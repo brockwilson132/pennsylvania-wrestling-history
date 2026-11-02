@@ -56,7 +56,7 @@ function seasonStrip(h, st, opts = {}) {
 }
 
 /* ---------- where on the scale: share of each weight class's points, split by medal ---------- */
-const TIERS = [{ label: 'Titles', places: [1], color: '#d4a33a' }, { label: '2nd–3rd', places: [2, 3], color: '#c3cad1' }, { label: '4th–8th', places: [4, 5, 6, 7, 8], color: '#6f8ea6' }];
+const TIERS = [{ label: 'Titles', places: [1], color: '#d4a33a' }, { label: '2nd–3rd', places: [2, 3], color: '#c3cad1' }, { label: '4th–8th', places: [4, 5, 6, 7, 8], color: '#69717a' }];
 const tierKey = () => `<span class="tiers">${TIERS.map((t) => `<span><i style="background:${t.color}"></i>${t.label}</span>`).join('')}<span><i class="line"></i>share overall</span></span>`;
 function weightChart(h, ws, opts = {}) {
   const W = widthOf(h), H = opts.H || 220, left = opts.mini ? 4 : 34, right = opts.mini ? 4 : 8, top = opts.mini ? 14 : 22, bottom = opts.mini ? 16 : 24;
@@ -64,10 +64,11 @@ function weightChart(h, ws, opts = {}) {
   const x = d3.scaleBand(cs.map((c) => c.c.k), [left, W - right]).paddingInner(opts.mini ? 0.16 : 0.22);
   const max = Math.max(ws.overall * 1.6, d3.max(cs, (c) => c.share) * 1.08) || 0.1;
   const y = d3.scaleLinear([0, max], [H - bottom, top]);
+  const pf = max < 0.06 ? pct1 : pct0;
   const svg = svgIn(h, W, H, opts.label || 'Share of each weight class');
   if (!opts.mini) {
     svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('class', 'grid').attr('x1', left).attr('x2', W - right).attr('y1', y).attr('y2', y);
-    svg.append('g').selectAll('text').data(y.ticks(4)).join('text').attr('class', 'ax').attr('x', left - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text(pct0);
+    svg.append('g').selectAll('text').data(y.ticks(4).filter((v) => v > 0 || true)).join('text').attr('class', 'ax').attr('x', left - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text(pf);
   }
   cs.forEach((c) => {
     let acc = 0;
@@ -75,12 +76,12 @@ function weightChart(h, ws, opts = {}) {
     if (opts.mini) g.append('rect').attr('x', x(c.c.k)).attr('width', x.bandwidth()).attr('y', y(c.share)).attr('height', Math.max(0, H - bottom - y(c.share))).attr('fill', c.share > ws.overall ? '#eceef0' : '#4b535b');
     else TIERS.forEach((t) => { const v = d3.sum(t.places, (p) => c.byPlace[p - 1]); if (!v) return; g.append('rect').attr('x', x(c.c.k)).attr('width', x.bandwidth()).attr('y', y(acc + v)).attr('height', Math.max(0, y(acc) - y(acc + v) - (acc ? 0.8 : 0))).attr('fill', t.color); acc += v; });
     g.append('rect').attr('x', x(c.c.k) - 1).attr('width', x.bandwidth() + 2).attr('y', top).attr('height', H - bottom - top).attr('fill', 'transparent');
-    if (!opts.mini && x.bandwidth() > 20) svg.append('text').attr('class', 'val' + (c.share > ws.overall * 1.15 ? ' hi' : '')).attr('x', x(c.c.k) + x.bandwidth() / 2).attr('y', y(c.share) - 5).attr('text-anchor', 'middle').text(pct0(c.share));
+    if (!opts.mini && x.bandwidth() > 20) svg.append('text').attr('class', 'val' + (c.share > ws.overall * 1.15 ? ' hi' : '')).attr('x', x(c.c.k) + x.bandwidth() / 2).attr('y', y(c.share) - 5).attr('text-anchor', 'middle').text(c.share ? pf(c.share) : '');
     bindTip(g, () => `<b>${c.c.label}${c.c.note ? ' <span class="t3">(' + c.c.note + ')</span>' : ''}</b><div class="tl">${pct1(c.share)} of the state’s points here</div><div class="t3">${pct1(ws.overall)} overall · ${c.rows.length ? shelf(c.places, { size: 14 }) : 'no medals'}</div>`);
   });
   // the overall share: a level line across the classes
   svg.append('line').attr('class', 'avg').attr('x1', left).attr('x2', W - right).attr('y1', y(ws.overall)).attr('y2', y(ws.overall));
-  svg.append('text').attr('class', 'ax avg-t').attr('x', W - right).attr('y', y(ws.overall) - 4).attr('text-anchor', 'end').text(opts.mini ? pct0(ws.overall) : `overall ${pct0(ws.overall)}`);
+  svg.append('text').attr('class', 'ax avg-t').attr('x', W - right).attr('y', y(ws.overall) - 4).attr('text-anchor', 'end').text(opts.mini ? pf(ws.overall) : `overall ${pf(ws.overall)}`);
   svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', H - bottom + 0.5).attr('y2', H - bottom + 0.5).attr('class', 'base');
   const labs = opts.mini ? cs.filter((c, i) => i === 0 || c.c.k === '145' || i === cs.length - 1) : cs;
   svg.append('g').selectAll('text').data(labs).join('text').attr('class', 'ax').attr('x', (c) => x(c.c.k) + x.bandwidth() / 2).attr('y', H - (opts.mini ? 3 : 7)).attr('text-anchor', 'middle').text((c) => c.c.label);

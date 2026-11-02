@@ -100,7 +100,9 @@ function unitStats(u) {
     won: seasons.filter((s) => s.rank === 1).length,
     best: seasons.length ? seasons.reduce((m, s) => (s.share > m.share ? s : m)) : null,
     first: seasons.length ? seasons[0].year : null, last: seasons.length ? seasons[seasons.length - 1].year : null,
-    recent: placeCounts(rows.filter((r) => r.year > last - HALF_LIFE))
+    recent: placeCounts(rows.filter((r) => r.year > last - HALF_LIFE)),
+    trend: 100 * (d3.sum(seasons.filter((s) => s.year > last - 10), (s) => s.share) - d3.sum(seasons.filter((s) => s.year <= last - 10 && s.year > last - 20), (s) => s.share)),
+    spark: d3.range(last - 19, last + 1).map((y) => { const s = seasons.find((x) => x.year === y); return s ? s.share : 0; })
   };
   STATS.set(key, o);
   return o;
@@ -126,6 +128,8 @@ d3.groups(MED.concat((RAW.d11 || []).map(([year, w, name, school]) => ({ sch: ca
 });
 const schoolDistrict = (s) => SCHOOL_D.get(canon(s)) || null;
 const schoolHref = (s) => '#school/' + slug(canon(s));
+/* the classes a school has wrestled in, as runs of seasons: [{cls, from, to}] */
+const classHistory = (s) => { const ys = d3.rollups(MED.filter((r) => r.sch === s), (v) => v[0].cls, (r) => r.year).sort((a, b) => a[0] - b[0]); const out = []; ys.forEach(([y, c]) => { const L = out[out.length - 1]; if (L && L.cls === c) L.to = y; else out.push({ cls: c, from: y, to: y }); }); return out; };
 const lineageOf = (s) => { const c = d3.rollups(MED.filter((r) => r.sch === s && r.cls !== 'single'), (v) => v.length, (r) => r.cls).sort((a, b) => b[1] - a[1]); return c.length ? c[0][0] : null; };
 
 /* ---------- wrestlers ---------- */

@@ -6,10 +6,10 @@ const METALS = [
   { name: 'Silver', hi: '#fbfcfd', mid: '#c3cad1', lo: '#6b737c', ink: '#2f353b' },
   { name: 'Bronze', hi: '#f0c79c', mid: '#b0773f', lo: '#5f3a17', ink: '#3a220c' },
   { name: 'Copper', hi: '#ffb69b', mid: '#c4593a', lo: '#6e2614', ink: '#3d130a' },
-  { name: 'Pewter', hi: '#e2e5e7', mid: '#959ca1', lo: '#4f5559', ink: '#23272a' },
-  { name: 'Steel', hi: '#cfe0ec', mid: '#6f8ea6', lo: '#364a5a', ink: '#f2f6f9' },
-  { name: 'Gunmetal', hi: '#8e979f', mid: '#4a5158', lo: '#262b30', ink: '#e5e8eb' },
-  { name: 'Onyx', hi: '#5f656c', mid: '#222529', lo: '#0b0c0d', ink: '#cfd3d7' }
+  { name: 'Steel', hi: '#b8bfc6', mid: '#69717a', lo: '#33383e', ink: '#f1f3f5' },
+  { name: 'Steel', hi: '#b8bfc6', mid: '#69717a', lo: '#33383e', ink: '#f1f3f5' },
+  { name: 'Steel', hi: '#b8bfc6', mid: '#69717a', lo: '#33383e', ink: '#f1f3f5' },
+  { name: 'Steel', hi: '#b8bfc6', mid: '#69717a', lo: '#33383e', ink: '#f1f3f5' }
 ];
 const metal = (p) => METALS[p] || METALS[8];
 /* one set of gradients for the whole page */
@@ -18,11 +18,18 @@ const metal = (p) => METALS[p] || METALS[8];
   const el = document.createElement('div'); el.innerHTML = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${s}</defs></svg>`; document.body.prepend(el.firstChild);
 })();
 /* a medal: place number on the metal */
-const medal = (p, size = 18, title) => `<svg class="md" width="${size}" height="${size}" viewBox="0 0 20 20" role="img" aria-label="${title || ordinal(p) + ' place'}"><circle cx="10" cy="10" r="9.3" fill="url(#m${p})"${p >= 7 ? ' stroke="#6b727a" stroke-width=".8"' : ''}/><circle cx="10" cy="10" r="7" fill="none" stroke="${metal(p).lo}" stroke-opacity=".5" stroke-width=".7"/><text x="10" y="10" dy=".36em" text-anchor="middle" fill="${metal(p).ink}">${p}</text></svg>`;
-/* counts by place as a row of medals: [g,s,b,c,p,s,g,o] */
-const shelf = (c, opts = {}) => `<span class="shelf${opts.compact ? ' compact' : ''}">${c.map((n, i) => (n || opts.zeros ? `<span class="sh${n ? '' : ' zero'}" title="${n} × ${ordinal(i + 1)}">${medal(i + 1, opts.size || 16)}<b>${n}</b></span>` : '')).join('')}</span>`;
+const medal = (p, size = 18, title, text) => `<svg class="md" width="${size}" height="${size}" viewBox="0 0 20 20" role="img" aria-label="${title || ordinal(p) + ' place'}"><circle cx="10" cy="10" r="9.3" fill="url(#m${Math.min(p, 8)})"/><circle cx="10" cy="10" r="7" fill="none" stroke="${metal(p).lo}" stroke-opacity=".5" stroke-width=".7"/><text x="10" y="10" dy=".36em" text-anchor="middle" fill="${metal(p).ink}"${text && text.length > 1 ? ' font-size="8.5"' : ''}>${text || p}</text></svg>`;
+/* counts by place as a row of medals: 1st, 2nd, 3rd, 4th, then 5th–8th together */
+const shelf = (c, opts = {}) => { const g = c.slice(0, 4).concat([d3.sum(c.slice(4))]); return `<span class="shelf${opts.compact ? ' compact' : ''}">${g.map((n, i) => (n || opts.zeros ? `<span class="sh${n ? '' : ' zero'}" title="${n} × ${i < 4 ? ordinal(i + 1) : '5th–8th'}">${medal(i + 1, opts.size || 16, i < 4 ? null : '5th to 8th', i < 4 ? null : '5+')}<b>${n}</b></span>` : '')).join('')}</span>`; };
 /* points by place as one bar: how the success was made */
-const medalBar = (c, max, w = 120) => { const pts = c.map((n, i) => n * ptsOf(i + 1)); const tot = d3.sum(pts); const W = max ? (tot / max) * w : w; let x = 0; return `<svg class="mbar" width="${w}" height="10" viewBox="0 0 ${w} 10" aria-hidden="true">${pts.map((v, i) => { const ww = tot ? (v / tot) * W : 0; const s = ww > 0 ? `<rect x="${x.toFixed(2)}" y="0" width="${Math.max(0, ww - 0.6).toFixed(2)}" height="10" fill="${metal(i + 1).mid}"/>` : ''; x += ww; return s; }).join('')}</svg>`; };
+const medalBar = (c, max, w = 120) => { const pts = c.map((n, i) => n * ptsOf(i + 1)).slice(0, 4).concat([d3.sum(c.slice(4).map((n, i) => n * ptsOf(i + 5)))]); const tot = d3.sum(pts); const W = max ? (tot / max) * w : w; let x = 0; return `<svg class="mbar" width="${w}" height="10" viewBox="0 0 ${w} 10" aria-hidden="true">${pts.map((v, i) => { const ww = tot ? (v / tot) * W : 0; const s = ww > 0 ? `<rect x="${x.toFixed(2)}" y="0" width="${Math.max(0, ww - 0.6).toFixed(2)}" height="10" fill="${metal(Math.min(i + 1, 5)).mid}"/>` : ''; x += ww; return s; }).join('')}</svg>`; };
+
+/* the medal key: 1st–4th each have a metal; 5th–8th share steel */
+const KEY = [[1, 'Gold', '1st', '16'], [2, 'Silver', '2nd', '12'], [3, 'Bronze', '3rd', '9'], [4, 'Copper', '4th', '7'], [5, 'Steel', '5th–8th', '5, 3, 2, 1']];
+const medalKey = () => `<div class="key">${KEY.map(([p, n, pl, pts]) => `<span>${medal(p, 22)}<b>${n}</b><i>${pl} · ${pts} pts</i></span>`).join('')}</div>`;
+/* last 20 seasons as tiny bars */
+const spark = (vals, w = 80, h = 18) => { const m = d3.max(vals) || 1, bw = w / vals.length; return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${vals.map((v, i) => `<rect x="${(i * bw).toFixed(1)}" y="${(h - Math.max(v ? 1.5 : 0.6, (v / m) * h)).toFixed(1)}" width="${(bw - 1).toFixed(1)}" height="${Math.max(v ? 1.5 : 0.6, (v / m) * h).toFixed(1)}" fill="${v ? '#aab2ba' : '#3a4047'}"/>`).join('')}</svg>`; };
+const trendTxt = (t) => (Math.abs(t) < 0.5 ? '<span class="tr flat">even</span>' : `<span class="tr ${t > 0 ? 'up' : 'dn'}">${t > 0 ? '▲' : '▼'} ${scoreFmt(Math.abs(t))}</span>`);
 
 /* ---------- districts ---------- */
 const MAP = window.PA_MAP;
@@ -32,8 +39,8 @@ const distLabel = (d, opts = {}) => `<span class="dist">${opts.map === false ? '
 const distLink = (d, opts) => `<a class="dlink" href="#district/${d}" title="District ${d}: ${esc(DISTRICTS[d].long)}">${distLabel(d, opts)}</a>`;
 
 /* ---------- schools ---------- */
-const LOGOS = window.WR_LOGOS || {};
-const chip = (school, size = 22) => { const s = canon(school), f = LOGOS[slug(s)]; if (f) return `<img class="chip logo" src="${f}" width="${size}" height="${size}" alt="" loading="lazy">`; return `<span class="chip" style="width:${size}px;height:${size}px">${SB ? SB.svg(s, { size, variant: 'chip', title: false }) : ''}</span>`; };
+/* school badge: initials in the school's colors. Logo files in site/logos are kept for future use on school pages. */
+const chip = (school, size = 22) => { const s = canon(school); return `<span class="chip" style="width:${size}px;height:${size}px">${SB ? SB.svg(s, { size, variant: 'chip', title: false }) : ''}</span>`; };
 const schoolLink = (school, size = 20) => `<a class="who" href="${schoolHref(school)}">${chip(school, size)}<span>${esc(canon(school))}</span></a>`;
 
 /* ---------- tooltip ---------- */

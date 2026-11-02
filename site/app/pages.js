@@ -1,31 +1,38 @@
 /* Pages and router. */
 'use strict';
 const VIEWS = {};
-const shelf4 = (c) => `<span class="shelf compact">${[0, 1, 2].map((i) => `<span class="sh${c[i] ? '' : ' zero'}">${medal(i + 1, 15)}<b>${c[i]}</b></span>`).join('')}<span class="sh rest${d3.sum(c.slice(3)) ? '' : ' zero'}" title="4th–8th"><i class="rest-t">4–8</i><b>${d3.sum(c.slice(3))}</b></span></span>`;
+const shelf4 = (c) => shelf(c, { size: 15, compact: true, zeros: true });
+const DEFS = `<dl class="defs"><div><dt>Era score</dt><dd>All-time. A program’s share of the points available each season, added up across every season, times 100. Fair across eras.</dd></div><div><dt>Power</dt><dd>Now. The same, but a season seven years back counts half, about one roster generation.</dd></div><div><dt>Trend</dt><dd>Era score from the last ten seasons, against the ten before.</dd></div></dl>`;
 const unitName = (u) => (u.kind === 'district' ? `District ${u.d}` : u.name);
 const unitLink = (u, size) => (u.kind === 'district' ? distLink(u.d, { mapW: 30 }) : schoolLink(u.name, size || 20));
 
 /* ================= Home ================= */
 VIEWS.home = function () {
-  const seasons = seasonsInScope(), [a, b] = yearsInScope();
+  const [a, b] = yearsInScope();
   const rows = ROWS(), champs = rows.filter((r) => r.place === 1).length;
   const progs = rankings('school'), dists = rankings('district');
-  const nowTop = progs.slice().sort((p, q) => q.now - p.now).slice(0, 10);
-  if (!state.pick || !nowTop.some((o) => o.u.name === state.pick)) state.pick = nowTop[0] && nowTop[0].u.name;
+  const mode = state.homeRank === 'era' ? 'era' : 'power';
+  const top = progs.slice().sort((p, q) => (mode === 'era' ? q.allTime - p.allTime : q.now - p.now)).slice(0, 10);
+  if (!state.pick || !progs.some((o) => o.u.name === state.pick)) state.pick = top[0] && top[0].u.name;
   const maxPts = d3.max(dists, (o) => o.pts);
   const S = seasonOf(b);
   const bigD = dists.filter((o) => o.pts / d3.sum(dists, (x) => x.pts) > 0.02).slice(0, 8);
   $view.innerHTML = `
   <header class="hero">
     <h1>Pennsylvania state wrestling</h1>
-    <p class="lede">${fmt(champs)} state champions and ${fmt(rows.length - champs)} more place winners in ${clsName()}, ${a}–${b}. Every place earns a medal and points, so a program’s depth counts along with its titles.</p>
-    <div class="key">${d3.range(1, 9).map((p) => `<span>${medal(p, 26)}<b>${METALS[p].name}</b><i>${ptsOf(p)} pts</i></span>`).join('')}</div>
+    <p class="lede">${fmt(champs)} state champions and ${fmt(rows.length - champs)} more place winners in ${clsName()}, ${a}–${b}. Every place earns a medal and points, so depth counts along with titles.</p>
+    ${medalKey()}
   </header>
 
-  <section class="sec">${sec('On top now', `The ten strongest programs today. Now counts every medal, with a season seven years back worth half as much as this one. Pick a program to see its medals on the mat.`)}
-    <div class="now">
-      <ol class="nowlist">${nowTop.map((o, i) => `<li><button type="button" data-pick="${esc(o.u.name)}" aria-pressed="${o.u.name === state.pick}"><span class="rk">${i + 1}</span>${chip(o.u.name, 24)}<span class="nm">${esc(o.u.name)}</span><span class="sc">${scoreFmt(o.now)}</span>${shelf(o.recent, { size: 14, compact: true })}</button></li>`).join('')}</ol>
-      <div class="now-mat"><div class="mat-host" data-c="hmat"></div><p class="mat-cap" id="hcap"></p></div>
+  <section class="sec">${sec(mode === 'era' ? 'Era ranking' : 'Power ranking', mode === 'era' ? 'The greatest programs of all time, by era score: each season’s share of points, added up.' : 'The strongest programs today, by power: every medal counts, and a season seven years back counts half.', null, seg('hr', [['power', 'Power: now'], ['era', 'Era: all-time']], mode))}
+    <div class="home-rank">
+      <div class="hr-mat"><div class="mat-host" data-c="hmat"></div><p class="mat-cap" id="hcap"></p></div>
+      <div class="hr-list">
+        <ol class="nowlist">${top.map((o, i) => `<li><button type="button" data-pick="${esc(o.u.name)}" aria-pressed="${o.u.name === state.pick}"><span class="rk">${i + 1}</span>${chip(o.u.name, 24)}<span class="nm">${esc(o.u.name)}</span><span class="sc">${scoreFmt(mode === 'era' ? o.allTime : o.now)}</span>${shelf(mode === 'era' ? o.places : o.recent, { size: 14, compact: true })}</button></li>`).join('')}</ol>
+        <label class="pickany"><span>Show any program on the mat</span><input class="field" id="pickany" list="schoolnames" placeholder="Type a school" autocomplete="off"></label>
+        <datalist id="schoolnames">${progs.map((o) => `<option value="${esc(o.u.name)}">`).join('')}</datalist>
+        <p class="links"><a class="more" href="#rankings">Full rankings</a> · <a class="more" href="#schools">Every school</a></p>
+      </div>
     </div>
   </section>
 
@@ -42,23 +49,25 @@ VIEWS.home = function () {
   </section>`;
   bigD.forEach((o, i) => weightChart(host('ws-' + i), weightShares(rows.filter((r) => r.d === o.u.d), rows), { mini: true, H: 96 }));
   const drawMat = () => {
-    const name = state.pick, st = unitStats({ kind: 'school', name });
+    const name = state.pick, st = unitStats({ kind: 'school', name }), me = progs.find((o) => o.u.name === name);
     const h = host('hmat'); h.innerHTML = '';
     const m = mat(h, st.rows, { max: 520, label: `${name}: every state medal` });
     const last = st.seasons[st.seasons.length - 1];
     m.paint(null, '');
     d3.select(h).select('.hub-y').text(st.medals).attr('class', 'hub-y');
     d3.select(h).select('.hub-s').text('medals');
-    $view.querySelector('#hcap').innerHTML = `${chip(name, 18)} <b>${esc(name)}</b>: ${shelf(st.places, { size: 14 })}<br>Each spoke is a season from ${a} (top, clockwise); each ring a spot in that season’s lineup, lightest at the center. <a href="${schoolHref(name)}">Open ${esc(name)}</a>`;
+    $view.querySelector('#hcap').innerHTML = `<span class="cap-h">${chip(name, 20)} <b>${esc(name)}</b> <span class="t3">Era ${ordinal(me.allRank)} · Power ${ordinal(me.nowRank)}</span></span>${shelf(st.places, { size: 15 })}<span class="cap-t">Every ${clsName()} medal on one mat: each spoke is a season, clockwise from ${a} at the top; each ring a spot in that season’s lineup, lightest at the center.</span><a class="more" href="${schoolHref(name)}">Open ${esc(name)}</a>`;
   };
   drawMat();
   $view.querySelector('.nowlist').addEventListener('click', (e) => { const bt = e.target.closest('[data-pick]'); if (!bt) return; state.pick = bt.dataset.pick; $view.querySelectorAll('[data-pick]').forEach((x) => x.setAttribute('aria-pressed', x === bt)); drawMat(); });
+  $view.querySelector('#pickany').addEventListener('change', (e) => { const v = e.target.value.trim(); const o = progs.find((x) => x.u.name.toLowerCase() === v.toLowerCase()); if (!o) return; state.pick = o.u.name; $view.querySelectorAll('[data-pick]').forEach((x) => x.setAttribute('aria-pressed', x.dataset.pick === o.u.name)); drawMat(); e.target.blur(); });
+  $view.querySelectorAll('[data-hr]').forEach((bt) => bt.addEventListener('click', () => { state.homeRank = bt.dataset.hr; state.pick = null; render(); }));
 };
 
 /* ================= Rankings ================= */
 function rankingTable(h, kind, opts = {}) {
   let rows = rankings(kind).filter(opts.filter || (() => true));
-  const sorts = { all: (o) => o.allTime, now: (o) => o.now, titles: (o) => o.titles, medals: (o) => o.medals, won: (o) => o.won };
+  const sorts = { all: (o) => o.allTime, now: (o) => o.now, trend: (o) => o.trend, titles: (o) => o.titles, medals: (o) => o.medals, won: (o) => o.won };
   let key = 'all', q = '', dsel = '', limit = opts.limit || 50;
   const draw = () => {
     let L = rows.slice().sort((p, r) => sorts[key](r) - sorts[key](p));
@@ -66,8 +75,8 @@ function rankingTable(h, kind, opts = {}) {
     if (dsel) L = L.filter((o) => o.u.d === +dsel);
     const maxPts = d3.max(rows, (o) => o.pts);
     const th = (k, l, t) => `<th class="n"><button type="button" data-sort="${k}" aria-pressed="${key === k}" title="${t || ''}">${l}${key === k ? ' ↓' : ''}</button></th>`;
-    h.querySelector('.rt').innerHTML = `<table class="rank"><thead><tr><th class="n">#</th><th>${kind === 'district' ? 'District' : 'Program'}</th>${th('all', 'All-time', 'Share of each season’s points, summed')}${th('now', 'Now', 'The same, with a seven-season half-life')}${th('titles', 'Medals', 'Sort by titles')}<th class="hide-m">Points, by medal</th>${th('won', 'Team races won', 'Seasons first in placement points')}</tr></thead>
-      <tbody>${L.slice(0, limit).map((o, i) => `<tr><td class="n rk">${key === 'all' ? o.allRank : key === 'now' ? o.nowRank : i + 1}</td><td class="nm"><span class="nmw">${unitLink(o.u)}${kind === 'school' && o.u.d && !opts.noTag ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.allTime)}</b></td><td class="n">${scoreFmt(o.now)}</td><td class="n">${shelf4(o.places)}</td><td class="hide-m">${medalBar(o.places, maxPts, 160)}</td><td class="n">${o.won || ''}</td></tr>`).join('')}</tbody></table>
+    h.querySelector('.rt').innerHTML = `<table class="rank"><thead><tr><th class="n">#</th><th>${kind === 'district' ? 'District' : 'Program'}</th>${th('all', 'Era score', 'All-time: share of each season’s points, summed')}${th('now', 'Power', 'Now: the same, with a seven-season half-life')}${th('trend', 'Trend', 'Last ten seasons against the ten before')}<th class="hide-m">Last 20 seasons</th>${th('titles', 'Medals', 'Sort by titles')}${th('won', 'Team races won', 'Seasons first in placement points')}</tr></thead>
+      <tbody>${L.slice(0, limit).map((o, i) => `<tr><td class="n rk">${key === 'all' ? o.allRank : key === 'now' ? o.nowRank : i + 1}</td><td class="nm"><span class="nmw">${unitLink(o.u)}${kind === 'school' && o.u.d && !opts.noTag ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.allTime)}</b></td><td class="n"><b>${scoreFmt(o.now)}</b></td><td class="n">${trendTxt(o.trend)}</td><td class="hide-m">${spark(o.spark)}</td><td class="n hide-m">${shelf4(o.places)}</td><td class="n hide-m">${o.won || ''}</td></tr>`).join('')}</tbody></table>
       ${L.length > limit ? `<button type="button" class="btn more-btn" data-more>Show all ${L.length}</button>` : ''}`;
   };
   h.innerHTML = `${opts.tools === false ? '' : `<div class="tools">${kind === 'school' ? `<input class="field" type="search" placeholder="Find a program" aria-label="Find a program"><select class="field" aria-label="District"><option value="">All districts</option>${d3.range(1, 13).map((d) => `<option value="${d}">District ${d}, ${esc(DISTRICTS[d].short)}</option>`).join('')}</select>` : ''}</div>`}<div class="rt"></div>`;
@@ -80,7 +89,7 @@ function rankingTable(h, kind, opts = {}) {
 const METHOD = `<details class="method"><summary>How the numbers work</summary><p>Every place earns points: 16, 12, 9, 7, 5, 3, 2, 1 for 1st through 8th. <b>All-time</b> adds up a program’s share of the points available each season, times 100, so a title in a 1950s bracket with four places counts the same as one in today’s eight-place bracket. <b>Now</b> is the same with a seven-season half-life, about one roster generation: a medal from seven seasons ago counts half. A <b>team race</b> is the season’s standings by placement points.</p><p>PIAA team scores also count advancement and bonus points, which the results sheets don’t record, so these team races are reconstructions. Checked against the real Class AAA team champions since 1974, they name the same champion in 47 of 53 seasons.</p></details>`;
 VIEWS.rankings = function (arg) {
   const kind = arg === 'districts' ? 'district' : 'school';
-  $view.innerHTML = `<header class="page-head"><h1>Rankings</h1><p class="lede">Every ${kind === 'district' ? 'district' : 'program'} in ${clsName()}, ranked by its medals.</p>${seg('kind', [['programs', 'Programs'], ['districts', 'Districts']], kind === 'district' ? 'districts' : 'programs')}</header>${METHOD}<div data-c="rt"></div>`;
+  $view.innerHTML = `<header class="page-head"><h1>Rankings</h1><p class="lede">Every ${kind === 'district' ? 'district' : 'program'} in ${clsName()}, ranked by its medals. Tap a column to sort.</p>${seg('kind', [['programs', 'Programs'], ['districts', 'Districts']], kind === 'district' ? 'districts' : 'programs')}</header>${DEFS}${METHOD}<div data-c="rt"></div>`;
   $view.querySelectorAll('[data-kind]').forEach((b) => b.addEventListener('click', () => { location.hash = b.dataset.kind === 'districts' ? '#rankings/districts' : '#rankings'; }));
   rankingTable(host('rt'), kind, { limit: kind === 'district' ? 12 : 50 });
 };
@@ -94,11 +103,12 @@ function programPage(u) {
   const other = !isD ? ['AAA', 'AA', 'single'].filter((c) => c !== state.cls && MED.some((r) => r.cls === c && r.sch === u.name)) : [];
   const head = isD
     ? `<div class="ph-mark">${distMap(u.d, 120)}</div><div class="ph-id"><p class="crumb">${dtag(u.d)} PIAA district</p><h1>${esc(DISTRICTS[u.d].short)}</h1><p class="about">District ${u.d}: ${esc(DISTRICTS[u.d].long)}.</p></div>`
-    : `<div class="ph-mark">${chip(u.name, 72)}</div><div class="ph-id"><p class="crumb">${u.d ? distLink(u.d, { mapW: 30 }) : ''}</p><h1>${esc(u.name)}</h1>${other.length ? `<p class="about">Also has medals in ${other.map((c) => `<button type="button" class="linkish" data-cls="${c}">${clsName(c)}</button>`).join(' and ')}.</p>` : ''}</div>`;
+    : `<div class="ph-mark">${chip(u.name, 72)}</div><div class="ph-id"><p class="crumb">${u.d ? distLink(u.d, { mapW: 30 }) : ''}</p><h1>${esc(u.name)}</h1>${classLine(u.name)}</div>`;
   if (!st.medals) { $view.innerHTML = `<header class="ph">${head}</header><p class="lede">No ${clsName()} state medals on record.${other.length ? ' Try ' + other.map((c) => clsName(c)).join(' or ') + '.' : ''}</p>`; bindCls(); return; }
   const nums = [
-    [scoreFmt(st.allTime), 'All-time', `${ordinal(me.allRank)} of ${R.length}`],
-    [scoreFmt(st.now), 'Now', `${ordinal(me.nowRank)} of ${R.length}`],
+    [scoreFmt(st.allTime), 'Era score', `${ordinal(me.allRank)} of ${R.length} all-time`],
+    [scoreFmt(st.now), 'Power', `${ordinal(me.nowRank)} of ${R.length} now`],
+    [trendTxt(st.trend), 'Trend', 'last 10 seasons vs the 10 before'],
     [fmt(st.pts), 'Points', plural(st.medals, 'medal')],
     [st.won, 'Team races won', st.won ? `first in placement points` : 'by placement points'],
     st.best ? [st.best.year, 'Best season', `${st.best.pts} pts, ${ordinal(st.best.rank)}`] : null
@@ -143,12 +153,18 @@ function programPage(u) {
   // weight
   const ws = weightShares(st.rows, rows);
   weightChart(host('wc'), ws, { H: 240, label: `${unitName(u)}: share of each weight class` });
+  const pf = ws.overall < 0.04 ? pct1 : pct0;
   const hi = ws.classes.filter((c) => c.poolPts > 0).map((c) => ({ c, r: c.share / (ws.overall || 1) })).sort((p, q) => q.r - p.r);
-  $view.querySelector('#lean').innerHTML = hi.length > 3 ? `Strongest at <b>${hi.slice(0, 2).map((x) => x.c.c.label).join(' and ')}</b>, where it wins ${pct0(hi[0].c.share)} and ${pct0(hi[1].c.share)} of the points against ${pct0(ws.overall)} overall. Weakest at <b>${hi[hi.length - 1].c.c.label}</b> (${pct0(hi[hi.length - 1].c.share)}).` : '';
+  $view.querySelector('#lean').innerHTML = hi.length > 3 ? `Strongest at <b>${hi.slice(0, 2).map((x) => x.c.c.label).join(' and ')}</b>, where it wins ${pf(hi[0].c.share)} and ${pf(hi[1].c.share)} of the points against ${pf(ws.overall)} overall. Weakest at <b>${hi[hi.length - 1].c.c.label}</b> (${pf(hi[hi.length - 1].c.share)}).` : '';
   // wrestlers
   wrestlerTable(host('wr'), W, { school: isD, limit: 25 });
   if (isD) rankingTable(host('dprog'), 'school', { filter: (o) => o.u.d === u.d, tools: false, limit: 15, noTag: true });
   if (isD && u.d === 11) { const by = d3.rollups(D11, (v) => v.length, (r) => r.sch).sort((p, q) => q[1] - p[1]).slice(0, 15); const mx = by[0][1]; host('d11').innerHTML = `<ol class="bars">${by.map(([s, n]) => `<li>${schoolLink(s, 18)}<span class="bar"><i style="width:${(n / mx * 100).toFixed(1)}%"></i></span><b>${n}</b></li>`).join('')}</ol>`; }
+}
+function classLine(name) {
+  const H = classHistory(name); if (!H.length) return '';
+  const moved = H.length > 1 && H.some((h) => h.cls === 'AAA') && H.some((h) => h.cls === 'AA');
+  return `<p class="about">Class history: ${H.map((h) => `${h.cls === state.cls ? `<b>${clsName(h.cls)}</b>` : `<button type="button" class="linkish" data-cls="${h.cls}">${clsName(h.cls)}</button>`} ${h.from}${h.to > h.from ? '–' + h.to : ''}`).join(' · ')}.${moved ? ' Schools change class as enrollment shifts, and in recent cycles the PIAA has moved some successful programs up a class or let them opt up.' : ''}</p>`;
 }
 function bindCls() { $view.querySelectorAll('[data-cls]').forEach((b) => b.addEventListener('click', () => { setCls(b.dataset.cls); render(); })); }
 function wrestlerTable(h, W, opts = {}) {
@@ -157,8 +173,30 @@ function wrestlerTable(h, W, opts = {}) {
   h.addEventListener('click', (e) => { if (e.target.closest('[data-more]')) { limit = 1e4; draw(); } });
   draw();
 }
-VIEWS.school = (s) => { const name = SCHOOL_BY_SLUG.get(s) || s; programPage({ kind: 'school', name, d: schoolDistrict(name) }); };
+VIEWS.school = (s) => { const name = SCHOOL_BY_SLUG.get(s) || s; if (!MED.some((r) => r.sch === name && r.cls === state.cls)) { const H = classHistory(name); if (H.length) { setCls(H[H.length - 1].cls); chrome('school'); } } programPage({ kind: 'school', name, d: schoolDistrict(name) }); };
 VIEWS.district = (d) => programPage({ kind: 'district', d: +d, name: `District ${+d}` });
+
+/* ================= Schools: every program, A to Z ================= */
+VIEWS.schools = function () {
+  const names = Array.from(new Set(MED.map((r) => r.sch))).sort((p, q) => p.localeCompare(q));
+  const info = names.map((n) => { const rs = MED.filter((r) => r.sch === n); return { n, d: schoolDistrict(n), places: placeCounts(rs), cls: classHistory(n), here: rs.some((r) => r.cls === state.cls) }; });
+  $view.innerHTML = `<header class="page-head"><h1>Schools</h1><p class="lede">Every school with a state place winner since 1938: ${fmt(names.length)} programs. Medals here count every class.</p></header>
+    <div class="tools"><input class="field" id="sq" type="search" placeholder="Find a school" aria-label="Find a school"><select class="field" id="sd" aria-label="District"><option value="">All districts</option>${d3.range(1, 13).map((d) => `<option value="${d}">District ${d}, ${esc(DISTRICTS[d].short)}</option>`).join('')}</select>${seg('ss', [['az', 'A–Z'], ['medals', 'Most medals']], 'az')}<label class="chk"><input type="checkbox" id="sh"> Only ${clsName()}</label></div>
+    <p class="t3" id="scount"></p><div class="dir" id="dir"></div>`;
+  let q = '', d = '', sort = 'az', only = false;
+  const draw = () => {
+    let L = info.filter((o) => (!q || o.n.toLowerCase().includes(q)) && (!d || o.d === +d) && (!only || o.here));
+    if (sort === 'medals') L = L.slice().sort((p, r) => d3.sum(r.places) - d3.sum(p.places) || r.places[0] - p.places[0]);
+    $view.querySelector('#scount').textContent = `${fmt(L.length)} schools`;
+    let last = '';
+    $view.querySelector('#dir').innerHTML = L.map((o) => { const letter = sort === 'az' ? o.n[0].toUpperCase() : ''; const head = letter && letter !== last ? `<h3 class="letter">${(last = letter)}</h3>` : ''; return `${head}<a class="card" href="${schoolHref(o.n)}">${chip(o.n, 30)}<span class="cn"><b>${esc(o.n)}</b><span class="cl">${o.d ? dtag(o.d) : ''}${o.cls.map((h) => `<span class="ctag${h.cls === state.cls ? ' on' : ''}">${clsShort(h.cls)}</span>`).filter((x, i, A) => A.indexOf(x) === i).join('')}</span></span>${shelf(o.places, { size: 14, compact: true })}</a>`; }).join('');
+  };
+  $view.querySelector('#sq').addEventListener('input', (e) => { q = e.target.value.trim().toLowerCase(); draw(); });
+  $view.querySelector('#sd').addEventListener('change', (e) => { d = e.target.value; draw(); });
+  $view.querySelector('#sh').addEventListener('change', (e) => { only = e.target.checked; draw(); });
+  $view.querySelectorAll('[data-ss]').forEach((bt) => bt.addEventListener('click', () => { sort = bt.dataset.ss; $view.querySelectorAll('[data-ss]').forEach((x) => x.setAttribute('aria-pressed', x === bt)); draw(); }));
+  draw();
+};
 
 /* ================= Season ================= */
 VIEWS.season = function (arg) {
@@ -218,10 +256,10 @@ VIEWS.about = function () {
 };
 
 /* ================= chrome: scope, search, router ================= */
-const NAV = [['home', 'Home'], ['rankings', 'Rankings'], ['season', 'Seasons'], ['records', 'Records'], ['about', 'About']];
+const NAV = [['home', 'Home'], ['rankings', 'Rankings'], ['schools', 'Schools'], ['season', 'Seasons'], ['records', 'Records'], ['about', 'About']];
 function chrome(route) {
   document.getElementById('scope').innerHTML = [['AAA', 'Class AAA'], ['AA', 'Class AA'], ['single', '1938–73']].map(([c, l]) => `<button type="button" data-scope="${c}" aria-pressed="${state.cls === c}">${l}</button>`).join('');
-  document.getElementById('nav').innerHTML = NAV.map(([k, l]) => `<a href="#${k}" aria-current="${route === k || (k === 'rankings' && (route === 'school' || route === 'district')) ? 'page' : 'false'}">${l}</a>`).join('');
+  document.getElementById('nav').innerHTML = NAV.map(([k, l]) => `<a href="#${k}" aria-current="${route === k || (k === 'schools' && route === 'school') || (k === 'rankings' && route === 'district') ? 'page' : 'false'}">${l}</a>`).join('');
 }
 document.getElementById('scope').addEventListener('click', (e) => { const b = e.target.closest('[data-scope]'); if (!b) return; setCls(b.dataset.scope); state.year = null; render(); });
 (function search() {
