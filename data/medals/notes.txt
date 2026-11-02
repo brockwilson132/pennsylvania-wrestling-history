@@ -1,0 +1,36 @@
+1999-2002 AAA: 13 weights (103-275) x 8 places = 104 data rows. OK.
+2003-2006 AAA: 14 weights (adds 215, top is 275) x 8 = 112 data rows. OK.
+2007-2010 AAA: 14 weights (top weight 285) x 8 = 112 data rows. OK.
+2011 AAA and AA: 14 weights (103-285, incl. 215) x 8 = 112 rows each. OK.
+2012 AAA and AA: weight classes changed to 106,113,120,126,132,138,145,152,160,170,182,195,220,285; 14 x 8 = 112 rows each. OK.
+Fetched output for 2000 AAA, 2006 AAA, 2007 AAA and 2012 AAA was wrapped in markdown fences; stripped before saving.
+Row counts exclude header line.
+1999-2010 AA: all fetches blocked by allowlist (see missing.txt); files contain header only.
+WARNING: this notes.txt was written with overwrite (>) by the 1999-2012 worker; any notes other workers wrote earlier were lost and need re-adding.
+[AA agent] 1974_AA.csv: URL was _State_B_results.pdf; 12 weights x 4 places = 48 rows (OK). Weights are 98..185 and 250 (heavyweight).
+[AA agent] 1975_AA.csv: INCOMPLETE. URL _State_B_results.pdf; two fetches returned only 1st/2nd (finalists) for 12 weights = 24 rows; 3rd/4th not recoverable from the scrambled bracket text. Expected 48. Heavyweight written as UNL.
+[AA agent] 1976-1980_AA.csv: 12 weights x 4 places = 48 rows each (OK). Heavyweight as UNL.
+[AA agent] 1981-1988_AA.csv: 12 weights x 6 places = 72 rows each (OK). Heavyweight as UNL.
+[AA agent] 1986_AA.csv: fetch flagged a possible discrepancy at 119: place list says Sam Bocchino (Wyalusing) 1st, but bracket text ended with "R. Williams (SQ) Dec. 1-0", suggesting Rich Williams (Susquenita) may be champion. Wait: that note was on the 1985 fetch (119 lb). 1985_AA.csv uses Place Winners list as written (Bocchino 1st, Williams 5th) -- verify manually.
+[AA agent] 1989-1998_AA.csv: 12 weights (103..189, 275) x 6 places = 72... file has 78 data rows = 13 weights x 6 (103,112,119,125,130,135,140,145,152,160,171,189,275). OK.
+[AA agent] 1999_AA.csv: 13 weights x 8 places = 104 rows (OK).
+[AA agent] CORRECTION to my lines above: the 119 lb discrepancy is in 1985_AA.csv (not 1986). 1989-1998_AA.csv have 13 weights x 6 places = 78 data rows each (OK).
+[2013-2026 worker] 2013-2020 AAA: 14 weights (106-285, incl. 170/182/195/220) x 8 = 112 rows each. README says 13 weights; actual is 14 for these years. OK.
+[2013-2026 worker] 2021 AAA: 102 rows, not 104. Weights 106..285 (13 weights; 172/189/215 replace 170/182/195/220). 113 lb and 189 lb have only 7 places listed (no 8th) in the source. Not recoverable; left as returned.
+[2013-2026 worker] 2022-2026 AAA and 2021-2026 AA: 13 weights x 8 = 104 rows each. OK. 2023+ weights are 107,114,121,127,133,139,145,152,160,172,189,215,285.
+[2013-2026 worker] 2013-2020 AAA and 2021, 2023-2024-style outputs: markdown fences stripped from 2014, 2016, 2021, 2022 AA, 2024 AAA(none), 2025 AAA, 2026 AAA outputs where present.
+[2013-2026 worker] 2026_AAA.csv: fetch appended a commentary note saying the source text was garbled and that some places below 2nd were inferred from consolation matches and may contain errors. Note stripped from CSV; treat 3rd-8th in 2026 AAA as lower confidence and spot-check.
+[2013-2026 worker] 2013-2015 AA were written by the AA agent (not me). 2016-2020 AA remain header-only from my side (blocked, see missing.txt).
+[2013-2026 worker] CORRECTION: by the end of my run the AA agent had filled 2013-2020 AA (112 rows each), so my 2016-2020 AA missing.txt lines are obsolete. Also ignore my vague "fences stripped" line above: fences were stripped from 2014, 2016, 2021, 2025 and 2026 AAA and 2022, 2025 and 2026 AA fetch outputs.
+[single agent] 1938-1941_single.csv: 10 weights (85,95,105,115,125,135,145,155,165,185) x 2 places = 20 rows each. Only 1st/2nd returned by source. No 175/UNL class appears.
+[single agent] 1942-1953,1955_single.csv: 10 weights (95,103,112,120,127,133,138,145,154,165,185 = 11 weights) x 2 places = 22 rows each. Only 1st/2nd returned by source; no 3rd/4th.
+[single agent] 1944_single.csv: fetch flagged internal inconsistency -- for 103,120,127,133,138,145,154,185 the 1st-place name in the Place Winners section differs from the name labeled CHAMPION elsewhere on the page. File follows Place Winners section as written; verify manually.
+[single agent] 1954_single.csv: header only (fetch failed, see missing.txt).
+[single agent] CORRECTION: 1942-1953 and 1955_single.csv have 11 weights (95,103,112,120,127,133,138,145,154,165,185) x 2 places = 22 rows each (not 10 weights).
+[single-class agent] 1956-1973_single.csv written (URLs _State_results.pdf, no class suffix). 1956-1972 PDFs list only 1st and 2nd (finalists, "Place Winners" with regional qualifier tags); no 3rd/4th/consolation data exists in them (verified on 1965), so 12 weights x 2 = 22-24 rows each (1956-59: 11 weights x2 = 22, 95-185; 1960-64: 12 incl. UNL = 24; 1965-72: 12 weights 95-250 = 24). 1973 has 4 places x 12 weights (98..250) = 48 rows. Fetch for 1963 was fence-wrapped; fences stripped. Data came via WebFetch summarizer, not raw text; spelling variants (e.g. "Welsey Schrader" 1971) kept as returned.
+AA 2000-2026 (this run): WebFetch succeeded for all 27 URLs (2000-2026_PIAA_State_AA_results.pdf); all 27 _AA.csv files written (previously header-only). Overwrites of 1999_AA.csv NOT done (not in scope).
+AA 2000-2002: 13 weights x 8 places = 104 rows each (103-275). 2003-2011: 14 weights (adds 215; 2007+ heavyweight listed as 285). 2012-2026: 14 weights; 2012-2020 use 106/113/120/126/132/138/145/152/160/170/182/195/220/285; 2021-2022 use 106..138,145,152,160,172,189,215,285; 2023-2026 use 107/114/121/127/133/139/145/152/160/172/189/215/285. All 112 data rows per 2003+ file.
+AA 2022: fetch tool warned that the source place-winner list was out of order; names matched to schools via bracket results. Places 1, 2, 5, 7 confirmed from match results; places 3, 4, 6, 8 are inferred and may be wrong. Verify before relying on them.
+AA 2008: one wrestler name contains a comma ("Kevin Ryan, Jr.", 140, 5th) and is CSV-quoted. School strings such as "Bishop McDevitt (3)" (2013-2017) and "Pius X (Roseto)" are kept as returned by the extraction.
+AA 2011: weight 152 8th "Joseph (JT) Mannozzi"; 2000: 171 2nd "Walter (Bud) Putnam" - nicknames kept as written.
+CORRECTION to AA 2000-2026 note above: 2003-2020 files have 14 weights x 8 = 112 rows; 2000-2002 and 2021-2026 have 13 weights x 8 = 104 rows. All places are numeric 1-8 with no gaps.

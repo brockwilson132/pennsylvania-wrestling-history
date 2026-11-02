@@ -1,0 +1,12 @@
+{
+  "name": "pennsylvania-wrestling-history",
+  "private": true,
+  "description": "PA Wrestling Almanac: PIAA state wrestling history, 1938 to today",
+  "scripts": {
+    "build:medals": "node tools/build_medals.js"
+  },
+  "devDependencies": {
+    "d3": "^7.9.0",
+    "playwright": "*"
+  }
+}
