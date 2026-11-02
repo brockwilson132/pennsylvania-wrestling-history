@@ -182,7 +182,7 @@ svg.spark { display: block; }
 .lean { color: var(--chalk-2); margin: 0 0 10px; } .lean b { color: var(--chalk); }
 .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .bars li { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) 40px; gap: 10px; align-items: center; }
-.bars .bar { height: 12px; background: #24292e; } .bars .bar i { display: block; height: 100%; background: var(--chalk-2); }
+.bars .track { height: 12px; background: #24292e; } .bars .track i { display: block; height: 100%; background: var(--chalk-2); }
 .bars b { text-align: right; }
 /* tables */
 .tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
@@ -215,9 +215,41 @@ table.wr td.nm b { display: block; } .yrs { color: var(--chalk-3); font-size: 12
 .rec { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
 .rec li { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "who n" "yr yr"; gap: 0 10px; padding: 6px 0; border-bottom: 1px solid #24292e; }
 .rec .who { grid-area: who; } .rec > li > b { grid-area: n; font-size: 16px; } .rec .yrs { grid-area: yr; margin-left: 28px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+/* home */
+.statemap { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 22px; align-items: start; margin-top: 12px; }
+.map-host svg { width: 100%; height: auto; display: block; }
+.pa-dist:hover { filter: brightness(1.12); }
+.pa-lab { font-family: var(--body); font-weight: 800; letter-spacing: .02em; }
+.dcard { background: var(--tile); border: 1px solid var(--seam); padding: 14px 16px; display: grid; gap: 8px; }
+.dc-h { display: flex; gap: 12px; align-items: center; } .dc-h p { margin: 0; } .dc-h h3 { font-size: 18px; }
+.dc-n { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; } .dc-n div { background: var(--tile-2); padding: 6px 8px; } .dc-n dd { margin: 0; font: 700 18px var(--body); } .dc-n dt { color: var(--chalk-3); font-size: 12px; }
+.dc-l { margin: 4px 0 0; color: var(--chalk-3); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.dc-p { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; } .dc-p li { display: flex; justify-content: space-between; gap: 8px; } .dc-w { margin: 0; }
+.panel.tight { padding: 4px 12px; }
+.wtab td { vertical-align: middle; } .wtab .idx { color: var(--chalk-2); font-size: 12.5px; white-space: nowrap; } .wlink { font: 400 18px var(--stencil); text-decoration: none; }
+.career.sm { display: inline-flex; gap: 2px; vertical-align: middle; }
+a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decoration: underline; }
+/* weights */
+.wchips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.wchips a { flex: none; min-width: 52px; text-align: center; padding: 8px 10px; background: var(--tile); border: 1px solid var(--seam); text-decoration: none; font: 400 17px var(--stencil); }
+.wchips a[aria-current="true"] { background: var(--chalk); color: var(--floor); border-color: var(--chalk); }
+.whead { margin: 18px 0 0; } .whead p { margin: 2px 0 0; }
+.rec.wl li { grid-template-columns: 22px minmax(0, 1fr) auto; grid-template-areas: "rk who n" "rk yr yr"; } .rec.wl .rk { grid-area: rk; color: var(--chalk-3); font-weight: 700; } .rec.wl .wname { grid-area: who; } .rec.wl .yrs { margin-left: 0; }
+.dbar { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 7px; }
+.dbar li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(90px, 1.1fr) 40px; gap: 10px; align-items: center; } .dbar a { text-decoration: none; min-width: 0; overflow: hidden; }
+.dbar .track { display: block; position: relative; height: 12px; background: #24292e; } .dbar .track i { display: block; height: 100%; background: var(--chalk-2); } .dbar .track s { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--chalk); }
+.dbar b { text-align: right; }
+.champs { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.champs li { display: grid; grid-template-columns: 44px 38px minmax(0, 1fr) minmax(0, auto); gap: 8px; align-items: center; padding: 4px 0; border-bottom: 1px solid #24292e; }
+.champs li.more-li { display: block; border: 0; padding-top: 8px; } .champs .yr { color: var(--chalk-2); } .champs .w { color: var(--chalk-3); font-weight: 700; } .champs .who span { max-width: 150px; color: var(--chalk-2); font-weight: 500; }
+/* wrestler */
+.career-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.career-list li { display: flex; gap: 14px; align-items: center; background: var(--tile); border: 1px solid var(--seam); padding: 10px 14px; }
+.career-list li > div { display: grid; } .career-list .fin { color: var(--chalk-2); font-size: 13.5px; }
+.key-about .key { margin: 8px 0 16px; }
 /* phones */
 @media (max-width: 980px) {
-  .home-rank, .matbox { grid-template-columns: 1fr; } .hr-mat { position: static; }
+  .home-rank, .matbox, .statemap { grid-template-columns: 1fr; } .hr-mat { position: static; }
   .season { position: static; }
   .smalls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .drow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "d p" "s s" "b b"; gap: 6px 10px; }
@@ -243,6 +275,9 @@ table.wr td.nm b { display: block; } .yrs { color: var(--chalk-3); font-size: 12
   td, th { padding: 6px 5px; } td.nm .who { max-width: 150px; }
   table.rank td.nm .dtag { display: none; }
   .bars li { grid-template-columns: minmax(0, 1fr) 90px 30px; }
+  .dbar li { grid-template-columns: minmax(0, 1fr) 90px 36px; } .dbar .dist svg.pa { display: none; }
+  .champs li { grid-template-columns: 40px 34px minmax(0, 1fr); } .champs .who { grid-column: 3; } .champs .who span { max-width: 200px; }
+  .wtab .career.sm svg.md { width: 13px; height: 13px; }
   .small svg.pa { display: none; } .small { padding: 8px 8px 4px; }
   .c-p i { display: none; } .drow .c-d { min-width: 0; }
 }
@@ -251,7 +286,7 @@ table.wr td.nm b { display: block; } .yrs { color: var(--chalk-3); font-size: 12
 <body>
 <header class="top">
   <div class="bar"><a class="brand" href="#home">PA Wrestling Almanac</a><div class="seg" id="scope" role="group" aria-label="Class"></div>
-    <div class="search"><input class="field" id="q" type="search" placeholder="Find a school, district or wrestler" aria-label="Search" autocomplete="off"><div id="qres" hidden></div></div></div>
+</div>
   <nav id="nav" aria-label="Sections"></nav>
 </header>
 <main id="view"></main>

@@ -4,7 +4,7 @@
 /* ---------- the mat: every season is a spoke, every lineup spot a ring, every cell the unit's medal ---------- */
 function mat(h, unitRows, opts = {}) {
   const [a, b] = opts.years || yearsInScope();
-  const years = d3.range(a, b + 1).filter((y) => LINEUP.has(y + '|' + state.cls));
+  const years = d3.range(a, b + 1).filter((y) => seasonOf(y));
   const W = Math.min(widthOf(h), opts.max || 640), cx = W / 2, cy = W / 2, R = W / 2 - 22, r0 = R * 0.3;
   const gap = 0.16 * Math.PI, span = 2 * Math.PI - gap, step = span / years.length, a0 = gap / 2;
   const best = new Map(); unitRows.forEach((r) => { const k = r.year + '|' + r.slot; const c = best.get(k); if (!c || r.place < c.place) best.set(k, r); });
@@ -12,7 +12,7 @@ function mat(h, unitRows, opts = {}) {
   const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
   g.append('circle').attr('r', R + 8).attr('class', 'mat-rim');
   const cells = [];
-  years.forEach((y, i) => { const L = LINEUP.get(y + '|' + state.cls); const n = L.length; L.forEach((o, s) => cells.push({ y, s, n, w: o.w, a: a0 + i * step, r: best.get(y + '|' + s) })); });
+  years.forEach((y, i) => { const L = seasonOf(y).lineup; const n = L.length || 1; L.forEach((o, s) => cells.push({ y, s, n, w: o.w, a: a0 + i * step, r: best.get(y + '|' + s) })); });
   const arc = d3.arc().innerRadius((c) => r0 + (R - r0) * c.s / c.n + 0.35).outerRadius((c) => r0 + (R - r0) * (c.s + 1) / c.n - 0.35).startAngle((c) => c.a + 0.0025).endAngle((c) => c.a + step - 0.0025);
   const cellSel = g.append('g').selectAll('path').data(cells).join('path').attr('d', arc).attr('class', (c) => (c.r ? 'mc on' : 'mc')).attr('fill', (c) => (c.r ? `url(#m${c.r.place})` : null));
   bindTip(cellSel, (c) => (c.r ? `<b>${c.y} · ${wLabel(c.w)}</b><div class="tl">${medal(c.r.place, 16)} ${esc(c.r.name)}</div><div class="t3">${esc(c.r.sch)}, ${ordinal(c.r.place)}</div>` : `<b>${c.y} · ${wLabel(c.w)}</b><div class="t3">${opts.emptyText || 'no medal'}</div>`));
@@ -101,4 +101,24 @@ function raceBoard(S, opts = {}) {
   const list = S.teams.filter(opts.filter || (() => true)).slice(0, opts.limit || 15);
   const strip = (t) => { const at = new Map(); t.rows.forEach((r) => { if (!at.has(r.slot) || r.place < at.get(r.slot).place) at.set(r.slot, r); }); return `<div class="rx-strip" style="--n:${n}">${d3.range(n).map((i) => { const r = at.get(i); return r ? `<i title="${title(r)}">${medal(r.place, 18)}</i>` : '<i class="nil"></i>'; }).join('')}</div>`; };
   return `${axis(false)}<ol class="race">${list.map((t) => `<li class="${opts.hl && opts.hl === t.id ? 'hl' : ''}"><span class="rk">${t.rank}</span><span class="nm">${schoolLink(t.id, 20)}</span><span class="pts"><b>${t.pts}</b> pts</span>${strip(t)}</li>`).join('')}</ol>`;
+}
+
+/* ---------- Pennsylvania by district: shade is the chosen score, label is the district ---------- */
+function stateMap(h, vals, opts = {}) {
+  const W = Math.min(widthOf(h), opts.max || 760), H = W * MAP.h / MAP.w, k = W / MAP.w;
+  const max = d3.max(Object.values(vals)) || 1;
+  const tone = (v) => d3.interpolateRgb('#262b30', '#eceef0')(Math.pow((v || 0) / max, 0.7));
+  const svg = svgIn(h, W, H, opts.label || 'Pennsylvania by district');
+  const g = svg.append('g').attr('transform', `scale(${k})`);
+  g.append('path').attr('d', MAP.outline).attr('fill', '#1e2226');
+  const ds = d3.range(1, 13);
+  const shapes = g.append('g').selectAll('path').data(ds.filter((d) => MAP.d[d])).join('path').attr('d', (d) => MAP.d[d]).attr('fill', (d) => tone(vals[d])).attr('stroke', '#131416').attr('stroke-width', 0.35).attr('class', 'pa-dist');
+  const dots = g.append('g').selectAll('circle').data([8, 12]).join('circle').attr('cx', (d) => MAP.dot[d][0]).attr('cy', (d) => MAP.dot[d][1]).attr('r', 2.6).attr('fill', (d) => tone(vals[d])).attr('stroke', '#131416').attr('stroke-width', 0.5).attr('class', 'pa-dist');
+  const off = { 7: [0, 7], 8: [6, -1.5], 12: [5, 3.2], 1: [-2.5, -1], 5: [0, 1] };
+  const lab = g.append('g').selectAll('g').data(ds).join('g').attr('transform', (d) => { const [x, y] = MAP.dot[d], o = off[d] || [0, 0]; return `translate(${x + o[0]},${y + o[1]})`; }).style('pointer-events', 'none');
+  lab.append('text').attr('class', 'pa-lab').attr('text-anchor', 'middle').attr('dy', '.35em').attr('font-size', W < 500 ? 3.6 : 3).attr('fill', (d) => ((vals[d] || 0) / max > 0.45 && (!off[d] || d === 7) ? '#131416' : '#eceef0')).text((d) => 'D' + d);
+  const all = shapes.merge(dots);
+  all.style('cursor', 'pointer').on('click', (ev, d) => opts.select && opts.select(d));
+  bindTip(all, (d) => `<b>District ${d} · ${esc(DISTRICTS[d].short)}</b><div class="t3">${opts.tipText ? opts.tipText(d) : ''}</div>`);
+  return { paint(sel) { all.attr('stroke', (d) => (d === sel ? '#eceef0' : '#131416')).attr('stroke-width', (d) => (d === sel ? 0.9 : d === 8 || d === 12 ? 0.5 : 0.35)); all.filter((d) => d === sel).raise(); } };
 }

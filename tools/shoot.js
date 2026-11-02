@@ -2,7 +2,7 @@
 const { chromium } = require('playwright'); const path = require('path'); const fs = require('fs');
 const NM = process.env.D3_NM || '/home/claude/almanac/node_modules';
 const SITE = path.resolve(__dirname, '..', 'site');
-const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['home', 'schools', 'school/notre-dame-green-pond', 'rankings', 'rankings/districts', 'school/nazareth', 'district/11', 'district/7', 'season/2026', 'records', 'about'];
+const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['home', 'weights/152', 'wrestlers', 'wrestler/sean-kinney--nazareth', 'season/1960', 'schools', 'school/notre-dame-green-pond', 'rankings', 'rankings/districts', 'school/nazareth', 'district/11', 'district/7', 'season/2026', 'records', 'about'];
 (async () => {
   const b = await chromium.launch(); fs.mkdirSync(path.join(__dirname, '..', 'shots'), { recursive: true });
   for (const [w, h, tag] of [[1440, 900, 'd'], [390, 844, 'm']]) {

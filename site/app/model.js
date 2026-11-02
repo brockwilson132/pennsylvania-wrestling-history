@@ -35,12 +35,15 @@ const DISTRICTS = {
   12: { short: 'Philadelphia', long: 'Philadelphia Public and Catholic leagues' }
 };
 
-/* ---------- scope ---------- */
-const state = { cls: 'AAA', race: 'schools', pick: null };
-try { const s = localStorage.getItem('pawa-cls'); if (['AAA', 'AA', 'single'].includes(s)) state.cls = s; } catch (e) { /* storage unavailable */ }
-const setCls = (c) => { state.cls = c; try { localStorage.setItem('pawa-cls', c); } catch (e) { /* ignore */ } };
-const clsName = (c = state.cls) => (c === 'single' ? 'the one-class era' : 'Class ' + c);
-const clsShort = (c = state.cls) => (c === 'single' ? '1938–73' : c);
+/* ---------- scope: Class AAA, Class AA, or all of it ----------
+   Before 1974 every school wrestled in one class. Those seasons count toward AAA or AA
+   by the class each school wrestled in afterwards (or its successor's, for closed schools). */
+const state = { cls: 'AAA', pick: null };
+try { const s = localStorage.getItem('pawa-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* storage unavailable */ }
+const setCls = (c) => { state.cls = c; try { localStorage.setItem('pawa-scope', c); } catch (e) { /* ignore */ } };
+const clsName = (c = state.cls) => (c === 'ALL' ? 'all classes' : c === 'single' ? 'the one-class era' : 'Class ' + c);
+const clsShort = (c = state.cls) => (c === 'single' ? '1938–73' : c === 'ALL' ? 'All' : c);
+const classLabel = (c) => (c === 'single' ? 'One class' : 'Class ' + c);
 
 /* ---------- rows: every place winner, champions filling any gap ---------- */
 const CH = RAW.champs.concat(window.WR_CHAMP_FILL || []).map(([year, cls, w, name, school, d]) => ({ year, cls, w, wn: wNum(w), place: 1, name, school, sch: canon(school), d }));
@@ -52,7 +55,15 @@ MED.forEach((r) => { const L = LINEUP.get(r.year + '|' + r.cls) || []; let i = L
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
 const ptsOf = (p) => PTS[p - 1] || 0;
 MED.forEach((r) => { r.pts = ptsOf(r.place); });
-const ROWS = () => MED.filter((r) => r.cls === state.cls);
+const SUCCESSOR = { Canonsburg: 'Canon-McMillan', 'Forty Fort': 'Wyoming Valley West', Kingston: 'Wyoming Valley West', Plymouth: 'Wyoming Valley West', Philipsburg: 'Philipsburg-Osceola', Allentown: 'William Allen', 'Chartiers Township': 'Chartiers-Houston', Boswell: 'North Star', Carnegie: 'Carlynton', 'Manheim Borough': 'Manheim Central', Greensburg: 'Greensburg Salem', Latrobe: 'Greater Latrobe', Lansdowne: 'Penn Wood' };
+const LIN = new Map();
+d3.groups(MED.filter((r) => r.cls !== 'single'), (r) => r.sch).forEach(([s, rs]) => { const c = d3.rollups(rs, (v) => ({ n: v.length, last: d3.max(v, (r) => r.year) }), (r) => r.cls).sort((a, b) => b[1].n - a[1].n || b[1].last - a[1].last); LIN.set(s, c[0][0]); });
+const lineage = (s) => LIN.get(s) || LIN.get(SUCCESSOR[s]) || 'AAA';
+MED.forEach((r) => { r.k = r.cls === 'single' ? lineage(r.sch) : r.cls; });
+const inScope = (r) => state.cls === 'ALL' || r.k === state.cls;
+const ROWS = () => MED.filter(inScope);
+const YEARS = Array.from(new Set(MED.map((r) => r.year))).sort((a, b) => a - b);
+const BY_YEAR = d3.group(MED, (r) => r.year);
 
 /* ---------- standard weight classes: drift of a few pounds is filed under today's class ---------- */
 const STD = [
@@ -65,20 +76,33 @@ const STD = [
 ];
 const stdOf = (r) => STD.find((c) => r.wn >= c.min && r.wn <= c.max) || STD[STD.length - 1];
 
-/* ---------- seasons and team races ---------- */
-const SEASON = new Map(); // year|cls
-d3.group(MED, (r) => r.year + '|' + r.cls).forEach((rs, k) => {
-  const [year, cls] = k.split('|');
-  const avail = d3.sum(rs, (r) => r.pts);
-  const roll = (key) => Array.from(d3.rollup(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), places: placeCounts(v), n: v.length, titles: v.filter((r) => r.place === 1).length, d: v[0].d, rows: v.slice().sort((a, b) => a.slot - b.slot || a.place - b.place) }), key)).map(([id, o]) => ({ id, ...o })).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
-  const teams = roll((r) => r.sch), dists = roll((r) => r.d);
-  [teams, dists].forEach((L) => L.forEach((t, i) => { t.rank = i ? (t.pts === L[i - 1].pts ? L[i - 1].rank : i + 1) : 1; t.share = avail ? t.pts / avail : 0; }));
-  SEASON.set(k, { year: +year, cls, avail, places: d3.max(rs, (r) => r.place), lineup: LINEUP.get(k) || [], teams, dists, teamBy: new Map(teams.map((t) => [t.id, t])), distBy: new Map(dists.map((t) => [t.id, t])), filled: rs.some((r) => r.filled) });
-});
+/* ---------- seasons and team races, per year and scope ----------
+   A season's points available are the whole tournament's: both classes under All, the one
+   class before 1974. So a share is always a share of what was really on offer. */
+const SEASONS = new Map();
+function seasonOf(year, scope = state.cls) {
+  const key = year + '|' + scope;
+  if (SEASONS.has(key)) return SEASONS.get(key);
+  const yr = BY_YEAR.get(year) || [];
+  const one = yr.length && yr[0].cls === 'single';
+  const rows = scope === 'ALL' ? yr : yr.filter((r) => r.k === scope);
+  let S = null;
+  if (rows.length) {
+    const lc = one ? 'single' : scope === 'ALL' ? 'AAA' : scope;
+    const avail = d3.sum(scope === 'ALL' || one ? yr : rows, (r) => r.pts);
+    const roll = (key) => Array.from(d3.rollup(rows, (v) => ({ pts: d3.sum(v, (r) => r.pts), places: placeCounts(v), n: v.length, titles: v.filter((r) => r.place === 1).length, d: v[0].d, rows: v.slice().sort((a, b) => a.slot - b.slot || a.place - b.place) }), key)).map(([id, o]) => ({ id, ...o })).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
+    const teams = roll((r) => r.sch), dists = roll((r) => r.d);
+    [teams, dists].forEach((L) => L.forEach((t, i) => { t.rank = i ? (t.pts === L[i - 1].pts ? L[i - 1].rank : i + 1) : 1; t.share = avail ? t.pts / avail : 0; }));
+    S = { year, scope, one, cls: lc, avail, rows, places: d3.max(yr, (r) => r.place), lineup: LINEUP.get(year + '|' + lc) || [], teams, dists, teamBy: new Map(teams.map((t) => [t.id, t])), distBy: new Map(dists.map((t) => [t.id, t])) };
+  }
+  SEASONS.set(key, S);
+  return S;
+}
+/* what a season page shows: the one-class field before 1974, else each class in scope */
+const boardsFor = (year) => { const yr = BY_YEAR.get(year) || []; if (!yr.length) return []; if (yr[0].cls === 'single') return [seasonOf(year, 'ALL')]; return (state.cls === 'ALL' ? ['AAA', 'AA'] : [state.cls]).map((c) => seasonOf(year, c)).filter(Boolean); };
 function placeCounts(rows) { const c = [0, 0, 0, 0, 0, 0, 0, 0]; rows.forEach((r) => { if (r.place >= 1 && r.place <= 8) c[r.place - 1]++; }); return c; }
-const seasonsInScope = () => Array.from(SEASON.values()).filter((S) => S.cls === state.cls).sort((a, b) => a.year - b.year);
+const seasonsInScope = () => YEARS.map((y) => seasonOf(y)).filter(Boolean);
 const yearsInScope = () => { const s = seasonsInScope(); return s.length ? [s[0].year, s[s.length - 1].year] : [0, 0]; };
-const seasonOf = (year, cls = state.cls) => SEASON.get(year + '|' + cls) || null;
 
 /* ---------- units: a school or a district ---------- */
 const HALF_LIFE = 7;
@@ -130,9 +154,13 @@ const schoolDistrict = (s) => SCHOOL_D.get(canon(s)) || null;
 const schoolHref = (s) => '#school/' + slug(canon(s));
 /* the classes a school has wrestled in, as runs of seasons: [{cls, from, to}] */
 const classHistory = (s) => { const ys = d3.rollups(MED.filter((r) => r.sch === s), (v) => v[0].cls, (r) => r.year).sort((a, b) => a[0] - b[0]); const out = []; ys.forEach(([y, c]) => { const L = out[out.length - 1]; if (L && L.cls === c) L.to = y; else out.push({ cls: c, from: y, to: y }); }); return out; };
-const lineageOf = (s) => { const c = d3.rollups(MED.filter((r) => r.sch === s && r.cls !== 'single'), (v) => v.length, (r) => r.cls).sort((a, b) => b[1] - a[1]); return c.length ? c[0][0] : null; };
 
 /* ---------- wrestlers ---------- */
+const wKey = (r) => nkey(r.name) + '|' + r.sch;
+const wSlug = (name, sch) => slug(name) + '--' + slug(sch);
+const WRESTLER = new Map(); // slug -> {name, sch, d, rows}
+d3.groups(MED, wKey).forEach(([, rs]) => { rs.sort((a, b) => a.year - b.year); const L = rs[rs.length - 1]; WRESTLER.set(wSlug(L.name, L.sch), { name: L.name, sch: L.sch, d: rs[0].d, rows: rs }); });
+const wrestlerHref = (r) => '#wrestler/' + wSlug(r.name, r.sch);
 const wrestlersOf = (rows) => d3.groups(rows, (r) => nkey(r.name) + '|' + r.sch).map(([, rs]) => {
   rs.sort((a, b) => a.year - b.year);
   return { name: rs[rs.length - 1].name, school: rs[rs.length - 1].sch, d: rs[0].d, n: rs.length, titles: rs.filter((r) => r.place === 1).length, best: d3.min(rs, (r) => r.place), pts: d3.sum(rs, (r) => r.pts), rows: rs };
