@@ -1,1 +1,0 @@
-python3 -c "s=open('site/index.html').read().replace('<script src=\"foil.js\"></script>','<script src=\"../test/mock.js\"></script>\n<script src=\"foil.js\"></script>');open('site/test.html','w').write(s)"

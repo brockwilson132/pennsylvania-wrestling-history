@@ -1,18 +1,30 @@
 # PA Wrestling Almanac
 
-A history of Pennsylvania high school wrestling: every PIAA state champion and state medalist since 1938, by district, school and weight, with District 11 and Northeast Regional history.
+Every Pennsylvania state wrestling champion and place winner since 1938, by school, district, weight and season.
+
+Success is counted in medals: every state place earns points (16, 12, 9, 7, 5, 3, 2, 1 for 1st–8th), so a program's depth counts along with its titles. Color on the site means a medal and nothing else. See `docs/SPEC.md` for the design.
 
 ## Layout
 
-- `site/` the app. Static files: open `site/index.html` or serve the folder.
-- `data/` source data. `data/medals/{YEAR}_{AAA|AA|single}.csv` holds every state place winner; `tools/build_medals.js` turns them into `site/medals.js`.
-- `tools/` build script and the Playwright checks used during development (layout audit at phone width, interaction and touch checks).
-- `archive/` earlier versions, kept for reference.
+- `site/` the site: static files, no build step. Open `site/index.html` or serve the folder.
+  - `app/model.js` data and scoring · `app/ui.js` medals, district maps, badges · `app/charts.js` the mat, weight and race charts · `app/pages.js` pages and router
+  - `data.js` champions and history, `medals.js` every place winner, `badges.js` school colors, `pa-map.js` district shapes, `logos/` school logos
+- `data/` source data. `data/medals/{YEAR}_{AAA|AA|single}.csv` holds every state place winner.
+- `tools/`
+  - `node tools/build_medals.js` rebuilds `site/medals.js` from the CSVs
+  - `node tools/build_map.js` rebuilds `site/pa-map.js` (needs `d3`, `topojson-client`, `us-atlas`)
+  - `python3 tools/make_logo.py "School" image.png` adds a logo to `site/logos/`
+  - `node tools/shoot.js` and `node tools/interact.js` are the Playwright checks (layout at phone and desktop width, interactions)
+- `archive/` earlier versions.
+
+## Publishing
+
+`.github/workflows/pages.yml` publishes `site/` to GitHub Pages on every push to `main`. Turn it on once in the repo's Settings → Pages → Source: GitHub Actions. On a free GitHub plan, Pages needs the repository to be public.
 
 ## Sources
 
-Results from PA-Wrestling.com's PIAA championship archive (results sheets for each season). Gaps: the 1954 single-class sheet could not be retrieved, and 1975 places are incomplete.
+PA-Wrestling.com's PIAA championship archive. Gaps: the 1954 one-class results sheet could not be retrieved, and 1975 places are incomplete.
 
-## Status
+## History
 
-The `v4-snapshot` tag is the version published as a Claude artifact on 2 November 2026. A rebuild is in progress. In this snapshot, school logos live in the Claude artifact's owner-only storage and are not in the repo; the rebuild moves them into `site/logos/` so the site can run on GitHub Pages.
+The `v4-snapshot-save` branch holds the version published before the rebuild.

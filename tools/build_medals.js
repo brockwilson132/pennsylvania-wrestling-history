@@ -1,6 +1,6 @@
 // Builds medals.js from data/medals/*.csv: one row per placewinner, validated against the champions list.
 const fs = require('fs'), path = require('path');
-global.window = {}; require('./app/data.js'); require('./app/badges.js');
+global.window = {}; require('../site/data.js'); require('../site/badges.js');
 const R = window.WR_DATA, SB = window.SchoolBadge;
 const canon = (s) => { const id = SB.identity(s); return id ? id.school : s; };
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
@@ -53,4 +53,4 @@ console.log('files', files.length, 'rows', out.length, 'champions checked', chec
 // champions missing from the original list, recovered from the place-winner files
 const fill = out.filter((r) => r[3] === 1 && !champ.has(`${r[0]}|${r[1]}|${r[2]}`) && r[6] != null).map((r) => [r[0], r[1], r[2], r[4], r[5], r[6]]);
 console.log('champion fills', fill.length);
-fs.writeFileSync('v4/medals.js', 'window.WR_MEDALS=' + JSON.stringify(out) + ';\nwindow.WR_CHAMP_FILL=' + JSON.stringify(fill) + ';');
+fs.writeFileSync('site/medals.js', 'window.WR_MEDALS=' + JSON.stringify(out) + ';\nwindow.WR_CHAMP_FILL=' + JSON.stringify(fill) + ';');
