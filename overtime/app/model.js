@@ -42,15 +42,21 @@ const OT = (window.OT = {});
   const SUCCESSOR = { Canonsburg: 'Canon-McMillan', 'Forty Fort': 'Wyoming Valley West', Kingston: 'Wyoming Valley West', Plymouth: 'Wyoming Valley West', Philipsburg: 'Philipsburg-Osceola', 'Chartiers Township': 'Chartiers-Houston', Boswell: 'North Star', Carnegie: 'Carlynton', 'Manheim Borough': 'Manheim Central', Greensburg: 'Greensburg Salem', Latrobe: 'Greater Latrobe', Lansdowne: 'Penn Wood' };
   const LIN = new Map(); d3.groups(APP.filter((r) => r.cls !== 'single'), (r) => r.sch).forEach(([s, rs]) => { const c = d3.rollups(rs, (v) => v.length, (r) => r.cls).sort((a, b) => b[1] - a[1]); LIN.set(s, c[0][0]); });
   const lineage = (s) => LIN.get(s) || LIN.get(SUCCESSOR[s]) || 'AAA';
-  /* home class = the class of the school's most recent appearance; earlier seasons in the other class still count for the
-     school, discounted by OFF_CLASS in Score, Era and Power (medal counts stay whole). Pre-1974 one-class rows follow lineage. */
-  const OFF_CLASS = 0.85;
+  /* A school belongs to every class it has wrestled in. In AAA or AA scope its seasons in that class count in full and its
+     seasons in the other class still count, discounted by OFF_CLASS in Score, Era and Power (medal counts stay whole).
+     So a program that moved classes appears in both rankings, weighted toward the class being viewed. Pre-1974 one-class
+     rows follow lineage (the class the school later wrestled most). */
+  const OFF_CLASS = 0.85; // AA results viewed in the AAA ranking
+  const OFF_DOWN = 0.85;  // AAA results viewed in the AA ranking (same for now; tune separately if wanted)
+  const CLASSES = new Map(); APP.forEach((r) => { if (r.cls !== 'single') (CLASSES.get(r.sch) || CLASSES.set(r.sch, new Set()).get(r.sch)).add(r.cls); });
+  const classesOf = (s) => CLASSES.get(s) || CLASSES.get(SUCCESSOR[s]) || new Set([lineage(s)]);
   const HOME = new Map(); d3.groups(APP.filter((r) => r.cls !== 'single'), (r) => r.sch).forEach(([s, rs]) => { HOME.set(s, rs.reduce((a, b) => (b.year > a.year ? b : a)).cls); });
   const homeOf = (s) => HOME.get(s) || HOME.get(SUCCESSOR[s]) || lineage(s);
-  APP.forEach((r) => { r.k = homeOf(r.sch); r.off = r.cls !== 'single' && r.cls !== r.k; });
-  const wt = (r) => (r.off && state.cls !== 'ALL' ? OFF_CLASS : 1);
+  APP.forEach((r) => { r.k = r.cls === 'single' ? lineage(r.sch) : r.cls; r.classes = classesOf(r.sch); });
+  const isOff = (r) => state.cls !== 'ALL' && r.cls !== 'single' && r.cls !== state.cls;
+  const wt = (r) => (isOff(r) ? (state.cls === 'AAA' ? OFF_CLASS : OFF_DOWN) : 1);
   const wpts = (r) => r.pts * wt(r);
-  const inScope = (r) => state.cls === 'ALL' || r.k === state.cls;
+  const inScope = (r) => state.cls === 'ALL' || (r.cls === 'single' ? r.k === state.cls : r.classes.has(state.cls));
   const actualIn = (r, scope, one) => scope === 'ALL' || (one ? r.k === scope : r.cls === scope);
   const ROWS = () => APP.filter(inScope);
   const YEARS = Array.from(new Set(APP.map((r) => r.year))).sort((a, b) => a - b);
@@ -120,7 +126,7 @@ const OT = (window.OT = {});
     if (u.kind === 'state') seasons.forEach((s) => sh.set(s.year, 1));
     else d3.rollups(rows, (v) => d3.sum(v, wpts), (r) => r.year).forEach(([y, p]) => { const S = seasonOf(y); if (S && S.avail) sh.set(y, p / S.avail); });
     const shares = Array.from(sh, ([year, share]) => ({ year, share }));
-    const offRows = state.cls === 'ALL' ? [] : rows.filter((r) => r.off);
+    const offRows = state.cls === 'ALL' ? [] : rows.filter(isOff);
     const o = { u, seasons, apps, rows, places, medals: rows.length, titles: places[0], pts: Math.round(d3.sum(rows, wpts)), quals: apps.length,
       offMedals: offRows.length, offCls: offRows.length ? offRows[0].cls : null, offClass: OFF_CLASS,
       era: 100 * d3.sum(shares, (s) => s.share), power: 100 * d3.sum(shares, (s) => s.share * Math.pow(0.5, (last - s.year) / HALF_LIFE)),
@@ -181,5 +187,5 @@ const OT = (window.OT = {});
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 
-  Object.assign(OT, { OFF_CLASS, wt, wpts, homeOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, SCHOOL_R, DIST_R, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, hierarchyOf, unitByKind, wKey });
+  Object.assign(OT, { OFF_CLASS, wt, wpts, isOff, homeOf, classesOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, SCHOOL_R, DIST_R, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, hierarchyOf, unitByKind, wKey });
 })();
