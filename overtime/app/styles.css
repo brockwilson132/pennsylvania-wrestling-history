@@ -215,3 +215,10 @@ td.xc{text-align:center}
 @media(min-width:720px){.bvl{grid-template-columns:minmax(0,1fr) 300px;grid-template-rows:auto;gap:14px;padding:6px 10px 6px 12px}.bvtop{grid-template-columns:52px 22px minmax(0,1fr) 18px;gap:10px}}
 @media(max-width:400px){.bvtop{grid-template-columns:32px 20px minmax(0,1fr) 16px;gap:5px}}
 .cm.bvm{grid-area:auto}
+
+.bvsrc{margin:6px 0 10px;font-size:12px;color:var(--ash);letter-spacing:.02em}.bvsrc a{color:var(--chalk)}
+.bvsrclist{display:grid;gap:6px}.bvsrcrow{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;color:inherit;min-height:48px}
+.bvsrcrow .pill{width:30px;height:24px}.bvsrcn b{display:block;font:700 17px var(--cond);text-transform:uppercase;letter-spacing:.02em}.bvsrcn small{color:var(--ash);font-size:12px}
+
+.tw{overflow-x:auto;padding:12px}.dt{width:100%;border-collapse:collapse;font-size:13px}.dt th{font:700 11px var(--cond);letter-spacing:.12em;color:var(--ash);text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}.dt td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}.dt td.num{font-variant-numeric:tabular-nums;white-space:nowrap}.dt a{color:inherit}.dt .ash{color:var(--ash)}.dt .gold,.gold{color:var(--gold)}
+.dt td small{display:block;min-width:240px;white-space:normal;line-height:1.35}

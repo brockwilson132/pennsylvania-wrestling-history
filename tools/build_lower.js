@@ -20,6 +20,17 @@ function csv(file) {
 }
 const E = csv('data/brackets/lower_entrants.csv'), T = csv('data/brackets/lower_teams.csv');
 
+/* supplementary sources fill whole tournaments the archive lacks (District III Records: D3 champions;
+   WPIAL: D7 champions). Only (year, cls, unit) tournaments with no archive file are filled; place 1 only, no field. */
+const SRCS = { D3: ['data/sources/d3_champions.csv', 'd3records'], D7: ['data/sources/d7_champions.csv', 'wpial'] };
+const have = new Set(E.filter((r) => r.level === 'district').map((r) => { const cls = r.cls === 'A' ? 'AAA' : r.cls === 'B' ? 'AA' : r.cls; return `${r.year}|${cls}|${r.unit}`; }));
+const SRC = {}; let added = 0;
+Object.entries(SRCS).forEach(([unit, [file, src]]) => { if (!fs.existsSync(file)) return; csv(file).forEach((r) => {
+  const k = `${r.year}|${r.cls}|${unit}`; if (have.has(k)) return;
+  E.push({ level: 'district', tournament: `${r.year}_${unit}_${r.cls}_${src}`, year: r.year, cls: r.cls, unit, weight: r.weight === 'HWT' ? 'UNL' : r.weight, place: '1', seed: '', name: r.name.replace(/\s+Jr\.?$/, ''), school: r.school, grade: '', record: '', src });
+  SRC[`district|${r.year}|${r.cls}|${unit}`] = src; added++; }); });
+console.log('source rows added', added, 'tournaments', Object.keys(SRC).length);
+
 /* normalize unit / class. District 1 AAA parts come through as unit D1_AAA with the part in cls. */
 const D1 = new Set(['North', 'South', 'Central', 'East', 'West']);
 function norm(r) {
@@ -86,7 +97,7 @@ const sizes = {
   district: write('overtime/lower-district.js', 'WR_LOWER_D', parts.district),
   regional: write('overtime/lower-regional.js', 'WR_LOWER_R', parts.regional),
   teams: write('overtime/lowerteams.js', 'WR_LOWER_TEAMS', teams),
-  meta: write('overtime/lowermeta.js', 'WR_LOWER_META', { strs, cov: Object.keys(cov), dreg, adv }),
+  meta: write('overtime/lowermeta.js', 'WR_LOWER_META', { strs, cov: Object.keys(cov), dreg, adv, src: SRC }),
 };
 /* linking report: state placers 1974+ with a district row (exact name key, or last name + school + year + weight) */
 { const meds = (window.WR_MEDALS || []).filter((m) => m[0] >= 1974); const dIdx = new Map(); rows.filter((r) => r.level === 'district').forEach((r) => { const k = `${r.year}|${r.cls}|${r.sch}`; (dIdx.get(k) || dIdx.set(k, []).get(k)).push(r); });

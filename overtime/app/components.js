@@ -209,6 +209,8 @@
       if (r) return { ...base, r, w: r.w, place: r.place };
       if (!higher(lvl, p.year)) return { ...base, none: true };
       const cls = s ? s.cls : p.cls; const unit = lvl === 'district' ? (s ? s.d : p.d) : (s ? (s.region || OT.regionOf(s, cls === 'single' ? s.k : cls)) : p.region);
+      const only = OT.lowerSrc(lvl, p.year, cls, unit);
+      if (only) return { ...base, pend: true, src: only === 'wpial' ? 'only the WPIAL champion is on record for this year' : 'only the District III champion is on record for this year' };
       if (OT.lowerCovered(lvl, p.year, cls, unit)) return { ...base, q: true, src: 'advanced without a recorded place' };
       if (lvl === 'regional' && s && p.year >= 1951 && s.reg) return { ...base, place: s.reg, src: 'from the state seed; no regional file' };
       if (lvl === 'district' && s && p.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'from the state seed; no district file' };
@@ -223,7 +225,7 @@
     const edge = col ? ` style="box-shadow:inset 0 4px 0 ${col}"` : '';
     const b = band && c.r && tier ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
     if (c.place) return `<${tag}${hr} class="${cls} ${pc(c.place)}"${edge} title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}${href ? ' · open the bracket' : ''}">${c.place}${b}</${tag}>`;
-    if (c.pend) return `<div class="${cls} pend" title="${c.year} · no bracket file on the archive for this tournament">Q</div>`;
+    if (c.pend) return `<${tag}${hr} class="${cls} pend" title="${c.year} · ${c.src || 'no bracket file on the archive for this tournament'}${href ? ' · open what is on record' : ''}">Q</${tag}>`;
     return `<${tag}${hr} class="${cls} cq"${edge} title="${c.year} qualifier${href ? ' · open the bracket' : ''}">Q${b}</${tag}>`;
   };
   function careerGrid(W) {
@@ -288,6 +290,9 @@
     const title = `${F.year} · ${unit}${F.lvl === 'state' ? ' State' : ''} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
     const dot = F.tier ? bandIcon(F.tier, 16, F.info && F.info.top && F.info.top.length ? 'in the bracket: ' + F.info.top.map((t) => t.name).join(', ') : '') : '';
     const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${dot ? `<div class="bvdot">${dot}</div>` : ''}</div>`;
+    const SRCI = { d3records: ['champions only', 'District III Records', 'https://piaadistrict3records.com/'], wpial: ['champions only', 'WPIAL', 'https://wpial.org/'] }[F.src];
+    const srcNote = SRCI ? `<div class="bvsrc">${SRCI[0]} · <a href="${SRCI[2]}" target="_blank" rel="noopener">${SRCI[1]}</a> · the bracket archive has no file for this tournament</div>` : '';
+    if (SRCI && F.entrants.length) return head + srcNote + `<div class="bvsrclist">${F.entrants.map((e) => `<a class="bvsrcrow" href="#wrestler/${e.slug}"><span class="pill ${pc(e.r.place)}">${e.r.place}</span><span class="bvsrcn"><b>${esc(e.r.name)}</b><small>${esc(e.r.sch)}</small></span></a>`).join('')}</div>`;
     if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
     const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 128 : 92, BW = phone ? 54 : 110, H = n * RH;
     const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;

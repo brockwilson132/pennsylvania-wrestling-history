@@ -1,0 +1,1764 @@
+year,cls,weight,place,name,school,source
+2024,AAA,107,1,Nicholas McGarrity,Peters Township,wpial
+2024,AAA,114,1,Santino Sloboda,Butler,wpial
+2024,AAA,121,1,Luke Willochell,Greater Latrobe,wpial
+2024,AAA,127,1,Andrew Binni,Canon-McMillan,wpial
+2024,AAA,133,1,Mason Kernan,Bethel Park,wpial
+2024,AAA,139,1,Maddox Shaw,Thomas Jefferson,wpial
+2024,AAA,145,1,Evan Petrovich,Connellsville,wpial
+2024,AAA,152,1,Eli Carr,Hempfield Area,wpial
+2024,AAA,160,1,Bode Marlow,Thomas Jefferson,wpial
+2024,AAA,172,1,Vaughn Spencer,Pine-Richland,wpial
+2024,AAA,189,1,Cooper Roscosky,Kiski Area,wpial
+2024,AAA,215,1,Jake Conroy,Ringgold,wpial
+2024,AAA,285,1,Shepherd Turk,Thomas Jefferson,wpial
+2024,AA,107,1,Cam Baker,Burrell,wpial
+2024,AA,114,1,Anthony Mucci,Derry,wpial
+2024,AA,121,1,Antonio Boni,Central Valley,wpial
+2024,AA,127,1,Chris Vargo,Bentworth,wpial
+2024,AA,133,1,Jack Kazalas,Quaker Valley,wpial
+2024,AA,139,1,Cooper Hornack,Burrell,wpial
+2024,AA,145,1,Mason Horwat,Derry,wpial
+2024,AA,152,1,Rudy Brown,Burgettstown,wpial
+2024,AA,160,1,Isaiah Pisano,Hopewell,wpial
+2024,AA,172,1,Elijah Brown,Belle Vernon,wpial
+2024,AA,189,1,Brady Brown,Derry,wpial
+2024,AA,215,1,Rune Lawrence,Frazier,wpial
+2024,AA,285,1,Brenan Morgan,Central Valley,wpial
+2023,AAA,107,1,Tanner Mizenko,Canon-McMillan,wpial
+2023,AAA,114,1,Luke Willochell,Greater Latrobe,wpial
+2023,AAA,121,1,Ryan Klingensmith,Kiski Area,wpial
+2023,AAA,127,1,Vincent Kilkeary,Greater Latrobe,wpial
+2023,AAA,133,1,Maddox Shaw,Thomas Jefferson,wpial
+2023,AAA,139,1,Eli Carr,Hempfield Area,wpial
+2023,AAA,145,1,Mac Church,Waynesburg Central,wpial
+2023,AAA,152,1,Ty Watters,West Allegheny,wpial
+2023,AAA,160,1,Shawn Taylor,West Allegheny,wpial
+2023,AAA,172,1,Rocco Welsh,Waynesburg Central,wpial
+2023,AAA,189,1,Vaughn Spencer,Pine-Richland,wpial
+2023,AAA,215,1,Eli Makel,Waynesburg Central,wpial
+2023,AAA,285,1,Ty Banco,Trinity,wpial
+2023,AA,107,1,Antonio Boni,Central Valley,wpial
+2023,AA,114,1,Nico Fanella,Indiana,wpial
+2023,AA,121,1,Jack Kazalas,Quaker Valley,wpial
+2023,AA,127,1,Cooper Hornack,Burrell,wpial
+2023,AA,133,1,Peter Chacon,Montour,wpial
+2023,AA,139,1,Joey Sentipal,Burgettstown,wpial
+2023,AA,145,1,Tyler Debnar,Bethlehem-Center,wpial
+2023,AA,152,1,Ryan Celaschi,Frazier,wpial
+2023,AA,160,1,Grant MacKay,Laurel,wpial
+2023,AA,172,1,Braedon Welsh,Fort Cherry,wpial
+2023,AA,189,1,Rune Lawrence,Frazier,wpial
+2023,AA,215,1,Brenan Morgan,Central Valley,wpial
+2023,AA,285,1,Christian Flaherty,Keystone Oaks,wpial
+2022,AAA,106,1,Luke Willochell,Greater Latrobe,wpial
+2022,AAA,113,1,Tyler Chappell,Seneca Valley,wpial
+2022,AAA,120,1,Vincent Kilkeary,Greater Latrobe,wpial
+2022,AAA,126,1,Ethan Lebin,Hempfield Area,wpial
+2022,AAA,132,1,Mac Church,Waynesburg Central,wpial
+2022,AAA,138,1,Briar Priest,Hempfield Area,wpial
+2022,AAA,145,1,Finn Solomon,Franklin Regional,wpial
+2022,AAA,152,1,Dylan Evans,Chartiers Valley,wpial
+2022,AAA,160,1,Jared Keslar,Connellsville,wpial
+2022,AAA,172,1,Rocco Welsh,Waynesburg Central,wpial
+2022,AAA,189,1,Maclane Stout,Mt. Lebanon,wpial
+2022,AAA,215,1,Brian Finnerty,Thomas Jefferson,wpial
+2022,AAA,285,1,Billy McChesney,Greensburg Salem,wpial
+2022,AA,106,1,Parker Sentipal,Burgettstown,wpial
+2022,AA,113,1,Colin Bartley,Laurel,wpial
+2022,AA,120,1,Chris Vargo,Bentworth,wpial
+2022,AA,126,1,Dylan Bruce,Elizabeth Forward,wpial
+2022,AA,132,1,Joey Sentipal,Burgettstown,wpial
+2022,AA,138,1,Ambrose Boni,Central Valley,wpial
+2022,AA,145,1,Shawn Szymanski,Burrell,wpial
+2022,AA,152,1,Justin Richey,Quaker Valley,wpial
+2022,AA,160,1,Grant MacKay,Laurel,wpial
+2022,AA,172,1,Rune Lawrence,Frazier,wpial
+2022,AA,189,1,Patrick Cutchember,Quaker Valley,wpial
+2022,AA,215,1,Dayton Pitzer,Mt. Pleasant,wpial
+2022,AA,285,1,Joseph Baronick,Burgettstown,wpial
+2021,AAA,106,1,Tyler Chappell,Seneca Valley,wpial
+2021,AAA,113,1,Vincent Kilkeary,Greater Latrobe,wpial
+2021,AAA,120,1,Dylan Coy,North Allegheny,wpial
+2021,AAA,126,1,Carter Dibert,Franklin Regional,wpial
+2021,AAA,132,1,Dylan Chappell,Seneca Valley,wpial
+2021,AAA,138,1,Cole Homet,Waynesburg Central,wpial
+2021,AAA,145,1,Wyatt Henson,Waynesburg Central,wpial
+2021,AAA,152,1,Alejandro Herrera-Rondon,Seneca Valley) 138 – Nick Coy (Penn-Trafford,wpial
+2021,AAA,160,1,Cole Spencer,Pine-Richland,wpial
+2021,AAA,172,1,Luca Augustine,Waynesburg Central,wpial
+2021,AAA,189,1,Justin Hart,Hampton,wpial
+2021,AAA,215,1,Cole Weightman,Belle Vernon,wpial
+2021,AAA,285,1,Isaiah Vance,Hempfield Area,wpial
+2021,AA,106,1,Cooper Hornack,Burrell,wpial
+2021,AA,113,1,Chris Vargo,Bentworth,wpial
+2021,AA,120,1,Nicholas Ferra,Burrell,wpial
+2021,AA,126,1,Joey Fischer,South Park,wpial
+2021,AA,132,1,Jamison Poklembo,Mt. Pleasant,wpial
+2021,AA,138,1,Ian Oswalt,Burrell,wpial
+2021,AA,145,1,Kenny Duschek,Blackhawk,wpial
+2021,AA,152,1,Grant MacKay,Laurel,wpial
+2021,AA,160,1,A.J. Corrado,Burrell,wpial
+2021,AA,172,1,Rune Lawrence,Frazier,wpial
+2021,AA,189,1,Patrick Cutchember,Quaker Valley,wpial
+2021,AA,215,1,Dayton Pitzer,Mt. Pleasant,wpial
+2021,AA,285,1,Mitch Miles,Laurel,wpial
+2020,AAA,106,1,Mac Church,Waynesburg Central,wpial
+2020,AAA,113,1,Carter Dibert,Franklin Regional,wpial
+2020,AAA,120,1,Dylan Chappell,Seneca Valley,wpial
+2020,AAA,126,1,Kurtis Phipps,Norwin,wpial
+2020,AAA,132,1,Alejandro Herrera-Rondon,Seneca Valley,wpial
+2020,AAA,138,1,Wyatt Henson,Waynesburg Central,wpial
+2020,AAA,145,1,Ty Linsenbigler,Hempfield Area,wpial
+2020,AAA,152,1,Cole Spencer,Pine-Richland,wpial
+2020,AAA,160,1,Luca Augustine,Waynesburg Central,wpial
+2020,AAA,170,1,Maclane Stout,Mt. Lebanon,wpial
+2020,AAA,182,1,Gerrit Nijenhuis,Canon-McMillan,wpial
+2020,AAA,195,1,Luke Stout,Mt. Lebanon,wpial
+2020,AAA,220,1,Cole Weightman,Belle Vernon,wpial
+2020,AAA,285,1,Isaiah Vance,Hempfield Area,wpial
+2020,AA,106,1,Chase Brandebura,Carlynton,wpial
+2020,AA,113,1,Joey Fischer,South Park,wpial
+2020,AA,120,1,Ryan Michaels,Elizabeth Forward,wpial
+2020,AA,126,1,Ty Cymmerman,Derry,wpial
+2020,AA,132,1,Ian Oswalt,Burrell,wpial
+2020,AA,138,1,Kenny Duschek,Freedom Area,wpial
+2020,AA,145,1,Rocco Ferraro,McGuffey,wpial
+2020,AA,152,1,A.J. Corrado,Burrell,wpial
+2020,AA,160,1,Thayne Lawrence,Frazier,wpial
+2020,AA,170,1,Trent Schultheis,Freedom Area,wpial
+2020,AA,182,1,Austin Walley,Ellwood City,wpial
+2020,AA,195,1,Garrett Boone,McGuffey,wpial
+2020,AA,220,1,Donovan Cutchember,Quaker Valley,wpial
+2020,AA,285,1,Mitch Miles,Laurel,wpial
+2019,AAA,106,1,Dylan Chappell,Seneca Valley,wpial
+2019,AAA,113,1,Alejandro Herrera-Rondon,Seneca Valley,wpial
+2019,AAA,120,1,Kurtis Phipps,Norwin,wpial
+2019,AAA,126,1,Colton Camacho,Franklin Regional,wpial
+2019,AAA,132,1,Sam Hillegas,North Hills,wpial
+2019,AAA,145,1,Antonio Amelio,Seneca Valley,wpial
+2019,AAA,152,1,Cam Conner,Kiski Area,wpial
+2019,AAA,160,1,Jack Blumer,Kiski Area,wpial
+2019,AAA,170,1,Gerrit Nijenhuis,Canon-McMillan,wpial
+2019,AAA,182,1,Luke Stout,Mt. Lebanon,wpial
+2019,AAA,195,1,Max Shaw,Thomas Jefferson,wpial
+2019,AAA,220,1,Ryan Weinzen,Norwin,wpial
+2019,AAA,285,1,Jake Slinger,Upper St. Clair,wpial
+2019,AA,106,1,Joey Fischer,South Park,wpial
+2019,AA,113,1,Ryan Michaels,Elizabeth Forward,wpial
+2019,AA,120,1,Ian Oswalt,Burrell,wpial
+2019,AA,126,1,Ty Cymmerman,Derry,wpial
+2019,AA,132,1,Conner Redinger,Quaker Valley,wpial
+2019,AA,138,1,Jacob Ealy,Hopewell,wpial
+2019,AA,145,1,John Rocco Kazalas,Quaker Valley,wpial
+2019,AA,152,1,Trent Schultheis,Freedom Area,wpial
+2019,AA,160,1,Thayne Lawrence,Frazier,wpial
+2019,AA,170,1,Christian Clutter,McGuffey,wpial
+2019,AA,182,1,Dayton Pitzer,Mt. Pleasant,wpial
+2019,AA,195,1,Jon Vargo,Bentworth,wpial
+2019,AA,220,1,Dom DeLuca,Derry,wpial
+2019,AA,285,1,Riley Kemper,Burgettstown,wpial
+2018,AAA,106,1,Kurtis Phipps,Norwin,wpial
+2018,AAA,113,1,Ryan Sullivan,Shaler,wpial
+2018,AAA,120,1,Logan Macri,Canon-McMillan,wpial
+2018,AAA,126,1,Sam Hillegas,North Hills,wpial
+2018,AAA,132,1,Colton Camacho,Franklin Regional,wpial
+2018,AAA,138,1,Noah Levett,Kiski Area,wpial
+2018,AAA,145,1,Cam Conner,Kiski Area,wpial
+2018,AAA,152,1,Jack Blumer,Kiski Area,wpial
+2018,AAA,160,1,Zachary Hartman,Belle Vernon,wpial
+2018,AAA,170,1,Scott Joll,Belle Vernon,wpial
+2018,AAA,182,1,Christian Sequete,Seneca Valley,wpial
+2018,AAA,220,1,Ian Edenfield,Laurel Highlands,wpial
+2018,AAA,285,1,Isaac Reid,Kiski Area,wpial
+2018,AA,106,1,Conner Redinger,Quaker Valley,wpial
+2018,AA,113,1,Ian Oswalt,Burrell,wpial
+2018,AA,120,1,Ty Cymmerman,Derry,wpial
+2018,AA,126,1,Gavin Teasdale,Jefferson-Morgan,wpial
+2018,AA,132,1,Trent Schultheis,Freedom Area,wpial
+2018,AA,138,1,Jake Pail,Freedom Area,wpial
+2018,AA,145,1,Joe Demor,South Side,wpial
+2018,AA,152,1,Thayne Lawrence,Frazier,wpial
+2018,AA,160,1,Shaun Gates,Burrell,wpial
+2018,AA,170,1,Christian Clutter,McGuffey,wpial
+2018,AA,182,1,Jon Vargo,Bentworth,wpial
+2018,AA,195,1,Bryson Miller,Freedom Area,wpial
+2018,AA,220,1,Dom DeLuca,Derry,wpial
+2018,AA,285,1,Bishop McCoy,South Side,wpial
+2017,AAA,106,1,Kurtis Phipps,Norwin,wpial
+2017,AAA,113,1,Sam Hillegas,North Hills,wpial
+2017,AAA,120,1,Vincent Distefanis,Hempfield Area,wpial
+2017,AAA,126,1,Spencer Lee,Franklin Regional,wpial
+2017,AAA,132,1,Caleb Morris,Waynesburg Central,wpial
+2017,AAA,138,1,Luke Kemerer,Hempfield Area,wpial
+2017,AAA,145,1,Jarod Verkleeran,Hempfield Area,wpial
+2017,AAA,152,1,Cameron Coy,Penn-Trafford,wpial
+2017,AAA,160,1,Eric Hong,North Allegheny,wpial
+2017,AAA,170,1,Tim Wallace,Albert Gallatin,wpial
+2017,AAA,182,1,Nino Bonaccorsi,Bethel Park,wpial
+2017,AAA,195,1,Jake Woodley,North Allegheny,wpial
+2017,AAA,220,1,Ian Edenfield,Laurel Highlands,wpial
+2017,AAA,285,1,Brendan Furman,Canon-McMillan,wpial
+2017,AA,106,1,Trent Valovchik,Burrell,wpial
+2017,AA,113,1,Manny Dovshek,Bentworth,wpial
+2017,AA,120,1,Jett Pattison,McGuffey,wpial
+2017,AA,126,1,Gavin Teasdale,Jefferson-Morgan,wpial
+2017,AA,132,1,Tyler Griffiths,Southmoreland,wpial
+2017,AA,138,1,Thayne Lawrence,Frazier,wpial
+2017,AA,145,1,Kody Komara,Freedom Area,wpial
+2017,AA,152,1,Logan Witwicki,Carlynton,wpial
+2017,AA,160,1,Christian Clutter,McGuffey,wpial
+2017,AA,170,1,R.J. Hall,Chartiers-Houston,wpial
+2017,AA,182,1,Dominic Fundy,Bethlehem-Center,wpial
+2017,AA,195,1,Bryson Miller,Freedom Area,wpial
+2017,AA,220,1,Bishop McCoy,South Side,wpial
+2017,AA,285,1,Evan Sweesy,Freedom Area,wpial
+2016,AAA,106,1,Louis Newell,Seneca Valley,wpial
+2016,AAA,113,1,Gage Curry,North Hills,wpial
+2016,AAA,120,1,Spencer Lee,Franklin Regional,wpial
+2016,AAA,126,1,Chris Eddins,Greensburg Salem,wpial
+2016,AAA,132,1,Zachary Hartman,Belle Vernon,wpial
+2016,AAA,138,1,Luke Pletcher,Greater Latrobe,wpial
+2016,AAA,145,1,Cameron Coy,Penn-Trafford,wpial
+2016,AAA,152,1,Derek Verkleeren,Belle Vernon,wpial
+2016,AAA,160,1,Tim Wallace,Albert Gallatin,wpial
+2016,AAA,170,1,Nino Bonaccorsi,Bethel Park,wpial
+2016,AAA,182,1,Jake Woodley,North Allegheny,wpial
+2016,AAA,195,1,Drew Phipps,Norwin,wpial
+2016,AAA,220,1,Jacob Robb,Armstrong,wpial
+2016,AAA,285,1,Hayden Rice,Norwin,wpial
+2016,AA,106,1,Z.J. Ward,Freedom Area,wpial
+2016,AA,113,1,Gavin Teasdale,Jefferson-Morgan,wpial
+2016,AA,120,1,Tyler Griffiths,Southmoreland,wpial
+2016,AA,126,1,Jihad Ratliff,Valley,wpial
+2016,AA,132,1,Stone Kepple,Derry,wpial
+2016,AA,138,1,George Phillippi,Derry,wpial
+2016,AA,145,1,Mike Carr,South Fayette,wpial
+2016,AA,152,1,Damon Greenwald,Burrell,wpial
+2016,AA,160,1,Jake Wentzel,South Park,wpial
+2016,AA,170,1,Anthony Welsh,Bethlehem-Center,wpial
+2016,AA,182,1,Greg Bulsak,South Park,wpial
+2016,AA,195,1,Bill Bowlen,Jefferson-Morgan,wpial
+2016,AA,220,1,Alex Moses,Burrell,wpial
+2016,AA,285,1,Jacob Beistel,Southmoreland,wpial
+2015,AAA,106,1,Caleb Morris,Waynesburg Central,wpial
+2015,AAA,113,1,Devin Brown,Franklin Regional,wpial
+2015,AAA,120,1,Spencer Lee,Franklin Regional,wpial
+2015,AAA,126,1,Ethan McCoy,Greater Latrobe,wpial
+2015,AAA,132,1,A.C. Headlee,Waynesburg Central,wpial
+2015,AAA,138,1,Sam Krivus,Hempfield Area,wpial
+2015,AAA,145,1,Michael Kemerer,Franklin Regional,wpial
+2015,AAA,152,1,Vincenzo Joseph,Central Catholic,wpial
+2015,AAA,160,1,Josh Shields,Franklin Regional,wpial
+2015,AAA,170,1,Te’Shan Campbell,Penn Hills,wpial
+2015,AAA,182,1,Kellan Stout,Mt. Lebanon,wpial
+2015,AAA,195,1,Drew Phipps,Norwin,wpial
+2015,AAA,220,1,Tyler Worthing,Kiski Area,wpial
+2015,AAA,285,1,Tyler Mears,Greater Latrobe,wpial
+2015,AA,106,1,Gavin Teasdale,Jefferson-Morgan,wpial
+2015,AA,113,1,Gage Nicolella,McGuffey,wpial
+2015,AA,120,1,Brendan Howard,Jefferson-Morgan,wpial
+2015,AA,126,1,Hunter Neely,Bentworth,wpial
+2015,AA,132,1,George Phillippi,Derry,wpial
+2015,AA,138,1,Mike Carr,South Fayette,wpial
+2015,AA,145,1,Gio Vonne Sanders,Jeannette,wpial
+2015,AA,152,1,Jake Wentzel,South Park,wpial
+2015,AA,160,1,Jared Walker,South Fayette,wpial
+2015,AA,170,1,Greg Bulsak,South Park,wpial
+2015,AA,182,1,Bill Bowlen,Jefferson-Morgan,wpial
+2015,AA,195,1,Robert Scherer,Burrell,wpial
+2015,AA,220,1,Jacob Robb,Kittanning,wpial
+2015,AA,285,1,Allan Beattie,Burrell,wpial
+2014,AAA,106,1,Devin Brown,Franklin Regional,wpial
+2014,AAA,113,1,Spencer Lee,Franklin Regional,wpial
+2014,AAA,120,1,Luke Pletcher,Greater Latrobe,wpial
+2014,AAA,126,1,Dalton Macri,Canon-McMillan,wpial
+2014,AAA,132,1,Cameron Coy,Penn-Trafford,wpial
+2014,AAA,138,1,Vincenzo Joseph,Central Catholic,wpial
+2014,AAA,145,1,Solomon Chishko,Canon-McMillan,wpial
+2014,AAA,152,1,Josh Shields,Franklin Regional,wpial
+2014,AAA,160,1,Austin Bell,Belle Vernon,wpial
+2014,AAA,170,1,Kyle Coniker,Central Catholic,wpial
+2014,AAA,182,1,Zack Zavatsky,Greater Latrobe,wpial
+2014,AAA,195,1,Cole Macek,Montour,wpial
+2014,AAA,220,1,Tyler Worthing,Kiski Area,wpial
+2014,AAA,285,1,Shane Kuhn,Kiski Area,wpial
+2014,AA,106,1,Dallas Bulsak,South Park,wpial
+2014,AA,113,1,Austin McDermitt,Burgettstown,wpial
+2014,AA,120,1,George Phillippi,Derry,wpial
+2014,AA,126,1,John Demaske,Jefferson-Morgan,wpial
+2014,AA,132,1,Mike Carr,South Fayette,wpial
+2014,AA,138,1,Jake Wentzel,South Park,wpial
+2014,AA,145,1,Jason Nolf,Kittanning,wpial
+2014,AA,152,1,Steven Edwards,Burrell,wpial
+2014,AA,160,1,Jared Walker,South Fayette,wpial
+2014,AA,170,1,Bill Bowlen,Jefferson-Morgan,wpial
+2014,AA,182,1,Terrell Fields,Valley,wpial
+2014,AA,195,1,Marcus Davenport,Valley,wpial
+2014,AA,220,1,Jake Temple,Avella,wpial
+2014,AA,285,1,Allan Beattie,Burrell,wpial
+2013,AAA,106,1,Luke Pletcher,Greater Latrobe,wpial
+2013,AAA,113,1,A.C. Headlee,Waynesburg Central,wpial
+2013,AAA,120,1,Sam Krivus,Hempfield Area,wpial
+2013,AAA,126,1,Connor Schram,Canon-McMillan,wpial
+2013,AAA,132,1,Ethan Kenney,Connellsville,wpial
+2013,AAA,138,1,Josh Maruca,Franklin Regional,wpial
+2013,AAA,145,1,Solomon Chishko,Canon-McMillan,wpial
+2013,AAA,152,1,Heath Coles,Norwin,wpial
+2013,AAA,160,1,Zack Zavatsky,Greater Latrobe,wpial
+2013,AAA,170,1,Cody Wiercioch,Canon-McMillan,wpial
+2013,AAA,182,1,Alex DeCiantis,North Allegheny,wpial
+2013,AAA,195,1,Jake Hart,Hampton,wpial
+2013,AAA,220,1,Zach DeLuca,Central Catholic,wpial
+2013,AAA,285,1,Shane Kuhn,Kiski Area,wpial
+2013,AA,106,1,Austin McDermitt,Burgettstown,wpial
+2013,AA,113,1,George Phillippi,Derry,wpial
+2013,AA,120,1,Nathan Reckner,South Side,wpial
+2013,AA,126,1,Greg Bulsak,South Park,wpial
+2013,AA,132,1,Jason Nolf,Kittanning,wpial
+2013,AA,138,1,Nick Gavazzi,Charleroi,wpial
+2013,AA,145,1,Phillip Marra,Burrell,wpial
+2013,AA,152,1,Boe Bonzo,Freedom Area,wpial
+2013,AA,160,1,Jared Walker,South Fayette,wpial
+2013,AA,170,1,Dustin Conti,Jefferson-Morgan,wpial
+2013,AA,182,1,Dakota DesLauriers,Burrell,wpial
+2013,AA,195,1,Garrett Vulcano,Chartiers-Houston,wpial
+2013,AA,220,1,Jake Temple,Avella,wpial
+2013,AA,285,1,Allan Beattie,Burrell,wpial
+2012,AAA,106,1,Michael Kemerer,Franklin Regional,wpial
+2012,AAA,113,1,Sam Krivus,Hempfield Area,wpial
+2012,AAA,120,1,Connor Schram,Canon-McMillan,wpial
+2012,AAA,126,1,Derrick Evanovich,Peters Township,wpial
+2012,AAA,132,1,Mackenzie McGuire,Upper St. Clair,wpial
+2012,AAA,138,1,Solomon Chishko,Canon-McMillan,wpial
+2012,AAA,145,1,Heath Coles,Norwin,wpial
+2012,AAA,152,1,Tyler Manion,Central Catholic,wpial
+2012,AAA,160,1,Zack Zavatsky,Greater Latrobe,wpial
+2012,AAA,170,1,Cody Wiercioch,Canon-McMillan,wpial
+2012,AAA,182,1,Matt McCutcheon,Kiski Area,wpial
+2012,AAA,195,1,Perry Hills,Central Catholic,wpial
+2012,AAA,220,1,Ben Balish,Pine-Richland,wpial
+2012,AAA,285,1,Cody Klempay,Canon-McMillan,wpial
+2012,AA,106,1,Pat Dewitt,Valley,wpial
+2012,AA,113,1,Jason Nolf,Kittanning,wpial
+2012,AA,120,1,Nathan Reckner,South Side,wpial
+2012,AA,126,1,James Gulibon,Derry,wpial
+2012,AA,132,1,Josh Kwasny,Charleroi,wpial
+2012,AA,138,1,Nick Gavazzi,Charleroi,wpial
+2012,AA,145,1,Tanner Sutton,Chartiers-Houston,wpial
+2012,AA,152,1,Jared Walker,South Fayette,wpial
+2012,AA,160,1,Francis Mizia,Bentworth,wpial
+2012,AA,170,1,Dustin Conti,Jefferson-Morgan,wpial
+2012,AA,182,1,Dakota DesLauriers,Burrell,wpial
+2012,AA,195,1,Jordan Kitta,Southmoreland,wpial
+2012,AA,220,1,Greg Kumer,Fort Cherry,wpial
+2012,AA,285,1,Corey Garry,Fort Cherry,wpial
+2011,AAA,103,1,Colt Shorts,Canon-McMillan,wpial
+2011,AAA,112,1,Connor Schram,Canon-McMillan,wpial
+2011,AAA,119,1,Mackenzie McGuire,Upper St. Clair,wpial
+2011,AAA,125,1,Nico Megaludis,Franklin Regional,wpial
+2011,AAA,130,1,Solomon Chishko,Canon-McMillan,wpial
+2011,AAA,135,1,Ty Lydic,Greater Latrobe,wpial
+2011,AAA,140,1,Tyler Manion,Central Catholic,wpial
+2011,AAA,145,1,Nick Catalano,Canon-McMillan,wpial
+2011,AAA,152,1,Lorenzo Thomas,Central Catholic,wpial
+2011,AAA,160,1,Jason Luster,Central Catholic,wpial
+2011,AAA,171,1,Nick Bonaccorsi,Bethel Park,wpial
+2011,AAA,189,1,Perry Hills,Central Catholic,wpial
+2011,AAA,215,1,Kyle McWreath,Trinity,wpial
+2011,AAA,285,1,Cody Klempay,Canon-McMillan,wpial
+2011,AA,103,1,Jason Nolf,Kittanning,wpial
+2011,AA,112,1,Zach Kelly,Burrell,wpial
+2011,AA,119,1,James Gulibon,Derry,wpial
+2011,AA,125,1,Geoff Alexander,Shady Side Academy) 125 – Dave Makara (Burrell,wpial
+2011,AA,130,1,Dave Makara,Burrell,wpial
+2011,AA,135,1,Jeremy Landowski,Burrell,wpial
+2011,AA,140,1,Travis Shaffer,Derry,wpial
+2011,AA,145,1,Michael Imes,Chartiers-Houston,wpial
+2011,AA,152,1,Nick Carr,South Fayette,wpial
+2011,AA,160,1,Cody Wiercioch,Charleroi,wpial
+2011,AA,171,1,Dakota DesLauriers,Burrell,wpial
+2011,AA,189,1,Jordan Kitta,Southmoreland,wpial
+2011,AA,215,1,Brian Beattie,Burrell,wpial
+2011,AA,285,1,Jeff Tarley,Bethlehem-Center,wpial
+2010,AAA,103,1,Ethan Kenney,Connellsville,wpial
+2010,AAA,112,1,James Gulibon,Derry,wpial
+2010,AAA,119,1,Nico Megaludis,Franklin Regional,wpial
+2010,AAA,125,1,Zach McGinnis,Waynesburg Central,wpial
+2010,AAA,130,1,Tyler Zymroz,Central Catholic,wpial
+2010,AAA,135,1,Travis Shaffer,Derry,wpial
+2010,AAA,140,1,Lorenzo Thomas,Central Catholic,wpial
+2010,AAA,145,1,Aaron McKinney,West Allegheny,wpial
+2010,AAA,152,1,Zack Shannon,Kiski Area,wpial
+2010,AAA,160,1,Troy Reaghard,West Allegheny,wpial
+2010,AAA,171,1,Tyler Wilps,Chartiers Valley,wpial
+2010,AAA,189,1,Eric Shaffer,Greater Latrobe,wpial
+2010,AAA,215,1,Nate Gaffney,Connellsville,wpial
+2010,AAA,285,1,Adam Lazenga,Bethel Park,wpial
+2010,AA,103,1,Nick Hough,Mt. Pleasant,wpial
+2010,AA,112,1,Aaron Toth,Charleroi,wpial
+2010,AA,119,1,Geoff Alexander,Shady Side Academy) 119 – Travis McKillop (Burrell,wpial
+2010,AA,125,1,Dave Makara,Burrell,wpial
+2010,AA,130,1,Frank Marellotti,Shady Side Academy,wpial
+2010,AA,135,1,Colton Blumer,West Greene,wpial
+2010,AA,140,1,Michael Imes,Chartiers-Houston,wpial
+2010,AA,145,1,Nick Carr,South Fayette,wpial
+2010,AA,152,1,Travis McKillop,Burrell,wpial
+2010,AA,160,1,Sam Guidi,Fort Cherry,wpial
+2010,AA,171,1,Matthew Cunningham,Shady Side Academy) 171 – Kurt Brendel (Shady Side Academy,wpial
+2010,AA,189,1,Gary Kiefer,Fort Cherry,wpial
+2010,AA,215,1,Brian Beattie,Burrell,wpial
+2010,AA,285,1,Jeff Tarley,Bethlehem-Center,wpial
+2009,AAA,103,1,James Guilbon,Derry,wpial
+2009,AAA,112,1,Nico Megaludis,Franklin Regional,wpial
+2009,AAA,119,1,Shane Young,Penn-Trafford,wpial
+2009,AAA,125,1,Sam Sherlock,West Mifflin,wpial
+2009,AAA,130,1,Joe Waltko,North Allegheny,wpial
+2009,AAA,135,1,Travis Shaffer,Derry,wpial
+2009,AAA,140,1,Jack Bachman,Hempfield Area,wpial
+2009,AAA,145,1,Cole Baxter,Butler,wpial
+2009,AAA,152,1,Matt Hundenski,Hopewell,wpial
+2009,AAA,160,1,Jake Kemerer,Hempfield Area,wpial
+2009,AAA,171,1,Troy Reaghard,West Allegheny,wpial
+2009,AAA,189,1,Jake Leninsky,West Allegheny,wpial
+2009,AAA,215,1,Nate Gaffney,Connellsville,wpial
+2009,AAA,285,1,Sam Brownlee,Canon-McMillan,wpial
+2009,AA,103,1,Andrew Lucarini,Fort Cherry,wpial
+2009,AA,112,1,Geoff Alexander,Shady Side Academy) 112 – Dane Johnson (Shady Side Academy,wpial
+2009,AA,119,1,Anthony Zanetta,Keystone Oaks,wpial
+2009,AA,130,1,Frank Martellotti,Shady Side Academy) 130 – Jordan Shields (Burrell,wpial
+2009,AA,135,1,Mitch Spencer,Avella,wpial
+2009,AA,140,1,Dane Johnson,Shady Side Academy,wpial
+2009,AA,145,1,Nick Carr,South Fayette,wpial
+2009,AA,152,1,Kyle Appleby,Avella,wpial
+2009,AA,160,1,Matthew Cunningham,Shady Side Academy) 160 – Alex Evans (Washington,wpial
+2009,AA,171,1,Cody Catalina,Bethlehem-Center,wpial
+2009,AA,189,1,Roman San Doval,Shady Side Academy,wpial
+2009,AA,215,1,Ryan Watson,Burgettstown,wpial
+2009,AA,285,1,Jordan Roussos,Carlynton,wpial
+2008,AAA,103,1,Nico Megaludis,Franklin Regional,wpial
+2008,AAA,112,1,Shane Young,Penn-Trafford,wpial
+2008,AAA,119,1,Nico Cortese,Hempfield Area,wpial
+2008,AAA,125,1,Sam Sherlock,West Mifflin,wpial
+2008,AAA,130,1,Zach Zummo,Plum,wpial
+2008,AAA,135,1,Colin Johnston,Canon-McMillan,wpial
+2008,AAA,140,1,Donnie Tasser,Belle Vernon,wpial
+2008,AAA,145,1,James Fleming,West Mifflin,wpial
+2008,AAA,152,1,Troy Reaghard,West Allegheny,wpial
+2008,AAA,160,1,Jake Kemerer,Hempfield Area,wpial
+2008,AAA,171,1,Karl DeCiantis,North Allegheny,wpial
+2008,AAA,189,1,Mike Salopek,Norwin,wpial
+2008,AAA,215,1,Dan Utchel,Chartiers Valley,wpial
+2008,AAA,285,1,Justin Haines,Connellsville,wpial
+2008,AA,103,1,Geoff Alexander,Shady Side Academy,wpial
+2008,AA,112,1,Anthony Zanetta,Keystone Oaks,wpial
+2008,AA,125,1,Dane Johnson,Shady Side Academy,wpial
+2008,AA,130,1,Mitch Spencer,Avella,wpial
+2008,AA,135,1,Shane Welsh,Burrell,wpial
+2008,AA,140,1,Jordan Shields,Burrell,wpial
+2008,AA,145,1,Bob Speer,Burrell,wpial
+2008,AA,152,1,Matthew Cunningham,Shady Side Academy,wpial
+2008,AA,160,1,Sam Guidi,Fort Cherry,wpial
+2008,AA,189,1,Roman San Doval,Shady Side Academy,wpial
+2008,AA,215,1,Dan Conley,Burgettstown,wpial
+2008,AA,285,1,Zack Reefer,Elderton,wpial
+2007,AAA,103,1,Shane Young,Penn-Trafford,wpial
+2007,AAA,112,1,Ken Trumbetta,Greensburg Salem,wpial
+2007,AAA,119,1,Nico Cortese,Hempfield Area,wpial
+2007,AAA,125,1,Colin Johnston,Canon-McMillan,wpial
+2007,AAA,130,1,Grant Lowther,Trinity,wpial
+2007,AAA,135,1,Dave Cawley,North Allegheny,wpial
+2007,AAA,140,1,James Fleming,West Mifflin,wpial
+2007,AAA,145,1,Nick Nelson,Shaler,wpial
+2007,AAA,152,1,Ryan Goodman,Greater Latrobe,wpial
+2007,AAA,160,1,Matt Ryan,Canon-McMillan,wpial
+2007,AAA,171,1,A.J. Brentzel,Penn-Trafford,wpial
+2007,AAA,189,1,Jon Moore,Kiski Area,wpial
+2007,AAA,215,1,Dan Utchel,Chartiers Valley,wpial
+2007,AAA,285,1,Justin Haines,Connellsville,wpial
+2007,AA,103,1,Frank Martellotti,Shady Side Academy,wpial
+2007,AA,119,1,Troy Dolan,Derry,wpial
+2007,AA,125,1,Zack Sheridan,Mt. Pleasant,wpial
+2007,AA,135,1,Shane Welsh,Burrell,wpial
+2007,AA,140,1,Kory Bissett,West Greene,wpial
+2007,AA,145,1,Matthew Cunningham,Shady Side Academy,wpial
+2007,AA,152,1,Phil Sorrentino,South Allegheny,wpial
+2007,AA,171,1,Damian Majocha,Burrell,wpial
+2007,AA,189,1,Ethan Virgilli,Jefferson-Morgan,wpial
+2007,AA,215,1,Luke Miller,Chartiers-Houston,wpial
+2007,AA,285,1,Myles Caragein,Keystone Oaks,wpial
+2006,AAA,103,1,Zack Zummo,Plum,wpial
+2006,AAA,112,1,Colin Johnston,Canon-McMillan,wpial
+2006,AAA,119,1,Matt Scherich,McGuffey,wpial
+2006,AAA,125,1,Grant Lowther,Trinity,wpial
+2006,AAA,130,1,Matt Nelson,Shaler,wpial
+2006,AAA,135,1,James Fleming,West Mifflin,wpial
+2006,AAA,140,1,Ashtin Primus,Connellsville,wpial
+2006,AAA,145,1,Jesse Byerly,Keystone Oaks,wpial
+2006,AAA,152,1,Ryan Goodman,Greater Latrobe,wpial
+2006,AAA,160,1,Eric Williams,Trinity,wpial
+2006,AAA,171,1,Josh Serene,Kittanning,wpial
+2006,AAA,189,1,Scott Joseph,Kiski Area,wpial
+2006,AAA,215,1,T.J. Valore,Greensburg C.C.,wpial
+2006,AAA,275,1,Myles Caragein,Keystone Oaks,wpial
+2006,AA,103,1,Dane Johnson,Shady Side Academy,wpial
+2006,AA,112,1,Jordan Shields,Burrell,wpial
+2006,AA,119,1,Troy Dolan,Derry,wpial
+2006,AA,125,1,Lee Vanella,Mt. Pleasant,wpial
+2006,AA,130,1,Shane Welsh,Burrell,wpial
+2006,AA,135,1,Kory Bissett,West Greene,wpial
+2006,AA,140,1,Cody Renner,West Greene,wpial
+2006,AA,145,1,Don Ament,Mt. Pleasant,wpial
+2006,AA,152,1,Alex Evans,Washington,wpial
+2006,AA,160,1,Josh Shields,Burrell,wpial
+2006,AA,171,1,Damian Majocha,Burrell,wpial
+2006,AA,189,1,David Pisarcik,Mars,wpial
+2006,AA,215,1,Nathan Toporoski,Highlands,wpial
+2006,AA,275,1,Paul Snyder,Mt. Pleasant,wpial
+2005,AAA,103,1,Colin Johnston,Canon-McMillan,wpial
+2005,AAA,112,1,Chris Neidermeier,Waynesburg Central,wpial
+2005,AAA,119,1,Kalvin Schultz,Trinity,wpial
+2005,AAA,125,1,Sean Clair,Plum,wpial
+2005,AAA,130,1,Brian Pogel,Hampton,wpial
+2005,AAA,135,1,Ashtin Primus,Connellsville,wpial
+2005,AAA,140,1,Dan Burkholder,Trinity,wpial
+2005,AAA,145,1,Mike Catalano,Canon-McMillan,wpial
+2005,AAA,152,1,Donnie Jones,Greensburg Salem,wpial
+2005,AAA,160,1,Rob Waltko,North Allegheny,wpial
+2005,AAA,171,1,Corbin Semple,Waynesburg Central,wpial
+2005,AAA,189,1,Joe West,Trinity,wpial
+2005,AAA,215,1,Quentin Taraszewski,Kiski Area,wpial
+2005,AAA,275,1,R.J. Parks,North Allegheny,wpial
+2005,AA,103,1,Jordan Shields,Burrell,wpial
+2005,AA,112,1,Troy Dolan,Derry,wpial
+2005,AA,119,1,Kory Bissett,West Greene,wpial
+2005,AA,125,1,Lee Vanella,Mt. Pleasant,wpial
+2005,AA,130,1,Joey Geary,Mt. Pleasant,wpial
+2005,AA,135,1,Bryan Pleskovich,Fort Cherry,wpial
+2005,AA,140,1,Damian Rose,Freedom Area,wpial
+2005,AA,145,1,Don Ament,Mt. Pleasant,wpial
+2005,AA,152,1,Jason Makara,Burrell,wpial
+2005,AA,160,1,Corey Checkan,South Side,wpial
+2005,AA,171,1,A.J. Graves,Jeannette,wpial
+2005,AA,189,1,Rich Froats,Burgettstown,wpial
+2005,AA,215,1,Nathan Toporoski,Highlands,wpial
+2005,AA,275,1,Elliott Bates,Chartiers-Houston,wpial
+2004,AAA,103,1,Chris Neidermeier,Waynesburg Central,wpial
+2004,AAA,112,1,Scott Morgan,Norwin,wpial
+2004,AAA,119,1,Sean Clair,Plum,wpial
+2004,AAA,125,1,Coleman Scott,Waynesburg Central,wpial
+2004,AAA,130,1,Mark Throckmorton,Waynesburg Central,wpial
+2004,AAA,135,1,Dan Burkholder,Trinity,wpial
+2004,AAA,140,1,Donnie Jones,Greensburg Salem,wpial
+2004,AAA,145,1,Andrew Sherry,Central Catholic,wpial
+2004,AAA,152,1,Jared Mowl,Moon,wpial
+2004,AAA,160,1,Jarrod King,Connellsville,wpial
+2004,AAA,171,1,Kyle Deliere,Canon-McMillan,wpial
+2004,AAA,189,1,Andrew Haile,Greensburg Salem,wpial
+2004,AAA,215,1,Scott McKillop,Kiski Area,wpial
+2004,AAA,275,1,Adam McKnight,Chartiers Valley,wpial
+2004,AA,103,1,Adam Smetana,Mars,wpial
+2004,AA,112,1,Troy Dolan,Derry,wpial
+2004,AA,119,1,Lee Vanella,Mt. Pleasant,wpial
+2004,AA,125,1,Joey Geary,Mt. Pleasant,wpial
+2004,AA,130,1,Larry Hall,Jeannette,wpial
+2004,AA,135,1,Damian Rose,Freedom Area,wpial
+2004,AA,140,1,Don Ament,Mt. Pleasant,wpial
+2004,AA,145,1,Jason Makara,Burrell,wpial
+2004,AA,152,1,Todd Cessna,Elderton,wpial
+2004,AA,160,1,A.J. Graves,Jeannette,wpial
+2004,AA,171,1,Kurt Brenner,Freedom Area,wpial
+2004,AA,189,1,Shane Datz,Southmoreland,wpial
+2004,AA,215,1,Justin Poole,Southmoreland,wpial
+2004,AA,275,1,John Maraldo,Charleroi,wpial
+2003,AAA,103,1,Bill Spencer,Highlands,wpial
+2003,AAA,112,1,Coleman Scott,Waynesburg Central,wpial
+2003,AAA,119,1,Sean Clair,Plum,wpial
+2003,AAA,125,1,Dan Enciso,Valley,wpial
+2003,AAA,130,1,Donnie Jones,Greensburg Salem,wpial
+2003,AAA,135,1,Nathan Kennedy,McGuffey,wpial
+2003,AAA,140,1,Jared Mowl,Moon,wpial
+2003,AAA,145,1,Kirk Main,McGuffey,wpial
+2003,AAA,152,1,Jarrod King,Connellsville,wpial
+2003,AAA,160,1,Mickey Moran,Shaler,wpial
+2003,AAA,171,1,Jake Herbert,North Allegheny,wpial
+2003,AAA,189,1,Eric Cassidy,North Allegheny,wpial
+2003,AAA,215,1,Scott McKillop,Kiski Area,wpial
+2003,AAA,275,1,Tim Frank,Fox Chapel,wpial
+2003,AA,103,1,Zach Holt,Mt. Pleasant,wpial
+2003,AA,112,1,Nick Schepis,Carlynton,wpial
+2003,AA,119,1,Larry Hall,Jeannette,wpial
+2003,AA,125,1,Joe Makara,Burrell,wpial
+2003,AA,130,1,Jason Makara,Burrell,wpial
+2003,AA,135,1,Brad Shrum,Derry,wpial
+2003,AA,140,1,Jared Shields,Burrell,wpial
+2003,AA,145,1,Stush Demaske,Jefferson-Morgan,wpial
+2003,AA,152,1,Justin Scarfo,Mars,wpial
+2003,AA,160,1,Damian Johnson,Shady Side Academy,wpial
+2003,AA,171,1,Kurt Brenner,Freedom Area,wpial
+2003,AA,189,1,Shane Datz,Southmoreland,wpial
+2003,AA,215,1,Pierce Frauenheim,Shady Side Academy,wpial
+2003,AA,275,1,Justin Poole,Southmoreland,wpial
+2002,AAA,103,1,Coleman Scott,Waynesburg Central,wpial
+2002,AAA,112,1,Mike Ciotti,Greater Latrobe,wpial
+2002,AAA,119,1,Reimark Neidermeier,Waynesburg Central,wpial
+2002,AAA,125,1,Brian Sticca,Greensburg Salem,wpial
+2002,AAA,130,1,Chad Seybold,Waynesburg Central,wpial
+2002,AAA,135,1,Jarrod King,Connellsville,wpial
+2002,AAA,140,1,Kirk Main,McGuffey,wpial
+2002,AAA,145,1,Taylor Letters,Shaler,wpial
+2002,AAA,152,1,Adam Brochetti,Kittanning,wpial
+2002,AAA,160,1,Jake Herbert,North Allegheny,wpial
+2002,AAA,171,1,Nick Kozar,Derry,wpial
+2002,AAA,189,1,Matt Cassidy,Plum,wpial
+2002,AAA,HWT,1,Bob Kail,Peters Township,wpial
+2002,AA,103,1,Larry Hall,Jeannette,wpial
+2002,AA,112,1,Mike Lauff,Fort Cherry,wpial
+2002,AA,119,1,Joe Makara,Burrell,wpial
+2002,AA,125,1,Dan Kosharsky,Chartiers-Houston,wpial
+2002,AA,130,1,Louie Vigliotti,Burgettstown,wpial
+2002,AA,135,1,Dave Saadeh,Elderton,wpial
+2002,AA,140,1,Deacon Smolleck,Greensburg C.C.,wpial
+2002,AA,145,1,Josh Peterson,Southmoreland,wpial
+2002,AA,152,1,Matt Hill,Freedom Area,wpial
+2002,AA,160,1,Tory Moore,Shady Side Academy,wpial
+2002,AA,171,1,Kurt Brenner,Freedom Area,wpial
+2002,AA,189,1,Shane Datz,Southmoreland,wpial
+2002,AA,HWT,1,C.J. Wonsettler,Bentworth,wpial
+2001,AAA,103,1,Mark McKnight,Chartiers Valley,wpial
+2001,AAA,112,1,Coleman Scott,Waynesburg Central,wpial
+2001,AAA,119,1,Chris Lape,West Allegheny,wpial
+2001,AAA,125,1,Shawn Cully,Seneca Valley,wpial
+2001,AAA,130,1,Ron Tarquinio,West Allegheny,wpial
+2001,AAA,135,1,DeWitt Driscoll,Connellsville,wpial
+2001,AAA,140,1,Ron Doppelheuer,Connellsville,wpial
+2001,AAA,145,1,Ryan Powell,Trinity,wpial
+2001,AAA,152,1,B.J. Mikeska,Derry,wpial
+2001,AAA,160,1,Troy Letters,Shaler,wpial
+2001,AAA,171,1,Matt Cassidy,Plum,wpial
+2001,AAA,189,1,Brandon Lehmeier,Shaler,wpial
+2001,AAA,HWT,1,Tom Parks,North Allegheny,wpial
+2001,AA,103,1,Larry Hall,Jeannette,wpial
+2001,AA,112,1,Joe Makara,Burrell,wpial
+2001,AA,119,1,Dave Saadeh,Elderton,wpial
+2001,AA,125,1,Jason Mounts,Washington,wpial
+2001,AA,130,1,Louie Vigliotti,Burgettstown,wpial
+2001,AA,135,1,Ted Demianczyk,Fort Cherry,wpial
+2001,AA,140,1,Don Rush Jr.,Avella,wpial
+2001,AA,145,1,Matt Hill,Freedom Area,wpial
+2001,AA,152,1,Will Durkee,Shady Side Academy,wpial
+2001,AA,160,1,Matt Lebe,Jeannette,wpial
+2001,AA,171,1,Phil Rowe,Burrell,wpial
+2001,AA,189,1,C.J. Wonsettler,Bentworth,wpial
+2001,AA,HWT,1,Ric San Doval,Shady Side Academy,wpial
+2000,AAA,103,1,Scott Hutton,Chartiers Valley,wpial
+2000,AAA,112,1,Chris Lape,West Allegheny,wpial
+2000,AAA,119,1,Justin Spates,Mt. Pleasant,wpial
+2000,AAA,125,1,Chad Seybold,Waynesburg Central,wpial
+2000,AAA,130,1,Rick Bauer,McGuffey,wpial
+2000,AAA,135,1,Jake Herbert,North Allegheny,wpial
+2000,AAA,140,1,Travis Rastoka,Waynesburg Central,wpial
+2000,AAA,145,1,Aaron Gibbs,Canon-McMillan,wpial
+2000,AAA,152,1,Troy Letters,Shaler,wpial
+2000,AAA,160,1,Greg Jones,Greensburg Salem,wpial
+2000,AAA,171,1,Todd Schuchert,Norwin,wpial
+2000,AAA,189,1,Mike Croyle,Norwin,wpial
+2000,AAA,HWT,1,Lanfer Simpson,Waynesburg Central) HWT – Clay McKendree (Kiski Area,wpial
+2000,AA,103,1,Joe Makara,Burrell,wpial
+2000,AA,112,1,Josh Peterson,Southmoreland,wpial
+2000,AA,119,1,Matt Schomburg,Freedom Area,wpial
+2000,AA,125,1,Dan Mousetis,Washington,wpial
+2000,AA,130,1,Ulysses Davis,Bethlehem-Center,wpial
+2000,AA,135,1,Don Rush Jr.,Avella,wpial
+2000,AA,140,1,Garrett Rossero,Washington,wpial
+2000,AA,145,1,Will Durkee,Shady Side Academy,wpial
+2000,AA,152,1,Ryan Yates,Burrell,wpial
+2000,AA,160,1,Matt Lebe,Jeannette,wpial
+2000,AA,171,1,Cliff Wonsettler,Bentworth,wpial
+2000,AA,189,1,Jason Shaw,Chartiers-Houston,wpial
+2000,AA,HWT,1,Ric San Doval,Shady Side Academy,wpial
+1999,AAA,103,1,Jeff Breese,McGuffey,wpial
+1999,AAA,112,1,Justin Spates,Mt. Pleasant,wpial
+1999,AAA,119,1,Mike May,Derry,wpial
+1999,AAA,125,1,Luke Main,McGuffey,wpial
+1999,AAA,130,1,John Lorenz,Kiski Area,wpial
+1999,AAA,135,1,Mark Bredl,Bethel Park,wpial
+1999,AAA,140,1,Jim Hanning,McGuffey,wpial
+1999,AAA,145,1,Troy Letters,Shaler,wpial
+1999,AAA,152,1,Pat O’Donnell,Waynesburg Central,wpial
+1999,AAA,160,1,Matt King,Connellsville,wpial
+1999,AAA,171,1,Nick Richmond,McGuffey,wpial
+1999,AAA,189,1,Joe Ross,Connellsville,wpial
+1999,AAA,HWT,1,John Wise,Albert Gallatin,wpial
+1999,AA,103,1,Josh Peterson,Southmoreland,wpial
+1999,AA,112,1,Ulysses Davis,Bethlehem-Center,wpial
+1999,AA,119,1,Dan Butera,Carlynton,wpial
+1999,AA,125,1,Brad Yoder,Southmoreland,wpial
+1999,AA,130,1,Andrew Courtwright,West Greene,wpial
+1999,AA,135,1,Eric Ryan,Burgettstown,wpial
+1999,AA,140,1,Garrett Rossero,Washington,wpial
+1999,AA,145,1,Jeremy Rafferty,Jefferson-Morgan,wpial
+1999,AA,152,1,Sean Thomas,Washington,wpial
+1999,AA,160,1,Matt Lebe,Jeannette,wpial
+1999,AA,171,1,Chad Lough,West Greene,wpial
+1999,AA,189,1,Ken Varoli,South Fayette,wpial
+1999,AA,HWT,1,Justin Poorbaugh,Yough,wpial
+1998,AAA,103,1,Brian Hutton,Chartiers Valley,wpial
+1998,AAA,112,1,Andy Migyanko,Trinity,wpial
+1998,AAA,119,1,Mike Seybold,Waynesburg Central,wpial
+1998,AAA,125,1,Greg Jones,Greensburg Salem,wpial
+1998,AAA,130,1,Troy Letters,Shaler,wpial
+1998,AAA,135,1,Jason Staso,Norwin,wpial
+1998,AAA,140,1,George Carter,Greensburg Salem,wpial
+1998,AAA,145,1,Brendan O’Connell,North Allegheny,wpial
+1998,AAA,152,1,Matt King,Connellsville,wpial
+1998,AAA,160,1,Robbie Waller,Mt. Pleasant,wpial
+1998,AAA,171,1,Nick Richmond,McGuffey,wpial
+1998,AAA,189,1,Mark Shrout,Franklin Regional,wpial
+1998,AA,103,1,Tony Beal,Southmoreland,wpial
+1998,AA,112,1,Dan Butera,Carlynton,wpial
+1998,AA,119,1,Brad Yoder,Southmoreland,wpial
+1998,AA,125,1,Shawn Whyte,West Greene,wpial
+1998,AA,130,1,Andrew Courtwright,West Greene,wpial
+1998,AA,135,1,Matt LoPresti,Washington,wpial
+1998,AA,140,1,Shawn Depta,Southmoreland,wpial
+1998,AA,145,1,Sean Thomas,Washington,wpial
+1998,AA,152,1,Scott Belcastro,Washington,wpial
+1998,AA,160,1,Cory Shaw,Chartiers-Houston,wpial
+1998,AA,171,1,Tom Locke,Shady Side Academy,wpial
+1998,AA,189,1,Brock White,Burrell,wpial
+1998,AA,HWT,1,Tim Bennett,Fort Cherry,wpial
+1997,AAA,103,1,Andy Migyanko,Trinity,wpial
+1997,AAA,112,1,Matt Helicke,McGuffey,wpial
+1997,AAA,119,1,Bill Selembo,Greensburg Salem,wpial
+1997,AAA,125,1,Bill Smith,Greensburg Salem,wpial
+1997,AAA,130,1,Blaise Mucci,Derry,wpial
+1997,AAA,135,1,Joe Lloyd,Mt. Pleasant,wpial
+1997,AAA,140,1,Chamie Hooks,Kittanning,wpial
+1997,AAA,145,1,Brian Burrows,Hempfield Area,wpial
+1997,AAA,152,1,Robbie Waller,Mt. Pleasant,wpial
+1997,AAA,160,1,Vince DeAugustine,Hempfield Area,wpial
+1997,AAA,171,1,Ryan McQuaide,Kiski Area,wpial
+1997,AAA,189,1,Rick Pifer,Connellsville,wpial
+1997,AAA,HWT,1,Jason Yohe,McGuffey,wpial
+1997,AA,103,1,Dan Kosek,Washington,wpial
+1997,AA,112,1,Erick Glass,Chartiers-Houston,wpial
+1997,AA,119,1,Shawn Whyte,West Greene,wpial
+1997,AA,125,1,Todd Beatty,Chartiers-Houston,wpial
+1997,AA,130,1,Luke Kaylor,Southmoreland,wpial
+1997,AA,135,1,Jeremy Bowman,Southmoreland,wpial
+1997,AA,140,1,Sean Thomas,Washington,wpial
+1997,AA,145,1,Joel DesLauriers,Burrell,wpial
+1997,AA,152,1,Kevin Bednarski,Washington,wpial
+1997,AA,160,1,Brandon Shafer,Freedom Area,wpial
+1997,AA,171,1,Brock White,Burrell,wpial
+1997,AA,189,1,Ryan Haile,Jeannette,wpial
+1997,AA,HWT,1,Bob Sweany,Bethlehem-Center,wpial
+1996,AAA,103,1,Andy Migyanko,Trinity,wpial
+1996,AAA,112,1,Bill Smith,Greensburg Salem,wpial
+1996,AAA,119,1,Jeremy Hunter,McGuffey,wpial
+1996,AAA,125,1,Bob Patnesky,Canon-McMillan,wpial
+1996,AAA,130,1,George Carter,Greensburg Salem,wpial
+1996,AAA,135,1,Shaun Shapert,Shaler,wpial
+1996,AAA,140,1,Brian Burrows,Hempfield Area,wpial
+1996,AAA,145,1,Eric Pizzi,McGuffey,wpial
+1996,AAA,152,1,Bruce Cridge,Canon-McMillan,wpial
+1996,AAA,160,1,Vince DeAugustine,Hempfield Area,wpial
+1996,AAA,171,1,Steve Bucciero,Franklin Regional,wpial
+1996,AAA,189,1,Nik Kozy,Montour,wpial
+1996,AAA,HWT,1,Mike Enick,Penn-Trafford,wpial
+1996,AA,103,1,Mike Scripps,Burrell,wpial
+1996,AA,112,1,Wes Watson,West Greene,wpial
+1996,AA,119,1,Shawn Whyte,West Greene,wpial
+1996,AA,125,1,J.J. Lagoni,Chartiers-Houston,wpial
+1996,AA,130,1,Randy Mort,Bethlehem-Center,wpial
+1996,AA,135,1,Demetrius Davis,Bethlehem-Center,wpial
+1996,AA,140,1,Joel DesLauriers,Burrell,wpial
+1996,AA,145,1,Jason Wheeler,Chartiers-Houston,wpial
+1996,AA,152,1,Bill Meyers,Bethlehem-Center,wpial
+1996,AA,160,1,Sean Clark,Elderton,wpial
+1996,AA,171,1,Justin Tracanna,Jefferson-Morgan,wpial
+1996,AA,189,1,Aaron Gatten,Washington,wpial
+1996,AA,HWT,1,Bob Sweany,Bethlehem-Center,wpial
+1995,AAA,103,1,Bill Smith,Greensburg Salem,wpial
+1995,AAA,112,1,Jeremy Hunter,McGuffey,wpial
+1995,AAA,119,1,Teague Moore,North Allegheny,wpial
+1995,AAA,125,1,Mark Angle,Canon-McMillan,wpial
+1995,AAA,130,1,Eric Newill,Mt. Pleasant,wpial
+1995,AAA,135,1,Justin Martin,Connellsville,wpial
+1995,AAA,140,1,Chamie Hooks,Kittanning,wpial
+1995,AAA,145,1,Vince DeAugustine,Hempfield Area,wpial
+1995,AAA,152,1,Greg Uschock,Greater Latrobe,wpial
+1995,AAA,160,1,Tom Bogan,Upper St. Clair,wpial
+1995,AAA,171,1,Vertus Jones,Greensburg Salem,wpial
+1995,AAA,189,1,Brad Hughes,Hampton,wpial
+1995,AAA,HWT,1,Vince Pellis,Greensburg Salem,wpial
+1995,AA,103,1,Wes Watson,West Greene,wpial
+1995,AA,112,1,Shawn Whyte,West Greene,wpial
+1995,AA,119,1,Tim Glass,Chartiers-Houston,wpial
+1995,AA,125,1,Travis Makel,Jefferson-Morgan,wpial
+1995,AA,130,1,Chad Teasdale,Jefferson-Morgan,wpial
+1995,AA,135,1,Kevin Bednarski,Washington,wpial
+1995,AA,140,1,Brad Kime,Bethlehem-Center,wpial
+1995,AA,145,1,Brandon Shafer,Freedom Area,wpial
+1995,AA,152,1,Jason Wheeler,Chartiers-Houston,wpial
+1995,AA,160,1,Jarrod Vezzi,South Fayette,wpial
+1995,AA,171,1,Justin Tracanna,Jefferson-Morgan,wpial
+1995,AA,189,1,Aaron Gatten,Washington,wpial
+1995,AA,HWT,1,Jamey Bennett,Fort Cherry,wpial
+1994,AAA,103,1,Jeremy Hunter,McGuffey,wpial
+1994,AAA,112,1,Teague Moore,North Allegheny,wpial
+1994,AAA,119,1,Mark Angle,Canon-McMillan,wpial
+1994,AAA,125,1,Chad Jesko,Connellsville,wpial
+1994,AAA,130,1,Jim Harshaw,Seneca Valley,wpial
+1994,AAA,135,1,Jason Bursick,Hampton,wpial
+1994,AAA,140,1,Greg Uschock,Greater Latrobe,wpial
+1994,AAA,145,1,Vertus Jones,Greensburg Salem,wpial
+1994,AAA,152,1,Brian Martin,Connellsville,wpial
+1994,AAA,160,1,Keilan O’Daniel,Canon-McMillan,wpial
+1994,AAA,171,1,Jim Patterson,Greensburg Salem,wpial
+1994,AAA,189,1,Jarratt Gooch,Seneca Valley,wpial
+1994,AAA,HWT,1,Brendan Bibro,Central Catholic,wpial
+1994,AA,103,1,Todd Porter,Chartiers-Houston,wpial
+1994,AA,112,1,Justin Watson,West Greene,wpial
+1994,AA,119,1,Chris Tarr,Washington,wpial
+1994,AA,125,1,Brad Kime,Bethlehem-Center,wpial
+1994,AA,130,1,Travis Makel,Jefferson-Morgan,wpial
+1994,AA,135,1,Brock Baird,Fort Cherry,wpial
+1994,AA,140,1,Brandon Teasdale,Jefferson-Morgan,wpial
+1994,AA,145,1,Gary Whyte,West Greene,wpial
+1994,AA,152,1,Justin Tracanna,Jefferson-Morgan,wpial
+1994,AA,160,1,Chet Tedrow,West Greene,wpial
+1994,AA,171,1,Adam Ferrell,Southmoreland,wpial
+1994,AA,189,1,Kevin Coates,West Allegheny,wpial
+1994,AA,HWT,1,Corey Walker,Chartiers-Houston,wpial
+1993,AAA,103,1,Teague Moore,North Allegheny,wpial
+1993,AAA,112,1,Mark Angle,Canon-McMillan,wpial
+1993,AAA,119,1,Kevin Saniga,Connellsville,wpial
+1993,AAA,125,1,Chad Jesko,Connellsville,wpial
+1993,AAA,130,1,Ryan Lang,Gateway,wpial
+1993,AAA,135,1,Nate McDaniel,Trinity,wpial
+1993,AAA,140,1,Jim Danko,West Mifflin,wpial
+1993,AAA,145,1,Mike Kail,Peters Township,wpial
+1993,AAA,152,1,Keilan O’Daniel,Canon-McMillan,wpial
+1993,AAA,160,1,Rob Gordon,Hempfield Area,wpial
+1993,AAA,171,1,Jason Barr,McGuffey,wpial
+1993,AAA,189,1,Jason Robison,Hampton,wpial
+1993,AAA,HWT,1,Bill Closson,Plum,wpial
+1993,AA,103,1,Todd Porter,Chartiers-Houston,wpial
+1993,AA,112,1,Brad Kime,Bethlehem-Center,wpial
+1993,AA,119,1,Chad Kime,Bethlehem-Center,wpial
+1993,AA,125,1,Rick Thorne,Jefferson-Morgan,wpial
+1993,AA,130,1,Travis Makel,Jefferson-Morgan,wpial
+1993,AA,135,1,Justin Tracanna,Jefferson-Morgan,wpial
+1993,AA,140,1,Gary Whyte,West Greene,wpial
+1993,AA,145,1,Jason Makel,Jefferson-Morgan,wpial
+1993,AA,152,1,Chet Tedrow,West Greene,wpial
+1993,AA,160,1,Jason Carpenter,West Greene,wpial
+1993,AA,171,1,Rodney Wilson,West Greene,wpial
+1993,AA,189,1,Corey Walker,Chartiers-Houston,wpial
+1993,AA,HWT,1,Jamey Bennett,Fort Cherry,wpial
+1992,AAA,103,1,Mark Angle,Canon-McMillan,wpial
+1992,AAA,112,1,Kevin Saniga,Connellsville,wpial
+1992,AAA,119,1,Phil Stoneking,Waynesburg Central,wpial
+1992,AAA,125,1,Chad Jesko,Connellsville,wpial
+1992,AAA,130,1,B.C. Cowden,Trinity,wpial
+1992,AAA,135,1,Jeff Bricker,Derry,wpial
+1992,AAA,140,1,Trent Boyd,Waynesburg Central,wpial
+1992,AAA,145,1,Keilan O’Daniel,Canon-McMillan,wpial
+1992,AAA,152,1,Damon Brown,Trinity,wpial
+1992,AAA,160,1,Bryan Matusic,Canon-McMillan,wpial
+1992,AAA,171,1,Mark Eckley,Thomas Jefferson,wpial
+1992,AAA,189,1,Jason Robison,Hampton,wpial
+1992,AAA,HWT,1,Wally Wickline,Moon,wpial
+1992,AA,103,1,Chad Kime,Bethlehem-Center,wpial
+1992,AA,112,1,Chris Tarr,Washington,wpial
+1992,AA,119,1,Mark Villee,Fort Cherry,wpial
+1992,AA,125,1,Bill White,Jefferson-Morgan,wpial
+1992,AA,130,1,Jay Allen,Avella,wpial
+1992,AA,135,1,Cary Kolat,Jefferson-Morgan,wpial
+1992,AA,140,1,Eric Yanek,West Allegheny,wpial
+1992,AA,145,1,C.J. Lowry,Carmichaels,wpial
+1992,AA,152,1,Jason Ivcic,Bentworth,wpial
+1992,AA,160,1,Paul Donovan,Sewickley Academy,wpial
+1992,AA,171,1,Rodney Wilson,West Greene,wpial
+1992,AA,189,1,Jeff Abbott,Burgettstown,wpial
+1992,AA,HWT,1,Jim Howard,Jefferson-Morgan,wpial
+1991,AAA,103,1,Kevin Saniga,Connellsville,wpial
+1991,AAA,112,1,Phil Stoneking,Waynesburg Central,wpial
+1991,AAA,119,1,Jon Truby,Trinity,wpial
+1991,AAA,125,1,Lee Schickel,Penn-Trafford,wpial
+1991,AAA,130,1,John Richey,Connellsville,wpial
+1991,AAA,135,1,R.J. Pizzi,McGuffey,wpial
+1991,AAA,140,1,Damon Brown,Trinity,wpial
+1991,AAA,145,1,Dave Thomas,Waynesburg Central,wpial
+1991,AAA,152,1,Brian Cipollone,Plum,wpial
+1991,AAA,160,1,Bryan Matusic,Canon-McMillan,wpial
+1991,AAA,171,1,Shawn Ambrust,Mt. Pleasant,wpial
+1991,AAA,189,1,Tiny Anderson,Greensburg Salem,wpial
+1991,AAA,HWT,1,Tom Dasta,Penn Hills,wpial
+1991,AA,103,1,Matt Scripps,Burrell,wpial
+1991,AA,112,1,Dennis Furmanek,West Greene,wpial
+1991,AA,119,1,Bill White,Jefferson-Morgan,wpial
+1991,AA,125,1,Jay Allen,Avella,wpial
+1991,AA,130,1,Cary Kolat,Jefferson-Morgan,wpial
+1991,AA,135,1,Jim Yuratovich,Bethlehem-Center,wpial
+1991,AA,140,1,Eric Yanek,West Allegheny,wpial
+1991,AA,145,1,C.J. Lowry,Carmichaels,wpial
+1991,AA,152,1,George Penrod,Northgate,wpial
+1991,AA,160,1,Jeff Grimes,West Greene,wpial
+1991,AA,171,1,Rob Vettorel,Avella,wpial
+1991,AA,189,1,Jeff Abbott,Burgettstown,wpial
+1991,AA,HWT,1,Bill Sjolinder,West Allegheny,wpial
+1990,AAA,103,1,Brian Kapusta,Greensburg Salem,wpial
+1990,AAA,112,1,Tim Queen,McGuffey,wpial
+1990,AAA,119,1,Ty Moore,North Allegheny,wpial
+1990,AAA,125,1,John Richey,Connellsville,wpial
+1990,AAA,130,1,Bob Bernd,West Mifflin,wpial
+1990,AAA,135,1,Mike Yancosky,Mt. Pleasant,wpial
+1990,AAA,140,1,Steve Cassidy,Plum,wpial
+1990,AAA,145,1,Brian Cipollone,Plum,wpial
+1990,AAA,152,1,Romy O’Daniel,Canon-McMillan,wpial
+1990,AAA,160,1,Ray Brinzer,North Allegheny,wpial
+1990,AAA,171,1,Ken Bauer,North Allegheny,wpial
+1990,AAA,189,1,Mike Kraft,Penn Hills,wpial
+1990,AAA,HWT,1,Wayne Anderson,Woodland Hills,wpial
+1990,AA,103,1,Matt Scripps,Burrell,wpial
+1990,AA,112,1,Dan Higgins,Chartiers-Houston,wpial
+1990,AA,119,1,Bill Mylan,Bethlehem-Center,wpial
+1990,AA,125,1,Cary Kolat,Jefferson-Morgan,wpial
+1990,AA,130,1,Rob Keys,Jefferson-Morgan,wpial
+1990,AA,135,1,Eric Yanek,West Allegheny,wpial
+1990,AA,140,1,Mike Morris,Jeannette,wpial
+1990,AA,145,1,Dennis Rutan,West Greene,wpial
+1990,AA,152,1,Mike Johnson,West Allegheny,wpial
+1990,AA,160,1,Eric Mosier,Jefferson-Morgan,wpial
+1990,AA,171,1,Jim Howard,Jefferson-Morgan,wpial
+1990,AA,189,1,Dan Rossero,Fort Cherry,wpial
+1990,AA,HWT,1,Jim Slomka,Richland,wpial
+1989,AAA,103,1,Brian Kapusta,Greensburg Salem,wpial
+1989,AAA,112,1,Jeff Stepanic,Connellsville,wpial
+1989,AAA,119,1,John Richey,Connellsville,wpial
+1989,AAA,125,1,Mark Hutchin,Keystone Oaks,wpial
+1989,AAA,130,1,Mike Yancosky,Mt. Pleasant,wpial
+1989,AAA,135,1,Dave Thomas,Waynesburg Central,wpial
+1989,AAA,140,1,Tim Morgan,Trinity,wpial
+1989,AAA,145,1,Kevin Harris,Keystone Oaks,wpial
+1989,AAA,152,1,Rich Catalano,North Allegheny,wpial
+1989,AAA,160,1,Ray Brinzer,North Allegheny,wpial
+1989,AAA,171,1,Ken Bauer,North Allegheny,wpial
+1989,AAA,189,1,Mike Kraft,Penn Hills,wpial
+1989,AAA,HWT,1,Wayne Anderson,Woodland Hills,wpial
+1989,AAA,119,1,Cary Kolat,Jefferson-Morgan,wpial
+1989,AAA,125,1,Mike Johnson,West Allegheny,wpial
+1989,AAA,135,1,Brad Abbott,Burgettstown,wpial
+1989,AAA,145,1,Shawn Moses,South Park,wpial
+1989,AAA,160,1,Rocky McGeary,West Allegheny,wpial
+1989,AAA,171,1,Dave Arnold,Jefferson-Morgan,wpial
+1989,AAA,189,1,Bill Schlegel,Richland,wpial
+1989,AAA,HWT,1,Aaron Williams,Washington,wpial
+1988,AAA,98,1,Shawn McNavish,Chartiers-Houston,wpial
+1988,AAA,105,1,Ty Moore,North Allegheny,wpial
+1988,AAA,112,1,Dana Pinson,Canon-McMillan,wpial
+1988,AAA,119,1,John Richey,Connellsville,wpial
+1988,AAA,126,1,Mike Yuiska,Shaler,wpial
+1988,AAA,132,1,Jim Herriott,Canon-McMillan,wpial
+1988,AAA,138,1,John Dasta,Penn Hills,wpial
+1988,AAA,145,1,Duke Reed,Greater Latrobe,wpial
+1988,AAA,155,1,Ray Brinzer,North Allegheny,wpial
+1988,AAA,167,1,Mike Kraft,Penn Hills,wpial
+1988,AAA,185,1,Nate McKnight,New Castle,wpial
+1988,AAA,HWT,1,George Mehalic,Central Catholic,wpial
+1988,AAA,98,1,Ryan Sella,Avella,wpial
+1988,AAA,138,1,Don Lemley,Waynesburg Central,wpial
+1988,AAA,145,1,Eric Mosier,Jefferson-Morgan,wpial
+1988,AAA,155,1,Jeff Hamilton,West Greene,wpial
+1988,AAA,167,1,Justin Watters,West Allegheny,wpial
+1988,AAA,185,1,Dan Conley,Carlynton,wpial
+1987,AAA,98,1,Ty Moore,North Allegheny,wpial
+1987,AAA,105,1,Mike Norton,North Allegheny,wpial
+1987,AAA,112,1,Rich Catalano,North Allegheny,wpial
+1987,AAA,119,1,Bob Truby,Trinity,wpial
+1987,AAA,126,1,Mike Yuiska,Shaler,wpial
+1987,AAA,132,1,John Dasta,Penn Hills,wpial
+1987,AAA,138,1,Carl Yanek,West Allegheny,wpial
+1987,AAA,145,1,Mike Toplisek,Canon-McMillan,wpial
+1987,AAA,155,1,Dave Miller,Penn Hills,wpial
+1987,AAA,167,1,Eric Unger,Hopewell,wpial
+1987,AAA,185,1,Todd Smith,Derry,wpial
+1987,AAA,HWT,1,Kurt Angle,Mt. Lebanon,wpial
+1987,AAA,126,1,Todd Lowry,German,wpial
+1987,AAA,155,1,Jody Conti,Bethlehem-Center,wpial
+1987,AAA,167,1,Jon Schlegel,Richland,wpial
+1987,AAA,185,1,Bill Schlegel,Richland,wpial
+1987,AAA,HWT,1,Bill Kennedy,Carlynton,wpial
+1986,AAA,98,1,Mike Norton,North Allegheny,wpial
+1986,AAA,105,1,Ron Rothka,Canon-McMillan,wpial
+1986,AAA,112,1,Mike Ferrari,Trinity,wpial
+1986,AAA,119,1,Bob Truby,Trinity,wpial
+1986,AAA,126,1,John Dasta,Penn Hills,wpial
+1986,AAA,132,1,Tim Ellison,Hopewell,wpial
+1986,AAA,138,1,John Sarnese,Mt. Pleasant,wpial
+1986,AAA,145,1,Dirk Cole,Waynesburg Central,wpial
+1986,AAA,155,1,Mitch Barcaskey,Moon,wpial
+1986,AAA,167,1,Scott Mullen,Greater Latrobe,wpial
+1986,AAA,185,1,Joe Rozanc,Chartiers-Houston,wpial
+1986,AAA,HWT,1,Kurt Angle,Mt. Lebanon,wpial
+1986,AA,98,1,Scott Marciniak,Northgate,wpial
+1986,AA,105,1,Vic Freeberg,Elderton,wpial
+1986,AA,112,1,Ralph Parise,Washington,wpial
+1986,AA,119,1,Dave Nelson,Bethelhem-Center,wpial
+1986,AA,126,1,Todd Lowry,German,wpial
+1986,AA,132,1,Mike Wood,Elderton,wpial
+1986,AA,138,1,Domanick Snyder,Bentworth,wpial
+1986,AA,145,1,Randy Jackson,Washington,wpial
+1986,AA,155,1,Jody Conti,Bethlehem-Center,wpial
+1986,AA,167,1,Rob Zajac,Northgate,wpial
+1986,AA,185,1,Eric Smith,Avella,wpial
+1986,AA,HWT,1,Mike Yorio,Northgate,wpial
+1985,AAA,98,1,Ron Rothka,Canon-McMillan,wpial
+1985,AAA,105,1,Mike Ferrari,Trinity,wpial
+1985,AAA,112,1,Doug Wyland,North Allegheny,wpial
+1985,AAA,119,1,John Dasta,Penn Hills,wpial
+1985,AAA,126,1,Rich Dami,Canon-McMillan,wpial
+1985,AAA,132,1,Marc Speal,Greensburg Salem,wpial
+1985,AAA,138,1,Scott Buckiso,Thomas Jefferson,wpial
+1985,AAA,145,1,Rick Shaffer,Derry,wpial
+1985,AAA,155,1,Mark Mears,Mt. Pleasant,wpial
+1985,AAA,167,1,Jim Walsh,Seneca Valley,wpial
+1985,AAA,185,1,Jeff Spinetti,Uniontown,wpial
+1985,AAA,HWT,1,Rob Benjamin,Canon-McMillan,wpial
+1985,AA,98,1,Dave Lowery,German,wpial
+1985,AA,105,1,Dan Strope,Burgettstown,wpial
+1985,AA,112,1,Scott Rhodes,Bethlehem-Center,wpial
+1985,AA,119,1,Dave Nelson,Bethlehem-Center,wpial
+1985,AA,126,1,Dave Ciafre,Riverview,wpial
+1985,AA,132,1,Derrick Hall,Jeannette,wpial
+1985,AA,138,1,Domanick Snyder,Bentworth,wpial
+1985,AA,145,1,Paul McConaghy,Carlynton,wpial
+1985,AA,155,1,Dan Midea,Washington,wpial
+1985,AA,167,1,Kevin Myers,Bentworth,wpial
+1985,AA,185,1,Rick Miller,Washington,wpial
+1985,AA,HWT,1,Eric Smith,Avella,wpial
+1984,AAA,98,1,Greg Johns,North Allegheny,wpial
+1984,AAA,105,1,Joe Yancosky,Mt. Pleasant,wpial
+1984,AAA,112,1,Mark Jenkins,Uniontown,wpial
+1984,AAA,119,1,Chris Perri,Mt. Lebanon,wpial
+1984,AAA,126,1,Chris Mary,Chartiers-Houston,wpial
+1984,AAA,132,1,Tom Haught,Trinity,wpial
+1984,AAA,138,1,Alec Mutkus,Hopewell,wpial
+1984,AAA,145,1,John Peterman,Penn Hills,wpial
+1984,AAA,155,1,Mike Tongel,North Hills,wpial
+1984,AAA,167,1,Mike Blair,Keystone Oaks,wpial
+1984,AAA,185,1,Ken Hackman,Derry,wpial
+1984,AAA,HWT,1,Ray Huckstein,North Allegheny,wpial
+1984,AA,98,1,Dave Kriebel,Bethlehem-Center,wpial
+1984,AA,105,1,Rod Fuqua,Washington,wpial
+1984,AA,112,1,Dave Ciafre,Riverview,wpial
+1984,AA,119,1,Marc Bartolomucci,Bethlehem-Center,wpial
+1984,AA,126,1,Derrick Hall,Jeannette,wpial
+1984,AA,132,1,Phil DeAugustino,West Mifflin South,wpial
+1984,AA,138,1,Lance Phaturos,Riverview,wpial
+1984,AA,145,1,Dean Simonelli,Avella,wpial
+1984,AA,155,1,Rikk Walters,West Greene,wpial
+1984,AA,167,1,Kevin Myers,Bentworth,wpial
+1984,AA,185,1,Chris Homistek,Mapletown,wpial
+1984,AA,HWT,1,Eric Smith,Avella,wpial
+1983,AAA,98,1,Dan Buzza,Moon,wpial
+1983,AAA,105,1,Rich McClain,Canon-McMillan,wpial
+1983,AAA,112,1,Phil Mary,Chartiers-Houston,wpial
+1983,AAA,119,1,Chris Mary,Chartiers-Houston,wpial
+1983,AAA,126,1,John Thockmorton,Waynesburg Central,wpial
+1983,AAA,132,1,Craig Dellorso,Canon-McMillan,wpial
+1983,AAA,138,1,Greg Zimmerman,Shaler,wpial
+1983,AAA,145,1,Ken Haselrig,Penn Hills,wpial
+1983,AAA,155,1,Steve Risnear,Hampton,wpial
+1983,AAA,167,1,Steve Peperak,Connellsville,wpial
+1983,AAA,185,1,Chris Leon,North Allegheny,wpial
+1983,AAA,HWT,1,Mike Kirkling,Hempfield Area,wpial
+1983,AA,98,1,Dave Williams,Carmichaels,wpial
+1983,AA,105,1,Dave Wisniewski,Northgate,wpial
+1983,AA,112,1,Rich Harris,Avella,wpial
+1983,AA,119,1,Marc Bartolomucci,Bethlehem-Center,wpial
+1983,AA,126,1,Warren Terhorst,Fort Cherry,wpial
+1983,AA,132,1,Jeff Frazier,Washington,wpial
+1983,AA,138,1,Dean Simonelli,Avella,wpial
+1983,AA,145,1,Rikk Walters,West Greene,wpial
+1983,AA,155,1,Tom Lapcevic,Bentworth,wpial
+1983,AA,167,1,Arleigh Closser,West Greene,wpial
+1983,AA,185,1,Chris Homistek,Mapletown,wpial
+1983,AA,HWT,1,Mike Pasteryk,South Fayette,wpial
+1982,AAA,98,1,Dan Buzza,Moon,wpial
+1982,AAA,105,1,Buddy Blaha,Valley,wpial
+1982,AAA,112,1,Bill Perri,Mt. Lebanon,wpial
+1982,AAA,119,1,Chris Mary,Chartiers-Houston,wpial
+1982,AAA,126,1,Gary Bolin,Shaler,wpial
+1982,AAA,132,1,Rich Barron,Seneca Valley,wpial
+1982,AAA,138,1,Greg Zimmerman,Shaler,wpial
+1982,AAA,145,1,Rich Hudock,Derry,wpial
+1982,AAA,155,1,Joe Bond,North Allegheny,wpial
+1982,AAA,167,1,Paul Poulos,Ambridge,wpial
+1982,AAA,185,1,Jim Andrianos,Mt. Lebanon,wpial
+1982,AAA,HWT,1,Bob Riley,North Allegheny,wpial
+1982,AA,98,1,Gary Bassinger,Jefferson-Morgan,wpial
+1982,AA,105,1,Larry LeGrand,South Park,wpial
+1982,AA,112,1,Marc Bartolomucci,Bethlehem-Center) 112 – Ron Nutt (Charleroi,wpial
+1982,AA,119,1,Scott Heim,Richland,wpial
+1982,AA,126,1,Ed Shriver,Waynesburg Central,wpial
+1982,AA,132,1,Todd Eddy,Waynesburg Central,wpial
+1982,AA,138,1,Lonnie Barnes,Washington,wpial
+1982,AA,145,1,Mike Dudek,Kittanning,wpial
+1982,AA,155,1,Jim Frazier,Washington,wpial
+1982,AA,167,1,Jim Edwards,Charleroi,wpial
+1982,AA,185,1,Al Starostanko,Jefferson-Morgan,wpial
+1982,AA,HWT,1,Roy Hall,Jeannette,wpial
+1981,AAA,98,1,Phil Mary,Chartiers-Houston,wpial
+1981,AAA,105,1,Kyle Nellis,Shaler,wpial
+1981,AAA,112,1,Bill Perri,Mt. Lebanon,wpial
+1981,AAA,119,1,Bart Morrow,North Allegheny,wpial
+1981,AAA,126,1,Dave Crebs,Greater Latrobe,wpial
+1981,AAA,132,1,Sean Braddock,North Allegheny,wpial
+1981,AAA,138,1,Ken Nellis,Shaler,wpial
+1981,AAA,145,1,Jeff Patrick,Thomas Jefferson,wpial
+1981,AAA,155,1,Mark Stivala,Elizabeth Forward,wpial
+1981,AAA,167,1,Mark Kissell,Hempfield Area,wpial
+1981,AAA,185,1,Frank Vulcano,Chartiers-Houston,wpial
+1981,AAA,HWT,1,Mike Kirkling,Hempfield Area,wpial
+1981,AA,98,1,Marty Stewart,Waynesburg Central,wpial
+1981,AA,112,1,Scott Heim,Richland,wpial
+1981,AA,119,1,John Lis,Burgettstown,wpial
+1981,AA,126,1,Tom Wilt,Washington,wpial
+1981,AA,132,1,Lonnie Barnes,Washington,wpial
+1981,AA,138,1,Ernie Bannister,Burgettstown,wpial
+1981,AA,145,1,Jim Frazier,Washington,wpial
+1981,AA,155,1,Pete Comis,Burgettstown,wpial
+1981,AA,167,1,Mark Marshall,Burgettstown,wpial
+1981,AA,185,1,Kelly Suehr,Burgettstown,wpial
+1981,AA,HWT,1,Roy Hall,Jeannette,wpial
+1980,AAA,98,1,Kyle Nellis,Shaler,wpial
+1980,AAA,105,1,Roger Shirey,Greater Latrobe,wpial
+1980,AAA,112,1,Stan Romano,Trinity,wpial
+1980,AAA,119,1,Tom Moore,Seneca Valley,wpial
+1980,AAA,126,1,Ken Nellis,Shaler,wpial
+1980,AAA,132,1,Dave Stark,North Allegheny,wpial
+1980,AAA,138,1,Geoff Alexander,Plum,wpial
+1980,AAA,145,1,Dan Oliverio,Trinity,wpial
+1980,AAA,155,1,Dave Oliverio,Trinity,wpial
+1980,AAA,167,1,Matt Skittle,Canon-McMillan,wpial
+1980,AAA,185,1,Greg Hensh,Laurel Highlands,wpial
+1980,AAA,HWT,1,Bill Fralic,Penn Hills,wpial
+1980,AA,98,1,Marty Stewart,Waynesburg Central,wpial
+1980,AA,105,1,O.J. Wandrisco,Canevin Catholic,wpial
+1980,AA,119,1,Joe Throckmorton,Waynesburg Central,wpial
+1980,AA,126,1,Tom Lapcevic,Bentworth,wpial
+1980,AA,132,1,Monte Guidi,South Fayette,wpial
+1980,AA,138,1,Mike Harvey,Burgettstown,wpial
+1980,AA,145,1,Doug Haines,Waynesburg Central,wpial
+1980,AA,155,1,Roy Sisler,Jefferson-Morgan,wpial
+1980,AA,167,1,Frank Rich,Albert Gallatin,wpial
+1980,AA,185,1,Mark Rich,Albert Gallatin,wpial
+1980,AA,HWT,1,Steve Peters,Quigley Catholic,wpial
+1979,AAA,98,1,Bill Johnson,Derry,wpial
+1979,AAA,105,1,Ken Nellis,Shaler,wpial
+1979,AAA,112,1,Kraig Nellis,Shaler,wpial
+1979,AAA,119,1,Jay Domenic,Greater Latrobe,wpial
+1979,AAA,126,1,John Sippel,North Allegheny,wpial
+1979,AAA,132,1,Bob Siar,Shaler,wpial
+1979,AAA,138,1,Ted Benko,Shaler,wpial
+1979,AAA,145,1,Tom Klingensmith,Penn-Trafford,wpial
+1979,AAA,155,1,Brian Kesneck,Chartiers-Houston,wpial
+1979,AAA,167,1,Kurt Hertz,North Allegheny,wpial
+1979,AAA,185,1,Darrell Patterson,Canon-McMillan,wpial
+1979,AAA,HWT,1,Todd Campbell,Valley,wpial
+1979,AA,98,1,Dave Stewart,Waynesburg Central,wpial
+1979,AA,105,1,Marty Marish,Bethlehem-Center,wpial
+1979,AA,112,1,Rich Bongiorni,Burgettstown,wpial
+1979,AA,119,1,Joe Throckmorton,Waynesburg Central,wpial
+1979,AA,126,1,Andy Pordash,Bentworth,wpial
+1979,AA,132,1,Monte Guidi,South Fayette,wpial
+1979,AA,138,1,Ted Guess,McGuffey,wpial
+1979,AA,145,1,Mike McWilliams,Carmichaels,wpial
+1979,AA,155,1,Frank Rich,Albert Gallatin,wpial
+1979,AA,167,1,Mark Sember,Fort Cherry,wpial
+1979,AA,185,1,Derek Santini,Charleroi,wpial
+1979,AA,HWT,1,Rod Hall,Jeannette,wpial
+1978,AAA,98,1,Kraig Nellis,Shaler,wpial
+1978,AAA,105,1,Alan Franks,Uniontown,wpial
+1978,AAA,112,1,Dave Chomanics,Norwin,wpial
+1978,AAA,119,1,Keith Hatcher,Carlynton,wpial
+1978,AAA,126,1,Tom Sams,Trinity,wpial
+1978,AAA,132,1,Bob Siar,Shaler,wpial
+1978,AAA,138,1,Tom Klingensmith,Penn-Trafford,wpial
+1978,AAA,145,1,Ken Parsley,Greensburg Salem,wpial
+1978,AAA,155,1,Phil Pekich,Mt. Lebanon,wpial
+1978,AAA,167,1,Kurt Hertz,North Allegheny,wpial
+1978,AAA,185,1,Wayne Bloom,Seneca Valley,wpial
+1978,AAA,HWT,1,Leo Wisniewski,Fox Chapel,wpial
+1978,AA,98,1,Tim Nelson,Bethlehem-Center,wpial
+1978,AA,105,1,Kevin Brown,McGuffey,wpial
+1978,AA,112,1,Bob Salvadore,Richland,wpial
+1978,AA,119,1,Lloyd Johnston,Bethelhem-Center,wpial
+1978,AA,126,1,Tim Heim,Richland,wpial
+1978,AA,132,1,Jeff Gordon,Avella,wpial
+1978,AA,138,1,Gary Havelka,Burgettstown,wpial
+1978,AA,145,1,Mike McWilliams,Carmichaels,wpial
+1978,AA,155,1,Chad Menzie,Greensburg C.C.,wpial
+1978,AA,167,1,John Chendy,Ligonier Valley,wpial
+1978,AA,185,1,Tom Morrell,Immaculate Conception,wpial
+1978,AA,HWT,1,Jim Covert,Freedom Area,wpial
+1977,AAA,98,1,Bob French,Keystone Oaks,wpial
+1977,AAA,105,1,Curt Ellis,Washington,wpial
+1977,AAA,112,1,Dave Chomanics,Norwin,wpial
+1977,AAA,119,1,Tom Diamond,Washington,wpial
+1977,AAA,126,1,Tom Sams,Trinity,wpial
+1977,AAA,132,1,Ken Evans,Trinity,wpial
+1977,AAA,138,1,Tom Klingensmith,Penn-Trafford,wpial
+1977,AAA,145,1,Benjy Dudek,Kittanning,wpial
+1977,AAA,155,1,Phil Pekich,Mt. Lebanon,wpial
+1977,AAA,167,1,Mark Barrett,Moon,wpial
+1977,AAA,185,1,Wayne Bloom,Seneca Valley,wpial
+1977,AAA,HWT,1,Leo Wisniewski,Fox Chapel,wpial
+1977,AA,98,1,Kevin Brown,McGuffey,wpial
+1977,AA,112,1,Lloyd Johnston,Bethlehem-Center,wpial
+1977,AA,119,1,Jeff Gordon,Avella,wpial
+1977,AA,126,1,Rob Bogo,Avella,wpial
+1977,AA,132,1,Gary Havelka,Burgettstown,wpial
+1977,AA,138,1,Ted Cawoski,Greensburg C.C.,wpial
+1977,AA,145,1,Chad Menzie,Greensburg C.C.,wpial
+1977,AA,155,1,John Chendy,Ligonier Valley,wpial
+1977,AA,167,1,Charles Colburn,Bethlehem-Center,wpial
+1977,AA,185,1,Jess Caravaggio,Greensburg C.C.,wpial
+1977,AA,HWT,1,Jim Covert,Freedom Area,wpial
+1976,AAA,98,1,Curt Ellis,Washington,wpial
+1976,AAA,105,1,William Hawley,Norwin,wpial
+1976,AAA,112,1,Mike DeAugustino,North Allegheny,wpial
+1976,AAA,119,1,Ken Evans,Trinity,wpial
+1976,AAA,126,1,Scott DeAugustino,North Allegheny,wpial
+1976,AAA,132,1,Doug Henderson,Washington,wpial
+1976,AAA,138,1,Bob Piatt,Trinity,wpial
+1976,AAA,145,1,Joe Trombetta,Carlynton,wpial
+1976,AAA,155,1,Doug Herbert,North Allegheny,wpial
+1976,AAA,167,1,Bill Clemons,Canon-McMillan,wpial
+1976,AAA,185,1,Ed Benzio,Connellsville,wpial
+1976,AAA,HWT,1,John Cerminara,Keystone Oaks,wpial
+1976,AA,98,1,Kevin Brown,McGuffey,wpial
+1976,AA,105,1,Jerry Main,McGuffey,wpial
+1976,AA,112,1,Pat Teagarden,Waynesburg Central,wpial
+1976,AA,119,1,Greg Hall,Jeannette,wpial
+1976,AA,126,1,Ron Krautz,Jeannette,wpial
+1976,AA,132,1,Randy Brasco,Jeannette,wpial
+1976,AA,138,1,Ed Bredniak,Avella,wpial
+1976,AA,145,1,Bob McCaffrey,Fort Cherry,wpial
+1976,AA,155,1,Jim Hargrove,Immaculate Conception) 138 – Abby Rush (Avella,wpial
+1976,AA,167,1,Joe Zombek,Fort Cherry,wpial
+1976,AA,185,1,Tom Bertrand,Burgettstown,wpial
+1976,AA,HWT,1,Mark Cuneo,Greensburg C.C.,wpial
+1975,AAA,91,1,Larry Moorhead,Kiski Area,wpial
+1975,AAA,98,1,Vance Mulligan,Washington,wpial
+1975,AAA,105,1,Angelo Marino,Canon-McMillan,wpial
+1975,AAA,112,1,Mike DeAugustino,North Allegheny,wpial
+1975,AAA,119,1,Dan Perri,Mt. Lebanon,wpial
+1975,AAA,126,1,Bill Zollner,Norwin,wpial
+1975,AAA,132,1,Tom Van Gorder,North Allegheny,wpial
+1975,AAA,138,1,Mark Stemmer,Greater Latrobe,wpial
+1975,AAA,145,1,Jim May,Sharon,wpial
+1975,AAA,155,1,Doug Hebert,North Allegheny,wpial
+1975,AAA,167,1,Kelly North,North Allegheny,wpial
+1975,AAA,185,1,Dave Grau,Shaler,wpial
+1975,AAA,HWT,1,Kevin Telep,Canon-McMillan,wpial
+1975,AA,91,1,Mark McCahill,German Township,wpial
+1975,AA,98,1,Pat Teagarden,Waynesburg Central,wpial
+1975,AA,105,1,Tom Baker,Waynesburg Central,wpial
+1975,AA,112,1,Greg Hall,Jeannette,wpial
+1975,AA,119,1,Rob Bogo,Avella,wpial
+1975,AA,126,1,Randy Brasco,Jeannette,wpial
+1975,AA,132,1,Dan Hartung,Jeannette,wpial
+1975,AA,138,1,Brian Ross,Waynesburg Central,wpial
+1975,AA,145,1,Kevin Martin,Jefferson-Morgan,wpial
+1975,AA,155,1,Jeff Culp,Jefferson-Morgan,wpial
+1975,AA,167,1,Mike Morrell,Immaculate Conception,wpial
+1975,AA,185,1,Bill Bertrand,Burgettstown,wpial
+1975,AA,HWT,1,Ray Kemp,Fort Cherry,wpial
+1974,AAA,91,1,Jerry Main,McGuffey,wpial
+1974,AAA,98,1,Angelo Marino,Canon-McMillan,wpial
+1974,AAA,105,1,Kevin Nellis,Shaler,wpial
+1974,AAA,112,1,Len DeAugustino,West Mifflin North,wpial
+1974,AAA,119,1,Roger Meyers,Shaler,wpial
+1974,AAA,126,1,Craig Davis,Mt. Lebanon,wpial
+1974,AAA,132,1,Tim Mousetis,Washington,wpial
+1974,AAA,138,1,Bob Harwick,Mt. Lebanon,wpial
+1974,AAA,145,1,Jeff Reintgen,Greater Latrobe,wpial
+1974,AAA,155,1,Mike Rubino,North Hills,wpial
+1974,AAA,167,1,Jim Lohman,Mt. Lebanon,wpial
+1974,AAA,185,1,Dave Grau,Shaler,wpial
+1974,AAA,HWT,1,Randy Mathias,Connellsville,wpial
+1974,AA,91,1,Jeff Lauf,Burgettstown,wpial
+1974,AA,98,1,Chris Sergakis,Burgettstown,wpial
+1974,AA,105,1,Tom Baker,Waynesburg Central,wpial
+1974,AA,112,1,Darwin Stalnaker,German Township,wpial
+1974,AA,119,1,Jim Walters,Burgettstown,wpial
+1974,AA,126,1,Dave Detore,Greensburg C.C.,wpial
+1974,AA,132,1,Jim Bauer,Avella,wpial
+1974,AA,145,1,Kevin Martin,Jefferson-Morgan,wpial
+1974,AA,155,1,Bob Hospodar,Fort Cherry,wpial
+1974,AA,167,1,Bill Bertrand,Burgettstown,wpial
+1974,AA,185,1,Kevin Bussey,Waynesburg Central,wpial
+1974,AA,HWT,1,Ted Cuneo,Greensburg C.C.,wpial
+1973,single,88,1,Angelo Marino,Canon-McMillan,wpial
+1973,single,95,1,Kevin Nellis,Shaler,wpial
+1973,single,105,1,Dennis Zuk,Carlynton,wpial
+1973,single,112,1,Keith Nellis,Shaler,wpial
+1973,single,119,1,Bob Banks,Kiski Area,wpial
+1973,single,126,1,Bob Davis,Chartiers-Houston,wpial
+1973,single,132,1,Don Rodgers,North Allegheny,wpial
+1973,single,138,1,Glenn Hall,McKeesport,wpial
+1973,single,145,1,Fran Presley,Sharon,wpial
+1973,single,154,1,Dave Rodgers,North Allegheny,wpial
+1973,single,167,1,Bill Bertrand,Burgettstown,wpial
+1973,single,185,1,Art Baker,Carlynton,wpial
+1973,single,HWT,1,George Ochap,McKeesport,wpial
+1972,single,88,1,Tim Barnickel,Trinity,wpial
+1972,single,95,1,Dennis Zuk,Carlynton,wpial
+1972,single,103,1,Jim Seabright,McGuffey,wpial
+1972,single,112,1,Carlos Bryant,Washington,wpial
+1972,single,120,1,Bob Banks,Kiski Area,wpial
+1972,single,127,1,Alan Housner,Mt. Lebanon,wpial
+1972,single,133,1,Dan Levine,Waynesburg Central,wpial
+1972,single,138,1,Joe McGuier,McGuffey,wpial
+1972,single,145,1,Dave Rodgers,North Allegheny,wpial
+1972,single,154,1,Ray Dallatore,Trinity,wpial
+1972,single,165,1,George O’Korn,Canon-McMillan,wpial
+1972,single,180,1,Jeff Minerd,Mt. Lebanon,wpial
+1972,single,HWT,1,George Reihner,Washington,wpial
+1971,single,88,1,Dennis Zuk,Carnegie,wpial
+1971,single,95,1,Mickey Kenney,Greensburg Salem,wpial
+1971,single,103,1,Mike Marino,Canon-McMillan,wpial
+1971,single,112,1,George Bryant,Washington,wpial
+1971,single,120,1,Alan Housner,Mt. Lebanon,wpial
+1971,single,127,1,Edward Schlosser,Fox Chapel,wpial
+1971,single,133,1,Dan Levine,Waynesburg Central,wpial
+1971,single,138,1,Scott Miller,Trinity,wpial
+1971,single,145,1,Mike Henry,Mt. Lebanon,wpial
+1971,single,154,1,Jack Platts,North Allegheny,wpial
+1971,single,165,1,Jeff Lutz,North Allegheny,wpial
+1971,single,180,1,Don Dallatore,Trinity,wpial
+1971,single,HWT,1,George Reihner,Washington,wpial
+1970,single,88,1,Mike Passalacqua,Trinity,wpial
+1970,single,95,1,Mickey Kenney,Greensburg Salem,wpial
+1970,single,103,1,Tom Teagarden,McGuffey,wpial
+1970,single,112,1,Chris Takagi,Thomas Jefferson,wpial
+1970,single,120,1,James Vockel,Mt. Lebanon,wpial
+1970,single,127,1,Dan Colpo,North Allegheny,wpial
+1970,single,133,1,Terry Dugan,German Township,wpial
+1970,single,138,1,Scott Miller,Trinity,wpial
+1970,single,145,1,Kevin Love,Carnegie,wpial
+1970,single,154,1,John Chatman,Trinity,wpial
+1970,single,165,1,Ted Bouyoucas,Mt. Lebanon,wpial
+1970,single,180,1,Tom Kearns,Seneca Valley,wpial
+1970,single,HWT,1,Duane Holler,North Allegheny,wpial
+1969,single,88,1,William Martin,Washington,wpial
+1969,single,95,1,Tom Teagarden,McGuffey,wpial
+1969,single,103,1,Richard Panella,New Castle,wpial
+1969,single,112,1,Dan Barnickel,Trinity,wpial
+1969,single,120,1,Lester Peterson,Canon-McMillan,wpial
+1969,single,127,1,Andy Kohlhepp,New Castle,wpial
+1969,single,133,1,Mike Mousetis,Washington,wpial
+1969,single,138,1,Kevin Love,Carnegie,wpial
+1969,single,145,1,Dave Batista,Canon-McMillan,wpial
+1969,single,154,1,John Chatman,Trinity,wpial
+1969,single,165,1,Paul Tillson,Mt. Lebanon,wpial
+1969,single,180,1,Rod Smith,Mt. Lebanon,wpial
+1969,single,HWT,1,James Caramanna,Mt. Lebanon,wpial
+1968,single,88,1,David Palmieri,North Allegheny,wpial
+1968,single,95,1,Dan Colpo,North Allegheny,wpial
+1968,single,103,1,Gary McClure,Waynesburg,wpial
+1968,single,112,1,Dale Murdock,Waynesburg,wpial
+1968,single,120,1,Lester Peterson,Canon-McMillan,wpial
+1968,single,127,1,George Dugan,German Township,wpial
+1968,single,133,1,Doug Closser,West Greene,wpial
+1968,single,138,1,Lynn Housner,Mt. Lebanon,wpial
+1968,single,145,1,John Chatman,Trinity,wpial
+1968,single,154,1,Alan Walker,Mt. Lebanon,wpial
+1968,single,165,1,Jim Fleming,Mt. Lebanon,wpial
+1968,single,180,1,Terry Claypool,Kittanning,wpial
+1968,single,HWT,1,Rich Brown,Shaler,wpial
+1967,single,88,1,Don Cook,West Greene,wpial
+1967,single,95,1,Gary McClure,Waynesburg,wpial
+1967,single,103,1,Richard Panella,New Castle,wpial
+1967,single,112,1,Lester Peterson,Canon-McMillion,wpial
+1967,single,120,1,Ron Junko,Trinity,wpial
+1967,single,127,1,Dick Herrington,Mt. Lebanon,wpial
+1967,single,133,1,Amedio Piccioni,Canon-McMillan,wpial
+1967,single,138,1,Pat Lavery,German Township,wpial
+1967,single,145,1,Dave Cook,Chartiers-Houston,wpial
+1967,single,154,1,Bill Brunofsky,Waynesburg,wpial
+1967,single,165,1,Ted Swisher,Mt. Lebanon,wpial
+1967,single,180,1,Terry Claypool,Kittanning,wpial
+1967,single,HWT,1,Ralph Cindrich,Avella,wpial
+1966,single,88,1,Gary McClure,Waynesburg,wpial
+1966,single,95,1,Dale Murdock,Waynesburg,wpial
+1966,single,103,1,Ron Junko,Trinity,wpial
+1966,single,112,1,Rich Trunzo,Canon-McMillan,wpial
+1966,single,120,1,John Abajace,Trinity,wpial
+1966,single,127,1,Rod Patterson,Canon-McMillan,wpial
+1966,single,133,1,Russell Benson,Chartiers Valley,wpial
+1966,single,138,1,Curt Callahan,Churchill,wpial
+1966,single,145,1,Reggie Sherron,Washington,wpial
+1966,single,154,1,John Long,Trinity,wpial
+1966,single,165,1,Jack Sullivan,Mt. Lebanon,wpial
+1966,single,180,1,Jack Kuhn,Baldwin,wpial
+1966,single,HWT,1,Ralph Cindrich,Avella,wpial
+1965,single,88,1,Dale Murdock,Waynesburg,wpial
+1965,single,95,1,Tim Morgan,Norwin,wpial
+1965,single,103,1,John Abajace,Trinity,wpial
+1965,single,112,1,Mike Zuk,Carnegie,wpial
+1965,single,120,1,Phil Detore,Greensburg Salem,wpial
+1965,single,127,1,Barry Souder,Mt. Lebanon,wpial
+1965,single,133,1,Jeff Paxton,Chartiers-Houston,wpial
+1965,single,138,1,Terry Zaccarino,Canon-McMillan,wpial
+1965,single,145,1,Jay Tray,Norwin,wpial
+1965,single,154,1,Jack Sullivan,Mt. Lebanon,wpial
+1965,single,165,1,Mike Gudiness,Mt. Lebanon,wpial
+1965,single,180,1,Rich Constantine,Uniontown,wpial
+1965,single,HWT,1,Rich Cahill,Penn Hills,wpial
+1964,single,88,1,John Abajace,Trinity,wpial
+1964,single,95,1,Duane Patterson,Chartiers-Houston,wpial
+1964,single,103,1,Lee Stevenson,North Allegheny,wpial
+1964,single,112,1,John Relyea,Shaler,wpial
+1964,single,120,1,Ralph Adamson,Waynesburg,wpial
+1964,single,127,1,Jeff Paxton,Chartiers-Houston,wpial
+1964,single,133,1,Rich Gilmore,Peters Township,wpial
+1964,single,138,1,Dave Spinda,Carnegie,wpial
+1964,single,145,1,Jim Higgins,Waynesburg,wpial
+1964,single,154,1,Jim Biringer,Canon-McMillan,wpial
+1964,single,165,1,Mike Gudiness,Mt. Lebanon,wpial
+1964,single,180,1,Carl Carbonara,Uniontown,wpial
+1964,single,UNL,1,Ray Tokar,Shaler,wpial
+1963,single,88,1,Tommy Carr,Greensburg Salem,wpial
+1963,single,95,1,Bill Gardner,Jefferson-Morgan,wpial
+1963,single,103,1,Leroy Taylor,Waynesburg,wpial
+1963,single,112,1,Frank Dellorso,Canon-McMillan,wpial
+1963,single,120,1,Tom Todd,New Castle,wpial
+1963,single,127,1,Jerry Lattimore,Trinity,wpial
+1963,single,133,1,Robert Shriver,Waynesburg,wpial
+1963,single,138,1,Glenn Briggs,Trinity,wpial
+1963,single,145,1,Jim Biringer,Canon-McMillan,wpial
+1963,single,154,1,Jerry Seaman,McGuffey,wpial
+1963,single,165,1,Tony Compeggie,Canon-McMillan,wpial
+1963,single,180,1,Richard Quarture,Canon-McMillan,wpial
+1963,single,UNL,1,Walter Petkervich,Chartiers Valley,wpial
+1962,single,88,1,Steve Meeki,Washington,wpial
+1962,single,95,1,Allen Roberts,Waynesburg,wpial
+1962,single,103,1,Andy Ulinsky,Kittanning,wpial
+1962,single,112,1,Mickey Boudreau,Waynesburg,wpial
+1962,single,120,1,Drew Bachman,Mt. Lebanon,wpial
+1962,single,127,1,Robert Shriver,Waynesburg,wpial
+1962,single,133,1,Jack Banks,Wilkinsburg,wpial
+1962,single,138,1,Jim Biringer,Canon-McMillan,wpial
+1962,single,145,1,James Sinclair,Kittanning,wpial
+1962,single,154,1,Frank Mosier,Trinity,wpial
+1962,single,165,1,Jim Meighen,Waynesburg,wpial
+1962,single,180,1,Richard Quarture,Canon-McMillan,wpial
+1962,single,UNL,1,Ronald Grimm,Dormont,wpial
+1961,single,88,1,Ted Brown,Washington,wpial
+1961,single,95,1,Jerry Lattimore,Trinity,wpial
+1961,single,103,1,Terry Wilson,Waynesburg,wpial
+1961,single,112,1,Rich Kelvington,Trinity,wpial
+1961,single,120,1,Bob Dugan,German Township,wpial
+1961,single,127,1,Tony Gusic,Waynesburg,wpial
+1961,single,133,1,Dino Boni,Burgettstown,wpial
+1961,single,138,1,Frank O’Korn,Canon-McMillan,wpial
+1961,single,145,1,Don Zielinski,Chartiers-Houston,wpial
+1961,single,154,1,Bob Kopnisky,Shaler,wpial
+1961,single,165,1,Bob Cindrich,Avella,wpial
+1961,single,180,1,Jack White,Wilkinsburg,wpial
+1961,single,UNL,1,Melio Sulipek,German Township,wpial
+1960,single,88,1,Jerry Lattimore,Trinity,wpial
+1960,single,95,1,James Crain,Avella,wpial
+1960,single,103,1,Phil Lapping,Waynesburg,wpial
+1960,single,112,1,Charles Houk,New Castle,wpial
+1960,single,120,1,John Davis,North Allegheny,wpial
+1960,single,127,1,Robert Haney,Canon-McMillan,wpial
+1960,single,133,1,Tom Bailey,Waynesburg,wpial
+1960,single,138,1,George Reese,Trinity,wpial
+1960,single,145,1,Frank Ferrari,Avella,wpial
+1960,single,154,1,Floyd Marshall,Burgettstown,wpial
+1960,single,165,1,Nick Stellavato,Trinity,wpial
+1960,single,180,1,John Kuzniewski,Shaler,wpial
+1960,single,UNL,1,Wallace Brown,Wilkinsburg,wpial
+1959,single,88,1,James Crain,Avella,wpial
+1959,single,95,1,Jack Brady,Uniontown,wpial
+1959,single,103,1,Truman Burgess,Chartiers-Houston,wpial
+1959,single,112,1,Arthur Maughn,Canonsburg,wpial
+1959,single,120,1,Ron Mayle,Waynesburg,wpial
+1959,single,127,1,Robert Haney,Canonsburg,wpial
+1959,single,133,1,Larry Burgess,Chartiers-Houston,wpial
+1959,single,138,1,Bill Bonus,Trinity,wpial
+1959,single,145,1,Floyd Marshall,Burgettstown,wpial
+1959,single,154,1,Sam Fuller,Waynesburg,wpial
+1959,single,165,1,James Husk,Waynesburg,wpial
+1959,single,185,1,Edmond Pohland,Greater Latrobe,wpial
+1958,single,88,1,Jay Windfelder,Mt. Lebanon,wpial
+1958,single,95,1,Duane Makel,Waynesburg,wpial
+1958,single,103,1,Dan Hopkins,Trinity,wpial
+1958,single,112,1,Arthur Maughn,Canonsburg,wpial
+1958,single,120,1,Robert Haney,Canonsburg,wpial
+1958,single,127,1,Daryl Kelvington,Trinity,wpial
+1958,single,133,1,John Kalokerinos,Greater Latrobe,wpial
+1958,single,138,1,John Byard,Waynesburg,wpial
+1958,single,145,1,Floyd Marshall,Burgettstown,wpial
+1958,single,154,1,Robert Marshall,Burgettstown,wpial
+1958,single,165,1,Jack Maroni,Burgettstown,wpial
+1958,single,185,1,Ray Bazzoli,Chartiers-Houston,wpial
+1957,single,88,1,Truman Burgess,Chartiers-Houston,wpial
+1957,single,95,1,James Grimes,Trinity,wpial
+1957,single,103,1,Arthur Maughn,Canonsburg,wpial
+1957,single,112,1,Richard Martin,Greater Latrobe,wpial
+1957,single,120,1,Ronald Silbaugh,Jefferson-Morgan,wpial
+1957,single,127,1,Robert Bleakney,Waynesburg,wpial
+1957,single,133,1,Andy Rommes,Burgettstown,wpial
+1957,single,138,1,Steve Dasta,Washington,wpial
+1957,single,145,1,Robert Marshall,Burgettstown,wpial
+1957,single,154,1,John Ketchum,Waynesburg,wpial
+1957,single,165,1,David Vidovich,German Township,wpial
+1957,single,185,1,James Shearer,Carnegie,wpial
+1956,single,88,1,Robert Stinespring,Chartiers-Houston,wpial
+1956,single,95,1,James Grimes,Trinity,wpial
+1956,single,103,1,Richard Martin,Greater Latrobe,wpial
+1956,single,112,1,Paul Duffield,Waynesburg,wpial
+1956,single,120,1,James Dollar,Jefferson-Morgan,wpial
+1956,single,127,1,Ralph Littleberry,Trinity,wpial
+1956,single,133,1,John Barclay,Waynesburg,wpial
+1956,single,138,1,Robert Marshall,Burgettstown,wpial
+1956,single,145,1,Veryl Long,Trinity,wpial
+1956,single,154,1,Ronald Hauser,Greater Latrobe,wpial
+1956,single,165,1,Paul Eckley,Munhall,wpial
+1956,single,185,1,Ronald Maltony,Burgettstown,wpial
+1955,single,88,1,John Karpy,Canonsburg,wpial
+1955,single,95,1,Robert Price,Chartiers Township,wpial
+1955,single,103,1,Fred Sentner,Carnegie,wpial
+1955,single,112,1,Robert Taggart,Trinity,wpial
+1955,single,120,1,Ralph Littleberry,Trinity,wpial
+1955,single,127,1,Donald Wilson,Trinity,wpial
+1955,single,133,1,Bill Milligan,Washington,wpial
+1955,single,138,1,Veryl Long,Trinity,wpial
+1955,single,145,1,Bill Gallo,Trinity,wpial
+1955,single,154,1,Ben Cree,Mapletown,wpial
+1955,single,165,1,Paul Eckley,Munhall,wpial
+1955,single,185,1,Nick Dano,Canonsburg,wpial
+1954,single,88,1,Robert Price,Chartiers Township,wpial
+1954,single,95,1,Bill Bane,Trinity,wpial
+1954,single,103,1,Francis Adams,Chartiers Township,wpial
+1954,single,112,1,Joseph Shook,Trinity,wpial
+1954,single,120,1,Edward Herrod,Waynesburg,wpial
+1954,single,127,1,Victor DeFelice,Canonsburg,wpial
+1954,single,133,1,Bill Milligan,Washington,wpial
+1954,single,138,1,Nick Petronka,Washington,wpial
+1954,single,145,1,Bill Gallo,Trinity,wpial
+1954,single,154,1,Luis Craig,Trinity,wpial
+1954,single,165,1,George Terembes,Jefferson,wpial
+1954,single,185,1,Gene Smittle,Canonsburg,wpial
+1953,single,88,1,Paul Shazer,Uniontown,wpial
+1953,single,95,1,Richard Bongiorini,Burgettstown,wpial
+1953,single,103,1,Francis Adams,Chartiers Township,wpial
+1953,single,112,1,Joseph Shook,Trinity,wpial
+1953,single,120,1,Edward Peery,Shaler,wpial
+1953,single,127,1,Donald Gorman,Waynesburg,wpial
+1953,single,133,1,Nick Petronka,Washington,wpial
+1953,single,138,1,Dick Bonifield,Waynesburg,wpial
+1953,single,145,1,James Cargoni,Canonsburg,wpial
+1953,single,154,1,Robert DeFelice,Canonsburg,wpial
+1953,single,165,1,Joseph Thomas,Chartiers Township,wpial
+1953,single,185,1,Harold McElhaney,Burgettstown,wpial
+1952,single,88,1,Wille Felton,Washington,wpial
+1952,single,95,1,Charles Pryor,Washington,wpial
+1952,single,103,1,Manuel Pihakis,Canonsburg,wpial
+1952,single,112,1,Dick Wilson,Trinity,wpial
+1952,single,120,1,Edward Peery,Shaler,wpial
+1952,single,127,1,Ronald Kurtz,Waynesburg,wpial
+1952,single,133,1,Joseph Angelillo,Washington,wpial
+1952,single,138,1,Bill Enos,Trinity,wpial
+1952,single,145,1,Thomas Diamond,Washington,wpial
+1952,single,154,1,Edward DeWitt,Trinity,wpial
+1952,single,165,1,Alex Skirpan,Carnegie,wpial
+1952,single,185,1,John Higgins,Waynesburg,wpial
+1951,single,88,1,Ed Herrod,Waynesburg,wpial
+1951,single,95,1,William Hulings,Canonsburg,wpial
+1951,single,103,1,Manuel Pihakis,Canonsburg,wpial
+1951,single,112,1,Edward Peery,Shaler,wpial
+1951,single,120,1,John Barna,Waynesburg,wpial
+1951,single,127,1,Donald Zenner,Washington,wpial
+1951,single,133,1,Joseph Angelillo,Washington,wpial
+1951,single,138,1,Joseph Nicolella,Washington,wpial
+1951,single,145,1,Ed DeWitt,Chartiers Township,wpial
+1951,single,154,1,Joseph Solomon,Canonsburg,wpial
+1951,single,165,1,Alex Skirpan,Carnegie,wpial
+1951,single,185,1,Bill Hoffman,Greensburg Salem,wpial
+1950,single,88,1,Samuel Manella,Uniontown,wpial
+1950,single,95,1,Manuel Pihakis,Canonsburg,wpial
+1950,single,103,1,Ronald Kurtz,Waynesburg,wpial
+1950,single,112,1,Ronald Roman,Canonsburg,wpial
+1950,single,120,1,Robert Cadman,Munhall,wpial
+1950,single,127,1,Joseph DeVito,Farrell,wpial
+1950,single,133,1,Vincent Cottle,Jefferson,wpial
+1950,single,138,1,Donald Young,Washington,wpial
+1950,single,145,1,Joseph Solomon,Canonsburg,wpial
+1950,single,154,1,Donald Haney,Canonsburg,wpial
+1950,single,165,1,Thomas Alberts,Waynesburg,wpial
+1950,single,185,1,Edwin Maltony,Burgettstown,wpial
+1949,single,88,1,Manuel Pihakis,Canonsburg,wpial
+1949,single,95,1,Ronald Roman,Canonsburg,wpial
+1949,single,103,1,Russell Wedlake,Farrell,wpial
+1949,single,112,1,Donald Zenner,Washington,wpial
+1949,single,120,1,Tom Springer,Farrell,wpial
+1949,single,127,1,Carl Wilson,Washington,wpial
+1949,single,133,1,Donald Young,Washington,wpial
+1949,single,138,1,Donald Haney,Canonsburg,wpial
+1949,single,145,1,Joseph Solomon,Canonsburg,wpial
+1949,single,154,1,Thomas Alberts,Waynesburg,wpial
+1949,single,168,1,Wayne Cimino,Chartiers Township,wpial
+1949,single,185,1,Cornelius Mullins,Chartiers Township,wpial
+1948,single,88,1,Ronald Roman,Canonsburg,wpial
+1948,single,95,1,Enrico Noble,Greensburg,wpial
+1948,single,103,1,James Bencivengo,Farrell,wpial
+1948,single,112,1,Anthony Gizoni,Washington,wpial
+1948,single,120,1,Harold Miller,Washington,wpial
+1948,single,127,1,Donald Haney,Canonsburg,wpial
+1948,single,133,1,Robert Laurine,Washington,wpial
+1948,single,138,1,James Funk,Washington,wpial
+1948,single,145,1,Jack Vallely,Farrell,wpial
+1948,single,154,1,Hobart Wagner,Farrell,wpial
+1948,single,165,1,Wayne Cimino,Chartiers Township,wpial
+1948,single,185,1,William Bird,Chartiers Township,wpial
+1947,single,88,1,Duane Cole,Jefferson-Morgan,wpial
+1947,single,95,1,Charles Shannon,Canonsburg,wpial
+1947,single,103,1,Anthony Gizoni,Washington,wpial
+1947,single,112,1,Pat Haney,Canonsburg,wpial
+1947,single,120,1,Eugene Bowman,Canonsburg,wpial
+1947,single,127,1,Donald Haney,Canonsburg,wpial
+1947,single,133,1,Victor DeVito,Farrell,wpial
+1947,single,138,1,Tom Lewis,Farrell,wpial
+1947,single,145,1,William Santel,Chartiers Township,wpial
+1947,single,154,1,Joseph Ogrodowski,Canonsburg,wpial
+1947,single,165,1,Harold Addis,Canonsburg,wpial
+1947,single,185,1,William George,Waynesburg,wpial
+1946,single,88,1,William Larkin,Washington,wpial
+1946,single,95,1,Anthony Gizoni,Washington,wpial
+1946,single,103,1,Pat Haney,Canonsburg,wpial
+1946,single,112,1,George Lewis,Farrell,wpial
+1946,single,120,1,Eugene Bowman,Canonsburg,wpial
+1946,single,127,1,Donald Malarky,Chartiers Township,wpial
+1946,single,133,1,Stanley Mousetis,Washington,wpial
+1946,single,138,1,James Chemento,Canonsburg,wpial
+1946,single,145,1,Achilles Mouganis,Farrell,wpial
+1946,single,154,1,Joseph Ogrodowski,Canonsburg,wpial
+1946,single,165,1,William Scott,Waynesburg,wpial
+1946,single,185,1,William George,Waynesburg,wpial
+1945,single,88,1,Bill Grimm,Greensburg,wpial
+1945,single,95,1,Bill DePaoli,Chartiers Township,wpial
+1945,single,103,1,George Lewis,Farrell,wpial
+1945,single,112,1,Eugene Bowman,Canonsburg,wpial
+1945,single,120,1,Harold Gordon,Waynesburg,wpial
+1945,single,127,1,Victor DeVito,Farrell,wpial
+1945,single,133,1,Achilles Mouganis,Farrell,wpial
+1945,single,138,1,David Solomon,Canonsburg,wpial
+1945,single,145,1,Joseph Yourchek,Jefferson,wpial
+1945,single,154,1,William George,Waynesburg,wpial
+1945,single,165,1,John Bralich,Farrell,wpial
+1945,single,185,1,John Mullins,Chartiers Township,wpial
+1944,single,88,1,Earl Taylor,Waynesburg,wpial
+1944,single,95,1,Stanley Scott,Waynesburg,wpial
+1944,single,103,1,Richard Abraham,Canonsburg,wpial
+1944,single,112,1,William Thompson,Dormont,wpial
+1944,single,120,1,Robert Schell,Dormont,wpial
+1944,single,127,1,Donald Howard,Chartiers Township,wpial
+1944,single,133,1,Benny Maffio,Canonsburg,wpial
+1944,single,138,1,Matthew Gusic,Waynesburg,wpial
+1944,single,145,1,Tony George,Canonsburg,wpial
+1944,single,154,1,James Cooklis,Canonsburg,wpial
+1944,single,165,1,John Mullins,Chartiers Township,wpial
+1944,single,185,1,Robert Flath,Greensburg,wpial
+1943,single,88,1,Aldo Zanoni,Canonsburg,wpial
+1943,single,95,1,Charles Barno,Jefferson,wpial
+1943,single,103,1,Charles Patterson,Waynesburg,wpial
+1943,single,112,1,Larry Dudzik,Canonsburg,wpial
+1943,single,120,1,James Conklin,Waynesburg,wpial
+1943,single,127,1,Matthew Gusic,Waynesburg,wpial
+1943,single,133,1,Tony George,Canonsburg,wpial
+1943,single,138,1,Elias George,Canonsburg,wpial
+1943,single,145,1,Earl Fuller,Waynesburg,wpial
+1943,single,154,1,Nick Osso,Waynesburg,wpial
+1943,single,165,1,Keith Moore,Waynesburg,wpial
+1943,single,185,1,John Mullins,Chartiers Township,wpial
+1942,single,88,1,Charles Patterson,Waynesburg,wpial
+1942,single,95,1,George Pihakis,Canonsburg,wpial
+1942,single,103,1,Jack Weixel,West View,wpial
+1942,single,112,1,James Conklin,Waynesburg,wpial
+1942,single,120,1,John White,Waynesburg,wpial
+1942,single,127,1,Francis Pastor,Waynesburg,wpial
+1942,single,133,1,Elias George,Canonsburg,wpial
+1942,single,138,1,Earl Fuller,Waynesburg,wpial
+1942,single,145,1,George Yates,Canonsburg,wpial
+1942,single,154,1,Alex Supinski,Canonsburg,wpial
+1942,single,165,1,Harry Mousetis,Washington,wpial
+1942,single,185,1,George Albert,Waynesburg,wpial
+1941,single,85,1,Jack Weixel,West View,wpial
+1941,single,95,1,James Conklin,Waynesburg,wpial
+1941,single,105,1,Edward Champ,Canonsburg,wpial
+1941,single,115,1,Mike Kusturis,Canonsburg,wpial
+1941,single,125,1,Ralph Abraham,Greensburg,wpial
+1941,single,135,1,Paul Bronofsky,Waynesburg,wpial
+1941,single,145,1,Ernest Closser,Waynesburg,wpial
+1941,single,155,1,John Walter,West View,wpial
+1941,single,165,1,Daniel Abraham,Canonsburg,wpial
+1941,single,185,1,Malvin Podrasky,Canonsburg,wpial
+1940,single,85,1,James Conklin,Waynesburg,wpial
+1940,single,95,1,Raymond Murdock,Waynesburg,wpial
+1940,single,105,1,Reed Huffman,Waynesburg,wpial
+1940,single,115,1,George Custer,Canonsburg,wpial
+1940,single,125,1,Charles Blair,Waynesburg,wpial
+1940,single,135,1,Joseph Malacky,Canonsburg,wpial
+1940,single,145,1,Mike Grosnak,Monongahela Township,wpial
+1940,single,155,1,Theodore Serafin,Trafford,wpial
+1940,single,165,1,Daniel Abraham,Canonsburg,wpial
+1940,single,185,1,Malvin Podrasky,Canonsburg,wpial
+1939,single,85,1,Raymond Murdock,Waynesburg,wpial
+1939,single,95,1,Reed Huffman,Waynesburg,wpial
+1939,single,105,1,George Custer,Canonsburg,wpial
+1939,single,115,1,William Stanley,Canonsburg,wpial
+1939,single,125,1,Andrew Puchany,Canonsburg,wpial
+1939,single,135,1,Thomas Abraham,Greensburg,wpial
+1939,single,145,1,Theodore Sarafin,Trafford,wpial
+1939,single,155,1,John Abraham,Canonsburg,wpial
+1939,single,165,1,Malvin Podrasky,Canonsburg,wpial
+1939,single,185,1,Tony Mazza,Canonsburg,wpial
+1938,single,85,1,Sandy DeMarino,Greensburg,wpial
+1938,single,95,1,George Custer,Canonsburg,wpial
+1938,single,105,1,George Phillips,Dormont,wpial
+1938,single,115,1,Andrew Puchany,Canonsburg,wpial
+1938,single,125,1,Edward Pappert,Dormont,wpial
+1938,single,135,1,John Metzler,Greensburg,wpial
+1938,single,145,1,Virgil Volmassoni,Trafford,wpial
+1938,single,155,1,Fred Paul,Canonsburg,wpial
+1938,single,165,1,Don Bitler,Greensburg,wpial
+1938,single,185,1,Philip Ahwesh,Canonsburg,wpial
+1937,single,85,1,William Stanley,Canonsburg,wpial
+1937,single,95,1,Andrew Puchany,Canonsburg,wpial
+1937,single,105,1,John Mikos,Canonsburg,wpial
+1937,single,115,1,Theodore Blyshak,Canonsburg,wpial
+1937,single,125,1,John Metzler,Greensburg,wpial
+1937,single,135,1,Tom Davies,Carmichaels,wpial
+1937,single,145,1,Mike Abraham,Greensburg,wpial
+1937,single,155,1,Jim Hawk,Turtle Creek,wpial
+1937,single,165,1,George Kline,Greensburg,wpial
+1937,single,185,1,Stanley Walkowicz,Canonsburg,wpial
+1936,single,85,1,Andrew Puchany,Canonsburg,wpial
+1936,single,95,1,Raymond Koon,Trafford,wpial
+1936,single,105,1,Tom Fenton,Norwin,wpial
+1936,single,115,1,Theodore Blyshak,Canonsburg,wpial
+1936,single,125,1,Mike Matyuk,Canonsburg,wpial
+1936,single,135,1,Steve Breeyle,Norwin,wpial
+1936,single,145,1,Joe Chesnik,Canonsburg,wpial
+1936,single,155,1,Herb Mollenauer,Canonsburg,wpial
+1936,single,165,1,Joseph Valla,Blairsville,wpial
+1936,single,185,1,Alex Polasky,Canonsburg,wpial
