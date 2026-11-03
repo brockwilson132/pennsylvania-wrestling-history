@@ -27,7 +27,7 @@
     const inp = document.getElementById('wsearch'); if (!inp) return;
     const list = document.getElementById('wlist'), more = document.getElementById('wmore');
     const ws = OT.wrestlersOf(OT.ROWS().filter((r) => r.place));
-    const item = (w) => `<a href="${w.href}"><span><b>${esc(w.name)}</b><small>${esc(w.sch)} · D${w.d} · ${w.years}</small></span><span class="ch">${chips(w.places)}</span></a>`;
+    const item = (w) => `<a href="${w.href}"><span><b>${esc(w.name)}</b><small>${esc(w.sch)} · D${w.d} · ${w.years}</small></span><span class="ch">${OT.yearPills(w.apps)}</span></a>`;
     let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim().toLowerCase(); const hit = q ? ws.filter((w) => (w.name + ' ' + w.sch).toLowerCase().includes(q)) : ws; list.innerHTML = hit.slice(0, 60).map(item).join('') || '<div class="card empty">No one by that name.</div>'; more.textContent = hit.length > 60 ? `Showing 60 of ${hit.length}.` : `${hit.length} wrestler${hit.length === 1 ? '' : 's'}.`; }, 120); });
   }
   document.addEventListener('click', (e) => {

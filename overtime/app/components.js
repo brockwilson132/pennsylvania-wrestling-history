@@ -122,6 +122,12 @@
 
   /* medal chips */
   const chips = (places) => places.map((n, i) => n ? `<span class="chip ${pc(i + 1)}" title="${n} × ${ordinal(i + 1)}">${n}×${i + 1}</span>` : '').join('');
+  /* one pill per season slot FR·SO·JR·SR: the place (medal color), Q for a trip without a medal, empty when no trip */
+  const yearPills = (apps) => {
+    const slots = [null, null, null, null];
+    apps.forEach((r) => { const i = OT.gradeSlot(r, apps); if (!slots[i] || (r.place && (!slots[i].place || r.place < slots[i].place))) slots[i] = r; });
+    return `<span class="yp">${slots.map((r, i) => r ? `<span class="chip ${r.place ? pc(r.place) : 'q'}" title="${r.year} · ${OT.GRADE_L[i]} · ${r.place ? ordinal(r.place) : 'qualified'}">${r.place ? r.place : 'Q'}<small>${String(r.year).slice(2)}</small></span>` : `<span class="chip none" aria-hidden="true">·</span>`).join('')}</span>`;
+  };
 
   /* career grid */
   function careerGrid(W) {
@@ -156,5 +162,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { yearPills, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

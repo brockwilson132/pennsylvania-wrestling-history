@@ -107,9 +107,10 @@ td.p0{color:var(--ash2)}td.p1{color:var(--m1);font-weight:700}td.p2{color:var(--
 /* wrestlers list */
 .search{width:100%;height:46px;border-radius:12px;border:1px solid var(--line2);background:var(--slate);color:var(--chalk);padding:0 14px;font:inherit}
 .wl{display:grid;gap:8px;margin-top:12px}
-.wl a{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:10px 14px;text-decoration:none;min-height:56px}
+.wl a{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;min-height:60px}
 .wl b{font:700 18px var(--cond);text-transform:uppercase;letter-spacing:.02em}.wl small{color:var(--ash);display:block}
-.wl .ch{display:flex;gap:4px;flex-wrap:wrap;justify-content:end;max-width:150px}
+.wl .ch{display:flex;justify-content:end}
+.yp{display:grid;grid-template-columns:repeat(4,34px);gap:4px}.yp .chip{min-width:34px;width:34px;height:40px;padding:3px 0 2px;display:grid;place-items:center;grid-template-rows:1fr auto;line-height:1;font-size:15px;border-radius:9px}.yp .chip small{font:700 10px var(--cond);letter-spacing:0;opacity:.9}.yp .chip.q small{opacity:.9}.yp .chip.none{border-style:dashed}
 /* career grid */
 .cg{display:grid;grid-template-columns:84px repeat(4,minmax(0,1fr));gap:6px;align-items:center}
 .cg .h{text-align:center}.cg .lab{padding-right:4px}
