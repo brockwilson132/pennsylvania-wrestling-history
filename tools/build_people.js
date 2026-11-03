@@ -23,9 +23,14 @@ const sosOf = (year) => { if (!SOS.has(year)) { const f = path.join(OV, 'sos', y
 const rating = (key, name) => { const year = +key.split('.')[0]; const b = sosOf(year)[key]; const x = b && b.s && b.s[nkey(name)]; return x && x[0] ? x[0] : 0; };
 
 const P = new Map();
+const FIVE = ['NE', 'NW', 'SC', 'SE', 'SW'];
+/* standardized weights, the same buckets as the app (model.js STD) */
+const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
+const stdIdx = (wn) => { const i = STDK.findIndex(([, a, b]) => wn >= a && wn <= b); return i < 0 ? STDK.length - 1 : i; };
+const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
 function add(lvl, year, cls, unit, w, place, name, school, d) {
   if (!name) return; const sch = canon(school); const k = nkey(name) + '|' + sch; if (!nkey(name)) return;
-  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0 }; P.set(k, p); }
+  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map() }; P.set(k, p); }
   if (year >= p.ny) { p.ny = year; p.name = name; }
   p.y0 = Math.min(p.y0, year); p.y1 = Math.max(p.y1, year);
   if (d) p.ds.set(d, (p.ds.get(d) || 0) + 1);
@@ -33,7 +38,12 @@ function add(lvl, year, cls, unit, w, place, name, school, d) {
   const cur = Math.floor(p.best / 10), curP = p.best % 10;
   if (L > cur || (L === cur && pl && (!curP || pl < curP))) p.best = L * 10 + pl;
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
-  const r = rating(key, name); if (r > p.peak) p.peak = r;
+  const r = rating(key, name); if (r > p.peak) { p.peak = r; p.pw = wNum(w); }
+  /* one result per level and season (the best place seen), for the all-time team credit */
+  const rk = lvl + '|' + year, prev = p.res.get(rk);
+  if (!prev || (pl && (!prev.place || pl < prev.place))) p.res.set(rk, { lvl, year, place: pl, w: wNum(w) });
+  p.wc.set(wNum(w), (p.wc.get(wNum(w)) || 0) + (lvl === 'state' ? 3 : 1));
+  if (lvl === 'regional' && unit && FIVE.includes(unit)) p.regs.set(unit, (p.regs.get(unit) || 0) + 1);
 }
 
 /* state: medalists, champions and every qualifier */
@@ -52,7 +62,19 @@ const LS = W.WR_LOWER_META.strs;
 const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, schools.length); schools.push(s); } return sidx.get(s); };
 const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.peak).map((p) => {
   const d = p.ds.size ? Array.from(p.ds).sort((a, b) => b[1] - a[1])[0][0] : 0;
-  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak / 10)];
+  /* his one all-time-team weight: the weight of his highest-rated season, else the weight he wrestled most (state counts 3x) */
+  const pw = p.pw != null ? p.pw : Array.from(p.wc).sort((a, b) => b[1] - a[1])[0][0];
+  const R = Array.from(p.res.values());
+  const lv = (l) => R.filter((x) => x.lvl === l);
+  const pts = (l) => lv(l).reduce((a, x) => a + (x.place ? PTS[x.place - 1] : 0), 0);
+  const q = (l) => lv(l).filter((x) => !x.place).length;
+  const best = (l) => lv(l).reduce((a, x) => (x.place && (!a || x.place < a) ? x.place : a), 0);
+  const titles = (l) => lv(l).filter((x) => x.place === 1).length;
+  const sres = lv('state').sort((a, b) => a.year - b.year).map((x) => x.year * 10 + x.place);
+  const reg = p.regs.size ? Array.from(p.regs).sort((a, b) => b[1] - a[1])[0][0] : '';
+  /* [name, school, firstYear, span, district, best, peak/10, teamWeightIdx, statePts, regionalPts, districtPts,
+      stateQuals, regionalQuals, [state year*10+place…], regionalBest, districtBest, regionalTitles, districtTitles, region] */
+  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak / 10), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg];
 });
 fs.writeFileSync(path.join(OV, 'people.json'), JSON.stringify({ s: schools, p: out }));
 const st = fs.statSync(path.join(OV, 'people.json')).size;

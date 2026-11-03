@@ -148,15 +148,20 @@
     return OT.lowerWrestlersOf(rows).map((w) => ({ name: w.name, href: w.href, sub: w.years, places: w.places, medals: w.medals, titles: w.titles, pts: w.pts, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => r.pts * Math.pow(0.5, (last - r.year) / 7)) / tot * 100, rtg: w.rtg ? w.rtg.peak : null }));
   }
 
-  /* all-time teams: every level pooled, ranked by peak Overtime Rating at the weight */
+  /* all-time teams: one weight per wrestler, ranked by the page's placement credit plus peak rating */
+  const ATT_NOTE = { state: 'Ranked by state results and peak rating.', region: 'Ranked by state, then regional results, plus peak rating.', district: 'Ranked by state, regional and district results (state counts most), plus peak rating.', school: 'Ranked by state, regional and district results (state counts most), plus peak rating.' };
   function teamsBlock(u) {
-    const T = allTimeTeams(u, 3); if (!T.length) return empty('No one on record yet.');
+    const T = allTimeTeams(u, 3);
+    if (T === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';
+    if (!T.length) return empty('No one on record yet.');
+    const lowerToo = u.kind !== 'state';
+    const mark = (lv, best, titles) => best ? `<span class="lt" title="${lv === 'R' ? 'Regional' : 'District'} ${titles ? titles + '× champion' : 'best ' + ordinal(best)}">${lv}${titles ? '★' + (titles > 1 ? titles : '') : ordinal(best)}</span>` : '';
     const slot = (s, i) => { if (!s) return '<div class="slot none"></div>';
-      const sp = s.rows.map((r) => `<a class="yp ${pc(r.place)}" href="${OT.bhref(OT.bkey(r))}" title="${ordinal(r.place)} at states, ${r.year}">${String(r.year).slice(2)}</a>`).join('');
-      const lt = !s.rows.length ? s.lowT.map((r) => `<span class="lt" title="${r.lvl === 'district' ? 'District' : 'Regional'} champion ${r.year}">${r.lvl === 'district' ? 'D' : 'R'}★${String(r.year).slice(2)}</span>`).join('') : '';
-      return `<div class="slot t${i + 1}"><a href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small></a><span class="pl">${sp}${lt}</span>${s.rtg ? `<span class="srt">${rtgTag(s.rtg, { size: 'xs' })}</span>` : ''}</div>`; };
+      const sp = s.sres.map((r) => r.place ? `<span class="yp ${pc(r.place)}" title="${ordinal(r.place)} at states, ${r.year}">${String(r.year).slice(2)}</span>` : `<span class="yp q" title="State qualifier, ${r.year}">${String(r.year).slice(2)}</span>`).join('');
+      const lt = lowerToo ? mark('R', s.rB, s.rT) + (u.kind === 'region' ? '' : mark('D', s.dB, s.dT)) : '';
+      return `<div class="slot t${i + 1}"><a href="${s.href}"><b>${esc(s.name)}</b><small>${u.kind === 'school' ? '' : esc(s.sch) + ' · '}${s.years}</small></a><span class="pl">${sp}${lt}</span>${s.rtg ? `<span class="srt">${rtgTag(s.rtg, { size: 'xs' })}</span>` : ''}</div>`; };
     return `<div class="teams"><div class="thead"><span></span><span>1st team</span><span>2nd team</span><span>3rd team</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map(slot).join('')}</div>`).join('')}</div>
-      <div class="note">Ranked by peak Overtime Rating at the weight, which counts every district, regional and state bout. Pills are state medals by year.</div>`;
+      <div class="note">${ATT_NOTE[u.kind]} Each wrestler counts at one weight, his highest-rated. Pills are state results by year${lowerToo ? '; R and D marks are his best regional and district finishes (★ = champion)' : ''}.</div>`;
   }
 
   /* season details render when a year is opened (a drawer can hold 80+ seasons) */

@@ -284,26 +284,34 @@ const OT = (window.OT = {});
     items = items.filter((it) => it.pts > 0 && !(it.n < 3 && it.pts / total < 0.005)).sort((a, b) => b.pts - a.pts).map((it, i) => ({ ...it, seed: i + 1, share: it.pts / total }));
     return { items, total };
   }
-  /* all-time teams pool every level: candidates at each weight are ranked by their peak Overtime Rating at that weight
-     (the rating already weighs district, regional and state bouts together), then state medals, then titles. The window
-     decides who is in; his whole career counts. A wrestler may hold a slot at several weights but never two on one team. */
-  function allTimeTeams(u, depth = 3) { return memo('att|' + wkey() + '|' + u.kind + '|' + u.id + '|' + depth, () => allTimeTeams0(u, depth)); }
+  /* all-time teams: every wrestler who appears in any bracket for the unit is a candidate, at ONE weight (the weight of
+     his highest-rated season). Value = ALPHA · z(placement credit) + (1 − ALPHA) · z(peak Overtime Rating), z within the
+     unit's candidates at that weight (the unit's whole pool when a weight has fewer than 10). Placement credit depends on
+     the page: State counts state results only (district strength varies too much to compare statewide); Region adds
+     regional results; District and School add district results too. Points 16-12-9-7-5-3-2-1 per place over his whole
+     career, times the level weight; advancing without placing earns a little (state 1, regional 0.5, times the weight).
+     The window decides who is eligible (any season inside it); his whole career counts. The level switch does not apply. */
+  const ATT_ALPHA = 0.6;
+  const ATT_W = { state: { s: 1, r: 0, d: 0 }, region: { s: 1, r: 0.4, d: 0 }, district: { s: 1, r: 0.4, d: 0.15 }, school: { s: 1, r: 0.4, d: 0.15 } };
+  const attCredit = (p, kind) => { const w = ATT_W[kind]; return w.s * (p.sP + p.sQ) + w.r * (p.rP + 0.5 * p.rQ) + w.d * p.dP; };
+  const personRegion = (p) => regionOf({ cls: p.cls || homeOf(p.sch), region: p.reg, year: p.y1, d: p.d });
+  const personIn = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (p) => personRegion(p) === u.id : u.kind === 'district' ? (p) => p.d === u.id : (p) => p.sch === u.id;
+  const personScope = (p) => { if (state.cls !== 'ALL' && homeOf(p.sch) !== state.cls) return false; const [a, b] = yearsWindow(); if (p.y1 < a || p.y0 > b) return false;
+    const f = state.f; return (!f.weights.length || f.weights.includes(p.tw)) && (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); };
+  const zf = (arr, g) => { if (!arr.length) return () => 0; const v = arr.map(g); const m = d3.mean(v); const sd = d3.deviation(v) || 1; return (x) => (g(x) - m) / sd; };
+  function allTimeTeams(u, depth = 3) { if (!PEOPLE) return null; return memo('att|' + wkey() + '|' + u.kind + '|' + u.id + '|' + depth, () => allTimeTeams0(u, depth)); }
   function allTimeTeams0(u, depth) {
-    const inU = inUnit(u), lowerScope = (r) => (state.cls === 'ALL' || r.k === state.cls) && passFilters(r);
-    const keys = new Set(ROWS().filter(inU).map(wKey)); LOWER.forEach((r) => { if (lowerIn(r) && inU(r)) keys.add(wKey(r)); });
-    const all = APP.filter((r) => keys.has(wKey(r)) && inScopeNoWin(r)).concat(LOWER.filter((r) => keys.has(wKey(r)) && lowerScope(r)));
-    const cands = [];
-    d3.group(all, wKey).forEach((rs, key) => {
-      rs.sort((a, b) => a.year - b.year); const L = rs[rs.length - 1]; const meds = rs.filter((r) => r.lvl === 'state' && r.place);
-      const lowT = rs.filter((r) => r.lvl !== 'state' && r.place === 1);
-      const years = rs[0].year === L.year ? String(L.year) : `${rs[0].year}–${L.year}`;
-      d3.groups(rs, (r) => stdOf(r).k).forEach(([k, v]) => { const rt = d3.max(v, rtgOf); const sm = v.filter((r) => r.lvl === 'state' && r.place);
-        cands.push({ key, k, name: L.name, sch: L.sch, d: rs[0].d, rtg: rt || 0, sm: sm.length, st: sm.filter((r) => r.place === 1).length, rows: meds, lowT, years, href: wrestlerHref(L) }); });
-    });
-    cands.sort((p, q) => q.rtg - p.rtg || q.sm - p.sm || q.st - p.st);
-    const slots = new Map(STD.map((c) => [c.k, Array(depth).fill(null)])), held = new Map();
-    cands.forEach((c) => { const S = slots.get(c.k), H = held.get(c.key) || new Set(); for (let i = 0; i < depth; i++) if (!S[i] && !H.has(i)) { S[i] = c; H.add(i); held.set(c.key, H); break; } });
-    return STD.filter((c) => slots.get(c.k).some(Boolean)).map((c) => ({ c, slots: slots.get(c.k) }));
+    const kind = u.kind, inU = personIn(u);
+    const pool = PEOPLE.filter((p) => p.tw && inU(p) && personScope(p)); if (!pool.length) return [];
+    const cr = (p) => attCredit(p, kind), rated = pool.filter((p) => p.peak);
+    const zC0 = zf(pool, cr), zR0 = zf(rated, (p) => p.peak);
+    const byW = d3.group(pool, (p) => p.tw);
+    return STD.filter((c) => byW.has(c.k)).map((c) => { const arr = byW.get(c.k), big = arr.length >= 10, ra = arr.filter((p) => p.peak);
+      const zC = big ? zf(arr, cr) : zC0, zR = big && ra.length >= 5 ? zf(ra, (p) => p.peak) : zR0;
+      const ranked = arr.map((p) => ({ p, v: ATT_ALPHA * zC(p) + (1 - ATT_ALPHA) * (p.peak ? zR(p) : 0), credit: cr(p) })).sort((x, y) => y.v - x.v || y.credit - x.credit || (y.p.peak || 0) - (x.p.peak || 0));
+      const slots = ranked.slice(0, depth).map(({ p, credit }) => ({ name: p.name, sch: p.sch, d: p.d, href: '#wrestler/' + p.slug, rtg: p.peak, years: p.y0 === p.y1 ? String(p.y0) : `${p.y0}–${p.y1}`, sres: p.sres, rB: p.rB, dB: p.dB, rT: p.rT, dT: p.dT, credit, w: c.k }));
+      while (slots.length < depth) slots.push(null);
+      return { c, slots }; });
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 
@@ -368,7 +376,7 @@ const OT = (window.OT = {});
   let PEOPLE = null, PEOPLE_BY = null, PPL = null;
   const LVLN = ['', 'district', 'regional', 'state'];
   const loadPeople = () => PPL || (PPL = fetch('people.json').then((r) => (r.ok ? r.json() : { s: [], p: [] })).catch(() => ({ s: [], p: [] })).then((D) => {
-    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak ? peak * 10 : null, slug: wSlug(name, sch), key: nkey(name) + '|' + sch, q: (name + ' ' + sch).toLowerCase() }; });
+    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak ? peak * 10 : null, slug: wSlug(name, sch), key: nkey(name) + '|' + sch, q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null }; });
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
   const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
@@ -399,5 +407,5 @@ const OT = (window.OT = {});
     const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional')])).then(() => { W.lower = mergeLower(W, years);
       const more = careerYears(W); const add = more.filter((y) => !years.includes(y)); if (add.length && n < 2) return pass(years.concat(add).sort((a, b) => a - b), n + 1); W.full = true; W.span = years; return true; });
     return pass(careerYears({ ...W, lower: W.lower0 }), 0); };
-  Object.assign(OT, { peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();
