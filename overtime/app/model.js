@@ -314,8 +314,8 @@ const OT = (window.OT = {});
     const tier = k.lvl === 'state' ? fieldTier(k.year, k.cls, w) : lowerFieldTier(k.lvl, k.year, k.cls, k.unit, w);
     const info = k.lvl === 'state' ? fieldInfo(k.year, k.cls, w) : lowerFieldInfo(k.lvl, k.year, k.cls, k.unit, w);
     const adv = k.lvl === 'state' ? null : advOf(k.lvl, k.year, k.cls, k.unit, w);
-    const entrants = rows.map((r) => { const W = WRESTLER.get(wSlug(r.name, r.sch)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; const sameSeason = k.lvl === 'state' ? null : (stateByYK.get(r.year + '|' + wKey(r)) ? APP.find((x) => x.year === r.year && wKey(x) === wKey(r)) : null);
-      return { r, slug: wSlug(r.name, r.sch), career, sameSeason, adv: adv && r.place && r.place <= adv, seedLabel: r.lvl === 'state' || !r.lvl ? (r.year >= 1951 ? (r.region ? `${r.region}-${r.reg || '?'}` : (r.reg ? String(r.reg) : '')) : (r.dist ? `D${r.d}-${r.dist}` : `D${r.d}`)) : (r.seed ? String(r.seed) : '') }; });
+    const entrants = rows.map((r) => { const W = WRESTLER.get(wSlug(r.name, r.sch)) || lowerWrestler(wSlug(r.name, r.sch)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; const sameSeason = k.lvl === 'state' ? null : (stateByYK.get(r.year + '|' + wKey(r)) ? APP.find((x) => x.year === r.year && wKey(x) === wKey(r)) : null);
+      return { r, W, slug: wSlug(r.name, r.sch), career, sameSeason, adv: adv && r.place && r.place <= adv, seedLabel: r.lvl === 'state' || !r.lvl ? (r.year >= 1951 ? (r.region ? `${r.region}-${r.reg || '?'}` : (r.reg ? String(r.reg) : '')) : (r.dist ? `D${r.d}-${r.dist}` : `D${r.d}`)) : (r.seed ? String(r.seed) : '') }; });
     return { ...k, key, w, tier, info, adv, loading, covered: k.lvl === 'state' || LM.cov.includes(`${k.lvl}|${k.year}|${k.cls}|${k.unit}`), entrants, unitLabel: k.lvl === 'state' ? 'PIAA' : unitLabel(k.lvl, k.unit), next: k.lvl === 'state' ? 'HERSHEY' : k.lvl === 'regional' ? 'TO STATES' : 'TO REGIONALS' };
   }
 

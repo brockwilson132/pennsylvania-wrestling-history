@@ -248,6 +248,36 @@
       </svg>`;
   }
 
+  /* entrant career matrix inside a bracket view: same pills as the wrestler cards, with this tournament highlighted
+     (its season column outlined, its level row tinted, the intersection ringed in gold) */
+  const BV_LVLS = ['district', 'regional', 'state'];
+  function entrantMatrix(e, F) {
+    const r = e.r, W = e.W;
+    let apps = W ? (W.apps || []) : [], low = W ? (W.lower || OT.lowerFor(apps)) : [];
+    if (F.lvl === 'state' && !apps.some((a) => a.year === r.year)) apps = apps.concat([r]).sort((a, b) => a.year - b.year);
+    if (F.lvl !== 'state' && !low.some((x) => x.lvl === F.lvl && x.year === r.year)) low = low.concat([{ ...r, lvl: F.lvl }]).sort((a, b) => a.year - b.year);
+    const M = careerCells(apps, low);
+    const ci = M.cols.findIndex((c) => c && c.year === r.year), ri = BV_LVLS.indexOf(F.lvl);
+    const at = (row, col) => `grid-row:${row};grid-column:${col}`;
+    let h = '';
+    if (ci >= 0) h += `<span class="mcol" style="grid-row:1 / span 4;grid-column:${ci + 2}"></span>`;
+    h += `<span class="mrow" style="grid-row:${ri + 2};grid-column:1 / -1"></span>`;
+    h += `<span style="${at(1, 1)}"></span>` + M.cols.map((c, i) => `<span class="ch${i === ci ? ' on' : ''}" style="${at(1, i + 2)}">${c ? `<b>${String(c.year).slice(2)}</b><i>${wShort(c.w)}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`}</span>`).join('');
+    M.rows.forEach((row, k) => {
+      h += `<span class="rl" style="${at(k + 2, 1)}" title="${row.l}">${navIcon(LVL_ICON[row.k])}</span>`;
+      row.cells.forEach((c, i) => {
+        const here = i === ci && k === ri;
+        let cell;
+        if (here) { // this tournament's own result, taken from the bracket row
+          const cls = `pill here${e.adv ? ' adv' : ''}`;
+          cell = r.place ? `<span class="${cls} ${pc(r.place)}" title="${r.year} · ${wShort(r.w)} · ${ordinal(r.place)}${e.adv ? ' · advanced' : ''}">${r.place}</span>` : `<span class="${cls} cq" title="${r.year} · ${F.lvl === 'state' ? 'qualified' : 'did not place'}">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
+        } else cell = cellHTML(c, 'pill');
+        h += cell.replace(/^<(div|span|a)([^>]*?)class="/, (m, t, a) => `<${t}${a}style="${at(k + 2, i + 2)}" class="`);
+      });
+    });
+    return `<span class="cm bvm">${h}</span>`;
+  }
+
   /* ---- tournament bracket view: one year · level · unit · weight, in the app's bracket language ----
      No bout data yet, so pairings are not fabricated: entrants sit on the left in seed order, the joins are structure
      only, and each finish is a medal pill at the end of the line. */
@@ -259,7 +289,7 @@
     const dot = F.tier ? bandIcon(F.tier, 16, F.info && F.info.top && F.info.top.length ? 'in the bracket: ' + F.info.top.map((t) => t.name).join(', ') : '') : '';
     const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${dot ? `<div class="bvdot">${dot}</div>` : ''}</div>`;
     if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
-    const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 52 : 48, BW = phone ? 54 : 110, H = n * RH;
+    const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 128 : 92, BW = phone ? 54 : 110, H = n * RH;
     const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
     let ys = F.entrants.map((_, i) => i * RH + RH / 2), paths = [];
     for (let k = 0; k < rounds; k++) { const x0 = k * step, x1 = (k + 1) * step, next = []; for (let i = 0; i < ys.length; i += 2) { const a = ys[i], b = ys[i + 1]; if (b == null) { paths.push(`M${x0} ${a} H${x1}`); next.push(a); continue; } const m = (a + b) / 2; paths.push(`M${x0} ${a} H${x1} V${b} H${x0}`); next.push(m); } ys = next; }
@@ -270,15 +300,11 @@
     const lines = F.entrants.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
       const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
-      const ped = e.career.length ? `<span class="ped" title="other seasons: ${e.career.map((x) => x.year + ' ' + ordinal(x.place)).join(', ')}">${e.career.slice(0, 6).map((x) => `<i style="background:${MED[x.place - 1]}"></i>`).join('')}${e.career.length > 6 ? `<small>+${e.career.length - 6}</small>` : ''}</span>` : '';
-      const other = F.lvl === 'state' && e.career.length ? `<span class="oth">${e.career.map((x) => `<em class="${pc(x.place)}" title="${x.year} · ${wShort(x.w)}">${String(x.year).slice(2)}·${x.place}</em>`).join('')}</span>` : '';
-      const fin = r.place ? `<span class="pill ${pc(r.place)}${e.adv ? ' adv' : ''}" title="${e.adv ? 'advanced to the next level' : ''}">${ordinal(r.place)}</span>` : `<span class="pill cq">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
-      const nx = e.sameSeason ? `<span class="nx" title="that season at states: ${e.sameSeason.place ? ordinal(e.sameSeason.place) : 'qualified'}"><em class="${e.sameSeason.place ? pc(e.sameSeason.place) : 'cq'}">${e.sameSeason.place ? 'ST ' + e.sameSeason.place : 'ST Q'}</em></span>` : '';
       const meta = [r.grade, r.record].filter(Boolean).join(' · ');
-      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}</small>${other}${nx}</a>${ped}${fin}</div>`;
+      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp" aria-hidden="true"></span></span>${entrantMatrix(e, F)}</div>`;
     }).join('');
-    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}; a gold edge marks them.` : '';
-    return head + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div><div class="note">${F.loading ? 'Loading the full field… ' : ''}Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished.${advNote} Dots after a name are his state medals in other seasons; ST shows that season's state finish; the gold line is the wrestler you came from.</div>`;
+    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}; they are marked advanced.` : '';
+    return head + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div><div class="note">${F.loading ? 'Loading the full field… ' : ''}Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished.${advNote} Each line carries that wrestler's whole career, district, regional and state across FR to SR; this tournament is the ringed pill, its season outlined and its level tinted. The gold line is the wrestler you came from.</div>`;
   }
 
   Object.assign(OT, { tierColor, bracketView, bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
