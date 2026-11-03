@@ -10,12 +10,17 @@
 const fs = require('fs'), path = require('path');
 const OV = path.join(__dirname, '..', 'overtime');
 global.window = {};
-['badges.js', 'data.js', 'medals.js', 'brackets.js', 'lowermeta.js', 'lower-district.js', 'lower-regional.js'].forEach((f) => { (0, eval)(fs.readFileSync(path.join(OV, f), 'utf8')); });
+['badges.js', 'data.js', 'medals.js', 'brackets.js', 'lowermeta.js', 'lower-district.js', 'lower-regional.js', 'membership.js'].forEach((f) => { (0, eval)(fs.readFileSync(path.join(OV, f), 'utf8')); });
 const W = window, SB = W.SchoolBadge;
 const SAME = { Allentown: 'William Allen', Allen: 'William Allen' };
 const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
 const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
 const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
+/* same corrections as the app (model.js): where a state entrant actually wrestled districts, and two schools sharing a name */
+const MEMB = (window.WR_MEMB || { r: {} }).r;
+const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' } };
+const splitName = (sch, d) => (SPLIT[sch] && SPLIT[sch][d]) || sch;
+const unitDist = (lvl, unit, d) => { if (lvl !== 'district') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
 
 /* ratings: sos/<year>.json → bracket key → s[nkey] = [rating, …] */
 const SOS = new Map();
@@ -29,11 +34,14 @@ const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118,
 const stdIdx = (wn) => { const i = STDK.findIndex(([, a, b]) => wn >= a && wn <= b); return i < 0 ? STDK.length - 1 : i; };
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
 function add(lvl, year, cls, unit, w, place, name, school, d) {
-  if (!name) return; const sch = canon(school); const k = nkey(name) + '|' + sch; if (!nkey(name)) return;
-  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map() }; P.set(k, p); }
+  if (!name) return;
+  if (lvl === 'state') { const mb = MEMB[`${year}|${cls}|${wNum(w)}|${nkey(name)}`]; if (mb) { d = mb[0]; if (mb[1]) school = mb[1]; } } else d = unitDist(lvl, unit, d);
+  const sch = splitName(canon(school), d); const k = nkey(name) + '|' + sch; if (!nkey(name)) return;
+  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0 }; P.set(k, p); }
+  p.cls.set(cls, (p.cls.get(cls) || 0) + (lvl === 'state' ? 3 : 1)); p.ws |= 1 << stdIdx(wNum(w));
   if (year >= p.ny) { p.ny = year; p.name = name; }
   p.y0 = Math.min(p.y0, year); p.y1 = Math.max(p.y1, year);
-  if (d) p.ds.set(d, (p.ds.get(d) || 0) + 1);
+  if (d) p.ds.set(d, (p.ds.get(d) || 0) + (lvl === 'district' ? 3 : 1));
   const L = { district: 1, regional: 2, state: 3 }[lvl]; const pl = place >= 1 && place <= 8 ? place : 0;
   const cur = Math.floor(p.best / 10), curP = p.best % 10;
   if (L > cur || (L === cur && pl && (!curP || pl < curP))) p.best = L * 10 + pl;
@@ -73,8 +81,10 @@ const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.
   const sres = lv('state').sort((a, b) => a.year - b.year).map((x) => x.year * 10 + x.place);
   const reg = p.regs.size ? Array.from(p.regs).sort((a, b) => b[1] - a[1])[0][0] : '';
   /* [name, school, firstYear, span, district, best, peak/10, teamWeightIdx, statePts, regionalPts, districtPts,
-      stateQuals, regionalQuals, [state year*10+place…], regionalBest, districtBest, regionalTitles, districtTitles, region] */
-  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak / 10), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg];
+      stateQuals, regionalQuals, [state year*10+place…], regionalBest, districtBest, regionalTitles, districtTitles, region,
+      class (0 AAA · 1 AA · 2 one-class era), weights wrestled (bitmask of standardized weights)] */
+  const cl = Array.from(p.cls).sort((a, b) => b[1] - a[1])[0][0];
+  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak / 10), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg, cl === 'AAA' ? 0 : cl === 'AA' ? 1 : 2, p.ws];
 });
 fs.writeFileSync(path.join(OV, 'people.json'), JSON.stringify({ s: schools, p: out }));
 const st = fs.statSync(path.join(OV, 'people.json')).size;

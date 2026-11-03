@@ -55,12 +55,18 @@
   PAGES.region = (id) => {
     if (!id) return indexPage('Regions', regionsInScope().map((c) => { const o = unitStats(U.region(c)); return { href: '#region/' + c, name: REGIONS[c], sub: `${fmt(o.medals)} state medals · ${fmt(o.titles)} titles` }; }), state.cls === 'ALL' ? 'The qualifying tournaments between districts and Hershey.' : 'The ' + clsName() + ' regions.');
     const u = U.region(id); const kind = state.child === 'district' ? 'district' : 'school';
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], rankings: () => unitRank(kind, u, childToggle('region', [['school', 'Schools'], ['district', 'Districts']], kind)) });
+    const mem = OT.regionMembers(id), win = OT.windowLabel(); const full = mem.every((m) => m.span === win);
+    const memSub = mem.length ? mem.map((m) => `<a href="#district/${m.d}" style="color:var(--ash)">District ${m.d}</a>${full ? '' : ' · ' + m.span}`).join(full ? ', ' : '<br>') + (full ? '' : '<br><span class="note1">Membership as of each season</span>') : '';
+    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => unitRank(kind, u, childToggle('region', [['school', 'Schools'], ['district', 'Districts']], kind)) });
   };
   PAGES.district = (id) => {
     if (!id) return indexPage('Districts', d3.range(1, 13).map((d) => { const o = unitStats(U.district(d)); return { href: '#district/' + d, name: 'District ' + d, sub: `${DISTRICTS[d]} · ${fmt(o.medals)} state medals` }; }));
-    const u = U.district(+id); const dr = distRegions(+id); const regs = dr.map((c) => `<a href="#region/${c}" style="color:var(--ash)">${REGIONS[c]}</a>`).join(', ');
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}`,
+    const u = U.district(+id); const spans = OT.districtRegionSpans(+id), win = OT.windowLabel(); const dr = spans.map((x) => x.g);
+    const one = spans.length === 1 && spans[0].span === win;
+    const regs = spans.map((x) => `<a href="#region/${x.g}" style="color:var(--ash)">${REGIONS[x.g]}</a>${one ? '' : ' ' + x.span}`).join(', ');
+    const movers = OT.districtMovers(+id).filter((m) => m.span !== win && m.n < 0.85 * m.total).slice(0, 4);
+    const moveNote = (one ? '' : '') + (movers.length ? `<br><span class="note1">Part of the window: ${movers.map((m) => `<a href="#school/${OT.slug(m.sch)}" style="color:var(--ash)">${esc(m.sch)}</a> ${m.span}`).join(' · ')}</span>` : '') + (!one || movers.length ? '<br><span class="note1">Membership as of each season</span>' : '');
+    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}${moveNote}`,
       rankings: () => unitRank('school', u) });
   };
   PAGES.school = (sl) => {
