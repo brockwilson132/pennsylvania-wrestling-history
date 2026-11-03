@@ -14,7 +14,7 @@ function mat(h, unitRows, opts = {}) {
   const cells = [];
   years.forEach((y, i) => { const L = seasonOf(y).lineup; const n = L.length || 1; L.forEach((o, s) => cells.push({ y, s, n, w: o.w, a: a0 + i * step, r: best.get(y + '|' + s) })); });
   const arc = d3.arc().innerRadius((c) => r0 + (R - r0) * c.s / c.n + 0.35).outerRadius((c) => r0 + (R - r0) * (c.s + 1) / c.n - 0.35).startAngle((c) => c.a + 0.0025).endAngle((c) => c.a + step - 0.0025);
-  const cellSel = g.append('g').selectAll('path').data(cells).join('path').attr('d', arc).attr('class', (c) => (c.r ? 'mc on' : 'mc')).attr('fill', (c) => (c.r ? `url(#m${c.r.place})` : null));
+  const cellSel = g.append('g').selectAll('path').data(cells).join('path').attr('d', arc).attr('class', (c) => (c.r ? 'mc on' : 'mc')).attr('fill', (c) => (c.r ? `url(#m${c.r.place})` : null)).attr('fill-opacity', (c) => (c.r && opts.dim && c.r.place > 1 ? 0.38 : 1));
   bindTip(cellSel, (c) => (c.r ? `<b>${c.y} · ${wLabel(c.w)}</b><div class="tl">${medal(c.r.place, 16)} ${esc(c.r.name)}</div><div class="t3">${esc(c.r.sch)}, ${ordinal(c.r.place)}</div>` : `<b>${c.y} · ${wLabel(c.w)}</b><div class="t3">${opts.emptyText || 'no medal'}</div>`));
   // decade labels
   years.forEach((y, i) => { if (y % 10 && y !== a) return; const ang = a0 + i * step + step / 2 - Math.PI / 2; g.append('text').attr('class', 'ax').attr('x', Math.cos(ang) * (R + 15)).attr('y', Math.sin(ang) * (R + 15) + 4).attr('text-anchor', 'middle').text(y); });
@@ -83,7 +83,7 @@ function weightChart(h, ws, opts = {}) {
   svg.append('line').attr('class', 'avg').attr('x1', left).attr('x2', W - right).attr('y1', y(ws.overall)).attr('y2', y(ws.overall));
   svg.append('text').attr('class', 'ax avg-t').attr('x', W - right).attr('y', y(ws.overall) - 4).attr('text-anchor', 'end').text(opts.mini ? pf(ws.overall) : `overall ${pf(ws.overall)}`);
   svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', H - bottom + 0.5).attr('y2', H - bottom + 0.5).attr('class', 'base');
-  const labs = opts.mini ? cs.filter((c, i) => i === 0 || c.c.k === '145' || i === cs.length - 1) : cs;
+  const labs = opts.mini ? cs.filter((c, i) => i === 0 || c.c.k === '145' || i === cs.length - 1) : W < 520 ? cs.filter((c, i) => i % 2 === 0) : cs;
   svg.append('g').selectAll('text').data(labs).join('text').attr('class', 'ax').attr('x', (c) => x(c.c.k) + x.bandwidth() / 2).attr('y', H - (opts.mini ? 3 : 7)).attr('text-anchor', 'middle').text((c) => c.c.label);
 }
 

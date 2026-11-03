@@ -18,7 +18,13 @@ VIEWS.home = function () {
   if (!state.dsel || !dBy.has(state.dsel)) state.dsel = dRank[0].u.d;
   const top = progs.slice().sort((p, q) => q.now - p.now).slice(0, 10);
   const weights = STD.map((c) => ({ c, rs: rows.filter((r) => stdOf(r).k === c.k) })).filter((o) => o.rs.length > 20);
-  const lastS = boardsFor(b)[0];
+  const seasons = seasonsInScope();
+  const wins = d3.rollups(seasons, (v) => v.length, (S) => S.teams[0].id).sort((p, q) => q[1] - p[1]);
+  const Wall = wrestlersOf(rows), W4 = Wall.filter((w) => w.n >= 4), W3 = Wall.filter((w) => w.titles === 3), W4c = Wall.filter((w) => w.titles >= 4);
+  const decades = d3.range(Math.floor(a / 10) * 10, b + 1, 10);
+  const decTot = d3.rollup(rows, (v) => d3.sum(v, (r) => r.pts), (r) => Math.floor(r.year / 10) * 10);
+  const decD = dists.filter((o) => o.pts / d3.sum(dists, (x) => x.pts) > 0.02).map((o) => ({ d: o.u.d, by: d3.rollup(o.rows, (v) => d3.sum(v, (r) => r.pts), (r) => Math.floor(r.year / 10) * 10) })).map((o) => ({ d: o.d, by: new Map(decades.map((dc) => [dc, (o.by.get(dc) || 0) / (decTot.get(dc) || 1)])) }));
+  const decMax = d3.max(decD, (o) => d3.max(Array.from(o.by.values()))) || 1;
   $view.innerHTML = `
   <header class="hero"><h1>Pennsylvania state wrestling</h1><p class="lede">${fmt(rows.length)} state medals in ${clsName()}, ${a}–${b}.</p></header>
 
@@ -31,12 +37,28 @@ VIEWS.home = function () {
     <div class="panel tight"><table class="rank home-top"><thead><tr><th class="n">#</th><th>Program</th><th class="n">Power</th><th class="n">Trend</th><th class="hide-m">Medals, last 7 seasons</th></tr></thead><tbody>${top.map((o, i) => `<tr><td class="n rk">${i + 1}</td><td class="nm"><span class="nmw">${schoolLink(o.u.name)}${o.u.d ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.now)}</b></td><td class="n">${trendTxt(o.trend)}</td><td class="hide-m">${shelf(o.recent, { size: 15, compact: true })}</td></tr>`).join('')}</tbody></table></div>
   </section>
 
-  <section class="sec">${sec('Strength at each weight', 'Where each weight’s points go, all-time.', null, '<a class="more" href="#weights">Weights</a>')}
-    <div class="panel tight"><table class="wtab"><thead><tr><th>Weight</th><th title="The district whose share of points at this weight most exceeds its share overall">Strongest district for its size</th><th class="hide-m">Top program</th><th>Best wrestler</th></tr></thead><tbody>${weights.map((o) => { const d = overIndex(o.rs, rows), sc = topBy(o.rs, (r) => r.sch), w = wrestlersOf(o.rs)[0]; return `<tr><td><a class="wlink" href="#weights/${o.c.k}">${o.c.label}</a></td><td>${d ? `${distLink(d.d, { map: false })} <span class="idx">${pct0(d.share)} here · ${pct0(d.overall)} overall</span>` : ''}</td><td class="hide-m">${schoolLink(sc.k, 18)}</td><td>${w ? `<a href="${wrestlerHref(w.rows[0])}" class="wname">${esc(w.name)}</a> <span class="career sm">${w.rows.map((r) => medal(r.place, 15)).join('')}</span>` : ''}</td></tr>`; }).join('')}</tbody></table></div>
+  <section class="sec">${sec('Strength at each weight', 'The district and program with the largest share of each weight’s points, and the wrestler with the most points there.', null, '<a class="more" href="#weights">Weights</a>')}
+    <div class="panel tight"><table class="wtab"><thead><tr><th>Weight</th><th>Strongest district</th><th class="hide-m">Strongest program</th><th>Best wrestler</th></tr></thead><tbody>${weights.map((o) => { const d = topBy(o.rs, (r) => r.d), sc = topBy(o.rs, (r) => r.sch), w = wrestlersOf(o.rs)[0]; return `<tr><td><a class="wlink" href="#weights/${o.c.k}">${o.c.label}</a></td><td>${distLink(+d.k, { map: false })} <span class="idx">${pct0(d.share)} of points</span></td><td class="hide-m">${schoolLink(sc.k, 18)}</td><td>${w ? `<a href="${wrestlerHref(w.rows[0])}" class="wname">${esc(w.name)}</a> <span class="career sm">${w.rows.map((r) => medal(r.place, 15)).join('')}</span> <span class="idx">${w.pts} pts</span>` : ''}</td></tr>`; }).join('')}</tbody></table></div>
   </section>
 
-  ${lastS ? `<section class="sec">${sec(`The ${b} season`, `${lastS.scope === 'ALL' ? '' : classLabel(lastS.cls) + ' team race, '}every medal on one weight axis.`, null, `<a class="more" href="#season/${b}">Open ${b}</a>`)}
-    <div class="panel race-host">${raceBoard(lastS, { limit: 6 })}</div></section>` : ''}`;
+  <section class="sec">${sec('The state in numbers', '')}
+    <dl class="tiles">
+      <div><dd>${fmt(seasons.length)}</dd><dt>Seasons</dt><span>${a}–${b}</span></div>
+      <div><dd>${fmt(progs.length)}</dd><dt>Programs with a medal</dt><span>${fmt(progs.filter((o) => o.titles).length)} with a title</span></div>
+      <div><dd>${pct0(d3.sum(progs.slice(0, 10), (o) => o.pts) / d3.sum(progs, (o) => o.pts))}</dd><dt>Points held by the top ten programs</dt><span>of ${fmt(d3.sum(progs, (o) => o.pts))} all-time</span></div>
+      <div><dd>${fmt(W4.length)}</dd><dt>Four-time medalists</dt><span>${W3.length} three-time champions, ${W4c.length} four-time</span></div>
+      <div><dd>${esc(wins[0][0])}</dd><dt>Most team races won</dt><span>${wins[0][1]} seasons first in points</span></div>
+      <div><dd>${esc(DISTRICTS[dRank[0].u.d].short)}</dd><dt>Top district by ${mode === 'era' ? 'era score' : 'power'}</dt><span>District ${dRank[0].u.d}, ${pct0(dRank[0].pts / d3.sum(dists, (o) => o.pts))} of all points</span></div>
+    </dl>
+  </section>
+
+  <section class="sec">${sec('Who has won the team race', `The school first in placement points each season, newest first. ${wins.slice(0, 4).map(([s, n]) => `${esc(s)} ${n}`).join(' · ')}.`, null, '<a class="more" href="#records">Records</a>')}
+    <div class="winners">${seasons.slice().reverse().slice(0, 40).map((S) => `<a class="winner" href="#season/${S.year}" title="${S.year}: ${esc(S.teams[0].id)}, ${S.teams[0].pts} pts">${chip(S.teams[0].id, 26)}<b>${S.year}</b></a>`).join('')}</div>
+  </section>
+
+  <section class="sec">${sec('How the map has shifted', 'Each district’s share of the state’s points, decade by decade. The last bar is the current decade.')}
+    <div class="smalls dec">${decD.map((o) => `<a class="small" href="#district/${o.d}"><div class="small-h">${distLabel(o.d, { mapW: 30 })}</div><div class="decbars">${decades.map((dc) => `<i title="${dc}s: ${pct1(o.by.get(dc) || 0)}" style="height:${((o.by.get(dc) || 0) / decMax * 100).toFixed(1)}%"></i>`).join('')}</div><div class="decax"><span>${decades[0]}s</span><span>${pct0(o.by.get(decades[decades.length - 1]) || 0)} now</span></div></a>`).join('')}</div>
+  </section>`;
   const m = stateMap(host('pamap'), Object.fromEntries(dists.map((o) => [o.u.d, score(o)])), { select: (d) => { state.dsel = d; card(); }, tipText: (d) => { const o = dBy.get(d); return o ? `${mode === 'era' ? 'Era' : 'Power'} ${scoreFmt(score(o))}, ${ordinal(dRank.indexOf(o) + 1)}` : 'no medals'; } });
   const card = () => {
     const o = dBy.get(state.dsel); m.paint(state.dsel);
@@ -113,7 +135,7 @@ function programPage(u) {
   $view.innerHTML = `<header class="ph">${head}</header>
     <dl class="nums">${nums.map(([v, l, s]) => `<div><dd>${v}</dd><dt>${l}</dt><span>${s}</span></div>`).join('')}</dl>
     <div class="shelf-row">${shelf(st.places, { size: 22, zeros: true })}</div>
-    <section class="sec">${sec('Every medal, season by season', `Each spoke is a ${clsName()} season, clockwise from ${a} at the top; each ring is a spot in that season’s lineup, lightest at the center. A lit cell is ${isD ? 'the district’s best medal' : 'the medal'} at that weight.`)}
+    <section class="sec">${sec('Every medal, season by season', `Each spoke is a ${clsName()} season, clockwise from ${a} at the top; each ring is a spot in that season’s lineup, lightest at the center.${isD ? ' Titles are bright; other medals are dimmed so the titles read.' : ''}`)}
       <div class="matbox"><div class="mat-host" data-c="pmat"></div>
         <aside class="season"><div data-c="strip"></div><p class="strip-cap">Bars: share of each season’s points, colored by team-race finish.</p>
           <div class="scrub"><button type="button" class="btn" id="prev" aria-label="Previous season">‹</button><span id="yr"></span><button type="button" class="btn" id="next" aria-label="Next season">›</button></div>
@@ -126,7 +148,7 @@ function programPage(u) {
   bindCls();
   // the mat and its season card
   let pv = null;
-  const m = mat(host('pmat'), st.rows, { max: 600, label: `${unitName(u)}: every state medal`, preview: (y) => { pv = y; paint(); }, select: (y) => setYear(y) });
+  const m = mat(host('pmat'), st.rows, { max: 600, dim: isD, label: `${unitName(u)}: every state medal`, preview: (y) => { pv = y; paint(); }, select: (y) => setYear(y) });
   const strip = seasonStrip(host('strip'), st, { select: (y) => setYear(y) });
   const card = $view.querySelector('#card');
   const paint = () => {

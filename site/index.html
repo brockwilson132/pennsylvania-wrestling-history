@@ -33,7 +33,7 @@ button { font: inherit; color: inherit; }
 #qres a { display: flex; align-items: center; gap: 8px; padding: 7px 8px; text-decoration: none; }
 #qres a:hover { background: var(--tile-2); }
 #qres p { margin: 8px; }
-nav#nav { max-width: var(--w); margin: 0 auto; padding: 0 20px; display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+nav#nav { max-width: var(--w); margin: 0 auto; padding: 0 20px; display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
 nav#nav a { text-decoration: none; color: var(--chalk-2); font-weight: 600; padding: 8px 0 9px; border-bottom: 2px solid transparent; white-space: nowrap; }
 nav#nav a[aria-current="page"] { color: var(--chalk); border-color: var(--chalk); }
 main { max-width: var(--w); margin: 0 auto; padding: 8px 20px 80px; }
@@ -229,6 +229,16 @@ table.wr td.nm b { display: block; } .yrs { color: var(--chalk-3); font-size: 12
 .wtab td { vertical-align: middle; } .wtab .idx { color: var(--chalk-2); font-size: 12.5px; white-space: nowrap; } .wlink { font: 400 18px var(--stencil); text-decoration: none; }
 .career.sm { display: inline-flex; gap: 2px; vertical-align: middle; }
 a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decoration: underline; }
+/* home stats */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; margin: 0; }
+.tiles > div { background: var(--tile); border: 1px solid var(--seam); padding: 12px 14px; display: grid; min-width: 0; }
+.tiles dd { margin: 0; font: 400 26px/1.1 var(--stencil); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .tiles dt { font-weight: 700; font-size: 13px; margin-top: 2px; } .tiles span { color: var(--chalk-3); font-size: 12.5px; }
+.winners { display: grid; grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 6px; }
+.winner { display: grid; justify-items: center; gap: 3px; background: var(--tile); border: 1px solid var(--seam); padding: 8px 4px 6px; text-decoration: none; } .winner b { font-size: 11.5px; color: var(--chalk-2); font-weight: 600; }
+.winner:hover { border-color: var(--chalk-3); }
+.decbars { display: flex; align-items: flex-end; gap: 3px; height: 54px; margin-top: 8px; }
+.decbars i { flex: 1; background: #59616a; min-height: 1px; } .decbars i:last-child { background: var(--chalk); }
+.decax { display: flex; justify-content: space-between; color: var(--chalk-3); font-size: 11.5px; margin-top: 4px; }
 /* weights */
 .wchips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
 .wchips a { flex: none; min-width: 52px; text-align: center; padding: 8px 10px; background: var(--tile); border: 1px solid var(--seam); text-decoration: none; font: 400 17px var(--stencil); }
