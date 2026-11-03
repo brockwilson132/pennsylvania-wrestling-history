@@ -36,15 +36,15 @@ const HX=65.5,HY=39.5; // Hershey
 const C={mat:'#0B0D10',chalk:'#EEEAE1',siren:'#FF3B2F',gold:'#D9A441',green:'#2EC27E',ash:'#8E98A4',slate:'#161A20'};
 const ticks=(cx,cy,r1,r2,n,col,w)=>Array.from({length:n},(_,i)=>{const a=i/n*2*Math.PI-Math.PI/2;return `<line x1="${cx+r1*Math.cos(a)}" y1="${cy+r1*Math.sin(a)}" x2="${cx+r2*Math.cos(a)}" y2="${cy+r2*Math.sin(a)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`}).join('');
 const hand=(cx,cy,len,deg,col,w)=>{const a=(deg-90)*Math.PI/180;return `<line x1="${cx}" y1="${cy}" x2="${cx+len*Math.cos(a)}" y2="${cy+len*Math.sin(a)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`};
-// A — mat at Hershey, detailed
-function markA(state=C.chalk,bg=C.mat,ring=C.siren,size=1){
-  return `<svg width="${300*size}" height="${180*size}" viewBox="0 0 100 60"><g transform="translate(1,2)">
-  <path d="${PA}" fill="${state}"/>
-  <circle cx="${HX}" cy="${HY}" r="12.5" fill="${bg}"/>
-  ${ticks(HX,HY,10,11.6,4,state,0.7)}
-  <circle cx="${HX}" cy="${HY}" r="7.2" fill="none" stroke="${ring}" stroke-width="2.4"/>
-    ${hand(HX,HY,6.3,35,state,1)}<circle cx="${HX}" cy="${HY}" r="1.1" fill="${state}"/>
-  </g></svg>`;
+// A — OT monogram: geometric O (same O as the wordmark), slab T, red center
+function markA(fg=C.chalk,bg=C.mat,dot=C.siren,size=1){
+  const R=52, cx=74, cy=96, sw=R*0.3;
+  return `<svg width="${300*size}" height="${180*size}" viewBox="0 0 300 180">
+  <circle cx="${cx}" cy="${cy}" r="${R-sw/2}" fill="none" stroke="${fg}" stroke-width="${sw}"/>
+  <circle cx="${cx}" cy="${cy}" r="${R*0.17}" fill="${dot}"/>
+  <path d="M140 44 H256 V76 H216 V148 H180 V76 H140 Z" fill="${fg}"/>
+  <text x="256" y="166" text-anchor="end" font-family="'Barlow Condensed'" font-weight="700" font-size="14" letter-spacing="5" fill="${fg}" opacity=".7">PENNSYLVANIA</text>
+  </svg>`;
 }
 // B — the state is the O
 function markB(state=C.chalk,bg=C.mat,ring=C.siren,txt=C.chalk){
@@ -135,7 +135,7 @@ function road(){ // the road to Hershey
   <path d="M${rx} ${ry} Q ${(rx+hx)/2} ${ry-18} ${hx} ${hy}" fill="none" stroke="${C.gold}" stroke-width="3.5" stroke-linecap="round"/>
   <circle cx="${dx}" cy="${dy}" r="7" fill="${C.mat}" stroke="${C.ash}" stroke-width="2.5"/>
   <circle cx="${rx}" cy="${ry}" r="7" fill="${C.gold}" stroke="${C.gold}" stroke-width="2.5"/>
-  <circle cx="${hx}" cy="${hy}" r="15" fill="${C.gold}"/><circle cx="${hx}" cy="${hy}" r="10" fill="${C.mat}"/><circle cx="${hx}" cy="${hy}" r="6" fill="none" stroke="${C.siren}" stroke-width="2.4"/>${hand(hx,hy,5,35,C.chalk,1.2)}
+  <circle cx="${hx}" cy="${hy}" r="15" fill="${C.gold}"/><circle cx="${hx}" cy="${hy}" r="10" fill="${C.mat}"/><circle cx="${hx}" cy="${hy}" r="6" fill="${C.siren}"/>
   <g font-family="'Barlow Condensed'" font-weight="700" font-size="12" letter-spacing="2" fill="${C.ash}"><text x="${dx-14}" y="${dy+24}">DISTRICT</text><text x="${rx-20}" y="${ry-14}">REGIONAL</text><text x="${hx-14}" y="${hy+34}" fill="${C.chalk}">HERSHEY</text></g>
   </svg>`}
 const MED=['#D9A441','#B8BFC6','#B5733A','#8E5A3C','#5F6B78','#5F6B78','#5F6B78','#5F6B78'];
@@ -162,7 +162,7 @@ function placewinner(){ // wrestler medal grid: FR SO JR SR slots per level
 const sw=[['Mat','#0B0D10;border:1px solid #242A32','#8E98A4'],['Slate','#161A20','#8E98A4'],['Chalk','#EEEAE1','#0B0D10'],['Gold · primary','#D9A441','#0B0D10'],['Green · band','#2EC27E','#0B0D10'],['Red · band','#FF3B2F','#0B0D10'],['Ash','#8E98A4','#0B0D10'],['Medals','linear-gradient(90deg,#D9A441 0 20%,#B8BFC6 0 40%,#B5733A 0 60%,#8E5A3C 0 80%,#5F6B78 0)','#0B0D10']];
 document.getElementById('b').innerHTML=`
 <h1>OVERTIME — BRAND BOARD v3</h1>
-<div class="sec"><h2>1 · PRIMARY MARK — THE MAT AT HERSHEY</h2><div class="row" style="--n:3">
+<div class="sec"><h2>1 · PRIMARY MARK — OT</h2><div class="row" style="--n:3">
  <div class="tile"><span class="cap">ON MAT</span>${markA()}</div>
  <div class="tile chalk"><span class="cap">ON CHALK</span>${markA(C.mat,C.chalk,C.siren)}</div>
  <div class="tile gold"><span class="cap">ON GOLD</span>${markA(C.mat,C.gold,C.siren)}</div>
