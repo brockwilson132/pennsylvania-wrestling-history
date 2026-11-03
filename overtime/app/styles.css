@@ -222,3 +222,25 @@ td.xc{text-align:center}
 
 .tw{overflow-x:auto;padding:12px}.dt{width:100%;border-collapse:collapse;font-size:13px}.dt th{font:700 11px var(--cond);letter-spacing:.12em;color:var(--ash);text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}.dt td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}.dt td.num{font-variant-numeric:tabular-nums;white-space:nowrap}.dt a{color:inherit}.dt .ash{color:var(--ash)}.dt .gold,.gold{color:var(--gold)}
 .dt td small{display:block;min-width:240px;white-space:normal;line-height:1.35}
+/* strength-of-schedule tag: slanted parallelogram, 0-99, green to red. Never round, never a medal color. */
+.sos{display:inline-flex;align-items:center;vertical-align:middle;flex:none;transform:skewX(-12deg);background:var(--sc);color:#0B0D10;border-radius:2px;padding:0 4px;height:15px;line-height:15px}
+.sos b{display:inline-block;transform:skewX(12deg);font:800 10.5px var(--cond);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.sos.md{height:20px;line-height:20px;padding:0 6px}.sos.md b{font-size:14px}
+.sos.first b::before{content:'SOS ';font-size:.78em;letter-spacing:.08em;opacity:.8}
+.sos-legend{display:flex;align-items:center;gap:8px;margin:6px 0 8px;font-size:12px;color:var(--ash)}.sos-legend .sos{--sc:linear-gradient(90deg,#2EC27E,#B8C94A,#F08A24,#FF3B2F);background:var(--sc)}
+.sos-legend .sos b{font-size:10px;letter-spacing:.1em}
+.cw{display:grid;gap:4px;justify-items:stretch}.cws{display:flex;justify-content:center;min-height:15px}
+.bvf{display:grid;justify-items:center;gap:3px}.bvf small{font:700 9.5px var(--cond);letter-spacing:.16em;color:var(--ash)}
+.bvl .dsp{width:auto;height:auto;min-width:22px;display:flex;justify-content:flex-end}
+.bvb{display:flex;flex-wrap:wrap;gap:2px 5px;font:600 11.5px var(--cond);letter-spacing:.02em;color:var(--ash);min-width:0}
+.bvb .bo-w{color:var(--chalk)}.bvb .bo-l{color:var(--ash)}.bvb i{font-style:normal;color:var(--line2,#3a424c)}
+.bvrounds{display:none}
+@media(min-width:720px){.bvrounds{display:grid;gap:16px;margin-top:18px}.bvr>.k{font:700 11px var(--cond);letter-spacing:.16em;color:var(--ash);margin-bottom:6px}
+.bvrc{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:10px;overflow-x:auto;padding-bottom:4px}
+.bvcol{display:flex;flex-direction:column;justify-content:space-around;gap:6px}.bvcol>.k{font:700 10.5px var(--cond);letter-spacing:.12em;color:var(--ash);text-transform:uppercase}
+.bvbout{display:grid;background:var(--mat);border:1px solid var(--line);border-radius:8px;padding:5px 8px;line-height:1.15}.bvbout b{font:700 13px var(--cond);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bvbout small{color:var(--ash);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bvbout span{font:600 11px var(--cond);color:var(--gold)}}
+.bvtop{grid-template-columns:36px 22px minmax(0,1fr) auto}
+@media(min-width:720px){.bvtop{grid-template-columns:52px 22px minmax(0,1fr) auto}.bvl>.bvtop{grid-column:1;grid-row:1}.bvl>.bvb{grid-column:1;grid-row:2}.bvl>:last-child:not(.bvb):not(.bvtop){grid-column:2;grid-row:1/3}}
+@media(max-width:400px){.bvtop{grid-template-columns:32px 20px minmax(0,1fr) auto}}
+@media(min-width:720px){.bvrounds,.bvr{min-width:0;max-width:100%}.bvrc{max-width:100%;grid-auto-columns:minmax(140px,170px)}}

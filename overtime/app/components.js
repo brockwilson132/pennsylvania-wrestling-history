@@ -19,13 +19,23 @@
     wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
   };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
-  /* difficulty glyph: a small mat (filled circle with a thinner inner ring) colored green → red by tier. Never a word; the tier name lives in the title. */
-  const TIER_COLORS = [null, '#2EC27E', '#B8C94A', '#F08A24', '#FF3B2F'];
-  const tierColor = (tier) => tier ? TIER_COLORS[Math.max(1, Math.min(4, Math.round(tier)))] : null;
-  const bandIcon = (tier, h = 12, extra = '') => { if (!tier) return ''; const t = Math.max(1, Math.min(4, Math.round(tier))); const col = TIER_COLORS[t], r = h / 2;
-    return `<svg class="band" width="${h}" height="${h}" viewBox="0 0 ${h} ${h}" role="img" aria-label="Field strength ${t} of 4"><title>${OT.TIER_NAMES[t]} field${extra ? ' · ' + extra : ''}</title><circle cx="${r}" cy="${r}" r="${r}" fill="${col}"/><circle cx="${r}" cy="${r}" r="${r * 0.58}" fill="none" stroke="${C.mat}" stroke-width="${Math.max(1, h / 9)}" opacity=".85"/></svg>`; };
-  const fieldTip = (r) => { const f = OT.fieldInfo(r.year, r.cls, r.w); return f && f.top.length ? 'in the bracket: ' + f.top.map((t) => t.name).join(', ') : ''; };
-  const bandFor = (r, h = 12) => bandIcon(OT.fieldOf(r), h, fieldTip(r));
+  /* strength-of-schedule tag: a slanted parallelogram with a 0-99 number, green (light) to red (brutal). Never a circle,
+     never a medal color, never on top of a medal pill. The first tag in a view gets the "SOS" label and a one-line legend. */
+  const RAMP = ['#2EC27E', '#B8C94A', '#F08A24', '#FF3B2F'];
+  const sosColor = (v) => { if (v == null) return null; const t = Math.max(0, Math.min(99, v)) / 99 * 3, i = Math.min(2, Math.floor(t)), f = t - i; return d3.interpolateRgb(RAMP[i], RAMP[i + 1])(f); };
+  const tierColor = sosColor;
+  const sosTag = (v, opts = {}) => { if (v == null || isNaN(v)) return ''; const n = Math.round(v); const lvl = opts.lvl ? ` for ${opts.lvl === 'state' ? 'states' : opts.lvl === 'regional' ? 'a regional' : 'a district'}` : '';
+    const what = opts.kind === 'field' ? 'field strength (the bracket\'s top eight)' : opts.kind === 'path' ? 'strength of schedule (the opponents he wrestled)' : 'strength of schedule';
+    const t = `${what} ${n} of 99 · ${OT.SOS_WORD(n)}${lvl}${opts.extra ? ' · ' + opts.extra : ''}`;
+    return `<span class="sos${opts.size === 'md' ? ' md' : ''}" style="--sc:${sosColor(n)}" title="${esc(t)}" aria-label="${esc(t)}"><b>${String(n).padStart(2, '0')}</b></span>`; };
+  const bandIcon = (v, h = 12, extra = '') => sosTag(v, { size: h >= 14 ? 'md' : 'sm', extra });
+  const fieldTip = () => '';
+  const bandFor = (r, h = 12, lvl) => sosTag(OT.sosOf(r, lvl), { size: h >= 14 ? 'md' : 'sm', kind: OT.sosKind(r, lvl), lvl: lvl || r.lvl || 'state' });
+  const SOS_LEGEND = '<div class="sos-legend"><span class="sos"><b>SOS</b></span> strength of schedule, 0–99 · green light, red brutal · tap a season to see the bracket</div>';
+  /* mark the first tag in a container and put the legend under its section */
+  const sosFirst = (root) => { if (!root) return; root.querySelectorAll('.sos.first').forEach((e) => e.classList.remove('first')); root.querySelectorAll('.sos-legend.auto').forEach((e) => e.remove());
+    const first = Array.from(root.querySelectorAll('.sos')).find((e) => !e.closest('.sos-legend')); if (!first) return; first.classList.add('first');
+    const host = first.closest('.card, .bvhead, .wl, .teams, .rt, section, .seasons') || first.parentElement; host.insertAdjacentHTML(host.classList.contains('bvhead') ? 'afterend' : 'beforebegin', SOS_LEGEND.replace('sos-legend', 'sos-legend auto')); };
   const classToggle = () => `<div class="seg" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((k) => `<button data-cls="${k}" aria-pressed="${state.cls === k}">${k === 'ALL' ? 'All' : k}</button>`).join('')}</div>`;
   /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
@@ -50,7 +60,7 @@
     return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Clear all</button><button class="pdone" data-panel-close>Done</button></span></div>
       <div class="pg" id="pg-class"><div class="k">Class</div>${classToggle()}</div>
       <div class="pg" id="pg-window"><div class="k">Seasons</div>${windowToggle()}</div>
-      <div class="pg" id="pg-adjust"><div class="k">Difficulty</div><label class="sw"><input type="checkbox" data-adjust ${state.adj ? 'checked' : ''}><span class="tr"></span><span>Adjust points for field strength <small class="muted">× 0.88 / 0.96 / 1.04 / 1.12 by tier ${bandIcon(1, 10)} ${bandIcon(2, 10)} ${bandIcon(3, 10)} ${bandIcon(4, 10)}</small></span></label></div>
+      <div class="pg" id="pg-adjust"><div class="k">Strength of schedule</div><label class="sw"><input type="checkbox" data-adjust ${state.adj ? 'checked' : ''}><span class="tr"></span><span>Adjust for strength of schedule <small class="muted">points × 0.85 to 1.15 by how strong the field and his opponents were ${sosTag(10)} ${sosTag(40)} ${sosTag(65)} ${sosTag(90)} · medal counts never change</small></span></label></div>
       <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((s) => fchip('weights', s.k, s.label, f.weights.includes(s.k))).join('')}</div></div>
       <div class="pg"><div class="k">Regions${f.regions.length ? ` <button class="pclr" data-clear="regions">clear</button>` : ''}</div><div class="fcs">${OT.regionOrder().map((r) => fchip('regions', r, REGIONS[r], f.regions.includes(r))).join('')}</div></div>
       <div class="pg"><div class="k">Districts${f.districts.length ? ` <button class="pclr" data-clear="districts">clear</button>` : ''}</div><div class="fcs">${d3.range(1, 13).map((d) => fchip('districts', d, 'D' + d, f.districts.includes(d))).join('')}</div></div>
@@ -123,7 +133,7 @@
     const list = ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => OT.apts(r) * Math.pow(0.5, (last - r.year) / 7)) / tot * 100 }))
       .sort((a, b) => sortKey === 'field' ? ((b.field || 0) - (a.field || 0) || b.pts - a.pts) : (b.pts - a.pts || b.titles - a.titles));
     return rankTable(list, { limit: opts.limit || 25, note: opts.note, sub: (o) => (opts.school ? '' : esc(o.sch)) + ' ' + o.years, moreHref: opts.moreHref, sortKey,
-      extra: { label: 'Field', key: 'field', cell: (o) => o.field ? bandIcon(o.field, 12, `average over ${o.apps.length} bracket${o.apps.length === 1 ? '' : 's'}`) : '·' } });
+      extra: { label: 'SOS', key: 'field', cell: (o) => o.field != null ? bandIcon(o.field, 12, `average over ${o.apps.length} bracket${o.apps.length === 1 ? '' : 's'}`) : '·' } });
   }
 
   /* all-time teams */
@@ -221,17 +231,17 @@
   const cellHTML = (c, cls, band, href) => {
     const tag = href ? 'a' : 'div', hr = href ? ` href="${href}"` : '';
     if (!c || c.none) return `<div class="${cls}"></div>`;
-    const tier = band && c.r ? OT.fieldOf(c.r) : null, col = tierColor(tier);
-    const edge = col ? ` style="box-shadow:inset 0 4px 0 ${col}"` : '';
-    const b = band && c.r && tier ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
+    const edge = '', b = '';
     if (c.place) return `<${tag}${hr} class="${cls} ${pc(c.place)}"${edge} title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}${href ? ' · open the bracket' : ''}">${c.place}${b}</${tag}>`;
     if (c.pend) return `<${tag}${hr} class="${cls} pend" title="${c.year} · ${c.src || 'no bracket file on the archive for this tournament'}${href ? ' · open what is on record' : ''}">Q</${tag}>`;
     return `<${tag}${hr} class="${cls} cq"${edge} title="${c.year} qualifier${href ? ' · open the bracket' : ''}">Q${b}</${tag}>`;
   };
   function careerGrid(W) {
     const M = careerCells(W.apps, W.lower);
-    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', true, c && !c.none && !c.pend ? OT.bhref(OT.bkey(c.r, r.k)) : null)).join('')}`).join('')}</div>
-      <div class="note">Tap any season to open that tournament's bracket. The colored edge is the strength of that bracket, green (open) to red (gauntlet), from what its entrants did at the next levels and in other seasons. An outlined Q is a tournament he came through without a recorded place; a dashed Q means the archive has no file for it.</div>`;
+    const wrap = (c, k) => { const ok = c && !c.none && !c.pend; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null;
+      const tag = ok && c.r ? bandFor(c.r, 12, k) : ''; return `<div class="cw">${cellHTML(c, 'cell', false, href)}${tag ? `<span class="cws">${tag}</span>` : ''}</div>`; };
+    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => wrap(c, r.k)).join('')}`).join('')}</div>
+      <div class="note">Tap any season to open that tournament's bracket. The slanted tag under a result is his strength of schedule there: how strong the opponents he actually wrestled were that season, 0–99 on that level's scale (or the bracket's field when his bouts aren't on record). An outlined Q is a tournament he came through without a recorded place; a dashed Q means the archive has no file for it.</div>`;
   }
 
   /* road to Hershey: one season as a line across the state */
@@ -288,13 +298,18 @@
     const lvlName = { state: 'State', regional: 'Regional', district: 'District' }[F.lvl];
     const unit = F.unitLabel;
     const title = `${F.year} · ${unit}${F.lvl === 'state' ? ' State' : ''} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
-    const dot = F.tier ? bandIcon(F.tier, 16, F.info && F.info.top && F.info.top.length ? 'in the bracket: ' + F.info.top.map((t) => t.name).join(', ') : '') : '';
+    const dot = F.tier != null ? `<span class="bvf">${sosTag(F.tier, { size: 'md', kind: 'field', lvl: F.lvl })}<small>FIELD</small></span>` : '';
+    const SB_ = OT.sosBracket(key), nk = OT.nkey;
+    const RES = { fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' };
+    const boutsOf = (name) => { if (!SB_) return []; const n = nk(name); return SB_.b.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
+    const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [RES[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
+      return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}</span>`; };
     const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${dot ? `<div class="bvdot">${dot}</div>` : ''}</div>`;
     const SRCI = { d3records: ['champions only', 'District III Records', 'https://piaadistrict3records.com/'], wpial: ['champions only', 'WPIAL', 'https://wpial.org/'] }[F.src];
     const srcNote = SRCI ? `<div class="bvsrc">${SRCI[0]} · <a href="${SRCI[2]}" target="_blank" rel="noopener">${SRCI[1]}</a> · the bracket archive has no file for this tournament</div>` : '';
     if (SRCI && F.entrants.length) return head + srcNote + `<div class="bvsrclist">${F.entrants.map((e) => `<a class="bvsrcrow" href="#wrestler/${e.slug}"><span class="pill ${pc(e.r.place)}">${e.r.place}</span><span class="bvsrcn"><b>${esc(e.r.name)}</b><small>${esc(e.r.sch)}</small></span></a>`).join('')}</div>`;
     if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
-    const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 128 : 92, BW = phone ? 54 : 110, H = n * RH;
+    const SBx = OT.sosBracket(key), hasB = !!(SBx && SBx.b.length); const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? (hasB ? 182 : 128) : (hasB ? 100 : 92), BW = phone ? 54 : 110, H = n * RH;
     const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
     let ys = F.entrants.map((_, i) => i * RH + RH / 2), paths = [];
     for (let k = 0; k < rounds; k++) { const x0 = k * step, x1 = (k + 1) * step, next = []; for (let i = 0; i < ys.length; i += 2) { const a = ys[i], b = ys[i + 1]; if (b == null) { paths.push(`M${x0} ${a} H${x1}`); next.push(a); continue; } const m = (a + b) / 2; paths.push(`M${x0} ${a} H${x1} V${b} H${x0}`); next.push(m); } ys = next; }
@@ -306,11 +321,19 @@
       const r = e.r, me = e.slug === focusSlug;
       const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
       const meta = [r.grade, r.record].filter(Boolean).join(' · ');
-      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp" aria-hidden="true"></span></span>${entrantMatrix(e, F)}</div>`;
+      const ps = SB_ && SB_.s[nk(r.name)] ? SB_.s[nk(r.name)][0] : OT.pathSOS(r, F.lvl); const bl = boutsOf(r.name);
+      const tag = ps != null ? sosTag(ps, { kind: 'path', lvl: F.lvl }) : '';
+      const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}</span>` : '';
+      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${tag}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}; they are marked advanced.` : '';
-    return head + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div><div class="note">${F.loading ? 'Loading the full field… ' : ''}Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished.${advNote} Each line carries that wrestler's whole career, district, regional and state across FR to SR; this tournament is the ringed pill, its season outlined and its level tinted. The gold line is the wrestler you came from.</div>`;
+    const RN = (d, side) => side === 'champ' ? (['Final', 'Semifinal', 'Quarterfinal', 'Round 1', 'Prelim'][d] || 'Prelim') : (d === 0 ? ({ p3: '3rd place', p5: '5th place', p7: '7th place' }[side] || 'Consolation final') : 'Consolation ' + d);
+    const roundsHTML = SB_ && SB_.b.length ? (() => { const sides = [['champ', 'Championship'], ['cons', 'Consolation']].map(([sd, lab]) => { const bs = SB_.b.filter((b) => sd === 'champ' ? b[0] === 'champ' : b[0] !== 'champ'); if (!bs.length) return '';
+        const cols = d3.groups(bs, (b) => (b[0] === 'champ' || b[0] === 'p3' || b[0] === 'cons' ? b[1] : -1 - ['p5', 'p7'].indexOf(b[0]))).sort((a, b) => b[0] - a[0]);
+        return `<div class="bvr"><div class="k">${lab}</div><div class="bvrc">${cols.map(([d, xs]) => `<div class="bvcol"><div class="k">${esc(RN(Math.max(0, d), xs[0][0]))}</div>${xs.map((b) => `<div class="bvbout"><b>${esc(b[2])}</b><small>over ${esc(b[3])}</small><span>${esc([RES[b[4]] ?? b[4], b[5], b[6]].filter(Boolean).join(' ') || 'dec')}</span></div>`).join('')}</div>`).join('')}</div></div>`; }).join('');
+      return `<div class="bvrounds">${sides}</div>`; })() : '';
+    return head + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div>${roundsHTML}<div class="note">${F.loading ? 'Loading the full field… ' : ''}${SB_ && SB_.b.length ? 'Each line lists his bouts in this tournament, championship side first; the slanted tag is his strength of schedule here and the tag up top is the field.' : SB_ ? 'No bouts on record for this bracket; lines show the field in seed order and where each wrestler finished.' : 'Loading bouts…'}${advNote} Each line carries that wrestler's whole career, district, regional and state across FR to SR; this tournament is the ringed pill, its season outlined and its level tinted. The gold line is the wrestler you came from.</div>`;
   }
 
-  Object.assign(OT, { tierColor, bracketView, bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { sosTag, sosColor, sosFirst, SOS_LEGEND, tierColor, bracketView, bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

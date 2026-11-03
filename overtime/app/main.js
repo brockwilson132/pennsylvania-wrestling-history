@@ -22,9 +22,12 @@
   const bview = document.getElementById('bview');
   function showBracket(key, focus) {
     if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
-    bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
+    const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; OT.sosFirst(bview.querySelector('.bvcard')); };
+    paint(); bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
     const me = bview.querySelector('.bvl.me'); if (me) me.scrollIntoView({ block: 'center' });
-    const k = OT.parseBkey(key); if (k && k.lvl !== 'state' && !OT.lowerLoaded(k.year, k.lvl)) OT.loadLower(k.year, k.lvl).then(() => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; bview.scrollTop = top; } });
+    const again = () => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; paint(); bview.scrollTop = top; } };
+    const k = OT.parseBkey(key); if (k && k.lvl !== 'state' && !OT.lowerLoaded(k.year, k.lvl)) OT.loadLower(k.year, k.lvl).then(again);
+    if (k && !OT.sosLoaded(k.year)) OT.loadSOS(k.year).then(again);
   }
   let lastBase = '';
   function render(keepScroll) {
@@ -35,7 +38,7 @@
     if (p === 'school' && !i) { i = lastSchool(); if (!i) { p = 'state'; } }
     if (p === 'school' && i) try { localStorage.setItem('ot-school', i); } catch (e) { /* none */ }
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[p](i);
+    main.innerHTML = PAGES[p](i); OT.sosFirst(main);
     const cur = p === 'wrestler' ? 'wrestlers' : p;
     bnav.innerHTML = `<ul>${NAV.map(([k, l, h]) => `<li><a href="${k === 'school' ? '#school' + (lastSchool() ? '/' + lastSchool() : '') : h}" ${k === cur ? 'aria-current="page"' : ''}>${navIcon(k)}<span>${l}</span></a></li>`).join('')}</ul>`;
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
