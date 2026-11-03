@@ -15,7 +15,9 @@ const fmt1 = d3.format(',.1f');
 const pct0 = d3.format('.0%'), pct1 = d3.format('.1%');
 const ordinal = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 'st', 'nd', 'rd'][n % 100] || 'th');
 const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : (many || one + 's')}`;
-const canon = (s) => { const id = SB && SB.identity(s); return id ? id.school : s; };
+/* schools the sources name more than one way. Allentown High became William Allen in 1959 (Dieruff is a separate school). */
+const SAME = { Allentown: 'William Allen', Allen: 'William Allen', 'Allentown Allen': 'William Allen' };
+const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
 const wLabel = (w) => (w === 'UNL' ? 'Unlimited' : w === 'HWT' ? 'Heavyweight' : w + ' lb');
 const wShort = (w) => (w === 'UNL' ? 'Unl' : w === 'HWT' ? 'Hwt' : String(w));
 
@@ -63,7 +65,7 @@ const TEAMSCORES = new Map(); (window.WR_TEAMS || []).forEach(([year, cls, place
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
 const ptsOf = (p) => PTS[p - 1] || 0;
 MED.forEach((r) => { r.pts = ptsOf(r.place); });
-const SUCCESSOR = { Canonsburg: 'Canon-McMillan', 'Forty Fort': 'Wyoming Valley West', Kingston: 'Wyoming Valley West', Plymouth: 'Wyoming Valley West', Philipsburg: 'Philipsburg-Osceola', Allentown: 'William Allen', 'Chartiers Township': 'Chartiers-Houston', Boswell: 'North Star', Carnegie: 'Carlynton', 'Manheim Borough': 'Manheim Central', Greensburg: 'Greensburg Salem', Latrobe: 'Greater Latrobe', Lansdowne: 'Penn Wood' };
+const SUCCESSOR = { Canonsburg: 'Canon-McMillan', 'Forty Fort': 'Wyoming Valley West', Kingston: 'Wyoming Valley West', Plymouth: 'Wyoming Valley West', Philipsburg: 'Philipsburg-Osceola', 'Chartiers Township': 'Chartiers-Houston', Boswell: 'North Star', Carnegie: 'Carlynton', 'Manheim Borough': 'Manheim Central', Greensburg: 'Greensburg Salem', Latrobe: 'Greater Latrobe', Lansdowne: 'Penn Wood' };
 const LIN = new Map();
 d3.groups(MED.filter((r) => r.cls !== 'single'), (r) => r.sch).forEach(([s, rs]) => { const c = d3.rollups(rs, (v) => ({ n: v.length, last: d3.max(v, (r) => r.year) }), (r) => r.cls).sort((a, b) => b[1].n - a[1].n || b[1].last - a[1].last); LIN.set(s, c[0][0]); });
 const lineage = (s) => LIN.get(s) || LIN.get(SUCCESSOR[s]) || 'AAA';
