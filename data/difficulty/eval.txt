@@ -1,38 +1,32 @@
-bouts 374237 (rated: 365990), brackets 24746, wrestlers with a grade-season 180340
-forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (125.6, 122.3, 125.5), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
-forward rating log loss: tuning years 0.5778; held-out 2018-2026 0.5585 over 68852 bouts, accuracy 0.707 (coin flip 0.6931)
-  ablations held-out: no margin factor 0.5714 / 0.696; no grade step 0.6163 / 0.653
-state bouts 2018-2026 with both regional seeds (n=8289): seed-only 0.6163, rating-only 0.5786, seed+rating 0.5624
+identity linking: 1184 of 99549 name keys merged into another (1654 merge events)
+bouts 374237 (rated: 365990), brackets 24746, wrestlers with a grade-season 180280
+forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (125.6, 122.4, 125.6), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
+forward rating log loss: tuning years 0.5775; held-out 2018-2026 0.5576 over 68852 bouts, accuracy 0.708 (coin flip 0.6931)
+  ablations held-out: no margin factor 0.5705 / 0.696; no grade step 0.6158 / 0.653
+state bouts 2018-2026 with both regional seeds (n=8289): seed-only 0.6163, rating-only 0.5768, seed+rating 0.5610
 
 season-batch fit: 365990 bouts + 2285 placement-implied pairs (weight 0.3/(placers-1)) for brackets with fewer bouts than placers
-prior sd scale (hidden 5% of 1990-2017 bouts): 0.35: 0.5770, 0.5: 0.5766, 0.7: 0.5762, 1.0: 0.5757 -> 1.0
-held-out 10% of 2018-2026 bouts (n=6849), fit without them: season-batch strength log loss 0.5623 accuracy 0.697; forward rating 0.5530
+prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.5759, 1.0: 0.5755, 1.5: 0.5745, 2.0: 0.5743, 3.0: 0.5785, 4.5: 0.5960 -> 2.0
+held-out 10% of 2018-2026 bouts (n=6849), fit without them: season-batch strength log loss 0.5563 accuracy 0.689; forward rating 0.5522
   (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)
-  prior pass: largest change from season-only estimates 590
-proximity weights (season-only strength at t regressed on t-2, t-1, t+1, t+2 with grade, non-negative): t-2 0.263  t-1 0.444  t+1 0.334  t+2 0.172; grade FR..SR +11 +3 +14 +47; prior sd 107
+  prior pass: largest change from season-only estimates 597
+proximity weights (season-only strength at t regressed on t-2, t-1, t+1, t+2 with grade, non-negative): t-2 0.262  t-1 0.445  t+1 0.333  t+2 0.171; grade FR..SR +17 +9 +21 +54; prior sd 215
 
-era normalization: z-score against that year+class district wrestlers (mean 1572-1617, sd 80-165), rescaled to sd 138
-0-99 scales (1st -> 0, 99.5th -> 99; modern = pooled 1980-2026, single = pooled 1938-1973, per level): district/modern path 1364-1745, field 1393-1715; district/single path 1345-2001, field 1389-1678; regional/modern path 1418-1834, field 1529-1793; regional/single path 1378-2087, field 1439-1845; state/modern path 1582-2004, field 1744-1930; state/single path 1508-2141, field 1560-1945
-  district path SOS median 34 (p10 15, p90 59);  field median 45 (p10 19, p90 74)
-  regional path SOS median 40 (p10 16, p90 66);  field median 45 (p10 18, p90 74)
-  state    path SOS median 37 (p10 17, p90 58);  field median 50 (p10 20, p90 77)
-state path SOS, smoothed season strength vs forward rating at the bout: Spearman 0.858, mean percentile move 11.1 pts, top-10% overlap 0.65
-state path SOS, smoothed season strength vs season t only (no neighbouring seasons): Spearman 0.803, mean percentile move 13.3 pts, top-10% overlap 0.60
-state path SOS, smoothed season strength vs naive symmetric window (t-1, t, t+1 equal): Spearman 0.855, mean percentile move 11.2 pts, top-10% overlap 0.67
-senior state wins over freshmen who later won a state title (n=195), opponent strength on the state path scale: smoothed season strength 36, symmetric window 51; those opponents as seniors 99
+scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1735-2001, sd 107-178; spread 167
+  district field strength 1980+: median 1221 (p10 1078, p90 1346)
+  regional field strength 1980+: median 1375 (p10 1287, p90 1479)
+  state    field strength 1980+: median 1638 (p10 1584, p90 1685)
 
-which measure makes a state result a better signal of ability? target = next-season state points of returning qualifiers 1980-2025 (n=7396):
-  placement points alone R2 0.2909; + own entering rating 0.3096
-  + (a) old tier: R2 0.2930 (gain +0.0021), coefficient +0.2361
-  + (b) field strength: R2 0.2948 (gain +0.0039), coefficient +0.0083
-  + (c) path SOS, blended opponents: R2 0.2948 (gain +0.0039), coefficient +0.0051
-  + (c0) path SOS, forward rating only: R2 0.2940 (gain +0.0032), coefficient +0.0036
-  + (d) path + field: R2 0.2963 (gain +0.0054)
-  path SOS beyond placement AND own entering rating: R2 0.3117 (gain +0.0020), coefficient +0.0037
+state brackets (6+ rated, champion known, n=1532): champion rated #1 82.2%, top 2 94.1%; mean Spearman(rating, place) 0.767
+same-season bouts where the winner is rated below the loser: 7.9% of 365990
 
-P(place at states) for state entrants 1980+ (n=20752): own entering rating R2 0.1822
-  + (a) old tier: R2 0.1822 (gain +0.0000), coefficient -0.00182
-  + (b) field strength: R2 0.1966 (gain +0.0143), coefficient -0.00151
-
-fixed cutoffs on the 0-99 scale: (25, 50, 75); share of a year+class state brackets at 75+ ranges 0.00-0.64, median 0.08 (the old method forced 0.25)
-  state field median by decade: 1930s 30, 1940s 30, 1950s 62, 1960s 54, 1970s 38, 1980s 41, 1990s 43, 2000s 53, 2010s 58, 2020s 49
+state placement points 1980+ (n=20752): own season rating R2 0.6427
+  + best win: R2 0.6428 (gain +0.0001), coefficient +0.0005
+  + mean of opponents beaten: R2 0.6428 (gain +0.0000), coefficient +0.0003
+  + bad losses: R2 0.6430 (gain +0.0003), coefficient -0.3334
+  + field strength: R2 0.6585 (gain +0.0157), coefficient -0.0157
+next-season state points of returners (n=7405): rating + this season placement R2 0.3794
+  + best win: R2 0.3860 (gain +0.0066), coefficient -0.00543
+  + mean of opponents beaten: R2 0.3796 (gain +0.0001), coefficient -0.00108
+  + bad losses: R2 0.3795 (gain +0.0000), coefficient +0.11426
+  + field strength: R2 0.3814 (gain +0.0020), coefficient -0.00652

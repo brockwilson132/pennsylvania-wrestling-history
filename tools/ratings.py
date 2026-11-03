@@ -4,9 +4,12 @@ evaluation that chose the method. Method and evidence: docs/DIFFICULTY.md.
 
 Inputs (repo root): data/brackets/bouts.csv, data/brackets/lower_entrants.csv, data/brackets/state_entrants.csv,
                     overtime/medals.js
-Outputs:            data/difficulty/brackets.csv          per bracket: field strength
-                    data/difficulty/wrestler_seasons.csv  per wrestler per tournament: path SOS, ratings
+Outputs:            data/difficulty/brackets.csv          per bracket: field strength (rating scale)
+                    data/difficulty/wrestler_seasons.csv  per wrestler per tournament: season rating, quality of wins, bad losses
                     data/difficulty/eval.txt              every number quoted in the doc
+v2 (docs/RATING_AUDIT.md): identity linking across name variants (tools/identity.py); one absolute scale where
+1500 = the average state qualifier (rolling 11-season window per class); path SOS and the 0-99 per-level scales
+are retired in favour of the wrestler's own rating, quality of wins and bad losses.
 Usage: python3 -I tools/ratings.py [--grid]
 
 Two layers:
@@ -74,6 +77,18 @@ for r in csv.DictReader(open('data/brackets/state_entrants.csv')):
     entrants[('state', state_tname(y, c), r['weight'])].append((k, r['name'], r['school'], state_place.get((y, c, wn(r['weight']), nk(r['name']))),
                                                                 (r['region'] + '-' + r['seed']) if r['region'] else r['seed']))
     if r['grade'] in GR: grade[(k, y)] = GR[r['grade']]
+# ---- identity linking (v2): merge name variants of one wrestler so his bouts pool into one season rating
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from identity import canon_map
+_idrec = [(b['winner'], b['winner_school'], b['year'], b['weight']) for b in bouts] + [(b['loser'], b['loser_school'], b['year'], b['weight']) for b in bouts]
+for (lvl, t, w), es in entrants.items():
+    for e in es: _idrec.append((e[1], e[2], int(t[:4]), w))
+CANON, _merges = canon_map(_idrec, nk, nk); del _idrec
+CK = lambda k: CANON.get(k, k)
+for b in bouts: b['wk'] = CK(b['wk']); b['lk'] = CK(b['lk'])
+for bk in list(entrants): entrants[bk] = [(CK(e[0]),) + tuple(e[1:]) for e in entrants[bk]]
+grade = {(CK(k), y): g for (k, y), g in sorted(grade.items(), key=lambda kv: kv[0][0] == CK(kv[0][0]))}
+say(f'identity linking: {sum(1 for k, v in CANON.items() if k != v)} of {len(CANON)} name keys merged into another ({len(_merges)} merge events)')
 bracket_meta = {}
 for b in bouts: bracket_meta.setdefault(b['bk'], (b['year'], b['c'], b['unit'], b['lr']))
 for (lvl, t, w) in entrants:
@@ -273,7 +288,7 @@ random.seed(5)
 tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
 tb = [b for b in bouts if b['i'] in tune_held]
 scores = {}
-for sc in (0.35, 0.5, 0.7, 1.0):
+for sc in (0.7, 1.0, 1.5, 2.0, 3.0, 4.5):
     Tt, *_ = smoother(mask=tune_held, sd_scale=sc)
     scores[sc] = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb])
 SDS = min(scores, key=scores.get)
@@ -292,41 +307,63 @@ T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS)
 say(f'proximity weights (season-only strength at t regressed on t-2, t-1, t+1, t+2 with grade, non-negative): t-2 {Wt[0]:.3f}  t-1 {Wt[1]:.3f}  t+1 {Wt[2]:.3f}  t+2 {Wt[3]:.3f}; grade FR..SR {Wt[8]:+.0f} {Wt[9]:+.0f} {Wt[10]:+.0f} {Wt[11]:+.0f}; prior sd {RES_SD:.0f}')
 def theta(k, y): return T.get(y, {}).get(ID(k, y))
 
-# ============================================================ per tournament records, era anchor, SOS
-WIN_W = 2.0
+# ============================================================ v2: one absolute scale, quality of wins, bad losses
+# Scale: 1500 = the average state qualifier. Anchor per class group (AAA, AA, one-class era) on a rolling 11-season
+# window of state entrants' season strength, so long drift between separately fitted seasons is removed while a
+# deep year still reads deeper than its neighbours. Spread: the median sd of modern state qualifiers (raw Elo
+# points), so a 400-point gap still means about 10:1.
+state_vals = defaultdict(list)
+for (lvl, t, w), es in entrants.items():
+    if lvl != 'state': continue
+    y, c = bracket_meta[(lvl, t, w)][:2]
+    for e in es:
+        v = theta(e[0], y)
+        if v is not None: state_vals[(y, c)].append(v)
+def _window(y, c):
+    vals = [v for yy in range(y - 5, y + 6) for v in state_vals.get((yy, c), [])]
+    return (float(np.mean(vals)), float(np.std(vals))) if len(vals) >= 40 else None
+ANCHOR = {}
+for y in YEARS:
+    for c in ('AAA', 'AA', 'single'):
+        a = _window(y, c)
+        if a: ANCHOR[(y, c)] = a
+SD_REF = float(np.median([sd for (y, c), (m, sd) in ANCHOR.items() if y >= 1980 and c != 'single']))
+def anc(y, c):
+    if (y, c) in ANCHOR: return ANCHOR[(y, c)]
+    near = sorted((abs(g[0] - y), g) for g in ANCHOR if g[1] == c) or sorted((abs(g[0] - y), g) for g in ANCHOR)
+    return ANCHOR[near[0][1]]
+def norm(v, y, c):
+    if v is None: return None
+    m, sd = anc(y, c); return 1500 + (v - m) / sd * SD_REF
+say(f'\nscale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
+    f'sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}; spread {SD_REF:.0f}')
+# cls of a wrestler-season (for the scale): the class of his bouts that season
+def rating(k, y, c=None):
+    v = theta(k, y)
+    if v is None: return None
+    return norm(v, y, c or key_cls.get((k, y), 'single'))
+# per tournament records: own rating, wins (opponent ratings), losses
+BAD = 150   # a loss to someone rated 150+ below (about a 30% upset)
 recs = {}
 for b in bouts:
     if b['result'] in SKIP or b['i'] not in PRE: continue
     y = b['year']; rw, rl = PRE[b['i']]
-    for k, nm, sc, ok, fwd_o, won in ((b['wk'], b['winner'], b['winner_school'], b['lk'], rl, 1), (b['lk'], b['loser'], b['loser_school'], b['wk'], rw, 0)):
+    for k, nm, sc, ok, won in ((b['wk'], b['winner'], b['winner_school'], b['lk'], 1), (b['lk'], b['loser'], b['loser_school'], b['wk'], 0)):
         r = recs.setdefault((b['bk'], k), {'bk': b['bk'], 'k': k, 'name': nm, 'school': sc, 'year': y, 'c': b['c'], 'lr': b['lr'], 'opp': [], 'enter': (rw if won else rl)})
-        r['opp'].append((theta(ok, y), fwd_o, ok, won, T0.get(y, {}).get(ID(ok, y))))
-anchor_vals = defaultdict(list)
-for (bk, k), r in recs.items():
-    if bk[0] == 'district' and theta(k, r['year']) is not None: anchor_vals[(r['year'], r['c'])].append(theta(k, r['year']))
-ANCHOR = {g: (float(np.mean(v)), float(np.std(v))) for g, v in anchor_vals.items() if len(v) >= 50}
-SD_REF = float(np.median([sd for (y, c), (m, sd) in ANCHOR.items() if y >= 1980]))
-def anc(y, c):
-    if (y, c) in ANCHOR: return ANCHOR[(y, c)]
-    near = [ANCHOR[g] for g in ANCHOR if g[1] == c and abs(g[0] - y) <= 3] or list(ANCHOR.values())
-    return float(np.mean([m for m, s in near])), float(np.mean([s for m, s in near]))
-def norm(v, y, c):
-    if v is None: return None
-    m, sd = anc(y, c); return 1500 + (v - m) / sd * SD_REF
-say(f'\nera normalization: z-score against that year+class district wrestlers (mean {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}), rescaled to sd {SD_REF:.0f}')
-def wavg(vals):
-    vals = [(v, w) for v, w in vals if v is not None]
-    return sum(v * (WIN_W if won else 1) for v, won in vals) / sum(WIN_W if won else 1 for v, won in vals) if vals else None
-def sym(k, y, c):
-    vals = [norm(T0.get(yy, {}).get(ID(k, yy)), yy, c) for yy in (y - 1, y, y + 1)]
-    vals = [v for v in vals if v is not None]; return float(np.mean(vals)) if vals else None
+        r['opp'].append((rating(ok, y, b['c']), ok, won, b['side'], b['round'], b['result'], b['score']))
 for r in recs.values():
     y, c = r['year'], r['c']
-    r['path'] = wavg([(norm(o[0], y, c), o[3]) for o in r['opp']])                    # season strength (batch, smoothed)
-    r['path_t'] = wavg([(norm(o[1], y, c), o[3]) for o in r['opp']])                  # forward rating at the bout
-    r['path_only'] = wavg([(norm(o[4], y, c), o[3]) for o in r['opp']])               # season-only, no neighbours
-    r['path_sym'] = wavg([(sym(o[2], y, c), o[3]) for o in r['opp']])                 # naive symmetric window
-    r['season'] = norm(theta(r['k'], y), y, c)
+    r['rating'] = rating(r['k'], y, c)
+    wins = [o for o in r['opp'] if o[2] and o[0] is not None]
+    r['best'] = max(wins, key=lambda o: o[0]) if wins else None
+    r['qow'] = float(np.mean([o[0] for o in wins])) if wins else None
+    r['bad'] = sum(1 for o in r['opp'] if not o[2] and o[0] is not None and r['rating'] is not None and o[0] <= r['rating'] - BAD)
+# season level: best win and bad losses across every tournament of the season
+season_best = {}; season_bad = Counter(); season_qow = defaultdict(list)
+for r in recs.values():
+    key = (r['k'], r['year'])
+    if r['best'] and (key not in season_best or r['best'][0] > season_best[key][0]): season_best[key] = r['best']
+    season_bad[key] += r['bad']; season_qow[key] += [o[0] for o in r['opp'] if o[2] and o[0] is not None]
 brackets = {}
 rec_keys = defaultdict(list)
 for (b2, k) in recs: rec_keys[b2].append(k)
@@ -335,125 +372,81 @@ for bk, (y, c, unit, lr) in bracket_meta.items():
     vals = [norm(theta(k, y), y, c) for k in keys if theta(k, y) is not None]
     top = sorted(vals, reverse=True)[:8]
     brackets[bk] = {'year': y, 'c': c, 'unit': unit, 'lr': lr, 'n': len(keys), 'rated': len(vals), 'field': float(np.mean(top)) if top else None, 'bouts': bouts_in.get(bk, 0)}
-
-# ============================================================ scale 0-99 (fixed, one scale for every level and era)
-# one fixed scale per level (district / regional / state), pooled over every season 1980-2026: a deep year can
-# have many hard brackets; a district 80 means hard for a district, a state 80 hard for states.
-# The one-class era (1938-1973: few bouts per season, 2-4 placers, no regionals before 1951) gets its own scale per level.
-SCALE = {}
-era = lambda y: 'single' if y <= 1973 else 'modern'
 for lvl in ('district', 'regional', 'state'):
-    for e, (y0, y1) in (('modern', (1980, 2026)), ('single', (1938, 1973))):
-        pv = [r['path'] for r in recs.values() if r['bk'][0] == lvl and r['path'] is not None and y0 <= r['year'] <= y1]
-        fv = [B['field'] for bk, B in brackets.items() if bk[0] == lvl and B['field'] is not None and y0 <= B['year'] <= y1]
-        if len(pv) < 50 or len(fv) < 20: continue
-        SCALE[(lvl, e)] = {'path': (float(np.percentile(pv, 1)), float(np.percentile(pv, 99.5))), 'field': (float(np.percentile(fv, 1)), float(np.percentile(fv, 99.5)))}
-def sos(v, lvl='state', kind='path', y=2000):
-    if v is None: return None
-    lo, hi = SCALE.get((lvl, era(y)), SCALE[(lvl, 'modern')])[kind]; return int(max(0, min(99, round((v - lo) / (hi - lo) * 99))))
-say('0-99 scales (1st -> 0, 99.5th -> 99; modern = pooled 1980-2026, single = pooled 1938-1973, per level): ' + '; '.join(f"{l}/{e} path {v['path'][0]:.0f}-{v['path'][1]:.0f}, field {v['field'][0]:.0f}-{v['field'][1]:.0f}" for (l, e), v in SCALE.items()))
-for lvl in ('district', 'regional', 'state'):
-    ps = [sos(r['path'], lvl) for r in recs.values() if r['bk'][0] == lvl and r['year'] >= 1980]
-    fs = [sos(B['field'], lvl, 'field') for bk, B in brackets.items() if bk[0] == lvl and B['year'] >= 1980 and B['field'] is not None]
-    say(f'  {lvl:8s} path SOS median {int(np.median(ps))} (p10 {int(np.percentile(ps,10))}, p90 {int(np.percentile(ps,90))});  field median {int(np.median(fs))} (p10 {int(np.percentile(fs,10))}, p90 {int(np.percentile(fs,90))})')
+    fs = [B['field'] for bk, B in brackets.items() if bk[0] == lvl and B['year'] >= 1980 and B['field'] is not None]
+    say(f'  {lvl:8s} field strength 1980+: median {np.median(fs):.0f} (p10 {np.percentile(fs,10):.0f}, p90 {np.percentile(fs,90):.0f})')
 
-# ============================================================ how much the opponent-strength choice moves SOS
-st = [r for r in recs.values() if r['bk'][0] == 'state' and r['year'] >= 1980 and r['path'] is not None]
-for nm, key in (('forward rating at the bout', 'path_t'), ('season t only (no neighbouring seasons)', 'path_only'), ('naive symmetric window (t-1, t, t+1 equal)', 'path_sym')):
-    a_ = np.array([r['path'] for r in st]); b_ = np.array([r[key] for r in st])
-    rho_ = spearmanr(a_, b_).correlation
-    ra = np.argsort(np.argsort(-a_)) / len(a_); rb = np.argsort(np.argsort(-b_)) / len(b_)
-    topa = set(np.argsort(-a_)[:len(a_) // 10]); topb = set(np.argsort(-b_)[:len(b_) // 10])
-    say(f'state path SOS, smoothed season strength vs {nm}: Spearman {rho_:.3f}, mean percentile move {100*np.mean(np.abs(ra-rb)):.1f} pts, top-10% overlap {len(topa & topb)/len(topa):.2f}')
-# the freshman example: wins over opponents who were freshmen and later won a state title
-champs = {(nk(n) + '|' + nk(s)) for (y, c, w, p, n, s, d) in [(m[0], m[1], m[2], m[3], m[4], m[5], m[6]) for m in med] if p == 1}
-ex = []
-for r in st:
-    for o in r['opp']:
-        if o[3] and o[2] in champs and grade.get((o[2], r['year'])) == 0 and grade.get((r['k'], r['year'])) == 3:
-            ex.append((norm(o[0], r['year'], r['c']), sym(o[2], r['year'], r['c']), norm(theta(o[2], r['year'] + 3), r['year'] + 3, r['c'])))
-if ex:
-    say(f'senior state wins over freshmen who later won a state title (n={len(ex)}), opponent strength on the state path scale: smoothed season strength {sos(np.mean([e[0] for e in ex]))}, symmetric window {sos(np.mean([e[1] for e in ex]))}; those opponents as seniors {sos(np.mean([e[2] for e in ex if e[2]]))}')
-
-# ============================================================ which difficulty measure? (held-out evaluation)
-career_state = defaultdict(lambda: defaultdict(int))
+# ============================================================ evaluation v2
+# 1) consistency inside state brackets
+med_k = defaultdict(dict)
 for (lvl, t, w), es in entrants.items():
     if lvl != 'state': continue
     y = bracket_meta[(lvl, t, w)][0]
-    for k, nm, sc, pl, sd in es:
-        if pl: career_state[k][y] += PTS[pl - 1]
-old_raw, old_tier = {}, {}
-for bk, B in brackets.items():
-    if bk[0] == 'state': old_raw[bk] = sum(sum(p for yy, p in career_state[e[0]].items() if yy != B['year']) for e in entrants.get(bk, []))
-byyc = defaultdict(list)
-for bk, v in old_raw.items(): byyc[(brackets[bk]['year'], brackets[bk]['c'])].append((v, bk))
-for g, lst in byyc.items():
-    lst.sort()
-    for i, (v, bk) in enumerate(lst): old_tier[bk] = 1 + min(3, int(4 * i / max(1, len(lst))))
+    for k, nm, sc, pl, sd in es: med_k[(t, w)][k] = (pl or 9, y)
+nb = ch1 = top2 = 0; rh = []
+for (t, w), es in med_k.items():
+    vals = [(rating(k, y), pl) for k, (pl, y) in es.items() if rating(k, y) is not None]
+    if len(vals) < 6 or not any(p == 1 for _, p in vals): continue
+    nb += 1; vals.sort(key=lambda x: -x[0]); ranks = [p for _, p in vals]
+    ch1 += ranks[0] == 1; top2 += 1 in ranks[:2]
+    x = spearmanr([-v for v, _ in vals], [p for _, p in vals]).correlation
+    if not np.isnan(x): rh.append(x)
+say(f'\nstate brackets (6+ rated, champion known, n={nb}): champion rated #1 {ch1/nb:.1%}, top 2 {top2/nb:.1%}; mean Spearman(rating, place) {np.mean(rh):.3f}')
+inv = n_ = 0
+for b in bouts:
+    if b['result'] in SKIP: continue
+    a, c2 = theta(b['wk'], b['year']), theta(b['lk'], b['year'])
+    if a is None or c2 is None: continue
+    n_ += 1; inv += a < c2
+say(f'same-season bouts where the winner is rated below the loser: {inv/n_:.1%} of {n_}')
+# 2) does quality of wins add to placement, beyond the wrestler's own rating? (state entrants 1980+)
+career_pts = {}
+for (t, w), es in med_k.items():
+    for k, (pl, y) in es.items(): career_pts[(k, y)] = PTS[pl - 1] if pl <= 8 else 0
+Q_rows = []
+for r in recs.values():
+    if r['bk'][0] != 'state' or r['year'] < 1980 or r['rating'] is None: continue
+    sb = season_best.get((r['k'], r['year'])); sq = season_qow.get((r['k'], r['year']))
+    nx = career_pts.get((r['k'], r['year'] + 1)); cur = career_pts.get((r['k'], r['year']), 0)
+    Q_rows.append((r['rating'], sb[0] if sb else r['rating'] - 200, float(np.mean(sq)) if sq else r['rating'] - 200, season_bad[(r['k'], r['year'])], cur, nx,
+                   brackets[r['bk']]['field'] or 1500))
 def r2(X, y):
     X = np.column_stack([np.ones(len(y))] + [np.asarray(c, float) for c in X]); y = np.asarray(y, float)
     beta, *_ = np.linalg.lstsq(X, y, rcond=None); p = X @ beta
     return 1 - ((y - p) ** 2).sum() / ((y - y.mean()) ** 2).sum(), beta
-nextpts = {}
-for (lvl, t, w), es in entrants.items():
-    if lvl == 'state':
-        y = bracket_meta[(lvl, t, w)][0]
-        for k, nm, sc, pl, sd in es: nextpts[(k, y)] = PTS[pl - 1] if pl else 0
-E_rows = []
-for r in st:
-    if r['year'] > 2025: continue
-    pl = state_place.get((r['year'], r['c'], wn(r['bk'][2]), r['k'].split('|')[0]))
-    nx = nextpts.get((r['k'], r['year'] + 1))
-    if nx is None or r['bk'] not in old_tier or brackets[r['bk']]['field'] is None: continue
-    E_rows.append((PTS[pl - 1] if pl else 0, nx, r['enter'], old_tier[r['bk']], brackets[r['bk']]['field'], r['path'], r['path_t'], r['year']))
-pts_, nx_, en_, ot_, fl_, pa_, pt_, yr_ = map(np.array, zip(*E_rows))
-say(f'\nwhich measure makes a state result a better signal of ability? target = next-season state points of returning qualifiers 1980-2025 (n={len(E_rows)}):')
-r0, _ = r2([pts_], nx_); r1, _ = r2([pts_, en_], nx_)
-say(f'  placement points alone R2 {r0:.4f}; + own entering rating {r1:.4f}')
-for nm, v in (('(a) old tier', ot_), ('(b) field strength', fl_), ('(c) path SOS, blended opponents', pa_), ('(c0) path SOS, forward rating only', pt_)):
-    rr, beta = r2([pts_, v], nx_); say(f'  + {nm}: R2 {rr:.4f} (gain {rr - r0:+.4f}), coefficient {beta[2]:+.4f}')
-rr, _ = r2([pts_, pa_, fl_], nx_); say(f'  + (d) path + field: R2 {rr:.4f} (gain {rr - r0:+.4f})')
-rr, beta = r2([pts_, en_, pa_], nx_); say(f'  path SOS beyond placement AND own entering rating: R2 {rr:.4f} (gain {rr - r1:+.4f}), coefficient {beta[3]:+.4f}')
-# does the field make placing harder for a wrestler of given rating?
-P_rows = []
-for r in recs.values():
-    if r['bk'][0] != 'state' or r['year'] < 1980 or r['bk'] not in old_tier or brackets[r['bk']]['field'] is None: continue
-    pl = state_place.get((r['year'], r['c'], wn(r['bk'][2]), r['k'].split('|')[0]))
-    P_rows.append((r['enter'], old_tier[r['bk']], brackets[r['bk']]['field'], 1 if pl else 0))
-en2, ot2, fl2, yy2 = map(np.array, zip(*P_rows))
-r0, _ = r2([en2], yy2); say(f'\nP(place at states) for state entrants 1980+ (n={len(P_rows)}): own entering rating R2 {r0:.4f}')
-for nm, v in (('(a) old tier', ot2), ('(b) field strength', fl2)):
-    rr, beta = r2([en2, v], yy2); say(f'  + {nm}: R2 {rr:.4f} (gain {rr - r0:+.4f}), coefficient {beta[2]:+.5f}')
-# stability: no forced quarter per tier
-CUTS = (25, 50, 75)
-by = defaultdict(list)
-for bk, B in brackets.items():
-    if bk[0] == 'state' and B['year'] >= 1980 and B['field'] is not None: by[(B['year'], B['c'])].append(sos(B['field'], 'state', 'field') >= CUTS[2])
-sh = sorted(np.mean(v) for v in by.values())
-say(f'\nfixed cutoffs on the 0-99 scale: {CUTS}; share of a year+class state brackets at 75+ ranges {sh[0]:.2f}-{sh[-1]:.2f}, median {np.median(sh):.2f} (the old method forced 0.25)')
-dec = defaultdict(list)
-for bk, B in brackets.items():
-    if bk[0] == 'state' and B['field'] is not None: dec[B['year'] // 10 * 10].append(sos(B['field'], 'state', 'field', B['year']))
-say('  state field median by decade: ' + ', '.join(f"{d}s {int(np.median(v))}" for d, v in sorted(dec.items())))
+rt, bw, mq, bl, cur, nx, fl = map(np.array, zip(*Q_rows))
+r0, _ = r2([rt], cur); say(f'\nstate placement points 1980+ (n={len(Q_rows)}): own season rating R2 {r0:.4f}')
+for nm, v in (('best win', bw), ('mean of opponents beaten', mq), ('bad losses', bl), ('field strength', fl)):
+    rr, beta = r2([rt, v], cur); say(f'  + {nm}: R2 {rr:.4f} (gain {rr - r0:+.4f}), coefficient {beta[2]:+.4f}')
+m = np.array([x is not None for x in nx]); nx2 = np.array([x for x in nx if x is not None], float)
+r0, _ = r2([rt[m], cur[m]], nx2); say(f'next-season state points of returners (n={m.sum()}): rating + this season placement R2 {r0:.4f}')
+for nm, v in (('best win', bw), ('mean of opponents beaten', mq), ('bad losses', bl), ('field strength', fl)):
+    rr, beta = r2([rt[m], cur[m], v[m]], nx2); say(f'  + {nm}: R2 {rr:.4f} (gain {rr - r0:+.4f}), coefficient {beta[3]:+.5f}')
 
 # ============================================================ outputs
 os.makedirs('data/difficulty', exist_ok=True)
 with open('data/difficulty/brackets.csv', 'w', newline='') as f:
-    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'unit', 'entrants', 'rated', 'bouts', 'field', 'field_sos', 'old_tier', 'fallback'])
+    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'unit', 'entrants', 'rated', 'bouts', 'field', 'fallback'])
     for bk, B in sorted(brackets.items(), key=lambda kv: (kv[1]['year'], kv[0])):
-        c.writerow([bk[0], bk[1], bk[2], B['year'], B['c'], B['unit'], B['n'], B['rated'], B['bouts'], f"{B['field']:.1f}" if B['field'] is not None else '',
-                    sos(B['field'], bk[0], 'field', B['year']) if B['field'] is not None else '', old_tier.get(bk, ''), 1 if B['bouts'] == 0 else 0])
+        c.writerow([bk[0], bk[1], bk[2], B['year'], B['c'], B['unit'], B['n'], B['rated'], B['bouts'], f"{B['field']:.0f}" if B['field'] is not None else '', 1 if B['bouts'] == 0 else 0])
+names_of = {}
+for r in recs.values(): names_of.setdefault((r['k'], r['year']), r['name'])
 with open('data/difficulty/wrestler_seasons.csv', 'w', newline='') as f:
-    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'enter', 'season', 'path', 'path_sos', 'bouts', 'wins', 'results'])
+    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
+                                   'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results'])
     res_by = defaultdict(list)
     for b in bouts:
         if b['i'] not in PRE: continue
         res_by[(b['bk'], b['wk'])].append('W ' + b['result'] + ' ' + b['score'] + (' ' + b['flags'] if b['flags'] else ''))
         res_by[(b['bk'], b['lk'])].append('L ' + b['result'] + ' ' + b['score'] + (' ' + b['flags'] if b['flags'] else ''))
+    f0 = lambda v: f'{v:.0f}' if v is not None else ''
     for (bk, k), r in recs.items():
-        c.writerow([bk[0], bk[1], bk[2], r['year'], r['c'], r['name'], r['school'], f"{r['enter']:.0f}", f"{r['season']:.0f}", f"{r['path']:.0f}",
-                    sos(r['path'], bk[0], 'path', r['year']), len(r['opp']), sum(o[3] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)])])
+        bst = r['best']; sb = season_best.get((k, r['year']))
+        c.writerow([bk[0], bk[1], bk[2], r['year'], r['c'], r['name'], r['school'], k, f0(r['enter']), f0(r['rating']),
+                    f0(bst[0]) if bst else '', names_of.get((bst[1], r['year']), '') if bst else '', bst[3] if bst else '', bst[4] if bst else '', bst[5] if bst else '',
+                    f0(r['qow']), r['bad'], f0(sb[0]) if sb else '', names_of.get((sb[1], r['year']), '') if sb else '', season_bad[(k, r['year'])],
+                    len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)])])
 open('data/difficulty/eval.txt', 'w').write('\n'.join(out) + '\n')
-json.dump({'scale': {f'{l}/{e}': v for (l, e), v in SCALE.items()}, 'sd_ref': SD_REF, 'cuts': CUTS, 'weights': {'t-2': Wt[0], 't-1': Wt[1], 't+1': Wt[2], 't+2': Wt[3]}, 'prior_sd': RES_SD, 'win_weight': WIN_W, 'params': params},
+json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': {'t-2': Wt[0], 't-1': Wt[1], 't+1': Wt[2], 't+2': Wt[3]}, 'prior_sd': RES_SD, 'params': params},
           open('data/difficulty/scale.json', 'w'), indent=1, default=float)
 print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments')

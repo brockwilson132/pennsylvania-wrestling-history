@@ -22,7 +22,7 @@
   const bview = document.getElementById('bview');
   function showBracket(key, focus) {
     if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
-    const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; OT.sosFirst(bview.querySelector('.bvcard')); };
+    const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; };
     paint(); bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
     const me = bview.querySelector('.bvl.me'); if (me) me.scrollIntoView({ block: 'center' });
     const again = () => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; paint(); bview.scrollTop = top; } };
@@ -38,7 +38,7 @@
     if (p === 'school' && !i) { i = lastSchool(); if (!i) { p = 'state'; } }
     if (p === 'school' && i) try { localStorage.setItem('ot-school', i); } catch (e) { /* none */ }
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[p](i); OT.sosFirst(main);
+    main.innerHTML = PAGES[p](i); if (p === 'wrestler') loadBestWins(i);
     const cur = p === 'wrestler' ? 'wrestlers' : p;
     bnav.innerHTML = `<ul>${NAV.map(([k, l, h]) => `<li><a href="${k === 'school' ? '#school' + (lastSchool() ? '/' + lastSchool() : '') : h}" ${k === cur ? 'aria-current="page"' : ''}>${navIcon(k)}<span>${l}</span></a></li>`).join('')}</ul>`;
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
@@ -46,6 +46,12 @@
     if (!keepScroll) window.scrollTo(0, 0);
     wireSearch();
     showBracket(q.b, page === 'wrestler' ? id : null);
+  }
+  /* the wrestler page's best wins need his seasons' bout files */
+  function loadBestWins(sl) {
+    const W = OT.WRESTLER.get(sl) || OT.lowerWrestler(sl); if (!W) return; if (!W.lower) W.lower = OT.lowerFor(W.apps);
+    const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
+    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { const el = document.getElementById('bestwins'); if (el && el.dataset.w === W.slug) el.innerHTML = OT.bestWinsHTML(W); });
   }
   function wireSearch() {
     const inp = document.getElementById('wsearch'); if (!inp) return;
@@ -66,6 +72,7 @@
     const lk = e.target.closest('button[data-lkind]'); if (lk) { state.lchild = lk.dataset.lkind; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }
+    const bs = e.target.closest('button[data-bvsort]'); if (bs) { state.bvsort = bs.dataset.bvsort; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; bview.scrollTop = top; } return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }
     const bl = e.target.closest('a.bl[data-bl]'); if (bl) { e.preventDefault(); slideTo(bl); return; }
     const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) pod.hidden = open; }
@@ -73,7 +80,6 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('submit', (e) => { const f = e.target.closest('form[data-wrange]'); if (!f) return; e.preventDefault(); setWin({ mode: 'custom', from: +f.from.value, to: +f.to.value }); applyScope(); });
   document.addEventListener('input', (e) => { if (e.target.id === 'psearch') { panelQ = e.target.value; refreshPanel(); } });
-  document.addEventListener('change', (e) => { if (e.target.matches('input[data-adjust]')) { OT.setAdjust(e.target.checked); applyScope(); } });
   document.addEventListener('click', (e) => { const th = e.target.closest('th[data-sort]'); if (th) { state.wsort = th.dataset.sort; render(true); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelOpen()) closePanel(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });

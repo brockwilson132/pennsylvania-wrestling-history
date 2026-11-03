@@ -1,4 +1,10 @@
-# Difficulty (strength of schedule)
+# Ratings and difficulty
+
+> **v2 (November 2026).** The 0–99 path SOS tags and per-level scales are retired. The primary number is now the
+> wrestler's own **Overtime Rating** on one scale (1500 = the average state qualifier); brackets carry a **field**
+> strength on the same scale; runs are described by **best win** and **upset losses**; the "Adjust for strength of
+> schedule" toggle is removed. Why: `docs/RATING_AUDIT.md`. Sections 1–2 below still describe the bout data and the
+> season batch; v2 changes are in section 6, and sections 3–4 are kept as the record of v1.
 
 How Overtime measures how hard a bracket was and how hard a wrestler's run through it was, why it is built
 this way, and what the numbers say. Everything here is reproduced by `tools/parse_bouts.py`,
@@ -135,3 +141,22 @@ uses the result being explained):
   rests on their regional and state bouts.
 - Pre-1960s regional and district brackets are partial; their strengths rest on few bouts plus placements.
 - Same name + same school within five seasons is treated as one wrestler.
+
+## 6. v2: what changed and the evidence
+
+- **Identity linking** (`tools/identity.py`): 1,184 of 99,549 name keys merged (nicknames, dropped letters, initials,
+  empty or parenthesized schools), so one wrestler's bouts pool into one season. Forward held-out log loss
+  0.5585 → 0.5576.
+- **Prior strength.** v1 tuned the prior that links seasons on a grid whose best value was its edge (1.0). Extended to
+  0.7–4.5, hidden 1990–2017 bouts pick **2.0** (log loss 0.5743; 3.0 → 0.5785, 4.5 → 0.5960): the prior sd is now 215,
+  so a season's own bouts dominate and neighbouring seasons inform it. Hidden 2018–26 bouts: 0.5623 → **0.5563**.
+  Champion rated #1 in his state bracket 66% → **82%** (top 2: 85% → 94%); lower-rated winner of a same-season bout
+  12.6% → 7.8%. Proximity weights are unchanged (t−1 0.45, t+1 0.33, t−2 0.26, t+2 0.17).
+- **One scale.** Each season's strengths are anchored per class on a rolling 11-season window of state entrants:
+  1500 = the average state qualifier, spread 167 (the median sd of modern state qualifiers), so 400 points ≈ 10:1.
+  Typical fields since 1980: district 1221, regional 1375, state 1638.
+- **Path SOS → best win and upset losses.** Beyond a wrestler's own rating, best win adds +0.0001 to R² for state
+  placement points, the mean of opponents beaten +0.0000, upset losses +0.0003; field strength adds +0.0157. For next
+  season's state points, best win adds +0.0066 with a negative coefficient. The rating already contains what the
+  quality of wins says, so they are shown as description, not scored, and the **adjustment toggle is removed**.
+- **Career numbers.** Peak season rating, and the average of his season ratings.

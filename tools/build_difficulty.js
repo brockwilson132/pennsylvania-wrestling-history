@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-/* Strength-of-schedule data for the Overtime app, from tools/ratings.py output and the parsed bouts.
+/* Rating data for the Overtime app, from tools/ratings.py output and the parsed bouts (method: docs/DIFFICULTY.md, v2).
  *
- *   overtime/sos.js            window.WR_SOS = { year: { "cls.l.unit.wn": [fieldSOS, "nk8:pathSOS,..."] } }   l = s / r / d
- *                              nk8 = first 5 + last 3 letters of the app's nkey(name), unique within a bracket
- *                              eager: field strength for every bracket; path SOS for every state entrant and every
- *                              district/regional medalist (what cards, career grids, teams and tables show)
- *   overtime/sos/<year>.json   lazy, per season: { bkey: { s: { nkey: [pathSOS, seasonRating] }, b: [[side, round, winner, loser, result, score, flags], ...] } }
- *                              every entrant's path and every bout, for the bracket view
+ *   overtime/sos.js            window.WR_SOS = { year: { "cls.l.unit.wn": [field10, "nk8:rating10,..."] } }   l = s / r / d
+ *                              window.WR_RTG_META = { field: { district, regional, state }, lo, hi }  (typical field per level, gauge range)
+ *                              rating10 = Overtime Rating / 10 (1500 = the average state qualifier); field10 = the bracket's top-8 mean / 10
+ *                              eager: every bracket's field; the rating of every state entrant and district/regional medalist
+ *   overtime/sos/<year>.json   lazy, per season: { bkey: { s: { nkey: [rating, bestWin, bestWinName, badLosses] }, b: [[side, round, winner, loser, result, score, flags], ...] } }
+ *                              every entrant's rating and quality of wins in that tournament, and every bout, for the bracket view and the wrestler page
+ *   (file names kept from v1, when these held 0-99 strength-of-schedule values)
  *
  * bkey matches the app: state  `${year}.${cls}.state.${wn}`, lower `${year}.${cls}.${lvl}.${unit}.${wn}`
  * Usage (repo root): node tools/build_difficulty.js
@@ -42,16 +43,20 @@ const bkeyOf = (level, tournament, weight) => { const u = unitCls(level, tournam
 const eager = new Set();
 csv('data/brackets/lower_entrants.csv').forEach((r) => { if (r.place) eager.add(bkeyOf(r.level, r.tournament, r.weight) + '|' + nkey(r.name)); });
 
-const F = {};
-csv('data/difficulty/brackets.csv').forEach((r) => { if (r.field_sos !== '') F[bkeyOf(r.level, r.tournament, r.weight)] = +r.field_sos; });
+const F = {}; const FL = { district: [], regional: [], state: [] };
+csv('data/difficulty/brackets.csv').forEach((r) => { if (r.field === '') return; F[bkeyOf(r.level, r.tournament, r.weight)] = Math.round(+r.field / 10); if (+r.year >= 1980) FL[r.level].push(+r.field); });
+const med = (a) => { a = a.slice().sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null; };
+const pct = (a, p) => { a = a.slice().sort((x, y) => x - y); return a[Math.floor((a.length - 1) * p)]; };
+const all = FL.district.concat(FL.regional, FL.state);
+const META = { field: { district: Math.round(med(FL.district)), regional: Math.round(med(FL.regional)), state: Math.round(med(FL.state)) }, lo: Math.floor(pct(all, 0.02) / 50) * 50, hi: Math.ceil(pct(all, 0.998) / 50) * 50 };
 const P = {}, LAZY = {};
 const wsFile = fs.existsSync('data/difficulty/wrestler_seasons.csv') ? 'data/difficulty/wrestler_seasons.csv' : 'data/difficulty/wrestler_seasons.csv.gz';
 csv(wsFile).forEach((r) => {
-  if (r.path_sos === '') return;
+  if (r.season === '') return;
   const k = bkeyOf(r.level, r.tournament, r.weight), n = nkey(r.name), y = +r.year;
-  if (r.level === 'state' || eager.has(k + '|' + n)) (P[k] || (P[k] = [])).push(n + ':' + r.path_sos);
+  if (r.level === 'state' || eager.has(k + '|' + n)) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season / 10));
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
-  B.s[n] = [+r.path_sos, Math.round(+r.season)];
+  B.s[n] = [Math.round(+r.season), r.best === "" ? null : +r.best, r.best_name || null, +r.bad || 0];
 });
 csv('data/brackets/bouts.csv').forEach((b) => {
   const k = bkeyOf(b.level, b.tournament, b.weight), y = +b.year;
@@ -64,9 +69,9 @@ new Set([...Object.keys(F), ...Object.keys(P)]).forEach((k) => {
   const p = k.split('.'); const y = p[0], lvl = p[2]; const short = lvl === 'state' ? `${p[1]}.s..${p[3]}` : `${p[1]}.${L1[lvl]}.${p[3]}.${p[4]}`;
   (OUT[y] || (OUT[y] = {}))[short] = [F[k] ?? null, (P[k] || []).map((e) => { const [n, v] = e.split(':'); return nk8(n) + ':' + v; }).join(',')];
 });
-fs.writeFileSync('overtime/sos.js', 'window.WR_SOS=' + JSON.stringify(OUT) + ';\n');
+fs.writeFileSync('overtime/sos.js', 'window.WR_SOS=' + JSON.stringify(OUT) + ';\nwindow.WR_RTG_META=' + JSON.stringify(META) + ';\n');
 fs.mkdirSync('overtime/sos', { recursive: true });
 let lazyBytes = 0;
 Object.entries(LAZY).forEach(([y, obj]) => { const s = JSON.stringify(obj); lazyBytes += s.length; fs.writeFileSync(`overtime/sos/${y}.json`, s); });
-console.log('sos.js', (fs.statSync('overtime/sos.js').size / 1e6).toFixed(2), 'MB;', Object.keys(F).length, 'brackets;', Object.values(P).reduce((a, v) => a + v.length, 0), 'eager paths;',
+console.log('field medians', META, 'sos.js', (fs.statSync('overtime/sos.js').size / 1e6).toFixed(2), 'MB;', Object.keys(F).length, 'brackets;', Object.values(P).reduce((a, v) => a + v.length, 0), 'eager paths;',
   Object.keys(LAZY).length, 'season files', (lazyBytes / 1e6).toFixed(1), 'MB');
