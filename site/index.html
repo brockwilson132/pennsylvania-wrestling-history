@@ -245,6 +245,20 @@ a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decora
 .decbars { display: flex; align-items: flex-end; gap: 3px; height: 54px; margin-top: 8px; }
 .decbars i { flex: 1; background: #59616a; min-height: 1px; } .decbars i:last-child { background: var(--chalk); }
 .decax { display: flex; justify-content: space-between; color: var(--chalk-3); font-size: 11.5px; margin-top: 4px; }
+/* career grid */
+.qp { display: inline-grid; place-items: center; border: 1.5px solid #8d969f; color: #aab2ba; font-weight: 800; border-radius: 3px; line-height: 1; vertical-align: middle; flex: none; box-sizing: border-box; }
+.cg { display: inline-flex; gap: 14px; align-items: center; }
+.gg { display: inline-flex; align-items: center; gap: 3px; } .gg b { display: none; }
+.cg.full .gg b { display: inline-block; font-size: 11px; color: var(--chalk-3); text-transform: uppercase; letter-spacing: .05em; margin-right: 4px; min-width: 56px; }
+.gc { display: inline-grid; place-items: center; width: 22px; height: 22px; background: rgba(255, 255, 255, 0.04); border: 1px solid #262b30; font-style: normal; }
+.cg.full .gc { width: 36px; height: 36px; }
+.gg.nodata .gc { opacity: .35; border-style: dashed; }
+.gh { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; } .gh i { width: 22px; text-align: center; font-style: normal; font-size: 10px; color: var(--chalk-3); font-weight: 700; }
+.grid-row { display: grid; gap: 6px; } .gh-row { margin-left: 70px; } .gh-row .gh { margin: 0; } .gh-row .gh i { width: 36px; font-size: 11px; }
+.gnote { margin: 4px 0 0; }
+.career-list .qp { font-size: 15px; }
+th.mh button svg { vertical-align: middle; }
+.map-link { display: block; text-decoration: none; max-width: 560px; }
 /* weights */
 .wchips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
 .wchips a { flex: none; min-width: 52px; text-align: center; padding: 8px 10px; background: var(--tile); border: 1px solid var(--seam); text-decoration: none; font: 400 17px var(--stencil); }
@@ -281,6 +295,8 @@ a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decora
   .hide-m { display: none; } .show-m { display: block; color: var(--chalk-3); font-size: 12.5px; }
   .ph { gap: 14px; } .ph-mark svg.pa { width: 84px; height: auto; } .ph-mark .chip, .ph-mark img.chip { width: 54px !important; height: 54px !important; }
   .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } .nums dd { font-size: 24px; }
+  .cg.full { flex-direction: column; align-items: flex-start; gap: 6px; } .cg.full .gc { width: 30px; height: 30px; } .gh-row { margin-left: 64px; } .gh-row .gh i { width: 30px; }
+  .gc { width: 20px; height: 20px; } .gh i { width: 20px; }
   .rx-axis { grid-template-columns: 1fr; padding-left: 0; } .rx-axis > span { display: none; }
   .race li { grid-template-columns: 22px minmax(0, 1fr) auto; grid-template-areas: "rk nm pts" "ax ax ax"; gap: 4px 8px; }
   .race.d li { grid-template-areas: "rk nm pts" "rk sh sh" "ax ax ax"; }
@@ -312,6 +328,7 @@ a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decora
 <script src="badges.js"></script>
 <script src="data.js"></script>
 <script src="medals.js"></script>
+<script src="brackets.js"></script>
 <script src="pa-map.js"></script>
 <script src="app/model.js"></script>
 <script src="app/ui.js"></script>

@@ -1,0 +1,246 @@
+{
+  "Jenkintown": {
+    "d": 1,
+    "note": "Jenkintown, Montgomery County; confidence high"
+  },
+  "Delhaas": {
+    "d": 1,
+    "note": "Bristol Township, Bucks County; confidence high"
+  },
+  "Collingdale": {
+    "d": 1,
+    "note": "Collingdale, Delaware County; confidence high"
+  },
+  "Wilkinsburg": {
+    "d": 7,
+    "note": "Wilkinsburg, Allegheny County (outside the Pittsburgh city league); confidence high"
+  },
+  "Mansfield": {
+    "d": 4,
+    "note": "Mansfield, Tioga County; confidence high"
+  },
+  "Aliquippa": {
+    "d": 7,
+    "note": "Aliquippa, Beaver County; confidence high"
+  },
+  "Tulpehocken": {
+    "d": 3,
+    "note": "Bernville, Berks County; confidence high"
+  },
+  "Morrisville": {
+    "d": 1,
+    "note": "Morrisville, Bucks County; confidence high"
+  },
+  "Penn Wood": {
+    "d": 1,
+    "note": "Lansdowne, Delaware County; confidence high"
+  },
+  "Academy Park": {
+    "d": 1,
+    "note": "Sharon Hill, Delaware County; confidence high"
+  },
+  "Plains": {
+    "d": 2,
+    "note": "Plains Township, Luzerne County; confidence high"
+  },
+  "Jefferson": {
+    "d": 7,
+    "note": "Ambiguous name; Jefferson-Morgan (Greene County) assumed, Jefferson Hills (Allegheny) also D7; confidence low"
+  },
+  "West Mifflin North": {
+    "d": 7,
+    "note": "West Mifflin, Allegheny County; confidence high"
+  },
+  "William Penn": {
+    "d": 1,
+    "note": "Darby, Delaware County (William Penn School District); a York County William Penn would be D3; confidence medium"
+  },
+  "Elk County Christian": {
+    "d": 9,
+    "note": "St. Marys, Elk County; confidence high"
+  },
+  "Susquehanna Community": {
+    "d": 2,
+    "note": "Susquehanna County; confidence high"
+  },
+  "Millville": {
+    "d": 4,
+    "note": "Millville, Columbia County; confidence high"
+  },
+  "Armstrong Central": {
+    "d": 7,
+    "note": "Armstrong County; confidence medium"
+  },
+  "Keystone": {
+    "d": 6,
+    "note": "Ambiguous name; Keystone Central (Lock Haven, Clinton County) assumed, Keystone Oaks would be D7 and Keystone (Clarion) D9; confidence low"
+  },
+  "Archbishop Ryan": {
+    "d": 12,
+    "note": "Philadelphia, Catholic; confidence high"
+  },
+  "River Valley": {
+    "d": 6,
+    "note": "Blairsville, Indiana County (Blairsville-Saltsburg School District); confidence high"
+  },
+  "Windber": {
+    "d": 5,
+    "note": "Windber, Somerset County; confidence high"
+  },
+  "Woodrow Wilson": {
+    "d": 1,
+    "note": "Langhorne, Bucks County (Middletown Woodrow Wilson High School); confidence medium"
+  },
+  "Lourdes Regional": {
+    "d": 4,
+    "note": "Shamokin area, Northumberland/Snyder County; confidence high"
+  },
+  "Sharon Hill": {
+    "d": 1,
+    "note": "Sharon Hill, Delaware County; confidence high"
+  },
+  "Valley Forge Military": {
+    "d": 1,
+    "note": "Wayne, Delaware County; confidence high"
+  },
+  "Bucktail": {
+    "d": 6,
+    "note": "Renovo, Clinton County; confidence medium"
+  },
+  "New Hope-Solebury": {
+    "d": 1,
+    "note": "New Hope, Bucks County; confidence high"
+  },
+  "Reading CC": {
+    "d": 3,
+    "note": "Reading, Berks County (Reading Central Catholic); confidence high"
+  },
+  "North Penn-Blossburg": {
+    "d": 4,
+    "note": "Blossburg, Tioga County; confidence high"
+  },
+  "Archbishop Wood": {
+    "d": 1,
+    "note": "Warminster, Bucks County; confidence high"
+  },
+  "Summit Academy": {
+    "d": 7,
+    "note": "Butler County (Summit Academy, Butler area, WPIAL); name also used elsewhere in PA; confidence medium"
+  },
+  "Overbrook": {
+    "d": 12,
+    "note": "Philadelphia; confidence high"
+  },
+  "Lawrence Park": {
+    "d": 10,
+    "note": "Erie County; confidence high"
+  },
+  "Peabody": {
+    "d": 8,
+    "note": "Pittsburgh city league (East Liberty); confidence high"
+  },
+  "Central Bucks": {
+    "d": 1,
+    "note": "Doylestown, Bucks County; confidence high"
+  },
+  "West Side Vo-Tech": {
+    "d": 2,
+    "note": "Kingston, Luzerne County (West Side Career and Technology Center); confidence high"
+  },
+  "Rocky Grove": {
+    "d": 10,
+    "note": "Franklin, Venango County; confidence high"
+  },
+  "Shenandoah Valley": {
+    "d": 11,
+    "note": "Shenandoah, Schuylkill County; confidence high"
+  },
+  "Ford City": {
+    "d": 7,
+    "note": "Ford City, Armstrong County; confidence high"
+  },
+  "Rothrock": {
+    "d": 6,
+    "note": "Central PA, Huntingdon area assumed; a PA wrestling record lists a Rothrock wrestler in District 6; confidence medium"
+  },
+  "Bishop Carroll": {
+    "d": 6,
+    "note": "Ebensburg, Cambria County; confidence high"
+  },
+  "Bishop Hafey": {
+    "d": 2,
+    "note": "Hazleton, Luzerne County; confidence high"
+  },
+  "West Mifflin South": {
+    "d": 7,
+    "note": "West Mifflin, Allegheny County; confidence high"
+  },
+  "North Pocono": {
+    "d": 2,
+    "note": "Moscow, Lackawanna County; confidence high"
+  },
+  "Bristol": {
+    "d": 1,
+    "note": "Bristol Borough, Bucks County; confidence high"
+  },
+  "Scotland School": {
+    "d": 3,
+    "note": "Scotland, Franklin County; confidence high"
+  },
+  "Sewickley Academy": {
+    "d": 7,
+    "note": "Sewickley, Allegheny County; confidence high"
+  },
+  "Oliver": {
+    "d": 8,
+    "note": "Pittsburgh city league (Oliver High School); confidence medium"
+  },
+  "Carrick": {
+    "d": 8,
+    "note": "Pittsburgh city league (Carrick); confidence high"
+  },
+  "Abraham Lincoln": {
+    "d": 12,
+    "note": "Philadelphia; confidence high"
+  },
+  "Apollo Ridge": {
+    "d": 7,
+    "note": "Armstrong County (Apollo-Ridge); confidence high"
+  },
+  "Fleetwood": {
+    "d": 3,
+    "note": "Fleetwood, Berks County; confidence high"
+  },
+  "Phil-Mont Christian": {
+    "d": 1,
+    "note": "Montgomery County; confidence high"
+  },
+  "Shade": {
+    "d": 5,
+    "note": "Somerset County (Shade-Central City); confidence high"
+  },
+  "Westinghouse": {
+    "d": 8,
+    "note": "Pittsburgh city league; confidence high"
+  },
+  "Archbishop Carroll": {
+    "d": 1,
+    "note": "Radnor, Delaware County; confidence high"
+  },
+  "Mariana Bracetti Acad.": {
+    "d": 12,
+    "note": "Philadelphia charter; confidence high"
+  },
+  "East Stroudsburg North": {
+    "d": 11,
+    "note": "East Stroudsburg, Monroe County; confidence high"
+  },
+  "Belmont Charter": {
+    "d": 12,
+    "note": "Philadelphia charter; confidence high"
+  },
+  "Frankford": {
+    "d": 12,
+    "note": "Philadelphia; confidence high"
+  }
+}

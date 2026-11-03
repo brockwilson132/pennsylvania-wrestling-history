@@ -61,3 +61,25 @@ const svgIn = (el, w, h, label) => d3.select(el).append('svg').attr('width', w).
 const sec = (title, sub, id, extra = '') => `<div class="sec-head"${id ? ` id="${id}"` : ''}><h2>${title}</h2>${sub ? `<p class="sub">${sub}</p>` : ''}${extra}</div>`;
 const seg = (name, opts, cur) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button type="button" data-${name}="${v}" aria-pressed="${v === cur}">${l}</button>`).join('')}</div>`;
 const scoreFmt = (v) => (v >= 100 ? fmt(Math.round(v)) : v >= 10 ? v.toFixed(0) : v.toFixed(1));
+
+/* ---------- a career on a grid: District, Regional, State; FR SO JR SR in each ----------
+   Medals are placed by grade (from the brackets); a Q is a state qualifier who did not place.
+   District and regional results are on file only for District 11 (district) and the Northeast AAA Regional. */
+const qpill = (size = 16, title = 'State qualifier') => `<span class="qp" style="width:${size}px;height:${size}px;font-size:${Math.round(size * 0.62)}px" role="img" aria-label="${title}">Q</span>`;
+const GRADE_L = ['FR', 'SO', 'JR', 'SR'];
+function careerGrid(w, opts = {}) {
+  const apps = w.apps || appsOf(w.name, w.school || w.sch);
+  const size = opts.size || 18, full = !!opts.full;
+  const slot = (r) => gradeSlot(r, apps);
+  const state = Array(4).fill(null); apps.forEach((r) => { const i = slot(r); if (!state[i] || (r.place && (!state[i].place || r.place < state[i].place))) state[i] = r; });
+  const yearGrade = new Map(apps.map((r) => [r.year, slot(r)]));
+  const other = (rows) => { const g = Array(4).fill(null); rows.forEach((r) => { let i = yearGrade.get(r.year); if (i == null) { const k = apps.find((a) => a.grade in GRADE_I); i = k ? Math.max(0, Math.min(3, GRADE_I[k.grade] + (r.year - k.year))) : null; } if (i != null && !g[i]) g[i] = r; }); return g; };
+  const sch = w.school || w.sch;
+  const dRows = full ? D11.filter((r) => r.sch === sch && nkey(r.name) === nkey(w.name)).map((r) => ({ ...r, place: 1 })) : [];
+  const rRows = full ? REG.filter((r) => r.sch === sch && nkey(r.name) === nkey(w.name)).map((r) => ({ ...r, place: 1 })) : [];
+  const cell = (r, lvl) => (!r ? '<i class="gc"></i>' : r.place ? `<i class="gc" title="${r.year}, ${lvl}, ${wLabel(r.w)}, ${ordinal(r.place)}${r.grade ? ', ' + r.grade : ''}">${medal(r.place, size)}</i>` : `<i class="gc" title="${r.year}, state qualifier at ${wLabel(r.w)}${r.grade ? ', ' + r.grade : ''}">${qpill(size)}</i>`);
+  const group = (label, cells, lvl, known) => `<span class="gg${known ? '' : ' nodata'}" title="${known ? label + ': champions only on file' : label + ': results not collected for this district'}"><b>${label}</b>${cells.map((r) => cell(r, lvl)).join('')}</span>`;
+  const d = w.d || schoolDistrict(sch);
+  return `<span class="cg${full ? ' full' : ''}">${full ? group('District', other(dRows), 'district', d === 11) + group('Regional', other(rRows), 'regional', [2, 4, 11, 12].includes(d)) : ''}${group('State', state, 'state', true)}</span>`;
+}
+const gradeHead = () => `<span class="gh">${GRADE_L.map((g) => `<i>${g}</i>`).join('')}</span>`;

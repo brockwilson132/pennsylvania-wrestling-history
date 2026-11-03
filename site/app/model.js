@@ -52,6 +52,14 @@ d3.group(CH, (r) => r.year + '|' + r.cls).forEach((rs, k) => LINEUP.set(k, rs.sl
 const MED = (window.WR_MEDALS || []).map(([year, cls, w, place, name, school, d]) => ({ year, cls, w, wn: wNum(w), place, name, school, sch: canon(school), d }));
 { const have = new Set(MED.filter((r) => r.place === 1).map((r) => r.year + '|' + r.cls + '|' + r.wn)); CH.forEach((r) => { if (!have.has(r.year + '|' + r.cls + '|' + r.wn)) MED.push({ ...r, filled: true }); }); }
 MED.forEach((r) => { const L = LINEUP.get(r.year + '|' + r.cls) || []; let i = L.findIndex((o) => o.wn === r.wn); if (i < 0) i = L.findIndex((o) => o.wn >= r.wn); if (i < 0) i = L.length - 1; r.slot = Math.max(0, i); r.n = L.length || 1; });
+/* grades from the brackets, and every state qualifier who did not place */
+const GRADES = window.WR_GRADES || {};
+MED.forEach((r) => { r.grade = GRADES[r.year + '|' + r.cls + '|' + nkey(r.name)] || ''; });
+const QUAL = (window.WR_QUAL || []).map(([year, cls, w, name, school, d, grade, seed, region]) => ({ year, cls, w, wn: wNum(w), place: 0, name, school, sch: canon(school), d, grade, seed, region, pts: 0 }));
+QUAL.forEach((r) => { const L = LINEUP.get(r.year + '|' + r.cls) || []; let i = L.findIndex((o) => o.wn === r.wn); if (i < 0) i = L.findIndex((o) => o.wn >= r.wn); if (i < 0) i = L.length - 1; r.slot = Math.max(0, i); r.n = L.length || 1; });
+const HAS_QUAL = QUAL.length > 0;
+/* real team scores from the brackets (1976 on): year|cls -> [{place, pts, sch}] */
+const TEAMSCORES = new Map(); (window.WR_TEAMS || []).forEach(([year, cls, place, pts, sch]) => { const k = year + '|' + cls; (TEAMSCORES.get(k) || TEAMSCORES.set(k, []).get(k)).push({ place, pts, sch }); });
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
 const ptsOf = (p) => PTS[p - 1] || 0;
 MED.forEach((r) => { r.pts = ptsOf(r.place); });
@@ -60,6 +68,9 @@ const LIN = new Map();
 d3.groups(MED.filter((r) => r.cls !== 'single'), (r) => r.sch).forEach(([s, rs]) => { const c = d3.rollups(rs, (v) => ({ n: v.length, last: d3.max(v, (r) => r.year) }), (r) => r.cls).sort((a, b) => b[1].n - a[1].n || b[1].last - a[1].last); LIN.set(s, c[0][0]); });
 const lineage = (s) => LIN.get(s) || LIN.get(SUCCESSOR[s]) || 'AAA';
 MED.forEach((r) => { r.k = r.cls === 'single' ? lineage(r.sch) : r.cls; });
+QUAL.forEach((r) => { r.k = r.cls === 'single' ? lineage(r.sch) : r.cls; });
+const QBY_YEAR = d3.group(QUAL, (r) => r.year);
+const QUALS = () => QUAL.filter(inScope);
 const inScope = (r) => state.cls === 'ALL' || r.k === state.cls;
 const ROWS = () => MED.filter(inScope);
 const YEARS = Array.from(new Set(MED.map((r) => r.year))).sort((a, b) => a - b);
@@ -94,6 +105,12 @@ function seasonOf(year, scope = state.cls) {
     const teams = roll((r) => r.sch), dists = roll((r) => r.d);
     [teams, dists].forEach((L) => L.forEach((t, i) => { t.rank = i ? (t.pts === L[i - 1].pts ? L[i - 1].rank : i + 1) : 1; t.share = avail ? t.pts / avail : 0; }));
     S = { year, scope, one, cls: lc, avail, rows, places: d3.max(yr, (r) => r.place), lineup: LINEUP.get(year + '|' + lc) || [], teams, dists, teamBy: new Map(teams.map((t) => [t.id, t])), distBy: new Map(dists.map((t) => [t.id, t])) };
+    // real team scores, when one class is in view and the sheet had them
+    const real = scope !== 'ALL' && !one ? TEAMSCORES.get(year + '|' + scope) : null;
+    if (real && real.length) { S.real = true; const by = new Map(real.map((t) => [t.sch, t])); teams.forEach((t) => { const x = by.get(t.id); t.score = x ? x.pts : 0; t.realRank = x ? x.place : null; }); real.forEach((x) => { if (!S.teamBy.has(x.sch)) { const t = { id: x.sch, pts: 0, places: placeCounts([]), n: 0, titles: 0, d: schoolDistrict(x.sch), rows: [], rank: teams.length + 1, share: 0, score: x.pts, realRank: x.place }; teams.push(t); S.teamBy.set(t.id, t); } }); teams.sort((a, b) => (b.score || 0) - (a.score || 0) || b.pts - a.pts); }
+    // qualifiers who did not place, by school and by weight slot
+    const q = (QBY_YEAR.get(year) || []).filter((r) => scope === 'ALL' || r.k === scope);
+    S.quals = q; S.qualBy = d3.group(q, (r) => r.sch);
   }
   SEASONS.set(key, S);
   return S;
@@ -117,11 +134,14 @@ function unitStats(u) {
   seasonsInScope().forEach((S) => { const t = (u.kind === 'district' ? S.distBy : S.teamBy).get(unitKey(u)); if (t) seasons.push({ year: S.year, S, t, pts: t.pts, share: t.share, rank: t.rank }); });
   const rows = seasons.flatMap((s) => s.t.rows);
   const places = placeCounts(rows);
+  const quals = QUALS().filter(inUnit(u));
+  const realWon = seasonsInScope().filter((S) => S.real && S.teams[0] && (u.kind === 'district' ? S.teams[0].d === u.d && false : S.teams[0].id === u.name)).length;
   const o = {
     u, seasons, rows, places, medals: rows.length, titles: places[0], pts: d3.sum(seasons, (s) => s.pts),
     allTime: 100 * d3.sum(seasons, (s) => s.share),
     now: 100 * d3.sum(seasons, (s) => s.share * Math.pow(0.5, (last - s.year) / HALF_LIFE)),
-    won: seasons.filter((s) => s.rank === 1).length,
+    won: seasons.filter((s) => (s.t.realRank ? s.t.realRank === 1 : s.rank === 1)).length,
+    quals: quals.length, qualified: quals.length + rows.length, qrate: quals.length + rows.length ? rows.length / (quals.length + rows.length) : null,
     best: seasons.length ? seasons.reduce((m, s) => (s.share > m.share ? s : m)) : null,
     first: seasons.length ? seasons[0].year : null, last: seasons.length ? seasons[seasons.length - 1].year : null,
     recent: placeCounts(rows.filter((r) => r.year > last - HALF_LIFE)),
@@ -158,8 +178,12 @@ const classHistory = (s) => { const ys = d3.rollups(MED.filter((r) => r.sch === 
 /* ---------- wrestlers ---------- */
 const wKey = (r) => nkey(r.name) + '|' + r.sch;
 const wSlug = (name, sch) => slug(name) + '--' + slug(sch);
-const WRESTLER = new Map(); // slug -> {name, sch, d, rows}
-d3.groups(MED, wKey).forEach(([, rs]) => { rs.sort((a, b) => a.year - b.year); const L = rs[rs.length - 1]; WRESTLER.set(wSlug(L.name, L.sch), { name: L.name, sch: L.sch, d: rs[0].d, rows: rs }); });
+const WRESTLER = new Map(); // slug -> {name, sch, d, rows (medals), apps (medals and qualifications)}
+d3.groups(MED.concat(QUAL), wKey).forEach(([, all]) => { all.sort((a, b) => a.year - b.year); const rs = all.filter((r) => r.place > 0); const L = all[all.length - 1]; WRESTLER.set(wSlug(L.name, L.sch), { name: L.name, sch: L.sch, d: all[0].d, rows: rs, apps: all }); });
+const appsOf = (name, sch) => { const w = WRESTLER.get(wSlug(name, sch)); return w ? w.apps : []; };
+/* grade slot 0-3 for an appearance; falls back to position in the career when the grade is unknown */
+const GRADE_I = { FR: 0, SO: 1, JR: 2, SR: 3 };
+const gradeSlot = (r, apps) => { if (r.grade in GRADE_I) return GRADE_I[r.grade]; const known = apps.find((a) => a.grade in GRADE_I); if (known) return Math.max(0, Math.min(3, GRADE_I[known.grade] + (r.year - known.year))); const i = apps.indexOf(r); return Math.max(0, Math.min(3, 3 - (apps.length - 1 - i))); };
 const wrestlerHref = (r) => '#wrestler/' + wSlug(r.name, r.sch);
 const wrestlersOf = (rows) => d3.groups(rows, (r) => nkey(r.name) + '|' + r.sch).map(([, rs]) => {
   rs.sort((a, b) => a.year - b.year);
@@ -189,18 +213,18 @@ const D11 = (RAW.d11 || []).map(([year, w, name, school]) => ({ year, w, wn: wNu
 const REG = (RAW.reg || []).map(([year, w, name, school, d]) => ({ year, w, wn: wNum(w), name, school, sch: canon(school), d: +d }));
 
 /* ---------- all-time teams: at each weight class, the wrestlers with the most points there ----------
-   A wrestler is placed once, at the class where he earned the most points, so the teams read as one lineup.
-   Ties: more titles, then more medals, then the earlier career. Returns {classes:[{c, slots:[entry, entry, entry]}]} */
+   A wrestler may hold a slot at any weight he medaled at (counting only his points there), but never the same
+   team level twice: first team at 145 rules out first team at 152, not second team. Candidates are placed best
+   first, so the strongest claims win. Ties: more titles, then more medals, then the earlier career. */
 function allTimeTeams(rows, depth = 3) {
-  const byW = d3.group(rows, wKey);
   const cands = [];
-  byW.forEach((rs) => {
-    const byC = d3.rollups(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), titles: v.filter((r) => r.place === 1).length, n: v.length, rows: v.slice().sort((a, b) => a.year - b.year) }), (r) => stdOf(r).k).sort((p, q) => q[1].pts - p[1].pts || q[1].titles - p[1].titles);
-    const [k, o] = byC[0]; const L = o.rows[o.rows.length - 1];
-    cands.push({ k, name: L.name, sch: L.sch, d: o.rows[0].d, pts: o.pts, titles: o.titles, n: o.n, rows: o.rows, years: o.rows[0].year === L.year ? String(L.year) : `${o.rows[0].year}–${L.year}`, href: wrestlerHref(L) });
+  d3.group(rows, wKey).forEach((rs, key) => {
+    d3.rollups(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), titles: v.filter((r) => r.place === 1).length, n: v.length, rows: v.slice().sort((a, b) => a.year - b.year) }), (r) => stdOf(r).k).forEach(([k, o]) => { const L = o.rows[o.rows.length - 1]; cands.push({ key, k, name: L.name, sch: L.sch, d: o.rows[0].d, pts: o.pts, titles: o.titles, n: o.n, rows: o.rows, years: o.rows[0].year === L.year ? String(L.year) : `${o.rows[0].year}–${L.year}`, href: wrestlerHref(L) }); });
   });
-  const byK = d3.group(cands, (c) => c.k);
-  return STD.filter((c) => byK.has(c.k)).map((c) => ({ c, slots: byK.get(c.k).sort((p, q) => q.pts - p.pts || q.titles - p.titles || q.n - p.n || p.rows[0].year - q.rows[0].year).slice(0, depth) }));
+  cands.sort((p, q) => q.pts - p.pts || q.titles - p.titles || q.n - p.n || p.rows[0].year - q.rows[0].year);
+  const slots = new Map(STD.map((c) => [c.k, Array(depth).fill(null)])), held = new Map();
+  cands.forEach((c) => { const S = slots.get(c.k), H = held.get(c.key) || new Set(); for (let i = 0; i < depth; i++) { if (!S[i] && !H.has(i)) { S[i] = c; H.add(i); held.set(c.key, H); break; } } });
+  return STD.filter((c) => slots.get(c.k).some(Boolean)).map((c) => ({ c, slots: slots.get(c.k) }));
 }
 /* at each weight class, the units (districts or programs) with the largest share of its points */
 function weightLeaders(rows, key, depth = 3) {

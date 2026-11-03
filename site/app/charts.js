@@ -99,8 +99,8 @@ function raceBoard(S, opts = {}) {
     return `${axis(true)}<ol class="race d">${list.map((t) => `<li><span class="rk">${t.rank}</span><span class="nm">${distLink(t.id, { mapW: 30 })}</span><span class="pts"><b>${t.pts}</b> pts</span><span class="mini">${shelf(t.places, { size: 14, compact: true })}</span>${grid(t)}</li>`).join('')}</ol>`;
   }
   const list = S.teams.filter(opts.filter || (() => true)).slice(0, opts.limit || 15);
-  const strip = (t) => { const at = new Map(); t.rows.forEach((r) => { if (!at.has(r.slot) || r.place < at.get(r.slot).place) at.set(r.slot, r); }); return `<div class="rx-strip" style="--n:${n}">${d3.range(n).map((i) => { const r = at.get(i); return r ? `<i title="${title(r)}">${medal(r.place, 18)}</i>` : '<i class="nil"></i>'; }).join('')}</div>`; };
-  return `${axis(false)}<ol class="race">${list.map((t) => `<li class="${opts.hl && opts.hl === t.id ? 'hl' : ''}"><span class="rk">${t.rank}</span><span class="nm">${schoolLink(t.id, 20)}</span><span class="pts"><b>${t.pts}</b> pts</span>${strip(t)}</li>`).join('')}</ol>`;
+  const strip = (t) => { const at = new Map(); t.rows.forEach((r) => { if (!at.has(r.slot) || r.place < at.get(r.slot).place) at.set(r.slot, r); }); const qs = new Map(((S.qualBy && S.qualBy.get(t.id)) || []).map((r) => [r.slot, r])); return `<div class="rx-strip" style="--n:${n}">${d3.range(n).map((i) => { const r = at.get(i); if (r) return `<i title="${title(r)}">${medal(r.place, 18)}</i>`; const q = qs.get(i); return q ? `<i title="${esc(q.name)}: qualified at ${wLabel(q.w)}, did not place">${qpill(16)}</i>` : '<i class="nil"></i>'; }).join('')}</div>`; };
+  return `${axis(false)}<ol class="race">${list.map((t) => `<li class="${opts.hl && opts.hl === t.id ? 'hl' : ''}"><span class="rk">${S.real ? t.realRank || '' : t.rank}</span><span class="nm">${schoolLink(t.id, 20)}</span><span class="pts"><b>${S.real ? t.score : t.pts}</b> ${S.real ? '' : 'pts'}</span>${strip(t)}</li>`).join('')}</ol>`;
 }
 
 /* ---------- Pennsylvania by district: shade is the chosen score, label is the district ---------- */

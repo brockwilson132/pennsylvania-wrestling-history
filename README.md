@@ -9,9 +9,10 @@ Success is counted in medals: every state place earns points (16, 12, 9, 7, 5, 3
 - `site/` the site: static files, no build step. Open `site/index.html` or serve the folder.
   - `app/model.js` data and scoring · `app/ui.js` medals, district maps, badges · `app/charts.js` the mat, weight and race charts · `app/pages.js` pages and router
   - `data.js` champions and history, `medals.js` every place winner, `badges.js` school colors, `pa-map.js` district shapes, `logos/` school logos
-- `data/` source data. `data/medals/{YEAR}_{AAA|AA|single}.csv` holds every state place winner.
+- `data/` source data. `data/medals/{YEAR}_{AAA|AA|single}.csv` holds every state place winner; `data/brackets/` holds every state entrant and the official team scores, parsed from the bracket PDFs.
 - `tools/`
   - `node tools/build_medals.js` rebuilds `site/medals.js` from the CSVs
+  - `bash tools/fetch_brackets.sh` downloads the bracket PDFs (run on your own computer); `python3 tools/parse_state.py <folder>` reads them into `data/brackets/*.csv`; `node tools/build_brackets.js` builds `site/brackets.js` (qualifiers, grades, team scores)
   - `node tools/build_map.js` rebuilds `site/pa-map.js` (needs `d3`, `topojson-client`, `us-atlas`)
   - `python3 tools/make_logo.py "School" image.png` adds a logo to `site/logos/`
   - `node tools/shoot.js` and `node tools/interact.js` are the Playwright checks (layout at phone and desktop width, interactions)
