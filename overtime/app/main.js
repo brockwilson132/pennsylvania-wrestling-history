@@ -37,8 +37,9 @@
     let p = page, i = id;
     if (p === 'school' && !i) { i = lastSchool(); if (!i) { p = 'state'; } }
     if (p === 'school' && i) try { localStorage.setItem('ot-school', i); } catch (e) { /* none */ }
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[p](i); if (p === 'wrestler') loadBestWins(i);
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.lastRoute = page + '/' + id; }
+    main.innerHTML = PAGES[p](i); if (p === 'wrestler') { loadBestWins(i); loadCareer(i); }
+    if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     const cur = p === 'wrestler' ? 'wrestlers' : p;
     bnav.innerHTML = `<ul>${NAV.map(([k, l, h]) => `<li><a href="${k === 'school' ? '#school' + (lastSchool() ? '/' + lastSchool() : '') : h}" ${k === cur ? 'aria-current="page"' : ''}>${navIcon(k)}<span>${l}</span></a></li>`).join('')}</ul>`;
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
@@ -48,17 +49,24 @@
     showBracket(q.b, page === 'wrestler' ? id : null);
   }
   /* the wrestler page's best wins need his seasons' bout files */
+  /* his whole career: full district and regional fields for every season, then repaint */
+  function loadCareer(sl) {
+    const W = OT.getWrestler(sl); if (!W || W.full) return;
+    OT.fullCareer(W).then((changed) => { if (changed && route().page === 'wrestler' && route().id === sl) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
   function loadBestWins(sl) {
-    const W = OT.WRESTLER.get(sl) || OT.lowerWrestler(sl); if (!W) return; if (!W.lower) W.lower = OT.lowerFor(W.apps);
+    const W = OT.getWrestler(sl); if (!W) return; if (!W.lower) W.lower = OT.lowerFor(W.apps);
     const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { const el = document.getElementById('bestwins'); if (el && el.dataset.w === W.slug) el.innerHTML = OT.bestWinsHTML(W); });
   }
+  /* search: everyone in any bracket (the people index loads on first use) */
   function wireSearch() {
     const inp = document.getElementById('wsearch'); if (!inp) return;
-    const list = document.getElementById('wlist'), more = document.getElementById('wmore');
-    const ws = OT.wrestlersOf(OT.careerRows(OT.ROWS().filter((r) => r.place)).filter((r) => r.place));
-    const item = (w) => OT.wrestlerCard(w);
-    let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim().toLowerCase(); const hit = q ? ws.filter((w) => (w.name + ' ' + w.sch).toLowerCase().includes(q)) : ws; list.innerHTML = hit.slice(0, 60).map(item).join('') || '<div class="card empty">No one by that name.</div>'; more.textContent = hit.length > 60 ? `Showing 60 of ${hit.length}.` : `${hit.length} wrestler${hit.length === 1 ? '' : 's'}.`; }, 120); });
+    const list = document.getElementById('wlist'), more = document.getElementById('wmore'); const top = list.innerHTML, topNote = more.textContent;
+    OT.loadPeople();
+    const card = (p) => { const W = OT.WRESTLER.get(p.slug); if (W) { const w = OT.wrestlersOf(W.apps)[0]; if (w) { w.lower = OT.lowerFor(W.apps); return OT.wrestlerCard(w); } } return OT.personRow(p); };
+    let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = top; more.textContent = topNote; return; }
+      OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 60); list.innerHTML = hit.map(card).join('') || '<div class="card empty">No one by that name.</div>'; more.textContent = hit.length >= 60 ? 'Showing the top 60 by rating. Add a school or more of the name to narrow it.' : `${hit.length} wrestler${hit.length === 1 ? '' : 's'}.`; }); }, 150); });
   }
   const applyScope = () => { refreshPanel(); render(true); };
   document.addEventListener('click', (e) => {
@@ -68,19 +76,20 @@
     const cl = e.target.closest('button[data-clear]'); if (cl) { OT.clearFilters(cl.dataset.clear); applyScope(); return; }
     const fc = e.target.closest('button[data-f]'); if (fc) { const k = fc.dataset.f; OT.toggleFilter(k, k === 'districts' ? +fc.dataset.v : fc.dataset.v); applyScope(); return; }
     const b = e.target.closest('button[data-cls]'); if (b) { setCls(b.dataset.cls); applyScope(); return; }
-    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(); return; }
-    const lk = e.target.closest('button[data-lkind]'); if (lk) { state.lchild = lk.dataset.lkind; render(true); return; }
+    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(true); return; }
+    const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
+    const rs = e.target.closest('button[data-rsort]'); if (rs) { state.rsort = rs.dataset.rsort; render(true); return; }
+    const ra = e.target.closest('button[data-rall]'); if (ra) { state.rall = ra.dataset.rall === '1'; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }
     const bs = e.target.closest('button[data-bvsort]'); if (bs) { state.bvsort = bs.dataset.bvsort; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; bview.scrollTop = top; } return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }
     const bl = e.target.closest('a.bl[data-bl]'); if (bl) { e.preventDefault(); slideTo(bl); return; }
-    const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) pod.hidden = open; }
+    const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) { if (!open && pod.dataset.sd && !pod.dataset.done) { pod.innerHTML = OT.seasonDetail(pod.dataset.sd); pod.dataset.done = '1'; } pod.hidden = open; } }
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('submit', (e) => { const f = e.target.closest('form[data-wrange]'); if (!f) return; e.preventDefault(); setWin({ mode: 'custom', from: +f.from.value, to: +f.to.value }); applyScope(); });
   document.addEventListener('input', (e) => { if (e.target.id === 'psearch') { panelQ = e.target.value; refreshPanel(); } });
-  document.addEventListener('click', (e) => { const th = e.target.closest('th[data-sort]'); if (th) { state.wsort = th.dataset.sort; render(true); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelOpen()) closePanel(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
   /* the tapped line slides to the top of the bracket while the rest fade, then we go there */
