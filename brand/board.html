@@ -38,10 +38,10 @@ const ticks=(cx,cy,r1,r2,n,col,w)=>Array.from({length:n},(_,i)=>{const a=i/n*2*M
 const hand=(cx,cy,len,deg,col,w)=>{const a=(deg-90)*Math.PI/180;return `<line x1="${cx}" y1="${cy}" x2="${cx+len*Math.cos(a)}" y2="${cy+len*Math.sin(a)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`};
 // A — OT monogram: geometric O (same O as the wordmark), slab T, red center
 function markA(fg=C.chalk,bg=C.mat,dot=C.siren,size=1){
-  const R=52, cx=74, cy=96, sw=R*0.3;
+  const R=56, cx=76, cy=96, sw=34;
   return `<svg width="${300*size}" height="${180*size}" viewBox="0 0 300 180">
   <circle cx="${cx}" cy="${cy}" r="${R-sw/2}" fill="none" stroke="${fg}" stroke-width="${sw}"/>
-  <circle cx="${cx}" cy="${cy}" r="${R*0.17}" fill="${dot}"/>
+  <circle cx="${cx}" cy="${cy}" r="9" fill="${dot}"/>
   <path d="M140 44 H256 V76 H216 V148 H180 V76 H140 Z" fill="${fg}"/>
   <text x="256" y="166" text-anchor="end" font-family="'Barlow Condensed'" font-weight="700" font-size="14" letter-spacing="5" fill="${fg}" opacity=".7">PENNSYLVANIA</text>
   </svg>`;
