@@ -24,6 +24,7 @@
     if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
     bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
     const me = bview.querySelector('.bvl.me'); if (me) me.scrollIntoView({ block: 'center' });
+    const k = OT.parseBkey(key); if (k && k.lvl !== 'state' && !OT.lowerLoaded(k.year, k.lvl)) OT.loadLower(k.year, k.lvl).then(() => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; bview.scrollTop = top; } });
   }
   let lastBase = '';
   function render(keepScroll) {
@@ -59,6 +60,7 @@
     const fc = e.target.closest('button[data-f]'); if (fc) { const k = fc.dataset.f; OT.toggleFilter(k, k === 'districts' ? +fc.dataset.v : fc.dataset.v); applyScope(); return; }
     const b = e.target.closest('button[data-cls]'); if (b) { setCls(b.dataset.cls); applyScope(); return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(); return; }
+    const lk = e.target.closest('button[data-lkind]'); if (lk) { state.lchild = lk.dataset.lkind; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }

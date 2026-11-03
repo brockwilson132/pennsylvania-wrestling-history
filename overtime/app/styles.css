@@ -196,3 +196,5 @@ td.xc{text-align:center}
 .slot .pl .yr{display:inline-flex;align-items:center;gap:3px;text-decoration:none;color:var(--ash);font:700 10px var(--cond)}.slot .pl .yr:hover{color:var(--chalk)}
 .prow a.w{text-decoration:none;color:inherit}.prow a.w:hover{color:var(--gold)}
 .slot>a{text-decoration:none;color:inherit;display:grid;gap:2px;min-width:0}.slot>a b,.slot>a small{display:block}
+
+.pill.adv{box-shadow:0 0 0 2px var(--gold)}.bvl .nx em{display:inline-block;margin-left:6px;padding:1px 5px;border-radius:5px;font:700 10px var(--cond);letter-spacing:.04em;color:var(--mat)}.bvl .nx em.c1{background:var(--m1)}.bvl .nx em.c2{background:var(--m2)}.bvl .nx em.c3{background:var(--m3)}.bvl .nx em.c4{background:var(--m4)}.bvl .nx em.c5{background:var(--m5);color:var(--chalk)}.bvl .nx em.cq{background:transparent;border:1px solid var(--ash);color:var(--ash)}

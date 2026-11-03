@@ -112,25 +112,25 @@
     const th = (c, i) => { const sortable = opts.sortKey && (c === 'Score' || (X && c === X.label)); const key = c === 'Score' ? 'pts' : X && c === X.label ? X.key : null; const on = sortable && opts.sortKey === key;
       return `<th class="${i < 2 ? 'l ' : ''}${i === 0 ? 'sticky1' : i === 1 ? 'sticky2' : ''}${sortable ? ' sortable' : ''}${on ? ' on' : ''}"${sortable ? ` data-sort="${key}" role="button" tabindex="0" title="Sort by ${c}"` : ''}>${c}${on ? ' ▾' : ''}</th>`; };
     return `<div class="tw"><table><thead><tr>${cols.map(th).join('')}</tr></thead><tbody>${body}</tbody></table></div>${more}
-      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1${state.adj ? ', adjusted for field strength (× 0.88–1.12 by tier)' : ''}. A school's seasons in the other class count at 85%. Window: ${windowLabel()}.</div>`;
+      <div class="note">${opts.note || `Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1${state.adj ? ', adjusted for field strength (× 0.88–1.12 by tier)' : ''}. A school's seasons in the other class count at 85%. Window: ${windowLabel()}.`}</div>`;
   }
   /* wrestler rows as rankings (Score, Medals, places); Era/Power shown as career share */
   function wrestlerRank(rows, opts = {}) {
-    const ws = OT.wrestlersOf(careerRows(rows.filter((r) => r.place)).filter((r) => r.place)); if (!ws.length) return empty('No placewinners in ' + clsName().toLowerCase() + '.');
-    const tot = d3.sum(seasonsInScope(), (S) => S.avail) || 1;
+    const ws = OT.wrestlersOf(opts.prepared ? rows.filter((r) => r.place) : careerRows(rows.filter((r) => r.place)).filter((r) => r.place)); if (!ws.length) return empty('No placewinners in ' + clsName().toLowerCase() + '.');
+    const tot = (opts.prepared ? d3.sum(Array.from(new Set(rows.filter((r) => r.place).map((r) => r.lvl + '|' + r.year + '|' + (r.lvl === 'district' ? r.d : r.region)))), (k) => { const [l, y, c] = k.split('|'); return OT.lowerAvail(l, +y, l === 'district' ? +c : c); }) : d3.sum(seasonsInScope(), (S) => S.avail)) || 1;
     const [, last] = OT.yearsInScope();
     const sortKey = state.wsort === 'field' ? 'field' : 'pts';
     const list = ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => OT.apts(r) * Math.pow(0.5, (last - r.year) / 7)) / tot * 100 }))
       .sort((a, b) => sortKey === 'field' ? ((b.field || 0) - (a.field || 0) || b.pts - a.pts) : (b.pts - a.pts || b.titles - a.titles));
-    return rankTable(list, { limit: opts.limit || 25, sub: (o) => (opts.school ? '' : esc(o.sch)) + ' ' + o.years, moreHref: opts.moreHref, sortKey,
+    return rankTable(list, { limit: opts.limit || 25, note: opts.note, sub: (o) => (opts.school ? '' : esc(o.sch)) + ' ' + o.years, moreHref: opts.moreHref, sortKey,
       extra: { label: 'Field', key: 'field', cell: (o) => o.field ? bandIcon(o.field, 12, `average over ${o.apps.length} bracket${o.apps.length === 1 ? '' : 's'}`) : '·' } });
   }
 
   /* all-time teams */
-  function teamsBlock(rows) {
-    const T = allTimeTeams(careerRows(rows.filter((r) => r.place)).filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
+  function teamsBlock(rows, opts = {}) {
+    const T = allTimeTeams(opts.prepared ? rows.filter((r) => r.place) : careerRows(rows.filter((r) => r.place)).filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
     return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<div class="slot t${i + 1}"><a href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small></a><span class="pl">${s.rows.map((r) => `<a class="yr" href="${OT.bhref(OT.bkey(r))}" title="${ordinal(r.place)} ${r.year} · open the bracket"><i style="background:${MED[r.place - 1]}"></i>${String(r.year).slice(2)}</a>`).join('')}${bandIcon(OT.avgTier(s.rows), 9, 'average over the seasons at this weight')}</span></div>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
-      <div class="note">Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team. Anyone who placed in the window is in; his whole career counts.</div>`;
+      <div class="note">${opts.note || 'Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team. Anyone who placed in the window is in; his whole career counts.'}</div>`;
   }
 
   /* seasons drawer */
@@ -150,13 +150,30 @@
     return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
   }
 
-  /* lower-level dominance (district / regional brackets) */
+  /* lower-level dominance (district / regional brackets): the unit's own tournament results, never mixed with state */
+  function lowerSeasons(u, lvl, rows, teams) {
+    const champs = d3.group(teams.filter((t) => t.place === 1), (t) => t.year), mine = u.kind === 'school' ? d3.group(teams, (t) => t.year) : null;
+    const years = Array.from(new Set(rows.map((r) => r.year).concat(teams.map((t) => t.year)))).sort((a, b) => b - a);
+    if (!years.length) return empty('No seasons on file.');
+    const body = years.map((y) => { const rs = rows.filter((r) => r.year === y && r.place); const ch = champs.get(y) || []; const me = mine && mine.get(y);
+      const label = u.kind === 'school' ? (me && me.length ? `${ordinal(me[0].place)} as a team · ${me[0].pts}` : rs.length ? `${rs.filter((r) => r.place === 1).length} title${rs.filter((r) => r.place === 1).length === 1 ? '' : 's'}` : '–') : ch.length ? ch.map((t) => `${esc(t.sch)}${u.kind === 'region' || /_|-/.test(t.unit) ? ` <span class="muted">${esc(OT.unitLabel(lvl, t.unit).replace(/^District \d+ ?/, ''))}</span>` : ''} ${t.pts}`).join(' · ') : '–';
+      const byW = d3.groups(rs.sort((a, b) => a.wn - b.wn || a.place - b.place), (r) => r.unit + '|' + r.w);
+      const podium = `<div class="podium" hidden>${byW.map(([k, v]) => `<div class="prow"><a class="w" href="${OT.bhref(OT.bkey(v[0]))}" title="open the ${y} ${wShort(v[0].w)} bracket">${wShort(v[0].w)}${byW.some(([k2]) => k2 !== k && k2.split('|')[1] === v[0].w) ? ` <small class="muted">${esc(OT.unitLabel(lvl, v[0].unit).replace(/^District \d+ ?/, ''))}</small>` : ''} ${bandFor(v[0], 10)}</a><div class="ps">${v.map((r) => `<span><i style="color:${MED[Math.min(r.place, 8) - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}</div>`;
+      return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${y}</span><span class="c">${label}</span><span class="n">${rs.length} medal${rs.length === 1 ? '' : 's'}</span></div>${podium}`; }).join('');
+    return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${years.length}</b> <span class="muted">seasons · ${years[years.length - 1]}–${years[0]}</span></span><span class="k">Open</span></summary><div class="body">${body}</div></details>`;
+  }
   function lowerBlock(u, lvl) {
-    const rows = lowerRows(lvl).filter((r) => (state.cls === 'ALL' || r.cls === state.cls) && (u.kind === 'district' ? r.d === u.id : u.kind === 'region' ? r.region === u.id : r.sch === u.id));
     const title = lvl === 'district' ? 'District results' : 'Regional results';
-    if (!rows.length) return section(title, empty(`${title} are being collected from the bracket archive. This block will rank the same way as the state block, from ${lvl} brackets only, and nothing here mixes with state numbers.`));
-    const ws = OT.wrestlersOf(rows);
-    return section(title, rankTable(ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 0, power: 0 })), { limit: 15 }));
+    const rows = OT.lowerUnitRows(u, lvl), teams = OT.lowerTeamRows(u, lvl), cov = OT.lowerCoverage(u, lvl);
+    if (!rows.length) return section(title, empty(cov.n ? `No ${lvl} medals for ${esc(u.name)} in this scope.` : `The archive has no ${lvl} brackets for ${esc(u.name)}${state.cls !== 'ALL' ? ' in ' + clsName() : ''}.`));
+    const o = OT.lowerStats(u, lvl, rows); const tt = u.kind === 'school' ? teams.filter((t) => t.place === 1).length : null;
+    const hero = `<div class="hero" style="margin:0 0 12px">${[['Medals', o.medals], ['Titles', o.titles], u.kind === 'school' ? ['Team titles', tt] : ['Tournaments', cov.n], ['Seasons', cov.first ? `${cov.first}–${cov.last}` : '–']].map(([l, v]) => `<div><b>${typeof v === 'number' ? fmt(v) : v}</b><span>${l}</span></div>`).join('')}</div>`;
+    const kind = u.kind === 'region' && state.lchild === 'district' ? 'district' : 'school';
+    const toggle = u.kind === 'region' ? `<div class="tbar" style="margin-bottom:10px"><div class="seg sm"><button data-lkind="school" aria-pressed="${kind === 'school'}">Schools</button><button data-lkind="district" aria-pressed="${kind === 'district'}">Districts</button></div></div>` : '';
+    const note = `Era: share of the ${lvl === 'district' ? "district's" : "region's"} ${lvl} points, summed across seasons (×100). Power: the same with a 7-season half-life. Score: ${lvl} placement points, 16-12-9-7-5-3-2-1${state.adj ? ', adjusted for field strength' : ''}. From ${lvl} brackets only; nothing here mixes with state results. ${cov.n} tournament${cov.n === 1 ? '' : 's'} on file${cov.first ? `, ${cov.first}–${cov.last}` : ''}.`;
+    const rank = u.kind === 'school' ? wrestlerRank(rows, { school: true, limit: 20, prepared: true, note }) : rankTable(OT.lowerRankings(u, lvl, kind), { limit: 20, note, sub: kind === 'school' && u.kind !== 'district' ? (x) => 'D' + (x.rows[0] && x.rows[0].d || '') : null });
+    const teamsN = `Best ${lvl} career at each weight by placement points, from ${lvl} brackets only.`;
+    return section(title, hero + toggle + rank) + section(`All-time ${lvl} teams`, teamsBlock(rows, { prepared: true, note: teamsN })) + section(`${lvl === 'district' ? 'District' : 'Regional'} seasons`, lowerSeasons(u, lvl, rows, teams));
   }
 
   /* medal chips */
@@ -167,7 +184,7 @@
     const id = OT.SB && OT.SB.identity(w.sch); const p1 = (id && id.primary) || '#5F6B78', p2 = (id && id.secondary) || '#EEEAE1';
     const badge = OT.SB ? OT.SB.svg(w.sch, { size: 34, variant: 'chip', title: false }) : '';
     const reg = (OT.schoolRegion && OT.schoolRegion(w.sch)) || '';
-    const M = careerCells(w.apps);
+    const M = careerCells(w.apps, w.lower);
     return `<a class="wc" href="${w.href}" style="--p1:${p1};--p2:${p2}">
       <span class="badge">${badge}</span>
       <span class="who"><b>${esc(w.name)}</b><small>${esc(w.sch)} · ${w.years}</small></span>
@@ -178,18 +195,24 @@
 
   /* career grid */
   /* career matrix: 3 levels × 4 grade slots. Each cell: null | {place, q, pend, year, w, src} */
-  function careerCells(apps) {
-    const slotOf = (g) => apps.find((a) => gradeSlot(a, apps) === g);
+  function careerCells(apps, lowerIn) {
+    const low = lowerIn || OT.lowerFor(apps);
+    const years = Array.from(new Set(apps.map((a) => a.year).concat(low.map((r) => r.year)))).sort((a, b) => a - b);
+    const pseudo = years.map((y) => apps.find((a) => a.year === y) || { ...(low.find((r) => r.year === y && r.grade) || low.find((r) => r.year === y)), year: y, pseudo: true });
+    const slotOf = (g) => pseudo.find((p) => gradeSlot(p, pseudo) === g);
+    const higher = (lvl, y) => (lvl === 'district' ? apps.some((a) => a.year === y) || low.some((r) => r.lvl === 'regional' && r.year === y) : apps.some((a) => a.year === y));
     const cell = (lvl, g) => {
-      const s = slotOf(g); if (!s) return null;
-      const base = { year: s.year, w: s.w, r: s };
-      if (lvl === 'state') return s.place ? { ...base, place: s.place } : { ...base, q: true };
-      const low = lowerRows(lvl).filter((a) => OT.wKey(a) === OT.wKey(apps[0])); const r = low.find((a) => a.year === s.year);
-      if (r) return r.place ? { ...base, place: r.place } : { ...base, q: true };
-      if (lvl === 'regional' && s.year >= 1951 && s.reg) return { ...base, place: s.reg, src: 'Regional place, from the state seed' };
-      if (lvl === 'district' && s.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'District place, from the state seed' };
-      if (lvl === 'district' && s.year >= 1951) return { ...base, pend: true };
-      return { ...base, none: true };
+      const p = slotOf(g); if (!p) return null;
+      const s = apps.find((a) => a.year === p.year); const base = { year: p.year, w: p.w, r: s || p };
+      if (lvl === 'state') return s ? (s.place ? { ...base, place: s.place } : { ...base, q: true }) : { ...base, none: true };
+      const r = low.find((x) => x.lvl === lvl && x.year === p.year);
+      if (r) return { ...base, r, w: r.w, place: r.place };
+      if (!higher(lvl, p.year)) return { ...base, none: true };
+      const cls = s ? s.cls : p.cls; const unit = lvl === 'district' ? (s ? s.d : p.d) : (s ? (s.region || OT.regionOf(s, cls === 'single' ? s.k : cls)) : p.region);
+      if (OT.lowerCovered(lvl, p.year, cls, unit)) return { ...base, q: true, src: 'advanced without a recorded place' };
+      if (lvl === 'regional' && s && p.year >= 1951 && s.reg) return { ...base, place: s.reg, src: 'from the state seed; no regional file' };
+      if (lvl === 'district' && s && p.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'from the state seed; no district file' };
+      return { ...base, pend: true };
     };
     return { cols: [0, 1, 2, 3].map(slotOf), rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((g) => cell(k, g)) })) };
   }
@@ -200,13 +223,13 @@
     const edge = col ? ` style="box-shadow:inset 0 4px 0 ${col}"` : '';
     const b = band && c.r && tier ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
     if (c.place) return `<${tag}${hr} class="${cls} ${pc(c.place)}"${edge} title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}${href ? ' · open the bracket' : ''}">${c.place}${b}</${tag}>`;
-    if (c.pend) return `<${tag}${hr} class="${cls} pend" title="${c.year} · district bracket not loaded yet">Q</${tag}>`;
+    if (c.pend) return `<div class="${cls} pend" title="${c.year} · no bracket file on the archive for this tournament">Q</div>`;
     return `<${tag}${hr} class="${cls} cq"${edge} title="${c.year} qualifier${href ? ' · open the bracket' : ''}">Q${b}</${tag}>`;
   };
   function careerGrid(W) {
-    const M = careerCells(W.apps);
-    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', r.k === 'state', c && !c.none ? OT.bhref(OT.bkey(c.r, r.k)) : null)).join('')}`).join('')}</div>
-      <div class="note">Tap any season to open that tournament's bracket. The colored edge on a state cell is the strength of that bracket, green (open) to red (gauntlet), from what its entrants did in other seasons. District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
+    const M = careerCells(W.apps, W.lower);
+    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', true, c && !c.none && !c.pend ? OT.bhref(OT.bkey(c.r, r.k)) : null)).join('')}`).join('')}</div>
+      <div class="note">Tap any season to open that tournament's bracket. The colored edge is the strength of that bracket, green (open) to red (gauntlet), from what its entrants did at the next levels and in other seasons. An outlined Q is a tournament he came through without a recorded place; a dashed Q means the archive has no file for it.</div>`;
   }
 
   /* road to Hershey: one season as a line across the state */
@@ -231,11 +254,11 @@
   function bracketView(key, focusSlug) {
     const F = OT.bracketField(key); if (!F) return '';
     const lvlName = { state: 'State', regional: 'Regional', district: 'District' }[F.lvl];
-    const unit = F.lvl === 'state' ? 'PIAA' : F.lvl === 'district' ? 'District ' + String(F.unit).replace(/^D/, '') : (OT.REGIONS[F.unit] || F.unit) + ' Region';
-    const title = `${F.year} · ${lvlName} · ${unit} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
+    const unit = F.unitLabel;
+    const title = `${F.year} · ${unit}${F.lvl === 'state' ? ' State' : ''} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
     const dot = F.tier ? bandIcon(F.tier, 16, F.info && F.info.top && F.info.top.length ? 'in the bracket: ' + F.info.top.map((t) => t.name).join(', ') : '') : '';
     const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${dot ? `<div class="bvdot">${dot}</div>` : ''}</div>`;
-    if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : 'This bracket arrives with the archive: district and regional fields are being parsed from the PDFs now.');
+    if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
     const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 52 : 48, BW = phone ? 54 : 110, H = n * RH;
     const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
     let ys = F.entrants.map((_, i) => i * RH + RH / 2), paths = [];
@@ -249,11 +272,13 @@
       const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
       const ped = e.career.length ? `<span class="ped" title="other seasons: ${e.career.map((x) => x.year + ' ' + ordinal(x.place)).join(', ')}">${e.career.slice(0, 6).map((x) => `<i style="background:${MED[x.place - 1]}"></i>`).join('')}${e.career.length > 6 ? `<small>+${e.career.length - 6}</small>` : ''}</span>` : '';
       const other = F.lvl === 'state' && e.career.length ? `<span class="oth">${e.career.map((x) => `<em class="${pc(x.place)}" title="${x.year} · ${wShort(x.w)}">${String(x.year).slice(2)}·${x.place}</em>`).join('')}</span>` : '';
-      const fin = r.place ? `<span class="pill ${pc(r.place)}">${ordinal(r.place)}</span>` : `<span class="pill cq">${r.place === 0 ? 'Q' : 'DNP'}</span>`;
+      const fin = r.place ? `<span class="pill ${pc(r.place)}${e.adv ? ' adv' : ''}" title="${e.adv ? 'advanced to the next level' : ''}">${ordinal(r.place)}</span>` : `<span class="pill cq">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
+      const nx = e.sameSeason ? `<span class="nx" title="that season at states: ${e.sameSeason.place ? ordinal(e.sameSeason.place) : 'qualified'}"><em class="${e.sameSeason.place ? pc(e.sameSeason.place) : 'cq'}">${e.sameSeason.place ? 'ST ' + e.sameSeason.place : 'ST Q'}</em></span>` : '';
       const meta = [r.grade, r.record].filter(Boolean).join(' · ');
-      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}</small>${other}</a>${ped}${fin}</div>`;
+      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}</small>${other}${nx}</a>${ped}${fin}</div>`;
     }).join('');
-    return head + `<div class="bvbody"><div class="bvlines">${lines}</div>${svg}</div><div class="note">Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished. Dots after a name are his medals in other seasons; the gold line is the wrestler you came from.</div>`;
+    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}; a gold edge marks them.` : '';
+    return head + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div><div class="note">${F.loading ? 'Loading the full field… ' : ''}Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished.${advNote} Dots after a name are his state medals in other seasons; ST shows that season's state finish; the gold line is the wrestler you came from.</div>`;
   }
 
   Object.assign(OT, { tierColor, bracketView, bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
