@@ -262,5 +262,22 @@ const OT = (window.OT = {});
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 
-  Object.assign(OT, { SB, setAdjust, ADJ, TIER_NAMES, fieldInfo, fieldTier, fieldOf, lowerFieldTier, lowerFieldInfo, adjMult, apts, avgTier, regionInfo, regionTier, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  /* ---- tournament brackets (the field of one year · class · level · unit · weight) ----
+     key: year.cls.state.wn  |  year.cls.district.D11.wn  |  year.cls.regional.NE.wn */
+  const bkey = (r, lvl = r.lvl || 'state') => lvl === 'state' ? `${r.year}.${r.cls}.state.${r.wn}` : `${r.year}.${r.cls}.${lvl}.${lvl === 'district' ? 'D' + (r.d || '?') : (r.region || '?')}.${r.wn}`;
+  const parseBkey = (k) => { const p = String(k || '').split('.'); if (p.length < 4) return null; const [year, cls, lvl] = p; return lvl === 'state' ? { year: +year, cls, lvl, wn: +p[3] } : { year: +year, cls, lvl, unit: p[3], wn: +p[4] }; };
+  const seedNum = (r) => (r.lvl === 'state' || !r.lvl) ? (r.year >= 1951 ? (r.reg || 99) : (r.dist || 99)) : (r.seed || 99);
+  function bracketField(key) {
+    const k = parseBkey(key); if (!k) return null;
+    let rows;
+    if (k.lvl === 'state') rows = APP.filter((r) => r.year === k.year && r.cls === k.cls && r.wn === k.wn);
+    else rows = LOWER.filter((r) => r.lvl === k.lvl && r.year === k.year && r.cls === k.cls && r.wn === k.wn && (k.lvl === 'district' ? 'D' + r.d === k.unit : r.region === k.unit));
+    rows = rows.slice().sort((a, b) => (a.place || 99) - (b.place || 99) || seedNum(a) - seedNum(b) || a.name.localeCompare(b.name));
+    const w = rows[0] ? rows[0].w : String(k.wn);
+    const tier = k.lvl === 'state' ? fieldTier(k.year, k.cls, w) : lowerFieldTier(k.lvl, k.year, k.cls, w);
+    const info = k.lvl === 'state' ? fieldInfo(k.year, k.cls, w) : lowerFieldInfo(k.lvl, k.year, k.cls, w);
+    const entrants = rows.map((r) => { const W = WRESTLER.get(wSlug(r.name, r.sch)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; return { r, slug: wSlug(r.name, r.sch), career, seedLabel: r.lvl === 'state' || !r.lvl ? (r.year >= 1951 ? (r.region ? `${r.region}-${r.reg || '?'}` : (r.reg ? String(r.reg) : '')) : (r.dist ? `D${r.d}-${r.dist}` : `D${r.d}`)) : (r.seed ? String(r.seed) : '') }; });
+    return { ...k, key, w, tier, info, entrants, next: k.lvl === 'state' ? 'HERSHEY' : k.lvl === 'regional' ? 'TO STATES' : 'TO REGIONALS' };
+  }
+  Object.assign(OT, { bkey, parseBkey, bracketField, SB, setAdjust, ADJ, TIER_NAMES, fieldInfo, fieldTier, fieldOf, lowerFieldTier, lowerFieldInfo, adjMult, apts, avgTier, regionInfo, regionTier, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();

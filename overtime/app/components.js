@@ -19,9 +19,11 @@
     wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
   };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
-  /* field-strength band: four vertical stripes, 1–4 filled (like ankle-band stripes). Never a word; the tier name lives in the title. */
-  const bandIcon = (tier, h = 12, extra = '') => { if (!tier) return ''; const t = Math.max(1, Math.min(4, Math.round(tier))); const w = h * 1.25, sw = w / 7;
-    return `<svg class="band" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Field strength ${t} of 4"><title>${OT.TIER_NAMES[t]} field${extra ? ' · ' + extra : ''}</title>${[0, 1, 2, 3].map((i) => `<rect x="${i * sw * 2}" y="0" width="${sw}" height="${h}" rx="${sw / 2}" fill="${i < t ? C.chalk : C.line}"/>`).join('')}</svg>`; };
+  /* difficulty glyph: a small mat (filled circle with a thinner inner ring) colored green → red by tier. Never a word; the tier name lives in the title. */
+  const TIER_COLORS = [null, '#2EC27E', '#B8C94A', '#F08A24', '#FF3B2F'];
+  const tierColor = (tier) => tier ? TIER_COLORS[Math.max(1, Math.min(4, Math.round(tier)))] : null;
+  const bandIcon = (tier, h = 12, extra = '') => { if (!tier) return ''; const t = Math.max(1, Math.min(4, Math.round(tier))); const col = TIER_COLORS[t], r = h / 2;
+    return `<svg class="band" width="${h}" height="${h}" viewBox="0 0 ${h} ${h}" role="img" aria-label="Field strength ${t} of 4"><title>${OT.TIER_NAMES[t]} field${extra ? ' · ' + extra : ''}</title><circle cx="${r}" cy="${r}" r="${r}" fill="${col}"/><circle cx="${r}" cy="${r}" r="${r * 0.58}" fill="none" stroke="${C.mat}" stroke-width="${Math.max(1, h / 9)}" opacity=".85"/></svg>`; };
   const fieldTip = (r) => { const f = OT.fieldInfo(r.year, r.cls, r.w); return f && f.top.length ? 'in the bracket: ' + f.top.map((t) => t.name).join(', ') : ''; };
   const bandFor = (r, h = 12) => bandIcon(OT.fieldOf(r), h, fieldTip(r));
   const classToggle = () => `<div class="seg" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((k) => `<button data-cls="${k}" aria-pressed="${state.cls === k}">${k === 'ALL' ? 'All' : k}</button>`).join('')}</div>`;
@@ -127,7 +129,7 @@
   /* all-time teams */
   function teamsBlock(rows) {
     const T = allTimeTeams(careerRows(rows.filter((r) => r.place)).filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
-    return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<a class="slot t${i + 1}" href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small><span class="pl">${s.rows.map((r) => `<i style="background:${MED[r.place - 1]}" title="${ordinal(r.place)} ${r.year}"></i>`).join('')}${bandIcon(OT.avgTier(s.rows), 9, 'average over the seasons at this weight')}</span></a>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
+    return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<div class="slot t${i + 1}"><a href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small></a><span class="pl">${s.rows.map((r) => `<a class="yr" href="${OT.bhref(OT.bkey(r))}" title="${ordinal(r.place)} ${r.year} · open the bracket"><i style="background:${MED[r.place - 1]}"></i>${String(r.year).slice(2)}</a>`).join('')}${bandIcon(OT.avgTier(s.rows), 9, 'average over the seasons at this weight')}</span></div>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
       <div class="note">Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team. Anyone who placed in the window is in; his whole career counts.</div>`;
   }
 
@@ -140,7 +142,7 @@
       const n = `${t.n || 0} medal${t.n === 1 ? '' : 's'}${t.titles ? ` · ${t.titles} title${t.titles === 1 ? '' : 's'}` : ''}`;
       const pod = t.rows.filter((r) => r.place).sort((a, b) => a.slot - b.slot || a.place - b.place);
       const byW = d3.groups(pod, (r) => r.w);
-      const podium = `<div class="podium" hidden>${byW.map(([w, rs]) => `<div class="prow"><div class="w">${wShort(w)} ${bandFor(rs[0], 10)}</div><div class="ps">${rs.map((r) => `<span><i style="color:${MED[r.place - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}</div>`;
+      const podium = `<div class="podium" hidden>${byW.map(([w, rs]) => `<div class="prow"><a class="w" href="${OT.bhref(OT.bkey(rs[0]))}" title="open the ${s.year} ${wShort(w)} bracket">${wShort(w)} ${bandFor(rs[0], 10)}</a><div class="ps">${rs.map((r) => `<span><i style="color:${MED[r.place - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}</div>`;
       const rband = u.kind === 'region' && s.cls !== 'single' ? bandIcon(OT.regionTier(s.year, s.cls, u.id), 12, 'region strength that season: share of state medal points over share of qualifiers') : '';
       return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${s.year}</span><span class="c">${label}</span><span class="n">${rband ? rband + ' ' : ''}${n}</span></div>${podium}`;
     }).join('');
@@ -191,17 +193,20 @@
     };
     return { cols: [0, 1, 2, 3].map(slotOf), rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((g) => cell(k, g)) })) };
   }
-  const cellHTML = (c, cls, band) => {
+  const cellHTML = (c, cls, band, href) => {
+    const tag = href ? 'a' : 'div', hr = href ? ` href="${href}"` : '';
     if (!c || c.none) return `<div class="${cls}"></div>`;
-    const b = band && c.r ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
-    if (c.place) return `<div class="${cls} ${pc(c.place)}" title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}">${c.place}${b}</div>`;
-    if (c.pend) return `<div class="${cls} pend" title="${c.year} · district bracket not loaded yet">Q</div>`;
-    return `<div class="${cls} cq" title="${c.year} qualifier">Q${b}</div>`;
+    const tier = band && c.r ? OT.fieldOf(c.r) : null, col = tierColor(tier);
+    const edge = col ? ` style="box-shadow:inset 0 4px 0 ${col}"` : '';
+    const b = band && c.r && tier ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
+    if (c.place) return `<${tag}${hr} class="${cls} ${pc(c.place)}"${edge} title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}${href ? ' · open the bracket' : ''}">${c.place}${b}</${tag}>`;
+    if (c.pend) return `<${tag}${hr} class="${cls} pend" title="${c.year} · district bracket not loaded yet">Q</${tag}>`;
+    return `<${tag}${hr} class="${cls} cq"${edge} title="${c.year} qualifier${href ? ' · open the bracket' : ''}">Q${b}</${tag}>`;
   };
   function careerGrid(W) {
     const M = careerCells(W.apps);
-    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', r.k === 'state')).join('')}`).join('')}</div>
-      <div class="note">The stripes on a state cell are the strength of that bracket (1–4, from what its entrants did in other seasons). District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
+    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', r.k === 'state', c && !c.none ? OT.bhref(OT.bkey(c.r, r.k)) : null)).join('')}`).join('')}</div>
+      <div class="note">Tap any season to open that tournament's bracket. The colored edge on a state cell is the strength of that bracket, green (open) to red (gauntlet), from what its entrants did in other seasons. District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
   }
 
   /* road to Hershey: one season as a line across the state */
@@ -220,5 +225,36 @@
       </svg>`;
   }
 
-  Object.assign(OT, { bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  /* ---- tournament bracket view: one year · level · unit · weight, in the app's bracket language ----
+     No bout data yet, so pairings are not fabricated: entrants sit on the left in seed order, the joins are structure
+     only, and each finish is a medal pill at the end of the line. */
+  function bracketView(key, focusSlug) {
+    const F = OT.bracketField(key); if (!F) return '';
+    const lvlName = { state: 'State', regional: 'Regional', district: 'District' }[F.lvl];
+    const unit = F.lvl === 'state' ? 'PIAA' : F.lvl === 'district' ? 'District ' + String(F.unit).replace(/^D/, '') : (OT.REGIONS[F.unit] || F.unit) + ' Region';
+    const title = `${F.year} · ${lvlName} · ${unit} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
+    const dot = F.tier ? bandIcon(F.tier, 16, F.info && F.info.top && F.info.top.length ? 'in the bracket: ' + F.info.top.map((t) => t.name).join(', ') : '') : '';
+    const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${dot ? `<div class="bvdot">${dot}</div>` : ''}</div>`;
+    if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : 'This bracket arrives with the archive: district and regional fields are being parsed from the PDFs now.');
+    const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? 52 : 48, BW = phone ? 54 : 110, H = n * RH;
+    const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
+    let ys = F.entrants.map((_, i) => i * RH + RH / 2), paths = [];
+    for (let k = 0; k < rounds; k++) { const x0 = k * step, x1 = (k + 1) * step, next = []; for (let i = 0; i < ys.length; i += 2) { const a = ys[i], b = ys[i + 1]; if (b == null) { paths.push(`M${x0} ${a} H${x1}`); next.push(a); continue; } const m = (a + b) / 2; paths.push(`M${x0} ${a} H${x1} V${b} H${x0}`); next.push(m); } ys = next; }
+    const fy = ys[0], fx = rounds * step; paths.push(`M${fx} ${fy} H${BW - 20}`);
+    const term = F.lvl === 'state' ? `<circle cx="${BW - 10}" cy="${fy}" r="7.5" fill="none" stroke="${C.chalk}" stroke-width="2.4"/><circle cx="${BW - 10}" cy="${fy}" r="2.4" fill="${C.red}"/>` : `<circle cx="${BW - 10}" cy="${fy}" r="5" fill="${C.chalk}"/>`;
+    const label = `<text transform="translate(${BW - 22} ${Math.min(H - 70, fy + 14)}) rotate(90)" text-anchor="start" font-family="Barlow Condensed" font-weight="700" font-size="10" letter-spacing="2" fill="${C.ash}">${F.next}</text>`;
+    const svg = `<svg class="bvjoins" width="${BW}" height="${H}" viewBox="0 0 ${BW} ${H}" aria-hidden="true"><path d="${paths.join(' ')}" fill="none" stroke="${C.line2 || C.ash}" stroke-width="1"/>${term}${n > 3 ? label : ''}</svg>`;
+    const lines = F.entrants.map((e) => {
+      const r = e.r, me = e.slug === focusSlug;
+      const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
+      const ped = e.career.length ? `<span class="ped" title="other seasons: ${e.career.map((x) => x.year + ' ' + ordinal(x.place)).join(', ')}">${e.career.slice(0, 6).map((x) => `<i style="background:${MED[x.place - 1]}"></i>`).join('')}${e.career.length > 6 ? `<small>+${e.career.length - 6}</small>` : ''}</span>` : '';
+      const other = F.lvl === 'state' && e.career.length ? `<span class="oth">${e.career.map((x) => `<em class="${pc(x.place)}" title="${x.year} · ${wShort(x.w)}">${String(x.year).slice(2)}·${x.place}</em>`).join('')}</span>` : '';
+      const fin = r.place ? `<span class="pill ${pc(r.place)}">${ordinal(r.place)}</span>` : `<span class="pill cq">${r.place === 0 ? 'Q' : 'DNP'}</span>`;
+      const meta = [r.grade, r.record].filter(Boolean).join(' · ');
+      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}</small>${other}</a>${ped}${fin}</div>`;
+    }).join('');
+    return head + `<div class="bvbody"><div class="bvlines">${lines}</div>${svg}</div><div class="note">Pairings and bout scores come with the next parse; until then lines show the field in seed order and where each wrestler finished. Dots after a name are his medals in other seasons; the gold line is the wrestler you came from.</div>`;
+  }
+
+  Object.assign(OT, { tierColor, bracketView, bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

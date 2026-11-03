@@ -13,11 +13,23 @@
   const NAV = [['state', 'State', '#state'], ['region', 'Region', '#region'], ['district', 'District', '#district'], ['school', 'School', '#school'], ['wrestlers', 'Wrestlers', '#wrestlers']];
   const lastSchool = () => { try { return localStorage.getItem('ot-school') || ''; } catch (e) { return ''; } };
   function route() {
-    const h = (location.hash || '#state').slice(1); const [page, ...rest] = h.split('/'); const id = rest.join('/');
-    return { page: PAGES[page] ? page : 'state', id: decodeURIComponent(id || '') };
+    const raw = (location.hash || '#state').slice(1); const [h, qs] = raw.split('?'); const [page, ...rest] = h.split('/'); const id = rest.join('/');
+    const q = {}; (qs || '').split('&').forEach((kv) => { const [k, v] = kv.split('='); if (k) q[k] = decodeURIComponent(v || ''); });
+    return { page: PAGES[page] ? page : 'state', id: decodeURIComponent(id || ''), q, base: '#' + h };
   }
+  /* href for the same page with a bracket overlay open (key) or closed (null) */
+  OT.bhref = (key) => { const r = route(); return key ? `${r.base}?b=${encodeURIComponent(key)}` : r.base; };
+  const bview = document.getElementById('bview');
+  function showBracket(key, focus) {
+    if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
+    bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
+    const me = bview.querySelector('.bvl.me'); if (me) me.scrollIntoView({ block: 'center' });
+  }
+  let lastBase = '';
   function render(keepScroll) {
-    const { page, id } = route();
+    const { page, id, q, base } = route();
+    if (base === lastBase && (q.b || bview && !bview.hidden)) { showBracket(q.b, page === 'wrestler' ? id : null); drawChips(); return; }
+    lastBase = base;
     let p = page, i = id;
     if (p === 'school' && !i) { i = lastSchool(); if (!i) { p = 'state'; } }
     if (p === 'school' && i) try { localStorage.setItem('ot-school', i); } catch (e) { /* none */ }
@@ -29,6 +41,7 @@
     drawChips();
     if (!keepScroll) window.scrollTo(0, 0);
     wireSearch();
+    showBracket(q.b, page === 'wrestler' ? id : null);
   }
   function wireSearch() {
     const inp = document.getElementById('wsearch'); if (!inp) return;
@@ -57,7 +70,8 @@
   document.addEventListener('input', (e) => { if (e.target.id === 'psearch') { panelQ = e.target.value; refreshPanel(); } });
   document.addEventListener('change', (e) => { if (e.target.matches('input[data-adjust]')) { OT.setAdjust(e.target.checked); applyScope(); } });
   document.addEventListener('click', (e) => { const th = e.target.closest('th[data-sort]'); if (th) { state.wsort = th.dataset.sort; render(true); } });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelOpen()) closePanel(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelOpen()) closePanel(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
+  bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
   /* the tapped line slides to the top of the bracket while the rest fade, then we go there */
   function slideTo(bl) {
     const box = bl.parentElement, top = box.getBoundingClientRect().top, me = bl.getBoundingClientRect().top;
