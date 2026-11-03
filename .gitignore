@@ -3,3 +3,5 @@ shots/
 *.log
 .DS_Store
 site/test.html
+data/difficulty/wrestler_seasons.csv
+tools/__pycache__/
