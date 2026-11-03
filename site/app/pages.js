@@ -17,7 +17,6 @@ VIEWS.home = function () {
   const dRank = dists.slice().sort((p, q) => score(q) - score(p));
   if (!state.dsel || !dBy.has(state.dsel)) state.dsel = dRank[0].u.d;
   const top = progs.slice().sort((p, q) => q.now - p.now).slice(0, 10);
-  const weights = STD.map((c) => ({ c, rs: rows.filter((r) => stdOf(r).k === c.k) })).filter((o) => o.rs.length > 20);
   const seasons = seasonsInScope();
   const wins = d3.rollups(seasons, (v) => v.length, (S) => S.teams[0].id).sort((p, q) => q[1] - p[1]);
   const Wall = wrestlersOf(rows), W4 = Wall.filter((w) => w.n >= 4), W3 = Wall.filter((w) => w.titles === 3), W4c = Wall.filter((w) => w.titles >= 4);
@@ -37,8 +36,8 @@ VIEWS.home = function () {
     <div class="panel tight"><table class="rank home-top"><thead><tr><th class="n">#</th><th>Program</th><th class="n">Power</th><th class="n">Trend</th><th class="hide-m">Medals, last 7 seasons</th></tr></thead><tbody>${top.map((o, i) => `<tr><td class="n rk">${i + 1}</td><td class="nm"><span class="nmw">${schoolLink(o.u.name)}${o.u.d ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.now)}</b></td><td class="n">${trendTxt(o.trend)}</td><td class="hide-m">${shelf(o.recent, { size: 15, compact: true })}</td></tr>`).join('')}</tbody></table></div>
   </section>
 
-  <section class="sec">${sec('Strength at each weight', 'The district and program with the largest share of each weight’s points, and the wrestler with the most points there.', null, '<a class="more" href="#weights">Weights</a>')}
-    <div class="panel tight"><table class="wtab"><thead><tr><th>Weight</th><th>Strongest district</th><th class="hide-m">Strongest program</th><th>Best wrestler</th></tr></thead><tbody>${weights.map((o) => { const d = topBy(o.rs, (r) => r.d), sc = topBy(o.rs, (r) => r.sch), w = wrestlersOf(o.rs)[0]; return `<tr><td><a class="wlink" href="#weights/${o.c.k}">${o.c.label}</a></td><td>${distLink(+d.k, { map: false })} <span class="idx">${pct0(d.share)} of points</span></td><td class="hide-m">${schoolLink(sc.k, 18)}</td><td>${w ? `<a href="${wrestlerHref(w.rows[0])}" class="wname">${esc(w.name)}</a> <span class="career sm">${w.rows.map((r) => medal(r.place, 15)).join('')}</span> <span class="idx">${w.pts} pts</span>` : ''}</td></tr>`; }).join('')}</tbody></table></div>
+  <section class="sec">${sec('All-time teams', 'An all-star lineup from every season: at each weight, the wrestlers with the most points there, each placed once at his best weight. Programs and Districts show who has taken the biggest share of each weight’s points.', null, '<a class="more" href="#weights">Weights</a>')}
+    <div data-c="teams"></div>
   </section>
 
   <section class="sec">${sec('The state in numbers', '')}
@@ -59,6 +58,7 @@ VIEWS.home = function () {
   <section class="sec">${sec('How the map has shifted', 'Each district’s share of the state’s points, decade by decade. The last bar is the current decade.')}
     <div class="smalls dec">${decD.map((o) => `<a class="small" href="#district/${o.d}"><div class="small-h">${distLabel(o.d, { mapW: 30 })}</div><div class="decbars">${decades.map((dc) => `<i title="${dc}s: ${pct1(o.by.get(dc) || 0)}" style="height:${((o.by.get(dc) || 0) / decMax * 100).toFixed(1)}%"></i>`).join('')}</div><div class="decax"><span>${decades[0]}s</span><span>${pct0(o.by.get(decades[decades.length - 1]) || 0)} now</span></div></a>`).join('')}</div>
   </section>`;
+  teamsSection(host('teams'), rows, 'state');
   const m = stateMap(host('pamap'), Object.fromEntries(dists.map((o) => [o.u.d, score(o)])), { select: (d) => { state.dsel = d; card(); }, tipText: (d) => { const o = dBy.get(d); return o ? `${mode === 'era' ? 'Era' : 'Power'} ${scoreFmt(score(o))}, ${ordinal(dRank.indexOf(o) + 1)}` : 'no medals'; } });
   const card = () => {
     const o = dBy.get(state.dsel); m.paint(state.dsel);
@@ -75,6 +75,25 @@ VIEWS.home = function () {
   card();
   $view.querySelectorAll('[data-hr]').forEach((bt) => bt.addEventListener('click', () => { state.homeRank = bt.dataset.hr; state.dsel = null; render(); }));
 };
+/* all-time teams, as a multi-view section. scope: 'state' | 'district' | 'school' */
+function teamsSection(h, rows, scope) {
+  const T = allTimeTeams(rows, 3);
+  const D = scope === 'state' ? weightLeaders(rows, (r) => r.d) : null;
+  const P = scope !== 'school' ? weightLeaders(rows, (r) => r.sch) : null;
+  const views = [['w', 'Wrestlers']].concat(P ? [['p', 'Programs']] : []).concat(D ? [['d', 'Districts']] : []);
+  let view = 'w', team = 0;
+  const draw = () => {
+    const teamSeg = view === 'w' ? `<div class="seg sm" role="group">${['First team', 'Second team', 'Third team'].map((l, i) => `<button type="button" data-team="${i}" aria-pressed="${team === i}">${l}</button>`).join('')}</div>` : '';
+    h.querySelector('.tm-tools').innerHTML = `${views.length > 1 ? `<div class="seg" role="group">${views.map(([v, l]) => `<button type="button" data-view="${v}" aria-pressed="${view === v}">${l}</button>`).join('')}</div>` : ''}${teamSeg}`;
+    let body = '';
+    if (view === 'w') body = `<table class="team"><thead><tr><th>Weight</th><th>Wrestler</th><th class="hide-m">School</th><th>Seasons</th><th>Medals</th><th class="n">Pts</th></tr></thead><tbody>${T.map(({ c, slots }) => { const e = slots[team]; return `<tr><td class="wk">${c.label}</td>${e ? `<td class="nm"><a class="wname" href="${e.href}">${esc(e.name)}</a>${scope === 'state' ? dtag(e.d) : ''}<span class="show-m t3">${esc(e.sch)}</span></td><td class="hide-m">${schoolLink(e.sch, 18)}</td><td class="t3">${e.years}</td><td><span class="career sm">${e.rows.map((r) => medal(r.place, 16, `${r.year}, ${ordinal(r.place)}`)).join('')}</span></td><td class="n"><b>${e.pts}</b></td>` : '<td colspan="5" class="t3">—</td>'}</tr>`; }).join('')}</tbody></table>`;
+    else { const L = view === 'p' ? P : D; body = `<table class="team"><thead><tr><th>Weight</th><th>First</th><th>Second</th><th class="hide-m">Third</th></tr></thead><tbody>${L.map(({ c, slots }) => `<tr><td class="wk">${c.label}</td>${[0, 1, 2].map((i) => { const e = slots[i]; return `<td class="${i === 2 ? 'hide-m' : ''}">${e ? `${view === 'p' ? schoolLink(e.id, 18) : distLink(+e.id, { map: false })}<span class="t3 shr">${pct0(e.share)} · ${e.places[0]} titles</span>` : ''}</td>`; }).join('')}</tr>`).join('')}</tbody></table>`; }
+    h.querySelector('.tm-body').innerHTML = body;
+  };
+  h.innerHTML = `<div class="tm-tools"></div><div class="tm-body panel tight"></div>`;
+  h.addEventListener('click', (e) => { const v = e.target.closest('[data-view]'); if (v) { view = v.dataset.view; draw(); } const t = e.target.closest('[data-team]'); if (t) { team = +t.dataset.team; draw(); } });
+  draw();
+}
 /* the district whose share of a weight's points most exceeds its overall share (districts with at least 2% overall) */
 function overIndex(rs, all) { const T = d3.sum(rs, (r) => r.pts) || 1, A = d3.sum(all, (r) => r.pts) || 1; const ov = d3.rollup(all, (v) => d3.sum(v, (r) => r.pts) / A, (r) => r.d); return d3.rollups(rs, (v) => d3.sum(v, (r) => r.pts) / T, (r) => r.d).filter(([d]) => ov.get(d) >= 0.02).map(([d, share]) => ({ d, share, overall: ov.get(d), idx: share / ov.get(d) })).sort((p, q) => q.idx - p.idx)[0]; }
 /* the unit with the largest share of these rows' points */
@@ -91,8 +110,8 @@ function rankingTable(h, kind, opts = {}) {
     if (dsel) L = L.filter((o) => o.u.d === +dsel);
     const maxPts = d3.max(rows, (o) => o.pts);
     const th = (k, l, t) => `<th class="n"><button type="button" data-sort="${k}" aria-pressed="${key === k}" title="${t || ''}">${l}${key === k ? ' ↓' : ''}</button></th>`;
-    h.querySelector('.rt').innerHTML = `<table class="rank"><thead><tr><th class="n">#</th><th>${kind === 'district' ? 'District' : 'Program'}</th>${th('all', 'Era score', 'All-time: share of each season’s points, summed')}${th('now', 'Power', 'Now: the same, with a seven-season half-life')}${th('trend', 'Trend', 'Last ten seasons against the ten before')}<th class="hide-m">Last 20 seasons</th>${th('titles', 'Medals', 'Sort by titles')}${th('won', 'Team races won', 'Seasons first in placement points')}</tr></thead>
-      <tbody>${L.slice(0, limit).map((o, i) => `<tr><td class="n rk">${key === 'all' ? o.allRank : key === 'now' ? o.nowRank : i + 1}</td><td class="nm"><span class="nmw">${unitLink(o.u)}${kind === 'school' && o.u.d && !opts.noTag ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.allTime)}</b></td><td class="n"><b>${scoreFmt(o.now)}</b></td><td class="n">${trendTxt(o.trend)}</td><td class="hide-m">${spark(o.spark)}</td><td class="n hide-m">${shelf4(o.places)}</td><td class="n hide-m">${o.won || ''}</td></tr>`).join('')}</tbody></table>
+    h.querySelector('.rt').innerHTML = `<table class="rank"><thead><tr><th class="n">#</th><th>${kind === 'district' ? 'District' : 'Program'}</th>${th('all', 'Era score', 'All-time: share of each season’s points, summed')}${th('now', 'Power', 'Now: the same, with a seven-season half-life')}<th class="n hide-m"><button type="button" data-sort="trend" aria-pressed="${key === 'trend'}" title="Era score, last ten seasons against the ten before">Trend${key === 'trend' ? ' ↓' : ''}</button></th><th class="hide-m">Last 20 seasons</th>${th('titles', 'Medals', 'Sort by titles')}<th class="n hide-m"><button type="button" data-sort="won" aria-pressed="${key === 'won'}" title="Seasons first in placement points">Team races won${key === 'won' ? ' ↓' : ''}</button></th></tr></thead>
+      <tbody>${L.slice(0, limit).map((o, i) => `<tr><td class="n rk">${key === 'all' ? o.allRank : key === 'now' ? o.nowRank : i + 1}</td><td class="nm"><span class="nmw">${unitLink(o.u)}${kind === 'school' && o.u.d && !opts.noTag ? dtag(o.u.d) : ''}</span></td><td class="n"><b>${scoreFmt(o.allTime)}</b></td><td class="n"><b>${scoreFmt(o.now)}</b></td><td class="n hide-m">${trendTxt(o.trend)}</td><td class="hide-m">${spark(o.spark)}</td><td class="n">${shelf4(o.places)}</td><td class="n hide-m">${o.won || '<span class="t3">–</span>'}</td></tr>`).join('')}</tbody></table>
       ${L.length > limit ? `<button type="button" class="btn more-btn" data-more>Show all ${L.length}</button>` : ''}`;
   };
   h.innerHTML = `${opts.tools === false ? '' : `<div class="tools">${kind === 'school' ? `<input class="field" type="search" placeholder="Find a program" aria-label="Find a program"><select class="field" aria-label="District"><option value="">All districts</option>${d3.range(1, 13).map((d) => `<option value="${d}">District ${d}, ${esc(DISTRICTS[d].short)}</option>`).join('')}</select>` : ''}</div>`}<div class="rt"></div>`;
@@ -102,10 +121,10 @@ function rankingTable(h, kind, opts = {}) {
   if (sel) sel.addEventListener('change', () => { dsel = sel.value; draw(); });
   draw();
 }
-const METHOD = `<details class="method"><summary>How the numbers work</summary><p>Every place earns points: 16, 12, 9, 7, 5, 3, 2, 1 for 1st through 8th. <b>All-time</b> adds up a program’s share of the points available each season, times 100, so a title in a 1950s bracket with four places counts the same as one in today’s eight-place bracket. <b>Now</b> is the same with a seven-season half-life, about one roster generation: a medal from seven seasons ago counts half. A <b>team race</b> is the season’s standings by placement points.</p><p>PIAA team scores also count advancement and bonus points, which the results sheets don’t record, so these team races are reconstructions. Checked against the real Class AAA team champions since 1974, they name the same champion in 47 of 53 seasons.</p></details>`;
+const METHOD = `<details class="method"><summary>How the numbers work: era score, power, trend</summary><p>Every place earns points: 16, 12, 9, 7, 5, 3, 2, 1 for 1st through 8th. <b>All-time</b> adds up a program’s share of the points available each season, times 100, so a title in a 1950s bracket with four places counts the same as one in today’s eight-place bracket. <b>Now</b> is the same with a seven-season half-life, about one roster generation: a medal from seven seasons ago counts half. A <b>team race</b> is the season’s standings by placement points.</p><p>PIAA team scores also count advancement and bonus points, which the results sheets don’t record, so these team races are reconstructions. Checked against the real Class AAA team champions since 1974, they name the same champion in 47 of 53 seasons.</p></details>`;
 VIEWS.rankings = function (arg) {
   const kind = arg === 'districts' ? 'district' : 'school';
-  $view.innerHTML = `<header class="page-head"><h1>Rankings</h1><p class="lede">Every ${kind === 'district' ? 'district' : 'program'} in ${clsName()}, ranked by its medals. Tap a column to sort.</p>${seg('kind', [['programs', 'Programs'], ['districts', 'Districts']], kind === 'district' ? 'districts' : 'programs')}</header>${DEFS}${METHOD}<div data-c="rt"></div>`;
+  $view.innerHTML = `<header class="page-head"><h1>Rankings</h1><p class="lede">Every ${kind === 'district' ? 'district' : 'program'} in ${clsName()}, ranked by its medals. Tap a column to sort.</p>${seg('kind', [['programs', 'Programs'], ['districts', 'Districts']], kind === 'district' ? 'districts' : 'programs')}</header>${METHOD}<div data-c="rt"></div>`;
   $view.querySelectorAll('[data-kind]').forEach((b) => b.addEventListener('click', () => { location.hash = b.dataset.kind === 'districts' ? '#rankings/districts' : '#rankings'; }));
   rankingTable(host('rt'), kind, { limit: kind === 'district' ? 12 : 50 });
 };
@@ -122,9 +141,9 @@ function programPage(u) {
     : `<div class="ph-mark">${chip(u.name, 72)}</div><div class="ph-id"><p class="crumb">${u.d ? distLink(u.d, { mapW: 30 }) : ''}</p><h1>${esc(u.name)}</h1>${classLine(u.name)}</div>`;
   if (!st.medals) { $view.innerHTML = `<header class="ph">${head}</header><p class="lede">No ${clsName()} state medals on record. ${other.map((c) => `<button type="button" class="btn" data-cls="${c}">Show ${clsName(c)}</button>`).join(' ')} <button type="button" class="btn" data-cls="ALL">Show all classes</button></p>`; bindCls(); return; }
   const nums = [
-    [scoreFmt(st.allTime), 'Era score', `${ordinal(me.allRank)} of ${R.length} all-time`],
-    [scoreFmt(st.now), 'Power', `${ordinal(me.nowRank)} of ${R.length} now`],
-    [trendTxt(st.trend), 'Trend', 'last 10 seasons vs the 10 before'],
+    [scoreFmt(st.allTime), 'Era score', `${ordinal(me.allRank)} of ${R.length} ${isD ? 'districts' : 'programs'}, all-time`],
+    [scoreFmt(st.now), 'Power', `${ordinal(me.nowRank)} of ${R.length}, now`],
+    [trendTxt(st.trend), 'Trend', 'era score pts, last 10 seasons vs the 10 before'],
     [fmt(st.pts), 'Points', plural(st.medals, 'medal')],
     [st.won, 'Team races won', st.won ? `first in placement points` : 'by placement points'],
     st.best ? [st.best.year, 'Best season', `${st.best.pts} pts, ${ordinal(st.best.rank)}`] : null
@@ -132,9 +151,11 @@ function programPage(u) {
   if (titlesTeam.length) nums.push([titlesTeam.length, 'AAA team titles', titlesTeam.map((t) => t.year).slice(-3).join(', ') + (titlesTeam.length > 3 ? '…' : '')]);
   if (state.year == null || !st.seasons.some((s) => s.year === state.year) || state.yearFor !== unitName(u)) { state.year = st.last; state.yearFor = unitName(u); }
   const W = wrestlersOf(st.rows);
+  const progSec = isD ? `<section class="sec">${sec('Its programs', `District ${u.d} schools, ranked by era score.`)}<div data-c="dprog"></div></section>` : '';
   $view.innerHTML = `<header class="ph">${head}</header>
     <dl class="nums">${nums.map(([v, l, s]) => `<div><dd>${v}</dd><dt>${l}</dt><span>${s}</span></div>`).join('')}</dl>
     <div class="shelf-row">${shelf(st.places, { size: 22, zeros: true })}</div>
+    ${progSec}
     <section class="sec">${sec('Every medal, season by season', `Each spoke is a ${clsName()} season, clockwise from ${a} at the top; each ring is a spot in that season’s lineup, lightest at the center.${isD ? ' Titles are bright; other medals are dimmed so the titles read.' : ''}`)}
       <div class="matbox"><div class="mat-host" data-c="pmat"></div>
         <aside class="season"><div data-c="strip"></div><p class="strip-cap">Bars: share of each season’s points, colored by team-race finish.</p>
@@ -142,7 +163,7 @@ function programPage(u) {
           <div id="card" aria-live="polite"></div></aside></div>
     </section>
     <section class="sec">${sec('Where on the scale', `Each bar is a weight class: ${isD ? 'the district’s' : esc(u.name) + '’s'} share of all the points won there, split by medal. The level line is its share overall.`)}<p class="lean" id="lean"></p><div class="panel">${tierKey()}<div data-c="wc"></div></div></section>
-    ${isD ? `<section class="sec">${sec('Its programs', `District ${u.d} schools, ranked.`)}<div data-c="dprog"></div></section>` : ''}
+    <section class="sec">${sec('All-time lineup', `${isD ? 'The district’s' : esc(u.name) + '’s'} best at each weight, each wrestler placed once at his best weight. Use the tabs for the second and third teams${isD ? ', or the district’s leading programs at each weight' : ''}.`)}<div data-c="teams"></div></section>
     <section class="sec">${sec(isD ? 'Its best wrestlers' : 'Its wrestlers', 'Ranked by points; each medal in the order it was won.')}<div data-c="wr"></div></section>
     ${isD && u.d === 11 ? `<section class="sec">${sec('The District 11 tournament', `Champions at the District 11 AAA tournament, ${d3.min(D11, (r) => r.year)}–${d3.max(D11, (r) => r.year)}, by school.`)}<div class="panel"><div data-c="d11"></div></div></section>` : ''}`;
   bindCls();
@@ -158,7 +179,7 @@ function programPage(u) {
     $view.querySelector('#yr').textContent = y;
     const mine = s ? s.t.rows.slice().sort((p, q) => p.slot - q.slot) : [];
     card.innerHTML = `<p class="race-line">${s ? `<b>${ordinal(s.rank)}</b> of ${isD ? S.dists.length + ' districts' : S.teams.length + ' schools'} in the team race, <b>${s.pts}</b> points${s.rank > 1 ? `; ${isD ? 'District ' + S.dists[0].id : esc(S.teams[0].id)} led with ${(isD ? S.dists[0] : S.teams[0]).pts}` : ''}.` : `No ${clsName()} medals in ${y}.`}</p>
-      ${mine.length ? `<ol class="mlist">${mine.map((r) => `<li>${medal(r.place, 22)}<span class="w">${wShort(r.w)}</span><span class="nm">${esc(r.name)}</span>${isD ? schoolLink(r.sch, 18) : ''}</li>`).join('')}</ol>` : ''}
+      ${(() => { if (!mine.length) return ''; const li = (r) => `<li>${medal(r.place, 22)}<span class="w">${wShort(r.w)}</span><a class="nm wname" href="${wrestlerHref(r)}">${esc(r.name)}</a>${isD ? schoolLink(r.sch, 18) : ''}</li>`; if (!isD || mine.length <= 8) return `<ol class="mlist">${mine.map(li).join('')}</ol>`; const t = mine.filter((r) => r.place <= 3), rest = mine.filter((r) => r.place > 3); return `<ol class="mlist">${t.map(li).join('')}</ol>${rest.length ? `<details class="rest"><summary>${plural(rest.length, 'more medal')}</summary><ol class="mlist">${rest.map(li).join('')}</ol></details>` : ''}`; })()}
       ${S ? `<a class="more" href="#season/${y}">Open the ${y} season</a>` : ''}`;
   };
   const years = st.seasons.map((s) => s.year);
@@ -173,6 +194,7 @@ function programPage(u) {
   const hi = ws.classes.filter((c) => c.poolPts > 0).map((c) => ({ c, r: c.share / (ws.overall || 1) })).sort((p, q) => q.r - p.r);
   $view.querySelector('#lean').innerHTML = hi.length > 3 ? `Strongest at <b>${hi.slice(0, 2).map((x) => x.c.c.label).join(' and ')}</b>, where it wins ${pf(hi[0].c.share)} and ${pf(hi[1].c.share)} of the points against ${pf(ws.overall)} overall. Weakest at <b>${hi[hi.length - 1].c.c.label}</b> (${pf(hi[hi.length - 1].c.share)}).` : '';
   // wrestlers
+  teamsSection(host('teams'), st.rows, isD ? 'district' : 'school');
   wrestlerTable(host('wr'), W, { school: isD, limit: 25 });
   if (isD) rankingTable(host('dprog'), 'school', { filter: (o) => o.u.d === u.d, tools: false, limit: 15, noTag: true });
   if (isD && u.d === 11) { const by = d3.rollups(D11, (v) => v.length, (r) => r.sch).sort((p, q) => q[1] - p[1]).slice(0, 15); const mx = by[0][1]; host('d11').innerHTML = `<ol class="bars">${by.map(([s, n]) => `<li>${schoolLink(s, 18)}<span class="track"><i style="width:${(n / mx * 100).toFixed(1)}%"></i></span><b>${n}</b></li>`).join('')}</ol>`; }
@@ -229,7 +251,9 @@ VIEWS.season = function (arg) {
       <div class="panel race-host" data-c="race-${S.cls}"></div></section>
       <section class="sec">${sec(boards.length > 1 ? `${classLabel(S.cls)} finals` : 'The finals', '')}<ol class="finals">${finFor(S).map((f) => `<li><span class="w">${wShort(f.w)}</span><span class="f1">${medal(1, 22)}<span><a class="wname" href="${wrestlerHref(f.win)}">${esc(f.win.name)}</a>${schoolLink(f.win.sch, 16)}</span></span><span class="f2">${medal(2, 22)}<span><a class="wname" href="${wrestlerHref(f.lose)}">${esc(f.lose.name)}</a>${schoolLink(f.lose.sch, 16)}</span></span></li>`).join('') || '<li class="empty">Finals results are not on record for this season.</li>'}</ol></section>`).join('')}`;
   boards.forEach((S) => {
-    const draw = (mode) => { host('race-' + S.cls).innerHTML = raceBoard(S, { mode, limit: mode === 'districts' ? 12 : 40 }); };
+    let lim = 15;
+    const draw = (mode) => { S._mode = mode; host('race-' + S.cls).innerHTML = raceBoard(S, { mode, limit: mode === 'districts' ? 12 : lim }) + (mode === 'schools' && S.teams.length > lim ? `<button type="button" class="btn more-btn" data-more>Show all ${S.teams.length} schools</button>` : ''); };
+    host('race-' + S.cls).addEventListener('click', (e) => { if (e.target.closest('[data-more]')) { lim = 1e4; draw(S._mode); } });
     draw('schools');
     $view.querySelectorAll(`[data-race-${S.cls.toLowerCase()}]`).forEach((bt) => bt.addEventListener('click', () => { $view.querySelectorAll(`[data-race-${S.cls.toLowerCase()}]`).forEach((x) => x.setAttribute('aria-pressed', x === bt)); draw(bt.dataset['race-' + S.cls.toLowerCase()] || bt.getAttribute(`data-race-${S.cls.toLowerCase()}`)); }));
   });
@@ -293,10 +317,10 @@ VIEWS.records = function () {
   const wins = d3.rollups(seasons.filter((S) => S.teams.length), (v) => v.map((S) => S.year), (S) => S.teams[0].id).map(([s, ys]) => ({ s, ys })).sort((p, q) => q.ys.length - p.ys.length).slice(0, 10);
   const runs = d3.groups(rows, (r) => r.sch).map(([s, rs]) => { const ys = Array.from(new Set(rs.map((r) => r.year))).sort((p, q) => p - q); let bestR = { n: 0 }, cur = { n: 0 }; ys.forEach((y, i) => { cur = i && y === ys[i - 1] + 1 ? { n: cur.n + 1, from: cur.from, to: y } : { n: 1, from: y, to: y }; if (cur.n > bestR.n) bestR = cur; }); return { s, ...bestR }; }).sort((p, q) => q.n - p.n).slice(0, 10);
   const W = wrestlersOf(rows);
-  const greats = W.filter((w) => w.titles >= 3 || w.n >= 4).sort((p, q) => q.titles - p.titles || q.pts - p.pts);
+  const greats = W.filter((w) => w.titles >= 3 || w.n >= 4).sort((p, q) => q.pts - p.pts || q.titles - p.titles || q.n - p.n || p.rows[0].year - q.rows[0].year);
   const fin = FINALS.filter((f) => inScope(f.win)), rec = new Map();
   fin.forEach((f) => { [[f.win.sch, 1], [f.lose.sch, 0]].forEach(([s, w]) => { const o = rec.get(s) || { s, w: 0, l: 0 }; if (w) o.w++; else o.l++; rec.set(s, o); }); });
-  const fr = Array.from(rec.values()).filter((o) => o.w + o.l >= 8).sort((p, q) => q.w / (q.w + q.l) - p.w / (p.w + p.l)).slice(0, 12);
+  const fr = Array.from(rec.values()).filter((o) => o.w + o.l >= 12).sort((p, q) => q.w / (q.w + q.l) - p.w / (p.w + p.l)).slice(0, 12);
   $view.innerHTML = `<header class="page-head"><h1>Records</h1><p class="lede">The marks that stand out in ${clsName()}.</p></header>
     <div class="two">
       <section class="panel"><h3>Most team races won</h3><p class="sub">Seasons first in placement points.</p><ol class="rec">${wins.map((o) => `<li>${schoolLink(o.s, 20)}<b>${o.ys.length}</b><span class="yrs">${o.ys.slice(-6).join(', ')}${o.ys.length > 6 ? '…' : ''}</span></li>`).join('')}</ol></section>
@@ -304,9 +328,9 @@ VIEWS.records = function () {
     </div>
     <div class="two">
       <section class="panel"><h3>Longest runs with a medalist</h3><p class="sub">Consecutive seasons with at least one state place winner.</p><ol class="rec">${runs.map((o) => `<li>${schoolLink(o.s, 20)}<b>${o.n}</b><span class="yrs">${o.from}–${o.to}</span></li>`).join('')}</ol></section>
-      <section class="panel"><h3>Finals records</h3><p class="sub">Wins and losses in state finals, schools with eight or more.</p><ol class="rec">${fr.map((o) => `<li>${schoolLink(o.s, 20)}<b>${o.w}–${o.l}</b><span class="yrs">${pct0(o.w / (o.w + o.l))}</span></li>`).join('')}</ol></section>
+      <section class="panel"><h3>Finals records</h3><p class="sub">Wins and losses in state finals, schools with twelve or more.</p><ol class="rec">${fr.map((o) => `<li>${schoolLink(o.s, 20)}<b>${o.w}–${o.l}</b><span class="yrs">${pct0(o.w / (o.w + o.l))} in ${o.w + o.l} finals</span></li>`).join('')}</ol></section>
     </div>
-    <section class="sec">${sec('The great careers', 'Three-time champions and four-time place winners, each medal in order.')}<div data-c="gr"></div></section>`;
+    <section class="sec">${sec('The great careers', 'Three-time champions and four-time place winners, ranked by points, then titles, then medals.')}<div data-c="gr"></div></section>`;
   wrestlerTable(host('gr'), greats, { school: true, limit: 30 });
 };
 
@@ -324,7 +348,9 @@ VIEWS.about = function () {
     <p><b>Code and data.</b> <a href="https://github.com/brockwilson132/pennsylvania-wrestling-history">github.com/brockwilson132/pennsylvania-wrestling-history</a></p></div>`;
 };
 
-/* ================= chrome: scope, search, router ================= */
+VIEWS.notfound = () => { $view.innerHTML = `<header class="page-head"><h1>Not found</h1><p class="lede">Nothing lives at this address. <a href="#home">Back to the start</a>.</p></header>`; };
+
+/* ================= chrome: scope, router ================= */
 const NAV = [['home', 'Home'], ['rankings', 'Rankings'], ['schools', 'Schools'], ['weights', 'Weights'], ['wrestlers', 'Wrestlers'], ['season', 'Seasons'], ['records', 'Records'], ['about', 'About']];
 function chrome(route) {
   document.getElementById('scope').innerHTML = [['AAA', 'Class AAA'], ['AA', 'Class AA'], ['ALL', 'All']].map(([c, l]) => `<button type="button" data-scope="${c}" aria-pressed="${state.cls === c}">${l}</button>`).join('');
@@ -333,11 +359,12 @@ function chrome(route) {
 document.getElementById('scope').addEventListener('click', (e) => { const b = e.target.closest('[data-scope]'); if (!b || b.dataset.scope === state.cls) return; setCls(b.dataset.scope); state.year = null; state.dsel = null; render(); });
 function render() {
   const h = (location.hash || '#home').slice(1), [route, arg] = h.split('/');
-  const fn = VIEWS[route] || VIEWS.home;
+  const fn = VIEWS[route] || (route === 'home' || !route ? VIEWS.home : VIEWS.notfound);
   tip.hide();
   chrome(VIEWS[route] ? route : 'home');
   $view.innerHTML = '';
   fn(arg ? decodeURIComponent(arg) : undefined);
+  const h1 = $view.querySelector('h1'); document.title = (h1 && route !== 'home' ? h1.textContent.trim() + ' · ' : '') + 'PA Wrestling Almanac';
 }
 let lastRoute = null;
 addEventListener('hashchange', () => { const r = location.hash.split('/')[0]; if (r !== lastRoute) scrollTo(0, 0); lastRoute = r; render(); });

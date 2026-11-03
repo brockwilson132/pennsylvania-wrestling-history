@@ -2,11 +2,11 @@
 # Downloads the PIAA state and district bracket PDFs from PA-Wrestling.com's archive
 # into ./brackets, skipping files that don't exist. Run it on your own computer:
 #   bash tools/fetch_brackets.sh
-# then zip the folder (zip -r brackets.zip brackets) and attach it in the chat.
+# The PDFs land in ~/Projects/pa-wrestling/brackets.
 # It is polite to the server: one file at a time with a short pause.
 set -u
 BASE="https://brackets.pa-wrestling.com/pdfs"
-OUT="${1:-brackets}"
+OUT="${1:-$HOME/Projects/pa-wrestling/brackets}"
 mkdir -p "$OUT/state" "$OUT/district"
 get() { # url, dest
   [ -s "$2" ] && return 0

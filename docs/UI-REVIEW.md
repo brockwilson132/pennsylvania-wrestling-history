@@ -1,5 +1,7 @@
 # UI review, 2 November 2026
 
+Status: items 1–5 applied the same day (see commit 'Review items 1–5'). Item 6 waits on the bracket PDFs.
+
 Reviewed every page at 1440 and 390 px after the medals rebuild. Ordered by how much each item would improve the site.
 
 ## 1. Pages that do too much

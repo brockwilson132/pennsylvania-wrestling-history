@@ -187,3 +187,22 @@ const FINALS = (() => { const out = []; d3.group(MED, (r) => r.year + '|' + r.cl
 const TEAMS = (RAW.teams || []).map(([year, type, school, d, runner, tie]) => ({ year, type, school, sch: canon(school), d, runner, tie }));
 const D11 = (RAW.d11 || []).map(([year, w, name, school]) => ({ year, w, wn: wNum(w), name, school, sch: canon(school) }));
 const REG = (RAW.reg || []).map(([year, w, name, school, d]) => ({ year, w, wn: wNum(w), name, school, sch: canon(school), d: +d }));
+
+/* ---------- all-time teams: at each weight class, the wrestlers with the most points there ----------
+   A wrestler is placed once, at the class where he earned the most points, so the teams read as one lineup.
+   Ties: more titles, then more medals, then the earlier career. Returns {classes:[{c, slots:[entry, entry, entry]}]} */
+function allTimeTeams(rows, depth = 3) {
+  const byW = d3.group(rows, wKey);
+  const cands = [];
+  byW.forEach((rs) => {
+    const byC = d3.rollups(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), titles: v.filter((r) => r.place === 1).length, n: v.length, rows: v.slice().sort((a, b) => a.year - b.year) }), (r) => stdOf(r).k).sort((p, q) => q[1].pts - p[1].pts || q[1].titles - p[1].titles);
+    const [k, o] = byC[0]; const L = o.rows[o.rows.length - 1];
+    cands.push({ k, name: L.name, sch: L.sch, d: o.rows[0].d, pts: o.pts, titles: o.titles, n: o.n, rows: o.rows, years: o.rows[0].year === L.year ? String(L.year) : `${o.rows[0].year}–${L.year}`, href: wrestlerHref(L) });
+  });
+  const byK = d3.group(cands, (c) => c.k);
+  return STD.filter((c) => byK.has(c.k)).map((c) => ({ c, slots: byK.get(c.k).sort((p, q) => q.pts - p.pts || q.titles - p.titles || q.n - p.n || p.rows[0].year - q.rows[0].year).slice(0, depth) }));
+}
+/* at each weight class, the units (districts or programs) with the largest share of its points */
+function weightLeaders(rows, key, depth = 3) {
+  return STD.map((c) => { const rs = rows.filter((r) => stdOf(r).k === c.k); if (!rs.length) return null; const t = d3.sum(rs, (r) => r.pts); const L = d3.rollups(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), places: placeCounts(v) }), key).map(([id, o]) => ({ id, ...o, share: o.pts / t })).sort((p, q) => q.pts - p.pts).slice(0, depth); return { c, slots: L }; }).filter(Boolean);
+}

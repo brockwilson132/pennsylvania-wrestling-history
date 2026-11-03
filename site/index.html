@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PA Wrestling Almanac</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cdefs%3E%3CradialGradient id='g' cx='34%25' cy='28%25' r='78%25'%3E%3Cstop offset='0' stop-color='%23fbe7a1'/%3E%3Cstop offset='.58' stop-color='%23d4a33a'/%3E%3Cstop offset='1' stop-color='%237d5a12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='10' cy='10' r='9.3' fill='url(%23g)'/%3E%3Ctext x='10' y='10' dy='.36em' text-anchor='middle' font-family='Arial' font-weight='800' font-size='10.5' fill='%234a3306'%3E1%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Every Pennsylvania state wrestling champion and place winner since 1938, by school, district, weight and season.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Saira:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,6 +16,10 @@ html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--floor); color: var(--chalk); font: 15px/1.5 var(--body); }
 a { color: var(--chalk); }
 button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; }
+.seg.sm button { padding: 5px 10px; font-size: 12.5px; }
+.tm-tools { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 10px; }
+table.team td.wk { font: 400 18px var(--stencil); width: 56px; } table.team .shr { display: block; } table.team td.nm .dtag { margin-left: 6px; vertical-align: middle; }
 .btn { display: inline-grid; place-items: center; min-width: 36px; height: 34px; padding: 0 10px; background: var(--tile-2); border: 1px solid var(--seam); color: var(--chalk); cursor: pointer; text-decoration: none; }
 .btn:hover { border-color: var(--chalk-3); } .btn.off { opacity: .35; cursor: default; }
 .field { background: var(--tile); border: 1px solid var(--seam); color: var(--chalk); padding: 7px 10px; font: inherit; min-height: 36px; }
@@ -41,8 +46,9 @@ main > *, .sec > *, .panel > * { min-width: 0; }
 footer { max-width: var(--w); margin: 0 auto; padding: 0 20px 40px; color: var(--chalk-3); font-size: 13px; }
 /* type */
 h1 { font: 400 clamp(34px, 6vw, 56px)/1.02 var(--stencil); margin: 18px 0 8px; letter-spacing: .005em; }
-h2 { font: 400 24px/1.15 var(--stencil); margin: 0; letter-spacing: .01em; }
-h3 { font-size: 16px; margin: 0 0 2px; }
+h2 { font: 400 26px/1.15 var(--stencil); margin: 0; letter-spacing: .01em; }
+h3 { font-size: 15px; margin: 0 0 2px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--chalk-2); }
+.dc-h h3 { text-transform: none; letter-spacing: 0; color: var(--chalk); }
 .lede { color: var(--chalk-2); max-width: 760px; font-size: 16.5px; margin: 0 0 14px; }
 .sub { color: var(--chalk-2); margin: 4px 0 0; max-width: 780px; font-size: 14px; }
 .t3 { color: var(--chalk-3); font-size: 12.5px; }
@@ -204,7 +210,7 @@ table.wr td.nm b { display: block; } .yrs { color: var(--chalk-3); font-size: 12
 /* season */
 .season-head .yr-nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .season-head h1 { margin: 10px 0; }
-.finals { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.finals { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .finals li { display: grid; grid-template-columns: 50px minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: center; background: var(--tile); border: 1px solid var(--seam); padding: 8px 12px; }
 .finals .w { font: 400 20px var(--stencil); }
 .finals .f1, .finals .f2 { display: flex; gap: 10px; align-items: center; min-width: 0; }
@@ -267,9 +273,9 @@ a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decora
 }
 @media (max-width: 760px) {
   body { font-size: 14.5px; }
-  .bar { padding: 8px 14px; gap: 8px 10px; } main { padding: 4px 14px 60px; } nav#nav { padding: 0 14px; gap: 18px; }
-  .search { flex: 1 1 100%; order: 3; margin: 0; }
-  .brand { font-size: 18px; } .seg button { padding: 6px 9px; font-size: 13px; }
+  .bar { padding: 6px 14px; gap: 6px 10px; flex-wrap: nowrap; justify-content: space-between; } main { padding: 4px 14px 60px; } nav#nav { padding: 0 14px; gap: 16px; }
+  .brand { font-size: 16px; } .seg button { padding: 5px 8px; font-size: 12.5px; } #scope button { padding: 5px 8px; }
+  nav#nav a { padding: 6px 0 7px; font-size: 14px; }
   .key { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .two, .defs { grid-template-columns: 1fr; }
   .hide-m { display: none; } .show-m { display: block; color: var(--chalk-3); font-size: 12.5px; }
@@ -281,7 +287,7 @@ a.wname { font-weight: 700; text-decoration: none; } a.wname:hover { text-decora
   .rx-cols b { font-size: 9.5px; }
   .rx-strip i svg.md { width: 17px; height: 17px; }
   .rx-grid i .chip { width: 14px !important; height: 14px !important; }
-  .finals li { grid-template-columns: 40px minmax(0, 1fr); } .finals .f2 { grid-column: 2; }
+  .finals { grid-template-columns: 1fr; } .finals li { grid-template-columns: 40px minmax(0, 1fr); } .finals .f2 { grid-column: 2; }
   td, th { padding: 6px 5px; } td.nm .who { max-width: 150px; }
   table.rank td.nm .dtag { display: none; }
   .bars li { grid-template-columns: minmax(0, 1fr) 90px 30px; }
