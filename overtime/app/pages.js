@@ -54,7 +54,7 @@
   };
   PAGES.wrestlers = () => {
     const rows = OT.ROWS(); const ws = wrestlersOf(rows.filter((r) => r.place));
-    const item = (w) => `<a href="${w.href}"><span><b>${esc(w.name)}</b><small>${esc(w.sch)} · D${w.d} · ${w.years}</small></span><span class="ch">${OT.yearPills(w.apps)}</span></a>`;
+    const item = (w) => OT.wrestlerCard(w);
     return `<header class="uh"><div><h1>Wrestlers</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b> · ${fmt(ws.length)} placewinners · sorted by career points</div></div>${OT.scopeBar()}</header>
       <input class="search" id="wsearch" type="search" placeholder="Search a wrestler or school" autocomplete="off" aria-label="Search wrestlers">
       <div class="wl" id="wlist" data-n="${ws.length}">${ws.slice(0, 40).map(item).join('')}</div><div class="note" id="wmore">Showing 40 of ${fmt(ws.length)}. Type to search all.</div>`;

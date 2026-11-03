@@ -109,8 +109,16 @@ td.p0{color:var(--ash2)}td.p1{color:var(--m1);font-weight:700}td.p2{color:var(--
 .wl{display:grid;gap:8px;margin-top:12px}
 .wl a{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;min-height:60px}
 .wl b{font:700 18px var(--cond);text-transform:uppercase;letter-spacing:.02em}.wl small{color:var(--ash);display:block}
-.wl .ch{display:flex;justify-content:end}
-.yp{display:grid;grid-template-columns:repeat(4,34px);gap:4px}.yp .chip{min-width:34px;width:34px;height:40px;padding:3px 0 2px;display:grid;place-items:center;grid-template-rows:1fr auto;line-height:1;font-size:15px;border-radius:9px}.yp .chip small{font:700 10px var(--cond);letter-spacing:0;opacity:.9}.yp .chip.q small{opacity:.9}.yp .chip.none{border-style:dashed}
+.wc{display:grid;grid-template-columns:40px 1fr auto;grid-template-areas:"badge who where" "tiles tiles tiles";gap:6px 10px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:12px;text-decoration:none;color:inherit}
+.wc .badge{grid-area:badge;display:grid;place-items:center}.wc .badge svg{width:36px;height:36px;display:block}
+.wc .who{grid-area:who;min-width:0}.wc .who b{display:block;font:700 19px var(--cond);text-transform:uppercase;letter-spacing:.02em;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wc .who small{color:var(--ash);display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wc .where{grid-area:where;display:flex;gap:8px;align-items:center}.wc .where span{display:inline-flex;align-items:center;gap:3px;font:700 13px var(--cond);letter-spacing:.06em;color:var(--ash)}.wc .where svg{width:16px;height:16px;color:var(--ash)}
+.st{grid-area:tiles;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:2px}
+.st .tile{display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:1px;padding:6px 4px 5px;border-radius:10px;border:1.5px solid transparent;background:var(--mat);color:var(--chalk)}
+.st .tile .y{font:600 11px var(--cond);letter-spacing:.08em;color:var(--ash)}.st .tile .w{font:700 14px var(--cond);letter-spacing:.02em}.st .tile b{font:900 16px var(--cond);line-height:1.1;margin-top:1px}
+.st .tile.c1 b{color:var(--m1)}.st .tile.c2 b{color:var(--m2)}.st .tile.c3 b{color:var(--m3)}.st .tile.c4 b{color:var(--m4)}.st .tile.c5 b{color:var(--m5)}
+.st .tile.c1{border-color:var(--m1)}.st .tile.c2{border-color:var(--m2)}.st .tile.c3{border-color:var(--m3)}.st .tile.c4{border-color:var(--m4)}.st .tile.c5{border-color:var(--m5)}
+.st .tile.q{border-color:var(--line2)}.st .tile.q b{color:var(--ash)}.st .tile.none{border-style:dashed;border-color:var(--line);background:transparent}.st .tile.none .w,.st .tile.none .y{color:var(--line2)}
 /* career grid */
 .cg{display:grid;grid-template-columns:84px repeat(4,minmax(0,1fr));gap:6px;align-items:center}
 .cg .h{text-align:center}.cg .lab{padding-right:4px}

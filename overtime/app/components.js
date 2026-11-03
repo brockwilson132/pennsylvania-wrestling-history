@@ -122,11 +122,22 @@
 
   /* medal chips */
   const chips = (places) => places.map((n, i) => n ? `<span class="chip ${pc(i + 1)}" title="${n} × ${ordinal(i + 1)}">${n}×${i + 1}</span>` : '').join('');
-  /* one pill per season slot FR·SO·JR·SR: the place (medal color), Q for a trip without a medal, empty when no trip */
-  const yearPills = (apps) => {
+  /* wrestler card: badge + name + school, district/region as icons, then one season tile per slot FR·SO·JR·SR (year, weight, place) */
+  const seasonTiles = (apps) => {
     const slots = [null, null, null, null];
     apps.forEach((r) => { const i = OT.gradeSlot(r, apps); if (!slots[i] || (r.place && (!slots[i].place || r.place < slots[i].place))) slots[i] = r; });
-    return `<span class="yp">${slots.map((r, i) => r ? `<span class="chip ${r.place ? pc(r.place) : 'q'}" title="${r.year} · ${OT.GRADE_L[i]} · ${r.place ? ordinal(r.place) : 'qualified'}">${r.place ? r.place : 'Q'}<small>${String(r.year).slice(2)}</small></span>` : `<span class="chip none" aria-hidden="true">·</span>`).join('')}</span>`;
+    return `<div class="st">${slots.map((r, i) => r
+      ? `<div class="tile ${r.place ? pc(r.place) : 'q'}" title="${r.year} · ${OT.GRADE_L[i]} · ${OT.wShort(r.w)} · ${r.place ? ordinal(r.place) : 'qualified'}"><span class="y">${r.year}</span><span class="w">${OT.wShort(r.w)}</span><b>${r.place ? ordinal(r.place) : 'Q'}</b></div>`
+      : `<div class="tile none"><span class="y">${OT.GRADE_L[i]}</span><span class="w">—</span><b></b></div>`).join('')}</div>`;
+  };
+  const wrestlerCard = (w) => {
+    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 36, variant: 'chip', title: false }) : '';
+    const reg = (OT.schoolRegion && OT.schoolRegion(w.sch)) || '';
+    return `<a class="wc" href="${w.href}">
+      <span class="badge">${badge}</span>
+      <span class="who"><b>${esc(w.name)}</b><small>${esc(w.sch)}</small></span>
+      <span class="where"><span title="District ${w.d}">${navIcon("district")}${w.d}</span>${reg ? `<span title="${esc(OT.REGIONS[reg] || reg)} Region">${navIcon("region")}${esc(reg)}</span>` : ''}</span>
+      ${seasonTiles(w.apps)}</a>`;
   };
 
   /* career grid */
@@ -162,5 +173,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { yearPills, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { seasonTiles, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();
