@@ -171,96 +171,139 @@ Xt = np.array([[-d, (rw - rl) / 400] for d, rw, rl, y in te])
 say(f'state bouts 2018-2026 with both regional seeds (n={len(te)}): seed-only {np.mean([lgl(-a*d) for d,*_ in te]):.4f}, '
     f'rating-only {np.mean([-math.log(1/(1+10**((rl-rw)/400))) for d,rw,rl,y in te]):.4f}, seed+rating {np.mean(np.log1p(np.exp(-(Xt @ wfit)))):.4f}')
 
-# ============================================================ layer 2: season performance and opponent strength
-# per wrestler-season: list of (bout index, opponent pre-bout rating, won)
-games = defaultdict(list)
+# ============================================================ layer 2: season strength (batch, smoothed through time)
+# Brock's rule: inside a season, order is noise. Beating someone at districts who went on to win states that season
+# counts the same as beating him at states. So each season is fit as one batch (Bradley-Terry on the Elo scale, every
+# bout of that season at every level, weighted by result), and seasons are linked by a prior: season t is shrunk
+# toward a fitted blend of the same wrestler's t-2, t-1, t+1, t+2 strengths plus a per-grade term. The forward Elo
+# above is kept only for the leak-free prediction test and as the "entering rating" control in the evaluation.
+C_ = math.log(10) / 400
+MW = {'fall': 1.5, 'tf': 1.4, 'md': 1.2, 'dec': 1.0}
+def mweight(b):
+    if b['result'] in SKIP: return 0.0
+    if b['result'] == 'dec' and re.search(r'\b(OT|SV|TB|UTB|2OT|UT)\b', b['flags'] or ''): return 0.8
+    return MW.get(b['result'], 1.0)
+# identities: a name+school pair unseen for more than five seasons starts a new identity
+years_of = defaultdict(set)
+for b in bouts: years_of[b['wk']].add(b['year']); years_of[b['lk']].add(b['year'])
+for (lvl, t, w), es in entrants.items():
+    for e in es: years_of[e[0]].add(int(t[:4]))
+IDN = {}
+for k, ys in years_of.items():
+    n, prev = 0, None
+    for y in sorted(ys):
+        if prev is not None and y - prev > 5: n += 1
+        IDN[(k, y)] = k if n == 0 else f'{k}#{n}'; prev = y
+ID = lambda k, y: IDN.get((k, y), k)
+for b in bouts: b['wi'] = ID(b['wk'], b['year']); b['li'] = ID(b['lk'], b['year'])
+# season data: bouts + placement-implied pairs for brackets without (enough) bouts
+season_b = defaultdict(list)          # year -> [(winner id, loser id, weight, bout index or -1)]
 for b in bouts:
-    if b['i'] not in PRE: continue
-    rw, rl = PRE[b['i']]
-    games[(b['wk'], b['year'])].append((b['i'], rl, 1)); games[(b['lk'], b['year'])].append((b['i'], rw, 0))
-PRIOR_SD = 200.0
-def perf(gs, mu, skip=None):
-    """MAP performance rating from a season's bouts (opponent pre-bout ratings), normal prior around mu."""
-    x = mu
-    for _ in range(12):
-        g = (mu - x) / PRIOR_SD ** 2; h = -1 / PRIOR_SD ** 2; c = math.log(10) / 400
-        for i, r, won in gs:
-            if i == skip: continue
-            p = 1 / (1 + 10 ** ((r - x) / 400)); g += c * (won - p); h -= c * c * p * (1 - p)
-        step = g / h; x -= step
-        if abs(step) < 0.05: break
-    return x
-enter_season = {}
-for b in bouts:
-    if b['i'] not in PRE: continue
-    rw, rl = PRE[b['i']]
-    enter_season.setdefault((b['wk'], b['year']), rw); enter_season.setdefault((b['lk'], b['year']), rl)
-PERF = {}   # full-season performance
-for kt, gs in games.items(): PERF[kt] = perf(gs, enter_season[kt])
-def adj(k, t):
-    """adjacent-season evidence about wrestler k as of season t, no season-t information:
-       end of t-2 and t-1 forward ratings (past), t+1 and t+2 season performance ratings (future, season-only)"""
-    return [END.get((k, t - 2)), END.get((k, t - 1)), PERF.get((k, t + 1)), PERF.get((k, t + 2))]
-
-# --- fit proximity weights (Brock's spec): target = season-t performance excluding nothing at the season level is
-#     leave-one-bout-out averaged; with >=4 bouts the full-season performance is a good proxy and is what we use.
-rows = []
-for (k, t), gs in games.items():
-    if len(gs) < 4: continue
-    A = adj(k, t)
-    if all(v is None for v in A): continue
-    g = grade.get((k, t))
-    rows.append((PERF[(k, t)], A, g, key_cls.get((k, t), 'single'), t))
-def design(A, g):
-    x = [(v - 1500) if v is not None else 0.0 for v in A] + [1.0 if v is None else 0.0 for v in A] + [1.0 if g == j else 0.0 for j in range(4)] + [1.0]
-    return x
-Xa = np.array([design(A, g) for _, A, g, *_ in rows]); ya = np.array([y - 1500 for y, *_ in rows])
-lb = [0, 0, 0, 0] + [-np.inf] * 9; ub = [np.inf] * 13
-fit = lsq_linear(Xa, ya, bounds=(lb, ub))
-W = fit.x
-pred_adj = lambda A, g: 1500 + float(np.dot(design(A, g), W))
-resid = ya - Xa @ W
-say(f'\nproximity weights fitted on {len(rows)} wrestler-seasons with >=4 bouts (non-negative least squares, target = season-t performance rating):')
-say(f'  t-2 {W[0]:.3f}   t-1 {W[1]:.3f}   t+1 {W[2]:.3f}   t+2 {W[3]:.3f}   (grade terms FR..SR {W[8]:+.0f} {W[9]:+.0f} {W[10]:+.0f} {W[11]:+.0f}); residual sd {resid.std():.0f}')
-# season-t share: a = n / (n + n0), n = other bouts that season; fit n0 on bout log loss with both sides' strengths excluding the bout
-def strength(k, t, skip=None, n0=4.0):
-    gs = games.get((k, t), [])
-    n = sum(1 for i, *_ in gs if i != skip)
-    A = adj(k, t); base = pred_adj(A, grade.get((k, t))) if any(v is not None for v in A) else enter_season.get((k, t), 1500)
-    if n == 0: return base
-    loo = perf(gs, base, skip=skip)
-    a = n / (n + n0)
-    return a * loo + (1 - a) * base
-sample = [b for b in bouts if b['i'] in PRE and b['year'] >= 1980]
-random.seed(7); sample = random.sample(sample, 25000)
-def ll_n0(n0):
-    s = 0
-    for b in sample:
-        sw = strength(b['wk'], b['year'], b['i'], n0); sl = strength(b['lk'], b['year'], b['i'], n0)
-        s += -math.log(max(1e-9, 1 / (1 + 10 ** ((sl - sw) / 400))))
-    return s / len(sample)
-n0s = {n0: ll_n0(n0) for n0 in (2, 4, 8, 16, 32)}
-N0 = min(n0s, key=n0s.get)
-say(f'season-t shrinkage n0 (bout log loss, both sides leave-one-bout-out, 25k bouts 1980+): ' + ', '.join(f'{k}: {v:.4f}' for k, v in n0s.items()) + f'  -> n0 = {N0}')
-say(f'  for reference the forward pre-bout rating on the same bouts: {np.mean([-math.log(max(1e-9, 1/(1+10**((PRE[b["i"]][1]-PRE[b["i"]][0])/400)))) for b in sample]):.4f}')
+    m = mweight(b)
+    if m > 0: season_b[b['year']].append((b['wi'], b['li'], m, b['i']))
+bouts_in = Counter(b['bk'] for b in bouts)
+PLACE_W = 0.3
+npseudo = 0
+for bk, es in entrants.items():
+    y = int(bk[1][:4]); pl = sorted([(e[3], ID(e[0], y)) for e in es if e[3]], key=lambda x: x[0])
+    if len(pl) < 2 or bouts_in.get(bk, 0) >= len(pl): continue
+    for i in range(len(pl)):
+        for j in range(i + 1, len(pl)):
+            season_b[y].append((pl[i][1], pl[j][1], PLACE_W / (len(pl) - 1), -1)); npseudo += 1
+say(f'\nseason-batch fit: {sum(len(v) for v in season_b.values()) - npseudo} bouts + {npseudo} placement-implied pairs (weight {PLACE_W}/(placers-1)) for brackets with fewer bouts than placers')
+def fit_season(rows, ids, mu, sd, mask=None):
+    """MAP Bradley-Terry: maximize sum m*log sigma(c*(t_w - t_l)) - sum (t-mu)^2/(2 sd^2)"""
+    idx = {k: i for i, k in enumerate(ids)}
+    W = np.array([idx[r[0]] for r in rows if mask is None or r[3] not in mask], int)
+    L = np.array([idx[r[1]] for r in rows if mask is None or r[3] not in mask], int)
+    M = np.array([r[2] for r in rows if mask is None or r[3] not in mask], float)
+    mu = np.asarray(mu, float); iv = 1 / np.asarray(sd, float) ** 2
+    def f(t):
+        z = C_ * (t[W] - t[L]); sp = np.logaddexp(0, -z)
+        g = np.zeros_like(t); s = M * C_ * (1 / (1 + np.exp(z)))
+        np.add.at(g, W, -s); np.add.at(g, L, s)
+        d = t - mu; return float((M * sp).sum() + 0.5 * (iv * d * d).sum()), g + iv * d
+    r = minimize(f, mu.copy(), jac=True, method='L-BFGS-B', options={'maxiter': 500})
+    return dict(zip(ids, r.x))
+YEARS = sorted(season_b)
+ids_of = {y: sorted({r[0] for r in season_b[y]} | {r[1] for r in season_b[y]}) for y in YEARS}
+nb_of = Counter()
+for y in YEARS:
+    for r in season_b[y]:
+        if r[3] >= 0: nb_of[(r[0], y)] += 1; nb_of[(r[1], y)] += 1
+gr = lambda i, y: grade.get((i.split('#')[0], y))
+def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
+    # 0) season-only estimates (weak prior), the regression target and regressors
+    T0 = {}
+    for y in YEARS:
+        ids = ids_of[y]; T0[y] = fit_season(season_b[y], ids, [1500] * len(ids), [250] * len(ids), mask)
+    # 1) proximity weights: season-only t ~ season-only t-2, t-1, t+1, t+2 (+ grade), non-negative slopes
+    rows = []
+    for y in YEARS:
+        for i, v in T0[y].items():
+            if nb_of[(i, y)] < 4: continue
+            A = [T0.get(y + d, {}).get(i) for d in (-2, -1, 1, 2)]
+            if all(x is None for x in A): continue
+            rows.append((v, A, gr(i, y)))
+    def design(A, g): return [(v - 1500) if v is not None else 0.0 for v in A] + [1.0 if v is None else 0.0 for v in A] + [1.0 if g == j else 0.0 for j in range(4)] + [1.0]
+    X = np.array([design(A, g) for _, A, g in rows]); yv = np.array([v - 1500 for v, *_ in rows])
+    fit = lsq_linear(X, yv, bounds=([0] * 4 + [-np.inf] * 9, [np.inf] * 13)); Wt = fit.x
+    res_sd = float((yv - X @ Wt).std()) * sd_scale
+    pop_sd = float(np.std([v for y in YEARS for v in T0[y].values()]))
+    # 2) prior mean for season t from the neighbours' SEASON-ONLY estimates, exactly the quantities the weights were
+    #    fit on. (Feeding the neighbours' smoothed estimates back in and iterating double-counts: the fitted weights
+    #    sum to ~1.2 because season-only regressors are noisy, so the loop amplified instead of settling; tried and
+    #    rejected, see docs/DIFFICULTY.md.) With the prior built this way one pass is the fixed point.
+    T = {y: dict(T0[y]) for y in YEARS}
+    for it in range(1):
+        delta = 0.0
+        for y in YEARS:
+            ids = ids_of[y]; mu, sd = [], []
+            for i in ids:
+                A = [T0.get(y + d, {}).get(i) for d in (-2, -1, 1, 2)]
+                if any(x is not None for x in A): mu.append(1500 + float(np.dot(design(A, gr(i, y)), Wt))); sd.append(res_sd)
+                else: mu.append(1500 + float(np.dot(design([None] * 4, gr(i, y)), Wt))); sd.append(pop_sd)
+            new = fit_season(season_b[y], ids, mu, sd, mask)
+            delta = max(delta, max(abs(new[i] - T[y][i]) for i in ids)); T[y] = new
+        if report: say(f'  prior pass: largest change from season-only estimates {delta:.0f}')
+    return T, T0, Wt, res_sd
+# prior strength: the regression residual overstates the prior sd (its target is itself noisy), so scale it,
+# tuned on hidden 1990-2017 bouts
+random.seed(5)
+tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
+tb = [b for b in bouts if b['i'] in tune_held]
+scores = {}
+for sc in (0.35, 0.5, 0.7, 1.0):
+    Tt, *_ = smoother(mask=tune_held, sd_scale=sc)
+    scores[sc] = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb])
+SDS = min(scores, key=scores.get)
+say('prior sd scale (hidden 5% of 1990-2017 bouts): ' + ', '.join(f'{k}: {v:.4f}' for k, v in scores.items()) + f' -> {SDS}')
+# leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
+random.seed(3)
+held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and random.random() < 0.10}
+Th, *_ = smoother(mask=held, sd_scale=SDS)
+hb = [b for b in bouts if b['i'] in held]
+ll_batch = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Th[b['year']][b['li']] - Th[b['year']][b['wi']]) / 400)))) for b in hb])
+ll_fwd = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((PRE[b['i']][1] - PRE[b['i']][0]) / 400)))) for b in hb])
+acc_b = np.mean([Th[b['year']][b['wi']] > Th[b['year']][b['li']] for b in hb])
+say(f'held-out 10% of 2018-2026 bouts (n={len(hb)}), fit without them: season-batch strength log loss {ll_batch:.4f} accuracy {acc_b:.3f}; forward rating {ll_fwd:.4f}')
+say('  (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)')
+T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS)
+say(f'proximity weights (season-only strength at t regressed on t-2, t-1, t+1, t+2 with grade, non-negative): t-2 {Wt[0]:.3f}  t-1 {Wt[1]:.3f}  t+1 {Wt[2]:.3f}  t+2 {Wt[3]:.3f}; grade FR..SR {Wt[8]:+.0f} {Wt[9]:+.0f} {Wt[10]:+.0f} {Wt[11]:+.0f}; prior sd {RES_SD:.0f}')
+def theta(k, y): return T.get(y, {}).get(ID(k, y))
 
 # ============================================================ per tournament records, era anchor, SOS
 WIN_W = 2.0
 recs = {}
 for b in bouts:
-    if b['i'] not in PRE: continue
-    t = b['year']
-    so_l = strength(b['lk'], t, b['i'], N0); so_w = strength(b['wk'], t, b['i'], N0)
-    rw, rl = PRE[b['i']]
-    for k, nm, sc, opp_blend, opp_fwd, opp_key, won in ((b['wk'], b['winner'], b['winner_school'], so_l, rl, b['lk'], 1), (b['lk'], b['loser'], b['loser_school'], so_w, rw, b['wk'], 0)):
-        r = recs.setdefault((b['bk'], k), {'bk': b['bk'], 'k': k, 'name': nm, 'school': sc, 'year': t, 'c': b['c'], 'lr': b['lr'], 'opp': [], 'enter': (rw if won else rl)})
-        r['opp'].append((opp_blend, opp_fwd, opp_key, won))
-# season strength (full season, for fields) and era anchor = mean season strength of district-level wrestlers, per year and class
-SEAS = {}
-for kt in games: SEAS[kt] = strength(kt[0], kt[1], None, N0)
+    if b['result'] in SKIP or b['i'] not in PRE: continue
+    y = b['year']; rw, rl = PRE[b['i']]
+    for k, nm, sc, ok, fwd_o, won in ((b['wk'], b['winner'], b['winner_school'], b['lk'], rl, 1), (b['lk'], b['loser'], b['loser_school'], b['wk'], rw, 0)):
+        r = recs.setdefault((b['bk'], k), {'bk': b['bk'], 'k': k, 'name': nm, 'school': sc, 'year': y, 'c': b['c'], 'lr': b['lr'], 'opp': [], 'enter': (rw if won else rl)})
+        r['opp'].append((theta(ok, y), fwd_o, ok, won, T0.get(y, {}).get(ID(ok, y))))
 anchor_vals = defaultdict(list)
 for (bk, k), r in recs.items():
-    if bk[0] == 'district': anchor_vals[(r['year'], r['c'])].append(SEAS[(k, r['year'])])
+    if bk[0] == 'district' and theta(k, r['year']) is not None: anchor_vals[(r['year'], r['c'])].append(theta(k, r['year']))
 ANCHOR = {g: (float(np.mean(v)), float(np.std(v))) for g, v in anchor_vals.items() if len(v) >= 50}
 SD_REF = float(np.median([sd for (y, c), (m, sd) in ANCHOR.items() if y >= 1980]))
 def anc(y, c):
@@ -270,35 +313,28 @@ def anc(y, c):
 def norm(v, y, c):
     if v is None: return None
     m, sd = anc(y, c); return 1500 + (v - m) / sd * SD_REF
-say(f'\nera normalization: z-score against the season strength of that year+class district wrestlers (mean {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}), rescaled to sd {SD_REF:.0f}')
+say(f'\nera normalization: z-score against that year+class district wrestlers (mean {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}), rescaled to sd {SD_REF:.0f}')
 def wavg(vals):
+    vals = [(v, w) for v, w in vals if v is not None]
     return sum(v * (WIN_W if won else 1) for v, won in vals) / sum(WIN_W if won else 1 for v, won in vals) if vals else None
 def sym(k, y, c):
-    vals = [norm(END.get((k, y - 1)), y - 1, c), norm(SEAS.get((k, y)), y, c), norm(PERF.get((k, y + 1)), y + 1, c)]
+    vals = [norm(T0.get(yy, {}).get(ID(k, yy)), yy, c) for yy in (y - 1, y, y + 1)]
     vals = [v for v in vals if v is not None]; return float(np.mean(vals)) if vals else None
 for r in recs.values():
     y, c = r['year'], r['c']
-    r['path'] = wavg([(norm(o[0], y, c), o[3]) for o in r['opp']])
-    r['path_t'] = wavg([(norm(o[1], y, c), o[3]) for o in r['opp']])                  # forward rating at the bout only
-    r['path_sym'] = wavg([(sym(o[2], y, c), o[3]) for o in r['opp']])
-    r['season'] = norm(SEAS[(r['k'], y)], y, c)
-# fields: mean season strength (normalized) of the top 8 entrants
-bouts_in = Counter(b['bk'] for b in bouts)
+    r['path'] = wavg([(norm(o[0], y, c), o[3]) for o in r['opp']])                    # season strength (batch, smoothed)
+    r['path_t'] = wavg([(norm(o[1], y, c), o[3]) for o in r['opp']])                  # forward rating at the bout
+    r['path_only'] = wavg([(norm(o[4], y, c), o[3]) for o in r['opp']])               # season-only, no neighbours
+    r['path_sym'] = wavg([(sym(o[2], y, c), o[3]) for o in r['opp']])                 # naive symmetric window
+    r['season'] = norm(theta(r['k'], y), y, c)
 brackets = {}
 rec_keys = defaultdict(list)
 for (b2, k) in recs: rec_keys[b2].append(k)
 for bk, (y, c, unit, lr) in bracket_meta.items():
     keys = list(dict.fromkeys([e[0] for e in entrants.get(bk, [])] + rec_keys.get(bk, [])))
-    vals = []
-    for k in keys:
-        v = SEAS.get((k, y))
-        if v is None:
-            A = adj(k, y)
-            v = pred_adj(A, grade.get((k, y))) if any(x is not None for x in A) else None
-        if v is not None: vals.append(norm(v, y, c))
+    vals = [norm(theta(k, y), y, c) for k in keys if theta(k, y) is not None]
     top = sorted(vals, reverse=True)[:8]
-    brackets[bk] = {'year': y, 'c': c, 'unit': unit, 'lr': lr, 'n': len(keys), 'rated': len(vals), 'field': float(np.mean(top)) if top else None,
-                    'bouts': bouts_in.get(bk, 0)}
+    brackets[bk] = {'year': y, 'c': c, 'unit': unit, 'lr': lr, 'n': len(keys), 'rated': len(vals), 'field': float(np.mean(top)) if top else None, 'bouts': bouts_in.get(bk, 0)}
 
 # ============================================================ scale 0-99 (fixed, one scale for every level and era)
 # one fixed scale per level (district / regional / state), pooled over every season 1980-2026: a deep year can
@@ -323,21 +359,21 @@ for lvl in ('district', 'regional', 'state'):
 
 # ============================================================ how much the opponent-strength choice moves SOS
 st = [r for r in recs.values() if r['bk'][0] == 'state' and r['year'] >= 1980 and r['path'] is not None]
-for nm, key in (('forward rating at the bout (t only)', 'path_t'), ('naive symmetric window (t-1, t, t+1 equal)', 'path_sym')):
+for nm, key in (('forward rating at the bout', 'path_t'), ('season t only (no neighbouring seasons)', 'path_only'), ('naive symmetric window (t-1, t, t+1 equal)', 'path_sym')):
     a_ = np.array([r['path'] for r in st]); b_ = np.array([r[key] for r in st])
     rho_ = spearmanr(a_, b_).correlation
     ra = np.argsort(np.argsort(-a_)) / len(a_); rb = np.argsort(np.argsort(-b_)) / len(b_)
     topa = set(np.argsort(-a_)[:len(a_) // 10]); topb = set(np.argsort(-b_)[:len(b_) // 10])
-    say(f'state path SOS, blend vs {nm}: Spearman {rho_:.3f}, mean percentile move {100*np.mean(np.abs(ra-rb)):.1f} pts, top-10% overlap {len(topa & topb)/len(topa):.2f}')
+    say(f'state path SOS, smoothed season strength vs {nm}: Spearman {rho_:.3f}, mean percentile move {100*np.mean(np.abs(ra-rb)):.1f} pts, top-10% overlap {len(topa & topb)/len(topa):.2f}')
 # the freshman example: wins over opponents who were freshmen and later won a state title
 champs = {(nk(n) + '|' + nk(s)) for (y, c, w, p, n, s, d) in [(m[0], m[1], m[2], m[3], m[4], m[5], m[6]) for m in med] if p == 1}
 ex = []
 for r in st:
     for o in r['opp']:
         if o[3] and o[2] in champs and grade.get((o[2], r['year'])) == 0 and grade.get((r['k'], r['year'])) == 3:
-            ex.append((norm(o[0], r['year'], r['c']), sym(o[2], r['year'], r['c']), norm(SEAS.get((o[2], r['year'] + 3)), r['year'] + 3, r['c'])))
+            ex.append((norm(o[0], r['year'], r['c']), sym(o[2], r['year'], r['c']), norm(theta(o[2], r['year'] + 3), r['year'] + 3, r['c'])))
 if ex:
-    say(f'senior state wins over freshmen who later won a state title (n={len(ex)}), opponent strength on the state path scale: blend {sos(np.mean([e[0] for e in ex]))}, symmetric window {sos(np.mean([e[1] for e in ex]))}; those opponents as seniors {sos(np.mean([e[2] for e in ex if e[2]]))}')
+    say(f'senior state wins over freshmen who later won a state title (n={len(ex)}), opponent strength on the state path scale: smoothed season strength {sos(np.mean([e[0] for e in ex]))}, symmetric window {sos(np.mean([e[1] for e in ex]))}; those opponents as seniors {sos(np.mean([e[2] for e in ex if e[2]]))}')
 
 # ============================================================ which difficulty measure? (held-out evaluation)
 career_state = defaultdict(lambda: defaultdict(int))
@@ -418,6 +454,6 @@ with open('data/difficulty/wrestler_seasons.csv', 'w', newline='') as f:
         c.writerow([bk[0], bk[1], bk[2], r['year'], r['c'], r['name'], r['school'], f"{r['enter']:.0f}", f"{r['season']:.0f}", f"{r['path']:.0f}",
                     sos(r['path'], bk[0], 'path', r['year']), len(r['opp']), sum(o[3] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)])])
 open('data/difficulty/eval.txt', 'w').write('\n'.join(out) + '\n')
-json.dump({'scale': {f'{l}/{e}': v for (l, e), v in SCALE.items()}, 'sd_ref': SD_REF, 'cuts': CUTS, 'weights': {'t-2': W[0], 't-1': W[1], 't+1': W[2], 't+2': W[3]}, 'n0': N0, 'win_weight': WIN_W, 'params': params},
+json.dump({'scale': {f'{l}/{e}': v for (l, e), v in SCALE.items()}, 'sd_ref': SD_REF, 'cuts': CUTS, 'weights': {'t-2': Wt[0], 't-1': Wt[1], 't+1': Wt[2], 't+2': Wt[3]}, 'prior_sd': RES_SD, 'win_weight': WIN_W, 'params': params},
           open('data/difficulty/scale.json', 'w'), indent=1, default=float)
 print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments')

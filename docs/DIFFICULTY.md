@@ -22,101 +22,116 @@ winner's slot gives the type and score (dec, major, tech fall, fall with time, O
   from the 1980s on. Before that: state championship sides are complete from 1938 (consolations from the mid-70s);
   regionals 1950s–60s have the final but often only part of the bracket; districts reach ~90% from the 1960s.
 
-## 2. Ratings (forward, predictive)
+## 2. Season strength: one batch per season, linked through time
 
-A chronological Elo rating for every wrestler (identity = normalized name + school; a pair unseen for more than
-five seasons starts over, so fathers and sons stay separate).
+**Why not a running Elo.** A first version rated wrestlers bout by bout in date order. Brock's correction: inside a
+season, order is noise. Beating someone at districts who went on to win states three weeks later should count the
+same as beating him at states, and his other results that season are evidence too. A running rating says the
+district win was over a lesser wrestler only because the tournaments that showed otherwise had not happened yet.
 
-- Updates scale with the result: fall 1.5×, tech fall 1.35×, major 1.2×, decision 1.0×. Forfeits, injury
-  defaults and DQs are skipped.
-- New ratings move faster (K × (1 + 2 / (bouts + 1))), K = 56.
-- **Between seasons** the rating regresses 20% toward the mean and then adds a **grade step fitted from the
-  data**: about +126 into the sophomore year, +122 into junior, +126 into senior (before the 20% regression, so a typical returning wrestler nets roughly +100). A freshman's rating is expected to
-  rise, not frozen.
-- Tuned on 1980–2017 bouts, tested on 2018–2026 (68,852 bouts, never seen in tuning):
+So each season is fit **as one batch**:
+
+- **Bradley–Terry on the Elo scale**, every bout of that season at every level, weighted by result: fall 1.5,
+  tech fall 1.4, major 1.2, decision 1.0, decision in OT / SV / TB 0.8. Forfeits, injury defaults and DQs carry no
+  information and are dropped. A win counts by the opponent's full-season strength, regardless of round or level.
+- **Placements as extra evidence** where a bracket has fewer bouts than placers (old partial brackets, the few
+  files with no bout lines): each higher placer is treated as beating each lower placer, at weight
+  0.3 / (placers − 1). 2,285 such pairs against 366k real bouts.
+- **Seasons are linked by a prior.** Season-*t* strength is shrunk toward a fitted blend of the same wrestler's
+  *t*−2, *t*−1, *t*+1 and *t*+2 strengths plus a per-grade term. **The weights are fitted, not guessed**: each
+  wrestler-season's season-only strength (his season fit on its own, weak prior) is regressed on his season-only
+  strengths in the neighbouring seasons and his grade, slopes constrained non-negative:
+
+| *t*−2 | *t*−1 | *t*+1 | *t*+2 |
+|---|---|---|---|
+| 0.26 | **0.44** | 0.33 | 0.17 |
+
+  The season before counts more than the season after, and both more than seasons two away. Prior sd 107 rating
+  points (the regression residual; a tighter prior was tested on hidden 1990–2017 bouts and did worse).
+- **No iteration loop.** Brock's spec suggested iterating the seasons to convergence. Tried: feeding neighbours'
+  *smoothed* estimates back into each other's priors double-counts (the fitted weights sum to about 1.2 because the
+  season-only regressors are noisy), and the loop amplified instead of settling (largest change still 49 rating
+  points after five passes). The prior is therefore built from the neighbours' season-only estimates, exactly the
+  quantities the weights were fit on, which makes a single pass the fixed point.
+
+**A forward-only rating is kept for one job: the leak-free prediction test**, and as the "entering rating"
+control in the evaluation below. It is a chronological Elo: margin-scaled updates, faster-moving provisional
+ratings, 20% regression to the mean between seasons plus a fitted grade step of about +125 per year.
+Tuned on 1980–2017, tested on 2018–2026 (68,852 bouts never seen in tuning):
 
 | held-out 2018–2026 | log loss | accuracy |
 |---|---|---|
 | coin flip | 0.693 | 0.500 |
-| rating | **0.559** | **0.707** |
-| rating without the margin factor | 0.571 | 0.696 |
-| rating without the grade step | 0.616 | 0.653 |
+| forward rating | **0.559** | **0.707** |
+| forward rating without the margin factor | 0.571 | 0.696 |
+| forward rating without the grade step | 0.616 | 0.653 |
 
 At states, where seeds exist (2018–2026, 8,289 bouts): seed only 0.616, rating only 0.579, seed + rating 0.562.
-The rating beats the seed, and the two together beat both.
 
-## 3. How strong was an opponent, in the season you wrestled him?
+**Both, on the same hidden bouts.** 10% of 2018–2026 bouts were hidden and the season batch was refit without
+them: season-batch strength 0.562 (accuracy 0.697) vs forward rating 0.553 on the same 6,849 bouts. The two are
+close; the forward rating is slightly the better pure predictor because it carries a whole career, while the batch
+looks two seasons each way. The batch is the better *description* of how good someone was that season, which is
+what difficulty needs, and it is leak-free for the bout being predicted.
 
-Brock's concern: a senior who beat a freshman who went on to win a title as a senior should not get credit for
-beating a champion. The current season matters most; adjacent seasons less; the season before more than the
-season after.
+## 3. What it changes
 
-So the strength credited to an opponent in a bout in season *t* is an estimate of **his season-*t* strength**,
-built without the bout being scored:
+**Brock's example.** 195 state wins by seniors over freshmen who later won a state title. Those freshmen are
+credited at **36** on the state path scale (smoothed season strength) vs 51 with a naive symmetric window
+(*t*−1, *t*, *t*+1 weighted equally); the same wrestlers as seniors rated 99. The win counts for beating a good
+freshman, not for beating a champion.
 
-1. **Season-*t* performance, leave-one-bout-out**: a performance rating from his other bouts that season
-   (opponents' pre-bout ratings, normal prior around his entering rating).
-2. **Adjacent seasons**: his end-of-season ratings for *t*−2 and *t*−1 (forward, no season-*t* information) and his
-   season-only performance ratings for *t*+1 and *t*+2 (season-only, so they do not carry season-*t* results forward).
+**How far rankings move** (state runs since 1980, smoothed season strength vs each alternative):
 
-**The weights are fitted, not guessed.** For 67,831 wrestler-seasons with at least four bouts, his season-*t*
-performance was regressed on the four adjacent estimates plus grade, coefficients constrained non-negative:
-
-| *t*−2 | *t*−1 | *t*+1 | *t*+2 |
+| compared with | Spearman | mean percentile move | top-10% overlap |
 |---|---|---|---|
-| 0.21 | **0.61** | 0.36 | 0.15 |
+| forward rating at the time of the bout | 0.86 | 11 pts | 65% |
+| season *t* alone, no neighbouring seasons | 0.80 | 13 pts | 60% |
+| naive symmetric window | 0.86 | 11 pts | 67% |
 
-The season before counts almost twice the season after, and both outweigh seasons two away, as expected. The
-season-*t* evidence is then blended in with weight n / (n + 16), n = his other bouts that season (16 fitted on bout
-prediction with both sides scored leave-one-bout-out). The blend predicts bouts better than the forward rating
-(log loss 0.536 vs 0.575 on 25,000 bouts), so it is the better description of how good someone was *that* season.
-
-**What it changes.** Across state runs since 1980, compared with the forward rating at the bout only, Spearman
-0.89, a wrestler's SOS percentile moves 10 points on average, 71% of the top-10% hardest runs stay in the top 10%.
-Against a naive symmetric window (*t*−1, *t*, *t*+1 weighted equally): Spearman 0.90, 9 points, 77%.
-On Brock's example: 195 state wins by seniors over freshmen who later won a state title. Those freshmen are
-credited at **40** (blend) vs 58 (symmetric window); the same wrestlers as seniors rated 99. The win counts for
-beating a good freshman, not for beating a champion.
-
-**Trade-off.** Forward-only ratings underrate genuinely elite freshmen early in their first season (everyone starts
-level). The blend partly fixes that through the freshman's own season-*t* results and, at a lower weight, through
-what he did the next season, without crediting a win for growth that happened later.
+**Trade-off.** A forward-only rating underrates a genuinely elite freshman early (everyone starts level), and a
+season-only fit is noisy for anyone with few bouts. The smoothed season strength fixes both with his own same-season
+results first and his neighbouring seasons second, past above future, without crediting a win for growth that
+happened years later.
 
 ## 4. Two measures, and which one wins at what
 
-- **Field strength** (a bracket): mean season-*t* strength of the bracket's top eight entrants.
-- **Path SOS** (one wrestler's run): mean strength of the opponents he actually wrestled in that tournament, wins
-  counted twice (a loss still tells you who you had to see).
+- **Field strength** (a bracket): mean season strength of the bracket's top eight entrants.
+- **Path SOS** (one wrestler's run): mean season strength of the opponents he actually wrestled in that
+  tournament, wins counted twice (a loss still tells you who you had to see). Both include same-season later results.
 
 Both are normalized by era: each season's strengths are z-scored against that year and class's district wrestlers,
 then put on **0–99 scales that are fixed per level** (district, regional, state), pooled over 1980–2026
 (1938–1973 one-class seasons have their own scale, since there were few bouts and, before 1951, no regionals).
 A district 80 means hard for a district; a state 80 means hard for states. Cutoffs are fixed, not per-year
 percentiles, so a deep year can have many hard brackets: the share of a year's state brackets at 75+ ranges from
-0% to 64% (median 15%), where the old method forced 25% every year.
+0% to 64% (median 8%), where the old method forced 25% every year.
 
-**Evaluation** (state, 1980–2025):
+**Evaluation** (state, 1980–2025; the control for "own strength" is the forward entering rating, so nothing here
+uses the result being explained):
 
 | question | old tier (a) | field (b) | path (c) | path + field (d) |
 |---|---|---|---|---|
-| Holding a wrestler's own rating, does the measure make placing harder? Gain in R² for P(place), n = 20,752 | +0.0000 | **+0.0184** | n/a (depends on how far he went) | — |
-| Does it make a medal a better signal of ability? Gain in R² for next season's state points over placement points, n = 7,396 | +0.0021 | +0.0032 | +0.0019 | +0.0034 |
+| Holding a wrestler's own rating, does the measure make placing harder? Gain in R² for P(place), n = 20,752 | +0.0000 | **+0.0143** | n/a (depends on how far he went) | — |
+| Does it make a medal a better signal of ability? Gain in R² for next season's state points over placement points, n = 7,396 | +0.0021 | +0.0039 | +0.0039 | **+0.0054** |
 
-- **Field strength wins** as the measure of a bracket: it is the only one that explains how hard it was to place,
+- **Field strength wins** as the measure of a bracket: it is the only one that explains how hard it was to place
   for a wrestler of a given strength. The old percentile tier explains nothing beyond his own rating.
-- **Path SOS** is the right description of a run (who he actually had to beat) but adds little *prediction*
-  beyond placement and his own rating (+0.0005), because the rating already counts who he beat. It is shown, not
-  used to re-rank.
-- The opt-in **"Adjust for strength of schedule"** uses (d), the average of path and field on the 0–99 scale,
-  mapped smoothly to a multiplier between 0.85 and 1.15 on placement points. Medal counts never change.
+- **Path SOS** is the right description of a run and, built on season strength, it now adds information beyond
+  placement *and* his own entering rating (+0.0020; the running-Elo version added +0.0004).
+- **Combined (d) wins** at making a medal a better signal of ability, so the opt-in **"Adjust for strength of
+  schedule"** uses (d), the average of path and field on the 0–99 scale, mapped smoothly to a multiplier between
+  0.85 and 1.15 on placement points. Medal counts never change.
+- All gains are small in absolute terms: a placement already says most of what a placement can say. Difficulty is
+  context for a result, not a replacement for it.
 
 ## 5. Caveats
 
-- Ratings are relative to the wrestlers each one actually met. AA and AAA rarely meet, so their scales are
+- Strengths are relative to the wrestlers each one actually met. AA and AAA rarely meet, so their scales are
   normalized separately against their own district populations; compare within a class.
-- State fields rise over the decades on this scale (median 45 in the 1980s to 61 in the 2020s). Part of that is
-  real depth, part is that districts grew larger and weaker relative to the state's top eight.
-- District 3 and District 7 AAA years missing from the archive have no bouts; their wrestlers' ratings start at
-  regionals. 53 brackets with entrants but no bouts are flagged `fallback` and use adjacent-season strength only.
-- Pre-1960s regional and district brackets are partial; their SOS rests on few bouts.
+- State fields rise from the 1980s to the 2010s on this scale (median 41 to 58). Part of that is real depth, part is
+  that districts grew larger relative to the state's top eight.
+- District 3 and District 7 AAA years missing from the archive have no bouts; those wrestlers' season strength
+  rests on their regional and state bouts.
+- Pre-1960s regional and district brackets are partial; their strengths rest on few bouts plus placements.
 - Same name + same school within five seasons is treated as one wrestler.
