@@ -1,0 +1,35 @@
+bouts 374237 (rated: 365990), brackets 24746, wrestlers with a grade-season 180340
+forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (107.4, 104.3, 112.1), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
+forward rating log loss: tuning years 0.5819; held-out 2018-2026 0.5619 over 68852 bouts, accuracy 0.708 (coin flip 0.6931)
+  ablations held-out: no margin factor 0.5743 / 0.697; no grade step 0.6163 / 0.653
+state bouts 2018-2026 with both regional seeds (n=8289): seed-only 0.6163, rating-only 0.5793, seed+rating 0.5617
+
+proximity weights fitted on 67831 wrestler-seasons with >=4 bouts (non-negative least squares, target = season-t performance rating):
+  t-2 0.209   t-1 0.617   t+1 0.359   t+2 0.144   (grade terms FR..SR +1 +7 +11 +38); residual sd 85
+season-t shrinkage n0 (bout log loss, both sides leave-one-bout-out, 25k bouts 1980+): 2: 0.5517, 4: 0.5441, 8: 0.5390, 16: 0.5378, 32: 0.5394  -> n0 = 16
+  for reference the forward pre-bout rating on the same bouts: 0.5783
+
+era normalization: z-score against the season strength of that year+class district wrestlers (mean 1532-1673, sd 56-175), rescaled to sd 142
+0-99 scales (1st -> 0, 99.5th -> 99; modern = pooled 1980-2026, single = pooled 1938-1973, per level): district/modern path 1361-1754, field 1395-1725; district/single path 1369-2004, field 1382-1738; regional/modern path 1371-1844, field 1495-1815; regional/single path 1373-2099, field 1389-1892; state/modern path 1472-2013, field 1682-1953; state/single path 1380-2147, field 1485-1946
+  district path SOS median 33 (p10 12, p90 60);  field median 43 (p10 18, p90 73)
+  regional path SOS median 42 (p10 17, p90 69);  field median 45 (p10 17, p90 74)
+  state    path SOS median 46 (p10 24, p90 66);  field median 56 (p10 26, p90 81)
+state path SOS, blend vs forward rating at the bout (t only): Spearman 0.881, mean percentile move 10.1 pts, top-10% overlap 0.70
+state path SOS, blend vs naive symmetric window (t-1, t, t+1 equal): Spearman 0.901, mean percentile move 9.0 pts, top-10% overlap 0.77
+senior state wins over freshmen who later won a state title (n=195), opponent strength on the state path scale: blend 40, symmetric window 58; those opponents as seniors 99
+
+which measure makes a state result a better signal of ability? target = next-season state points of returning qualifiers 1980-2025 (n=7396):
+  placement points alone R2 0.2909; + own entering rating 0.3100
+  + (a) old tier: R2 0.2930 (gain +0.0021), coefficient +0.2361
+  + (b) field strength: R2 0.2936 (gain +0.0027), coefficient +0.0049
+  + (c) path SOS, blended opponents: R2 0.2926 (gain +0.0018), coefficient +0.0026
+  + (c0) path SOS, forward rating only: R2 0.2940 (gain +0.0031), coefficient +0.0040
+  + (d) path + field: R2 0.2939 (gain +0.0030)
+  path SOS beyond placement AND own entering rating: R2 0.3104 (gain +0.0004), coefficient +0.0013
+
+P(place at states) for state entrants 1980+ (n=20752): own entering rating R2 0.1854
+  + (a) old tier: R2 0.1855 (gain +0.0000), coefficient -0.00306
+  + (b) field strength: R2 0.2033 (gain +0.0179), coefficient -0.00119
+
+fixed cutoffs on the 0-99 scale: (25, 50, 75); share of a year+class state brackets at 75+ ranges 0.00-0.57, median 0.15 (the old method forced 0.25)
+  state field median by decade: 1930s 22, 1940s 32, 1950s 52, 1960s 40, 1970s 39, 1980s 44, 1990s 50, 2000s 60, 2010s 64, 2020s 62
