@@ -122,38 +122,47 @@
 
   /* medal chips */
   const chips = (places) => places.map((n, i) => n ? `<span class="chip ${pc(i + 1)}" title="${n} × ${ordinal(i + 1)}">${n}×${i + 1}</span>` : '').join('');
-  /* wrestler card: badge + name + school, district/region as icons, then one season tile per slot FR·SO·JR·SR (year, weight, place) */
-  const seasonTiles = (apps) => {
-    const slots = [null, null, null, null];
-    apps.forEach((r) => { const i = OT.gradeSlot(r, apps); if (!slots[i] || (r.place && (!slots[i].place || r.place < slots[i].place))) slots[i] = r; });
-    return `<div class="st">${slots.map((r, i) => r
-      ? `<div class="tile ${r.place ? pc(r.place) : 'q'}" title="${r.year} · ${OT.GRADE_L[i]} · ${OT.wShort(r.w)} · ${r.place ? ordinal(r.place) : 'qualified'}"><span class="y">${r.year}</span><span class="w">${OT.wShort(r.w)}</span><b>${r.place ? ordinal(r.place) : 'Q'}</b></div>`
-      : `<div class="tile none"><span class="y">${OT.GRADE_L[i]}</span><span class="w">—</span><b></b></div>`).join('')}</div>`;
-  };
+  /* wrestler card: school-colored stripe + badge, name, district/region icons, then the career matrix (D/R/S × FR–SR) in small pills */
+  const LVL_ICON = { district: 'district', regional: 'region', state: 'state' };
   const wrestlerCard = (w) => {
-    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 36, variant: 'chip', title: false }) : '';
+    const id = OT.SB && OT.SB.identity(w.sch); const p1 = (id && id.primary) || '#5F6B78', p2 = (id && id.secondary) || '#EEEAE1';
+    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 34, variant: 'chip', title: false }) : '';
     const reg = (OT.schoolRegion && OT.schoolRegion(w.sch)) || '';
-    return `<a class="wc" href="${w.href}">
+    const M = careerCells(w.apps);
+    return `<a class="wc" href="${w.href}" style="--p1:${p1};--p2:${p2}">
       <span class="badge">${badge}</span>
-      <span class="who"><b>${esc(w.name)}</b><small>${esc(w.sch)}</small></span>
-      <span class="where"><span title="District ${w.d}">${navIcon("district")}${w.d}</span>${reg ? `<span title="${esc(OT.REGIONS[reg] || reg)} Region">${navIcon("region")}${esc(reg)}</span>` : ''}</span>
-      ${seasonTiles(w.apps)}</a>`;
+      <span class="who"><b>${esc(w.name)}</b><small>${esc(w.sch)} · ${w.years}</small></span>
+      <span class="where"><span title="District ${w.d}">${navIcon('district')}${w.d}</span>${reg ? `<span title="${esc(OT.REGIONS[reg] || reg)} Region">${navIcon('region')}${esc(reg)}</span>` : ''}</span>
+      <span class="cm"><span></span>${M.cols.map((c, i) => `<span class="ch">${c ? `<b>${String(c.year).slice(2)}</b><i>${wShort(c.w)}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`}</span>`).join('')}
+        ${M.rows.map((r) => `<span class="rl" title="${r.l}">${navIcon(LVL_ICON[r.k])}</span>${r.cells.map((c) => cellHTML(c, 'pill')).join('')}`).join('')}</span></a>`;
   };
 
   /* career grid */
-  function careerGrid(W) {
-    const apps = W.apps; const levels = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
+  /* career matrix: 3 levels × 4 grade slots. Each cell: null | {place, q, pend, year, w, src} */
+  function careerCells(apps) {
+    const slotOf = (g) => apps.find((a) => gradeSlot(a, apps) === g);
     const cell = (lvl, g) => {
-      if (lvl === 'state') { const r = apps.find((a) => gradeSlot(a, apps) === g); if (!r) return `<div class="cell"></div>`; return r.place ? `<div class="cell ${pc(r.place)}" title="${r.year} · ${wShort(r.w)}">${r.place}</div>` : `<div class="cell cq" title="${r.year} qualifier">Q</div>`; }
-      const low = lowerRows(lvl).filter((a) => OT.wKey(a) === OT.wKey(apps[0])); const r = low.find((a) => apps.some((s) => gradeSlot(s, apps) === g && s.year === a.year));
-      if (r) return r.place ? `<div class="cell ${pc(r.place)}">${r.place}</div>` : `<div class="cell cq">Q</div>`;
-      // state seed = regional place from 1951, district place before
-      const s = apps.find((a) => gradeSlot(a, apps) === g); if (s && lvl === 'regional' && s.year >= 1951 && s.reg) return `<div class="cell ${pc(s.reg)}" title="Regional place, from the state seed">${s.reg}</div>`;
-      if (s && lvl === 'district' && s.year < 1951 && s.dist) return `<div class="cell ${pc(s.dist)}" title="District place, from the state seed">${s.dist}</div>`;
-      if (s && lvl === 'district' && s.year >= 1951) return `<div class="cell pend" title="District bracket not loaded yet">Q</div>`;
-      return `<div class="cell"></div>`;
+      const s = slotOf(g); if (!s) return null;
+      const base = { year: s.year, w: s.w };
+      if (lvl === 'state') return s.place ? { ...base, place: s.place } : { ...base, q: true };
+      const low = lowerRows(lvl).filter((a) => OT.wKey(a) === OT.wKey(apps[0])); const r = low.find((a) => a.year === s.year);
+      if (r) return r.place ? { ...base, place: r.place } : { ...base, q: true };
+      if (lvl === 'regional' && s.year >= 1951 && s.reg) return { ...base, place: s.reg, src: 'Regional place, from the state seed' };
+      if (lvl === 'district' && s.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'District place, from the state seed' };
+      if (lvl === 'district' && s.year >= 1951) return { ...base, pend: true };
+      return { ...base, none: true };
     };
-    return `<div class="cg"><div></div>${GRADE_L.map((g) => `<div class="k h">${g}</div>`).join('')}${levels.map(([k, l]) => `<div class="k lab">${l}</div>${[0, 1, 2, 3].map((g) => cell(k, g)).join('')}`).join('')}</div>
+    return { cols: [0, 1, 2, 3].map(slotOf), rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((g) => cell(k, g)) })) };
+  }
+  const cellHTML = (c, cls) => {
+    if (!c || c.none) return `<div class="${cls}"></div>`;
+    if (c.place) return `<div class="${cls} ${pc(c.place)}" title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}">${c.place}</div>`;
+    if (c.pend) return `<div class="${cls} pend" title="${c.year} · district bracket not loaded yet">Q</div>`;
+    return `<div class="${cls} cq" title="${c.year} qualifier">Q</div>`;
+  };
+  function careerGrid(W) {
+    const M = careerCells(W.apps);
+    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell')).join('')}`).join('')}</div>
       <div class="note">District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
   }
 
@@ -173,5 +182,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { seasonTiles, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();
