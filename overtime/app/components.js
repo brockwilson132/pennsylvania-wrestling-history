@@ -19,6 +19,11 @@
     wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
   };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
+  /* field-strength band: four vertical stripes, 1–4 filled (like ankle-band stripes). Never a word; the tier name lives in the title. */
+  const bandIcon = (tier, h = 12, extra = '') => { if (!tier) return ''; const t = Math.max(1, Math.min(4, Math.round(tier))); const w = h * 1.25, sw = w / 7;
+    return `<svg class="band" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Field strength ${t} of 4"><title>${OT.TIER_NAMES[t]} field${extra ? ' · ' + extra : ''}</title>${[0, 1, 2, 3].map((i) => `<rect x="${i * sw * 2}" y="0" width="${sw}" height="${h}" rx="${sw / 2}" fill="${i < t ? C.chalk : C.line}"/>`).join('')}</svg>`; };
+  const fieldTip = (r) => { const f = OT.fieldInfo(r.year, r.cls, r.w); return f && f.top.length ? 'in the bracket: ' + f.top.map((t) => t.name).join(', ') : ''; };
+  const bandFor = (r, h = 12) => bandIcon(OT.fieldOf(r), h, fieldTip(r));
   const classToggle = () => `<div class="seg" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((k) => `<button data-cls="${k}" aria-pressed="${state.cls === k}">${k === 'ALL' ? 'All' : k}</button>`).join('')}</div>`;
   /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
@@ -32,7 +37,7 @@
     return out; };
   const headerChips = () => { const fc = filterChips(); const n = nFilters();
     const ic = `<button class="hc ic${n ? ' on' : ''}" data-panel="filters" aria-label="Filters" title="Filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>${n ? `<b>${n}</b>` : ''}</button>`;
-    const main = `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : windowLabel()}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}`;
+    const main = `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : windowLabel()}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}${state.adj ? `<button class="hc on" data-panel="adjust" title="Points adjusted for field strength">Adjusted</button>` : ''}`;
     return (window.innerWidth || 390) < 720 ? ic + main : main + ic; };
   /* the control panel: class, window, multi-select filters */
   const fchip = (kind, v, label, on) => `<button class="fc${on ? ' on' : ''}" data-f="${kind}" data-v="${esc(String(v))}" aria-pressed="${on}">${label}</button>`;
@@ -43,6 +48,7 @@
     return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Clear all</button><button class="pdone" data-panel-close>Done</button></span></div>
       <div class="pg" id="pg-class"><div class="k">Class</div>${classToggle()}</div>
       <div class="pg" id="pg-window"><div class="k">Seasons</div>${windowToggle()}</div>
+      <div class="pg" id="pg-adjust"><div class="k">Difficulty</div><label class="sw"><input type="checkbox" data-adjust ${state.adj ? 'checked' : ''}><span class="tr"></span><span>Adjust points for field strength <small class="muted">× 0.88 / 0.96 / 1.04 / 1.12 by tier ${bandIcon(1, 10)} ${bandIcon(2, 10)} ${bandIcon(3, 10)} ${bandIcon(4, 10)}</small></span></label></div>
       <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((s) => fchip('weights', s.k, s.label, f.weights.includes(s.k))).join('')}</div></div>
       <div class="pg"><div class="k">Regions${f.regions.length ? ` <button class="pclr" data-clear="regions">clear</button>` : ''}</div><div class="fcs">${OT.regionOrder().map((r) => fchip('regions', r, REGIONS[r], f.regions.includes(r))).join('')}</div></div>
       <div class="pg"><div class="k">Districts${f.districts.length ? ` <button class="pclr" data-clear="districts">clear</button>` : ''}</div><div class="fcs">${d3.range(1, 13).map((d) => fchip('districts', d, 'D' + d, f.districts.includes(d))).join('')}</div></div>
@@ -96,25 +102,32 @@
   function rankTable(rows, opts = {}) {
     if (!rows.length) return empty(opts.emptyMsg || 'Nothing here in ' + clsName().toLowerCase() + '.');
     const lim = opts.limit || 25;
+    const X = opts.extra; // optional extra column {label, key, cell(o)} placed after Medals; header is a sort control when opts.sortKey is set
     const body = rows.slice(0, lim).map((o, i) => { const u = o.u || o; const name = opts.name ? opts.name(o) : esc(u.name); let sub = opts.sub ? opts.sub(o) : ''; if (o.offMedals) sub += `${sub ? ' · ' : ''}incl. ${o.offMedals} ${o.offCls} medal${o.offMedals === 1 ? '' : 's'} at ${Math.round(100 * o.offClass)}%`;
-      return `<tr><td class="rk sticky1">${i + 1}</td><td class="l sticky2"><a href="${u.href || o.href}">${name}</a>${sub ? `<small class="muted"> ${sub}</small>` : ''}</td><td class="num">${score(o.era)}</td><td class="num">${score(o.power)}</td><td class="num">${fmt(o.pts)}</td><td class="num">${fmt(o.medals)}</td>${o.places.map((n, k) => `<td class="num p${n ? Math.min(k + 1, 5) : 0}">${n || '·'}</td>`).join('')}</tr>`; }).join('');
+      return `<tr><td class="rk sticky1">${i + 1}</td><td class="l sticky2"><a href="${u.href || o.href}">${name}</a>${sub ? `<small class="muted"> ${sub}</small>` : ''}</td><td class="num">${score(o.era)}</td><td class="num">${score(o.power)}</td><td class="num">${fmt(Math.round(o.pts))}</td><td class="num">${fmt(o.medals)}</td>${X ? `<td class="num xc">${X.cell(o)}</td>` : ''}${o.places.map((n, k) => `<td class="num p${n ? Math.min(k + 1, 5) : 0}">${n || '·'}</td>`).join('')}</tr>`; }).join('');
     const more = rows.length > lim ? `<div class="note">Showing ${lim} of ${rows.length}. ${opts.moreHref ? `<a href="${opts.moreHref}">See all</a>` : ''}</div>` : '';
-    return `<div class="tw"><table><thead><tr>${COLS.map((c, i) => `<th class="${i < 2 ? 'l ' : ''}${i === 0 ? 'sticky1' : i === 1 ? 'sticky2' : ''}">${c}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>${more}
-      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1. A school's seasons in the other class count at 85%. Window: ${windowLabel()}.</div>`;
+    const cols = X ? COLS.slice(0, 6).concat([X.label]).concat(COLS.slice(6)) : COLS;
+    const th = (c, i) => { const sortable = opts.sortKey && (c === 'Score' || (X && c === X.label)); const key = c === 'Score' ? 'pts' : X && c === X.label ? X.key : null; const on = sortable && opts.sortKey === key;
+      return `<th class="${i < 2 ? 'l ' : ''}${i === 0 ? 'sticky1' : i === 1 ? 'sticky2' : ''}${sortable ? ' sortable' : ''}${on ? ' on' : ''}"${sortable ? ` data-sort="${key}" role="button" tabindex="0" title="Sort by ${c}"` : ''}>${c}${on ? ' ▾' : ''}</th>`; };
+    return `<div class="tw"><table><thead><tr>${cols.map(th).join('')}</tr></thead><tbody>${body}</tbody></table></div>${more}
+      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1${state.adj ? ', adjusted for field strength (× 0.88–1.12 by tier)' : ''}. A school's seasons in the other class count at 85%. Window: ${windowLabel()}.</div>`;
   }
   /* wrestler rows as rankings (Score, Medals, places); Era/Power shown as career share */
   function wrestlerRank(rows, opts = {}) {
     const ws = OT.wrestlersOf(careerRows(rows.filter((r) => r.place)).filter((r) => r.place)); if (!ws.length) return empty('No placewinners in ' + clsName().toLowerCase() + '.');
     const tot = d3.sum(seasonsInScope(), (S) => S.avail) || 1;
     const [, last] = OT.yearsInScope();
-    const list = ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => r.pts * Math.pow(0.5, (last - r.year) / 7)) / tot * 100 })).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
-    return rankTable(list, { limit: opts.limit || 25, sub: (o) => (opts.school ? '' : esc(o.sch)) + ' ' + o.years, moreHref: opts.moreHref });
+    const sortKey = state.wsort === 'field' ? 'field' : 'pts';
+    const list = ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => OT.apts(r) * Math.pow(0.5, (last - r.year) / 7)) / tot * 100 }))
+      .sort((a, b) => sortKey === 'field' ? ((b.field || 0) - (a.field || 0) || b.pts - a.pts) : (b.pts - a.pts || b.titles - a.titles));
+    return rankTable(list, { limit: opts.limit || 25, sub: (o) => (opts.school ? '' : esc(o.sch)) + ' ' + o.years, moreHref: opts.moreHref, sortKey,
+      extra: { label: 'Field', key: 'field', cell: (o) => o.field ? bandIcon(o.field, 12, `average over ${o.apps.length} bracket${o.apps.length === 1 ? '' : 's'}`) : '·' } });
   }
 
   /* all-time teams */
   function teamsBlock(rows) {
     const T = allTimeTeams(careerRows(rows.filter((r) => r.place)).filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
-    return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<a class="slot t${i + 1}" href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small><span class="pl">${s.rows.map((r) => `<i style="background:${MED[r.place - 1]}" title="${ordinal(r.place)} ${r.year}"></i>`).join('')}</span></a>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
+    return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<a class="slot t${i + 1}" href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small><span class="pl">${s.rows.map((r) => `<i style="background:${MED[r.place - 1]}" title="${ordinal(r.place)} ${r.year}"></i>`).join('')}${bandIcon(OT.avgTier(s.rows), 9, 'average over the seasons at this weight')}</span></a>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
       <div class="note">Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team. Anyone who placed in the window is in; his whole career counts.</div>`;
   }
 
@@ -127,8 +140,9 @@
       const n = `${t.n || 0} medal${t.n === 1 ? '' : 's'}${t.titles ? ` · ${t.titles} title${t.titles === 1 ? '' : 's'}` : ''}`;
       const pod = t.rows.filter((r) => r.place).sort((a, b) => a.slot - b.slot || a.place - b.place);
       const byW = d3.groups(pod, (r) => r.w);
-      const podium = `<div class="podium" hidden>${byW.map(([w, rs]) => `<div class="prow"><div class="w">${wShort(w)}</div><div class="ps">${rs.map((r) => `<span><i style="color:${MED[r.place - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}</div>`;
-      return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${s.year}</span><span class="c">${label}</span><span class="n">${n}</span></div>${podium}`;
+      const podium = `<div class="podium" hidden>${byW.map(([w, rs]) => `<div class="prow"><div class="w">${wShort(w)} ${bandFor(rs[0], 10)}</div><div class="ps">${rs.map((r) => `<span><i style="color:${MED[r.place - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}</div>`;
+      const rband = u.kind === 'region' && s.cls !== 'single' ? bandIcon(OT.regionTier(s.year, s.cls, u.id), 12, 'region strength that season: share of state medal points over share of qualifiers') : '';
+      return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${s.year}</span><span class="c">${label}</span><span class="n">${rband ? rband + ' ' : ''}${n}</span></div>${podium}`;
     }).join('');
     const first = S[S.length - 1].S.year, last = S[0].S.year;
     return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
@@ -156,7 +170,7 @@
       <span class="badge">${badge}</span>
       <span class="who"><b>${esc(w.name)}</b><small>${esc(w.sch)} · ${w.years}</small></span>
       <span class="where"><span title="District ${w.d}">${navIcon('district')}${w.d}</span>${reg ? `<span title="${esc(OT.REGIONS[reg] || reg)} Region">${navIcon('region')}${esc(reg)}</span>` : ''}</span>
-      <span class="cm"><span></span>${M.cols.map((c, i) => `<span class="ch">${c ? `<b>${String(c.year).slice(2)}</b><i>${wShort(c.w)}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`}</span>`).join('')}
+      <span class="cm"><span></span>${M.cols.map((c, i) => `<span class="ch">${c ? `<b>${String(c.year).slice(2)} ${bandFor(c, 9)}</b><i>${wShort(c.w)}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`}</span>`).join('')}
         ${M.rows.map((r) => `<span class="rl" title="${r.l}">${navIcon(LVL_ICON[r.k])}</span>${r.cells.map((c) => cellHTML(c, 'pill')).join('')}`).join('')}</span></a>`;
   };
 
@@ -166,7 +180,7 @@
     const slotOf = (g) => apps.find((a) => gradeSlot(a, apps) === g);
     const cell = (lvl, g) => {
       const s = slotOf(g); if (!s) return null;
-      const base = { year: s.year, w: s.w };
+      const base = { year: s.year, w: s.w, r: s };
       if (lvl === 'state') return s.place ? { ...base, place: s.place } : { ...base, q: true };
       const low = lowerRows(lvl).filter((a) => OT.wKey(a) === OT.wKey(apps[0])); const r = low.find((a) => a.year === s.year);
       if (r) return r.place ? { ...base, place: r.place } : { ...base, q: true };
@@ -177,16 +191,17 @@
     };
     return { cols: [0, 1, 2, 3].map(slotOf), rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((g) => cell(k, g)) })) };
   }
-  const cellHTML = (c, cls) => {
+  const cellHTML = (c, cls, band) => {
     if (!c || c.none) return `<div class="${cls}"></div>`;
-    if (c.place) return `<div class="${cls} ${pc(c.place)}" title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}">${c.place}</div>`;
+    const b = band && c.r ? `<span class="cb">${bandFor(c.r, 9)}</span>` : '';
+    if (c.place) return `<div class="${cls} ${pc(c.place)}" title="${c.year} · ${wShort(c.w)}${c.src ? ' · ' + c.src : ''}">${c.place}${b}</div>`;
     if (c.pend) return `<div class="${cls} pend" title="${c.year} · district bracket not loaded yet">Q</div>`;
-    return `<div class="${cls} cq" title="${c.year} qualifier">Q</div>`;
+    return `<div class="${cls} cq" title="${c.year} qualifier">Q${b}</div>`;
   };
   function careerGrid(W) {
     const M = careerCells(W.apps);
-    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell')).join('')}`).join('')}</div>
-      <div class="note">District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
+    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year} · ${wShort(M.cols[i].w)}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => cellHTML(c, 'cell', r.k === 'state')).join('')}`).join('')}</div>
+      <div class="note">The stripes on a state cell are the strength of that bracket (1–4, from what its entrants did in other seasons). District and regional rows fill in from the bracket archive; until then the regional cell shows the state seed (the regional place since 1951) and a dashed Q marks a district qualification we know happened but have not loaded.</div>`;
   }
 
   /* road to Hershey: one season as a line across the state */
@@ -205,5 +220,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { bandIcon, bandFor, fieldTip, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

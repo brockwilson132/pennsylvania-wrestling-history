@@ -55,6 +55,8 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('submit', (e) => { const f = e.target.closest('form[data-wrange]'); if (!f) return; e.preventDefault(); setWin({ mode: 'custom', from: +f.from.value, to: +f.to.value }); applyScope(); });
   document.addEventListener('input', (e) => { if (e.target.id === 'psearch') { panelQ = e.target.value; refreshPanel(); } });
+  document.addEventListener('change', (e) => { if (e.target.matches('input[data-adjust]')) { OT.setAdjust(e.target.checked); applyScope(); } });
+  document.addEventListener('click', (e) => { const th = e.target.closest('th[data-sort]'); if (th) { state.wsort = th.dataset.sort; render(true); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelOpen()) closePanel(); });
   /* the tapped line slides to the top of the bracket while the rest fade, then we go there */
   function slideTo(bl) {

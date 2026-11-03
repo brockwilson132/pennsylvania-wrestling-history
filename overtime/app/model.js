@@ -19,20 +19,22 @@ const OT = (window.OT = {});
 
   /* scope */
   const EMPTY_F = () => ({ weights: [], regions: [], districts: [], schools: [] });
-  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
+  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F(), adj: false };
+  try { state.adj = localStorage.getItem('ot-adjust') === '1'; } catch (e) { /* none */ }
   try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
   try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
   try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && typeof f === 'object') state.f = { ...EMPTY_F(), ...f }; } catch (e) { /* none */ }
   const clearCaches = () => { STATS.clear(); RANKS.clear(); SEASONS.clear(); WIN.clear(); SREG.clear(); DREG.clear(); };
   const save = (k, v) => { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) { /* none */ } };
   const setCls = (c) => { state.cls = c; save('ot-scope', c); clearCaches(); };
+  const setAdjust = (v) => { state.adj = !!v; save('ot-adjust', state.adj ? '1' : '0'); clearCaches(); };
   const setWin = (w) => { state.win = { ...state.win, ...w }; save('ot-window', state.win); clearCaches(); };
   /* multi-select filters: weights (STD keys), regions, districts, schools. Toggle a value in or out. */
   const toggleFilter = (kind, v) => { const L = state.f[kind]; const i = L.indexOf(v); if (i < 0) L.push(v); else L.splice(i, 1); save('ot-filters', state.f); clearCaches(); };
   const clearFilters = (kind) => { if (kind) state.f[kind] = []; else state.f = EMPTY_F(); save('ot-filters', state.f); clearCaches(); };
-  const clearAll = () => { state.cls = 'AAA'; state.win = { mode: 'all', from: null, to: null }; state.f = EMPTY_F(); save('ot-scope', 'AAA'); save('ot-window', state.win); save('ot-filters', state.f); clearCaches(); };
+  const clearAll = () => { state.cls = 'AAA'; state.win = { mode: 'all', from: null, to: null }; state.f = EMPTY_F(); state.adj = false; save('ot-scope', 'AAA'); save('ot-window', state.win); save('ot-filters', state.f); save('ot-adjust', '0'); clearCaches(); };
   const nFilters = () => state.f.weights.length + state.f.regions.length + state.f.districts.length + state.f.schools.length;
-  const wkey = () => state.cls + '|' + state.win.mode + (state.win.mode === 'custom' ? state.win.from + '-' + state.win.to : '') + '|' + JSON.stringify(state.f);
+  const wkey = () => state.cls + '|' + state.win.mode + (state.win.mode === 'custom' ? state.win.from + '-' + state.win.to : '') + '|' + JSON.stringify(state.f) + (state.adj ? '|adj' : '');
   const clsName = (c = state.cls) => (c === 'ALL' ? 'All classes' : 'Class ' + c);
 
   /* appearances */
@@ -64,7 +66,7 @@ const OT = (window.OT = {});
   APP.forEach((r) => { r.k = r.cls === 'single' ? lineage(r.sch) : homeOf(r.sch); r.off = r.cls !== 'single' && r.cls !== r.k; });
   const isOff = (r) => state.cls !== 'ALL' && r.off;
   const wt = (r) => (isOff(r) ? (state.cls === 'AAA' ? OFF_CLASS : OFF_DOWN) : 1);
-  const wpts = (r) => r.pts * wt(r);
+  const wpts = (r) => apts(r) * wt(r);
   /* time window: all-time, last N seasons in scope, or a custom range */
   const WIN = new Map();
   function yearsWindow() {
@@ -192,12 +194,54 @@ const OT = (window.OT = {});
   const WRESTLER = new Map();
   d3.groups(APP, wKey).forEach(([, all]) => { all.sort((a, b) => a.year - b.year); const L = all[all.length - 1]; WRESTLER.set(wSlug(L.name, L.sch), { name: L.name, sch: L.sch, d: all[0].d, apps: all, rows: all.filter((r) => r.place), slug: wSlug(L.name, L.sch) }); });
   const wrestlerHref = (r) => '#wrestler/' + wSlug(r.name, r.sch);
-  const wrestlersOf = (rows) => d3.groups(rows, wKey).map(([, rs]) => { rs.sort((a, b) => a.year - b.year); const L = rs[rs.length - 1]; const W = WRESTLER.get(wSlug(L.name, L.sch)); const meds = rs.filter((r) => r.place); return { name: L.name, sch: L.sch, d: rs[0].d, medals: meds.length, titles: meds.filter((r) => r.place === 1).length, pts: d3.sum(rs, (r) => r.pts), places: placeCounts(rs), rows: meds, apps: W ? W.apps : rs, years: rs[0].year === L.year ? String(L.year) : rs[0].year + '–' + L.year, href: wrestlerHref(L) }; }).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
+  /* ---- difficulty, layer 1: strength of field ----
+     A state bracket (year, class, weight) is as strong as what its entrants did in their OTHER seasons: for every entrant,
+     career state points minus this season's points, summed. Brackets are compared only against the other weights of the
+     same year and class (a percentile), then cut into four tiers: 1 Open (<25%), 2 Solid, 3 Loaded, 4 Gauntlet (>=75%).
+     Fewer than 4 known entrants: no tier. */
+  const TIER_NAMES = [null, 'Open', 'Solid', 'Loaded', 'Gauntlet'];
+  const ADJ = [0.88, 0.96, 1.04, 1.12];
+  const CAREER_PTS = new Map(); APP.forEach((r) => { const k = wKey(r); CAREER_PTS.set(k, (CAREER_PTS.get(k) || 0) + r.pts); });
+  const FIELD = new Map();
+  d3.group(APP, (r) => r.year + '|' + r.cls + '|' + r.wn).forEach((rs, key) => {
+    const byW = d3.rollups(rs, (v) => ({ other: CAREER_PTS.get(wKey(v[0])) - d3.sum(v, (r) => r.pts), r: v[0] }), wKey).map(([, o]) => o);
+    const strength = d3.sum(byW, (o) => o.other);
+    const top = byW.filter((o) => o.other > 0).sort((a, b) => b.other - a.other).slice(0, 3).map((o) => ({ name: o.r.name, sch: o.r.sch, other: o.other }));
+    FIELD.set(key, { year: rs[0].year, cls: rs[0].cls, w: rs[0].w, wn: rs[0].wn, n: byW.length, strength, top, tier: null, pct: null });
+  });
+  d3.group(Array.from(FIELD.values()), (f) => f.year + '|' + f.cls).forEach((fs) => {
+    const ok = fs.filter((f) => f.n >= 4).sort((a, b) => a.strength - b.strength); const n = ok.length;
+    ok.forEach((f, i) => { f.pct = n > 1 ? i / (n - 1) : 0.5; f.tier = f.pct < 0.25 ? 1 : f.pct < 0.5 ? 2 : f.pct < 0.75 ? 3 : 4; });
+  });
+  const fieldInfo = (year, cls, w) => FIELD.get(year + '|' + cls + '|' + wNum(w)) || null;
+  const fieldTier = (year, cls, w) => { const f = fieldInfo(year, cls, w); return f ? f.tier : null; };
+  const fieldOf = (r) => (r.lvl && r.lvl !== 'state' ? lowerFieldTier(r.lvl, r.year, r.cls, r.w) : fieldTier(r.year, r.cls, r.w));
+  /* district / regional brackets: same idea once WR_LOWER exists — for each entrant of a district (or regional) bracket,
+     sum the state points they earned that season AND their career state points in other seasons (downstream achievement),
+     percentile within the same year, class and level across weights and districts/regions, four tiers. Returns null until
+     the bracket archive is parsed. Bout-level path difficulty (who you actually beat) is a later layer on top of this. */
+  const lowerFieldTier = (lvl, year, cls, w) => (LOWER.length ? null : null);
+  const lowerFieldInfo = (lvl, year, cls, w) => null;
+  /* adjusted points: opt-in multiplier by field tier, medal counts untouched */
+  const adjMult = (r) => { if (!state.adj) return 1; const t = fieldOf(r); return t ? ADJ[t - 1] : 1; };
+  const apts = (r) => r.pts * adjMult(r);
+  const avgTier = (rows) => { const ts = rows.map(fieldOf).filter(Boolean); return ts.length ? d3.mean(ts) : null; };
+  /* region strength per year and class: share of state medal points over share of qualifiers, percentile across regions */
+  const RTIER = new Map();
+  ['AAA', 'AA'].forEach((c) => d3.group(APP.filter((r) => r.cls === c), (r) => r.year).forEach((rs, year) => {
+    const reg = (r) => regionOf(r, c); const tot = d3.sum(rs, (r) => r.pts) || 1, nq = rs.length || 1;
+    const L = d3.rollups(rs.filter((r) => reg(r)), (v) => (d3.sum(v, (r) => r.pts) / tot) / (v.length / nq), reg).sort((a, b) => a[1] - b[1]);
+    const n = L.length; L.forEach(([code, ratio], i) => { const pct = n > 1 ? i / (n - 1) : 0.5; RTIER.set(year + '|' + c + '|' + code, { ratio, pct, tier: pct < 0.25 ? 1 : pct < 0.5 ? 2 : pct < 0.75 ? 3 : 4 }); });
+  }));
+  const regionInfo = (year, cls, code) => RTIER.get(year + '|' + cls + '|' + code) || null;
+  const regionTier = (year, cls, code) => { const x = regionInfo(year, cls, code); return x ? x.tier : null; };
+
+  const wrestlersOf = (rows) => d3.groups(rows, wKey).map(([, rs]) => { rs.sort((a, b) => a.year - b.year); const L = rs[rs.length - 1]; const W = WRESTLER.get(wSlug(L.name, L.sch)); const meds = rs.filter((r) => r.place); return { name: L.name, sch: L.sch, d: rs[0].d, medals: meds.length, titles: meds.filter((r) => r.place === 1).length, pts: d3.sum(rs, apts), raw: d3.sum(rs, (r) => r.pts), field: avgTier(rs), places: placeCounts(rs), rows: meds, apps: W ? W.apps : rs, years: rs[0].year === L.year ? String(L.year) : rs[0].year + '–' + L.year, href: wrestlerHref(L) }; }).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
   const GRADE_I = { FR: 0, SO: 1, JR: 2, SR: 3 }, GRADE_L = ['FR', 'SO', 'JR', 'SR'];
   const gradeSlot = (r, apps) => { if (r.grade in GRADE_I) return GRADE_I[r.grade]; const k = apps.find((a) => a.grade in GRADE_I); if (k) return Math.max(0, Math.min(3, GRADE_I[k.grade] + (r.year - k.year))); const i = apps.indexOf(r); return Math.max(0, Math.min(3, 3 - (apps.length - 1 - i))); };
   function allTimeTeams(rows, depth = 3) {
     const cands = [];
-    d3.group(rows, wKey).forEach((rs, key) => { d3.rollups(rs, (v) => ({ pts: d3.sum(v, (r) => r.pts), titles: v.filter((r) => r.place === 1).length, n: v.length, rows: v.slice().sort((a, b) => a.year - b.year) }), (r) => stdOf(r).k).forEach(([k, o]) => { const L = o.rows[o.rows.length - 1]; cands.push({ key, k, name: L.name, sch: L.sch, d: o.rows[0].d, pts: o.pts, titles: o.titles, n: o.n, rows: o.rows, years: o.rows[0].year === L.year ? String(L.year) : `${o.rows[0].year}–${L.year}`, href: wrestlerHref(L) }); }); });
+    d3.group(rows, wKey).forEach((rs, key) => { d3.rollups(rs, (v) => ({ pts: d3.sum(v, apts), titles: v.filter((r) => r.place === 1).length, n: v.length, rows: v.slice().sort((a, b) => a.year - b.year) }), (r) => stdOf(r).k).forEach(([k, o]) => { const L = o.rows[o.rows.length - 1]; cands.push({ key, k, name: L.name, sch: L.sch, d: o.rows[0].d, pts: o.pts, titles: o.titles, n: o.n, rows: o.rows, years: o.rows[0].year === L.year ? String(L.year) : `${o.rows[0].year}–${L.year}`, href: wrestlerHref(L) }); }); });
     cands.sort((p, q) => q.pts - p.pts || q.titles - p.titles || q.n - p.n || p.rows[0].year - q.rows[0].year);
     const slots = new Map(STD.map((c) => [c.k, Array(depth).fill(null)])), held = new Map();
     cands.forEach((c) => { const S = slots.get(c.k), H = held.get(c.key) || new Set(); for (let i = 0; i < depth; i++) if (!S[i] && !H.has(i)) { S[i] = c; H.add(i); held.set(c.key, H); break; } });
@@ -218,5 +262,5 @@ const OT = (window.OT = {});
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 
-  Object.assign(OT, { SB, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { SB, setAdjust, ADJ, TIER_NAMES, fieldInfo, fieldTier, fieldOf, lowerFieldTier, lowerFieldInfo, adjMult, apts, avgTier, regionInfo, regionTier, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();
