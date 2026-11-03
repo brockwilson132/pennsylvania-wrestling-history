@@ -1,7 +1,7 @@
 /* Overtime — pages. One level page function; State, Region, District and School all call it. */
 'use strict';
 (() => {
-  const { esc, fmt, ordinal, state, clsName, U, unitRows, unitStats, rankings, regionsInScope, REGIONS, DISTRICTS, DIST_R, SCHOOL_BY_SLUG, classHistory, WRESTLER, wrestlersOf, section, empty, unitHeader, floor, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, careerGrid, road, chips, placeCounts, lowerRows } = OT;
+  const { esc, fmt, ordinal, state, clsName, U, unitRows, unitStats, rankings, regionsInScope, REGIONS, DISTRICTS, distRegions, SCHOOL_BY_SLUG, classHistory, WRESTLER, wrestlersOf, section, empty, unitHeader, bracket, rankTable, windowLabel, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, careerGrid, road, chips, placeCounts, lowerRows } = OT;
 
   /* the one level page */
   function levelPage(u, opts = {}) {
@@ -10,7 +10,7 @@
     const parts = [unitHeader(u, o, opts)];
     // b. signature viz
     const crumbs = (opts.crumbs || []).concat([{ name: u.name }]); if (u.kind === 'state') crumbs.splice(0, crumbs.length, { name: 'Pennsylvania' });
-    parts.push(section(u.kind === 'school' ? 'The floor · by weight' : 'The floor', floor(u, crumbs, state.floor), u.kind === 'school' ? '' : clsName()));
+    parts.push(section('The bracket', bracket(u, crumbs, state.bmode, state.bracketAll), clsName() + ' · ' + windowLabel()));
     // c. rankings of children
     parts.push(section('Rankings', opts.rankings(o)));
     // d. all-time teams
@@ -28,19 +28,19 @@
   const PAGES = {};
   PAGES.state = () => {
     const u = U.state(); const kind = state.child || 'school';
-    return levelPage(u, { sub: `PIAA individual championships · ${OT.yearsInScope().join('–')}`,
+    return levelPage(u, { sub: 'PIAA individual championships',
       rankings: () => `<div class="tbar" style="margin-bottom:10px">${childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)}</div>` + rankTable(rankings(kind), { limit: 30, sub: kind === 'school' ? (o) => 'D' + o.u.d : kind === 'district' ? (o) => esc(DISTRICTS[o.u.id]) : null }) });
   };
   PAGES.region = (id) => {
-    if (!id) return indexPage('Regions', regionsInScope().map((c) => { const o = unitStats(U.region(c)); return { href: '#region/' + c, name: REGIONS[c], sub: `${fmt(o.medals)} medals · ${fmt(o.titles)} titles` }; }), 'Regions are the PIAA qualifying tournaments between districts and Hershey. Membership follows the state seeds, so a district that moved regions is counted where it actually wrestled each year.');
+    if (!id) return indexPage('Regions', regionsInScope().map((c) => { const o = unitStats(U.region(c)); return { href: '#region/' + c, name: REGIONS[c], sub: `${fmt(o.medals)} medals · ${fmt(o.titles)} titles` }; }), state.cls === 'ALL' ? 'Regions are the PIAA qualifying tournaments between districts and Hershey. With all classes selected the historical regions stand as they were.' : 'The ' + clsName() + ' regions in this window. Membership follows the state seeds, so a district that moved regions is counted where it actually wrestled; seasons before regions existed are placed through their district.');
     const u = U.region(id); const kind = state.child === 'district' ? 'district' : 'school';
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }],
       rankings: () => `<div class="tbar" style="margin-bottom:10px">${childToggle('region', [['school', 'Schools'], ['district', 'Districts']], kind)}</div>` + rankTable(rankings(kind, u), { limit: 25, sub: kind === 'school' ? (o) => 'D' + o.u.d : (o) => esc(DISTRICTS[o.u.id]) }) });
   };
   PAGES.district = (id) => {
     if (!id) return indexPage('Districts', d3.range(1, 13).map((d) => { const o = unitStats(U.district(d)); return { href: '#district/' + d, name: 'District ' + d, sub: `${DISTRICTS[d]} · ${fmt(o.medals)} medals` }; }));
-    const u = U.district(+id); const regs = (DIST_R.get(+id) || []).map((c) => `<a href="#region/${c}" style="color:var(--ash)">${REGIONS[c]}</a>`).join(', ');
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(regs ? [{ name: REGIONS[(DIST_R.get(+id) || [])[0]] + ' Region', href: '#region/' + (DIST_R.get(+id) || [])[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}`,
+    const u = U.district(+id); const dr = distRegions(+id); const regs = dr.map((c) => `<a href="#region/${c}" style="color:var(--ash)">${REGIONS[c]}</a>`).join(', ');
+    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}`,
       rankings: () => rankTable(rankings('school', u), { limit: 25 }) });
   };
   PAGES.school = (sl) => {
@@ -55,7 +55,7 @@
   PAGES.wrestlers = () => {
     const rows = OT.ROWS(); const ws = wrestlersOf(rows.filter((r) => r.place));
     const item = (w) => `<a href="${w.href}"><span><b>${esc(w.name)}</b><small>${esc(w.sch)} · D${w.d} · ${w.years}</small></span><span class="ch">${chips(w.places)}</span></a>`;
-    return `<header class="uh"><div style="display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap"><div><h1>Wrestlers</h1><div class="sub">${fmt(ws.length)} placewinners in ${clsName().toLowerCase()} · sorted by career points</div></div>${OT.classToggle()}</div></header>
+    return `<header class="uh"><div><h1>Wrestlers</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b> · ${fmt(ws.length)} placewinners · sorted by career points</div></div>${OT.scopeBar()}</header>
       <input class="search" id="wsearch" type="search" placeholder="Search a wrestler or school" autocomplete="off" aria-label="Search wrestlers">
       <div class="wl" id="wlist" data-n="${ws.length}">${ws.slice(0, 40).map(item).join('')}</div><div class="note" id="wmore">Showing 40 of ${fmt(ws.length)}. Type to search all.</div>`;
   };
@@ -70,10 +70,10 @@
     const roads = section('Road to Hershey', `<div class="roads">${W.apps.map((r) => `<div class="card"><div class="k" style="display:flex;justify-content:space-between"><span>${r.year} · ${OT.wShort(r.w)}</span><span>${r.grade || ''}</span></div><div class="road">${road(r, W)}</div></div>`).join('')}</div>`);
     return head + grid + roads;
   };
-  PAGES.about = () => `<header class="uh"><h1>Overtime</h1><div class="sub">Pennsylvania wrestling history, by level.</div></header><div class="card"><p>Every result is an appearance: one wrestler, one season, one weight, at one level of the PIAA bracket. State, Region, District and School are filters over the same appearances, and each level ranks only its own tournament results, so district dominance never mixes with state dominance.</p><p><b>Class moves.</b> A school belongs to every class it has wrestled in, so a program that moved shows up in both rankings. In the class you are viewing, its seasons in that class count in full and its seasons in the other class count at 85% in Score, Era and Power (medal counts stay whole), in both directions: an AA result inside the AAA ranking is a little easier, and an AAA result inside the AA ranking is not a measure of AA success. Seasons before 1974, when there was one class, follow the school's lineage. With all classes selected there is no discount.</p><p>Sources: PIAA brackets via the PA-Wrestling.com archive.</p></div>`;
+  PAGES.about = () => `<header class="uh"><h1>Overtime</h1><div class="sub">Pennsylvania wrestling history, by level.</div></header><div class="card"><p>Every result is an appearance: one wrestler, one season, one weight, at one level of the PIAA bracket. State, Region, District and School are filters over the same appearances, and each level ranks only its own tournament results, so district dominance never mixes with state dominance.</p><p><b>Class moves.</b> A school is counted with the class it is in now, the class of its most recent season, and appears only in that class's lists. Everything it did in the other class still counts for it, but at 85% in Score, Era and Power (medal counts stay whole): an AA result inside the AAA ranking is a little easier, and an AAA result inside the AA ranking is not a measure of AA success. Seasons before 1974, when there was one class, follow the school's lineage. With all classes selected there is no discount.</p><p><b>Regions.</b> In AAA or AA the regions of that class are the only regions (five in AAA; AA has wrestled in four since South Central was folded in). Seasons before 1974, the 2021 super-regionals and any other historical grouping are placed through their district. With all classes selected the historical regions stand as they were.</p><p><b>Seasons.</b> The window next to the class toggle (all-time, last 5, 10 or 25 seasons, or a custom range) applies to every number on the page. Era is the share of the window's points; Power keeps its 7-season half-life.</p><p>Sources: PIAA brackets via the PA-Wrestling.com archive.</p></div>`;
 
   function indexPage(title, items, note) {
-    return `<header class="uh"><div style="display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap"><div><h1>${title}</h1>${note ? `<div class="sub">${note}</div>` : ''}</div>${OT.classToggle()}</div></header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
+    return `<header class="uh"><div><h1>${title}</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b>${note ? ` · ${note}` : ''}</div></div>${OT.scopeBar()}</header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
   }
   Object.assign(OT, { PAGES });
 })();

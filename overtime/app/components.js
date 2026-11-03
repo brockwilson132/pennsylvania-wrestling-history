@@ -1,7 +1,7 @@
 /* Overtime — shared components. Every level page is built from the same pieces. */
 'use strict';
 (() => {
-  const { esc, fmt, ordinal, wShort, state, setCls, clsName, STD, stdOf, placeCounts, unitStats, rankings, allTimeTeams, hierarchyOf, seasonsInScope, unitRows, GRADE_L, gradeSlot, lowerRows, REGIONS, DISTRICTS } = OT;
+  const { esc, fmt, ordinal, wShort, state, setCls, clsName, STD, stdOf, placeCounts, unitStats, rankings, allTimeTeams, bracketOf, seasonsInScope, unitRows, GRADE_L, gradeSlot, lowerRows, REGIONS, DISTRICTS, windowLabel, yearsWindow } = OT;
   const MAP = window.PA_MAP, HX = 65.5, HY = 39.5; // Hershey
   const C = { mat: '#0B0D10', chalk: '#EEEAE1', ash: '#8E98A4', gold: '#D9A441', red: '#FF3B2F', green: '#2EC27E', slate: '#161A20', line: '#242A32' };
   const MED = ['#D9A441', '#B8BFC6', '#B5733A', '#8E5A3C', '#5F6B78', '#5F6B78', '#5F6B78', '#5F6B78'];
@@ -20,43 +20,52 @@
   };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
   const classToggle = (small) => `<div class="seg${small ? ' sm' : ''}" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((c) => `<button data-cls="${c}" aria-pressed="${state.cls === c}">${c === 'ALL' ? 'All' : c}</button>`).join('')}</div>`;
+  /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
+  const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
+    return `<div class="win"><div class="seg sm" role="group" aria-label="Seasons">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25'], ['custom', 'Custom']].map(([k, l]) => `<button data-win="${k}" aria-pressed="${w.mode === k}">${l}</button>`).join('')}</div>${w.mode === 'custom' ? `<form class="wrange" data-wrange><input type="number" name="from" inputmode="numeric" min="1938" max="2026" value="${a}" aria-label="From"><span>–</span><input type="number" name="to" inputmode="numeric" min="1938" max="2026" value="${b}" aria-label="To"><button type="submit" class="go">Go</button></form>` : ''}</div>`; };
+  const scopeBar = () => `<div class="scope">${classToggle()}${windowToggle()}</div>`;
 
   /* unit header + hero numbers */
   function unitHeader(u, o, extra = {}) {
     const hero = extra.hero || [['Medals', o.medals], ['Titles', o.titles], ['Qualifiers', o.quals], u.kind === 'school' ? ['Team titles', o.won] : ['Reg. titles', o.regTitles]];
     return `<header class="uh">
-      <div style="display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap"><div><h1>${esc(u.name)}</h1>${extra.sub ? `<div class="sub">${extra.sub}</div>` : ''}</div>${classToggle()}</div>
+      <div><h1>${esc(u.name)}</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b>${extra.sub ? ` · ${extra.sub}` : ''}</div></div>${scopeBar()}
       <div class="hero">${hero.map(([l, v]) => `<div><b>${v == null ? '–' : fmt(v)}</b><span>${l}</span></div>`).join('')}</div>
     </header>`;
   }
   const section = (title, body, right = '') => `<section class="sec"><div class="k"><span>${title}</span>${right ? `<span>${right}</span>` : ''}</div>${body}</section>`;
   const empty = (msg) => `<div class="card empty">${msg}</div>`;
 
-  /* the Floor: every unit is a mat sized by its (discounted) state points; the same component at every level */
-  function floor(u, crumbs = [], mode) {
-    const H = hierarchyOf(u, mode);
-    const W = Math.min((window.innerWidth || 390) - 32, 1100), HT = W < 720 ? 300 : 380;
+  /* the Bracket: every child unit is one line, seeded by state points, converging toward Hershey. Same component at every level. */
+  function bracket(u, crumbs = [], mode, showAll) {
+    const { items } = bracketOf(u, mode);
     const crumbBar = `<div class="fcrumb">${crumbs.map((c, i) => (i < crumbs.length - 1 ? `<a href="${c.href}">${esc(c.name)}</a><span>›</span>` : `<b>${esc(c.name)}</b>`)).join('')}</div>`;
-    if (!H.children || !H.children.length) return crumbBar + empty('No placements in ' + clsName().toLowerCase() + ' yet.');
-    const root = d3.hierarchy(H).sum((d) => (d.children ? 0 : d.pts)).sort((a, b) => b.value - a.value);
-    d3.treemap().size([W, HT]).paddingOuter(0).paddingInner(3).paddingTop((d) => (d.depth === 1 && d.children ? 0 : 0)).round(true)(root);
-    const top = root.children, n = top.length, total = root.value;
-    const ramp = d3.interpolateRgb(C.chalk, '#2A313A');
-    const href = (d) => (d.data.kind && OT.unitByKind[d.data.kind] && d.data.id != null ? OT.unitByKind[d.data.kind](d.data.id).href : null);
-    const tiles = top.map((d, i) => {
-      const w = d.x1 - d.x0, h = d.y1 - d.y0, t = n > 1 ? Math.pow(i / (n - 1), 0.7) : 0, bg = ramp(t), dark = t > 0.5;
-      const share = (100 * d.value / total), sh = share >= 10 ? share.toFixed(0) + '%' : share.toFixed(1) + '%';
-      const pl = d.data.places || [0, 0, 0, 0];
-      const big = w >= 112 && h >= 82, mid = w >= 60 && h >= 44, small = w >= 34 && h >= 20; const medc = (k) => (dark ? MED[k] : ['#8A6410', '#5F6B78', '#8F4F1E', '#6E4330'][k]);
-      const label = big ? `<b>${esc(d.data.name)}</b><span class="sh">${sh}</span><span class="pl">${pl.slice(0, 4).map((c, k) => c ? `<i style="color:${medc(k)}">${c}</i>` : '').join('')}</span>`
-        : mid ? `<b>${esc(d.data.name)}</b><span class="sh">${sh}</span>` : small ? `<b>${esc(d.data.name)}</b>` : '';
-      const subs = d.children ? d.children.map((c) => `<i class="sub" style="left:${c.x0 - d.x0}px;top:${c.y0 - d.y0}px;width:${Math.max(0, c.x1 - c.x0)}px;height:${Math.max(0, c.y1 - c.y0)}px"></i>`).join('') : '';
-      const h2 = href(d);
-      return `<div class="tile${dark ? ' dk' : ''}${big ? ' big' : mid ? ' mid' : small ? ' sm' : ' xs'}" style="left:${d.x0}px;top:${d.y0}px;width:${w}px;height:${h}px;background:${bg}" ${h2 ? `data-href="${h2}" role="link" tabindex="0"` : ''} title="${esc(d.data.name)} · ${fmt(Math.round(d.value))} pts · ${sh}${d.data.titles ? ' · ' + d.data.titles + ' titles' : ''}">${subs}${label}</div>`;
-    }).join('');
-    const toggle = u.kind === 'state' ? `<div class="seg sm" data-floor="1"><button data-mode="region" aria-pressed="${mode !== 'district'}">Regions</button><button data-mode="district" aria-pressed="${mode === 'district'}">Districts</button></div>` : '';
-    return `${crumbBar}<div class="floor card" style="height:${HT}px"><div class="fl" style="width:${W}px;height:${HT}px">${tiles}</div></div>
-      <div class="fcap"><span>Share of state points · tap a mat to go there</span>${toggle}</div>`;
+    const toggle = u.kind === 'state' ? `<div class="seg sm" data-bracket="1"><button data-mode="region" aria-pressed="${mode !== 'district'}">Regions</button><button data-mode="district" aria-pressed="${mode === 'district'}">Districts</button></div>`
+      : u.kind === 'school' ? `<div class="seg sm" data-bracket="1"><button data-mode="wrestler" aria-pressed="${mode !== 'weight'}">Wrestlers</button><button data-mode="weight" aria-pressed="${mode === 'weight'}">Weights</button></div>` : '';
+    if (!items.length) return crumbBar + empty('No placements in ' + clsName().toLowerCase() + ' for ' + windowLabel() + '.');
+    const LIM = 16, show = showAll || items.length <= LIM ? items : items.slice(0, LIM), n = show.length;
+    const phone = (window.innerWidth || 390) < 720, RH = phone ? 44 : 40, BW = phone ? 64 : 120, H = n * RH, maxShare = show[0].share || 1;
+    // bracket joins: pair consecutive lines round by round until one line reaches Hershey
+    const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
+    let ys = show.map((_, i) => i * RH + RH / 2), paths = [];
+    for (let k = 0; k < rounds; k++) {
+      const x0 = k * step, x1 = (k + 1) * step, next = [];
+      for (let i = 0; i < ys.length; i += 2) {
+        const a = ys[i], b = ys[i + 1];
+        if (b == null) { paths.push(`M${x0} ${a} H${x1}`); next.push(a); continue; }
+        const m = (a + b) / 2; paths.push(`M${x0} ${a} H${x1} V${b} H${x0}`); paths.push(`M${x1} ${m} H${x1 + 0.01}`); next.push(m);
+      }
+      ys = next;
+    }
+    const fy = ys[0], fx = rounds * step; paths.push(`M${fx} ${fy} H${BW - 20}`);
+    const hershey = `<circle cx="${BW - 10}" cy="${fy}" r="7.5" fill="none" stroke="${C.chalk}" stroke-width="2.4"/><circle cx="${BW - 10}" cy="${fy}" r="2.4" fill="${C.red}"/>`;
+    const label = `<text transform="translate(${BW - 22} ${Math.min(H - 60, fy + 14)}) rotate(90)" text-anchor="start" font-family="Barlow Condensed" font-weight="700" font-size="10" letter-spacing="2" fill="${C.ash}">HERSHEY</text>`;
+    const svg = `<svg class="bj" width="${BW}" height="${H}" viewBox="0 0 ${BW} ${H}" aria-hidden="true"><path d="${paths.join(' ')}" fill="none" stroke="${C.ash}" stroke-width="1" opacity=".8"/>${hershey}${phone ? '' : label}</svg>`;
+    const rowsHtml = show.map((it, i) => { const tag = it.href ? 'a' : 'div'; const sh = it.share >= 0.1 ? (100 * it.share).toFixed(0) + '%' : (100 * it.share).toFixed(1) + '%';
+      return `<${tag} class="bl" ${it.href ? `href="${it.href}" data-bl="1"` : ''} style="height:${RH}px"><span class="sd${i === 0 ? ' s1' : ''}">${it.seed}</span><span class="nm"><b>${esc(it.name)}</b>${it.sub ? `<small>${esc(it.sub)}</small>` : ''}</span><span class="br"><i style="width:${Math.max(3, 100 * it.share / maxShare)}%"></i></span><span class="sh">${sh}</span></${tag}>`; }).join('');
+    const more = items.length > LIM ? `<button class="more" data-bracket-all="${showAll ? '0' : '1'}">${showAll ? 'Show top 16' : `Show all ${items.length}`}</button>` : '';
+    return `${crumbBar}<div class="bracket card"><div class="bls">${rowsHtml}</div>${svg}</div>
+      <div class="fcap"><span>Seeded by state points · follow a line toward Hershey</span><span class="fright">${more}${toggle}</span></div>`;
   }
 
   /* rankings table */
@@ -68,7 +77,7 @@
       return `<tr><td class="rk sticky1">${i + 1}</td><td class="l sticky2"><a href="${u.href || o.href}">${name}</a>${sub ? `<small class="muted"> ${sub}</small>` : ''}</td><td class="num">${score(o.era)}</td><td class="num">${score(o.power)}</td><td class="num">${fmt(o.pts)}</td><td class="num">${fmt(o.medals)}</td>${o.places.map((n, k) => `<td class="num p${n ? Math.min(k + 1, 5) : 0}">${n || '·'}</td>`).join('')}</tr>`; }).join('');
     const more = rows.length > lim ? `<div class="note">Showing ${lim} of ${rows.length}. ${opts.moreHref ? `<a href="${opts.moreHref}">See all</a>` : ''}</div>` : '';
     return `<div class="tw"><table><thead><tr>${COLS.map((c, i) => `<th class="${i < 2 ? 'l ' : ''}${i === 0 ? 'sticky1' : i === 1 ? 'sticky2' : ''}">${c}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>${more}
-      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1. A school's seasons in the other class count at 85%.</div>`;
+      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1. A school's seasons in the other class count at 85%. Window: ${windowLabel()}.</div>`;
   }
   /* wrestler rows as rankings (Score, Medals, places); Era/Power shown as career share */
   function wrestlerRank(rows, opts = {}) {
@@ -147,5 +156,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { C, MED, pc, score, wordmark, navIcon, classToggle, unitHeader, section, empty, floor, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();
