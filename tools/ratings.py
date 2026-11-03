@@ -42,9 +42,16 @@ def say(*a):
     s = ' '.join(str(x) for x in a); out.append(s); print(s, flush=True)
 
 # ============================================================ load
+D1PARTS = {'North', 'South', 'Central', 'East', 'West'}
+REGION = {'North_East': 'NE', 'North_West': 'NW', 'South_Central': 'SC', 'South_East': 'SE', 'South_West': 'SW', 'West': 'W', 'East': 'E', 'Central_North_West': 'CNW'}
+def unit_cls(unit, cls):
+    # same normalization as tools/build_lower.js: District 1 AAA parts arrive as unit D1_AAA with the part in cls
+    if unit == 'D1_AAA' and cls in D1PARTS: unit, cls = 'D1_' + cls, 'AAA'
+    return REGION.get(unit, unit), {'A': 'AAA', 'B': 'AA'}.get(cls, cls)
 bouts = []
 for b in csv.DictReader(open('data/brackets/bouts.csv')):
     b['year'] = int(b['year']); b['round'] = int(b['round'])
+    b['unit'], b['cls'] = unit_cls(b['unit'], b['cls'])
     b['wk'] = nk(b['winner']) + '|' + nk(b['winner_school']); b['lk'] = nk(b['loser']) + '|' + nk(b['loser_school'])
     b['lr'] = lvl_rank(b['level'], b['unit']); b['bk'] = (b['level'], b['tournament'], b['weight']); b['c'] = clsg(b['cls'])
     bouts.append(b)
@@ -74,7 +81,7 @@ for (lvl, t, w) in entrants:
     y = int(t[:4]); rest = t[5:]
     if lvl == 'state': c = clsg({'A': 'AAA', 'B': 'AA'}.get(rest, rest)); unit = 'PIAA'
     else:
-        parts = rest.split('_'); c = clsg({'A': 'AAA', 'B': 'AA'}.get(parts[-1], parts[-1])); unit = '_'.join(parts[:-1])
+        parts = rest.split('_'); unit, c = unit_cls('_'.join(parts[:-1]), parts[-1]); c = clsg(c)
     bracket_meta[(lvl, t, w)] = (y, c, unit, lvl_rank(lvl, unit))
 key_cls = {}
 for b in bouts: key_cls[(b['wk'], b['year'])] = b['c']; key_cls[(b['lk'], b['year'])] = b['c']
@@ -124,7 +131,7 @@ def fit_growth(params):
         params = dict(params, grow=tuple(round(float(np.mean(res[g])) if res[g] else 30, 1) for g in (1, 2, 3)))
     return params
 
-params = dict(K=40, rho=0.75, grow=(60, 40, 25), init=(1500, 1500, 1540, 1580), marg=(1.5, 1.35, 1.2, 1.0), prov=2.0)
+params = dict(K=56, rho=0.8, grow=(100, 100, 100), init=(1500, 1500, 1500, 1500), marg=(1.5, 1.35, 1.2, 1.0), prov=2)   # --grid result, 1980-2017
 if '--grid' in sys.argv:
     grid = list(itertools.product([24, 32, 40, 56], [0.5, 0.65, 0.8], [(1500, 1500, 1500, 1500), (1500, 1500, 1560, 1620), (1500, 1520, 1600, 1680)],
                                   [(1, 1, 1, 1), (1.5, 1.35, 1.2, 1.0), (2.0, 1.7, 1.35, 1.0)], [0, 2, 4]))

@@ -31,15 +31,15 @@ five seasons starts over, so fathers and sons stay separate).
   defaults and DQs are skipped.
 - New ratings move faster (K × (1 + 2 / (bouts + 1))), K = 56.
 - **Between seasons** the rating regresses 20% toward the mean and then adds a **grade step fitted from the
-  data**: about +107 into the sophomore year, +104 into junior, +112 into senior. A freshman's rating is expected to
+  data**: about +126 into the sophomore year, +122 into junior, +126 into senior (before the 20% regression, so a typical returning wrestler nets roughly +100). A freshman's rating is expected to
   rise, not frozen.
 - Tuned on 1980–2017 bouts, tested on 2018–2026 (68,852 bouts, never seen in tuning):
 
 | held-out 2018–2026 | log loss | accuracy |
 |---|---|---|
 | coin flip | 0.693 | 0.500 |
-| rating | **0.562** | **0.708** |
-| rating without the margin factor | 0.574 | 0.697 |
+| rating | **0.559** | **0.707** |
+| rating without the margin factor | 0.571 | 0.696 |
 | rating without the grade step | 0.616 | 0.653 |
 
 At states, where seeds exist (2018–2026, 8,289 bouts): seed only 0.616, rating only 0.579, seed + rating 0.562.
@@ -64,15 +64,15 @@ performance was regressed on the four adjacent estimates plus grade, coefficient
 
 | *t*−2 | *t*−1 | *t*+1 | *t*+2 |
 |---|---|---|---|
-| 0.21 | **0.62** | 0.36 | 0.14 |
+| 0.21 | **0.61** | 0.36 | 0.15 |
 
 The season before counts almost twice the season after, and both outweigh seasons two away, as expected. The
 season-*t* evidence is then blended in with weight n / (n + 16), n = his other bouts that season (16 fitted on bout
 prediction with both sides scored leave-one-bout-out). The blend predicts bouts better than the forward rating
-(log loss 0.538 vs 0.578 on 25,000 bouts), so it is the better description of how good someone was *that* season.
+(log loss 0.536 vs 0.575 on 25,000 bouts), so it is the better description of how good someone was *that* season.
 
 **What it changes.** Across state runs since 1980, compared with the forward rating at the bout only, Spearman
-0.88, a median wrestler's SOS percentile moves 10 points, 70% of the top-10% hardest runs stay in the top 10%.
+0.89, a wrestler's SOS percentile moves 10 points on average, 71% of the top-10% hardest runs stay in the top 10%.
 Against a naive symmetric window (*t*−1, *t*, *t*+1 weighted equally): Spearman 0.90, 9 points, 77%.
 On Brock's example: 195 state wins by seniors over freshmen who later won a state title. Those freshmen are
 credited at **40** (blend) vs 58 (symmetric window); the same wrestlers as seniors rated 99. The win counts for
@@ -93,19 +93,19 @@ then put on **0–99 scales that are fixed per level** (district, regional, stat
 (1938–1973 one-class seasons have their own scale, since there were few bouts and, before 1951, no regionals).
 A district 80 means hard for a district; a state 80 means hard for states. Cutoffs are fixed, not per-year
 percentiles, so a deep year can have many hard brackets: the share of a year's state brackets at 75+ ranges from
-0% to 57% (median 15%), where the old method forced 25% every year.
+0% to 64% (median 15%), where the old method forced 25% every year.
 
 **Evaluation** (state, 1980–2025):
 
 | question | old tier (a) | field (b) | path (c) | path + field (d) |
 |---|---|---|---|---|
-| Holding a wrestler's own rating, does the measure make placing harder? Gain in R² for P(place), n = 20,752 | +0.0000 | **+0.0179** | n/a (depends on how far he went) | — |
-| Does it make a medal a better signal of ability? Gain in R² for next season's state points over placement points, n = 7,396 | +0.0021 | +0.0027 | +0.0018 | +0.0030 |
+| Holding a wrestler's own rating, does the measure make placing harder? Gain in R² for P(place), n = 20,752 | +0.0000 | **+0.0184** | n/a (depends on how far he went) | — |
+| Does it make a medal a better signal of ability? Gain in R² for next season's state points over placement points, n = 7,396 | +0.0021 | +0.0032 | +0.0019 | +0.0034 |
 
 - **Field strength wins** as the measure of a bracket: it is the only one that explains how hard it was to place,
   for a wrestler of a given strength. The old percentile tier explains nothing beyond his own rating.
 - **Path SOS** is the right description of a run (who he actually had to beat) but adds little *prediction*
-  beyond placement and his own rating (+0.0004), because the rating already counts who he beat. It is shown, not
+  beyond placement and his own rating (+0.0005), because the rating already counts who he beat. It is shown, not
   used to re-rank.
 - The opt-in **"Adjust for strength of schedule"** uses (d), the average of path and field on the 0–99 scale,
   mapped smoothly to a multiplier between 0.85 and 1.15 on placement points. Medal counts never change.
@@ -114,7 +114,7 @@ percentiles, so a deep year can have many hard brackets: the share of a year's s
 
 - Ratings are relative to the wrestlers each one actually met. AA and AAA rarely meet, so their scales are
   normalized separately against their own district populations; compare within a class.
-- State fields rise over the decades on this scale (median 44 in the 1980s to 62 in the 2020s). Part of that is
+- State fields rise over the decades on this scale (median 45 in the 1980s to 61 in the 2020s). Part of that is
   real depth, part is that districts grew larger and weaker relative to the state's top eight.
 - District 3 and District 7 AAA years missing from the archive have no bouts; their wrestlers' ratings start at
   regionals. 53 brackets with entrants but no bouts are flagged `fallback` and use adjacent-season strength only.
