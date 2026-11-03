@@ -1,7 +1,7 @@
 /* Overtime — shared components. Every level page is built from the same pieces. */
 'use strict';
 (() => {
-  const { esc, fmt, ordinal, wShort, state, setCls, clsName, STD, stdOf, placeCounts, unitStats, rankings, allTimeTeams, bracketOf, seasonsInScope, unitRows, GRADE_L, gradeSlot, lowerRows, REGIONS, DISTRICTS, windowLabel, yearsWindow } = OT;
+  const { esc, fmt, ordinal, wShort, state, setCls, clsName, STD, stdOf, placeCounts, unitStats, rankings, allTimeTeams, bracketOf, seasonsInScope, unitRows, GRADE_L, gradeSlot, lowerRows, REGIONS, DISTRICTS, windowLabel, yearsWindow, careerRows, nFilters } = OT;
   const MAP = window.PA_MAP, HX = 65.5, HY = 39.5; // Hershey
   const C = { mat: '#0B0D10', chalk: '#EEEAE1', ash: '#8E98A4', gold: '#D9A441', red: '#FF3B2F', green: '#2EC27E', slate: '#161A20', line: '#242A32' };
   const MED = ['#D9A441', '#B8BFC6', '#B5733A', '#8E5A3C', '#5F6B78', '#5F6B78', '#5F6B78', '#5F6B78'];
@@ -19,17 +19,41 @@
     wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
   };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
-  const classToggle = (small) => `<div class="seg${small ? ' sm' : ''}" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((c) => `<button data-cls="${c}" aria-pressed="${state.cls === c}">${c === 'ALL' ? 'All' : c}</button>`).join('')}</div>`;
+  const classToggle = () => `<div class="seg" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((k) => `<button data-cls="${k}" aria-pressed="${state.cls === k}">${k === 'ALL' ? 'All' : k}</button>`).join('')}</div>`;
   /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
-    return `<div class="win"><div class="seg sm" role="group" aria-label="Seasons">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25'], ['custom', 'Custom']].map(([k, l]) => `<button data-win="${k}" aria-pressed="${w.mode === k}">${l}</button>`).join('')}</div>${w.mode === 'custom' ? `<form class="wrange" data-wrange><input type="number" name="from" inputmode="numeric" min="1938" max="2026" value="${a}" aria-label="From"><span>–</span><input type="number" name="to" inputmode="numeric" min="1938" max="2026" value="${b}" aria-label="To"><button type="submit" class="go">Go</button></form>` : ''}</div>`; };
-  const scopeBar = () => `<div class="scope">${classToggle()}${windowToggle()}</div>`;
+    return `<div class="win"><div class="seg" role="group" aria-label="Seasons">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25'], ['custom', 'Custom']].map(([k, l]) => `<button data-win="${k}" aria-pressed="${w.mode === k}">${l}</button>`).join('')}</div>${w.mode === 'custom' ? `<form class="wrange" data-wrange><input type="number" name="from" inputmode="numeric" min="1938" max="2026" value="${a}" aria-label="From"><span>–</span><input type="number" name="to" inputmode="numeric" min="1938" max="2026" value="${b}" aria-label="To"><button type="submit" class="go">Go</button></form>` : ''}</div>`; };
+  /* header chips: the current selections, each one opens the control panel */
+  const filterChips = () => { const f = state.f, out = [];
+    if (f.weights.length) out.push(f.weights.length === 1 ? STD.find((s) => s.k === f.weights[0]).label + ' lbs' : f.weights.length + ' weights');
+    if (f.regions.length) out.push(f.regions.length === 1 ? REGIONS[f.regions[0]] : f.regions.length + ' regions');
+    if (f.districts.length) out.push(f.districts.length === 1 ? 'District ' + f.districts[0] : f.districts.length + ' districts');
+    if (f.schools.length) out.push(f.schools.length === 1 ? f.schools[0] : f.schools.length + ' schools');
+    return out; };
+  const headerChips = () => { const fc = filterChips(); const n = nFilters();
+    const ic = `<button class="hc ic${n ? ' on' : ''}" data-panel="filters" aria-label="Filters" title="Filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>${n ? `<b>${n}</b>` : ''}</button>`;
+    const main = `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : windowLabel()}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}`;
+    return (window.innerWidth || 390) < 720 ? ic + main : main + ic; };
+  /* the control panel: class, window, multi-select filters */
+  const fchip = (kind, v, label, on) => `<button class="fc${on ? ' on' : ''}" data-f="${kind}" data-v="${esc(String(v))}" aria-pressed="${on}">${label}</button>`;
+  function panel(q = '') {
+    const f = state.f;
+    const schools = Array.from(OT.SCHOOL_D.keys()).sort();
+    const ql = q.trim().toLowerCase(); const hits = ql ? schools.filter((s) => s.toLowerCase().includes(ql)).slice(0, 12) : [];
+    return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Clear all</button><button class="pdone" data-panel-close>Done</button></span></div>
+      <div class="pg" id="pg-class"><div class="k">Class</div>${classToggle()}</div>
+      <div class="pg" id="pg-window"><div class="k">Seasons</div>${windowToggle()}</div>
+      <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((s) => fchip('weights', s.k, s.label, f.weights.includes(s.k))).join('')}</div></div>
+      <div class="pg"><div class="k">Regions${f.regions.length ? ` <button class="pclr" data-clear="regions">clear</button>` : ''}</div><div class="fcs">${OT.regionOrder().map((r) => fchip('regions', r, REGIONS[r], f.regions.includes(r))).join('')}</div></div>
+      <div class="pg"><div class="k">Districts${f.districts.length ? ` <button class="pclr" data-clear="districts">clear</button>` : ''}</div><div class="fcs">${d3.range(1, 13).map((d) => fchip('districts', d, 'D' + d, f.districts.includes(d))).join('')}</div></div>
+      <div class="pg"><div class="k">Schools${f.schools.length ? ` <button class="pclr" data-clear="schools">clear</button>` : ''}</div>${f.schools.length ? `<div class="fcs">${f.schools.map((s) => fchip('schools', s, esc(s) + ' ×', true)).join('')}</div>` : ''}<input class="search psearch" id="psearch" type="search" placeholder="Add a school" value="${esc(q)}" autocomplete="off" aria-label="Search schools">${hits.length ? `<div class="fcs">${hits.map((s) => fchip('schools', s, esc(s), f.schools.includes(s))).join('')}</div>` : ''}</div>`;
+  }
 
   /* unit header + hero numbers */
   function unitHeader(u, o, extra = {}) {
     const hero = extra.hero || [['Medals', o.medals], ['Titles', o.titles], ['Qualifiers', o.quals], u.kind === 'school' ? ['Team titles', o.won] : ['Reg. titles', o.regTitles]];
     return `<header class="uh">
-      <div><h1>${esc(u.name)}</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b>${extra.sub ? ` · ${extra.sub}` : ''}</div></div>${scopeBar()}
+      <div><h1>${esc(u.name)}</h1>${extra.sub ? `<div class="sub">${extra.sub}</div>` : ''}</div>
       <div class="hero">${hero.map(([l, v]) => `<div><b>${v == null ? '–' : fmt(v)}</b><span>${l}</span></div>`).join('')}</div>
     </header>`;
   }
@@ -64,8 +88,7 @@
     const rowsHtml = show.map((it, i) => { const tag = it.href ? 'a' : 'div'; const sh = it.share >= 0.1 ? (100 * it.share).toFixed(0) + '%' : (100 * it.share).toFixed(1) + '%';
       return `<${tag} class="bl" ${it.href ? `href="${it.href}" data-bl="1"` : ''} style="height:${RH}px"><span class="sd${i === 0 ? ' s1' : ''}">${it.seed}</span><span class="nm"><b>${esc(it.name)}</b>${it.sub ? `<small>${esc(it.sub)}</small>` : ''}</span><span class="br"><i style="width:${Math.max(3, 100 * it.share / maxShare)}%"></i></span><span class="sh">${sh}</span></${tag}>`; }).join('');
     const more = items.length > LIM ? `<button class="more" data-bracket-all="${showAll ? '0' : '1'}">${showAll ? 'Show top 16' : `Show all ${items.length}`}</button>` : '';
-    return `${crumbBar}<div class="bracket card"><div class="bls">${rowsHtml}</div>${svg}</div>
-      <div class="fcap"><span>Seeded by state points · follow a line toward Hershey</span><span class="fright">${more}${toggle}</span></div>`;
+    return `${crumbBar}<div class="bracket card" title="Seeded by state points · follow a line toward Hershey">${toggle ? `<div class="btop">${toggle}</div>` : ''}<div class="bls">${rowsHtml}</div>${svg}${more ? `<div class="bmore">${more}</div>` : ''}</div>`;
   }
 
   /* rankings table */
@@ -81,7 +104,7 @@
   }
   /* wrestler rows as rankings (Score, Medals, places); Era/Power shown as career share */
   function wrestlerRank(rows, opts = {}) {
-    const ws = OT.wrestlersOf(rows.filter((r) => r.place)); if (!ws.length) return empty('No placewinners in ' + clsName().toLowerCase() + '.');
+    const ws = OT.wrestlersOf(careerRows(rows.filter((r) => r.place)).filter((r) => r.place)); if (!ws.length) return empty('No placewinners in ' + clsName().toLowerCase() + '.');
     const tot = d3.sum(seasonsInScope(), (S) => S.avail) || 1;
     const [, last] = OT.yearsInScope();
     const list = ws.map((w) => ({ ...w, u: { name: w.name, href: w.href }, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => r.pts * Math.pow(0.5, (last - r.year) / 7)) / tot * 100 })).sort((a, b) => b.pts - a.pts || b.titles - a.titles);
@@ -90,9 +113,9 @@
 
   /* all-time teams */
   function teamsBlock(rows) {
-    const T = allTimeTeams(rows.filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
+    const T = allTimeTeams(careerRows(rows.filter((r) => r.place)).filter((r) => r.place), 3); if (!T.length) return empty('No placewinners yet.');
     return `<div class="teams"><div class="thead"><span></span><span>1ST TEAM</span><span>2ND TEAM</span><span>3RD TEAM</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map((s, i) => s ? `<a class="slot t${i + 1}" href="${s.href}"><b>${esc(s.name)}</b><small>${esc(s.sch)} · ${s.years}</small><span class="pl">${s.rows.map((r) => `<i style="background:${MED[r.place - 1]}" title="${ordinal(r.place)} ${r.year}"></i>`).join('')}</span></a>` : '<div class="slot none"></div>').join('')}</div>`).join('')}</div>
-      <div class="note">Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team.</div>`;
+      <div class="note">Best career at each weight by placement points. A wrestler can hold a slot at every weight he placed at, but never two slots on the same team. Anyone who placed in the window is in; his whole career counts.</div>`;
   }
 
   /* seasons drawer */
@@ -182,5 +205,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, scopeBar, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

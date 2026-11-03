@@ -10,11 +10,11 @@
     const parts = [unitHeader(u, o, opts)];
     // b. signature viz
     const crumbs = (opts.crumbs || []).concat([{ name: u.name }]); if (u.kind === 'state') crumbs.splice(0, crumbs.length, { name: 'Pennsylvania' });
-    parts.push(section('The bracket', bracket(u, crumbs, state.bmode, state.bracketAll), clsName() + ' · ' + windowLabel()));
-    // c. rankings of children
-    parts.push(section('Rankings', opts.rankings(o)));
+    parts.push(`<div class="viz">${bracket(u, crumbs, state.bmode, state.bracketAll)}</div>`);
+    // c. rankings of children, right under the bracket
+    parts.push(`<div class="rk">${opts.rankings(o)}</div>`);
     // d. all-time teams
-    parts.push(section('All-time teams', teamsBlock(rows), clsName()));
+    parts.push(section('All-time teams', teamsBlock(rows)));
     // e. seasons
     parts.push(section('Seasons', seasonsDrawer(u)));
     // f. lower levels, separate and unmixed
@@ -53,9 +53,9 @@
       rankings: () => roads + '<div style="height:12px"></div>' + wrestlerRank(o.apps, { school: true, limit: 30 }) });
   };
   PAGES.wrestlers = () => {
-    const rows = OT.ROWS(); const ws = wrestlersOf(rows.filter((r) => r.place));
+    const ws = wrestlersOf(OT.careerRows(OT.ROWS().filter((r) => r.place)).filter((r) => r.place));
     const item = (w) => OT.wrestlerCard(w);
-    return `<header class="uh"><div><h1>Wrestlers</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b> · ${fmt(ws.length)} placewinners · sorted by career points</div></div>${OT.scopeBar()}</header>
+    return `<header class="uh"><div><h1>Wrestlers</h1><div class="sub">${fmt(ws.length)} placewinners · sorted by career points${state.win.mode !== 'all' ? ' · anyone who placed in ' + windowLabel() + ', whole career counted' : ''}</div></div></header>
       <input class="search" id="wsearch" type="search" placeholder="Search a wrestler or school" autocomplete="off" aria-label="Search wrestlers">
       <div class="wl" id="wlist" data-n="${ws.length}">${ws.slice(0, 40).map(item).join('')}</div><div class="note" id="wmore">Showing 40 of ${fmt(ws.length)}. Type to search all.</div>`;
   };
@@ -70,10 +70,10 @@
     const roads = section('Road to Hershey', `<div class="roads">${W.apps.map((r) => `<div class="card"><div class="k" style="display:flex;justify-content:space-between"><span>${r.year} · ${OT.wShort(r.w)}</span><span>${r.grade || ''}</span></div><div class="road">${road(r, W)}</div></div>`).join('')}</div>`);
     return head + grid + roads;
   };
-  PAGES.about = () => `<header class="uh"><h1>Overtime</h1><div class="sub">Pennsylvania wrestling history, by level.</div></header><div class="card"><p>Every result is an appearance: one wrestler, one season, one weight, at one level of the PIAA bracket. State, Region, District and School are filters over the same appearances, and each level ranks only its own tournament results, so district dominance never mixes with state dominance.</p><p><b>Class moves.</b> A school is counted with the class it is in now, the class of its most recent season, and appears only in that class's lists. Everything it did in the other class still counts for it, but at 85% in Score, Era and Power (medal counts stay whole): an AA result inside the AAA ranking is a little easier, and an AAA result inside the AA ranking is not a measure of AA success. Seasons before 1974, when there was one class, follow the school's lineage. With all classes selected there is no discount.</p><p><b>Regions.</b> In AAA or AA the regions of that class are the only regions (five in AAA; AA has wrestled in four since South Central was folded in). Seasons before 1974, the 2021 super-regionals and any other historical grouping are placed through their district. With all classes selected the historical regions stand as they were.</p><p><b>Seasons.</b> The window next to the class toggle (all-time, last 5, 10 or 25 seasons, or a custom range) applies to every number on the page. Era is the share of the window's points; Power keeps its 7-season half-life.</p><p>Sources: PIAA brackets via the PA-Wrestling.com archive.</p></div>`;
+  PAGES.about = () => `<header class="uh"><h1>Overtime</h1><div class="sub">Pennsylvania wrestling history, by level.</div></header><div class="card"><p>Every result is an appearance: one wrestler, one season, one weight, at one level of the PIAA bracket. State, Region, District and School are filters over the same appearances, and each level ranks only its own tournament results, so district dominance never mixes with state dominance.</p><p><b>Class moves.</b> A school is counted with the class it is in now, the class of its most recent season, and appears only in that class's lists. Everything it did in the other class still counts for it, but at 85% in Score, Era and Power (medal counts stay whole): an AA result inside the AAA ranking is a little easier, and an AAA result inside the AA ranking is not a measure of AA success. Seasons before 1974, when there was one class, follow the school's lineage. With all classes selected there is no discount.</p><p><b>Regions.</b> In AAA or AA the regions of that class are the only regions (five in AAA; AA has wrestled in four since South Central was folded in). Seasons before 1974, the 2021 super-regionals and any other historical grouping are placed through their district. With all classes selected the historical regions stand as they were.</p><p><b>Scope.</b> The header holds every control: class, the season window (all-time, last 5, 10 or 25 seasons, or a custom range) and multi-select filters for weights, regions, districts and schools. They apply to every number on every page. Era is the share of the window's points; Power keeps its 7-season half-life. For wrestlers the window decides who is in, not what counts: anyone with an appearance in the window is included, and then his whole career is shown and scored, in the wrestler list, in a school's wrestler ranking and in the all-time teams.</p><p>Sources: PIAA brackets via the PA-Wrestling.com archive.</p></div>`;
 
   function indexPage(title, items, note) {
-    return `<header class="uh"><div><h1>${title}</h1><div class="sub"><b class="gold">${clsName()} · ${windowLabel()}</b>${note ? ` · ${note}` : ''}</div></div>${OT.scopeBar()}</header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
+    return `<header class="uh"><div><h1>${title}</h1>${note ? `<div class="sub">${note}</div>` : ''}</div></header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
   }
   Object.assign(OT, { PAGES });
 })();

@@ -18,13 +18,21 @@ const OT = (window.OT = {});
   const REGION_ORDER = ['NE', 'SE', 'SC', 'NW', 'SW', 'CNW', 'E', 'W'];
 
   /* scope */
-  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null } };
+  const EMPTY_F = () => ({ weights: [], regions: [], districts: [], schools: [] });
+  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
   try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
   try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
+  try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && typeof f === 'object') state.f = { ...EMPTY_F(), ...f }; } catch (e) { /* none */ }
   const clearCaches = () => { STATS.clear(); RANKS.clear(); SEASONS.clear(); WIN.clear(); SREG.clear(); DREG.clear(); };
-  const setCls = (c) => { state.cls = c; try { localStorage.setItem('ot-scope', c); } catch (e) { /* none */ } clearCaches(); };
-  const setWin = (w) => { state.win = { ...state.win, ...w }; try { localStorage.setItem('ot-window', JSON.stringify(state.win)); } catch (e) { /* none */ } clearCaches(); };
-  const wkey = () => state.cls + '|' + state.win.mode + (state.win.mode === 'custom' ? state.win.from + '-' + state.win.to : '');
+  const save = (k, v) => { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) { /* none */ } };
+  const setCls = (c) => { state.cls = c; save('ot-scope', c); clearCaches(); };
+  const setWin = (w) => { state.win = { ...state.win, ...w }; save('ot-window', state.win); clearCaches(); };
+  /* multi-select filters: weights (STD keys), regions, districts, schools. Toggle a value in or out. */
+  const toggleFilter = (kind, v) => { const L = state.f[kind]; const i = L.indexOf(v); if (i < 0) L.push(v); else L.splice(i, 1); save('ot-filters', state.f); clearCaches(); };
+  const clearFilters = (kind) => { if (kind) state.f[kind] = []; else state.f = EMPTY_F(); save('ot-filters', state.f); clearCaches(); };
+  const clearAll = () => { state.cls = 'AAA'; state.win = { mode: 'all', from: null, to: null }; state.f = EMPTY_F(); save('ot-scope', 'AAA'); save('ot-window', state.win); save('ot-filters', state.f); clearCaches(); };
+  const nFilters = () => state.f.weights.length + state.f.regions.length + state.f.districts.length + state.f.schools.length;
+  const wkey = () => state.cls + '|' + state.win.mode + (state.win.mode === 'custom' ? state.win.from + '-' + state.win.to : '') + '|' + JSON.stringify(state.f);
   const clsName = (c = state.cls) => (c === 'ALL' ? 'All classes' : 'Class ' + c);
 
   /* appearances */
@@ -70,7 +78,12 @@ const OT = (window.OT = {});
   }
   const inWindow = (y) => { const [a, b] = yearsWindow(); return y >= a && y <= b; };
   const windowLabel = () => { const [a, b] = yearsWindow(); return a === b ? String(a) : a + '–' + b; };
-  const inScope = (r) => (state.cls === 'ALL' || r.k === state.cls) && inWindow(r.year);
+  const passFilters = (r) => { const f = state.f;
+    return (!f.weights.length || f.weights.includes(stdOf(r).k)) && (!f.districts.length || f.districts.includes(r.d)) && (!f.schools.length || f.schools.includes(r.sch)) && (!f.regions.length || f.regions.includes(regionOf(r))); };
+  const inScopeNoWin = (r) => (state.cls === 'ALL' || r.k === state.cls) && passFilters(r);
+  const inScope = (r) => inScopeNoWin(r) && inWindow(r.year);
+  /* whole careers: a wrestler is eligible if any appearance is in the window; then every appearance of his (in class and filters) counts */
+  const careerRows = (rows) => { const keys = new Set(rows.map(wKey)); return APP.filter((r) => keys.has(wKey(r)) && inScopeNoWin(r)); };
   const actualIn = (r, scope, one) => scope === 'ALL' || (one ? r.k === scope : r.cls === scope);
   const ROWS = () => APP.filter(inScope);
   const YEARS = Array.from(new Set(APP.map((r) => r.year))).sort((a, b) => a - b);
@@ -195,7 +208,7 @@ const OT = (window.OT = {});
     const rows = unitRows(u).filter((r) => r.place), total = d3.sum(rows, wpts) || 1;
     let items;
     if (u.kind === 'school' && mode === 'weight') items = d3.groups(rows, (r) => stdOf(r).k).map(([k, v]) => ({ name: STD.find((c) => c.k === k).label, pts: d3.sum(v, wpts), n: v.length, href: null }));
-    else if (u.kind === 'school') items = wrestlersOf(rows).map((w) => ({ name: w.name, sub: w.years, pts: w.pts, n: w.medals, href: w.href }));
+    else if (u.kind === 'school') items = wrestlersOf(careerRows(rows)).map((w) => ({ name: w.name, sub: w.years, pts: w.pts, n: w.medals, href: w.href }));
     else {
       const kind = u.kind === 'state' ? (mode === 'district' ? 'district' : 'region') : u.kind === 'region' ? 'district' : 'school';
       items = rankings(kind, u.kind === 'state' ? null : u).map((o) => ({ name: kind === 'region' ? REGIONS[o.u.id] : o.u.name, sub: kind === 'district' ? DISTRICTS[o.u.id] : kind === 'school' && u.kind !== 'district' ? 'D' + o.u.d : '', pts: o.pts, n: o.medals, href: o.u.href }));
@@ -205,5 +218,5 @@ const OT = (window.OT = {});
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 
-  Object.assign(OT, { SB, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { SB, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();
