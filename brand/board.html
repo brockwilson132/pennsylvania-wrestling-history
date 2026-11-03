@@ -1,0 +1,196 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Archivo Black';font-weight:400;src:url(node_modules/@fontsource/archivo-black/files/archivo-black-latin-400-normal.woff2)}
+@font-face{font-family:'Barlow Condensed';font-weight:900;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2)}
+@font-face{font-family:'Barlow Condensed';font-weight:700;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2)}
+@font-face{font-family:'Barlow Condensed';font-weight:600;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2)}
+@font-face{font-family:'Barlow';font-weight:500;src:url(node_modules/@fontsource/barlow/files/barlow-latin-500-normal.woff2)}
+@font-face{font-family:'Barlow';font-weight:600;src:url(node_modules/@fontsource/barlow/files/barlow-latin-600-normal.woff2)}
+:root{--mat:#0B0D10;--slate:#161A20;--line:#242A32;--chalk:#EEEAE1;--ash:#8E98A4;--siren:#FF3B2F;--gold:#D9A441;--silver:#B8BFC6;--bronze:#B5733A;--copper:#8E5A3C;--steel:#5F6B78}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mat);color:var(--chalk);font-family:Barlow,sans-serif;width:1200px}
+.board{padding:56px 64px 64px;display:grid;gap:44px}
+h1{font-family:'Barlow Condensed';font-weight:900;font-size:22px;letter-spacing:.18em;margin:0;color:var(--ash)}
+.sec{display:grid;gap:16px}
+.sec h2{font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.2em;color:var(--ash);margin:0}
+.row{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:20px}
+.tile{overflow:hidden;background:var(--slate);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;place-items:center;gap:18px;position:relative;min-height:240px}
+.tile.chalk{background:var(--chalk)}
+.tile.red{background:var(--siren)}
+.cap{position:absolute;left:18px;top:14px;font-family:'Barlow Condensed';font-weight:700;font-size:13px;letter-spacing:.16em;color:var(--ash)}
+.tile.chalk .cap,.tile.red .cap{color:rgba(0,0,0,.55)}
+.sw{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.sw div{height:84px;border-radius:12px;position:relative;font-family:'Barlow Condensed';font-weight:700;font-size:13px;letter-spacing:.1em}
+.sw span{position:absolute;left:12px;bottom:10px}
+.type{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.type .tile{place-items:start;gap:10px;padding:28px 32px}
+.nav{width:390px;background:var(--slate);border:1px solid var(--line);border-radius:28px;padding:18px 10px 14px;display:grid;grid-template-columns:repeat(5,1fr);justify-items:center}
+.nav div{display:grid;justify-items:center;gap:6px;font-family:'Barlow Condensed';font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--ash)}
+.nav div.on{color:var(--chalk)}
+.nav svg{width:26px;height:26px}
+</style></head><body><div class="board" id="b"></div>
+<script>
+const PA="M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z";
+const HX=65.5,HY=39.5; // Hershey
+const C={mat:'#0B0D10',chalk:'#EEEAE1',siren:'#FF3B2F',ash:'#8E98A4',slate:'#161A20'};
+const ticks=(cx,cy,r1,r2,n,col,w)=>Array.from({length:n},(_,i)=>{const a=i/n*2*Math.PI-Math.PI/2;return `<line x1="${cx+r1*Math.cos(a)}" y1="${cy+r1*Math.sin(a)}" x2="${cx+r2*Math.cos(a)}" y2="${cy+r2*Math.sin(a)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`}).join('');
+const hand=(cx,cy,len,deg,col,w)=>{const a=(deg-90)*Math.PI/180;return `<line x1="${cx}" y1="${cy}" x2="${cx+len*Math.cos(a)}" y2="${cy+len*Math.sin(a)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`};
+// A — mat at Hershey, detailed
+function markA(state=C.chalk,bg=C.mat,ring=C.siren,size=1){
+  return `<svg width="${300*size}" height="${180*size}" viewBox="0 0 100 60"><g transform="translate(1,2)">
+  <path d="${PA}" fill="${state}"/>
+  <circle cx="${HX}" cy="${HY}" r="12.5" fill="${bg}"/>
+  ${ticks(HX,HY,10.6,11.6,60,state,0.25)}${ticks(HX,HY,9.8,11.7,12,state,0.5)}
+  <circle cx="${HX}" cy="${HY}" r="7.2" fill="none" stroke="${ring}" stroke-width="2.4"/>
+  <circle cx="${HX}" cy="${HY}" r="4" fill="none" stroke="${state}" stroke-width="0.35" opacity=".55"/>
+  ${hand(HX,HY,6.3,35,state,1)}<circle cx="${HX}" cy="${HY}" r="1.1" fill="${state}"/>
+  </g></svg>`;
+}
+// B — the state is the O
+function markB(state=C.chalk,bg=C.mat,ring=C.siren,txt=C.chalk){
+  const F=84, R=F*0.37; const s=R/9.5; const ox=HX*s, oy=HY*s; const W=900,H=300;
+  const left=ox+24, cy=24+oy, X0=left-ox, Y0=cy-oy;
+  const text=`<text x="${left+R+F*0.09}" y="${cy+F*0.355}" font-family="'Archivo Black'" font-size="${F}" letter-spacing="-1">VERTIME</text>`;
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs><clipPath id="pa"><path d="${PA}" transform="translate(${X0},${Y0}) scale(${s})"/></clipPath></defs>
+  <g transform="translate(${X0},${Y0}) scale(${s})"><path d="${PA}" fill="${state}"/></g>
+  <g fill="${txt}">${text}</g><g fill="${bg}" clip-path="url(#pa)">${text}</g>
+  <circle cx="${left}" cy="${cy}" r="${R*1.08}" fill="${bg}"/>
+  <circle cx="${left}" cy="${cy}" r="${R*0.78}" fill="none" stroke="${ring}" stroke-width="${R*0.3}"/>
+  ${ticks(left,cy,R*0.5,R*0.58,12,state,1.6)}
+  ${hand(left,cy,R*0.5,35,state,3.4)}<circle cx="${left}" cy="${cy}" r="3.6" fill="${state}"/>
+  <text x="${left+R+F*0.09+3}" y="${cy+F*0.355+34}" font-family="'Barlow Condensed'" font-weight="700" font-size="18" letter-spacing="6" fill="${C.ash}">PENNSYLVANIA WRESTLING HISTORY</text>
+  </svg>`;
+}
+// C — the stopwatch O monogram
+function markC(ring=C.siren,fg=C.chalk,bg=C.mat){
+  const cx=60,cy=66,R=44;
+  return `<svg width="240" height="240" viewBox="0 0 120 120">
+  <rect x="${cx-7}" y="${cy-R-14}" width="14" height="10" rx="3" fill="${fg}"/><rect x="${cx-4}" y="${cy-R-6}" width="8" height="6" fill="${fg}"/>
+  <g transform="rotate(38 ${cx} ${cy})"><rect x="${cx-5}" y="${cy-R-10}" width="10" height="7" rx="2.5" fill="${fg}"/></g>
+  <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${fg}" stroke-width="7"/>
+  <path d="M ${cx} ${cy-R+11} A ${R-11} ${R-11} 0 0 1 ${cx+(R-11)*Math.sin(35*Math.PI/180)} ${cy-(R-11)*Math.cos(35*Math.PI/180)} L ${cx} ${cy} Z" fill="${ring}" opacity=".9"/>
+  ${ticks(cx,cy,R-10,R-7,60,fg,0.5)}${ticks(cx,cy,R-14,R-7,12,fg,1.6)}
+  ${hand(cx,cy,R-16,35,fg,3)}<circle cx="${cx}" cy="${cy}" r="3.2" fill="${fg}"/><circle cx="${cx}" cy="${cy}" r="1.3" fill="${ring}"/>
+  </svg>`;
+}
+// D — wordmark with the stopwatch O
+function markD(fg=C.chalk,ring=C.siren,bg=C.mat,F=92){
+  const R=F*0.36, cx=14+R, cy=120;
+  return `<svg width="620" height="170" viewBox="0 0 620 170">
+  <rect x="${cx-R*0.16}" y="${cy-R-R*0.30}" width="${R*0.32}" height="${R*0.22}" rx="3" fill="${fg}"/><rect x="${cx-R*0.09}" y="${cy-R-R*0.12}" width="${R*0.18}" height="${R*0.14}" fill="${fg}"/>
+  <circle cx="${cx}" cy="${cy}" r="${R*0.88}" fill="none" stroke="${fg}" stroke-width="${R*0.24}"/>
+  <path d="M ${cx} ${cy-R*0.62} A ${R*0.62} ${R*0.62} 0 0 1 ${cx+R*0.62*Math.sin(35*Math.PI/180)} ${cy-R*0.62*Math.cos(35*Math.PI/180)} L ${cx} ${cy} Z" fill="${ring}"/>
+  ${hand(cx,cy,R*0.55,35,fg,3)}<circle cx="${cx}" cy="${cy}" r="3" fill="${fg}"/>
+  <text x="${cx+R+F*0.09}" y="${cy+F*0.355}" font-family="'Archivo Black'" font-size="${F}" letter-spacing="-1" fill="${fg}">VERTIME</text>
+  </svg>`;
+}
+function iconTile(bg,inner,r=22,size=120){return `<div style="width:${size}px;height:${size}px;border-radius:${r}px;background:${bg};display:grid;place-items:center;overflow:hidden">${inner}</div>`}
+function iconA(state,bg,ring,size){ // app icon: the dial alone
+  const r=size/2, k=size/100;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100">${ticks(50,50,40,44,60,state,1)}${ticks(50,50,36,44.5,12,state,2.4)}<circle cx="50" cy="50" r="26" fill="none" stroke="${ring}" stroke-width="10"/>${hand(50,50,23,35,state,4.5)}<circle cx="50" cy="50" r="4.5" fill="${state}"/></svg>`}
+const navIcon={
+ state:`<path d="${PA}" transform="translate(1,4) scale(.245)" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>`,
+ region:`<path d="M3 13 L13 3 L23 13 L13 23 Z M3 13 H23 M13 3 V23" fill="none" stroke="currentColor" stroke-width="2"/>`,
+ district:`<rect x="3" y="3" width="8" height="8" fill="currentColor"/><rect x="15" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/>`,
+ school:`<path d="M3 23 V11 L13 4 L23 11 V23 Z M10 23 V15 H16 V23" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+ wrestler:`<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`
+};
+
+// ---- OT monograms ----
+function dial(cx,cy,R,fg,ring,bg,withTicks=true){return `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${bg}"/>${withTicks?ticks(cx,cy,R*0.84,R*0.92,60,fg,R*0.02)+ticks(cx,cy,R*0.78,R*0.93,12,fg,R*0.045):''}<circle cx="${cx}" cy="${cy}" r="${R*0.58}" fill="none" stroke="${ring}" stroke-width="${R*0.2}"/>${hand(cx,cy,R*0.5,35,fg,R*0.08)}<circle cx="${cx}" cy="${cy}" r="${R*0.09}" fill="${fg}"/>`}
+function otA(fg=C.chalk,ring=C.siren,bg=C.mat){ // OT: dial O + slab T, state outline underneath
+  return `<svg width="300" height="200" viewBox="0 0 300 200">
+  ${dial(78,78,58,fg,ring,bg)}
+  <path d="M150 28 H262 V58 H224 V136 H188 V58 H150 Z" fill="${fg}"/>
+  <g transform="translate(60,150) scale(1.85)"><path d="${PA}" fill="none" stroke="${C.ash}" stroke-width="1.1" stroke-linejoin="round"/><circle cx="${HX}" cy="${HY}" r="2.6" fill="${ring}"/></g>
+  </svg>`}
+function otB(state=C.chalk,bg=C.mat,ring=C.siren){ // OT knocked out of the state, dial stays at Hershey
+  return `<svg width="320" height="190" viewBox="0 0 100 60"><g transform="translate(1,2)">
+  <path d="${PA}" fill="${state}"/>
+  <text x="9" y="46" font-family="'Archivo Black'" font-size="36" fill="${bg}" letter-spacing="-1">OT</text>
+  <circle cx="${HX}" cy="${HY}" r="7.5" fill="${bg}"/><circle cx="${HX}" cy="${HY}" r="4.6" fill="none" stroke="${ring}" stroke-width="1.7"/>${hand(HX,HY,3.8,35,state,0.75)}<circle cx="${HX}" cy="${HY}" r=".8" fill="${state}"/>
+  </g></svg>`}
+function otC(fg=C.chalk,ring=C.siren,bg=C.mat){ // badge: OT inside the dial, the hand sweeps behind the letters
+  const cx=150,cy=100,R=92;
+  return `<svg width="300" height="200" viewBox="0 0 300 200">
+  <circle cx="${cx}" cy="${cy}" r="${R}" fill="${fg}"/>
+  ${ticks(cx,cy,R*0.86,R*0.93,60,bg,1.4)}${ticks(cx,cy,R*0.8,R*0.94,12,bg,3)}
+  <path d="M ${cx} ${cy-R*0.74} A ${R*0.74} ${R*0.74} 0 0 1 ${cx+R*0.74*Math.sin(35*Math.PI/180)} ${cy-R*0.74*Math.cos(35*Math.PI/180)} L ${cx} ${cy} Z" fill="${ring}"/>
+  <text x="${cx}" y="${cy+28}" text-anchor="middle" font-family="'Archivo Black'" font-size="82" fill="${bg}" letter-spacing="-3">OT</text>
+  </svg>`}
+function otD(fg=C.chalk,ring=C.siren,bg=C.mat){ // the patch: OT as an app icon, O is the dial
+  return `<svg width="300" height="200" viewBox="0 0 300 200">
+  <rect x="60" y="10" width="180" height="180" rx="40" fill="${fg}"/>
+  <text x="150" y="134" text-anchor="middle" font-family="'Archivo Black'" font-size="96" fill="${bg}" letter-spacing="-4">OT</text>
+  <circle cx="108" cy="99" r="18" fill="${fg}"/><circle cx="108" cy="99" r="11" fill="none" stroke="${ring}" stroke-width="6"/>${hand(108,99,9,35,bg,2.4)}<circle cx="108" cy="99" r="1.8" fill="${bg}"/>
+  </svg>`}
+// ---- Concepts ----
+function road(){ // the road to Hershey
+  const s=3.0, X=8, Y=14;
+  const P=(x,y)=>[X+x*s,Y+y*s];
+  const [dx,dy]=P(14,41),[rx,ry]=P(36,30),[hx,hy]=P(HX,HY);
+  return `<svg width="330" height="200" viewBox="0 0 330 200">
+  <g transform="translate(${X},${Y}) scale(${s})"><path d="${PA}" fill="${C.slate}" stroke="${C.ash}" stroke-width=".5" stroke-linejoin="round"/></g>
+  <path d="M${dx} ${dy} Q ${(dx+rx)/2+10} ${dy+8} ${rx} ${ry}" fill="none" stroke="${C.ash}" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+  <path d="M${rx} ${ry} Q ${(rx+hx)/2} ${ry-18} ${hx} ${hy}" fill="none" stroke="${C.siren}" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="${dx}" cy="${dy}" r="7" fill="${C.mat}" stroke="${C.ash}" stroke-width="2.5"/>
+  <circle cx="${rx}" cy="${ry}" r="7" fill="${C.ash}" stroke="${C.ash}" stroke-width="2.5"/>
+  ${dial(hx,hy,16,C.chalk,C.siren,C.mat,false)}
+  <g font-family="'Barlow Condensed'" font-weight="700" font-size="12" letter-spacing="2" fill="${C.ash}"><text x="${dx-14}" y="${dy+24}">DISTRICT</text><text x="${rx-20}" y="${ry-14}">REGIONAL</text><text x="${hx-14}" y="${hy+34}" fill="${C.chalk}">HERSHEY</text></g>
+  </svg>`}
+const MED=['#D9A441','#B8BFC6','#B5733A','#8E5A3C','#5F6B78','#5F6B78','#5F6B78','#5F6B78'];
+function podium(){ // 8 places, heights fall, tops carry the medal color
+  const order=[7,5,3,1,0,2,4,6]; // 8th..1st..7th
+  const h=[150,122,100,84,70,58,48,40];
+  const w=36,g=6,x0=12;
+  return `<svg width="350" height="190" viewBox="0 0 350 190">${order.map((p,i)=>{const H=h[p],x=x0+i*(w+g),y=170-H;return `<rect x="${x}" y="${y}" width="${w}" height="${H}" rx="3" fill="#20262E"/><rect x="${x}" y="${y}" width="${w}" height="5" rx="2" fill="${MED[p]}"/><text x="${x+w/2}" y="${y+28}" text-anchor="middle" font-family="'Barlow Condensed'" font-weight="900" font-size="22" fill="${p<4?MED[p]:C.ash}">${p+1}</text>`}).join('')}<line x1="8" y1="171" x2="342" y2="171" stroke="${C.line}" stroke-width="1"/></svg>`}
+function medals(){ // place chips + qualifier
+  const chip=(t,bg,fg,outline)=>`<span style="display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 10px;border-radius:999px;background:${outline?'transparent':bg};border:2px solid ${bg};color:${fg};font-family:'Barlow Condensed';font-weight:900;font-size:18px;letter-spacing:.02em">${t}</span>`;
+  const lbl=['1ST','2ND','3RD','4TH','5TH','6TH','7TH','8TH'];
+  return `<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">${lbl.map((l,i)=>chip(l,MED[i],'#0B0D10')).join('')}${chip('Q',C.ash,C.ash,true)}${chip('DNP','#2A313A',C.ash,true)}</div>
+  <div style="color:${C.ash};font-size:13px;line-height:1.5;max-width:330px">Gold, silver, bronze, copper for the podium. Fifth through eighth converge to steel. Qualified-but-unplaced is an outline Q. These are the only colored chips in the app.</div>`}
+function placewinner(){ // wrestler medal grid: FR SO JR SR slots per level
+  const cell=(v)=>{const t=v==null?'':v==='Q'?'Q':v; const bg=v==null?'transparent':v==='Q'?'transparent':MED[v-1]; const bd=v==null?C.line:v==='Q'?C.ash:MED[v-1]; const fg=v==='Q'?C.ash:'#0B0D10';return `<div style="height:40px;border-radius:8px;background:${bg};border:1.5px solid ${bd};display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:900;font-size:18px;color:${fg}">${t}</div>`};
+  const row=(name,vals)=>`<div style="font-family:'Barlow Condensed';font-weight:700;font-size:13px;letter-spacing:.14em;color:${C.ash};align-self:center">${name}</div>${vals.map(cell).join('')}`;
+  return `<div style="width:100%;display:grid;gap:10px">
+   <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-family:'Barlow Condensed';font-weight:900;font-size:30px;line-height:1">SEAN KINNEY</div><div style="color:${C.ash};font-size:13px;letter-spacing:.1em">NAZARETH · 2021–24</div></div>
+   <div style="display:grid;grid-template-columns:86px repeat(4,1fr);gap:8px">
+   <div></div>${['FR','SO','JR','SR'].map(g=>`<div style="text-align:center;font-family:'Barlow Condensed';font-weight:700;font-size:12px;letter-spacing:.16em;color:${C.ash}">${g}</div>`).join('')}
+   ${row('DISTRICT',[1,1,1,1])}${row('REGIONAL',[2,1,1,1])}${row('STATE',['Q',3,1,1])}
+   </div></div>`}
+
+const sw=[['Mat','#0B0D10;border:1px solid #242A32','#8E98A4'],['Slate','#161A20','#8E98A4'],['Chalk','#EEEAE1','#0B0D10'],['Siren','#FF3B2F','#0B0D10'],['Ash','#8E98A4','#0B0D10'],['Medals','linear-gradient(90deg,#D9A441 0 20%,#B8BFC6 0 40%,#B5733A 0 60%,#8E5A3C 0 80%,#5F6B78 0)','#0B0D10']];
+document.getElementById('b').innerHTML=`
+<h1>OVERTIME — BRAND BOARD v1</h1>
+<div class="sec"><h2>1 · PRIMARY MARK — THE MAT AT HERSHEY</h2><div class="row" style="--n:3">
+ <div class="tile"><span class="cap">ON MAT</span>${markA()}</div>
+ <div class="tile chalk"><span class="cap">ON CHALK</span>${markA(C.mat,C.chalk,C.siren)}</div>
+ <div class="tile red"><span class="cap">ON SIREN</span>${markA(C.mat,C.siren,C.chalk)}</div>
+</div></div>
+<div class="sec"><h2>1B · OT MONOGRAMS — SAME DIAL, LETTERS DO THE TALKING</h2><div class="row" style="--n:2">
+ <div class="tile"><span class="cap">OT + STATE</span>${otA()}</div>
+ <div class="tile"><span class="cap">CUT FROM THE STATE</span>${otB()}</div>
+ <div class="tile"><span class="cap">THE BADGE</span>${otC()}</div>
+ <div class="tile"><span class="cap">THE PATCH — app icon alt</span>${otD()}</div>
+</div></div>
+<div class="sec"><h2>2 · LOCKUP — THE STATE IS THE O</h2><div class="row" style="--n:1"><div class="tile" style="min-height:260px">${markB()}</div></div>
+<div class="row" style="--n:2"><div class="tile chalk" style="min-height:200px">${markD(C.mat,C.siren,C.chalk,72)}</div><div class="tile" style="min-height:200px">${markD(C.chalk,C.siren,C.mat,72)}</div></div></div>
+<div class="sec"><h2>3 · THE O — MONOGRAM / FAVICON</h2><div class="row" style="--n:4">
+ <div class="tile">${markC()}</div>
+ <div class="tile chalk">${markC(C.siren,C.mat,C.chalk)}</div>
+ <div class="tile" style="gap:14px;grid-auto-flow:column;align-items:center"><span class="cap">APP ICONS</span>${iconTile(C.mat,iconA(C.chalk,C.mat,C.siren,120),26)}${iconTile(C.siren,iconA(C.mat,C.siren,C.chalk,120),26)}</div>
+ <div class="tile" style="gap:10px;grid-auto-flow:column;align-items:end"><span class="cap">AT 48 / 32 / 20 PX</span>${iconTile(C.mat,iconA(C.chalk,C.mat,C.siren,48),10,48)}${iconTile(C.mat,iconA(C.chalk,C.mat,C.siren,32),7,32)}${iconTile(C.mat,iconA(C.chalk,C.mat,C.siren,20),4,20)}</div>
+</div></div>
+<div class="sec"><h2>4 · COLOR — ONE ACCENT. MEDALS ARE THE ONLY OTHER COLOR, AND THEY MEAN PLACE.</h2><div class="sw">${sw.map(([n,c,t])=>`<div style="background:${c};color:${t}"><span>${n.toUpperCase()}</span></div>`).join('')}</div></div>
+<div class="sec"><h2>5 · TYPE &amp; NAV</h2><div class="type">
+ <div class="tile"><div style="font-family:'Barlow Condensed';font-weight:900;font-size:64px;line-height:.95;letter-spacing:-.01em">STATE<br>CHAMPIONS<br><span style="color:var(--siren)">1938–2026</span></div><div style="color:var(--ash);font-size:15px;line-height:1.5;max-width:400px">Barlow Condensed 900 for headlines and numbers that need to hit. Barlow 500 for everything you read. Tabular figures in every table. No gold anywhere except on a first-place row.</div></div>
+ <div class="tile"><div class="nav">${[['state','STATE',1],['region','REGION'],['district','DISTRICT'],['school','SCHOOL'],['wrestler','WRESTLERS']].map(([k,l,on])=>`<div class="${on?'on':''}"><svg viewBox="0 0 26 26" style="color:${on?C.siren:'currentColor'}">${navIcon[k]}</svg>${l}</div>`).join('')}</div><div style="color:var(--ash);font-size:14px">Bottom nav. The active level lights up in Siren; everything else stays Ash.</div></div></div>
+</div></div>
+<div class="sec"><h2>6 · CONCEPTS — THE ROAD, THE PODIUM, THE MEDALS, THE PLACEWINNER</h2><div class="row" style="--n:2">
+ <div class="tile"><span class="cap">THE ROAD TO HERSHEY — a wrestler's season as one line</span>${road()}</div>
+ <div class="tile"><span class="cap">THE PODIUM — eight places, heights fall, color only on top</span>${podium()}</div>
+ <div class="tile" style="place-items:start"><span class="cap">MEDALS — place chips</span><div style="height:14px"></div>${medals()}</div>
+ <div class="tile" style="place-items:start"><span class="cap">THE PLACEWINNER — career grid</span><div style="height:14px"></div>${placewinner()}</div>
+</div></div>`;
+</script></body></html>
