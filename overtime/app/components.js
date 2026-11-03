@@ -23,10 +23,8 @@
 
   /* unit header + hero numbers */
   function unitHeader(u, o, extra = {}) {
-    const crumbs = extra.crumbs || [];
     const hero = extra.hero || [['Medals', o.medals], ['Titles', o.titles], ['Qualifiers', o.quals], u.kind === 'school' ? ['Team titles', o.won] : ['Reg. titles', o.regTitles]];
     return `<header class="uh">
-      ${crumbs.length ? `<div class="crumb">${crumbs.map((c) => (c.href ? `<a href="${c.href}">${esc(c.name)}</a>` : `<span>${esc(c.name)}</span>`)).join('<span>›</span>')}</div>` : ''}
       <div style="display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap"><div><h1>${esc(u.name)}</h1>${extra.sub ? `<div class="sub">${extra.sub}</div>` : ''}</div>${classToggle()}</div>
       <div class="hero">${hero.map(([l, v]) => `<div><b>${v == null ? '–' : fmt(v)}</b><span>${l}</span></div>`).join('')}</div>
     </header>`;
@@ -34,22 +32,31 @@
   const section = (title, body, right = '') => `<section class="sec"><div class="k"><span>${title}</span>${right ? `<span>${right}</span>` : ''}</div>${body}</section>`;
   const empty = (msg) => `<div class="card empty">${msg}</div>`;
 
-  /* sunburst */
-  function sunburst(u) {
-    const H = hierarchyOf(u); if (!H.children || !H.children.length) return empty('No placements in ' + clsName().toLowerCase() + ' yet.');
-    const id = 'sun' + Math.random().toString(36).slice(2, 8);
+  /* the Floor: every unit is a mat sized by its (discounted) state points; the same component at every level */
+  function floor(u, crumbs = [], mode) {
+    const H = hierarchyOf(u, mode);
+    const W = Math.min((window.innerWidth || 390) - 32, 1100), HT = W < 720 ? 300 : 380;
+    const crumbBar = `<div class="fcrumb">${crumbs.map((c, i) => (i < crumbs.length - 1 ? `<a href="${c.href}">${esc(c.name)}</a><span>›</span>` : `<b>${esc(c.name)}</b>`)).join('')}</div>`;
+    if (!H.children || !H.children.length) return crumbBar + empty('No placements in ' + clsName().toLowerCase() + ' yet.');
     const root = d3.hierarchy(H).sum((d) => (d.children ? 0 : d.pts)).sort((a, b) => b.value - a.value);
-    const depth = root.height, R = 150; d3.partition().size([2 * Math.PI, R])(root);
-    const top = root.children; const col = d3.scaleOrdinal().domain(top.map((d) => d.data.name)).range(['#D9A441', '#C8D2DC', '#8E98A4', '#A8742E', '#6F7B88', '#E0C27C', '#515D6B', '#B5733A', '#D5CFC2', '#3F4A57']);
-    const arc = d3.arc().startAngle((d) => d.x0).endAngle((d) => d.x1).innerRadius((d) => ringIn(d)).outerRadius((d) => ringOut(d)).padAngle(0.004);
-    function ringIn(d) { const w = 104 / depth; return 46 + (d.depth - 1) * w; } function ringOut(d) { const w = 104 / depth; return 46 + d.depth * w - 1.5; }
-    const nodes = root.descendants().filter((d) => d.depth > 0 && d.x1 - d.x0 > 0.004);
-    const topOf = (d) => { while (d.depth > 1) d = d.parent; return d; };
+    d3.treemap().size([W, HT]).paddingOuter(0).paddingInner(3).paddingTop((d) => (d.depth === 1 && d.children ? 0 : 0)).round(true)(root);
+    const top = root.children, n = top.length, total = root.value;
+    const ramp = d3.interpolateRgb(C.chalk, '#2A313A');
     const href = (d) => (d.data.kind && OT.unitByKind[d.data.kind] && d.data.id != null ? OT.unitByKind[d.data.kind](d.data.id).href : null);
-    const paths = nodes.map((d) => { const base = col(topOf(d).data.name); const c = d3.color(base); const f = d.depth === 1 ? base : d3.interpolateRgb(base, '#0B0D10')(0.18 * (d.depth - 1) + 0.12 * ((d.x0 * 7) % 1)); const h = href(d); return `<path d="${arc(d)}" fill="${f}" ${h ? `data-href="${h}"` : ''}><title>${esc(d.data.name)} · ${fmt(d.value)} pts · ${d.data.titles} titles</title></path>`; }).join('');
-    const center = `<text text-anchor="middle" y="-4" font-family="Barlow Condensed" font-weight="900" font-size="30" fill="${C.chalk}">${fmt(root.value)}</text><text text-anchor="middle" y="14" font-family="Barlow Condensed" font-weight="700" font-size="11" letter-spacing="2" fill="${C.ash}">POINTS</text>`;
-    const leg = top.slice(0, 12).map((d) => { const h = href(d); return `<a href="${h || '#'}" ${h ? '' : 'style="pointer-events:none"'}><i style="background:${col(d.data.name)}"></i><span>${esc(d.data.name)}</span><span class="n num">${(100 * d.value / root.value).toFixed(0)}%</span></a>`; }).join('');
-    return `<div class="sun card" id="${id}"><svg viewBox="-152 -152 304 304" role="img" aria-label="Share of ${esc(u.name)} points by ${esc(top[0].data.kind)}"><g>${paths}</g>${center}</svg><div class="leg${top.length > 6 ? ' two' : ''}">${leg}</div></div>`;
+    const tiles = top.map((d, i) => {
+      const w = d.x1 - d.x0, h = d.y1 - d.y0, t = n > 1 ? Math.pow(i / (n - 1), 0.7) : 0, bg = ramp(t), dark = t > 0.5;
+      const share = (100 * d.value / total), sh = share >= 10 ? share.toFixed(0) + '%' : share.toFixed(1) + '%';
+      const pl = d.data.places || [0, 0, 0, 0];
+      const big = w >= 112 && h >= 82, mid = w >= 60 && h >= 44, small = w >= 34 && h >= 20; const medc = (k) => (dark ? MED[k] : ['#8A6410', '#5F6B78', '#8F4F1E', '#6E4330'][k]);
+      const label = big ? `<b>${esc(d.data.name)}</b><span class="sh">${sh}</span><span class="pl">${pl.slice(0, 4).map((c, k) => c ? `<i style="color:${medc(k)}">${c}</i>` : '').join('')}</span>`
+        : mid ? `<b>${esc(d.data.name)}</b><span class="sh">${sh}</span>` : small ? `<b>${esc(d.data.name)}</b>` : '';
+      const subs = d.children ? d.children.map((c) => `<i class="sub" style="left:${c.x0 - d.x0}px;top:${c.y0 - d.y0}px;width:${Math.max(0, c.x1 - c.x0)}px;height:${Math.max(0, c.y1 - c.y0)}px"></i>`).join('') : '';
+      const h2 = href(d);
+      return `<div class="tile${dark ? ' dk' : ''}${big ? ' big' : mid ? ' mid' : small ? ' sm' : ' xs'}" style="left:${d.x0}px;top:${d.y0}px;width:${w}px;height:${h}px;background:${bg}" ${h2 ? `data-href="${h2}" role="link" tabindex="0"` : ''} title="${esc(d.data.name)} · ${fmt(Math.round(d.value))} pts · ${sh}${d.data.titles ? ' · ' + d.data.titles + ' titles' : ''}">${subs}${label}</div>`;
+    }).join('');
+    const toggle = u.kind === 'state' ? `<div class="seg sm" data-floor="1"><button data-mode="region" aria-pressed="${mode !== 'district'}">Regions</button><button data-mode="district" aria-pressed="${mode === 'district'}">Districts</button></div>` : '';
+    return `${crumbBar}<div class="floor card" style="height:${HT}px"><div class="fl" style="width:${W}px;height:${HT}px">${tiles}</div></div>
+      <div class="fcap"><span>Share of state points · tap a mat to go there</span>${toggle}</div>`;
   }
 
   /* rankings table */
@@ -57,11 +64,11 @@
   function rankTable(rows, opts = {}) {
     if (!rows.length) return empty(opts.emptyMsg || 'Nothing here in ' + clsName().toLowerCase() + '.');
     const lim = opts.limit || 25;
-    const body = rows.slice(0, lim).map((o, i) => { const u = o.u || o; const name = opts.name ? opts.name(o) : esc(u.name); const sub = opts.sub ? opts.sub(o) : '';
+    const body = rows.slice(0, lim).map((o, i) => { const u = o.u || o; const name = opts.name ? opts.name(o) : esc(u.name); let sub = opts.sub ? opts.sub(o) : ''; if (o.offMedals) sub += `${sub ? ' · ' : ''}incl. ${o.offMedals} ${o.offCls} medal${o.offMedals === 1 ? '' : 's'} at ${Math.round(100 * o.offClass)}%`;
       return `<tr><td class="rk sticky1">${i + 1}</td><td class="l sticky2"><a href="${u.href || o.href}">${name}</a>${sub ? `<small class="muted"> ${sub}</small>` : ''}</td><td class="num">${score(o.era)}</td><td class="num">${score(o.power)}</td><td class="num">${fmt(o.pts)}</td><td class="num">${fmt(o.medals)}</td>${o.places.map((n, k) => `<td class="num p${n ? Math.min(k + 1, 5) : 0}">${n || '·'}</td>`).join('')}</tr>`; }).join('');
     const more = rows.length > lim ? `<div class="note">Showing ${lim} of ${rows.length}. ${opts.moreHref ? `<a href="${opts.moreHref}">See all</a>` : ''}</div>` : '';
     return `<div class="tw"><table><thead><tr>${COLS.map((c, i) => `<th class="${i < 2 ? 'l ' : ''}${i === 0 ? 'sticky1' : i === 1 ? 'sticky2' : ''}">${c}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>${more}
-      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1.</div>`;
+      <div class="note">Era: share of all state points, summed across every season (×100). Power: the same with a 7-season half-life. Score: placement points, 16-12-9-7-5-3-2-1. A school's seasons in the other class count at 85%.</div>`;
   }
   /* wrestler rows as rankings (Score, Medals, places); Era/Power shown as career share */
   function wrestlerRank(rows, opts = {}) {
@@ -140,5 +147,5 @@
       </svg>`;
   }
 
-  Object.assign(OT, { C, MED, pc, score, wordmark, navIcon, classToggle, unitHeader, section, empty, sunburst, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
+  Object.assign(OT, { C, MED, pc, score, wordmark, navIcon, classToggle, unitHeader, section, empty, floor, rankTable, wrestlerRank, teamsBlock, seasonsDrawer, lowerBlock, chips, careerGrid, road });
 })();

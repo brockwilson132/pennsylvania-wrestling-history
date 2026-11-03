@@ -32,10 +32,19 @@
   document.addEventListener('click', (e) => {
     const b = e.target.closest('button[data-cls]'); if (b) { setCls(b.dataset.cls); render(); return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(); return; }
-    const p = e.target.closest('path[data-href]'); if (p) { location.hash = p.dataset.href; return; }
+    const f = e.target.closest('button[data-mode]'); if (f) { state.floor = f.dataset.mode; render(); return; }
+    const t = e.target.closest('.tile[data-href]'); if (t) { zoomTo(t); return; }
     const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) pod.hidden = open; }
   });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.target.classList.contains('srow') || e.target.classList.contains('tile'))) e.target.click(); });
+  /* zoom a mat up to fill its floor, then go there */
+  function zoomTo(t) {
+    const fl = t.parentElement, fr = fl.getBoundingClientRect(), tr = t.getBoundingClientRect();
+    const sx = fr.width / tr.width, sy = fr.height / tr.height, dx = fr.left - tr.left, dy = fr.top - tr.top;
+    t.classList.add('zoom'); t.style.transformOrigin = '0 0'; t.style.transform = `translate(${dx}px,${dy}px) scale(${sx},${sy})`;
+    fl.classList.add('zooming');
+    setTimeout(() => { location.hash = t.dataset.href; }, 320);
+  }
   window.addEventListener('hashchange', render);
   render();
 })();
