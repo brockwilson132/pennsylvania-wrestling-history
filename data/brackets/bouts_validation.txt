@@ -1,0 +1,47 @@
+bouts 374237  brackets 24693
+champion check (place-1 wins in the bouts, never loses, and wins the final when one is found): match 22563, mismatch 150, no place-1 to compare 306  (99.34% agree)
+mismatch examples:
+  state 1962_single 112: final winner J. Boudreau; place-1 jimboudreau; won False lost False
+  state 2007_AAA 125: final winner Chad Frankhouser; place-1 coreyhouser; won True lost False
+  state 2011_AAA 171: final winner J. Staudenmayer; place-1 johnmichaelstaudenmayer; won False lost False
+  state 2019_AAA 120: final winner Kody Evans; place-1 seanpierson; won True lost False
+  state 2023_AA 127: final winner Kobi Burkett; place-1 cooperhornack; won True lost False
+  state 2024_AA 107: final winner Joe Bachmann; place-1 joeybachmann; won False lost False
+  district 1938_D1_single 165: final winner D. Calebaugh; place-1 doncalebaugh; won False lost False
+  district 1938_D3_single 95: final winner Lloyd Leppo; place-1 benklugh; won False lost False
+  district 1938_D7_single 105: final winner G. Phillips; place-1 georgephillips; won False lost False
+  state 2026_AAA 189: final winner Noah Williams; place-1 mariohutcherson; won True lost False
+  district 1940_D7_single 115: final winner Ralph Abraham; place-1 georgecuster; won True lost False
+  district 1943_D3_single 112: final winner Bob Myers; place-1 robertbrown; won True lost False
+bouts wrestled by the champion (count -> brackets): 1:476, 2:4183, 3:11650, 4:6666, 5:37, 6:4, 7:2, 8:1
+result types: dec:192483, fall:117032, md:41550, tf:14925, ff:3980, inj:3849, dq:418
+
+coverage by level x decade (brackets with a final / full champ side / consolation side):
+  district  1930s  brackets   138  final  51.4%  champ side  46.4%  consolation  55.1%
+  district  1940s  brackets   751  final  68.3%  champ side  57.9%  consolation  32.0%
+  district  1950s  brackets   919  final  78.7%  champ side  75.4%  consolation  34.9%
+  district  1960s  brackets  1234  final  90.2%  champ side  87.3%  consolation  22.4%
+  district  1970s  brackets  1744  final  94.7%  champ side  94.4%  consolation  67.4%
+  district  1980s  brackets  2057  final  94.2%  champ side  94.2%  consolation  98.5%
+  district  1990s  brackets  2197  final  95.6%  champ side  95.6%  consolation 100.0%
+  district  2000s  brackets  2522  final  92.6%  champ side  92.6%  consolation 100.0%
+  district  2010s  brackets  2714  final  91.2%  champ side  90.2%  consolation  99.4%
+  district  2020s  brackets  1630  final  81.5%  champ side  80.6%  consolation  99.1%
+  regional  1950s  brackets   407  final  96.1%  champ side  40.0%  consolation   3.9%
+  regional  1960s  brackets   493  final 100.0%  champ side  72.2%  consolation   0.0%
+  regional  1970s  brackets   755  final  99.9%  champ side  95.0%  consolation  73.5%
+  regional  1980s  brackets   968  final 100.0%  champ side 100.0%  consolation 100.0%
+  regional  1990s  brackets  1079  final 100.0%  champ side 100.0%  consolation 100.0%
+  regional  2000s  brackets  1233  final 100.0%  champ side 100.0%  consolation 100.0%
+  regional  2010s  brackets  1260  final 100.0%  champ side 100.0%  consolation 100.0%
+  regional  2020s  brackets   802  final 100.0%  champ side 100.0%  consolation 100.0%
+  state     1930s  brackets    20  final 100.0%  champ side 100.0%  consolation   0.0%
+  state     1940s  brackets   108  final 100.0%  champ side 100.0%  consolation   0.0%
+  state     1950s  brackets   110  final 100.0%  champ side 100.0%  consolation   0.0%
+  state     1960s  brackets   120  final 100.0%  champ side  98.3%  consolation   0.0%
+  state     1970s  brackets   192  final 100.0%  champ side 100.0%  consolation  68.8%
+  state     1980s  brackets   242  final 100.0%  champ side 100.0%  consolation 100.0%
+  state     1990s  brackets   260  final 100.0%  champ side 100.0%  consolation 100.0%
+  state     2000s  brackets   274  final 100.0%  champ side 100.0%  consolation 100.0%
+  state     2010s  brackets   280  final 100.0%  champ side 100.0%  consolation 100.0%
+  state     2020s  brackets   184  final 100.0%  champ side 100.0%  consolation 100.0%
