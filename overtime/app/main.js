@@ -52,7 +52,7 @@
     let p = page, i = id;
     if (p === 'school' && !i && +q.d) { ctx.district = +q.d; const sp = OT.districtRegionSpans(+q.d); if (sp.length) ctx.region = sp[sp.length - 1].g; }
     setCtx(p, i); state.ctxDistrict = ctx.district;
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.lastRoute = page + '/' + id; }
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.lastRoute = page + '/' + id; }
     main.innerHTML = PAGES[p](i); main.querySelectorAll('.pscr.scroll').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (p === 'wrestler') { loadBestWins(i); loadCareer(i); }
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     const cur = p === 'wrestler' ? 'wrestlers' : p;
@@ -93,8 +93,22 @@
     const nb = main.querySelector(`.perf[data-perf="${CSS.escape(key)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left;
   }
   /* hovering a season shows every line's value for it */
-  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
-  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
+  document.addEventListener('mouseover', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) { const c = mk.closest('.mapcard'); c.querySelectorAll('[data-mk]').forEach((el) => el.classList.toggle('hlk', el.dataset.mk === mk.dataset.mk)); } });
+  document.addEventListener('mouseout', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) mk.closest('.mapcard').querySelectorAll('.hlk').forEach((el) => el.classList.remove('hlk')); });
+  /* season scrubber: drag either handle to a sub-range of the header window */
+  document.addEventListener('pointerdown', (e) => {
+    const h = e.target.closest && e.target.closest('.scr .sch'); if (!h) return; e.preventDefault();
+    const scr = h.closest('.scr'), card = scr.closest('.mapcard'), track = scr.querySelector('.scrt'); const y0 = +scr.dataset.y0, y1 = +scr.dataset.y1, n = y1 - y0 + 1;
+    let a = +scr.dataset.a, b = +scr.dataset.b; const which = h.dataset.h;
+    const pc = (y) => (100 * (y - y0 + 0.5)) / n;
+    const yAt = (x) => { const r = track.getBoundingClientRect(); return Math.max(y0, Math.min(y1, y0 + Math.floor(((x - r.left) / Math.max(1, r.width)) * n))); };
+    const paint = () => { const lo = Math.min(a, b), hi = Math.max(a, b); scr.querySelector('.sch[data-h="a"]').style.left = pc(a) + '%'; scr.querySelector('.sch[data-h="b"]').style.left = pc(b) + '%'; const f = scr.querySelector('.scrf'); f.style.left = (pc(lo) - 50 / n) + '%'; f.style.width = (100 * (hi - lo + 1)) / n + '%'; scr.querySelector('.scrl').textContent = lo === hi ? String(lo) : lo + '–' + hi + ' · avg'; };
+    const move = (ev) => { const y = yAt(ev.clientX); if (which === 'a') a = y; else b = y; paint(); };
+    const up = () => { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); const lo = Math.min(a, b), hi = Math.max(a, b); const [kd, ...rest] = card.dataset.mapcard.split(':'); state.msel = lo === y0 && hi === y1 ? null : { k: card.dataset.mapcard, a: lo, b: hi }; card.outerHTML = OT.mapCard({ kind: kd, id: rest.join(':') }); };
+    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up);
+  });
+  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
+  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
   document.addEventListener('change', (e) => { const inp = e.target.closest && e.target.closest('input[data-cmpadd]'); if (!inp || !state.cmp) return; const v = inp.value.trim(); const s = OT.UD.schools.find((x) => x.toLowerCase() === v.toLowerCase());
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   const applyScope = () => { refreshPanel(); render(true); };
@@ -121,6 +135,17 @@
     const bs = e.target.closest('button[data-bvsort]'); if (bs) { state.bvsort = bs.dataset.bvsort; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; bview.scrollTop = top; } return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }
     const bl = e.target.closest('a.bl[data-bl]'); if (bl) { e.preventDefault(); slideTo(bl); return; }
+    const mcard = e.target.closest && e.target.closest('.mapcard');
+    if (mcard) {
+      const [kd, ...rest] = mcard.dataset.mapcard.split(':'); const u = { kind: kd, id: rest.join(':') }; const key = mcard.dataset.mapcard;
+      const repaint = () => { mcard.outerHTML = OT.mapCard(u); };
+      const ty = e.target.closest('button[data-msel-y]'); if (ty) { const y = +ty.dataset.mselY; const m = state.msel; state.msel = m && m.k === key && m.a === y && m.b === y ? null : { k: key, a: y, b: y }; repaint(); return; }
+      if (e.target.closest('[data-msel-reset]')) { state.msel = null; repaint(); return; }
+      const ms = e.target.closest('button[data-msort]'); if (ms) { state.msort = ms.dataset.msort; repaint(); return; }
+      const ma = e.target.closest('button[data-mlall]'); if (ma) { state.mlall = ma.dataset.mlall === '1'; repaint(); return; }
+      const row = e.target.closest('.mlr'); if (row && !e.target.closest('a')) { const k = row.dataset.mk; const on = !row.classList.contains('pin'); mcard.querySelectorAll('[data-mk]').forEach((el) => el.classList.toggle('pin', on && el.dataset.mk === k)); return; }
+    }
+    const sx = e.target.closest('button[data-sx]'); if (sx) { const open = sx.getAttribute('aria-expanded') === 'true'; sx.setAttribute('aria-expanded', String(!open)); const d = sx.nextElementSibling; if (d) d.hidden = open; sx.parentElement.classList.toggle('open', !open); return; }
     const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) { if (!open && pod.dataset.sd && !pod.dataset.done) { pod.innerHTML = OT.seasonDetail(pod.dataset.sd); pod.dataset.done = '1'; } pod.hidden = open; } }
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });

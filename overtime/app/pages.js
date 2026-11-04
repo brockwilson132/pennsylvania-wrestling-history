@@ -39,7 +39,7 @@
     const rk = opts.rankings();
     const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
     const map = u.kind === 'school' ? '' : OT.ratingMap(u);
-    const parts = [head, map ? `<section class="sec secmap">${map}</section>` : '', `<section class="sec">${OT.perfChart(u)}</section>`, rankSec, section('All-time team', teamsBlock(u)), section('Seasons', seasonsDrawer(u))];
+    const parts = [head, map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` : '', rankSec, section('All-time team', teamsBlock(u)), section('Seasons', seasonsDrawer(u))];
     if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u));
     if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u)));
     return parts.join('');

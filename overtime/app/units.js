@@ -253,7 +253,6 @@
   });
   /* unit card: identity, best wrestler and podiums on the left; a 2×2 matrix on the right that fills the card's height:
      Score (with the S/R/D split) · Rating (mini chart on a tint of the strength scale) · Team titles · Individual titles */
-  let CARD_SC = null;
   function unitCard(a, rank, sort, pageKind) {
     const lv = LVL3.filter((l, i) => a.w[i]);
     const rt = r10(a.rating);
@@ -281,20 +280,47 @@
         <span class="t2 t2i${hl('titles')}"><i class="t2k">Individual titles</i><b>${a.ti}</b><span class="t2sl">${ind.slice(1).map(([n, l]) => `<em>${l} ${n}</em>`).join('')}</span></span>
       </span></a>`;
   }
-  /* one sort control */
+  /* one sort control (wrestler lists still use it) */
   const sortSelect = (key, sorts, cur) => `<label class="ssel"><span>Sort</span><select data-sortsel="${key}" aria-label="Sort by">${sorts.map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${l}</option>`).join('')}</select></label>`;
+  /* ---------- standings rows ----------
+     A ranked unit is one 56px row: rank, colour edge, name with a one-line summary, then fixed columns: a rating chip
+     (tinted on the strength scale, value over an inline sparkline) and Score. Column headers sort. Tap a row to open its
+     detail in place: finishes 1st–8th across the full width for each level that counts on this page, the top wrestler,
+     team titles and a link to the unit's page. */
+  const chipSpark = (series) => { const pts = series.filter((p) => p[1]); if (pts.length < 2) return '';
+    const y0 = pts[0][0], y1 = pts[pts.length - 1][0], v = pts.map((p) => p[1]), lo = Math.min(...v), hi = Math.max(...v);
+    const X = (y) => 1 + 58 * (y - y0) / Math.max(1, y1 - y0), Y = (x) => 13 - 12 * (x - lo) / Math.max(1, hi - lo);
+    return `<svg class="rcs" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true"><path d="${pts.map(([y, x], i) => (i ? 'L' : 'M') + X(y).toFixed(1) + ' ' + Y(x).toFixed(1)).join(' ')}" vector-effect="non-scaling-stroke"/></svg>`; };
+  function distRows(a) {
+    const lv = LVL3.filter((l, i) => a.w[i]);
+    const rows = lv.map((l) => { const c = placeDist(a.kind, l).get(a.k) || [0, 0, 0, 0, 0, 0, 0, 0]; const mx = Math.max(1, ...c), tot = c.reduce((t, x) => t + x, 0);
+      return `<div class="sdr"><span class="sdl">${OT.navIcon(LVI[l])}<b>${LV[LVL3.indexOf(l)][0]}</b><i>${tot}</i></span><span class="sdb">${c.map((n, i) => `${((h) => `<span class="sdc" title="${ordinal(i + 1)}: ${n}" style="--h:${h}%"><em>${n || ''}</em><i style="height:${h}%;--c:${MEDC[i]}"></i></span>`)(n ? Math.max(8, Math.round(78 * n / mx)) : 0)}`).join('')}</span></div>`; }).join('');
+    return `<div class="sdh"><span></span><span class="sdb">${[1, 2, 3, 4, 5, 6, 7, 8].map((p) => `<i>${ordinal(p)}</i>`).join('')}</span></div>${rows}`;
+  }
+  function unitCard(a, rank, sort, pageKind) {
+    const rt = r10(a.rating), tint = rt ? colorAt(domFrac(a.kind, a.rating)) : '#2F3640';
+    const dt = dualTitles(a.kind).get(a.k) || 0, team = a.tt + dt;
+    const sub = [a.sub ? esc(a.sub) : '', `${a.ti} state title${a.ti === 1 ? '' : 's'}`, team ? `${team} team` : ''].filter(Boolean).join(' · ');
+    const off = a.off && a.kind === 'school' && state.cls !== 'ALL' ? `<div class="sxn">Includes ${a.off} ${state.cls === 'AAA' ? 'AA' : 'AAA'} season${a.off === 1 ? '' : 's'} at 85%.</div>` : '';
+    const best = a.best ? `<a class="sxw" href="${OT.wrestlerHref({ name: a.best.name, sch: a.best.sch, year: a.best.y })}"><i>Top wrestler</i><b>${esc(a.best.name)}</b>${a.kind !== 'school' ? `<small>${esc(a.best.sch)}</small>` : ''}<em>${r10(a.best.r)} · ${a.best.y}</em></a>` : '';
+    const tl = team ? `<div class="sxt"><i>Team titles</i>${[a.tt ? `PIAA <b>${a.tt}</b>` : '', dt ? `Duals <b>${dt}</b>` : ''].filter(Boolean).join(' · ')}</div>` : '';
+    const hl = (k) => (sort === k ? ' on' : '');
+    return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b><small>${sub}</small></span><span class="c ct${hl('titles')}">${a.ti}</span><span class="c ctm">${team || '–'}</span><span class="rc${hl('rating')}" style="--tint:${tint}"><b>${rt || '–'}</b>${chipSpark(a.series)}</span><span class="c cs${hl('score')}">${fmt(Math.round(a.score))}</span></button>
+      <div class="sxd" hidden>${distRows(a)}<div class="sxf">${best}${tl}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
+  }
   function unitRankings(kind, parent, pageKind, opts = {}) {
     const sorts = [['rating', 'Rating'], ['score', 'Score']].concat(pageKind !== 'school' ? [['titles', 'Titles']] : []);
     let sort = sorts.some(([k]) => k === state.usort) ? state.usort : 'rating';
     if (sort === 'rating' && OT.yearsWindow()[1] < RATED_FROM) sort = 'score';
     const L = aggregate(kind, parent, pageKind).slice().sort(SORTS[sort]);
-    { const v = L.map((a) => a.rating).filter(Boolean); CARD_SC = v.length ? { lo: Math.min(...v), hi: Math.max(...v) } : null; }
     L.forEach((a) => { a.kind = kind; });
     if (!L.length) return OT.empty('No ' + (kind === 'school' ? 'schools' : kind + 's') + ' with enough seasons in this window.');
     const lim = state.uall ? L.length : opts.limit || 20;
-    const sortSeg = sortSelect('usort', sorts, sort);
+    const canT = sorts.some(([k]) => k === 'titles');
+    const hb = (k, l, cls) => `<button class="${cls}${sort === k ? ' on' : ''}" data-usort="${k}" aria-pressed="${sort === k}">${l}</button>`;
+    const head = `<div class="sxh"><span class="rk"></span><span class="nm">${canT ? hb('titles', 'Titles', 'ht m') : ''}</span><span class="c ct">${canT ? hb('titles', 'Titles', 'ht') : 'Titles'}</span><span class="c ctm">Team</span><span class="rc">${hb('rating', 'RTG', 'ht')}</span><span class="c cs">${hb('score', 'Score', 'ht')}</span></div>`;
     const more = L.length > (opts.limit || 20) ? `<button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Show top ' + (opts.limit || 20) : 'Show all ' + L.length}</button>` : '';
-    return { sortSeg, html: `<div class="ul">${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
+    return { sortSeg: '', html: `<div class="sxl">${head}${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
   }
 
   /* ---------- performance chart ----------
@@ -391,28 +417,31 @@
     const y0 = Math.min(...yA), y1 = Math.max(...yA), n = y1 - y0 + 1, by = new Map(rows.map((r) => [r.y, r]));
     const phone = (window.innerWidth || 390) < 720;
     const labW = u.kind === 'district' ? (phone ? 112 : 170) : u.kind === 'school' ? (phone ? 62 : 80) : (phone ? 96 : 150);
+    const HG = 6; /* gap under the top (avg / own) row */
     const avail = Math.min(1100, Math.max(240, (window.innerWidth || 390) - (phone ? 40 : 140) - labW));
-    const cw = Math.max(14, avail / n), WB = cw * n + 8, W = WB, x = (y) => 4 + cw * (y - y0) + cw / 2;
-    const scroll = cw * n + 8 > avail + 2;
-    const CH = phone ? 16 : 18, CG = 2;
+    const cw = phone ? 18 : Math.max(18, Math.min(44, avail / n)), WB = cw * n, W = WB, x = (y) => cw * (y - y0) + cw / 2;
+    const scroll = cw * n > avail + 2;
+    const CH = phone ? 22 : 26, CG = 2;
+    const rowY = (i) => i * (CH + CG) + (i > 0 && HR[0].top && HR.length > 1 ? HG : 0);
     let g = '', labs = '';
     let t = 0;
     /* heat rows: rank among peers (non-top rows) per season for the tooltip */
     const peers = HR.filter((h) => !h.top);
     const rankAt = (h, y) => { if (h.top || !h.pts.has(y)) return null; const v = h.pts.get(y); const vs = peers.map((p) => p.pts.get(y)).filter(Boolean); return [1 + vs.filter((w) => w > v).length, vs.length]; };
-    if (y0 < RATED_FROM) { const gx = x(Math.min(RATED_FROM, y1 + 1)) - cw / 2; g += `<rect x="0" y="0" width="${Math.max(0, gx).toFixed(1)}" height="${HR.length * (CH + CG)}" class="nodat"/>`; if (gx > 90) g += `<text x="${(gx / 2).toFixed(1)}" y="${(HR.length * (CH + CG)) / 2 + 4}" text-anchor="middle" class="nodt">limited data before 1974</text>`; }
+    const hH = rowY(HR.length - 1) + CH;
+    if (y0 < RATED_FROM) { const gx = x(Math.min(RATED_FROM, y1 + 1)) - cw / 2; g += `<rect x="0" y="0" width="${Math.max(0, gx).toFixed(1)}" height="${hH}" class="nodat"/>`; if (gx > 90) g += `<text x="${(gx / 2).toFixed(1)}" y="${hH / 2 + 4}" text-anchor="middle" class="nodt">limited data before 1974</text>`; }
     HR.forEach((h, i) => {
-      const yy = t + i * (CH + CG);
+      const yy = rowY(i);
       const lab = h.href ? `<a href="${h.href}">${esc(phone && h.short ? h.short : h.label)}</a>` : esc(h.label);
-      labs += `<span class="pl-l hl${h.top ? ' top' : ''}" style="top:${yy + CH / 2 - 7}px;width:${labW - 6}px" title="${esc(h.label)}">${lab}</span>`;
+      labs += `<span class="pl-l hl${h.top ? ' top' : ''}" style="top:${yy}px;height:${CH}px;width:${labW - 6}px" title="${esc(h.label)}">${lab}</span>`;
+      for (let yq = y0; yq <= y1; yq++) if (!h.pts.has(yq)) g += `<rect class="he" x="${(x(yq) - cw / 2 + 1).toFixed(1)}" y="${yy}" width="${(cw - 2).toFixed(1)}" height="${CH}" rx="2"/>`;
       h.pts.forEach((v, y) => {
         const rk = rankAt(h, y);
         const tipT = `${y} · ${h.label} · RTG ${r10(v)}${rk ? ` · #${rk[0]} of ${rk[1]}` : ''}`;
-        g += `<rect class="hc${y === sel ? ' on' : ''}" data-py="${y}" data-tip="${esc(tipT)}" x="${(x(y) - cw / 2 + 1).toFixed(1)}" y="${yy}" width="${(cw - 2).toFixed(1)}" height="${CH}" rx="2" fill="${ratingColor(h.kind, v)}"><title>${esc(tipT)}</title></rect>`;
+        g += `<rect class="hcell${y === sel ? ' on' : ''}" data-py="${y}" data-tip="${esc(tipT)}" x="${(x(y) - cw / 2 + 1).toFixed(1)}" y="${yy}" width="${(cw - 2).toFixed(1)}" height="${CH}" rx="2" fill="${ratingColor(h.kind, v)}"><title>${esc(tipT)}</title></rect>`;
       });
-      if (h.top) g += `<line x1="0" x2="${WB}" y1="${yy + CH + CG / 2 + 2}" y2="${yy + CH + CG / 2 + 2}" class="bl"/>`;
     });
-    t = HR.length * (CH + CG) + (HR.length > 1 ? 4 : 0);
+    t = hH + 2;
     if (sel) { const sx = x(sel) - cw / 2; g += `<rect x="${sx.toFixed(1)}" y="-2" width="${cw.toFixed(1)}" height="${t + 2}" class="xcol"/>`; }
     const gap = 12; t += gap;
     const bw = Math.max(2, Math.min(cw * 0.62, 18)), SS = Math.max(7, Math.min(cw * 0.75, 11));
@@ -454,17 +483,17 @@
       t += TH + gap;
     }
     const bottom = Math.max(0, t - gap);
-    const step = cw >= 34 ? 1 : cw >= 22 ? 2 : cw >= 15 ? 5 : 10;
-    for (let y = y0; y <= y1; y++) if ((y % step === 0) || (n <= 12)) g += `<text x="${x(y)}" y="${bottom + 15}" text-anchor="middle" class="ax">${cw < 30 ? "'" + String(y).slice(2) : y}</text>`;
+    const step = n <= 6 ? 1 : 5;
+    for (let y = y0; y <= y1; y++) if (y % step === 0 || n <= 6) g += `<text x="${x(y)}" y="${bottom + 15}" text-anchor="middle" class="ax">${cw < 30 ? "'" + String(y).slice(2) : y}</text>`;
     /* results rows: column hit areas (the heat cells carry their own) */
-    const hTop = HR.length * (CH + CG);
-    if (bottom > hTop) for (let y = y0; y <= y1; y++) g += `<rect data-py="${y}" data-tip="${y}" x="${(4 + cw * (y - y0)).toFixed(1)}" y="${hTop + 2}" width="${cw.toFixed(1)}" height="${bottom - hTop - 2}" class="hit${y === sel ? ' on' : ''}"><title>${y}</title></rect>`;
+    const hTop = hH;
+    if (bottom > hTop) for (let y = y0; y <= y1; y++) g += `<rect data-py="${y}" data-tip="${y}" x="${(cw * (y - y0)).toFixed(1)}" y="${hTop + 2}" width="${cw.toFixed(1)}" height="${bottom - hTop - 2}" class="hit${y === sel ? ' on' : ''}"><title>${y}</title></rect>`;
     const [dlo, dhi] = ratingDom(HR[HR.length > 1 ? 1 : 0].kind);
     const scale = `<span class="hlg"><span class="mlgl">Rating</span><b>${r10(dlo)}</b><i class="mlgbar"></i><b>${r10(dhi)}</b></span>`;
     const legend = scale + (showResults ? `<span><b class="stk">★</b>individual title</span><span>${gl('d')}district team title</span><span>${gl('r')}regional team title</span><span>${gl('s', '#D9A441')}PIAA team top 3</span><span>${gl('u', '#D9A441')}PIAA duals finish</span>` : '');
     const moreBtn = more ? `<button class="more" data-hall="${state.hall ? '0' : '1'}">${state.hall ? 'Show top 15' : 'Show all ' + more + ' schools'}</button>` : '';
     const sheet = sel ? seasonSheet(u, sel, by.get(sel), team && team.get(sel)) : `<div class="note1">Tap a season for its ${u.kind === 'school' ? 'lineup' : 'state placers'}.</div>`;
-    return `<div class="perf heat" data-perf="${esc(u.kind + ':' + u.id)}"><div class="ptip" aria-live="polite"></div><div class="pwrap"><div class="plabs" style="height:${bottom + 20}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}"><svg viewBox="0 0 ${W} ${bottom + 20}" width="${W}" height="${bottom + 20}" role="img" aria-label="Rating by season">${g}</svg></div></div>${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}<div class="plg">${legend}</div>${sheet}</div>`;
+    return `<div class="perf heat" data-perf="${esc(u.kind + ':' + u.id)}"><div class="pwrap"><div class="plabs" style="height:${bottom + 20}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}"><svg viewBox="0 0 ${W} ${bottom + 20}" width="${W}" height="${bottom + 20}" role="img" aria-label="Rating by season">${g}</svg></div></div>${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}<div class="plg">${legend}<span class="ptip" aria-live="polite"></span></div>${sheet}</div>`;
   }
   /* one season under the chart: a school's lineup (each result with its strength bar), or a unit's state placers */
   function seasonSheet(u, y, row, tm, vals) {
@@ -503,7 +532,7 @@
         const mine = v.pl.filter((r) => r.place && r.place <= 8 && inU(r)); if (!all && !mine.length) return '';
         const f = OT.fieldOf(v.any, 'state');
         const cells = [1, 2, 3, 4, 5, 6, 7, 8].map((p) => { const r = mine.find((x) => x.place === p); if (!r) return '<span class="pmc pm0"></span>';
-          const rt = OT.ratingOf(r, 'state'); return `<a class="pmc ${pcls(p)}" href="${OT.wrestlerHref(r)}" style="--p1:${colorOf(r.sch)}" title="${esc(ordinal(p) + ' · ' + r.name + ' · ' + r.sch)}"><b>${esc(shortName(r.name))}</b><small>${esc(r.sch)}</small>${rt ? `<i>${r10(rt)}</i>` : ''}</a>`; }).join('');
+          const rt = OT.ratingOf(r, 'state'); return `<a class="pmc ${pcls(p)}" href="${OT.wrestlerHref(r)}" style="--p1:${colorOf(r.sch)}" title="${esc(ordinal(p) + ' · ' + r.name + ' · ' + r.sch)}"><b><span class="fnm">${esc(shortName(r.name))}</span><span class="lnm">${esc(String(r.name).replace(/\(.*?\)/g, '').trim().split(/\s+/).slice(-1)[0])}</span></b><small>${esc(r.sch)}</small>${rt ? `<i>${r10(rt)}</i>` : ''}</a>`; }).join('');
         return `<div class="pmr"><span class="pmw"><b>${wShort(v.w)}</b>${f ? `<span class="pmf">${sbar(f, 'state', `${y} state ${wShort(v.w)}`)}<em>${r10(f)}</em></span>` : ''}</span>${cells}</div>`;
       }).join('');
       if (!rows) return '';

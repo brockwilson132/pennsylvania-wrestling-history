@@ -44,11 +44,11 @@
       const L = OT.aggregateCore('district', null, 'state'); const A = new Map(L.map((a) => [a.k, a]));
       Object.keys(M.d).filter((d) => M.d[d]).map(Number).forEach((d) => {
         const a = A.get(d), col = a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL; if (!(a && a.rating)) anyNo = true;
-        fills += `<a href="#district/${d}"><path class="par" d="${dPath(d)}" style="fill:${col}"><title>${esc(tip('District ' + d + ' · ' + (DISTRICTS[d] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></path></a>`;
+        fills += `<a href="#district/${d}"><path class="par" data-mk="d${d}" d="${dPath(d)}" style="fill:${col}"><title>${esc(tip('District ' + d + ' · ' + (DISTRICTS[d] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></path></a>`;
         const c = d === 12 ? [M.dot[d][0] + 52, M.dot[d][1] - 10] : M.dot[d];
         labels += `<g class="pal sm${d === 12 ? ' out' : ''}" transform="translate(${c[0]},${c[1]})"><text class="pan">D${d}</text>${a && a.rating ? `<text class="pav" y="24">${r10(a.rating)}</text>` : ''}</g>`;
       });
-      { const a = A.get(8), c = M.dot[8]; if (!(a && a.rating)) anyNo = true; fills += `<a href="#district/8"><circle class="pd8 on" cx="${c[0]}" cy="${c[1]}" r="9" style="fill:${a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL}"><title>${esc(tip('District 8 · ' + (DISTRICTS[8] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></circle></a>`; }
+      { const a = A.get(8), c = M.dot[8]; if (!(a && a.rating)) anyNo = true; fills += `<a href="#district/8"><circle class="pd8 on" data-mk="d8" cx="${c[0]}" cy="${c[1]}" r="9" style="fill:${a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL}"><title>${esc(tip('District 8 · ' + (DISTRICTS[8] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></circle></a>`; }
       FIVE.forEach((g) => { const ds = Object.keys(of).map(Number).filter((d) => of[d] === g && d !== 8); const shp = ds.length ? shapeOf(ds) : null; if (shp) lines += `<path class="parl thin" d="${PATH(shp)}"/>`; });
       const sc = scaleFor([], 'district');
       return wrap(svgOpen([0, 0, M.w, M.h], 'Districts of Pennsylvania coloured by rating') + fills + lines + outline() + labels + '</svg>', legend(sc, '', anyNo ? noData() : ''));
@@ -59,7 +59,7 @@
       const ds = Object.keys(of).map(Number).filter((d) => of[d] === g && d !== 8); if (!ds.length) return;
       const a = A.get(g), col = a && a.rating ? OT.ratingColor('region', a.rating) : NOFILL, shp = shapeOf(ds), p = shp ? PATH(shp) : ds.map(dPath).join(' ');
       if (!(a && a.rating)) anyNo = true;
-      fills += `<a href="#region/${g}"><path class="par" d="${p}" style="fill:${col}"><title>${esc(tip(REGIONS[g] + ' Region', a))}</title></path></a>`;
+      fills += `<a href="#region/${g}"><path class="par" data-mk="${g}" d="${p}" style="fill:${col}"><title>${esc(tip(REGIONS[g] + ' Region', a))}</title></path></a>`;
       lines += `<path class="parl" d="${p}"/>`;
       const c = shp ? PATH.centroid(shp) : M.dot[ds[0]];
       labels += `<g class="pal" transform="translate(${c[0].toFixed(0)},${c[1].toFixed(0)})"><text class="pan">${esc(REGIONS[g])}</text>${a && a.rating ? `<text class="pav" y="30">${r10(a.rating)}</text>` : ''}</g>`;
@@ -85,10 +85,10 @@
       const isMine = mine.includes(d), a = A.get(d);
       if (!isMine) { fills += `<path class="pax" d="${dPath(d)}"/>`; return; }
       const col = a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL; if (!(a && a.rating)) anyNo = true;
-      fills += `<a href="#district/${d}"><path class="par" d="${dPath(d)}" style="fill:${col}"><title>${esc(tip('District ' + d + ' · ' + (DISTRICTS[d] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></path></a>`;
+      fills += `<a href="#district/${d}"><path class="par" data-mk="d${d}" d="${dPath(d)}" style="fill:${col}"><title>${esc(tip('District ' + d + ' · ' + (DISTRICTS[d] || ''), a) + (a && a.rating ? '' : ' · ' + noData()))}</title></path></a>`;
       const c = d === 12 ? [M.dot[d][0] + 52, M.dot[d][1] - 10] : M.dot[d]; labels += `<g class="pal${d === 12 ? ' out' : ''}" transform="translate(${c[0]},${c[1]})"><text class="pan">D${d}</text>${a && a.rating ? `<text class="pav" y="28">${r10(a.rating)}</text>` : ''}</g>`;
     });
-    if (mine.includes(8)) { const a = A.get(8), c = M.dot[8]; fills += `<a href="#district/8"><circle class="pd8 on" cx="${c[0]}" cy="${c[1]}" r="9" style="fill:${a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL}"><title>${esc(tip('District 8 · ' + (DISTRICTS[8] || ''), a))}</title></circle></a>`; }
+    if (mine.includes(8)) { const a = A.get(8), c = M.dot[8]; fills += `<a href="#district/8"><circle class="pd8 on" data-mk="d8" cx="${c[0]}" cy="${c[1]}" r="9" style="fill:${a && a.rating ? OT.ratingColor('district', a.rating) : NOFILL}"><title>${esc(tip('District 8 · ' + (DISTRICTS[8] || ''), a))}</title></circle></a>`; }
     const shp = shapeOf(mine.filter((d) => d !== 8)), rl = shp ? `<path class="parl" d="${PATH(shp)}"/>` : '';
     return wrap(svgOpen([0, 0, M.w, M.h], (REGIONS[code] || code) + ' districts coloured by rating') + fills + rl + outline() + labels + '</svg>', legend(sc, '', anyNo ? noData() : ''));
   }
@@ -116,7 +116,7 @@
     const top5 = new Set(L.slice().sort((p, q) => (q.rating || 0) - (p.rating || 0)).slice(0, 5).map((a) => a.k));
     const dots = placed.sort((p, q) => (q[0].score || 0) - (p[0].score || 0)).map(([a, [x, y]]) => {
       const name = OT.UD.schools[a.k], r = k * (5 + 11 * Math.sqrt((a.score || 0) / smax)), col = a.rating ? OT.ratingColor('school', a.rating) : '#5F6B78';
-      return `<a href="#school/${slug(name)}"><circle class="psd" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" style="fill:${col};stroke-width:${(1.4 * k).toFixed(2)}"><title>${esc(tip(name, a))}</title></circle></a>`;
+      return `<a href="#school/${slug(name)}"><circle class="psd" data-mk="s${a.k}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" style="fill:${col};stroke-width:${(1.4 * k).toFixed(2)}"><title>${esc(tip(name, a))}</title></circle></a>`;
     }).join('');
     const labs = placed.filter(([a]) => top5.has(a.k)).map(([a, [x, y]]) => `<text class="psl" x="${(x + 10 * k).toFixed(1)}" y="${(y + 4 * k).toFixed(1)}" style="font-size:${(15 * k).toFixed(1)}px;stroke-width:${(4 * k).toFixed(1)}px">${esc(OT.UD.schools[a.k])}</text>`).join('');
     const base = d === 8 ? `<path class="pax" d="${dPath(7)}"/>` : `<path class="padz" d="${dPath(d)}" style="stroke-width:${(2 * k).toFixed(2)}"/>`;
@@ -125,14 +125,70 @@
   }
 
   const wrap = (svg, leg) => `<div class="pmap">${svg}${leg}</div>`;
-  function ratingMap(u) {
-    if (!M || !M.topo || !window.d3) return '';
-    try {
-      if (u.kind === 'state') return `<div class="mapctl"><div class="seg sm" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div></div>` + stateMap();
-      if (u.kind === 'region') return regionMap(u.id);
-      if (u.kind === 'district') return districtMap(+u.id);
-    } catch (e) { console.warn('map', e); }
+  function mapOnly(u) {
+    if (u.kind === 'state') return stateMap();
+    if (u.kind === 'region') return regionMap(u.id);
+    if (u.kind === 'district') return districtMap(+u.id);
     return '';
   }
-  Object.assign(OT, { ratingMap });
+  /* ---------- the map card ----------
+     Map (space) + the coloured units as a list + a season scrubber (time). The scrubber narrows the header window to one
+     season or a sub-range; the map and the "Selected" column follow it, the "Avg" column always uses the whole header
+     window, so you can see whether a season was strong relative to the unit's own history. */
+  const pageKey = (u) => u.kind + ':' + u.id;
+  const selOf = (u) => { const m = OT.state.msel; return m && m.k === pageKey(u) ? m : null; };
+  function listUnits(u) {
+    if (u.kind === 'state') {
+      if (OT.mapMode() === 'districts') return { kind: 'district', L: () => OT.aggregateCore('district', null, 'state'), keys: Array.from({ length: 12 }, (_, i) => i + 1), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k };
+      return { kind: 'region', L: () => OT.aggregateCore('region', null, 'state'), keys: FIVE, mk: (k) => k, name: (k) => REGIONS[k], href: (k) => '#region/' + k };
+    }
+    if (u.kind === 'region') { const { of } = membership(); return { kind: 'district', L: () => OT.aggregateCore('district', { kind: 'region', id: u.id }, 'region'), keys: Object.keys(of).map(Number).filter((d) => of[d] === u.id).sort((a, b) => a - b), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k }; }
+    return { kind: 'school', L: () => OT.aggregateCore('school', { kind: 'district', id: +u.id }, 'district'), keys: null, mk: (k) => 's' + k, name: (k) => OT.UD.schools[k], href: (k) => '#school/' + slug(OT.UD.schools[k]) };
+  }
+  function unitList(u, sel) {
+    const U = listUnits(u);
+    const full = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]));
+    const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
+    let keys = U.keys || Array.from(new Set([...full.keys()]));
+    let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => r.s || r.v);
+    const srt = OT.state.msort === 'avg' ? 'avg' : 'sel';
+    rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
+    const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
+    const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
+    const body = rows.slice(0, lim).map((r) => {
+      const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
+      const dl = !sel || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
+      return `<div class="mlr" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span></div>`;
+    }).join('');
+    const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
+    return `<div class="ml"><div class="mlh"><span></span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+  }
+  function scrubber(u, sel) {
+    const [y0, y1] = OT.yearsWindow(); const n = y1 - y0 + 1;
+    const a = sel ? sel.a : y0, b = sel ? sel.b : y1;
+    const pc = (y) => (n === 1 ? 50 : (100 * (y - y0 + 0.5)) / n);
+    const lab = !sel ? `${y0 === y1 ? y0 : y0 + '–' + y1} · whole period` : a === b ? String(a) : `${a}–${b} · avg`;
+    const ticks = Array.from({ length: n }, (_, i) => y0 + i).map((y) => `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-msel-y="${y}" style="left:${pc(y).toFixed(2)}%" aria-label="${y}" title="${y}"></button>`).join('');
+    const px = Math.min(1100, (window.innerWidth || 390) - 60), maxL = Math.max(3, Math.floor(px / 42)), step = n <= 6 ? 1 : [5, 10, 20, 25, 50].find((k) => n / k <= maxL) || 50;
+    const labs = Array.from({ length: n }, (_, i) => y0 + i).filter((y) => y % step === 0 || n <= 6).map((y) => `<i style="left:${pc(y).toFixed(2)}%">${y}</i>`).join('');
+    return `<div class="scr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${lab}</b>${sel ? '<button class="chipb" data-msel-reset>Whole period</button>' : ''}</div><div class="scrt"><span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%"></span></div><div class="scrx">${labs}</div></div>`;
+  }
+  function mapCard(u) {
+    const sel = selOf(u);
+    const map = sel ? OT.withSub([sel.a, sel.b], () => mapOnly(u)) : mapOnly(u);
+    if (!map) return '';
+    const ctl = u.kind === 'state' ? `<div class="mapctl"><div class="seg sm" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div></div>` : '';
+    let sheet = '';
+    if (sel && sel.a === sel.b) {
+      const inU = u.kind === 'state' ? () => true : u.kind === 'district' ? (r) => r.d === +u.id : (r) => OT.regionOf(r) === u.id;
+      sheet = `<div class="ss mss"><div class="ssh"><b>${sel.a}</b><span>state placers</span></div>${OT.placeMatrix(sel.a, inU, u.kind === 'state')}</div>`;
+    }
+    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}">${ctl}<div class="mcb"><div class="mcm">${map}</div>${unitList(u, sel)}</div>${scrubber(u, sel)}${sheet}</div>`;
+  }
+  function ratingMap(u) {
+    if (!M || !M.topo || !window.d3) return '';
+    try { return mapCard(u); } catch (e) { console.warn('map', e); }
+    return '';
+  }
+  Object.assign(OT, { ratingMap, mapCard });
 })();
