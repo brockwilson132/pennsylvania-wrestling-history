@@ -11,7 +11,22 @@
   function closePanel() { panelEl.hidden = true; scrim.hidden = true; document.body.classList.remove('noscroll'); panelQ = ''; }
   function refreshPanel() { if (!panelOpen()) return; const top = panelEl.scrollTop, inp = panelEl.querySelector('#psearch'), focus = inp && document.activeElement === inp, pos = inp ? inp.selectionStart : 0; panelEl.innerHTML = OT.panel(panelQ); panelEl.scrollTop = top; if (focus) { const i2 = panelEl.querySelector('#psearch'); i2.focus(); try { i2.setSelectionRange(pos, pos); } catch (e) { /* none */ } } }
   const NAV = [['state', 'State', '#state'], ['region', 'Region', '#region'], ['district', 'District', '#district'], ['school', 'School', '#school'], ['wrestlers', 'Wrestlers', '#wrestlers']];
-  const lastSchool = () => { try { return localStorage.getItem('ot-school') || ''; } catch (e) { return ''; } };
+  /* navigation context: the region / district of what you're looking at, so a tab opens on the right root.
+     Tapping the tab you're on resets it to its root; tabs never restore a stale deep page from another context. */
+  const ctx = { region: '', district: 0 };
+  function setCtx(p, i) {
+    if (p === 'state') { ctx.region = ''; ctx.district = 0; return; }
+    if (p === 'region' && i) { ctx.region = i; if (ctx.district && !OT.districtRegionSpans(ctx.district).some((x) => x.g === i)) ctx.district = 0; return; }
+    if (p === 'district' && i) { ctx.district = +i; const sp = OT.districtRegionSpans(+i); ctx.region = sp.length ? sp[sp.length - 1].g : ctx.region; return; }
+    const sch = p === 'school' && i ? (OT.SCHOOL_BY_SLUG.get(i) || OT.SLUG2S.get(i)) : p === 'wrestler' && i ? (OT.getWrestler(i) || {}).sch : null;
+    if (sch) { const u = OT.U.school(sch); if (u.d) ctx.district = u.d; if (u.region) ctx.region = u.region; }
+  }
+  const tabHref = (k, cur) => {
+    if (k === cur) return '#' + k; // the tab you're on: back to its root
+    if (k === 'region') return ctx.region ? '#region/' + ctx.region : '#region';
+    if (k === 'district') return ctx.district ? '#district/' + ctx.district : '#district';
+    return '#' + k;
+  };
   function route() {
     const raw = (location.hash || '#state').slice(1); const [h, qs] = raw.split('?'); const [page, ...rest] = h.split('/'); const id = rest.join('/');
     const q = {}; (qs || '').split('&').forEach((kv) => { const [k, v] = kv.split('='); if (k) q[k] = decodeURIComponent(v || ''); });
@@ -35,13 +50,13 @@
     if (base === lastBase && (q.b || bview && !bview.hidden)) { showBracket(q.b, page === 'wrestler' ? id : null); drawChips(); return; }
     lastBase = base;
     let p = page, i = id;
-    if (p === 'school' && !i) { i = lastSchool(); if (!i) { p = 'state'; } }
-    if (p === 'school' && i) try { localStorage.setItem('ot-school', i); } catch (e) { /* none */ }
+    if (p === 'school' && !i && +q.d) { ctx.district = +q.d; const sp = OT.districtRegionSpans(+q.d); if (sp.length) ctx.region = sp[sp.length - 1].g; }
+    setCtx(p, i); state.ctxDistrict = ctx.district;
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.pseason = null; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[p](i); if (p === 'wrestler') { loadBestWins(i); loadCareer(i); }
+    main.innerHTML = PAGES[p](i); main.querySelectorAll('.pscr.scroll').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (p === 'wrestler') { loadBestWins(i); loadCareer(i); }
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     const cur = p === 'wrestler' ? 'wrestlers' : p;
-    bnav.innerHTML = `<ul>${NAV.map(([k, l, h]) => `<li><a href="${k === 'school' ? '#school' + (lastSchool() ? '/' + lastSchool() : '') : h}" ${k === cur ? 'aria-current="page"' : ''}>${navIcon(k)}<span>${l}</span></a></li>`).join('')}</ul>`;
+    bnav.innerHTML = `<ul>${NAV.map(([k, l, h]) => `<li><a href="${tabHref(k, cur)}" ${k === cur ? 'aria-current="page"' : ''}>${navIcon(k)}<span>${l}</span></a></li>`).join('')}</ul>`;
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawChips();
     if (!keepScroll) window.scrollTo(0, 0);
@@ -83,7 +98,7 @@
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }
     const ua = e.target.closest('button[data-uall]'); if (ua) { state.uall = ua.dataset.uall === '1'; render(true); return; }
-    const py = e.target.closest('[data-py]'); if (py) { const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; state.pseason = state.pseason && state.pseason.k === k && state.pseason.y === y ? null : { k, y }; const u = kd === 'state' ? OT.U.state() : kd === 'region' ? OT.U.region(id) : kd === 'district' ? OT.U.district(+id) : OT.U.school(id); box.outerHTML = OT.perfChart(u); } return; }
+    const py = e.target.closest('[data-py]'); if (py) { const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; state.pseason = state.pseason && state.pseason.k === k && state.pseason.y === y ? null : { k, y }; const u = kd === 'state' ? OT.U.state() : kd === 'region' ? OT.U.region(id) : kd === 'district' ? OT.U.district(+id) : OT.U.school(id); const sx = box.querySelector('.pscr'), left = sx ? sx.scrollLeft : null; box.outerHTML = OT.perfChart(u); const nb = main.querySelector(`.perf[data-perf="${CSS.escape(box.dataset.perf)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left; } return; }
     const ra = e.target.closest('button[data-rall]'); if (ra) { state.rall = ra.dataset.rall === '1'; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }
