@@ -161,8 +161,9 @@
   }
   /* one result + its strength bar, the unit every career display is made of */
   function resCell(c, lvl, link, num) {
-    const ok = c && c.r && !c.dnc && !c.nodata; const href = link && ok ? OT.bhref(OT.bkey(c.r, lvl)) : null;
-    const f = ok ? OT.fieldOf(c.r, lvl) : null;
+    const lv = c && c.sec ? 'section' : lvl;
+    const ok = c && c.r && !c.dnc && !c.nodata; const href = link && ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
+    const f = ok ? OT.fieldOf(c.r, lv) : null;
     return `<span class="tc">${cellPill(c, lvl, href)}${smeter(f, lvl, f ? `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}` : '', num)}</span>`;
   }
   /* ---------- career grid (wrestler page) ----------
@@ -179,20 +180,21 @@
     const cell = (c, lvl) => {
       if (lvl === 'regional' && c && c.year < 1951) return '<span class="cgc none"></span>';
       if (!c) return '<span class="cgc none"></span>';
-      const ok = c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lvl)) : null;
-      const f = ok ? OT.fieldOf(c.r, lvl) : null; const fr = f ? sFrac(f, lvl) : 0;
+      const lv = c.sec ? 'section' : lvl;   // a section result stands in the District row where the section is the district round
+      const ok = c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
+      const f = ok ? OT.fieldOf(c.r, lv) : null; const fr = f ? sFrac(f, 'district') : 0;
       const tag = href ? 'a' : 'span', hr = href ? ` href="${href}"` : '';
-      let cls = 'cgp', txt = '', tip = `${c.year}${c.w ? ' · ' + wShort(c.w) : ''} · ${lvl}`;
+      let cls = 'cgp', txt = '', tip = `${c.year}${c.w ? ' · ' + wShort(c.w) : ''} · ${c.sec ? OT.unitLabel('section', c.r.unit) : lvl}`;
       if (c.place) { cls += ' ' + pcls(c.place); txt = ordinal(c.place); tip += ' ' + ordinal(c.place); }
       else if (c.dnc) { cls += ' dnc'; txt = 'DNC'; tip += ': did not compete'; }
       else if (c.nodata) { cls += ' nod'; txt = '–'; tip += ': ' + (c.src || 'no bracket on record'); }
       else if (c.dnp) { cls += ' dnp'; txt = 'DNP'; tip += ': entered, did not place'; }
       else { cls += ' q'; txt = 'Q'; tip += ': ' + (c.src || 'qualified'); }
-      if (f) tip += ' · ' + fieldTip(f, lvl);
-      return `<${tag}${hr} class="cgc" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
+      if (f) tip += ' · ' + fieldTip(f, 'district');
+      return `<${tag}${hr} class="cgc${c.sec ? ' sec' : ''}" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
     };
     const lab = (t, icon) => `<span class="cgl">${icon ? OT.navIcon(icon) : ''}<span>${t}</span></span>`;
-    const rows = M.rows.slice().reverse().map((row) => lab(row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
+    const rows = M.rows.slice().reverse().map((row) => lab(row.k === 'district' && row.cells.some((c) => c && c.sec) ? 'District · section' : row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
     return `<div class="cg">${head}${lab('Season rating', null)}${rt}${rows}</div>`;
   }
   function timeline(apps, lower, opts = {}) {
@@ -392,7 +394,7 @@
     if (!L.length) return OT.empty('No ' + (kind === 'school' ? 'schools' : kind + 's') + ' with enough seasons in this window.');
     const lim = state.uall ? L.length : opts.limit || 20;
     const hb = (k, l) => `<button class="ht${sort === k ? ' on' : ''}" data-usort="${k}" aria-pressed="${sort === k}">${l}</button>`;
-    const head = `<div class="sxh"><span class="rk"></span><span class="nm"></span><span class="vth">${hb('titles', 'Titles')}</span><span class="vth">${hb('rating', 'RTG')}</span><span class="vth">${hb('score', 'Score')}</span><span class="vth vtm">${hb('team', 'Team')}</span></div>`;
+    const head = `<div class="sxh"><span class="rk"></span><span class="nm"></span><span class="vth">${hb('titles', 'Titles')}</span><span class="vth">${hb('rating', OT.unitRtgLabel(kind))}</span><span class="vth">${hb('score', 'Score')}</span><span class="vth vtm">${hb('team', 'Team')}</span></div>`;
     const sc = L.map((a) => a.score).sort((p, q) => p - q);
     const yrs = L.flatMap((a) => a.ys.map((y) => y.y)); const [wa, wb] = OT.yearsWindow();
     const ctx = { span: [Math.max(wa, Math.min(...yrs)), Math.min(wb, Math.max(...yrs))], maxTi: Math.max(1, ...L.map((a) => a.ti)), maxTeam: Math.max(1, ...L.map((a) => a.tt + (dualTitles(kind).get(a.k) || 0))),
@@ -642,5 +644,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { unitRtgLabel: (kind) => (kind === 'school' ? 'Team RTG' : 'Top-4 RTG'), unitRtgTip: (kind) => (kind === 'school' ? 'Team rating: the school’s best wrestler at each weight who reached regionals, averaged over the weights (a weight with nobody there counts as 1000)' : 'The average of its four best wrestlers at each weight that season, averaged over the weights: how strong the top of its tournament is'), rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

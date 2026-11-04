@@ -106,7 +106,7 @@ APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + c
 /* typical rating of a wrestler whose season ended at districts (used where a district bracket is missing) */
 const endedAt = new Map(); APP.forEach((a) => { const k = a.k + '|' + a.year; const L = { section: 0.5, district: 1, regional: 2, state: 3 }[a.lvl]; const x = endedAt.get(k) || { L: 0, r: 0 }; x.L = Math.max(x.L, L); x.r = Math.max(x.r, a.rating); endedAt.set(k, x); });
 const dOnly = Array.from(endedAt.values()).filter((x) => x.L === 1 && x.r).map((x) => x.r);
-const DIST_ONLY = Math.round(dOnly.reduce((a, b) => a + b, 0) / dOnly.length);
+const DIST_ONLY = dOnly.length ? Math.round(dOnly.reduce((a, b) => a + b, 0) / dOnly.length) : FILL;   // first-round-only seasons carry no rating now
 console.log('typical district-only rating', DIST_ONLY);
 
 /* ---- school seasons ---- */

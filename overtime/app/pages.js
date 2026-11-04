@@ -28,7 +28,7 @@
   function summary(u) {
     const a = OT.unitAgg(u); if (!a) return '';
     const it = [];
-    if (a.rating) it.push([OT.r10(a.rating), 'RTG', 'Overtime Rating, averaged over the seasons in the window']);
+    if (a.rating && u.kind !== 'state') it.push([OT.r10(a.rating), OT.unitRtgLabel(u.kind), OT.unitRtgTip(u.kind) + ', averaged over the seasons in the window']);   // the state's own number would be 1500 by definition
     if (a.score) it.push([fmt(Math.round(a.score)), 'Score', 'placement points in the window, weighted for this page']);
     return `<div class="usum">${it.map(([v, l, t]) => `<span${t ? ` title="${esc(t)}"` : ''}><b>${v}</b><i>${l}</i></span>`).join('')}</div>`;
   }

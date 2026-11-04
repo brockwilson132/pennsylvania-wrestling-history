@@ -51,16 +51,22 @@ const all = FL.district.concat(FL.regional, FL.state);
 const META = { field: { district: Math.round(med(FL.district)), regional: Math.round(med(FL.regional)), state: Math.round(med(FL.state)) }, lo: Math.floor(pct(all, 0.02) / 50) * 50, hi: Math.ceil(pct(all, 0.998) / 50) * 50 };
 const P = {}, LAZY = {};
 const wsFile = fs.existsSync('data/difficulty/wrestler_seasons.csv') ? 'data/difficulty/wrestler_seasons.csv' : 'data/difficulty/wrestler_seasons.csv.gz';
-csv(wsFile).forEach((r) => {
+const WSROWS = csv(wsFile);
+const ADVN = new Set(WSROWS.filter((r) => String(r.adv || '').trim() !== '0').map((r) => r.tournament + '|' + r.weight + '|' + r.name));
+WSROWS.forEach((r) => {
   if (r.season === '') return;
+  // a season that ended in the first round carries no rating in the app: the lower first-round prior makes wins over
+  // these wrestlers count less, so their own numbers are deliberately low and are not a ranking (tools/ratings.py ADV)
+  const shown = String(r.adv || '').trim() !== '0';
   const k = bkeyOf(r.level, r.tournament, r.weight), n = nkey(r.name), y = +r.year;
-  if (r.level !== 'section' && (r.level === 'state' || eager.has(k + '|' + n))) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season));
+  if (shown && r.level !== 'section' && (r.level === 'state' || eager.has(k + '|' + n))) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season));
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
-  B.s[n] = [Math.round(+r.season), r.best === "" ? null : +r.best, r.best_name || null, +r.bad || 0];
+  const bOk = r.best !== '' && ADVN.has(r.tournament + '|' + r.weight + '|' + r.best_name);   // a best win over a first-round exit shows no number
+  B.s[n] = [shown ? Math.round(+r.season) : null, bOk ? +r.best : null, r.best_name || null, +r.bad || 0];
 });
 // RTG as of each bout (tools/ratings.py bout_rtg.csv): season rating from the bouts so far, before and after the bout
 const ELO = new Map();
-if (fs.existsSync('data/difficulty/bout_rtg.csv')) csv('data/difficulty/bout_rtg.csv').forEach((r) => { ELO.set([r.tournament, r.weight, r.side, r.round, r.winner, r.loser].join('|'), [+r.pre_w, +r.pre_l, +r.post_w, +r.post_l]); });
+if (fs.existsSync('data/difficulty/bout_rtg.csv')) csv('data/difficulty/bout_rtg.csv').forEach((r) => { const w = String(r.adv_w || '').trim() !== '0', l = String(r.adv_l || '').trim() !== '0'; ELO.set([r.tournament, r.weight, r.side, r.round, r.winner, r.loser].join('|'), [w ? +r.pre_w : null, l ? +r.pre_l : null, w ? +r.post_w : null, l ? +r.post_l : null]); });
 csv('data/brackets/bouts.csv').forEach((b) => {
   const k = bkeyOf(b.level, b.tournament, b.weight), y = +b.year;
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
@@ -68,8 +74,8 @@ csv('data/brackets/bouts.csv').forEach((b) => {
   B.b.push(e ? [b.side, +b.round, b.winner, b.loser, b.result, b.score, b.flags, ...e] : [b.side, +b.round, b.winner, b.loser, b.result, b.score, b.flags]);
 });
 const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
-const OUT = {}; const L1 = { state: 's', regional: 'r', district: 'd' };
-new Set([...Object.keys(F).filter((k) => k.split('.')[2] !== 'section'), ...Object.keys(P)]).forEach((k) => {
+const OUT = {}; const L1 = { state: 's', regional: 'r', district: 'd', section: 'x' };
+new Set([...Object.keys(F), ...Object.keys(P)]).forEach((k) => {
   const p = k.split('.'); const y = p[0], lvl = p[2]; const short = lvl === 'state' ? `${p[1]}.s..${p[3]}` : `${p[1]}.${L1[lvl]}.${p[3]}.${p[4]}`;
   (OUT[y] || (OUT[y] = {}))[short] = [F[k] ?? null, (P[k] || []).map((e) => { const [n, v] = e.split(':'); return nk8(n) + ':' + v; }).join(',')];
 });
@@ -78,7 +84,7 @@ fs.mkdirSync('overtime/sos', { recursive: true });
 let lazyBytes = 0;
 /* section brackets (qualifiers below districts) feed tools/build_units.js only: written beside the app files, not into them */
 fs.mkdirSync('data/difficulty/sos-section', { recursive: true });
-Object.entries(LAZY).forEach(([y, obj]) => { const main = {}, sec = {}; Object.entries(obj).forEach(([k, v]) => { (k.split('.')[2] === 'section' ? sec : main)[k] = v; });
+Object.entries(LAZY).forEach(([y, obj]) => { const main = {}, sec = {}; Object.entries(obj).forEach(([k, v]) => { main[k] = v; if (k.split('.')[2] === 'section') sec[k] = v; });
   const s = JSON.stringify(main); lazyBytes += s.length; fs.writeFileSync(`overtime/sos/${y}.json`, s); fs.writeFileSync(`data/difficulty/sos-section/${y}.json`, JSON.stringify(sec)); });
 console.log('field medians', META, 'sos.js', (fs.statSync('overtime/sos.js').size / 1e6).toFixed(2), 'MB;', Object.keys(F).length, 'brackets;', Object.values(P).reduce((a, v) => a + v.length, 0), 'eager paths;',
   Object.keys(LAZY).length, 'season files', (lazyBytes / 1e6).toFixed(1), 'MB');

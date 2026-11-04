@@ -135,10 +135,13 @@ const OT = (window.OT = {});
   const COV = new Set(LM.cov);
   const DREG_T = new Map(); LM.dreg.forEach(([cls, year, d, reg]) => DREG_T.set(cls + '|' + year + '|' + d, reg));
   const dregOf = (cls, year, d) => DREG_T.get(cls + '|' + year + '|' + d) || null;
-  const unitLabel = (lvl, unit) => { if (lvl === 'regional') return (REGIONS[unit] || unit) + ' Regional'; const m = /^D(\d+)(?:[_-](.+))?$/.exec(unit || ''); if (!m) return String(unit); return (m[2] && /^\d/.test(m[2]) ? `Districts ${m[1]}-${m[2]}` : `District ${m[1]}`) + (m[2] && !/^\d/.test(m[2]) ? ' ' + m[2] : ''); };
-  const unitDist = (lvl, unit, d) => { if (lvl !== 'district') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
+  const unitLabel = (lvl, unit) => { if (lvl === 'section') { const m = /^D(\d+)_(.+)$/.exec(unit || ''); if (!m) return String(unit); const s = m[2], nm = /^S\d+$/.test(s) ? 'Section ' + s.slice(1) : s === 'CAT' ? 'Catholic section' : s === 'PUB' ? 'Public section' : 'Section ' + s.replace(/^S/, ''); return `District ${m[1]} ${nm}`; } if (lvl === 'regional') return (REGIONS[unit] || unit) + ' Regional'; const m = /^D(\d+)(?:[_-](.+))?$/.exec(unit || ''); if (!m) return String(unit); return (m[2] && /^\d/.test(m[2]) ? `Districts ${m[1]}-${m[2]}` : `District ${m[1]}`) + (m[2] && !/^\d/.test(m[2]) ? ' ' + m[2] : ''); };
+  const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
   const decodeLower = (lvl, rows) => rows.map(([, year, c, ui, wi, place, ni, si, g, sdi, d0]) => { const cls = LCLS[c], unit = LS[ui], w = LS[wi], d = unitDist(lvl, unit, d0), sch = splitName(LS[si], d); return { lvl, year, cls, unit, w, wn: wNum(w), place, name: LS[ni], school: sch, sch, d: d || null, region: lvl === 'regional' ? unit : dregOf(cls, year, d), grade: LGR[g] || '', seed: LS[sdi] || '', pts: ptsOf(place) }; });
   const LOWER = decodeLower('district', window.WR_LOWER_D || []).concat(decodeLower('regional', window.WR_LOWER_R || []));
+  /* section placers, where the section is the district round (its district held no district tournament that season):
+     kept apart from LOWER so district counts, points and pages are unchanged; the career grid's District row uses them */
+  const LSEC = decodeLower('section', window.WR_LOWER_X || []);
   const lowerRows = (lvl) => LOWER.filter((r) => r.lvl === lvl);
   const LTEAMS = (window.WR_LOWER_TEAMS || []).map(([l, year, c, ui, place, pts, si]) => ({ lvl: l ? 'regional' : 'district', year, cls: LCLS[c], unit: LS[ui], place, pts, sch: LS[si] }));
   { const LH = new Map(); LOWER.forEach((r) => { if (r.cls === 'single') return; const p = LH.get(r.sch); if (!p || r.year > p.year) LH.set(r.sch, r); });
@@ -298,7 +301,7 @@ const OT = (window.OT = {});
      rating, best win and bad losses per tournament, and every bout). */
   const stateByYK = new Map(); APP.forEach((r) => { const k = r.year + '|' + wKey(r); stateByYK.set(k, (stateByYK.get(k) || 0) + r.pts); });
   const SOSD = window.WR_SOS || {}, RTG_META = window.WR_RTG_META || { field: {}, lo: 1000, hi: 1750 };
-  const L1 = { state: 's', regional: 'r', district: 'd' };
+  const L1 = { state: 's', regional: 'r', district: 'd', section: 'x' };
   const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
   const sosEntry = (lvl, year, cls, unit, wn) => { const Y = SOSD[year]; if (!Y) return null; return Y[lvl === 'state' ? `${cls}.s..${wn}` : `${cls}.${L1[lvl]}.${unit}.${wn}`] || null; };
   const RMAPC = new Map();
@@ -419,7 +422,7 @@ const OT = (window.OT = {});
   /* full fields of one year and level, fetched on demand for the bracket view */
   const LFIELD = new Map(), LLOAD = new Map();
   const lowerLoaded = (year, lvl) => LFIELD.has(year + '-' + lvl);
-  const loadLower = (year, lvl) => { const k = year + '-' + lvl; if (LFIELD.has(k)) return Promise.resolve(LFIELD.get(k)); if (LLOAD.has(k)) return LLOAD.get(k); if (!LM.cov.some((c) => c.startsWith(`${lvl}|${year}|`))) { LFIELD.set(k, []); return Promise.resolve([]); }
+  const loadLower = (year, lvl) => { const k = year + '-' + lvl; if (LFIELD.has(k)) return Promise.resolve(LFIELD.get(k)); if (LLOAD.has(k)) return LLOAD.get(k); if (!LM.cov.concat(LM.scov || []).some((c) => c.startsWith(`${lvl}|${year}|`))) { LFIELD.set(k, []); return Promise.resolve([]); }
     const p = fetch(`lower/${k}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => []).then((rows) => { const out = rows.map(([cls, unit, w, place, seed, name, sch0, grade, record, d0]) => { const d = unitDist(lvl, unit, d0), sch = splitName(sch0, d); return { lvl, year, cls, unit, w, wn: wNum(w), place: +place || 0, seed, name, school: sch, sch, grade, record, d: d || null, region: lvl === 'regional' ? unit : dregOf(cls, year, d), pts: ptsOf(+place || 0) }; }); LFIELD.set(k, out); LLOAD.delete(k); return out; });
     LLOAD.set(k, p); return p; };
   function bracketField(key) {
@@ -435,7 +438,7 @@ const OT = (window.OT = {});
     const entrants = rows.map((r) => { const W = WRESTLER.get(rSlug(r)) || lowerWrestler(rSlug(r)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; const sameSeason = k.lvl === 'state' ? null : (stateByYK.get(r.year + '|' + wKey(r)) ? APP.find((x) => x.year === r.year && wKey(x) === wKey(r)) : null);
       return { r, W, slug: rSlug(r), career, sameSeason, adv: adv && r.place && r.place <= adv, seedLabel: r.lvl === 'state' || !r.lvl ? (r.year >= 1951 ? (r.region ? `${r.region}-${r.reg || '?'}` : (r.reg ? String(r.reg) : '')) : (r.dist ? `D${r.d}-${r.dist}` : `D${r.d}`)) : (r.seed ? String(r.seed) : '') }; });
     const src = (LM.src || {})[`${k.lvl}|${k.year}|${k.cls}|${k.unit}`] || null;
-    return { ...k, key, w, field, adv, loading, src, covered: k.lvl === 'state' || LM.cov.includes(`${k.lvl}|${k.year}|${k.cls}|${k.unit}`), entrants, unitLabel: k.lvl === 'state' ? 'PIAA' : unitLabel(k.lvl, k.unit), next: k.lvl === 'state' ? 'HERSHEY' : k.lvl === 'regional' ? 'TO STATES' : 'TO REGIONALS' };
+    return { ...k, key, w, field, adv, loading, src, covered: k.lvl === 'state' || LM.cov.concat(LM.scov || []).includes(`${k.lvl}|${k.year}|${k.cls}|${k.unit}`), entrants, unitLabel: k.lvl === 'state' ? 'PIAA' : unitLabel(k.lvl, k.unit), next: k.lvl === 'state' ? 'HERSHEY' : k.lvl === 'regional' ? 'TO STATES' : 'TO REGIONALS' };
   }
 
   /* ---- lower-level dominance: a district's (or region's, or school's) own tournament results, never mixed with state ---- */
@@ -460,6 +463,12 @@ const OT = (window.OT = {});
   const firstName = (n) => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
   /* same person, different spelling of the first name (Joe / Joey, Matt / Matthew); brothers (Tyler / Trevor) stay apart */
   const sameFirst = (a, b) => { const x = firstName(a), y = firstName(b); return x === y || (Math.min(x.length, y.length) >= 3 && (x.startsWith(y) || y.startsWith(x))); };
+  const LSIDX = new Map(), LSIDX2 = new Map();
+  LSEC.forEach((r) => { const k = wKey(r); (LSIDX.get(k) || LSIDX.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (LSIDX2.get(k2) || LSIDX2.set(k2, []).get(k2)).push(r); });
+  /* his section result in a season: exact key, then last name + school + season + weight */
+  const sectionFor = (apps, year) => { const a0 = apps && apps[0]; if (!a0) return null; const ex = (LSIDX.get(wKey(a0)) || []).find((r) => r.year === year); if (ex) return ex;
+    const ln = lastName(a0.name); const near = apps.find((a) => a.year === year) || a0;
+    return (LSIDX2.get(near.sch + '|' + year) || []).find((r) => lastName(r.name) === ln && sameFirst(r.name, a0.name) && (!near.wn || Math.abs(r.wn - near.wn) <= 20)) || null; };
   const lowerFor = (apps) => { if (!apps || !apps.length) return []; const out = (LIDX.get(wKey(apps[0])) || []).slice(); const have = new Set(out.map((r) => r.lvl + '|' + r.year)); const ln = lastName(apps[0].name);
     apps.forEach((a) => (LIDX2.get(a.sch + '|' + a.year) || []).forEach((r) => { if (!have.has(r.lvl + '|' + r.year) && lastName(r.name) === ln && sameFirst(r.name, apps[0].name) && Math.abs(r.wn - a.wn) <= 20) { out.push(r); have.add(r.lvl + '|' + r.year); } }));
     return out.sort((a, b) => a.year - b.year || (a.lvl === 'district' ? 0 : 1) - (b.lvl === 'district' ? 0 : 1)); };
@@ -502,5 +511,5 @@ const OT = (window.OT = {});
     const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional')])).then(() => { W.lower = mergeLower(W, years);
       const more = careerYears(W); const add = more.filter((y) => !years.includes(y)); if (add.length && n < 2) return pass(years.concat(add).sort((a, b) => a - b), n + 1); W.full = true; W.span = years; return true; });
     return pass(careerYears({ ...W, lower: W.lower0 }), 0); };
-  Object.assign(OT, { clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { sectionFor, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();

@@ -364,6 +364,38 @@ for (lvl, t, w), es in entrants.items():
         for e in es: ADV.add((ID(e[0], y), y))
 for b in bouts:
     if b['level'] in ('regional', 'state'): ADV.add((b['wi'], b['year'])); ADV.add((b['li'], b['year']))
+def _ud(unit):
+    m = re.match(r'D(\d+)', unit or ''); return int(m.group(1)) if m else None
+def _e5(y): return 0 if y < 1956 else 1 if y < 1974 else 2 if y < 1990 else 3 if y < 2005 else 4
+# where the regional a bracket fed is missing from the record, its wrestlers would all look like first-round exits and
+# get the lower prior: missing data penalising them. Infer who advanced from where they placed: the number that advance
+# from that kind of bracket (district number, level, class, era) in seasons where the regional is on file.
+_regy = defaultdict(set)                          # (year, weight) -> wrestler ids in regional or state brackets that season
+for (lvl, t, w), es in entrants.items():
+    if lvl in ('regional', 'state'):
+        y = int(t[:4]); [_regy[(y, wn(w))].add(ID(e[0], y)) for e in es]
+_tier = {int(t[:4]) for (lvl, t, w) in entrants if lvl == 'regional'}
+_has_dist = {(int(t[:4]), _ud(bracket_meta[(lvl, t, w)][2]), wn(w)) for (lvl, t, w) in entrants if lvl == 'district'}
+_nadv = defaultdict(list); _missing = []
+for (lvl, t, w), es in entrants.items():
+    if lvl not in ('district', 'section'): continue
+    y = int(t[:4])
+    if y not in _tier: continue
+    d = _ud(bracket_meta[(lvl, t, w)][2])
+    if lvl == 'section' and (y, d, wn(w)) in _has_dist: continue     # a district bracket above it decides who advanced
+    k = (d, lvl, bracket_meta[(lvl, t, w)][1], _e5(y)); ids = [ID(e[0], y) for e in es]
+    n_ = sum(1 for i in ids if i in _regy[(y, wn(w))])
+    if n_: _nadv[k].append(n_)
+    elif any(e[3] for e in es): _missing.append(((lvl, t, w), k, y))
+_nadv_l = defaultdict(list)
+for k, v in _nadv.items(): _nadv_l[k[1]] += v
+_inferred = 0
+for bk, k, y in _missing:
+    v = _nadv.get(k) or _nadv_l.get(k[1]) or [4]
+    K = int(np.median(v))
+    for e in entrants[bk]:
+        if e[3] and e[3] <= K and (ID(e[0], y), y) not in ADV: ADV.add((ID(e[0], y), y)); _inferred += 1
+say(f'reached regionals: {len(ADV)} wrestler-seasons on file + {_inferred} inferred from placements in {len(_missing)} brackets whose regional is missing')
 def cov_group(i, y):
     """None when the district bracket is on file; else (class, era)"""
     if (i, y) in COVERED: return None
@@ -545,8 +577,8 @@ RESID = dist_resid if GROUP_MODE == 'district' else cov_resid
 SMOOTH = float(os.environ.get('RATINGS_SMOOTH', 40))
 NIT = int(os.environ.get('RATINGS_SHIFT_ITERS', 15)); TOL = float(os.environ.get('RATINGS_SHIFT_TOL', 2))
 # the district offsets are fitted on seasons up to FIT_HI: 2017 while testing (so the 2018-26 tests stay unseen), all
-# seasons for the published ratings (RATINGS_FIT_ALL=1)
-FIT_HI = 2026 if os.environ.get('RATINGS_FIT_ALL') else 2017
+# seasons for the published ratings (the default)
+FIT_HI = 2017 if os.environ.get('RATINGS_SHIFT_TEST') or os.environ.get('RATINGS_FIT_TEST') else 2026
 SHIFT = {}
 # RATINGS_NO_SHIFT=1 turns the coverage shift off, for the with/without comparison on held-out state bouts
 for it in range(0 if os.environ.get('RATINGS_NO_SHIFT') else NIT):
@@ -790,7 +822,7 @@ for nm, v in (('best win', bw), ('mean of opponents beaten', mq), ('bad losses',
 # ============================================================ outputs
 os.makedirs('data/difficulty', exist_ok=True)
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/brackets.csv', 'w', newline='') as f:
-    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'unit', 'entrants', 'rated', 'bouts', 'field', 'fallback'])
+    c = csv.writer(f, lineterminator='\n'); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'unit', 'entrants', 'rated', 'bouts', 'field', 'fallback'])
     for bk, B in sorted(brackets.items(), key=lambda kv: (kv[1]['year'], kv[0])):
         c.writerow([bk[0], bk[1], bk[2], B['year'], B['c'], B['unit'], B['n'], B['rated'], B['bouts'], f"{B['field']:.0f}" if B['field'] is not None else '', 1 if B['bouts'] == 0 else 0])
 names_of = {}
@@ -824,7 +856,7 @@ def fit_one(mu_i, sd_i, obs, t0):
     return t
 LV = {'section': 0, 'district': 1, 'regional': 2, 'state': 3}
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_rtg.csv', 'w', newline='') as f:
-    c_ = csv.writer(f); c_.writerow(['level', 'tournament', 'weight', 'side', 'round', 'winner', 'loser', 'pre_w', 'pre_l', 'post_w', 'post_l'])
+    c_ = csv.writer(f, lineterminator='\n'); c_.writerow(['level', 'tournament', 'weight', 'side', 'round', 'winner', 'loser', 'pre_w', 'pre_l', 'post_w', 'post_l', 'adv_w', 'adv_l'])
     nfit = 0; maxgap = 0.0
     for y in YEARS:
         if y not in PRIORS: continue
@@ -849,23 +881,25 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_rtg.csv', 'w
         for r in season_b[y]:
             if not isinstance(r[3], int): continue
             b = BI[r[3]]; (pw_, qw_), (pl_, ql_) = AS[(b['wi'], r[3])], AS[(b['li'], r[3])]; c = b['c']
-            c_.writerow([b['level'], b['tournament'], b['weight'], b['side'], b['round'], b['winner'], b['loser']] + [round(norm(x, y, c)) for x in (pw_, pl_, qw_, ql_)])
+            c_.writerow([b['level'], b['tournament'], b['weight'], b['side'], b['round'], b['winner'], b['loser']] + [round(norm(x, y, c)) for x in (pw_, pl_, qw_, ql_)] + [int((b['wi'], y) in ADV), int((b['li'], y) in ADV)])
 say(f'RTG as of each round: {nfit} bout checkpoints, last checkpoint vs season RTG max gap {maxgap:.2f} (should be ~0)')
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.csv', 'w', newline='') as f:
-    c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
-                                   'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results'])
+    c = csv.writer(f, lineterminator='\n'); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
+                                   'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results', 'adv'])
     res_by = defaultdict(list)
     for b in bouts:
         if b['i'] not in PRE: continue
         res_by[(b['bk'], b['wk'])].append('W ' + b['result'] + ' ' + b['score'] + (' ' + b['flags'] if b['flags'] else ''))
         res_by[(b['bk'], b['lk'])].append('L ' + b['result'] + ' ' + b['score'] + (' ' + b['flags'] if b['flags'] else ''))
     f0 = lambda v: f'{v:.0f}' if v is not None else ''
+    WK2WI = {}
+    for b in bouts: WK2WI[(b['wk'], b['year'])] = b['wi']; WK2WI[(b['lk'], b['year'])] = b['li']
     for (bk, k), r in recs.items():
         bst = r['best']; sb = season_best.get((k, r['year']))
         c.writerow([bk[0], bk[1], bk[2], r['year'], r['c'], r['name'], r['school'], k, f0(r['enter']), f0(r['rating']),
                     f0(bst[0]) if bst else '', names_of.get((bst[1], r['year']), '') if bst else '', bst[3] if bst else '', bst[4] if bst else '', bst[5] if bst else '',
                     f0(r['qow']), r['bad'], f0(sb[0]) if sb else '', names_of.get((sb[1], r['year']), '') if sb else '', season_bad[(k, r['year'])],
-                    len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)])])
+                    len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)]), int((WK2WI.get((k, r['year']), ID(k, r['year'])), r['year']) in ADV)])
 open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/eval.txt', 'w').write('\n'.join(out) + '\n')
 json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': 'per neighbour-availability pattern, see eval.txt', 'prior_sd': RES_SD, 'params': params},
           open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/scale.json', 'w'), indent=1, default=float)

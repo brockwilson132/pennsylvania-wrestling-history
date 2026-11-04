@@ -7,6 +7,7 @@ ROOT = os.path.join(os.path.dirname(__file__), '..')
 nkey = lambda s: re.sub(r'[^a-z]', '', re.sub(r'\(.*?\)', '', s.lower()))
 OT = re.compile(r'\b(OT|SV|TB|UTB|2OT|3OT)\b')
 rows = list(csv.DictReader(open(os.path.join(ROOT, 'data/difficulty/wrestler_seasons.csv'))))
+ADVN = {(r['tournament'], r['weight'], r['name']) for r in rows if (r.get('adv') or '1').strip() != '0'}   # best wins only over wrestlers who advanced
 state_keys = {r['key'] for r in rows if r['level'] == 'state'}
 agg, owner, clash = {}, {}, set()
 for r in rows:
@@ -14,7 +15,7 @@ for r in rows:
     k = nkey(r['name']) + '|' + r['year']
     if owner.setdefault(k, r['key']) != r['key']: clash.add(k); continue
     a = agg.setdefault(k, [0, '', '', 0, 0, 0, 0])
-    if r['best'] and float(r['best']) > a[0]: a[0], a[1], a[2] = round(float(r['best'])), r['best_name'], ('x' if r['level'] == 'section' else r['level'][0])
+    if r['best'] and (r['tournament'], r['weight'], r['best_name']) in ADVN and float(r['best']) > a[0]: a[0], a[1], a[2] = round(float(r['best'])), r['best_name'], ('x' if r['level'] == 'section' else r['level'][0])
     for t in (r['results'] or '').split(' · '):
         t = t.strip()
         if not t: continue

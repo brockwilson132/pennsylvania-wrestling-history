@@ -221,6 +221,7 @@
       const s = apps.find((a) => a.year === p.year); const base = { year: p.year, w: p.w, r: s || p };
       if (lvl === 'state') return s ? (s.place ? { ...base, place: s.place } : { ...base, q: true }) : null;
       const r = low.find((x) => x.lvl === lvl && x.year === p.year);
+      if (!r && lvl === 'district') { const sr = OT.sectionFor(apps.length ? apps : low, p.year); if (sr) return { ...base, r: sr, w: sr.w, place: sr.place, sec: true }; }
       if (r) return r.place ? { ...base, r, w: r.w, place: r.place } : higher(lvl, p.year) ? { ...base, r, w: r.w, q: true } : { ...base, r, w: r.w, dnp: true };
       if (!higher(lvl, p.year)) return lvl === 'district' ? dist(p) : null;
       const cls = s ? s.cls : p.cls; const unit = lvl === 'district' ? (s ? s.d : p.d) : (s ? (s.region || OT.regionOf(s, cls === 'single' ? s.k : cls)) : p.region);
@@ -373,7 +374,7 @@
      placement bouts), then the field: every entrant with his bouts and career matrix. */
   function bracketView(key, focusSlug) {
     const F = OT.bracketField(key); if (!F) return '';
-    const lvlName = { state: 'State', regional: 'Regional', district: 'District' }[F.lvl];
+    const lvlName = { state: 'State', regional: 'Regional', district: 'District', section: 'Section' }[F.lvl] || 'District';
     const unit = F.unitLabel;
     const title = `${F.year} · ${unit}${F.lvl === 'state' ? ' State' : ''} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
     const SB_ = OT.sosBracket(key), nk = OT.nkey;
@@ -397,7 +398,7 @@
     bouts.forEach((b) => {
       if (hasElo && b.length > 8) { DL.set(b, b[9] - b[7]); PRE.set(b, [b[7], b[8]]); return; }
       const d = boutDelta(b, rOfName(b[2]), rOfName(b[3])); DL.set(b, d); });
-    if (hasElo) { const seq = new Map(); bouts.filter((b) => b.length > 8).forEach((b) => { [[b[2], b[7], b[9]], [b[3], b[8], b[10]]].forEach(([n, a, z]) => { const k = nk(n); (seq.get(k) || seq.set(k, []).get(k)).push([a, z]); }); });
+    if (hasElo) { const seq = new Map(); bouts.filter((b) => b.length > 8).forEach((b) => { [[b[2], b[7], b[9]], [b[3], b[8], b[10]]].forEach(([n, a, z]) => { if (a == null) return; const k = nk(n); (seq.get(k) || seq.set(k, []).get(k)).push([a, z]); }); });
       seq.forEach((v, k) => { const lo = v.reduce((m, x) => (x[0] < m[0] ? x : m)); let first = v[0], last = v[0];
         /* first bout = the one whose "before" no other bout's "after" produced; last = the one whose "after" feeds none */
         const afters = new Set(v.map((x) => x[1])), befores = new Set(v.map((x) => x[0]));
@@ -406,11 +407,11 @@
     else bouts.forEach((b) => { const d = DL.get(b); if (d == null) return; NET.set(nk(b[2]), (NET.get(nk(b[2])) || 0) + d); NET.set(nk(b[3]), (NET.get(nk(b[3])) || 0) - d); });
     const focusN = (() => { const e = F.entrants.find((x) => x.slug === focusSlug); return e ? nk(e.r.name) : null; })();
     const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
-      line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n); const d = pr ? (won ? b[9] - b[7] : b[10] - b[8]) : DL.get(b); const dd = d == null ? null : pr ? d : won ? d : -d;
+      line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n); const d = pr ? (rt == null ? null : won ? b[9] - b[7] : b[10] - b[8]) : DL.get(b); const dd = d == null ? null : pr ? d : won ? d : -d;
         const chip = e && OT.SB ? OT.SB.svg(e.r.sch, { size: 14, variant: 'chip', title: false }) : '<i class="bxnc"></i>';
         const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
-        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? (pr ? ' · RTG before ' + Math.round(rt) + ', after ' + Math.round(rt + dd) : ' · RTG ' + OT.rtg10(rt)) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
-        const inner = `${chip}${nm}<span class="bxv">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : ''}</span>${dTxt(dd)}`;
+        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt == null && pr ? ' · season ended in the first round: no rating shown' : ''}${rt != null ? (pr ? ' · RTG before ' + Math.round(rt) + ', after ' + Math.round(rt + dd) : ' · RTG ' + OT.rtg10(rt)) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
+        const inner = `${chip}${nm}<span class="bxv${rt == null ? ' nr' : ''}">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</span>${dTxt(dd)}`;
         return e ? `<a class="bxl${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="bxl${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
     const RNC = (d) => ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16', 'Round of 32', 'Pigtails'][d] || 'Prelims';
     const RNX = (d) => (d === 0 ? '3rd place' : d === 1 ? 'Consolation semis' : 'Consolation R' + d);

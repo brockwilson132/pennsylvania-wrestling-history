@@ -57,7 +57,13 @@ const distOf = (sch, year, unit) => {
 const strs = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, strs.length); strs.push(s); } return sidx.get(s); };
 const parts = { district: [], regional: [], section: [] }; // section medalists are kept out of the app files
 const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: r.level === 'district' || r.level === 'section' ? (unitDistrict(unit) && /^D\d+$/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit)) : distOf(sch, year, unit) }; });
-rows.forEach((r) => { if (!r.place) return; parts[r.level].push([r.level === 'district' ? 0 : 1, r.year, CLS[r.cls], S(r.unit), S(r.weight), r.place, S(r.name), S(r.sch), GR[r.grade] || 0, S(r.seed || ''), r.d || 0]); });
+/* a section is the district round where its district has no district tournament that season (D7, D3, D1 sections):
+   those sections ship with the app (career grid District row, bracket view); other sections stay build inputs only */
+const _dn = new Map(); rows.forEach((r) => { if (r.level === 'district' && r.d) { const k = `${r.year}|${r.cls}|${r.d}`; _dn.set(k, (_dn.get(k) || 0) + 1); } });
+const distHas = new Set(Array.from(_dn).filter(([, n]) => n >= 24).map(([k]) => k));   // a full district bracket on file (champions-only rows don't count)
+const promoted = (r) => r.level === 'section' && r.d && !distHas.has(`${r.year}|${r.cls}|${r.d}`);
+const scov = {}; rows.forEach((r) => { if (promoted(r)) scov[`section|${r.year}|${r.cls}|${r.unit}`] = 1; });
+rows.forEach((r) => { if (!r.place || (r.level === 'section' && !promoted(r))) return; parts[r.level].push([r.level === 'district' ? 0 : 1, r.year, CLS[r.cls], S(r.unit), S(r.weight), r.place, S(r.name), S(r.sch), GR[r.grade] || 0, S(r.seed || ''), r.d || 0]); });
 
 /* coverage: which (level, year, cls, unit) tournaments exist */
 const cov = {}; rows.forEach((r) => { if (r.level === 'section') return; cov[`${r.level}|${r.year}|${r.cls}|${r.unit}`] = 1; });
@@ -89,6 +95,8 @@ fs.mkdirSync('overtime/lower', { recursive: true }); fs.readdirSync('overtime/lo
 const byYL = new Map(); rows.forEach((r) => { const k = `${r.year}-${r.level}`; (byYL.get(k) || byYL.set(k, []).get(k)).push([r.cls, r.unit, r.weight, r.place, r.seed || '', r.name, r.sch, r.grade, r.record, r.d || 0]); });
 /* section entrants are a build input (tools/build_units.js), not an app file */
 fs.mkdirSync('data/brackets/lower-section', { recursive: true }); fs.readdirSync('data/brackets/lower-section').forEach((f) => fs.unlinkSync(path.join('data/brackets/lower-section', f)));
+const byYS = new Map(); rows.forEach((r) => { if (!promoted(r)) return; const k = `${r.year}-section`; (byYS.get(k) || byYS.set(k, []).get(k)).push([r.cls, r.unit, r.weight, r.place, r.seed || '', r.name, r.sch, r.grade, r.record, r.d || 0]); });
+byYS.forEach((v, k) => { fs.writeFileSync(`overtime/lower/${k}.json`, JSON.stringify(v)); });
 let nfiles = 0, bytes = 0; byYL.forEach((v, k) => { const j = JSON.stringify(v); if (k.endsWith('-section')) { fs.writeFileSync(`data/brackets/lower-section/${k}.json`, j); return; } fs.writeFileSync(`overtime/lower/${k}.json`, j); nfiles++; bytes += j.length; });
 
 /* teams */
@@ -98,8 +106,9 @@ const write = (file, name, obj) => { const j = `window.${name}=${JSON.stringify(
 const sizes = {
   district: write('overtime/lower-district.js', 'WR_LOWER_D', parts.district),
   regional: write('overtime/lower-regional.js', 'WR_LOWER_R', parts.regional),
+  section: write('overtime/lower-section.js', 'WR_LOWER_X', parts.section),
   teams: write('overtime/lowerteams.js', 'WR_LOWER_TEAMS', teams),
-  meta: write('overtime/lowermeta.js', 'WR_LOWER_META', { strs, cov: Object.keys(cov), dreg, adv, src: SRC }),
+  meta: write('overtime/lowermeta.js', 'WR_LOWER_META', { strs, cov: Object.keys(cov), scov: Object.keys(scov), dreg, adv, src: SRC }),
 };
 /* linking report: state placers 1974+ with a district row (exact name key, or last name + school + year + weight) */
 { const meds = (window.WR_MEDALS || []).filter((m) => m[0] >= 1974); const dIdx = new Map(); rows.filter((r) => r.level === 'district').forEach((r) => { const k = `${r.year}|${r.cls}|${r.sch}`; (dIdx.get(k) || dIdx.set(k, []).get(k)).push(r); });

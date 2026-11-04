@@ -210,34 +210,36 @@
     const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
     rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
     const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
-    // benchmarks: selection values (Selected column) and whole-window values (Avg column)
-    const bench = [];
-    benchScopes(u, U).forEach(([l, f]) => {
-      const bf = bstat(f()), bs = sel ? OT.withSub([sel.a, sel.b], () => bstat(f())) : bf; if (!bf && !bs) return;
-      [['best', 'best'], ['avg', 'avg'], ['low', 'low']].forEach(([k, lab]) => bench.push({ b: true, label: `${l} ${k === 'low' && (bf || bs || {}).p5 ? '5th pct' : lab}`, s: bs ? bs[k] : 0, v: bf ? bf[k] : 0 }));
-    });
-    // merge benchmarks that land on the same values (e.g. State, Region and District best are all one school) into one line
-    for (let i = 0; i < bench.length; i++) for (let j = i + 1; j < bench.length; j++) { const A = bench[i], B = bench[j]; if (!A.gone && !B.gone && Math.round(A.s / 10) === Math.round(B.s / 10) && Math.round(A.v / 10) === Math.round(B.v / 10) && A.label.replace(/^\S+ /, '') === B.label.replace(/^\S+ /, '')) { A.label = A.label.replace(/ (best|avg|low|5th pct)$/, '') + ' · ' + B.label; B.gone = true; } }
-    for (let i = bench.length - 1; i >= 0; i--) if (bench[i].gone) bench.splice(i, 1);
-    const vis = rows.slice(0, lim), cut = more && vis.length ? key(vis[vis.length - 1]) : -Infinity;
-    const benchVis = bench.filter((x) => key(x) >= cut);
-    const all = vis.concat(benchVis).sort((p, q) => key(q) - key(p) || (q.b ? 1 : 0) - (p.b ? 1 : 0));
+    /* every row on one shared horizontal scale, with a single line for the state average running through the rows:
+       distance between units is visible, not just their order, and above/below average reads at a glance. Optional
+       band (sessionStorage ot-band, for review): the 10th-90th percentile of the unit's own season values in the window,
+       the same measure as its dot, so steady units and up-and-down ones look different. */
+    const stScope = () => OT.aggregateCore(U.kind, null, 'state');   // the line: the average unit of this list's kind statewide (school, district or region)
+    const stB = bstat(stScope()), stS = sel ? OT.withSub([sel.a, sel.b], () => bstat(stScope())) : stB;
+    const two = !!sel; const ref = two ? (stS && stS.avg) : (stB && stB.avg);
+    const vis = rows.slice(0, lim);
+    const band = (() => { try { return sessionStorage.getItem('ot-band') === '1'; } catch (e) { return false; } })(), q = (A, p) => { const S = A.slice().sort((x, y) => x - y); return S[Math.max(0, Math.min(S.length - 1, Math.round(p * (S.length - 1))))]; };
+    const bandOf = (k) => { if (!band) return null; const L_ = two ? OT.withSub([sel.a, sel.b], () => U.L()) : U.L(); const it = L_.find((a) => a.k === k);
+      const A = it && it.series ? it.series.map((x) => x[1]).filter(Boolean) : []; return A.length >= 3 ? [q(A, 0.1), q(A, 0.9)] : null; };
+    vis.forEach((r) => { r.band = bandOf(r.k); });
+    const vals = vis.flatMap((r) => [two ? r.s : r.v].concat(r.band || [])).filter(Boolean).concat(ref ? [ref] : []);
+    const lo0 = Math.min(...vals), hi0 = Math.max(...vals), pad = Math.max(10, (hi0 - lo0) * 0.06), lo = lo0 - pad, hi = hi0 + pad;
+    const X = (v) => (100 * (v - lo) / (hi - lo)).toFixed(2);
     const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
-    /* one rating column for the whole window; with a sub-selection, two columns named by their spans, plus the delta */
     const [wy0, wy1] = OT.yearsWindow(), span = (a, b) => (a === b ? String(a) : a + '–' + b);
-    const two = !!sel;
-    const body = all.map((r) => {
-      /* benchmarks are reference lines between rows, not rows: a dashed rule with a small right-aligned label */
-      if (r.b) { const v = two ? r.s : r.v; return `<div class="mlb2" role="note"><span>${esc(r.label)} <b>${v ? r10(v) : '–'}</b></span></div>`; }
+    const refTxt = ref ? `Avg ${U.kind} ${r10(ref)}` : '';
+    const body = vis.map((r) => {
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
       const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
       const v1 = two ? r.s : r.v;
       const e1 = two ? estS.get(r.k) : estF.get(r.k), e2 = two ? estF.get(r.k) : null;
-      return `<div class="mlr${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls${e1 ? ' est' : ''}" style="--tint:${v1 ? OT.ratingColor(U.kind, v1) : '#2F3640'}"${e1 ? ` title="${esc('est. · ' + e1)}"` : ''}>${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla${e2 ? ' est' : ''}"${e2 ? ` title="${esc('est. · ' + e2)}"` : ''}>${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
+      const tint = v1 ? OT.ratingColor(U.kind, v1) : '#2F3640';
+      const trk = `<span class="mlt" aria-hidden="true">${ref ? `<i class="mltl" style="left:${X(ref)}%"></i>` : ''}${r.band ? `<i class="mltb" style="left:${X(r.band[0])}%;width:${(X(r.band[1]) - X(r.band[0])).toFixed(2)}%;--tint:${tint}"></i>` : ''}${v1 ? `<i class="mltd" style="left:${X(v1)}%;--tint:${tint}"></i>` : ''}</span>`;
+      return `<div class="mlr ax${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a>${trk}<span class="mls${e1 ? ' est' : ''}" style="--tint:${tint}"${e1 ? ` title="${esc('est. · ' + e1)}"` : ''}>${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla${e2 ? ' est' : ''}"${e2 ? ` title="${esc('est. · ' + e2)}"` : ''}>${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
     const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';
-    return `<div class="ml">${contextTable(u, sel)}<div class="mlh${two ? '' : ' one'}"><span>${who}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : '<button class="ht on" disabled>Rating</button>'}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    return `<div class="ml">${contextTable(u, sel)}<div class="mlh ax${two ? '' : ' one'}"><span>${who}</span><span class="mltk">${refTxt ? `<i style="left:${X(ref)}%">${refTxt}</i>` : ''}${band ? '<em>band: middle 80% of its seasons</em>' : ''}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : `<button class="ht on" disabled title="${esc(OT.unitRtgTip(U.kind))}">${OT.unitRtgLabel(U.kind)}</button>`}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   /* the TIME scrubber (filter bar): the whole archive as a heat strip of the statewide rating per season, two handles
      for the window. Drawn with the window set to all-time so the strip always spans every season of the class. */

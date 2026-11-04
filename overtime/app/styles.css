@@ -1059,3 +1059,17 @@ a.tll:hover{color:var(--gold)}
 .cgs.off{background:none}
 a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-offset:1px}
 @media(min-width:720px){.cg{column-gap:14px}.cgp{height:34px;font-size:17px}.cgr{height:38px}.cgr b{font-size:18px}}
+
+.bxv.nr{opacity:.35}
+
+/* units list on a shared axis (maps.js unitList) */
+.mlh.ax,.mlr.ax{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) 62px 76px}
+.mlh.ax.one,.mlr.ax.one{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr) 62px}
+.mlt{position:relative;height:22px}
+.mlt::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid rgba(238,234,225,.08)}
+.mltl{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px dashed #8A94A3;opacity:.7}
+.mltb{position:absolute;top:50%;height:8px;transform:translateY(-50%);border-radius:4px;background:color-mix(in srgb,var(--tint) 35%,transparent)}
+.mltd{position:absolute;top:50%;width:11px;height:11px;transform:translate(-50%,-50%);border-radius:50%;background:var(--tint);box-shadow:0 0 0 2px var(--slate,#14181D)}
+.mltk{position:relative;height:14px}
+.mltk i{position:absolute;bottom:0;transform:translateX(-50%);font:700 9.5px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ash);white-space:nowrap;font-style:normal}
+.mltk em{position:absolute;right:0;top:-12px;font:600 9px var(--cond);letter-spacing:.06em;color:var(--ash2);font-style:normal;white-space:nowrap}
