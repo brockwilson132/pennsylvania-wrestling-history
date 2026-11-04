@@ -25,7 +25,10 @@
     return { of, mixed };
   }
   /* colour scale over the units shown: weakest green, strongest red */
-  const scaleFor = (vals) => { const v = vals.filter(Boolean); const lo = Math.min(...v), hi = Math.max(...v); return { lo, hi, f: (x) => (hi > lo ? (x - lo) / (hi - lo) : 0.5) }; };
+  /* fixed rating domains per unit kind, so a colour means the same strength in every window and on every map */
+  const DOM = { region: [1350, 1650], district: [1350, 1650], school: [1000, 1500] };
+  const scaleFor = (vals, kind = 'district') => { const [lo, hi] = DOM[kind] || DOM.district; return { lo, hi, f: (x) => Math.max(0, Math.min(1, (x - lo) / (hi - lo))) }; };
+  OT.RTG_DOM = DOM;
   const legend = (sc, note) => `<div class="mlg"><span class="mlgl">Rating</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
   const tip = (name, a) => `${name}${a && a.rating ? ' · RTG ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + fmt(Math.round(a.score)) : ''}`;
   const svgOpen = (vb, label) => `<svg class="pam" viewBox="${vb.join(' ')}" role="img" aria-label="${esc(label)}">`;
@@ -35,7 +38,7 @@
     proj();
     const { of, mixed } = membership();
     const L = OT.aggregateCore('region', null, 'state'); const A = new Map(L.map((a) => [a.k, a]));
-    const sc = scaleFor(FIVE.map((g) => A.get(g) && A.get(g).rating));
+    const sc = scaleFor(FIVE.map((g) => A.get(g) && A.get(g).rating), 'region');
     let fills = '', lines = '', labels = '';
     FIVE.forEach((g) => {
       const ds = Object.keys(of).map(Number).filter((d) => of[d] === g && d !== 8); if (!ds.length) return;
@@ -78,7 +81,7 @@
     const box = (M.box[d] || [0, 0, M.w, M.h]).slice(), pad = 0.08 * Math.max(box[2] - box[0], box[3] - box[1]);
     const vb = [box[0] - pad, box[1] - pad, box[2] - box[0] + 2 * pad, box[3] - box[1] + 2 * pad];
     const k = vb[2] / M.w; // marks and text scale with the zoom
-    const sc = scaleFor(L.map((a) => a.rating));
+    const sc = scaleFor(L.map((a) => a.rating), 'school');
     const smax = Math.max(1, ...L.map((a) => a.score || 0));
     const shp = d === 8 ? null : shapeOf([d]);
     const placed = [], pend = [];

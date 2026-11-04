@@ -264,7 +264,7 @@
     const tot = Math.max(1, a.parts[0] + a.parts[1] + a.parts[2]);
     const split = lv.length > 1 ? `<span class="t2sp">${lv.map((l, i) => `<i style="width:${(100 * a.parts[i] / tot).toFixed(1)}%;background:${LV[i][1]}" title="${LV[i][0]} ${fmt(Math.round(a.parts[i]))}"></i>`).join('')}</span><span class="t2sl">${lv.map((l, i) => `<em>${'SRD'[i]} ${fmt(Math.round(a.parts[i]))}</em>`).join('')}</span>` : '';
     // Rating tile: tint by where this unit sits on the list's rating range
-    const f = CARD_SC && rt && CARD_SC.hi > CARD_SC.lo ? (a.rating - CARD_SC.lo) / (CARD_SC.hi - CARD_SC.lo) : 0.5;
+    const D = (OT.RTG_DOM && OT.RTG_DOM[a.kind]) || [1350, 1650]; const f = rt ? Math.max(0, Math.min(1, (a.rating - D[0]) / (D[1] - D[0]))) : 0.5;
     const tint = rt ? colorAt(f) : '#2F3640';
     // Team titles: PIAA team championships + PIAA team duals
     const dt = dualTitles(a.kind).get(a.k) || 0;
