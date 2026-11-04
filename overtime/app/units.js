@@ -99,7 +99,7 @@
   }
   /* ---------- strength of competition ----------
      A bracket's strength is the mean rating of its top eight. Everywhere a result appears it gets one slim vertical bar
-     beside it: height and colour (green → yellow → orange → red) follow where that bracket ranks among brackets of the
+     beside it: height and colour (blue → cyan → green → yellow → orange → red) follow where that bracket ranks among brackets of the
      SAME level, so a loaded district reads as loaded and a thin state bracket as thin. The bracket header lays the same
      bar flat. */
   const FLO = 1000, FHI = () => (UD.typField.state || 1640) + 160;
@@ -113,7 +113,8 @@
     return LP[LK[lvl] || 's'];
   };
   const pctIn = (v, lvl = 'state') => { const A = lvlArr(lvl); if (!A.length) return null; let lo = 0, hi = A.length; while (lo < hi) { const m = (lo + hi) >> 1; if (A[m] < v) lo = m + 1; else hi = m; } return Math.round(100 * lo / A.length); };
-  const STOPS = [[0, [46, 194, 126]], [0.45, [229, 201, 74]], [0.72, [240, 138, 36]], [1, [255, 59, 47]]];
+  /* cold → hot: ice blue, cyan, green, yellow, orange, fire red. One ramp for every rating and strength colour. */
+  const STOPS = [[0, [44, 91, 216]], [0.2, [32, 168, 216]], [0.42, [46, 194, 126]], [0.62, [229, 197, 58]], [0.8, [240, 138, 36]], [1, [232, 57, 43]]];
   const colorAt = (f) => { let i = 0; while (i < STOPS.length - 2 && f > STOPS[i + 1][0]) i++; const [a, ca] = STOPS[i], [b, cb] = STOPS[i + 1]; const t = Math.max(0, Math.min(1, (f - a) / (b - a))); return 'rgb(' + ca.map((x, k) => Math.round(x + (cb[k] - x) * t)).join(',') + ')'; };
   const sFrac = (v, lvl = 'state') => { const p = pctIn(v, lvl); return p == null ? fpos(v) : Math.max(0.08, p / 100); };
   const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)}` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
@@ -406,94 +407,111 @@
     }
     return [own('school', 'Rating', a.series)];
   }
+  /* School season grid. Top: the RATING heat row (one cell per season on the cold → hot scale). Beneath it, aligned
+     cell rows on the same season columns, no floating marks:
+       Individual — State / Regional / District: the number of the school's medalists that season at that level, slate
+       cells lighter with more medalists; a gold top edge and a small gold ★n when the school had individual titles.
+       Team — District team / Regional team / PIAA team / Duals: the team's finish as a place number in medal colours.
+     Select on the grid: tap a column for that season (its lineup opens below); drag across columns (press and hold on a
+     phone) for a range. A pill above the grid shows the selection with a clear button. */
+  const MEDC2 = { 1: ['#D9A441', '#0B0D10'], 2: ['#B8BFC6', '#0B0D10'], 3: ['#B5733A', '#0B0D10'], 4: ['#8E5A3C', '#EEEAE1'] };
+  const medFill = (p) => MEDC2[p] || ['#5F6B78', '#EEEAE1'];
+  const DUP = { C: 1, F: 2, SF: 3, QF: 5 };
+  const mixHex = (a, b, t) => { const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16)); return 'rgb(' + pa.map((x, i) => Math.round(x + (pb[i] - x) * t)).join(',') + ')'; };
+  const selOfPerf = (u) => { const p = state.pseason; return p && p.k === u.kind + ':' + u.id ? p : null; };
+  function schoolSeasonRows(u) {
+    return memo('ssr|' + u.id, () => {
+      const by = new Map(); const g = (y) => by.get(y) || by.set(y, { S: 0, R: 0, D: 0, tS: 0, tR: 0, tD: 0 }).get(y);
+      ssIn({ kind: 'school', id: u.id }).forEach((r) => { const o = g(r[1]); o.S += r[9] + r[10] + r[11]; o.tS += r[9]; });
+      OT.LOWER.forEach((r) => { if (r.sch !== u.id || !OT.inWindow(r.year) || !(state.cls === 'ALL' || r.cls === state.cls || r.cls === 'single') || !(r.place > 0 && r.place <= 8)) return; const o = g(r.year); if (r.lvl === 'district') { o.D++; if (r.place === 1) o.tD++; } else if (r.lvl === 'regional') { o.R++; if (r.place === 1) o.tR++; } });
+      return by;
+    });
+  }
   function perfChart(u) {
-    const hr0 = heatRows(u), more = hr0.more || 0, HR = hr0.rows || hr0;
-    const rows = perfRows(u);
-    const allY = rows.map((r) => r.y).concat(...HR.map((h) => Array.from(h.pts.keys())));
-    if (!allY.length) return OT.empty('No seasons in this window.');
-    const sel = state.pseason && state.pseason.k === u.kind + ':' + u.id ? state.pseason.y : null;
-    const heatY = [].concat(...HR.map((h) => Array.from(h.pts.keys())));
-    const yA = u.kind === 'school' || !heatY.length ? allY : heatY;
-    const y0 = Math.min(...yA), y1 = Math.max(...yA), n = y1 - y0 + 1, by = new Map(rows.map((r) => [r.y, r]));
+    const HR = heatRows(u); const HR0 = Array.isArray(HR) ? HR : HR.rows; const rating = HR0[0];
+    const ind = schoolSeasonRows(u), team = teamResults(u);
+    const ys = Array.from(rating.pts.keys()).concat(Array.from(ind.keys()), Array.from(team.keys())).filter((y) => OT.inWindow(y));
+    if (!ys.length) return OT.empty('No seasons in this window.');
+    const y0 = Math.min(...ys), y1 = Math.max(...ys), n = y1 - y0 + 1;
     const phone = (window.innerWidth || 390) < 720;
-    const labW = u.kind === 'district' ? (phone ? 112 : 170) : u.kind === 'school' ? (phone ? 62 : 80) : (phone ? 96 : 150);
-    const HG = 6; /* gap under the top (avg / own) row */
+    const labW = phone ? 84 : 104;
     const avail = Math.min(1100, Math.max(240, (window.innerWidth || 390) - (phone ? 40 : 140) - labW));
-    const cw = phone ? 18 : Math.max(18, Math.min(44, avail / n)), WB = cw * n, W = WB, x = (y) => cw * (y - y0) + cw / 2;
-    const scroll = cw * n > avail + 2;
-    const CH = phone ? 22 : 26, CG = 2;
-    const rowY = (i) => i * (CH + CG) + (i > 0 && HR[0].top && HR.length > 1 ? HG : 0);
-    let g = '', labs = '';
-    let t = 0;
-    /* heat rows: rank among peers (non-top rows) per season for the tooltip */
-    const peers = HR.filter((h) => !h.top);
-    const rankAt = (h, y) => { if (h.top || !h.pts.has(y)) return null; const v = h.pts.get(y); const vs = peers.map((p) => p.pts.get(y)).filter(Boolean); return [1 + vs.filter((w) => w > v).length, vs.length]; };
-    const hH = rowY(HR.length - 1) + CH;
-    if (y0 < RATED_FROM) { const gx = x(Math.min(RATED_FROM, y1 + 1)) - cw / 2; g += `<rect x="0" y="0" width="${Math.max(0, gx).toFixed(1)}" height="${hH}" class="nodat"/>`; if (gx > 90) g += `<text x="${(gx / 2).toFixed(1)}" y="${hH / 2 + 4}" text-anchor="middle" class="nodt">limited data before 1974</text>`; }
-    HR.forEach((h, i) => {
-      const yy = rowY(i);
-      const lab = h.href ? `<a href="${h.href}">${esc(phone && h.short ? h.short : h.label)}</a>` : esc(h.label);
-      labs += `<span class="pl-l hl${h.top ? ' top' : ''}" style="top:${yy}px;height:${CH}px;width:${labW - 6}px" title="${esc(h.label)}">${lab}</span>`;
-      for (let yq = y0; yq <= y1; yq++) if (!h.pts.has(yq)) g += `<rect class="he" x="${(x(yq) - cw / 2 + 1).toFixed(1)}" y="${yy}" width="${(cw - 2).toFixed(1)}" height="${CH}" rx="2"/>`;
-      h.pts.forEach((v, y) => {
-        const rk = rankAt(h, y);
-        const tipT = `${y} · ${h.label} · RTG ${r10(v)}${rk ? ` · #${rk[0]} of ${rk[1]}` : ''}`;
-        g += `<rect class="hcell${y === sel ? ' on' : ''}" data-py="${y}" data-tip="${esc(tipT)}" x="${(x(y) - cw / 2 + 1).toFixed(1)}" y="${yy}" width="${(cw - 2).toFixed(1)}" height="${CH}" rx="2" fill="${ratingColor(h.kind, v)}"><title>${esc(tipT)}</title></rect>`;
-      });
-    });
-    t = hH + 2;
-    if (sel) { const sx = x(sel) - cw / 2; g += `<rect x="${sx.toFixed(1)}" y="-2" width="${cw.toFixed(1)}" height="${t + 2}" class="xcol"/>`; }
-    const gap = 12; t += gap;
-    const bw = Math.max(2, Math.min(cw * 0.62, 18)), SS = Math.max(7, Math.min(cw * 0.75, 11));
-    const showResults = u.kind === 'school';
-    /* results rows */
-    const lvls = showResults ? PAGE_LV.district : [];
-    const rowH = 54, BMAX = 26;
-    lvls.forEach(([lab, key, tk, col]) => {
-      labs += `<span class="pl-l" style="top:${t + rowH - 16}px">${u.kind === 'state' ? 'Share' : lab}</span>`;
-      g += `<line x1="0" x2="${WB}" y1="${t + rowH}" y2="${t + rowH}" class="bl"/>`;
-      const mx = Math.max(1, ...rows.map((r) => r[key]));
-      rows.forEach((r) => { const v = r[key]; const cx = x(r.y); let h = 0;
-        if (v) {
-          h = Math.max(2, BMAX * v / mx);
-          g += `<rect x="${(cx - bw / 2).toFixed(1)}" y="${(t + rowH - h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${col}"><title>${r.y} · ${lab} ${fmt(v)} pts</title></rect>`;
-        }
-        // a unit wins every title at its own level each season, so those stars would say nothing: skip them
-        // stars mark individual titles. A district or region wins most titles below states every season, so on those
-        // pages only state titles get stars (the counts below states say nothing); a school gets stars on every row.
-        if (u.kind === 'state' || (u.kind !== 'school' && key !== 'sp')) return;
-        const tc = r[tk] || 0; if (!tc) return;
-        const base = t + rowH - h - 2;
-        if (key !== 'sp') { g += `<text x="${cx}" y="${base.toFixed(1)}" text-anchor="middle" class="star${tc > 1 ? ' n' : ''}" style="font-size:${Math.max(7, SS - (tc > 1 ? 2 : 0))}px">★${tc > 1 ? tc : ''}<title>${r.y} · ${tc} ${lab.toLowerCase()} title${tc > 1 ? 's' : ''}</title></text>`; return; }
-        if (tc <= 3) for (let k = 0; k < tc; k++) g += `<text x="${cx}" y="${(base - k * (SS - 1)).toFixed(1)}" text-anchor="middle" class="star" style="font-size:${SS}px">★<title>${r.y} · ${tc} ${lab.toLowerCase()} title${tc > 1 ? 's' : ''}</title></text>`;
-        else g += `<text x="${cx}" y="${base.toFixed(1)}" text-anchor="middle" class="star n" style="font-size:${Math.max(7, SS - 1.5)}px">★${tc}<title>${r.y} · ${tc} ${lab.toLowerCase()} titles</title></text>`;
-      });
-      t += rowH + gap;
-    });
-    const team = showResults ? teamResults(u) : null;
-    if (team) {
-      const TH = 40; labs += `<span class="pl-l" style="top:${t + TH / 2 - 8}px">Team</span>`; g += `<line x1="0" x2="${WB}" y1="${t + TH}" y2="${t + TH}" class="bl"/>`;
-      const s = Math.max(2.8, Math.min(cw * 0.3, 4.6));
-      for (let y = y0; y <= y1; y++) { const o = team.get(y); if (!o) continue; const cx = x(y); let k = 0; const at = () => t + TH - s - 2 - k++ * (2 * s + 3); const tip = [];
-        if (o.d === 1) { g += glyph.d(cx, at(), s); tip.push('district team title'); }
-        if (o.r === 1) { g += glyph.r(cx, at(), s); tip.push('regional team title'); }
-        if (o.s && o.s <= 3) { g += glyph.s(cx, at(), s, STN[o.s]); tip.push('PIAA team ' + ordinal(o.s) + (u.kind === 'district' && o.sn ? ' (' + o.sn + ')' : '')); }
-        if (o.u && DUN[o.u]) { g += glyph.u(cx, at(), s, DUN[o.u][1]); tip.push(DUN[o.u][0] + (u.kind === 'district' && o.un ? ' (' + o.un + ')' : '')); }
-        if (tip.length) g += `<rect x="${cx - cw / 2}" y="${t}" width="${cw}" height="${TH}" fill="transparent"><title>${y} · ${tip.join(' · ')}</title></rect>`; }
-      t += TH + gap;
+    const cw = phone ? 18 : Math.max(18, Math.min(44, avail / n)), W = cw * n, X = (y) => cw * (y - y0);
+    const scroll = W > avail + 2;
+    const RH = phone ? 22 : 26, CH = phone ? 22 : 24, G = 1, GH = 14; // rating row, cell rows, gap, group header
+    const sel = selOfPerf(u); const sa = sel ? sel.a : null, sb = sel ? sel.b : null;
+    let g = '', labs = '', t = 0;
+    const lab = (txt, y, h, cls = '') => { labs += `<span class="pl-l gl2${cls}" style="top:${y}px;height:${h}px">${txt}</span>`; };
+    /* rating row, exactly as before: cold → hot cells */
+    lab('Rating', t, RH, ' top');
+    for (let y = y0; y <= y1; y++) {
+      const v = rating.pts.get(y);
+      if (!v) { g += `<rect class="he" x="${(X(y) + 1).toFixed(1)}" y="${t}" width="${(cw - 2).toFixed(1)}" height="${RH}" rx="2"/>`; continue; }
+      const tip = `${y} · rating ${r10(v)}`;
+      g += `<rect class="hcell" data-py="${y}" data-tip="${esc(tip)}" x="${(X(y) + 1).toFixed(1)}" y="${t}" width="${(cw - 2).toFixed(1)}" height="${RH}" rx="2" fill="${ratingColor('school', v)}"><title>${esc(tip)}</title></rect>`;
     }
-    const bottom = Math.max(0, t - gap);
-    const step = n <= 6 ? 1 : 5;
-    for (let y = y0; y <= y1; y++) if (y % step === 0 || n <= 6) g += `<text x="${x(y)}" y="${bottom + 15}" text-anchor="middle" class="ax">${cw < 30 ? "'" + String(y).slice(2) : y}</text>`;
-    /* results rows: column hit areas (the heat cells carry their own) */
-    const hTop = hH;
-    if (bottom > hTop) for (let y = y0; y <= y1; y++) g += `<rect data-py="${y}" data-tip="${y}" x="${(cw * (y - y0)).toFixed(1)}" y="${hTop + 2}" width="${cw.toFixed(1)}" height="${bottom - hTop - 2}" class="hit${y === sel ? ' on' : ''}"><title>${y}</title></rect>`;
-    const [dlo, dhi] = ratingDom(HR[HR.length > 1 ? 1 : 0].kind);
-    const scale = `<span class="hlg"><span class="mlgl">Rating</span><b>${r10(dlo)}</b><i class="mlgbar"></i><b>${r10(dhi)}</b></span>`;
-    const legend = scale + (showResults ? `<span><b class="stk">★</b>individual title</span><span>${gl('d')}district team title</span><span>${gl('r')}regional team title</span><span>${gl('s', '#D9A441')}PIAA team top 3</span><span>${gl('u', '#D9A441')}PIAA duals finish</span>` : '');
-    const moreBtn = more ? `<button class="more" data-hall="${state.hall ? '0' : '1'}">${state.hall ? 'Show top 15' : 'Show all ' + more + ' schools'}</button>` : '';
-    const sheet = sel ? seasonSheet(u, sel, by.get(sel), team && team.get(sel)) : `<div class="note1">Tap a season for its ${u.kind === 'school' ? 'lineup' : 'state placers'}.</div>`;
-    return `<div class="perf heat" data-perf="${esc(u.kind + ':' + u.id)}"><div class="pwrap"><div class="plabs" style="height:${bottom + 20}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}"><svg viewBox="0 0 ${W} ${bottom + 20}" width="${W}" height="${bottom + 20}" role="img" aria-label="Rating by season">${g}</svg></div></div>${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}<div class="plg">${legend}<span class="ptip" aria-live="polite"></span></div>${sheet}</div>`;
+    t += RH;
+    const group = (name) => { t += 8; g += `<line x1="0" x2="${W}" y1="${t + 0.5}" y2="${t + 0.5}" class="gdv"/>`; labs += `<span class="pl-g" style="top:${t + 2}px">${name}</span>`; t += GH; };
+    /* individual rows */
+    group('Individual');
+    const IR = [['State', 'S', 'tS'], ['Regional', 'R', 'tR'], ['District', 'D', 'tD']];
+    const mx = Math.max(1, ...Array.from(ind.values()).map((o) => Math.max(o.S, o.R, o.D)));
+    IR.forEach(([name, k, tk], i) => {
+      lab(name, t, CH);
+      for (let y = y0; y <= y1; y++) {
+        const o = ind.get(y), v = o ? o[k] : 0, ti = o ? o[tk] : 0, x = X(y) + 0.5, w = cw - 1;
+        if (!v) { g += `<rect class="ce" data-py="${y}" x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}"/>`; continue; }
+        const f = mixHex('#1D222A', '#6B7684', Math.min(1, 0.25 + 0.75 * v / mx));
+        const tip = `${y} · ${v} ${name.toLowerCase()} medalist${v > 1 ? 's' : ''}${ti ? ` · ${ti} title${ti > 1 ? 's' : ''}` : ''}`;
+        g += `<g class="cc" data-py="${y}" data-tip="${esc(tip)}"><rect x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}" fill="${f}"/>`;
+        if (ti) g += `<rect x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="2.5" fill="#D9A441"/>`;
+        g += `<text x="${(x + w / 2).toFixed(1)}" y="${t + CH / 2 + 4 + (ti ? 1 : 0)}" text-anchor="middle" class="cn">${v}</text>`;
+        if (ti && cw >= 22) g += `<text x="${(x + w - 2).toFixed(1)}" y="${t + 9}" text-anchor="end" class="ct">★${ti > 1 ? ti : ''}</text>`;
+        g += `<title>${esc(tip)}</title></g>`;
+      }
+      t += CH + G;
+    });
+    /* team rows */
+    group('Team');
+    const TR = [['District team', (o) => o.d], ['Regional team', (o) => o.r], ['PIAA team', (o) => o.s], ['Duals', (o) => (o.u ? DUP[o.u] : null)]];
+    const DUW = { 1: 'champion', 2: 'finalist', 3: 'semifinal', 5: 'quarterfinal' };
+    TR.forEach(([name, f], i) => {
+      lab(phone ? name.replace(' team', '') : name, t, CH);
+      for (let y = y0; y <= y1; y++) {
+        const o = team.get(y), p = o ? f(o) : null, x = X(y) + 0.5, w = cw - 1;
+        if (!p || p > 8) { g += `<rect class="ce" data-py="${y}" x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}"/>`; continue; }
+        const [bg, fg] = medFill(p);
+        const tip = `${y} · ${name} ${name === 'Duals' ? DUW[p] : ordinal(p)}`;
+        g += `<g class="cc" data-py="${y}" data-tip="${esc(tip)}"><rect x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}" fill="${bg}"/><text x="${(x + w / 2).toFixed(1)}" y="${t + CH / 2 + 4}" text-anchor="middle" class="cn${name === 'Duals' && p === 5 ? ' cq' : ''}" style="fill:${fg}">${name === 'Duals' && p === 5 ? 'QF' : p}</text><title>${esc(tip)}</title></g>`;
+      }
+      t += CH + G;
+    });
+    const bottom = t;
+    /* year labels */
+    const step = n <= 8 ? 1 : 5;
+    for (let y = y0; y <= y1; y++) if (y % step === 0 || n <= 8) g += `<text x="${(X(y) + cw / 2).toFixed(1)}" y="${bottom + 13}" text-anchor="middle" class="ax">${cw < 30 ? "'" + String(y).slice(2) : y}</text>`;
+    /* selection: a gold frame over the selected column(s) */
+    if (sel) g += `<rect class="xcol" x="${(X(sa) + 0.5).toFixed(1)}" y="-1.5" width="${(cw * (sb - sa + 1) - 1).toFixed(1)}" height="${bottom + 2}" rx="3"/>`;
+    /* hit columns for tap / drag selection (over the whole height) */
+    let hits = ''; for (let y = y0; y <= y1; y++) hits += `<rect class="hitc" data-py="${y}" data-tip="${y}" x="${X(y).toFixed(1)}" y="0" width="${cw.toFixed(1)}" height="${bottom}"/>`;
+    g = hits + g;
+    const H = bottom + 18;
+    const pill = sel ? `<div class="psel"><span class="pselp"><b>${sa === sb ? sa : sa + '–' + sb}</b>${sa === sb ? '' : ' · ' + (sb - sa + 1) + ' seasons'}<button class="pselx" data-pclear aria-label="Clear selection">clear</button></span></div>` : `<div class="psel"><span class="pselh">${phone ? 'Tap a season · press and hold, then drag for a range' : 'Click a season · drag across for a range'}</span></div>`;
+    const [dlo, dhi] = ratingDom('school');
+    const legend = `<span class="hlg"><span class="mlgl">Rating</span><b>${r10(dlo)}</b><i class="mlgbar"></i><b>${r10(dhi)}</b></span><span><i class="lgc" style="background:#4A5360"></i>medalists</span><span><i class="lgc lgt"></i>individual title</span><span><i class="lgc" style="background:#D9A441"></i><i class="lgc" style="background:#B8BFC6"></i><i class="lgc" style="background:#B5733A"></i>team finish</span>`;
+    let sheet = '';
+    if (sel && sa === sb) sheet = seasonSheet(u, sa, null, team.get(sa));
+    else if (sel) sheet = rangeSummary(u, sa, sb, rating, ind, team);
+    return `<div class="perf heat sgrid" data-perf="${esc(u.kind + ':' + u.id)}" data-y0="${y0}" data-cw="${cw}">${pill}<div class="pwrap"><div class="plabs" style="height:${H}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Season grid">${g}</svg></div></div><div class="plg">${legend}<span class="ptip" aria-live="polite"></span></div>${sheet}</div>`;
+  }
+  /* a range of seasons on a school: averages and totals across it */
+  function rangeSummary(u, a, b, rating, ind, team) {
+    const rv = []; let S = 0, R = 0, D = 0, tS = 0, tR = 0, tD = 0; const best = { d: 0, r: 0, s: 0, u: 0 };
+    for (let y = a; y <= b; y++) { const v = rating.pts.get(y); if (v) rv.push(v); const o = ind.get(y); if (o) { S += o.S; R += o.R; D += o.D; tS += o.tS; tR += o.tR; tD += o.tD; }
+      const tm = team.get(y); if (tm) { if (tm.d === 1) best.d++; if (tm.r === 1) best.r++; if (tm.s && tm.s <= 3) best.s++; if (tm.u === 'C') best.u++; } }
+    const avg = rv.length ? rv.reduce((x, y) => x + y, 0) / rv.length : 0;
+    const cell = (l, v, sub) => `<span class="rsc"><i>${l}</i><b>${v}</b>${sub ? `<em>${sub}</em>` : ''}</span>`;
+    return `<div class="ss"><div class="ssh"><b>${a}–${b}</b><span>${b - a + 1} seasons</span><button class="ssx" data-pclear aria-label="Close">✕</button></div><div class="rsg">${cell('Avg rating', avg ? `<span class="mls" style="--tint:${ratingColor('school', avg)}">${r10(avg)}</span>` : '–', rv.length ? `peak ${r10(Math.max(...rv))}` : '')}${cell('State medals', S, tS ? `${tS} title${tS > 1 ? 's' : ''}` : '')}${cell('Regional medals', R, tR ? `${tR} title${tR > 1 ? 's' : ''}` : '')}${cell('District medals', D, tD ? `${tD} title${tD > 1 ? 's' : ''}` : '')}${cell('Team titles', best.d + best.r, `district ${best.d} · regional ${best.r}`)}${cell('PIAA', best.s, `top-3 team · duals titles ${best.u}`)}</div><div class="note1">Tap one season for its lineup.</div></div>`;
   }
   /* one season under the chart: a school's lineup (each result with its strength bar), or a unit's state placers */
   function seasonSheet(u, y, row, tm, vals) {
@@ -502,7 +520,7 @@
     const vline = (vals || []).map(([o, v]) => `<span><i class="sw" style="background:${o.col || o.color}"></i>${esc(o.label)} <b>${r10(v)}</b></span>`).join('');
     const lvKeys = (PAGE_LV[u.kind === 'school' ? 'district' : u.kind] || []).map((l) => l[0]);
     const pts = row && u.kind !== 'state' ? lvKeys.map((l) => `<span>${l} <b>${row[{ State: 'sp', Regional: 'rp', District: 'dp' }[l]]}</b> pts</span>`).join('') : '';
-    const head = `<div class="ssh"><b>${y}</b>${pts}<button class="ssx" data-py="${y}" aria-label="Close">✕</button></div>${vline ? `<div class="ssv">${vline}</div>` : ''}${tr.length ? `<div class="sstm">${tr.map((x) => `<span>${x}</span>`).join('')}</div>` : ''}`;
+    const head = `<div class="ssh"><b>${y}</b>${pts}<button class="ssx" data-pclear aria-label="Close">✕</button></div>${vline ? `<div class="ssv">${vline}</div>` : ''}${tr.length ? `<div class="sstm">${tr.map((x) => `<span>${x}</span>`).join('')}</div>` : ''}`;
     const LV2 = { D: 'district', R: 'regional', S: 'state' };
     if (u.kind === 'school') {
       const st = OT.APP.filter((r) => r.sch === u.id && r.year === y && (state.cls === 'ALL' || r.cls === state.cls || r.cls === 'single'));

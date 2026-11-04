@@ -95,6 +95,23 @@
   /* hovering a season shows every line's value for it */
   document.addEventListener('mouseover', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) { const c = mk.closest('.mapcard'); c.querySelectorAll('[data-mk]').forEach((el) => el.classList.toggle('hlk', el.dataset.mk === mk.dataset.mk)); } });
   document.addEventListener('mouseout', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) mk.closest('.mapcard').querySelectorAll('.hlk').forEach((el) => el.classList.remove('hlk')); });
+  /* school season grid: drag across columns for a range (mouse: press and drag; touch: press and hold, then drag) */
+  const PDRAG = { justDragged: false, on: false };
+  document.addEventListener('pointerdown', (e) => {
+    const cell = e.target.closest && e.target.closest('.sgrid [data-py]'); if (!cell || e.button > 0) return;
+    const box = cell.closest('.perf'), svg = box.querySelector('svg'); const y0 = +box.dataset.y0, cw = +box.dataset.cw; const start = +cell.dataset.py;
+    const yAt = (x) => { const r = svg.getBoundingClientRect(); return y0 + Math.floor((x - r.left) / cw); };
+    let a = start, b = start, armed = e.pointerType === 'mouse', timer = null; const sx = e.clientX, sy = e.clientY;
+    let frame = null; const show = () => { if (!frame) { frame = document.createElementNS('http://www.w3.org/2000/svg', 'rect'); frame.setAttribute('class', 'xcol drag'); frame.setAttribute('rx', 3); svg.appendChild(frame); } const lo = Math.min(a, b), hi = Math.max(a, b); frame.setAttribute('x', cw * (lo - y0) + 0.5); frame.setAttribute('y', -1.5); frame.setAttribute('width', cw * (hi - lo + 1) - 1); frame.setAttribute('height', svg.viewBox.baseVal.height - 16); };
+    if (!armed) timer = setTimeout(() => { armed = true; PDRAG.on = true; show(); if (navigator.vibrate) navigator.vibrate(8); }, 330);
+    else PDRAG.on = true;
+    const move = (ev) => { if (!armed) { if (Math.abs(ev.clientX - sx) > 8 || Math.abs(ev.clientY - sy) > 8) cleanup(); return; } const y = yAt(ev.clientX); if (y !== b) { b = y; show(); } };
+    const cleanup = () => { clearTimeout(timer); document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); document.removeEventListener('pointercancel', cleanup); PDRAG.on = false; if (frame) frame.remove(); };
+    const up = () => { const was = armed && a !== b; cleanup(); if (!was) return; PDRAG.justDragged = true; setTimeout(() => { PDRAG.justDragged = false; }, 400);
+      const [kd, ...rest] = box.dataset.perf.split(':'); state.pseason = { k: kd + ':' + rest.join(':'), a: Math.min(a, b), b: Math.max(a, b) }; repaintPerf(box); };
+    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up); document.addEventListener('pointercancel', cleanup);
+  });
+  document.addEventListener('touchmove', (e) => { if (PDRAG.on) e.preventDefault(); }, { passive: false });
   /* season scrubber: drag either handle to a sub-range of the header window */
   document.addEventListener('pointerdown', (e) => {
     const h = e.target.closest && e.target.closest('.scr .sch'); if (!h) return; e.preventDefault();
@@ -107,8 +124,8 @@
     const up = () => { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); const lo = Math.min(a, b), hi = Math.max(a, b); const [kd, ...rest] = card.dataset.mapcard.split(':'); state.msel = lo === y0 && hi === y1 ? null : { k: card.dataset.mapcard, a: lo, b: hi }; card.outerHTML = OT.mapCard({ kind: kd, id: rest.join(':') }); };
     document.addEventListener('pointermove', move); document.addEventListener('pointerup', up);
   });
-  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
-  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
+  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell, .perf .cc, .perf .hitc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
+  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell, .perf .cc, .perf .hitc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
   document.addEventListener('change', (e) => { const inp = e.target.closest && e.target.closest('input[data-cmpadd]'); if (!inp || !state.cmp) return; const v = inp.value.trim(); const s = OT.UD.schools.find((x) => x.toLowerCase() === v.toLowerCase());
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   const applyScope = () => { refreshPanel(); render(true); };
@@ -128,7 +145,10 @@
     const ua = e.target.closest('button[data-uall]'); if (ua) { state.uall = ua.dataset.uall === '1'; render(true); return; }
     const cm = e.target.closest('button[data-cmp]'); if (cm) { const box = cm.closest('.perf'); if (box && state.cmp) { const id = cm.dataset.cmp; if (e.target.closest('em') && id.startsWith('s:')) { state.cmp.extra = state.cmp.extra.filter((s) => 's:' + s !== id); state.cmp.on.delete(id); } else if (!state.cmp.on.has(id)) { state.cmp.on.add(id); state.cmp.focus = id; } else if (state.cmp.focus !== id) state.cmp.focus = id; else { state.cmp.focus = null; if (!cm.dataset.fixed) state.cmp.on.delete(id); } repaintPerf(box); } return; }
     const fl = e.target.closest && e.target.closest('[data-focus]'); if (fl && state.cmp) { const box = fl.closest('.perf'); const id = fl.getAttribute('data-focus'); state.cmp.focus = state.cmp.focus === id ? null : id; if (box) repaintPerf(box); return; }
-    const py = e.target.closest('[data-py]'); if (py) { const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; state.pseason = state.pseason && state.pseason.k === k && state.pseason.y === y ? null : { k, y }; repaintPerf(box); } return; }
+    const pc = e.target.closest('[data-pclear]'); if (pc) { const box = pc.closest('.perf'); state.pseason = null; if (box) repaintPerf(box); return; }
+    const py = e.target.closest('.perf [data-py]'); if (py) { if (PDRAG.justDragged) { PDRAG.justDragged = false; return; } const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; const p = state.pseason;
+      if (e.shiftKey && p && p.k === k) state.pseason = { k, a: Math.min(p.a, y), b: Math.max(p.b, y) };
+      else state.pseason = p && p.k === k && p.a === y && p.b === y ? null : { k, a: y, b: y }; repaintPerf(box); } return; }
     const ra = e.target.closest('button[data-rall]'); if (ra) { state.rall = ra.dataset.rall === '1'; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }

@@ -1,5 +1,5 @@
 /* Overtime · the rating map. One picture per level, coloured by rating in the class and time window, on the same
-   green → yellow → orange → red scale as strength of competition, so colour always means strength.
+   blue (ice) → cyan → green → yellow → orange → red (fire) scale as strength of competition, so colour always means strength.
    State: regions (the union of their member districts in the window) with district lines inside.
    Region: the whole state for context, this region's districts coloured, everything else faint.
    District: the district zoomed in, its schools as dots (colour = rating, size = score), top five labelled.
@@ -145,12 +145,25 @@
     if (u.kind === 'region') { const { of } = membership(); return { kind: 'district', L: () => OT.aggregateCore('district', { kind: 'region', id: u.id }, 'region'), keys: Object.keys(of).map(Number).filter((d) => of[d] === u.id).sort((a, b) => a - b), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k }; }
     return { kind: 'school', L: () => OT.aggregateCore('school', { kind: 'district', id: +u.id }, 'district'), keys: null, mk: (k) => 's' + k, name: (k) => OT.UD.schools[k], href: (k) => '#school/' + slug(OT.UD.schools[k]) };
   }
+  /* context for the selection, no names: best / average / lowest school rating statewide, in the region and in the
+     district, so a school's number can be read against its surroundings */
+  function contextTable(u, sel) {
+    const scopes = [['State', null]];
+    if (u.kind === 'region') scopes.push(['Region', { kind: 'region', id: u.id }]);
+    if (u.kind === 'district') { const g = membership().of[+u.id]; if (g) scopes.push(['Region', { kind: 'region', id: g }]); scopes.push(['District', { kind: 'district', id: +u.id }]); }
+    const stat = (p) => { const L = OT.aggregateCore('school', p, p ? p.kind : 'state').map((a) => a.rating).filter(Boolean); if (!L.length) return null; return [Math.max(...L), L.reduce((t, v) => t + v, 0) / L.length, Math.min(...L), L.length]; };
+    const run = () => scopes.map(([l, p]) => [l, stat(p)]);
+    const rows = sel ? OT.withSub([sel.a, sel.b], run) : run();
+    const chip = (v) => `<span class="mls ctx" style="--tint:${v ? OT.ratingColor('school', v) : '#2F3640'}">${v ? r10(v) : '–'}</span>`;
+    const body = rows.map(([l, x]) => `<div class="ctr"><span class="ctl">${l}${x ? `<small>${x[3]} schools</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated schools</span>'}</div>`).join('');
+    return `<div class="ctx"><div class="cth"><span>School ratings</span><i>Best</i><i>Avg</i><i>Low</i></div>${body}</div>`;
+  }
   function unitList(u, sel) {
     const U = listUnits(u);
     const full = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]));
     const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
     let keys = U.keys || Array.from(new Set([...full.keys()]));
-    let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => r.s || r.v);
+    let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => (r.s || r.v) && String(U.name(r.k) || '').trim());
     const srt = OT.state.msort === 'avg' ? 'avg' : 'sel';
     rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
     const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
@@ -161,17 +174,21 @@
       return `<div class="mlr" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span></div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
-    return `<div class="ml"><div class="mlh"><span></span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    return `<div class="ml">${contextTable(u, sel)}<div class="mlh"><span></span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   function scrubber(u, sel) {
     const [y0, y1] = OT.yearsWindow(); const n = y1 - y0 + 1;
     const a = sel ? sel.a : y0, b = sel ? sel.b : y1;
     const pc = (y) => (n === 1 ? 50 : (100 * (y - y0 + 0.5)) / n);
     const lab = !sel ? `${y0 === y1 ? y0 : y0 + '–' + y1} · whole period` : a === b ? String(a) : `${a}–${b} · avg`;
-    const ticks = Array.from({ length: n }, (_, i) => y0 + i).map((y) => `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-msel-y="${y}" style="left:${pc(y).toFixed(2)}%" aria-label="${y}" title="${y}"></button>`).join('');
+    /* the track is a heat strip of this page's own rating per season (same cold → hot colours as the map) */
+    const kind = u.kind === 'district' ? 'district' : 'region';
+    const own = OT.unitAgg(u.kind === 'state' ? OT.U.state() : u.kind === 'region' ? OT.U.region(u.id) : OT.U.district(+u.id)); const RS = new Map(((own && own.series) || []).filter((p) => p[1] && OT.ratedYear(p[0])));
+    const strip = `<span class="scrs">${Array.from({ length: n }, (_, i) => y0 + i).map((y) => { const v = RS.get(y); return `<i class="${y < a || y > b ? 'out' : ''}" style="${v ? 'background:' + OT.ratingColor(kind, v) : ''}"></i>`; }).join('')}</span>`;
+    const ticks = Array.from({ length: n }, (_, i) => y0 + i).map((y) => { const v = RS.get(y); return `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-msel-y="${y}" style="left:${(pc(y) - 50 / n).toFixed(2)}%;width:${(100 / n).toFixed(3)}%" aria-label="${y}" title="${y}${v ? ' · rating ' + r10(v) : ''}"></button>`; }).join('');
     const px = Math.min(1100, (window.innerWidth || 390) - 60), maxL = Math.max(3, Math.floor(px / 42)), step = n <= 6 ? 1 : [5, 10, 20, 25, 50].find((k) => n / k <= maxL) || 50;
     const labs = Array.from({ length: n }, (_, i) => y0 + i).filter((y) => y % step === 0 || n <= 6).map((y) => `<i style="left:${pc(y).toFixed(2)}%">${y}</i>`).join('');
-    return `<div class="scr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${lab}</b>${sel ? '<button class="chipb" data-msel-reset>Whole period</button>' : ''}</div><div class="scrt"><span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%"></span></div><div class="scrx">${labs}</div></div>`;
+    return `<div class="scr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${lab}</b>${sel ? '<button class="chipb" data-msel-reset>Whole period</button>' : ''}</div><div class="scrt hs">${strip}<span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%"></span></div><div class="scrx">${labs}</div></div>`;
   }
   function mapCard(u) {
     const sel = selOf(u);

@@ -251,7 +251,7 @@ td.xc{text-align:center}
 .fg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:10px 14px 18px}
 .fgl{display:grid;line-height:1}.fgl span{font:700 10px var(--cond);letter-spacing:.16em;color:var(--ash)}.fgl b{font:900 24px var(--cond);color:var(--chalk)}
 .fgb{position:relative;height:8px;margin-top:2px}
-.fgr{position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,#2EC27E,#B8C94A 45%,#F08A24 75%,#FF3B2F)}
+.fgr{position:absolute;inset:0;border-radius:4px;background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B)}
 .fgt{position:absolute;top:-3px;transform:translateX(-50%);display:grid;justify-items:center}.fgt i{display:block;width:1px;height:14px;background:var(--chalk);opacity:.55}.fgt em{font:700 9.5px var(--cond);font-style:normal;letter-spacing:.1em;color:var(--ash);margin-top:1px}
 .fgt.on em{color:var(--chalk)}
 .fgm{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--mat);border:3px solid var(--chalk);transform:translate(-50%,-50%);box-shadow:0 0 0 2px var(--mat)}
@@ -606,7 +606,7 @@ i.wdg{height:5px}
 .psl{font-family:var(--cond);font-weight:700;fill:var(--chalk);paint-order:stroke;stroke:var(--mat);pointer-events:none}
 .mlg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px;font:700 12px var(--cond);letter-spacing:.08em;color:var(--ash)}
 .mlgl{text-transform:uppercase;letter-spacing:.16em}.mlg b{color:var(--chalk);font-weight:900}
-.mlgbar{display:inline-block;width:110px;height:8px;border-radius:4px;background:linear-gradient(90deg,#2EC27E,#E5C94A 45%,#F08A24 72%,#FF3B2F)}
+.mlgbar{display:inline-block;width:110px;height:8px;border-radius:4px;background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B)}
 .mlgn{flex-basis:100%;font:500 12px var(--body);letter-spacing:0;color:var(--ash)}.mlgs{font:500 12px var(--body);color:var(--ash);margin-top:2px}
 @media(max-width:719px){.pan{font-size:30px}.pav{font-size:28px}.pdn{font-size:18px}}
 /* unit card v9: identity + podiums left, 2×2 matrix right */
@@ -793,3 +793,53 @@ i.wdg{height:5px}
 .scrx i{position:absolute;transform:translateX(-50%);font:700 10.5px var(--cond);font-style:normal;color:var(--ash2)}
 .mss{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
 .mss .ssh span{font:700 12px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+
+/* context table above the map list: best / avg / low school rating by scope */
+.ctx{margin:0 0 10px;padding:0 0 8px;border-bottom:1px solid var(--line)}
+.cth,.ctr{display:grid;grid-template-columns:minmax(0,1fr) 58px 58px 58px;align-items:center;gap:6px}
+.cth{font:700 10.5px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash);padding:0 0 4px}
+.cth i{font-style:normal;text-align:center}
+.ctr{padding:3px 0}
+.ctl{font:800 13px var(--cond);letter-spacing:.04em;text-transform:uppercase;color:var(--chalk);display:flex;flex-direction:column;line-height:1.1}
+.ctl small{font:500 10.5px var(--sans,inherit);letter-spacing:0;text-transform:none;color:var(--ash2)}
+.mls.ctx{min-width:0;width:100%;padding:2px 0;font-size:13px}
+.ctn{grid-column:2 / span 3;color:var(--ash2);font-size:12px}
+
+/* school season grid: rating row, then aligned Individual and Team cell rows */
+.sgrid .pl-l.gl2{display:flex;align-items:center;left:0;font:700 11px var(--cond);letter-spacing:.04em;text-transform:none;color:var(--chalk);white-space:nowrap}
+.sgrid .pl-l.gl2.top{font-weight:900;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+.sgrid .pl-g{position:absolute;left:0;font:700 9.5px var(--cond);letter-spacing:.16em;text-transform:uppercase;color:var(--ash2)}
+.sgrid .gdv{stroke:var(--line2);stroke-width:1}
+.sgrid .ce{fill:rgba(238,234,225,.03)}
+.sgrid .cn{font:800 11px var(--cond);fill:var(--chalk);pointer-events:none;font-variant-numeric:tabular-nums}
+.sgrid .ct{font:900 7.5px var(--cond);fill:#D9A441;pointer-events:none}
+.sgrid .cc{cursor:pointer}.sgrid .cc:hover rect:first-child{stroke:var(--chalk);stroke-width:1}
+.sgrid .hitc{fill:transparent;cursor:pointer}.sgrid .hitc:hover{fill:rgba(238,234,225,.05)}
+.sgrid .xcol{fill:rgba(217,164,65,.08);stroke:var(--gold);stroke-width:1.6;pointer-events:none}
+.sgrid .xcol.drag{fill:rgba(217,164,65,.14);stroke-dasharray:4 2}
+.sgrid svg{user-select:none;-webkit-user-select:none;touch-action:pan-x}
+.psel{display:flex;align-items:center;min-height:28px;margin:0 0 6px}
+.pselh{font-size:11.5px;color:var(--ash2)}
+.pselp{display:inline-flex;align-items:center;gap:8px;padding:3px 4px 3px 10px;border-radius:999px;background:rgba(217,164,65,.12);border:1px solid rgba(217,164,65,.5);font:600 12.5px var(--sans,inherit);color:var(--ash)}
+.pselp b{font:900 14px var(--cond);color:var(--gold);letter-spacing:.02em}
+.pselx{all:unset;cursor:pointer;font:700 10.5px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);padding:3px 9px;border-radius:999px;background:var(--line2)}
+.pselx:hover{background:var(--ash2)}
+.plg .lgc{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:1px}
+.plg .lgt{background:#4A5360;box-shadow:inset 0 2px 0 #D9A441}
+.rsg{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px;margin:8px 0}
+.rsc{display:flex;flex-direction:column;gap:2px;background:var(--slate2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.rsc i{font:700 10px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash);font-style:normal}
+.rsc b{font:900 22px var(--cond);color:var(--chalk)}.rsc b .mls{font-size:16px}
+.rsc em{font-style:normal;font-size:11.5px;color:var(--ash2)}
+@media (min-width:720px){.sgrid .pl-l.gl2{font-size:12px}}
+/* map scrubber track: a heat strip of the page's own rating, one cell per season */
+.scrt.hs::before{display:none}
+.scrs{position:absolute;left:0;right:0;top:5px;height:20px;display:flex;gap:1px;pointer-events:none}
+.scrs i{flex:1;border-radius:2px;background:rgba(238,234,225,.05)}
+.scrs i.out{opacity:.28}
+.scrt.hs .scrf{top:2px;height:26px;background:transparent;border:2px solid var(--gold);border-radius:5px;box-sizing:border-box}
+.scrt.hs .sct{top:2px;height:26px;margin-left:0}
+.scrt.hs .sct::after{display:none}
+.scrt.hs .sct:hover{box-shadow:inset 0 0 0 1px var(--chalk);border-radius:3px}
+.scrt.hs .sch{top:5px}
+.sgrid .cn.cq{font-size:8.5px;letter-spacing:-.02em}
