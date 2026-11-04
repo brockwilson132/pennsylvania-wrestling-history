@@ -43,17 +43,31 @@ So each season is fit **as one batch**:
 - **Placements as extra evidence** where a bracket has fewer bouts than placers (old partial brackets, the few
   files with no bout lines): each higher placer is treated as beating each lower placer, at weight
   0.3 / (placers − 1). 2,285 such pairs against 366k real bouts.
-- **Seasons are linked by a prior.** Season-*t* strength is shrunk toward a fitted blend of the same wrestler's
-  *t*−2, *t*−1, *t*+1 and *t*+2 strengths plus a per-grade term. **The weights are fitted, not guessed**: each
-  wrestler-season's season-only strength (his season fit on its own, weak prior) is regressed on his season-only
-  strengths in the neighbouring seasons and his grade, slopes constrained non-negative:
+- **Seasons are linked by a prior.** Season-*t* strength is shrunk toward a fitted prediction from the same
+  wrestler's season-only strengths in *t*−2, *t*−1, *t*+1 and *t*+2 plus a per-grade term. **The prediction is
+  fitted separately for each neighbour-availability pattern** (which of the four neighbouring seasons exist, whether
+  a missing next season is graduation — known senior or 4th season of the career — and whether a missing previous
+  season is freshman year), with its own slopes, grade terms and residual sd. Slopes are non-negative. Examples from
+  the current fit:
 
-| *t*−2 | *t*−1 | *t*+1 | *t*+2 |
+| pattern | n | slopes | sum |
 |---|---|---|---|
-| 0.26 | **0.44** | 0.33 | 0.17 |
+| senior, has *t*−2 and *t*−1 (graduated) | 15,538 | 0.24, 0.53 | 0.76 |
+| junior, has *t*−2, *t*−1, *t*+1 | 6,530 | 0.15, 0.29, 0.43 | 0.87 |
+| sophomore, has *t*−1, *t*+1, *t*+2 | 5,567 | 0.35, 0.29, 0.15 | 0.80 |
+| freshman, has *t*+1 and *t*+2 | 4,555 | 0.40, 0.20 | 0.60 |
 
-  The season before counts more than the season after, and both more than seasons two away. Prior sd 107 rating
-  points (the regression residual; a tighter prior was tested on hidden 1990–2017 bouts and did worse).
+  **Why per pattern (the senior-year taper).** v2 fitted one regression on all rows with missing-value indicators.
+  Its slopes (t−1 0.44, t+1 0.33, t−2 0.26, t+2 0.17, sum ≈1.2) were set mostly by wrestlers with neighbours on both
+  sides; a senior has no *t*+1 or *t*+2, so his prior was ≈0.7 × his past plus one constant shared with wrestlers who
+  simply did not return. That pulled strong seniors toward the mean: among four-season careers peaking at 1850+,
+  the junior-to-senior gain was +21 against +149 sophomore-to-junior, 45% peaked as juniors, and 30% of careers
+  peaking at 1700+ rated lower as seniors. Brock spotted it. Fitting each pattern on its own rows, and separating
+  graduation from not returning, removes it: the JR→SR gain is now +126 / +136 / +122 for peaks 1850+ / 1700–1850 /
+  1500–1700 (in line with the earlier years), and 8% of 1700+ careers rate lower as seniors.
+- **Prior width.** Hidden 1990–2017 bouts give a nearly flat loss for prior-sd scales 0.7–2.0 (0.5635–0.5644);
+  within 0.001 of the best, the widest prior is taken (2.0), so a season's own bouts decide and the prior fills
+  gaps. Hidden 2018–26 bouts: season-batch log loss **0.5464** (v2 0.5564).
 - **No iteration loop.** Brock's spec suggested iterating the seasons to convergence. Tried: feeding neighbours'
   *smoothed* estimates back into each other's priors double-counts (the fitted weights sum to about 1.2 because the
   season-only regressors are noisy), and the loop amplified instead of settling (largest change still 49 rating
@@ -151,7 +165,7 @@ uses the result being explained):
   0.7–4.5, hidden 1990–2017 bouts pick **2.0** (log loss 0.5743; 3.0 → 0.5785, 4.5 → 0.5960): the prior sd is now 215,
   so a season's own bouts dominate and neighbouring seasons inform it. Hidden 2018–26 bouts: 0.5623 → **0.5563**.
   Champion rated #1 in his state bracket 66% → **82%** (top 2: 85% → 94%); lower-rated winner of a same-season bout
-  12.6% → 7.8%. Proximity weights are unchanged (t−1 0.45, t+1 0.33, t−2 0.26, t+2 0.17).
+  12.6% → 7.8%. (v3 replaced the single proximity regression with per-pattern fits; see section 2.)
 - **One scale.** Each season's strengths are anchored per class on a rolling 11-season window of state entrants:
   1500 = the average state qualifier, spread 167 (the median sd of modern state qualifiers), so 400 points ≈ 10:1.
   Typical fields since 1980: district 1221, regional 1375, state 1638.
@@ -160,3 +174,17 @@ uses the result being explained):
   season's state points, best win adds +0.0066 with a negative coefficient. The rating already contains what the
   quality of wins says, so they are shown as description, not scored, and the **adjustment toggle is removed**.
 - **Career numbers.** Peak season rating, and the average of his season ratings.
+
+## 7. v3: the senior-year taper
+
+| | v2 | v3 |
+|---|---|---|
+| JR→SR gain, careers peaking 1850+ | +21 | **+126** |
+| JR→SR gain, peaking 1700–1850 | +94 | **+136** |
+| JR→SR gain, peaking 1500–1700 | +101 | **+122** |
+| peak season FR/SO/JR/SR, peaking 1850+ | 0/8/160/191 | 0/3/15/401 |
+| 1700+ careers rated lower as seniors | 30% | 8% |
+| champion rated #1 in his state bracket | 82.2% | 82.0% |
+| Spearman(rating, state place) | 0.767 | 0.764 |
+| lower-rated winner, same-season bouts | 7.9% | 7.8% |
+| hidden 2018–26 bouts, season-batch log loss | 0.5564 | **0.5464** |

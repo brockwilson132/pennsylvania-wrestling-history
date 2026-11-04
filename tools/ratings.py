@@ -267,51 +267,92 @@ for y in YEARS:
     for r in season_b[y]:
         if r[3] >= 0: nb_of[(r[0], y)] += 1; nb_of[(r[1], y)] += 1
 gr = lambda i, y: grade.get((i.split('#')[0], y))
+start_of = {}
+for y in YEARS:
+    for i in ids_of[y]:
+        if i not in start_of or y < start_of[i]: start_of[i] = y
+DS = (-2, -1, 1, 2)
+def avail(T0, i, y): return tuple(T0.get(y + d, {}).get(i) is not None for d in DS)
+def gone(i, y, av):
+    """no next season because he graduated (known SR, or the 4th season of his career): structurally missing,
+    not the same as a wrestler who did not return."""
+    return (not av[2]) and (gr(i, y) == 3 or y - start_of.get(i, y) >= 3)
+def fresh(i, y, av): return (not av[1]) and gr(i, y) == 0
+MIN_PAT = 300
 def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
-    # 0) season-only estimates (weak prior), the regression target and regressors
+    """Season-only fits, then one prior pass. The prior for season t is a regression on the neighbours'
+    season-only strengths fitted SEPARATELY per neighbour-availability pattern (which of t-2, t-1, t+1, t+2 exist,
+    plus whether a missing next season is graduation and a missing previous season is freshman year). A single
+    regression with missing-value indicators uses slopes fitted where both sides exist (they sum ~1.2), so a senior
+    with only his past got a prior of ~0.7 x past: elite seniors were pulled toward the mean (the senior-year taper)."""
     T0 = {}
     for y in YEARS:
         ids = ids_of[y]; T0[y] = fit_season(season_b[y], ids, [1500] * len(ids), [250] * len(ids), mask)
-    # 1) proximity weights: season-only t ~ season-only t-2, t-1, t+1, t+2 (+ grade), non-negative slopes
-    rows = []
+    def pkey(i, y):
+        av = avail(T0, i, y); return av + (gone(i, y, av), fresh(i, y, av))
+    def coarse(k): return (any(k[:2]), any(k[2:4]), k[4], k[5])
+    groups = defaultdict(list); cgroups = defaultdict(list)
     for y in YEARS:
         for i, v in T0[y].items():
             if nb_of[(i, y)] < 4: continue
-            A = [T0.get(y + d, {}).get(i) for d in (-2, -1, 1, 2)]
-            if all(x is None for x in A): continue
-            rows.append((v, A, gr(i, y)))
-    def design(A, g): return [(v - 1500) if v is not None else 0.0 for v in A] + [1.0 if v is None else 0.0 for v in A] + [1.0 if g == j else 0.0 for j in range(4)] + [1.0]
-    X = np.array([design(A, g) for _, A, g in rows]); yv = np.array([v - 1500 for v, *_ in rows])
-    fit = lsq_linear(X, yv, bounds=([0] * 4 + [-np.inf] * 9, [np.inf] * 13)); Wt = fit.x
-    res_sd = float((yv - X @ Wt).std()) * sd_scale
+            k = pkey(i, y)
+            if not any(k[:4]): continue
+            A = [T0.get(y + d, {}).get(i) for d in DS]
+            groups[k].append((v, A, gr(i, y))); cgroups[coarse(k)].append((v, A, gr(i, y)))
+    def design(A, g, av): return [(A[j] - 1500) for j in range(4) if av[j]] + [1.0 if g == j else 0.0 for j in range(4)] + [1.0]
+    def fitg(rows, av):
+        X = np.array([design(A, g, av) for _, A, g in rows]); yv = np.array([v - 1500 for v, *_ in rows]); ns = sum(av)
+        f = lsq_linear(X, yv, bounds=([0] * ns + [-np.inf] * 5, [np.inf] * (ns + 5)))
+        return f.x, float((yv - X @ f.x).std()) * sd_scale
+    models = {}; cmodels = {}
+    for k, rows in groups.items():
+        if len(rows) >= MIN_PAT: models[k] = fitg(rows, k[:4])
     pop_sd = float(np.std([v for y in YEARS for v in T0[y].values()]))
-    # 2) prior mean for season t from the neighbours' SEASON-ONLY estimates, exactly the quantities the weights were
-    #    fit on. (Feeding the neighbours' smoothed estimates back in and iterating double-counts: the fitted weights
-    #    sum to ~1.2 because season-only regressors are noisy, so the loop amplified instead of settling; tried and
-    #    rejected, see docs/DIFFICULTY.md.) With the prior built this way one pass is the fixed point.
+    def model(k):
+        if k in models: return models[k], k[:4]
+        ck = coarse(k)
+        if ck + k[:4] not in cmodels:
+            # coarse fallback: same side availability, rows restricted to the exact availability of k for the regressors
+            rows = [r for r in cgroups.get(ck, []) if all((r[1][j] is not None) >= k[j] for j in range(4))]
+            cmodels[ck + k[:4]] = fitg(rows, k[:4]) if len(rows) >= 50 else None
+        m = cmodels.get(ck + k[:4]); return (m, k[:4]) if m else (None, k[:4])
+    nog = [(v - 1500, gr(i, y)) for y in YEARS for i, v in T0[y].items() if nb_of[(i, y)] >= 4 and not any(avail(T0, i, y))]
+    gmean = {j: float(np.mean([v for v, g in nog if g == j])) if any(g == j for v, g in nog) else 0.0 for j in (0, 1, 2, 3, None)}
     T = {y: dict(T0[y]) for y in YEARS}
     for it in range(1):
         delta = 0.0
         for y in YEARS:
             ids = ids_of[y]; mu, sd = [], []
             for i in ids:
-                A = [T0.get(y + d, {}).get(i) for d in (-2, -1, 1, 2)]
-                if any(x is not None for x in A): mu.append(1500 + float(np.dot(design(A, gr(i, y)), Wt))); sd.append(res_sd)
-                else: mu.append(1500 + float(np.dot(design([None] * 4, gr(i, y)), Wt))); sd.append(pop_sd)
+                k = pkey(i, y)
+                if any(k[:4]):
+                    m, av = model(k)
+                    if m is not None:
+                        w, rs = m; A = [T0.get(y + d, {}).get(i) for d in DS]
+                        mu.append(1500 + float(np.dot(design(A, gr(i, y), av), w))); sd.append(rs); continue
+                mu.append(1500 + gmean.get(gr(i, y), gmean[None])); sd.append(pop_sd)
             new = fit_season(season_b[y], ids, mu, sd, mask)
             delta = max(delta, max(abs(new[i] - T[y][i]) for i in ids)); T[y] = new
         if report: say(f'  prior pass: largest change from season-only estimates {delta:.0f}')
-    return T, T0, Wt, res_sd
+    if report:
+        say('  prior models by neighbour pattern (t-2 t-1 t+1 t+2 | graduated | freshman): n, slopes, slope sum, resid sd')
+        for k in sorted(models, key=lambda k: -len(groups[k])):
+            w, rs = models[k]; ns = sum(k[:4]); sl = ' '.join(f'{x:.2f}' for x in w[:ns])
+            say(f'    {"".join("x" if a else "." for a in k[:4])} g{int(k[4])} f{int(k[5])}: n={len(groups[k])}, slopes {sl}, sum {sum(w[:ns]):.2f}, sd {rs:.0f}')
+    top = max(models, key=lambda k: len(groups[k])) if models else None
+    return T, T0, [0] * 13, (models[top][1] if top else pop_sd)
 # prior strength: the regression residual overstates the prior sd (its target is itself noisy), so scale it,
 # tuned on hidden 1990-2017 bouts
 random.seed(5)
 tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
 tb = [b for b in bouts if b['i'] in tune_held]
 scores = {}
-for sc in (0.7, 1.0, 1.5, 2.0, 3.0, 4.5):
+for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
     Tt, *_ = smoother(mask=tune_held, sd_scale=sc)
     scores[sc] = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb])
-SDS = min(scores, key=scores.get)
+# the held-out loss is nearly flat across a range of prior widths; within that flat range (0.001 of the best) take
+# the widest prior, so the season's own bouts decide and the prior only fills gaps
+SDS = max(k for k, v in scores.items() if v <= min(scores.values()) + 0.001)
 say('prior sd scale (hidden 5% of 1990-2017 bouts): ' + ', '.join(f'{k}: {v:.4f}' for k, v in scores.items()) + f' -> {SDS}')
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
 random.seed(3)
@@ -324,7 +365,7 @@ acc_b = np.mean([Th[b['year']][b['wi']] > Th[b['year']][b['li']] for b in hb])
 say(f'held-out 10% of 2018-2026 bouts (n={len(hb)}), fit without them: season-batch strength log loss {ll_batch:.4f} accuracy {acc_b:.3f}; forward rating {ll_fwd:.4f}')
 say('  (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)')
 T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS)
-say(f'proximity weights (season-only strength at t regressed on t-2, t-1, t+1, t+2 with grade, non-negative): t-2 {Wt[0]:.3f}  t-1 {Wt[1]:.3f}  t+1 {Wt[2]:.3f}  t+2 {Wt[3]:.3f}; grade FR..SR {Wt[8]:+.0f} {Wt[9]:+.0f} {Wt[10]:+.0f} {Wt[11]:+.0f}; prior sd {RES_SD:.0f}')
+say(f'prior sd (most common pattern, scaled): {RES_SD:.0f}')
 def theta(k, y): return T.get(y, {}).get(ID(k, y))
 
 # ============================================================ v2: one absolute scale, quality of wins, bad losses
@@ -467,6 +508,6 @@ with open('data/difficulty/wrestler_seasons.csv', 'w', newline='') as f:
                     f0(r['qow']), r['bad'], f0(sb[0]) if sb else '', names_of.get((sb[1], r['year']), '') if sb else '', season_bad[(k, r['year'])],
                     len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)])])
 open('data/difficulty/eval.txt', 'w').write('\n'.join(out) + '\n')
-json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': {'t-2': Wt[0], 't-1': Wt[1], 't+1': Wt[2], 't+2': Wt[3]}, 'prior_sd': RES_SD, 'params': params},
+json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': 'per neighbour-availability pattern, see eval.txt', 'prior_sd': RES_SD, 'params': params},
           open('data/difficulty/scale.json', 'w'), indent=1, default=float)
 print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments')
