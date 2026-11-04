@@ -141,7 +141,7 @@
     const yrs = OT.yearsOf(W.apps, W.lower); const rec = OT.bwLoaded() ? OT.recordOf(W.name, yrs) : null;
     const recI = rec ? [[`${rec[0]}–${rec[1]}`, 'Postseason']].concat(rec[2] ? [[rec[2], rec[2] === 1 ? 'Fall' : 'Falls']] : []) : [];
     const heroK = W.lowerOnly ? hero : [['State medals', W.rows.length], ['State titles', places[0]]];
-    const sumI = (cr ? [[OT.r10(cr.peak), 'Peak RTG'], [OT.r10(cr.avg), 'Career avg']] : []).concat(heroK.filter(([, v]) => v !== 0 && v !== '0 / 0').map(([l, v]) => [typeof v === 'number' ? fmt(v) : v, l])).concat(recI);
+    const sumI = (cr ? [[OT.rw(cr.peak), 'Peak RTG'], [OT.rw(cr.avg), 'Career avg']] : []).concat(heroK.filter(([, v]) => v !== 0 && v !== '0 / 0').map(([l, v]) => [typeof v === 'number' ? fmt(v) : v, l])).concat(recI);
     const head = `<header class="uh2"><div class="crumb"><a href="#state">Pennsylvania</a><span>›</span><a href="#district/${W.d}">District ${W.d}</a><span>›</span><a href="${u.href}">${esc(W.sch)}</a></div>
       <h1>${esc(W.name)}</h1><div class="sub">${esc(W.sch)} · ${first === last ? first : first + '–' + last}${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
       <div class="usum"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div></header>`;

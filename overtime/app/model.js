@@ -302,7 +302,7 @@ const OT = (window.OT = {});
   const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
   const sosEntry = (lvl, year, cls, unit, wn) => { const Y = SOSD[year]; if (!Y) return null; return Y[lvl === 'state' ? `${cls}.s..${wn}` : `${cls}.${L1[lvl]}.${unit}.${wn}`] || null; };
   const RMAPC = new Map();
-  const rmap = (e) => { let m = RMAPC.get(e); if (!m) { m = new Map(); (e[1] || '').split(',').forEach((x) => { if (!x) return; const i = x.lastIndexOf(':'); m.set(x.slice(0, i), +x.slice(i + 1) * 10); }); RMAPC.set(e, m); } return m; };
+  const rmap = (e) => { let m = RMAPC.get(e); if (!m) { m = new Map(); (e[1] || '').split(',').forEach((x) => { if (!x) return; const i = x.lastIndexOf(':'); m.set(x.slice(0, i), +x.slice(i + 1)); }); RMAPC.set(e, m); } return m; };
   const entryOf = (r, lvl = r.lvl || 'state') => { const k = parseBkey(bkey(r, lvl)); return k ? sosEntry(k.lvl, k.year, k.cls, k.unit, k.wn) : null; };
   /* his season rating, from any bracket he wrestled in that season */
   const ratingOf = (r, lvl) => { const e = entryOf(r, lvl); if (!e) return null; const m = rmap(e), t = nk8(nkey(r.name)); let v = m.get(t);
@@ -310,7 +310,7 @@ const OT = (window.OT = {});
     return v == null ? null : v; };
   const fieldOf = (r, lvl) => { const e = entryOf(r, lvl); return e && e[0] != null ? e[0] * 10 : null; };
   const fieldAt = (lvl, year, cls, unit, wn) => { const e = sosEntry(lvl, year, cls, unit, wn); return e && e[0] != null ? e[0] * 10 : null; };
-  const rtg10 = (v) => (v == null ? null : Math.round(v / 10) * 10);
+  const rtg10 = (v) => (v == null ? null : Math.round(v));   // shown to the point so the season tile, the bracket and the headline agree
   /* a wrestler's ratings by season (state rows first, then district / regional rows of seasons without a state trip) */
   const seasonRatings = (apps, lower) => { const by = new Map();
     (apps || []).forEach((r) => { const v = ratingOf(r, 'state'); if (v != null && !by.has(r.year)) by.set(r.year, { year: r.year, rating: v, w: r.w, grade: r.grade }); });
@@ -471,7 +471,7 @@ const OT = (window.OT = {});
   let PEOPLE = null, PEOPLE_BY = null, PPL = null;
   const LVLN = ['', 'district', 'regional', 'state'];
   const loadPeople = () => PPL || (PPL = fetch('people.json').then((r) => (r.ok ? r.json() : { s: [], p: [] })).catch(() => ({ s: [], p: [] })).then((D) => {
-    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak ? peak * 10 : null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : ''), q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0 }; });
+    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : ''), q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0 }; });
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
   const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);

@@ -54,13 +54,13 @@ const wsFile = fs.existsSync('data/difficulty/wrestler_seasons.csv') ? 'data/dif
 csv(wsFile).forEach((r) => {
   if (r.season === '') return;
   const k = bkeyOf(r.level, r.tournament, r.weight), n = nkey(r.name), y = +r.year;
-  if (r.level !== 'section' && (r.level === 'state' || eager.has(k + '|' + n))) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season / 10));
+  if (r.level !== 'section' && (r.level === 'state' || eager.has(k + '|' + n))) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season));
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
   B.s[n] = [Math.round(+r.season), r.best === "" ? null : +r.best, r.best_name || null, +r.bad || 0];
 });
-// running Elo per bout (tools/ratings.py bout_elo.csv): rating before and after, on the RTG scale
+// RTG as of each bout (tools/ratings.py bout_rtg.csv): season rating from the bouts so far, before and after the bout
 const ELO = new Map();
-if (fs.existsSync('data/difficulty/bout_elo.csv')) csv('data/difficulty/bout_elo.csv').forEach((r) => { ELO.set([r.tournament, r.weight, r.side, r.round, r.winner, r.loser].join('|'), [+r.pre_w, +r.pre_l, +r.post_w, +r.post_l]); });
+if (fs.existsSync('data/difficulty/bout_rtg.csv')) csv('data/difficulty/bout_rtg.csv').forEach((r) => { ELO.set([r.tournament, r.weight, r.side, r.round, r.winner, r.loser].join('|'), [+r.pre_w, +r.pre_l, +r.post_w, +r.post_l]); });
 csv('data/brackets/bouts.csv').forEach((b) => {
   const k = bkeyOf(b.level, b.tournament, b.weight), y = +b.year;
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });

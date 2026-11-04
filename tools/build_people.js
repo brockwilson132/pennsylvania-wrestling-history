@@ -3,7 +3,7 @@
  * Emits overtime/people.json (loaded lazily by the Wrestlers tab, search and wrestler pages):
  *   { s: [school…], p: [[name, schoolIdx, firstYear, span, district, best, peak], …] }
  *   best = level*10 + place   (level 1 district · 2 regional · 3 state; place 1–8, 0 = entered without placing)
- *   peak = peak Overtime Rating / 10 (0 when no bouts are on record)
+ *   peak = peak Overtime Rating (0 when no bouts are on record)
  * Keys match the app: normalized name + canonical school (overtime/app/model.js wKey).
  */
 'use strict';
@@ -148,7 +148,7 @@ const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.
       stateQuals, regionalQuals, [state year*10+place…], regionalBest, districtBest, regionalTitles, districtTitles, region,
       class (0 AAA · 1 AA · 2 one-class era), weights wrestled (bitmask of standardized weights)] */
   const cl = Array.from(p.cls).sort((a, b) => b[1] - a[1])[0][0];
-  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak / 10), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg, cl === 'AAA' ? 0 : cl === 'AA' ? 1 : 2, p.ws];
+  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg, cl === 'AAA' ? 0 : cl === 'AA' ? 1 : 2, p.ws];
 });
 fs.writeFileSync(path.join(OV, 'people.json'), JSON.stringify({ s: schools, p: out }));
 const st = fs.statSync(path.join(OV, 'people.json')).size;

@@ -304,7 +304,7 @@ for bk, es in entrants.items():
     if len(pl) < 2 or bouts_in.get(bk, 0) >= len(pl): continue
     for i in range(len(pl)):
         for j in range(i + 1, len(pl)):
-            season_b[y].append((pl[i][1], pl[j][1], PLACE_W / (len(pl) - 1), -1)); npseudo += 1
+            season_b[y].append((pl[i][1], pl[j][1], PLACE_W / (len(pl) - 1), ('P', bk[0]))); npseudo += 1
 say(f'\nseason-batch fit: {sum(len(v) for v in season_b.values()) - npseudo} bouts + {npseudo} placement-implied pairs (weight {PLACE_W}/(placers-1)) for brackets with fewer bouts than placers')
 def fit_season(rows, ids, mu, sd, mask=None):
     """MAP Bradley-Terry: maximize sum m*log sigma(c*(t_w - t_l)) - sum (t-mu)^2/(2 sd^2)"""
@@ -325,7 +325,7 @@ ids_of = {y: sorted({r[0] for r in season_b[y]} | {r[1] for r in season_b[y]}) f
 nb_of = Counter()
 for y in YEARS:
     for r in season_b[y]:
-        if r[3] >= 0: nb_of[(r[0], y)] += 1; nb_of[(r[1], y)] += 1
+        if isinstance(r[3], int): nb_of[(r[0], y)] += 1; nb_of[(r[1], y)] += 1
 gr = lambda i, y: grade.get((i.split('#')[0], y))
 start_of = {}
 for y in YEARS:
@@ -391,6 +391,7 @@ def gone(i, y, av):
     return (not av[2]) and (gr(i, y) == 3 or y - start_of.get(i, y) >= 3)
 def fresh(i, y, av): return (not av[1]) and gr(i, y) == 0
 MIN_PAT = 300
+PRIORS = {}
 def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
     """Season-only fits, then one prior pass. The prior for season t is a regression on the neighbours'
     season-only strengths fitted SEPARATELY per neighbour-availability pattern (which of t-2, t-1, t+1, t+2 exist,
@@ -446,6 +447,7 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
                 mu.append(1500 + gmean.get(gr(i, y), gmean[None])); sd.append(pop_sd)
             if shift: mu = [m + shift.get(grp(i, y), 0.0) * SHIFT_PASS for m, i in zip(mu, ids)]
             new = fit_season(season_b[y], ids, mu, sd, mask)
+            if report and mask is None: PRIORS[y] = (ids, mu, sd)
             delta = max(delta, max(abs(new[i] - T[y][i]) for i in ids)); T[y] = new
         if report: say(f'  prior pass: largest change from season-only estimates {delta:.0f}')
     if report:
@@ -697,26 +699,62 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/brackets.csv', 'w
         c.writerow([bk[0], bk[1], bk[2], B['year'], B['c'], B['unit'], B['n'], B['rated'], B['bouts'], f"{B['field']:.0f}" if B['field'] is not None else '', 1 if B['bouts'] == 0 else 0])
 names_of = {}
 for r in recs.values(): names_of.setdefault((r['k'], r['year']), r['name'])
-# running Elo for the bracket view: the forward rating before and after every bout (only past results), put on the same
-# 1500 = average state qualifier scale with its own per-season anchor (state entrants' rating entering states)
-_ea = defaultdict(list); _seen = set()
-for b in bouts:
-    if b['level'] != 'state' or b['i'] not in PRE: continue
-    for k, v in ((b['wk'], PRE[b['i']][0]), (b['lk'], PRE[b['i']][1])):
-        if (k, b['year']) in _seen: continue
-        _seen.add((k, b['year'])); _ea[(b['year'], b['c'])].append(v)
-EANC = {g: (float(np.mean(v)), float(np.std(v)) or 1.0) for g, v in _ea.items() if len(v) >= 20}
-_ecache = {}
-def enorm(v, y, c):
-    g = _ecache.get((y, c))
-    if g is None: g = _ecache[(y, c)] = (y, c) if (y, c) in EANC else min(EANC, key=lambda g: (g[1] != c, abs(g[0] - y)))
-    m, sd = EANC[g]; return 1500 + (v - m) / sd * SD_REF
-with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_elo.csv', 'w', newline='') as f:
+# RTG as of each round, for the bracket view. The same season fit as the season rating (same priors, same bouts), run
+# again after every round with only the bouts up to that round; placement-implied pairs count once their level is over.
+# A wrestler's number going into a bout is the fit before that round, coming out is the fit after it, and after his last
+# bout of the season it equals his season rating.
+STAGE = {'section': 0, 'district': 1, 'regional': 2, 'state': 3}
+def _stage(b): return 1.5 if b['level'] == 'regional' and b['unit'].endswith('_Sub') else STAGE[b['level']]
+BI = {b['i']: b for b in bouts}
+# bout order inside a bracket: a wrestler's championship bouts come before his consolation bouts, each from the earliest
+# round (highest number) down; a bout's wave is one past the later of the two wrestlers' previous bouts. Waves line up
+# with the session order of a real tournament (pigtails, first round, first consolations, quarters, ...).
+WAVE = {}
+_byb = defaultdict(list)
+for b in bouts: _byb[b['bk']].append(b)
+for bl in _byb.values():
+    last = {}
+    for b in sorted(bl, key=lambda b: (b['side'] != 'champ', b['side'], -b['round'])):
+        w = 1 + max(last.get(b['wi'], 0), last.get(b['li'], 0)); WAVE[b['i']] = w; last[b['wi']] = last[b['li']] = w
+def fit_one(mu_i, sd_i, obs, t0):
+    """one wrestler's MAP strength with opponents fixed: obs = [(opponent strength, +1 won / -1 lost, weight)]"""
+    t = t0; iv = 1 / sd_i ** 2
+    for _ in range(30):
+        g = iv * (t - mu_i); h = iv
+        for o, sg, m in obs:
+            z = C_ * sg * (t - o); p = 1 / (1 + np.exp(z)); g -= m * C_ * sg * p; h += m * C_ * C_ * p * (1 - p)
+        st = g / h; t -= st
+        if abs(st) < 1e-4: break
+    return t
+LV = {'section': 0, 'district': 1, 'regional': 2, 'state': 3}
+with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_rtg.csv', 'w', newline='') as f:
     c_ = csv.writer(f); c_.writerow(['level', 'tournament', 'weight', 'side', 'round', 'winner', 'loser', 'pre_w', 'pre_l', 'post_w', 'post_l'])
-    for b in bouts:
-        if b['i'] not in PRE: continue
-        y, c = b['year'], b['c']; (pw_, pl_), (qw_, ql_) = PRE[b['i']], POST[b['i']]
-        c_.writerow([b['level'], b['tournament'], b['weight'], b['side'], b['round'], b['winner'], b['loser']] + [round(enorm(v, y, c)) for v in (pw_, pl_, qw_, ql_)])
+    nfit = 0; maxgap = 0.0
+    for y in YEARS:
+        if y not in PRIORS: continue
+        ids, mu, sd = PRIORS[y]; Ty = T[y]; P0 = {i: (m, s_) for i, m, s_ in zip(ids, mu, sd)}
+        mine = defaultdict(list)          # wrestler -> [(time key, opponent final strength, sign, weight, bout index)]
+        for r in season_b[y]:
+            if isinstance(r[3], int):
+                b = BI[r[3]]; k = (_stage(b), WAVE[r[3]])
+            else:
+                k = (LV[r[3][1]] + 0.9, 10 ** 6)   # placement-implied pairs count once that level is over
+            mine[r[0]].append((k, Ty[r[1]], 1, r[2], r[3])); mine[r[1]].append((k, Ty[r[0]], -1, r[2], r[3]))
+        AS = {}                           # (wrestler, bout index) -> (before, after)
+        for i, ev in mine.items():
+            ev.sort(key=lambda e: e[0]); m_i, s_i = P0[i]; t = m_i; done = []
+            for n_, e in enumerate(ev):
+                if not isinstance(e[4], int): done.append(e[1:4]); continue
+                pre = fit_one(m_i, s_i, done, t) if done else m_i
+                post = fit_one(m_i, s_i, done + [x[1:4] for x in ev[n_:] if x[0] == e[0]], pre); nfit += 1
+                AS[(i, e[4])] = (pre, post)
+                if all(x[0] <= e[0] for x in ev): maxgap = max(maxgap, abs(post - Ty[i]))
+                done.append(e[1:4]); t = pre
+        for r in season_b[y]:
+            if not isinstance(r[3], int): continue
+            b = BI[r[3]]; (pw_, qw_), (pl_, ql_) = AS[(b['wi'], r[3])], AS[(b['li'], r[3])]; c = b['c']
+            c_.writerow([b['level'], b['tournament'], b['weight'], b['side'], b['round'], b['winner'], b['loser']] + [round(norm(x, y, c)) for x in (pw_, pl_, qw_, ql_)])
+say(f'RTG as of each round: {nfit} bout checkpoints, last checkpoint vs season RTG max gap {maxgap:.2f} (should be ~0)')
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.csv', 'w', newline='') as f:
     c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
                                    'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results'])

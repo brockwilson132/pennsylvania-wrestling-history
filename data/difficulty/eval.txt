@@ -62,3 +62,4 @@ next-season state points of returners (n=7510): rating + this season placement R
   + mean of opponents beaten: R2 0.4303 (gain +0.0093), coefficient -0.00919
   + bad losses: R2 0.4214 (gain +0.0004), coefficient +0.42533
   + field strength: R2 0.4249 (gain +0.0039), coefficient -0.00873
+RTG as of each round: 984332 bout checkpoints, last checkpoint vs season RTG max gap 0.29 (should be ~0)
