@@ -19,7 +19,7 @@ h1,h2,h3{margin:0;font-family:var(--cond);font-weight:900;line-height:1}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px 80px}
 /* header: the only global controls */
 .top{position:sticky;top:0;z-index:20;background:rgba(11,13,16,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}
+.top .in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .wm{font:400 19px 'Archivo Black',sans-serif;letter-spacing:-.5px;display:flex;align-items:center;gap:1px;white-space:nowrap}
 .seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:2px;background:var(--slate)}
 .seg button{font:700 13px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ash);padding:6px 11px;border-radius:999px;min-height:32px;white-space:nowrap}
@@ -118,6 +118,16 @@ table.dt{width:100%;border-collapse:collapse;background:var(--slate);border:1px 
 .sel button[aria-pressed=true]{color:var(--mat);background:var(--chalk);border-color:var(--chalk)}
 .cmp{display:grid;gap:10px}@media(min-width:900px){.cmp{grid-template-columns:1fr 1fr 1fr}}
 .cmp .panel h3{font-size:18px}
+.cwin{display:flex;align-items:center;gap:6px;justify-content:flex-end}.cwin[hidden]{display:none}
+.cwin input{width:64px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--slate);color:var(--chalk);font:700 15px 'Barlow Condensed',sans-serif;text-align:center;padding:0 4px}
+.cwin span{color:var(--ash)}.cwin button{height:34px;border-radius:9px;border:1px solid var(--chalk);background:var(--chalk);color:var(--mat);font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:0 12px;cursor:pointer}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(22,26,32,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.bnav ul{list-style:none;margin:0 auto;padding:0;max-width:1100px;display:grid;grid-template-columns:repeat(5,1fr);height:64px}
+.bnav a{display:grid;justify-items:center;align-content:center;gap:5px;height:100%;text-decoration:none;color:var(--ash);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.bnav svg{width:24px;height:24px}.bnav a[aria-current=page]{color:var(--chalk)}.bnav a[aria-current=page] svg{color:var(--gold)}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+@media(max-width:700px){.cwin{flex-basis:100%;padding-bottom:2px}}
+section{scroll-margin-top:70px}
 </style></head>
 <body>
 <header class="top"><div class="in">
@@ -126,6 +136,7 @@ table.dt{width:100%;border-collapse:collapse;background:var(--slate);border:1px 
     <div class="seg" id="cls" role="group" aria-label="Class"></div>
     <div class="seg" id="win" role="group" aria-label="Seasons"></div>
   </div>
+  <form class="cwin" id="cwin" hidden><input name="y0" type="number" min="1938" max="2026" inputmode="numeric" aria-label="From season"><span>–</span><input name="y1" type="number" min="1938" max="2026" inputmode="numeric" aria-label="To season"><button type="submit">Apply</button></form>
 </div></header>
 <main class="wrap">
   <div class="intro">
@@ -169,13 +180,14 @@ table.dt{width:100%;border-collapse:collapse;background:var(--slate);border:1px 
 
   <section>
     <div class="cmp">
-      <div class="panel"><h3>Controls, simplified</h3><ul><li>Header: class (AAA / AA) and seasons (All-time, Last 10, Last 5, custom). Nothing else global.</li><li>One sort control per table: Rating (default) and Score; Titles added on district, region and state lists.</li><li>No level switch, no Medals/Power/Era sorts, no filter sheet on ranking pages (search covers schools and wrestlers).</li></ul></div>
+      <div class="panel"><h3>Controls, simplified</h3><ul><li>Header: class (AAA / AA) and seasons (All-time, Last 5, Last 10, Last 25, Custom). Nothing else global.</li><li>One sort control per table: Rating (default) and Score; Titles added on district, region and state lists.</li><li>No level switch, no Medals/Power/Era sorts, no filter sheet on ranking pages (search covers schools and wrestlers).</li></ul></div>
       <div class="panel"><h3>Where brackets stay</h3><ul><li>Only for real tournaments: tap any district, regional or state result to open that bracket.</li><li>Ranking lists use the cards above, never the bracket drawing.</li></ul></div>
       <div class="panel"><h3>Data notes</h3><ul><li id="excl"></li><li>District and region ratings start in 1974 for the two-class era; one-class seasons count toward a school's later class.</li><li>Team rating uses every bout on file; seasons before the 1970s have partial district brackets, so treat early numbers as approximate.</li></ul></div>
     </div>
   </section>
 </main>
 <script src="badges.js"></script>
+<nav class="bnav" id="bnav" aria-label="Levels"></nav>
 <script>
 'use strict';
 const $ = (s) => document.querySelector(s);
@@ -186,7 +198,9 @@ const ord = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 
 const pc = (p) => 'c' + Math.min(p, 5);
 const REG = { NE: 'Northeast', NW: 'Northwest', SC: 'South Central', SE: 'Southeast', SW: 'Southwest', CNW: 'Central Northwest' };
 const DIS = { 1: 'Southeast', 2: 'Scranton–Wilkes-Barre', 3: 'South Central', 4: 'North Central', 5: 'Bedford–Somerset', 6: 'Central', 7: 'WPIAL', 8: 'Pittsburgh City', 9: 'Northwest Central', 10: 'Northwest', 11: 'Lehigh Valley', 12: 'Philadelphia' };
-const WINS = { all: ['All-time', 1938, 2026], last10: ['Last 10', 2017, 2026], last5: ['Last 5', 2022, 2026] };
+const LAST = 2026, FIRST = 1938;
+const WINS = { all: ['All-time', FIRST, LAST], last5: ['Last 5', LAST - 4, LAST], last10: ['Last 10', LAST - 9, LAST], last25: ['Last 25', LAST - 24, LAST], custom: ['Custom', 1990, 2005] };
+const winLabel = () => { const [l, a, b] = WINS[st.win]; return st.win === 'custom' ? a + '–' + b : l; };
 const st = { cls: 'AAA', win: 'all', lvl: 'school', sort: 'rating', team: 'Nazareth', season: null, ctx: 'state' };
 const CTX = { state: { label: 'State page', lv: ['school', 'district', 'region'], w: [1, 0, 0] }, NE: { label: 'Northeast page', lv: ['school', 'district'], w: [1, 0.4, 0] }, D11: { label: 'District 11 page', lv: ['school'], w: [1, 0.4, 0.15] } };
 let DREG = null; // year|cls|district -> region (majority of member school-seasons)
@@ -227,7 +241,8 @@ function matrix(c) {
 }
 
 /* ---------- wrestlers ---------- */
-function wList() { return D.wrestlers[st.cls][st.win === 'all' ? 'all' : st.win]; }
+/* whole careers of anyone who wrestled a season inside the window, by peak rating */
+function wList() { const [, y0, y1] = WINS[st.win]; return D.wrestlers[st.cls].filter((c) => c.seasons.some((s) => s[0] >= y0 && s[0] <= y1)).sort((a, b) => b.peak - a.peak || b.titles - a.titles).slice(0, 10); }
 const stateFins = (c) => c.seasons.filter((s) => s[5] >= 0).map((s) => pillW(s[5], s[8], 'State', `title="${s[0]} state ${s[5] ? ord(s[5]) : 'qualifier'}"`)).join('');
 function wA(c, i) {
   const pts = c.seasons.map((s) => [s[0], s[2]]);
@@ -276,8 +291,8 @@ function wC(L) {
     <td class="hide-s muted">${c.weights.join(', ')}</td><td class="hide-s bw">${c.bw[0] ? esc(c.bw[1]) + ' <b>' + rt(c.bw[0]) + '</b>' : '—'}</td></tr>`).join('')}</tbody></table>`;
 }
 function renderW() {
-  const L = wList(); const [wl] = WINS[st.win];
-  $('#wcap').textContent = `Top 10 · Class ${st.cls} · ${wl === 'All-time' ? 'all-time' : wl.toLowerCase() + ' seasons (whole careers of anyone who wrestled in them)'} · by peak rating`;
+  const L = wList(); const wl = winLabel();
+  $('#wcap').textContent = `Top 10 · Class ${st.cls} · ${st.win === 'all' ? 'all-time' : wl + ' (whole careers of anyone who wrestled in it)'} · by peak rating`;
   $('#wA').innerHTML = L.map(wA).join(''); $('#wB').innerHTML = L.map(wB).join(''); $('#wC').innerHTML = wC(L);
 }
 
@@ -429,12 +444,37 @@ function renderT() {
 function renderAll() {
   seg($('#cls'), [['AAA', 'AAA'], ['AA', 'AA']], st.cls, (v) => { st.cls = v; st.season = null; renderAll(); });
   seg($('#win'), Object.entries(WINS).map(([k, v]) => [k, v[0]]), st.win, (v) => { st.win = v; st.season = null; renderAll(); });
+  const cw = $('#cwin'); cw.hidden = st.win !== 'custom';
+  if (st.win === 'custom') { const [, a, b] = WINS.custom; cw.querySelector('[name=y0]').value = a; cw.querySelector('[name=y1]').value = b; }
   renderW(); renderU(); renderT();
 }
 let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => D && renderT(), 150); });
 fetch('data.json').then((r) => r.json()).then((d) => {
-  D = d; $('#excl').textContent = `${fmt(d.excludedLongCareers)} wrestler keys with careers longer than five seasons (merged-identity cases still being fixed) are left out of the wrestler cards.`;
+  D = d; $('#excl').textContent = `Wrestler careers are split by graduating class, so fathers and sons sharing a name and school are separate people (longest career on file: ${d.longestCareer} seasons).`;
   st.season = 2016; renderAll();
 });
+
+/* custom window */
+$('#cwin').onsubmit = (e) => { e.preventDefault(); const f = e.target; let a = +f.y0.value || 1990, b = +f.y1.value || 2005; a = Math.max(FIRST, Math.min(LAST, a)); b = Math.max(FIRST, Math.min(LAST, b)); if (a > b) [a, b] = [b, a]; WINS.custom[1] = a; WINS.custom[2] = b; st.season = null; renderAll(); };
+/* bottom tabs, as in the app: each jumps to its preview section */
+const PA_OUT = 'M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z';
+const NAVI = {
+  state: `<path d="${PA_OUT}" transform="translate(1,4) scale(.245)" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>`,
+  region: `<path d="M3 13 L13 3 L23 13 L13 23 Z M3 13 H23 M13 3 V23" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  district: `<rect x="3" y="3" width="8" height="8" fill="currentColor"/><rect x="15" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  school: `<path d="M3 23 V11 L13 4 L23 11 V23 Z M10 23 V15 H16 V23" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+  wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
+};
+const TABS = [['state', 'State', 'u', 'state'], ['region', 'Region', 'u', 'NE'], ['district', 'District', 'u', 'D11'], ['school', 'School', 't'], ['wrestlers', 'Wrestlers', 'w']];
+let tab = 'state';
+function renderNav() { $('#bnav').innerHTML = '<ul>' + TABS.map(([k, l]) => `<li><a href="#" data-tab="${k}"${k === tab ? ' aria-current="page"' : ''}><svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>${l}</a></li>`).join('') + '</ul>'; }
+$('#bnav').onclick = (e) => {
+  const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault();
+  const t = TABS.find((x) => x[0] === a.dataset.tab); tab = t[0];
+  if (t[3]) { st.ctx = t[3]; if (D) renderU(); }
+  if (t[0] === 'school' && st.team !== 'Nazareth') { st.team = 'Nazareth'; st.season = null; if (D) renderT(); }
+  renderNav(); document.getElementById(t[2]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+renderNav();
 </script>
 </body></html>

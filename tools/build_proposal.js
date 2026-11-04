@@ -5,7 +5,7 @@
  *   ss         per school-season: [schoolIdx, year, cls, district, region, teamRating, statePts, regPts, distPts,
  *               stateTitles, podium2to4, placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, coverage]
  *   lineups    {schoolName: {year: [[stdIdx, name, rating, D, R, S]…]}} for a few showcase schools
- *   wrestlers  {AAA: {all: [...], last10: [...]}, AA: {...}} top cards
+ *   wrestlers  {AAA: [...], AA: [...]} card pool: each season's ten best careers; the page picks any window's top ten
  * Team rating (per season) = mean Overtime Rating of the school's best wrestler at each standardized weight;
  * a weight with no entrant counts as a replacement-level 1000 (1100 where the district bracket is missing).
  * Identity keys follow tools/build_people.js.
@@ -14,7 +14,7 @@
 const fs = require('fs'), path = require('path');
 const OV = path.join(__dirname, '..', 'overtime');
 global.window = {};
-['badges.js', 'data.js', 'medals.js', 'brackets.js', 'lowermeta.js', 'lower-district.js', 'lower-regional.js', 'membership.js', 'lowerteams.js'].forEach((f) => { (0, eval)(fs.readFileSync(path.join(OV, f), 'utf8')); });
+['badges.js', 'data.js', 'medals.js', 'brackets.js', 'lowermeta.js', 'lower-district.js', 'lower-regional.js', 'membership.js', 'lowerteams.js', 'careers.js'].forEach((f) => { (0, eval)(fs.readFileSync(path.join(OV, f), 'utf8')); });
 const W = window, SB = W.SchoolBadge;
 const SAME = { Allentown: 'William Allen', Allen: 'William Allen' };
 const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
@@ -51,7 +51,8 @@ function add(lvl, year, cls, unit, w, place, name, school, d) {
   const sch = splitName(canon(school), d);
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
   const s = sosRow(key, name);
-  A.push({ k: nkey(name) + '|' + sch, name, sch, year, cls, lvl, w: wNum(w), std: stdIdx(wNum(w)), place: place >= 1 && place <= 8 ? place : 0, d: d || 0, unit, rating: s && s[0] ? s[0] : 0, field: 0, bw: s && s[1] ? s[1] : 0, bwn: s && s[2] ? s[2] : '' });
+  const base = nkey(name) + '|' + sch; const cs = (W.WR_CAREERS || {})[base]; let k = base; if (cs) cs.forEach((y0) => { if (year >= y0) k = base + '#' + y0; });
+  A.push({ k, name, sch, year, cls, lvl, w: wNum(w), std: stdIdx(wNum(w)), place: place >= 1 && place <= 8 ? place : 0, d: d || 0, unit, rating: s && s[0] ? s[0] : 0, field: 0, bw: s && s[1] ? s[1] : 0, bwn: s && s[2] ? s[2] : '' });
 }
 (W.WR_MEDALS || []).forEach(([year, cls, w, place, name, school, d]) => add('state', year, cls, null, w, place, name, school, d));
 (W.WR_DATA.champs || []).concat(W.WR_CHAMP_FILL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 1, name, school, d));
@@ -172,15 +173,19 @@ function card(rows) {
   const c = clsOf(L);
   return { name: L.name, sch: L.sch, y0: years[0], y1: years[years.length - 1], cls: c, peak: Math.max(...rows.map((a) => a.rating)), titles: rows.filter((a) => a.lvl === 'state' && a.place === 1).length, medals: rows.filter((a) => a.lvl === 'state' && a.place).length, weights: Array.from(new Set(rows.map((a) => STDK[a.std][0]))), seasons, bw };
 }
-const cards = Array.from(byW.values()).map(card).filter((c) => c.y1 - c.y0 <= 4 && c.peak > 0);
-const top = (cls, from) => cards.filter((c) => c.cls === cls && c.y1 >= from).sort((a, b) => b.peak - a.peak || b.titles - a.titles).slice(0, 10);
-const wrestlers = {}; ['AAA', 'AA'].forEach((c) => { wrestlers[c] = { all: top(c, 0), last10: top(c, 2017), last5: top(c, 2022) }; });
-const excluded = Array.from(byW.values()).filter((rows) => { const ys = rows.map((a) => a.year); return Math.max(...ys) - Math.min(...ys) > 4; }).length;
-
+const cards = Array.from(byW.values()).map(card).filter((c) => c.peak > 0);
+/* pool: for each (class, season), the ten best careers (by peak) active that season. Any window's top ten is a
+   subset of this pool: a wrestler in a window's top ten is in the top ten of every season he wrestled inside it. */
+const pool = { AAA: new Set(), AA: new Set() };
+['AAA', 'AA'].forEach((c) => {
+  const byY = new Map(); cards.filter((x) => x.cls === c).forEach((x) => x.seasons.forEach((sx) => { (byY.get(sx[0]) || byY.set(sx[0], []).get(sx[0])).push(x); }));
+  byY.forEach((L) => L.sort((a, b) => b.peak - a.peak || b.titles - a.titles).slice(0, 10).forEach((x) => pool[c].add(x)));
+});
+const wrestlers = { AAA: Array.from(pool.AAA), AA: Array.from(pool.AA) };
+const longest = Math.max(...cards.map((c) => c.y1 - c.y0 + 1));
 const typ = {}; ['district', 'regional', 'state'].forEach((L) => { const v = APP.filter((a) => a.lvl === L && a.field && a.year >= 1980).map((a) => a.field); typ[L] = Math.round(v.reduce((x, y) => x + y, 0) / v.length); });
-const out = { typField: typ, schools, names, ss, ds, rs, lineups, wrestlers, std: STDK.map((s) => s[0]), excludedLongCareers: excluded, built: new Date().toISOString().slice(0, 10) };
+const out = { typField: typ, schools, names, ss, ds, rs, lineups, wrestlers, std: STDK.map((s) => s[0]), longestCareer: longest, built: new Date().toISOString().slice(0, 10) };
 fs.mkdirSync(path.join(OV, 'proposals'), { recursive: true });
 fs.writeFileSync(path.join(OV, 'proposals', 'data.json'), JSON.stringify(out));
-console.log('bytes', fs.statSync(path.join(OV, 'proposals', 'data.json')).size, 'excluded long careers', excluded);
-console.log('AAA all top:', wrestlers.AAA.all.map((c) => c.name + ' ' + c.peak).join(', '));
-console.log('AAA last10 top:', wrestlers.AAA.last10.map((c) => c.name + ' ' + c.peak).join(', '));
+console.log('bytes', fs.statSync(path.join(OV, 'proposals', 'data.json')).size, 'pool', wrestlers.AAA.length, wrestlers.AA.length, 'longest career', longest);
+
