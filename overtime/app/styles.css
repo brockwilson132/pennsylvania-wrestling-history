@@ -656,7 +656,7 @@ i.wdg{height:5px}
 .pmx{overflow-x:auto;scrollbar-width:thin;margin:6px 0 4px;-webkit-overflow-scrolling:touch}
 .pmg{display:grid;min-width:max-content;gap:3px}
 .pmr{display:grid;grid-template-columns:76px repeat(8,128px);gap:3px;align-items:stretch}
-.pmw{position:sticky;left:0;z-index:2;background:var(--slate);display:flex;flex-direction:column;justify-content:center;gap:2px;padding:2px 6px 2px 0}
+.pmw{position:sticky;left:0;z-index:2;background:var(--slate);display:flex;flex-direction:column;justify-content:center;gap:2px;padding:2px 6px 2px 8px}
 .pmw b{font:900 15px var(--cond);color:var(--chalk)}
 .pmf{display:inline-flex;align-items:center;gap:4px;height:14px}.pmf .sb{height:100%!important;width:4px;align-self:stretch}.pmf em{font:700 10.5px var(--cond);font-style:normal;color:var(--ash)}
 .pmh .pmw{font:700 10.5px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
