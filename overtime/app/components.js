@@ -282,7 +282,7 @@
           cell = r.place ? `<span class="${cls} ${pc(r.place)}" title="${r.year} · ${wShort(r.w)} · ${ordinal(r.place)}${e.adv ? ' · advanced' : ''}">${r.place}</span>` : `<span class="${cls} cq" title="${r.year} · ${F.lvl === 'state' ? 'qualified' : 'did not place'}">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
         } else cell = cellHTML(c, 'pill');
         const rr = here ? r : c && c.r && !c.dnc && !c.nodata ? c.r : null; const fv = rr ? OT.fieldOf(rr, row.k) : null;
-        h += `<span class="pw" style="${at(k + 2, i + 2)}">${cell}${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<i class="sb sb0"></i>'}</span>`;
+        h += `<span class="pw" style="${at(k + 2, i + 2)}">${cell}${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<span class="sm sm0"><i></i></span>'}</span>`;
       });
     });
     return `<span class="cm bvm">${h}</span>`;

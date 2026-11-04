@@ -207,14 +207,20 @@
     const benchVis = bench.filter((x) => key(x) >= cut);
     const all = vis.concat(benchVis).sort((p, q) => key(q) - key(p) || (q.b ? 1 : 0) - (p.b ? 1 : 0));
     const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
+    /* one rating column for the whole window; with a sub-selection, two columns named by their spans, plus the delta */
+    const [wy0, wy1] = OT.yearsWindow(), span = (a, b) => (a === b ? String(a) : a + '–' + b);
+    const two = !!sel;
     const body = all.map((r) => {
-      if (r.b) return `<div class="mlr mlb"><span class="mln">${esc(r.label)}</span><span class="mls mlo" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}</span></div>`;
+      /* benchmarks are reference lines between rows, not rows: a dashed rule with a small right-aligned label */
+      if (r.b) { const v = two ? r.s : r.v; return `<div class="mlb2" role="note"><span>${esc(r.label)} <b>${v ? r10(v) : '–'}</b></span></div>`; }
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
-      const dl = !sel || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
-      return `<div class="mlr" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span></div>`;
+      const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
+      const v1 = two ? r.s : r.v;
+      return `<div class="mlr${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${v1 ? OT.ratingColor(U.kind, v1) : '#2F3640'}">${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
-    return `<div class="ml">${contextTable(u, sel)}<div class="mlh"><span>${U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions'}</span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';
+    return `<div class="ml">${contextTable(u, sel)}<div class="mlh${two ? '' : ' one'}"><span>${who}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : '<button class="ht on" disabled>Rating</button>'}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   function scrubber(u, sel) {
     const [y0, y1] = OT.yearsWindow(); const n = y1 - y0 + 1;

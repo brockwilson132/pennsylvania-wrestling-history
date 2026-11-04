@@ -119,8 +119,14 @@
   const sFrac = (v, lvl = 'state') => { const p = pctIn(v, lvl); return p == null ? fpos(v) : Math.max(0.08, p / 100); };
   const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)}` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
   const compColor = (v, lvl = 'state') => colorAt(sFrac(v, lvl));
-  /* the glyph: a 4px bar beside a result, as tall as the result at most */
-  const sbar = (v, lvl, ctx) => (v ? `<i class="sb" style="height:${(100 * sFrac(v, lvl)).toFixed(0)}%;background:${colorAt(sFrac(v, lvl))}" title="${esc(fieldTip(v, lvl, ctx))}"></i>` : '<i class="sb sb0"></i>');
+  /* the glyph: a short horizontal strength meter beside a result: a track filled from the left by the bracket's rank among
+     brackets of its own level, on the cold → hot ramp; optional value above it. Never on or under a medal pill. */
+  const smeter = (v, lvl, ctx, num) => {
+    if (!v) return '<span class="sm sm0" aria-hidden="true"><i></i></span>';
+    const f = sFrac(v, lvl), c = colorAt(f);
+    return `<span class="sm${num ? ' n' : ''}" title="${esc(fieldTip(v, lvl, ctx))}">${num ? `<em style="color:${c}">${r10(v)}</em>` : ''}<i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`;
+  };
+  const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
   /* bracket header: the same bar lying flat, its length and colour from the same within-level rank */
   function fieldGauge(v, lvl = 'state') {
@@ -128,7 +134,7 @@
     const f = sFrac(v, lvl), p = pctIn(v, lvl);
     return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i></span><em>${p != null ? `tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
-  const legend = () => `<span class="clg"><i class="sb" style="height:35%;background:${colorAt(0.15)}"></i><i class="sb" style="height:65%;background:${colorAt(0.55)}"></i><i class="sb" style="height:100%;background:${colorAt(0.95)}"></i>strength of competition, vs. brackets of the same level</span>`;
+  const legend = () => `<span class="clg"><span class="sm"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="sm"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="sm"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span>strength of competition, vs. brackets of the same level</span>`;
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
@@ -146,10 +152,10 @@
     return `<${tag}${hr} class="tp q" title="${esc(tip(c.src || 'qualified'))}">Q</${tag}>`;
   }
   /* one result + its strength bar, the unit every career display is made of */
-  function resCell(c, lvl, link) {
+  function resCell(c, lvl, link, num) {
     const ok = c && c.r && !c.dnc && !c.nodata; const href = link && ok ? OT.bhref(OT.bkey(c.r, lvl)) : null;
     const f = ok ? OT.fieldOf(c.r, lvl) : null;
-    return `<span class="tc">${cellPill(c, lvl, href)}${f ? sbar(f, lvl, `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}`) : '<i class="sb sb0"></i>'}</span>`;
+    return `<span class="tc">${cellPill(c, lvl, href)}${smeter(f, lvl, f ? `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}` : '', num)}</span>`;
   }
   function timeline(apps, lower, opts = {}) {
     const M = OT.careerCells(apps, lower, { full: opts.full }), cr = OT.careerRating(apps, lower);
@@ -165,9 +171,10 @@
     const dots = rat.map((v, i) => (v ? `<span class="td${i === pki ? ' pk' : ''}" style="left:${xp(i)}%;top:${yp(v).toFixed(1)}px" title="${cols[i].year} · Overtime Rating ${r10(v)}"></span>${big || i === pki ? `<span class="tv${i === pki ? ' pk' : ''}" style="left:${xp(i)}%;top:${(yp(v) - (big ? 20 : 13)).toFixed(1)}px">${r10(v)}</span>` : ''}` : '')).join('');
     const ratingRow = `<span class="tl-r" style="height:${H}px">${ref}<svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" aria-hidden="true"><path d="${line}" vector-effect="non-scaling-stroke"/></svg>${dots}</span>`;
     const head = cols.map((c, i) => `<span class="th">${c ? (big ? `<b>${OT.GRADE_L[i]} '${String(c.year).slice(2)}</b><i>${c.w ? wShort(c.w) + ' lbs' : ''}</i>` : `<b>'${String(c.year).slice(2)}</b> <i>${c.w ? wShort(c.w) : ''}</i>`) : `<b>${OT.GRADE_L[i]}</b><i></i>`}</span>`).join('');
-    const lab = (t, icon) => `<span class="tlab">${big ? t : OT.navIcon(icon)}</span>`;
-    const rows = M.rows.map((row) => lab(row.l, LVI[row.k]) + row.cells.map((c) => resCell(c, row.k, big)).join('')).join('');
-    return `<span class="tl${big ? ' big' : ''}"><span class="tlab">${big ? 'Rating' : ''}</span>${ratingRow}<span class="tlab"></span>${head}${rows}</span>`;
+    /* labels sit on a line above the row they name, so the grid uses the full width */
+    const lab = (t, icon) => `<span class="tlab">${OT.navIcon(icon)}<span>${t}</span></span>`;
+    const rows = M.rows.map((row) => lab(row.l, LVI[row.k]) + row.cells.map((c) => resCell(c, row.k, big, true)).join('')).join('');
+    return `<span class="tl${big ? ' big' : ''}">${big ? '<span class="tlab tlr"><span>Rating</span></span>' : ''}${ratingRow}${head}${rows}</span>`;
   }
 
   /* ---------- best wins and postseason record (lazy) ---------- */
@@ -439,16 +446,17 @@
     if (!ys.length) return OT.empty('No seasons in this window.');
     const y0 = Math.min(...ys), y1 = Math.max(...ys), n = y1 - y0 + 1;
     const phone = (window.innerWidth || 390) < 720;
-    const labW = phone ? 84 : 104;
-    const avail = Math.min(1100, Math.max(240, (window.innerWidth || 390) - (phone ? 40 : 140) - labW));
+    const labW = 0; // labels sit on top of their rows, not in a column beside them
+    const avail = Math.min(1180, Math.max(240, (window.innerWidth || 390) - (phone ? 40 : 140)));
     const cw = phone ? 18 : Math.max(18, Math.min(44, avail / n)), W = cw * n, X = (y) => cw * (y - y0);
     const scroll = W > avail + 2;
-    const RH = phone ? 22 : 26, CH = phone ? 22 : 24, G = 1, GH = 14; // rating row, cell rows, gap, group header
+    const RH = phone ? 22 : 26, CH = phone ? 22 : 24, G = 1, GH = 14, LH = phone ? 14 : 15; // rating row, cell rows, gap, group header, label line
     const sel = selOfPerf(u); const sa = sel ? sel.a : null, sb = sel ? sel.b : null;
     let g = '', labs = '', t = 0;
-    const lab = (txt, y, h, cls = '') => { labs += `<span class="pl-l gl2${cls}" style="top:${y}px;height:${h}px">${txt}</span>`; };
+    /* each label is a line ABOVE its row; the label layer sits outside the scroller so it stays pinned at the left */
+    const lab = (txt, cls = '') => { labs += `<span class="pl-l gl2${cls}" style="top:${t}px;height:${LH}px">${txt}</span>`; t += LH; };
     /* rating row, exactly as before: cold → hot cells */
-    lab('Rating', t, RH, ' top');
+    lab('Rating', ' top');
     for (let y = y0; y <= y1; y++) {
       const v = rating.pts.get(y);
       if (!v) { g += `<rect class="he" x="${(X(y) + 1).toFixed(1)}" y="${t}" width="${(cw - 2).toFixed(1)}" height="${RH}" rx="2"/>`; continue; }
@@ -456,13 +464,13 @@
       g += `<rect class="hcell" data-py="${y}" data-tip="${esc(tip)}" x="${(X(y) + 1).toFixed(1)}" y="${t}" width="${(cw - 2).toFixed(1)}" height="${RH}" rx="2" fill="${ratingColor('school', v)}"><title>${esc(tip)}</title></rect>`;
     }
     t += RH;
-    const group = (name) => { t += 8; g += `<line x1="0" x2="${W}" y1="${t + 0.5}" y2="${t + 0.5}" class="gdv"/>`; labs += `<span class="pl-g" style="top:${t + 2}px">${name}</span>`; t += GH; };
+    const group = (name) => { t += 8; g += `<line x1="0" x2="${W}" y1="${t + 0.5}" y2="${t + 0.5}" class="gdv"/>`; labs += `<span class="pl-g" style="top:${t + 3}px">${name}</span>`; t += GH; };
     /* individual rows */
     group('Individual');
     const IR = [['State', 'S', 'tS'], ['Regional', 'R', 'tR'], ['District', 'D', 'tD']];
     const mx = Math.max(1, ...Array.from(ind.values()).map((o) => Math.max(o.S, o.R, o.D)));
     IR.forEach(([name, k, tk], i) => {
-      lab(name, t, CH);
+      lab(name);
       for (let y = y0; y <= y1; y++) {
         const o = ind.get(y), v = o ? o[k] : 0, ti = o ? o[tk] : 0, x = X(y) + 0.5, w = cw - 1;
         if (!v) { g += `<rect class="ce" data-py="${y}" x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}"/>`; continue; }
@@ -481,7 +489,7 @@
     const TR = [['District team', (o) => o.d], ['Regional team', (o) => o.r], ['PIAA team', (o) => o.s], ['Duals', (o) => (o.u ? DUP[o.u] : null)]];
     const DUW = { 1: 'champion', 2: 'finalist', 3: 'semifinal', 5: 'quarterfinal' };
     TR.forEach(([name, f], i) => {
-      lab(phone ? name.replace(' team', '') : name, t, CH);
+      lab(name);
       for (let y = y0; y <= y1; y++) {
         const o = team.get(y), p = o ? f(o) : null, x = X(y) + 0.5, w = cw - 1;
         if (!p || p > 8) { g += `<rect class="ce" data-py="${y}" x="${x.toFixed(1)}" y="${t}" width="${w.toFixed(1)}" height="${CH}"/>`; continue; }
@@ -533,8 +541,8 @@
       const by = new Map(); const add = (r, L) => { const k = nkey(r.name); const x = by.get(k) || { name: r.name, w: r.w, wn: r.wn || +r.w || 999, r }; x[L] = r.place || 0; x['r' + L] = r; if (L === 'S') { x.w = r.w; x.wn = r.wn; x.r = r; } by.set(k, x); };
       low.forEach((r) => add(r, r.lvl === 'district' ? 'D' : 'R')); st.forEach((r) => add(r, 'S'));
       const L = Array.from(by.values()).sort((a, b) => (a.wn || 999) - (b.wn || 999));
-      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><i class="sb sb0"></i></span>'; const f = OT.fieldOf(rr, lvl);
-        return `<span class="tc">${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<i class="sb sb0"></i>'}</span>`; };
+      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="sm sm0"><i></i></span></span>'; const f = OT.fieldOf(rr, lvl);
+        return `<span class="tc">${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="sm sm0"><i></i></span>'}</span>`; };
       const rows = L.map((x) => { const rt = OT.ratingOf(x.r, x.S != null ? 'state' : x.r.lvl); return `<a class="sr" href="${OT.wrestlerHref(x.r)}"><span class="w">${wShort(x.w)}</span><span class="n">${esc(x.name)}</span><span class="f">${cell(x, 'D')}${cell(x, 'R')}${cell(x, 'S')}</span><span class="r">${rt ? r10(rt) : ''}</span></a>`; }).join('');
       const mx = placeMatrix(y, (r) => r.sch === u.id, false);
       return `<div class="ss">${head}${mx.indexOf('pmx') >= 0 ? mx : ''}${rows ? `<div class="srh"><span></span><span></span><span class="f"><i>D</i><i>R</i><i>S</i></span><span class="r">RTG</span></div>${rows}` : '<div class="note1">No district, regional or state results on file for this season.</div>'}</div>`;
