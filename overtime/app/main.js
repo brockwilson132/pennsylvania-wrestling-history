@@ -52,7 +52,7 @@
     let p = page, i = id;
     if (p === 'school' && !i && +q.d) { ctx.district = +q.d; const sp = OT.districtRegionSpans(+q.d); if (sp.length) ctx.region = sp[sp.length - 1].g; }
     setCtx(p, i); state.ctxDistrict = ctx.district;
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.pseason = null; state.lastRoute = page + '/' + id; }
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.lastRoute = page + '/' + id; }
     main.innerHTML = PAGES[p](i); main.querySelectorAll('.pscr.scroll').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (p === 'wrestler') { loadBestWins(i); loadCareer(i); }
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     const cur = p === 'wrestler' ? 'wrestlers' : p;
@@ -93,8 +93,8 @@
     const nb = main.querySelector(`.perf[data-perf="${CSS.escape(key)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left;
   }
   /* hovering a season shows every line's value for it */
-  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
-  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
+  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
+  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
   document.addEventListener('change', (e) => { const inp = e.target.closest && e.target.closest('input[data-cmpadd]'); if (!inp || !state.cmp) return; const v = inp.value.trim(); const s = OT.UD.schools.find((x) => x.toLowerCase() === v.toLowerCase());
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   const applyScope = () => { refreshPanel(); render(true); };
@@ -109,6 +109,8 @@
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }
+    const mm = e.target.closest('button[data-mapmode]'); if (mm) { state.mapmode = mm.dataset.mapmode; try { localStorage.setItem('ot-mapmode', state.mapmode); } catch (er) { /* none */ } state.pseason = null; render(true); return; }
+    const ha = e.target.closest('button[data-hall]'); if (ha) { state.hall = ha.dataset.hall === '1'; render(true); return; }
     const ua = e.target.closest('button[data-uall]'); if (ua) { state.uall = ua.dataset.uall === '1'; render(true); return; }
     const cm = e.target.closest('button[data-cmp]'); if (cm) { const box = cm.closest('.perf'); if (box && state.cmp) { const id = cm.dataset.cmp; if (e.target.closest('em') && id.startsWith('s:')) { state.cmp.extra = state.cmp.extra.filter((s) => 's:' + s !== id); state.cmp.on.delete(id); } else if (!state.cmp.on.has(id)) { state.cmp.on.add(id); state.cmp.focus = id; } else if (state.cmp.focus !== id) state.cmp.focus = id; else { state.cmp.focus = null; if (!cm.dataset.fixed) state.cmp.on.delete(id); } repaintPerf(box); } return; }
     const fl = e.target.closest && e.target.closest('[data-focus]'); if (fl && state.cmp) { const box = fl.closest('.perf'); const id = fl.getAttribute('data-focus'); state.cmp.focus = state.cmp.focus === id ? null : id; if (box) repaintPerf(box); return; }

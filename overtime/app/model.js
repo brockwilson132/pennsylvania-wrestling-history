@@ -25,6 +25,7 @@ const OT = (window.OT = {});
   /* scope */
   const EMPTY_F = () => ({ weights: [], regions: [], districts: [], schools: [] });
   const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
+  try { const mm = localStorage.getItem('ot-mapmode'); if (mm === 'districts' || mm === 'regions') state.mapmode = mm; } catch (e) { /* none */ }
   try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
   try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
   try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
