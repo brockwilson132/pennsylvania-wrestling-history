@@ -361,7 +361,7 @@
   function medalists(placers, info) {
     const by = (p) => placers.filter((r) => r.place === p);
     const chip = (r, n) => (OT.SB ? OT.SB.svg(r.sch, { size: n, variant: 'chip', title: false }) : '');
-    const stats = (r) => { const i = info(r); return `<span class="mdv">${i.rt != null ? `<b>${OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
+    const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'Elo after the tournament and his change across it' : 'season rating and his change across the tournament'}">${i.rt != null ? `<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
     const H = { 1: 70, 2: 52, 3: 40 };
     const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
     const rest = [4, 5, 6, 7, 8].flatMap((p) => by(p).map((r) => `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i>${chip(r, 20)}<span class="mdnm"><b>${esc(r.name)}</b><small>${esc(r.sch)}</small></span>${stats(r)}</a>`)).join('');
@@ -388,15 +388,29 @@
     const rOf = (r) => rOfName(r.name);
     const bouts = SB_ ? SB_.b : [];
     // per-bout deltas and each wrestler's net for the tournament
-    const DL = new Map(), NET = new Map();
-    bouts.forEach((b) => { const d = boutDelta(b, rOfName(b[2]), rOfName(b[3])); DL.set(b, d); if (d == null) return; NET.set(nk(b[2]), (NET.get(nk(b[2])) || 0) + d); NET.set(nk(b[3]), (NET.get(nk(b[3])) || 0) - d); });
+    /* running Elo: each bout carries both wrestlers' rating before and after it (forward rating, past results only), so
+       the number after one bout is the number going into the next. Older season files without it fall back to the
+       season-rating step. */
+    const hasElo = bouts.some((b) => b.length > 8);
+    const DL = new Map(), NET = new Map(), PRE = new Map(), EIN = new Map(), EOUT = new Map();
+    const ordered = bouts.slice().sort((a, b) => (a[0] === 'champ' ? 0 : 1) - (b[0] === 'champ' ? 0 : 1) || b[1] - a[1]);
+    bouts.forEach((b) => {
+      if (hasElo && b.length > 8) { DL.set(b, b[9] - b[7]); PRE.set(b, [b[7], b[8]]); return; }
+      const d = boutDelta(b, rOfName(b[2]), rOfName(b[3])); DL.set(b, d); });
+    if (hasElo) { const seq = new Map(); bouts.filter((b) => b.length > 8).forEach((b) => { [[b[2], b[7], b[9]], [b[3], b[8], b[10]]].forEach(([n, a, z]) => { const k = nk(n); (seq.get(k) || seq.set(k, []).get(k)).push([a, z]); }); });
+      seq.forEach((v, k) => { const lo = v.reduce((m, x) => (x[0] < m[0] ? x : m)); let first = v[0], last = v[0];
+        /* first bout = the one whose "before" no other bout's "after" produced; last = the one whose "after" feeds none */
+        const afters = new Set(v.map((x) => x[1])), befores = new Set(v.map((x) => x[0]));
+        first = v.find((x) => !afters.has(x[0])) || lo; last = v.find((x) => !befores.has(x[1])) || v[v.length - 1];
+        EIN.set(k, first[0]); EOUT.set(k, last[1]); NET.set(k, last[1] - first[0]); }); }
+    else bouts.forEach((b) => { const d = DL.get(b); if (d == null) return; NET.set(nk(b[2]), (NET.get(nk(b[2])) || 0) + d); NET.set(nk(b[3]), (NET.get(nk(b[3])) || 0) - d); });
     const focusN = (() => { const e = F.entrants.find((x) => x.slug === focusSlug); return e ? nk(e.r.name) : null; })();
     const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
-      line: (n, won, b) => { const e = EN.get(nk(n)); const rt = rOfName(n); const d = DL.get(b); const dd = d == null ? null : won ? d : -d;
+      line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n); const d = pr ? (won ? b[9] - b[7] : b[10] - b[8]) : DL.get(b); const dd = d == null ? null : pr ? d : won ? d : -d;
         const chip = e && OT.SB ? OT.SB.svg(e.r.sch, { size: 14, variant: 'chip', title: false }) : '<i class="bxnc"></i>';
         const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
-        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? ' · RTG ' + OT.rtg10(rt) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
-        const inner = `${chip}${nm}<span class="bxv">${rt != null ? OT.rtg10(rt) : ''}</span>${dTxt(dd)}`;
+        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? (pr ? ' · Elo before ' + Math.round(rt) + ', after ' + Math.round(rt + dd) : ' · RTG ' + OT.rtg10(rt)) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
+        const inner = `${chip}${nm}<span class="bxv">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : ''}</span>${dTxt(dd)}`;
         return e ? `<a class="bxl${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="bxl${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
     const RNC = (d) => ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16', 'Round of 32', 'Pigtails'][d] || 'Prelims';
     const RNX = (d) => (d === 0 ? '3rd place' : d === 1 ? 'Consolation semis' : 'Consolation R' + d);
@@ -405,7 +419,7 @@
     const placeB = bouts.filter((b) => b[0] === 'p5' || b[0] === 'p7').sort((p, q) => (p[0] > q[0]) - (p[0] < q[0]));
     const finish = (lab) => (n) => { const e = EN.get(nk(n)); return `<i>${lab}</i><b>${esc(shortName(n))}</b>`; };
     const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
-    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk"><h3>Championship</h3><span>Season rating · Δ = rating points won or lost in that bout against expectation</span></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
+    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk"><h3>Championship</h3><span>${hasElo ? 'Elo going into each bout, and how much it moved: the number after one bout is the number going into the next' : 'Season rating · Δ = rating points won or lost in that bout against expectation'}</span></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
       + (consT.length ? `<section class="bxsec"><div class="bxk"><h3>Consolation</h3></div>${bracketTree(consT, ctx, { roundName: RNX, finish: finish('3rd') })}</section>` : '')
       + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '') : '';
     // the field: every entrant with his bouts and career matrix
@@ -413,7 +427,7 @@
     const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
     const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
     const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
-      const d = DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
+      const d = b.length > 8 ? (won ? b[9] - b[7] : -(b[10] - b[8])) : DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
@@ -427,10 +441,10 @@
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
-    const info = (r) => ({ rt: rOf(r), net: NET.has(nk(r.name)) ? NET.get(nk(r.name)) : null });
+    const info = (r) => ({ rt: hasElo && EOUT.has(nk(r.name)) ? EOUT.get(nk(r.name)) : rOf(r), raw: hasElo && EOUT.has(nk(r.name)), net: NET.has(nk(r.name)) ? NET.get(nk(r.name)) : null });
     return head + (placers.length ? medalists(placers, info) : '') + bracketHTML
       + `<section class="bxsec"><div class="bxk"><h3>The field</h3>${sortSeg}</div><div class="bvlist"${F.loading ? ' data-loading="1"' : ''}>${lines}</div></section>`
-      + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? 'Δ is the Elo step each result is worth given both wrestlers’ season ratings: K 56, scaled by margin (fall 1.5, TF 1.4, MD 1.2, decision 1.0, overtime 0.8); forfeits and injury defaults count 0. ' : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
+      + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are a running Elo: his rating before each bout from earlier results only (every bout since his first postseason), updated after the bout with K 56 scaled by margin (fall 1.5, TF 1.35, MD 1.2, decision 1.0), more for wrestlers with few bouts on record. Medalists show the Elo after the tournament and the change across it. RTG elsewhere is the season rating, fit on the whole season at once. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
   Object.assign(OT, { boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });

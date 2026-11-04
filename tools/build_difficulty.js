@@ -58,10 +58,14 @@ csv(wsFile).forEach((r) => {
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
   B.s[n] = [Math.round(+r.season), r.best === "" ? null : +r.best, r.best_name || null, +r.bad || 0];
 });
+// running Elo per bout (tools/ratings.py bout_elo.csv): rating before and after, on the RTG scale
+const ELO = new Map();
+if (fs.existsSync('data/difficulty/bout_elo.csv')) csv('data/difficulty/bout_elo.csv').forEach((r) => { ELO.set([r.tournament, r.weight, r.side, r.round, r.winner, r.loser].join('|'), [+r.pre_w, +r.pre_l, +r.post_w, +r.post_l]); });
 csv('data/brackets/bouts.csv').forEach((b) => {
   const k = bkeyOf(b.level, b.tournament, b.weight), y = +b.year;
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
-  B.b.push([b.side, +b.round, b.winner, b.loser, b.result, b.score, b.flags]);
+  const e = ELO.get([b.tournament, b.weight, b.side, b.round, b.winner, b.loser].join('|'));
+  B.b.push(e ? [b.side, +b.round, b.winner, b.loser, b.result, b.score, b.flags, ...e] : [b.side, +b.round, b.winner, b.loser, b.result, b.score, b.flags]);
 });
 const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
 const OUT = {}; const L1 = { state: 's', regional: 'r', district: 'd' };

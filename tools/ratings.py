@@ -88,6 +88,39 @@ CK = lambda k: CANON.get(k, k)
 for b in bouts: b['wk'] = CK(b['wk']); b['lk'] = CK(b['lk'])
 for bk in list(entrants): entrants[bk] = [(CK(e[0]),) + tuple(e[1:]) for e in entrants[bk]]
 grade = {(CK(k), y): g for (k, y), g in sorted(grade.items(), key=lambda kv: kv[0][0] == CK(kv[0][0]))}
+# ---- transfers: one wrestler, two schools. Keys are name|school, so a transfer looked like two people and his second
+# school's seasons started with no history. Merge two keys with the same name when every check agrees: grades give the
+# same graduating class, the seasons do not overlap and follow within two years, the career fits in four seasons, and
+# the weights are close (within 30 lb).
+_yrs = defaultdict(set); _wts = defaultdict(list)
+for b in bouts:
+    for k in (b['wk'], b['lk']): _yrs[k].add(b['year'])
+    m_ = re.match(r'\d+', str(b['weight']))
+    if m_: _wts[(b['wk'], b['year'])].append(int(m_.group())); _wts[(b['lk'], b['year'])].append(int(m_.group()))
+for (lvl, t, w), es in entrants.items():
+    for e in es: _yrs[e[0]].add(int(t[:4]))
+_gyk = defaultdict(set)
+for (kk, y), g in grade.items(): _gyk[kk].add(y + 3 - g)
+_byname = defaultdict(list)
+for k in _yrs: _byname[k.split('|')[0]].append(k)
+TRANSFER = {}
+for nm, ks in _byname.items():
+    if len(ks) < 2 or len(nm) < 6: continue
+    ks = sorted(ks, key=lambda k: min(_yrs[k]))
+    for i, a in enumerate(ks):
+        for b2 in ks[i + 1:]:
+            ra = TRANSFER.get(a, a)
+            ya, yb = _yrs[ra] | set().union(*[_yrs[x] for x, v in TRANSFER.items() if v == ra]), _yrs[b2]
+            if b2 in TRANSFER or ya & yb or min(yb) <= max(ya) or min(yb) - max(ya) > 2 or max(yb) - min(ya) > 3: continue
+            ga, gb = _gyk.get(a, set()) | _gyk.get(ra, set()), _gyk.get(b2, set())
+            if len(ga) != 1 or len(gb) != 1 or ga != gb: continue
+            wa = [w_ for y in ya for w_ in _wts.get((ra, y), [])]; wb = [w_ for y in yb for w_ in _wts.get((b2, y), [])]
+            if wa and wb and abs(np.median(wa) - np.median(wb)) > 30: continue
+            TRANSFER[b2] = ra
+for b in bouts: b['wk'] = TRANSFER.get(b['wk'], b['wk']); b['lk'] = TRANSFER.get(b['lk'], b['lk'])
+for bk in list(entrants): entrants[bk] = [(TRANSFER.get(e[0], e[0]),) + tuple(e[1:]) for e in entrants[bk]]
+grade = {(TRANSFER.get(k, k), y): g for (k, y), g in grade.items()}
+say(f'transfers: {len(TRANSFER)} name+school keys linked to the same wrestler at an earlier school')
 say(f'identity linking: {sum(1 for k, v in CANON.items() if k != v)} of {len(CANON)} name keys merged into another ({len(_merges)} merge events)')
 bracket_meta = {}
 for b in bouts: bracket_meta.setdefault(b['bk'], (b['year'], b['c'], b['unit'], b['lr']))
@@ -118,6 +151,7 @@ class Elo:
         return s.R[k]
     def p(s, ra, rb): return 1 / (1 + 10 ** ((rb - ra) / s.S))
 
+POST = {}
 def run(params, keep=False):
     E = Elo(**params); tune = [0, 0]; hold = [0, 0, 0]
     pre = {} ; end = {}
@@ -131,7 +165,7 @@ def run(params, keep=False):
         E.R[b['wk']] = rw + E.kf(b['wk']) * m * (1 - pw); E.R[b['lk']] = rl - E.kf(b['lk']) * m * (1 - pw)
         E.n[b['wk']] += 1; E.n[b['lk']] += 1
         if keep:
-            pre[b['i']] = (rw, rl); end[(b['wk'], b['year'])] = E.R[b['wk']]; end[(b['lk'], b['year'])] = E.R[b['lk']]
+            pre[b['i']] = (rw, rl); POST[b['i']] = (E.R[b['wk']], E.R[b['lk']]); end[(b['wk'], b['year'])] = E.R[b['wk']]; end[(b['lk'], b['year'])] = E.R[b['lk']]
     return tune[0] / tune[1], hold[0] / hold[1], hold[2] / hold[1], hold[1], E, pre, end
 
 def fit_growth(params):
@@ -637,6 +671,24 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/brackets.csv', 'w
         c.writerow([bk[0], bk[1], bk[2], B['year'], B['c'], B['unit'], B['n'], B['rated'], B['bouts'], f"{B['field']:.0f}" if B['field'] is not None else '', 1 if B['bouts'] == 0 else 0])
 names_of = {}
 for r in recs.values(): names_of.setdefault((r['k'], r['year']), r['name'])
+# running Elo for the bracket view: the forward rating before and after every bout (only past results), put on the same
+# 1500 = average state qualifier scale with its own per-season anchor (state entrants' rating entering states)
+_ea = defaultdict(list); _seen = set()
+for b in bouts:
+    if b['level'] != 'state' or b['i'] not in PRE: continue
+    for k, v in ((b['wk'], PRE[b['i']][0]), (b['lk'], PRE[b['i']][1])):
+        if (k, b['year']) in _seen: continue
+        _seen.add((k, b['year'])); _ea[(b['year'], b['c'])].append(v)
+EANC = {g: (float(np.mean(v)), float(np.std(v)) or 1.0) for g, v in _ea.items() if len(v) >= 20}
+def enorm(v, y, c):
+    g = (y, c) if (y, c) in EANC else min(EANC, key=lambda g: (g[1] != c, abs(g[0] - y)))
+    m, sd = EANC[g]; return 1500 + (v - m) / sd * SD_REF
+with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_elo.csv', 'w', newline='') as f:
+    c_ = csv.writer(f); c_.writerow(['level', 'tournament', 'weight', 'side', 'round', 'winner', 'loser', 'pre_w', 'pre_l', 'post_w', 'post_l'])
+    for b in bouts:
+        if b['i'] not in PRE: continue
+        y, c = b['year'], b['c']; (pw_, pl_), (qw_, ql_) = PRE[b['i']], POST[b['i']]
+        c_.writerow([b['level'], b['tournament'], b['weight'], b['side'], b['round'], b['winner'], b['loser']] + [round(enorm(v, y, c)) for v in (pw_, pl_, qw_, ql_)])
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.csv', 'w', newline='') as f:
     c = csv.writer(f); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
                                    'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results'])
