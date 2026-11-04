@@ -85,6 +85,18 @@
     let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = top; more.textContent = topNote; const hd = document.getElementById('whead'); if (hd) hd.textContent = 'Placewinners'; return; }
       OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 60); list.innerHTML = (hit.length ? '<div class="wkl">' + hit.map(card).join('') + '</div>' : '<div class="card empty">No one by that name.</div>'); const hd = document.getElementById('whead'); if (hd) hd.textContent = 'Search'; more.textContent = hit.length >= 60 ? 'Showing the top 60 by rating. Add a school or more of the name to narrow it.' : `${hit.length} wrestler${hit.length === 1 ? '' : 's'}.`; }); }, 150); });
   }
+  /* repaint one performance chart in place, keeping its horizontal scroll */
+  function repaintPerf(box) {
+    const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':');
+    const u = kd === 'state' ? OT.U.state() : kd === 'region' ? OT.U.region(id) : kd === 'district' ? OT.U.district(+id) : OT.U.school(id);
+    const sx = box.querySelector('.pscr'), left = sx ? sx.scrollLeft : null; const key = box.dataset.perf; box.outerHTML = OT.perfChart(u);
+    const nb = main.querySelector(`.perf[data-perf="${CSS.escape(key)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left;
+  }
+  /* hovering a season shows every line's value for it */
+  document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
+  document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
+  document.addEventListener('change', (e) => { const inp = e.target.closest && e.target.closest('input[data-cmpadd]'); if (!inp || !state.cmp) return; const v = inp.value.trim(); const s = OT.UD.schools.find((x) => x.toLowerCase() === v.toLowerCase());
+    if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   const applyScope = () => { refreshPanel(); render(true); };
   document.addEventListener('click', (e) => {
     const hp = e.target.closest('[data-panel]'); if (hp) { openPanel(hp.dataset.panel); return; }
@@ -98,7 +110,8 @@
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }
     const ua = e.target.closest('button[data-uall]'); if (ua) { state.uall = ua.dataset.uall === '1'; render(true); return; }
-    const py = e.target.closest('[data-py]'); if (py) { const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; state.pseason = state.pseason && state.pseason.k === k && state.pseason.y === y ? null : { k, y }; const u = kd === 'state' ? OT.U.state() : kd === 'region' ? OT.U.region(id) : kd === 'district' ? OT.U.district(+id) : OT.U.school(id); const sx = box.querySelector('.pscr'), left = sx ? sx.scrollLeft : null; box.outerHTML = OT.perfChart(u); const nb = main.querySelector(`.perf[data-perf="${CSS.escape(box.dataset.perf)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left; } return; }
+    const cm = e.target.closest('button[data-cmp]'); if (cm) { const box = cm.closest('.perf'); if (box && state.cmp) { const id = cm.dataset.cmp; if (e.target.closest('em') && id.startsWith('s:')) { state.cmp.extra = state.cmp.extra.filter((s) => 's:' + s !== id); state.cmp.on.delete(id); } else if (state.cmp.on.has(id)) state.cmp.on.delete(id); else state.cmp.on.add(id); repaintPerf(box); } return; }
+    const py = e.target.closest('[data-py]'); if (py) { const box = py.closest('.perf'); if (box) { const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':'); const y = +py.dataset.py; const k = kd + ':' + id; state.pseason = state.pseason && state.pseason.k === k && state.pseason.y === y ? null : { k, y }; repaintPerf(box); } return; }
     const ra = e.target.closest('button[data-rall]'); if (ra) { state.rall = ra.dataset.rall === '1'; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
     const w = e.target.closest('button[data-win]'); if (w) { setWin({ mode: w.dataset.win }); applyScope(); return; }

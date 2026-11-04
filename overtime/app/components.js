@@ -249,7 +249,7 @@
   const colHead = (c, i, full) => (c ? `<b>${full ? c.year : String(c.year).slice(2)}</b><i>${c.w ? wShort(c.w) : GRADE_L[i]}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`);
   function careerGrid(W) {
     const M = careerCells(W.apps, W.lower, { full: W.full });
-    const wrap = (c, k) => { const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null; const f = ok ? OT.fieldOf(c.r, k) : null; return `<div class="cw">${cellHTML(c, 'cell', false, href)}${f ? OT.wedge(f) : '<i class="wdg"></i>'}</div>`; };
+    const wrap = (c, k) => { const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null; const f = ok ? OT.fieldOf(c.r, k) : null; return `<div class="cw">${cellHTML(c, 'cell', false, href)}${f ? OT.sbar(f, k, c.year + ' ' + k) : '<i class="sb sb0"></i>'}</div>`; };
     return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year}${M.cols[i].w ? ' · ' + wShort(M.cols[i].w) : ''}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => wrap(c, r.k)).join('')}`).join('')}</div>
       <div class="note">${OT.wlegend()} Tap a result for its bracket. Q advanced without a place · DNP entered, didn't place · DNC didn't compete · – no bracket on record.${W.full ? '' : ' Loading his full career…'}</div>`;
   }
@@ -294,7 +294,8 @@
           const cls = `pill here${e.adv ? ' adv' : ''}`;
           cell = r.place ? `<span class="${cls} ${pc(r.place)}" title="${r.year} · ${wShort(r.w)} · ${ordinal(r.place)}${e.adv ? ' · advanced' : ''}">${r.place}</span>` : `<span class="${cls} cq" title="${r.year} · ${F.lvl === 'state' ? 'qualified' : 'did not place'}">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
         } else cell = cellHTML(c, 'pill');
-        h += cell.replace(/^<(div|span|a)([^>]*?)class="/, (m, t, a) => `<${t}${a}style="${at(k + 2, i + 2)}" class="`);
+        const rr = here ? r : c && c.r && !c.dnc && !c.nodata ? c.r : null; const fv = rr ? OT.fieldOf(rr, row.k) : null;
+        h += `<span class="pw" style="${at(k + 2, i + 2)}">${cell}${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<i class="sb sb0"></i>'}</span>`;
       });
     });
     return `<span class="cm bvm">${h}</span>`;

@@ -15,7 +15,7 @@ const srv = http.createServer((q, s) => { const f = path.join(SITE, decodeURICom
     for (const rt of routes) {
       await p.goto(BASE + '/index.html#' + rt); await p.waitForTimeout(rt.startsWith('wrestler/') || rt.includes('?b=') ? 1800 : 700);
       const sw = await p.evaluate(() => document.documentElement.scrollWidth);
-      const wide = await p.evaluate((W) => Array.from(document.querySelectorAll('main *')).filter((e) => { const r = e.getBoundingClientRect(); return r.right > W + 1 && !e.closest('.tw,.drawer .body,.rchips'); }).slice(0, 5).map((e) => e.tagName.toLowerCase() + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().right)), w);
+      const wide = await p.evaluate((W) => Array.from(document.querySelectorAll('main *')).filter((e) => { const r = e.getBoundingClientRect(); return r.right > W + 1 && !e.closest('.tw,.drawer .body,.rchips,.schips.sm'); }).slice(0, 5).map((e) => e.tagName.toLowerCase() + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().right)), w);
       if (sw > w || wide.length) bad++;
       console.log(tag, rt.padEnd(32), 'scrollW', sw, wide.join(' | '));
       await p.screenshot({ path: path.join(SITE, 'shots', `${tag}-${rt.replace(/[\/?=.]/g, '_')}.png`), fullPage: true });
