@@ -198,17 +198,37 @@ def mweight(b):
     if b['result'] in SKIP: return 0.0
     if b['result'] == 'dec' and re.search(r'\b(OT|SV|TB|UTB|2OT|UT)\b', b['flags'] or ''): return 0.8
     return MW.get(b['result'], 1.0)
-# identities: a name+school pair unseen for more than five seasons starts a new identity
+# identities: one name+school can be several people (father and son, or unrelated wrestlers years apart). Same rule as
+# tools/build_people.js splitCareers: a career spans at most 4 seasons (5 when grades show a repeated year), grades
+# never go backward, every grade implies the same graduating class (+-1 for a repeat), no season past graduation.
 years_of = defaultdict(set)
 for b in bouts: years_of[b['wk']].add(b['year']); years_of[b['lk']].add(b['year'])
 for (lvl, t, w), es in entrants.items():
     for e in es: years_of[e[0]].add(int(t[:4]))
-IDN = {}
-for k, ys in years_of.items():
-    n, prev = 0, None
+def split_careers(k, ys):
+    cs = []
     for y in sorted(ys):
-        if prev is not None and y - prev > 5: n += 1
-        IDN[(k, y)] = k if n == 0 else f'{k}#{n}'; prev = y
+        g = grade.get((k, y)); g = g + 9 if g is not None else 0; gy = y + 12 - g if g else 0
+        c = cs[-1] if cs else None; ok = c is not None
+        if ok:
+            rep = (gy and c['gy'] and gy == c['gy'] + 1) or (g and c['lg'] and g == c['lg'] and y > c['end'])
+            if y - c['start'] > (4 if (rep or c['rep']) else 3): ok = False
+            if ok and g and c['lg'] and g < c['lg']: ok = False
+            if ok and gy and c['gy'] and abs(gy - c['gy']) > 1: ok = False
+            if ok and not gy and c['gy'] and y > c['gy']: ok = False
+            if ok and rep: c['rep'] = True
+        if not ok: cs.append(dict(start=y, end=y, gy=gy, lg=g, rep=False))
+        else:
+            c['end'] = y
+            if g: c['lg'] = g; c['gy'] = c['gy'] or gy
+    return [c['start'] for c in cs]
+IDN = {}; _nsplit = 0
+for k, ys in years_of.items():
+    starts = split_careers(k, ys); _nsplit += len(starts) > 1
+    for y in ys:
+        n = sum(1 for st in starts[1:] if y >= st)
+        IDN[(k, y)] = k if n == 0 else f'{k}#{n}'
+say(f'careers: {_nsplit} name+school keys split into several careers')
 ID = lambda k, y: IDN.get((k, y), k)
 for b in bouts: b['wi'] = ID(b['wk'], b['year']); b['li'] = ID(b['lk'], b['year'])
 # season data: bouts + placement-implied pairs for brackets without (enough) bouts

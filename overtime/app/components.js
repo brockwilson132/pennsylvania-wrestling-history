@@ -62,7 +62,7 @@
 
   /* the level switch: which tournament level the podium, bracket, rankings and seasons count */
   const LVLS = [['state', 'State'], ['regional', 'Regional'], ['district', 'District']];
-  const levelSwitch = () => `<div class="seg lvl" role="group" aria-label="Tournament level">${LVLS.map(([k, l]) => `<button data-lvl="${k}" aria-pressed="${state.lvl === k}">${l}</button>`).join('')}</div>`;
+  const levelSwitch = (kind) => { const ok = OT.lvlsFor(kind || 'school'); if (ok.length < 2) return ''; return `<div class="seg lvl" role="group" aria-label="Tournament level">${LVLS.filter(([k]) => ok.includes(k)).map(([k, l]) => `<button data-lvl="${k}" aria-pressed="${state.lvl === k}">${l}</button>`).join('')}</div>`; };
   /* the podium: eight steps, heights fall from 1st, color only on the top edge; each step carries the count */
   const POD = [7, 5, 3, 1, 0, 2, 4, 6], POD_H = [100, 80, 66, 56, 47, 40, 34, 29];
   const podium = (places, opts = {}) => `<div class="pod${opts.sm ? ' sm' : ''}" role="img" aria-label="Medals by place: ${places.map((n, i) => ordinal(i + 1) + ' ' + n).join(', ')}">${POD.map((i) => `<div class="pst"><div class="pblk m${Math.min(i + 1, 5)}" style="height:${POD_H[i]}%"><b>${places[i] ? fmt(places[i]) : ''}</b></div><span>${ordinal(i + 1)}</span></div>`).join('')}</div>`;
@@ -80,7 +80,7 @@
       : [['Medals', o.medals], ['Titles', o.titles], u.kind === 'school' ? ['Team titles', o.won] : ['Tournaments', o.cov ? o.cov.n : null], ['Seasons', o.cov ? o.cov.years.length : null]]);
     return `<header class="uh">
       <div><h1>${esc(u.name)}</h1>${extra.sub ? `<div class="sub">${extra.sub}</div>` : ''}</div>
-      ${levelSwitch()}
+      ${levelSwitch(u.kind)}
       <div class="hero">${hero.map(([l, v]) => `<div><b>${v == null ? '–' : typeof v === 'number' ? fmt(v) : v}</b><span>${l}</span></div>`).join('')}</div>
       ${o.places ? podium(o.places) : ''}
     </header>`;

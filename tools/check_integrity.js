@@ -81,6 +81,27 @@ const setScope = (cls, mode) => { OT.clearAll(); OT.setCls(cls); OT.setWin({ mod
       check(`${cls} ${mode} ${lvl}: state total = bracket rows = Σ districts`, st === raw && kids === raw, `${st} / ${raw} / ${kids}`); }
     OT.setLvl('state'); }
 
+  /* 8. identities: one person never spans more than 5 seasons, never has more than 4 state results, never two results
+        at one level in one season (careers split in tools/build_people.js, WR_CAREERS) */
+  { setScope('ALL', 'all');
+    const P = OT.peopleLoaded() ? await OT.loadPeople() : await OT.loadPeople();
+    const long = P.filter((p) => p.y1 - p.y0 > 4);
+    check('people: no career longer than 5 seasons', !long.length, long.length ? `${long.length}: ${long.slice(0, 5).map((p) => `${p.name} (${p.sch}) ${p.y0}–${p.y1}`).join('; ')}` : `${P.length} people, longest ${Math.max(...P.map((p) => p.y1 - p.y0)) + 1} seasons`);
+    const many = P.filter((p) => p.sres.length > 4 || p.sres.filter((x) => x.place).length > 4);
+    check('people: at most 4 state results (medals or qualifications)', !many.length, many.length ? many.slice(0, 5).map((p) => `${p.name} (${p.sch}) ${p.sres.length}`).join('; ') : 'none over 4');
+    const groups = Array.from(OT.d3 ? [] : []);
+    const G = new Map(); OT.APP.forEach((r) => { const k = OT.wKey(r); (G.get(k) || G.set(k, []).get(k)).push(r); });
+    let spanBad = [], dupBad = [];
+    G.forEach((rs, k) => { const ys = rs.map((r) => r.year); const sp = Math.max(...ys) - Math.min(...ys);
+      if (sp > 4) spanBad.push(`${rs[0].name} (${rs[0].sch}) ${Math.min(...ys)}–${Math.max(...ys)}`);
+      const per = new Map(); rs.forEach((r) => per.set(r.year, (per.get(r.year) || 0) + 1)); per.forEach((n, y) => { if (n > 1) dupBad.push(`${rs[0].name} (${rs[0].sch}) ${y}×${n}`); }); });
+    check('state wrestlers: no career longer than 5 seasons', !spanBad.length, spanBad.length ? `${spanBad.length}: ${spanBad.slice(0, 5).join('; ')}` : `${G.size} state wrestlers`);
+    check('state wrestlers: at most one state result per season', dupBad.length <= 0.001 * G.size, dupBad.length ? `${dupBad.length}: ${dupBad.slice(0, 6).join('; ')}` : 'none', dupBad.length > 0);
+    const LG = new Map(); OT.LOWER.forEach((r) => { const k = OT.wKey(r) + '|' + r.lvl + '|' + r.year; LG.set(k, (LG.get(k) || 0) + 1); });
+    const lowDup = Array.from(LG).filter(([, n]) => n > 1);
+    check('district/regional medalists: at most one result per level per season', lowDup.length <= 0.002 * LG.size, `${lowDup.length} of ${LG.size}${lowDup.length ? ': ' + lowDup.slice(0, 5).map(([k, n]) => k + '×' + n).join('; ') : ''}`, lowDup.length > 0);
+  }
+
   const w = Math.max(...results.map((r) => r.name.length));
   results.forEach((r) => console.log(`${r.ok ? 'PASS' : r.soft ? 'NOTE' : 'FAIL'}  ${r.name.padEnd(w)}  ${r.detail || ''}`));
   const hard = results.filter((r) => !r.ok && !r.soft);

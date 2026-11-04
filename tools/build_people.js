@@ -33,10 +33,43 @@ const FIVE = ['NE', 'NW', 'SC', 'SE', 'SW'];
 const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
 const stdIdx = (wn) => { const i = STDK.findIndex(([, a, b]) => wn >= a && wn <= b); return i < 0 ? STDK.length - 1 : i; };
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
-function add(lvl, year, cls, unit, w, place, name, school, d) {
+/* Raw appearances first, keyed by name + school; careers are split afterwards (see splitCareers), so a father and a
+   son, or two unrelated wrestlers with one name at one school decades apart, never merge into one person. */
+const RAW = new Map();
+const GN = { FR: 9, SO: 10, JR: 11, SR: 12, '7': 7, '8': 8, '7th': 7, '8th': 8 };
+function add(lvl, year, cls, unit, w, place, name, school, d, grade) {
   if (!name) return;
   if (lvl === 'state') { const mb = MEMB[`${year}|${cls}|${wNum(w)}|${nkey(name)}`]; if (mb) { d = mb[0]; if (mb[1]) school = mb[1]; } } else d = unitDist(lvl, unit, d);
-  const sch = splitName(canon(school), d); const k = nkey(name) + '|' + sch; if (!nkey(name)) return;
+  const sch = splitName(canon(school), d); if (!nkey(name)) return; const base = nkey(name) + '|' + sch;
+  if (lvl === 'state' && !grade) grade = (W.WR_GRADES || {})[`${year}|${cls}|${nkey(name)}`] || '';
+  (RAW.get(base) || RAW.set(base, []).get(base)).push({ a: [lvl, year, cls, unit, w, place, name, sch, d], year, g: GN[String(grade || '').trim()] || 0, lvl, wn: wNum(w) });
+}
+/* Split one name+school into careers. Hard limits: a career spans at most 4 seasons (5 when grades show a repeated
+   year or an 8th-grade start), grades never go backward, and every grade must imply the same graduating class (±1 for
+   a repeated year). Appearances are taken in season order; anything that breaks a limit starts a new career. Returns
+   the start season of each career. */
+function splitCareers(apps) {
+  const years = Array.from(new Set(apps.map((x) => x.year))).sort((a, b) => a - b);
+  const gOf = (y) => { const gs = apps.filter((x) => x.year === y && x.g).map((x) => x.g); return gs.length ? Math.max(...gs) : 0; };
+  const cs = [];
+  for (const y of years) {
+    const g = gOf(y), gy = g ? y + 12 - g : 0; const c = cs[cs.length - 1];
+    let ok = !!c;
+    if (ok) {
+      const repeat = (gy && c.gy && gy === c.gy + 1) || (g && c.lastG && g === c.lastG && y > c.end) || (c.minG && c.minG <= 8);
+      const maxSpan = repeat || c.repeat ? 4 : 3;
+      if (y - c.start > maxSpan) ok = false;
+      if (ok && g && c.lastG && g < c.lastG) ok = false;                       // grade went backward
+      if (ok && gy && c.gy && Math.abs(gy - c.gy) > 1) ok = false;             // different graduating class
+      if (ok && !gy && c.gy && y > c.gy) ok = false;                           // past his graduation
+      if (ok && repeat) c.repeat = true;
+    }
+    if (!ok) cs.push({ start: y, end: y, gy, lastG: g, minG: g || 99, repeat: false });
+    else { const cc = cs[cs.length - 1]; cc.end = y; if (g) { cc.lastG = g; cc.minG = Math.min(cc.minG, g); if (!cc.gy) cc.gy = gy; } }
+  }
+  return cs.map((c) => c.start);
+}
+function addAgg(k, lvl, year, cls, unit, w, place, name, sch, d) {
   let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0 }; P.set(k, p); }
   p.cls.set(cls, (p.cls.get(cls) || 0) + (lvl === 'state' ? 3 : 1)); p.ws |= 1 << stdIdx(wNum(w));
   if (year >= p.ny) { p.ny = year; p.name = name; }
@@ -57,15 +90,30 @@ function add(lvl, year, cls, unit, w, place, name, school, d) {
 /* state: medalists, champions and every qualifier */
 (W.WR_MEDALS || []).forEach(([year, cls, w, place, name, school, d]) => add('state', year, cls, null, w, place, name, school, d));
 (W.WR_DATA.champs || []).concat(W.WR_CHAMP_FILL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 1, name, school, d));
-(W.WR_QUAL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 0, name, school, d));
+(W.WR_QUAL || []).forEach(([year, cls, w, name, school, d, grade]) => add('state', year, cls, null, w, 0, name, school, d, grade));
 /* district / regional: every entrant in the full fields, plus source-only champions in the medalist tables */
 const LCLS = ['AAA', 'AA', 'single'];
 fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).forEach((f) => {
   const [year, lvl] = f.replace('.json', '').split('-');
-  JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach(([cls, unit, w, place, , name, sch, , , d]) => add(lvl, +year, cls, unit, w, +place || 0, name, sch, d));
+  JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach(([cls, unit, w, place, , name, sch, grade, , d]) => add(lvl, +year, cls, unit, w, +place || 0, name, sch, d, grade));
 });
 const LS = W.WR_LOWER_META.strs;
-[['district', W.WR_LOWER_D], ['regional', W.WR_LOWER_R]].forEach(([lvl, rows]) => (rows || []).forEach(([, year, c, ui, wi, place, ni, si, , , d]) => add(lvl, year, LCLS[c], LS[ui], LS[wi], place, LS[ni], LS[si], d)));
+[['district', W.WR_LOWER_D], ['regional', W.WR_LOWER_R]].forEach(([lvl, rows]) => (rows || []).forEach(([, year, c, ui, wi, place, ni, si, g, , d]) => add(lvl, year, LCLS[c], LS[ui], LS[wi], place, LS[ni], LS[si], d, ['', 'FR', 'SO', 'JR', 'SR'][g] || '')));
+
+/* careers: split every name+school, then aggregate each career as its own person. careers.js lists, for each
+   name+school with more than one career, the start season of every career after the first (the app uses it to give
+   each career its own key and page). */
+const CAREERS = {}; let nSplit = 0, nSameSeason = 0;
+RAW.forEach((apps, base) => {
+  const starts = splitCareers(apps);
+  if (starts.length > 1) { CAREERS[base] = starts.slice(1); nSplit++; }
+  apps.forEach((x) => { let i = 0; while (i + 1 < starts.length && x.year >= starts[i + 1]) i++; const k = i ? base + '#' + starts[i] : base; addAgg(k, ...x.a); });
+  /* two state appearances in one season at weights >12 lb apart: two people sharing a name (counted, not split) */
+  const byY = new Map(); apps.filter((x) => x.lvl === 'state').forEach((x) => { (byY.get(x.year) || byY.set(x.year, []).get(x.year)).push(x.wn); });
+  byY.forEach((ws) => { if (ws.length > 1 && Math.max(...ws) - Math.min(...ws) > 12) nSameSeason++; });
+});
+fs.writeFileSync(path.join(OV, 'careers.js'), 'window.WR_CAREERS=' + JSON.stringify(CAREERS) + ';\n');
+console.log('name+school keys', RAW.size, 'split into several careers', nSplit, 'same-season two-weight state cases', nSameSeason);
 
 const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, schools.length); schools.push(s); } return sidx.get(s); };
 const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.peak).map((p) => {

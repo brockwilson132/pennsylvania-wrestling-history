@@ -30,6 +30,7 @@
     return lowerSeasons(u, state.lvl, rows, teams);
   }
   function levelPage(u, opts = {}) {
+    OT.pageLvl(u.kind);
     const o = levelStats(u);
     const parts = [unitHeader(u, o, opts)];
     const crumbs = (opts.crumbs || []).concat([{ name: u.name }]); if (u.kind === 'state') crumbs.splice(0, crumbs.length, { name: 'Pennsylvania' });
@@ -71,7 +72,7 @@
   };
   PAGES.school = (sl) => {
     const name = SCHOOL_BY_SLUG.get(sl); if (!name) return `<header class="uh"><h1>Not found</h1></header>` + empty('No school at this address.');
-    const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
+    OT.pageLvl('school'); const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
     const o = unitStats(u);
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(u.region ? [{ name: REGIONS[u.region] + ' Region', href: '#region/' + u.region }] : []), { name: 'District ' + u.d, href: '#district/' + u.d }], sub: hist + (state.lvl === 'state' && o.offMedals ? ` · ${o.offMedals} ${o.offCls} medals count at ${Math.round(100 * o.offClass)}%` : ''),
       hero: state.lvl === 'state' ? [['Medals', o.medals], ['Titles', o.titles], ['Team titles', o.won], ['Qualifiers', o.quals]] : null,
