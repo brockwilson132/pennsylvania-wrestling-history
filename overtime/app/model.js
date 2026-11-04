@@ -27,7 +27,7 @@ const OT = (window.OT = {});
   const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
   try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
   try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
-  try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && typeof f === 'object') state.f = { ...EMPTY_F(), ...f }; } catch (e) { /* none */ }
+  try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
   const MEMO = new Map(); const memo = (k, f) => { if (!MEMO.has(k)) MEMO.set(k, f()); return MEMO.get(k); };
   const clearCaches = () => { MEMO.clear(); STATS.clear(); RANKS.clear(); SEASONS.clear(); WIN.clear(); SREG.clear(); DREG.clear(); };
   const save = (k, v) => { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) { /* none */ } };

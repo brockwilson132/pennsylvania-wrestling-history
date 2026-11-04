@@ -35,29 +35,19 @@
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
     return `<div class="win"><div class="seg" role="group" aria-label="Seasons">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25'], ['custom', 'Custom']].map(([k, l]) => `<button data-win="${k}" aria-pressed="${w.mode === k}">${l}</button>`).join('')}</div>${w.mode === 'custom' ? `<form class="wrange" data-wrange><input type="number" name="from" inputmode="numeric" min="1938" max="2026" value="${a}" aria-label="From"><span>–</span><input type="number" name="to" inputmode="numeric" min="1938" max="2026" value="${b}" aria-label="To"><button type="submit" class="go">Go</button></form>` : ''}</div>`; };
   /* header chips: the current selections, each one opens the control panel */
-  const filterChips = () => { const f = state.f, out = [];
-    if (f.weights.length) out.push(f.weights.length === 1 ? STD.find((s) => s.k === f.weights[0]).label + ' lbs' : f.weights.length + ' weights');
-    if (f.regions.length) out.push(f.regions.length === 1 ? REGIONS[f.regions[0]] : f.regions.length + ' regions');
-    if (f.districts.length) out.push(f.districts.length === 1 ? 'District ' + f.districts[0] : f.districts.length + ' districts');
-    if (f.schools.length) out.push(f.schools.length === 1 ? f.schools[0] : f.schools.length + ' schools');
-    return out; };
-  const headerChips = () => { const fc = filterChips(); const n = nFilters();
-    const ic = `<button class="hc ic${n ? ' on' : ''}" data-panel="filters" aria-label="Filters" title="Filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>${n ? `<b>${n}</b>` : ''}</button>`;
-    const main = `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : windowLabel()}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}`;
-    return (window.innerWidth || 390) < 720 ? ic + main : main + ic; };
+  const filterChips = () => { const f = state.f; return f.weights.length ? [f.weights.length === 1 ? STD.find((x) => x.k === f.weights[0]).label + ' lbs' : f.weights.length + ' weights'] : []; };
+  const headerChips = () => { const fc = filterChips(), n = state.f.weights.length;
+    const ic = `<button class="hc ic${n ? ' on' : ''}" data-panel="filters" aria-label="Class, seasons and weights" title="Class, seasons and weights"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>`;
+    return ic + `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? windowLabel() : 'Last ' + state.win.mode}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}`; };
   /* the control panel: class, window, multi-select filters */
   const fchip = (kind, v, label, on) => `<button class="fc${on ? ' on' : ''}" data-f="${kind}" data-v="${esc(String(v))}" aria-pressed="${on}">${label}</button>`;
-  function panel(q = '') {
+  function panel() {
     const f = state.f;
-    const schools = Array.from(OT.SCHOOL_D.keys()).sort();
-    const ql = q.trim().toLowerCase(); const hits = ql ? schools.filter((s) => s.toLowerCase().includes(ql)).slice(0, 12) : [];
-    return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Clear all</button><button class="pdone" data-panel-close>Done</button></span></div>
+    return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Reset</button><button class="pdone" data-panel-close>Done</button></span></div>
       <div class="pg" id="pg-class"><div class="k">Class</div>${classToggle()}</div>
       <div class="pg" id="pg-window"><div class="k">Seasons</div>${windowToggle()}</div>
-      <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((s) => fchip('weights', s.k, s.label, f.weights.includes(s.k))).join('')}</div></div>
-      <div class="pg"><div class="k">Regions${f.regions.length ? ` <button class="pclr" data-clear="regions">clear</button>` : ''}</div><div class="fcs">${OT.regionOrder().map((r) => fchip('regions', r, REGIONS[r], f.regions.includes(r))).join('')}</div></div>
-      <div class="pg"><div class="k">Districts${f.districts.length ? ` <button class="pclr" data-clear="districts">clear</button>` : ''}</div><div class="fcs">${d3.range(1, 13).map((d) => fchip('districts', d, 'D' + d, f.districts.includes(d))).join('')}</div></div>
-      <div class="pg"><div class="k">Schools${f.schools.length ? ` <button class="pclr" data-clear="schools">clear</button>` : ''}</div>${f.schools.length ? `<div class="fcs">${f.schools.map((s) => fchip('schools', s, esc(s) + ' ×', true)).join('')}</div>` : ''}<input class="search psearch" id="psearch" type="search" placeholder="Add a school" value="${esc(q)}" autocomplete="off" aria-label="Search schools">${hits.length ? `<div class="fcs">${hits.map((s) => fchip('schools', s, esc(s), f.schools.includes(s))).join('')}</div>` : ''}</div>`;
+      <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((x) => fchip('weights', x.k, x.label, f.weights.includes(x.k))).join('')}</div><div class="note1">Weights narrow the wrestler lists and all-time teams.</div></div>
+      <a class="pabout" href="#about" data-panel-close>How ratings and scores work</a>`;
   }
 
   /* the level switch: which tournament level the podium, bracket, rankings and seasons count */
@@ -259,9 +249,9 @@
   const colHead = (c, i, full) => (c ? `<b>${full ? c.year : String(c.year).slice(2)}</b><i>${c.w ? wShort(c.w) : GRADE_L[i]}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`);
   function careerGrid(W) {
     const M = careerCells(W.apps, W.lower, { full: W.full });
-    const wrap = (c, k) => { const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null; return `<div class="cw">${cellHTML(c, 'cell', false, href)}</div>`; };
+    const wrap = (c, k) => { const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null; const f = ok ? OT.fieldOf(c.r, k) : null; return `<div class="cw">${cellHTML(c, 'cell', false, href)}${f ? OT.wedge(f) : '<i class="wdg"></i>'}</div>`; };
     return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year}${M.cols[i].w ? ' · ' + wShort(M.cols[i].w) : ''}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => wrap(c, r.k)).join('')}`).join('')}</div>
-      <div class="note">Tap a result for its bracket. Q advanced without a recorded place · DNP entered, didn't place · DNC didn't compete · — no bracket on record.${W.full ? '' : ' Loading his full career…'}</div>`;
+      <div class="note">${OT.wlegend()} Tap a result for its bracket. Q advanced without a place · DNP entered, didn't place · DNC didn't compete · – no bracket on record.${W.full ? '' : ' Loading his full career…'}</div>`;
   }
 
   /* road to Hershey: one season as a line across the state */
@@ -325,7 +315,7 @@
       return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}</span>`; };
     const sortBy = state.bvsort === 'rtg' ? 'rtg' : 'seed';
     const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
-    const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${sortSeg}</div>${F.field != null ? `<div class="bvfield">${fieldGauge(F.field, F.lvl)}</div>` : ''}`;
+    const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${sortSeg}</div>${F.field != null ? `<div class="bvfield">${OT.fieldGauge(F.field, F.lvl)}</div>` : ''}`;
     const SRCI = { d3records: ['champions only', 'District III Records', 'https://piaadistrict3records.com/'], wpial: ['champions only', 'WPIAL', 'https://wpial.org/'] }[F.src];
     const srcNote = SRCI ? `<div class="bvsrc">${SRCI[0]} · <a href="${SRCI[2]}" target="_blank" rel="noopener">${SRCI[1]}</a> · the bracket archive has no file for this tournament</div>` : '';
     if (SRCI && F.entrants.length) return head + srcNote + `<div class="bvsrclist">${F.entrants.map((e) => `<a class="bvsrcrow" href="#wrestler/${e.slug}"><span class="pill ${pc(e.r.place)}">${e.r.place}</span><span class="bvsrcn"><b>${esc(e.r.name)}</b><small>${esc(e.r.sch)}</small></span></a>`).join('')}</div>`;
