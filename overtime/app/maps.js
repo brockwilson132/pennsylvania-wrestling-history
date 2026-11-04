@@ -173,7 +173,7 @@
     if (u.kind === 'region') scopes.push(['Region', ALL.filter((d) => of[d] === u.id)]);
     if (u.kind === 'district') { const g = of[+u.id]; if (g) scopes.push(['Region', ALL.filter((d) => of[d] === g)]); scopes.push(['District', [+u.id]]); }
     const chip = (v) => `<span class="mls ctx" style="--tint:${v ? OT.ratingColor('wrestler', v) : '#2F3640'}">${v ? r10(v) : '–'}</span>`;
-    const body = scopes.map(([l, ds]) => { const x = wrestlerStats(lvl, ds, y0, y1); return `<div class="ctr"><span class="ctl">${l}${x ? `<small>${fmt(x[3])} wrestlers</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated wrestlers</span>'}</div>`; }).join('');
+    const body = scopes.map(([l, ds]) => { const x = wrestlerStats(lvl, ds, y0, y1); return `<div class="ctr"><span class="ctxl">${l}${x ? `<small>${fmt(x[3])} wrestlers</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated wrestlers</span>'}</div>`; }).join('');
     const who = lvl === 'd' ? 'district entrants' : lvl === 'r' ? 'regional entrants' : 'state entrants';
     return `<div class="ctx"><div class="cth"><span>Wrestler ratings</span><i>Best</i><i>Avg</i><i>Low*</i></div>${body}<div class="ctf">${who} · season ratings · *5th percentile</div></div>`;
   }

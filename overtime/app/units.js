@@ -122,9 +122,9 @@
   /* the glyph: a short horizontal strength meter beside a result: a track filled from the left by the bracket's rank among
      brackets of its own level, on the cold → hot ramp; optional value above it. Never on or under a medal pill. */
   const smeter = (v, lvl, ctx, num) => {
-    if (!v) return '<span class="sm sm0" aria-hidden="true"><i></i></span>';
+    if (!v) return '<span class="smtr sm0" aria-hidden="true"><i></i></span>';
     const f = sFrac(v, lvl), c = colorAt(f);
-    return `<span class="sm${num ? ' n' : ''}" title="${esc(fieldTip(v, lvl, ctx))}">${num ? `<em style="color:${c}">${r10(v)}</em>` : ''}<i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`;
+    return `<span class="smtr${num ? ' n' : ''}" title="${esc(fieldTip(v, lvl, ctx))}">${num ? `<em style="color:${c}">${r10(v)}</em>` : ''}<i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`;
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
@@ -134,7 +134,7 @@
     const f = sFrac(v, lvl), p = pctIn(v, lvl);
     return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i></span><em>${p != null ? `tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
-  const legend = () => `<span class="clg"><span class="sm"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="sm"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="sm"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span>strength of competition, vs. brackets of the same level</span>`;
+  const legend = () => `<span class="clg"><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span>strength of competition, vs. brackets of the same level</span>`;
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
@@ -541,8 +541,8 @@
       const by = new Map(); const add = (r, L) => { const k = nkey(r.name); const x = by.get(k) || { name: r.name, w: r.w, wn: r.wn || +r.w || 999, r }; x[L] = r.place || 0; x['r' + L] = r; if (L === 'S') { x.w = r.w; x.wn = r.wn; x.r = r; } by.set(k, x); };
       low.forEach((r) => add(r, r.lvl === 'district' ? 'D' : 'R')); st.forEach((r) => add(r, 'S'));
       const L = Array.from(by.values()).sort((a, b) => (a.wn || 999) - (b.wn || 999));
-      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="sm sm0"><i></i></span></span>'; const f = OT.fieldOf(rr, lvl);
-        return `<span class="tc">${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="sm sm0"><i></i></span>'}</span>`; };
+      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="smtr sm0"><i></i></span></span>'; const f = OT.fieldOf(rr, lvl);
+        return `<span class="tc">${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="smtr sm0"><i></i></span>'}</span>`; };
       const rows = L.map((x) => { const rt = OT.ratingOf(x.r, x.S != null ? 'state' : x.r.lvl); return `<a class="sr" href="${OT.wrestlerHref(x.r)}"><span class="w">${wShort(x.w)}</span><span class="n">${esc(x.name)}</span><span class="f">${cell(x, 'D')}${cell(x, 'R')}${cell(x, 'S')}</span><span class="r">${rt ? r10(rt) : ''}</span></a>`; }).join('');
       const mx = placeMatrix(y, (r) => r.sch === u.id, false);
       return `<div class="ss">${head}${mx.indexOf('pmx') >= 0 ? mx : ''}${rows ? `<div class="srh"><span></span><span></span><span class="f"><i>D</i><i>R</i><i>S</i></span><span class="r">RTG</span></div>${rows}` : '<div class="note1">No district, regional or state results on file for this season.</div>'}</div>`;
