@@ -241,18 +241,45 @@
     return `<span class="pz${tot ? '' : ' pz0'}" title="${esc(tip)}"><span class="pzh">${OT.navIcon(LVI[lvl])}<b>${tot}</b><i>${counts[0] ? counts[0] + ' ★' : ''}</i></span><span class="pzs" style="height:${H}px">${POD_ORDER.map((i) => `<i style="height:${counts[i] ? Math.max(3, Math.round(H * counts[i] / mx)) : 1}px;--c:${MEDC[i]}" title="${ordinal(i + 1)}: ${counts[i]}"></i>`).join('')}</span></span>`;
   }
   const LVL3 = ['state', 'regional', 'district'];
+  /* PIAA team duals championships by unit in the class and window (winner's district from the bracket; region via the
+     district's region that season) */
+  const dualTitles = (kind) => memo('dt|' + kind, () => {
+    const M = new Map(), DS = window.WR_DUALS || [], [wa, wb] = OT.yearsWindow();
+    const regOf = new Map(); SS.forEach((r) => { if (r[3] >= 1 && r[4]) regOf.set(r[3] + '|' + r[1], r[4] === 'W' ? 'SW' : r[4]); });
+    DS.forEach((d) => { if (!/championship match/i.test(d[2]) || d[0] < wa || d[0] > wb || !clsOk(d[1])) return;
+      const k = kind === 'school' ? SIDX.get(canonT(d[3])) : kind === 'district' ? d[4] : regOf.get(d[4] + '|' + d[0]);
+      if (k != null) M.set(k, (M.get(k) || 0) + 1); });
+    return M;
+  });
+  /* unit card: identity, best wrestler and podiums on the left; a 2×2 matrix on the right that fills the card's height:
+     Score (with the S/R/D split) · Rating (mini chart on a tint of the strength scale) · Team titles · Individual titles */
+  let CARD_SC = null;
   function unitCard(a, rank, sort, pageKind) {
     const lv = LVL3.filter((l, i) => a.w[i]);
-    const rt = r10(a.rating) || '–';
-    const hero = sort === 'titles' ? [a.ti, 'Titles'] : sort === 'score' ? [fmt(Math.round(a.score)), 'Score'] : [rt, 'RTG'];
-    const second = sort === 'rating' ? [fmt(Math.round(a.score)), 'Score'] : [rt, 'RTG'];
-    const offNote = a.off && a.kind === 'school' && state.cls !== 'ALL' ? ` · incl. ${a.off} ${state.cls === 'AAA' ? 'AA' : 'AAA'} season${a.off === 1 ? '' : 's'} at 85%` : '';
+    const rt = r10(a.rating);
+    const offNote = a.off && a.kind === 'school' && state.cls !== 'ALL' ? `incl. ${a.off} ${state.cls === 'AAA' ? 'AA' : 'AAA'} season${a.off === 1 ? '' : 's'} at 85%` : '';
     const pods = lv.map((l) => podium(placeDist(a.kind, l).get(a.k) || [0, 0, 0, 0, 0, 0, 0, 0], l)).join('');
-    const foot = [a.best ? `Best <b>${esc(a.best.name)}</b> ${r10(a.best.r)}${a.kind !== 'school' ? ' · ' + esc(a.best.sch) : ''} · '${String(a.best.y).slice(2)}` : '', a.tt ? `<b>${a.tt}</b> PIAA team title${a.tt === 1 ? '' : 's'}` : ''].filter(Boolean);
-    return `<a class="uk" href="${a.href}"${a.color ? ` style="--p1:${a.color}"` : ''}>
-      <span class="uk1"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b><small>${[a.sub ? esc(a.sub) : '', `${second[1]} <b>${second[0]}</b>`].filter(Boolean).join(' · ')}${offNote}</small></span><span class="rv"><i>${hero[1]}</i><b>${hero[0]}</b></span></span>
-      <span class="ukm">${miniChart(a.series, unitColor(a))}<span class="ukp">${pods}</span></span>
-      ${foot.length ? `<span class="ukf">${foot.map((x) => `<span>${x}</span>`).join('')}</span>` : ''}</a>`;
+    const best = a.best ? `<span class="ukbw"><i>Best wrestler</i> <b>${esc(a.best.name)}</b>${a.kind !== 'school' ? ' · ' + esc(a.best.sch) : ''} · <span class="ukbr">RTG ${r10(a.best.r)}</span> · ${a.best.y}</span>` : '';
+    // Score tile
+    const tot = Math.max(1, a.parts[0] + a.parts[1] + a.parts[2]);
+    const split = lv.length > 1 ? `<span class="t2sp">${lv.map((l, i) => `<i style="width:${(100 * a.parts[i] / tot).toFixed(1)}%;background:${LV[i][1]}" title="${LV[i][0]} ${fmt(Math.round(a.parts[i]))}"></i>`).join('')}</span><span class="t2sl">${lv.map((l, i) => `<em>${'SRD'[i]} ${fmt(Math.round(a.parts[i]))}</em>`).join('')}</span>` : '';
+    // Rating tile: tint by where this unit sits on the list's rating range
+    const f = CARD_SC && rt && CARD_SC.hi > CARD_SC.lo ? (a.rating - CARD_SC.lo) / (CARD_SC.hi - CARD_SC.lo) : 0.5;
+    const tint = rt ? colorAt(f) : '#2F3640';
+    // Team titles: PIAA team championships + PIAA team duals
+    const dt = dualTitles(a.kind).get(a.k) || 0;
+    const team = a.tt + dt;
+    // Individual titles: state, plus regional / district on pages that count them
+    const ind = [[a.ti, 'State']].concat(a.w[1] ? [[a.rt, 'Reg']] : []).concat(a.w[2] ? [[a.dt, 'Dist']] : []);
+    const hl = (k) => (sort === k ? ' hl' : '');
+    return `<a class="uk2" href="${a.href}"${a.color ? ` style="--p1:${a.color}"` : ''}>
+      <span class="ukL"><span class="ukh"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b>${a.sub || offNote ? `<small>${[a.sub ? esc(a.sub) : '', offNote].filter(Boolean).join(' · ')}</small>` : ''}</span></span>${best}<span class="ukp">${pods}</span></span>
+      <span class="ukM">
+        <span class="t2 t2s${hl('score')}"><i class="t2k">Score</i><b>${fmt(Math.round(a.score))}</b>${split}</span>
+        <span class="t2 t2r${hl('rating')}" style="--tint:${tint}"><i class="t2k">Rating</i><b>${rt || '–'}</b>${miniChart(a.series, '#EEEAE1', false)}</span>
+        <span class="t2 t2t"><i class="t2k">Team titles</i><b>${team}</b><span class="t2sl">${a.tt ? `<em>PIAA ${a.tt}</em>` : ''}${dt ? `<em>Duals ${dt}</em>` : ''}${!team ? '<em>—</em>' : ''}</span></span>
+        <span class="t2 t2i${hl('titles')}"><i class="t2k">Individual titles</i><b>${a.ti}</b><span class="t2sl">${ind.slice(1).map(([n, l]) => `<em>${l} ${n}</em>`).join('')}</span></span>
+      </span></a>`;
   }
   /* one sort control */
   const sortSelect = (key, sorts, cur) => `<label class="ssel"><span>Sort</span><select data-sortsel="${key}" aria-label="Sort by">${sorts.map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${l}</option>`).join('')}</select></label>`;
@@ -261,6 +288,7 @@
     let sort = sorts.some(([k]) => k === state.usort) ? state.usort : 'rating';
     if (sort === 'rating' && OT.yearsWindow()[1] < RATED_FROM) sort = 'score';
     const L = aggregate(kind, parent, pageKind).slice().sort(SORTS[sort]);
+    { const v = L.map((a) => a.rating).filter(Boolean); CARD_SC = v.length ? { lo: Math.min(...v), hi: Math.max(...v) } : null; }
     L.forEach((a) => { a.kind = kind; });
     if (!L.length) return OT.empty('No ' + (kind === 'school' ? 'schools' : kind + 's') + ' with enough seasons in this window.');
     const lim = state.uall ? L.length : opts.limit || 20;
@@ -471,5 +499,5 @@
     return `<div class="ss">${head}${pl.length ? `<div class="sspod">${podium(counts, 'state', { h: 30 })}</div>` : ''}${rows || '<div class="note1">No state placers this season.</div>'}${pl.length > 40 ? `<div class="note1">and ${pl.length - 40} more</div>` : ''}</div>`;
   }
 
-  Object.assign(OT, { sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

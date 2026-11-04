@@ -2,7 +2,7 @@
 'use strict';
 (() => {
   const { esc, fmt, ordinal, wShort, state, setCls, clsName, STD, stdOf, placeCounts, unitStats, rankings, allTimeTeams, bracketOf, seasonsInScope, unitRows, GRADE_L, gradeSlot, lowerRows, REGIONS, DISTRICTS, windowLabel, yearsWindow, careerRows, nFilters } = OT;
-  const MAP = window.PA_MAP, HX = 65.5, HY = 39.5; // Hershey
+  const MAP = window.PA_MAP, MS = (MAP && MAP.w ? MAP.w / 100 : 1), HX = 65.5, HY = 39.5; // Hershey (100-wide units)
   const C = { mat: '#0B0D10', chalk: '#EEEAE1', ash: '#8E98A4', gold: '#D9A441', red: '#FF3B2F', green: '#2EC27E', slate: '#161A20', line: '#242A32' };
   const MED = ['#D9A441', '#B8BFC6', '#B5733A', '#8E5A3C', '#5F6B78', '#5F6B78', '#5F6B78', '#5F6B78'];
   const pc = (p) => (p >= 5 ? 'c5' : 'c' + p);
@@ -12,7 +12,7 @@
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
     return `<svg viewBox="0 0 560 170" aria-label="Overtime"><rect x="${cx - R * .16}" y="${cy - R - R * .30}" width="${R * .32}" height="${R * .22}" rx="3" fill="currentColor"/><rect x="${cx - R * .09}" y="${cy - R - R * .12}" width="${R * .18}" height="${R * .14}" fill="currentColor"/><circle cx="${cx}" cy="${cy}" r="${R * .88}" fill="none" stroke="currentColor" stroke-width="${R * .24}"/><path d="M ${cx} ${cy - R * .62} A ${R * .62} ${R * .62} 0 0 1 ${cx + R * .62 * Math.sin(a)} ${cy - R * .62 * Math.cos(a)} L ${cx} ${cy} Z" fill="${C.red}"/><line x1="${cx}" y1="${cy}" x2="${cx + R * .55 * Math.sin(a)}" y2="${cy - R * .55 * Math.cos(a)}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3" fill="currentColor"/><text x="${cx + R + F * .09}" y="${cy + F * .355}" font-family="'Archivo Black'" font-size="${F}" letter-spacing="-1" fill="currentColor">VERTIME</text></svg>`; };
   const NAVI = {
-    state: `<path d="${MAP.outline}" transform="translate(1,4) scale(.245)" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>`,
+    state: `<path d="${MAP.outline}" transform="translate(1,4) scale(.0245)" fill="none" stroke="currentColor" stroke-width="80" stroke-linejoin="round"/>`,
     region: `<path d="M3 13 L13 3 L23 13 L13 23 Z M3 13 H23 M13 3 V23" fill="none" stroke="currentColor" stroke-width="2"/>`,
     district: `<rect x="3" y="3" width="8" height="8" fill="currentColor"/><rect x="15" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/>`,
     school: `<path d="M3 23 V11 L13 4 L23 11 V23 Z M10 23 V15 H16 V23" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
@@ -244,10 +244,10 @@
   /* road to Hershey: one season as a line across the state */
   function road(r, W) {
     const s = 3, X = 6, Y = 10; const P = (x, y) => [X + x * s, Y + y * s];
-    const d0 = MAP.dot[r.d] || [30, 30]; const [dx, dy] = P(d0[0], d0[1]), [hx, hy] = P(HX, HY);
+    const d0 = (MAP.dot[r.d] || [300, 300]).map((v) => v / MS); const [dx, dy] = P(d0[0], d0[1]), [hx, hy] = P(HX, HY);
     const rx = dx + (hx - dx) * 0.5, ry = Math.min(dy, hy) - 14;
     const placed = !!r.place, reg = r.reg;
-    return `<svg viewBox="0 0 320 190" role="img" aria-label="${r.year} road to Hershey"><g transform="translate(${X},${Y}) scale(${s})"><path d="${MAP.outline}" fill="${C.slate}" stroke="${C.ash}" stroke-width=".45" stroke-linejoin="round"/></g>
+    return `<svg viewBox="0 0 320 190" role="img" aria-label="${r.year} road to Hershey"><g transform="translate(${X},${Y}) scale(${s / MS})"><path d="${MAP.outline}" fill="${C.slate}" stroke="${C.ash}" stroke-width="${0.45 * MS}" stroke-linejoin="round"/></g>
       <path d="M${dx} ${dy} Q ${(dx + rx) / 2} ${dy + 6} ${rx} ${ry}" fill="none" stroke="${C.gold}" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
       <path d="M${rx} ${ry} Q ${(rx + hx) / 2} ${ry - 10} ${hx} ${hy}" fill="none" stroke="${C.gold}" stroke-width="3.5" stroke-linecap="round"/>
       <circle cx="${dx}" cy="${dy}" r="7" fill="${C.mat}" stroke="${C.gold}" stroke-width="2.5"/>

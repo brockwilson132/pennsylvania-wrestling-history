@@ -38,7 +38,8 @@
     const head = `<header class="uh2">${crumbBar(crumbs)}<h1>${esc(u.name)}</h1>${opts.sub ? `<div class="sub">${opts.sub}</div>` : ''}${summary(u)}</header>`;
     const rk = opts.rankings();
     const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
-    const parts = [head, `<section class="sec">${OT.perfChart(u)}</section>`, rankSec, section('All-time team', teamsBlock(u)), section('Seasons', seasonsDrawer(u))];
+    const map = u.kind === 'school' ? '' : OT.ratingMap(u);
+    const parts = [head, map ? `<section class="sec secmap">${map}</section>` : '', `<section class="sec">${OT.perfChart(u)}</section>`, rankSec, section('All-time team', teamsBlock(u)), section('Seasons', seasonsDrawer(u))];
     if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u));
     if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u)));
     return parts.join('');
