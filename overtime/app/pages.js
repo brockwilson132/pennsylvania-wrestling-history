@@ -120,9 +120,10 @@
   const personRow = (p) => `<a class="prr" href="#wrestler/${p.slug}"><span class="pn"><b>${esc(p.name)}</b><small>${esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></span><span class="pb ${p.place ? 'm' + Math.min(p.place, 5) : ''}">${bestTxt(p)}</span>${p.peak ? OT.rtgTag(p.peak, { size: 'sm' }) : '<span></span>'}</a>`;
   OT.personRow = personRow;
   PAGES.wrestlers = () => {
-    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' });
-    return `<header class="uh2"><h1>Wrestlers</h1><div class="sub">State placewinners, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket.</div></header>
-      <input class="search" id="wsearch" type="search" placeholder="Search any wrestler or school" autocomplete="off" aria-label="Search wrestlers">
+    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' }); const f = state.f;
+    const where = f.schools[0] || (f.districts[0] ? 'District ' + f.districts[0] : f.regions[0] ? REGIONS[f.regions[0]] + ' Region' : '');
+    return `<header class="uh2"><h1>Wrestlers</h1><div class="sub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div></header>
+      <input class="search" id="wsearch" type="search" placeholder="Search ${where ? esc(where) + ' wrestlers' : 'any wrestler or school'}" autocomplete="off" aria-label="Search wrestlers">
       <section class="sec"><div class="sech"><h2 id="whead">Placewinners</h2><span class="ctl" id="wctl">${r.sortSeg}</span></div><div id="wlist">${r.html}</div><div class="note" id="wmore"></div></section>`;
   };
   PAGES.wrestler = (sl) => {
@@ -151,7 +152,7 @@
     <h3>Score</h3><p>Score is how much a unit won in the selected seasons: placement points, 16-12-9-7-5-3-2-1 for 1st through 8th, weighted by the page. On the State page only state results count. A Region page adds regional results at 0.4. District and School pages add district results at 0.15. District strength varies too much to compare district medals statewide, which is why the State page ignores them. Score grows with size and years by design; Rating does not.</p>
     <h3>Strength of competition</h3><p>A bracket's strength of competition is the average rating of its top eight. Every result in the app, on cards, career grids, brackets and season sheets, carries a slim bar beside it: the taller and hotter the bar, the tougher that bracket was compared with other brackets of the same level, so a loaded district reads as loaded. The bracket header lays the same bar flat. Tap or hover for the number.</p>
     <h3>Colour</h3><p>Every rating and strength colour in the app uses one cold-to-hot scale: blue is ice, then cyan, green, yellow and orange, and red is on fire. Maps, the season grid, rating chips and strength bars all read from it, so a colour means the same strength everywhere. Each kind of unit (school, district, region) has its own range, taken from its season ratings since 1974, and the legend under each picture shows it.</p>
-    <h3>Seasons and classes</h3><p>The header sets the class and the seasons (all-time, the last 5, 10 or 25, or a custom range); weights narrow the wrestler lists and all-time teams. Totals count each result in the class it was wrestled in. For wrestlers the seasons decide who is in, not what counts: anyone who wrestled a season inside the window is included with his whole career. Region and district membership is taken as of each season.</p>
+    <h3>Seasons and classes</h3><p>The filter bar at the bottom sets the division, the place (region, district, school) and the seasons (TIME: all-time, the last 5, 10 or 25, or any range on the strip); weights narrow the wrestler lists and all-time teams. Totals count each result in the class it was wrestled in. For wrestlers the seasons decide who is in, not what counts: anyone who wrestled a season inside the window is included with his whole career. Region and district membership is taken as of each season.</p>
     <h3>All-time teams</h3><p>Every wrestler who appears in any bracket for the place is a candidate, at one weight: the weight of his highest-rated season. Value is 0.6 × his placement credit plus 0.4 × his peak rating, each compared with the other candidates at that weight. Placement credit follows the page, like Score: state only on the State page, plus regional at 0.4 on a Region page, plus district at 0.15 on District and School pages.</p>
     <h3>Careers</h3><p>In a career grid, Q means he advanced without a recorded place, DNP that he entered and did not place, DNC that the district bracket is on record and he is not in it, and a dash that no bracket is on record. Careers are split by graduating class, so a father and son with the same name at the same school are two people.</p>
     <h3>Missing from the archive</h3><p>The bracket archive marks some tournaments as incomplete: no official team scores, or consolation rounds not on record. Those seasons count only what was recorded. Each District page lists its own.</p>${missingBlock(null)}
@@ -179,5 +180,26 @@
   function indexPage(title, items, note) {
     return `<header class="uh"><div><h1>${title}</h1>${note ? `<div class="sub">${note}</div>` : ''}</div></header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
   }
+
+  /* Tournaments (menu): every bracket in the archive for one season, by level and unit */
+  PAGES.tournaments = (id, q = {}) => {
+    const ys = OT.YEARS, y = ys.includes(+q.y) ? +q.y : OT.yearsWindow()[1];
+    const inCls = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
+    const cn = (c) => (c === 'single' ? 'One class' : c);
+    const link = (r, lvl) => `<a class="twl" href="#tournaments?y=${y}&b=${encodeURIComponent(OT.bkey(r, lvl))}">${r.wn}</a>`;
+    const rowsOf = (rs, lvl, name) => d3.groups(rs.filter((r) => inCls(r.cls)), (r) => name(r), (r) => r.cls).map(([nm, byC]) => byC.map(([c, v]) => {
+      const one = Array.from(d3.group(v, (r) => r.wn).values()).map((g) => g[0]).sort((a, b) => a.wn - b.wn);
+      return { nm, c, html: `<div class="tbrow"><span class="tbn"><b>${esc(nm)}</b><small>${cn(c)}</small></span><span class="tbws">${one.map((r) => link(r, lvl)).join('')}</span></div>` }; })).flat();
+    const st = rowsOf(OT.APP.filter((r) => r.year === y), 'state', () => 'State championships');
+    const reg = rowsOf(OT.LOWER.filter((r) => r.year === y && r.lvl === 'regional'), 'regional', (r) => OT.unitLabel('regional', r.unit)).sort((a, b) => a.nm.localeCompare(b.nm) || a.c.localeCompare(b.c));
+    const dis = rowsOf(OT.LOWER.filter((r) => r.year === y && r.lvl === 'district'), 'district', (r) => OT.unitLabel('district', r.unit)).sort((a, b) => (parseInt(a.nm.replace(/\D+/, ''), 10) - parseInt(b.nm.replace(/\D+/, ''), 10)) || a.nm.localeCompare(b.nm) || a.c.localeCompare(b.c));
+    const i = ys.indexOf(y), prev = ys[i - 1], next = ys[i + 1];
+    const pick = `<div class="typick">${prev ? `<a class="chipb" href="#tournaments?y=${prev}" aria-label="Season ${prev}">‹ ${prev}</a>` : '<span></span>'}<select data-tyear aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${next ? `<a class="chipb" href="#tournaments?y=${next}" aria-label="Season ${next}">${next} ›</a>` : '<span></span>'}</div>`;
+    const blk = (t, rs) => rs.length ? section(t, `<div class="card tlist">${rs.map((r) => r.html).join('')}</div>`) : '';
+    return `<header class="uh2"><h1>Tournaments</h1><div class="sub">Every bracket on record for one season${state.cls === 'ALL' ? '' : ', ' + clsName()}. Tap a weight to open its bracket.</div>${pick}</header>`
+      + (blk('State', st) + blk('Regionals', reg) + blk('Districts', dis) || empty('No brackets on record for this season.'));
+  };
+  /* Missing from the archive (menu) */
+  PAGES.missing = () => `<header class="uh2"><h1>Missing</h1><div class="sub">Tournaments the bracket archive marks as incomplete: no official team scores, or consolation rounds not on record. Those seasons count only what was recorded.</div></header>${missingBlock(null).replace('<details class="drawer">', '<details class="drawer" open>') || empty('Nothing marked missing.')}`;
   Object.assign(OT, { PAGES });
 })();

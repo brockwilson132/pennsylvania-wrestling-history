@@ -138,11 +138,8 @@
     return '';
   }
   /* ---------- the map card ----------
-     Map (space) + the coloured units as a list + a season scrubber (time). The scrubber narrows the header window to one
-     season or a sub-range; the map and the "Selected" column follow it, the "Avg" column always uses the whole header
-     window, so you can see whether a season was strong relative to the unit's own history. */
+     Map (space) + the coloured units as a list. Time comes from the TIME filter in the bottom bar. */
   const pageKey = (u) => u.kind + ':' + u.id;
-  const selOf = (u) => { const m = OT.state.msel; return m && m.k === pageKey(u) ? m : null; };
   function listUnits(u) {
     if (u.kind === 'state') {
       if (OT.mapMode() === 'districts') return { kind: 'district', L: () => OT.aggregateCore('district', null, 'state'), keys: Array.from({ length: 12 }, (_, i) => i + 1), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k };
@@ -240,23 +237,23 @@
     const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';
     return `<div class="ml">${contextTable(u, sel)}<div class="mlh${two ? '' : ' one'}"><span>${who}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : '<button class="ht on" disabled>Rating</button>'}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
-  function scrubber(u, sel) {
-    const [y0, y1] = OT.yearsWindow(); const n = y1 - y0 + 1;
-    const a = sel ? sel.a : y0, b = sel ? sel.b : y1;
-    const pc = (y) => (n === 1 ? 50 : (100 * (y - y0 + 0.5)) / n);
-    const lab = !sel ? `${y0 === y1 ? y0 : y0 + '–' + y1} · whole period` : a === b ? String(a) : `${a}–${b} · avg`;
-    /* the track is a heat strip of this page's own rating per season (same cold → hot colours as the map) */
-    const kind = u.kind === 'district' ? 'district' : 'region';
-    const own = OT.unitAgg(u.kind === 'state' ? OT.U.state() : u.kind === 'region' ? OT.U.region(u.id) : OT.U.district(+u.id)); const RS = new Map(((own && own.series) || []).filter((p) => p[1] && OT.ratedYear(p[0])));
-    const strip = `<span class="scrs">${Array.from({ length: n }, (_, i) => y0 + i).map((y) => { const v = RS.get(y); return `<i class="${y < a || y > b ? 'out' : ''}" style="${v ? 'background:' + OT.ratingColor(kind, v) : ''}"></i>`; }).join('')}</span>`;
-    const ticks = Array.from({ length: n }, (_, i) => y0 + i).map((y) => { const v = RS.get(y); return `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-msel-y="${y}" style="left:${(pc(y) - 50 / n).toFixed(2)}%;width:${(100 / n).toFixed(3)}%" aria-label="${y}" title="${y}${v ? ' · rating ' + r10(v) : ''}"></button>`; }).join('');
-    const px = Math.min(1100, (window.innerWidth || 390) - 60), maxL = Math.max(3, Math.floor(px / 42)), step = n <= 6 ? 1 : [5, 10, 20, 25, 50].find((k) => n / k <= maxL) || 50;
-    const labs = Array.from({ length: n }, (_, i) => y0 + i).filter((y) => y % step === 0 || n <= 6).map((y) => `<i style="left:${pc(y).toFixed(2)}%">${y}</i>`).join('');
-    return `<div class="scr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${lab}</b>${sel ? '<button class="chipb" data-msel-reset>Whole period</button>' : ''}</div><div class="scrt hs">${strip}<span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%"></span></div><div class="scrx">${labs}</div></div>`;
+  /* the TIME scrubber (filter bar): the whole archive as a heat strip of the statewide rating per season, two handles
+     for the window. Drawn with the window set to all-time so the strip always spans every season of the class. */
+  function timeScrubber() {
+    const st = OT.state, keep = st.win; const [a, b] = OT.yearsWindow();
+    st.win = { mode: 'all', from: null, to: null };
+    let y0, y1, RS;
+    try { [y0, y1] = OT.yearsWindow(); const own = OT.unitAgg(OT.U.state()); RS = new Map(((own && own.series) || []).filter((p) => p[1] && OT.ratedYear(p[0]))); } finally { st.win = keep; }
+    const n = y1 - y0 + 1; const pc = (y) => (n === 1 ? 50 : (100 * (y - y0 + 0.5)) / n); const ys = Array.from({ length: n }, (_, i) => y0 + i);
+    const strip = `<span class="scrs">${ys.map((y) => { const v = RS.get(y); return `<i class="${y < a || y > b ? 'out' : ''}" style="${v ? 'background:' + OT.ratingColor('region', v) : ''}"></i>`; }).join('')}</span>`;
+    const ticks = ys.map((y) => { const v = RS.get(y); return `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-ty="${y}" style="left:${(pc(y) - 50 / n).toFixed(2)}%;width:${(100 / n).toFixed(3)}%" aria-label="${y}" title="${y}${v ? ' · statewide rating ' + r10(v) : ''}"></button>`; }).join('');
+    const labs = ys.filter((y) => y % 10 === 0).map((y) => `<i style="left:${pc(y).toFixed(2)}%">${y}</i>`).join('');
+    return `<div class="scr tscr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${a === b ? a : a + '–' + b}</b><span class="muted">${a === b ? '1 season' : (b - a + 1) + ' seasons'}</span></div><div class="scrt hs">${strip}<span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%" role="slider" aria-label="First season" aria-valuenow="${a}" tabindex="0"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%" role="slider" aria-label="Last season" aria-valuenow="${b}" tabindex="0"></span></div><div class="scrx">${labs}</div></div>`;
   }
   function mapCard(u) {
-    const sel = selOf(u);
-    const map = sel ? OT.withSub([sel.a, sel.b], () => mapOnly(u)) : mapOnly(u);
+    /* the map follows TIME; a single season also gets that season's state placers */
+    const [w0, w1] = OT.yearsWindow(); const sel = w0 === w1 ? { a: w0, b: w1 } : null;
+    const map = mapOnly(u);
     if (!map) return '';
     const ctl = u.kind === 'state' ? `<div class="mapctl"><div class="seg sm" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div></div>` : '';
     let sheet = '';
@@ -264,12 +261,12 @@
       const inU = u.kind === 'state' ? () => true : u.kind === 'district' ? (r) => r.d === +u.id : (r) => OT.regionOf(r) === u.id;
       sheet = `<div class="ss mss"><div class="ssh"><b>${sel.a}</b><span>state placers</span></div>${OT.placeMatrix(sel.a, inU, u.kind === 'state')}</div>`;
     }
-    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}">${ctl}<div class="mcb"><div class="mcm">${map}</div>${unitList(u, sel)}</div>${scrubber(u, sel)}${sheet}</div>`;
+    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}">${ctl}<div class="mcb"><div class="mcm">${map}</div>${unitList(u, null)}</div>${sheet}</div>`;
   }
   function ratingMap(u) {
     if (!M || !M.topo || !window.d3) return '';
     try { return mapCard(u); } catch (e) { console.warn('map', e); }
     return '';
   }
-  Object.assign(OT, { ratingMap, mapCard });
+  Object.assign(OT, { ratingMap, mapCard, timeScrubber });
 })();

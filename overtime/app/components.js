@@ -16,8 +16,14 @@
     region: `<path d="M3 13 L13 3 L23 13 L13 23 Z M3 13 H23 M13 3 V23" fill="none" stroke="currentColor" stroke-width="2"/>`,
     district: `<rect x="3" y="3" width="8" height="8" fill="currentColor"/><rect x="15" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/>`,
     school: `<path d="M3 23 V11 L13 4 L23 11 V23 Z M10 23 V15 H16 V23" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
-    wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
+    wrestlers: `<circle cx="13" cy="8" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 23 C4.6 16.8 8.2 14.6 13 14.6 C17.8 14.6 21.4 16.8 22 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
+    division: `<rect x="3.5" y="15" width="5" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="10" width="5" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17.5" y="4" width="5" height="19" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>`,
+    weights: `<path d="M9 8.5 A4 4 0 1 1 17 8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 11 H19.5 L22 23 H4 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+    menu: `<path d="M4 8 H22 M4 13 H22 M4 18 H22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
   };
+  /* the stopwatch O from the wordmark, on its own: crown, ring, the red overtime wedge, the hand */
+  const stopwatch = (sz = 26) => { const cx = 13, cy = 14.5, R = 9.2, a = 35 * Math.PI / 180;
+    return `<svg viewBox="0 0 26 26" width="${sz}" height="${sz}" aria-hidden="true"><rect x="${cx - 2.4}" y="1.2" width="4.8" height="2.6" rx="1" fill="currentColor"/><rect x="${cx - 1.2}" y="3.4" width="2.4" height="2.2" fill="currentColor"/><circle cx="${cx}" cy="${cy}" r="${R * .9}" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M ${cx} ${cy - R * .62} A ${R * .62} ${R * .62} 0 0 1 ${(cx + R * .62 * Math.sin(a)).toFixed(2)} ${(cy - R * .62 * Math.cos(a)).toFixed(2)} L ${cx} ${cy} Z" fill="${C.red}"/><line x1="${cx}" y1="${cy}" x2="${(cx + R * .55 * Math.sin(a)).toFixed(2)}" y2="${(cy - R * .55 * Math.cos(a)).toFixed(2)}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="1.3" fill="currentColor"/></svg>`; };
   const navIcon = (k) => `<svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>`;
   /* Overtime Rating: the wrestler's own season strength on one scale (1500 = the average state qualifier), shown as a
      labeled number in chalk. It is not colored: a rating is how good he was, not how hard something was. */
@@ -28,22 +34,6 @@
   /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
     return `<div class="win"><div class="seg" role="group" aria-label="Seasons">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25'], ['custom', 'Custom']].map(([k, l]) => `<button data-win="${k}" aria-pressed="${w.mode === k}">${l}</button>`).join('')}</div>${w.mode === 'custom' ? `<form class="wrange" data-wrange><input type="number" name="from" inputmode="numeric" min="1938" max="2026" value="${a}" aria-label="From"><span>–</span><input type="number" name="to" inputmode="numeric" min="1938" max="2026" value="${b}" aria-label="To"><button type="submit" class="go">Go</button></form>` : ''}</div>`; };
-  /* header chips: the current selections, each one opens the control panel */
-  const filterChips = () => { const f = state.f; return f.weights.length ? [f.weights.length === 1 ? STD.find((x) => x.k === f.weights[0]).label + ' lbs' : f.weights.length + ' weights'] : []; };
-  const headerChips = () => { const fc = filterChips(), n = state.f.weights.length;
-    const ic = `<button class="hc ic${n ? ' on' : ''}" data-panel="filters" aria-label="Class, seasons and weights" title="Class, seasons and weights"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>`;
-    return ic + `<button class="hc" data-panel="class">${state.cls === 'ALL' ? 'All classes' : state.cls}</button><button class="hc" data-panel="window">${state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? windowLabel() : 'Last ' + state.win.mode}</button>${fc.map((t) => `<button class="hc on" data-panel="filters">${esc(t)}</button>`).join('')}`; };
-  /* the control panel: class, window, multi-select filters */
-  const fchip = (kind, v, label, on) => `<button class="fc${on ? ' on' : ''}" data-f="${kind}" data-v="${esc(String(v))}" aria-pressed="${on}">${label}</button>`;
-  function panel() {
-    const f = state.f;
-    return `<div class="pbar"><b>Scope</b><span><button class="pclr" data-clear-all>Reset</button><button class="pdone" data-panel-close>Done</button></span></div>
-      <div class="pg" id="pg-class"><div class="k">Class</div>${classToggle()}</div>
-      <div class="pg" id="pg-window"><div class="k">Seasons</div>${windowToggle()}</div>
-      <div class="pg" id="pg-filters"><div class="k">Weights${f.weights.length ? ` <button class="pclr" data-clear="weights">clear</button>` : ''}</div><div class="fcs">${STD.map((x) => fchip('weights', x.k, x.label, f.weights.includes(x.k))).join('')}</div><div class="note1">Weights narrow the wrestler lists and all-time teams.</div></div>
-      <a class="pabout" href="#about" data-panel-close>How ratings and scores work</a>`;
-  }
-
   /* the level switch: which tournament level the podium, bracket, rankings and seasons count */
   const LVLS = [['state', 'State'], ['regional', 'Regional'], ['district', 'District']];
   const levelSwitch = (kind) => { const ok = OT.lvlsFor(kind || 'school'); if (ok.length < 2) return ''; return `<div class="seg lvl" role="group" aria-label="Tournament level">${LVLS.filter(([k]) => ok.includes(k)).map(([k, l]) => `<button data-lvl="${k}" aria-pressed="${state.lvl === k}">${l}</button>`).join('')}</div>`; };
@@ -339,5 +329,5 @@
     return head + (placers.length ? namedPodium(placers) : '') + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div>${roundsHTML}<div class="note">${F.loading ? 'Loading the full field… ' : ''}Each line: his bouts here, his rating that season (RTG), and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { rtgTag, bracketView, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();

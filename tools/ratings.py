@@ -271,6 +271,27 @@ start_of = {}
 for y in YEARS:
     for i in ids_of[y]:
         if i not in start_of or y < start_of[i]: start_of[i] = y
+# ---- coverage: is the wrestler's district bracket on file for this season? Same rule as tools/build_units.js: a
+# district tournament counts only when its full field is on file (>= 24 entrants). Wrestlers whose district bracket is
+# missing (most D7 and D3 AAA seasons) have only their regional/state bouts, so the season fit pulls them toward a
+# too-low mean; docs/CALIBRATION.md measured the effect at states (+59 points). A fitted shift per class and era moves
+# their prior mean back. Fitted on cross-coverage bouts before 2018 only, so the 2018-26 tests stay leak-free.
+_tsize = Counter()
+for (lvl, t, w), es in entrants.items():
+    if lvl == 'district': _tsize[t] += len(es)
+COVERED = set()
+for (lvl, t, w), es in entrants.items():
+    if lvl == 'district' and _tsize[t] >= 24:
+        y = int(t[:4])
+        for e in es: COVERED.add((ID(e[0], y), y))
+CLS_OF = {}
+for b in bouts: CLS_OF.setdefault((b['wi'], b['year']), b['c']); CLS_OF.setdefault((b['li'], b['year']), b['c'])
+def era_of(y): return 'e0' if y < 1990 else 'e1' if y < 2005 else 'e2'
+def cov_group(i, y):
+    """None when the district bracket is on file; else (class, era)"""
+    if (i, y) in COVERED: return None
+    return (CLS_OF.get((i, y), 'single'), era_of(y))
+say(f'coverage: {len(COVERED)} wrestler-seasons with their district bracket on file; district tournaments with a full field: {sum(1 for t in _tsize if _tsize[t] >= 24)} of {len(_tsize)}')
 DS = (-2, -1, 1, 2)
 def avail(T0, i, y): return tuple(T0.get(y + d, {}).get(i) is not None for d in DS)
 def gone(i, y, av):
@@ -279,7 +300,7 @@ def gone(i, y, av):
     return (not av[2]) and (gr(i, y) == 3 or y - start_of.get(i, y) >= 3)
 def fresh(i, y, av): return (not av[1]) and gr(i, y) == 0
 MIN_PAT = 300
-def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
+def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
     """Season-only fits, then one prior pass. The prior for season t is a regression on the neighbours'
     season-only strengths fitted SEPARATELY per neighbour-availability pattern (which of t-2, t-1, t+1, t+2 exist,
     plus whether a missing next season is graduation and a missing previous season is freshman year). A single
@@ -287,7 +308,8 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
     with only his past got a prior of ~0.7 x past: elite seniors were pulled toward the mean (the senior-year taper)."""
     T0 = {}
     for y in YEARS:
-        ids = ids_of[y]; T0[y] = fit_season(season_b[y], ids, [1500] * len(ids), [250] * len(ids), mask)
+        ids = ids_of[y]; sh = (lambda i: (shift or {}).get(cov_group(i, y), 0.0))
+        T0[y] = fit_season(season_b[y], ids, [1500 + sh(i) for i in ids], [250] * len(ids), mask)
     def pkey(i, y):
         av = avail(T0, i, y); return av + (gone(i, y, av), fresh(i, y, av))
     def coarse(k): return (any(k[:2]), any(k[2:4]), k[4], k[5])
@@ -331,6 +353,7 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
                         w, rs = m; A = [T0.get(y + d, {}).get(i) for d in DS]
                         mu.append(1500 + float(np.dot(design(A, gr(i, y), av), w))); sd.append(rs); continue
                 mu.append(1500 + gmean.get(gr(i, y), gmean[None])); sd.append(pop_sd)
+            if shift: mu = [m + shift.get(cov_group(i, y), 0.0) * SHIFT_PASS for m, i in zip(mu, ids)]
             new = fit_season(season_b[y], ids, mu, sd, mask)
             delta = max(delta, max(abs(new[i] - T[y][i]) for i in ids)); T[y] = new
         if report: say(f'  prior pass: largest change from season-only estimates {delta:.0f}')
@@ -341,6 +364,38 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0):
             say(f'    {"".join("x" if a else "." for a in k[:4])} g{int(k[4])} f{int(k[5])}: n={len(groups[k])}, slopes {sl}, sum {sum(w[:ns]):.2f}, sd {rs:.0f}')
     top = max(models, key=lambda k: len(groups[k])) if models else None
     return T, T0, [0] * 13, (models[top][1] if top else pop_sd)
+# ---- coverage shift: iterate until bouts between covered and uncovered wrestler-seasons (regional + state, before 2018)
+# show no remaining coverage residual, one shift per (class, era)
+SHIFT_PASS = 1.0
+# AAA only: AA district coverage is ~96% complete and its uncovered wrestlers are mostly D3; an AA shift (+80, fitted
+# on those) over-rated AA SC at states in the 2018-26 held-out test (cross-region log loss 0.4261 -> 0.4314)
+SHIFT_CLASSES = {'AAA'}
+def cov_resid(T, lo, hi):
+    acc = defaultdict(list)
+    for b in bouts:
+        if b['result'] in SKIP or b['level'] == 'district' or not (lo <= b['year'] <= hi): continue
+        gw, gl = cov_group(b['wi'], b['year']), cov_group(b['li'], b['year'])
+        if (gw is None) == (gl is None): continue
+        tw, tl = T.get(b['year'], {}).get(b['wi']), T.get(b['year'], {}).get(b['li'])
+        if tw is None or tl is None: continue
+        g = gw or gl; sgn = 1.0 if gw else -1.0            # +: the uncovered wrestler won
+        if g[0] not in SHIFT_CLASSES: continue
+        acc[g].append((tw - tl, sgn))
+    out = {}
+    for g, rows in acc.items():
+        if len(rows) < 200: continue
+        d = np.array([r[0] for r in rows]); sg = np.array([r[1] for r in rows])
+        def nll(c): return float(np.logaddexp(0, -C_ * (d + c * sg)).sum())
+        r = minimize(lambda x: nll(x[0]), [0.0], method='Nelder-Mead'); out[g] = (float(r.x[0]), len(rows))
+    return out
+SHIFT = {}
+for it in range(4):
+    Ts, *_ = smoother(sd_scale=2.0, shift=SHIFT)
+    res = cov_resid(Ts, 1974, 2017)
+    say(f'coverage shift pass {it + 1}: residual ' + ', '.join(f'{k[0]} {k[1]} {v[0]:+.0f} (n={v[1]})' for k, v in sorted(res.items())))
+    if all(abs(v[0]) < 5 for v in res.values()): break
+    for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+say('coverage shift (raw rating points added to the prior mean of wrestler-seasons without their district bracket): ' + ', '.join(f'{k[0]} {k[1]} {v:+.0f}' for k, v in sorted(SHIFT.items())))
 # prior strength: the regression residual overstates the prior sd (its target is itself noisy), so scale it,
 # tuned on hidden 1990-2017 bouts
 random.seed(5)
@@ -348,7 +403,7 @@ tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] 
 tb = [b for b in bouts if b['i'] in tune_held]
 scores = {}
 for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
-    Tt, *_ = smoother(mask=tune_held, sd_scale=sc)
+    Tt, *_ = smoother(mask=tune_held, sd_scale=sc, shift=SHIFT)
     scores[sc] = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb])
 # the held-out loss is nearly flat across a range of prior widths; within that flat range (0.001 of the best) take
 # the widest prior, so the season's own bouts decide and the prior only fills gaps
@@ -357,14 +412,14 @@ say('prior sd scale (hidden 5% of 1990-2017 bouts): ' + ', '.join(f'{k}: {v:.4f}
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
 random.seed(3)
 held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and random.random() < 0.10}
-Th, *_ = smoother(mask=held, sd_scale=SDS)
+Th, *_ = smoother(mask=held, sd_scale=SDS, shift=SHIFT)
 hb = [b for b in bouts if b['i'] in held]
 ll_batch = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Th[b['year']][b['li']] - Th[b['year']][b['wi']]) / 400)))) for b in hb])
 ll_fwd = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((PRE[b['i']][1] - PRE[b['i']][0]) / 400)))) for b in hb])
 acc_b = np.mean([Th[b['year']][b['wi']] > Th[b['year']][b['li']] for b in hb])
 say(f'held-out 10% of 2018-2026 bouts (n={len(hb)}), fit without them: season-batch strength log loss {ll_batch:.4f} accuracy {acc_b:.3f}; forward rating {ll_fwd:.4f}')
 say('  (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)')
-T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS)
+T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS, shift=SHIFT)
 say(f'prior sd (most common pattern, scaled): {RES_SD:.0f}')
 def theta(k, y): return T.get(y, {}).get(ID(k, y))
 

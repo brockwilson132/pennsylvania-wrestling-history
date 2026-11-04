@@ -1,7 +1,7 @@
 /* Screenshots + layout check: node shoot.js [routes...] */
 const { chromium } = require('playwright'); const path = require('path'); const fs = require('fs');
 const NM = '/home/claude/almanac/node_modules', SITE = __dirname;
-const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['state', 'region/NE', 'region', 'district/11', 'district', 'school/nazareth', 'wrestlers', 'wrestler/sean-kinney--nazareth'];
+const routes = process.argv.slice(2).length ? process.argv.slice(2) : ['state', 'region/NE', 'district/11', 'school/nazareth', 'wrestlers', 'wrestlers?d=11', 'wrestlers?s=nazareth', 'wrestler/sean-kinney--nazareth', 'tournaments', 'tournaments?y=1995', 'missing', 'about', 'region', 'district'];
 const http = require('http');
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.png': 'image/png' };
 const srv = http.createServer((q, s) => { const f = path.join(SITE, decodeURIComponent(q.url.split('?')[0])); if (!f.startsWith(SITE) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { s.writeHead(404); return s.end(); } s.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(s); });
