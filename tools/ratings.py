@@ -52,7 +52,16 @@ def unit_cls(unit, cls):
     if unit == 'D1_AAA' and cls in D1PARTS: unit, cls = 'D1_' + cls, 'AAA'
     return REGION.get(unit, unit), {'A': 'AAA', 'B': 'AA'}.get(cls, cls)
 bouts = []
+NO_SEC_BOUTS = bool(os.environ.get('RATINGS_NO_SECTION_BOUTS'))   # test switch: drop section bouts, keep section entrants for district labels
+# first-round rule, the same for every district (sections are the district round where a district is split into them):
+#   keep  - every bout counts (default)
+#   drop  - district and section bouts left out of the rating; their brackets still label each wrestler's district
+#   prior - every bout counts; wrestlers whose season ended in the first round get their own prior mean, fitted so that
+#           on average their ratings sit where their prior says (an offset per class and era, learned from the data)
+FIRST = os.environ.get('RATINGS_FIRST_STAGE', 'prior')
 for b in csv.DictReader(open('data/brackets/bouts.csv')):
+    if NO_SEC_BOUTS and b['level'] == 'section': continue
+    if FIRST == 'drop' and b['level'] in ('district', 'section'): continue
     b['year'] = int(b['year']); b['round'] = int(b['round'])
     b['unit'], b['cls'] = unit_cls(b['unit'], b['cls'])
     b['wk'] = nk(b['winner']) + '|' + nk(b['winner_school']); b['lk'] = nk(b['loser']) + '|' + nk(b['loser_school'])
@@ -301,7 +310,7 @@ PLACE_W = 0.3
 npseudo = 0
 for bk, es in entrants.items():
     y = int(bk[1][:4]); pl = sorted([(e[3], ID(e[0], y)) for e in es if e[3]], key=lambda x: x[0])
-    if len(pl) < 2 or bouts_in.get(bk, 0) >= len(pl): continue
+    if len(pl) < 2 or bouts_in.get(bk, 0) >= len(pl) or (NO_SEC_BOUTS and bk[0] == 'section') or (FIRST == 'drop' and bk[0] in ('district', 'section')): continue
     for i in range(len(pl)):
         for j in range(i + 1, len(pl)):
             season_b[y].append((pl[i][1], pl[j][1], PLACE_W / (len(pl) - 1), ('P', bk[0]))); npseudo += 1
@@ -348,6 +357,13 @@ for (lvl, t, w), es in entrants.items():
 CLS_OF = {}
 for b in bouts: CLS_OF.setdefault((b['wi'], b['year']), b['c']); CLS_OF.setdefault((b['li'], b['year']), b['c'])
 def era_of(y): return 'e0' if y < 1990 else 'e1' if y < 2005 else 'e2'
+ADV = set()   # wrestler-seasons that reached a regional or state bracket
+for (lvl, t, w), es in entrants.items():
+    if lvl in ('regional', 'state'):
+        y = int(t[:4])
+        for e in es: ADV.add((ID(e[0], y), y))
+for b in bouts:
+    if b['level'] in ('regional', 'state'): ADV.add((b['wi'], b['year'])); ADV.add((b['li'], b['year']))
 def cov_group(i, y):
     """None when the district bracket is on file; else (class, era)"""
     if (i, y) in COVERED: return None
@@ -379,8 +395,10 @@ def dist_of(i, y):
     return s.most_common(1)[0][0] if s else None
 def era5(y): return 0 if y < 1956 else 1 if y < 1974 else 2 if y < 1990 else 3 if y < 2005 else 4
 GROUP_MODE = os.environ.get('RATINGS_GROUP', 'district')
+BLOCK = int(os.environ.get('RATINGS_BLOCK', 0))   # 0: the five eras; N: N-season blocks, smoothed between neighbours
+def eblock(y): return era5(y) if not BLOCK else y // BLOCK * BLOCK
 def dist_group(i, y):
-    d = dist_of(i, y); return None if d is None else (CLS_OF.get((i, y), 'single'), era5(y), d)
+    d = dist_of(i, y); return None if d is None else (CLS_OF.get((i, y), 'single'), eblock(y), d)
 def grp(i, y): return dist_group(i, y) if GROUP_MODE == 'district' else cov_group(i, y)
 say(f'coverage: {len(COVERED)} wrestler-seasons with their district bracket on file; district tournaments with a full field: {sum(1 for t in _tsize if _tsize[t] >= 24)} of {len(_tsize)}')
 DS = (-2, -1, 1, 2)
@@ -391,7 +409,12 @@ def gone(i, y, av):
     return (not av[2]) and (gr(i, y) == 3 or y - start_of.get(i, y) >= 3)
 def fresh(i, y, av): return (not av[1]) and gr(i, y) == 0
 MIN_PAT = 300
-PRIORS = {}
+PRIORS = {}; CAPTURE = [False]
+STG = {}
+def stg(i, y):
+    """(class, era) for a wrestler-season that ended in the first round (no regional or state bracket); else None"""
+    if (i, y) in ADV: return None
+    return (CLS_OF.get((i, y), 'single'), era_of(y))
 def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
     """Season-only fits, then one prior pass. The prior for season t is a regression on the neighbours'
     season-only strengths fitted SEPARATELY per neighbour-availability pattern (which of t-2, t-1, t+1, t+2 exist,
@@ -401,7 +424,7 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
     T0 = {}
     for y in YEARS:
         ids = ids_of[y]; sh = (lambda i: (shift or {}).get(grp(i, y), 0.0))
-        T0[y] = fit_season(season_b[y], ids, [1500 + sh(i) for i in ids], [250] * len(ids), mask)
+        T0[y] = fit_season(season_b[y], ids, [1500 + sh(i) + STG.get(stg(i, y), 0.0) for i in ids], [250] * len(ids), mask)
     def pkey(i, y):
         av = avail(T0, i, y); return av + (gone(i, y, av), fresh(i, y, av))
     def coarse(k): return (any(k[:2]), any(k[2:4]), k[4], k[5])
@@ -446,8 +469,9 @@ def smoother(mask=None, iters=5, report=False, sd_scale=1.0, shift=None):
                         mu.append(1500 + float(np.dot(design(A, gr(i, y), av), w))); sd.append(rs); continue
                 mu.append(1500 + gmean.get(gr(i, y), gmean[None])); sd.append(pop_sd)
             if shift: mu = [m + shift.get(grp(i, y), 0.0) * SHIFT_PASS for m, i in zip(mu, ids)]
+            if STG: mu = [m + STG.get(stg(i, y), 0.0) for m, i in zip(mu, ids)]
             new = fit_season(season_b[y], ids, mu, sd, mask)
-            if report and mask is None: PRIORS[y] = (ids, mu, sd)
+            if (report or CAPTURE[0]) and mask is None: PRIORS[y] = (ids, mu, sd)
             delta = max(delta, max(abs(new[i] - T[y][i]) for i in ids)); T[y] = new
         if report: say(f'  prior pass: largest change from season-only estimates {delta:.0f}')
     if report:
@@ -493,7 +517,15 @@ def dist_resid(T, lo, hi, skip=frozenset()):
         if tw is None or tl is None: continue
         rows.append((tw - tl, gw, gl))
     cnt = Counter(); [cnt.update([g, h]) for _, g, h in rows]
-    G = sorted(g for g, n_ in cnt.items() if n_ >= 150); gi = {g: k for k, g in enumerate(G)}
+    G = sorted(g for g, n_ in cnt.items() if n_ >= (60 if BLOCK else 150)); gi = {g: k for k, g in enumerate(G)}
+    # with blocks, neighbouring blocks of the same class and district are tied together (random-walk penalty, sd SMOOTH
+    # raw points per block), so a district's level can change over time without one thin block swinging on its own
+    nb = []
+    if BLOCK:
+        for g in G:
+            h = (g[0], g[1] + BLOCK, g[2])
+            if h in gi: nb.append((gi[g], gi[h]))
+    nb = np.array(nb, int).reshape(-1, 2); lam2 = 1 / SMOOTH ** 2
     rows = [r for r in rows if r[1] in gi or r[2] in gi]
     d = np.array([r[0] for r in rows]); W_ = np.array([gi.get(r[1], -1) for r in rows]); L_ = np.array([gi.get(r[2], -1) for r in rows])
     lam = 1e-4
@@ -501,20 +533,53 @@ def dist_resid(T, lo, hi, skip=frozenset()):
         cw = np.where(W_ >= 0, c[np.maximum(W_, 0)], 0.0); cl = np.where(L_ >= 0, c[np.maximum(L_, 0)], 0.0)
         z = C_ * (d + cw - cl); sp = np.logaddexp(0, -z); s_ = -C_ / (1 + np.exp(z))
         g = np.zeros(len(G)); np.add.at(g, W_[W_ >= 0], s_[W_ >= 0]); np.add.at(g, L_[L_ >= 0], -s_[L_ >= 0])
-        return float(sp.sum() + 0.5 * lam * (c * c).sum()), g + lam * c
+        val = float(sp.sum() + 0.5 * lam * (c * c).sum()); g = g + lam * c
+        if len(nb):
+            dd = c[nb[:, 0]] - c[nb[:, 1]]; val += 0.5 * lam2 * float((dd * dd).sum())
+            np.add.at(g, nb[:, 0], lam2 * dd); np.add.at(g, nb[:, 1], -lam2 * dd)
+        return val, g
     r = minimize(f, np.zeros(len(G)), jac=True, method='L-BFGS-B')
     c = r.x - np.average(r.x, weights=[cnt[g] for g in G])   # anchored: corrections average zero over bouts
     return {g: (float(c[gi[g]]), cnt[g]) for g in G}
 RESID = dist_resid if GROUP_MODE == 'district' else cov_resid
+SMOOTH = float(os.environ.get('RATINGS_SMOOTH', 40))
+NIT = int(os.environ.get('RATINGS_SHIFT_ITERS', 15)); TOL = float(os.environ.get('RATINGS_SHIFT_TOL', 2))
+# the district offsets are fitted on seasons up to FIT_HI: 2017 while testing (so the 2018-26 tests stay unseen), all
+# seasons for the published ratings (RATINGS_FIT_ALL=1)
+FIT_HI = 2026 if os.environ.get('RATINGS_FIT_ALL') else 2017
 SHIFT = {}
 # RATINGS_NO_SHIFT=1 turns the coverage shift off, for the with/without comparison on held-out state bouts
-for it in range(0 if os.environ.get('RATINGS_NO_SHIFT') else 6):
+for it in range(0 if os.environ.get('RATINGS_NO_SHIFT') else NIT):
     Ts, *_ = smoother(sd_scale=2.0, shift=SHIFT)
-    res = RESID(Ts, 1938 if GROUP_MODE == 'district' else 1974, 2017)
+    res = RESID(Ts, 1938 if GROUP_MODE == 'district' else 1974, FIT_HI)
     say(f'{GROUP_MODE} prior pass {it + 1}: largest residual {max([abs(v[0]) for v in res.values()] or [0]):.0f} over {len(res)} groups')
-    if all(abs(v[0]) < 5 for v in res.values()): break
+    done_s = all(abs(v[0]) < TOL for v in res.values())
     for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+    done_p = True
+    if done_s and done_p: break
 say(f'{GROUP_MODE} prior offsets (raw points added to the prior mean): ' + ', '.join(f'{"/".join(str(x) for x in k)} {v:+.0f}' for k, v in sorted(SHIFT.items(), key=lambda kv: str(kv[0]))))
+# first-round prior (RATINGS_FIRST_STAGE=prior): one offset added to the prior mean of every wrestler-season that ended in
+# the first round. It can't be set from those wrestlers' own fitted ratings (a wrestler with no wins has no lower bound,
+# so the mean keeps falling), so it is chosen by prediction: hide 10% of 1990-2017 regional and state bouts and keep
+# the offset that predicts them best. The 2018-26 tests never see this choice.
+if FIRST == 'prior':
+    import zlib
+    TUNE = {b['i'] for b in bouts if b['level'] in ('regional', 'state') and 1990 <= b['year'] <= 2017 and b['result'] not in SKIP
+            and zlib.crc32(('t|' + b['tournament'] + b['weight'] + b['winner'] + b['loser'] + str(b['round'])).encode()) % 10 == 0}
+    tb_ = [b for b in bouts if b['i'] in TUNE]; best = None
+    for off in (-200, -300, -400, -500, -600, -800, -1000, -1500):
+        STG.clear(); STG.update({(c, e): float(off) for c in ('AAA', 'AA', 'single') for e in ('e0', 'e1', 'e2')})
+        Tt, *_ = smoother(mask=TUNE, sd_scale=2.0, shift=SHIFT)
+        ll = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb_])
+        say(f'  first-round prior offset {off:+d}: log loss on hidden 1990-2017 regional + state bouts {ll:.4f}')
+        if best is None or ll < best[1]: best = (off, ll)
+    STG.clear(); STG.update({(c, e): float(best[0]) for c in ('AAA', 'AA', 'single') for e in ('e0', 'e1', 'e2')})
+    say(f'first-round prior offset chosen: {best[0]:+d}')
+    for it in range(NIT):
+        Ts, *_ = smoother(sd_scale=2.0, shift=SHIFT); res = RESID(Ts, 1938, FIT_HI)
+        say(f'district prior refit {it + 1} with first-round prior: largest residual {max(abs(v[0]) for v in res.values()):.0f}')
+        if all(abs(v[0]) < TOL for v in res.values()): break
+        for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
 # prior strength: the regression residual overstates the prior sd (its target is itself noisy), so scale it,
 # tuned on hidden 1990-2017 bouts
 random.seed(5)
@@ -528,6 +593,30 @@ for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
 # the widest prior, so the season's own bouts decide and the prior only fills gaps
 SDS = max(k for k, v in scores.items() if v <= min(scores.values()) + 0.001)
 say('prior sd scale (hidden 5% of 1990-2017 bouts): ' + ', '.join(f'{k}: {v:.4f}' for k, v in scores.items()) + f' -> {SDS}')
+# the district offsets move the prior mean, and how far a rating follows its prior depends on the prior width: offsets
+# fitted at one width and applied at another over- or under-shoot (most where a season has few bouts). Refit them at
+# the width the ratings actually use.
+if SDS != 2.0 and not os.environ.get('RATINGS_NO_SHIFT'):
+    for it in range(NIT):
+        Ts, *_ = smoother(sd_scale=SDS, shift=SHIFT); res = RESID(Ts, 1938, FIT_HI)
+        say(f'district prior refit {it + 1} at prior sd scale {SDS}: largest residual {max(abs(v[0]) for v in res.values()):.0f}')
+        if all(abs(v[0]) < TOL for v in res.values()): break
+        for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+    if FIRST == 'prior':   # the first-round offset was chosen at the wider width; check it again at this one
+        best2 = None
+        for off in (best[0] - 200, best[0] - 100, best[0], best[0] + 100, best[0] + 200):
+            STG.update({k: float(off) for k in STG})
+            Tt, *_ = smoother(mask=TUNE, sd_scale=SDS, shift=SHIFT)
+            ll = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb_])
+            say(f'  first-round prior offset {off:+d} at prior sd scale {SDS}: log loss {ll:.4f}')
+            if best2 is None or ll < best2[1]: best2 = (off, ll)
+        STG.update({k: float(best2[0]) for k in STG}); say(f'first-round prior offset at the final width: {best2[0]:+d}')
+        if best2[0] != best[0]:
+            for it in range(NIT):
+                Ts, *_ = smoother(sd_scale=SDS, shift=SHIFT); res = RESID(Ts, 1938, FIT_HI)
+                say(f'district prior refit {it + 1} after the offset change: largest residual {max(abs(v[0]) for v in res.values()):.0f}')
+                if all(abs(v[0]) < TOL for v in res.values()): break
+                for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
 # ---- does the coverage shift earn its place? Hide 15% of 1980-2017 state bouts, fit the shift and the ratings without
 # them (shift fitted on the remaining bouts only), and score the hidden bouts with and without the shift. The subset that
 # matters is bouts where exactly one wrestler has no district (or section) bracket on file.
@@ -535,10 +624,10 @@ if os.environ.get('RATINGS_SHIFT_TEST'):
     random.seed(11)
     SH = {b['i'] for b in bouts if b['level'] == 'state' and 1980 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.15}
     shH = {}
-    for it in range(6):
-        Tq, *_ = smoother(mask=SH, sd_scale=2.0, shift=shH)
+    for it in range(NIT):
+        Tq, *_ = smoother(mask=SH, sd_scale=SDS, shift=shH)
         rq = RESID(Tq, 1938 if GROUP_MODE == 'district' else 1974, 2017, skip=SH)
-        if all(abs(v[0]) < 5 for v in rq.values()): break
+        if all(abs(v[0]) < TOL for v in rq.values()): break
         for g, (c, n_) in rq.items(): shH[g] = shH.get(g, 0.0) + c
     def score(T, sel):
         ll = [-math.log(max(1e-9, 1 / (1 + 10 ** ((T[b['year']][b['li']] - T[b['year']][b['wi']]) / 400)))) for b in sel if T.get(b['year'], {}).get(b['wi']) is not None and T.get(b['year'], {}).get(b['li']) is not None]
@@ -552,15 +641,22 @@ if os.environ.get('RATINGS_SHIFT_TEST'):
     hb_cd = [b for b in hb_all if dist_of(b['wi'], b['year']) and dist_of(b['li'], b['year']) and dist_of(b['wi'], b['year']) != dist_of(b['li'], b['year'])]
     a, na = score(Ton, hb_cd); c_, nc = score(Toff, hb_cd); say(f'shift test, cross-district hidden state bouts (n={na}): log loss with {GROUP_MODE} prior {a:.4f}, without {c_:.4f}')
     # fairness: does each district win the hidden cross-district state bouts as often as its ratings say? (+ = underrated)
-    for lab, T_ in (('with', Ton), ('without', Toff)):
+    tr_cd = [b for b in bouts if b['i'] not in SH and b['level'] == 'state' and 1980 <= b['year'] <= 2017 and b['result'] not in SKIP and dist_of(b['wi'], b['year']) and dist_of(b['li'], b['year']) and dist_of(b['wi'], b['year']) != dist_of(b['li'], b['year'])]
+    for lab, T_, sel_ in (('with', Ton, hb_cd), ('without', Toff, hb_cd), ('TRAINING bouts, with', Ton, tr_cd)):
         acc = defaultdict(lambda: [0.0, 0.0, 0])
-        for b in hb_cd:
+        for b in sel_:
             tw, tl = T_.get(b['year'], {}).get(b['wi']), T_.get(b['year'], {}).get(b['li'])
             if tw is None or tl is None: continue
             e = 1 / (1 + 10 ** ((tl - tw) / 400))
             for i_, sgn in ((b['wi'], 1), (b['li'], -1)):
                 d_ = dist_of(i_, b['year']); a_ = acc[d_]; a_[0] += (1 - e) * sgn; a_[2] += 1
         say(f'  fairness {lab} prior, hidden cross-district state bouts: wins above expectation per bout by district: ' + ', '.join(f'D{d_} {v[0] / v[2]:+.3f} (n={v[2]})' for d_, v in sorted(acc.items()) if v[2] >= 60))
+    import zlib
+    HM = {b['i'] for b in bouts if b['level'] in ('regional', 'state') and b['year'] >= 2018 and b['result'] not in SKIP
+          and zlib.crc32('|'.join((b['tournament'], b['weight'], b['side'], str(b['round']), b['winner'], b['loser'])).encode()) % 10 == 0}
+    Tm, *_ = smoother(mask=HM, sd_scale=SDS, shift=SHIFT); hm = [b for b in bouts if b['i'] in HM]
+    sc_, n_ = score(Tm, hm); acc_ = np.mean([Tm[b['year']][b['wi']] > Tm[b['year']][b['li']] for b in hm])
+    say(f'common test, hidden 10% of 2018-26 regional + state bouts (n={n_}): log loss {sc_:.4f}, accuracy {acc_:.3f}')
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
 random.seed(3)
 held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and random.random() < 0.10}
