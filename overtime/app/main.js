@@ -135,4 +135,9 @@
   }
   window.addEventListener('hashchange', render);
   render();
+
+  /* hovering a chip or a line label brightens that series */
+  const hlSeries = (e, on) => { const t = e.target.closest && e.target.closest('[data-cmp],[data-focus]'); if (!t) return; const box = t.closest('.perf'); if (!box) return; const id = t.getAttribute('data-cmp') || t.getAttribute('data-focus');
+    box.querySelectorAll(`[data-sid="${CSS.escape(id)}"], .elab[data-focus="${CSS.escape(id)}"]`).forEach((n) => n.classList.toggle('hl', on)); };
+  document.addEventListener('mouseover', (e) => hlSeries(e, true)); document.addEventListener('mouseout', (e) => hlSeries(e, false));
 })();

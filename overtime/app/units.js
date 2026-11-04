@@ -281,7 +281,7 @@
   function seriesOptions(u) {
     const O = [];
     if (u.kind === 'state') {
-      FIVE.forEach((g) => O.push({ id: 'r:' + g, label: REGIONS[g], kind: 'region', ref: g, color: RNEUT[g][0], dash: RNEUT[g][1], def: true, own: true }));
+      FIVE.forEach((g) => O.push({ id: 'r:' + g, label: REGIONS[g], kind: 'region', ref: g, color: RNEUT[g][0], dash: RNEUT[g][1], def: true, many: true }));
       O.push({ id: 'st', label: 'State avg', kind: 'state', color: '#8E98A4', dash: DASH.st, def: true });
       return O;
     }
@@ -308,7 +308,11 @@
   }
   function cmpState(u, O) {
     const key = u.kind + ':' + u.id;
-    if (!state.cmp || state.cmp.key !== key) state.cmp = { key, on: new Set(O.filter((o) => o.def).map((o) => o.id)), extra: [], focus: u.kind === 'state' ? null : u.kind === 'school' ? null : 'own' };
+    if (!state.cmp || state.cmp.key !== key) {
+      let focus = u.kind === 'state' ? null : u.kind === 'school' ? null : 'own';
+      if (u.kind === 'state') { let best = -1; O.filter((o) => o.many).forEach((o) => { const s = seriesOf(o.kind, o.ref).filter((p) => p[1] && ratedYear(p[0])); const m = s.length ? s.reduce((t, p) => t + p[1], 0) / s.length : 0; if (m > best) { best = m; focus = o.id; } }); }
+      state.cmp = { key, on: new Set(O.filter((o) => o.def).map((o) => o.id)), extra: [], focus };
+    }
     if (state.cmp.focus && !state.cmp.on.has(state.cmp.focus)) state.cmp.focus = null;
     O.forEach((o) => { if (o.fixed) state.cmp.on.add(o.id); });
     return state.cmp;
@@ -373,15 +377,16 @@
       if (!pts.length) return;
       let d = '', gd = '', prev = null, pv = null; pts.forEach(([y, v]) => { if (prev != null && y - prev > 1) gd += 'M' + x(prev).toFixed(1) + ' ' + ry(pv).toFixed(1) + ' L' + x(y).toFixed(1) + ' ' + ry(v).toFixed(1) + ' '; d += (prev == null || y - prev > 1 ? 'M' : 'L') + x(y).toFixed(1) + ' ' + ry(v).toFixed(1) + ' '; prev = y; pv = v; });
       const foc = o.id === cs.focus;
-      if (gd) g += `<path d="${gd}" class="sl gap" style="stroke:${o.col}"/>`;
-      g += `<path d="${d}" class="sl${o.own ? ' own' : ''}${foc ? ' foc' : ''}" style="stroke:${o.col}${o.dsh ? ';stroke-dasharray:' + o.dsh : ''}"/>`;
+      if (gd) g += `<path d="${gd}" data-sid="${esc(o.id)}" class="sl gap" style="stroke:${o.col}"/>`;
+      const faint = !foc && !o.own && !['d', 'r', 'st'].includes(o.id);
+      g += `<path d="${d}" data-sid="${esc(o.id)}" class="sl${o.own ? ' own' : ''}${foc ? ' foc' : ''}${faint ? ' faint' : ''}" style="stroke:${o.col}${o.dsh ? ';stroke-dasharray:' + o.dsh : ''}"/>`;
       if ((o.id === 'own' || foc) && pts.length) { const pk = pts.reduce((a, b) => (b[1] > a[1] ? b : a)); g += `<circle cx="${x(pk[0])}" cy="${ry(pk[1])}" r="4" class="pk"/><text x="${Math.min(WB - 18, Math.max(18, x(pk[0])))}" y="${ry(pk[1]) - 9}" text-anchor="middle" class="pkt">${r10(pk[1])}</text>`; }
       const last = pts[pts.length - 1]; ends.push({ o, y: ry(last[1]), x: x(last[0]), v: last[1] });
     });
     /* direct labels at each line's right end, nudged apart */
     ends.sort((a, b) => a.y - b.y); for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 12) ends[i].y = ends[i - 1].y + 12;
     const short = (o) => (o.label.length > (phone ? 9 : 17) ? (o.kind === 'region' ? o.label.replace(/ avg$/, '').replace(/^North|^South/, (m) => m[0]).replace('east', 'E').replace('west', 'W').replace(' Central', 'C') + (/avg$/.test(o.label) ? ' avg' : '') : o.label.slice(0, phone ? 8 : 16) + '…') : o.label);
-    const endLabels = ends.map((e) => `<text x="${(e.x + 6).toFixed(1)}" y="${(e.y + 3.5).toFixed(1)}" class="elab${e.o.id === cs.focus ? ' foc' : ''}" style="fill:${e.o.col}" data-focus="${esc(e.o.id)}">${esc(short(e.o))}<title>${esc(e.o.label)} · ${r10(e.v)} · tap to focus</title></text>`).join('');
+    const endLabels = ends.map((e) => `<text x="${(e.x + 6).toFixed(1)}" y="${(e.y + 3.5).toFixed(1)}" class="elab${e.o.id === cs.focus ? ' foc' : (!e.o.own && !['d', 'r', 'st'].includes(e.o.id) ? ' faint' : '')}" style="fill:${e.o.col}" data-focus="${esc(e.o.id)}">${esc(short(e.o))}<title>${esc(e.o.label)} · ${r10(e.v)} · tap to focus</title></text>`).join('');
     const valAt = (y) => ser.map(({ o, pts }) => { const p = pts.find((q) => q[0] === y); return p ? [o, p[1]] : null; }).filter(Boolean);
     if (sel) { const sx = x(sel); g += `<line x1="${sx}" x2="${sx}" y1="4" y2="${RH}" class="xh"/>`; valAt(sel).forEach(([o, v]) => { g += `<circle cx="${sx}" cy="${ry(v)}" r="3.4" style="fill:${o.col}" class="xd"/>`; }); }
     /* results rows */
@@ -466,5 +471,5 @@
     return `<div class="ss">${head}${pl.length ? `<div class="sspod">${podium(counts, 'state', { h: 30 })}</div>` : ''}${rows || '<div class="note1">No state placers this season.</div>'}${pl.length > 40 ? `<div class="note1">and ${pl.length - 40} more</div>` : ''}</div>`;
   }
 
-  Object.assign(OT, { sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

@@ -24,12 +24,6 @@
   const rtgTip = 'Overtime Rating: his strength that season from every bout at every level, on one scale for every era (1500 = the average state qualifier; 400 points ≈ 10-to-1 odds)';
   const rtgTag = (v, opts = {}) => { if (v == null || isNaN(v)) return ''; const n = OT.rtg10(v);
     return `<span class="rtg${opts.size ? ' ' + opts.size : ''}" title="${esc(opts.title || rtgTip)}"><i>${opts.label || 'RTG'}</i><b>${n}</b></span>`; };
-  /* field strength: one labeled gauge, a gradient bar with ticks at the typical district / regional / state field and a
-     marker for this bracket. The only place difficulty uses color. */
-  const fieldGauge = (v, lvl) => { if (v == null) return ''; const M = OT.RTG_META, lo = M.lo, hi = M.hi, x = (q) => Math.max(0, Math.min(100, 100 * (q - lo) / (hi - lo)));
-    const ticks = [['district', 'D'], ['regional', 'R'], ['state', 'S']].filter(([k]) => M.field[k]).map(([k, l]) => `<span class="fgt${k === lvl ? ' on' : ''}" style="left:${x(M.field[k])}%" title="typical ${k} field ${OT.rtg10(M.field[k])}"><i></i><em>${l}</em></span>`).join('');
-    const t = `Field ${OT.rtg10(v)}: the mean Overtime Rating of this bracket's top eight. Typical fields: district ${OT.rtg10(M.field.district)}, regional ${OT.rtg10(M.field.regional)}, state ${OT.rtg10(M.field.state)}.`;
-    return `<div class="fg" title="${esc(t)}" aria-label="${esc(t)}"><div class="fgl"><span>FIELD</span><b>${OT.rtg10(v)}</b></div><div class="fgb"><div class="fgr"></div>${ticks}<span class="fgm" style="left:${x(v)}%"></span></div></div>`; };
   const classToggle = () => `<div class="seg" role="group" aria-label="Class">${['AAA', 'AA', 'ALL'].map((k) => `<button data-cls="${k}" aria-pressed="${state.cls === k}">${k === 'ALL' ? 'All' : k}</button>`).join('')}</div>`;
   /* time window: all-time, last 5 / 10 / 25 seasons, or a custom range */
   const windowToggle = () => { const w = state.win, [a, b] = yearsWindow();
@@ -247,13 +241,6 @@
     return `<${tag}${hr} class="${cls} cq" title="${c.year} · ${c.src || 'qualified'}">Q</${tag}>`;
   };
   const colHead = (c, i, full) => (c ? `<b>${full ? c.year : String(c.year).slice(2)}</b><i>${c.w ? wShort(c.w) : GRADE_L[i]}</i>` : `<b>${GRADE_L[i]}</b><i>·</i>`);
-  function careerGrid(W) {
-    const M = careerCells(W.apps, W.lower, { full: W.full });
-    const wrap = (c, k) => { const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, k)) : null; const f = ok ? OT.fieldOf(c.r, k) : null; return `<div class="cw">${cellHTML(c, 'cell', false, href)}${f ? OT.sbar(f, k, c.year + ' ' + k) : '<i class="sb sb0"></i>'}</div>`; };
-    return `<div class="cg"><div></div>${GRADE_L.map((g, i) => `<div class="k h">${g}${M.cols[i] ? `<small>${M.cols[i].year}${M.cols[i].w ? ' · ' + wShort(M.cols[i].w) : ''}</small>` : ''}</div>`).join('')}${M.rows.map((r) => `<div class="k lab">${r.l}</div>${r.cells.map((c) => wrap(c, r.k)).join('')}`).join('')}</div>
-      <div class="note">${OT.wlegend()} Tap a result for its bracket. Q advanced without a place · DNP entered, didn't place · DNC didn't compete · – no bracket on record.${W.full ? '' : ' Loading his full career…'}</div>`;
-  }
-
   /* road to Hershey: one season as a line across the state */
   function road(r, W) {
     const s = 3, X = 6, Y = 10; const P = (x, y) => [X + x * s, Y + y * s];
@@ -352,5 +339,5 @@
     return head + (placers.length ? namedPodium(placers) : '') + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div>${roundsHTML}<div class="note">${F.loading ? 'Loading the full field… ' : ''}Each line: his bouts here, his rating that season (RTG), and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { rtgTag, fieldGauge, bracketView, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, careerGrid, road });
+  Object.assign(OT, { rtgTag, bracketView, headerChips, panel, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
