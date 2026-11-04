@@ -344,7 +344,7 @@
     SS.forEach((r) => { if (r[1] >= RATED_FROM && r[5]) add('school', r[2], r[5]); });
     UD.ds.forEach(([u, y, c, r]) => { if (y >= RATED_FROM && r) add('district', c, r); });
     UD.rs.forEach(([u, y, c, r]) => { if (y >= RATED_FROM && r) add('region', c, r); });
-    const out = {}; Object.entries(pools).forEach(([k, A]) => { A.sort((x, y) => x - y); out[k] = [pctl(A, 0.05), pctl(A, 0.95)]; });
+    const out = {}; Object.entries(pools).forEach(([k, A]) => { A.sort((x, y) => x - y); out[k] = k.startsWith('school|') ? [pctl(A, 0.10), pctl(A, 0.995)] : [pctl(A, 0.05), pctl(A, 0.95)]; /* schools: the pool is dominated by thin programs, so stretch the top end so strong programs stay distinguishable */ });
     return out;
   })();
   const ratingDom = (kind) => DOMS[kind + '|' + (state.cls === 'ALL' ? 'ALL' : state.cls)] || DOMS[kind + '|ALL'] || [1300, 1700];
