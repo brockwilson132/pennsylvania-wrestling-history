@@ -12,7 +12,8 @@ const I = { level: ix('level'), t: ix('tournament'), year: ix('year'), cls: ix('
 const rows = [];
 for (let i = 1; i < lines.length; i++) {
   const L = lines[i]; if (!L) continue;
-  const c = L.split(','); if (c.length < H.length) continue;   // rows with quoted commas are rare; skip them
+  const c = []; { let cur = '', q = false; for (let i = 0; i < L.length; i++) { const ch = L[i]; if (q) { if (ch === '"') { if (L[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; } else if (ch === '"') q = true; else if (ch === ',') { c.push(cur); cur = ''; } else cur += ch; } c.push(cur); }
+  if (c.length < H.length) continue;
   const v = +c[I.season]; if (!v) continue;
   rows.push({ lvl: c[I.level], t: c[I.t], year: +c[I.year], cls: c[I.cls], school: c[I.school], key: c[I.key], v });
 }
