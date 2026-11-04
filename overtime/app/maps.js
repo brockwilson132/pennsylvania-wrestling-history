@@ -145,18 +145,45 @@
     if (u.kind === 'region') { const { of } = membership(); return { kind: 'district', L: () => OT.aggregateCore('district', { kind: 'region', id: u.id }, 'region'), keys: Object.keys(of).map(Number).filter((d) => of[d] === u.id).sort((a, b) => a - b), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k }; }
     return { kind: 'school', L: () => OT.aggregateCore('school', { kind: 'district', id: +u.id }, 'district'), keys: null, mk: (k) => 's' + k, name: (k) => OT.UD.schools[k], href: (k) => '#school/' + slug(OT.UD.schools[k]) };
   }
-  /* context for the selection, no names: best / average / lowest school rating statewide, in the region and in the
-     district, so a school's number can be read against its surroundings */
+  /* WRESTLER RATINGS context (no names): Best / Avg / 5th-percentile season rating of the wrestlers who entered this
+     page's tournament level (districts on a District page, regionals on a Region page, states on the State page),
+     statewide, in the region and in the district, for the selection and class. Groups come from wstats.js
+     (per season, class, level and district: max, sum, count and a 10-point histogram). */
+  const WS = window.WR_WSTATS || null;
+  function wrestlerStats(lvl, ds, y0, y1) {
+    if (!WS) return null;
+    const cl = OT.state.cls, cls = cl === 'ALL' ? ['AAA', 'AA', 'single'] : [cl, 'single'];
+    let mx = 0, sum = 0, n = 0; const h = new Map();
+    for (let y = y0; y <= y1; y++) for (const c of cls) for (const d of ds) {
+      const g = WS.g[`${y}|${c}|${lvl}|${d}`]; if (!g) continue;
+      mx = Math.max(mx, g[0]); sum += g[1]; n += g[2];
+      g[3].split(',').forEach((x) => { const i = x.indexOf(':'); const b = +x.slice(0, i); h.set(b, (h.get(b) || 0) + +x.slice(i + 1)); });
+    }
+    if (!n) return null;
+    const bins = Array.from(h.entries()).sort((a, b) => a[0] - b[0]); let acc = 0, p5 = bins[0][0] * WS.bin; const t = 0.05 * n;
+    for (const [bn, c] of bins) { acc += c; if (acc >= t) { p5 = (bn + 0.5) * WS.bin; break; } }
+    return [mx, sum / n, p5, n];
+  }
   function contextTable(u, sel) {
-    const scopes = [['State', null]];
-    if (u.kind === 'region') scopes.push(['Region', { kind: 'region', id: u.id }]);
-    if (u.kind === 'district') { const g = membership().of[+u.id]; if (g) scopes.push(['Region', { kind: 'region', id: g }]); scopes.push(['District', { kind: 'district', id: +u.id }]); }
-    const stat = (p) => { const L = OT.aggregateCore('school', p, p ? p.kind : 'state').map((a) => a.rating).filter(Boolean); if (!L.length) return null; return [Math.max(...L), L.reduce((t, v) => t + v, 0) / L.length, Math.min(...L), L.length]; };
-    const run = () => scopes.map(([l, p]) => [l, stat(p)]);
-    const rows = sel ? OT.withSub([sel.a, sel.b], run) : run();
-    const chip = (v) => `<span class="mls ctx" style="--tint:${v ? OT.ratingColor('school', v) : '#2F3640'}">${v ? r10(v) : '–'}</span>`;
-    const body = rows.map(([l, x]) => `<div class="ctr"><span class="ctl">${l}${x ? `<small>${x[3]} schools</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated schools</span>'}</div>`).join('');
-    return `<div class="ctx"><div class="cth"><span>School ratings</span><i>Best</i><i>Avg</i><i>Low</i></div>${body}</div>`;
+    const lvl = u.kind === 'district' ? 'd' : u.kind === 'region' ? 'r' : 's';
+    const [w0, w1] = OT.yearsWindow(), y0 = sel ? sel.a : w0, y1 = sel ? sel.b : w1;
+    const ALL = Array.from({ length: 12 }, (_, i) => i + 1);
+    const of = (sel ? OT.withSub([sel.a, sel.b], membership) : membership()).of;
+    const scopes = [['State', ALL]];
+    if (u.kind === 'region') scopes.push(['Region', ALL.filter((d) => of[d] === u.id)]);
+    if (u.kind === 'district') { const g = of[+u.id]; if (g) scopes.push(['Region', ALL.filter((d) => of[d] === g)]); scopes.push(['District', [+u.id]]); }
+    const chip = (v) => `<span class="mls ctx" style="--tint:${v ? OT.ratingColor('wrestler', v) : '#2F3640'}">${v ? r10(v) : '–'}</span>`;
+    const body = scopes.map(([l, ds]) => { const x = wrestlerStats(lvl, ds, y0, y1); return `<div class="ctr"><span class="ctl">${l}${x ? `<small>${fmt(x[3])} wrestlers</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated wrestlers</span>'}</div>`; }).join('');
+    const who = lvl === 'd' ? 'district entrants' : lvl === 'r' ? 'regional entrants' : 'state entrants';
+    return `<div class="ctx"><div class="cth"><span>Wrestler ratings</span><i>Best</i><i>Avg</i><i>Low*</i></div>${body}<div class="ctf">${who} · season ratings · *5th percentile</div></div>`;
+  }
+  /* team benchmarks in line with the units list: best / average / 5th-percentile unit rating over each scope */
+  const p5of = (A) => { const S = A.slice().sort((a, b) => a - b); return S[Math.max(0, Math.round(0.05 * (S.length - 1)))]; };
+  const bstat = (L) => { const A = L.map((a) => a.rating).filter(Boolean); if (!A.length) return null; return { best: Math.max(...A), avg: A.reduce((t, v) => t + v, 0) / A.length, low: p5of(A) }; };
+  function benchScopes(u, U) {
+    if (u.kind === 'district') { const g = membership().of[+u.id]; return [['State', () => OT.aggregateCore('school', null, 'state')]].concat(g ? [['Region', () => OT.aggregateCore('school', { kind: 'region', id: g }, 'region')]] : []).concat([['District', () => U.L()]]); }
+    if (u.kind === 'region') return [['State', () => OT.aggregateCore('district', null, 'state')], ['Region', () => U.L()]];
+    return [['State', () => U.L()]];
   }
   function unitList(u, sel) {
     const U = listUnits(u);
@@ -164,17 +191,27 @@
     const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
     let keys = U.keys || Array.from(new Set([...full.keys()]));
     let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => (r.s || r.v) && String(U.name(r.k) || '').trim());
-    const srt = OT.state.msort === 'avg' ? 'avg' : 'sel';
+    const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
     rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
     const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
+    // benchmarks: selection values (Selected column) and whole-window values (Avg column)
+    const bench = [];
+    benchScopes(u, U).forEach(([l, f]) => {
+      const bf = bstat(f()), bs = sel ? OT.withSub([sel.a, sel.b], () => bstat(f())) : bf; if (!bf && !bs) return;
+      [['best', 'best'], ['avg', 'avg'], ['low', 'low']].forEach(([k, lab]) => bench.push({ b: true, label: `${l} ${lab}`, s: bs ? bs[k] : 0, v: bf ? bf[k] : 0 }));
+    });
+    const vis = rows.slice(0, lim), cut = more && vis.length ? key(vis[vis.length - 1]) : -Infinity;
+    const benchVis = bench.filter((x) => key(x) >= cut);
+    const all = vis.concat(benchVis).sort((p, q) => key(q) - key(p) || (q.b ? 1 : 0) - (p.b ? 1 : 0));
     const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
-    const body = rows.slice(0, lim).map((r) => {
+    const body = all.map((r) => {
+      if (r.b) return `<div class="mlr mlb"><span class="mln">${esc(r.label)}</span><span class="mls mlo" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}</span></div>`;
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
       const dl = !sel || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
       return `<div class="mlr" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${r.s ? OT.ratingColor(U.kind, r.s) : '#2F3640'}">${r.s ? r10(r.s) : '–'}</span><span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span></div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
-    return `<div class="ml">${contextTable(u, sel)}<div class="mlh"><span></span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    return `<div class="ml">${contextTable(u, sel)}<div class="mlh"><span>${U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions'}</span>${hd('sel', 'Selected')}${hd('avg', 'Avg')}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   function scrubber(u, sel) {
     const [y0, y1] = OT.yearsWindow(); const n = y1 - y0 + 1;

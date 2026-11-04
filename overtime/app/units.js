@@ -374,6 +374,11 @@
     const out = {}; Object.entries(pools).forEach(([k, A]) => { A.sort((x, y) => x - y); out[k] = k.startsWith('school|') ? [pctl(A, 0.10), pctl(A, 0.995)] : [pctl(A, 0.05), pctl(A, 0.95)]; /* schools: the pool is dominated by thin programs, so stretch the top end so strong programs stay distinguishable */ });
     return out;
   })();
+  /* wrestlers: 5th–95th percentile of all entrants' season ratings since 1974, from the wstats histograms */
+  (() => { const W = window.WR_WSTATS; if (!W) return; const h = new Map(); let n = 0;
+    Object.entries(W.g).forEach(([k, g]) => { if (+k.slice(0, 4) < RATED_FROM) return; g[3].split(',').forEach((x) => { const i = x.indexOf(':'), b = +x.slice(0, i), c = +x.slice(i + 1); h.set(b, (h.get(b) || 0) + c); n += c; }); });
+    const B = Array.from(h.entries()).sort((a, b) => a[0] - b[0]); const q = (t) => { let acc = 0; for (const [b, c] of B) { acc += c; if (acc >= t * n) return (b + 0.5) * W.bin; } return B.length ? B[B.length - 1][0] * W.bin : null; };
+    if (n) DOMS['wrestler|ALL'] = [q(0.05), q(0.95)]; })();
   const ratingDom = (kind) => DOMS[kind + '|' + (state.cls === 'ALL' ? 'ALL' : state.cls)] || DOMS[kind + '|ALL'] || [1300, 1700];
   const domFrac = (kind, v) => { const [lo, hi] = ratingDom(kind); return Math.max(0, Math.min(1, (v - lo) / Math.max(1, hi - lo))); };
   const ratingColor = (kind, v) => (v ? colorAt(domFrac(kind, v)) : null);
