@@ -137,8 +137,8 @@ say(f'bouts {len(bouts)} (rated: {sum(b["result"] not in SKIP for b in bouts)}),
 
 # ============================================================ layer 1: forward Elo
 class Elo:
-    def __init__(s, K=40, rho=0.75, grow=(60, 40, 25), init=(1500, 1500, 1540, 1580), marg=(1.5, 1.35, 1.2, 1.0), prov=2.0, S=400):
-        s.K, s.rho, s.grow, s.init, s.marg, s.S, s.prov = K, rho, grow, init, dict(zip(MARGIN_TYPES, marg)), S, prov
+    def __init__(s, K=40, rho=0.75, grow=(60, 40, 25), init=(1500, 1500, 1540, 1580), marg=(1.5, 1.35, 1.2, 1.0), prov=2.0, S=400, gap='decay'):
+        s.K, s.rho, s.grow, s.init, s.marg, s.S, s.prov, s.gap = K, rho, grow, init, dict(zip(MARGIN_TYPES, marg)), S, prov, gap
         s.R, s.last, s.n = {}, {}, Counter()
     def kf(s, key): return s.K * (1 + s.prov / (s.n[key] + 1))
     def get(s, k, year, lr):
@@ -147,7 +147,15 @@ class Elo:
         elif s.last[k] < year:
             gap = year - s.last[k]; g = grade.get((k, year))
             step = s.grow[g - 1] if g is not None and g >= 1 else sum(s.grow) / len(s.grow)
-            s.R[k] = 1500 + (s.rho ** gap) * (s.R[k] - 1500) + step; s.last[k] = year
+            # a missed season: 'decay' regresses once per elapsed year (the old rule), 'hold' regresses once however
+            # long the gap, 'grow' regresses once and adds the growth step for every grade he moved up
+            if s.gap == 'decay': s.R[k] = 1500 + (s.rho ** gap) * (s.R[k] - 1500) + step
+            else:
+                st = step
+                if s.gap == 'grow' and gap > 1 and g is not None:
+                    st = sum(s.grow[x - 1] for x in range(max(1, g - gap + 1), g + 1))
+                s.R[k] = 1500 + s.rho * (s.R[k] - 1500) + st
+            s.last[k] = year
         return s.R[k]
     def p(s, ra, rb): return 1 / (1 + 10 ** ((rb - ra) / s.S))
 
@@ -193,6 +201,24 @@ if '--grid' in sys.argv:
     params = best[1]
 params = fit_growth(params)
 say('forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted):', params)
+# missed seasons: compare the three gap rules on held-out 2018-26 bouts, overall and for bouts where a wrestler is
+# back after sitting out at least one season; keep the best on the returners (ties go to the overall score)
+def _gap_eval(mode):
+    p_ = dict(params, gap=mode); E_ = Elo(**p_); seen = {}; ll = [0.0, 0]; llr = [0.0, 0]
+    for b in bouts:
+        if b['result'] in SKIP: continue
+        back = any(b['year'] - seen.get(k, b['year']) >= 2 for k in (b['wk'], b['lk']))
+        rw = E_.get(b['wk'], b['year'], b['lr']); rl = E_.get(b['lk'], b['year'], b['lr']); pw = E_.p(rw, rl)
+        if b['year'] > 2017:
+            l = -math.log(max(pw, 1e-9)); ll[0] += l; ll[1] += 1
+            if back: llr[0] += l; llr[1] += 1
+        m = E_.marg.get(b['result'], 1.0); E_.R[b['wk']] = rw + E_.kf(b['wk']) * m * (1 - pw); E_.R[b['lk']] = rl - E_.kf(b['lk']) * m * (1 - pw)
+        E_.n[b['wk']] += 1; E_.n[b['lk']] += 1; seen[b['wk']] = b['year']; seen[b['lk']] = b['year']
+    return ll[0] / ll[1], llr[0] / max(1, llr[1]), llr[1]
+_gr = {m: _gap_eval(m) for m in ('decay', 'hold', 'grow')}
+for m, (a, r, n_) in _gr.items(): say(f'missed-season rule {m}: held-out 2018-26 log loss {a:.4f}; bouts with a wrestler back after a missed season (n={n_}) {r:.4f}')
+params = dict(params, gap=min(_gr, key=lambda m: (round(_gr[m][1], 4), _gr[m][0])))
+say(f'missed-season rule chosen: {params["gap"]}')
 lt, lh, acc, nh, E, PRE, END = run(params, keep=True)
 say(f'forward rating log loss: tuning years {lt:.4f}; held-out 2018-2026 {lh:.4f} over {nh} bouts, accuracy {acc:.3f} (coin flip 0.6931)')
 _, lh1, acc1, *_ = run(dict(params, marg=(1, 1, 1, 1)))
@@ -680,8 +706,10 @@ for b in bouts:
         if (k, b['year']) in _seen: continue
         _seen.add((k, b['year'])); _ea[(b['year'], b['c'])].append(v)
 EANC = {g: (float(np.mean(v)), float(np.std(v)) or 1.0) for g, v in _ea.items() if len(v) >= 20}
+_ecache = {}
 def enorm(v, y, c):
-    g = (y, c) if (y, c) in EANC else min(EANC, key=lambda g: (g[1] != c, abs(g[0] - y)))
+    g = _ecache.get((y, c))
+    if g is None: g = _ecache[(y, c)] = (y, c) if (y, c) in EANC else min(EANC, key=lambda g: (g[1] != c, abs(g[0] - y)))
     m, sd = EANC[g]; return 1500 + (v - m) / sd * SD_REF
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_elo.csv', 'w', newline='') as f:
     c_ = csv.writer(f); c_.writerow(['level', 'tournament', 'weight', 'side', 'round', 'winner', 'loser', 'pre_w', 'pre_l', 'post_w', 'post_l'])

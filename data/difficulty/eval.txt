@@ -2,9 +2,13 @@ transfers: 1534 name+school keys linked to the same wrestler at an earlier schoo
 identity linking: 2649 of 132412 name keys merged into another (3358 merge events)
 bouts 503192 (rated: 492166), brackets 36524, wrestlers with a grade-season 240393
 forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (122.6, 119.7, 124.8), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
-forward rating log loss: tuning years 0.5732; held-out 2018-2026 0.5511 over 102740 bouts, accuracy 0.716 (coin flip 0.6931)
-  ablations held-out: no margin factor 0.5646 / 0.705; no grade step 0.6110 / 0.659
-state bouts 2018-2026 with both regional seeds (n=8289): seed-only 0.6163, rating-only 0.5678, seed+rating 0.5542
+missed-season rule decay: held-out 2018-26 log loss 0.5511; bouts with a wrestler back after a missed season (n=1845) 0.5489
+missed-season rule hold: held-out 2018-26 log loss 0.5503; bouts with a wrestler back after a missed season (n=1845) 0.5387
+missed-season rule grow: held-out 2018-26 log loss 0.5530; bouts with a wrestler back after a missed season (n=1845) 0.5647
+missed-season rule chosen: hold
+forward rating log loss: tuning years 0.5729; held-out 2018-2026 0.5503 over 102740 bouts, accuracy 0.716 (coin flip 0.6931)
+  ablations held-out: no margin factor 0.5638 / 0.706; no grade step 0.6108 / 0.659
+state bouts 2018-2026 with both regional seeds (n=8289): seed-only 0.6163, rating-only 0.5668, seed+rating 0.5535
 careers: 642 name+school keys split into several careers
 
 season-batch fit: 492166 bouts + 4356 placement-implied pairs (weight 0.3/(placers-1)) for brackets with fewer bouts than placers
@@ -17,7 +21,7 @@ district prior pass 5: largest residual 10 over 83 groups
 district prior pass 6: largest residual 8 over 83 groups
 district prior offsets (raw points added to the prior mean): AA/2/1 -207, AA/2/10 -0, AA/2/11 -41, AA/2/12 -204, AA/2/2 -133, AA/2/3 -36, AA/2/4 +35, AA/2/5 -99, AA/2/6 +1, AA/2/7 +145, AA/2/9 -91, AA/3/1 -166, AA/3/10 +23, AA/3/11 -20, AA/3/12 -201, AA/3/2 -135, AA/3/3 -33, AA/3/4 +42, AA/3/5 -63, AA/3/6 -60, AA/3/7 +23, AA/3/9 -43, AA/4/1 -107, AA/4/10 +181, AA/4/11 +111, AA/4/2 -16, AA/4/3 +86, AA/4/4 +196, AA/4/5 +80, AA/4/6 +104, AA/4/7 +76, AA/4/9 +89, AAA/2/1 -182, AAA/2/10 -7, AAA/2/11 -26, AAA/2/2 -163, AAA/2/3 -29, AAA/2/4 -35, AAA/2/5 -100, AAA/2/6 -54, AAA/2/7 +164, AAA/2/9 -48, AAA/3/1 -128, AAA/3/10 -7, AAA/3/11 +25, AAA/3/2 -130, AAA/3/3 +25, AAA/3/4 -37, AAA/3/6 -60, AAA/3/7 +102, AAA/3/8 -279, AAA/3/9 -88, AAA/4/1 -23, AAA/4/10 -7, AAA/4/11 +79, AAA/4/12 -115, AAA/4/2 -14, AAA/4/3 +40, AAA/4/4 -26, AAA/4/6 +31, AAA/4/7 +64, AAA/4/8 -212, AAA/4/9 -29, single/0/1 -71, single/0/10 +1, single/0/11 +5, single/0/2 -12, single/0/3 -105, single/0/4 +3, single/0/5 -84, single/0/6 +77, single/0/7 +64, single/1/1 +0, single/1/10 +71, single/1/11 +34, single/1/12 -392, single/1/2 -132, single/1/3 -80, single/1/4 +46, single/1/5 -157, single/1/6 +120, single/1/7 -43, single/1/9 -99
 prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.5401, 1.0: 0.5396, 1.5: 0.5399, 2.0: 0.5410, 2.5: 0.5431, 3.0: 0.5466, 4.5: 0.5628 -> 1.5
-held-out 10% of 2018-2026 bouts (n=10348), fit without them: season-batch strength log loss 0.5217 accuracy 0.729; forward rating 0.5522
+held-out 10% of 2018-2026 bouts (n=10348), fit without them: season-batch strength log loss 0.5217 accuracy 0.729; forward rating 0.5512
   (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)
   prior pass: largest change from season-only estimates 552
   prior models by neighbour pattern (t-2 t-1 t+1 t+2 | graduated | freshman): n, slopes, slope sum, resid sd

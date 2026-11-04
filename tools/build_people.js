@@ -72,7 +72,7 @@ function splitCareers(apps) {
 function addAgg(k, lvl, year, cls, unit, w, place, name, sch, d) {
   let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0 }; P.set(k, p); }
   p.cls.set(cls, (p.cls.get(cls) || 0) + (lvl === 'state' ? 3 : 1)); p.ws |= 1 << stdIdx(wNum(w));
-  if (year >= p.ny) { p.ny = year; p.name = name; }
+  if (year >= p.ny) { p.ny = year; p.name = name; p.sch = sch; }   // a transfer is listed under his last school
   p.y0 = Math.min(p.y0, year); p.y1 = Math.max(p.y1, year);
   if (d) p.ds.set(d, (p.ds.get(d) || 0) + (lvl === 'district' ? 3 : 1));
   const L = { district: 1, regional: 2, state: 3 }[lvl]; const pl = place >= 1 && place <= 8 ? place : 0;
@@ -104,15 +104,31 @@ const LS = W.WR_LOWER_META.strs;
    name+school with more than one career, the start season of every career after the first (the app uses it to give
    each career its own key and page). */
 const CAREERS = {}; let nSplit = 0, nSameSeason = 0;
+/* transfers: one wrestler, two schools (same rule as tools/ratings.py). A later career at another school joins an earlier
+   one when the name matches, grades give the same graduating class, the seasons follow within two years without
+   overlapping, the whole career fits in four seasons and the weights are within 30 lb. WR_TRANSFER maps the later
+   career key to the earlier one; the app files both under one wrestler page. */
+const CAR = []; // {k, nm, y0, y1, gy, wn}
+RAW.forEach((apps, base) => { const starts = splitCareers(apps); starts.forEach((st, i) => { const end = starts[i + 1] || 9999; const xs = apps.filter((x) => x.year >= st && x.year < end);
+  const gys = new Set(xs.filter((x) => x.g >= 9).map((x) => x.year + 12 - x.g)); const ws = xs.map((x) => x.wn).filter((w) => w && w < 999).sort((a, b) => a - b);
+  CAR.push({ k: i ? base + '#' + st : base, nm: base.split('|')[0], y0: Math.min(...xs.map((x) => x.year)), y1: Math.max(...xs.map((x) => x.year)), gy: gys.size === 1 ? [...gys][0] : 0, wn: ws.length ? ws[ws.length >> 1] : 0 }); }); });
+const TRANSFER = {}; const byNm = new Map(); CAR.forEach((c) => (byNm.get(c.nm) || byNm.set(c.nm, []).get(c.nm)).push(c));
+byNm.forEach((cs) => { if (cs.length < 2 || cs[0].nm.length < 6) return; cs.sort((a, b) => a.y0 - b.y0);
+  cs.forEach((b, j) => { for (let i = j - 1; i >= 0; i--) { const a = cs[i]; if (TRANSFER[a.k] || a.k.split('|')[1].split('#')[0] === b.k.split('|')[1].split('#')[0]) continue;
+    const root = a; const y0 = root.y0, y1 = Math.max(root.y1, ...cs.filter((c) => TRANSFER[c.k] === root.k).map((c) => c.y1));
+    if (b.y0 <= y1 || b.y0 - y1 > 2 || b.y1 - y0 > 3 || !a.gy || a.gy !== b.gy || (a.wn && b.wn && Math.abs(a.wn - b.wn) > 30)) continue;
+    TRANSFER[b.k] = a.k; break; } }); });
+const TR = (k) => TRANSFER[k] || k;
 RAW.forEach((apps, base) => {
   const starts = splitCareers(apps);
   if (starts.length > 1) { CAREERS[base] = starts.slice(1); nSplit++; }
-  apps.forEach((x) => { let i = 0; while (i + 1 < starts.length && x.year >= starts[i + 1]) i++; const k = i ? base + '#' + starts[i] : base; addAgg(k, ...x.a); });
+  apps.forEach((x) => { let i = 0; while (i + 1 < starts.length && x.year >= starts[i + 1]) i++; const k = i ? base + '#' + starts[i] : base; addAgg(TR(k), ...x.a); });
   /* two state appearances in one season at weights >12 lb apart: two people sharing a name (counted, not split) */
   const byY = new Map(); apps.filter((x) => x.lvl === 'state').forEach((x) => { (byY.get(x.year) || byY.set(x.year, []).get(x.year)).push(x.wn); });
   byY.forEach((ws) => { if (ws.length > 1 && Math.max(...ws) - Math.min(...ws) > 12) nSameSeason++; });
 });
-fs.writeFileSync(path.join(OV, 'careers.js'), 'window.WR_CAREERS=' + JSON.stringify(CAREERS) + ';\n');
+fs.writeFileSync(path.join(OV, 'careers.js'), 'window.WR_CAREERS=' + JSON.stringify(CAREERS) + ';\nwindow.WR_TRANSFER=' + JSON.stringify(TRANSFER) + ';\n');
+console.log('transfers linked', Object.keys(TRANSFER).length);
 console.log('name+school keys', RAW.size, 'split into several careers', nSplit, 'same-season two-weight state cases', nSameSeason);
 
 const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, schools.length); schools.push(s); } return sidx.get(s); };

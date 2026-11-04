@@ -280,10 +280,14 @@ const OT = (window.OT = {});
   }
 
   /* wrestlers */
-  const wKey = (r) => { const b = nkey(r.name) + '|' + r.sch, c = cStart(b, r.year); return c ? b + '#' + c : b; }, wSlug = (n, s) => slug(n) + '--' + slug(s);
-  const rSlug = (r) => { const c = cStart(nkey(r.name) + '|' + r.sch, r.year); return wSlug(r.name, r.sch) + (c ? '-' + c : ''); };
+  /* transfers (tools/build_people.js WR_TRANSFER): a later career at another school maps to his earlier career key, so
+     both schools' rows form one wrestler; his page and links use the slug of his last school */
+  const TRF = window.WR_TRANSFER || {}, SLUGK = new Map();
+  const wKey = (r) => { const b = nkey(r.name) + '|' + r.sch, c = cStart(b, r.year), k = c ? b + '#' + c : b; return TRF[k] || k; }, wSlug = (n, s) => slug(n) + '--' + slug(s);
+  const ownSlug = (r) => { const c = cStart(nkey(r.name) + '|' + r.sch, r.year); return wSlug(r.name, r.sch) + (c ? '-' + c : ''); };
+  const rSlug = (r) => SLUGK.get(wKey(r)) || ownSlug(r);
   const WRESTLER = new Map();
-  d3.groups(APP, wKey).forEach(([, all]) => { all.sort((a, b) => a.year - b.year); const L = all[all.length - 1]; WRESTLER.set(rSlug(L), { name: L.name, sch: L.sch, d: all[0].d, apps: all, rows: all.filter((r) => r.place), slug: rSlug(L) }); });
+  d3.groups(APP, wKey).forEach(([k, all]) => { all.sort((a, b) => a.year - b.year); const L = all[all.length - 1]; const sl = ownSlug(L); SLUGK.set(k, sl); WRESTLER.set(sl, { name: L.name, sch: L.sch, d: all[0].d, apps: all, rows: all.filter((r) => r.place), slug: sl }); });
   const wrestlerHref = (r) => '#wrestler/' + rSlug(r);
   /* ---- Overtime Rating (docs/DIFFICULTY.md, v2) ----
      Every bout in the archive is parsed; each season is fit as one batch (a win counts by the opponent's full-season
