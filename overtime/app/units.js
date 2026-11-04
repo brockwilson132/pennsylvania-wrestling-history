@@ -212,7 +212,7 @@
   /* ---------- unit card ----------
      Rating is the graphic: a mini chart of the unit's rating across the window with the 1500 line. Beside it Score and one
      podium per level that counts on this page (State; + Regional on a Region page; + District on District and School). */
-  const SORTS = { rating: (a, b) => b.rating - a.rating, score: (a, b) => b.score - a.score || b.rating - a.rating, titles: (a, b) => b.ti - a.ti || b.score - a.score };
+  const SORTS = { rating: (a, b) => b.rating - a.rating, score: (a, b) => b.score - a.score || b.rating - a.rating, titles: (a, b) => b.ti - a.ti || b.score - a.score, team: (a, b) => (b.tt + (b.dtt || 0)) - (a.tt + (a.dtt || 0)) || b.score - a.score };
   /* comparison lines are neutral (colour means medals): chalk / ash tones and dash patterns, each line labelled at its
      right end; the focused series is gold; a school's own line keeps the school colour */
   const GOLD = '#D9A441';
@@ -263,6 +263,15 @@
       if (k != null) M.set(k, (M.get(k) || 0) + 1); });
     return M;
   });
+  /* the seasons a unit won the PIAA team duals (for the team-titles tile's year ticks) */
+  const dualYears = (kind) => memo('dy|' + kind, () => {
+    const M = new Map(), DS = window.WR_DUALS || [], [wa, wb] = OT.yearsWindow();
+    const regOf = new Map(); SS.forEach((r) => { if (r[3] >= 1 && r[4]) regOf.set(r[3] + '|' + r[1], r[4] === 'W' ? 'SW' : r[4]); });
+    DS.forEach((d) => { if (!/championship match/i.test(d[2]) || d[0] < wa || d[0] > wb || !clsOk(d[1])) return;
+      const k = kind === 'school' ? SIDX.get(canonT(d[3])) : kind === 'district' ? d[4] : regOf.get(d[4] + '|' + d[0]);
+      if (k != null) (M.get(k) || M.set(k, []).get(k)).push(d[0]); });
+    return M;
+  });
   /* unit card: identity, best wrestler and podiums on the left; a 2×2 matrix on the right that fills the card's height:
      Score (with the S/R/D split) · Rating (mini chart on a tint of the strength scale) · Team titles · Individual titles */
   function unitCard(a, rank, sort, pageKind) {
@@ -295,44 +304,67 @@
   /* one sort control (wrestler lists still use it) */
   const sortSelect = (key, sorts, cur) => `<label class="ssel"><span>Sort</span><select data-sortsel="${key}" aria-label="Sort by">${sorts.map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${l}</option>`).join('')}</select></label>`;
   /* ---------- standings rows ----------
-     A ranked unit is one 56px row: rank, colour edge, name with a one-line summary, then fixed columns: a rating chip
-     (tinted on the strength scale, value over an inline sparkline) and Score. Column headers sort. Tap a row to open its
-     detail in place: finishes 1st–8th across the full width for each level that counts on this page, the top wrestler,
-     team titles and a link to the unit's page. */
-  const chipSpark = (series) => { const pts = series.filter((p) => p[1]); if (pts.length < 2) return '';
+     A ranked unit is one row: rank, colour edge, name, then one tile per value. Every tile has the same build: the number
+     on top, a small graphic of how it was reached across the window underneath, and a tint that says how it compares.
+       Titles  individual state titles; gold ticks mark the seasons with a title; gold deepens with the count.
+       RTG     the unit rating; line = season ratings; tint on the ice-to-fire strength scale.
+       Score   weighted placement points; bars = points per season; tint = where it sits in this list, ice to fire.
+       Team    PIAA team titles + team duals titles; ticks mark the seasons (wider screens).
+     Column headers sort. Tap a row to open its detail in place. */
+  const chipSpark = (series) => { const pts = series.filter((p) => p[1]); if (pts.length < 2) return '<svg class="rcs" viewBox="0 0 60 14" aria-hidden="true"></svg>';
     const y0 = pts[0][0], y1 = pts[pts.length - 1][0], v = pts.map((p) => p[1]), lo = Math.min(...v), hi = Math.max(...v);
     const X = (y) => 1 + 58 * (y - y0) / Math.max(1, y1 - y0), Y = (x) => 13 - 12 * (x - lo) / Math.max(1, hi - lo);
     return `<svg class="rcs" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true"><path d="${pts.map(([y, x], i) => (i ? 'L' : 'M') + X(y).toFixed(1) + ' ' + Y(x).toFixed(1)).join(' ')}" vector-effect="non-scaling-stroke"/></svg>`; };
+  /* bars per season across the window (Score) */
+  const chipBars = (vals, y0, y1) => { const n = Math.max(1, y1 - y0 + 1), mx = Math.max(1e-9, ...vals.map((v) => v[1])), bw = 60 / n;
+    return `<svg class="rcs rcb" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true">${vals.filter((v) => v[1] > 0).map(([y, v]) => `<rect x="${((y - y0) * bw).toFixed(2)}" y="${(14 - 13 * v / mx).toFixed(2)}" width="${Math.max(0.6, bw * 0.72).toFixed(2)}" height="${(13 * v / mx).toFixed(2)}"/>`).join('')}</svg>`; };
+  /* ticks for the seasons something happened (Titles, Team) */
+  const chipTicks = (years, y0, y1) => { const n = Math.max(1, y1 - y0); return `<svg class="rcs rct" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 13.5 H60" vector-effect="non-scaling-stroke"/>${years.map((y) => `<path d="M${(1 + 58 * (y - y0) / n).toFixed(2)} 2 V13" vector-effect="non-scaling-stroke"/>`).join('')}</svg>`; };
   function distRows(a) {
     const lv = LVL3.filter((l, i) => a.w[i]);
     const rows = lv.map((l) => { const c = placeDist(a.kind, l).get(a.k) || [0, 0, 0, 0, 0, 0, 0, 0]; const mx = Math.max(1, ...c), tot = c.reduce((t, x) => t + x, 0);
       return `<div class="sdr"><span class="sdl">${OT.navIcon(LVI[l])}<b>${LV[LVL3.indexOf(l)][0]}</b><i>${tot}</i></span><span class="sdb">${c.map((n, i) => `${((h) => `<span class="sdc" title="${ordinal(i + 1)}: ${n}" style="--h:${h}%"><em>${n || ''}</em><i style="height:${h}%;--c:${MEDC[i]}"></i></span>`)(n ? Math.max(8, Math.round(78 * n / mx)) : 0)}`).join('')}</span></div>`; }).join('');
     return `<div class="sdh"><span></span><span class="sdb">${[1, 2, 3, 4, 5, 6, 7, 8].map((p) => `<i>${ordinal(p)}</i>`).join('')}</span></div>${rows}`;
   }
-  function unitCard(a, rank, sort, pageKind) {
+  function unitCard(a, rank, sort, pageKind, ctx) {
     const rt = r10(a.rating), tint = rt ? colorAt(domFrac(a.kind, a.rating)) : '#2F3640';
     const dt = dualTitles(a.kind).get(a.k) || 0, team = a.tt + dt;
-    const sub = [a.sub ? esc(a.sub) : '', `${a.ti} state title${a.ti === 1 ? '' : 's'}`, team ? `${team} team` : ''].filter(Boolean).join(' · ');
+    const [y0, y1] = ctx.span;
+    const sTint = colorAt(ctx.scorePct(a.score));
+    const tYears = a.ys.filter((y) => y.ti > 0).map((y) => y.y);
+    const teamYears = a.ys.filter((y) => y.tt > 0).map((y) => y.y).concat(dualYears(a.kind).get(a.k) || []);
+    const gold = (n, mx) => (n ? `--g:${(0.18 + 0.5 * Math.min(1, n / Math.max(1, mx))).toFixed(2)}` : '');
     const off = a.off && a.kind === 'school' && state.cls !== 'ALL' ? `<div class="sxn">Includes ${a.off} ${state.cls === 'AAA' ? 'AA' : 'AAA'} season${a.off === 1 ? '' : 's'} at 85%.</div>` : '';
     const best = a.best ? `<a class="sxw" href="${OT.wrestlerHref({ name: a.best.name, sch: a.best.sch, year: a.best.y })}"><i>Top wrestler</i><b>${esc(a.best.name)}</b>${a.kind !== 'school' ? `<small>${esc(a.best.sch)}</small>` : ''}<em>${r10(a.best.r)} · ${a.best.y}</em></a>` : '';
     const tl = team ? `<div class="sxt"><i>Team titles</i>${[a.tt ? `PIAA <b>${a.tt}</b>` : '', dt ? `Duals <b>${dt}</b>` : ''].filter(Boolean).join(' · ')}</div>` : '';
+    const ind = [a.w[1] ? `Regional <b>${a.rt}</b>` : '', a.w[2] ? `District <b>${a.dt}</b>` : ''].filter(Boolean);
+    const il = ind.length ? `<div class="sxt"><i>Other titles</i>${ind.join(' · ')}</div>` : '';
     const hl = (k) => (sort === k ? ' on' : '');
-    return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b><small>${sub}</small></span><span class="c ct${hl('titles')}">${a.ti}</span><span class="c ctm">${team || '–'}</span><span class="rc${hl('rating')}${a.est ? ' est' : ''}" style="--tint:${tint}"${a.est ? ` title="${esc('est. · ' + a.estTip)}"` : ''}><b>${rt || '–'}</b>${chipSpark(a.series)}</span><span class="c cs${hl('score')}">${fmt(Math.round(a.score))}</span></button>
-      <div class="sxd" hidden>${distRows(a)}<div class="sxf">${best}${tl}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
+    const tile = (cls, k, val, gfx, style, title) => `<span class="vt ${cls}${hl(k)}"${style ? ` style="${style}"` : ''}${title ? ` title="${esc(title)}"` : ''}><b>${val}</b>${gfx}</span>`;
+    return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b></span>`
+      + tile('vtt' + (a.ti ? '' : ' z'), 'titles', a.ti || '–', chipTicks(tYears, y0, y1), gold(a.ti, ctx.maxTi), `${a.ti} state title${a.ti === 1 ? '' : 's'}${tYears.length ? ' · ' + tYears.join(', ') : ''}`)
+      + tile('vtr' + (a.est ? ' est' : ''), 'rating', rt || '–', chipSpark(a.series), `--tint:${tint}`, a.est ? 'est. · ' + a.estTip : `Rating ${rt} · season ratings across the window`)
+      + tile('vts', 'score', fmt(Math.round(a.score)), chipBars(a.ys.map((y) => [y.y, y.sp * a.w[0] + y.rp * a.w[1] + y.dp * a.w[2]]), y0, y1), `--tint:${sTint}`, `Score ${fmt(Math.round(a.score))} · placement points per season`)
+      + tile('vtm' + (team ? '' : ' z'), 'team', team || '–', chipTicks(teamYears, y0, y1), gold(team, ctx.maxTeam), team ? `${team} team title${team === 1 ? '' : 's'} · ${teamYears.sort((p, q) => p - q).join(', ')}` : 'no team titles')
+      + `</button>
+      <div class="sxd" hidden>${a.sub ? `<div class="sxsub">${esc(a.sub)}</div>` : ''}${distRows(a)}<div class="sxf">${best}${tl}${il}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
   }
   function unitRankings(kind, parent, pageKind, opts = {}) {
-    const sorts = [['rating', 'Rating'], ['score', 'Score']].concat(pageKind !== 'school' ? [['titles', 'Titles']] : []);
+    const sorts = [['rating', 'Rating'], ['score', 'Score'], ['titles', 'Titles'], ['team', 'Team']];
     let sort = sorts.some(([k]) => k === state.usort) ? state.usort : 'rating';
     if (sort === 'rating' && OT.yearsWindow()[1] < RATED_FROM) sort = 'score';
-    const L = aggregate(kind, parent, pageKind).filter((a) => kind !== 'school' || (a.name && String(a.name).trim())).slice().sort(SORTS[sort]);
+    const DT = dualTitles(kind); const L = aggregate(kind, parent, pageKind).filter((a) => kind !== 'school' || (a.name && String(a.name).trim())).map((a) => { a.dtt = DT.get(a.k) || 0; return a; }).sort(SORTS[sort]);
     L.forEach((a) => { a.kind = kind; });
     if (!L.length) return OT.empty('No ' + (kind === 'school' ? 'schools' : kind + 's') + ' with enough seasons in this window.');
     const lim = state.uall ? L.length : opts.limit || 20;
-    const canT = sorts.some(([k]) => k === 'titles');
-    const hb = (k, l, cls) => `<button class="${cls}${sort === k ? ' on' : ''}" data-usort="${k}" aria-pressed="${sort === k}">${l}</button>`;
-    const head = `<div class="sxh"><span class="rk"></span><span class="nm">${canT ? hb('titles', 'Titles', 'ht m') : ''}</span><span class="c ct">${canT ? hb('titles', 'Titles', 'ht') : 'Titles'}</span><span class="c ctm">Team</span><span class="rc">${hb('rating', 'RTG', 'ht')}</span><span class="c cs">${hb('score', 'Score', 'ht')}</span></div>`;
+    const hb = (k, l) => `<button class="ht${sort === k ? ' on' : ''}" data-usort="${k}" aria-pressed="${sort === k}">${l}</button>`;
+    const head = `<div class="sxh"><span class="rk"></span><span class="nm"></span><span class="vth">${hb('titles', 'Titles')}</span><span class="vth">${hb('rating', 'RTG')}</span><span class="vth">${hb('score', 'Score')}</span><span class="vth vtm">${hb('team', 'Team')}</span></div>`;
+    const sc = L.map((a) => a.score).sort((p, q) => p - q);
+    const yrs = L.flatMap((a) => a.ys.map((y) => y.y)); const [wa, wb] = OT.yearsWindow();
+    const ctx = { span: [Math.max(wa, Math.min(...yrs)), Math.min(wb, Math.max(...yrs))], maxTi: Math.max(1, ...L.map((a) => a.ti)), maxTeam: Math.max(1, ...L.map((a) => a.tt + (dualTitles(kind).get(a.k) || 0))),
+      scorePct: (v) => { let lo = 0, hi = sc.length; while (lo < hi) { const m = (lo + hi) >> 1; if (sc[m] < v) lo = m + 1; else hi = m; } return sc.length > 1 ? lo / (sc.length - 1) : 0.5; } };
     const more = L.length > (opts.limit || 20) ? `<button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Show top ' + (opts.limit || 20) : 'Show all ' + L.length}</button>` : '';
-    return { sortSeg: '', html: `<div class="sxl">${head}${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
+    return { sortSeg: '', html: `<div class="sxl">${head}${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind, ctx)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
   }
 
   /* ---------- performance chart ----------

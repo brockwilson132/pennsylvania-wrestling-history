@@ -290,56 +290,148 @@
     return `<span class="cm bvm">${h}</span>`;
   }
 
-  /* ---- tournament bracket view: one year · level · unit · weight, in the app's bracket language ----
-     No bout data yet, so pairings are not fabricated: entrants sit on the left in seed order, the joins are structure
-     only, and each finish is a medal pill at the end of the line. */
+  /* ---- bout rating deltas ----
+     Ratings are fitted on the whole season, so a bout's delta is the Elo step that result is worth given both season
+     ratings: Δ = K · margin · (result − expected), expected = 1 / (1 + 10^((opp − me)/400)). K 56 is the forward Elo's
+     fitted step; the margin multiplier is the rating fit's (fall 1.5, TF 1.4, MD 1.2, decision 1.0, overtime 0.8).
+     Forfeits and injury defaults carry no information and score 0. The winner gains what the loser gives up. */
+  const ELO_K = 56, MARG = { fall: 1.5, tf: 1.4, md: 1.2, dec: 1.0, dq: 1.0 };
+  function boutDelta(b, rW, rL) {
+    if (rW == null || rL == null || !(b[4] in MARG)) return null;
+    const m = /OT|SV|TB|UT/.test(b[6] || '') && b[4] === 'dec' ? 0.8 : MARG[b[4]];
+    const eW = 1 / (1 + Math.pow(10, (rL - rW) / 400));
+    return ELO_K * m * (1 - eW);
+  }
+  const RES = { fall: 'Fall', tf: 'TF', md: 'MD', dec: 'Dec', ff: 'FF', inj: 'Inj', dq: 'DQ' };
+  const resTxt = (b) => [RES[b[4]] ?? b[4], b[5], b[6]].filter(Boolean).join(' ');
+  const dTxt = (d) => (d == null ? '' : `<em class="dl ${d >= 0.5 ? 'up' : d <= -0.5 ? 'dn' : 'ev'}">${d >= 0.5 ? '+' : d <= -0.5 ? '−' : '±'}${Math.round(Math.abs(d))}</em>`);
+  const shortName = (n) => { const t = String(n || '').replace(/\(.*?\)/g, '').trim().split(/\s+/); return t.length > 1 ? t[0][0] + '. ' + t.slice(1).join(' ') : n; };
+
+  /* ---- the bracket as it was wrestled ----
+     Bouts carry side, depth from the final, winner, loser and result, not bracket slots, so the tree is rebuilt from who
+     advanced: a bout's two feeders are each wrestler's previous win on the same side. Top/bottom follows the order the
+     bouts were read off the PDF, which runs top to bottom. Wrestlers with no feeder (byes, consolation drop-ins) enter
+     where they first wrestled. Each match box: two lines (name, season rating, Δ), result above, winner bright. */
+  function buildTrees(bouts, sideOk) {
+    const B = bouts.map((b, i) => ({ b, i, d: b[1] })).filter((x) => sideOk(x.b[0]));
+    const by = new Map(); const nk = OT.nkey;
+    B.forEach((x) => [x.b[2], x.b[3]].forEach((n) => { const k = nk(n); (by.get(k) || by.set(k, []).get(k)).push(x); }));
+    const feeder = (x, name) => { let best = null; (by.get(nk(name)) || []).forEach((y) => { if (y !== x && nk(y.b[2]) === nk(name) && y.d > x.d && (!best || y.d < best.d)) best = y; }); return best; };
+    const parentOf = (x) => { let best = null; (by.get(nk(x.b[2])) || []).forEach((y) => { if (y !== x && y.d < x.d && (!best || y.d > best.d)) best = y; }); return best; };
+    const used = new Set();
+    const node = (x) => { used.add(x); const ps = [x.b[2], x.b[3]].map((n) => { const f = feeder(x, n); return { name: n, won: n === x.b[2], child: f && !used.has(f) ? node(f) : null }; });
+      ps.forEach((p) => { p.key = p.child ? p.child.minI : 1e9 + (p.won ? 0 : 1); });
+      ps.sort((p, q) => p.key - q.key);
+      const kids = ps.filter((p) => p.child).map((p) => p.child);
+      return { x, ps, minI: Math.min(x.i, ...kids.map((k) => k.minI)), size: ps.reduce((t, p) => t + (p.child ? p.child.size : 1), 0), maxD: Math.max(x.d, ...kids.map((k) => k.maxD)) }; };
+    return B.filter((x) => !parentOf(x)).sort((p, q) => p.d - q.d || p.i - q.i).map(node);
+  }
+  function bracketTree(trees, ctx, opts) {
+    if (!trees.length) return '';
+    const BW = ctx.phone ? 164 : 184, GAP = 30, SH = 33, LH = 22, TOP = 26;
+    const maxD = Math.max(...trees.map((t) => t.maxD)), minD = Math.min(...trees.map((t) => t.x.d));
+    const cols = maxD - minD + 1, END = 112;
+    const W = cols * (BW + GAP) + END;
+    let y0 = TOP, boxes = '', paths = [], gold = [];
+    const X = (d) => (maxD - d) * (BW + GAP);
+    const place = (n, top) => { // returns center y
+      let cur = top; const ys = n.ps.map((p) => { if (p.child) { const c = place(p.child, cur); cur += p.child.size * SH; return c; } const c = cur + SH / 2; cur += SH; return null; });
+      const cy = top + n.size * SH / 2; const x = X(n.x.d);
+      const lineY = [cy - LH / 2, cy + LH / 2];
+      n.ps.forEach((p, k) => { if (p.child) { const c = p.child; const x1 = X(c.x.d) + BW, yc = c.cy, xm = x - GAP / 2; const d = `M${x1} ${yc} H${xm} V${lineY[k]} H${x}`; (ctx.isFocus(p.name) ? gold : paths).push(d); } });
+      n.cy = cy;
+      const b = n.x.b; const rows = n.ps.map((p) => ctx.line(p.name, p.won, b)).join('');
+      boxes += `<div class="bxm${n.ps.some((p) => ctx.isFocus(p.name)) ? ' me' : ''}" style="left:${x}px;top:${cy - LH}px;width:${BW}px"><span class="bxr">${esc(resTxt(b))}</span>${rows}</div>`;
+      return cy;
+    };
+    const heads = [];
+    for (let d = maxD; d >= minD; d--) heads.push(`<span class="bxh" style="left:${X(d)}px;width:${BW}px">${esc(opts.roundName(d))}</span>`);
+    trees.forEach((t) => {
+      const cy = place(t, y0);
+      const w = t.x.b[2], x = X(t.x.d) + BW;
+      (ctx.isFocus(w) ? gold : paths).push(`M${x} ${cy - LH / 2} H${x + GAP / 2}`);
+      if (t.x.d === 0 && opts.finish) boxes += `<div class="bxw" style="left:${x + GAP / 2 + 4}px;top:${cy - LH / 2 - 15}px">${opts.finish(w)}</div>`;
+      y0 += t.size * SH + 18;
+    });
+    const H = y0;
+    return `<div class="bxs"><div class="bxc" style="width:${W}px;height:${H}px">${heads.join('')}<svg class="bxj" width="${W}" height="${H}" aria-hidden="true"><path d="${paths.join(' ')}"/><path class="g" d="${gold.join(' ')}"/></svg>${boxes}</div></div>`;
+  }
+
+  /* the eight medalists: top three on a podium (name, school, season rating, net Δ for the tournament), 4th–8th as rows */
+  function medalists(placers, info) {
+    const by = (p) => placers.filter((r) => r.place === p);
+    const chip = (r, n) => (OT.SB ? OT.SB.svg(r.sch, { size: n, variant: 'chip', title: false }) : '');
+    const stats = (r) => { const i = info(r); return `<span class="mdv">${i.rt != null ? `<b>${OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
+    const H = { 1: 70, 2: 52, 3: 40 };
+    const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
+    const rest = [4, 5, 6, 7, 8].flatMap((p) => by(p).map((r) => `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i>${chip(r, 20)}<span class="mdnm"><b>${esc(r.name)}</b><small>${esc(r.sch)}</small></span>${stats(r)}</a>`)).join('');
+    return `<div class="md"><div class="mdtop">${top}</div>${rest ? `<div class="mdrest">${rest}</div>` : ''}</div>`;
+  }
+
+  /* ---- tournament bracket view: one year · level · unit · weight ----
+     Header and strength of competition, the medalists, the bracket as wrestled (championship, then consolation, then
+     placement bouts), then the field: every entrant with his bouts and career matrix. */
   function bracketView(key, focusSlug) {
     const F = OT.bracketField(key); if (!F) return '';
     const lvlName = { state: 'State', regional: 'Regional', district: 'District' }[F.lvl];
     const unit = F.unitLabel;
     const title = `${F.year} · ${unit}${F.lvl === 'state' ? ' State' : ''} · ${F.cls === 'single' ? 'one class' : F.cls} · ${wShort(F.w)}`;
     const SB_ = OT.sosBracket(key), nk = OT.nkey;
-    const RES = { fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' };
-    const boutsOf = (name) => { if (!SB_) return []; const n = nk(name); return SB_.b.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
-    const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [RES[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
-      return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}</span>`; };
-    const sortBy = state.bvsort === 'rtg' ? 'rtg' : 'seed';
-    const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
-    const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div>${sortSeg}</div>${F.field != null ? `<div class="bvfield">${OT.fieldGauge(F.field, F.lvl)}</div>` : ''}`;
+    const head = `<div class="bvhead"><a class="bvclose" href="${OT.bhref(null)}" aria-label="Close">✕</a><div><div class="k">${lvlName.toUpperCase()} BRACKET</div><h2>${esc(title)}</h2></div></div>${F.field != null ? `<div class="bvfield">${OT.fieldGauge(F.field, F.lvl)}</div>` : ''}`;
     const SRCI = { d3records: ['champions only', 'District III Records', 'https://piaadistrict3records.com/'], wpial: ['champions only', 'WPIAL', 'https://wpial.org/'] }[F.src];
     const srcNote = SRCI ? `<div class="bvsrc">${SRCI[0]} · <a href="${SRCI[2]}" target="_blank" rel="noopener">${SRCI[1]}</a> · the bracket archive has no file for this tournament</div>` : '';
     if (SRCI && F.entrants.length) return head + srcNote + `<div class="bvsrclist">${F.entrants.map((e) => `<a class="bvsrcrow" href="#wrestler/${e.slug}"><span class="pill ${pc(e.r.place)}">${e.r.place}</span><span class="bvsrcn"><b>${esc(e.r.name)}</b><small>${esc(e.r.sch)}</small></span></a>`).join('')}</div>`;
     if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
-    const SBx = OT.sosBracket(key), hasB = !!(SBx && SBx.b.length); const n = F.entrants.length, phone = (window.innerWidth || 390) < 720, RH = phone ? (hasB ? 200 : 136) : (hasB ? 112 : 92), BW = phone ? 54 : 110, H = n * RH;
-    const rOf = (r) => { const x = SB_ && SB_.s[nk(r.name)]; return x ? x[0] : OT.ratingOf(r, F.lvl); };
+    const phone = (window.innerWidth || 390) < 720;
+    const EN = new Map(F.entrants.map((e) => [nk(e.r.name), e]));
+    const rOfName = (n) => { const x = SB_ && SB_.s[nk(n)]; if (x) return x[0]; const e = EN.get(nk(n)); return e ? OT.ratingOf(e.r, F.lvl) : null; };
+    const rOf = (r) => rOfName(r.name);
+    const bouts = SB_ ? SB_.b : [];
+    // per-bout deltas and each wrestler's net for the tournament
+    const DL = new Map(), NET = new Map();
+    bouts.forEach((b) => { const d = boutDelta(b, rOfName(b[2]), rOfName(b[3])); DL.set(b, d); if (d == null) return; NET.set(nk(b[2]), (NET.get(nk(b[2])) || 0) + d); NET.set(nk(b[3]), (NET.get(nk(b[3])) || 0) - d); });
+    const focusN = (() => { const e = F.entrants.find((x) => x.slug === focusSlug); return e ? nk(e.r.name) : null; })();
+    const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
+      line: (n, won, b) => { const e = EN.get(nk(n)); const rt = rOfName(n); const d = DL.get(b); const dd = d == null ? null : won ? d : -d;
+        const chip = e && OT.SB ? OT.SB.svg(e.r.sch, { size: 14, variant: 'chip', title: false }) : '<i class="bxnc"></i>';
+        const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
+        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? ' · RTG ' + OT.rtg10(rt) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
+        const inner = `${chip}${nm}<span class="bxv">${rt != null ? OT.rtg10(rt) : ''}</span>${dTxt(dd)}`;
+        return e ? `<a class="bxl${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="bxl${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
+    const RNC = (d) => ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16', 'Round of 32', 'Pigtails'][d] || 'Prelims';
+    const RNX = (d) => (d === 0 ? '3rd place' : d === 1 ? 'Consolation semis' : 'Consolation R' + d);
+    const champT = buildTrees(bouts, (s) => s === 'champ');
+    const consT = buildTrees(bouts, (s) => s === 'p3' || s === 'cons');
+    const placeB = bouts.filter((b) => b[0] === 'p5' || b[0] === 'p7').sort((p, q) => (p[0] > q[0]) - (p[0] < q[0]));
+    const finish = (lab) => (n) => { const e = EN.get(nk(n)); return `<i>${lab}</i><b>${esc(shortName(n))}</b>`; };
+    const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
+    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk"><h3>Championship</h3><span>Season rating · Δ = rating points won or lost in that bout against expectation</span></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
+      + (consT.length ? `<section class="bxsec"><div class="bxk"><h3>Consolation</h3></div>${bracketTree(consT, ctx, { roundName: RNX, finish: finish('3rd') })}</section>` : '')
+      + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '') : '';
+    // the field: every entrant with his bouts and career matrix
+    const sortBy = state.bvsort === 'rtg' ? 'rtg' : 'seed';
+    const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
+    const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
+    const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
+      const d = DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
-    const rounds = Math.max(1, Math.ceil(Math.log2(Math.max(2, n)))), step = (BW - 22) / rounds;
-    let ys = ents.map((_, i) => i * RH + RH / 2), paths = [];
-    for (let k = 0; k < rounds; k++) { const x0 = k * step, x1 = (k + 1) * step, next = []; for (let i = 0; i < ys.length; i += 2) { const a = ys[i], b = ys[i + 1]; if (b == null) { paths.push(`M${x0} ${a} H${x1}`); next.push(a); continue; } const m = (a + b) / 2; paths.push(`M${x0} ${a} H${x1} V${b} H${x0}`); next.push(m); } ys = next; }
-    const fy = ys[0], fx = rounds * step; paths.push(`M${fx} ${fy} H${BW - 20}`);
-    const term = F.lvl === 'state' ? `<circle cx="${BW - 10}" cy="${fy}" r="7.5" fill="none" stroke="${C.chalk}" stroke-width="2.4"/><circle cx="${BW - 10}" cy="${fy}" r="2.4" fill="${C.red}"/>` : `<circle cx="${BW - 10}" cy="${fy}" r="5" fill="${C.chalk}"/>`;
-    const label = `<text transform="translate(${BW - 22} ${Math.min(H - 70, fy + 14)}) rotate(90)" text-anchor="start" font-family="Barlow Condensed" font-weight="700" font-size="10" letter-spacing="2" fill="${C.ash}">${F.next}</text>`;
-    const svg = `<svg class="bvjoins" width="${BW}" height="${H}" viewBox="0 0 ${BW} ${H}" aria-hidden="true"><path d="${paths.join(' ')}" fill="none" stroke="${C.line2 || C.ash}" stroke-width="1"/>${term}${n > 3 ? label : ''}</svg>`;
-    const shortName = (n) => { const t = String(n || '').replace(/\(.*?\)/g, '').trim().split(/\s+/); return t.length > 1 ? t[0][0] + '. ' + t.slice(1).join(' ') : n; };
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
       const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
       const meta = [r.grade, r.record].filter(Boolean).join(' · ');
-      const sx = SB_ && SB_.s[nk(r.name)]; const rt = rOf(r); const bl = boutsOf(r.name);
-      const tag = rtgTag(rt);
-      const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}</span>` : '';
+      const sx = SB_ && SB_.s[nk(r.name)]; const bl = boutsOf(r.name);
+      const net = NET.get(nk(r.name));
+      const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
       const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
-      return `<div class="bvl${me ? ' me' : ''}" style="height:${RH}px"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${tag}</span></span>${line}${entrantMatrix(e, F)}</div>`;
+      return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
-    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}; they are marked advanced.` : '';
-    const RN = (d, side) => side === 'champ' ? (['Final', 'Semifinal', 'Quarterfinal', 'Round 1', 'Prelim'][d] || 'Prelim') : (d === 0 ? ({ p3: '3rd place', p5: '5th place', p7: '7th place' }[side] || 'Consolation final') : 'Consolation ' + d);
-    const roundsHTML = SB_ && SB_.b.length ? (() => { const sides = [['champ', 'Championship'], ['cons', 'Consolation']].map(([sd, lab]) => { const bs = SB_.b.filter((b) => sd === 'champ' ? b[0] === 'champ' : b[0] !== 'champ'); if (!bs.length) return '';
-        const cols = d3.groups(bs, (b) => (b[0] === 'champ' || b[0] === 'p3' || b[0] === 'cons' ? b[1] : -1 - ['p5', 'p7'].indexOf(b[0]))).sort((a, b) => b[0] - a[0]);
-        return `<div class="bvr"><div class="k">${lab}</div><div class="bvrc">${cols.map(([d, xs]) => `<div class="bvcol"><div class="k">${esc(RN(Math.max(0, d), xs[0][0]))}</div>${xs.map((b) => `<div class="bvbout"><b>${esc(b[2])}</b><small>over ${esc(b[3])}</small><span>${esc([RES[b[4]] ?? b[4], b[5], b[6]].filter(Boolean).join(' ') || 'dec')}</span></div>`).join('')}</div>`).join('')}</div></div>`; }).join('');
-      return `<div class="bvrounds">${sides}</div>`; })() : '';
+    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
-    return head + (placers.length ? namedPodium(placers) : '') + `<div class="bvbody"${F.loading ? ' data-loading="1"' : ''}><div class="bvlines">${lines}</div>${svg}</div>${roundsHTML}<div class="note">${F.loading ? 'Loading the full field… ' : ''}Each line: his bouts here, his rating that season (RTG), and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
+    const info = (r) => ({ rt: rOf(r), net: NET.has(nk(r.name)) ? NET.get(nk(r.name)) : null });
+    return head + (placers.length ? medalists(placers, info) : '') + bracketHTML
+      + `<section class="bxsec"><div class="bxk"><h3>The field</h3>${sortSeg}</div><div class="bvlist"${F.loading ? ' data-loading="1"' : ''}>${lines}</div></section>`
+      + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? 'Δ is the Elo step each result is worth given both wrestlers’ season ratings: K 56, scaled by margin (fall 1.5, TF 1.4, MD 1.2, decision 1.0, overtime 0.8); forfeits and injury defaults count 0. ' : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
