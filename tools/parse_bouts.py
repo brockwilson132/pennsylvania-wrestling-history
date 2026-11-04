@@ -195,7 +195,7 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     jobs = int(next((a.split('=')[1] for a in sys.argv if a.startswith('--jobs=')), '4'))
     tasks = []
-    for d, level in zip(args, ('state', 'district', 'regional')):
+    for d, level in zip(args, ('state', 'district', 'regional', 'section')):
         tasks += [(os.path.join(d, f), level) for f in sorted(os.listdir(d)) if f.endswith('.pdf')]
     # 1974-75 state files exist twice (A/AAA and B/AA); keep the A/B originals
     tasks = [t for t in tasks if not (t[1] == 'state' and re.match(r'197[45]_(AAA|AA)\.pdf$', os.path.basename(t[0])))]

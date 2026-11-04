@@ -14,7 +14,7 @@ for r in rows:
     k = nkey(r['name']) + '|' + r['year']
     if owner.setdefault(k, r['key']) != r['key']: clash.add(k); continue
     a = agg.setdefault(k, [0, '', '', 0, 0, 0, 0])
-    if r['best'] and float(r['best']) > a[0]: a[0], a[1], a[2] = round(float(r['best'])), r['best_name'], r['level'][0]
+    if r['best'] and float(r['best']) > a[0]: a[0], a[1], a[2] = round(float(r['best'])), r['best_name'], ('x' if r['level'] == 'section' else r['level'][0])
     for t in (r['results'] or '').split(' · '):
         t = t.strip()
         if not t: continue

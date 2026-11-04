@@ -15,7 +15,8 @@ for (let i = 1; i < lines.length; i++) {
   const c = []; { let cur = '', q = false; for (let i = 0; i < L.length; i++) { const ch = L[i]; if (q) { if (ch === '"') { if (L[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; } else if (ch === '"') q = true; else if (ch === ',') { c.push(cur); cur = ''; } else cur += ch; } c.push(cur); }
   if (c.length < H.length) continue;
   const v = +c[I.season]; if (!v) continue;
-  rows.push({ lvl: c[I.level], t: c[I.t], year: +c[I.year], cls: c[I.cls], school: c[I.school], key: c[I.key], v });
+  rows.push({ lvl: c[I.level] === 'section' ? 'district' : c[I.level],   // section qualifiers are district-level entrants
+    t: c[I.t], year: +c[I.year], cls: c[I.cls], school: c[I.school], key: c[I.key], v });
 }
 const unitDistrict = (t) => { const m = /^\d{4}_D(\d{1,2})(?:_|$)/.exec(t); return m ? +m[1] : null; };   // D11, D1_AAA_North; not D1-12 / D4-9
 // the wrestler's district in a season: his own district bracket; else his school's usual district
@@ -35,9 +36,11 @@ rows.forEach((r) => {
    wrestlers who also show up at regionals/states, so its average and low are biased high and it is left out of State and
    Region district-entrant averages. Coverage = at least 24 entrants in the full-field file, as in tools/build_units.js. */
 const fullCnt = new Map();
-fs.readdirSync(path.join(ROOT, 'overtime/lower')).filter((f) => /-district\.json$/.test(f)).forEach((f) => {
-  const year = +f.split('-')[0];
-  JSON.parse(fs.readFileSync(path.join(ROOT, 'overtime/lower', f), 'utf8')).forEach(([cls, unit, , , , , , , , d]) => {
+const SECD = path.join(ROOT, 'data/brackets/lower-section');
+fs.readdirSync(path.join(ROOT, 'overtime/lower')).filter((f) => /-district\.json$/.test(f)).map((f) => path.join(ROOT, 'overtime/lower', f))
+  .concat(fs.existsSync(SECD) ? fs.readdirSync(SECD).map((f) => path.join(SECD, f)) : []).forEach((fp) => {
+  const year = +path.basename(fp).split('-')[0];
+  JSON.parse(fs.readFileSync(fp, 'utf8')).forEach(([cls, unit, , , , , , , , d]) => {
     const m = /^D(\d+)(?:_|$)/.exec(unit || ''); const dd = m ? +m[1] : d; if (!dd) return;
     const c = cls === 'A' ? 'AAA' : cls === 'B' ? 'AA' : cls; const k = year + '|' + c + '|' + dd; fullCnt.set(k, (fullCnt.get(k) || 0) + 1);
   });

@@ -50,6 +50,7 @@ def meta(path):
     if cls.endswith('Super'): cls, unit = parts[-2], '_'.join(parts[:-2]) + '_Super'
     if cls.endswith('Sub'): cls, unit = parts[-2], '_'.join(parts[:-2]) + '_Sub'
     level = 'district' if unit.startswith('D') else 'regional'
+    if os.sep + 'section' + os.sep in path: level = 'section'   # section/sub-section qualifiers below districts
     if level == 'regional': unit = REGION.get(unit, unit)
     return base, year, cls, unit, level
 

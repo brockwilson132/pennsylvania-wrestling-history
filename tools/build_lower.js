@@ -46,7 +46,7 @@ let lookup = {}; try { lookup = JSON.parse(fs.readFileSync('data/school_district
 /* school → district by year, from the district-level rows themselves (the tournament a school wrestled in) */
 const unitDistrict = (unit) => { const m = /^D(\d+)(?:_|$|-)/.exec(unit); return m ? +m[1] : null; };
 const SD = new Map(); // sch → Map(year → d)
-E.forEach((r) => { if (r.level !== 'district') return; const { unit } = norm(r); const m = /^D(\d+)$/.exec(unit) || /^D(\d+)_/.exec(unit); if (!m) return; const s = canon(r.school); (SD.get(s) || SD.set(s, new Map()).get(s)).set(+r.year, +m[1]); });
+E.forEach((r) => { if (r.level !== 'district' && r.level !== 'section') return; const { unit } = norm(r); const m = /^D(\d+)$/.exec(unit) || /^D(\d+)_/.exec(unit); if (!m) return; const s = canon(r.school); (SD.get(s) || SD.set(s, new Map()).get(s)).set(+r.year, +m[1]); });
 const distOf = (sch, year, unit) => {
   const m = SD.get(sch); if (m) { if (m.has(year)) return m.get(year); let best = null, bd = 1e9; m.forEach((d, y) => { if (Math.abs(y - year) < bd) { bd = Math.abs(y - year); best = d; } }); if (best) return best; }
   const d = stateDist[sch] || lookup[sch]; if (d) return +d;
@@ -55,12 +55,12 @@ const distOf = (sch, year, unit) => {
 
 /* strings tables */
 const strs = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, strs.length); strs.push(s); } return sidx.get(s); };
-const parts = { district: [], regional: [] };
-const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: r.level === 'district' ? (unitDistrict(unit) && /^D\d+$/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit)) : distOf(sch, year, unit) }; });
+const parts = { district: [], regional: [], section: [] }; // section medalists are kept out of the app files
+const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: r.level === 'district' || r.level === 'section' ? (unitDistrict(unit) && /^D\d+$/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit)) : distOf(sch, year, unit) }; });
 rows.forEach((r) => { if (!r.place) return; parts[r.level].push([r.level === 'district' ? 0 : 1, r.year, CLS[r.cls], S(r.unit), S(r.weight), r.place, S(r.name), S(r.sch), GR[r.grade] || 0, S(r.seed || ''), r.d || 0]); });
 
 /* coverage: which (level, year, cls, unit) tournaments exist */
-const cov = {}; rows.forEach((r) => { cov[`${r.level}|${r.year}|${r.cls}|${r.unit}`] = 1; });
+const cov = {}; rows.forEach((r) => { if (r.level === 'section') return; cov[`${r.level}|${r.year}|${r.cls}|${r.unit}`] = 1; });
 
 /* district → region membership by year and class: a regional entrant's school district (from the district rows) */
 const mem = new Map(); // cls|year|d → counts by region
@@ -74,9 +74,9 @@ const stateIdx = new Map();
 { global.window = {}; require('../site/medals.js'); require('../site/brackets.js'); const add = (year, cls, name, school) => { const k = `${year}|${cls}`; (stateIdx.get(k) || stateIdx.set(k, new Set()).get(k)).add(nkey(name) + '|' + canon(school)); };
   (window.WR_MEDALS || []).forEach(([year, cls, w, place, name, school]) => add(year, cls, name, school)); (window.WR_QUAL || []).forEach(([year, cls, w, name, school]) => add(year, cls, name, school)); }
 const adv = {}; // level|year|cls|unit → [modal n, {weight: n} overrides]
-const byT = new Map(); rows.forEach((r) => { const k = `${r.level}|${r.year}|${r.cls}|${r.unit}`; (byT.get(k) || byT.set(k, []).get(k)).push(r); });
+const byT = new Map(); rows.forEach((r) => { if (r.level === 'section') return; const k = `${r.level}|${r.year}|${r.cls}|${r.unit}`; (byT.get(k) || byT.set(k, []).get(k)).push(r); });
 byT.forEach((rs, k) => {
-  const [level, year, cls] = k.split('|'); const nx = level === 'district' ? (nextIdx.get(`regional|${year}|${cls}`) || stateIdx.get(`${year}|${cls}`) || new Set()) : (stateIdx.get(`${year}|${cls}`) || new Set());
+  const [level, year, cls] = k.split('|'); const nx = level === 'section' ? (nextIdx.get(`district|${year}|${cls}`) || new Set()) : level === 'district' ? (nextIdx.get(`regional|${year}|${cls}`) || stateIdx.get(`${year}|${cls}`) || new Set()) : (stateIdx.get(`${year}|${cls}`) || new Set());
   const perW = {}; const byW = new Map(); rs.forEach((r) => (byW.get(r.weight) || byW.set(r.weight, []).get(r.weight)).push(r));
   byW.forEach((v, w) => { const n = Math.max(0, ...v.filter((r) => r.place && nx.has(nkey(r.name) + '|' + r.sch)).map((r) => r.place)); perW[w] = n; });
   const vals = Object.values(perW).filter((n) => n > 0); const modal = vals.length ? Array.from(new Map(vals.map((n) => [n, vals.filter((x) => x === n).length])).entries()).sort((a, b) => b[1] - a[1] || b[0] - a[0])[0][0] : 0;
@@ -87,10 +87,12 @@ byT.forEach((rs, k) => {
 /* lazy entrant files */
 fs.mkdirSync('overtime/lower', { recursive: true }); fs.readdirSync('overtime/lower').forEach((f) => fs.unlinkSync(path.join('overtime/lower', f)));
 const byYL = new Map(); rows.forEach((r) => { const k = `${r.year}-${r.level}`; (byYL.get(k) || byYL.set(k, []).get(k)).push([r.cls, r.unit, r.weight, r.place, r.seed || '', r.name, r.sch, r.grade, r.record, r.d || 0]); });
-let nfiles = 0, bytes = 0; byYL.forEach((v, k) => { const j = JSON.stringify(v); fs.writeFileSync(`overtime/lower/${k}.json`, j); nfiles++; bytes += j.length; });
+/* section entrants are a build input (tools/build_units.js), not an app file */
+fs.mkdirSync('data/brackets/lower-section', { recursive: true }); fs.readdirSync('data/brackets/lower-section').forEach((f) => fs.unlinkSync(path.join('data/brackets/lower-section', f)));
+let nfiles = 0, bytes = 0; byYL.forEach((v, k) => { const j = JSON.stringify(v); if (k.endsWith('-section')) { fs.writeFileSync(`data/brackets/lower-section/${k}.json`, j); return; } fs.writeFileSync(`overtime/lower/${k}.json`, j); nfiles++; bytes += j.length; });
 
 /* teams */
-const teams = T.map((r) => { const { unit, cls } = norm(r); return [r.level === 'district' ? 0 : 1, +r.year, CLS[cls], S(unit), +r.place, +r.points, S(canon(r.school))]; });
+const teams = T.filter((r) => r.level !== 'section').map((r) => { const { unit, cls } = norm(r); return [r.level === 'district' ? 0 : 1, +r.year, CLS[cls], S(unit), +r.place, +r.points, S(canon(r.school))]; });
 
 const write = (file, name, obj) => { const j = `window.${name}=${JSON.stringify(obj)};`; fs.writeFileSync(file, j); return j.length; };
 const sizes = {

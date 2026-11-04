@@ -23,7 +23,7 @@ const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
 const MEMB = (W.WR_MEMB || { r: {} }).r;
 const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' } };
 const splitName = (sch, d) => (SPLIT[sch] && SPLIT[sch][d]) || sch;
-const unitDist = (lvl, unit, d) => { if (lvl !== 'district') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
+const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
 const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
 const stdIdx = (wn) => { const i = STDK.findIndex(([, a, b]) => wn >= a && wn <= b); return i < 0 ? STDK.length - 1 : i; };
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
@@ -32,7 +32,7 @@ const FIVE = ['NE', 'NW', 'SC', 'SE', 'SW'];
 const normCls = (c) => (c === 'A' ? 'AAA' : c === 'B' ? 'AA' : c);
 
 const SOS = new Map();
-const sosOf = (year) => { if (!SOS.has(year)) { const f = path.join(OV, 'sos', year + '.json'); SOS.set(year, fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {}); } return SOS.get(year); };
+const sosOf = (year) => { if (!SOS.has(year)) { const rd = (f) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {}); SOS.set(year, { ...rd(path.join(OV, 'sos', year + '.json')), ...rd(path.join(__dirname, '..', 'data', 'difficulty', 'sos-section', year + '.json')) }); } return SOS.get(year); };
 const sosRow = (key, name) => { const year = +key.split('.')[0]; const b = sosOf(year)[key]; return (b && b.s && b.s[nkey(name)]) || null; };
 
 /* field strength per bracket (mean rating of its top eight), from tools/ratings.py */
@@ -57,9 +57,12 @@ function add(lvl, year, cls, unit, w, place, name, school, d) {
 (W.WR_MEDALS || []).forEach(([year, cls, w, place, name, school, d]) => add('state', year, cls, null, w, place, name, school, d));
 (W.WR_DATA.champs || []).concat(W.WR_CHAMP_FILL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 1, name, school, d));
 (W.WR_QUAL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 0, name, school, d));
-fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).forEach((f) => {
-  const [year, lvl] = f.replace('.json', '').split('-');
-  JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach(([cls, unit, w, place, , name, sch, , , d]) => add(lvl, +year, cls, unit, w, +place || 0, name, sch, d));
+const SECDIR = path.join(__dirname, '..', 'data', 'brackets', 'lower-section'); // section qualifiers (below districts)
+const lowerFiles = fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).map((f) => path.join(OV, 'lower', f))
+  .concat(fs.existsSync(SECDIR) ? fs.readdirSync(SECDIR).filter((f) => f.endsWith('.json')).map((f) => path.join(SECDIR, f)) : []);
+lowerFiles.forEach((fp) => {
+  const f = path.basename(fp); const [year, lvl] = f.replace('.json', '').split('-');
+  JSON.parse(fs.readFileSync(fp, 'utf8')).forEach(([cls, unit, w, place, , name, sch, , , d]) => add(lvl, +year, cls, unit, w, +place || 0, name, sch, d));
 });
 const LS = W.WR_LOWER_META.strs, LCLS = ['AAA', 'AA', 'single'];
 [['district', W.WR_LOWER_D], ['regional', W.WR_LOWER_R]].forEach(([lvl, rows]) => (rows || []).forEach(([, year, c, ui, wi, place, ni, si, , , d]) => add(lvl, year, LCLS[c], LS[ui], LS[wi], place, LS[ni], LS[si], d)));
@@ -85,10 +88,11 @@ const regionOf = (year, cls, d) => { const m = dr.get(year + '|' + cls + '|' + d
 /* district coverage: was there a district bracket for (year, class, district)? */
 /* A district bracket counts as on file only when its full field is (entrants beyond the placewinners): champions-only fills
    (District III Records, WPIAL) and placewinner-only rows do not show who else wrestled, so they are not coverage. */
+/* A full section field (D3, D7 and D1 AAA qualifiers below districts) shows the same thing, so it counts as coverage too. */
 const fullCnt = new Map();
-fs.readdirSync(path.join(OV, 'lower')).filter((f) => /-district\.json$/.test(f)).forEach((f) => {
-  const year = +f.split('-')[0];
-  JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach(([cls, unit, , , , , , , , d]) => {
+lowerFiles.filter((fp) => /-(district|section)\.json$/.test(fp)).forEach((fp) => {
+  const year = +path.basename(fp).split('-')[0];
+  JSON.parse(fs.readFileSync(fp, 'utf8')).forEach(([cls, unit, , , , , , , , d]) => {
     const dd = unitDist('district', unit, d); if (!dd) return; const c = normCls(cls) === 'single' ? lineage('') : normCls(cls);
     const k = year + '|' + (c === 'AAA' || c === 'AA' ? c : 'AAA') + '|' + dd; fullCnt.set(k, (fullCnt.get(k) || 0) + 1);
     if (normCls(cls) === 'single') { const k2 = year + '|AA|' + dd; fullCnt.set(k2, (fullCnt.get(k2) || 0) + 1); }
@@ -100,7 +104,7 @@ const nW = new Map();
 APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + clsOf(a); const s = nW.get(k) || new Set(); s.add(a.std); nW.set(k, s); });
 
 /* typical rating of a wrestler whose season ended at districts (used where a district bracket is missing) */
-const endedAt = new Map(); APP.forEach((a) => { const k = a.k + '|' + a.year; const L = { district: 1, regional: 2, state: 3 }[a.lvl]; const x = endedAt.get(k) || { L: 0, r: 0 }; x.L = Math.max(x.L, L); x.r = Math.max(x.r, a.rating); endedAt.set(k, x); });
+const endedAt = new Map(); APP.forEach((a) => { const k = a.k + '|' + a.year; const L = { section: 0.5, district: 1, regional: 2, state: 3 }[a.lvl]; const x = endedAt.get(k) || { L: 0, r: 0 }; x.L = Math.max(x.L, L); x.r = Math.max(x.r, a.rating); endedAt.set(k, x); });
 const dOnly = Array.from(endedAt.values()).filter((x) => x.L === 1 && x.r).map((x) => x.r);
 const DIST_ONLY = Math.round(dOnly.reduce((a, b) => a + b, 0) / dOnly.length);
 console.log('typical district-only rating', DIST_ONLY);
@@ -117,14 +121,14 @@ const SHOW = ['Nazareth', 'Easton', 'Northampton', 'Bethlehem Catholic', 'Bethle
 const lineups = {};
 bySS.forEach((rows, k) => {
   const [sch, ys, c] = k.split('|'); const year = +ys;
-  const dc = new Map(); rows.forEach((a) => { if (a.d) dc.set(a.d, (dc.get(a.d) || 0) + (a.lvl === 'district' ? 3 : 1)); });
+  const dc = new Map(); rows.forEach((a) => { if (a.d) dc.set(a.d, (dc.get(a.d) || 0) + (a.lvl === 'district' || a.lvl === 'section' ? 3 : 1)); });
   const d = dc.size ? Array.from(dc).sort((a, b) => b[1] - a[1])[0][0] : 0;
   let reg = regionOf(year, c, d) || (rows.find((a) => a.lvl === 'regional' && a.unit) || {}).unit || ''; if (reg === 'W') reg = 'SW'; if (!['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(reg)) reg = '';
   const covered = cov.has(year + '|' + c + '|' + d);
   /* lineup: best rated wrestler per weight */
   const best = new Map();
   const per = new Map(); // wrestler → {std, rating, D,R,S}
-  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, rating: 0, fwd: 0, D: -1, R: -1, S: -1 }; p.rating = Math.max(p.rating, a.rating); if (a.lvl !== 'district') p.fwd = 1; const L = a.lvl[0].toUpperCase(); const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
+  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, rating: 0, fwd: 0, X: -1, D: -1, R: -1, S: -1 }; p.rating = Math.max(p.rating, a.rating); if (a.lvl !== 'district' && a.lvl !== 'section') p.fwd = 1; const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
   per.forEach((p) => { const b = best.get(p.std); if (!b || p.rating > b.rating) best.set(p.std, p); });
   /* team rating counts only wrestlers who advanced past districts (regional or state entrants): the regional fields
      are on file for every district, while some district brackets are not, so this stays fair across districts */

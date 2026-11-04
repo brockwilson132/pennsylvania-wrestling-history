@@ -44,7 +44,7 @@ const eager = new Set();
 csv('data/brackets/lower_entrants.csv').forEach((r) => { if (r.place) eager.add(bkeyOf(r.level, r.tournament, r.weight) + '|' + nkey(r.name)); });
 
 const F = {}; const FL = { district: [], regional: [], state: [] };
-csv('data/difficulty/brackets.csv').forEach((r) => { if (r.field === '') return; F[bkeyOf(r.level, r.tournament, r.weight)] = Math.round(+r.field / 10); if (+r.year >= 1980) FL[r.level].push(+r.field); });
+csv('data/difficulty/brackets.csv').forEach((r) => { if (r.field === '') return; F[bkeyOf(r.level, r.tournament, r.weight)] = Math.round(+r.field / 10); if (+r.year >= 1980 && FL[r.level]) FL[r.level].push(+r.field); });
 const med = (a) => { a = a.slice().sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null; };
 const pct = (a, p) => { a = a.slice().sort((x, y) => x - y); return a[Math.floor((a.length - 1) * p)]; };
 const all = FL.district.concat(FL.regional, FL.state);
@@ -54,7 +54,7 @@ const wsFile = fs.existsSync('data/difficulty/wrestler_seasons.csv') ? 'data/dif
 csv(wsFile).forEach((r) => {
   if (r.season === '') return;
   const k = bkeyOf(r.level, r.tournament, r.weight), n = nkey(r.name), y = +r.year;
-  if (r.level === 'state' || eager.has(k + '|' + n)) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season / 10));
+  if (r.level !== 'section' && (r.level === 'state' || eager.has(k + '|' + n))) (P[k] || (P[k] = [])).push(n + ':' + Math.round(+r.season / 10));
   const Y = LAZY[y] || (LAZY[y] = {}); const B = Y[k] || (Y[k] = { s: {}, b: [] });
   B.s[n] = [Math.round(+r.season), r.best === "" ? null : +r.best, r.best_name || null, +r.bad || 0];
 });
@@ -65,13 +65,16 @@ csv('data/brackets/bouts.csv').forEach((b) => {
 });
 const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
 const OUT = {}; const L1 = { state: 's', regional: 'r', district: 'd' };
-new Set([...Object.keys(F), ...Object.keys(P)]).forEach((k) => {
+new Set([...Object.keys(F).filter((k) => k.split('.')[2] !== 'section'), ...Object.keys(P)]).forEach((k) => {
   const p = k.split('.'); const y = p[0], lvl = p[2]; const short = lvl === 'state' ? `${p[1]}.s..${p[3]}` : `${p[1]}.${L1[lvl]}.${p[3]}.${p[4]}`;
   (OUT[y] || (OUT[y] = {}))[short] = [F[k] ?? null, (P[k] || []).map((e) => { const [n, v] = e.split(':'); return nk8(n) + ':' + v; }).join(',')];
 });
 fs.writeFileSync('overtime/sos.js', 'window.WR_SOS=' + JSON.stringify(OUT) + ';\nwindow.WR_RTG_META=' + JSON.stringify(META) + ';\n');
 fs.mkdirSync('overtime/sos', { recursive: true });
 let lazyBytes = 0;
-Object.entries(LAZY).forEach(([y, obj]) => { const s = JSON.stringify(obj); lazyBytes += s.length; fs.writeFileSync(`overtime/sos/${y}.json`, s); });
+/* section brackets (qualifiers below districts) feed tools/build_units.js only: written beside the app files, not into them */
+fs.mkdirSync('data/difficulty/sos-section', { recursive: true });
+Object.entries(LAZY).forEach(([y, obj]) => { const main = {}, sec = {}; Object.entries(obj).forEach(([k, v]) => { (k.split('.')[2] === 'section' ? sec : main)[k] = v; });
+  const s = JSON.stringify(main); lazyBytes += s.length; fs.writeFileSync(`overtime/sos/${y}.json`, s); fs.writeFileSync(`data/difficulty/sos-section/${y}.json`, JSON.stringify(sec)); });
 console.log('field medians', META, 'sos.js', (fs.statSync('overtime/sos.js').size / 1e6).toFixed(2), 'MB;', Object.keys(F).length, 'brackets;', Object.values(P).reduce((a, v) => a + v.length, 0), 'eager paths;',
   Object.keys(LAZY).length, 'season files', (lazyBytes / 1e6).toFixed(1), 'MB');
