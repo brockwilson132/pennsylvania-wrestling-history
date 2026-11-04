@@ -164,6 +164,36 @@
     const f = ok ? OT.fieldOf(c.r, lvl) : null;
     return `<span class="tc">${cellPill(c, lvl, href)}${smeter(f, lvl, f ? `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}` : '', num)}</span>`;
   }
+  /* ---------- career grid (wrestler page) ----------
+     One compact card that fits a phone screen: a column per high-school season, his season rating on top as a tile on
+     the strength scale (peak ringed gold), then one row per level. Each result is a medal-coloured place with the
+     bracket's strength of competition as a thin bar under it (number on tap/hover), so the only numbers in the grid
+     are places and ratings. Labels sit on a hairline above their row. */
+  function careerGrid(apps, lower, opts = {}) {
+    const M = OT.careerCells(apps, lower, { full: opts.full }), cr = OT.careerRating(apps, lower), cols = M.cols;
+    const rat = cols.map((c) => { if (!c || !cr) return null; const s = cr.seasons.find((x) => x.year === c.year); return s ? s.rating : null; });
+    const pk = Math.max(...rat.filter(Boolean), 0);
+    const head = cols.map((c, i) => `<span class="cgh${c ? '' : ' off'}"><b>${OT.GRADE_L[i]}${c ? ` '${String(c.year).slice(2)}` : ''}</b><i>${c && c.w ? wShort(c.w) + ' lb' : ''}</i></span>`).join('');
+    const rt = rat.map((v, i) => (v ? `<span class="cgr${v === pk ? ' pk' : ''}" style="--tint:${ratingColor('wrestler', v)}" title="${cols[i].year} season rating ${r10(v)}${v === pk ? ' · peak' : ''}"><b>${r10(v)}</b></span>` : '<span class="cgr none"></span>')).join('');
+    const cell = (c, lvl) => {
+      if (lvl === 'regional' && c && c.year < 1951) return '<span class="cgc none"></span>';
+      if (!c) return '<span class="cgc none"></span>';
+      const ok = c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lvl)) : null;
+      const f = ok ? OT.fieldOf(c.r, lvl) : null; const fr = f ? sFrac(f, lvl) : 0;
+      const tag = href ? 'a' : 'span', hr = href ? ` href="${href}"` : '';
+      let cls = 'cgp', txt = '', tip = `${c.year}${c.w ? ' · ' + wShort(c.w) : ''} · ${lvl}`;
+      if (c.place) { cls += ' ' + pcls(c.place); txt = ordinal(c.place); tip += ' ' + ordinal(c.place); }
+      else if (c.dnc) { cls += ' dnc'; txt = 'DNC'; tip += ': did not compete'; }
+      else if (c.nodata) { cls += ' nod'; txt = '–'; tip += ': ' + (c.src || 'no bracket on record'); }
+      else if (c.dnp) { cls += ' dnp'; txt = 'DNP'; tip += ': entered, did not place'; }
+      else { cls += ' q'; txt = 'Q'; tip += ': ' + (c.src || 'qualified'); }
+      if (f) tip += ' · ' + fieldTip(f, lvl);
+      return `<${tag}${hr} class="cgc" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
+    };
+    const lab = (t, icon) => `<span class="cgl">${icon ? OT.navIcon(icon) : ''}<span>${t}</span></span>`;
+    const rows = M.rows.slice().reverse().map((row) => lab(row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
+    return `<div class="cg">${head}${lab('Season rating', null)}${rt}${rows}</div>`;
+  }
   function timeline(apps, lower, opts = {}) {
     const M = OT.careerCells(apps, lower, { full: opts.full }), cr = OT.careerRating(apps, lower);
     const big = !!opts.page, cols = M.cols;
@@ -611,5 +641,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

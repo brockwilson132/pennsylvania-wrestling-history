@@ -145,7 +145,7 @@
     const head = `<header class="uh2"><div class="crumb"><a href="#state">Pennsylvania</a><span>›</span><a href="#district/${W.d}">District ${W.d}</a><span>›</span><a href="${u.href}">${esc(W.sch)}</a></div>
       <h1>${esc(W.name)}</h1><div class="sub">${esc(W.sch)} · ${first === last ? first : first + '–' + last}${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
       <div class="usum"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div></header>`;
-    const tl = section('Career', `<div class="card tlcard">${OT.timeline(W.apps, W.lower, { page: true, full: W.full })}<div class="note">Tap a result for its bracket. Q advanced without a place · DNP entered, didn't place · DNC didn't compete · – no bracket on record. The bar beside each result is that bracket\'s strength of competition.${W.full ? '' : ' Loading his full career…'}</div></div>`);
+    const tl = section('Career', `<div class="card cgcard">${OT.careerGrid(W.apps, W.lower, { full: W.full })}<div class="note">Tap a result for its bracket. Bar = how tough that bracket was. Q advanced · DNP didn't place · DNC didn't compete · – no bracket on file.${W.full ? '' : ' Loading his full career…'}</div></div>`);
     const bw = section('Best wins', `<div class="card" id="bestwins" data-w="${W.slug}">${bestWinsHTML(W)}</div>`);
     return head + tl + bw;
   };
