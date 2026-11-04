@@ -189,9 +189,11 @@
     const note = lvl === 'd' && anySkip ? ' · districts whose brackets are not on file are left out of State and Region' : '';
     return `<div class="ctx"><div class="cth"><span>Wrestler ratings</span><i>Best</i><i>Avg</i><i>Low*</i></div>${body}<div class="ctf">${who} · season ratings · *5th percentile${note}</div></div>`;
   }
-  /* team benchmarks in line with the units list: best / average / 5th-percentile unit rating over each scope */
+  /* team benchmarks in line with the units list: best / average / low over each scope. Low is the true minimum for short
+     lists (the 12 districts, the 5 regions) and the 5th percentile for long ones (schools), where one tiny program would
+     otherwise set it. */
   const p5of = (A) => { const S = A.slice().sort((a, b) => a - b); return S[Math.max(0, Math.round(0.05 * (S.length - 1)))]; };
-  const bstat = (L) => { const A = L.map((a) => a.rating).filter(Boolean); if (!A.length) return null; return { best: Math.max(...A), avg: A.reduce((t, v) => t + v, 0) / A.length, low: p5of(A) }; };
+  const bstat = (L) => { const A = L.map((a) => a.rating).filter(Boolean); if (!A.length) return null; return { best: Math.max(...A), avg: A.reduce((t, v) => t + v, 0) / A.length, low: A.length < 20 ? Math.min(...A) : p5of(A), p5: A.length >= 20 }; };
   function benchScopes(u, U) {
     if (u.kind === 'district') { const g = membership().of[+u.id]; return [['State', () => OT.aggregateCore('school', null, 'state')]].concat(g ? [['Region', () => OT.aggregateCore('school', { kind: 'region', id: g }, 'region')]] : []).concat([['District', () => U.L()]]); }
     if (u.kind === 'region') return [['State', () => OT.aggregateCore('district', null, 'state')], ['Region', () => U.L()]];
@@ -212,10 +214,10 @@
     const bench = [];
     benchScopes(u, U).forEach(([l, f]) => {
       const bf = bstat(f()), bs = sel ? OT.withSub([sel.a, sel.b], () => bstat(f())) : bf; if (!bf && !bs) return;
-      [['best', 'best'], ['avg', 'avg'], ['low', 'low']].forEach(([k, lab]) => bench.push({ b: true, label: `${l} ${lab}`, s: bs ? bs[k] : 0, v: bf ? bf[k] : 0 }));
+      [['best', 'best'], ['avg', 'avg'], ['low', 'low']].forEach(([k, lab]) => bench.push({ b: true, label: `${l} ${k === 'low' && (bf || bs || {}).p5 ? '5th pct' : lab}`, s: bs ? bs[k] : 0, v: bf ? bf[k] : 0 }));
     });
     // merge benchmarks that land on the same values (e.g. State, Region and District best are all one school) into one line
-    for (let i = 0; i < bench.length; i++) for (let j = i + 1; j < bench.length; j++) { const A = bench[i], B = bench[j]; if (!A.gone && !B.gone && Math.round(A.s / 10) === Math.round(B.s / 10) && Math.round(A.v / 10) === Math.round(B.v / 10) && A.label.split(' ').pop() === B.label.split(' ').pop()) { A.label = A.label.replace(/ (best|avg|low)$/, '') + ' · ' + B.label; B.gone = true; } }
+    for (let i = 0; i < bench.length; i++) for (let j = i + 1; j < bench.length; j++) { const A = bench[i], B = bench[j]; if (!A.gone && !B.gone && Math.round(A.s / 10) === Math.round(B.s / 10) && Math.round(A.v / 10) === Math.round(B.v / 10) && A.label.replace(/^\S+ /, '') === B.label.replace(/^\S+ /, '')) { A.label = A.label.replace(/ (best|avg|low|5th pct)$/, '') + ' · ' + B.label; B.gone = true; } }
     for (let i = bench.length - 1; i >= 0; i--) if (bench[i].gone) bench.splice(i, 1);
     const vis = rows.slice(0, lim), cut = more && vis.length ? key(vis[vis.length - 1]) : -Infinity;
     const benchVis = bench.filter((x) => key(x) >= cut);
