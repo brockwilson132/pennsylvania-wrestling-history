@@ -313,7 +313,7 @@
     const sorts = [['rating', 'Rating'], ['score', 'Score']].concat(pageKind !== 'school' ? [['titles', 'Titles']] : []);
     let sort = sorts.some(([k]) => k === state.usort) ? state.usort : 'rating';
     if (sort === 'rating' && OT.yearsWindow()[1] < RATED_FROM) sort = 'score';
-    const L = aggregate(kind, parent, pageKind).slice().sort(SORTS[sort]);
+    const L = aggregate(kind, parent, pageKind).filter((a) => kind !== 'school' || (a.name && String(a.name).trim())).slice().sort(SORTS[sort]);
     L.forEach((a) => { a.kind = kind; });
     if (!L.length) return OT.empty('No ' + (kind === 'school' ? 'schools' : kind + 's') + ' with enough seasons in this window.');
     const lim = state.uall ? L.length : opts.limit || 20;
