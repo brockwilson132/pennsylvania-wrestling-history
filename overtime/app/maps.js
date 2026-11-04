@@ -156,19 +156,24 @@
      statewide, in the region and in the district, for the selection and class. Groups come from wstats.js
      (per season, class, level and district: max, sum, count and a 10-point histogram). */
   const WS = window.WR_WSTATS || null;
-  function wrestlerStats(lvl, ds, y0, y1) {
+  const PARTIAL = new Set((WS && WS.p) || []);
+  /* own: the scope is a single district (its own partial groups still count, flagged); otherwise partial district
+     groups are left out so a champions-only district cannot pull a State or Region average up */
+  function wrestlerStats(lvl, ds, y0, y1, own) {
     if (!WS) return null;
+    let partial = 0, skipped = 0;
     const cl = OT.state.cls, cls = cl === 'ALL' ? ['AAA', 'AA', 'single'] : [cl, 'single'];
     let mx = 0, sum = 0, n = 0; const h = new Map();
     for (let y = y0; y <= y1; y++) for (const c of cls) for (const d of ds) {
-      const g = WS.g[`${y}|${c}|${lvl}|${d}`]; if (!g) continue;
+      const gk = `${y}|${c}|${lvl}|${d}`, g = WS.g[gk]; if (!g) continue;
+      if (PARTIAL.has(gk)) { if (!own) { skipped++; continue; } partial++; }
       mx = Math.max(mx, g[0]); sum += g[1]; n += g[2];
       g[3].split(',').forEach((x) => { const i = x.indexOf(':'); const b = +x.slice(0, i); h.set(b, (h.get(b) || 0) + +x.slice(i + 1)); });
     }
     if (!n) return null;
     const bins = Array.from(h.entries()).sort((a, b) => a[0] - b[0]); let acc = 0, p5 = bins[0][0] * WS.bin; const t = 0.05 * n;
     for (const [bn, c] of bins) { acc += c; if (acc >= t) { p5 = (bn + 0.5) * WS.bin; break; } }
-    return [mx, sum / n, p5, n];
+    return [mx, sum / n, p5, n, partial, skipped];
   }
   function contextTable(u, sel) {
     const lvl = u.kind === 'district' ? 'd' : u.kind === 'region' ? 'r' : 's';
@@ -179,9 +184,13 @@
     if (u.kind === 'region') scopes.push(['Region', ALL.filter((d) => of[d] === u.id)]);
     if (u.kind === 'district') { const g = of[+u.id]; if (g) scopes.push(['Region', ALL.filter((d) => of[d] === g)]); scopes.push(['District', [+u.id]]); }
     const chip = (v) => `<span class="mls ctx" style="--tint:${v ? OT.ratingColor('wrestler', v) : '#2F3640'}">${v ? r10(v) : '–'}</span>`;
-    const body = scopes.map(([l, ds]) => { const x = wrestlerStats(lvl, ds, y0, y1); return `<div class="ctr"><span class="ctxl">${l}${x ? `<small>${fmt(x[3])} wrestlers</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated wrestlers</span>'}</div>`; }).join('');
+    let anySkip = 0;
+    const body = scopes.map(([l, ds]) => { const own = ds.length === 1 && l === 'District'; const x = wrestlerStats(lvl, ds, y0, y1, own); if (x && x[5]) anySkip++;
+      const part = x && x[4] ? ' <em class="ctp" title="Part of this district\'s brackets are not on file (champions only or missing), so only wrestlers who reached regionals or states are counted for those seasons; average and low read high.">partial</em>' : '';
+      return `<div class="ctr"><span class="ctxl">${l}${part}${x ? `<small>${fmt(x[3])} wrestlers</small>` : ''}</span>${x ? chip(x[0]) + chip(x[1]) + chip(x[2]) : '<span class="ctn">no rated wrestlers</span>'}</div>`; }).join('');
     const who = lvl === 'd' ? 'district entrants' : lvl === 'r' ? 'regional entrants' : 'state entrants';
-    return `<div class="ctx"><div class="cth"><span>Wrestler ratings</span><i>Best</i><i>Avg</i><i>Low*</i></div>${body}<div class="ctf">${who} · season ratings · *5th percentile</div></div>`;
+    const note = lvl === 'd' && anySkip ? ' · districts whose brackets are not on file are left out of State and Region' : '';
+    return `<div class="ctx"><div class="cth"><span>Wrestler ratings</span><i>Best</i><i>Avg</i><i>Low*</i></div>${body}<div class="ctf">${who} · season ratings · *5th percentile${note}</div></div>`;
   }
   /* team benchmarks in line with the units list: best / average / 5th-percentile unit rating over each scope */
   const p5of = (A) => { const S = A.slice().sort((a, b) => a - b); return S[Math.max(0, Math.round(0.05 * (S.length - 1)))]; };
@@ -195,6 +204,8 @@
     const U = listUnits(u);
     const full = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]));
     const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
+    const estF = new Map(U.L().filter((a) => a.est).map((a) => [a.k, a.estTip]));
+    const estS = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.est).map((a) => [a.k, a.estTip]))) : estF;
     let keys = U.keys || Array.from(new Set([...full.keys()]));
     let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => (r.s || r.v) && String(U.name(r.k) || '').trim());
     const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
@@ -222,7 +233,8 @@
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
       const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
       const v1 = two ? r.s : r.v;
-      return `<div class="mlr${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls" style="--tint:${v1 ? OT.ratingColor(U.kind, v1) : '#2F3640'}">${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
+      const e1 = two ? estS.get(r.k) : estF.get(r.k), e2 = two ? estF.get(r.k) : null;
+      return `<div class="mlr${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a><span class="mls${e1 ? ' est' : ''}" style="--tint:${v1 ? OT.ratingColor(U.kind, v1) : '#2F3640'}"${e1 ? ` title="${esc('est. · ' + e1)}"` : ''}>${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla${e2 ? ' est' : ''}"${e2 ? ` title="${esc('est. · ' + e2)}"` : ''}>${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
     const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';

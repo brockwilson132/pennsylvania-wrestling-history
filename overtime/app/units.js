@@ -15,8 +15,10 @@
   const SIDX = new Map(S.map((s, i) => [s, i]));
   const SLUG2S = new Map(S.map((s) => [slug(s), s]));
   const RATE = { district: new Map(), region: new Map() };
-  UD.ds.forEach(([u, y, c, r]) => { if (r) RATE.district.set(u + '|' + y + '|' + c, r); });
-  UD.rs.forEach(([u, y, c, r]) => { if (r) RATE.region.set((u === 'W' ? 'SW' : u) + '|' + y + '|' + c, r); });
+  /* estimated: the season's rating was estimated because the district bracket is not on file (tools/build_units.js) */
+  const EST = { district: new Set(), region: new Set() };
+  UD.ds.forEach(([u, y, c, r, e]) => { if (r) RATE.district.set(u + '|' + y + '|' + c, r); if (e) EST.district.add(u + '|' + y + '|' + c); });
+  UD.rs.forEach(([u, y, c, r, e]) => { const uu = u === 'W' ? 'SW' : u; if (r) RATE.region.set(uu + '|' + y + '|' + c, r); if (e) EST.region.add(uu + '|' + y + '|' + c); });
   /* Unit-season ratings need enough rated wrestlers in the lineup / top-4 per weight. Before 1974 (one class, regional
      fields of one wrestler per district, partial old brackets) most weights are padded with fill values, so unit
      ratings there read far too low; they are not plotted or averaged. Results (bars, stars, podiums) still count. */
@@ -49,8 +51,8 @@
         let a = M.get(k); if (!a) M.set(k, (a = { k, kind, years: new Map(), sp: 0, rp: 0, dp: 0, ti: 0, pod: 0, plc: 0, q: 0, rt: 0, dt: 0, tt: 0, best: null }));
         const y = a.years.get(r[1]) || { y: r[1], rs: 0, rn: 0, sp: 0, rp: 0, dp: 0, ti: 0, rt: 0, dt: 0, tt: 0 }; a.years.set(r[1], y);
         if (!ratedYear(r[1]) || !inC) { /* no rating */ }
-        else if (kind === 'school') { if (r[5]) { y.rs += r[5]; y.rn++; } }
-        else if (!y['c' + r[2]]) { y['c' + r[2]] = 1; const v = RATE[kind].get(k + '|' + r[1] + '|' + r[2]); if (v) { y.rs += v; y.rn++; } }
+        else if (kind === 'school') { if (r[5]) { y.rs += r[5]; y.rn++; if (r[19]) y.en = (y.en || 0) + 1; } }
+        else if (!y['c' + r[2]]) { y['c' + r[2]] = 1; const kk = k + '|' + r[1] + '|' + r[2], v = RATE[kind].get(kk); if (v) { y.rs += v; y.rn++; if (EST[kind].has(kk)) y.en = (y.en || 0) + 1; } }
         if (!inC) { a.off = (a.off || 0) + 1; a.sp += r[6] * m; a.rp += r[7] * m; a.dp += r[8] * m; y.sp += r[6] * m; y.rp += r[7] * m; y.dp += r[8] * m; a.ti += r[9]; return; }
         y.sp += r[6]; y.rp += r[7]; y.dp += r[8]; y.ti += r[9]; y.rt += r[13]; y.dt += r[14]; y.tt += r[15];
         a.sp += r[6]; a.rp += r[7]; a.dp += r[8]; a.ti += r[9]; a.pod += r[10]; a.plc += r[11]; a.q += r[12]; a.rt += r[13]; a.dt += r[14]; a.tt += r[15];
@@ -59,6 +61,8 @@
       return Array.from(M.values()).map((a) => {
         a.ys = Array.from(a.years.values()).sort((p, q) => p.y - q.y); a.series = a.ys.filter((y) => y.rn).map((y) => [y.y, y.rs / y.rn]);
         a.rating = a.series.length ? a.series.reduce((t, x) => t + x[1], 0) / a.series.length : 0;
+        a.estN = a.ys.filter((y) => y.rn && y.en && y.en * 2 >= y.rn).length; a.est = a.series.length && a.estN * 2 >= a.series.length;
+        a.estTip = a.estN ? `${a.estN} of ${a.series.length} season ratings est. (district bracket not on file: estimated from the wrestlers who reached regionals and states)` : '';
         a.parts = [a.sp * w[0], a.rp * w[1], a.dp * w[2]]; a.score = a.parts[0] + a.parts[1] + a.parts[2]; a.w = w;
         a.name = kind === 'school' ? S[a.k] : kind === 'district' ? 'District ' + a.k : REGIONS[a.k];
         a.sub = kind === 'district' ? DISTRICTS[a.k] : '';
@@ -313,7 +317,7 @@
     const best = a.best ? `<a class="sxw" href="${OT.wrestlerHref({ name: a.best.name, sch: a.best.sch, year: a.best.y })}"><i>Top wrestler</i><b>${esc(a.best.name)}</b>${a.kind !== 'school' ? `<small>${esc(a.best.sch)}</small>` : ''}<em>${r10(a.best.r)} · ${a.best.y}</em></a>` : '';
     const tl = team ? `<div class="sxt"><i>Team titles</i>${[a.tt ? `PIAA <b>${a.tt}</b>` : '', dt ? `Duals <b>${dt}</b>` : ''].filter(Boolean).join(' · ')}</div>` : '';
     const hl = (k) => (sort === k ? ' on' : '');
-    return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b><small>${sub}</small></span><span class="c ct${hl('titles')}">${a.ti}</span><span class="c ctm">${team || '–'}</span><span class="rc${hl('rating')}" style="--tint:${tint}"><b>${rt || '–'}</b>${chipSpark(a.series)}</span><span class="c cs${hl('score')}">${fmt(Math.round(a.score))}</span></button>
+    return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b><small>${sub}</small></span><span class="c ct${hl('titles')}">${a.ti}</span><span class="c ctm">${team || '–'}</span><span class="rc${hl('rating')}${a.est ? ' est' : ''}" style="--tint:${tint}"${a.est ? ` title="${esc('est. · ' + a.estTip)}"` : ''}><b>${rt || '–'}</b>${chipSpark(a.series)}</span><span class="c cs${hl('score')}">${fmt(Math.round(a.score))}</span></button>
       <div class="sxd" hidden>${distRows(a)}<div class="sxf">${best}${tl}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
   }
   function unitRankings(kind, parent, pageKind, opts = {}) {

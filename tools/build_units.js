@@ -83,7 +83,18 @@ const dr = new Map();
 APP.filter((a) => a.lvl === 'regional' && a.d && a.unit).forEach((a) => { const k = a.year + '|' + clsOf(a) + '|' + a.d; const m = dr.get(k) || new Map(); m.set(a.unit, (m.get(a.unit) || 0) + 1); dr.set(k, m); });
 const regionOf = (year, cls, d) => { const m = dr.get(year + '|' + cls + '|' + d); if (!m) return ''; const r = Array.from(m).sort((a, b) => b[1] - a[1])[0][0]; return r === 'W' ? 'SW' : r; };
 /* district coverage: was there a district bracket for (year, class, district)? */
-const cov = new Set(APP.filter((a) => a.lvl === 'district' && a.d).map((a) => a.year + '|' + clsOf(a) + '|' + a.d));
+/* A district bracket counts as on file only when its full field is (entrants beyond the placewinners): champions-only fills
+   (District III Records, WPIAL) and placewinner-only rows do not show who else wrestled, so they are not coverage. */
+const fullCnt = new Map();
+fs.readdirSync(path.join(OV, 'lower')).filter((f) => /-district\.json$/.test(f)).forEach((f) => {
+  const year = +f.split('-')[0];
+  JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach(([cls, unit, , , , , , , , d]) => {
+    const dd = unitDist('district', unit, d); if (!dd) return; const c = normCls(cls) === 'single' ? lineage('') : normCls(cls);
+    const k = year + '|' + (c === 'AAA' || c === 'AA' ? c : 'AAA') + '|' + dd; fullCnt.set(k, (fullCnt.get(k) || 0) + 1);
+    if (normCls(cls) === 'single') { const k2 = year + '|AA|' + dd; fullCnt.set(k2, (fullCnt.get(k2) || 0) + 1); }
+  });
+});
+const cov = new Set(); fullCnt.forEach((n, k) => { if (n >= 24) cov.add(k); }); // more than champions + runners-up for ~12 weights
 /* weights contested per (year, class) */
 const nW = new Map();
 APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + clsOf(a); const s = nW.get(k) || new Set(); s.add(a.std); nW.set(k, s); });
@@ -101,6 +112,7 @@ const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sid
 const bySS = new Map();
 APP.forEach((a) => { const c = clsOf(a); const k = a.sch + '|' + a.year + '|' + c; (bySS.get(k) || bySS.set(k, []).get(k)).push(a); });
 const ss = [];
+const FEAT = []; // parallel to ss: observable features for the coverage estimator
 const SHOW = ['Nazareth', 'Easton', 'Northampton', 'Bethlehem Catholic', 'Bethlehem Liberty', 'Parkland', 'Notre Dame-Green Pond'];
 const lineups = {};
 bySS.forEach((rows, k) => {
@@ -118,10 +130,15 @@ bySS.forEach((rows, k) => {
      are on file for every district, while some district brackets are not, so this stays fair across districts */
   const fwdBest = new Map(); per.forEach((p) => { if (!p.rating) return; const b = fwdBest.get(p.std); if (!b || p.rating > b.rating) fwdBest.set(p.std, p); });
   const weights = nW.get(year + '|' + c) || new Set(Array.from(best.keys()));
-  const fill = covered ? FILL : DIST_ONLY; // no district bracket on file: assume a typical district-only entrant
-  let sum = 0, n = 0; weights.forEach((i) => { const b = fwdBest.get(i); sum += b ? b.rating : fill; n++; });
+  /* observable whether or not the district bracket is on file: the school's best wrestler at each weight who
+     reached regionals or states */
+  const obsBest = new Map(); per.forEach((p) => { if (!p.rating || !p.fwd) return; const b = obsBest.get(p.std); if (!b || p.rating > b.rating) obsBest.set(p.std, p); });
+  let sum = 0, n = 0, nObs = 0, sumObs = 0; const unobsY = [];
+  weights.forEach((i) => { n++; const o = obsBest.get(i); if (o) { nObs++; sumObs += o.rating; } const b = fwdBest.get(i); sum += b ? b.rating : FILL; if (!o) unobsY.push(b ? b.rating : FILL); });
   const rated = fwdBest.size > 0 || Array.from(best.values()).some((b) => b.rating);
-  const teamRating = rated && n ? Math.round(sum / n) : 0;
+  const full = rated && n ? sum / n : 0;
+  FEAT.push({ year, c, d, covered, n, k: nObs, sumObs, meanObs: nObs ? sumObs / nObs : 0, unobsY, full, rated });
+  const teamRating = 0; // filled in after the estimator is fitted
   const topW = Array.from(per.values()).filter((p) => p.rating).sort((a, b) => b.rating - a.rating)[0];
   const lv = (L) => rows.filter((a) => a.lvl === L);
   const pts = (L) => lv(L).reduce((t, a) => t + (a.place ? PTS[a.place - 1] : 0), 0);
@@ -129,10 +146,55 @@ bySS.forEach((rows, k) => {
   ss.push([S(sch), year, c, d, reg, teamRating, pts('state'), pts('regional'), pts('district'),
     st.filter((a) => a.place === 1).length, st.filter((a) => a.place >= 2 && a.place <= 4).length, st.filter((a) => a.place >= 5).length, st.filter((a) => !a.place).length,
     lv('regional').filter((a) => a.place === 1).length, lv('district').filter((a) => a.place === 1).length, TEAMWIN.has(year + '|' + c + '|' + sch) ? 1 : 0, covered ? 1 : 0,
-    topW ? N(topW.name) : -1, topW ? topW.rating : 0]);
+    topW ? N(topW.name) : -1, topW ? topW.rating : 0, 0]);
   if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, p.rating, p.D, p.R, p.S]); }
 });
 console.log('school-seasons', ss.length, 'schools', schools.length);
+
+/* ---- coverage estimator ----
+   Where a district bracket is not on file we only see the school's wrestlers who reached regionals or states. Fit, on
+   seasons where the bracket IS on file, what the best district-only wrestler at an unobserved weight rates (FILL when
+   the school had nobody there), from the school's observed strength, how many weights it got through, class and era;
+   then rating = (observed sum + unobserved weights × predicted value) / weights. */
+const eraOf = (y) => (y < 1990 ? 0 : y < 2005 ? 1 : 2);
+/* how selective the district is: regional entrants per school that season (the WPIAL sends few per school, so getting
+   a wrestler through says more there than in a small district) */
+const advN = new Map(), schN = new Map();
+APP.filter((a) => a.lvl === 'regional' && a.d).forEach((a) => { const k = a.year + '|' + clsOf(a) + '|' + a.d; const s2 = advN.get(k) || new Set(); s2.add(a.k); advN.set(k, s2); });
+FEAT.forEach((f) => { const k = f.year + '|' + f.c + '|' + f.d; schN.set(k, (schN.get(k) || 0) + 1); });
+FEAT.forEach((f) => { const k = f.year + '|' + f.c + '|' + f.d; f.adv = ((advN.get(k) || new Set()).size) / (schN.get(k) || 1); });
+const xrow = (f) => [1, f.k ? f.meanObs - 1500 : 0, f.k ? 0 : 1, f.k / f.n, eraOf(f.year) === 1 ? 1 : 0, eraOf(f.year) === 2 ? 1 : 0, f.c === 'AA' ? 1 : 0];
+function ols(X, y) { const p = X[0].length; const A = Array.from({ length: p }, () => new Array(p).fill(0)), b = new Array(p).fill(0);
+  X.forEach((r, i) => { for (let a = 0; a < p; a++) { b[a] += r[a] * y[i]; for (let c2 = 0; c2 < p; c2++) A[a][c2] += r[a] * r[c2]; } });
+  for (let a = 0; a < p; a++) A[a][a] += 1e-6; // tiny ridge for safety
+  for (let col = 0; col < p; col++) { let piv = col; for (let r = col + 1; r < p; r++) if (Math.abs(A[r][col]) > Math.abs(A[piv][col])) piv = r; [A[col], A[piv]] = [A[piv], A[col]]; [b[col], b[piv]] = [b[piv], b[col]];
+    for (let r = 0; r < p; r++) if (r !== col) { const f = A[r][col] / A[col][col]; for (let c2 = col; c2 < p; c2++) A[r][c2] -= f * A[col][c2]; b[r] -= f * b[col]; } }
+  return b.map((v, i) => v / A[i][i]); }
+const trainOn = (keep) => { const X = [], y = []; FEAT.forEach((f) => { if (!f.covered || !f.rated || f.year < 1974 || !(f.c === 'AAA' || f.c === 'AA') || !keep(f)) return; f.unobsY.forEach((v) => { X.push(xrow(f)); y.push(v); }); }); return ols(X, y); };
+const estimate = (f, beta) => { if (!f.rated || !f.n) return 0; const x = xrow(f); const yhat = x.reduce((t, v, i) => t + v * beta[i], 0); return (f.sumObs + (f.n - f.k) * yhat) / f.n; };
+// hold-out check: fit without Districts 1 and 11, estimate their covered seasons as if the bracket were missing
+const betaHO = trainOn((f) => f.d !== 1 && f.d !== 11);
+const ho = FEAT.filter((f) => f.covered && f.rated && f.year >= 1974 && (f.d === 1 || f.d === 11) && f.n);
+const errs = ho.map((f) => Math.abs(estimate(f, betaHO) - f.full)), bias = ho.map((f) => estimate(f, betaHO) - f.full);
+const oldErr = ho.map((f) => Math.abs((f.sumObs + (f.n - f.k) * DIST_ONLY) / f.n - f.full));
+const mean = (a) => a.reduce((x, y) => x + y, 0) / (a.length || 1);
+console.log(`hold-out D1+D11 school-seasons n=${ho.length}: estimator MAE ${mean(errs).toFixed(1)} bias ${mean(bias).toFixed(1)}; old constant fill MAE ${mean(oldErr).toFixed(1)}`);
+// second check on the district this exists for: the few WPIAL (D7) AAA seasons whose full bracket IS on file
+const betaNo7 = trainOn((f) => f.d !== 7);
+const d7 = FEAT.filter((f) => f.covered && f.rated && f.year >= 1974 && f.d === 7 && f.c === 'AAA' && f.n);
+const e7 = d7.map((f) => estimate(f, betaNo7) - f.full);
+console.log(`D7 AAA covered school-seasons n=${d7.length} (years ${Array.from(new Set(d7.map((f) => f.year))).join(',')}): estimator bias ${mean(e7).toFixed(1)} MAE ${mean(e7.map(Math.abs)).toFixed(1)}`);
+const BETA = trainOn(() => true);
+console.log('estimator coefficients', BETA.map((v) => v.toFixed(3)).join(' '));
+let nEst = 0;
+ss.forEach((r, i) => { const f = FEAT[i]; if (!f.rated || !f.n) { r[5] = 0; return; } if (f.covered) r[5] = Math.round(f.full); else { r[5] = Math.round(estimate(f, BETA)); r[19] = 1; nEst++; } });
+console.log('estimated school-seasons', nEst, 'of', ss.filter((r) => r[5]).length);
+fs.writeFileSync(path.join(__dirname, '..', 'data', 'difficulty', 'coverage_estimator.txt'), [
+  'School season rating where the district bracket is not on file',
+  `features: [1, meanObserved-1500, noObserved, observedShare, era1990-2004, era2005+, classAA]`,
+  `coefficients: ${BETA.map((v) => v.toFixed(3)).join(' ')}`,
+  `hold-out (fit without D1/D11, estimate their covered seasons): n=${ho.length} MAE ${mean(errs).toFixed(1)} bias ${mean(bias).toFixed(1)}; old constant-fill MAE ${mean(oldErr).toFixed(1)}`,
+  `estimated school-seasons: ${nEst}`].join('\n') + '\n');
 
 /* ---- district and region seasons ----
    district rating = mean Overtime Rating of the wrestlers it sent to regionals that season (one per wrestler);
@@ -152,11 +214,13 @@ const unitSeason = (unitOf) => {
   return m;
 };
 const dRate = unitSeason((a) => a.d);
+const dCov = (u, y, c) => cov.has(y + '|' + c + '|' + u);
 const rRate = unitSeason((a, c) => regionOf(a.year, c, a.d) || '');
 const rollup = (keyOf, rate) => {
   const m = new Map();
   ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || [u, r[1], r[2], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; for (let i = 6; i <= 15; i++) x[i - 2] += r[i]; x[14] = (x[14] || 0) + 1; m.set(k, x); });
-  return Array.from(m.values()).map((x) => { const q = rate.get(x[0] + '|' + x[1] + '|' + x[2]); x[3] = q ? Math.round(q.sum / q.n) : 0; return x; });
+  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const x = m.get(u + '|' + r[1] + '|' + r[2]); if (x) { x[15] = (x[15] || 0) + (r[19] ? 1 : 0); } });
+  return Array.from(m.values()).map((x) => { const q = rate.get(x[0] + '|' + x[1] + '|' + x[2]); x[3] = q ? Math.round(q.sum / q.n) : 0; x[16] = (x[15] || 0) / (x[14] || 1) >= 0.5 ? 1 : 0; return x; });
 };
 /* [unit, year, cls, rating, statePts, regPts, distPts, stateTitles, podium2to4, placers5to8, qualsNoPlace, regTitles, distTitles, teamTitles, schools] */
 const ds = rollup((r) => r[3], dRate), rs = rollup((r) => r[4], rRate);
@@ -171,6 +235,6 @@ const stateFields = APP.filter((a) => a.lvl === 'state' && a.field).map((a) => a
 const fset = new Map(); APP.filter((a) => a.lvl === 'state' && a.field).forEach((a) => fset.set(a.year + '|' + a.cls + '|' + a.w, a.field));
 const fsorted = Array.from(fset.values()).sort((a, b) => a - b);
 const pct = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((q) => fsorted[Math.min(fsorted.length - 1, Math.floor(q / 100 * (fsorted.length - 1)))]);
-const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ds: ds.map((x) => x.slice(0, 4)), rs: rs.map((x) => x.slice(0, 4)) };
+const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ds: ds.map((x) => x.slice(0, 4).concat([x[16] || 0])), rs: rs.map((x) => x.slice(0, 4).concat([x[16] || 0])) };
 fs.writeFileSync(path.join(OV, 'units.js'), 'window.WR_UNITS=' + JSON.stringify(out) + ';\n');
 console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'state brackets', fsorted.length, 'deciles', pct.join(' '));

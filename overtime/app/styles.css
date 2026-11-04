@@ -900,3 +900,7 @@ i.wdg{height:5px}
 .mlist .mrow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2px 12px;padding:9px 14px;border-top:1px solid var(--line)}
 .mlist .mrow:first-child{border-top:0}
 .mlist .mt{font-weight:600}.mlist .my{text-align:right}.mlist .mm{grid-column:1/-1;font-size:13px}
+
+/* estimated unit ratings (district bracket not on file): a subtle dotted underline on the value */
+.mls.est,.mla.est,.rc.est>b{text-decoration:underline dotted rgba(238,234,225,.55);text-decoration-thickness:1px;text-underline-offset:3px}
+.ctp{font:600 9.5px var(--cond);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--ash2,#6B7480);border:1px dashed #56606E;border-radius:999px;padding:0 5px;margin-left:6px;vertical-align:1px}

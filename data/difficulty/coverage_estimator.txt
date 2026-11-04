@@ -1,0 +1,5 @@
+School season rating where the district bracket is not on file
+features: [1, meanObserved-1500, noObserved, observedShare, era1990-2004, era2005+, classAA]
+coefficients: 1087.975 0.094 -15.583 54.007 -39.708 -71.459 -15.298
+hold-out (fit without D1/D11, estimate their covered seasons): n=5297 MAE 32.3 bias 2.9; old constant-fill MAE 45.4
+estimated school-seasons: 9410
