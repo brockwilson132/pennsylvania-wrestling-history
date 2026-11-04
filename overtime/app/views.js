@@ -9,7 +9,7 @@
      State → schools (or districts, regions), Region → schools (or districts), District → schools, School → its weights
      (the rating of its best wrestler on record at each weight, each season). */
   const UNITS = { state: [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], region: [['school', 'Schools'], ['district', 'Districts']], district: [['school', 'Schools']], school: [['weight', 'Weights']] };
-  const SORTS = [['avg', 'Window average'], ['last', 'Latest season'], ['peak', 'Peak'], ['name', 'Name']];
+  const SORTS = [['avg', 'Average'], ['last', 'Latest season'], ['peak', 'Peak'], ['name', 'Name']];
   const NOUN = { school: ['school', 'schools'], district: ['district', 'districts'], region: ['region', 'regions'], weight: ['weight', 'weights'] };
   const unitOf = (u) => { const opts = UNITS[u.kind] || UNITS.state; return opts.some(([k]) => k === state.tlunit) ? state.tlunit : opts[0][0]; };
   const parentOf = (u) => (u.kind === 'state' ? null : { kind: u.kind, id: u.kind === 'district' ? +u.id : u.id });
@@ -19,7 +19,11 @@
     return OT.aggregateCore(kind, parentOf(u), u.kind === 'state' ? 'state' : u.kind, home).filter((a) => a.series.length && a.name).map((a) => {
       const vals = new Map(a.series), est = new Set(a.ys.filter((y) => y.rn && y.en && y.en * 2 >= y.rn).map((y) => y.y));
       const sch = kind === 'school' ? OT.U.school(a.name) : null;
-      return { name: a.name, href: a.href, vals, est, d: sch ? sch.d || 0 : 0 };
+      const row = { name: a.name, href: a.href, vals, est, d: sch ? sch.d || 0 : 0 };
+      /* seasons this school spent in the other class: their own row under it, never in this class's numbers or ranks */
+      const oys = home ? OT.otherClass(a.k) : [];
+      if (oys.length) row.alt = { name: a.name, cls: oys[0].c, href: a.href, vals: new Map(oys.map((o) => [o.y, o.v])), est: new Set(oys.filter((o) => o.e).map((o) => o.y)) };
+      return row;
     });
   }
   function weightRowsTL(u) {
@@ -67,7 +71,10 @@
       const ri = idx.get(r);
       const cells = d.years.map((y, i) => { const v = r.vals.get(y); return v ? `<i data-c="${ri}|${i}" class="${r.est.has(y) ? 'e' : ''}" style="background:${OT.ratingColor(kd, v)}"></i>` : `<i class="n" data-c="${ri}|${i}"></i>`; }).join('');
       const lab = r.href ? `<a class="tll" href="${r.href}">${esc(r.name)}</a>` : `<span class="tll">${esc(r.name)}</span>`;
-      return `${g}<div class="tlr"><span class="tlh">${lab}<span class="tla num" title="${esc(SORTS.find(([k]) => k === (s === 'weight' ? 'avg' : s))[1])}">${OT.r10(s === 'last' ? r.last : s === 'peak' ? r.peak : r.avg)}</span></span><div class="tls">${cells}</div></div>`; }).join('');
+      const alt = r.alt && r.alt.vals.size ? (() => { const a = r.alt; const cs = d.years.map((y, i) => { const v = a.vals.get(y); return v ? `<i data-c="a${ri}|${i}" class="${a.est.has(y) ? 'e' : ''}" style="background:${OT.ratingColor(kd, v)}"></i>` : `<i class="n" data-c="a${ri}|${i}"></i>`; }).join('');
+        const av = Array.from(a.vals).filter(([y]) => y >= d.years[0] && y <= d.years[n - 1]).map(([, v]) => v);
+        return av.length ? `<div class="tlr alt"><span class="tlh"><span class="tll">${esc(r.name)} <em>${a.cls === 'AAA' ? 'AAA' : 'AA'} seasons</em></span><span class="tla num" title="average of these seasons; not counted in ${esc(state.cls)}">${OT.r10(mean(av))}</span></span><div class="tls">${cs}</div></div>` : ''; })() : '';
+      return `${g}<div class="tlr"><span class="tlh">${lab}<span class="tla num" title="${esc(SORTS.find(([k]) => k === (s === 'weight' ? 'avg' : s))[1])}">${OT.r10(s === 'last' ? r.last : s === 'peak' ? r.peak : r.avg)}</span></span><div class="tls">${cells}</div></div>${alt}`; }).join('');
     const more = rows.length > lim ? `<div class="bmore"><button class="more" type="button" data-tlmore>Show ${Math.min(50, rows.length - lim)} more of ${rows.length}</button></div>` : '';
     const nn = NOUN[d.kind];
     return `${ctl}<div class="tltip" id="tltip" aria-live="polite">${rows.length} ${nn[rows.length === 1 ? 0 : 1]}, ${d.years[0]}–${d.years[n - 1]}. Tap a season for its rating and rank.</div>
@@ -75,7 +82,10 @@
       <div class="note">${d.kind === 'weight' ? 'Each weight: the rating of the school\'s best wrestler on record there that season (state entrants and district and regional placewinners).' : 'Each strip: the ' + nn[0] + '\'s season rating, cold to hot.'} Dotted cells are estimated. The number beside each name follows the sort.${d.kind === 'weight' ? '' : ' ' + nn[1][0].toUpperCase() + nn[1].slice(1) + ' rated in fewer than ' + minS + ' of these seasons come last.'}</div>`;
   }
   /* the tip: value and rank among the rows that season */
-  const tipFor = (key) => { if (!TL) return ''; const [ri, i] = key.split('|').map(Number); const r = TL.rows[ri], y = TL.years[i]; if (!r) return ''; const v = r.vals.get(y);
+  const tipFor = (key) => { if (!TL) return '';
+    if (key[0] === 'a') { const [ri, i] = key.slice(1).split('|').map(Number); const r = TL.rows[ri], y = TL.years[i]; const a = r && r.alt; if (!a) return ''; const v = a.vals.get(y);
+      return v ? `<b>${esc(r.name)}</b> · ${y} · <b class="num">${OT.r10(v)}</b> in ${a.cls}${a.est.has(y) ? ' est.' : ''} · not counted in ${esc(state.cls)}` : `${esc(r.name)} · ${y} · not in ${a.cls}`; }
+    const [ri, i] = key.split('|').map(Number); const r = TL.rows[ri], y = TL.years[i]; if (!r) return ''; const v = r.vals.get(y);
     if (!v) return `${esc(r.name)} · ${y} · no rating`;
     const R = TL.rank.get(y) || []; const k = R.indexOf(v) + 1; const nn = NOUN[TL.kind];
     return `<b>${esc(r.name)}</b> · ${y} · <b class="num">${OT.r10(v)}</b>${r.est.has(y) ? ' est.' : ''}${r.who && r.who.get(y) ? ' · ' + esc(r.who.get(y)) : ''} · ${ordinal(k)} of ${R.length} ${nn[R.length === 1 ? 0 : 1]}`; };

@@ -1035,3 +1035,5 @@ a.tll:hover{color:var(--gold)}
 .bvlist .bvl{height:auto;min-height:0}
 .bvlist .bvl:last-child{border-bottom:0}
 @media(min-width:720px){.mdtop{max-width:640px;width:100%;margin:0 auto}}
+.tlr.alt{margin-top:-1px}.tlr.alt .tll{color:var(--ash);font-weight:600}.tlr.alt .tll em{font-style:normal;font:700 10px var(--cond);letter-spacing:.12em;color:var(--ash2);margin-left:4px}
+.tlr.alt .tla{color:var(--ash2)}.tlr.alt .tls i:not(.n){opacity:.78}

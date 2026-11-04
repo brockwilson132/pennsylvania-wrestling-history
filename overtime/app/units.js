@@ -41,6 +41,9 @@
      per class). Everything else counts results in the class they were wrestled in. */
   const homeRows = (parent) => memo('ssH|' + (parent ? parent.kind + ':' + parent.id : 'all'), () => { const [a, b] = OT.yearsWindow(), f = inParent(parent);
     return SS.filter((r) => r[1] >= a && r[1] <= b && f(r) && OT.homeOf(S[r[0]]) === state.cls); });
+  /* a school's rated seasons in the other class, statewide (the Timeline's second row); never mixed into this class */
+  const otherClass = (schoolIdx) => { if (state.cls === 'ALL') return []; const [a, b] = OT.yearsWindow();
+    return SS.filter((r) => r[0] === schoolIdx && r[1] >= a && r[1] <= b && r[2] !== state.cls && r[2] !== 'single' && r[5] && ratedYear(r[1])).map((r) => ({ y: r[1], v: r[5], c: r[2], e: !!r[19] })); };
   function aggregateCore(kind, parent, pageKind, home) {
     return memo('core|' + kind + '|' + (parent ? parent.kind + ':' + parent.id : '') + '|' + pageKind + (home ? '|h' : ''), () => {
       const keyOf = kind === 'school' ? (r) => r[0] : kind === 'district' ? (r) => (r[3] >= 1 && r[3] <= 12 ? r[3] : null) : (r) => (FIVE.includes(r[4]) ? r[4] : null);
@@ -608,5 +611,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
