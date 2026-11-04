@@ -200,6 +200,9 @@
       const bf = bstat(f()), bs = sel ? OT.withSub([sel.a, sel.b], () => bstat(f())) : bf; if (!bf && !bs) return;
       [['best', 'best'], ['avg', 'avg'], ['low', 'low']].forEach(([k, lab]) => bench.push({ b: true, label: `${l} ${lab}`, s: bs ? bs[k] : 0, v: bf ? bf[k] : 0 }));
     });
+    // merge benchmarks that land on the same values (e.g. State, Region and District best are all one school) into one line
+    for (let i = 0; i < bench.length; i++) for (let j = i + 1; j < bench.length; j++) { const A = bench[i], B = bench[j]; if (!A.gone && !B.gone && Math.round(A.s / 10) === Math.round(B.s / 10) && Math.round(A.v / 10) === Math.round(B.v / 10) && A.label.split(' ').pop() === B.label.split(' ').pop()) { A.label = A.label.replace(/ (best|avg|low)$/, '') + ' · ' + B.label; B.gone = true; } }
+    for (let i = bench.length - 1; i >= 0; i--) if (bench[i].gone) bench.splice(i, 1);
     const vis = rows.slice(0, lim), cut = more && vis.length ? key(vis[vis.length - 1]) : -Infinity;
     const benchVis = bench.filter((x) => key(x) >= cut);
     const all = vis.concat(benchVis).sort((p, q) => key(q) - key(p) || (q.b ? 1 : 0) - (p.b ? 1 : 0));
