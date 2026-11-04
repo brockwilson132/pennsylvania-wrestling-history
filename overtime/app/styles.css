@@ -888,7 +888,8 @@ i.wdg{height:5px}
 .mlb2::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed #4A5360}
 .mlb2>span{position:absolute;right:4px;top:50%;transform:translateY(-50%);padding:0 0 0 6px;background:var(--slate);font:600 10px/12px var(--cond);letter-spacing:.04em;color:var(--ash);white-space:nowrap}
 .mlb2>span b{font-weight:900;color:var(--chalk)}.mlb2>span i{font-style:normal;color:var(--ash2)}
-.mlb2{height:10px;margin:-5px 0}
-.mlb2>span{left:4px;right:auto;padding:0 6px 0 0;font-size:9.5px;line-height:10px;letter-spacing:.06em;text-transform:uppercase}
+.mlb2{height:14px;margin:-7px 0}
+.mlb2::before{border-top:1px dashed #56606E}
+.mlb2>span{left:50%;right:auto;transform:translate(-50%,-50%);padding:1px 8px;border:1px dashed #56606E;border-radius:999px;background:var(--mat,#0B0D10);font-size:9.5px;line-height:11px;letter-spacing:.08em;text-transform:uppercase}
 .tl{grid-template-columns:repeat(4,56px)}
 .tl .th{overflow:hidden}
