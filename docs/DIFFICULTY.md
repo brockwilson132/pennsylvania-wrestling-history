@@ -188,3 +188,29 @@ uses the result being explained):
 | Spearman(rating, state place) | 0.767 | 0.764 |
 | lower-rated winner, same-season bouts | 7.9% | 7.8% |
 | hidden 2018–26 bouts, season-batch log loss | 0.5564 | **0.5464** |
+
+## 8. v4: coverage-aware prior (AAA wrestlers with no district bracket)
+
+The archive has almost no D3/D7 AAA district brackets, so every SW and SC AAA state entrant had fewer rated bouts per
+season, was shrunk harder toward the 1500 prior and came out under-rated (docs/CALIBRATION.md). v4 shifts the prior
+mean of each AAA wrestler-season whose district tournament is not on file (full field < 24 entrants, the same rule as
+`build_units.js`) by a fitted amount per era. The shift is fitted iteratively on bouts at regionals and states between
+covered and uncovered wrestlers, before 2018 only, until those bouts show no residual: **+131 before 1990, +92 for
+1990–2004, +83 from 2005**. AA is left alone. Its district coverage is ~96% complete, and an AA shift (+80, fitted
+mostly on D3) over-rated AA SC at states in the held-out test.
+
+| | v3 | v4 |
+|---|---|---|
+| hidden 2018–26 bouts, season-batch log loss | 0.5464 | **0.5428** |
+| AAA cross-region state bouts 2018–26, log loss | 0.4312 | **0.4183** |
+| AA cross-region state bouts 2018–26, log loss | 0.4261 | 0.4286 |
+| AAA region offsets vs NE, 1990–2026 (SW / SC / SE / NW) | +85 / +57 / +5 / −19 | +17 / −12 / −13 / −22 |
+| AAA no-district-bracket term | +59 ±3 | +4 ±1 |
+| champion rated #1 in his state bracket | 82.0% | **83.6%** |
+| Spearman(rating, state place) | 0.764 | 0.776 |
+| lower-rated winner, same-season bouts | 7.8% | 7.7% |
+| JR→SR gain, peaking 1850+ / 1700–1850 / 1500–1700 | +126 / +136 / +122 | +126 / +133 / +122 |
+| 1700+ careers rated lower as seniors | 8% | 8% |
+
+The rating scale is re-anchored to the average state qualifier, so raising SW/SC lowers everyone else slightly. Peaks
+fell about 40–50 points: Oliver 2038 → 1987, Cunningham 2033 → 2000, Dillard 2011 → 1971.

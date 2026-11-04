@@ -8,49 +8,49 @@ careers: 508 name+school keys split into several careers
 
 season-batch fit: 365990 bouts + 2285 placement-implied pairs (weight 0.3/(placers-1)) for brackets with fewer bouts than placers
 coverage: 152236 wrestler-seasons with their district bracket on file; district tournaments with a full field: 1232 of 1252
-coverage shift pass 1: residual AA e0 +58 (n=2076), AA e1 +53 (n=1990), AAA e0 +93 (n=2321), AAA e1 +64 (n=3763), AAA e2 +59 (n=3863)
-coverage shift pass 2: residual AA e0 +17 (n=2076), AA e1 +19 (n=1990), AAA e0 +29 (n=2321), AAA e1 +21 (n=3763), AAA e2 +18 (n=3863)
-coverage shift pass 3: residual AA e0 +5 (n=2076), AA e1 +7 (n=1990), AAA e0 +9 (n=2321), AAA e1 +7 (n=3763), AAA e2 +6 (n=3863)
-coverage shift pass 4: residual AA e0 +2 (n=2076), AA e1 +2 (n=1990), AAA e0 +3 (n=2321), AAA e1 +2 (n=3763), AAA e2 +2 (n=3863)
-coverage shift (raw rating points added to the prior mean of wrestler-seasons without their district bracket): AA e0 +80, AA e1 +78, AAA e0 +130, AAA e1 +92, AAA e2 +83
-prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.5609, 1.0: 0.5605, 1.5: 0.5605, 2.0: 0.5612, 2.5: 0.5633, 3.0: 0.5670, 4.5: 0.5858 -> 2.0
-held-out 10% of 2018-2026 bouts (n=6849), fit without them: season-batch strength log loss 0.5429 accuracy 0.699; forward rating 0.5522
+coverage shift pass 1: residual AAA e0 +93 (n=2321), AAA e1 +64 (n=3763), AAA e2 +59 (n=3863)
+coverage shift pass 2: residual AAA e0 +29 (n=2321), AAA e1 +21 (n=3763), AAA e2 +18 (n=3863)
+coverage shift pass 3: residual AAA e0 +9 (n=2321), AAA e1 +7 (n=3763), AAA e2 +6 (n=3863)
+coverage shift pass 4: residual AAA e0 +3 (n=2321), AAA e1 +2 (n=3763), AAA e2 +2 (n=3863)
+coverage shift (raw rating points added to the prior mean of wrestler-seasons without their district bracket): AAA e0 +131, AAA e1 +92, AAA e2 +83
+prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.5608, 1.0: 0.5606, 1.5: 0.5607, 2.0: 0.5615, 2.5: 0.5636, 3.0: 0.5674, 4.5: 0.5862 -> 2.0
+held-out 10% of 2018-2026 bouts (n=6849), fit without them: season-batch strength log loss 0.5428 accuracy 0.699; forward rating 0.5522
   (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)
   prior pass: largest change from season-only estimates 512
   prior models by neighbour pattern (t-2 t-1 t+1 t+2 | graduated | freshman): n, slopes, slope sum, resid sd
-    xx.. g1 f0: n=15538, slopes 0.25 0.54, sum 0.78, sd 229
-    .x.. g1 f0: n=8999, slopes 0.60, sum 0.60, sd 234
-    .xx. g0 f0: n=7865, slopes 0.35 0.38, sum 0.73, sd 197
-    xxx. g0 f0: n=6530, slopes 0.15 0.30 0.43, sum 0.88, sd 194
-    ..x. g0 f0: n=5768, slopes 0.47, sum 0.47, sd 208
+    xx.. g1 f0: n=15538, slopes 0.25 0.53, sum 0.78, sd 228
+    .x.. g1 f0: n=8999, slopes 0.59, sum 0.59, sd 233
+    .xx. g0 f0: n=7865, slopes 0.35 0.38, sum 0.73, sd 196
+    xxx. g0 f0: n=6530, slopes 0.15 0.30 0.43, sum 0.88, sd 193
+    ..x. g0 f0: n=5768, slopes 0.46, sum 0.46, sd 207
     .xxx g0 f0: n=5567, slopes 0.36 0.29 0.16, sum 0.81, sd 191
-    ..xx g0 f1: n=4555, slopes 0.41 0.21, sum 0.62, sd 211
-    ..xx g0 f0: n=4373, slopes 0.33 0.18, sum 0.51, sd 197
+    ..xx g0 f1: n=4555, slopes 0.41 0.21, sum 0.61, sd 210
+    ..xx g0 f0: n=4373, slopes 0.33 0.18, sum 0.51, sd 196
     .x.. g0 f0: n=2269, slopes 0.66, sum 0.66, sd 216
-    x... g1 f0: n=1932, slopes 0.56, sum 0.56, sd 234
-    xx.. g0 f0: n=1061, slopes 0.30 0.51, sum 0.81, sd 213
+    x... g1 f0: n=1932, slopes 0.55, sum 0.55, sd 233
+    xx.. g0 f0: n=1061, slopes 0.30 0.51, sum 0.80, sd 213
     ..x. g0 f1: n=913, slopes 0.58, sum 0.58, sd 195
-    x.x. g0 f0: n=815, slopes 0.29 0.46, sum 0.74, sd 201
-    ...x g0 f0: n=561, slopes 0.37, sum 0.37, sd 207
-    ...x g0 f1: n=507, slopes 0.41, sum 0.41, sd 217
+    x.x. g0 f0: n=815, slopes 0.28 0.46, sum 0.74, sd 201
+    ...x g0 f0: n=561, slopes 0.36, sum 0.36, sd 205
+    ...x g0 f1: n=507, slopes 0.41, sum 0.41, sd 216
     .x.x g0 f0: n=435, slopes 0.38 0.33, sum 0.71, sd 201
-prior sd (most common pattern, scaled): 229
+prior sd (most common pattern, scaled): 228
 
-scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1732-2024, sd 115-180; spread 163
-  district field strength 1980+: median 1187 (p10 1049, p90 1323)
-  regional field strength 1980+: median 1375 (p10 1287, p90 1465)
-  state    field strength 1980+: median 1636 (p10 1581, p90 1679)
+scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1730-2022, sd 115-180; spread 166
+  district field strength 1980+: median 1193 (p10 1045, p90 1330)
+  regional field strength 1980+: median 1375 (p10 1281, p90 1469)
+  state    field strength 1980+: median 1638 (p10 1582, p90 1682)
 
-state brackets (6+ rated, champion known, n=1532): champion rated #1 83.9%, top 2 94.1%; mean Spearman(rating, place) 0.778
-same-season bouts where the winner is rated below the loser: 7.6% of 365990
+state brackets (6+ rated, champion known, n=1532): champion rated #1 83.6%, top 2 94.1%; mean Spearman(rating, place) 0.776
+same-season bouts where the winner is rated below the loser: 7.7% of 365990
 
-state placement points 1980+ (n=20752): own season rating R2 0.6678
-  + best win: R2 0.6682 (gain +0.0004), coefficient +0.0012
-  + mean of opponents beaten: R2 0.6678 (gain +0.0001), coefficient -0.0007
-  + bad losses: R2 0.6678 (gain +0.0000), coefficient +0.1201
-  + field strength: R2 0.6865 (gain +0.0188), coefficient -0.0174
-next-season state points of returners (n=7405): rating + this season placement R2 0.4147
-  + best win: R2 0.4235 (gain +0.0088), coefficient -0.00668
-  + mean of opponents beaten: R2 0.4172 (gain +0.0025), coefficient -0.00494
-  + bad losses: R2 0.4149 (gain +0.0003), coefficient +0.38566
-  + field strength: R2 0.4151 (gain +0.0004), coefficient -0.00318
+state placement points 1980+ (n=20752): own season rating R2 0.6619
+  + best win: R2 0.6621 (gain +0.0002), coefficient +0.0009
+  + mean of opponents beaten: R2 0.6620 (gain +0.0001), coefficient -0.0006
+  + bad losses: R2 0.6619 (gain +0.0000), coefficient -0.0431
+  + field strength: R2 0.6803 (gain +0.0184), coefficient -0.0170
+next-season state points of returners (n=7405): rating + this season placement R2 0.4136
+  + best win: R2 0.4229 (gain +0.0092), coefficient -0.00675
+  + mean of opponents beaten: R2 0.4154 (gain +0.0018), coefficient -0.00408
+  + bad losses: R2 0.4140 (gain +0.0003), coefficient +0.43242
+  + field strength: R2 0.4140 (gain +0.0004), coefficient -0.00299

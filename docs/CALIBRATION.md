@@ -47,9 +47,39 @@ WPIAL AAA wrestlers are under-rated by roughly 60–100 points at states. School
 ratings, so D7 AAA school ratings would rise by a similar amount: Canon-McMillan ~1200 → ~1270–1300 against Easton
 1380. The gap narrows by about half; the remainder is a real difference in this data (D11's lineups are deeper).
 
-## Proposed fix (not implemented)
-In `tools/ratings.py`, give the season fit a coverage-aware prior: for wrestler-seasons with no district bracket on
-file, shift the prior mean by a fitted coverage term (estimated jointly from cross-district/cross-region bouts at
-regionals and states, by class and era), or equivalently add district-season random effects estimated only from
-cross-district bouts. Validate with the same held-out cross-region state test, the champion-#1 rate and the
-upset rate, then rebuild units/wstats. Expected: AAA held-out log loss on cross-region state bouts ≈ 0.423 (from 0.431).
+## Fix (implemented, v4 in docs/DIFFICULTY.md section 8)
+`tools/ratings.py` now gives AAA wrestler-seasons with no district bracket on file a coverage-aware prior. The shift is
++131 / +92 / +83 for pre-1990 / 1990–2004 / 2005+, fitted on pre-2018 regional and state bouts between covered and
+uncovered wrestlers. AA is not shifted (an AA shift made the AA held-out test worse).
+
+| | before | after |
+|---|---|---|
+| AAA held-out 2018–26 cross-region state log loss (no offsets) | 0.4312 | **0.4183** |
+| AAA region offsets 1990–2026 vs NE: SW / SC | +85 / +57 | +17 / −12 |
+| AAA held-out-fitted offsets: SW / SC | +77 / +55 | +11 / −11 |
+| AAA no-district-bracket term | +59 ±3 | +4 ±1 |
+| AA held-out cross-region log loss | 0.4261 | 0.4286 |
+| AA offsets: SC / SE / SW | −18 / −20 / −14 | −21 / −28 / −15 |
+
+SC is now within noise of NE. SW stays slightly positive (+11 to +17, a few standard errors). NW (−22) and SE (−13)
+were mildly negative before the fix and still are.
+
+AAA school ratings, all-time / since 2017:
+
+| | before | after |
+|---|---|---|
+| Canon-McMillan | 1204 / 1230 | 1212 / 1236 |
+| Waynesburg Central | 1163 / 1220 | 1172 / 1230 |
+| North Allegheny | 1173 / 1163 | 1183 / 1176 |
+| Cumberland Valley | 1194 / 1124 | 1218 / 1132 |
+| Central Dauphin | 1183 / 1196 | 1206 / 1212 |
+| Easton | 1377 / 1304 | 1328 / 1254 |
+| Nazareth | 1374 / 1477 | 1323 / 1434 |
+| District 7 | 1452 / 1548 | 1491 / 1569 |
+| District 3 | 1453 / 1443 | 1508 / 1477 |
+| District 11 | 1520 / 1542 | 1475 / 1502 |
+| District 1 | 1473 / 1466 | 1443 / 1482 |
+
+Schools moved less than the earlier estimate (Canon-McMillan ~1270–1300). The units coverage estimator already
+corrected D7 school ratings for missing brackets, and re-anchoring the scale lowered D11. The Canon-McMillan–Easton
+gap narrows from 173 to 116 points. D3 and D7 now rate above D11 as districts.
