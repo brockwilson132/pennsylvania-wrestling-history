@@ -98,16 +98,22 @@
     proj();
     const GEO = window.WR_SCHOOLGEO || null; const hasGeo = GEO && Object.keys(GEO).length > 0;
     const L = OT.aggregateCore('school', { kind: 'district', id: d }, 'district').filter((a) => a.rating || a.score);
-    const box = (M.box[d] || [0, 0, M.w, M.h]).slice(), pad = 0.08 * Math.max(box[2] - box[0], box[3] - box[1]);
-    const vb = [box[0] - pad, box[1] - pad, box[2] - box[0] + 2 * pad, box[3] - box[1] + 2 * pad];
+    const box = (M.box[d] || [0, 0, M.w, M.h]).slice(), pad = 0.14 * Math.max(box[2] - box[0], box[3] - box[1]);
+    // square-ish frame so a thin district isn't stretched edge to edge, with room for the neighbours
+    let bw = box[2] - box[0] + 2 * pad, bh = box[3] - box[1] + 2 * pad; const cx = (box[0] + box[2]) / 2, cy = (box[1] + box[3]) / 2;
+    if (bw / bh < 1.4) bw = bh * 1.4; else if (bw / bh > 2.2) bh = bw / 2.2;
+    const vb = [cx - bw / 2, cy - bh / 2, bw, bh];
     const k = vb[2] / M.w; // marks and text scale with the zoom
+    // neighbouring districts drawn faint for context, labelled with their number
+    const nbrs = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12].filter((x) => x !== d && dPath(x)).map((x) => `<a href="#district/${x}"><path class="pnb" d="${dPath(x)}" style="stroke-width:${(1 * k).toFixed(2)}"><title>District ${x}</title></path></a>`).join('')
+      + [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12].filter((x) => x !== d && M.dot[x]).map((x) => `<text class="pnbl" x="${M.dot[x][0]}" y="${M.dot[x][1]}" style="font-size:${(13 * k).toFixed(1)}px">D${x}</text>`).join('');
     const own = OT.unitAgg({ kind: 'district', id: d }); const dcol = own && own.rating ? OT.ratingColor('district', own.rating) : NOFILL;
     if (!hasGeo) {
       /* no real coordinates yet: the district itself, coloured by its rating; no invented school positions */
       const base = d === 8 ? `<circle cx="${M.dot[8][0]}" cy="${M.dot[8][1]}" r="${(14 * k).toFixed(1)}" style="fill:${dcol}"/>` : `<path class="par" d="${dPath(d)}" style="fill:${dcol};stroke-width:${(2 * k).toFixed(2)}"/>`;
       const c = M.dot[d];
       const lab = own && own.rating ? `<g class="pal" transform="translate(${c[0]},${c[1]}) scale(${k.toFixed(3)})"><text class="pan">District ${d}</text><text class="pav" y="30">${r10(own.rating)}</text></g>` : '';
-      return wrap(svgOpen(vb, 'District ' + d + ' coloured by rating') + `<path class="pax" d="${M.outline}" style="stroke-width:${(1.5 * k).toFixed(2)}"/>` + base + lab + '</svg>', legend(scaleFor([], 'district'), 'School locations coming', own && own.rating ? '' : noData()));
+      return wrap(svgOpen(vb, 'District ' + d + ' coloured by rating') + nbrs + `<path class="paxo" d="${M.outline}" style="stroke-width:${(1.5 * k).toFixed(2)}"/>` + base + lab + '</svg>', legend(scaleFor([], 'district'), 'School locations coming', own && own.rating ? '' : noData()));
     }
     const sc = scaleFor([], 'school');
     const smax = Math.max(1, ...L.map((a) => a.score || 0));
@@ -121,7 +127,7 @@
     const labs = placed.filter(([a]) => top5.has(a.k)).map(([a, [x, y]]) => `<text class="psl" x="${(x + 10 * k).toFixed(1)}" y="${(y + 4 * k).toFixed(1)}" style="font-size:${(15 * k).toFixed(1)}px;stroke-width:${(4 * k).toFixed(1)}px">${esc(OT.UD.schools[a.k])}</text>`).join('');
     const base = d === 8 ? `<path class="pax" d="${dPath(7)}"/>` : `<path class="padz" d="${dPath(d)}" style="stroke-width:${(2 * k).toFixed(2)}"/>`;
     const note = missing ? `${missing} school${missing > 1 ? 's' : ''} without a location yet` : '';
-    return wrap(svgOpen(vb, 'District ' + d + ' schools coloured by rating') + `<path class="pax" d="${M.outline}" style="stroke-width:${(1.5 * k).toFixed(2)}"/>` + base + dots + labs + '</svg>', legend(sc, note) + (L.length ? '<div class="mlgs">Dot size = score</div>' : ''));
+    return wrap(svgOpen(vb, 'District ' + d + ' schools coloured by rating') + nbrs + `<path class="paxo" d="${M.outline}" style="stroke-width:${(1.5 * k).toFixed(2)}"/>` + base + dots + labs + '</svg>', legend(sc, note) + (L.length ? '<div class="mlgs">Dot size = score</div>' : ''));
   }
 
   const wrap = (svg, leg) => `<div class="pmap">${svg}${leg}</div>`;

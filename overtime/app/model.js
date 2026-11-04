@@ -162,15 +162,19 @@ const OT = (window.OT = {});
      the regional brackets (lowermeta). A wrestler's own seed is trusted only when at least a fifth of his district's
      entrants that season carry the same region (a real split, e.g. District 6 AA feeding two regionals); a lone seed
      that disagrees with the rest of his district is a parsing slip and the district's region is used instead. */
+  /* the official feeds (WR_MEMB.dr, from the archive's district pages) are the base: a seed or regional bracket that
+     puts a district in a regional it never fed is ignored, so seeds only choose between a split district's regionals */
+  const OFFREG = (window.WR_MEMB || {}).dr || {};
+  const offOk = (cls, d, reg) => !reg || !FIVE.concat(['CNW']).includes(reg) || !OFFREG[cls + '|' + d] || OFFREG[cls + '|' + d].includes(reg);
   const DYR = new Map();
-  const dyAdd = (k, reg, n) => { const m = DYR.get(k) || DYR.set(k, new Map()).get(k); m.set(reg, (m.get(reg) || 0) + n); };
+  const dyAdd = (k, reg, n) => { const [c, , d] = k.split('|'); if (!offOk(c, d, reg)) return; const m = DYR.get(k) || DYR.set(k, new Map()).get(k); m.set(reg, (m.get(reg) || 0) + n); };
   APP.forEach((r) => { if (r.year >= 1951 && r.region && r.d) dyAdd(r.cls + '|' + r.year + '|' + r.d, r.region, 1); });
   LM.dreg.forEach(([cls, year, d, reg, n]) => dyAdd(cls + '|' + year + '|' + d, reg, n || 1));
   const dyMajor = (cls, year, d, five) => { const m = DYR.get(cls + '|' + year + '|' + d); if (!m) return null; let best = null, bn = 0; m.forEach((n, reg) => { if ((!five || FIVE.includes(reg)) && n > bn) { bn = n; best = reg; } }); return best; };
   const dyShare = (cls, year, d, reg) => { const m = DYR.get(cls + '|' + year + '|' + d); if (!m) return 0; let t = 0; m.forEach((n) => { t += n; }); return t ? (m.get(reg) || 0) / t : 0; };
   const regionOf = (r, scope = state.cls) => {
     if (r.lvl === 'regional') { if (scope === 'ALL' || FIVE.includes(r.region)) return r.region || null; }
-    const own = r.lvl === 'regional' ? r.region : (r.region && (r.lvl === 'district' || r.year < 1951 || !r.d || dyShare(r.cls, r.year, r.d, r.region) >= 0.2) ? r.region : null);
+    const own = r.lvl === 'regional' ? r.region : (r.region && offOk(r.cls, r.d, r.region) && (r.lvl === 'district' || r.year < 1951 || !r.d || dyShare(r.cls, r.year, r.d, r.region) >= 0.2) ? r.region : null);
     if (scope === 'ALL') return own || dyMajor(r.cls, r.year, r.d, false) || null;
     // the region he actually wrestled in that season (one-class seasons included: D3 went to the Southeast regional
     // 1951–73), when it is one of the five
@@ -179,8 +183,9 @@ const OT = (window.OT = {});
     // super-regionals, the old Central Northwest) is placed in its usual modern region rather than a minority one
     const kc = r.cls === 'single' ? 'single' : scope;
     const dm = dyMajor(kc, r.year, r.d, false); if (dm && FIVE.includes(dm)) return dm;
-    if (!dm) { const dr = dregOf(kc, r.year, r.d); if (dr && FIVE.includes(dr)) return dr; }
-    return modernRegion(r.d, scope); };
+    if (!dm) { const dr = dregOf(kc, r.year, r.d); if (dr && FIVE.includes(dr) && offOk(kc, r.d, dr)) return dr; }
+    const mr = modernRegion(r.d, scope); if (offOk(kc, r.d, mr)) return mr;
+    return ((OFFREG[kc + '|' + r.d] || []).find((g) => FIVE.includes(g))) || mr; };
   const regionOrder = () => (state.cls === 'ALL' ? REGION_ORDER : FIVE);
 
   /* school → district, school → region (majority, per scope), district → regions (majority, per scope) */

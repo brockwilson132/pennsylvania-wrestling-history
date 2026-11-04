@@ -1,0 +1,163 @@
+district,level,tournament,cls,region,y0,y1,slug
+1,district,District 1 AA,AA,,1974,2008,/district-1-aa/
+1,district,2015-2016,single,,2025,2026,
+1,district,District 1/12 AA,AA,,2009,2014,/district-1-12-aa/
+1,district,District 1 AAA Central,AAA,,2007,2009,/district-1-aaa-central/
+1,district,District 1 AAA East,AAA,,2013,2018,/district-1-aaa-east/
+1,district,District 1 AAA North,AAA,,1974,2012,/district-1-aaa-north/
+1,district,District 1 AAA South,AAA,,1974,2012,/district-1-aaa-south/
+1,district,District 1 AAA West,AAA,,2013,2018,/district-1-aaa-west/
+1,district,District 1,single,,1934,1973,/district-1/
+1,regional,South Central AA Regional,AA,SC,1974,1998,/region-south-central-aa/
+1,regional,South East AA Regional,AA,SE,1974,2026,/region-south-east-aa/
+1,regional,South East AAA Regional,AAA,SE,1974,2026,/region-south-east-aaa/
+1,regional,South East Regional,single,SE,1951,1973,/region-south-east/
+1,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+1,super-regional,East AAA Super Regional,AAA,E,2021,2021,/super-region-east-aaa/
+1,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+1,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+1,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+2,district,District 2 AA,AA,,1974,2026,/district-2-aa/
+2,district,District 2 AAA,AAA,,1974,2026,/district-2-aaa/
+2,district,District 2,single,,1936,1973,/district-2/
+2,sub-regional,District 2-12 AA Sub-Regional,AA,,1995,1996,/district-2-12-aa-subregion/
+2,sub-regional,District 2-4 AAA Sub-Regional,AAA,,1995,1998,/district-2-4-aaa-subregion/
+2,regional,North East AA Regional,AA,NE,1974,2026,/region-north-east-aa/
+2,regional,North East AAA Regional,AAA,NE,1974,2026,/region-north-east-aaa/
+2,regional,North East Regional,single,NE,1951,1973,/region-north-east/
+2,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+2,super-regional,East AAA Super Regional,AAA,E,2021,2021,/super-region-east-aaa/
+2,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+2,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+2,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+3,district,District 3 AA,AA,,1999,2026,/district-3-aa/
+3,district,District 3,single,,1936,1973,/district-3/
+3,regional,South Central AA Regional,AA,SC,1974,1998,/region-south-central-aa/
+3,regional,South East AA Regional,AA,SE,1974,2026,/region-south-east-aa/
+3,regional,South Central AAA Regional,AAA,SC,1974,2026,/region-south-central-aaa/
+3,regional,South East Regional,single,SE,1951,1973,/region-south-east/
+3,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+3,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+3,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+3,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+3,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+4,district,District 4 AA,AA,,1974,2026,/district-4-aa/
+4,district,District 4 AAA,AAA,,1974,2012,/district-4-aaa/
+4,district,2015,single,,2025,2026,
+4,district,District 4/9 AAA,AAA,,2013,2014,/district-4-9-aaa/
+4,district,District 4,single,,1938,1942,/district-4/
+4,sub-regional,District 2-4 AAA Sub-Regional,AAA,,1995,1998,/district-2-4-aaa-subregion/
+4,regional,North East AA Regional,AA,NE,1974,2026,/region-north-east-aa/
+4,regional,North East AAA Regional,AAA,NE,1974,2026,/region-north-east-aaa/
+4,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+4,regional,North East Regional,single,NE,1951,1973,/region-north-east/
+4,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+4,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+4,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+4,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+4,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+5,district,District 5 AA,AA,,1974,2026,/district-5-aa/
+5,district,District 5/9 AAA,AAA,,1974,1985,/district-5-9-aaa/
+5,district,District 5,single,,1940,1973,/district-5/
+5,sub-regional,District 5-6 AA Sub-Regional,AA,,1997,1998,/district-5-6-aa-subregion/
+5,regional,North West AA Regional,AA,NW,1974,2026,/region-north-west-aa/
+5,regional,South West AA Regional,AA,SW,1997,2026,/region-south-west-aa/
+5,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+5,regional,Central North West Regional,single,CNW,1951,1973,/region-central-north-west/
+5,super-regional,West AA Super Regional,AA,W,2021,2021,/super-region-west-aa/
+5,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+5,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+5,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+6,district,District 6 AA,AA,,1974,2026,/district-6-aa/
+6,district,District 6 AAA,AAA,,1974,2026,/district-6-aaa/
+6,district,District 6,single,,1954,1973,/district-6/
+6,district,District 6/9,single,,1938,1953,/district-6-9/
+6,sub-regional,District 5-6 AA Sub-Regional,AA,,1997,1998,/district-5-6-aa-subregion/
+6,sub-regional,District 6-9 AAA Sub-Regional,AAA,,1997,1998,/district-6-9-aaa-subregion/
+6,regional,North West AA Regional,AA,NW,1974,2026,/region-north-west-aa/
+6,regional,South West AA Regional,AA,SW,1997,2026,/region-south-west-aa/
+6,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+6,regional,West AAA Regional,AAA,W,2025,2026,/region-west-aaa/
+6,regional,Central North West Regional,single,CNW,1951,1973,/region-central-north-west/
+6,super-regional,West AA Super Regional,AA,W,2021,2021,/super-region-west-aa/
+6,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+6,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+6,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+6,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+7,district,District 7 AA,AA,,1999,2026,/district-7-aa/
+7,district,District 7 AAA,AAA,,2025,2026,/district-7-aaa/
+7,district,District 7,single,,1936,1950,/district-7/
+7,regional,South West AA Regional,AA,SW,1997,2026,/region-south-west-aa/
+7,regional,South West AAA Regional,AAA,SW,1999,2024,/region-south-west-aaa/
+7,regional,West AAA Regional,AAA,W,2025,2026,/region-west-aaa/
+7,regional,South West Regional,single,SW,1951,1973,/region-south-west/
+7,super-regional,West AA Super Regional,AA,W,2021,2021,/super-region-west-aa/
+7,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+7,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+7,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+7,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+8,district,District 8 AAA,AAA,,2013,2026,/district-8-aaa/
+8,regional,North West AA Regional,AA,NW,1974,2026,/region-north-west-aa/
+8,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+8,regional,West AAA Regional,AAA,W,2025,2026,/region-west-aaa/
+8,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+8,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+9,district,District 9 AA,AA,,1974,2026,/district-9-aa/
+9,district,District 4/9 AAA,AAA,,2013,2014,/district-4-9-aaa/
+9,district,District 5/9 AAA,AAA,,1974,1985,/district-5-9-aaa/
+9,district,District 9 AAA,AAA,,1986,2012,/district-9-aaa/
+9,district,District 9/10 AAA,AAA,,2025,2026,/district-9-10-aaa/
+9,district,District 6/9,single,,1938,1953,/district-6-9/
+9,district,District 9,single,,1954,1973,/district-9/
+9,sub-regional,District 6-9 AAA Sub-Regional,AAA,,1997,1998,/district-6-9-aaa-subregion/
+9,regional,North West AA Regional,AA,NW,1974,2026,/region-north-west-aa/
+9,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+9,regional,West AAA Regional,AAA,W,2025,2026,/region-west-aaa/
+9,regional,Central North West Regional,single,CNW,1951,1973,/region-central-north-west/
+9,super-regional,West AA Super Regional,AA,W,2021,2021,/super-region-west-aa/
+9,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+9,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+9,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+9,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+10,district,District 10 AA,AA,,1974,2026,/district-10-aa/
+10,district,District 10 AAA,AAA,,1974,2026,/district-10-aaa/
+10,district,District 9/10 AAA,AAA,,2025,2026,/district-9-10-aaa/
+10,district,District 10,single,,1938,1973,/district-10/
+10,regional,North West AA Regional,AA,NW,1974,2026,/region-north-west-aa/
+10,regional,North West AAA Regional,AAA,NW,1974,2024,/region-north-west-aaa/
+10,regional,West AAA Regional,AAA,W,2025,2026,/region-west-aaa/
+10,regional,Central North West Regional,single,CNW,1951,1973,/region-central-north-west/
+10,super-regional,West AA Super Regional,AA,W,2021,2021,/super-region-west-aa/
+10,super-regional,West AAA Super Regional,AAA,W,2021,2021,/super-region-west-aaa/
+10,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+10,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+10,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+11,district,District 11 AA,AA,,1974,2026,/district-11-aa/
+11,district,District 11 AAA,AAA,,1974,2026,/district-11-aaa/
+11,district,District 2 AAA,AAA,,1974,2026,/district-2-aaa/
+11,district,District 11,single,,1938,1939,/district-11/
+11,regional,North East AA Regional,AA,NE,1974,2026,/region-north-east-aa/
+11,regional,South East AA Regional,AA,SE,1974,2026,/region-south-east-aa/
+11,regional,North East AAA Regional,AAA,NE,1974,2026,/region-north-east-aaa/
+11,regional,North East Regional,single,NE,1951,1973,/region-north-east/
+11,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+11,super-regional,East AAA Super Regional,AAA,E,2021,2021,/super-region-east-aaa/
+11,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+11,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
+11,state,PIAA Wrestling Championships,single,,1938,1973,/piaa/
+12,district,District 1/12 AA,AA,,2009,2014,/district-1-12-aa/
+12,district,District 12 AA,AA,,1974,1996,/district-12-aa/
+12,district,2015-2016,single,,2025,2026,
+12,district,District 1 AAA South,AAA,,1974,2012,/district-1-aaa-south/
+12,district,District 12 AAA,AAA,,2009,2010,/district-12-aaa/
+12,district,District 12,single,,1959,1973,/district-12/
+12,sub-regional,District 2-12 AA Sub-Regional,AA,,1995,1996,/district-2-12-aa-subregion/
+12,regional,North East AA Regional,AA,NE,1974,2026,/region-north-east-aa/
+12,regional,South East AA Regional,AA,SE,1974,2026,/region-south-east-aa/
+12,regional,North East AAA Regional,AAA,NE,1974,2026,/region-north-east-aaa/
+12,regional,South East AAA Regional,AAA,SE,1974,2026,/region-south-east-aaa/
+12,regional,North East Regional,single,NE,1951,1973,/region-north-east/
+12,super-regional,East AA Super Regional,AA,E,2021,2021,/super-region-east-aa/
+12,super-regional,East AAA Super Regional,AAA,E,2021,2021,/super-region-east-aaa/
+12,state,PIAA Class AA Wrestling Championships,AA,,1974,2026,/piaa-class-aa/
+12,state,PIAA Class AAA Wrestling Championships,AAA,,1974,2026,/piaa-class-aaa/
