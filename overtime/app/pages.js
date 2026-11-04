@@ -38,10 +38,13 @@
     const head = `<header class="uh2">${crumbBar(crumbs)}<h1>${esc(u.name)}</h1>${opts.sub ? `<div class="sub">${opts.sub}</div>` : ''}${summary(u)}</header>`;
     const rk = opts.rankings();
     const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
-    const map = u.kind === 'school' ? '' : OT.ratingMap(u);
-    const parts = [head, map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` : '', rankSec, section('All-time team', teamsBlock(u)), section('Seasons', seasonsDrawer(u))];
-    if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u));
-    if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u)));
+    const v = state.view || 'map';
+    const parts = [head];
+    if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
+    else if (v === 'rank') parts.push(rankSec);
+    else if (v === 'time') parts.push(`<section class="sec tlsec"><div class="sech"><h2>Timeline</h2></div>${OT.timelineView(u)}</section>`);
+    else if (v === 'team') parts.push(`<section class="sec atsec"><div class="sech"><h2>All-time team</h2></div>${OT.teamGrid(u)}</section>`);
+    else { parts.push(section('Seasons', seasonsDrawer(u))); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
     return parts.join('');
   }
   const childToggle = (id, kinds, cur) => `<div class="seg sm" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
@@ -92,7 +95,7 @@
     const movers = OT.districtMovers(+id).filter((m) => m.span !== win && m.n < 0.85 * m.total).slice(0, 4);
     const moveNote = movers.length ? ` · part of the window: ${movers.map((m) => `<a href="#school/${OT.slug(m.sch)}">${esc(m.sch)}</a> ${m.span}`).join(', ')}` : '';
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}${moveNote}${!one || movers.length ? ' · <span class="note1">membership as of each season</span>' : ''}`,
-      rankings: () => unitRank('school', { kind: 'district', id: +id }, 'district') }) + (missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '');
+      rankings: () => unitRank('school', { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
   };
   /* School tab root: the schools of the district you were looking at (or pick one) */
   function schoolIndex() {

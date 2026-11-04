@@ -37,13 +37,19 @@
   const winText = () => state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? OT.windowLabel() : 'Last ' + state.win.mode;
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
   let pop = '';
+  /* View: what the page body shows for the current selection; remembered for the session */
+  const VIEWS = [['map', 'Map', 'The picture and its list'], ['rank', 'Rankings', 'Standings for this selection'], ['time', 'Timeline', 'Every team, season by season'], ['team', 'All-time team', 'The best at each weight, as deep as you like'], ['seasons', 'Seasons', 'Results season by season']];
+  try { const v = sessionStorage.getItem('ot-view'); if (VIEWS.some(([k]) => k === v)) state.view = v; } catch (e) { /* none */ }
+  if (!state.view) state.view = 'map';
+  const viewName = () => (state.view === 'team' ? 'Team' : (VIEWS.find(([k]) => k === state.view) || VIEWS[0])[1]);
+  const paText = () => (state.cls === 'ALL' ? 'All' : state.cls) + (state.f.weights.length ? ' · ' + wtText() : '');
   function drawBar() {
     const f = F();
-    const cell = (k, name, val, on) => `<button class="fb${on ? ' on' : ''}" type="button" data-fb="${k}" aria-label="${name}: ${esc(val)}"${['state', 'wrestlers'].includes(k) ? '' : ` aria-haspopup="dialog" aria-expanded="${pop === k}"`}>${navIcon(k)}<span class="fbv">${esc(val)}</span></button>`;
-    const rv = f.r ? (f.d ? f.r + ' · D' + f.d : f.r) : f.d ? 'D' + f.d : 'All';
-    const wv = f.w ? (f.who ? f.who.split(' ').slice(-1)[0] : 'List') : '—';
+    const cell = (k, name, val, on, icon) => `<button class="fb${on ? ' on' : ''}" type="button" data-fb="${k}" aria-label="${name}: ${esc(val)}"${k === 'wrestlers' ? '' : ` aria-haspopup="dialog" aria-expanded="${pop === k}"`}>${icon || navIcon(k)}<span class="fbv">${esc(val)}</span></button>`;
+    const wv = f.w ? (f.who ? f.who.split(' ').slice(-1)[0] : 'List') : 'All';
     const time = `<button class="fb ft${state.win.mode !== 'all' ? ' on' : ''}" type="button" data-fb="time" aria-label="Time: ${esc(winText())}" aria-haspopup="dialog" aria-expanded="${pop === 'time'}"><span class="ftc">${OT.stopwatch(30)}</span><span class="fbv">${esc(winText())}</span></button>`;
-    fbar.innerHTML = `<div class="fbi">${cell('state', 'State', 'PA', false)}${cell('division', 'Division', state.cls === 'ALL' ? 'All' : state.cls, state.cls !== 'AAA')}${cell('region', 'Region', rv, !!(f.r || f.d))}${time}${cell('school', 'School', f.s || 'All', !!f.s)}${cell('weights', 'Weights', wtText(), state.f.weights.length > 0)}${cell('wrestlers', 'Wrestlers', wv, f.w)}</div>`;
+    const paOn = state.cls !== 'AAA' || state.f.weights.length > 0;
+    fbar.innerHTML = `<div class="fbi">${cell('pa', 'Pennsylvania', paText(), paOn, navIcon('state', paOn))}${cell('region', 'Region', f.r || 'All', !!f.r, navIcon('region', f.r))}${cell('district', 'District', f.d ? 'D' + f.d : 'All', !!f.d, navIcon('district', f.d))}${time}${cell('school', 'School', f.s || 'All', !!f.s)}${cell('wrestlers', 'Wrestlers', wv, f.w)}${cell('view', 'View', viewName(), false, navIcon('v_' + state.view))}</div>`;
   }
   /* the popups: one at a time, a sheet above the bar on a phone, a panel anchored to its button on a desktop */
   let SCH = null; const schools = () => SCH || (SCH = OT.UD.schools.map((n) => { const u = OT.U.school(n); return { n, d: u.d || 0, r: u.region || '', q: n.toLowerCase() }; }).sort((a, b) => a.n.localeCompare(b.n)));
@@ -51,15 +57,21 @@
   const schoolItems = (f, qq) => { const t = (qq || '').trim().toLowerCase(); const all = schoolScope(f).filter((x) => !t || x.q.includes(t)); const L = all.slice(0, 80);
     return (L.length ? L.map((x) => `<a class="fpo${x.n === f.s ? ' on' : ''}" href="${hrefOf({ ...f, s: x.n })}"><span>${esc(x.n)}</span><small>${x.d ? 'D' + x.d : ''}</small></a>`).join('') : '<div class="fpn">No school by that name here.</div>') + (all.length > 80 ? `<div class="fpn">${all.length - 80} more: type to narrow.</div>` : ''); };
   const POP = {
-    division: () => `<div class="fph"><b>Division</b></div><div class="seg" role="group" aria-label="Division">${[['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'All']].map(([k, l]) => `<button type="button" data-fdiv="${k}" aria-pressed="${state.cls === k}">${l}</button>`).join('')}</div><div class="fpn">Before the split into two classes, every season counts under both.</div>`,
+    pa: () => { const f = F();
+      return `<div class="fph"><b>Pennsylvania</b>${f.r || f.d || f.s ? `<a class="fpx" href="${hrefOf({ w: f.w && !f.who })}">Statewide</a>` : ''}</div>
+      <div class="fpk">Division</div><div class="seg" role="group" aria-label="Division">${[['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'All']].map(([k, l]) => `<button type="button" data-fdiv="${k}" aria-pressed="${state.cls === k}">${l}</button>`).join('')}</div>
+      <div class="fpk fpkw"><span>Weights</span>${state.f.weights.length ? '<button class="fpx" type="button" data-fwclear>Clear</button>' : ''}</div><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${state.f.weights.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${state.f.weights.includes(x.k)}">${x.label}</button>`).join('')}</div>
+      <div class="fpn">Before the split into two classes, every season counts under both. Weights narrow the wrestler lists, all-time teams and a school's timeline; ratings, scores and maps count every weight.</div>`; },
     region: () => { const f = F();
-      const regs = OT.FIVE.map((g) => `<a class="fpo${f.r === g ? ' on' : ''}" data-keep href="${hrefOf({ w: f.w, r: g })}"><span>${esc(OT.REGIONS[g])}</span><small>${g}</small></a>`).join('');
-      let ds = ''; if (f.r) { const mem = OT.regionMembers(f.r), win = OT.windowLabel();
-        ds = `<div class="fpk">Districts in the ${esc(OT.REGIONS[f.r])} Region</div><div class="fpg">${mem.map((m) => `<a class="fpc${f.d === m.d ? ' on' : ''}" href="${hrefOf({ w: f.w, r: f.r, d: m.d })}" title="${esc(OT.DISTRICTS[m.d] || '')}">D${m.d}${m.span === win ? '' : `<small>${esc(m.span)}</small>`}</a>`).join('')}</div>${mem.some((m) => m.span !== win) ? '<div class="fpn">Membership as of each season.</div>' : ''}`; }
-      return `<div class="fph"><b>Region</b>${f.r || f.d ? `<a class="fpx" href="${hrefOf({ w: f.w })}">Statewide</a>` : ''}</div><div class="fpl">${regs}</div>${ds}`; },
+      const regs = OT.FIVE.map((g) => `<a class="fpo${f.r === g ? ' on' : ''}" href="${hrefOf({ w: f.w && !f.who, r: g })}"><span>${esc(OT.REGIONS[g])}</span><small>${g}</small></a>`).join('');
+      return `<div class="fph"><b>Region</b>${f.r ? `<a class="fpx" href="${hrefOf({ w: f.w && !f.who })}">All regions</a>` : ''}</div><div class="fpl">${regs}</div>`; },
+    district: () => { const f = F(); const win = OT.windowLabel();
+      const mem = f.r ? OT.regionMembers(f.r) : d3.range(1, 13).map((d) => ({ d, span: win }));
+      const item = (m) => `<a class="fpo${f.d === m.d ? ' on' : ''}" href="${hrefOf({ w: f.w && !f.who, r: f.r && m.span === win ? f.r : regionOfD(m.d), d: m.d })}"><span>District ${m.d}<i class="fpd">${esc(OT.DISTRICTS[m.d] || '')}</i></span><small>${m.span === win ? (f.r ? '' : regionOfD(m.d)) : esc(m.span)}</small></a>`;
+      return `<div class="fph"><b>District</b><span class="muted">${f.r ? esc(OT.REGIONS[f.r]) + ' Region' : 'Pennsylvania'}</span>${f.d ? `<a class="fpx" href="${hrefOf({ w: f.w && !f.who, r: f.r })}">All districts</a>` : ''}</div><div class="fpl">${mem.map(item).join('')}</div>${mem.some((m) => m.span !== win) ? '<div class="fpn">Membership as of each season.</div>' : ''}`; },
     school: () => { const f = F(); const where = f.d ? 'District ' + f.d : f.r ? OT.REGIONS[f.r] + ' Region' : 'Pennsylvania';
       return `<div class="fph"><b>School</b><span class="muted">${esc(where)}</span>${f.s ? `<a class="fpx" href="${hrefOf({ ...f, s: '' })}">All schools</a>` : ''}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
-    weights: () => `<div class="fph"><b>Weights</b>${state.f.weights.length ? '<button class="fpx" type="button" data-fwclear>Clear</button>' : ''}</div><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${state.f.weights.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${state.f.weights.includes(x.k)}">${x.label}</button>`).join('')}</div><div class="fpn">Weights narrow the wrestler lists and all-time teams. Ratings, scores and maps still count every weight.</div>`,
+    view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${l}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
     time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season.</div>`,
     menu: () => `<nav class="fpm" aria-label="More"><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
@@ -97,8 +109,8 @@
     const f = F(); state.ctxDistrict = f.d;
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); }
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
+    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); }
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -177,7 +189,6 @@
   document.addEventListener('click', (e) => {
     /* filter bar and its popups */
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
-      if (k === 'state') { closePop(); location.hash = hrefOf({ w: f.w && !f.who }); return; }
       if (k === 'wrestlers') { closePop(); location.hash = hrefOf({ ...f, w: !f.w || !!f.who }); return; }
       if (pop === k) closePop(); else openPop(k); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
@@ -186,10 +197,16 @@
       const dv = e.target.closest('button[data-fdiv]'); if (dv) { if (dv.dataset.fdiv !== state.cls) { setCls(dv.dataset.fdiv); SCH = null; changed(); } closePop(); return; }
       const fw = e.target.closest('button[data-fw]'); if (fw) { OT.toggleFilter('weights', fw.dataset.fw); changed(); return; }
       if (e.target.closest('[data-fwclear]')) { OT.clearFilters('weights'); changed(); return; }
+      const vw = e.target.closest('button[data-view]'); if (vw) { state.view = vw.dataset.view; try { sessionStorage.setItem('ot-view', state.view); } catch (er) { /* none */ } closePop(); const f = F(); if (f.w) location.hash = hrefOf({ ...f, w: false }); else { lastBase = ''; render(); } return; }
       const tw = e.target.closest('button[data-tw]'); if (tw) { if (tw.dataset.tw !== state.win.mode) { setWin({ mode: tw.dataset.tw }); changed(); } return; }
       const ty = e.target.closest('button[data-ty]'); if (ty) { const scr = ty.closest('.tscr'); const y = +ty.dataset.ty; const one = state.win.mode === 'custom' && state.win.from === y && state.win.to === y; setRange(one ? +scr.dataset.y0 : y, one ? +scr.dataset.y1 : y, +scr.dataset.y0, +scr.dataset.y1); return; }
       const a = e.target.closest('a[href]'); if (a && !a.hasAttribute('data-keep')) { closePop(); return; }
     }
+    const tu = e.target.closest('button[data-tlunit]'); if (tu) { state.tlunit = tu.dataset.tlunit; state.tln = 50; render(true); return; }
+    if (e.target.closest('button[data-tlgroup]')) { state.tlgroup = !state.tlgroup; render(true); return; }
+    if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
+    const af = e.target.closest('button[data-attflip]'); if (af) { state.attFlip = af.dataset.attflip === '1'; render(true); return; }
+    if (e.target.closest('button[data-attmore]')) { const y = window.scrollY; state.attN = (state.attN || 3) + 3; render(true); window.scrollTo(0, y); const x = main.querySelector('.atx'); if (x && !state.attFlip) x.scrollLeft = x.scrollWidth; return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
