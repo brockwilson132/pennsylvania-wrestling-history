@@ -24,23 +24,68 @@
     return section('Team duals', `<div class="card tw"><div class="k" style="margin-bottom:8px">${by.length} appearances · ${tw}–${tl}${titles ? ' · ' + titles + ' title' + (titles > 1 ? 's' : '') : ''}</div><table class="dt"><thead><tr><th>Year</th><th>Class</th><th>Record</th><th>Finish</th><th>Matches</th></tr></thead><tbody>${rows}</tbody></table></div>${src}`);
   }
   /* the one level page: name, rating and score inline → performance chart → rankings → all-time team → seasons */
-  const crumbBar = (crumbs) => crumbs.length > 1 ? `<div class="crumb">${crumbs.slice(0, -1).map((c) => `<a href="${c.href}">${esc(c.name)}</a>`).join('<span>›</span>')}</div>` : '';
+  /* the page's numbers: four tiles under the title. Region and district: Strength, Talent, Score, Titles; tapping one
+     sets what the list under the map shows. Each bar is its percentile among every unit of the same kind statewide in
+     this window and class (the line under it says the rank). Strength takes the map colours, Talent the same cold → hot
+     ramp, Score and Titles (placements) gold. School: the same four, not tappable (its list is wrestlers). State: one
+     metric tile (pick Strength, Talent, Score or Titles: this window against the all-time value, which sits at 4/5 of
+     the bar like the average state bracket on the difficulty bars) and Regions, Districts, Schools: the list level,
+     each showing its leader in the picked metric. */
+  const GOLD = '#D9A441';
+  const METRICS = [['rating', 'Strength'], ['talent', 'Talent'], ['score', 'Score'], ['ti', 'Titles']];
+  const mval = (m) => (x) => (x && x[m]) || 0;
+  const mtxt = (m, v, kind) => (!v ? '–' : m === 'rating' ? OT.r10(v) : m === 'talent' ? OT.talTxt(v, kind) : m === 'score' ? OT.sfmt(v) : fmt(v));
+  const MTIP = { rating: (k) => OT.unitRtgTip(k), talent: (k) => `Talent: ${OT.talWhat()}${k === 'school' ? '' : ' per school'} per season`, score: (k) => (k === 'school' ? 'Score: placement points per season' : 'Score: placement points per school per season'), ti: () => 'Titles: individual state champions' };
+  const bar = (frac, color, tick) => `<span class="mtb" aria-hidden="true"><em style="width:${(100 * Math.max(0.03, Math.min(1, frac || 0))).toFixed(1)}%;background:${color}"></em>${tick != null ? `<u style="left:${(100 * tick).toFixed(1)}%"></u>` : ''}</span>`;
+  const tileHtml = (o) => { const inner = `<i>${o.label}</i><b>${o.val}</b>${o.sub ? `<s>${o.sub}</s>` : ''}${bar(o.frac, o.color, o.tick)}<small>${o.cap}</small>`;
+    return o.select ? `<label class="mtile on pick"${o.tip ? ` title="${esc(o.tip)}"` : ''}>${inner}<select data-sortsel="mmetric" aria-label="Metric">${METRICS.map(([k, l]) => `<option value="${k}"${k === o.m ? ' selected' : ''}>${l}</option>`).join('')}</select></label>`
+      : o.btn ? `<button type="button" class="mtile${o.on ? ' on' : ''}" ${o.btn} aria-pressed="${!!o.on}"${o.tip ? ` title="${esc(o.tip)}"` : ''}>${inner}</button>` : `<div class="mtile"${o.tip ? ` title="${esc(o.tip)}"` : ''}>${inner}</div>`; };
+  const curMetric = () => (METRICS.some(([k]) => k === state.mmetric) ? state.mmetric : 'rating');
+  const metricColor = (m, kind, v, pct) => (m === 'rating' ? OT.ratingColor(kind, v) || '#2F3640' : m === 'talent' ? OT.colorAt(pct) : GOLD);
   function summary(u) {
     const a = OT.unitAgg(u); if (!a) return '';
-    const it = [];
-    if (a.rating && u.kind !== 'state') it.push([OT.r10(a.rating), 'Strength', OT.unitRtgTip(u.kind) + `, averaged over ${a.nS} season${a.nS === 1 ? '' : 's'} in the window`]);
-    if (a.talent && u.kind !== 'state') it.push([OT.talTxt(a.talent, u.kind), 'Talent', `${OT.talWhat()}${u.kind === 'school' ? '' : ' per school'} per season (each wrestler counts his chance of medalling at states at his season rating), averaged over ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`]);
-    if (a.nS && u.kind !== 'state') it.push([a.nS, 'Seasons', 'seasons in the window with the full district field on file, which Strength and Talent average over']);
-    if (a.score && u.kind !== 'state') it.push([OT.sfmt(a.score), 'Score', u.kind === 'school' ? 'placement points per season, weighted for this page' : 'placement points per school per season, weighted for this page']);
-    return `<div class="usum">${it.map(([v, l, t]) => `<span${t ? ` title="${esc(t)}"` : ''}><b>${v}</b><i>${l}</i></span>`).join('')}</div>`;
+    if (u.kind === 'state') return stateTiles(a);
+    const L = OT.aggregateCore(u.kind, null, u.kind), id = a.k, cur = curMetric(), tap = u.kind !== 'school';
+    const out = METRICS.map(([m, label]) => { const f = mval(m), v = f(a), n = L.length, rank = 1 + L.filter((x) => f(x) > v).length;
+      const pct = n > 1 ? (n - rank) / (n - 1) : 1;
+      return tileHtml({ label, val: mtxt(m, v, u.kind), frac: v ? pct : 0, color: metricColor(m, u.kind, v, pct), cap: v ? `${ordinal(rank)} of ${fmt(n)}` : 'none', on: tap && m === cur, btn: tap ? `data-mmetric="${m}"` : '',
+        tip: MTIP[m](u.kind) + ` · ${ordinal(rank)} of ${fmt(n)} ${plural[u.kind]} statewide; the bar is its percentile` }); });
+    return `<div class="mtiles">${out.join('')}</div>`;
+  }
+  const plural = { school: 'schools', district: 'districts', region: 'regions' };
+  /* the state's own value of a metric in the current window: Strength and Talent average the regions' seasons, Score is
+     state points per school per season, Titles the champions crowned */
+  function stateVal(m) {
+    if (m === 'ti') return OT.aggregateCore('school', null, 'state').reduce((t, x) => t + x.ti, 0);
+    if (m === 'score') return OT.unitAgg(U.state()).score;
+    const L = OT.aggregateCore('region', null, 'state'), key = m === 'talent' ? 'tseries' : 'series', ys = new Map();
+    L.forEach((x) => x[key].forEach(([y, v]) => { const z = ys.get(y) || [0, 0]; z[0] += v; z[1]++; ys.set(y, z); }));
+    const A = Array.from(ys.values()); return A.length ? A.reduce((t, z) => t + z[0] / z[1], 0) / A.length : 0;
+  }
+  const allTime = (f) => { const keep = state.win; state.win = { mode: 'all', from: null, to: null }; try { return f(); } finally { state.win = keep; } };
+  function stateTiles() {
+    const m = curMetric(), label = METRICS.find(([k]) => k === m)[1], v = stateVal(m), all = allTime(() => stateVal(m));
+    const frac = m === 'rating' ? OT.domFrac('region', v) : m === 'ti' ? v / (all || 1) : 0.8 * v / (all || 1);
+    const tick = m === 'rating' ? (all ? OT.domFrac('region', all) : null) : m === 'ti' ? null : 0.8;
+    const lvl = ['region', 'district', 'school'].includes(state.mlevel) ? state.mlevel : OT.mapMode() === 'districts' ? 'district' : 'region';
+    const out = [tileHtml({ select: true, m, label: label + ' ▾', val: mtxt(m, v, 'state'), frac, tick, color: m === 'rating' ? OT.ratingColor('region', v) || '#2F3640' : m === 'talent' ? OT.colorAt(frac) : GOLD,
+      cap: m === 'ti' ? `of ${fmt(all)} all-time` : `All-time ${mtxt(m, all, 'state')}`, tip: MTIP[m]('region') + ' · statewide, this window against all-time' })];
+    [['region', 'Regions'], ['district', 'Districts'], ['school', 'Schools']].forEach(([k, l]) => {
+      const L = OT.aggregateCore(k, null, 'state').filter((x) => (k !== 'district' || (x.k >= 1 && x.k <= 12))), f = mval(m);
+      const top = L.slice().sort((p, q) => f(q) - f(p))[0], tv = top ? f(top) : 0, mx = tv || 1;
+      const nm = top ? (k === 'district' ? 'District ' + top.k : top.name) : '';
+      out.push(tileHtml({ label: l, val: mtxt(m, tv, k), sub: esc(nm), frac: m === 'rating' ? OT.domFrac(k, tv) : tv / mx, color: m === 'rating' ? OT.ratingColor(k, tv) || '#2F3640' : m === 'talent' ? OT.colorAt(1) : GOLD,
+        cap: `Top of ${fmt(L.length)}`, on: k === lvl, btn: `data-mlevel="${k}"`, tip: `List the ${l.toLowerCase()} by ${label}; the tile shows the top one` }));
+    });
+    return `<div class="mtiles st">${out.join('')}</div>`;
   }
   function levelPage(u, opts = {}) {
     state.lvl = 'state';
-    const crumbs = (opts.crumbs || []).concat([{ name: '' }]);
-    const head = `<header class="uh2">${crumbBar(crumbs)}<h1>${esc(u.name)}</h1>${opts.sub ? `<div class="sub">${opts.sub}</div>` : ''}${summary(u)}</header>`;
+    const v = state.view || 'map';
+    /* header: the title, then the four metric tiles */
+    const head = `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1></div>${summary(u)}</header>`;
     const rk = opts.rankings();
     const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
-    const v = state.view || 'map';
     const parts = [head];
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
@@ -68,7 +113,7 @@
   const PAGES = {};
   PAGES.state = () => {
     const u = U.state(); const kind = ['school', 'district', 'region'].includes(state.child) ? state.child : 'school';
-    return levelPage(u, { sub: 'PIAA individual championships', rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
+    return levelPage(u, { rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
   };
   PAGES.region = (id) => {
     if (!id) { const r = OT.unitRankings('region', null, 'state'); return `<header class="uh2"><h1>Regions</h1><div class="sub">The qualifying tournaments between districts and Hershey${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }
