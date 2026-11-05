@@ -1,0 +1,523 @@
+level,tournament,year,cls,unit,place,points,school,abbr
+league,1968_East_Penn_League_single,1968,single,East_Penn_League,1,3.0,Allentown Dieruff,DRF
+league,1968_East_Penn_League_single,1968,single,East_Penn_League,1,3.0,Easton,EAS
+league,1968_East_Penn_League_single,1968,single,East_Penn_League,3,0.0,Allentown Allen,ALL
+league,1968_East_Penn_League_single,1968,single,East_Penn_League,3,0.0,Bethlehem Freedom,BFR
+league,1968_East_Penn_League_single,1968,single,East_Penn_League,3,0.0,Bethlehem Liberty,BLIB
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,1,13.0,Nazareth,NAZ
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,1,13.0,Wilson Area,WLA
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,3,8.0,Hellertown Lower Saucon,HTLS
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Bangor,BNG
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,East Stroudsburg,ESDB
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Northwestern Lehigh,NWL
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Palisades,PLS
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Parkland,PRK
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Pen Argyl,PAR
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Pocono Mountain,PNMT
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Salisbury Township,SBT
+league,1968_Lehigh_Northampton_League_single,1968,single,Lehigh_Northampton_League,4,0.0,Southern Lehigh,SOLE
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,1,65.0,Northampton,NHA
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,2,63.0,Stroudsburg,SDB
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,3,39.0,Slatington,SLAT
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,4,30.0,Lehighton,LHT
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,5,27.0,Catasauqua,CAT
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,6,21.0,Emmaus,EMM
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,7,18.0,Whitehall,WHL
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,8,0.0,Palmerton,PLMT
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,1,10.0,Easton,EAS
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,2,8.0,Bethlehem Freedom,BFR
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,3,5.0,Allentown Allen,ALL
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,4,4.0,Allentown Dieruff,DRF
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,5,2.0,Bethlehem Liberty,BLIB
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,1,19.0,Hellertown Lower Saucon,HTLS
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,2,10.0,Wilson Area,WLA
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,3,8.0,Pen Argyl,PAR
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,4,6.0,Nazareth,NAZ
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,5,3.0,Northwestern Lehigh,NWL
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,5,3.0,Palisades,PLS
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,5,3.0,Parkland,PRK
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,5,3.0,Salisbury Township,SBT
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,9,2.0,Pocono Mountain,PNMT
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,10,1.0,Bangor,BNG
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,10,1.0,East Stroudsburg,ESDB
+league,1970_Lehigh_Northampton_League_single,1970,single,Lehigh_Northampton_League,10,1.0,Southern Lehigh,SOLE
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,1,19.0,North Schuylkill,NSC
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,2,10.0,Blue Mountain,BM
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,3,9.0,Pottsville,PTV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,4,7.0,Schuylkill Haven,SCHV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,4,7.0,Tri-Valley,TV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,6,6.0,Shenandoah Valley,SNDV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,7,4.0,Jim Thorpe,JTR
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,7,4.0,Mahanoy,MAH
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,7,4.0,Panther Valley,PAV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,7,4.0,West Hazleton,WTHZ
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,11,3.0,Hazleton Area,HAZ
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,12,2.0,Minersville,MNSV
+league,1970_TriCounty_League_single,1970,single,TriCounty_League,13,1.0,Tamaqua,TMQ
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,1,65.0,Northampton,NHA
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,2,59.0,Emmaus,EMM
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,2,59.0,Lehighton,LHT
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,4,40.0,Catasauqua,CAT
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,5,14.0,Stroudsburg,SDB
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,6,9.0,Whitehall,WHL
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,7,8.0,Slatington,SLAT
+league,1971_Lehigh_Valley_League_single,1971,single,Lehigh_Valley_League,8,1.0,Palmerton,PLMT
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,1,113.0,Saucon Valley,SAV
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,2,72.0,Nazareth,NAZ
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,3,55.5,Wilson Area,WLA
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,4,43.5,Pen Argyl,PAR
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,5,28.0,Parkland,PRK
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,6,22.0,Salisbury Township,SBT
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,7,18.0,Southern Lehigh,SOLE
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,8,17.5,Pocono Mountain,PNMT
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,9,16.0,East Stroudsburg,ESDB
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,10,12.0,Palisades,PLS
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,11,1.0,Jim Thorpe,JTR
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,11,1.0,Northwestern Lehigh,NWL
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,13,0.0,Bangor,BNG
+league,2013_Central_League_single,2013,single,Central_League,1,197.0,Garnet Valley,GAV
+league,2013_Central_League_single,2013,single,Central_League,2,175.5,Upper Darby,UDA
+league,2013_Central_League_single,2013,single,Central_League,3,136.5,Penncrest,PC
+league,2013_Central_League_single,2013,single,Central_League,4,110.0,Ridley,RID
+league,2013_Central_League_single,2013,single,Central_League,5,102.0,Haverford High,HAV
+league,2013_Central_League_single,2013,single,Central_League,5,102.0,Lower Merion,LME
+league,2013_Central_League_single,2013,single,Central_League,7,100.0,Conestoga,CNST
+league,2013_Central_League_single,2013,single,Central_League,8,91.0,Radnor,RAD
+league,2013_Central_League_single,2013,single,Central_League,9,83.0,Springfield Delco,SFD
+league,2013_Central_League_single,2013,single,Central_League,10,82.0,Marple Newtown,MN
+league,2013_Central_League_single,2013,single,Central_League,11,65.0,Strath Haven,SH
+league,2013_Central_League_single,2013,single,Central_League,12,26.0,Harriton,HAR
+league,2013_ChesMont_single,2013,single,ChesMont,1,210.0,Downingtown East,DE
+league,2013_ChesMont_single,2013,single,ChesMont,2,161.0,Downingtown West,DW
+league,2013_ChesMont_single,2013,single,ChesMont,3,130.5,Coatesville,CTV
+league,2013_ChesMont_single,2013,single,ChesMont,4,126.0,West Chester Henderson,WCH
+league,2013_ChesMont_single,2013,single,ChesMont,5,90.0,Unionville,UNV
+league,2013_ChesMont_single,2013,single,ChesMont,6,82.5,West Chester East,WCE
+league,2013_ChesMont_single,2013,single,ChesMont,7,79.0,Great Valley,GRTV
+league,2013_ChesMont_single,2013,single,ChesMont,8,73.0,Avon Grove,AGR
+league,2013_ChesMont_single,2013,single,ChesMont,9,55.0,Kennett,KNT
+league,2013_ChesMont_single,2013,single,ChesMont,10,53.0,West Chester Rustin,WCR
+league,2013_ChesMont_single,2013,single,ChesMont,11,43.0,Sun Valley,SUV
+league,2013_ChesMont_single,2013,single,ChesMont,12,39.5,Octorara,OCT
+league,2013_ChesMont_single,2013,single,ChesMont,13,33.0,Oxford Area,OX
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,1,206.0,Boyertown,BT
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,2,196.0,Owen J. Roberts,OJR
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,3,187.0,Spring-Ford,SF
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,4,177.5,Upper Perkiomen,UPE
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,5,109.0,Methacton,MTH
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,6,100.0,Pottstown,PTN
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,7,82.0,Perkiomen Valley,PKV
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,8,73.5,Pottsgrove,PG
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,9,49.5,Phoenixville,PHX
+league,2013_Pioneer_Athletic_Conference_single,2013,single,Pioneer_Athletic_Conference,10,22.0,Pope John Paul II,PJP
+league,2014_Central_League_single,2014,single,Central_League,1,225.5,Garnet Valley,GAV
+league,2014_Central_League_single,2014,single,Central_League,2,193.5,Penncrest,PC
+league,2014_Central_League_single,2014,single,Central_League,3,122.5,Upper Darby,UDA
+league,2014_Central_League_single,2014,single,Central_League,4,118.0,Conestoga,CNST
+league,2014_Central_League_single,2014,single,Central_League,4,118.0,Springfield Delco,SFD
+league,2014_Central_League_single,2014,single,Central_League,6,99.0,Radnor,RAD
+league,2014_Central_League_single,2014,single,Central_League,7,98.0,Ridley,RID
+league,2014_Central_League_single,2014,single,Central_League,8,93.0,Haverford High,HAV
+league,2014_Central_League_single,2014,single,Central_League,9,89.0,Strath Haven,SH
+league,2014_Central_League_single,2014,single,Central_League,10,61.5,Marple Newtown,MN
+league,2014_Central_League_single,2014,single,Central_League,11,29.0,Lower Merion,LME
+league,2014_Central_League_single,2014,single,Central_League,12,24.0,Harriton,HAR
+league,2014_ChesMont_single,2014,single,ChesMont,1,233.0,Downingtown East,DE
+league,2014_ChesMont_single,2014,single,ChesMont,2,156.5,Coatesville,CTV
+league,2014_ChesMont_single,2014,single,ChesMont,3,116.0,West Chester Henderson,WCH
+league,2014_ChesMont_single,2014,single,ChesMont,4,106.0,Avon Grove,AGR
+league,2014_ChesMont_single,2014,single,ChesMont,5,105.0,Downingtown West,DW
+league,2014_ChesMont_single,2014,single,ChesMont,6,98.0,Unionville,UNV
+league,2014_ChesMont_single,2014,single,ChesMont,7,89.0,West Chester Rustin,WCR
+league,2014_ChesMont_single,2014,single,ChesMont,8,74.0,Great Valley,GRTV
+league,2014_ChesMont_single,2014,single,ChesMont,9,64.5,Sun Valley,SUV
+league,2014_ChesMont_single,2014,single,ChesMont,10,45.0,West Chester East,WCE
+league,2014_ChesMont_single,2014,single,ChesMont,11,42.5,Octorara,OCT
+league,2014_ChesMont_single,2014,single,ChesMont,12,41.0,Kennett,KNT
+league,2014_ChesMont_single,2014,single,ChesMont,13,28.0,Oxford Area,OX
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,1,259.5,Boyertown,BT
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,2,210.5,Spring-Ford,SF
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,3,141.5,Methacton,MTH
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,4,129.5,Owen J. Roberts,OJR
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,5,116.0,Pottstown,PTN
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,6,111.0,Upper Perkiomen,UPE
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,7,107.0,Perkiomen Valley,PKV
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,8,87.0,Pottsgrove,PG
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,9,57.0,Phoenixville,PHX
+league,2014_Pioneer_Athletic_Conference_single,2014,single,Pioneer_Athletic_Conference,10,20.0,Pope John Paul II,PJP
+league,2014_SOL_American_single,2014,single,SOL_American,1,220.5,Plymouth Whitemarsh,PWM
+league,2014_SOL_American_single,2014,single,SOL_American,2,202.0,Norristown,NT
+league,2014_SOL_American_single,2014,single,SOL_American,3,159.0,Upper Moreland,UMO
+league,2014_SOL_American_single,2014,single,SOL_American,4,133.0,Upper Dublin,UDU
+league,2014_SOL_American_single,2014,single,SOL_American,5,126.0,Wissahickon,WIS
+league,2014_SOL_American_single,2014,single,SOL_American,6,110.0,Cheltenham,CHE
+league,2014_SOL_American_single,2014,single,SOL_American,7,76.0,Springfield Township,SFT
+league,2014_SOL_American_single,2014,single,SOL_American,8,46.0,Upper Merion,UME
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,1,177.5,Pennridge,PRG
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,2,125.0,Quakertown,QT
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,3,122.5,North Penn,NP
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,4,114.0,Hatboro-Horsham,HH
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,5,110.5,Central Bucks East,CBE
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,6,72.5,Central Bucks West,CBW
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,7,67.0,Central Bucks South,CBS
+league,2014_SOL_Continental_single,2014,single,SOL_Continental,8,61.0,Souderton,SOU
+league,2014_SOL_National_single,2014,single,SOL_National,1,181.0,Council Rock South,CRS
+league,2014_SOL_National_single,2014,single,SOL_National,2,154.5,Council Rock North,CRN
+league,2014_SOL_National_single,2014,single,SOL_National,3,129.5,Neshaminy,NSH
+league,2014_SOL_National_single,2014,single,SOL_National,4,106.5,Pennsbury,PBY
+league,2014_SOL_National_single,2014,single,SOL_National,5,105.5,Harry S. Truman,HST
+league,2014_SOL_National_single,2014,single,SOL_National,6,79.0,Bensalem,BNS
+league,2014_SOL_National_single,2014,single,SOL_National,7,76.5,William Tennent,WT
+league,2014_SOL_National_single,2014,single,SOL_National,8,33.0,Abington,AB
+league,2015_Central_League_single,2015,single,Central_League,1,208.5,Upper Darby,UDA
+league,2015_Central_League_single,2015,single,Central_League,2,166.5,Conestoga,CNST
+league,2015_Central_League_single,2015,single,Central_League,3,154.0,Haverford High,HAV
+league,2015_Central_League_single,2015,single,Central_League,4,131.5,Garnet Valley,GAV
+league,2015_Central_League_single,2015,single,Central_League,5,104.0,Strath Haven,SH
+league,2015_Central_League_single,2015,single,Central_League,6,94.5,Ridley,RID
+league,2015_Central_League_single,2015,single,Central_League,7,86.5,Springfield Delco,SFD
+league,2015_Central_League_single,2015,single,Central_League,8,85.0,Marple Newtown,MN
+league,2015_Central_League_single,2015,single,Central_League,8,85.0,Penncrest,PC
+league,2015_Central_League_single,2015,single,Central_League,10,64.0,Radnor,RAD
+league,2015_Central_League_single,2015,single,Central_League,11,63.0,Lower Merion,LME
+league,2015_Central_League_single,2015,single,Central_League,12,15.0,Harriton,HAR
+league,2015_ChesMont_single,2015,single,ChesMont,1,206.5,Downingtown East,DE
+league,2015_ChesMont_single,2015,single,ChesMont,2,165.0,West Chester Rustin,WCR
+league,2015_ChesMont_single,2015,single,ChesMont,3,117.5,Coatesville,CTV
+league,2015_ChesMont_single,2015,single,ChesMont,4,110.0,West Chester Henderson,WCH
+league,2015_ChesMont_single,2015,single,ChesMont,5,103.0,Unionville,UNV
+league,2015_ChesMont_single,2015,single,ChesMont,6,101.0,Avon Grove,AGR
+league,2015_ChesMont_single,2015,single,ChesMont,7,84.0,Sun Valley,SUV
+league,2015_ChesMont_single,2015,single,ChesMont,8,77.0,West Chester East,WCE
+league,2015_ChesMont_single,2015,single,ChesMont,9,74.0,Downingtown West,DW
+league,2015_ChesMont_single,2015,single,ChesMont,10,71.0,Kennett,KNT
+league,2015_ChesMont_single,2015,single,ChesMont,11,63.0,Great Valley,GRTV
+league,2015_ChesMont_single,2015,single,ChesMont,12,33.0,Octorara,OCT
+league,2015_ChesMont_single,2015,single,ChesMont,13,13.0,Oxford Area,OX
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,1,259.0,Spring-Ford,SF
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,2,234.0,Boyertown,BT
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,3,200.0,Owen J. Roberts,OJR
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,4,141.5,Upper Perkiomen,UPE
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,5,116.0,Pottstown,PTN
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,6,70.5,Perkiomen Valley,PKV
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,7,65.5,Phoenixville,PHX
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,8,64.0,Pottsgrove,PG
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,9,62.0,Methacton,MTH
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,10,27.0,Pope John Paul II,PJP
+league,2015_SOL_American_single,2015,single,SOL_American,1,234.0,Plymouth Whitemarsh,PWM
+league,2015_SOL_American_single,2015,single,SOL_American,2,170.0,Upper Moreland,UMO
+league,2015_SOL_American_single,2015,single,SOL_American,3,150.0,Norristown,NT
+league,2015_SOL_American_single,2015,single,SOL_American,4,126.0,Upper Dublin,UDU
+league,2015_SOL_American_single,2015,single,SOL_American,5,117.0,Wissahickon,WIS
+league,2015_SOL_American_single,2015,single,SOL_American,6,109.5,Upper Merion,UME
+league,2015_SOL_American_single,2015,single,SOL_American,7,76.0,Cheltenham,CHE
+league,2015_SOL_American_single,2015,single,SOL_American,8,53.0,Springfield Township,SFT
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,1,198.5,Pennridge,PRG
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,2,156.0,Quakertown,QT
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,3,132.0,North Penn,NP
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,4,95.5,Central Bucks West,CBW
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,5,74.0,Hatboro-Horsham,HH
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,5,74.0,Souderton,SOU
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,7,69.0,Central Bucks East,CBE
+league,2015_SOL_Continental_single,2015,single,SOL_Continental,8,43.5,Central Bucks South,CBS
+league,2015_SOL_National_single,2015,single,SOL_National,1,194.5,Council Rock South,CRS
+league,2015_SOL_National_single,2015,single,SOL_National,2,136.0,Neshaminy,NSH
+league,2015_SOL_National_single,2015,single,SOL_National,2,136.0,Pennsbury,PBY
+league,2015_SOL_National_single,2015,single,SOL_National,4,135.0,Council Rock North,CRN
+league,2015_SOL_National_single,2015,single,SOL_National,5,93.5,Harry S. Truman,HST
+league,2015_SOL_National_single,2015,single,SOL_National,6,81.5,Abington,AB
+league,2015_SOL_National_single,2015,single,SOL_National,7,38.0,William Tennent,WT
+league,2015_SOL_National_single,2015,single,SOL_National,8,34.0,Bensalem,BNS
+league,2016_Central_League_single,2016,single,Central_League,1,210.5,Upper Darby,UDA
+league,2016_Central_League_single,2016,single,Central_League,2,205.5,Garnet Valley,GAV
+league,2016_Central_League_single,2016,single,Central_League,3,121.0,Strath Haven,SH
+league,2016_Central_League_single,2016,single,Central_League,4,117.5,Penncrest,PC
+league,2016_Central_League_single,2016,single,Central_League,5,114.0,Conestoga,CNST
+league,2016_Central_League_single,2016,single,Central_League,6,113.5,Haverford High,HAV
+league,2016_Central_League_single,2016,single,Central_League,7,111.0,Ridley,RID
+league,2016_Central_League_single,2016,single,Central_League,8,83.0,Lower Merion,LME
+league,2016_Central_League_single,2016,single,Central_League,9,77.0,Marple Newtown,MN
+league,2016_Central_League_single,2016,single,Central_League,10,70.0,Radnor,RAD
+league,2016_Central_League_single,2016,single,Central_League,11,64.0,Springfield Delco,SFD
+league,2016_Central_League_single,2016,single,Central_League,12,14.0,Harriton,HAR
+league,2016_ChesMont_single,2016,single,ChesMont,1,210.0,Downingtown East,DE
+league,2016_ChesMont_single,2016,single,ChesMont,2,181.5,Downingtown West,DW
+league,2016_ChesMont_single,2016,single,ChesMont,3,163.0,West Chester Rustin,WCR
+league,2016_ChesMont_single,2016,single,ChesMont,4,159.5,Coatesville,CTV
+league,2016_ChesMont_single,2016,single,ChesMont,4,159.5,Unionville,UNV
+league,2016_ChesMont_single,2016,single,ChesMont,6,122.5,West Chester East,WCE
+league,2016_ChesMont_single,2016,single,ChesMont,7,113.0,Avon Grove,AGR
+league,2016_ChesMont_single,2016,single,ChesMont,8,112.0,Oxford Area,OX
+league,2016_ChesMont_single,2016,single,ChesMont,9,87.0,West Chester Henderson,WCH
+league,2016_ChesMont_single,2016,single,ChesMont,10,80.0,Kennett,KNT
+league,2016_ChesMont_single,2016,single,ChesMont,11,64.0,Octorara,OCT
+league,2016_ChesMont_single,2016,single,ChesMont,12,30.0,Sun Valley,SUV
+league,2016_ChesMont_single,2016,single,ChesMont,13,20.0,Great Valley,GRTV
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,1,278.5,Boyertown,BT
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,2,178.5,Spring-Ford,SF
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,3,175.5,Owen J. Roberts,OJR
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,4,139.0,Pottstown,PTN
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,5,136.0,Methacton,MTH
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,6,121.5,Upper Perkiomen,UPE
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,7,67.0,Pottsgrove,PG
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,8,46.0,Perkiomen Valley,PKV
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,9,31.0,Phoenixville,PHX
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,10,18.0,Pope John Paul II,PJP
+league,2016_SOL_American_single,2016,single,SOL_American,1,215.0,Plymouth Whitemarsh,PWM
+league,2016_SOL_American_single,2016,single,SOL_American,2,209.0,Norristown,NT
+league,2016_SOL_American_single,2016,single,SOL_American,3,177.0,Upper Moreland,UMO
+league,2016_SOL_American_single,2016,single,SOL_American,4,141.0,Wissahickon,WIS
+league,2016_SOL_American_single,2016,single,SOL_American,5,116.5,Upper Dublin,UDU
+league,2016_SOL_American_single,2016,single,SOL_American,6,114.5,Cheltenham,CHE
+league,2016_SOL_American_single,2016,single,SOL_American,7,93.0,Upper Merion,UME
+league,2016_SOL_American_single,2016,single,SOL_American,8,67.0,Springfield Township,SFT
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,1,174.0,Pennridge,PRG
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,2,142.0,North Penn,NP
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,3,112.5,Quakertown,QT
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,4,92.0,Central Bucks East,CBE
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,5,87.0,Souderton,SOU
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,6,85.5,Hatboro-Horsham,HH
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,7,78.0,Central Bucks South,CBS
+league,2016_SOL_Continental_single,2016,single,SOL_Continental,8,35.5,Central Bucks West,CBW
+league,2016_SOL_National_single,2016,single,SOL_National,1,192.0,Council Rock South,CRS
+league,2016_SOL_National_single,2016,single,SOL_National,2,148.5,Council Rock North,CRN
+league,2016_SOL_National_single,2016,single,SOL_National,3,138.5,Neshaminy,NSH
+league,2016_SOL_National_single,2016,single,SOL_National,4,111.0,Harry S. Truman,HST
+league,2016_SOL_National_single,2016,single,SOL_National,5,81.0,William Tennent,WT
+league,2016_SOL_National_single,2016,single,SOL_National,6,64.0,Pennsbury,PBY
+league,2016_SOL_National_single,2016,single,SOL_National,7,47.0,Abington,AB
+league,2016_SOL_National_single,2016,single,SOL_National,8,39.0,Bensalem,BNS
+league,2017_Central_League_single,2017,single,Central_League,1,216.0,Upper Darby,UDA
+league,2017_Central_League_single,2017,single,Central_League,2,209.5,Garnet Valley,GAV
+league,2017_Central_League_single,2017,single,Central_League,3,175.5,Penncrest,PC
+league,2017_Central_League_single,2017,single,Central_League,4,106.0,Ridley,RID
+league,2017_Central_League_single,2017,single,Central_League,5,96.5,Haverford High,HAV
+league,2017_Central_League_single,2017,single,Central_League,6,94.0,Conestoga,CNST
+league,2017_Central_League_single,2017,single,Central_League,7,93.5,Marple Newtown,MN
+league,2017_Central_League_single,2017,single,Central_League,8,82.0,Lower Merion,LME
+league,2017_Central_League_single,2017,single,Central_League,9,71.0,Springfield Delco,SFD
+league,2017_Central_League_single,2017,single,Central_League,10,69.5,Strath Haven,SH
+league,2017_Central_League_single,2017,single,Central_League,11,68.0,Radnor,RAD
+league,2017_Central_League_single,2017,single,Central_League,12,43.0,Harriton,HAR
+league,2017_ChesMont_single,2017,single,ChesMont,1,209.5,Downingtown West,DW
+league,2017_ChesMont_single,2017,single,ChesMont,2,170.0,West Chester Rustin,WCR
+league,2017_ChesMont_single,2017,single,ChesMont,3,157.5,Coatesville,CTV
+league,2017_ChesMont_single,2017,single,ChesMont,4,120.5,Downingtown East,DE
+league,2017_ChesMont_single,2017,single,ChesMont,4,120.5,Unionville,UNV
+league,2017_ChesMont_single,2017,single,ChesMont,6,115.0,Avon Grove,AGR
+league,2017_ChesMont_single,2017,single,ChesMont,7,107.0,West Chester Henderson,WCH
+league,2017_ChesMont_single,2017,single,ChesMont,8,105.0,West Chester East,WCE
+league,2017_ChesMont_single,2017,single,ChesMont,9,99.0,Octorara,OCT
+league,2017_ChesMont_single,2017,single,ChesMont,10,89.0,Oxford Area,OX
+league,2017_ChesMont_single,2017,single,ChesMont,11,66.5,Kennett,KNT
+league,2017_ChesMont_single,2017,single,ChesMont,12,66.0,Great Valley,GRTV
+league,2017_ChesMont_single,2017,single,ChesMont,13,52.0,Sun Valley,SUV
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,1,216.0,Owen J. Roberts,OJR
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,2,215.0,Boyertown,BT
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,3,172.0,Methacton,MTH
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,4,152.0,Spring-Ford,SF
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,5,137.5,Norristown,NT
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,6,102.0,Perkiomen Valley,PKV
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,7,87.5,Upper Perkiomen,UPE
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,8,78.0,Pottstown,PTN
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,9,65.0,Pottsgrove,PG
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,10,36.5,Phoenixville,PHX
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,11,31.0,Upper Merion,UME
+league,2017_Pioneer_Athletic_Conference_single,2017,single,Pioneer_Athletic_Conference,12,15.0,Pope John Paul II,PJP
+league,2017_SOL_American_single,2017,single,SOL_American,1,227.5,Plymouth Whitemarsh,PWM
+league,2017_SOL_American_single,2017,single,SOL_American,2,221.0,Quakertown,QT
+league,2017_SOL_American_single,2017,single,SOL_American,3,171.0,Wissahickon,WIS
+league,2017_SOL_American_single,2017,single,SOL_American,4,164.0,Hatboro-Horsham,HH
+league,2017_SOL_American_single,2017,single,SOL_American,5,99.5,Cheltenham,CHE
+league,2017_SOL_American_single,2017,single,SOL_American,6,85.0,Upper Dublin,UDU
+league,2017_SOL_American_single,2017,single,SOL_American,7,78.0,Springfield Township,SFT
+league,2017_SOL_American_single,2017,single,SOL_American,8,71.0,Upper Moreland,UMO
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,1,218.0,Pennridge,PRG
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,2,208.0,North Penn,NP
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,3,157.0,Souderton,SOU
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,4,125.5,William Tennent,WT
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,5,107.5,Central Bucks East,CBE
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,6,100.0,Central Bucks South,CBS
+league,2017_SOL_Continental_single,2017,single,SOL_Continental,7,50.0,Central Bucks West,CBW
+league,2017_SOL_National_single,2017,single,SOL_National,1,234.0,Council Rock South,CRS
+league,2017_SOL_National_single,2017,single,SOL_National,2,136.0,Council Rock North,CRN
+league,2017_SOL_National_single,2017,single,SOL_National,3,123.5,Neshaminy,NSH
+league,2017_SOL_National_single,2017,single,SOL_National,4,104.0,Pennsbury,PBY
+league,2017_SOL_National_single,2017,single,SOL_National,5,78.0,Harry S. Truman,HST
+league,2017_SOL_National_single,2017,single,SOL_National,6,57.0,Bensalem,BNS
+league,2017_SOL_National_single,2017,single,SOL_National,7,37.0,Abington,AB
+league,2018_Central_League_single,2018,single,Central_League,1,202.0,Garnet Valley,GAV
+league,2018_Central_League_single,2018,single,Central_League,2,156.0,Upper Darby,UDA
+league,2018_Central_League_single,2018,single,Central_League,3,154.0,Ridley,RID
+league,2018_Central_League_single,2018,single,Central_League,4,133.0,Strath Haven,SH
+league,2018_Central_League_single,2018,single,Central_League,5,126.0,Conestoga,CNST
+league,2018_Central_League_single,2018,single,Central_League,6,116.5,Penncrest,PC
+league,2018_Central_League_single,2018,single,Central_League,7,89.0,Radnor,RAD
+league,2018_Central_League_single,2018,single,Central_League,8,81.5,Lower Merion,LME
+league,2018_Central_League_single,2018,single,Central_League,9,74.0,Springfield Delco,SFD
+league,2018_Central_League_single,2018,single,Central_League,10,46.5,Haverford High,HAV
+league,2018_Central_League_single,2018,single,Central_League,11,44.0,Marple Newtown,MN
+league,2018_Central_League_single,2018,single,Central_League,12,43.5,Harriton,HAR
+league,2018_ChesMont_single,2018,single,ChesMont,1,186.5,Downingtown West,DW
+league,2018_ChesMont_single,2018,single,ChesMont,2,145.5,Downingtown East,DE
+league,2018_ChesMont_single,2018,single,ChesMont,3,123.0,West Chester Henderson,WCH
+league,2018_ChesMont_single,2018,single,ChesMont,4,99.0,Sun Valley,SUV
+league,2018_ChesMont_single,2018,single,ChesMont,5,97.5,Octorara,OCT
+league,2018_ChesMont_single,2018,single,ChesMont,6,91.0,Coatesville,CTV
+league,2018_ChesMont_single,2018,single,ChesMont,7,86.5,West Chester East,WCE
+league,2018_ChesMont_single,2018,single,ChesMont,8,86.0,Great Valley,GRTV
+league,2018_ChesMont_single,2018,single,ChesMont,9,85.5,Unionville,UNV
+league,2018_ChesMont_single,2018,single,ChesMont,10,85.0,West Chester Rustin,WCR
+league,2018_ChesMont_single,2018,single,ChesMont,11,79.0,Oxford Area,OX
+league,2018_ChesMont_single,2018,single,ChesMont,12,67.5,Avon Grove,AGR
+league,2018_ChesMont_single,2018,single,ChesMont,12,67.5,Kennett,KNT
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,1,210.0,Spring-Ford,SF
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,2,183.5,Owen J. Roberts,OJR
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,3,181.0,Boyertown,BT
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,4,143.0,Methacton,MTH
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,5,99.5,Upper Perkiomen,UPE
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,6,95.0,Perkiomen Valley,PKV
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,7,89.0,Norristown,NT
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,8,79.5,Pottsgrove,PG
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,9,77.5,Pope John Paul II,PJP
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,10,62.0,Pottstown,PTN
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,11,40.0,Phoenixville,PHX
+league,2018_Pioneer_Athletic_Conference_single,2018,single,Pioneer_Athletic_Conference,12,38.5,Upper Merion,UME
+league,2018_SOL_American_single,2018,single,SOL_American,1,228.5,Hatboro-Horsham,HH
+league,2018_SOL_American_single,2018,single,SOL_American,2,211.0,Quakertown,QT
+league,2018_SOL_American_single,2018,single,SOL_American,3,180.5,Plymouth Whitemarsh,PWM
+league,2018_SOL_American_single,2018,single,SOL_American,4,127.5,Wissahickon,WIS
+league,2018_SOL_American_single,2018,single,SOL_American,5,125.0,Upper Moreland,UMO
+league,2018_SOL_American_single,2018,single,SOL_American,6,93.0,Springfield Township,SFT
+league,2018_SOL_American_single,2018,single,SOL_American,7,75.0,Upper Dublin,UDU
+league,2018_SOL_American_single,2018,single,SOL_American,8,51.0,Cheltenham,CHE
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,1,171.0,North Penn,NP
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,2,147.0,Pennridge,PRG
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,3,128.5,Souderton,SOU
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,4,111.0,Central Bucks East,CBE
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,5,98.0,William Tennent,WT
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,6,74.0,Central Bucks West,CBW
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,7,46.5,Central Bucks South,CBS
+league,2018_SOL_National_single,2018,single,SOL_National,1,191.5,Council Rock South,CRS
+league,2018_SOL_National_single,2018,single,SOL_National,2,167.5,Neshaminy,NSH
+league,2018_SOL_National_single,2018,single,SOL_National,3,144.5,Council Rock North,CRN
+league,2018_SOL_National_single,2018,single,SOL_National,4,109.0,Bensalem,BNS
+league,2018_SOL_National_single,2018,single,SOL_National,5,83.5,Harry S. Truman,HST
+league,2018_SOL_National_single,2018,single,SOL_National,6,66.0,Pennsbury,PBY
+league,2018_SOL_National_single,2018,single,SOL_National,7,65.0,Abington,AB
+league,2019_Central_League_single,2019,single,Central_League,1,251.5,Garnet Valley,GAV
+league,2019_Central_League_single,2019,single,Central_League,2,176.5,Conestoga,CNST
+league,2019_Central_League_single,2019,single,Central_League,3,149.0,Ridley,RID
+league,2019_Central_League_single,2019,single,Central_League,4,128.0,Upper Darby,UDA
+league,2019_Central_League_single,2019,single,Central_League,5,120.5,Strath Haven,SH
+league,2019_Central_League_single,2019,single,Central_League,6,120.0,Penncrest,PC
+league,2019_Central_League_single,2019,single,Central_League,7,117.5,Radnor,RAD
+league,2019_Central_League_single,2019,single,Central_League,8,85.0,Haverford High,HAV
+league,2019_Central_League_single,2019,single,Central_League,9,66.0,Lower Merion,LME
+league,2019_Central_League_single,2019,single,Central_League,10,51.0,Marple Newtown,MN
+league,2019_Central_League_single,2019,single,Central_League,11,41.0,Harriton,HAR
+league,2019_Central_League_single,2019,single,Central_League,12,9.0,Springfield Delco,SFD
+league,2019_ChesMont_single,2019,single,ChesMont,1,222.0,West Chester Henderson,WCH
+league,2019_ChesMont_single,2019,single,ChesMont,2,199.0,Oxford Area Ox,
+league,2019_ChesMont_single,2019,single,ChesMont,3,178.0,West Chester Rustin,WCR
+league,2019_ChesMont_single,2019,single,ChesMont,4,174.5,Downingtown East,DE
+league,2019_ChesMont_single,2019,single,ChesMont,5,134.0,Coatesville,CTV
+league,2019_ChesMont_single,2019,single,ChesMont,6,129.0,Downingtown West,DW
+league,2019_ChesMont_single,2019,single,ChesMont,7,116.5,Unionville,UNV
+league,2019_ChesMont_single,2019,single,ChesMont,7,116.5,West Chester East,WCE
+league,2019_ChesMont_single,2019,single,ChesMont,9,92.0,Great Valley,GRTV
+league,2019_ChesMont_single,2019,single,ChesMont,10,78.0,Avon Grove,AGR
+league,2019_ChesMont_single,2019,single,ChesMont,11,52.5,Kennett,KNT
+league,2019_ChesMont_single,2019,single,ChesMont,12,8.0,Sun Valley,SUV
+league,2019_SOL_American_single,2019,single,SOL_American,1,209.0,Wissahickon,WIS
+league,2019_SOL_American_single,2019,single,SOL_American,2,148.0,Hatboro-Horsham,HH
+league,2019_SOL_American_single,2019,single,SOL_American,3,118.0,Plymouth Whitemarsh,PWM
+league,2019_SOL_American_single,2019,single,SOL_American,4,98.0,Springfield Township,SFT
+league,2019_SOL_American_single,2019,single,SOL_American,5,96.0,Abington,AB
+league,2019_SOL_American_single,2019,single,SOL_American,6,82.0,Upper Moreland,UMO
+league,2019_SOL_American_single,2019,single,SOL_American,7,65.0,Upper Dublin,UDU
+league,2019_SOL_American_single,2019,single,SOL_American,8,53.0,Cheltenham,CHE
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,1,194.0,Quakertown,QT
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,2,158.0,North Penn,NP
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,3,118.5,Souderton,SOU
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,4,110.0,Central Bucks East,CBE
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,5,85.0,Central Bucks West,CBW
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,6,73.0,Pennridge,PRG
+league,2019_SOL_Continental_single,2019,single,SOL_Continental,7,53.5,Central Bucks South,CBS
+league,2019_SOL_National_single,2019,single,SOL_National,1,200.5,Council Rock South,CRS
+league,2019_SOL_National_single,2019,single,SOL_National,2,143.0,Neshaminy,NSH
+league,2019_SOL_National_single,2019,single,SOL_National,3,121.5,Harry S. Truman,HST
+league,2019_SOL_National_single,2019,single,SOL_National,4,109.0,Council Rock North,CRN
+league,2019_SOL_National_single,2019,single,SOL_National,5,92.0,Pennsbury,PBY
+league,2019_SOL_National_single,2019,single,SOL_National,6,61.0,William Tennent,WT
+league,2019_SOL_National_single,2019,single,SOL_National,7,40.0,Bensalem,BNS
+league,2020_ChesMont_single,2020,single,ChesMont,1,261.0,West Chester Henderson,WCH
+league,2020_ChesMont_single,2020,single,ChesMont,2,193.0,Downingtown East,DE
+league,2020_ChesMont_single,2020,single,ChesMont,3,184.0,Oxford Area Ox,
+league,2020_ChesMont_single,2020,single,ChesMont,4,183.0,West Chester Rustin,WCR
+league,2020_ChesMont_single,2020,single,ChesMont,5,130.0,West Chester East,WCE
+league,2020_ChesMont_single,2020,single,ChesMont,6,103.0,Avon Grove,AGR
+league,2020_ChesMont_single,2020,single,ChesMont,7,89.5,Coatesville,CTV
+league,2020_ChesMont_single,2020,single,ChesMont,8,77.5,Kennett,KNT
+league,2020_ChesMont_single,2020,single,ChesMont,9,49.0,Downingtown West,DW
+league,2020_ChesMont_single,2020,single,ChesMont,10,46.0,Unionville,UNV
+league,2020_ChesMont_single,2020,single,ChesMont,11,45.0,Great Valley,GRTV
+league,2020_ChesMont_single,2020,single,ChesMont,12,24.0,Sun Valley,SUV
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,1,258.5,Spring-Ford,SF
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,2,191.0,Boyertown,BT
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,3,188.5,Owen J. Roberts,OJR
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,4,126.0,Perkiomen Valley,PKV
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,5,113.0,Pottsgrove,PG
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,6,111.0,Upper Perkiomen,UPE
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,7,108.5,Phoenixville,PHX
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,8,87.0,Norristown,NT
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,9,62.5,Pottstown,PTN
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,10,60.0,Pope John Paul II,PJP
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,11,56.0,Methacton,MTH
+league,2020_Pioneer_Athletic_Conference_single,2020,single,Pioneer_Athletic_Conference,12,7.0,Upper Merion,UME
+league,2020_SOL_American_single,2020,single,SOL_American,1,191.5,Abington,AB
+league,2020_SOL_American_single,2020,single,SOL_American,2,117.5,Upper Moreland,UMO
+league,2020_SOL_American_single,2020,single,SOL_American,3,116.0,Wissahickon,WIS
+league,2020_SOL_American_single,2020,single,SOL_American,4,115.5,Hatboro-Horsham,HH
+league,2020_SOL_American_single,2020,single,SOL_American,4,115.5,Plymouth Whitemarsh,PWM
+league,2020_SOL_American_single,2020,single,SOL_American,6,106.0,Upper Dublin,UDU
+league,2020_SOL_American_single,2020,single,SOL_American,7,92.0,Springfield Township,SFT
+league,2020_SOL_American_single,2020,single,SOL_American,8,55.0,Cheltenham,CHE
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,1,271.5,Quakertown,QT
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,2,207.5,Central Bucks East,CBE
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,3,197.0,North Penn,NP
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,4,126.5,Central Bucks West,CBW
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,5,93.0,Souderton,SOU
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,6,84.0,Pennridge,PRG
+league,2020_SOL_Continental_single,2020,single,SOL_Continental,7,76.0,Central Bucks South,CBS
+league,2020_SOL_National_single,2020,single,SOL_National,1,165.0,Neshaminy,NESH
+league,2020_SOL_National_single,2020,single,SOL_National,2,160.0,Council Rock South,CRS
+league,2020_SOL_National_single,2020,single,SOL_National,3,157.0,Council Rock North,CRN
+league,2020_SOL_National_single,2020,single,SOL_National,4,121.0,Pennsbury,PBY
+league,2020_SOL_National_single,2020,single,SOL_National,5,79.0,Harry S. Truman,HST
+league,2020_SOL_National_single,2020,single,SOL_National,6,77.0,Bensalem,BNS
+league,2020_SOL_National_single,2020,single,SOL_National,7,30.0,William Tennent,WT
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,1,239.5,Spring-Ford,SF
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,2,203.0,Boyertown,BT
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,3,175.5,Owen J. Roberts,OJR
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,4,153.0,Perkiomen Valley,PKV
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,5,126.0,Methacton,MTH
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,6,90.0,Upper Perkiomen,UPE
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,7,82.0,Pottsgrove,PG
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,8,81.0,Phoenixville,PHX
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,9,72.0,Norristown,NT
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,10,48.5,Pope John Paul II,PJP
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,11,47.0,Pottstown,PTN
+league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conference,12,22.5,Upper Merion,UME
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,1,235.5,Spring-Ford,SF
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,2,223.5,Boyertown,BT
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,3,179.5,Perkiomen Valley,PKV
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,4,165.0,Upper Perkiomen,UPE
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,5,164.0,Owen J. Roberts,OJR
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,6,127.5,Methacton,MTH
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,7,71.0,Pottsgrove,PG
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,8,66.0,Upper Merion,UME
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,9,46.5,Norristown,NT
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,10,42.0,Pope John Paul II,PJP
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,11,38.0,Phoenixville,PHX
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,12,16.0,Pottstown,PTN

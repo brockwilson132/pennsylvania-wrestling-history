@@ -1,0 +1,25 @@
+D3 champions: 1738 rows, 138 year-class groups, years 1938-2024
+d7 unparsed p6: 103 – None
+d7 unparsed p6: 112 – None
+d7 unparsed p6: 130 – None
+d7 unparsed p6: 140 – None
+d7 unparsed p6: 152 – None
+d7 unparsed p7: 105 – None
+d7 unparsed p7: 112 – None
+d7 unparsed p7: 119 – None
+d7 unparsed p7: 126 – None
+d7 unparsed p7: 132 – None
+d7 unparsed p7: HWT – None
+d7 unparsed p7: 98 – None
+d7 unparsed p7: 105 – None
+d7 unparsed p7: 112 – None
+d7 unparsed p7: 119 – None
+d7 unparsed p7: 132 – None
+d7 unparsed p7: 138 – None
+d7 unparsed p7: 145 – None
+d7 unparsed p8: 105 –
+d7 unparsed p8: 105 –
+D7 champions: 1763 rows, 137 year-class groups, years 1936-2024
+D3 team rows: Counter({'district_individual_team': 79, 'district_duals_champion': 68})
+duals unparsed 2019 AAA: Dallastown (3) 40, Father Judge (12)
+PIAA duals: 1192 bouts, 51 year-class brackets, 1 unparsed lines

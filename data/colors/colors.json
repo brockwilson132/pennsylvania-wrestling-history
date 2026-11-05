@@ -1,0 +1,1252 @@
+[
+  {
+    "school": "Clearfield",
+    "colors_named": "Red and Black",
+    "mascot": "Bison (Benny the Bison)",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Clearfield_Area_Junior/Senior_High_School"
+  },
+  {
+    "school": "Trinity",
+    "colors_named": "Green and White",
+    "mascot": "Shamrocks",
+    "primary": "#15803d",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Trinity_High_School_(Lower_Allen_Township,_Pennsylvania)"
+  },
+  {
+    "school": "Reynolds",
+    "colors_named": "not found",
+    "mascot": "Raiders (district tagline only)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://www.reynolds.k12.pa.us"
+  },
+  {
+    "school": "North Allegheny",
+    "colors_named": "Black and Gold",
+    "mascot": "Tigers",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/North_Allegheny_Senior_High_School"
+  },
+  {
+    "school": "Canonsburg",
+    "colors_named": "Blue and Gold (Canon-McMillan)",
+    "mascot": "Highlanders (Big Macs)",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Canon-McMillan_School_District"
+  },
+  {
+    "school": "Lock Haven",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Lock_Haven_Bald_Eagles"
+  },
+  {
+    "school": "Shamokin",
+    "colors_named": "Purple and White",
+    "mascot": "Indians",
+    "primary": "#5b2d8e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Shamokin_Area_High_School"
+  },
+  {
+    "school": "Benton",
+    "colors_named": "Orange",
+    "mascot": "Tigers",
+    "primary": "#e87722",
+    "secondary": null,
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Benton_Middle-Senior_High_School"
+  },
+  {
+    "school": "Bald Eagle Nittany",
+    "colors_named": "Blue and Gold",
+    "mascot": "Eagles",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Bald_Eagle_Area_School_District"
+  },
+  {
+    "school": "Montoursville",
+    "colors_named": "Blue and Gold",
+    "mascot": "Warriors",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Montoursville_Area_High_School"
+  },
+  {
+    "school": "Washington",
+    "colors_named": "not stated (photo caption says blue and black uniforms)",
+    "mascot": "Prexies",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://www.washington.k12.pa.us/"
+  },
+  {
+    "school": "Elmer L. Meyers",
+    "colors_named": "Royal Blue and Gold",
+    "mascot": "Mohawks",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Elmer_L._Meyers_Junior/Senior_High_School"
+  },
+  {
+    "school": "Shaler",
+    "colors_named": "Blue and White with red secondary",
+    "mascot": "Titans",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": "#c8102e",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Shaler_Area_High_School"
+  },
+  {
+    "school": "Greenville",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Greenville_Area_School_District"
+  },
+  {
+    "school": "Hughesville",
+    "colors_named": "not stated",
+    "mascot": "Spartans",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Hughesville_Junior_Senior_High_School"
+  },
+  {
+    "school": "Hempfield Area",
+    "colors_named": "Royal Blue and Silver",
+    "mascot": "Spartans",
+    "primary": "#1f4e9c",
+    "secondary": "#c0c0c0",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Hempfield_Area_High_School"
+  },
+  {
+    "school": "Faith Christian Academy",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": ""
+  },
+  {
+    "school": "DuBois",
+    "colors_named": "Red, Black and White",
+    "mascot": "Beavers",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/DuBois_Area_Senior_High_School"
+  },
+  {
+    "school": "Tyrone",
+    "colors_named": "Orange and Black",
+    "mascot": "Golden Eagles",
+    "primary": "#e87722",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Tyrone_Area_School_District"
+  },
+  {
+    "school": "Jefferson-Morgan",
+    "colors_named": "Orange and Black",
+    "mascot": "Rockets",
+    "primary": "#e87722",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Jefferson-Morgan_Middle/Senior_High_School"
+  },
+  {
+    "school": "Derry Area",
+    "colors_named": "Blue and Gold",
+    "mascot": "Trojans",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Derry_Area_High_School"
+  },
+  {
+    "school": "North Schuylkill",
+    "colors_named": "Crimson Red and Royal Blue",
+    "mascot": "Spartans",
+    "primary": "#dc143c",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/North_Schuylkill_School_District"
+  },
+  {
+    "school": "Line Mountain",
+    "colors_named": "Royal Blue and Gold with trim of Red",
+    "mascot": "Eagles",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": "#c8102e",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Line_Mountain_Jr./Sr._High_School"
+  },
+  {
+    "school": "Burrell",
+    "colors_named": "Blue and White",
+    "mascot": "Buccaneers",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Burrell_School_District"
+  },
+  {
+    "school": "Bishop McCort",
+    "colors_named": "Red and Gold (fetched text; mascot wording garbled)",
+    "mascot": "Crushers (from search-result URL slug only)",
+    "primary": "#c8102e",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Bishop_McCort_High_School"
+  },
+  {
+    "school": "Forty Fort",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": ""
+  },
+  {
+    "school": "Grove City",
+    "colors_named": "Gold and Black",
+    "mascot": "Eagles (from search-result URL slug only)",
+    "primary": "#c9a227",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Grove_City_Area_School_District"
+  },
+  {
+    "school": "Cumberland Valley",
+    "colors_named": "Red, Black and White",
+    "mascot": "Eagles",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Cumberland_Valley_High_School"
+  },
+  {
+    "school": "Muncy",
+    "colors_named": "Blue and White",
+    "mascot": "Indians",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Muncy_Junior-Senior_High_School"
+  },
+  {
+    "school": "Manheim Central",
+    "colors_named": "Maroon and Gray",
+    "mascot": "Barons",
+    "primary": "#7a1f3d",
+    "secondary": "#8a8d8f",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Manheim_Central_High_School"
+  },
+  {
+    "school": "North Penn",
+    "colors_named": "Navy and Columbia Blue",
+    "mascot": "Knights",
+    "primary": "#1b2a4a",
+    "secondary": "#5fa8e0",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/North_Penn_High_School"
+  },
+  {
+    "school": "Wilson Area",
+    "colors_named": "Blue and Gold",
+    "mascot": "Warriors",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Wilson_Area_High_School"
+  },
+  {
+    "school": "Athens",
+    "colors_named": "not stated",
+    "mascot": "Wildcats (district page)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Athens_Area_School_District"
+  },
+  {
+    "school": "Southern Columbia",
+    "colors_named": "Black and Gold",
+    "mascot": "Tigers",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Southern_Columbia_Area_High_School"
+  },
+  {
+    "school": "Wyalusing",
+    "colors_named": "Green and Gold",
+    "mascot": "Rams",
+    "primary": "#15803d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Wyalusing_Valley_Junior-Senior_High_School"
+  },
+  {
+    "school": "Shady Side Academy",
+    "colors_named": "Old Gold and Navy",
+    "mascot": "Bulldogs (Indians retired 2020)",
+    "primary": "#c9a227",
+    "secondary": "#1b2a4a",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Shady_Side_Academy"
+  },
+  {
+    "school": "Central Mountain",
+    "colors_named": "Royal Blue and White",
+    "mascot": "Wildcats",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Central_Mountain_High_School"
+  },
+  {
+    "school": "Kingston",
+    "colors_named": "not found (district page lists Burgundy and Gold for Wyoming Valley West)",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District"
+  },
+  {
+    "school": "Farrell",
+    "colors_named": "not found",
+    "mascot": "Steelers",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Farrell_Area_School_District"
+  },
+  {
+    "school": "Bellefonte",
+    "colors_named": "Red and White",
+    "mascot": "Red Raiders",
+    "primary": "#c8102e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Bellefonte_Area_High_School"
+  },
+  {
+    "school": "McGuffey",
+    "colors_named": "Navy Blue and Gold",
+    "mascot": "Highlanders",
+    "primary": "#1b2a4a",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/McGuffey_High_School"
+  },
+  {
+    "school": "Warrior Run",
+    "colors_named": "Blue and Gray",
+    "mascot": "Defenders",
+    "primary": "#1f4e9c",
+    "secondary": "#8a8d8f",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Warrior_Run_High_School"
+  },
+  {
+    "school": "Greensburg Salem",
+    "colors_named": "Gold, Brown and White",
+    "mascot": "Golden Lions",
+    "primary": "#c9a227",
+    "secondary": "#6b4423",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Greensburg_Salem_High_School"
+  },
+  {
+    "school": "Susquehanna Township",
+    "colors_named": "Red and White",
+    "mascot": "not defined (previously Indians)",
+    "primary": "#c8102e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Susquehanna_Township_High_School"
+  },
+  {
+    "school": "Milton",
+    "colors_named": "not stated",
+    "mascot": "Black Panthers",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Milton_Area_High_School"
+  },
+  {
+    "school": "Northwestern Lehigh",
+    "colors_named": "Black and Gold",
+    "mascot": "Tigers",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Northwestern_Lehigh_School_District"
+  },
+  {
+    "school": "Loyalsock",
+    "colors_named": "Maroon, White and Carolina Blue",
+    "mascot": "Lancers",
+    "primary": "#7a1f3d",
+    "secondary": "#ffffff",
+    "accent": "#5fa8e0",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Loyalsock_Township_High_School"
+  },
+  {
+    "school": "Brookville",
+    "colors_named": "Navy Blue and White",
+    "mascot": "Blue Raiders",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Brookville_Area_Jr./Sr._High_School"
+  },
+  {
+    "school": "Chartiers Township",
+    "colors_named": "Maroon and Gold (Chartiers-Houston district page)",
+    "mascot": "Buccaneers",
+    "primary": "#7a1f3d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District"
+  },
+  {
+    "school": "Philipsburg-Osceola",
+    "colors_named": "Navy and White",
+    "mascot": "Mounties",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_High_School"
+  },
+  {
+    "school": "Fort LeBoeuf",
+    "colors_named": "Blue and White",
+    "mascot": "Bison",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Fort_LeBoeuf_School_District"
+  },
+  {
+    "school": "Mifflinburg",
+    "colors_named": "Blue and White",
+    "mascot": "Wildcats",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Mifflinburg_Area_High_School"
+  },
+  {
+    "school": "Northern Lehigh",
+    "colors_named": "Navy and White",
+    "mascot": "Bulldogs",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Northern_Lehigh_High_School"
+  },
+  {
+    "school": "Mount Pleasant",
+    "colors_named": "Red, White and Blue",
+    "mascot": "Vikings",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Mount_Pleasant_Area_Junior/Senior_High_School"
+  },
+  {
+    "school": "Mount Carmel",
+    "colors_named": "not found",
+    "mascot": "Tornadoes",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Mount_Carmel_Area_High_School"
+  },
+  {
+    "school": "Philipsburg",
+    "colors_named": "Navy and White (Philipsburg-Osceola page; may be the pre-consolidation name)",
+    "mascot": "Mounties",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_High_School"
+  },
+  {
+    "school": "Burgettstown",
+    "colors_named": "not stated",
+    "mascot": "Blue Devils (district page)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Burgettstown_Area_School_District"
+  },
+  {
+    "school": "Chartiers-Houston",
+    "colors_named": "Maroon and Gold",
+    "mascot": "Buccaneers",
+    "primary": "#7a1f3d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District"
+  },
+  {
+    "school": "Saegertown",
+    "colors_named": "Blue and Gold (Penncrest district page)",
+    "mascot": "not confirmed",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Penncrest_School_District"
+  },
+  {
+    "school": "Commodore Perry",
+    "colors_named": "not stated",
+    "mascot": "Panthers",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Commodore_Perry_School_District"
+  },
+  {
+    "school": "Lewisburg",
+    "colors_named": "not stated",
+    "mascot": "Green Dragons",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Lewisburg_Area_High_School"
+  },
+  {
+    "school": "Curwensville",
+    "colors_named": "Black and Gold",
+    "mascot": "Golden Tide",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Curwensville_Area_Junior/Senior_High_School"
+  },
+  {
+    "school": "Montgomery",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Montgomery_Area_High_School"
+  },
+  {
+    "school": "Catasauqua",
+    "colors_named": "Brown and White (gold sometimes an accent)",
+    "mascot": "Rough Riders",
+    "primary": "#6b4423",
+    "secondary": "#ffffff",
+    "accent": "#c9a227",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Catasauqua_High_School"
+  },
+  {
+    "school": "Mount Union",
+    "colors_named": "Royal Blue and Vegas Gold (district page)",
+    "mascot": "Trojans",
+    "primary": "#1f4e9c",
+    "secondary": "#c5b358",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District"
+  },
+  {
+    "school": "Salisbury Township",
+    "colors_named": "Navy and White",
+    "mascot": "not confirmed (Falcons per athletics link text)",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Salisbury_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Forest Hills",
+    "colors_named": "Green and Yellow",
+    "mascot": "Rangers",
+    "primary": "#15803d",
+    "secondary": "#ffd700",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Forest_Hills_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Penn-Trafford",
+    "colors_named": "Green and Gold (article says Dartmouth Green and Green Bay Gold)",
+    "mascot": "Warriors",
+    "primary": "#1b5e3a",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Penn-Trafford_High_School"
+  },
+  {
+    "school": "Erie Academy",
+    "colors_named": "not confirmed (merged into Central Tech lineage, which lists Black and Gold)",
+    "mascot": "not confirmed (Central Tech lists Falcons)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Central_Tech_High_School"
+  },
+  {
+    "school": "Allentown",
+    "colors_named": "Canary Yellow and Blue (William Allen HS, Allentown)",
+    "mascot": "Canaries",
+    "primary": "#ffd700",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/William_Allen_High_School"
+  },
+  {
+    "school": "Selinsgrove",
+    "colors_named": "Red and Blue",
+    "mascot": "Seals",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Selinsgrove_Area_High_School"
+  },
+  {
+    "school": "Hickory",
+    "colors_named": "not stated",
+    "mascot": "Hornets (inferred from MaxPreps URL only)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Hermitage_School_District_(Pennsylvania)"
+  },
+  {
+    "school": "Dallastown",
+    "colors_named": "Blue and White",
+    "mascot": "Wildcats",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Dallastown_Area_High_School"
+  },
+  {
+    "school": "Jersey Shore",
+    "colors_named": "not found",
+    "mascot": "Bulldogs (from MaxPreps URL slug only)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Jersey_Shore_Area_School_District"
+  },
+  {
+    "school": "Huntingdon",
+    "colors_named": "Red and Blue",
+    "mascot": "Bearcats",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Huntingdon_Area_School_District"
+  },
+  {
+    "school": "West Branch",
+    "colors_named": "Red, White and Royal Blue",
+    "mascot": "Warriors",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/West_Branch_Area_Junior/Senior_High_School"
+  },
+  {
+    "school": "Council Rock",
+    "colors_named": "Navy Blue, White and Silver (North campus)",
+    "mascot": "Indians (under review; wiki still lists it)",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": "#c0c0c0",
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Council_Rock_High_School_North"
+  },
+  {
+    "school": "Jeannette",
+    "colors_named": "Red and Blue (district page)",
+    "mascot": "Jayhawks",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Jeannette_City_School_District"
+  },
+  {
+    "school": "Technical Memorial",
+    "colors_named": "Black and Gold (Central Tech lineage)",
+    "mascot": "Falcons (Central Tech lineage)",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Central_Tech_High_School"
+  },
+  {
+    "school": "Lake Lehman",
+    "colors_named": "Black and Gold",
+    "mascot": "Knights",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School"
+  },
+  {
+    "school": "Tri-Valley",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": ""
+  },
+  {
+    "school": "Meadville",
+    "colors_named": "Red and Black",
+    "mascot": "Bulldogs",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Meadville_Area_Senior_High_School"
+  },
+  {
+    "school": "Danville",
+    "colors_named": "Orange and Purple",
+    "mascot": "Ironmen",
+    "primary": "#e87722",
+    "secondary": "#5b2d8e",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Danville_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "North Star",
+    "colors_named": "Green and White",
+    "mascot": "Cougars",
+    "primary": "#15803d",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/North_Star_High_School"
+  },
+  {
+    "school": "Lakeview",
+    "colors_named": "not stated",
+    "mascot": "Sailors (district page)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Lakeview_School_District_(Mercer_County,_Pennsylvania)"
+  },
+  {
+    "school": "Richland",
+    "colors_named": "Red and Blue",
+    "mascot": "Rams",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Richland_Senior_High_School"
+  },
+  {
+    "school": "Quakertown",
+    "colors_named": "not stated",
+    "mascot": "Panthers",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Quakertown_High_School"
+  },
+  {
+    "school": "Hanover",
+    "colors_named": "Orange and Black",
+    "mascot": "Nighthawks",
+    "primary": "#e87722",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Hanover_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Pen Argyl",
+    "colors_named": "Green and White",
+    "mascot": "Green Knights",
+    "primary": "#15803d",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Pen_Argyl_Area_High_School"
+  },
+  {
+    "school": "Chestnut Ridge",
+    "colors_named": "Blue and Gold",
+    "mascot": "Lions",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Chestnut_Ridge_Senior_High_School"
+  },
+  {
+    "school": "Solanco",
+    "colors_named": "Black and Gold",
+    "mascot": "Golden Mules",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Solanco_High_School"
+  },
+  {
+    "school": "South Park",
+    "colors_named": "Royal Blue and White (black accent)",
+    "mascot": "Eagles",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": "#111111",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/South_Park_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Bedford",
+    "colors_named": "Royal Blue and White",
+    "mascot": "Bisons",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Bedford_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Erie Strong Vincent",
+    "colors_named": "Red and Black",
+    "mascot": "Colonels",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Strong_Vincent_High_School.html"
+  },
+  {
+    "school": "Hollidaysburg",
+    "colors_named": "Navy, Gold and White",
+    "mascot": "Golden Tigers",
+    "primary": "#1b2a4a",
+    "secondary": "#c9a227",
+    "accent": "#ffffff",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Hollidaysburg_Area_High_School"
+  },
+  {
+    "school": "Carnegie",
+    "colors_named": "Green and Gold (Carlynton HS, Carnegie PA)",
+    "mascot": "Golden Cougars",
+    "primary": "#15803d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://wiki.riteme.site/wiki/Carlynton_Junior/Senior_High_School"
+  },
+  {
+    "school": "Greater Johnstown",
+    "colors_named": "Black and Columbia Blue",
+    "mascot": "Trojans",
+    "primary": "#111111",
+    "secondary": "#5fa8e0",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Greater_Johnstown_High_School"
+  },
+  {
+    "school": "Boiling Springs",
+    "colors_named": "Purple and Gold",
+    "mascot": "Bubblers",
+    "primary": "#5b2d8e",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Boiling_Springs_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Neshaminy",
+    "colors_named": "Red and Blue",
+    "mascot": "Redskins (Skins; name under legal challenge)",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Neshaminy_High_School"
+  },
+  {
+    "school": "Chartiers Valley",
+    "colors_named": "Red and Blue",
+    "mascot": "Colts",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Chartiers_Valley_High_School"
+  },
+  {
+    "school": "Newport",
+    "colors_named": "Blue and White",
+    "mascot": "Buffaloes",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Newport_High_School_(Pennsylvania)"
+  },
+  {
+    "school": "Manheim Township",
+    "colors_named": "Blue and White",
+    "mascot": "Blue Streaks (Sir Streaksalot the Lion)",
+    "primary": "#1f4e9c",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Manheim_Township_High_School"
+  },
+  {
+    "school": "Cranberry",
+    "colors_named": "Maroon and Gold (district page)",
+    "mascot": "Super Berry",
+    "primary": "#7a1f3d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Cranberry_Area_School_District"
+  },
+  {
+    "school": "Chambersburg",
+    "colors_named": "Navy Blue, White and Silver Grey",
+    "mascot": "Trojans",
+    "primary": "#1b2a4a",
+    "secondary": "#ffffff",
+    "accent": "#8a8d8f",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Chambersburg_Area_Senior_High_School"
+  },
+  {
+    "school": "Northern York",
+    "colors_named": "Purple and White",
+    "mascot": "Polar Bears",
+    "primary": "#5b2d8e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Northern_High_School_(Dillsburg,_Pennsylvania)"
+  },
+  {
+    "school": "Avella",
+    "colors_named": "Blue and Gold (district page)",
+    "mascot": "Eagles",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Avella_Area_School_District.html"
+  },
+  {
+    "school": "Sayre",
+    "colors_named": "Red and Blue",
+    "mascot": "Redskins (under legal/community challenge)",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Sayre_Area_High_School"
+  },
+  {
+    "school": "Seneca Valley",
+    "colors_named": "Blue and Black (district page)",
+    "mascot": "Raiders",
+    "primary": "#1f4e9c",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Seneca_Valley_School_District"
+  },
+  {
+    "school": "Chief Logan",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": ""
+  },
+  {
+    "school": "South Western",
+    "colors_named": "not found",
+    "mascot": "not found",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/South_Western_School_District.html"
+  },
+  {
+    "school": "Delone Catholic",
+    "colors_named": "Red and Blue (school); Black and Gold (athletic)",
+    "mascot": "Squires",
+    "primary": "#c8102e",
+    "secondary": "#1f4e9c",
+    "accent": "#c9a227",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Delone_Catholic_High_School"
+  },
+  {
+    "school": "Cameron County",
+    "colors_named": "Red and White",
+    "mascot": "Red Raiders",
+    "primary": "#c8102e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Cameron_County_High_School"
+  },
+  {
+    "school": "Pine Grove",
+    "colors_named": "not stated",
+    "mascot": "Cardinals (district page)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Pine_Grove_Area_School_District"
+  },
+  {
+    "school": "Biglerville",
+    "colors_named": "Black and Gold",
+    "mascot": "Canners",
+    "primary": "#111111",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Biglerville_High_School"
+  },
+  {
+    "school": "Schuylkill Valley",
+    "colors_named": "Red and Black (district page)",
+    "mascot": "Panthers",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Schuylkill_Valley_School_District"
+  },
+  {
+    "school": "Coudersport",
+    "colors_named": "not stated",
+    "mascot": "not confirmed (Falcons per MaxPreps URL slug only)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Coudersport_Area_School_District"
+  },
+  {
+    "school": "Plum",
+    "colors_named": "not stated",
+    "mascot": "Mustangs",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": "https://en.wikipedia.org/wiki/Plum_High_School"
+  },
+  {
+    "school": "Canton",
+    "colors_named": "Crimson and White",
+    "mascot": "Warriors",
+    "primary": "#8b1e2d",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Canton_Junior_Senior_High_School"
+  },
+  {
+    "school": "Pittsburgh Central Catholic",
+    "colors_named": "Blue and Gold",
+    "mascot": "Vikings",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Central_Catholic_High_School_(Pittsburgh)"
+  },
+  {
+    "school": "Kittanning",
+    "colors_named": "not found",
+    "mascot": "Wildcats (MaxPreps URL slug only)",
+    "primary": null,
+    "secondary": null,
+    "accent": null,
+    "confidence": "low",
+    "source": ""
+  },
+  {
+    "school": "Freedom Area",
+    "colors_named": "Red and White",
+    "mascot": "Bulldogs",
+    "primary": "#c8102e",
+    "secondary": "#ffffff",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Freedom_Area_Senior_High_School"
+  },
+  {
+    "school": "Brockway",
+    "colors_named": "Red and Black",
+    "mascot": "Rovers",
+    "primary": "#c8102e",
+    "secondary": "#111111",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Brockway_Area_Junior/Senior_High_School"
+  },
+  {
+    "school": "Kennard-Dale",
+    "colors_named": "Blue and Gold",
+    "mascot": "Rams",
+    "primary": "#1f4e9c",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Kennard-Dale_High_School"
+  },
+  {
+    "school": "Mifflin County",
+    "colors_named": "Purple, Black and Silver",
+    "mascot": "Huskies",
+    "primary": "#5b2d8e",
+    "secondary": "#111111",
+    "accent": "#c0c0c0",
+    "confidence": "high",
+    "source": "https://en.wikipedia.org/wiki/Mifflin_County_High_School"
+  },
+  {
+    "school": "Wyoming Area",
+    "colors_named": "Green and Gold (district page)",
+    "mascot": "Warriors",
+    "primary": "#15803d",
+    "secondary": "#c9a227",
+    "accent": null,
+    "confidence": "medium",
+    "source": "https://en.wikipedia.org/wiki/Wyoming_Area_School_District"
+  }
+]

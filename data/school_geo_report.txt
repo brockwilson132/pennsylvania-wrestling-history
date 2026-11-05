@@ -1,0 +1,476 @@
+matched 546/1002 schools (54.5%); with a state medal 461/543 (84.9%)
+
+weaker matches (check):
+Allentown Central Catholic → ALLENTOW CENTRAL CATHOLIC HIGH SCHOOL. (ALLENTOWN) 0.70
+Bensalem → Bensalem Twp HS (Bensalem) 0.94
+East Stroudsburg → East Stroudsburg SHS South (East Stroudsburg) 0.72
+Elizabeth → Elizabeth Forward SHS (Elizabeth) 0.72
+Exeter → Exeter Twp SHS (Reading) 0.94
+Loyalsock → Loyalsock Twp SHS (Williamsport) 0.94
+Nanticoke → Greater Nanticoke Area SHS (Nanticoke) 0.72
+North Clarion → North Clarion Co JSHS (Tionesta) 0.94
+Northern Bedford → Northern Bedford County HS (Loysburg) 0.94
+Quakertown → Quakertown Community HS (Quakertown) 0.94
+Southern Huntingdon → Southern Huntingdon Co HS/MS (Three Springs) 0.94
+Trafford → Penn Trafford HS (Harrison City) 0.72
+Waynesburg → Waynesburg Central JSHS (Waynesburg) 0.72
+Williamsburg → Williamsburg Community JSHS (Williamsburg) 0.94
+Wyalusing → Wyalusing Valley JSHS (Wyalusing) 0.94
+
+unmatched (* = has a state medal; closed, merged, renamed or garbled names):
+  Abraham Lincoln (D12) · no candidate
+  Academy at Palumbo (D12) · no candidate
+  AleaveyPeters Township · no candidate
+  Ambler Joint (D1) · no candidate
+  Archbishop Wood, 8th (D12) · no candidate
+  Armstrong Central (D7) · no candidate
+  Asllentown Central Catholic (D11) · no candidate
+  Baegalviear County Christian (D7) · no candidate
+  BatPtilysmtaouth Whitemarsh (D1) · no candidate
+  BattPisltyamouth Whitemarsh (D1) · no candidate
+  BattiPstlyamouth Whitemarsh (D1) · no candidate
+  BattistaPlymouth Whitemarsh (D1) · no candidate
+  Beaver County Christian (D7) · no candidate
+  Belmont Charter (D12) · no candidate
+  BernardWoest Chester East (D1) · no candidate
+  Bethelhem-Center (D7) · no candidate
+  Bethlehem-Center) 112 – Ron Nutt (Charleroi (D7) · no candidate
+  Bishop Carroll (D6) · no candidate
+  Bishop Hafey (D11) · no candidate
+  Bishop Hannan (D2) · no candidate
+  Bishop Klonowski (D2) · no candidate
+  Bishop O'Reilly (D2) · no candidate
+  Bkissdhaolpe McDevitt (3) (D3) · no candidate
+  Bneeavdeyr County Christian (D7) · no candidate
+  Boiling Springs ()5) (D3) · no candidate
+  Bonner & Prendie (D12) · no candidate
+  Boyertown, 8th · no candidate
+  Boys' Latin (D12) · no candidate
+  Bsermudian Springs (D3) · no candidate
+  Btaegavliear County Christian (D7) · no candidate
+  Bteaagvleiar County Christian (D7) · no candidate
+  Buepaever County Christian (D7) · no candidate
+  CW North Catholic (D7) · no candidate
+  Canevin Catholic (D7) · no candidate
+  Canon-McMillion (D7) · no candidate
+  Canton, 8th (D4) · no candidate
+  Caonuncil Rock South · no candidate
+  Captain Jack (D6) · no candidate
+  Cardinal Dougherty (D1) · no candidate
+  Cardinal Wuerl North Catholic · no candidate
+  Cboelurmgebria-Montour Vo-Tech (D4) · no candidate
+  Cdelanrks Summit/Abington · no candidate
+  Cecil Township · no candidate
+  Celanrks Summit/Abington · no candidate
+  Celarks Summit/Abington · no candidate
+  Center Township · no candidate
+  Central Bucks (D1) · no candidate
+  Ceolumbia-Montour Vo-Tech (D4) · no candidate
+  Cgohlutmbia-Montour Vo-Tech (D4) · no candidate
+  Chambersburg, SR, -1-8 · no candidate
+  Chartiers Township, 8th (D7) · no candidate
+  ChesGnereyensburg Salem · no candidate
+  ChesnGeryeensburg Salem (D7) · no candidate
+  ChesneGyreensburg Salem · no candidate
+  ChicchisPeters Township · no candidate
+  ChristopheSrhady Side Academy (D7) · no candidate
+  Christopher Dock (D1) · no candidate
+  Ciahkuorch Farm School · no candidate
+  Ciahukroch Farm School · no candidate
+  Cinolumbia-Montour Vo-Tech (D4) · no candidate
+  Ckentral Bucks South (D1) · no candidate
+  Ckhourch Farm School · no candidate
+  Ckolumbia-Montour Vo-Tech (D4) · no candidate
+  Clarks Summit/Abington (D12) · no candidate
+  Claysville · no candidate
+  ClellandDowningtown West (D1) · no candidate
+  CloskeSyugar Valley Rural Charter · no candidate
+  CloskeySugar Valley Rural Charter (D4) · no candidate
+  Cmolusmbia-Montour Vo-Tech (D4) · no candidate
+  Cnanon-McMillan · no candidate
+  Cnentral Bucks South (D1) · no candidate
+  Cnoelumbia-Montour Vo-Tech (D4) · no candidate
+  Cnolumbia-Montour Vo-Tech (D4) · no candidate
+  Cnonemaugh Township · no candidate
+  Coanon-McMillan · no candidate
+  Coentral Valley · no candidate
+  Collingdale (D1) · no candidate
+  Conemaugh Township, SR, -2-12 (D5) · no candidate
+  Conneaut Valley (D10) · no candidate
+  ConnehaNorth Allegheny · no candidate
+  Coorutnhcil Rock South (D1) · no candidate
+  Covouncil Rock South · no candidate
+  CrackenWaynesburg Central · no candidate
+  Cresson (D6) · no candidate
+  Crotlsumbia-Montour Vo-Tech (D4) · no candidate
+  Csolumbia-Montour Vo-Tech (D4) · no candidate
+  Ctolumbia-Montour Vo-Tech (D4) · no candidate
+  Cumberland Township (D7) · no candidate
+  Cuorngemaugh Township · no candidate
+  Cveerntral Dauphin East · no candidate
+  Dallas, 8th (D2) · no candidate
+  Daniel Boone, 8th · no candidate
+  Delaware Co. Christian (D1) · no candidate
+  Delhaas (D1) · no candidate
+  Diowningtown West (D1) · no candidate
+  Disq. 1:10 (D11) · no candidate
+  DoWnaelsdt Chester Henderson (D1) · no candidate
+  DoWnaesldt Chester Henderson (D1) · no candidate
+  Donora (D7) · no candidate
+  East Pike Run (D7) · no candidate
+  Edinboro (D10) · no candidate
+  Elco (D3) · no candidate
+  Elk County Christian (D9) · no candidate
+  Elkland Area (D4) · no candidate
+  Emporium (D9) · no candidate
+  Enaast Stroudsburg North · no candidate
+  Executive Education Acad. (D11) · no candidate
+  Executive Education Academy (D11) · no candidate
+  Exeter, 8th · no candidate
+  Faith Christian Academy, 8th (D1) · no candidate
+  Ford City (D7) · no candidate
+  Forfeit (D6) · no candidate
+  Franklin Towne Charter (D12) · no candidate
+  Franklin Township (D7) · no candidate
+  Friends Select (D1) · no candidate
+  GWuiensnte Cshsester Henderson (D1) · no candidate
+  Gereensburg Salem · no candidate
+  Gererensburg Salem (D7) · no candidate
+  German (D7) · no candidate
+  GinleyDowningtown East (D1) · no candidate
+  Girard College (D1) · no candidate
+  Girard College, 8th (D1) · no candidate
+  Gnreensburg Salem · no candidate
+  Greensburg C.C. (D7) · no candidate
+  Greensburg CC (D7) · no candidate
+  Greensburg Salem, 8th · no candidate
+  Grereensburg Salem · no candidate
+  Grreensburg Salem (D7) · no candidate
+  GuWinensets Cshester Henderson (D1) · no candidate
+  Gveorge Washington · no candidate
+  Haverford High, 8th (D1) · no candidate
+  Hellertown Lower Saucon (D11) · no candidate
+  Holy Cross (D2) · 3 statewide candidates
+  Hyleulklertown Lower Saucon (D11) · no candidate
+  Immaculate Conception) 138 – Abby Rush (Avella (D7) · no candidate
+  InnisWest Chester Henderson (D1) · no candidate
+  James Buchanan, 8th (D3) · no candidate
+  Jefferson (D7) · no candidate
+  Jenkintown (D1) · no candidate
+  KBinenaeveyr County Christian (D7) · no candidate
+  Kennedy Christian, 8th (D10) · no candidate
+  Kennedy-Kenrick (D1) · no candidate
+  KiBnenaevyer County Christian (D7) · no candidate
+  Kingston Central Catholic (D2) · no candidate
+  Ktieystone Oaks (D7) · no candidate
+  Lake Consolidated (D12) · no candidate
+  Lake-Noxen (D2) · no candidate
+  Lancaster (D3) · no candidate
+  Langley · no candidate
+  Lansdale Catholic (D1) · no candidate
+  Lansdowne-Aldan, 8th (D1) · no candidate
+  LaughlWinest Chester Henderson (D1) · no candidate
+  Lawrence Park (D10) · no candidate
+  Lehman-Jackson-Ross (D2) · no candidate
+  Lemoyne (D3) · no candidate
+  Liberty (D4) · no candidate
+  Lincoln Park (D7) · no candidate
+  Lititz (D3) · no candidate
+  Lower Paxton (D3) · no candidate
+  MWonesatg Clehester Henderson · no candidate
+  Mahanoy Joint (D4) · no candidate
+  Manor-Millersville (D3) · no candidate
+  Mansfield (D4) · no candidate
+  Maplewood, JR, -1-17 (D10) · no candidate
+  Mariana Bracetti Acad. (D12) · no candidate
+  Marple Newtown, 8th · no candidate
+  MartinoNeshaminy-Langhorne (D1) · no candidate
+  Mastery Charter Lenfest (D12) · no candidate
+  Mastery Charter School (D12) · no candidate
+  Mastery Charter School Lenfest (D12) · no candidate
+  McVeytown (D6) · no candidate
+  Meeradowbrook Christian (D4) · no candidate
+  Methacton, 8th (D1) · no candidate
+  Meyersdale, 6th (D5) · no candidate
+  Mill Hall (D6) · no candidate
+  Millvale (D7) · no candidate
+  MonagWleest Chester Henderson (D1) · no candidate
+  Morrison Cove (D6) · no candidate
+  Muhlenburg (D3) · no candidate
+  MullenAllentown Dieruff · no candidate
+  Naeinghborhood Academy (D7) · no candidate
+  Naeshaminy-Langhorne (D1) · no candidate
+  Neighborhood Academy (D7) · no candidate
+  Neighborhood Academy, 8th · no candidate
+  Nether Providence (D1) · no candidate
+  New Kensington · no candidate
+  Ngnoortth Penn-Liberty (D4) · no candidate
+  Nhortheast Bradford (D4) · no candidate
+  Nieshaminy-Maple Point (D1) · no candidate
+  Nneshaminy-Maple Point (D1) · no candidate
+  Nnoortth Penn-Liberty (D4) · no candidate
+  Nootrth Penn-Liberty (D4) · no candidate
+  Norco Tech (D1) · no candidate
+  North Huntingdon · no candidate
+  North Penn-Blossburg (D4) · no candidate
+  North York Borough (D3) · no candidate
+  North-Mont (D4) · no candidate
+  Nzeshaminy-Maple Point · no candidate
+  Obama Academy (D8) · no candidate
+  Oliver (D8) · no candidate
+  Osceola Mills (D6) · no candidate
+  Palyyemrouth Whitemarsh (D1) · no candidate
+  Palyymerouth Whitemarsh (D1) · no candidate
+  PasqualCeolumbia-Montour Vo-Tech (D4) · no candidate
+  Peabody (D8) · no candidate
+  Peittsburgh CC · no candidate
+  Penn Joint · no candidate
+  Penn Manor, 8th · no candidate
+  Penns Valley, 8th (D6) · no candidate
+  Perry Traditional Acad. (D8) · no candidate
+  Perry Traditional Academy (D8) · no candidate
+  Pfilayhmouth Whitemarsh · no candidate
+  Phil-Mont Christian (D1) · no candidate
+  Pittsburgh CC (D7) · no candidate
+  Plains (D2) · no candidate
+  Playymeoruth Whitemarsh (D1) · no candidate
+  Pleasant Valley, 8th (D11) · no candidate
+  Plllyimouth Whitemarsh (D1) · no candidate
+  Plllyomouth Whitemarsh (D1) · no candidate
+  Plumstead Christian (D1) · no candidate
+  Pmitptssbounrgh Central Catholic (D7) · no candidate
+  Pmlyamyeourth Whitemarsh (D1) · no candidate
+  Pnsitktsiburgh Central Catholic (D7) · no candidate
+  Prdlymouth Whitemarsh · no candidate
+  Prior (D11) · no candidate
+  Prlymouth Whitemarsh (D1) · no candidate
+  Ptlyomouth Whitemarsh (D1) · no candidate
+  Ptritutzszbiurgh Central Catholic (D7) · no candidate
+  Pultyomouth Whitemarsh (D1) · no candidate
+  Pyleyrmouth Whitemarsh (D1) · no candidate
+  Qanuaker Valley (D7) · no candidate
+  Ralpho Township (D4) · no candidate
+  Ramsey (D7) · no candidate
+  Reading CC (D3) · no candidate
+  Reading Central Catholic (D3) · no candidate
+  Ridley Township (D1) · no candidate
+  Ridley, 8th (D1) · no candidate
+  Roman Catholic, 8th (D12) · no candidate
+  Rothrock (D6) · no candidate
+  Sandy Township (D9) · no candidate
+  Sbmeiethfield-Ridgebury-Ulster (D4) · no candidate
+  Schenley · no candidate
+  Scotland School (D3) · no candidate
+  Scott Township · no candidate
+  Scranton Central (D2) · no candidate
+  Scranton Tech (D2) · no candidate
+  Sdoenneca Valley · no candidate
+  Sdusquehanna Community · no candidate
+  Seneca Valley) 138 – Nick Coy (Penn-Trafford (D7) · no candidate
+  Seoruth Williamsport (D4) · no candidate
+  Seoyuth Williamsport (D4) · no candidate
+  Seuygar Valley Rural Charter (D4) · no candidate
+  Seuysquehanna Community · no candidate
+  Sewickley Township (D7) · no candidate
+  Seyusquehanna Community · no candidate
+  Sharon Hill (D1) · no candidate
+  Simon Gratz Mastery Charter (D12) · no candidate
+  Sleoruth Williamsport (D4) · no candidate
+  Sleuysquehanna Community · no candidate
+  Sltmonithfield-Ridgebury-Ulster (D4) · no candidate
+  Smomutoh nWsilliamsport (D4) · no candidate
+  Snpringfield Township · no candidate
+  Snusquehanna Community · no candidate
+  Soenneca Valley · no candidate
+  Souderton, 8th (D1) · no candidate
+  Souksquehanna Community · no candidate
+  Southern Lehigh, 8th (D11) · no candidate
+  Srdusquehanna Community · no candidate
+  Sruubsqeurehanna Community · no candidate
+  Ssmseitrhfield-Ridgebury-Ulster (D4) · no candidate
+  St. Gregory's Academy (D2) · no candidate
+  St. John Kanty Prep (D10) · no candidate
+  St. John Neumann Regional (D4) · no candidate
+  Stowe Township (D7) · no candidate
+  StravickUpper Perkiomen (D1) · no candidate
+  Sugar Valley Rural Charter (D4) · no candidate
+  Sumgihthfield-Ridgebury-Ulster (D4) · no candidate
+  Sup. Dec. 12-0 (D11) · no candidate
+  Sup. Dec. 13-1 (D11) · no candidate
+  Sup. Dec. 14-2 (D11) · no candidate
+  Sup. Dec. 15-2 (D11) · no candidate
+  Sup. Dec. 15-3 (D11) · no candidate
+  Sup. Dec. 16-2 (D11) · no candidate
+  Sup. Dec. 16-4 (D11) · no candidate
+  Sup. Dec. 18-0 (D11) · no candidate
+  Sup. Dec. 19-0 (D11) · no candidate
+  Sup. Dec. 19-6 (D11) · no candidate
+  Sup. Dec. 20-2 (D11) · no candidate
+  Sup. Dec. 20-6 (D11) · no candidate
+  Sup. Dec. 22-0 (D11) · no candidate
+  Sup. Dec. 22-5 (D11) · no candidate
+  Sup. Dec. 25-4 (D11) · no candidate
+  Sup. Dec. 33-0 (D11) · no candidate
+  Suubseqruehanna Community · no candidate
+  Syouth Williamsport (D4) · no candidate
+  Syugar Valley Rural Charter (D4) · no candidate
+  Syusquehanna Community · no candidate
+  TF 3:16 · no candidate
+  Thomas A. Edison (D12) · no candidate
+  Townville (D10) · no candidate
+  Tri-Valley, 8th (D11) · no candidate
+  Turtle Creek (D7) · no candidate
+  Tyrone Christian Academy (D6) · no candidate
+  Uovpper St. Clair (D7) · no candidate
+  Usopnper Moreland (D1) · no candidate
+  Valley Forge Military (D1) · no candidate
+  Venango Catholic (D10) · no candidate
+  Waamynesburg Central · no candidate
+  Wacekst Chester Rustin (D1) · no candidate
+  Waedst Chester Henderson · no candidate
+  Wamaynesburg Central · no candidate
+  Wase-sSta Cnhteasntaer Henderson (D1) · no candidate
+  Watsontown (D4) · no candidate
+  Wattsburg (D10) · no candidate
+  Waynesburg Central) HWT – Clay McKendree (Kiski Area (D7) · no candidate
+  Wckeesrt Chester Henderson (D1) · no candidate
+  Wdeesst Chester Rustin (D1) · no candidate
+  Weest Chester Henderson (D1) · no candidate
+  Weiaeyrnesburg Central · no candidate
+  West Chester (D1) · no candidate
+  West Mifflin North (D7) · no candidate
+  West Mifflin South (D7) · no candidate
+  West Side Vo-Tech (D2) · no candidate
+  Westinghouse (D8) · no candidate
+  Westmoreland (D2) · no candidate
+  Wffietsht Chester Henderson (D1) · no candidate
+  Wgaynesburg Central · no candidate
+  Wgeaynesburg Central · no candidate
+  Wgsest Chester Rustin (D1) · no candidate
+  Whaamynesburg Central · no candidate
+  Wideesst Chester Rustin (D1) · no candidate
+  Wilkes-Barre Township (D2) · no candidate
+  Wilkinsburg (D7) · no candidate
+  Winest Chester Henderson · no candidate
+  Wjacekst Chester Rustin (D1) · no candidate
+  Wlidesets Chester Rustin (D1) · no candidate
+  Wliedsets Chester Rustin (D1) · no candidate
+  Wliest Chester Henderson (D1) · no candidate
+  Wmeest Chester Henderson (D1) · no candidate
+  Wnaynesburg Central · no candidate
+  Wnest Chester Rustin (D1) · no candidate
+  Wonaynesburg Central · no candidate
+  Wonest Chester Rustin (D1) · no candidate
+  Woodrow Wilson (D1) · no candidate
+  Wraynesburg Central · no candidate
+  Wrest Allegheny · no candidate
+  Wriesst Chester Rustin (D1) · no candidate
+  Wrisest Chester Rustin (D1) · no candidate
+  Wrtaoynnesburg Central · no candidate
+  Ws-eSsat nCthaensater Henderson (D1) · no candidate
+  Wtateyrnesburg Central · no candidate
+  Wtiest Chester Henderson (D1) · no candidate
+  Wtoanynesburg Central · no candidate
+  Wtoesset Chester Henderson (D1) · no candidate
+  Wvleisdte Cshester Rustin (D1) · no candidate
+  Wwesskt iChester Henderson (D1) · no candidate
+  Wwest Chester Rustin (D1) · no candidate
+  Wyest Chester Henderson (D1) · no candidate
+  Wyoming Seminary (D2) · no candidate
+  Wyoming Seminary, 8th (D2) · no candidate
+  Yeadon (D1) · no candidate
+  York Technology (D3) · no candidate
+  aynesburg Central · no candidate
+  eshaminy-Maple Point (D1) · no candidate
+  est Chester East (D1) · no candidate
+  est Chester Henderson (D1) · no candidate
+  est Chester Rustin (D1) · no candidate
+  iny-Maple Point (D1) · no candidate
+  ithfield-Ridgebury-Ulster (D4) · no candidate
+  llentown Central Catholic (D11) · no candidate
+  lymouth Whitemarsh · no candidate
+  olumbia-Montour Vo-Tech (D4) · no candidate
+  reater Johnstown Vo-Tech (D6) · no candidate
+  t Chester Henderson (D1) · no candidate
+* Beth-Center (D7) · no candidate
+* Bishop Hoban · successor Holy Redeemer unmatched
+* Bishop O'Hara (D2) · no candidate
+* Blairsville (D6) · no candidate
+* Calvary Christian (D10) · no candidate
+* Cardinal O'Hara (D12) · no candidate
+* Central Clarion (D9) · no candidate
+* Central Tech (D10) · no candidate
+* Chief Logan (D6) · no candidate
+* Church Farm School (D1) · no candidate
+* Columbia-Montour Vo-Tech (D4) · no candidate
+* Conneaut Lake (D10) · no candidate
+* Conwell-Egan (D12) · no candidate
+* Council Rock (D1) · no candidate
+* Dormont (D7) · no candidate
+* Downingtown (D1) · no candidate
+* ELCO (D3) · no candidate
+* Ellwood City (D7) · no candidate
+* Elmer L. Meyers (D2) · no candidate
+* Erie Academy (D10) · no candidate
+* Erie Strong Vincent (D10) · no candidate
+* Fairchance-Georges (D7) · no candidate
+* Faith Christian Academy (D1) · 3 statewide candidates
+* Farrell (D7) · no candidate
+* GAR Memorial (D2) · no candidate
+* German Township (D7) · no candidate
+* Glen Mills (D1) · no candidate
+* Greater Johnstown Vo-Tech (D6) · no candidate
+* Greensburg Central Catholic (D7) · no candidate
+* Harry S. Truman (D1) · no candidate
+* Hyndman (D5) · no candidate
+* Immaculate Conception (D7) · no candidate
+* Indian Valley (D6) · no candidate
+* J.P. McCaskey (D3) · no candidate
+* James M. Coughlin (D2) · no candidate
+* Jenner-Boswell (D5) · no candidate
+* John Harris (D3) · no candidate
+* Kennedy Christian (D10) · no candidate
+* Kishacoquillas (D6) · no candidate
+* Lakeview (D10) · no candidate
+* Lansdowne-Aldan (D1) · no candidate
+* Lewistown (D6) · no candidate
+* Lewistown-Granville (D6) · no candidate
+* Mariana Bracetti Academy (D12) · no candidate
+* Meadowbrook Christian (D4) · no candidate
+* Mid Valley (D2) · no candidate
+* Middleburg (D4) · no candidate
+* Mifflin County (D6) · no candidate
+* Milton Hershey (D3) · no candidate
+* Monsignor Bonner (D12) · no candidate
+* Munhall (D7) · no candidate
+* Neshaminy-Maple Point (D1) · no candidate
+* Northeast Catholic (D12) · no candidate
+* Northern York (D3) · no candidate
+* Northgate (D7) · no candidate
+* Notre Dame-Green Pond (D11) · 2 statewide candidates
+* Oswayo Valley (D9) · 2 statewide candidates
+* Our Lady of Lourdes Regional (D4) · no candidate
+* Penn Highlands (D6) · no candidate
+* Pius X (Roseto) (D11) · no candidate
+* Pocono Mountain (D11) · no candidate
+* Quigley Catholic (D7) · no candidate
+* Roman Catholic (D12) · no candidate
+* Salisbury Township (D11) · no candidate
+* Saltsburg (D6) · no candidate
+* Shady Side Academy (D7) · 3 statewide candidates
+* Slatington (D11) · no candidate
+* Smithfield-Ridgebury-Ulster (D4) · no candidate
+* South Side Beaver (D7) · no candidate
+* St. Joseph's Academy (D6) · no candidate
+* St. Pius X (D1) · no candidate
+* Sugar Valley (D6) · no candidate
+* Sullivan County (D4) · no candidate
+* Technical Memorial (D10) · no candidate
+* Trinity (D3) · no candidate
+* West Hazleton (D11) · no candidate
+* West Snyder (D4) · no candidate
+* West View (D7) · no candidate
+* Wyoming Area (D2) · no candidate
+* York (D3) · no candidate
+* York Catholic (D3) · no candidate
+* York Tech (D3) · no candidate

@@ -1,0 +1,1146 @@
+{
+ "Beth-Center": {
+  "d": 7,
+  "canonical": "Beth-Center",
+  "confidence": "high"
+ },
+ "Warwick": {
+  "d": 3,
+  "canonical": "Warwick",
+  "confidence": "high"
+ },
+ "Towanda": {
+  "d": 4,
+  "canonical": "Towanda",
+  "confidence": "high"
+ },
+ "Lower Dauphin": {
+  "d": 3,
+  "canonical": "Lower Dauphin",
+  "confidence": "high"
+ },
+ "Penn Cambria": {
+  "d": 6,
+  "canonical": "Penn Cambria",
+  "confidence": "high"
+ },
+ "Notre Dame-GP": {
+  "d": 11,
+  "canonical": "Notre Dame-Green Pond High School",
+  "confidence": "high"
+ },
+ "Central Bucks West": {
+  "d": 1,
+  "canonical": "Central Bucks West",
+  "confidence": "high"
+ },
+ "Hamburg": {
+  "d": 3,
+  "canonical": "Hamburg",
+  "confidence": "high"
+ },
+ "Fort Cherry": {
+  "d": 7,
+  "canonical": "Fort Cherry",
+  "confidence": "high"
+ },
+ "West Greene": {
+  "d": 7,
+  "canonical": "West Greene",
+  "confidence": "high"
+ },
+ "Bethel Park": {
+  "d": 7,
+  "canonical": "Bethel Park",
+  "confidence": "high"
+ },
+ "Pittsburgh CC": {
+  "d": 7,
+  "canonical": "Pittsburgh Central Catholic High School",
+  "confidence": "high"
+ },
+ "Tussey Mountain": {
+  "d": 6,
+  "canonical": "Tussey Mountain",
+  "confidence": "high"
+ },
+ "Carlisle": {
+  "d": 3,
+  "canonical": "Carlisle",
+  "confidence": "high"
+ },
+ "Red Lion": {
+  "d": 3,
+  "canonical": "Red Lion",
+  "confidence": "high"
+ },
+ "Indian Valley": {
+  "d": 1,
+  "canonical": "Indian Valley",
+  "confidence": "high"
+ },
+ "Central": {
+  "d": 6,
+  "canonical": "Central Cambria High School",
+  "confidence": "low"
+ },
+ "Kennett": {
+  "d": 1,
+  "canonical": "Kennett",
+  "confidence": "high"
+ },
+ "Central York": {
+  "d": 3,
+  "canonical": "Central York",
+  "confidence": "high"
+ },
+ "Greensburg CC": {
+  "d": 7,
+  "canonical": "Greensburg Central Catholic High School",
+  "confidence": "high"
+ },
+ "Milton Hershey": {
+  "d": 3,
+  "canonical": "Milton Hershey",
+  "confidence": "high"
+ },
+ "West Scranton": {
+  "d": 2,
+  "canonical": "West Scranton",
+  "confidence": "high"
+ },
+ "Shippensburg": {
+  "d": 3,
+  "canonical": "Shippensburg",
+  "confidence": "high"
+ },
+ "Midd-West": {
+  "d": 4,
+  "canonical": "Midd-West",
+  "confidence": "high"
+ },
+ "Downingtown West": {
+  "d": 1,
+  "canonical": "Downingtown West",
+  "confidence": "high"
+ },
+ "Conwell-Egan": {
+  "d": 1,
+  "canonical": "Conwell-Egan Catholic High School",
+  "confidence": "high"
+ },
+ "Great Valley": {
+  "d": 1,
+  "canonical": "Great Valley",
+  "confidence": "high"
+ },
+ "Warren": {
+  "d": 10,
+  "canonical": "Warren",
+  "confidence": "high"
+ },
+ "Cambridge Springs": {
+  "d": 10,
+  "canonical": "Cambridge Springs",
+  "confidence": "high"
+ },
+ "Smethport": {
+  "d": 9,
+  "canonical": "Smethport",
+  "confidence": "high"
+ },
+ "Northeast Bradford": {
+  "d": 4,
+  "canonical": "Northeast Bradford",
+  "confidence": "high"
+ },
+ "Quaker Valley": {
+  "d": 7,
+  "canonical": "Quaker Valley",
+  "confidence": "high"
+ },
+ "Berks Catholic": {
+  "d": 3,
+  "canonical": "Berks Catholic",
+  "confidence": "high"
+ },
+ "South Williamsport": {
+  "d": 4,
+  "canonical": "South Williamsport",
+  "confidence": "high"
+ },
+ "Mercer": {
+  "d": 10,
+  "canonical": "Mercer",
+  "confidence": "high"
+ },
+ "Central Tech": {
+  "d": 10,
+  "canonical": "Central Tech",
+  "confidence": "medium"
+ },
+ "Williamson": {
+  "d": 4,
+  "canonical": "Williamson Senior High School",
+  "confidence": "high"
+ },
+ "Eastern York": {
+  "d": 3,
+  "canonical": "Eastern York",
+  "confidence": "high"
+ },
+ "Gateway": {
+  "d": 7,
+  "canonical": "Gateway",
+  "confidence": "high"
+ },
+ "Pequea Valley": {
+  "d": 3,
+  "canonical": "Pequea Valley",
+  "confidence": "high"
+ },
+ "Eisenhower": {
+  "d": 10,
+  "canonical": "Eisenhower",
+  "confidence": "high"
+ },
+ "Garnet Valley": {
+  "d": 1,
+  "canonical": "Garnet Valley",
+  "confidence": "high"
+ },
+ "Union City": {
+  "d": 10,
+  "canonical": "Union City",
+  "confidence": "high"
+ },
+ "North East": {
+  "d": 10,
+  "canonical": "North East",
+  "confidence": "high"
+ },
+ "Bensalem": {
+  "d": 1,
+  "canonical": "Bensalem",
+  "confidence": "high"
+ },
+ "William Tennent": {
+  "d": 1,
+  "canonical": "William Tennent",
+  "confidence": "high"
+ },
+ "Albert Gallatin": {
+  "d": 7,
+  "canonical": "Albert Gallatin",
+  "confidence": "high"
+ },
+ "Girard": {
+  "d": 10,
+  "canonical": "Girard",
+  "confidence": "high"
+ },
+ "Cocalico": {
+  "d": 3,
+  "canonical": "Cocalico",
+  "confidence": "high"
+ },
+ "Elizabeth Forward": {
+  "d": 7,
+  "canonical": "Elizabeth Forward",
+  "confidence": "high"
+ },
+ "Hyndman": {
+  "d": 5,
+  "canonical": "Hyndman",
+  "confidence": "high"
+ },
+ "Slippery Rock": {
+  "d": 7,
+  "canonical": "Slippery Rock",
+  "confidence": "high"
+ },
+ "Williams Valley": {
+  "d": 11,
+  "canonical": "Williams Valley",
+  "confidence": "medium"
+ },
+ "Panther Valley": {
+  "d": 11,
+  "canonical": "Panther Valley",
+  "confidence": "high"
+ },
+ "Sharpsville": {
+  "d": 10,
+  "canonical": "Sharpsville",
+  "confidence": "high"
+ },
+ "Lampeter-Strasburg": {
+  "d": 3,
+  "canonical": "Lampeter-Strasburg",
+  "confidence": "high"
+ },
+ "Middleburg": {
+  "d": 4,
+  "canonical": "Middleburg",
+  "confidence": "high"
+ },
+ "Valley View": {
+  "d": 2,
+  "canonical": "Valley View",
+  "confidence": "high"
+ },
+ "Butler": {
+  "d": 7,
+  "canonical": "Butler",
+  "confidence": "high"
+ },
+ "Conneaut Area": {
+  "d": 10,
+  "canonical": "Conneaut Area",
+  "confidence": "high"
+ },
+ "Halifax": {
+  "d": 3,
+  "canonical": "Halifax",
+  "confidence": "high"
+ },
+ "Ridley": {
+  "d": 1,
+  "canonical": "Ridley",
+  "confidence": "high"
+ },
+ "Titusville": {
+  "d": 10,
+  "canonical": "Titusville",
+  "confidence": "high"
+ },
+ "Wissahickon": {
+  "d": 1,
+  "canonical": "Wissahickon",
+  "confidence": "high"
+ },
+ "Blue Ridge": {
+  "d": 2,
+  "canonical": "Blue Ridge",
+  "confidence": "high"
+ },
+ "Portage": {
+  "d": 6,
+  "canonical": "Portage",
+  "confidence": "high"
+ },
+ "Unionville": {
+  "d": 1,
+  "canonical": "Unionville",
+  "confidence": "high"
+ },
+ "Montour": {
+  "d": 7,
+  "canonical": "Montour High School",
+  "confidence": "high"
+ },
+ "Sullivan County": {
+  "d": 4,
+  "canonical": "Sullivan County",
+  "confidence": "high"
+ },
+ "Strath Haven": {
+  "d": 1,
+  "canonical": "Strath Haven",
+  "confidence": "high"
+ },
+ "Iroquois": {
+  "d": 10,
+  "canonical": "Iroquois",
+  "confidence": "high"
+ },
+ "Springfield Township": {
+  "d": 1,
+  "canonical": "Springfield Township",
+  "confidence": "high"
+ },
+ "Lebanon": {
+  "d": 3,
+  "canonical": "Lebanon",
+  "confidence": "high"
+ },
+ "Conemaugh Township": {
+  "d": 5,
+  "canonical": "Conemaugh Township Area High School",
+  "confidence": "high"
+ },
+ "Donegal": {
+  "d": 7,
+  "canonical": "Donegal",
+  "confidence": "high"
+ },
+ "York Suburban": {
+  "d": 3,
+  "canonical": "York Suburban",
+  "confidence": "high"
+ },
+ "Ringgold": {
+  "d": 7,
+  "canonical": "Ringgold",
+  "confidence": "high"
+ },
+ "Bradford": {
+  "d": 9,
+  "canonical": "Bradford Area High School",
+  "confidence": "medium"
+ },
+ "Interboro": {
+  "d": 1,
+  "canonical": "Interboro",
+  "confidence": "high"
+ },
+ "Penncrest": {
+  "d": 10,
+  "canonical": "Penncrest High School",
+  "confidence": "medium"
+ },
+ "Southern Huntingdon": {
+  "d": 6,
+  "canonical": "Southern Huntingdon",
+  "confidence": "high"
+ },
+ "Fairfield": {
+  "d": 3,
+  "canonical": "Fairfield",
+  "confidence": "high"
+ },
+ "Downingtown East": {
+  "d": 1,
+  "canonical": "Downingtown East",
+  "confidence": "high"
+ },
+ "Manheim Borough": {
+  "d": 3,
+  "canonical": "Manheim Borough",
+  "confidence": "high"
+ },
+ "Churchill": {
+  "d": 7,
+  "canonical": "Churchill",
+  "confidence": "high"
+ },
+ "Western Wayne": {
+  "d": 2,
+  "canonical": "Western Wayne",
+  "confidence": "high"
+ },
+ "Muhlenberg": {
+  "d": 3,
+  "canonical": "Muhlenberg",
+  "confidence": "high"
+ },
+ "Fox Chapel": {
+  "d": 7,
+  "canonical": "Fox Chapel",
+  "confidence": "high"
+ },
+ "Upper Moreland": {
+  "d": 1,
+  "canonical": "Upper Moreland",
+  "confidence": "high"
+ },
+ "Kutztown": {
+  "d": 3,
+  "canonical": "Kutztown",
+  "confidence": "high"
+ },
+ "Sheffield": {
+  "d": 10,
+  "canonical": "Sheffield",
+  "confidence": "high"
+ },
+ "Ferndale": {
+  "d": 6,
+  "canonical": "Ferndale",
+  "confidence": "high"
+ },
+ "Tunkhannock": {
+  "d": 2,
+  "canonical": "Tunkhannock",
+  "confidence": "high"
+ },
+ "Baldwin": {
+  "d": 7,
+  "canonical": "Baldwin",
+  "confidence": "high"
+ },
+ "Elderton": {
+  "d": 7,
+  "canonical": "Elderton",
+  "confidence": "high"
+ },
+ "Northwestern": {
+  "d": 11,
+  "canonical": "Northwestern Lehigh High School",
+  "confidence": "low"
+ },
+ "Harriton": {
+  "d": 1,
+  "canonical": "Harriton",
+  "confidence": "high"
+ },
+ "Mars": {
+  "d": 7,
+  "canonical": "Mars",
+  "confidence": "high"
+ },
+ "West Chester Rustin": {
+  "d": 1,
+  "canonical": "West Chester Rustin",
+  "confidence": "high"
+ },
+ "Wallenpaupack": {
+  "d": 2,
+  "canonical": "Wallenpaupack",
+  "confidence": "high"
+ },
+ "Meadowbrook Christian": {
+  "d": 4,
+  "canonical": "Meadowbrook Christian School",
+  "confidence": "medium"
+ },
+ "Latrobe": {
+  "d": 7,
+  "canonical": "Latrobe",
+  "confidence": "high"
+ },
+ "Jenner-Boswell": {
+  "d": 5,
+  "canonical": "Jenner-Boswell",
+  "confidence": "high"
+ },
+ "Marple Newtown": {
+  "d": 1,
+  "canonical": "Marple Newtown",
+  "confidence": "high"
+ },
+ "Northeastern": {
+  "d": 3,
+  "canonical": "Northeastern York High School",
+  "confidence": "high"
+ },
+ "Neshaminy-Langhorne": {
+  "d": 1,
+  "canonical": "Neshaminy-Langhorne",
+  "confidence": "high"
+ },
+ "Bishop Canevin": {
+  "d": 7,
+  "canonical": "Bishop Canevin",
+  "confidence": "high"
+ },
+ "Avon Grove": {
+  "d": 1,
+  "canonical": "Avon Grove",
+  "confidence": "high"
+ },
+ "Palmyra": {
+  "d": 3,
+  "canonical": "Palmyra",
+  "confidence": "high"
+ },
+ "Yough": {
+  "d": 7,
+  "canonical": "Yough",
+  "confidence": "high"
+ },
+ "Chichester": {
+  "d": 1,
+  "canonical": "Chichester",
+  "confidence": "high"
+ },
+ "Pottsgrove": {
+  "d": 1,
+  "canonical": "Pottsgrove",
+  "confidence": "high"
+ },
+ "Greencastle-Antrim": {
+  "d": 3,
+  "canonical": "Greencastle-Antrim",
+  "confidence": "high"
+ },
+ "ELCO": {
+  "d": 3,
+  "canonical": "Eastern Lebanon County High School",
+  "confidence": "high"
+ },
+ "Oswayo Valley": {
+  "d": 4,
+  "canonical": "Oswayo Valley",
+  "confidence": "high"
+ },
+ "Trafford": {
+  "d": 7,
+  "canonical": "Trafford",
+  "confidence": "high"
+ },
+ "Steelton": {
+  "d": 3,
+  "canonical": "Steelton",
+  "confidence": "high"
+ },
+ "Munhall": {
+  "d": 7,
+  "canonical": "Munhall",
+  "confidence": "high"
+ },
+ "Millersburg": {
+  "d": 3,
+  "canonical": "Millersburg",
+  "confidence": "high"
+ },
+ "Lower Moreland": {
+  "d": 1,
+  "canonical": "Lower Moreland",
+  "confidence": "high"
+ },
+ "Twin Valley": {
+  "d": 3,
+  "canonical": "Twin Valley",
+  "confidence": "high"
+ },
+ "Minersville": {
+  "d": 11,
+  "canonical": "Minersville",
+  "confidence": "high"
+ },
+ "Bellwood Antis": {
+  "d": 6,
+  "canonical": "Bellwood Antis",
+  "confidence": "high"
+ },
+ "Cedar Crest": {
+  "d": 3,
+  "canonical": "Cedar Crest",
+  "confidence": "high"
+ },
+ "Rockwood": {
+  "d": 5,
+  "canonical": "Rockwood",
+  "confidence": "high"
+ },
+ "York Catholic": {
+  "d": 3,
+  "canonical": "York Catholic",
+  "confidence": "high"
+ },
+ "Riverview": {
+  "d": 7,
+  "canonical": "Riverview",
+  "confidence": "high"
+ },
+ "Kishacoquillas": {
+  "d": 3,
+  "canonical": "Kishacoquillas",
+  "confidence": "high"
+ },
+ "Fairchance-Georges": {
+  "d": 7,
+  "canonical": "Fairchance-Georges",
+  "confidence": "high"
+ },
+ "Woodland Hills": {
+  "d": 7,
+  "canonical": "Woodland Hills",
+  "confidence": "high"
+ },
+ "Carmichaels": {
+  "d": 7,
+  "canonical": "Carmichaels",
+  "confidence": "high"
+ },
+ "Wellsboro": {
+  "d": 4,
+  "canonical": "Wellsboro",
+  "confidence": "high"
+ },
+ "Schuylkill Haven": {
+  "d": 11,
+  "canonical": "Schuylkill Haven",
+  "confidence": "high"
+ },
+ "Radnor": {
+  "d": 1,
+  "canonical": "Radnor",
+  "confidence": "high"
+ },
+ "Glen Mills": {
+  "d": 1,
+  "canonical": "Glen Mills",
+  "confidence": "high"
+ },
+ "Mountain View": {
+  "d": 2,
+  "canonical": "Mountain View High School",
+  "confidence": "medium"
+ },
+ "Northeast High": {
+  "d": 12,
+  "canonical": "Northeast High",
+  "confidence": "high"
+ },
+ "Central Bucks South": {
+  "d": 1,
+  "canonical": "Central Bucks South",
+  "confidence": "high"
+ },
+ "James Buchanan": {
+  "d": 3,
+  "canonical": "James Buchanan",
+  "confidence": "high"
+ },
+ "Scranton Prep": {
+  "d": 2,
+  "canonical": "Scranton Prep",
+  "confidence": "high"
+ },
+ "Laurel Highlands": {
+  "d": 7,
+  "canonical": "Laurel Highlands",
+  "confidence": "high"
+ },
+ "North Penn-Liberty": {
+  "d": 1,
+  "canonical": "North Penn-Liberty",
+  "confidence": "high"
+ },
+ "Church Farm School": {
+  "d": 1,
+  "canonical": "Church Farm School",
+  "confidence": "high"
+ },
+ "Mariana Bracetti Academy": {
+  "d": 12,
+  "canonical": "Mariana Bracetti Academy",
+  "confidence": "high"
+ },
+ "Central Clarion": {
+  "d": 9,
+  "canonical": "Central Clarion",
+  "confidence": "high"
+ },
+ "Sunbury": {
+  "d": 4,
+  "canonical": "Sunbury",
+  "confidence": "high"
+ },
+ "Northwest": {
+  "d": 2,
+  "canonical": "Northwest Area High School",
+  "confidence": "medium"
+ },
+ "Coal Township": {
+  "d": 4,
+  "canonical": "Coal Township",
+  "confidence": "high"
+ },
+ "Lewistown-Granville": {
+  "d": 3,
+  "canonical": "Lewistown-Granville",
+  "confidence": "high"
+ },
+ "York": {
+  "d": 3,
+  "canonical": "York",
+  "confidence": "high"
+ },
+ "Columbia-Montour Vo-Tech": {
+  "d": 4,
+  "canonical": "Columbia-Montour Vo-Tech",
+  "confidence": "high"
+ },
+ "Saltsburg": {
+  "d": 6,
+  "canonical": "Saltsburg",
+  "confidence": "high"
+ },
+ "Conemaugh Valley": {
+  "d": 6,
+  "canonical": "Conemaugh Valley",
+  "confidence": "high"
+ },
+ "Swissvale": {
+  "d": 7,
+  "canonical": "Swissvale",
+  "confidence": "high"
+ },
+ "Our Lady of Lourdes Regional": {
+  "d": 4,
+  "canonical": "Our Lady of Lourdes Regional School",
+  "confidence": "low"
+ },
+ "Quigley Catholic": {
+  "d": 7,
+  "canonical": "Quigley Catholic",
+  "confidence": "high"
+ },
+ "Mapletown": {
+  "d": 7,
+  "canonical": "Mapletown",
+  "confidence": "high"
+ },
+ "Mercyhurst Prep": {
+  "d": 10,
+  "canonical": "Mercyhurst Prep",
+  "confidence": "high"
+ },
+ "Smithfield-Ridgebury-Ulster": {
+  "d": 4,
+  "canonical": "Smithfield-Ridgebury-Ulster",
+  "confidence": "medium"
+ },
+ "Bishop Hoban": {
+  "d": 2,
+  "canonical": "Bishop Hoban",
+  "confidence": "high"
+ },
+ "Northgate": {
+  "d": 7,
+  "canonical": "Northgate",
+  "confidence": "high"
+ },
+ "Greater Johnstown Vo-Tech": {
+  "d": 6,
+  "canonical": "Greater Johnstown Vo-Tech",
+  "confidence": "high"
+ },
+ "Elk Lake": {
+  "d": 2,
+  "canonical": "Elk Lake",
+  "confidence": "high"
+ },
+ "Annville-Cleona": {
+  "d": 3,
+  "canonical": "Annville-Cleona",
+  "confidence": "high"
+ },
+ "Northern Cambria": {
+  "d": 6,
+  "canonical": "Northern Cambria",
+  "confidence": "high"
+ },
+ "Avonworth": {
+  "d": 7,
+  "canonical": "Avonworth",
+  "confidence": "high"
+ },
+ "Ambridge": {
+  "d": 7,
+  "canonical": "Ambridge",
+  "confidence": "high"
+ },
+ "West Middlesex": {
+  "d": 10,
+  "canonical": "West Middlesex",
+  "confidence": "high"
+ },
+ "Jr.,Mount Union": {
+  "d": 6,
+  "canonical": "Mount Union Area High School",
+  "confidence": "medium"
+ },
+ "Cardinal O'Hara": {
+  "d": 1,
+  "canonical": "Cardinal O'Hara",
+  "confidence": "high"
+ },
+ "St. Pius X": {
+  "d": 1,
+  "canonical": "Saint Pius X High School",
+  "confidence": "high"
+ },
+ "Monsignor Bonner": {
+  "d": 1,
+  "canonical": "Monsignor Bonner & Archbishop Prendergast Catholic High School",
+  "confidence": "medium"
+ },
+ "Northeast Catholic": {
+  "d": 12,
+  "canonical": "Northeast Catholic",
+  "confidence": "high"
+ },
+ "Steel Valley": {
+  "d": 7,
+  "canonical": "Steel Valley",
+  "confidence": "high"
+ },
+ "Taylor Allderdice": {
+  "d": 8,
+  "canonical": "Taylor Allderdice",
+  "confidence": "high"
+ },
+ "Calvary Christian": {
+  "d": 10,
+  "canonical": "Calvary Christian",
+  "confidence": "low"
+ },
+ "Roman Catholic": {
+  "d": 12,
+  "canonical": "Roman Catholic High School",
+  "confidence": "high"
+ },
+ "Blackhawk": {
+  "d": 7,
+  "canonical": "Blackhawk",
+  "confidence": "high"
+ },
+ "Knoch": {
+  "d": 7,
+  "canonical": "Knoch",
+  "confidence": "high"
+ },
+ "Mid Valley": {
+  "d": 2,
+  "canonical": "Mid Valley",
+  "confidence": "high"
+ },
+ "Jenkintown": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Jenkintown, Montgomery County; confidence high"
+ },
+ "Delhaas": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Bristol Township, Bucks County; confidence high"
+ },
+ "Collingdale": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Collingdale, Delaware County; confidence high"
+ },
+ "Wilkinsburg": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Wilkinsburg, Allegheny County (outside the Pittsburgh city league); confidence high"
+ },
+ "Mansfield": {
+  "d": 4,
+  "note": "bracket qualifier lookup: Mansfield, Tioga County; confidence high"
+ },
+ "Aliquippa": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Aliquippa, Beaver County; confidence high"
+ },
+ "Tulpehocken": {
+  "d": 3,
+  "note": "bracket qualifier lookup: Bernville, Berks County; confidence high"
+ },
+ "Morrisville": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Morrisville, Bucks County; confidence high"
+ },
+ "Penn Wood": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Lansdowne, Delaware County; confidence high"
+ },
+ "Academy Park": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Sharon Hill, Delaware County; confidence high"
+ },
+ "Plains": {
+  "d": 2,
+  "note": "bracket qualifier lookup: Plains Township, Luzerne County; confidence high"
+ },
+ "Jefferson": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Ambiguous name; Jefferson-Morgan (Greene County) assumed, Jefferson Hills (Allegheny) also D7; confidence low"
+ },
+ "West Mifflin North": {
+  "d": 7,
+  "note": "bracket qualifier lookup: West Mifflin, Allegheny County; confidence high"
+ },
+ "William Penn": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Darby, Delaware County (William Penn School District); a York County William Penn would be D3; confidence medium"
+ },
+ "Elk County Christian": {
+  "d": 9,
+  "note": "bracket qualifier lookup: St. Marys, Elk County; confidence high"
+ },
+ "Susquehanna Community": {
+  "d": 2,
+  "note": "bracket qualifier lookup: Susquehanna County; confidence high"
+ },
+ "Millville": {
+  "d": 4,
+  "note": "bracket qualifier lookup: Millville, Columbia County; confidence high"
+ },
+ "Armstrong Central": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Armstrong County; confidence medium"
+ },
+ "Keystone": {
+  "d": 6,
+  "note": "bracket qualifier lookup: Ambiguous name; Keystone Central (Lock Haven, Clinton County) assumed, Keystone Oaks would be D7 and Keystone (Clarion) D9; confidence low"
+ },
+ "Archbishop Ryan": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia, Catholic; confidence high"
+ },
+ "River Valley": {
+  "d": 6,
+  "note": "bracket qualifier lookup: Blairsville, Indiana County (Blairsville-Saltsburg School District); confidence high"
+ },
+ "Windber": {
+  "d": 5,
+  "note": "bracket qualifier lookup: Windber, Somerset County; confidence high"
+ },
+ "Woodrow Wilson": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Langhorne, Bucks County (Middletown Woodrow Wilson High School); confidence medium"
+ },
+ "Lourdes Regional": {
+  "d": 4,
+  "note": "bracket qualifier lookup: Shamokin area, Northumberland/Snyder County; confidence high"
+ },
+ "Sharon Hill": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Sharon Hill, Delaware County; confidence high"
+ },
+ "Valley Forge Military": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Wayne, Delaware County; confidence high"
+ },
+ "Bucktail": {
+  "d": 6,
+  "note": "bracket qualifier lookup: Renovo, Clinton County; confidence medium"
+ },
+ "New Hope-Solebury": {
+  "d": 1,
+  "note": "bracket qualifier lookup: New Hope, Bucks County; confidence high"
+ },
+ "Reading CC": {
+  "d": 3,
+  "note": "bracket qualifier lookup: Reading, Berks County (Reading Central Catholic); confidence high"
+ },
+ "North Penn-Blossburg": {
+  "d": 4,
+  "note": "bracket qualifier lookup: Blossburg, Tioga County; confidence high"
+ },
+ "Archbishop Wood": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Warminster, Bucks County; confidence high"
+ },
+ "Summit Academy": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Butler County (Summit Academy, Butler area, WPIAL); name also used elsewhere in PA; confidence medium"
+ },
+ "Overbrook": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia; confidence high"
+ },
+ "Lawrence Park": {
+  "d": 10,
+  "note": "bracket qualifier lookup: Erie County; confidence high"
+ },
+ "Peabody": {
+  "d": 8,
+  "note": "bracket qualifier lookup: Pittsburgh city league (East Liberty); confidence high"
+ },
+ "Central Bucks": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Doylestown, Bucks County; confidence high"
+ },
+ "West Side Vo-Tech": {
+  "d": 2,
+  "note": "bracket qualifier lookup: Kingston, Luzerne County (West Side Career and Technology Center); confidence high"
+ },
+ "Rocky Grove": {
+  "d": 10,
+  "note": "bracket qualifier lookup: Franklin, Venango County; confidence high"
+ },
+ "Shenandoah Valley": {
+  "d": 11,
+  "note": "bracket qualifier lookup: Shenandoah, Schuylkill County; confidence high"
+ },
+ "Ford City": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Ford City, Armstrong County; confidence high"
+ },
+ "Rothrock": {
+  "d": 6,
+  "note": "bracket qualifier lookup: Central PA, Huntingdon area assumed; a PA wrestling record lists a Rothrock wrestler in District 6; confidence medium"
+ },
+ "Bishop Carroll": {
+  "d": 6,
+  "note": "bracket qualifier lookup: Ebensburg, Cambria County; confidence high"
+ },
+ "Bishop Hafey": {
+  "d": 2,
+  "note": "bracket qualifier lookup: Hazleton, Luzerne County; confidence high"
+ },
+ "West Mifflin South": {
+  "d": 7,
+  "note": "bracket qualifier lookup: West Mifflin, Allegheny County; confidence high"
+ },
+ "North Pocono": {
+  "d": 2,
+  "note": "bracket qualifier lookup: Moscow, Lackawanna County; confidence high"
+ },
+ "Bristol": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Bristol Borough, Bucks County; confidence high"
+ },
+ "Scotland School": {
+  "d": 3,
+  "note": "bracket qualifier lookup: Scotland, Franklin County; confidence high"
+ },
+ "Sewickley Academy": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Sewickley, Allegheny County; confidence high"
+ },
+ "Oliver": {
+  "d": 8,
+  "note": "bracket qualifier lookup: Pittsburgh city league (Oliver High School); confidence medium"
+ },
+ "Carrick": {
+  "d": 8,
+  "note": "bracket qualifier lookup: Pittsburgh city league (Carrick); confidence high"
+ },
+ "Abraham Lincoln": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia; confidence high"
+ },
+ "Apollo Ridge": {
+  "d": 7,
+  "note": "bracket qualifier lookup: Armstrong County (Apollo-Ridge); confidence high"
+ },
+ "Fleetwood": {
+  "d": 3,
+  "note": "bracket qualifier lookup: Fleetwood, Berks County; confidence high"
+ },
+ "Phil-Mont Christian": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Montgomery County; confidence high"
+ },
+ "Shade": {
+  "d": 5,
+  "note": "bracket qualifier lookup: Somerset County (Shade-Central City); confidence high"
+ },
+ "Westinghouse": {
+  "d": 8,
+  "note": "bracket qualifier lookup: Pittsburgh city league; confidence high"
+ },
+ "Archbishop Carroll": {
+  "d": 1,
+  "note": "bracket qualifier lookup: Radnor, Delaware County; confidence high"
+ },
+ "Mariana Bracetti Acad.": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia charter; confidence high"
+ },
+ "East Stroudsburg North": {
+  "d": 11,
+  "note": "bracket qualifier lookup: East Stroudsburg, Monroe County; confidence high"
+ },
+ "Belmont Charter": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia charter; confidence high"
+ },
+ "Frankford": {
+  "d": 12,
+  "note": "bracket qualifier lookup: Philadelphia; confidence high"
+ }
+}

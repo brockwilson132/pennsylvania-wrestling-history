@@ -1,0 +1,753 @@
+district,level,tournament,cls,year,missing
+1,district,District 1,single,1934,Official team scores are missing.
+1,district,District 1,single,1935,Some results are missing.
+1,district,District 1,single,1936,Some results are missing.
+1,district,District 1,single,1937,Most results are missing.
+1,district,District 1,single,1938,Some results are missing.
+1,district,District 1,single,1941,Some results are missing.
+1,district,District 1,single,1942,Some competing wrestlers and most quarterfinal results are missing.
+1,district,District 1,single,1943,Some competing wrestlers and some quarterfinal results are missing.
+1,district,District 1,single,1951,Some quarterfinal and semifinal results are missing.
+1,district,District 1,single,1952,Most quarterfinal results are missing.
+1,district,District 1,single,1953,Most quarterfinal and semifinal results are missing.
+1,district,District 1,single,1954,Most pigtail and quarterfinal results are missing.
+1,district,District 1,single,1955,Some competing wrestlers and most results are missing.
+1,district,District 1,single,1956,Some competing wrestlers and most pigtail and quarterfinal results are missing.
+1,district,District 1,single,1957,Some true second place results are missing.
+1,district,District 1,single,1958,Most results prior to placements are missing.
+1,district,District 1,single,1959,Most results prior to placements are missing.
+1,district,District 1,single,1960,Most results prior to placements are missing.
+1,district,District 1,single,1961,Some semifinal results are missing.
+1,district,District 1,single,1962,Some semifinal results are missing.
+1,district,District 1,single,1971,A pigtail result at 250 is missing.
+1,district,District 1 AAA North,AAA,1977,Official team scores are missing.
+1,district,District 1 AA,AA,1989,Most consolation results are missing.
+1,district,District 1 AA,AA,1997,Some consolation and semifinal results are missing.
+1,district,District 1 AA,AA,2000,Most results are missing.
+1,district,District 1 AA,AA,2002,Most results at 275 pounds are missing.
+1,regional,South East Regional,single,1951,Some third place results are missing.
+1,regional,South East Regional,single,1953,The 165 pound third place result is missing.
+1,regional,South East Regional,single,1959,Most third place results are missing.
+1,regional,South East A Regional,single,1975,Official team scores are missing.
+1,regional,South East AAA Regional,AAA,1976,Official team scores are missing.
+1,regional,South East AA Regional,AA,1981,Some consolation results are missing.
+1,regional,South East AA Regional,AA,1982,Official team scores are missing.
+1,regional,South Central AA Regional,AA,1988,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+1,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+1,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+2,district,District 2,single,1939,Quarterfinal results and some wrestlers are missing.
+2,district,District 2,single,1940,Most third place results are missing.
+2,district,District 2,single,1947,Semifinal results are missing.
+2,district,District 2,single,1950,Semifinal and some other results are missing.
+2,district,District 2,single,1954,Some quarterfinal results are missing.
+2,district,District 2,single,1955,Some pigtail and quarterfinal results are missing.
+2,district,District 2,single,1956,Some pigtail and quarterfinal results are missing.
+2,district,District 2,single,1957,Official team scores are missing.
+2,district,District 2,single,1958,Most results at 88 pounds are missing.
+2,district,District 2,single,1959,Some quarterfinal results at 88 pounds are missing.
+2,district,District 2,single,1960,Most results at 88 pounds are missing.
+2,district,District 2,single,1961,Semifinal results and most results at 88 pounds are missing.
+2,district,District 2,single,1963,Some results and official team scores are missing.
+2,district,District 2,single,1966,"Semifinal results at 154, 165, 180, and 250 are missing."
+2,district,District 2,single,1971,Some results are missing.
+2,district,District 2 A,single,1974,Some competing wrestlers along with pigtail and quarterfinal results are missing.
+2,district,District 2 B,single,1975,Pigtail results and official team scores are missing.
+2,district,District 2 AA,AA,1976,Pigtail results are missing.
+2,district,District 2 AA,AA,1977,Some pigtail and quarterfinal results are missing.
+2,district,District 2 AAA,AAA,1977,Some pigtail and quarterfinal results are missing.
+2,district,District 2 AAA,AAA,1980,Consolation results are missing.
+2,district,District 2 AAA,AAA,1981,Consolation results are missing.
+2,district,District 2 AA,AA,1982,Consolation results are missing.
+2,district,District 2 AAA,AAA,1982,Consolation results are missing.
+2,district,District 2 AA,AA,1983,Consolation results are missing.
+2,district,District 2 AAA,AAA,1983,Consolation results are missing.
+2,district,District 2 AA,AA,1984,Quarterfinal and consolation semifinal results are missing.
+2,district,District 2 AAA,AAA,1984,Most consolation results are missing.
+2,district,District 2 AA,AA,1985,Consolation results are missing.
+2,district,District 2 AAA,AAA,1985,Consolation results are missing.
+2,district,District 2 AA,AA,1986,Consolation results are missing.
+2,district,District 2 AAA,AAA,1986,Consolation results are missing.
+2,district,District 2 AA,AA,1987,Most consolation results and official team scores are missing.
+2,district,District 2 AAA,AAA,1987,Official team scores are missing.
+2,district,District 2 AA,AA,1988,Most consolation results are missing.
+2,district,District 2 AAA,AAA,1988,Most consolation results are missing.
+2,district,District 2 AAA,AAA,1992,Several results at 135 are missing.
+2,district,District 2 AA,AA,1997,Some results are missing.
+2,district,District 2 AA,AA,1998,Several results at 125 are missing.
+2,regional,North East Regional,single,1957,Results at 88 pounds are missing.
+2,regional,North East AAA Regional,AAA,1976,Consolation semifinal results are missing.
+2,regional,North East AAA Regional,AAA,1977,Most consolation semifinal results are missing.
+2,regional,North East AA Regional,AA,1978,Most consolation semifinal results are missing.
+2,regional,North East AAA Regional,AAA,1978,Consolation results are missing.
+2,regional,North East AA Regional,AA,1979,Most consolation results are missing.
+2,regional,North East AAA Regional,AAA,1979,Most first round consolation results are missing.
+2,regional,North East AA Regional,AA,1980,Most consolation results are missing.
+2,regional,North East AAA Regional,AAA,1980,Most consolation results are missing.
+2,regional,North East AA Regional,AA,1981,Consolation results are missing.
+2,regional,North East AAA Regional,AAA,1981,Consolation results are missing.
+2,regional,North East AA Regional,AA,1982,Most consolation results and official team scores are missing.
+2,regional,North East AAA Regional,AAA,1982,Most consolation results and official team scores are missing.
+2,regional,North East AA Regional,AA,1983,Official team scores are missing.
+2,regional,North East AAA Regional,AAA,1983,Official team scores are missing.
+2,regional,North East AA Regional,AA,1984,Most consolation results official team scores are missing.
+2,regional,North East AAA Regional,AAA,1984,Official team scores are missing.
+2,regional,North East AA Regional,AA,1986,Most first round consolation results are missing.
+2,regional,North East AAA Regional,AAA,1986,Official team scores are missing.
+2,regional,North East AA Regional,AA,1987,Some consolation results are missing.
+2,regional,North East AAA Regional,AAA,1987,Most first round consolation results are missing.
+2,regional,North East AA Regional,AA,1988,Official team scores are missing.
+2,regional,North East AA Regional,AA,1989,Official team scores are missing.
+2,regional,North East AA Regional,AA,1990,Official team scores are missing.
+2,regional,North East AAA Regional,AAA,1990,Official team scores are missing.
+2,regional,North East AAA Regional,AAA,1992,Official team scores are missing.
+2,regional,North East AAA Regional,AAA,1993,Official team scores are missing.
+2,regional,North East AA Regional,AA,2000,Official team scores are missing.
+2,regional,North East AA Regional,AA,2001,Official team scores are missing.
+2,regional,North East AA Regional,AA,2006,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+2,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+2,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+3,district,District 3,single,1939,Most results prior to the finals and official team scores are missing.
+3,district,District 3,single,1945,Some results and official team scores are missing.
+3,district,District 3,single,1946,Some results and official team scores are missing.
+3,district,District 3,single,1947,Some results and official team scores are missing.
+3,district,District 3,single,1948,Most quarterfinal results are missing.
+3,district,District 3 AA,AA,1999,Official team scores are missing.
+3,district,District 3 AA,AA,2000,Official team scores are missing.
+3,district,District 3 AA,AA,2002,Official team scores are missing.
+3,district,District 3 AA,AA,2003,Official team scores are missing.
+3,district,District 3 AA,AA,2004,Official team scores are missing.
+3,district,District 3 AA,AA,2006,Official team scores are missing.
+3,regional,South East Regional,single,1951,Some third place results are missing.
+3,regional,South East Regional,single,1953,The 165 pound third place result is missing.
+3,regional,South East Regional,single,1959,Most third place results are missing.
+3,regional,South Central A Regional,single,1974,Most first round results are missing.
+3,regional,South Central B Regional,single,1974,Most first round results are missing.
+3,regional,South Central A Regional,single,1975,Some first round results are missing.
+3,regional,South Central B Regional,single,1975,Some first round results are missing.
+3,regional,South Central AA Regional,AA,1976,Some first round results are missing.
+3,regional,South Central AA Regional,AA,1977,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1977,One pigtail result at 138 and official team scores are missing.
+3,regional,South Central AA Regional,AA,1978,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1978,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1979,Most consolation results are missing.
+3,regional,South Central AAA Regional,AAA,1979,Some consolation results and official team scores are missing.
+3,regional,South Central AA Regional,AA,1980,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1980,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1981,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1981,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1982,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1982,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1983,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1983,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1984,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1984,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1985,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1985,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1987,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1987,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1988,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1988,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1989,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1989,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1990,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1990,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1991,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1992,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1993,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1993,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1994,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1994,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1995,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1995,Official team scores are missing.
+3,regional,South Central AA Regional,AA,1997,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,1997,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,2000,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,2001,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,2003,Official team scores are missing.
+3,regional,South Central AAA Regional,AAA,2004,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+3,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+3,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+4,district,District 4,single,1947,Most semifinal results are missing.
+4,district,District 4,single,1963,Semifinal results at 88 pounds are missing.
+4,district,District 4,single,1964,Official team scores are missing.
+4,district,District 4,single,1965,Official team scores are missing.
+4,district,District 4,single,1966,Official team scores are missing.
+4,district,District 4,single,1967,Official team scores are missing.
+4,district,District 4,single,1969,Official team scores are missing.
+4,district,District 4,single,1970,Official team scores are missing.
+4,district,District 4,single,1971,Official team scores are missing.
+4,district,District 4,single,1972,Official team scores are missing.
+4,district,District 4,single,1973,Official team scores are missing.
+4,district,District 4 B,single,1974,Official team scores are missing.
+4,district,District 4 B,single,1975,Official team scores are missing.
+4,district,District 4 AA,AA,1976,Official team scores are missing.
+4,district,District 4 AA,AA,1977,Official team scores are missing.
+4,district,District 4 AAA,AAA,1977,Some quarterfinal results are missing.
+4,district,District 4 AA,AA,1978,Official team scores are missing.
+4,district,District 4 AA,AA,1979,Official team scores are missing.
+4,district,District 4 AA,AA,1980,Official team scores are missing.
+4,district,District 4 AA,AA,1981,Most first and second round consolation results are missing.
+4,district,District 4 AA,AA,1982,First and second round consolation results and official team scores are missing.
+4,district,District 4 AA,AA,1988,Official team scores are missing.
+4,district,District 4 AA,AA,1989,Some consolation semifinal results are missing.
+4,district,District 4 AA,AA,2001,Official team scores are missing.
+4,district,District 4 AA,AA,2002,Official team scores are missing.
+4,district,District 4 AA,AA,2004,Official team scores are missing.
+4,district,District 4 AA,AA,2005,Official team scores are missing.
+4,district,District 4 AA,AA,2011,Official team scores are missing.
+4,regional,North East Regional,single,1957,Results at 88 pounds are missing.
+4,regional,North East AAA Regional,AAA,1976,Consolation semifinal results are missing.
+4,regional,North East AAA Regional,AAA,1977,Most consolation semifinal results are missing.
+4,regional,North East AA Regional,AA,1978,Most consolation semifinal results are missing.
+4,regional,North East AAA Regional,AAA,1978,Consolation results are missing.
+4,regional,North East AA Regional,AA,1979,Most consolation results are missing.
+4,regional,North East AAA Regional,AAA,1979,Most first round consolation results are missing.
+4,regional,North East AA Regional,AA,1980,Most consolation results are missing.
+4,regional,North East AAA Regional,AAA,1980,Most consolation results are missing.
+4,regional,North East AA Regional,AA,1981,Consolation results are missing.
+4,regional,North East AAA Regional,AAA,1981,Consolation results are missing.
+4,regional,North East AA Regional,AA,1982,Most consolation results and official team scores are missing.
+4,regional,North East AAA Regional,AAA,1982,Most consolation results and official team scores are missing.
+4,regional,North East AA Regional,AA,1983,Official team scores are missing.
+4,regional,North East AAA Regional,AAA,1983,Official team scores are missing.
+4,regional,North East AA Regional,AA,1984,Most consolation results official team scores are missing.
+4,regional,North East AAA Regional,AAA,1984,Official team scores are missing.
+4,regional,North East AA Regional,AA,1986,Most first round consolation results are missing.
+4,regional,North East AAA Regional,AAA,1986,Official team scores are missing.
+4,regional,North East AA Regional,AA,1987,Some consolation results are missing.
+4,regional,North East AAA Regional,AAA,1987,Most first round consolation results are missing.
+4,regional,North East AA Regional,AA,1988,Official team scores are missing.
+4,regional,North East AA Regional,AA,1989,Official team scores are missing.
+4,regional,North East AA Regional,AA,1990,Official team scores are missing.
+4,regional,North East AAA Regional,AAA,1990,Official team scores are missing.
+4,regional,North East AAA Regional,AAA,1992,Official team scores are missing.
+4,regional,North East AAA Regional,AAA,1993,Official team scores are missing.
+4,regional,North East AA Regional,AA,2000,Official team scores are missing.
+4,regional,North East AA Regional,AA,2001,Official team scores are missing.
+4,regional,North East AA Regional,AA,2006,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+4,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+4,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+5,district,District 5,single,1941,The 145 pound semifinal results are missing.
+5,district,District 5,single,1947,Most semifinal results are missing.
+5,district,District 5,single,1948,Most results are missing.
+5,district,District 5,single,1949,Most quarterfinal and semifinal results are missing.
+5,district,District 5,single,1950,Most quarterfinal and semifinal results are missing.
+5,district,District 5 AA,AA,1982,Some consolation results are missing.
+5,district,District 5 AA,AA,1984,Most consolation results are missing.
+5,district,District 5 AA,AA,1985,Most consolation results are missing.
+5,district,District 5 AA,AA,1989,First and second round consolation results are missing.
+5,district,District 5 AA,AA,1990,Most consolation and semifinal results are missing.
+5,district,District 5 AA,AA,1991,Some quarterfinal and most first round consolation results are missing.
+5,district,District 5 AA,AA,1993,Most consolation results are missing.
+5,district,District 5 AA,AA,1994,Consolation results are missing.
+5,district,District 5 AA,AA,1995,Consolation results are missing.
+5,district,District 5 AA,AA,1997,First round consolation results are missing.
+5,district,District 5 AA,AA,2001,Consolation results are missing.
+5,district,District 5 AA,AA,2004,Second round consolation results are missing.
+5,district,District 5 AA,AA,2005,First round consolation results are missing.
+5,district,District 5 AA,AA,2006,Most consolation results are missing.
+5,district,District 5 AA,AA,2009,First round consolation results are missing.
+5,regional,North West AAA Regional,AAA,1982,Official team scores are missing.
+5,regional,North West AAA Regional,AAA,1983,Official team scores are missing.
+5,regional,North West AA Regional,AA,1984,Official team scores are missing.
+5,regional,North West AAA Regional,AAA,1984,Official team scores are missing.
+5,regional,North West AA Regional,AA,1985,Official team scores are missing.
+5,regional,North West AAA Regional,AAA,1985,Official team scores are missing.
+5,regional,North West AA Regional,AA,1986,Official team scores are missing.
+5,regional,South West AA Regional,AA,2001,Official team scores are missing.
+5,regional,South West AA Regional,AA,2005,Official team scores are missing.
+5,regional,South West AA Regional,AA,2011,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+5,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+5,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+5,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+5,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+6,district,District 6 B,single,1975,Official team scores are missing.
+6,district,District 6 AA,AA,1982,Most consolation results are missing.
+6,district,District 6 AAA,AAA,1989,Official team scores are missing.
+6,district,District 6 AAA,AAA,1994,First round consolation results are missing.
+6,district,District 6 AAA,AAA,1997,Second round consolation results are missing.
+6,district,District 6 AAA,AAA,1998,First round consolation results are missing.
+6,regional,North West AAA Regional,AAA,1982,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1983,Official team scores are missing.
+6,regional,North West AA Regional,AA,1984,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1984,Official team scores are missing.
+6,regional,North West AA Regional,AA,1985,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1985,Official team scores are missing.
+6,regional,North West AA Regional,AA,1986,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1986,Official team scores are missing.
+6,regional,North West AA Regional,AA,1987,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1987,Official team scores are missing.
+6,regional,North West AA Regional,AA,1988,First round consolation results are missing.
+6,regional,North West AAA Regional,AAA,1988,Official team scores are missing.
+6,regional,North West AA Regional,AA,1989,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1989,Official team scores are missing.
+6,regional,North West AA Regional,AA,1990,Pigtail results and official team scores are missing.
+6,regional,North West AAA Regional,AAA,1990,Official team scores are missing.
+6,regional,North West AA Regional,AA,1991,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1991,Official team scores are missing.
+6,regional,North West AA Regional,AA,1992,Some first round consolation results are missing.
+6,regional,North West AAA Regional,AAA,1992,Official team scores are missing.
+6,regional,North West AA Regional,AA,1993,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1993,Official team scores are missing.
+6,regional,North West AA Regional,AA,1994,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1994,Official team scores are missing.
+6,regional,North West AA Regional,AA,1995,Official team scores are missing.
+6,regional,North West AA Regional,AA,1996,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1996,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1997,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,1999,Official team scores are missing.
+6,regional,North West AAA Regional,AAA,2001,Official team scores are missing.
+6,regional,South West AA Regional,AA,2001,Official team scores are missing.
+6,regional,South West AA Regional,AA,2005,Official team scores are missing.
+6,regional,South West AA Regional,AA,2011,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+6,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+6,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+7,district,District 7,single,1936,Most third place and true second results are missing.
+7,district,District 7,single,1937,Some results are missing.
+7,regional,South West AAA Regional,AAA,2000,Official team scores are missing.
+7,regional,South West AA Regional,AA,2001,Official team scores are missing.
+7,regional,South West AAA Regional,AAA,2001,Official team scores are missing.
+7,regional,South West AAA Regional,AAA,2002,Official team scores are missing.
+7,regional,South West AAA Regional,AAA,2003,Official team scores are missing.
+7,regional,South West AA Regional,AA,2005,Official team scores are missing.
+7,regional,South West AA Regional,AA,2011,Official team scores are missing.
+7,regional,South West AAA Regional,AAA,2012,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+7,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+7,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+8,district,District 8 AAA,AAA,2013,Official team scores are missing.
+8,regional,North West AAA Regional,AAA,1990,Official team scores are missing.
+8,regional,North West AAA Regional,AAA,1991,Official team scores are missing.
+8,regional,North West AAA Regional,AAA,1992,Official team scores are missing.
+8,regional,North West AAA Regional,AAA,1999,Official team scores are missing.
+8,regional,North West AAA Regional,AAA,2001,Official team scores are missing.
+8,regional,North West AA Regional,AA,2011,Official team scores are missing.
+9,district,District 9 AA,AA,1990,Most consolation results are missing.
+9,district,District 9 AA,AA,1991,Most consolation results are missing.
+9,district,District 9 AA,AA,1992,Second round consolation results at 125 pounds are missing.
+9,district,District 9 AA,AA,1993,Some consolation results are missing.
+9,regional,North West AAA Regional,AAA,1982,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1983,Official team scores are missing.
+9,regional,North West AA Regional,AA,1984,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1984,Official team scores are missing.
+9,regional,North West AA Regional,AA,1985,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1985,Official team scores are missing.
+9,regional,North West AA Regional,AA,1986,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1986,Official team scores are missing.
+9,regional,North West AA Regional,AA,1987,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1987,Official team scores are missing.
+9,regional,North West AA Regional,AA,1988,First round consolation results are missing.
+9,regional,North West AAA Regional,AAA,1988,Official team scores are missing.
+9,regional,North West AA Regional,AA,1989,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1989,Official team scores are missing.
+9,regional,North West AA Regional,AA,1990,Pigtail results and official team scores are missing.
+9,regional,North West AAA Regional,AAA,1990,Official team scores are missing.
+9,regional,North West AA Regional,AA,1991,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1991,Official team scores are missing.
+9,regional,North West AA Regional,AA,1992,Some first round consolation results are missing.
+9,regional,North West AAA Regional,AAA,1992,Official team scores are missing.
+9,regional,North West AA Regional,AA,1993,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1993,Official team scores are missing.
+9,regional,North West AA Regional,AA,1994,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1994,Official team scores are missing.
+9,regional,North West AA Regional,AA,1995,Official team scores are missing.
+9,regional,North West AA Regional,AA,1996,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1996,Official team scores are missing.
+9,regional,North West AA Regional,AA,1997,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1997,Official team scores are missing.
+9,regional,North West AA Regional,AA,1998,Official team scores are missing.
+9,regional,North West AA Regional,AA,1999,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,1999,Official team scores are missing.
+9,regional,North West AAA Regional,AAA,2001,Official team scores are missing.
+9,regional,North West AA Regional,AA,2011,Official team scores are missing.
+9,regional,North West AA Regional,AA,2013,Official team scores are missing.
+9,regional,North West AA Regional,AA,2014,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+9,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+9,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+10,district,District 10,single,1938,Quarterfinal and semifinal results are missing.
+10,district,District 10,single,1939,Most results are missing.
+10,district,District 10,single,1940,Most results are missing.
+10,district,District 10,single,1944,Quarterfinal and semifinal results are missing.
+10,district,District 10,single,1945,Semifinals results are missing.
+10,district,District 10,single,1946,Pigtail and semifinal results are missing.
+10,district,District 10 AA,AA,1980,Most first round consolation results are missing.
+10,district,District 10 AAA,AAA,1980,Most consolation results are missing.
+10,district,District 10 AA,AA,1981,Some consolation results at 119 are missing.
+10,district,District 10 AAA,AAA,1981,Some pigtail and first round consolation results are missing.
+10,district,District 10 AA,AA,1982,Some consolation results and official team scores are missing.
+10,district,District 10 AA,AA,1986,First round consolation results are missing.
+10,district,District 10 AA,AA,1987,First round consolation results are missing.
+10,district,District 10 AA,AA,1999,First round consolation results are missing.
+10,district,District 10 AA,AA,2002,First round consolation results are missing.
+10,district,District 10 AA,AA,2003,First round consolation results are missing.
+10,district,District 10 AAA,AAA,2003,Most second round consolation and consolation semifinal results are missing.
+10,district,District 10 AAA,AAA,2005,A quarterfinal result at 119 is missing.  Contact us
+10,district,District 10 AAA,AAA,2010,Several results at 130 are missing.
+10,district,District 10 AA,AA,2011,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1982,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1983,Official team scores are missing.
+10,regional,North West AA Regional,AA,1984,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1984,Official team scores are missing.
+10,regional,North West AA Regional,AA,1985,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1985,Official team scores are missing.
+10,regional,North West AA Regional,AA,1986,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1986,Official team scores are missing.
+10,regional,North West AA Regional,AA,1987,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1987,Official team scores are missing.
+10,regional,North West AA Regional,AA,1988,First round consolation results are missing.
+10,regional,North West AAA Regional,AAA,1988,Official team scores are missing.
+10,regional,North West AA Regional,AA,1989,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1989,Official team scores are missing.
+10,regional,North West AA Regional,AA,1990,Pigtail results and official team scores are missing.
+10,regional,North West AAA Regional,AAA,1990,Official team scores are missing.
+10,regional,North West AA Regional,AA,1991,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1991,Official team scores are missing.
+10,regional,North West AA Regional,AA,1992,Some first round consolation results are missing.
+10,regional,North West AAA Regional,AAA,1992,Official team scores are missing.
+10,regional,North West AA Regional,AA,1993,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1993,Official team scores are missing.
+10,regional,North West AA Regional,AA,1994,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1994,Official team scores are missing.
+10,regional,North West AA Regional,AA,1995,Official team scores are missing.
+10,regional,North West AA Regional,AA,1996,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1996,Official team scores are missing.
+10,regional,North West AA Regional,AA,1997,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1997,Official team scores are missing.
+10,regional,North West AA Regional,AA,1998,Official team scores are missing.
+10,regional,North West AA Regional,AA,1999,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,1999,Official team scores are missing.
+10,regional,North West AAA Regional,AAA,2001,Official team scores are missing.
+10,regional,North West AA Regional,AA,2011,Official team scores are missing.
+10,regional,North West AA Regional,AA,2013,Official team scores are missing.
+10,regional,North West AA Regional,AA,2014,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+10,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+10,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+11,district,District 11,single,1957,Results at 88 pounds are missing.
+11,district,District 11,single,1964,Official team scores are missing.
+11,district,District 11 B,single,1974,Official team scores are missing.
+11,district,District 11 AA,AA,1976,Some consolation results are missing.
+11,district,District 11 AA,AA,1977,Consolation results and official team scores are missing.
+11,district,District 11 AA,AA,1978,Official team scores are missing.
+11,district,District 11 AA,AA,1982,Most consolation first round results are missing.
+11,district,District 11 AAA,AAA,1983,Some consolation results are missing.
+11,district,District 2 AAA,AAA,1983,Consolation results are missing.
+11,district,District 11 AAA,AAA,1984,Most consolation results are missing.
+11,district,District 11 AAA,AAA,1986,Most first round consolation results are missing.
+11,district,District 11 AAA,AAA,1987,Some consolation results are missing.
+11,district,District 11 AA,AA,1988,Consolation results are missing.
+11,district,District 11 AAA,AAA,1988,Most consolation results are missing.
+11,district,District 11 AA,AA,1989,Consolation results are missing.
+11,district,District 11 AAA,AAA,1989,Some first round consolation results are missing.
+11,district,District 11 AA,AA,1990,Most consolation results and official team scores are missing.
+11,district,District 11 AAA,AAA,1990,Some consolation results are missing.
+11,district,District 11 AA,AA,1991,Most consolation results are missing.
+11,district,District 11 AAA,AAA,1991,Most first round consolation results are missing.
+11,district,District 11 AA,AA,1992,Most consolation results are missing.
+11,district,District 11 AAA,AAA,1992,Most consolation results are missing.
+11,district,District 11 AA,AA,1993,Most consolation results are missing.
+11,district,District 11 AAA,AAA,1993,Most consolation results are missing.
+11,district,District 11 AA,AA,1994,Most consolation results are missing.
+11,district,District 11 AA,AA,1995,Most consolation results are missing.
+11,district,District 11 AA,AA,1996,Most consolation results are missing.
+11,district,District 11 AA,AA,1998,Most first round consolation results are missing.
+11,district,District 11 AA,AA,2001,Most first and second round consolation results are missing.
+11,district,District 11 AA,AA,2002,Some consolation results are missing.
+11,regional,North East Regional,single,1957,Results at 88 pounds are missing.
+11,regional,North East AAA Regional,AAA,1976,Consolation semifinal results are missing.
+11,regional,North East AAA Regional,AAA,1977,Most consolation semifinal results are missing.
+11,regional,North East AAA Regional,AAA,1978,Consolation results are missing.
+11,regional,North East AAA Regional,AAA,1979,Most first round consolation results are missing.
+11,regional,North East AAA Regional,AAA,1980,Most consolation results are missing.
+11,regional,North East AAA Regional,AAA,1981,Consolation results are missing.
+11,regional,South East AA Regional,AA,1981,Some consolation results are missing.
+11,regional,North East AAA Regional,AAA,1982,Most consolation results and official team scores are missing.
+11,regional,South East AA Regional,AA,1982,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1983,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1984,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1986,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1987,Most first round consolation results are missing.
+11,regional,North East AAA Regional,AAA,1990,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1992,Official team scores are missing.
+11,regional,North East AAA Regional,AAA,1993,Official team scores are missing.
+11,regional,North East AA Regional,AA,2000,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1976,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1977,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1978,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1979,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1980,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1983,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1984,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1986,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1987,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1989,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1990,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1992,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,1998,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,1998,Official team scores are missing.
+11,state,PIAA Class AA Wrestling Championships,AA,2000,Official team scores are missing.
+11,state,PIAA Class AAA Wrestling Championships,AAA,2000,Official team scores are missing.
+12,district,District 12,single,1959,Finals results are missing.
+12,district,District 12,single,1967,Third place result at 154 pounds is missing.
+12,district,District 12,single,1968,"Some competing wrestlers, all quarterfinal results, and official team scores are missing."
+12,district,District 12,single,1970,Semifinal results and one pigtail result are missing.
+12,district,District 12,single,1971,Most semifinal results are missing.
+12,district,District 12,single,1972,Most pigtail results are missing.
+12,district,District 12,single,1973,Most pigtail results are missing.
+12,district,District 12 B,single,1975,Consolation results and official team scores are missing.
+12,district,District 12 AA,AA,1976,Pigtail and consolation results are missing and some wrestlers and their seeding may be incorrect.
+12,district,District 12 AA,AA,1977,"Some wrestler seeding info and pigtail, consolation, and most third place results are missing."
+12,district,District 12 AA,AA,1978,Most wrestlers and their seeding and results prior to the finals are missing.
+12,district,District 12 AA,AA,1979,Semifinal and consolation results are missing.
+12,district,District 12 AA,AA,1980,Pigtail and consolation results are missing.
+12,district,District 12 AA,AA,1981,Some competing wrestlers and most results besides semifinals and placements are missing.
+12,district,District 12 AA,AA,1982,Most wrestlers and their seeding and results prior to the finals are missing.
+12,district,District 12 AA,AA,1983,Most wrestlers and their seeding and results prior to the finals are missing.
+12,district,District 12 AA,AA,1984,Most wrestlers and their seeding and results prior to the finals are missing.
+12,district,District 12 AA,AA,1985,Most consolation results are missing.
+12,district,District 12 AA,AA,1986,Consolation results are missing.
+12,district,District 12 AA,AA,1989,Some quarterfinal and semifinal results are missing.
+12,regional,North East AA Regional,AA,1978,Most consolation semifinal results are missing.
+12,regional,North East AA Regional,AA,1979,Most consolation results are missing.
+12,regional,North East AA Regional,AA,1980,Most consolation results are missing.
+12,regional,North East AA Regional,AA,1981,Consolation results are missing.
+12,regional,North East AA Regional,AA,1982,Most consolation results and official team scores are missing.
+12,regional,North East AA Regional,AA,1983,Official team scores are missing.
+12,regional,North East AA Regional,AA,1984,Most consolation results official team scores are missing.
+12,regional,North East AA Regional,AA,1986,Most first round consolation results are missing.
+12,regional,North East AA Regional,AA,1987,Some consolation results are missing.
+12,regional,North East AA Regional,AA,1988,Official team scores are missing.
+12,regional,North East AA Regional,AA,1989,Official team scores are missing.
+12,regional,North East AA Regional,AA,1990,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1976,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1977,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1978,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1979,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1980,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1983,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1984,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1987,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1990,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1994,Official team scores are missing.
+12,state,PIAA Class AA Wrestling Championships,AA,1996,Official team scores are missing.

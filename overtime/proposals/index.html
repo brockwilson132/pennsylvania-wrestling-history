@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Overtime — design directions</title>
+<style>
+@font-face{font-family:'Archivo Black';font-weight:400;font-display:swap;src:url(fonts/archivo-black-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-weight:900;font-display:swap;src:url(fonts/barlow-condensed-latin-900-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-weight:400;font-display:swap;src:url(fonts/barlow-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-weight:500;font-display:swap;src:url(fonts/barlow-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-weight:600;font-display:swap;src:url(fonts/barlow-latin-600-normal.woff2) format('woff2')}
+:root{--mat:#0B0D10;--slate:#161A20;--slate2:#1D222A;--line:#242A32;--line2:#2F3640;--chalk:#EEEAE1;--ash:#8E98A4;--ash2:#5F6B78;--gold:#D9A441;--green:#2EC27E;--red:#FF3B2F;
+--m1:#D9A441;--m2:#B8BFC6;--m3:#B5733A;--m4:#8E5A3C;--m5:#5F6B78;--cond:'Barlow Condensed',Impact,sans-serif;--body:Barlow,system-ui,sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:var(--mat)}
+body{margin:0;background:var(--mat);color:var(--chalk);font:15px/1.45 var(--body);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3{margin:0;font-family:var(--cond);font-weight:900;line-height:1}
+.k{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.muted{color:var(--ash)}.gold{color:var(--gold)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px 80px}
+/* header: the only global controls */
+.top{position:sticky;top:0;z-index:20;background:rgba(11,13,16,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.wm{font:400 19px 'Archivo Black',sans-serif;letter-spacing:-.5px;display:flex;align-items:center;gap:1px;white-space:nowrap}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:2px;background:var(--slate)}
+.seg button{font:700 13px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ash);padding:6px 11px;border-radius:999px;min-height:32px;white-space:nowrap}
+@media(max-width:520px){.top .in{padding:8px 10px;gap:6px}.wm{font-size:15px}.wm svg{width:15px;height:15px}.top .seg button{font-size:12px;padding:5px 8px;letter-spacing:.04em;min-height:30px}.ctl{gap:5px}}
+.seg button[aria-pressed=true]{background:var(--chalk);color:var(--mat)}
+.ctl{display:flex;gap:8px;margin-left:auto;overflow-x:auto;scrollbar-width:none}.ctl::-webkit-scrollbar{display:none}
+/* sections */
+.intro{padding:26px 0 8px}.intro h1{font-size:44px;letter-spacing:.01em;text-transform:uppercase}.intro p{color:var(--ash);max-width:720px;margin:10px 0 0}
+section{margin-top:40px}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sh h2{font-size:28px;letter-spacing:.01em;text-transform:uppercase}
+.dir{margin-top:22px}
+.dir .lab{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.dir .lab b{font:900 22px var(--cond);color:var(--gold)}
+.dir .lab span{font:700 16px var(--cond);letter-spacing:.06em;text-transform:uppercase}
+.dir .lab em{font-style:normal;color:var(--ash);font-size:13px;flex-basis:100%}
+.grid{display:grid;gap:10px}
+@media(min-width:900px){.grid.two{grid-template-columns:1fr 1fr}}
+.note{color:var(--ash);font-size:13px;margin-top:8px}
+.panel{background:var(--slate);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.panel h3{font-size:20px;margin-bottom:8px}
+.panel p{margin:6px 0;color:#c9ccd1;font-size:14px}
+.panel ul{margin:6px 0;padding-left:18px;color:#c9ccd1;font-size:14px}
+.tabs{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap}
+/* ---- wrestler A: rating hero ---- */
+.wa{position:relative;display:grid;grid-template-columns:26px 1fr auto;gap:2px 12px;align-items:center;background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 12px;overflow:hidden}
+.wa:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--p1,#5F6B78)}
+.rk{font:900 20px var(--cond);color:var(--ash);text-align:center}.rk.g{color:var(--gold)}
+.nm{font:900 20px var(--cond);text-transform:uppercase;letter-spacing:.01em;line-height:1.05}
+.sub{color:var(--ash);font-size:13px}
+.rtg{text-align:right;line-height:1}.rtg b{display:block;font:900 30px var(--cond)}.rtg small{font:700 11px var(--cond);letter-spacing:.16em;color:var(--ash)}
+.wa .mxw{grid-column:2/4;margin-top:8px}
+.wa .row2{grid-column:2/4;display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap}
+.spark{display:block}
+.chipline{display:flex;gap:4px;flex-wrap:wrap}
+.t{display:inline-flex;align-items:center;gap:4px;font:700 12px var(--cond);letter-spacing:.06em;color:var(--ash);text-transform:uppercase}
+.t b{color:var(--chalk);font-size:15px;letter-spacing:0}
+.pl{display:inline-grid;place-items:center;min-width:22px;height:20px;padding:0 5px;border-radius:5px;font:900 12px var(--cond);color:var(--mat)}
+.c1{background:var(--m1)}.c2{background:var(--m2)}.c3{background:var(--m3)}.c4{background:var(--m4)}.c5{background:var(--m5);color:var(--chalk)}
+.pq{border:1px solid var(--ash2);color:var(--ash);background:transparent}
+.pw{display:inline-grid;gap:2px;justify-items:start}
+.fu{display:block;height:2px;border-radius:1px;width:calc(var(--f) * 100%);background:linear-gradient(90deg,#2EC27E,#B8C94A 45%,#F08A24 75%,#FF3B2F);background-size:calc(100% / var(--f)) 100%;background-repeat:no-repeat}
+.mx{display:grid;grid-template-columns:16px repeat(var(--n),minmax(0,1fr));gap:3px 4px;align-items:center;width:100%}
+.mx .h{font:700 10px var(--cond);color:var(--ash);text-align:center;letter-spacing:.02em;line-height:1.1}
+.mx .lv{font:700 10px var(--cond);color:var(--ash2);letter-spacing:.1em}
+.mx .pw{justify-items:stretch}.mx .pl{width:100%;height:18px}
+.mx .x{height:18px;border-radius:5px;border:1px dashed #242A32}
+.sbar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--line);width:100%;margin-top:4px}
+.sbar i{display:block;height:100%}
+.ctx{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.bw{font-size:12px;color:var(--ash)}.bw b{color:var(--chalk);font-weight:600}
+/* ---- wrestler B: career path ---- */
+.wb{background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:26px 1fr auto;gap:4px 12px;align-items:center;position:relative;overflow:hidden}
+.wb:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--p1,#5F6B78)}
+.path{grid-column:1/4;margin-top:4px}
+/* ---- wrestler C: dense table ---- */
+table.dt{width:100%;border-collapse:collapse;background:var(--slate);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dt th{font:700 11px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ash);text-align:right;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.dt .chipline{flex-wrap:nowrap}.dt td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;vertical-align:middle}
+.dt tr:last-child td{border-bottom:0}
+.dt th:nth-child(2),.dt td:nth-child(2){text-align:left;white-space:normal}
+.dt td.n{font:900 18px var(--cond)}
+.dt .nm{font-size:16px}
+.dt .hide-s{display:none}
+@media(min-width:700px){.dt .hide-s{display:table-cell}}
+/* ---- unit A ---- */
+.ua{background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:12px 14px 14px 12px;display:grid;grid-template-columns:26px 1fr auto;gap:2px 12px;align-items:center;position:relative;overflow:hidden}
+.ua:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--p1,#5F6B78)}
+.dist{grid-column:2/4;margin-top:8px}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line)}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font:700 11px var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ash)}
+.legend b{color:var(--chalk);font-size:13px;letter-spacing:0}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:0}
+/* ---- unit B: level ladder ---- */
+.ub{background:var(--slate);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:26px 1fr auto;gap:2px 12px;align-items:center;position:relative;overflow:hidden}
+.ub:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--p1,#5F6B78)}
+.ladder{grid-column:1/4;display:grid;grid-template-columns:62px 1fr 44px;gap:3px 10px;align-items:center;margin-top:8px}
+.ladder .lv{font:700 11px var(--cond);letter-spacing:.14em;color:var(--ash);text-transform:uppercase}
+.ladder .tt{font:900 15px var(--cond);text-align:right}
+.ladder .tt small{font:700 10px var(--cond);color:var(--ash);letter-spacing:.1em;margin-left:2px}
+/* ---- team page performance ---- */
+.perf{background:var(--slate);border:1px solid var(--line);border-radius:16px;padding:14px}
+.perf svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.perf .hd{display:flex;justify-content:space-between;align-items:end;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.perf h3{font-size:30px;text-transform:uppercase}
+.lineup{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.lineup .r{display:grid;grid-template-columns:40px 1fr 54px 92px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.lineup .r:last-child{border-bottom:0}
+.lineup .w{font:900 15px var(--cond);color:var(--ash)}
+.lineup .nm{font-size:15px}
+.lineup .rv{font:900 16px var(--cond);text-align:right}
+.lineup .fin{display:flex;gap:3px;justify-content:flex-end}
+.sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.sel button{font:700 13px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash);border:1px solid var(--line2);border-radius:999px;padding:6px 11px}
+.sel button[aria-pressed=true]{color:var(--mat);background:var(--chalk);border-color:var(--chalk)}
+.cmp{display:grid;gap:10px}@media(min-width:900px){.cmp{grid-template-columns:1fr 1fr 1fr}}
+.cmp .panel h3{font-size:18px}
+.cwin{display:flex;align-items:center;gap:6px;justify-content:flex-end}.cwin[hidden]{display:none}
+.cwin input{width:64px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--slate);color:var(--chalk);font:700 15px 'Barlow Condensed',sans-serif;text-align:center;padding:0 4px}
+.cwin span{color:var(--ash)}.cwin button{height:34px;border-radius:9px;border:1px solid var(--chalk);background:var(--chalk);color:var(--mat);font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:0 12px;cursor:pointer}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(22,26,32,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.bnav ul{list-style:none;margin:0 auto;padding:0;max-width:1100px;display:grid;grid-template-columns:repeat(5,1fr);height:64px}
+.bnav a{display:grid;justify-items:center;align-content:center;gap:5px;height:100%;text-decoration:none;color:var(--ash);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.bnav svg{width:24px;height:24px}.bnav a[aria-current=page]{color:var(--chalk)}.bnav a[aria-current=page] svg{color:var(--gold)}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+@media(max-width:700px){.cwin{flex-basis:100%;padding-bottom:2px}}
+section{scroll-margin-top:70px}
+</style></head>
+<body>
+<header class="top"><div class="in">
+  <div class="wm" aria-label="Overtime"><svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="0.5" width="6" height="3" rx="1" fill="#EEEAE1"/><circle cx="12" cy="13.5" r="8.4" fill="none" stroke="#EEEAE1" stroke-width="2.6"/><path d="M12 13.5 L12 7.2 A6.3 6.3 0 0 1 15.6 8.3 Z" fill="#FF3B2F"/></svg>VERTIME</div>
+  <div class="ctl">
+    <div class="seg" id="cls" role="group" aria-label="Class"></div>
+    <div class="seg" id="win" role="group" aria-label="Seasons"></div>
+  </div>
+  <form class="cwin" id="cwin" hidden><input name="y0" type="number" min="1938" max="2026" inputmode="numeric" aria-label="From season"><span>–</span><input name="y1" type="number" min="1938" max="2026" inputmode="numeric" aria-label="To season"><button type="submit">Apply</button></form>
+</div></header>
+<main class="wrap">
+  <div class="intro">
+    <div class="k">Design directions · for review</div>
+    <h1>Rankings, cards and the team page</h1>
+    <p>Everything below is drawn from the real archive. The header holds the only two global controls: class and time window. Each table gets one sort control. Pick a direction per card type (A, B or C) and the app gets rebuilt around it.</p>
+  </div>
+
+  <section>
+    <div class="panel">
+      <h3>How it's scored</h3>
+      <p><b>Wrestler rating</b> is unchanged: his season strength from every bout at districts, regionals and states, on one scale where 1500 is an average state qualifier. A card shows his peak season.</p>
+      <p><b>School rating</b> (per season) is the average rating of its lineup: its best wrestler at each weight that season, wherever he wrestled. A weight where the school entered no one counts as 1000 (a replacement-level wrestler). In seasons whose district bracket is not on file, an empty weight counts as <span id="donly">1067</span>, the typical rating of a wrestler whose season ended at districts, so missing D3/D7 brackets don't drag those schools down.</p>
+      <p><b>District and region rating</b> (per season) is how strong the top of that tournament was: the average rating of its four best wrestlers at each weight. That is a per-weight measure, so a big district only rates higher when its top four really are better.</p>
+      <p><b>Over a window</b>, a unit's rating is the plain average of its season ratings inside the window; a school needs to have wrestled at least a third of those seasons to be listed. <b>Score</b> is how much they won: placement points (16-12-9-7-5-3-2-1) in the window, weighted by the page you're on, the same weights as the all-time team. On the State page only state results count; on a Region page, state 1.0 + regional 0.4; on District and School pages, state 1.0 + regional 0.4 + district 0.15. Score grows with size by design; <b>Rating</b> is how good they were and does not. <b>Titles</b> are individual state titles; team titles are the official PIAA team championships.</p>
+      <p class="muted">Power and Era are gone: Era (sum of state-point shares) is what Score plus Rating already say, and Power's recency weighting is replaced by choosing a time window.</p>
+    </div>
+  </section>
+
+  <section id="w">
+    <div class="sh"><div><div class="k">Wrestlers</div><h2>Ranking cards</h2></div><div class="muted" id="wcap"></div></div>
+    <div class="dir"><div class="lab"><b>A</b><span>Rating hero + career matrix</span><em>The number first, then the whole career as the same D / R / S grid the wrestler page uses. The thin line under each result is that bracket's field strength (full width = a typical state field; green light, red loaded).</em></div><div class="grid two" id="wA"></div></div>
+    <div class="dir"><div class="lab"><b>B</b><span>Career path</span><em>Each season is a column with his finish at districts, regionals and states; the gold line follows the furthest level he reached. Tells the story D → R → S; costs height.</em></div><div class="grid two" id="wB"></div></div>
+    <div class="dir"><div class="lab"><b>C</b><span>Ranked table</span><em>Densest. Best for 50+ rows and comparing; weakest on a phone (two columns hide under 700px).</em></div><div id="wC"></div></div>
+  </section>
+
+  <section id="u">
+    <div class="sh"><div><div class="k">Schools · districts · regions</div><h2>Ranking cards</h2></div></div>
+    <div class="ctx"><span class="k">Shown on</span><div class="seg" id="uctx" role="group" aria-label="Page"></div><div class="seg" id="ulvl" role="group" aria-label="Level"></div></div>
+    <div class="sh" style="margin:0"><div class="muted" id="ucap"></div><div class="seg" id="usort" role="group" aria-label="Sort"></div></div>
+    <div class="dir"><div class="lab"><b>A</b><span>Rating + how it was won</span><em>Rating with its trend, and one bar that splits state results into titles, podium (2–4), placers (5–8) and qualifiers. Replaces the eight medal boxes.</em></div><div class="grid two" id="uA"></div></div>
+    <div class="dir"><div class="lab"><b>B</b><span>Level ladder</span><em>Three thin rows show where the strength shows up: state, regional, district, each with its titles and a bar per season. Most information; busiest.</em></div><div class="grid two" id="uB"></div></div>
+    <div class="dir"><div class="lab"><b>C</b><span>Ranked table</span><em>Rating, score, titles and team titles in columns, trend as a sparkline. Most compact; least visual.</em></div><div id="uC"></div></div>
+  </section>
+
+  <section id="t">
+    <div class="sh"><div><div class="k">Team page</div><h2>Performance</h2></div><div class="muted">Replaces the metric boxes and the level switch. Tap a season for its lineup.</div></div>
+    <div class="sel" id="tsel"></div>
+    <div class="perf" id="perf"></div>
+  </section>
+
+  <section>
+    <div class="cmp">
+      <div class="panel"><h3>Controls, simplified</h3><ul><li>Header: class (AAA / AA) and seasons (All-time, Last 5, Last 10, Last 25, Custom). Nothing else global.</li><li>One sort control per table: Rating (default) and Score; Titles added on district, region and state lists.</li><li>No level switch, no Medals/Power/Era sorts, no filter sheet on ranking pages (search covers schools and wrestlers).</li></ul></div>
+      <div class="panel"><h3>Where brackets stay</h3><ul><li>Only for real tournaments: tap any district, regional or state result to open that bracket.</li><li>Ranking lists use the cards above, never the bracket drawing.</li></ul></div>
+      <div class="panel"><h3>Data notes</h3><ul><li id="excl"></li><li>District and region ratings start in 1974 for the two-class era; one-class seasons count toward a school's later class.</li><li>Team rating uses every bout on file; seasons before the 1970s have partial district brackets, so treat early numbers as approximate.</li></ul></div>
+    </div>
+  </section>
+</main>
+<script src="badges.js"></script>
+<nav class="bnav" id="bnav" aria-label="Levels"></nav>
+<script>
+'use strict';
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = (n) => Number(n).toLocaleString('en-US');
+const rt = (n) => String(Math.round(n));
+const ord = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 'st', 'nd', 'rd'][n % 100] || 'th');
+const pc = (p) => 'c' + Math.min(p, 5);
+const REG = { NE: 'Northeast', NW: 'Northwest', SC: 'South Central', SE: 'Southeast', SW: 'Southwest', CNW: 'Central Northwest' };
+const DIS = { 1: 'Southeast', 2: 'Scranton–Wilkes-Barre', 3: 'South Central', 4: 'North Central', 5: 'Bedford–Somerset', 6: 'Central', 7: 'WPIAL', 8: 'Pittsburgh City', 9: 'Northwest Central', 10: 'Northwest', 11: 'Lehigh Valley', 12: 'Philadelphia' };
+const LAST = 2026, FIRST = 1938;
+const WINS = { all: ['All-time', FIRST, LAST], last5: ['Last 5', LAST - 4, LAST], last10: ['Last 10', LAST - 9, LAST], last25: ['Last 25', LAST - 24, LAST], custom: ['Custom', 1990, 2005] };
+const winLabel = () => { const [l, a, b] = WINS[st.win]; return st.win === 'custom' ? a + '–' + b : l; };
+const st = { cls: 'AAA', win: 'all', lvl: 'school', sort: 'rating', team: 'Nazareth', season: null, ctx: 'state' };
+const CTX = { state: { label: 'State page', lv: ['school', 'district', 'region'], w: [1, 0, 0] }, NE: { label: 'Northeast page', lv: ['school', 'district'], w: [1, 0.4, 0] }, D11: { label: 'District 11 page', lv: ['school'], w: [1, 0.4, 0.15] } };
+let DREG = null; // year|cls|district -> region (majority of member school-seasons)
+const dregOf = (y, c, d) => { if (!DREG) { const m = new Map(); D.ss.forEach((r) => { if (!r[3] || !r[4]) return; const k = r[1] + '|' + r[2] + '|' + r[3]; const x = m.get(k) || {}; x[r[4]] = (x[r[4]] || 0) + 1; m.set(k, x); }); DREG = new Map(Array.from(m).map(([k, x]) => [k, Object.entries(x).sort((a, b) => b[1] - a[1])[0][0]])); } return DREG.get(y + '|' + c + '|' + d) || ''; };
+let D;
+const colorOf = (s) => { const id = window.SchoolBadge && SchoolBadge.identity(s); return id && id.primary ? id.primary : '#5F6B78'; };
+
+function seg(el, opts, cur, on) {
+  el.innerHTML = opts.map(([v, l]) => `<button data-v="${v}" aria-pressed="${v === cur}">${l}</button>`).join('');
+  el.onclick = (e) => { const b = e.target.closest('button'); if (b) on(b.dataset.v); };
+}
+/* sparkline of values over years [y0..y1]; null = no season */
+function spark(pts, y0, y1, w = 120, h = 28, opt = {}) {
+  const xs = (y) => y1 === y0 ? w / 2 : 3 + (w - 6) * (y - y0) / (y1 - y0);
+  const vals = pts.filter((p) => p[1]).map((p) => p[1]); if (!vals.length) return '';
+  const lo = opt.lo != null ? opt.lo : Math.min(...vals) - 20, hi = opt.hi != null ? opt.hi : Math.max(...vals) + 20;
+  const ys = (v) => h - 3 - (h - 6) * (v - lo) / Math.max(1, hi - lo);
+  let d = '', prev = null;
+  pts.forEach(([y, v]) => { if (!v) { prev = null; return; } d += (prev == null || y - prev > 1 ? 'M' : 'L') + xs(y).toFixed(1) + ' ' + ys(v).toFixed(1) + ' '; prev = y; });
+  const peak = pts.filter((p) => p[1]).reduce((a, b) => (b[1] > a[1] ? b : a));
+  const ref = opt.ref && opt.ref > lo && opt.ref < hi ? `<line x1="0" x2="${w}" y1="${ys(opt.ref)}" y2="${ys(opt.ref)}" stroke="#2F3640" stroke-dasharray="2 3"/>` : '';
+  const dots = pts.filter((p) => p[1]).length < 8 ? pts.filter((p) => p[1]).map(([y, v]) => `<circle cx="${xs(y)}" cy="${ys(v)}" r="2" fill="#8E98A4"/>`).join('') : '';
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${ref}<path d="${d}" fill="none" stroke="#EEEAE1" stroke-width="1.6" stroke-linejoin="round"/>${dots}<circle cx="${xs(peak[0])}" cy="${ys(peak[1])}" r="3" fill="#D9A441"/></svg>`;
+}
+
+/* field-strength underline: length relative to the typical state field, same gradient as the bracket header gauge */
+const FLO = 900;
+const ul = (field, lvl) => { if (!field) return ''; const f = Math.max(0.06, Math.min(1.15, (field - FLO) / (D.typField.state - FLO))); return `<i class="fu" style="--f:${f.toFixed(3)}" title="${lvl ? lvl + ' ' : ''}field ${field} · typical state field ${D.typField.state}"></i>`; };
+const pillW = (place, field, lvl, extra = '') => { if (place < 0) return ''; const p = place ? `<span class="pl ${pc(place)}" ${extra}>${place}</span>` : `<span class="pl pq" ${extra}>Q</span>`; return `<span class="pw">${p}${ul(field, lvl)}</span>`; };
+/* career matrix: D / R / S rows × seasons, every result a pill with its field underline */
+function matrix(c) {
+  const n = c.seasons.length;
+  let h = `<div class="mx" style="--n:${n}"><span></span>${c.seasons.map((s) => `<span class="h">'${String(s[0]).slice(2)}<br>${s[1]}</span>`).join('')}`;
+  [['D', 3, 6, 'District'], ['R', 4, 7, 'Regional'], ['S', 5, 8, 'State']].forEach(([l, i, fi, name]) => {
+    h += `<span class="lv">${l}</span>` + c.seasons.map((s) => (s[i] >= 0 ? pillW(s[i], s[fi], name, `title="${s[0]} ${name.toLowerCase()} ${s[i] ? ord(s[i]) : 'entrant'}"`) : '<span class="x" aria-hidden="true"></span>')).join('');
+  });
+  return h + '</div>';
+}
+
+/* ---------- wrestlers ---------- */
+/* whole careers of anyone who wrestled a season inside the window, by peak rating */
+function wList() { const [, y0, y1] = WINS[st.win]; return D.wrestlers[st.cls].filter((c) => c.seasons.some((s) => s[0] >= y0 && s[0] <= y1)).sort((a, b) => b.peak - a.peak || b.titles - a.titles).slice(0, 10); }
+const stateFins = (c) => c.seasons.filter((s) => s[5] >= 0).map((s) => pillW(s[5], s[8], 'State', `title="${s[0]} state ${s[5] ? ord(s[5]) : 'qualifier'}"`)).join('');
+function wA(c, i) {
+  const pts = c.seasons.map((s) => [s[0], s[2]]);
+  return `<div class="wa" style="--p1:${colorOf(c.sch)}"><div class="rk ${i ? '' : 'g'}">${i + 1}</div>
+    <div><div class="nm">${esc(c.name)}</div><div class="sub">${esc(c.sch)} · ${c.y0 === c.y1 ? c.y0 : c.y0 + '–' + String(c.y1).slice(2)} · ${c.weights.join(', ')}</div></div>
+    <div class="rtg"><small>RTG</small><b>${rt(c.peak)}</b></div>
+    <div class="row2">${spark(pts, c.y0, c.y1, 96, 26, { ref: 1500 })}<span class="t"><b>${c.titles}</b>state titles</span><span class="t"><b>${c.medals}</b>medals</span></div>
+    <div class="mxw">${matrix(c)}</div>
+    ${c.bw[0] ? `<div class="row2 bw">Best win <b>${esc(c.bw[1])}</b> ${rt(c.bw[0])} · ${c.bw[2]} ${c.bw[3]}</div>` : ''}</div>`;
+}
+function pathSVG(c) {
+  const n = c.seasons.length, W = 330, H = 94, colW = W / Math.max(n, 1), rowY = [64, 39, 14]; // D, R, S
+  const lab = ['D', 'R', 'S'];
+  let g = lab.map((l, i) => `<text x="0" y="${rowY[i] + 4}" font-family="Barlow Condensed" font-weight="700" font-size="10" fill="#5F6B78" letter-spacing="1">${l}</text><line x1="12" x2="${W}" y1="${rowY[i]}" y2="${rowY[i]}" stroke="#242A32"/>`).join('');
+  const pts = [];
+  let gid = 0; const pid = 'g' + Math.random().toString(36).slice(2, 7);
+  const under = (x, y, w, field) => { if (!field) return ''; const f = Math.max(0.06, Math.min(1.15, (field - FLO) / (D.typField.state - FLO))); const id = pid + (gid++);
+    return `<defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${x - w / 2}" x2="${x + w / 2}"><stop offset="0" stop-color="#2EC27E"/><stop offset=".45" stop-color="#B8C94A"/><stop offset=".75" stop-color="#F08A24"/><stop offset="1" stop-color="#FF3B2F"/></linearGradient></defs><rect x="${x - w / 2}" y="${y}" width="${(w * f).toFixed(1)}" height="2" rx="1" fill="url(#${id})"><title>field ${field}</title></rect>`; };
+  const pill = (x, y, place, main, field) => {
+    const fill = place > 0 ? ['#D9A441', '#B8BFC6', '#B5733A', '#8E5A3C', '#5F6B78'][Math.min(place, 5) - 1] : '#0B0D10';
+    const tc = place > 0 && place < 5 ? '#0B0D10' : '#EEEAE1', w = main ? 26 : 20, h = main ? 20 : 15;
+    return `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="${main ? 5 : 4}" fill="${fill}" stroke="${place > 0 ? 'none' : '#5F6B78'}" opacity="${main ? 1 : .8}"/><text x="${x}" y="${y + (main ? 4.5 : 3.5)}" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="${main ? 13 : 10}" fill="${tc}">${place > 0 ? place : 'Q'}</text>` + under(x, y + h / 2 + 2, w, field);
+  };
+  c.seasons.forEach((s, k) => {
+    const x = 12 + colW * k + (colW - 12) / 2 + 6;
+    const fins = [s[3], s[4], s[5]]; const lvl = fins[2] >= 0 ? 2 : fins[1] >= 0 ? 1 : 0;
+    const lowest = fins.findIndex((f) => f >= 0);
+    pts.push([x, rowY[lvl]]);
+    if (lowest >= 0 && lowest < lvl) g += `<line x1="${x}" x2="${x}" y1="${rowY[lowest]}" y2="${rowY[lvl]}" stroke="#2F3640" stroke-width="2"/>`;
+    const fl = [s[6], s[7], s[8]];
+    fins.forEach((f, L) => { if (f >= 0 && L !== lvl) g += pill(x, rowY[L], f, false, fl[L]); });
+    g += pill(x, rowY[lvl], fins[lvl] >= 0 ? fins[lvl] : 0, true, fl[lvl]);
+    g += `<text x="${x}" y="${H}" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="10" fill="#8E98A4">'${String(s[0]).slice(2)} · ${s[1]}</text>`;
+  });
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H + 4}" width="100%" aria-hidden="true"><path d="${line}" fill="none" stroke="#D9A441" stroke-width="2" opacity=".55"/>${g}</svg>`;
+}
+function wB(c, i) {
+  return `<div class="wb" style="--p1:${colorOf(c.sch)}"><div class="rk ${i ? '' : 'g'}">${i + 1}</div>
+    <div><div class="nm">${esc(c.name)}</div><div class="sub">${esc(c.sch)} · ${c.titles} state title${c.titles === 1 ? '' : 's'}</div></div>
+    <div class="rtg"><small>RTG</small><b>${rt(c.peak)}</b></div><div class="path">${pathSVG(c)}</div></div>`;
+}
+function wC(L) {
+  return `<table class="dt"><thead><tr><th>#</th><th>Wrestler</th><th>RTG</th><th>Titles</th><th>State</th><th class="hide-s">Weights</th><th class="hide-s">Best win</th></tr></thead><tbody>${L.map((c, i) => `<tr><td class="n ${i ? 'muted' : 'gold'}">${i + 1}</td>
+    <td><div class="nm">${esc(c.name)}</div><div class="sub">${esc(c.sch)} · ${c.y0}–${String(c.y1).slice(2)}</div></td><td class="n">${rt(c.peak)}</td><td class="n">${c.titles}</td><td><div class="chipline" style="justify-content:flex-end">${stateFins(c)}</div></td>
+    <td class="hide-s muted">${c.weights.join(', ')}</td><td class="hide-s bw">${c.bw[0] ? esc(c.bw[1]) + ' <b>' + rt(c.bw[0]) + '</b>' : '—'}</td></tr>`).join('')}</tbody></table>`;
+}
+function renderW() {
+  const L = wList(); const wl = winLabel();
+  $('#wcap').textContent = `Top 10 · Class ${st.cls} · ${st.win === 'all' ? 'all-time' : wl + ' (whole careers of anyone who wrestled in it)'} · by peak rating`;
+  $('#wA').innerHTML = L.map(wA).join(''); $('#wB').innerHTML = L.map(wB).join(''); $('#wC').innerHTML = wC(L);
+}
+
+/* ---------- units ---------- */
+function units() {
+  const [, y0, y1] = WINS[st.win]; const nSeasons = y1 - Math.max(y0, st.lvl === 'school' ? 1938 : 1974) + 1;
+  const S = D.schools, N = D.names;
+  const best = new Map(), keyOfSS = (r) => (st.lvl === 'school' ? r[0] : st.lvl === 'district' ? r[3] : r[4]);
+  D.ss.forEach((r) => { if (r[2] !== st.cls || r[1] < y0 || r[1] > y1 || r[17] < 0) return; const k = keyOfSS(r); const b = best.get(k); if (!b || r[18] > b[1]) best.set(k, [N[r[17]], r[18], S[r[0]], r[1]]); });
+  const agg = new Map();
+  const push = (k, y, rating, statePts, regPts, distPts, ti, pod, plc, q, rt, dt, tt) => {
+    const a = agg.get(k) || { k, seasons: [], statePts: 0, regPts: 0, distPts: 0, ti: 0, pod: 0, plc: 0, q: 0, rt: 0, dt: 0, tt: 0, byYear: new Map() };
+    if (rating) a.seasons.push([y, rating]); a.statePts += statePts; a.regPts += regPts; a.distPts += distPts; a.ti += ti; a.pod += pod; a.plc += plc; a.q += q; a.rt += rt; a.dt += dt; a.tt += tt;
+    a.byYear.set(y, [statePts, regPts, distPts]); agg.set(k, a);
+  };
+  const inCtx = (r) => st.ctx === 'state' || (st.ctx === 'NE' ? r[4] === 'NE' : r[3] === 11);
+  if (st.lvl === 'school') D.ss.forEach((r) => { if (r[2] === st.cls && r[1] >= y0 && r[1] <= y1 && inCtx(r)) push(r[0], r[1], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12], r[13], r[14], r[15]); });
+  else (st.lvl === 'district' ? D.ds : D.rs).forEach((r) => { if (r[2] === st.cls && r[1] >= y0 && r[1] <= y1 && r[1] >= 1974 && (st.lvl === 'district' ? r[0] >= 1 && r[0] <= 12 && (st.ctx !== 'NE' || dregOf(r[1], r[2], r[0]) === 'NE') : REG[r[0]] && r[0] !== 'CNW')) push(r[0], r[1], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12], r[13]); });
+  const minS = st.lvl === 'school' ? Math.max(1, Math.ceil(nSeasons / 3)) : Math.max(1, Math.ceil(nSeasons / 2));
+  const L = Array.from(agg.values()).filter((a) => a.seasons.length >= minS).map((a) => {
+    a.rating = Math.round(a.seasons.reduce((t, s) => t + s[1], 0) / a.seasons.length);
+    a.name = st.lvl === 'school' ? S[a.k] : st.lvl === 'district' ? 'District ' + a.k : REG[a.k];
+    a.sub = st.lvl === 'district' ? DIS[a.k] : st.lvl === 'region' ? '' : '';
+    const W3 = CTX[st.ctx].w; a.parts = [a.statePts * W3[0], a.regPts * W3[1], a.distPts * W3[2]]; a.score = Math.round(a.parts[0] + a.parts[1] + a.parts[2]);
+    a.best = best.get(a.k); a.color = st.lvl === 'school' ? colorOf(S[a.k]) : '#5F6B78';
+    return a;
+  });
+  const sorters = { rating: (a, b) => b.rating - a.rating, score: (a, b) => b.score - a.score, titles: (a, b) => b.ti - a.ti || b.score - a.score };
+  L.sort(sorters[st.sort] || sorters.rating);
+  return { L: L.slice(0, 10), y0: Math.max(y0, st.lvl === 'school' ? 1938 : 1974), y1 };
+}
+const mainNum = (a) => st.sort === 'score' ? [fmt(a.score), 'Score'] : st.sort === 'titles' ? [a.ti, 'Titles'] : [rt(a.rating), 'RTG'];
+const secNum = (a) => st.sort === 'rating' ? `Score <b>${fmt(a.score)}</b>` : `RTG <b>${rt(a.rating)}</b>`;
+function scoreBar(a) {
+  const W3 = CTX[st.ctx].w, tot = a.parts.reduce((x, y) => x + y, 0); if (!tot) return '';
+  const segs = [[a.parts[0], '#D9A441', 'State'], [a.parts[1], '#B8BFC6', 'Regional'], [a.parts[2], '#5F6B78', 'District']].filter((x, i) => W3[i]);
+  return `<div class="sbar" title="${segs.map(([v, , l]) => l + ' ' + Math.round(v)).join(' · ')}">${segs.map(([v, c]) => (v ? `<i style="width:${100 * v / tot}%;background:${c}"></i>` : '')).join('')}</div>`;
+}
+const scoreLine = (a) => { const W3 = CTX[st.ctx].w; if (W3[1] === 0) return ''; return `<div class="dist"><div class="legend" style="margin:0 0 2px"><span>Score <b>${fmt(a.score)}</b></span>${[['State', 0, '#D9A441'], ['Regional', 1, '#B8BFC6'], ['District', 2, '#5F6B78']].filter(([, i]) => W3[i]).map(([l, i, c]) => `<span><i style="background:${c}"></i><b>${fmt(Math.round(a.parts[i]))}</b> ${l}</span>`).join('')}</div>${scoreBar(a)}</div>`; };
+function distBar(a) {
+  const tot = a.ti + a.pod + a.plc + a.q; if (!tot) return '<div class="note">No state qualifiers in this window</div>';
+  const head = `<div class="legend" style="margin:0 0 3px"><span>State results</span></div>`;
+  const seg = [[a.ti, '#D9A441', 'Titles'], [a.pod, '#B8BFC6', 'Podium 2–4'], [a.plc, '#5F6B78', 'Placers 5–8'], [a.q, '#2F3640', 'Qualifiers']];
+  return head + `<div class="bar" title="${tot} state entries">${seg.map(([n, c]) => n ? `<i style="width:${100 * n / tot}%;background:${c}"></i>` : '').join('')}</div>
+    <div class="legend">${seg.map(([n, c, l]) => `<span><i style="background:${c}"></i><b>${n}</b> ${l}</span>`).join('')}</div>`;
+}
+function uA(a, i, y0, y1) {
+  const [n, l] = mainNum(a);
+  return `<div class="ua" style="--p1:${a.color}"><div class="rk ${i ? '' : 'g'}">${i + 1}</div>
+    <div><div class="nm">${esc(a.name)}</div><div class="sub">${a.sub ? esc(a.sub) + ' · ' : ''}${secNum(a).replace(/<\/?b>/g, '')}${a.tt ? ' · ' + a.tt + ' team title' + (a.tt > 1 ? 's' : '') : ''}</div></div>
+    <div class="rtg"><small>${l}</small><b>${n}</b></div>
+    <div class="dist">${distBar(a)}</div>${scoreLine(a)}
+    <div class="dist" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">${spark(a.seasons.sort((p, q) => p[0] - q[0]), y0, y1, 110, 24)}<span class="bw">${a.best ? `Best: <b>${esc(a.best[0])}</b> ${rt(a.best[1])}${st.lvl !== 'school' ? ' · ' + esc(a.best[2]) : ''} · ${a.best[3]}` : ''}</span></div></div>`;
+}
+function sparkBars(a, idx, y0, y1, max, color) {
+  const W = 200, H = 18, n = y1 - y0 + 1, bw = Math.max(1, W / n - (n > 30 ? 0.4 : 1.5));
+  let g = ''; for (let y = y0; y <= y1; y++) { const v = (a.byYear.get(y) || [0, 0, 0])[idx]; if (!v) continue; const h = Math.max(1.5, H * v / max); g += `<rect x="${(W / n) * (y - y0)}" y="${H - h}" width="${bw}" height="${h}" fill="${color}" rx="${n > 30 ? 0 : 1}"/>`; }
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${W}" y1="${H - .5}" y2="${H - .5}" stroke="#242A32"/>${g}</svg>`;
+}
+function uB(a, i, y0, y1, maxes) {
+  const [n, l] = mainNum(a);
+  return `<div class="ub" style="--p1:${a.color}"><div class="rk ${i ? '' : 'g'}">${i + 1}</div>
+    <div><div class="nm">${esc(a.name)}</div><div class="sub">${a.sub ? esc(a.sub) + ' · ' : ''}${secNum(a).replace(/<\/?b>/g, '')}</div></div>
+    <div class="rtg"><small>${l}</small><b>${n}</b></div>
+    ${scoreLine(a)}<div class="ladder">
+      <span class="lv">State</span>${sparkBars(a, 0, y0, y1, maxes[0], '#D9A441')}<span class="tt">${a.ti}<small>TTL</small></span>
+      <span class="lv">Regional</span>${sparkBars(a, 1, y0, y1, maxes[1], '#B8BFC6')}<span class="tt">${a.rt}<small>TTL</small></span>
+      <span class="lv">District</span>${sparkBars(a, 2, y0, y1, maxes[2], '#5F6B78')}<span class="tt">${a.dt}<small>TTL</small></span>
+    </div></div>`;
+}
+function uC(L, y0, y1) {
+  return `<table class="dt"><thead><tr><th>#</th><th>${st.lvl === 'school' ? 'School' : st.lvl === 'district' ? 'District' : 'Region'}</th><th>RTG</th><th>Score</th><th>Titles</th><th class="hide-s">Team</th><th class="hide-s">Trend</th></tr></thead><tbody>${L.map((a, i) => `<tr><td class="n ${i ? 'muted' : 'gold'}">${i + 1}</td>
+    <td><div class="nm">${esc(a.name)}</div>${a.sub ? `<div class="sub">${esc(a.sub)}</div>` : ''}</td><td class="n">${rt(a.rating)}</td><td class="n">${fmt(a.score)}${scoreBar(a)}</td><td class="n">${a.ti}</td><td class="hide-s n">${a.tt || '—'}</td><td class="hide-s">${spark(a.seasons.sort((p, q) => p[0] - q[0]), y0, y1, 110, 22)}</td></tr>`).join('')}</tbody></table>`;
+}
+function renderU() {
+  seg($('#uctx'), Object.entries(CTX).map(([k, v]) => [k, v.label]), st.ctx, (v) => { st.ctx = v; if (!CTX[v].lv.includes(st.lvl)) st.lvl = 'school'; renderU(); });
+  seg($('#ulvl'), [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']].filter(([k]) => CTX[st.ctx].lv.includes(k)), st.lvl, (v) => { st.lvl = v; if (v === 'school' && st.sort === 'titles') st.sort = 'rating'; renderU(); });
+  const sorts = [['rating', 'Rating'], ['score', 'Score']].concat(st.lvl === 'school' ? [] : [['titles', 'Titles']]);
+  seg($('#usort'), sorts, st.sort, (v) => { st.sort = v; renderU(); });
+  const { L, y0, y1 } = units();
+  const maxes = [0, 1, 2].map((k) => Math.max(1, ...L.flatMap((a) => Array.from(a.byYear.values()).map((v) => v[k]))));
+  $('#ucap').textContent = `Top 10 · Class ${st.cls} · ${y0}–${y1} · ${CTX[st.ctx].label}: Score counts ${['state', 'regional ×0.4', 'district ×0.15'].filter((x, i) => CTX[st.ctx].w[i]).join(' + ')} · sorted by ${st.sort}`;
+  $('#uA').innerHTML = L.map((a, i) => uA(a, i, y0, y1)).join('');
+  $('#uB').innerHTML = L.map((a, i) => uB(a, i, y0, y1, maxes)).join('');
+  $('#uC').innerHTML = uC(L, y0, y1);
+}
+
+/* ---------- team page ---------- */
+function renderT() {
+  const names = Object.keys(D.lineups).concat(['District 11', 'Northeast']);
+  seg($('#tsel'), names.map((n) => [n, n]), st.team, (v) => { st.team = v; st.season = null; renderT(); });
+  $('#tsel').className = 'sel';
+  const si = D.schools.indexOf(st.team);
+  const [, wy0, wy1] = WINS[st.win];
+  const isUnit = st.team === 'District 11' || st.team === 'Northeast';
+  const unitRows = st.team === 'District 11' ? D.ds.filter((r) => r[0] === 11) : st.team === 'Northeast' ? D.rs.filter((r) => r[0] === 'NE') : null;
+  const rows = (unitRows ? unitRows.filter((r) => r[2] === st.cls && r[1] >= 1974).map((r) => [r[0], r[1], r[2], 0, 0, r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12], r[13]]) : D.ss.filter((r) => r[0] === si)).filter((r) => r[1] >= wy0 && r[1] <= wy1).sort((a, b) => a[1] - b[1]);
+  if (!rows.length) { $('#perf').innerHTML = '<div class="note">No seasons in this window.</div>'; return; }
+  const y0 = rows[0][1], y1 = rows[rows.length - 1][1], n = y1 - y0 + 1;
+  const W = Math.max(320, Math.min(1080, ($('#perf').clientWidth || 680) - 30)), padL = W < 500 ? 54 : 64, padR = 8, cw = (W - padL - padR) / n;
+  const x = (y) => padL + cw * (y - y0) + cw / 2;
+  const rated = rows.filter((r) => r[5]); const rv = rated.map((r) => r[5]);
+  const span = Math.max(120, Math.max(...rv) - Math.min(...rv)); const lo = Math.min(...rv) - span * .15, hi = Math.max(...rv) + span * .2;
+  const RH = 120, ry = (v) => 12 + (RH - 24) * (1 - (v - lo) / (hi - lo));
+  let svg = '';
+  // rating panel
+  svg += `<text x="0" y="14" font-family="Barlow Condensed" font-weight="700" font-size="11" letter-spacing="1.6" fill="#8E98A4">RATING</text>`;
+  const stp = hi - lo > 600 ? 250 : hi - lo > 250 ? 100 : 50; const gl = []; for (let v = Math.ceil(lo / stp) * stp; v < hi; v += stp) gl.push(v); if (1500 > lo && 1500 < hi && !gl.includes(1500)) gl.push(1500);
+  gl.forEach((v) => { svg += `<line x1="${padL}" x2="${W - padR}" y1="${ry(v)}" y2="${ry(v)}" stroke="${v === 1500 ? '#2F3640' : '#1D222A'}" ${v === 1500 ? 'stroke-dasharray="3 3"' : ''}/><text x="${padL - 6}" y="${ry(v) + 4}" text-anchor="end" font-family="Barlow Condensed" font-weight="700" font-size="11" fill="#5F6B78">${v}</text>`; });
+  let d = '', prev = null; rated.forEach((r) => { d += (prev == null || r[1] - prev > 1 ? 'M' : 'L') + x(r[1]).toFixed(1) + ' ' + ry(r[5]).toFixed(1) + ' '; prev = r[1]; });
+  svg += `<path d="${d}" fill="none" stroke="#EEEAE1" stroke-width="2" stroke-linejoin="round"/>`;
+  const pk = rated.reduce((a, b) => (b[5] > a[5] ? b : a), rated[0]);
+  if (pk) svg += `<circle cx="${x(pk[1])}" cy="${ry(pk[5])}" r="4" fill="#D9A441"/><text x="${x(pk[1])}" y="${ry(pk[5]) - 8}" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="13" fill="#D9A441">${pk[5]}</text>`;
+  // three level rows
+  const lv = [['STATE', 6, '#D9A441'], ['REGIONAL', 7, '#B8BFC6'], ['DISTRICT', 8, '#5F6B78']];
+  const rowH = 46, top0 = RH + 14;
+  lv.forEach(([lab, idx, col], k) => {
+    const t = top0 + k * (rowH + 8), mx = Math.max(1, ...rows.map((r) => r[idx]));
+    svg += `<text x="0" y="${t + rowH / 2 + 4}" font-family="Barlow Condensed" font-weight="700" font-size="11" letter-spacing="1.4" fill="#8E98A4">${lab}</text><line x1="${padL}" x2="${W - padR}" y1="${t + rowH}" y2="${t + rowH}" stroke="#242A32"/>`;
+    rows.forEach((r) => { const v = r[idx]; if (!v) return; const h = Math.max(2, (rowH - 4) * v / mx); svg += `<rect x="${x(r[1]) - cw * .36}" y="${t + rowH - h}" width="${cw * .72}" height="${h}" rx="1.5" fill="${col}" opacity="${idx === 6 ? 1 : .85}"/>`; });
+    if (idx === 6) rows.forEach((r) => { const ti = r[9]; if (ti) svg += `<text x="${x(r[1])}" y="${t + 6}" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="${n > 30 ? 9 : 12}" fill="#D9A441">${n > 30 ? '★' : ti > 1 ? ti + '★' : '★'}</text>`; });
+  });
+  const bottom = top0 + 3 * (rowH + 8);
+  // year labels
+  const step = n > 40 ? (W < 500 ? 20 : 10) : n > 15 ? (W < 500 ? 10 : 5) : n > 8 ? 2 : 1;
+  for (let y = y0; y <= y1; y++) if ((y - y0) % step === 0 || y === y1) svg += `<text x="${x(y)}" y="${bottom + 12}" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="11" fill="#8E98A4">${n > 15 ? y : "'" + String(y).slice(2)}</text>`;
+  // hit targets + selection
+  const sel = st.season;
+  for (let y = y0; y <= y1; y++) svg += `<rect data-y="${y}" x="${padL + cw * (y - y0)}" y="0" width="${cw}" height="${bottom}" fill="${y === sel ? 'rgba(217,164,65,.12)' : 'transparent'}" stroke="${y === sel ? '#D9A441' : 'none'}" style="cursor:pointer"/>`;
+  const last = rows[rows.length - 1];
+  const avg = rated.length ? Math.round(rv.reduce((a, b) => a + b, 0) / rv.length) : 0;
+  const totS = rows.reduce((t, r) => t + r[6], 0), tit = rows.reduce((t, r) => t + r[9], 0), tt = rows.reduce((t, r) => t + r[15], 0);
+  let lineup = '';
+  if (sel && unitRows) {
+    const r = rows.find((q) => q[1] === sel);
+    lineup = r ? `<div class="lineup"><div class="k" style="margin-bottom:6px">${sel} · ${st.team}</div><div class="legend"><span>Rating <b>${rt(r[5])}</b> (mean of the top four at each weight)</span><span><b>${r[9]}</b> state titles</span><span>State points <b>${r[6]}</b></span><span>Regional <b>${r[7]}</b></span><span>District <b>${r[8]}</b></span></div></div>` : '';
+  } else if (sel) {
+    const L = (D.lineups[st.team] || {})[sel] || [];
+    const pill = (p, lvl) => p < 0 ? `<span class="pl pq" style="opacity:.3" title="${lvl}: did not reach">—</span>` : p === 0 ? `<span class="pl pq" title="${lvl}: entered">Q</span>` : `<span class="pl ${pc(p)}" title="${lvl} ${ord(p)}">${p}</span>`;
+    lineup = `<div class="lineup"><div class="k" style="margin-bottom:6px">${sel} lineup · best wrestler at each weight · D / R / S</div>${L.map(([i, nm, r, dd, rr, ss]) => `<div class="r"><span class="w">${D.std[i]}</span><span class="nm">${esc(nm)}</span><span class="rv">${r ? rt(r) : '—'}</span><span class="fin">${pill(dd, 'District')}${pill(rr, 'Regional')}${pill(ss, 'State')}</span></div>`).join('') || '<div class="note">No lineup on file.</div>'}</div>`;
+  }
+  $('#perf').innerHTML = `<div class="hd"><div><div class="k">${esc(D.schools[si] ? '' : '')}Class ${last[2]} · ${y0}–${y1}</div><h3>${esc(st.team)}</h3></div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="t"><b>${rt(avg)}</b>RTG</span><span class="t"><b>${fmt(totS)}</b>Score</span><span class="t"><b>${tit}</b>Titles</span><span class="t"><b>${tt}</b>Team titles</span></div></div>
+    <svg viewBox="0 0 ${W} ${bottom + 18}" role="img" aria-label="Season by season performance">${svg}</svg>
+    <div class="note">Top: ${unitRows ? 'rating per season (mean of its four best wrestlers at each weight)' : 'team rating per season (its lineup average)'}; dashed line = 1500, an average state qualifier. Below: placement points at each level per season; ★ marks state titles. ${sel ? '' : 'Tap a season.'}</div>${lineup}`;
+  $('#perf svg').onclick = (e) => { const r = e.target.closest('rect[data-y]'); if (r) { st.season = +r.dataset.y === st.season ? null : +r.dataset.y; renderT(); } };
+}
+
+function renderAll() {
+  seg($('#cls'), [['AAA', 'AAA'], ['AA', 'AA']], st.cls, (v) => { st.cls = v; st.season = null; renderAll(); });
+  seg($('#win'), Object.entries(WINS).map(([k, v]) => [k, v[0]]), st.win, (v) => { st.win = v; st.season = null; renderAll(); });
+  const cw = $('#cwin'); cw.hidden = st.win !== 'custom';
+  if (st.win === 'custom') { const [, a, b] = WINS.custom; cw.querySelector('[name=y0]').value = a; cw.querySelector('[name=y1]').value = b; }
+  renderW(); renderU(); renderT();
+}
+let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => D && renderT(), 150); });
+fetch('data.json').then((r) => r.json()).then((d) => {
+  D = d; $('#excl').textContent = `Wrestler careers are split by graduating class, so fathers and sons sharing a name and school are separate people (longest career on file: ${d.longestCareer} seasons).`;
+  st.season = 2016; renderAll();
+});
+
+/* custom window */
+$('#cwin').onsubmit = (e) => { e.preventDefault(); const f = e.target; let a = +f.y0.value || 1990, b = +f.y1.value || 2005; a = Math.max(FIRST, Math.min(LAST, a)); b = Math.max(FIRST, Math.min(LAST, b)); if (a > b) [a, b] = [b, a]; WINS.custom[1] = a; WINS.custom[2] = b; st.season = null; renderAll(); };
+/* bottom tabs, as in the app: each jumps to its preview section */
+const PA_OUT = 'M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z';
+const NAVI = {
+  state: `<path d="${PA_OUT}" transform="translate(1,4) scale(.245)" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>`,
+  region: `<path d="M3 13 L13 3 L23 13 L13 23 Z M3 13 H23 M13 3 V23" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  district: `<rect x="3" y="3" width="8" height="8" fill="currentColor"/><rect x="15" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/><rect x="15" y="15" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  school: `<path d="M3 23 V11 L13 4 L23 11 V23 Z M10 23 V15 H16 V23" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+  wrestlers: `<circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13 L13 6 M13 13 L17.5 15.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
+};
+const TABS = [['state', 'State', 'u', 'state'], ['region', 'Region', 'u', 'NE'], ['district', 'District', 'u', 'D11'], ['school', 'School', 't'], ['wrestlers', 'Wrestlers', 'w']];
+let tab = 'state';
+function renderNav() { $('#bnav').innerHTML = '<ul>' + TABS.map(([k, l]) => `<li><a href="#" data-tab="${k}"${k === tab ? ' aria-current="page"' : ''}><svg viewBox="0 0 26 26" aria-hidden="true">${NAVI[k]}</svg>${l}</a></li>`).join('') + '</ul>'; }
+$('#bnav').onclick = (e) => {
+  const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault();
+  const t = TABS.find((x) => x[0] === a.dataset.tab); tab = t[0];
+  if (t[3]) { st.ctx = t[3]; if (D) renderU(); }
+  if (t[0] === 'school' && st.team !== 'Nazareth') { st.team = 'Nazareth'; st.season = null; if (D) renderT(); }
+  renderNav(); document.getElementById(t[2]).scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+renderNav();
+</script>
+</body></html>

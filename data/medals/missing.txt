@@ -1,0 +1,99 @@
+1974 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1975 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1976 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1977 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1978 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1979 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1980 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1981 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1982 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1983 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1984 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1985 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL not on session allowlist, not fetched; not retried because tool said not to repeat the fetch)
+1986 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1987 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1988 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1989 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1990 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1991 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1992 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1993 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1994 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1995 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1996 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1997 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1998 AA: WebFetch refused URL (URL_NOT_ON_ALLOWLIST); not fetched, no workaround attempted
+1974 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1974_PIAA_State_AA_results.pdf; not retried)
+1975 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1975_PIAA_State_AA_results.pdf; not retried)
+1976 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1976_PIAA_State_AA_results.pdf; not retried)
+1977 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1977_PIAA_State_AA_results.pdf; not retried)
+1978 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1978_PIAA_State_AA_results.pdf; not retried)
+1979 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1979_PIAA_State_AA_results.pdf; not retried)
+1980 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1980_PIAA_State_AA_results.pdf; not retried)
+1981 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1981_PIAA_State_AA_results.pdf; not retried)
+1982 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1982_PIAA_State_AA_results.pdf; not retried)
+1983 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1983_PIAA_State_AA_results.pdf; not retried)
+1984 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1984_PIAA_State_AA_results.pdf; not retried)
+1985 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1985_PIAA_State_AA_results.pdf; not retried)
+1986 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1986_PIAA_State_AA_results.pdf; not retried)
+1987 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1987_PIAA_State_AA_results.pdf; not retried)
+1988 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1988_PIAA_State_AA_results.pdf; not retried)
+1989 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1989_PIAA_State_AA_results.pdf; not retried)
+1990 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1990_PIAA_State_AA_results.pdf; not retried)
+1991 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1991_PIAA_State_AA_results.pdf; not retried)
+1992 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1992_PIAA_State_AA_results.pdf; not retried)
+1993 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1993_PIAA_State_AA_results.pdf; not retried)
+1994 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1994_PIAA_State_AA_results.pdf; not retried)
+1995 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1995_PIAA_State_AA_results.pdf; not retried)
+1996 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1996_PIAA_State_AA_results.pdf; not retried)
+1997 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1997_PIAA_State_AA_results.pdf; not retried)
+1998 AA: URL_NOT_ON_ALLOWLIST (WebFetch refused https://brackets.pa-wrestling.com/pdfs/1998_PIAA_State_AA_results.pdf; not retried)
+1999 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2000 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2001 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2002 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2003 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2004 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2005 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2006 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2007 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2008 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2009 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2010 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2011 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2012 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2013 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2014 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2015 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2016 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2017 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2018 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2019 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2020 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2021 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2022 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2023 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2024 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2025 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+2026 AA: WebFetch refused (URL_NOT_ON_ALLOWLIST) for brackets.pa-wrestling.com; not fetched, no workaround attempted
+1999 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2000 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2001 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2002 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2003 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2004 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2005 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2006 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2007 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2008 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2009 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2010 AA: WebFetch returned URL_NOT_ON_ALLOWLIST (URL blocked by session allowlist, not fetched); not retried because the tool said not to repeat the fetch
+2016 AA: WebFetch returned URL_NOT_ON_ALLOWLIST for https://brackets.pa-wrestling.com/pdfs/2016_PIAA_State_AA_results.pdf; not retried (tool said not to repeat); header-only unless the AA agent has since filled it
+2017 AA: WebFetch returned URL_NOT_ON_ALLOWLIST for https://brackets.pa-wrestling.com/pdfs/2017_PIAA_State_AA_results.pdf; not retried (tool said not to repeat); header-only unless the AA agent has since filled it
+2018 AA: WebFetch returned URL_NOT_ON_ALLOWLIST for https://brackets.pa-wrestling.com/pdfs/2018_PIAA_State_AA_results.pdf; not retried (tool said not to repeat); header-only unless the AA agent has since filled it
+2019 AA: WebFetch returned URL_NOT_ON_ALLOWLIST for https://brackets.pa-wrestling.com/pdfs/2019_PIAA_State_AA_results.pdf; not retried (tool said not to repeat); header-only unless the AA agent has since filled it
+2020 AA: WebFetch returned URL_NOT_ON_ALLOWLIST for https://brackets.pa-wrestling.com/pdfs/2020_PIAA_State_AA_results.pdf; not retried (tool said not to repeat); header-only unless the AA agent has since filled it
+2013 AA, 2014 AA, 2015 AA: my WebFetch was also refused (URL_NOT_ON_ALLOWLIST), but these files were later populated by the AA agent (112 rows each); I did not touch them
+[2013-2026 worker] SUPERSEDES the "2021 AA" through "2026 AA" refusal lines above: those six fetches succeeded for me and 2021_AA.csv-2026_AA.csv contain data.
+1954 single: WebFetch returned SERVER_ERROR; retry blocked by tool as repeat failure (file has header only)
+1956-1972 single: no 3rd/4th place data in source PDFs (only 1st/2nd listed)
