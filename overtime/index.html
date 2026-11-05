@@ -19,47 +19,59 @@
 <main id="main"></main>
 <div class="bview" id="bview" role="dialog" aria-label="Tournament bracket" hidden></div>
 <nav class="fbar" id="fbar" aria-label="Filters"></nav>
-<!-- boot loader. A ~1.9 s intro (state, then OVERTIME letter by letter, then the tagline, then a glint), then the
-     loader zooms and fades into the app. It leaves at the later of: the intro being done, and the app's first render
-     (or OTBoot.hide()), so it never ends before the app is ready and never makes a slow load slower.
-     Every moving part is an HTML layer animated only with transform/opacity, so the compositor keeps it smooth while
-     the data scripts below block the main thread. The letters' dark cut is a static state-shaped mask, so the border
-     cut stays put while the letters rise through it. Tap/click/key skips the rest once the app is ready.
-     Reduced motion: no movement, a plain fade in and out. -->
+<!-- boot loader: "the districts". Pennsylvania's PIAA districts fly in from all sides, each with its number, and lock
+     together into the state. The seams glow and fade, OVERTIME drops in letter by letter, the tagline follows, and on
+     exit the districts burst apart to show the app. It leaves at the later of: the intro being done, and the app's
+     first render (or OTBoot.hide()), so it never ends before the app is ready and never makes a slow load slower.
+     Only transform/opacity animate, so it stays smooth while the data scripts block the main thread.
+     Tap/click/key skips the rest once the app is ready. Reduced motion: no movement, a plain fade in and out. -->
 <style>
-#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;pointer-events:auto}
-#otboot .w{display:grid;justify-items:center;gap:22px}
+#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;overflow:hidden}
+#otboot .w{position:relative;display:grid;justify-items:center;gap:22px}
 #otboot .lk{position:relative;width:min(520px,88vw);aspect-ratio:583/241}
-#otboot .lk>*,#otboot .lk .m>*{position:absolute;inset:0}
+#otboot .lk div{position:absolute;inset:0}
 #otboot .lk svg{width:100%;height:100%;overflow:visible;display:block}
 #otboot .m{-webkit-mask:var(--pa) 0 0/100% 100% no-repeat;mask:var(--pa) 0 0/100% 100% no-repeat}
 #otboot .a{will-change:transform,opacity;animation:var(--k) var(--d,.6s) var(--e,cubic-bezier(.16,1,.3,1)) var(--t,0s) both;animation-play-state:paused}
 #otboot.go .a{animation-play-state:running}
-#otboot .st{--k:otb-st;--d:.75s;--t:.05s}
-#otboot .ch{--k:otb-ch;--d:.55s;--e:cubic-bezier(.22,1.3,.36,1)}
-#otboot .tg{--k:otb-tg;--d:.6s}
-#otboot .gl{--k:otb-gl;--d:.7s;--t:1.3s;--e:cubic-bezier(.45,0,.55,1);background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.55) 50%,transparent 62%)}
-#otboot .lo{display:grid;justify-items:center;gap:22px;--k:otb-fd;--d:.5s;--t:.8s}
+#otboot .pc{--k:otb-pc;--d:.62s;--e:cubic-bezier(.2,1.25,.4,1);transform-origin:var(--ox) var(--oy)}
+#otboot .pf{--k:otb-flash;--d:.5s}
+#otboot .nm{--k:otb-num;--d:.75s;--e:ease-out}
+#otboot .ol{--k:otb-olo;--d:.3s;--t:1.5s;--e:ease-in}
+#otboot .st{--k:otb-fd;--d:.25s;--t:1.42s;--e:ease-out}
+#otboot .sm{--k:otb-seam;--d:.8s;--t:1.42s;--e:ease-out}
+#otboot .ch{--k:otb-drop;--d:.55s;--e:linear}
+#otboot .tg{--k:otb-tg;--d:.5s}
+#otboot .lo{display:grid;justify-items:center;gap:22px;--k:otb-fd;--d:.5s;--t:1.2s}
 #otboot .bar{width:min(220px,60vw);height:6px;border-radius:3px;background:#262C35;overflow:hidden}
 #otboot .bar b,#otboot .bar i{display:block;height:100%;transform:translateX(-100%);will-change:transform}
 #otboot .bar b{overflow:hidden}
 #otboot .bar i{position:relative;overflow:hidden;transform:translateX(100%);background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B)}
-#otboot .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:otb-sh 1.3s 1s ease-in-out infinite}
+#otboot .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:otb-sh 1.3s 2s ease-in-out infinite}
 #otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
-#otboot.out{pointer-events:none;animation:otb-out .5s .05s cubic-bezier(.4,0,.2,1) both}
-#otboot.out .w{animation:otb-zoom .45s cubic-bezier(.4,0,1,1) both}
-@keyframes otb-st{from{opacity:0;transform:translateY(14px) scale(.92)}}
-@keyframes otb-ch{from{opacity:0;transform:translateY(16%)}}
+/* exit: the state breaks back into its districts, which burst outward; the word and tagline fall away */
+#otboot.out{pointer-events:none;animation:otb-out .4s .25s ease-in both}
+#otboot.out .st,#otboot.out .sm,#otboot.out .ol{animation:none;opacity:0}
+#otboot.out .pf{animation:none;opacity:1}
+#otboot.out .pc{animation:otb-burst .6s cubic-bezier(.5,0,.75,0) both}
+#otboot.out .ch{animation:otb-fall .45s cubic-bezier(.5,0,1,1) both}
+#otboot.out .tg,#otboot.out .lo{animation:otb-out .25s ease-in both}
+@keyframes otb-pc{from{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(.55)}25%{opacity:1}}
+@keyframes otb-flash{0%,60%{opacity:0}75%{opacity:.75}to{opacity:.12}}
+@keyframes otb-num{0%,40%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.1)}80%{opacity:1;transform:scale(1)}to{opacity:0}}
+@keyframes otb-olo{to{opacity:0}}
+@keyframes otb-seam{from{opacity:1}to{opacity:0}}
+@keyframes otb-drop{0%{opacity:0;transform:translateY(-130%)}12%{opacity:1}55%{transform:translateY(0);animation-timing-function:cubic-bezier(.2,.6,.4,1)}72%{transform:translateY(-7%);animation-timing-function:cubic-bezier(.6,0,.8,.4)}86%{transform:translateY(0)}93%{transform:translateY(-1.5%)}to{transform:translateY(0)}}
 @keyframes otb-tg{from{opacity:0;transform:translateY(10px)}}
 @keyframes otb-fd{from{opacity:0}}
-@keyframes otb-gl{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
 @keyframes otb-sh{to{transform:translateX(100%)}}
 @keyframes otb-out{to{opacity:0}}
-@keyframes otb-zoom{70%{opacity:0}to{transform:scale(1.1);opacity:0}}
+@keyframes otb-burst{to{opacity:0;transform:translate(calc(var(--dx) * 1.6),calc(var(--dy) * 1.6)) rotate(calc(var(--r) * -1.5)) scale(1.25)}}
+@keyframes otb-fall{to{opacity:0;transform:translateY(90%) rotate(var(--fr))}}
 @media (prefers-reduced-motion:reduce){
   #otboot .a{animation:otb-fd .4s ease-out both;animation-play-state:paused}
-  #otboot .gl,#otboot .bar i::after{display:none}
-  #otboot.out{animation:otb-out .3s ease-out both}#otboot.out .w{animation:none}
+  #otboot .nm,#otboot .ol,#otboot .sm,#otboot .pf,#otboot .bar i::after{display:none}
+  #otboot.out{animation:otb-out .3s ease-out both}#otboot.out *{animation:none!important}
 }
 </style>
 <div id="otboot" role="status" aria-live="polite" aria-label="Loading Overtime"><div class="w">
@@ -68,20 +80,31 @@
 <script>
 (function () { var el = document.getElementById('otboot'), lk = document.getElementById('otbootlk'), done = false, ready = false;
   var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var INTRO = RM ? 1200 : 1900;   // ms the intro needs before the loader may leave (Brock: up to 3 s, then animate out)
-  /* the lockup: Pennsylvania outline, OVERTIME (cream outside the state, dark inside it), gold tagline */
+  var INTRO = RM ? 1200 : 2250;   // ms the intro needs before the loader may leave (Brock: up to 3 s, then animate out)
   var PA = 'M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z';
   var VB = '28 25 583 241', G = '<g transform="translate(24,24) scale(3.271578947368421)"><path d="' + PA + '" fill="#EEEAE1"/></g>';
   var svg = function (body) { return '<svg viewBox="' + VB + '" aria-hidden="true">' + body + '</svg>'; };
-  /* each letter (and tagline word) is its own layer holding the whole line with only that piece painted, so the layout
-     (kerning, letter-spacing, centring) is exactly the static lockup's */
   var only = function (parts, i) { return parts.map(function (p, j) { return '<tspan' + (j === i ? '' : ' fill-opacity="0"') + '>' + p + '</tspan>'; }).join(''); };
-  var W = 'OVERTIME'.split(''), word = function (i, fill) { return svg('<text x="54.48" y="157.31" fill="' + fill + '" font-family="\'Archivo Black\'" font-size="96" letter-spacing="-1">' + only(W, i) + '</text>'); };
-  var T = ['PENNSYLVANIA ', 'WRESTLING ', 'HISTORY'];
-  var h = '<div class="a st">' + svg(G) + '</div>', dk = '', i;
-  for (i = 0; i < W.length; i++) { var d = (0.55 + i * 0.07).toFixed(2) + 's'; h += '<div class="a ch" style="--t:' + d + '">' + word(i, '#EEEAE1') + '</div>'; dk += '<div class="a ch" style="--t:' + d + '">' + word(i, '#0B0D10') + '</div>'; }
-  h += '<div class="m" style="--pa:url(&quot;data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + VB + '" width="583" height="241">' + G + '</svg>').replace(/'/g, '%27') + '&quot;)">' + dk + '<div class="a gl"></div></div>';
-  for (i = 0; i < T.length; i++) h += '<div class="a tg" style="--t:' + (1.15 + i * 0.1).toFixed(2) + 's">' + svg('<text x="330.61" y="259.74" text-anchor="middle" fill="#D9A441" font-family="\'Barlow Condensed\'" font-weight="700" font-size="22" letter-spacing="7.26" xml:space="preserve">' + only(T, i) + '</text>') + '</div>';
+  var word = function (fill) { return svg('<text x="54.48" y="157.31" fill="' + fill + '" font-family="\'Archivo Black\'" font-size="96" letter-spacing="-1">OVERTIME</text>'); };
+  var pa = 'url(&quot;data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + VB + '" width="583" height="241">' + G + '</svg>').replace(/'/g, '%27') + '&quot;)';
+  /* the 12 PIAA districts (8, the Pittsburgh City League, has no area of its own) in the map's 1000x560 units (tools/build_intro.js), with
+     the centre of each one's box; the lockup draws the state at 1/10 of that, so the same transform places them */
+  var DS = {"1":["M824,528L813,531L804,537L793,552L737,552L748,544L760,521L760,503L769,486L769,470L779,465L808,442L835,399L842,405L854,390L866,380L888,365L889,369L894,374L904,373L909,380L908,397L911,406L925,409L929,421L941,431L945,441L957,448L964,462L955,468L949,467L942,476L924,483L926,468L918,464L902,484L892,476L884,474L877,482L887,491L875,498L882,506L878,519L886,522L877,525L863,527L853,535L840,528Z",851,458],"2":["M742,67L862,67L870,78L873,77L878,96L886,95L896,99L908,110L903,116L911,120L913,148L909,153L922,173L923,179L929,178L938,184L937,187L951,187L959,191L969,205L960,208L947,220L939,243L933,252L921,262L915,265L908,251L895,249L899,228L838,232L833,234L823,247L815,256L808,254L796,262L796,271L802,280L783,288L755,302L726,292L722,271L722,252L714,254L707,236L709,215L723,166L727,143L740,142L736,67Z",838,185],"3":["M777,350L835,399L808,442L779,465L769,470L769,486L760,503L760,521L748,544L737,552L421,552L437,530L450,493L459,480L470,458L481,441L507,416L512,414L511,409L551,384L571,375L569,371L594,366L606,361L611,366L638,355L646,354L688,389L704,385L718,384L731,381L748,371L757,371L760,358Z",628,451],"4":["M541,323L539,314L553,301L565,283L575,272L575,267L571,267L546,235L541,235L522,214L521,209L513,205L504,187L501,179L500,67L736,67L740,142L727,143L723,166L709,215L707,236L714,254L722,252L722,271L726,292L713,306L710,324L646,353L646,354L638,355L611,366L606,361L608,359L597,358L592,350L583,351L580,347L574,350L541,345Z",620,216],"5":["M376,552L213,552L211,545L218,539L217,531L209,524L212,514L235,475L242,468L246,470L250,460L253,459L267,433L287,433L293,436L295,442L331,442L337,425L355,433L365,442L367,430L391,442L396,431L399,446L424,465L449,472L459,480L450,493L437,530L421,552L382,552Z",334,488],"6":["M203,381L241,329L241,301L307,302L307,253L314,238L322,238L333,235L333,227L399,232L422,235L439,203L439,180L501,179L504,187L513,205L521,209L522,214L541,235L546,235L571,267L575,267L575,272L565,283L553,301L539,314L541,323L541,345L574,350L580,347L583,351L592,350L597,358L608,359L606,361L594,366L569,371L571,375L551,384L511,409L512,414L507,416L481,441L470,458L459,480L449,472L424,465L399,446L396,431L391,442L367,430L365,442L355,433L337,425L331,442L295,442L293,436L287,433L267,433L280,410L273,405L266,413L256,415L257,410L251,407L224,398L213,397L207,390L204,392Z",406,330],"7":["M31,255L73,254L73,257L91,257L99,267L115,245L164,245L169,271L180,275L176,284L203,286L209,281L215,285L217,281L230,280L241,271L241,329L203,381L204,392L207,390L213,397L224,398L251,407L257,410L256,415L266,413L273,405L280,410L253,459L250,460L246,470L242,468L235,475L212,514L209,524L217,531L218,539L211,545L213,552L31,552L31,303Z",156,398],"9":["M199,199L199,187L192,187L193,182L193,148L283,148L284,103L289,101L289,67L500,67L501,179L439,180L439,203L422,235L399,232L333,227L333,235L322,238L314,238L307,253L307,302L241,301L241,271L230,280L217,281L215,285L209,281L203,286L176,284L180,275L169,271L164,245L172,235L171,227L178,222L178,213L189,213L189,210L199,210Z",333,184],"10":["M31,99L31,71L59,60L85,46L90,42L96,31L103,30L105,35L126,22L153,8L153,67L289,67L289,101L284,103L283,148L193,148L193,182L192,187L199,187L199,210L189,210L189,213L178,213L178,222L171,227L172,235L164,245L115,245L99,267L91,257L73,257L73,254L31,255L31,175Z",160,137],"11":["M901,288L904,298L912,309L899,330L892,329L887,347L892,351L888,357L888,365L866,380L854,390L842,405L777,350L760,358L757,371L748,371L731,381L718,384L704,385L688,389L646,354L646,353L710,324L713,306L726,292L755,302L783,288L802,280L796,271L796,262L808,254L815,256L823,247L833,234L838,232L899,228L895,249L908,251L915,265L925,261L916,273L899,284Z",785,316],"12":["M875,498L887,491L877,482L884,474L892,476L902,484L918,464L926,468L924,483L910,495L899,502L897,517L886,522L878,519L882,506Z",900,493]}, DG = function (d, attrs) { return '<g transform="translate(24,24) scale(.3271578947368421)"><path d="' + d + '" ' + attrs + '/></g>'; };
+  var WD = 'OVERTIME'.split(''), word = function (i, fill) { return svg('<text x="54.48" y="157.31" fill="' + fill + '" font-family="\'Archivo Black\'" font-size="96" letter-spacing="-1">' + only(WD, i) + '</text>'); };
+  var pa = 'url(&quot;data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + VB + '" width="583" height="241">' + G + '</svg>').replace(/'/g, '%27') + '&quot;)';
+  var T = ['PENNSYLVANIA ', 'WRESTLING ', 'HISTORY'], i, h = '', seams = '', keys = Object.keys(DS).sort(function (a, b) { return a - b; });
+  var cxS = 24 + 50 * 3.2716, cyS = 24 + 28 * 3.2716;   // state centre in lockup units, the direction pieces fly from
+  keys.forEach(function (k, n) { var p = DS[k], ux = 24 + p[1] * .32716, uy = 24 + p[2] * .32716, dx = ux - cxS, dy = uy - cyS, L = Math.hypot(dx, dy) || 1;
+    var far = 230 + (n % 3) * 40, ox = ((ux - 28) / 583 * 100).toFixed(1) + '%', oy = ((uy - 25) / 241 * 100).toFixed(1) + '%', t = (0.08 + n * 0.1).toFixed(2) + 's';
+    var st = '--t:' + t + ';--ox:' + ox + ';--oy:' + oy + ';--dx:' + (dx / L * far / 583 * 100).toFixed(1) + '%;--dy:' + (dy / L * far / 241 * 100 * .55).toFixed(1) + '%;--r:' + ((n % 2 ? 1 : -1) * (14 + n * 2)) + 'deg';
+    h += '<div class="a pc" style="' + st + '"><div class="a pf" style="--t:' + t + '">' + svg(DG(p[0], 'fill="#EEEAE1"')) + '</div><div class="a ol" style="">' + svg(DG(p[0], 'fill="none" stroke="#EEEAE1" stroke-width="5" stroke-linejoin="round"')) + '</div>'
+      + '<div class="a nm" style="--t:' + t + ';transform-origin:' + ox + ' ' + oy + '">' + svg('<text x="' + ux.toFixed(1) + '" y="' + (uy + 9).toFixed(1) + '" text-anchor="middle" fill="#EEEAE1" font-family="\'Barlow Condensed\'" font-weight="700" font-size="26">' + k + '</text>') + '</div></div>';
+    seams += DG(p[0], 'fill="none" stroke="#0B0D10" stroke-width="4" stroke-linejoin="round"'); });
+  h += '<div class="a st">' + svg(G) + '</div><div class="a sm">' + svg(seams) + '</div>';
+  var dk = '';
+  for (i = 0; i < WD.length; i++) { var d = (1.5 + i * 0.055).toFixed(3) + 's', fr = ((i % 2 ? 1 : -1) * (6 + i * 2)) + 'deg'; h += '<div class="a ch" style="--t:' + d + ';--fr:' + fr + '">' + word(i, '#EEEAE1') + '</div>'; dk += '<div class="a ch" style="--t:' + d + ';--fr:' + fr + '">' + word(i, '#0B0D10') + '</div>'; }
+  h += '<div class="m" style="--pa:' + pa + '">' + dk + '</div>';
+  for (i = 0; i < T.length; i++) h += '<div class="a tg" style="--t:' + (2.0 + i * 0.08).toFixed(2) + 's">' + svg('<text x="330.61" y="259.74" text-anchor="middle" fill="#D9A441" font-family="\'Barlow Condensed\'" font-weight="700" font-size="22" letter-spacing="7.26" xml:space="preserve">' + only(T, i) + '</text>') + '</div>';
   lk.innerHTML = h;
   /* progress bar: the gradient is fixed to the track and revealed left to right by two opposite translations (compositor
      only). It creeps on its own; OTBoot.progress(f) moves it to real values; it never goes backwards; full on exit. */
@@ -91,11 +114,12 @@
     bar.style.transition = fill.style.transition = RM ? 'none' : tr; bar.style.transform = 'translateX(' + ((f - 1) * 100).toFixed(2) + '%)'; fill.style.transform = 'translateX(' + ((1 - f) * 100).toFixed(2) + '%)'; }
   var t0 = performance.now(), started = false, creep;
   /* start once the lockup fonts are in (so letters never swap face mid-animation), or after 500 ms regardless */
-  function go() { if (started) return; started = true; t0 = performance.now(); el.classList.add('go'); creep = setTimeout(function () { to(0.85, 5000); }, RM ? 0 : 800); setTimeout(maybeLeave, INTRO); }
+  function go() { if (started) return; started = true; t0 = performance.now(); el.classList.add('go'); 
+    creep = setTimeout(function () { to(0.85, 4000); }, RM ? 0 : 1900); setTimeout(maybeLeave, INTRO); }
   if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('96px "Archivo Black"'), document.fonts.load('700 22px "Barlow Condensed"')]).then(go, go);
   setTimeout(go, 500);
   function maybeLeave() { if (!ready || done || !started || performance.now() - t0 < INTRO - 20) return; leave(); }
-  function leave() { done = true; clearTimeout(creep); var sweep = RM ? 0 : 220; to(1, sweep, 'ease-in-out');
+  function leave() { done = true; clearTimeout(creep); var sweep = RM ? 0 : 200; to(1, sweep, 'ease-in-out');
     setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, RM ? 320 : 580); }, sweep); }
   function hide() { if (ready) return; ready = true; maybeLeave(); }
   el.addEventListener('click', function () { if (ready && !done) leave(); });
