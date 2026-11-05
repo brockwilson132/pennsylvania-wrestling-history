@@ -1,32 +1,38 @@
-# Next session: ratings v6 rollout (agreed with Brock, 2026-11-04)
+# Next session: finish the unit-rating redesign, then publish (agreed with Brock, 2026-11-04)
 
-State at hand-off
-- tools/ratings.py v6 is built locally and committed (8d212d2), NOT published. Live artifact is still version 1793810176-7dbe (v5 ratings + RTG-as-of brackets).
-- v6 = first-round prior (-600, chosen on hidden 1990-2017 regional+state bouts at the final prior width) + district offsets refit
-  at the final prior width (bug fix: offsets were fitted at sd scale 2.0, applied at 1.0) + offsets fit through 2026 (RATINGS_FIT_ALL=1).
-- Test results (offsets fit <=2017): hidden 2018-26 regional+state bouts 78.1% / log loss 0.455 (live 75.8% / 0.497);
-  cross-district hidden state bouts 0.544 (live 0.560); all districts within +-0.032 (D7 -0.005, D1 -0.032).
-- Known leftover: D7 AAA 2000-04 about 8% overrated at states (era 1990-2004 spans no-bracket and full-bracket D7 years);
-  5-season blocks were tested and lost (overfit).
+Done (local, not published; live artifact still 1793810176-7dbe)
+- Ratings v6 in tools/ratings.py: first-round prior chosen by prediction at the final prior width. Grid -400..-1000
+  turned at -700 (log loss .4924 .4886 .4866 .4862 .4875 .4902 .4942). Tests (offsets fit <=2017): hidden 2018-26
+  regional+state 78.4% / .452; cross-district .544; every district within +-0.032 (D1 -0.032, D7 -0.006, D11 -0.008).
+- Tried and rejected: estimating the first-round level from the group's own bouts (marginal likelihood). The level is
+  not identified (it slides with the whole scale; without kid-vs-kid bouts it ran to the grid floor). Before drifting it
+  passed -570..-730, agreeing with the prediction choice, so first-round ratings under -700 are genuine estimates.
+- Missing regionals inferred from placements (309 wrestler-seasons); adv column in wrestler_seasons.csv / bout_rtg.csv.
+- App: first-round ratings hidden (to be revisited, step 2), sections as the District row + section brackets,
+  unit lists on a shared axis with an average line, About page ladder / odds calculator / distribution.
+- The production ratings run with -700 was started at the end of the session: check /tmp/prod2.log or rerun
+  `python3 tools/ratings.py`, then the pipeline (build_lower, build_difficulty, build_bestwins, build_people,
+  build_wstats, build_units, check_integrity).
 
-Decisions made
-- Keep 1500 = average state qualifier (1000 would make 37% of ratings negative). No scale change, no 0-1000, no Pareto.
-- No percentile/odds callouts on cards. About page gets: ratings ladder, odds calculator, distribution chart.
-- Unit ratings are renamed "Team RTG".
+Agreed design for units (Brock approved)
+- Three numbers, one word each, same at every level (school -> district -> region):
+  Strength: lineup strength. Per weight the school's best wrestler (real rating, first-round kids included); a weight
+    with nobody entered is a forfeit (0 chance). Average the chances of beating an average AAA starter, convert back
+    to the rating scale ("as strong as 14 wrestlers rated X"). District/region season = average of its schools.
+  Talent: wrestlers at state-medalist level (about 1650+) per school per season; rolls up as count / schools.
+    (AAA 1999-2026 medals per 10 schools: D11 8.8, D6 8.7, D7 5.8, D3 3.5, D1 3.3.)
+  Score: total placement points, as now (sum).
+- Over a window: plain average of season values (each season once). NO shrinkage toward district/state (Brock: unfair,
+  and short windows). Keep a minimum-seasons rule for ranking and show the season count.
+- "RTG" stays for wrestlers only.
+- Remove the wrestler-ratings table from the list card; band off.
 
 Steps
-1. Audit "reached regionals" (ADV in ratings.py) where regional brackets are missing: infer advancement from district
-   placements (district qualifier counts per era) so missing regional data never puts a wrestler in the first-round group.
-   Rerun the fairness test; rebuild.
-2. Ratings for wrestlers whose season ended in the first round: do not show (tiles, lists, rankings, bracket boxes show
-   a plain mark, results stay). Decide the 8 advancers below 0 (min -246): inspect for data errors.
-   Check knock-on: best wins, team RTG, field strength, district/region wrestler stats should use advancers only.
-3. Career grid District row: show the section result (with section name) where a district splits into sections and
-   has no separate district tournament (D7, D3, D1; D12 seasons with both: show the district).
-4. District/region lists: replace best/avg/low divider rows with a shared horizontal axis per row (dot/bar) and one
-   state-average line; mock with and without a 10th-90th percentile depth band; screenshots to Brock before publishing.
-5. Rename unit ratings "Team RTG"; fix the Pennsylvania-page headline (1490 = mean of the five regions' team ratings).
-6. About page: ratings ladder (landmark seasons + named wrestlers, odds per gap), odds calculator (pick two wrestlers),
-   distribution chart (state-qualifier seasons, a chosen wrestler marked), short plain-language method note.
-7. Before/after for Brock and top wrestlers per weight, screenshots reviewed, then publish once.
-   Section batch 2 (pack_p2.sh) is not needed for ratings.
+1. Install the -700 production ratings; rebuild.
+2. Decide with Brock: show first-round wrestlers' ratings again (they are real estimates now). Negative values exist
+   (about 5% of all wrestler-seasons, all first-round kids); discuss display (show, or show as "<0").
+3. build_units.js: Strength (dual-meet lineup equivalent with forfeits), Talent, Score per school-season, rolled up to
+   district and region; remove the coverage estimator / FILL placeholder; app lists + pages + rankings use the three
+   names with one-line definitions; remove the wrestler-ratings table.
+4. Check D11 vs D7 vs D3 on all three; screenshots of lists, a few schools; before/after for Brock and top wrestlers.
+5. Update About (unit ratings section, the three numbers, the first-round rule), then publish once.

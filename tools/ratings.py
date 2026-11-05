@@ -594,6 +594,53 @@ say(f'{GROUP_MODE} prior offsets (raw points added to the prior mean): ' + ', '.
 # the first round. It can't be set from those wrestlers' own fitted ratings (a wrestler with no wins has no lower bound,
 # so the mean keeps falling), so it is chosen by prediction: hide 10% of 1990-2017 regional and state bouts and keep
 # the offset that predicts them best. The 2018-26 tests never see this choice.
+# first-round level by marginal likelihood (RATINGS_FIRST_STAGE=marginal): the group of wrestlers whose season ended in
+# the first round gets its own prior offset, estimated from their own bouts against everyone else's fitted strengths.
+# Each wrestler's strength is integrated over his prior (Gauss-Hermite), so a wrestler with no wins does not run off to
+# minus infinity the way a point estimate does, and the group level settles where its real results put it.
+def est_first(Tf, label):
+    from numpy.polynomial.hermite_e import hermegauss
+    xk, wk = hermegauss(24); lw = np.log(wk / math.sqrt(2 * math.pi))
+    G = sorted({g for y in PRIORS for i in PRIORS[y][0] for g in [stg(i, y)] if g is not None})
+    gi = {g: n for n, g in enumerate(G)}
+    kid_m, kid_s, kid_g, b_kid, b_opp, b_sg, b_w = [], [], [], [], [], [], []
+    for y in YEARS:
+        if y not in PRIORS: continue
+        ids, mu, sd = PRIORS[y]; Ty = Tf[y]; loc = {}
+        for i, m, s_ in zip(ids, mu, sd):
+            g = stg(i, y)
+            if g is None: continue
+            loc[i] = len(kid_m); kid_m.append(m - STG.get(g, 0.0)); kid_s.append(s_); kid_g.append(gi[g])
+        for r in season_b[y]:
+            for me, op, sg in ((r[0], r[1], 1), (r[1], r[0], -1)):
+                if me in loc and op in Ty and op not in loc and isinstance(r[3], int): b_kid.append(loc[me]); b_opp.append(Ty[op]); b_sg.append(sg); b_w.append(r[2])   # only bouts against wrestlers outside the group place the group
+    kid_m, kid_s, kid_g = np.array(kid_m), np.array(kid_s), np.array(kid_g)
+    b_kid, b_opp, b_sg, b_w = np.array(b_kid), np.array(b_opp), np.array(b_sg, float), np.array(b_w)
+    def total(delta):   # delta per group -> marginal log likelihood per group
+        th = (kid_m + delta[kid_g])[:, None] + kid_s[:, None] * xk[None, :]          # kids x nodes
+        z = C_ * b_sg[:, None] * (th[b_kid] - b_opp[:, None])
+        ll = np.zeros_like(th); np.add.at(ll, b_kid, -b_w[:, None] * np.logaddexp(0, -z))
+        mx = (ll + lw).max(1, keepdims=True); per = (mx[:, 0] + np.log(np.exp(ll + lw - mx).sum(1)))
+        return np.bincount(kid_g, weights=per, minlength=len(G))
+    grid = np.arange(-1400, 1, 50.0); best = np.full(len(G), -1e300); arg = np.zeros(len(G))
+    for d in grid:
+        v = total(np.full(len(G), d)); upd = v > best; best[upd] = v[upd]; arg[upd] = d
+    for step in (25.0, 10.0, 4.0):   # refine each group around its best
+        for d0 in (-step, step):
+            v = total(arg + d0); better = v > best; best[better] = v[better]; arg = np.where(better, arg + d0, arg)
+    out = {g: float(arg[gi[g]]) for g in G}
+    say(f'  first-round level ({label}), marginal likelihood over {len(kid_m)} wrestler-seasons, {len(b_kid)} bouts: ' + ', '.join(f'{g[0]}/{g[1]} {v:+.0f}' for g, v in sorted(out.items())))
+    return out
+if FIRST == 'marginal':
+    STG.update({(c, e): -400.0 for c in ('AAA', 'AA', 'single') for e in ('e0', 'e1', 'e2')})
+    for it in range(8):
+        CAPTURE[0] = True; Ts, *_ = smoother(sd_scale=2.0, shift=SHIFT); CAPTURE[0] = False
+        new_ = est_first(Ts, f'pass {it + 1}'); moved = max(abs(new_.get(k, v) - v) for k, v in STG.items()); STG.update(new_)
+        for it2 in range(NIT):
+            Ts, *_ = smoother(sd_scale=2.0, shift=SHIFT); res = RESID(Ts, 1938, FIT_HI)
+            if all(abs(v[0]) < TOL for v in res.values()): break
+            for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+        if moved < 10: break
 if FIRST == 'prior':
     import zlib
     TUNE = {b['i'] for b in bouts if b['level'] in ('regional', 'state') and 1990 <= b['year'] <= 2017 and b['result'] not in SKIP
@@ -634,9 +681,18 @@ if SDS != 2.0 and not os.environ.get('RATINGS_NO_SHIFT'):
         say(f'district prior refit {it + 1} at prior sd scale {SDS}: largest residual {max(abs(v[0]) for v in res.values()):.0f}')
         if all(abs(v[0]) < TOL for v in res.values()): break
         for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+    if FIRST == 'marginal':   # the first-round level again, at the final prior width
+        for it in range(8):
+            CAPTURE[0] = True; Ts, *_ = smoother(sd_scale=SDS, shift=SHIFT); CAPTURE[0] = False
+            new_ = est_first(Ts, f'final width, pass {it + 1}'); moved = max(abs(new_.get(k, v) - v) for k, v in STG.items()); STG.update(new_)
+            for it2 in range(NIT):
+                Ts, *_ = smoother(sd_scale=SDS, shift=SHIFT); res = RESID(Ts, 1938, FIT_HI)
+                if all(abs(v[0]) < TOL for v in res.values()): break
+                for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
+            if moved < 10: break
     if FIRST == 'prior':   # the first-round offset was chosen at the wider width; check it again at this one
         best2 = None
-        for off in (best[0] - 200, best[0] - 100, best[0], best[0] + 100, best[0] + 200):
+        for off in (-400, -500, -600, -700, -800, -900, -1000):
             STG.update({k: float(off) for k in STG})
             Tt, *_ = smoother(mask=TUNE, sd_scale=SDS, shift=SHIFT)
             ll = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb_])
