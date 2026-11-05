@@ -872,6 +872,27 @@ if os.environ.get('RATINGS_ANCHOR') != 'state':
           and bracket_meta[bk][0] >= 1999 and bracket_meta[bk][1] in ('AAA', 'AA') for e in es]
     _q = [v for v in _q if v is not None]; LEVEL[0] = float(np.mean(_q)) - 1500
     say(f'scale level: the top-{ANCHOR_N} group sits {-LEVEL[0]:.0f} above the average 1999-2026 state qualifier; shifted so that qualifier reads 1500')
+# uncertainty of each season rating: the posterior sd at the fitted rating (Laplace), from the season's prior width and
+# the information in its bouts, sum of weight * c^2 * p(1-p) with the opponents' fitted ratings held fixed; on the
+# rating scale. A wrestler with five lopsided wins in a thin season has a wide one, a wrestler with forty bouts a narrow
+# one. Written to wrestler_seasons.csv (sd). Tested 2026-11-05 as an all-time sort key (rating - k*sd): it made the
+# era skew worse (1934-53 in the top 200: 47 at k=0, 80 at k=2), because a dominant champion's lopsided wins carry little
+# information, so the best modern seasons have wide uncertainty too. Not used by the app.
+SDV = {}
+for y in YEARS:
+    if y not in PRIORS: continue
+    ids, mu, sd = PRIORS[y]; info = {i: 1 / s_ ** 2 for i, s_ in zip(ids, sd)}; Ty = T[y]
+    for r in season_b[y]:
+        a, b_, wgt = r[0], r[1], r[2]
+        if a not in Ty or b_ not in Ty: continue
+        p = 1 / (1 + math.exp(-C_ * (Ty[a] - Ty[b_]))); x = wgt * C_ * C_ * p * (1 - p)
+        info[a] = info.get(a, 0) + x; info[b_] = info.get(b_, 0) + x
+    for i, v in info.items():
+        if v > 0: SDV[(i, y)] = 1 / math.sqrt(v)
+def rating_sd(k, y, c):
+    i = ID(k, y); v = SDV.get((i, y))
+    if v is None: return None
+    m, sd = anc(y, c); return v * (1.0 if SPREAD == 'raw' else SD_REF / sd)
 say(f'\nscale: 1500 = average 1999-2026 state qualifier; seasons lined up on the {ANCHOR_N} best per weight (rolling 11 seasons per class, returner-linked); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
     f'sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}; spread {SD_REF:.0f}')
 # cls of a wrestler-season (for the scale): the class of his bouts that season
@@ -1026,7 +1047,7 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_rtg.csv', 'w
 say(f'RTG as of each round: {nfit} bout checkpoints, last checkpoint vs season RTG max gap {maxgap:.2f} (should be ~0)')
 with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.csv', 'w', newline='') as f:
     c = csv.writer(f, lineterminator='\n'); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'enter', 'season', 'best', 'best_name', 'best_side', 'best_round', 'best_result',
-                                   'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results', 'adv'])
+                                   'qow', 'bad', 'season_best', 'season_best_name', 'season_bad', 'bouts', 'wins', 'results', 'adv', 'sd'])
     res_by = defaultdict(list)
     for b in bouts:
         if b['i'] not in PRE: continue
@@ -1040,7 +1061,7 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.
         c.writerow([bk[0], bk[1], bk[2], r['year'], r['c'], r['name'], r['school'], k, f0(r['enter']), f0(r['rating']),
                     f0(bst[0]) if bst else '', names_of.get((bst[1], r['year']), '') if bst else '', bst[3] if bst else '', bst[4] if bst else '', bst[5] if bst else '',
                     f0(r['qow']), r['bad'], f0(sb[0]) if sb else '', names_of.get((sb[1], r['year']), '') if sb else '', season_bad[(k, r['year'])],
-                    len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)]), int((WK2WI.get((k, r['year']), ID(k, r['year'])), r['year']) in ADV)])
+                    len(r['opp']), sum(o[2] for o in r['opp']), ' · '.join(x.strip() for x in res_by[(bk, k)]), int((WK2WI.get((k, r['year']), ID(k, r['year'])), r['year']) in ADV), f0(rating_sd(k, r['year'], key_cls.get((k, r['year']), 'single')))])
 open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/eval.txt', 'w').write('\n'.join(out) + '\n')
 json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': 'per neighbour-availability pattern, see eval.txt', 'prior_sd': RES_SD, 'params': params},
           open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/scale.json', 'w'), indent=1, default=float)
