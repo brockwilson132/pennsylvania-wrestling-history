@@ -7,6 +7,8 @@
 <title>Overtime · Pennsylvania wrestling history</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 180'%3E%3Crect width='300' height='180' rx='36' fill='%230B0D10'/%3E%3Ccircle cx='76' cy='96' r='39' fill='none' stroke='%23EEEAE1' stroke-width='34'/%3E%3Ccircle cx='76' cy='96' r='9' fill='%23FF3B2F'/%3E%3Cpath d='M140 44H256V76H216V148H180V76H140Z' fill='%23EEEAE1'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icon.svg">
+<link rel="preload" href="fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="app/styles.css">
 </head>
 <body>
@@ -17,35 +19,89 @@
 <main id="main"></main>
 <div class="bview" id="bview" role="dialog" aria-label="Tournament bracket" hidden></div>
 <nav class="fbar" id="fbar" aria-label="Filters"></nav>
-<!-- boot loader: shows at once and stays at least MIN ms (Brock: the intro should be seen), then fades out on the first render
-     (or when OTBoot.hide() is called). A slow load is not made slower: the hold only covers what is left of MIN. -->
+<!-- boot loader. A ~1.9 s intro (state, then OVERTIME letter by letter, then the tagline, then a glint), then the
+     loader zooms and fades into the app. It leaves at the later of: the intro being done, and the app's first render
+     (or OTBoot.hide()), so it never ends before the app is ready and never makes a slow load slower.
+     Every moving part is an HTML layer animated only with transform/opacity, so the compositor keeps it smooth while
+     the data scripts below block the main thread. The letters' dark cut is a static state-shaped mask, so the border
+     cut stays put while the letters rise through it. Tap/click/key skips the rest once the app is ready.
+     Reduced motion: no movement, a plain fade in and out. -->
 <style>
-#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;opacity:0;animation:otb-in .15s forwards}
-#otboot.out{animation:none;opacity:0;transition:opacity .25s;pointer-events:none}
+#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;pointer-events:auto}
 #otboot .w{display:grid;justify-items:center;gap:22px}
-#otboot svg.lk{width:min(520px,88vw);height:auto;overflow:visible;animation:otb-st .5s both}
+#otboot .lk{position:relative;width:min(520px,88vw);aspect-ratio:583/241}
+#otboot .lk>*,#otboot .lk .m>*{position:absolute;inset:0}
+#otboot .lk svg{width:100%;height:100%;overflow:visible;display:block}
+#otboot .m{-webkit-mask:var(--pa) 0 0/100% 100% no-repeat;mask:var(--pa) 0 0/100% 100% no-repeat}
+#otboot .a{will-change:transform,opacity;animation:var(--k) var(--d,.6s) var(--e,cubic-bezier(.16,1,.3,1)) var(--t,0s) both;animation-play-state:paused}
+#otboot.go .a{animation-play-state:running}
+#otboot .st{--k:otb-st;--d:.75s;--t:.05s}
+#otboot .ch{--k:otb-ch;--d:.55s;--e:cubic-bezier(.22,1.3,.36,1)}
+#otboot .tg{--k:otb-tg;--d:.6s}
+#otboot .gl{--k:otb-gl;--d:.7s;--t:1.3s;--e:cubic-bezier(.45,0,.55,1);background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.55) 50%,transparent 62%)}
+#otboot .lo{display:grid;justify-items:center;gap:22px;--k:otb-fd;--d:.5s;--t:.8s}
 #otboot .bar{width:min(220px,60vw);height:6px;border-radius:3px;background:#262C35;overflow:hidden}
-#otboot .bar i{display:block;height:100%;background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B);clip-path:inset(0 100% 0 0);transition:clip-path .3s ease-out}
+#otboot .bar b,#otboot .bar i{display:block;height:100%;transform:translateX(-100%);will-change:transform}
+#otboot .bar b{overflow:hidden}
+#otboot .bar i{position:relative;overflow:hidden;transform:translateX(100%);background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B)}
+#otboot .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:otb-sh 1.3s 1s ease-in-out infinite}
 #otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
-@keyframes otb-in{to{opacity:1}}
-@keyframes otb-st{from{opacity:0;transform:translateY(6px)}}
-@media (prefers-reduced-motion:reduce){#otboot .bar i{transition:none}#otboot svg.lk{animation:none}}
+#otboot.out{pointer-events:none;animation:otb-out .5s .05s cubic-bezier(.4,0,.2,1) both}
+#otboot.out .w{animation:otb-zoom .45s cubic-bezier(.4,0,1,1) both}
+@keyframes otb-st{from{opacity:0;transform:translateY(14px) scale(.92)}}
+@keyframes otb-ch{from{opacity:0;transform:translateY(16%)}}
+@keyframes otb-tg{from{opacity:0;transform:translateY(10px)}}
+@keyframes otb-fd{from{opacity:0}}
+@keyframes otb-gl{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
+@keyframes otb-sh{to{transform:translateX(100%)}}
+@keyframes otb-out{to{opacity:0}}
+@keyframes otb-zoom{70%{opacity:0}to{transform:scale(1.1);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  #otboot .a{animation:otb-fd .4s ease-out both;animation-play-state:paused}
+  #otboot .gl,#otboot .bar i::after{display:none}
+  #otboot.out{animation:otb-out .3s ease-out both}#otboot.out .w{animation:none}
+}
 </style>
 <div id="otboot" role="status" aria-live="polite" aria-label="Loading Overtime"><div class="w">
-<svg class="lk" viewBox="28 25 583 241" role="img" aria-label="Overtime, Pennsylvania wrestling history"><defs><clipPath id="otbpa"><path d="M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z" transform="translate(24,24) scale(3.271578947368421)"/></clipPath></defs><g transform="translate(24,24) scale(3.271578947368421)"><path d="M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z" fill="#EEEAE1"/></g><g fill="#EEEAE1"><text x="54.48" y="157.31" font-family="'Archivo Black'" font-size="96" letter-spacing="-1">OVERTIME</text></g><g fill="#0B0D10" clip-path="url(#otbpa)"><text x="54.48" y="157.31" font-family="'Archivo Black'" font-size="96" letter-spacing="-1">OVERTIME</text></g><g fill="#D9A441"><text x="330.61" y="259.74" text-anchor="middle" font-family="'Barlow Condensed'" font-weight="700" font-size="22" letter-spacing="7.26">PENNSYLVANIA WRESTLING HISTORY</text></g></svg>
-<div class="msg" id="otbootmsg">Loading results</div><div class="bar" aria-hidden="true"><i id="otbootbar"></i></div></div></div>
+<div class="lk" id="otbootlk" role="img" aria-label="Overtime, Pennsylvania wrestling history"></div>
+<div class="lo a"><div class="msg" id="otbootmsg">Loading results</div><div class="bar" aria-hidden="true"><b id="otbootbar"><i></i></b></div></div></div></div>
 <script>
-(function () { var el = document.getElementById('otboot'), done = false;
-  // progress bar: the gradient is fixed to the track and only revealed left to right. Until real numbers arrive through
-  // OTBoot.progress(f), it eases toward 90% on a timer; it never moves backwards and fills to 100% on hide.
-  var bar = document.getElementById('otbootbar'), shown = 0, real = 0, t0 = Date.now(), tick, MIN = 1200;
-  function draw(f) { f = Math.max(shown, Math.min(1, f)); shown = f; if (bar) bar.style.clipPath = 'inset(0 ' + (100 - f * 100).toFixed(1) + '% 0 0)'; }
-  tick = setInterval(function () { draw(Math.max(real, 0.9 * (1 - Math.exp(-(Date.now() - t0) / 2500)))); }, 120);
-  /* on hide the bar sweeps to full over whatever is left of MIN (at least 150 ms), then the loader fades */
-  function hide() { if (done || !el) return; done = true; clearInterval(tick); var wait = Math.max(150, MIN - (Date.now() - t0));
-    if (bar) bar.style.transition = 'clip-path ' + wait + 'ms ease-in-out'; draw(1);
-    setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300); }, wait + 80); }
-  window.OTBoot = { hide: hide, progress: function (f) { real = +f || 0; draw(real); }, say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
+(function () { var el = document.getElementById('otboot'), lk = document.getElementById('otbootlk'), done = false, ready = false;
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var INTRO = RM ? 1200 : 1900;   // ms the intro needs before the loader may leave (Brock: up to 3 s, then animate out)
+  /* the lockup: Pennsylvania outline, OVERTIME (cream outside the state, dark inside it), gold tagline */
+  var PA = 'M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z';
+  var VB = '28 25 583 241', G = '<g transform="translate(24,24) scale(3.271578947368421)"><path d="' + PA + '" fill="#EEEAE1"/></g>';
+  var svg = function (body) { return '<svg viewBox="' + VB + '" aria-hidden="true">' + body + '</svg>'; };
+  /* each letter (and tagline word) is its own layer holding the whole line with only that piece painted, so the layout
+     (kerning, letter-spacing, centring) is exactly the static lockup's */
+  var only = function (parts, i) { return parts.map(function (p, j) { return '<tspan' + (j === i ? '' : ' fill-opacity="0"') + '>' + p + '</tspan>'; }).join(''); };
+  var W = 'OVERTIME'.split(''), word = function (i, fill) { return svg('<text x="54.48" y="157.31" fill="' + fill + '" font-family="\'Archivo Black\'" font-size="96" letter-spacing="-1">' + only(W, i) + '</text>'); };
+  var T = ['PENNSYLVANIA ', 'WRESTLING ', 'HISTORY'];
+  var h = '<div class="a st">' + svg(G) + '</div>', dk = '', i;
+  for (i = 0; i < W.length; i++) { var d = (0.55 + i * 0.07).toFixed(2) + 's'; h += '<div class="a ch" style="--t:' + d + '">' + word(i, '#EEEAE1') + '</div>'; dk += '<div class="a ch" style="--t:' + d + '">' + word(i, '#0B0D10') + '</div>'; }
+  h += '<div class="m" style="--pa:url(&quot;data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + VB + '" width="583" height="241">' + G + '</svg>').replace(/'/g, '%27') + '&quot;)">' + dk + '<div class="a gl"></div></div>';
+  for (i = 0; i < T.length; i++) h += '<div class="a tg" style="--t:' + (1.15 + i * 0.1).toFixed(2) + 's">' + svg('<text x="330.61" y="259.74" text-anchor="middle" fill="#D9A441" font-family="\'Barlow Condensed\'" font-weight="700" font-size="22" letter-spacing="7.26" xml:space="preserve">' + only(T, i) + '</text>') + '</div>';
+  lk.innerHTML = h;
+  /* progress bar: the gradient is fixed to the track and revealed left to right by two opposite translations (compositor
+     only). It creeps on its own; OTBoot.progress(f) moves it to real values; it never goes backwards; full on exit. */
+  var bar = document.getElementById('otbootbar'), fill = bar.firstChild, shown = 0;
+  function cur() { var m = /matrix\(([^)]+)\)/.exec(getComputedStyle(bar).transform), w = bar.offsetWidth || 1; return m ? Math.max(0, Math.min(1, 1 + (+m[1].split(',')[4]) / w)) : shown; }
+  function to(f, ms, ease) { f = Math.max(cur(), Math.min(1, f)); shown = f; var tr = 'transform ' + ms + 'ms ' + (ease || 'cubic-bezier(.25,.6,.3,1)');
+    bar.style.transition = fill.style.transition = RM ? 'none' : tr; bar.style.transform = 'translateX(' + ((f - 1) * 100).toFixed(2) + '%)'; fill.style.transform = 'translateX(' + ((1 - f) * 100).toFixed(2) + '%)'; }
+  var t0 = performance.now(), started = false, creep;
+  /* start once the lockup fonts are in (so letters never swap face mid-animation), or after 500 ms regardless */
+  function go() { if (started) return; started = true; t0 = performance.now(); el.classList.add('go'); creep = setTimeout(function () { to(0.85, 5000); }, RM ? 0 : 800); setTimeout(maybeLeave, INTRO); }
+  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('96px "Archivo Black"'), document.fonts.load('700 22px "Barlow Condensed"')]).then(go, go);
+  setTimeout(go, 500);
+  function maybeLeave() { if (!ready || done || !started || performance.now() - t0 < INTRO - 20) return; leave(); }
+  function leave() { done = true; clearTimeout(creep); var sweep = RM ? 0 : 220; to(1, sweep, 'ease-in-out');
+    setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, RM ? 320 : 580); }, sweep); }
+  function hide() { if (ready) return; ready = true; maybeLeave(); }
+  el.addEventListener('click', function () { if (ready && !done) leave(); });
+  window.addEventListener('keydown', function k() { if (ready && !done) { leave(); window.removeEventListener('keydown', k); } });
+  window.OTBoot = { hide: hide, progress: function (f) { if (done) return; clearTimeout(creep); f = +f || 0; to(f, 400); creep = setTimeout(function () { to(Math.min(0.95, f + 0.06), 4000); }, 450); },
+    say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
   var main = document.getElementById('main');
   if (main && window.MutationObserver) new MutationObserver(function (r, o) { if (main.childElementCount) { o.disconnect(); hide(); } }).observe(main, { childList: true });
   window.addEventListener('error', function () { window.OTBoot.say('Something failed to load. Try reloading.'); }, { once: true });
