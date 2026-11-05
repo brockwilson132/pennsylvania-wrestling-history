@@ -1220,3 +1220,13 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .gsr .fpk{margin-top:10px}.gsr .fpk:first-child{margin-top:0}
 .gsr .fpo .stag{font-size:11px}
 .gsp{display:grid}.gsp .prr{border-top:1px solid var(--line)}
+/* ranking table: only Strength is a coloured tile (colour = strength). Talent, Score, Titles and Team are plain figures
+   with their small chart under them, so the eye goes to the one coloured column; an empty value is a faint dash. */
+.sxr .vt:not(.vtr){background:none;box-shadow:none;padding:0 2px}
+.sxr .vtt b,.sxr .vtm b{color:var(--gold)}
+.sxr .vt.z b{color:var(--line2);font-weight:700}
+.sxr .vt.z svg{visibility:hidden}
+.sxr .vtl b,.sxr .vts b{color:var(--chalk)}
+.sxr .vt.on:not(.vtr) b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--ash)}
+.sxr{border-left:0}
+.sx+.sx .sxr{border-top:1px solid var(--line)}
