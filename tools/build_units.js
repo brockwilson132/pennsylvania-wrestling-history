@@ -44,6 +44,7 @@ const fieldOf = (a) => FIELD.get([a.lvl, a.year, normCls(a.cls), a.lvl === 'stat
 const A = []; // {k, name, sch, year, cls, lvl, w, std, place, d, unit, rating, bw, bwn}
 function add(lvl, year, cls, unit, w, place, name, school, d) {
   if (!name || !nkey(name) || /^(forfeit|bye|open|vacant)$/i.test(String(name).trim()) || !String(school || '').trim()) return;   // placeholder rows, not wrestlers
+  if (/_Sub$|Super/.test(String(unit || ''))) return;   // sub-regionals (1995–98) and 2021 super-regionals are extra rounds on top of a district or regional: counting them would give those seasons two sets of places and titles at one level
   if (lvl === 'state') { const mb = MEMB[`${year}|${cls}|${wNum(w)}|${nkey(name)}`]; if (mb) { d = mb[0]; if (mb[1]) school = mb[1]; } } else d = unitDist(lvl, unit, d);
   const sch = splitName(canon(school), d);
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
