@@ -1,8 +1,8 @@
-entrants 400984 -> 400959, bouts 586693 -> 586693
-     43  bouts: name letters woven into school taken back out
-    120  bouts: name resolved to its entrant
-   1382  bouts: side still has no school (kept)
-     25  entrants: duplicate row merged
-      3  entrants: grade and record cut from school
-    102  entrants: name letters woven into school taken back out
+entrants 400959 -> 400924, bouts 586693 -> 586693
+     17  bouts: name letters woven into school taken back out
+     69  bouts: name resolved to its entrant
+   1313  bouts: side still has no school (kept)
+     35  entrants: duplicate row merged
+     53  entrants: name letters woven into school taken back out
+     18  entrants: school's first letters taken back out of the name
     735  entrants: still no school (kept)

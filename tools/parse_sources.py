@@ -94,7 +94,7 @@ for pi, page in enumerate(pdf.pages):
             if g: log.append(f'd7 glued entry dropped p{pi+1}: {g.group(0).strip()}'); t = t[:g.start()].strip()
             m = went.match(t)
             if m and year:
-                d7.append(dict(year=year, cls=cls, weight=wnorm(m.group(1)), place=1, name=m.group(2).strip(), school=m.group(3).strip().replace('Bethelhem', 'Bethlehem'), source='wpial'))
+                d7.append(dict(year=year, cls=cls, weight=wnorm(m.group(1)), place=1, name=m.group(2).strip(), school=m.group(3).strip().replace('Bethelhem', 'Bethlehem').replace('Canon-McMillion', 'Canon-McMillan'), source='wpial'))
             elif re.match(r'^(\d{2,3}|HWT)\s*[–-]', t): log.append(f'd7 unparsed p{pi+1}: {t}')
 with open(os.path.join(OUT, 'd7_champions.csv'), 'w', newline='') as f:
     w = csv.DictWriter(f, fieldnames=list(d7[0].keys())); w.writeheader(); w.writerows(d7)
