@@ -213,7 +213,7 @@ const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), sc
 fs.writeFileSync(path.join(OV, 'units.js'), 'window.WR_UNITS=' + JSON.stringify(out) + ';\n');
 console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'state brackets', fsorted.length, 'deciles', pct.join(' '));
 
-/* ---- head to head (overtime/h2h/<school-slug>.json, loaded by the head-to-head page) ----
+/* ---- head to head (overtime/h2h/<first letter of school slug>.json, keyed by slug, loaded by the head-to-head page) ----
    o: every postseason bout between this school's wrestlers and another school's, as [year, won, lost] per opponent
       (forfeits, injury defaults and DQs left out; a bout's schools are the ones its wrestlers are filed under above).
    L: the lineup of every season with a Strength, [weight slot, real rating or null for a forfeit] — the app plays two
@@ -241,10 +241,12 @@ console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'stat
   SEAS.forEach((s) => { if (!s.row[5]) return; const L = get(same(s.sch)).L, prev = L[s.year];
     if (prev && prev.s >= s.row[5]) return; L[s.year] = { s: s.row[5], w: s.weights.map((i, j) => [i, s.lineup[j] == null ? null : Math.round(s.lineup[j])]) }; });
   const dir = path.join(OV, 'h2h'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
-  const seen = new Map(); let bytes = 0;
+  const seen = new Map(), B = {}; let bytes = 0;
   H.forEach((v, sch) => { const sl = slug(sch); if (!sl) return; if (seen.has(sl)) { console.log('h2h slug clash', sl, seen.get(sl), sch); return; } seen.set(sl, sch);
     Object.values(v.o).forEach((L) => L.sort((p, q) => p[0] - q[0]));
     const L = {}; Object.entries(v.L).forEach(([y, x]) => { L[y] = [x.s, x.w]; });
-    const txt = JSON.stringify({ n: sch, L, o: v.o }); bytes += txt.length; fs.writeFileSync(path.join(dir, sl + '.json'), txt); });
-  console.log('h2h: bouts between schools', nb, 'school files', seen.size, 'bytes', bytes);
+    (B[sl[0]] = B[sl[0]] || {})[sl] = { n: sch, L, o: v.o }; });
+  /* one file per first letter of the slug: the published artifact holds at most 511 files, so 790 school files won't fit */
+  Object.entries(B).forEach(([c, o]) => { const txt = JSON.stringify(o); bytes += txt.length; fs.writeFileSync(path.join(dir, c + '.json'), txt); });
+  console.log('h2h: bouts between schools', nb, 'schools', seen.size, 'files', Object.keys(B).length, 'bytes', bytes);
 }

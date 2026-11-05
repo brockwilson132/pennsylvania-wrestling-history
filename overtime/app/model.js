@@ -354,10 +354,12 @@ var OT = window.OT || (window.OT = {});
         out.push({ key, lvl, year: r.year, w: r.w, side: b[0], round: b[1], aWon: w === ka, result: b[4], score: b[5], flags: b[6], ra: sa && sa[0] != null ? sa[0] : null, rb: sb && sb[0] != null ? sb[0] : null }); }); });
     const LV = { section: 0, district: 1, regional: 2, state: 3 };
     return out.sort((a, b) => a.year - b.year || LV[a.lvl] - LV[b.lvl]); };
-  /* head to head for schools: overtime/h2h/<slug>.json (tools/build_units.js) — bouts between the two schools' wrestlers
+  /* head to head for schools: overtime/h2h/<first letter>.json keyed by slug (tools/build_units.js) — bouts between the two schools' wrestlers
      by year, and each season's lineup for dual-meet odds */
   const H2HS = new Map();
-  const loadH2HS = (sl) => { if (!H2HS.has(sl)) { const p = fetch(`h2h/${sl}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => { H2HS.set(sl, d); return d; }); H2HS.set(sl, p); } const v = H2HS.get(sl); return v instanceof Promise ? v : Promise.resolve(v); };
+  const H2HB = new Map();   // h2h/<first letter>.json bundles, fetched once each
+  const loadH2HS = (sl) => { if (!H2HS.has(sl)) { const c = sl[0]; if (!H2HB.has(c)) H2HB.set(c, fetch(`h2h/${c}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+      const p = H2HB.get(c).then((b) => { const d = (b && b[sl]) || null; H2HS.set(sl, d); return d; }); H2HS.set(sl, p); } const v = H2HS.get(sl); return v instanceof Promise ? v : Promise.resolve(v); };
   const h2hsOf = (sl) => { const v = H2HS.get(sl); return v && !(v instanceof Promise) ? v : null; };
   const h2hsLoaded = (sl) => H2HS.has(sl) && !(H2HS.get(sl) instanceof Promise);
   /* one dual meet, weight by weight: each bout won at the two wrestlers' season-rating odds; a weight one side has no
