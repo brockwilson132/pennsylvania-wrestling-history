@@ -29,7 +29,9 @@
   const scaleFor = (vals, kind = 'district') => { const [lo, hi] = OT.ratingDom(kind); return { lo, hi, f: (x) => OT.domFrac(kind, x) }; };
   const HATCH = '<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#1A1F26"/><line x1="0" y1="0" x2="0" y2="10" stroke="#3A424D" stroke-width="3"/></pattern></defs>';
   const NOFILL = 'url(#hatch)';
-  const legend = (sc, note, hatch) => `<div class="mlg"><span class="mlgl">Strength</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
+  /* the colour key: the full-width cold → hot ramp between a weak icon (one bar lit) and a strong one (all four lit) */
+  const sig = (n, c) => `<svg viewBox="0 0 22 18" width="22" height="18" aria-hidden="true">${[0, 1, 2, 3].map((i) => `<rect x="${i * 5.5 + 0.5}" y="${13 - i * 4}" width="4" height="${5 + i * 4}" rx="1" fill="${i < n ? c : 'none'}" stroke="${i < n ? c : '#5F6B78'}" stroke-width="1"/>`).join('')}</svg>`;
+  const legend = (sc, note, hatch) => `<div class="mlg"><div class="mlgr"><span class="mlgi" title="Weaker${sc.lo ? ' · ' + r10(sc.lo) : ''}">${sig(1, '#2C5BD8')}</span><i class="mlgbar" role="img" aria-label="Strength colour scale, ${r10(sc.lo) || '–'} to ${r10(sc.hi) || '–'}" title="Strength ${r10(sc.lo) || '–'} to ${r10(sc.hi) || '–'}"></i><span class="mlgi" title="Stronger${sc.hi ? ' · ' + r10(sc.hi) : ''}">${sig(4, '#E8392B')}</span></div>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
   const tip = (name, a) => `${name}${a && a.rating ? ' · Strength ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + OT.sfmt(a.score) : ''}`;
   const svgOpen = (vb, label) => `<svg class="pam" viewBox="${vb.join(' ')}" role="img" aria-label="${esc(label)}">${HATCH}`;
   const outline = () => `<path class="pao" d="${M.outline}"/>`;

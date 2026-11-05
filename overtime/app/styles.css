@@ -1266,15 +1266,18 @@ table.h2st{min-width:0}.h2st td small{min-width:0}
 .uhc .uht h1{font-size:28px;line-height:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(min-width:720px){.uhc .uht h1{font-size:36px}}
 .uhc .uht .seg{flex:none}
-.uhx summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:6px}
-.uhx summary::-webkit-details-marker{display:none}
-.uhx summary{min-height:28px;align-items:center}.uhx summary::after{content:'';flex:none;width:7px;height:7px;padding:0;margin-right:6px;border:solid var(--ash);border-width:0 1.5px 1.5px 0;transform:translateY(-2px) rotate(45deg);margin-left:auto}
-.uhx[open] summary::after{transform:translateY(2px) rotate(-135deg)}
-.uhx .sub{flex:1;font-size:13px;line-height:1.45;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.uhx[open] .sub{white-space:normal}
-.uhx .crumb{display:inline;font:700 12px var(--cond);letter-spacing:.1em}.uhx .crumb>span{margin:0 4px;color:var(--ash2)}
-.uhx .dot{color:var(--ash2)}
-.uhc .usum{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:0 22px;margin-top:4px}
-.uhc .usum span{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
-.uhc .usum b{font-size:22px}
-.uhc .usum i{font-size:10.5px;letter-spacing:.1em}
+/* metric tiles: label, value, a bar on the page's scale with a median tick, and what it is measured against */
+.mtiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:6px}
+@media(min-width:720px){.mtiles{gap:10px;max-width:760px}}
+.mtile{background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:8px 9px 7px;display:grid;gap:3px;min-width:0}
+.mtile>i{font:700 10.5px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash);font-style:normal}
+.mtile>b{font:900 23px/1 var(--cond);color:var(--chalk);letter-spacing:.01em}
+@media(min-width:720px){.mtile>b{font-size:28px}.mtile{padding:10px 12px 9px}}
+.mtb{position:relative;display:block;height:5px;border-radius:3px;background:#262C34;margin:3px 0 1px}
+.mtb em{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+.mtb u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--chalk);opacity:.75;border-radius:1px}
+.mtile small{font:600 10.5px var(--cond);letter-spacing:.03em;color:var(--ash2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* map key: icons at the ends, ramp across the card */
+.mlgr{display:flex;align-items:center;gap:8px;flex:1 1 100%}
+.mlgr .mlgbar{flex:1;width:auto;height:8px}
+.mlgi{display:inline-flex;flex:none}
