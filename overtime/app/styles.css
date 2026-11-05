@@ -1142,15 +1142,57 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 /* team duals table: text columns read left to right */
 .dt td{text-align:left}
 .fb.off{pointer-events:none}
-/* school name tag: black, white text, border in the school's preset colour (identity, never strength) */
-.stag{display:inline-block;vertical-align:1px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#000;color:var(--chalk);border:1.5px solid var(--tagc,#4A5360);border-radius:5px;padding:0 6px;font:700 11.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase}
-.stag.ab{min-width:34px;text-align:center;padding:0 4px;font-size:11px;letter-spacing:.04em}
-.stag.xs{min-width:0;font-size:9.5px;line-height:12px;padding:0 3px;border-width:1px;border-radius:3px}
+/* school name tag: the school's own colours (identity, never strength). F = pill with a dot, D = jersey with an edge. */
+.stag{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;max-width:100%;overflow:hidden;white-space:nowrap;background:var(--tf);color:var(--ti);font:900 11.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.stag.tF{border-radius:999px;padding:1px 9px 1px 4px}.stag.tF>i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ta);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
+.stag.tD{border-radius:5px;padding:0 6px;border:1.5px solid var(--ta)}
+.stag.nc{font-weight:700;color:var(--ash)}
+.stag.ab{justify-content:center;min-width:34px;font-size:11px;letter-spacing:.04em}.stag.tF.ab{padding:1px 7px 1px 3px;min-width:0}
+.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.tF.xs>i{width:7px;height:7px}.stag.tD.xs{padding:0 3px;border-width:1px;border-radius:3px}
 /* the school tag sits in the name line, so the old badge column is gone */
 .wk1{display:flex!important;gap:10px;align-items:center}.wk1>.nm{flex:1 1 auto;min-width:0}.wk1>.rk,.wk1>.rv{flex:none}
 .bvtop{display:flex!important;gap:8px;align-items:center}.bvtop>.nm{flex:1 1 auto;min-width:0}.bvtop>.sd{flex:none;min-width:30px}.bvtop>.dsp{flex:none}
 .bxl{grid-template-columns:auto minmax(0,1fr) auto 28px}
-.wk .nm small .stag,.bvl .nm small .stag{margin-right:4px}
+.wk .nm small .stag,.bvl .nm small .stag,.atc small .stag{margin:5px 5px 1px 0}
+.wk .nm small,.bvl .nm small{line-height:1.5}
 .atc,.atc:hover{border-left:1px solid var(--line)}.atc:hover{border-left-color:var(--line2)}
-.atc small .stag{font-size:10.5px;line-height:14px;padding:0 5px;margin-right:3px}
+.atc small .stag{font-size:10.5px;line-height:14px}
 .drawer[open]>summary>.k{font-size:0}.drawer[open]>summary>.k::after{content:'Close';font-size:12px}
+/* all-time team card: who on the left, his four seasons on the right (grade, strength bar, result) */
+.atsec .sech .chipb{margin:0}
+.atg{grid-template-columns:44px repeat(var(--c),minmax(236px,1fr))}
+.atc{grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:start}
+.atl{display:grid;gap:3px;min-width:0;align-content:start;justify-items:start}
+.atl .atn{width:100%}
+.atc small{display:flex;flex-wrap:wrap;align-items:center;column-gap:5px;white-space:normal}
+.atc small .stag{margin:2px 0 0}
+.ats{display:grid;grid-template-columns:auto 30px 40px;align-items:center;column-gap:6px;row-gap:3px}
+.ats .sg{font:800 10.5px/16px var(--cond);letter-spacing:.04em;color:var(--ash);white-space:nowrap}.ats .sg i{font-style:normal;margin-left:3px;color:var(--ash);opacity:.7}
+.ats .smtr{flex:none;width:30px}
+.ats .yp{display:block;line-height:16px}.ats .yp.q{line-height:14px}
+.ats .srl{font:700 10.5px/16px var(--cond);color:var(--chalk);white-space:nowrap;text-align:center}
+.ats .sr0{font:700 10.5px/16px var(--cond);color:var(--ash);text-align:center}
+.atc small{max-width:100%}.atc small .stag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+.atc small .stag.tF>i{display:inline-block;vertical-align:-1px;margin-right:4px}
+/* field entry layouts under comparison (?bv=A stacked, ?bv=B side by side) */
+.bvl.v2{display:block;padding:9px 10px 10px 10px}
+.bvh{display:grid;grid-template-columns:36px minmax(0,1fr) auto auto;align-items:center;gap:8px}
+.bvh .nm b{font:700 16px/1.1 var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.bvh .dsp{width:auto;height:auto}
+.bvsub{display:flex;align-items:center;gap:6px;margin:5px 0 0 44px;color:var(--ash);font-size:11.5px}
+.bvfin{font:800 12px/18px var(--cond);padding:0 7px;border-radius:5px;color:var(--mat)}
+.bvfin.c1{background:var(--m1)}.bvfin.c2{background:var(--m2)}.bvfin.c3{background:var(--m3)}.bvfin.c4{background:var(--m4);color:var(--chalk)}.bvfin.c5{background:var(--m5);color:var(--chalk)}.bvfin.adv{background:transparent;border:1px solid var(--ash);color:var(--ash);line-height:16px}
+.bvbl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:2px;font:600 12px/17px var(--cond);letter-spacing:.02em;color:var(--ash);align-content:start}
+.bvbl .bvr{color:var(--ash);font-weight:700;font-size:11px;letter-spacing:.06em}
+.bvbl .bo-w{color:var(--chalk)}.bvbl .bo-l{color:var(--ash)}.bvbl .bvd{text-align:right}
+.bvbw2{display:block;font:600 11.5px var(--cond);color:var(--ash);margin-top:4px}.bvbw2 b{color:var(--chalk)}
+.vA .bvbl{margin:8px 0 0 44px;max-width:300px}.vA .bvbw2{margin-left:44px}.vA .cm.bvm{margin-top:9px}
+.vB .bvcols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px;margin-top:8px;align-items:start}
+.vB .bvbl{grid-template-columns:auto minmax(0,1fr) auto;column-gap:6px}
+@media(min-width:720px){.vB .bvcols{grid-template-columns:minmax(0,1fr) 300px;margin-left:44px}}
+.bvl.v2 .bvbl{max-width:230px}.vB .bvleft{min-width:0}
+.ats .sx{display:contents}
+/* peak-rating bar down the card's left side: fills from the bottom, cold to hot */
+.atc{position:relative;padding-left:22px;overflow:hidden}
+.atv{position:absolute;left:0;top:0;bottom:0;width:12px;background:#1E242C;border-right:1px solid var(--line);display:flex;align-items:flex-end}
+.atv>i{display:block;width:100%}

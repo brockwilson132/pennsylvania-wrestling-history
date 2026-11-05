@@ -10,33 +10,62 @@
 
 
   /* ---- school name tags ----
-     A school is shown as a black tag with white text and a border in its colour. Colours snap to a short list of presets
-     (not each school's exact hex), so every border reads on black and two schools never sit a shade apart. `m` is the
-     colour a school's hex is matched against; `c` is the border drawn, lifted where the true colour vanishes on black.
-     A school whose main colour is black or white takes its second colour; unknown schools are grey. */
-  const TAG_PRESETS = [
-    ['red', '#C8102E', '#E0293C'], ['maroon', '#7A1E2C', '#B0425A'], ['orange', '#E87722', '#F08A30'], ['gold', '#C9A227', '#D4AE3A'],
-    ['yellow', '#FFD200', '#F2D024'], ['green', '#15803D', '#2EA55A'], ['dkgreen', '#0B4D2C', '#2F8A55'], ['royal', '#1F4E9C', '#3A72D6'],
-    ['navy', '#1B2A4A', '#5878B4'], ['ltblue', '#5BA8E0', '#6BB6EA'], ['purple', '#4B2E83', '#8A63D2'], ['brown', '#5A3520', '#A0704A'],
-    ['silver', '#9EA2A2', '#B9BEC4'],
-  ];
-  const TAG_UNKNOWN = { key: 'none', c: '#4A5360' }, TAG_BW = { key: 'bw', c: '#D8D8D8' };
+     A school is a small tag in its own colours: filled with its main colour, its second colour as the dot (F, pill) or the
+     edge (D, jersey), and the name written in the first of its colours that reads on the fill (second, then third, then
+     white or black). Colours are named presets, not each school's exact hex, so schools in "the same red" match.
+     District 11 is set by hand from Brock's list (TAG_ASSIGN); other schools snap the badge file's colours to the presets;
+     a school with no colours on file gets the plain grey tag. TAG_STYLE picks the design: 'F' (default) or 'D'. */
+  const TAG_PRESETS = {
+    red: '#C8102E', maroon: '#7A1E2C', orange: '#E87722', gold: '#C9A227', yellow: '#FFD200', green: '#15803D', dkgreen: '#0B4D2C',
+    royal: '#1F4E9C', navy: '#1B2A4A', ltblue: '#7EC8F2', purple: '#4B2E83', brown: '#4E2A1E', grey: '#8A8D8F', white: '#FFFFFF', black: '#111111',
+  };
+  /* District 11, from Brock (2026-11-05): colours in order, main first. Old names follow the school that replaced them. */
+  const TAG_ASSIGN = {
+    'Allentown Central Catholic': ['green', 'gold'], 'Allentown Dieruff': ['royal', 'grey'], 'Bangor': ['maroon', 'white'],
+    'Bethlehem Catholic': ['brown', 'gold'], 'Bethlehem Freedom': ['black', 'gold'], 'Bethlehem Liberty': ['maroon', 'navy', 'white'],
+    'Liberty': ['maroon', 'navy', 'white'], 'Bishop Hafey': ['gold', 'white'], 'Blue Mountain': ['navy', 'white'], 'Catasauqua': ['brown', 'white'],
+    'East Stroudsburg': ['purple', 'white'], 'East Stroudsburg North': ['ltblue', 'black', 'white'], 'East Stroudsburg South': ['purple', 'white'],
+    'Easton': ['red', 'white', 'black'], 'Emmaus': ['green', 'gold'], 'Hellertown Lower Saucon': ['red', 'black'], 'Jim Thorpe': ['navy', 'red', 'white'],
+    'Lehighton': ['maroon', 'white'], 'Mahanoy': ['black', 'gold'], 'Minersville': ['royal', 'white', 'black'], 'Nazareth': ['royal', 'white', 'black'],
+    'North Schuylkill': ['red', 'royal'], 'Northampton': ['orange', 'black'], 'Northern Lehigh': ['navy', 'white'], 'Northwestern Lehigh': ['black', 'gold'],
+    'Notre Dame-Green Pond': ['navy', 'gold'], 'Palisades': ['purple', 'gold', 'white'], 'Palmerton': ['royal', 'white'], 'Panther Valley': ['black', 'gold', 'white'],
+    'Parkland': ['red', 'grey', 'black'], 'Pen Argyl': ['green', 'white'], 'Pine Grove': ['red', 'grey'], 'Pius X (Roseto)': ['royal', 'white'],
+    'Pleasant Valley': ['royal', 'white'], 'Pocono Mountain': ['red', 'white'], 'Pocono Mountain East': ['red', 'white'], 'Pocono Mountain West': ['navy', 'grey'],
+    'Pottsville': ['red', 'white'], 'Salisbury Township': ['navy', 'white'], 'Saucon Valley': ['red', 'black'], 'Schuylkill Haven': ['royal', 'gold'],
+    'Shenandoah Valley': ['ltblue', 'white'], 'Slatington': ['navy', 'white'], 'Southern Lehigh': ['royal', 'white'], 'Stroudsburg': ['maroon', 'white'],
+    'Tamaqua': ['royal', 'white', 'black'], 'Tri-Valley': ['red', 'black', 'white'], 'West Hazleton': ['ltblue', 'black'], 'Whitehall': ['maroon', 'gold'],
+    'William Allen': ['yellow', 'royal'], 'Williams Valley': ['royal', 'red', 'white'], 'Wilson Area': ['royal', 'gold'],
+  };
+  const TAG_STYLE = (() => { try { const m = /[?&]tag=([DF])\b/.exec(location.search + location.hash); return m ? m[1] : 'F'; } catch (e) { return 'F'; } })();
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
-  const lumOf = (h) => { const [r, g, b] = hexRgb(h); return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255; };
-  const nearest = (h) => { const [r, g, b] = hexRgb(h); let best = null, bd = Infinity;
-    TAG_PRESETS.forEach(([key, m, c]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = { key, c }; } }); return best; };
-  const isBW = (h) => { if (!h) return true; const [r, g, b] = hexRgb(h); const sat = Math.max(r, g, b) - Math.min(r, g, b); return sat < 28 && (lumOf(h) < 0.16 || lumOf(h) > 0.85); };
+  const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const BV_STYLE = (() => { try { const m = /[?&]bv=([AB])\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare field layouts
+  const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
+  const PK = Object.entries(TAG_PRESETS);
+  const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
+    PK.forEach(([k, m]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = k; } }); return best; };
   const TAGC = new Map();
-  function schoolPreset(sch) {
+  /* a school's colours as preset keys, main first; null when nothing is on file */
+  function schoolColours(sch) {
     if (TAGC.has(sch)) return TAGC.get(sch);
-    const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
-    let p = TAG_UNKNOWN;
-    if (id && id.primary) { const main = !isBW(id.primary) ? id.primary : id.secondary && !isBW(id.secondary) ? id.secondary : null; p = main ? nearest(main) : TAG_BW; }
-    TAGC.set(sch, p); return p;
+    let ks = TAG_ASSIGN[sch] || null;
+    if (!ks) { const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
+      if (id && id.primary) ks = [id.primary, id.secondary, id.accent].filter(Boolean).map(nearestKey).filter((k, i, a) => a.indexOf(k) === i); }
+    TAGC.set(sch, ks); return ks;
+  }
+  /* fill, accent (dot or edge) and text colour for one school */
+  function tagPaint(sch) {
+    const ks = schoolColours(sch);
+    if (!ks || !ks.length) return { fill: '#2A3038', acc: '#4A5360', ink: '#EEEAE1', none: true };
+    const fill = TAG_PRESETS[ks[0]], acc = TAG_PRESETS[ks[1] || ks[0]];
+    const ink = ks.slice(1).map((k) => TAG_PRESETS[k]).find((c) => contrast(fill, c) >= READS) || (contrast(fill, '#FFFFFF') >= contrast(fill, '#000000') ? '#FFFFFF' : '#000000');
+    return { fill, acc, ink };
   }
   const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
-  const stag = (sch, o = {}) => `<span class="stag${o.abbr ? ' ab' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tagc:${schoolPreset(sch).c}"${o.abbr ? ` title="${esc(sch)}"` : ''}>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`;
+  const stag = (sch, o = {}) => { const p = tagPaint(sch);
+    return `<span class="stag t${TAG_STYLE}${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}>${TAG_STYLE === 'F' ? '<i></i>' : ''}${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
 
   /* brand */
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
@@ -459,6 +488,7 @@
     const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
     const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
       const d = b.length > 8 ? (won ? b[9] - b[7] : -(b[10] - b[8])) : DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
+    const RSH = (b) => { const d = b[1]; if (b[0] === 'champ') return ['Final', 'SF', 'QF', 'R16', 'R32', 'Pig'][d] || 'Pre'; if (b[0] === 'p3') return '3rd'; if (b[0] === 'p5') return '5th'; if (b[0] === 'p7') return '7th'; return d === 1 ? 'C-SF' : 'C' + d; };
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
@@ -467,6 +497,15 @@
       const net = NET.get(nk(r.name));
       const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
       const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
+      if (BV_STYLE) {
+        const fin = r.place ? `<span class="bvfin ${pc(r.place)}" title="Finished ${ordinal(r.place)}">${ordinal(r.place)}</span>` : e.adv ? '<span class="bvfin adv" title="Advanced">Adv</span>' : '';
+        const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
+        const bwl = sx && sx[1] != null ? `<span class="bvbw2">Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
+        const head = `<span class="bvh"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b></a>${fin}<span class="dsp">${rtgTag(rOf(r))}</span></span><span class="bvsub">${stag(r.sch)}${meta ? `<span>${meta}</span>` : ''}</span>`;
+        const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
+        return BV_STYLE === 'A' ? `<div class="bvl v2 vA${me ? ' me' : ''}">${head}${bouts}${bwl}${entrantMatrix(e, F)}</div>`
+          : `<div class="bvl v2 vB${me ? ' me' : ''}">${head}<span class="bvcols"><span class="bvleft">${bouts}${bwl}</span>${entrantMatrix(e, F)}</span></div>`;
+      }
       return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
@@ -477,5 +516,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament and the change across it. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { stag, schoolPreset, TAG_PRESETS, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { stag, schoolColours, tagPaint, TAG_PRESETS, TAG_ASSIGN, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
