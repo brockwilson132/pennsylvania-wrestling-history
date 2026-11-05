@@ -14,7 +14,7 @@
      edge (D, jersey), and the name written in the first of its colours that reads on the fill (second, then third, then
      white or black). Colours are named presets, not each school's exact hex, so schools in "the same red" match.
      District 11 is set by hand from Brock's list (TAG_ASSIGN); other schools snap the badge file's colours to the presets;
-     a school with no colours on file gets the plain grey tag. TAG_STYLE picks the design: 'F' (default) or 'D'. */
+     a school with no colours on file gets the plain grey tag. The tag is a pill with a dot in the accent colour. */
   const TAG_PRESETS = {
     red: '#C8102E', maroon: '#7A1E2C', orange: '#E87722', gold: '#C9A227', yellow: '#FFD200', green: '#15803D', dkgreen: '#0B4D2C',
     royal: '#1F4E9C', navy: '#1B2A4A', ltblue: '#7EC8F2', purple: '#4B2E83', brown: '#4E2A1E', grey: '#8A8D8F', white: '#FFFFFF', black: '#111111',
@@ -36,7 +36,6 @@
     'Tamaqua': ['royal', 'white', 'black'], 'Tri-Valley': ['red', 'black', 'white'], 'West Hazleton': ['ltblue', 'black'], 'Whitehall': ['maroon', 'gold'],
     'William Allen': ['yellow', 'royal'], 'Williams Valley': ['royal', 'red', 'white'], 'Wilson Area': ['royal', 'gold'],
   };
-  const TAG_STYLE = (() => { try { const m = /[?&]tag=([DF])\b/.exec(location.search + location.hash); return m ? m[1] : 'F'; } catch (e) { return 'F'; } })();
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
   const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
   const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
@@ -64,7 +63,7 @@
   const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
   const stag = (sch, o = {}) => { const p = tagPaint(sch);
-    return `<span class="stag t${TAG_STYLE}${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}>${TAG_STYLE === 'F' ? '<i></i>' : ''}${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
+    return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
 
   /* brand */
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
@@ -83,6 +82,7 @@
     wrestlers: `<g fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.4" r="2.2"/><circle cx="17" cy="7.4" r="2.2"/><path d="M7.4 10.2 C5.6 11.4 4.8 13.2 4.9 15.4 L3.6 22.5 M4.9 15.4 C6.4 17 7.2 19.4 7.6 22.5"/><path d="M18.6 10.2 C20.4 11.4 21.2 13.2 21.1 15.4 L22.4 22.5 M21.1 15.4 C19.6 17 18.8 19.4 18.4 22.5"/><path d="M8.2 12.6 L15.6 10 M17.8 12.6 L10.4 10"/></g>`,
     division: `<rect x="3.5" y="15" width="5" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="10" width="5" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17.5" y="4" width="5" height="19" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>`,
     weights: `<path d="M9 8.5 A4 4 0 1 1 17 8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 11 H19.5 L22 23 H4 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+    search: `<circle cx="11.5" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 L22 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
     menu: `<path d="M4 8 H22 M4 13 H22 M4 18 H22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
     /* the View item: one glyph per view */
     v_map: `<path d="M3 7 L9 4.5 L17 7 L23 4.5 V19 L17 21.5 L9 19 L3 21.5 Z M9 4.5 V19 M17 7 V21.5" fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linejoin="round"/>`,

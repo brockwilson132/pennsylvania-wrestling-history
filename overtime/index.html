@@ -11,12 +11,42 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="fwg" gradientUnits="userSpaceOnUse" x1="0" x2="100" y1="0" y2="0"><stop offset="0" stop-color="#2EC27E"/><stop offset=".45" stop-color="#B8C94A"/><stop offset=".72" stop-color="#F08A24"/><stop offset="1" stop-color="#FF3B2F"/></linearGradient></defs></svg>
-<div class="top"><div class="bar"><a class="brand" id="brand" href="#state" aria-label="Overtime home"></a><button class="mbtn" id="mbtn" type="button" aria-label="Menu" aria-haspopup="dialog" aria-expanded="false"></button></div></div>
+<div class="top"><div class="bar"><a class="brand" id="brand" href="#state" aria-label="Overtime home"></a><button class="mbtn sbtn" id="sbtn" type="button" aria-label="Search" aria-haspopup="dialog" aria-expanded="false"></button><button class="mbtn" id="mbtn" type="button" aria-label="Menu" aria-haspopup="dialog" aria-expanded="false"></button></div></div>
 <div class="fscrim" id="fscrim" hidden></div>
 <div class="fpop" id="fpop" role="dialog" hidden></div>
 <main id="main"></main>
 <div class="bview" id="bview" role="dialog" aria-label="Tournament bracket" hidden></div>
 <nav class="fbar" id="fbar" aria-label="Filters"></nav>
+<!-- boot loader: shows while the data scripts load, fades out on the first render (or when OTBoot.hide() is called) -->
+<style>
+#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;opacity:0;animation:otb-in .2s .25s forwards}
+#otboot.out{animation:none;opacity:0;transition:opacity .25s;pointer-events:none}
+#otboot .w{display:grid;justify-items:center;gap:22px}
+#otboot svg.lk{width:min(520px,88vw);height:auto;overflow:visible;animation:otb-st .5s .25s both}
+#otboot .bar{width:min(220px,60vw);height:6px;border-radius:3px;background:#262C35;overflow:hidden}
+#otboot .bar i{display:block;height:100%;background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B);clip-path:inset(0 100% 0 0);transition:clip-path .3s ease-out}
+#otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
+@keyframes otb-in{to{opacity:1}}
+@keyframes otb-st{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){#otboot .bar i{transition:none}#otboot svg.lk{animation:none}}
+</style>
+<div id="otboot" role="status" aria-live="polite" aria-label="Loading Overtime"><div class="w">
+<svg class="lk" viewBox="28 25 583 241" role="img" aria-label="Overtime, Pennsylvania wrestling history"><defs><clipPath id="otbpa"><path d="M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z" transform="translate(24,24) scale(3.271578947368421)"/></clipPath></defs><g transform="translate(24,24) scale(3.271578947368421)"><path d="M71.9,55L66.6,55L63.1,55L59.7,55L56.2,55L52.4,55L52.2,55L42.2,54.9L38.3,54.9L37.6,54.9L30.8,54.9L28.9,54.9L21.5,55L20.1,55L15.6,55L13.1,55L5.1,55L3.4,55L3.5,51.4L3.4,50L3.4,48.8L3.4,45.8L3.5,40.8L3.4,39.2L3.4,35.8L3.4,31.3L3.4,30.3L3.4,25.5L3.4,25.3L3.5,23.7L3.4,17.8L3.4,17.5L3.4,10L3.4,7.3L6.2,6.2L8.8,4.8L9.3,4.4L9.9,3.2L10.6,3.2L10.8,3.7L12.9,2.4L15.6,1L15.6,6.8L18,6.8L26.8,6.8L29,6.9L38.8,6.8L40.4,6.8L47.7,6.9L50,6.8L57.7,6.8L60.2,6.8L60.9,6.8L66.8,6.8L73.4,6.9L74,6.9L79.8,6.9L83.9,6.8L85.3,6.8L85.9,6.8L86.7,7.9L87,7.8L87.5,9.7L88.3,9.6L89.3,10L90.5,11.1L90,11.7L90.8,12.1L91,14.9L90.6,15.4L91.9,17.3L92,18L92.6,17.9L93.5,18.5L93.3,18.8L94.8,18.8L95.6,19.1L96.6,20.6L95.6,20.8L94.4,22.1L93.6,24.3L92.9,25.2L91.8,26.2L92.2,26.1L91.3,27.3L89.6,28.4L89.8,28.8L90.1,29.8L90.9,30.9L89.6,32.9L88.9,32.9L88.4,34.7L88.9,35.1L88.5,35.6L88.5,36.4L88.6,36.8L89.1,37.4L90.1,37.3L90.6,37.9L90.5,39.7L90.8,40.5L92.2,40.8L92.6,42L93.8,43L94.2,43.9L95.3,44.7L96.1,46L95.2,46.7L94.6,46.5L93.9,47.4L92.1,48.1L90.7,49.3L89.6,50L89.4,51.5L88.3,52L87.4,52.3L86,52.5L85,53.3L83.7,52.6L82.2,52.6L81.1,52.9L80.2,53.5L79.1,55L73.5,55L72,55Z" fill="#EEEAE1"/></g><g fill="#EEEAE1"><text x="54.48" y="157.31" font-family="'Archivo Black'" font-size="96" letter-spacing="-1">OVERTIME</text></g><g fill="#0B0D10" clip-path="url(#otbpa)"><text x="54.48" y="157.31" font-family="'Archivo Black'" font-size="96" letter-spacing="-1">OVERTIME</text></g><g fill="#D9A441"><text x="330.61" y="259.74" text-anchor="middle" font-family="'Barlow Condensed'" font-weight="700" font-size="22" letter-spacing="7.26">PENNSYLVANIA WRESTLING HISTORY</text></g></svg>
+<div class="msg" id="otbootmsg">Loading results</div><div class="bar" aria-hidden="true"><i id="otbootbar"></i></div></div></div>
+<script>
+(function () { var el = document.getElementById('otboot'), done = false;
+  // progress bar: the gradient is fixed to the track and only revealed left to right. Until real numbers arrive through
+  // OTBoot.progress(f), it eases toward 90% on a timer; it never moves backwards and fills to 100% on hide.
+  var bar = document.getElementById('otbootbar'), shown = 0, real = 0, t0 = Date.now(), tick;
+  function draw(f) { f = Math.max(shown, Math.min(1, f)); shown = f; if (bar) bar.style.clipPath = 'inset(0 ' + (100 - f * 100).toFixed(1) + '% 0 0)'; }
+  tick = setInterval(function () { draw(Math.max(real, 0.9 * (1 - Math.exp(-(Date.now() - t0) / 2500)))); }, 120);
+  function hide() { if (done || !el) return; done = true; clearInterval(tick); draw(1); setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300); }, 200); }
+  window.OTBoot = { hide: hide, progress: function (f) { real = +f || 0; draw(real); }, say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
+  var main = document.getElementById('main');
+  if (main && window.MutationObserver) new MutationObserver(function (r, o) { if (main.childElementCount) { o.disconnect(); hide(); } }).observe(main, { childList: true });
+  window.addEventListener('error', function () { window.OTBoot.say('Something failed to load. Try reloading.'); }, { once: true });
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="data.js"></script>
 <script src="medals.js"></script>

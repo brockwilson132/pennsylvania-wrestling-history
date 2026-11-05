@@ -2,8 +2,8 @@
 'use strict';
 (() => {
   const { PAGES, state, setCls, setWin, wordmark, navIcon, esc } = OT;
-  const main = document.getElementById('main'), brand = document.getElementById('brand'), fbar = document.getElementById('fbar'), fpop = document.getElementById('fpop'), fscrim = document.getElementById('fscrim'), mbtn = document.getElementById('mbtn');
-  brand.innerHTML = wordmark(); mbtn.innerHTML = navIcon('menu');
+  const main = document.getElementById('main'), brand = document.getElementById('brand'), fbar = document.getElementById('fbar'), fpop = document.getElementById('fpop'), fscrim = document.getElementById('fscrim'), mbtn = document.getElementById('mbtn'), sbtn = document.getElementById('sbtn');
+  brand.innerHTML = wordmark(); mbtn.innerHTML = navIcon('menu'); sbtn.innerHTML = navIcon('search');
   function route() {
     const raw = (location.hash || '#state').slice(1); const [h, qs] = raw.split('?'); const [page, ...rest] = h.split('/'); const id = rest.join('/');
     const q = {}; (qs || '').split('&').forEach((kv) => { const [k, v] = kv.split('='); if (k) q[k] = decodeURIComponent(v || ''); });
@@ -76,17 +76,19 @@
       return `<div class="fph"><b>School</b><span class="muted">${esc(where)}</span>${f.s ? `<a class="fpx" href="${hrefOf({ ...f, s: '' })}">All schools</a>` : ''}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
     view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${viewLabel(k, l)}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
     time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
+    search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
     menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {
-    if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : '') + (pop === 'time' ? ' time' : '');
-    const btn = pop === 'menu' ? mbtn : fbar.querySelector(`[data-fb="${pop}"]`);
-    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'time' ? 560 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, pop === 'menu' ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
+    if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'time' ? ' time' : '');
+    const btn = pop === 'menu' ? mbtn : pop === 'search' ? sbtn : fbar.querySelector(`[data-fb="${pop}"]`);
+    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'time' ? 560 : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
     else { fpop.style.left = ''; fpop.style.width = ''; }
+    if (pop === 'search') wireGlobalSearch();
     const inp = fpop.querySelector('#fps'); if (inp) { inp.addEventListener('input', () => { fpop.querySelector('#fpl').innerHTML = schoolItems(F(), inp.value); }); if (window.innerWidth >= 720) inp.focus(); }
   }
-  function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); paintPop(); drawBar(); }
-  function closePop() { if (!pop) return; pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
+  function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); sbtn.setAttribute('aria-expanded', String(k === 'search')); paintPop(); drawBar(); }
+  function closePop() { if (!pop) return; pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
   /* division, time and weights: each change is its own history entry, so Back steps through it */
   const snap = () => ({ cls: state.cls, win: { ...state.win }, w: state.f.weights.slice() });
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -160,6 +162,27 @@
         OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 8);
           list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2h/${side === 'a' ? p.slug + '~' + other : other + '~' + p.slug}"><b>${OT.esc(p.name)}</b><small>${OT.esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></a>`).join('') : '<div class="muted">No one by that name.</div>'; }); }, 150); }); });
   }
+  /* global search (top bar): schools and districts at once, then wrestlers once the people index is in. Ignores the filters. */
+  const DSEARCH = d3.range(1, 13).map((d) => ({ d, q: ('district ' + d + ' d' + d + ' ' + (OT.DISTRICTS[d] || '')).toLowerCase() }));
+  function wireGlobalSearch() {
+    const inp = fpop.querySelector('#gsq'), out = fpop.querySelector('#gsr'); if (!inp) return;
+    OT.loadPeople(); setTimeout(() => inp.focus(), 30);
+    const hd = (t) => `<div class="fpk">${t}</div>`;
+    const paint = () => { const q = inp.value.trim(), t = q.toLowerCase().split(/\s+/).filter(Boolean);
+      if (q.length < 2) { out.innerHTML = '<div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div>'; return; }
+      const has = (x) => t.every((w) => x.q.includes(w));
+      const sch = schools().filter(has).slice(0, 6), dis = DSEARCH.filter((x) => t.every((w) => x.q.split(/\s+/).some((y) => y.startsWith(w))) || x.q.includes(q.toLowerCase())).slice(0, 3);
+      const ppl = OT.peopleLoaded() ? OT.searchPeople(q, 25, true) : null;
+      let h = '';
+      if (dis.length) h += hd('Districts') + dis.map((x) => `<a class="fpo" href="#district/${x.d}"><span>District ${x.d}<i class="fpd">${esc(OT.DISTRICTS[x.d] || '')}</i></span></a>`).join('');
+      if (sch.length) h += hd('Schools') + sch.map((x) => `<a class="fpo" href="${hrefOf({ s: x.n })}"><span>${OT.stag(x.n)}</span><small>${x.d ? 'D' + x.d : ''}</small></a>`).join('');
+      h += hd('Wrestlers') + (ppl === null ? '<div class="fpn">Loading every wrestler…</div>' : ppl.length ? `<div class="gsp">${ppl.map(OT.personRow).join('')}</div>${ppl.length >= 25 ? '<div class="fpn">Top 25 by rating. Add more of the name or a school to narrow it.</div>' : ''}` : '<div class="fpn">No wrestler by that name.</div>');
+      out.innerHTML = h; };
+    let tm; inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(paint, 120); });
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const a = out.querySelector('a'); if (a) { location.hash = a.getAttribute('href'); closePop(); } } });
+    OT.loadPeople().then(() => { if (pop === 'search' && inp.value.trim().length >= 2) paint(); });
+    out.addEventListener('click', (e) => { if (e.target.closest('a')) closePop(); });
+  }
   /* search: everyone in any bracket (the people index loads on first use) */
   function wireSearch() {
     const inp = document.getElementById('wsearch'); if (!inp) return;
@@ -221,6 +244,7 @@
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       if (k === 'wrestlers') { closePop(); location.hash = hrefOf({ ...f, w: !f.w || !!f.who }); return; }
       if (pop === k) closePop(); else openPop(k); return; }
+    if (e.target.closest('#sbtn')) { if (pop === 'search') closePop(); else openPop('search'); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
     if (e.target === fscrim) { closePop(); return; }
     if (pop && fpop.contains(e.target)) {
