@@ -275,8 +275,25 @@
     /* the numbers */
     const brN = Object.keys(SY).filter((key) => { const k = OT.parseBkey(key); return k && inCls(k.cls); }).length;
     const nums = [[champs.length, 'state titles'], [rows.filter((r) => r.place).length, 'state medals'], [rows.length, 'state entrants'], [brN, 'brackets on record'], [fmt(nb), 'bouts'], [nb ? Math.round(100 * falls / nb) + '%' : '–', 'ended by fall'], [ot, 'overtime bouts']];
-    const numBlock = `<div class="card"><div class="usum">${nums.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div></div>`;
+    const numBlock = `<div class="card"><div class="usum">${nums.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div>${y === 2021 ? '<div class="note">2021 states were eight-man brackets (COVID year), so every qualifier medaled: no entrants without a place.</div>' : ''}</div>`;
     return head + section('Champions', champBlock) + section('Team titles', teamBlock) + section('Strongest of the season', topBlock) + section('Biggest upsets', upBlock) + (dBlock ? section('Titles by district', dBlock) : '') + section('By the numbers', numBlock);
+  };
+  /* upsets: the biggest all-time, at states, in state finals, and the wrestlers with the most of them */
+  PAGES.upsets = (id, q = {}) => {
+    const t = ['top', 'states', 'finals', 'killers'].includes(q.t) ? q.t : 'top';
+    const tabs = `<div class="dpick h2tab">${[['top', 'All levels'], ['states', 'States'], ['finals', 'State finals'], ['killers', 'Giant killers']].map(([k, l]) => `<a href="#upsets?t=${k}" class="${k === t ? 'on' : ''}">${l}</a>`).join('')}</div>`;
+    const head = `<header class="uh2"><h1>Upsets</h1><div class="sub">Wins over a wrestler rated 1500 or better (an average state qualifier) at odds under 25%, from both wrestlers' ratings going into the bout. The winner has at least three rated bouts behind him, so his rating rests on something.${state.cls === 'ALL' ? '' : ' ' + clsName() + ' only.'}</div>${tabs}</header>`;
+    const U = OT.upsets(); if (!U) return head + '<div class="card"><div class="muted bwl" data-need-upsets="1">Loading…</div></div>';
+    const inCls = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
+    const cn = (c) => (c === 'single' ? 'One class' : 'Class ' + c);
+    const wl = (name, sch) => `<a href="#wrestler/${OT.slug(name)}--${OT.slug(sch)}">${esc(name)}</a>`;
+    if (t === 'killers') { const K = U.killers;
+      return head + `<div class="card"><ol class="slist">${K.map((k, i) => `<li><span class="sw">${i + 1}</span><span class="sn"><b>${wl(k[0], k[1])}</b><small>${esc(k[1])} · ${k[4] === k[5] ? k[4] : k[4] + '–' + k[5]}${k[6] ? ` · ${k[6]} at states` : ''} · best ${pct(k[3])}</small></span><span class="sr">${k[2]} <i>upset${k[2] === 1 ? '' : 's'}</i></span></li>`).join('')}</ol><div class="note">Upset wins in a career, by the rule above. Ties go to the longer odds.</div></div>`; }
+    const L = U[t].filter((r) => inCls(r[1])).slice(0, 100);
+    const where = (r) => r[2] === 'state' ? 'States' : OT.unitLabel(r[2], r[3]);
+    const key = (r) => r[2] === 'state' ? `${r[0]}.${r[1]}.state.${OT.wNum(r[4])}` : `${r[0]}.${r[1]}.${r[2]}.${r[3]}.${OT.wNum(r[4])}`;
+    return head + (L.length ? `<div class="card"><ol class="bw h2m">${L.map((r) => { const p = oddsOf(r[14], r[15]);
+      return `<li><a href="${OT.bhref(key(r))}"><span class="bwn"><b>${esc(r[7])} over ${esc(r[9])}</b><small>${r[0]} · ${esc(where(r))} · ${cn(r[1])} ${OT.wShort(r[4])} · ${RN(r[5], r[6])} · ${[RES[r[11]] || r[11], r[12], r[13]].filter(Boolean).join(' ')} · ${esc(r[8])} vs ${esc(r[10])} · ${OT.rw(r[14])} vs ${OT.rw(r[15])}</small></span><span class="bwr"><b>${pct(p)}</b><i>odds</i></span></a></li>`; }).join('')}</ol><div class="note">Tap a bout for its bracket. ${U.n ? fmt(U.n) + ' upsets by this rule in ' + fmt(574000) + '+ bouts on record.' : ''}</div></div>` : empty('No upsets in scope.'));
   };
   PAGES.about = () => `<header class="uh2"><h1>Overtime</h1><div class="sub">Pennsylvania high school wrestling history, from districts to Hershey.</div></header><div class="card about">
     <h3>Overtime Rating</h3><p>Every bout in the archive is read from the brackets (about 374,000, 1938–2026). Each season, every wrestler's rating is fit from all of his postseason bouts at once: sections, districts, regionals and states. So beating the eventual state champion at districts counts the same as beating him at Hershey. Falls and tech falls count a little more than decisions. A wrestler's neighbouring seasons give the starting point, and each district starts at its own level, measured from how its wrestlers do against other districts at regionals and states. A win over someone who went out in the first round counts for very little, because those wrestlers start well below the rest. That rule is the same in every district, so a district with bigger fields doesn't collect extra credit. A wrestler's RTG is his best season. Wrestlers whose season ended in the first round get no rating in the app: their numbers exist only to set that starting point, not to rank them. In brackets, the number beside each name is his rating from the bouts up to that point, with every opponent at his full-season strength; after his last bout it is his season rating. Checked on bouts hidden from the fit, the rating picks the winner of 78% of 2018–26 regional and state bouts.</p>
@@ -330,7 +347,7 @@
     const pick = `<div class="typick">${prev ? `<a class="chipb" href="#tournaments?y=${prev}" aria-label="Season ${prev}">‹ ${prev}</a>` : '<span></span>'}<select data-tyear aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${next ? `<a class="chipb" href="#tournaments?y=${next}" aria-label="Season ${next}">${next} ›</a>` : '<span></span>'}</div>`;
     const blk = (t, rs) => rs.length ? section(t, `<div class="card tlist">${rs.map((r) => r.html).join('')}</div>`) : '';
     return `<header class="uh2"><h1>Tournaments</h1><div class="sub">Every bracket on record for one season${state.cls === 'ALL' ? '' : ', ' + clsName()}. Tap a weight to open its bracket.</div>${pick}</header>`
-      + (blk('State', st) + blk('Regionals', reg) + blk('Districts', dis) || empty('No brackets on record for this season.'));
+      + (y === 2021 ? '<div class="note">2021: eight-man state brackets (COVID year) after East and West super-regionals.</div>' : '') + (blk('State', st) + blk('Regionals', reg) + blk('Districts', dis) || empty('No brackets on record for this season.'));
   };
   /* Missing from the archive (menu) */
   PAGES.missing = () => `<header class="uh2"><h1>Missing</h1><div class="sub">Tournaments the bracket archive marks as incomplete: no official team scores, or consolation rounds not on record. Those seasons count only what was recorded.</div></header>${missingBlock(null).replace('<details class="drawer">', '<details class="drawer" open>') || empty('Nothing marked missing.')}`;
