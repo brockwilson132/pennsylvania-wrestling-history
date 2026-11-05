@@ -46,8 +46,12 @@ let lookup = {}; try { lookup = JSON.parse(fs.readFileSync('data/school_district
 /* school → district by year, from the district-level rows themselves (the tournament a school wrestled in) */
 const unitDistrict = (unit) => { const m = /^D(\d+)(?:_|$|-)/.exec(unit); return m ? +m[1] : null; };
 const SD = new Map(); // sch → Map(year → d)
-E.forEach((r) => { if (r.level !== 'district' && r.level !== 'section') return; const { unit } = norm(r); const m = /^D(\d+)$/.exec(unit) || /^D(\d+)_/.exec(unit); if (!m) return; const s = canon(r.school); (SD.get(s) || SD.set(s, new Map()).get(s)).set(+r.year, +m[1]); });
+// district rows first; a section row only fills a year the school has no district row for (sections hold the most
+// same-named small schools, e.g. D4 "Liberty" read as Bethlehem Liberty, so they must not overwrite a district entry)
+const SDall = new Map(); // sch → Map(year → Set(d)): every district a same-named school was seen in that season
+['district', 'section'].forEach((lvl) => E.forEach((r) => { if (r.level !== lvl) return; const { unit } = norm(r); const m = /^D(\d+)$/.exec(unit) || /^D(\d+)_/.exec(unit); if (!m) return; const s = canon(r.school); if (!s) return; const am = SDall.get(s) || SDall.set(s, new Map()).get(s); (am.get(+r.year) || am.set(+r.year, new Set()).get(+r.year)).add(+m[1]); const sm = SD.get(s) || SD.set(s, new Map()).get(s); if (lvl === 'section' && sm.has(+r.year)) return; sm.set(+r.year, +m[1]); }));
 const distOf = (sch, year, unit) => {
+  if (!sch) return unitDistrict(unit);   // a row with no school (unparsed name) takes its tournament's district, never another blank row's
   const m = SD.get(sch); if (m) { if (m.has(year)) return m.get(year); let best = null, bd = 1e9; m.forEach((d, y) => { if (Math.abs(y - year) < bd) { bd = Math.abs(y - year); best = d; } }); if (best) return best; }
   const d = stateDist[sch] || lookup[sch]; if (d) return +d;
   return unitDistrict(unit);
@@ -56,7 +60,16 @@ const distOf = (sch, year, unit) => {
 /* strings tables */
 const strs = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, strs.length); strs.push(s); } return sidx.get(s); };
 const parts = { district: [], regional: [], section: [] }; // section medalists are kept out of the app files
-const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: r.level === 'district' || r.level === 'section' ? (unitDistrict(unit) && /^D\d+$/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit)) : distOf(sch, year, unit) }; });
+/* a district or section tournament named D<n>... belongs to district n whoever the school is: a school-name lookup would send
+   same-named schools (Northwestern D7/D10, Trinity D3/D7) and blank-school rows to the wrong district. Joint tournaments
+   (D4-9, D5-6_Sub, ...), super-regionals and regionals name no single district, so their rows take the school's district. */
+const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: (r.level === 'district' || r.level === 'section') && /^D\d+(?:_|$)/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit) }; });
+/* two schools with one name in one season (Trinity D3/D7, Liberty D4/D11): a regional row goes to the candidate district
+   whose schools wrestle in this region that season, judged from the rows whose school name is not shared */
+{ const amb = (r) => { const y = SDall.get(r.sch); return y && y.get(r.year) && y.get(r.year).size > 1 ? y.get(r.year) : null; };
+  const reg = new Map(); rows.forEach((r) => { if (r.level !== 'regional' || !r.d || amb(r)) return; const k = `${r.cls}|${r.year}|${r.d}`; const m = reg.get(k) || reg.set(k, new Map()).get(k); m.set(r.unit, (m.get(r.unit) || 0) + 1); });
+  const top = (k) => { const m = reg.get(k); return m ? Array.from(m).sort((a, b) => b[1] - a[1])[0][0] : null; };
+  rows.forEach((r) => { if (r.level !== 'regional') return; const c = amb(r); if (!c) return; const fit = [...c].filter((d) => top(`${r.cls}|${r.year}|${d}`) === r.unit); if (fit.length === 1) r.d = fit[0]; }); }
 /* a section is the district round where its district has no district tournament that season (D7, D3, D1 sections):
    those sections ship with the app (career grid District row, bracket view); other sections stay build inputs only */
 const _dn = new Map(); rows.forEach((r) => { if (r.level === 'district' && r.d) { const k = `${r.year}|${r.cls}|${r.d}`; _dn.set(k, (_dn.get(k) || 0) + 1); } });

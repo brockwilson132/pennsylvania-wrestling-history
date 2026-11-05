@@ -90,7 +90,8 @@ def page_bouts(page):
         row.sort(key=lambda w: w['x0'])
         if not row: return None
         # first-round slot: name at the left, "School, GR, W-L" right-aligned at the end of the line
-        if len(row) >= 2 and row[-1]['x1'] > h['x1'] - 12 and ',' in row[-1]['text'] and row[0]['x0'] < h['x1'] - 60:
+        # (some 1960s-80s D6/D11 sheets end the school text 14pt short of the line, so allow 20)
+        if len(row) >= 2 and row[-1]['x1'] > h['x1'] - 20 and ',' in row[-1]['text'] and row[0]['x0'] < h['x1'] - 60:
             return {'full': row[0]['text'].strip(), 'school': row[-1]['text'].strip()}
         txt = ''.join(w['text'] if i == 0 else (('' if w['x0'] - row[i - 1]['x1'] < 1.5 else ' ') + w['text']) for i, w in enumerate(row))
         return {'abbr': txt.strip()}
@@ -195,18 +196,24 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     jobs = int(next((a.split('=')[1] for a in sys.argv if a.startswith('--jobs=')), '4'))
     tasks = []
-    for d, level in zip(args, ('state', 'district', 'regional', 'section')):
+    # folders are state district regional section by position; a folder named league (or any of those names)
+    # takes its level from its name, so `parse_bouts.py brackets/league --out=data/brackets/league` works alone
+    LEVELS = ('state', 'district', 'regional', 'section', 'league')
+    for d, level in zip(args, LEVELS):
+        name = os.path.basename(os.path.normpath(d))
+        if name in LEVELS: level = name
         tasks += [(os.path.join(d, f), level) for f in sorted(os.listdir(d)) if f.endswith('.pdf')]
     # 1974-75 state files exist twice (A/AAA and B/AA); keep the A/B originals
     tasks = [t for t in tasks if not (t[1] == 'state' and re.match(r'197[45]_(AAA|AA)\.pdf$', os.path.basename(t[0])))]
-    out = 'data/brackets/bouts.csv'; os.makedirs('data/brackets', exist_ok=True)
+    odir = next((x.split('=', 1)[1] for x in sys.argv[1:] if x.startswith('--out=')), 'data/brackets')
+    out = os.path.join(odir, 'bouts.csv'); os.makedirs(odir, exist_ok=True)
     logs = []
     with open(out, 'w', newline='') as f, Pool(jobs) as pool:
         cw = csv.writer(f)
         cw.writerow(['level', 'tournament', 'year', 'cls', 'unit', 'weight', 'side', 'round', 'winner', 'winner_school', 'loser', 'loser_school', 'result', 'score', 'flags'])
         for rows, log in pool.imap_unordered(parse_file, tasks, chunksize=4):
             cw.writerows(rows); logs.append(log)
-    with open('data/brackets/bouts_log.txt', 'w') as f: f.write('\n'.join(sorted(logs)) + '\n')
+    with open(os.path.join(odir, 'bouts_log.txt'), 'w') as f: f.write('\n'.join(sorted(logs)) + '\n')
     print('files', len(tasks))
 
 if __name__ == '__main__':
