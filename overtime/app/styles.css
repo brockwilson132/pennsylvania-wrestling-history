@@ -1158,3 +1158,19 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .atc,.atc:hover{border-left:1px solid var(--line)}.atc:hover{border-left-color:var(--line2)}
 .atc small .stag{font-size:10.5px;line-height:14px}
 .drawer[open]>summary>.k{font-size:0}.drawer[open]>summary>.k::after{content:'Close';font-size:12px}
+/* all-time team card: who on the left, his four seasons on the right (grade, strength bar, result) */
+.atsec .sech .chipb{margin:0}
+.atg{grid-template-columns:44px repeat(var(--c),minmax(236px,1fr))}
+.atc{grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:start}
+.atl{display:grid;gap:3px;min-width:0;align-content:start;justify-items:start}
+.atl .atn{width:100%}
+.atc small{display:flex;flex-wrap:wrap;align-items:center;column-gap:5px;white-space:normal}
+.atc small .stag{margin:2px 0 0}
+.ats{display:grid;grid-template-columns:auto 30px 40px;align-items:center;column-gap:6px;row-gap:3px}
+.ats .sg{font:800 10.5px/16px var(--cond);letter-spacing:.04em;color:var(--ash);white-space:nowrap}.ats .sg i{font-style:normal;margin-left:3px;color:var(--ash);opacity:.7}
+.ats .smtr{flex:none;width:30px}
+.ats .yp{display:block;line-height:16px}.ats .yp.q{line-height:14px}
+.ats .srl{font:700 10.5px/16px var(--cond);color:var(--chalk);white-space:nowrap;text-align:center}
+.ats .sr0{font:700 10.5px/16px var(--cond);color:var(--ash);text-align:center}
+.atc small{max-width:100%}.atc small .stag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+.atc small .stag.tF>i{display:inline-block;vertical-align:-1px;margin-right:4px}

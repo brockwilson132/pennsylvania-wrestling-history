@@ -208,8 +208,7 @@
     const tu = e.target.closest('button[data-tlunit]'); if (tu) { state.tlunit = tu.dataset.tlunit; state.tln = 50; render(true); return; }
     if (e.target.closest('button[data-tlgroup]')) { state.tlgroup = !state.tlgroup; render(true); return; }
     if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
-    const af = e.target.closest('button[data-attflip]'); if (af) { state.attFlip = af.dataset.attflip === '1'; render(true); return; }
-    if (e.target.closest('button[data-attmore]')) { const y = window.scrollY; state.attN = (state.attN || 3) + 3; render(true); window.scrollTo(0, y); const x = main.querySelector('.atx'); if (x && !state.attFlip) x.scrollLeft = x.scrollWidth; return; }
+    if (e.target.closest('button[data-attmore]')) { const y = window.scrollY; state.attN = (state.attN || 3) + 3; render(true); window.scrollTo(0, y); const x = main.querySelector('.atx'); if (x) x.scrollLeft = x.scrollWidth; return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }

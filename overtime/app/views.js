@@ -94,11 +94,33 @@
   document.addEventListener('click', (e) => { const c = e.target.closest && e.target.closest('.tls i'); if (c) showTip(c); }); }
 
   /* ---------- All-time team: weights × depth, as deep as you like ---------- */
-  const schColor = (s) => { const id = OT.SB && OT.SB.identity(s); return (id && id.primary) || '#5F6B78'; };
+  /* one line per season, FR to SR: how tough his toughest bracket that year was (the bar, ranked within its level) and how
+     far he got. A state result is a medal pill; a season that ended at regionals or districts says so in plain text. */
+  const LV_SHORT = { regional: 'Reg', district: 'Dist' };
+  function seasonLines(s) {
+    const W = OT.getWrestler(s.href.replace('#wrestler/', ''));
+    if (!W || !(W.apps.length || (W.lower && W.lower.length))) {   // index entry with no matching rows: state results only, no bars
+      if (!s.sres.length) return ''; const y1 = Math.max(...s.sres.map((r) => r.year)), ys = [y1 - 3, y1 - 2, y1 - 1, y1];
+      return ys.map((y, i) => { const r = s.sres.find((x) => x.year === y);
+        return `<span class="sg">${OT.GRADE_L[i]}<i>'${String(y).slice(2)}</i></span><span class="smtr sm0"><i></i></span>${r ? (r.place ? `<span class="yp ${OT.pc(r.place)}">${ordinal(r.place)}</span>` : '<span class="yp q">Q</span>') : '<span class="sr0">–</span>'}`; }).join(''); }
+    const M = OT.careerCells(W.apps, W.lower && W.lower.length ? W.lower : null);
+    const at = (k) => M.rows.find((r) => r.k === k).cells;
+    return M.cols.map((col, i) => {
+      const lvl = ['state', 'regional', 'district'].find((k) => { const c = at(k)[i]; return c && (c.place || c.q || c.dnp); });
+      const c = lvl ? at(lvl)[i] : null; const yr = col ? `'${String(col.year).slice(2)}` : '';
+      const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null;
+      const tip = c ? `${col.year} · ${lvl === 'state' ? 'state' : c.sec ? 'section' : lvl}` : '';
+      let res;
+      if (!c) res = `<span class="sr0">${col ? '–' : ''}</span>`;
+      else if (lvl === 'state') res = c.place ? `<span class="yp ${OT.pc(c.place)}" title="${tip} ${ordinal(c.place)}">${ordinal(c.place)}</span>` : `<span class="yp q" title="${tip} qualifier">Q</span>`;
+      else res = `<span class="srl" title="${tip}${c.place ? ' ' + ordinal(c.place) : c.q ? ', advanced' : ', did not place'}">${LV_SHORT[lvl]} ${c.place ? ordinal(c.place) : c.q ? 'Q' : 'DNP'}</span>`;
+      return `<span class="sg">${OT.GRADE_L[i]}<i>${yr}</i></span>${f ? OT.sbar(f, lvl, `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}`;
+    }).join('');
+  }
   function chip(s, u) {
     if (!s) return '<div class="atc none"></div>';
-    const pills = s.sres.map((r) => r.place ? `<span class="yp ${OT.pc(r.place)}" title="${ordinal(r.place)} at states, ${r.year}">${String(r.year).slice(2)}</span>` : `<span class="yp q" title="State qualifier, ${r.year}">${String(r.year).slice(2)}</span>`).join('');
-    return `<a class="atc" href="${s.href}" style="--sc:${schColor(s.sch)}"><span class="atn"><b>${esc(s.name)}</b>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}</span><small>${u.kind === 'school' ? '' : OT.stag(s.sch) + ' '}${s.years}</small>${pills ? `<span class="pl">${pills}</span>` : ''}</a>`;
+    const lines = seasonLines(s);
+    return `<a class="atc" href="${s.href}"><span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}<small>${u.kind === 'school' ? '' : OT.stag(s.sch)}${s.years}</small></span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
   }
   function teamGrid(u) {
     const D = Math.max(3, state.attN || 3);
@@ -106,16 +128,9 @@
     if (T0 === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';
     const T = state.f.weights.length ? T0.filter((x) => state.f.weights.includes(x.c.k)) : T0;
     if (!T.length) return OT.empty('No one on record yet.');
-    const flip = !!state.attFlip; const team = (i) => ordinal(i + 1);
-    const ctl = `<div class="tlctl"><div class="seg sm" role="group" aria-label="Layout"><button type="button" data-attflip="0" aria-pressed="${!flip}">Weights down</button><button type="button" data-attflip="1" aria-pressed="${flip}">Teams down</button></div><button type="button" class="chipb" data-attmore>+ 3 teams</button></div>`;
-    let grid;
-    if (!flip) {
-      grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
-    } else {
-      grid = `<div class="atg flip" style="--c:${T.length}"><span class="ath atw"></span>${T.map(({ c }) => `<span class="ath">${c.label}</span>`).join('')}${d3.range(D).map((i) => `<span class="atw">${team(i)}</span>${T.map(({ slots }) => chip(slots[i], u)).join('')}`).join('')}</div>`;
-    }
-    const lowerToo = u.kind !== 'state';
-    return `${ctl}<div class="atx">${grid}</div><div class="note">${{ state: 'Ranked by state results and peak rating.', region: 'Ranked by state, then regional results, plus peak rating.' }[u.kind] || 'Ranked by state, regional and district results (state counts most), plus peak rating.'} Each wrestler counts once, at his highest-rated weight. Pills are state results by year${lowerToo ? '' : ''}; the edge is his school's colour.</div>`;
+    const team = (i) => ordinal(i + 1);
+    const grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
+    return `<div class="atx">${grid}</div><div class="note">${{ state: 'Ranked by state results and peak rating.', region: 'Ranked by state, then regional results, plus peak rating.' }[u.kind] || 'Ranked by state, regional and district results (state counts most), plus peak rating.'} Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, ranked against brackets of the same level.</div>`;
   }
   Object.assign(OT, { timelineView, teamGrid });
 })();
