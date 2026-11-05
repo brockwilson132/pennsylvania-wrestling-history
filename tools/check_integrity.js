@@ -15,7 +15,7 @@ function load() {
   ctx.window = ctx; vm.createContext(ctx);
   vm.runInContext(fs.readFileSync(D3, 'utf8'), ctx);
   const html = fs.readFileSync(path.join(OV, 'index.html'), 'utf8');
-  const files = Array.from(html.matchAll(/<script src="([^"]+)"/g)).map((m) => m[1]).filter((f) => !/^https?:/.test(f) && !/components|pages|main/.test(f));
+  const files = require('./app_scripts')(html).filter((f) => !/^https?:/.test(f) && !/components|pages|main/.test(f));
   files.forEach((f) => vm.runInContext(fs.readFileSync(path.join(OV, f), 'utf8'), ctx, { filename: f }));
   return ctx.OT;
 }

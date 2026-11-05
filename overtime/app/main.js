@@ -1,14 +1,16 @@
 /* Overtime — router and interactions */
 'use strict';
 (() => {
-  const { PAGES, state, setCls, setWin, wordmark, navIcon, esc } = OT;
+  /* OT is rebuilt once, when the second boot stage lands (below): read PAGES and the setters through OT at call time */
+  const { state, wordmark, navIcon, esc } = OT;
+  const setCls = (c) => OT.setCls(c), setWin = (w) => OT.setWin(w);
   const main = document.getElementById('main'), brand = document.getElementById('brand'), fbar = document.getElementById('fbar'), fpop = document.getElementById('fpop'), fscrim = document.getElementById('fscrim'), mbtn = document.getElementById('mbtn'), sbtn = document.getElementById('sbtn');
   brand.innerHTML = wordmark(); mbtn.innerHTML = navIcon('menu'); sbtn.innerHTML = navIcon('search');
   function route() {
     const raw = (location.hash || '#state').slice(1); const [h, qs] = raw.split('?'); const [page, ...rest] = h.split('/'); const id = rest.join('/');
     const q = {}; (qs || '').split('&').forEach((kv) => { const [k, v] = kv.split('='); if (k) q[k] = decodeURIComponent(v || ''); });
     const keep = Object.entries(q).filter(([k]) => k !== 'b').map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
-    return { page: PAGES[page] ? page : 'state', id: decodeURIComponent(id || ''), q, base: '#' + h + (keep ? '?' + keep : '') };
+    return { page: OT.PAGES[page] ? page : 'state', id: decodeURIComponent(id || ''), q, base: '#' + h + (keep ? '?' + keep : '') };
   }
   /* href for the same page with a bracket overlay open (key) or closed (null) */
   OT.bhref = (key) => { const r = route(); return key ? `${r.base}${r.base.includes('?') ? '&' : '?'}b=${encodeURIComponent(key)}` : r.base; };
@@ -109,13 +111,14 @@
   let lastBase = '', lastHash = '';
   function render(keepScroll) {
     const { page, id, q, base } = route(); lastHash = location.hash;
+    if (!OT.full && !coreRoute(page, q)) { waiting = true; if (main.firstChild) { lastBase = ''; main.innerHTML = '<div class="card empty" role="status">Loading the archive…</div>'; } return; }
     if (base === lastBase && (q.b || bview && !bview.hidden)) { showBracket(q.b, page === 'wrestler' ? id : null); stamp(); return; }
     lastBase = base;
     const f = F(); state.ctxDistrict = f.d;
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -276,7 +279,31 @@
     setTimeout(() => { location.hash = bl.getAttribute('href'); }, 280);
   }
   window.addEventListener('hashchange', () => render());
+
+  /* ---------- two-stage boot ----------
+     The landing page (the State map) needs only the scripts index.html loads up front. Everything in
+     OT_LATE (medals, brackets, district fields, ratings, ...) is fetched after the first paint, without blocking it;
+     once it is all in, the app files run again over the same OT so every index is built from the full archive, and
+     any page that was waiting for it renders. Other pages opened first wait for the archive (the boot loader shows). */
+  let waiting = false;
+  function coreRoute(page, q) { return page === 'state' && state.view === 'map' && !q.b; }
+  function addScript(src) { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error('could not load ' + src)); document.body.appendChild(s); }); }
+  function loadFull() {
+    const late = window.OT_LATE || [];
+    const app = Array.from(document.scripts).map((s) => s.getAttribute('src')).filter((s) => s && /^app\//.test(s) && !/main\.js$/.test(s));
+    if (!late.length) { OT.full = true; return Promise.resolve(); }
+    // the boot loader (index.html) shows only while #main is empty, i.e. when a page other than the State map was opened first
+    let got = 0; const tick = () => { got++; if (window.OTBoot) window.OTBoot.progress(0.9 * got / late.length); };
+    return Promise.all(late.map((f) => addScript(f).then(tick))).then(() => Promise.all(app.map(addScript))).then(() => {
+      OT.full = true; SCH = null;
+      // repaint whatever is showing from the full archive (the State map comes out the same; a waiting page appears)
+      waiting = false; const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y);
+      document.dispatchEvent(new Event('ot-full'));
+    });
+  }
+  OT.full = !(window.OT_LATE || []).length;
   render();
+  OT.ready = loadFull();
 
   /* hovering a chip or a line label brightens that series */
   const hlSeries = (e, on) => { const t = e.target.closest && e.target.closest('[data-cmp],[data-focus]'); if (!t) return; const box = t.closest('.perf'); if (!box) return; const id = t.getAttribute('data-cmp') || t.getAttribute('data-focus');
