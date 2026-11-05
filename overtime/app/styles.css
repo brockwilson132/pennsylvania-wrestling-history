@@ -18,8 +18,8 @@ h1,h2,h3{margin:0;font-family:var(--cond);font-weight:900;line-height:1;letter-s
 /* chrome */
 .top{position:sticky;top:0;z-index:30;background:rgba(11,13,16,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .bar{max-width:var(--w);margin:0 auto;padding:8px 12px 8px 16px;display:flex;align-items:center;gap:12px;min-height:52px}
-.brand{display:inline-flex;align-items:center;text-decoration:none;flex:none;color:var(--chalk)}.brand svg{height:46px;width:auto;display:block;margin:-6px 0 -6px -4px}
-@media(min-width:720px){.brand svg{height:58px;margin:-8px 0 -8px -6px}.top .bar{min-height:66px}}
+.brand{display:inline-flex;align-items:center;text-decoration:none;flex:none;color:var(--chalk)}.brand svg{height:44px;width:auto;display:block;margin:-2px 0}
+@media(min-width:720px){.brand svg{height:52px;margin:-2px 0}.top .bar{min-height:66px}}
 .mbtn{margin-left:auto;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:var(--ash)}.mbtn svg{width:24px;height:24px}.mbtn:hover,.mbtn[aria-expanded=true]{color:var(--chalk);background:var(--slate)}
 /* the filter bar: State · Division · Region · TIME · School · Weights · Wrestlers */
 .fbar{position:fixed;left:0;right:0;bottom:0;z-index:46;background:rgba(22,26,32,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
@@ -1258,3 +1258,23 @@ table.h2st{min-width:0}.h2st td small{min-width:0}
 .sdual{font-size:13.5px;margin-top:4px}.sdual a{color:inherit;text-decoration:none}.sdual b{font:700 15px var(--cond);text-transform:uppercase}
 .bwr{display:grid;justify-items:end;line-height:1}.bwr b{font:900 20px var(--cond);color:var(--chalk)}.bwr i{font:700 10px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
 .snr{display:flex;align-items:center;gap:6px;min-width:0}.snr a{min-width:0;overflow:hidden}.rpt{margin-left:0;flex:none}
+
+/* ===== compact page header (state, region, district, school): title row, one context line, one row of numbers ===== */
+.uh2.uhc{padding:4px 0 2px;gap:4px}
+.uhc>*{min-width:0}
+.uhc .uht{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:34px}
+.uhc .uht h1{font-size:28px;line-height:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(min-width:720px){.uhc .uht h1{font-size:36px}}
+.uhc .uht .seg{flex:none}
+.uhx summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:6px}
+.uhx summary::-webkit-details-marker{display:none}
+.uhx summary{min-height:28px;align-items:center}.uhx summary::after{content:'';flex:none;width:7px;height:7px;padding:0;margin-right:6px;border:solid var(--ash);border-width:0 1.5px 1.5px 0;transform:translateY(-2px) rotate(45deg);margin-left:auto}
+.uhx[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.uhx .sub{flex:1;font-size:13px;line-height:1.45;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uhx[open] .sub{white-space:normal}
+.uhx .crumb{display:inline;font:700 12px var(--cond);letter-spacing:.1em}.uhx .crumb>span{margin:0 4px;color:var(--ash2)}
+.uhx .dot{color:var(--ash2)}
+.uhc .usum{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:0 22px;margin-top:4px}
+.uhc .usum span{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.uhc .usum b{font-size:22px}
+.uhc .usum i{font-size:10.5px;letter-spacing:.1em}

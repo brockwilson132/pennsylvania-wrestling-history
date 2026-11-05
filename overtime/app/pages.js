@@ -24,7 +24,7 @@
     return section('Team duals', `<div class="card tw"><div class="k" style="margin-bottom:8px">${by.length} appearances · ${tw}–${tl}${titles ? ' · ' + titles + ' title' + (titles > 1 ? 's' : '') : ''}</div><table class="dt"><thead><tr><th>Year</th><th>Class</th><th>Record</th><th>Finish</th><th>Matches</th></tr></thead><tbody>${rows}</tbody></table></div>${src}`);
   }
   /* the one level page: name, rating and score inline → performance chart → rankings → all-time team → seasons */
-  const crumbBar = (crumbs) => crumbs.length > 1 ? `<div class="crumb">${crumbs.slice(0, -1).map((c) => `<a href="${c.href}">${esc(c.name)}</a>`).join('<span>›</span>')}</div>` : '';
+  const crumbBar = (crumbs) => crumbs.length > 1 ? `<span class="crumb">${crumbs.slice(0, -1).map((c) => `<a href="${c.href}">${esc(c.name)}</a>`).join('<span>›</span>')}</span>` : '';
   function summary(u) {
     const a = OT.unitAgg(u); if (!a) return '';
     const it = [];
@@ -37,10 +37,14 @@
   function levelPage(u, opts = {}) {
     state.lvl = 'state';
     const crumbs = (opts.crumbs || []).concat([{ name: '' }]);
-    const head = `<header class="uh2">${crumbBar(crumbs)}<h1>${esc(u.name)}</h1>${opts.sub ? `<div class="sub">${opts.sub}</div>` : ''}${summary(u)}</header>`;
+    const v = state.view || 'map';
+    /* compact header: one title row (the state map's Regions/Districts switch sits on it), then one line of
+       breadcrumb + context that opens on tap, then the numbers in a single row */
+    const ctl = v === 'map' && u.kind === 'state' && OT.mapModeSeg ? OT.mapModeSeg() : '';
+    const ctx = [crumbBar(crumbs), opts.sub || ''].filter(Boolean).join('<span class="dot"> · </span>');
+    const head = `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1>${ctl}</div>${ctx ? `<details class="uhx"><summary><span class="sub">${ctx}</span></summary></details>` : ''}${summary(u)}</header>`;
     const rk = opts.rankings();
     const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
-    const v = state.view || 'map';
     const parts = [head];
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
@@ -68,7 +72,7 @@
   const PAGES = {};
   PAGES.state = () => {
     const u = U.state(); const kind = ['school', 'district', 'region'].includes(state.child) ? state.child : 'school';
-    return levelPage(u, { sub: 'PIAA individual championships', rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
+    return levelPage(u, { rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
   };
   PAGES.region = (id) => {
     if (!id) { const r = OT.unitRankings('region', null, 'state'); return `<header class="uh2"><h1>Regions</h1><div class="sub">The qualifying tournaments between districts and Hershey${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }

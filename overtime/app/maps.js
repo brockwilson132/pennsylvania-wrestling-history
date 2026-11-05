@@ -257,18 +257,19 @@
     const [w0, w1] = OT.yearsWindow(); const sel = w0 === w1 ? { a: w0, b: w1 } : null;
     const map = mapOnly(u);
     if (!map) return '';
-    const ctl = u.kind === 'state' ? `<div class="mapctl"><div class="seg sm" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div></div>` : '';
     let sheet = '';
     if (sel && sel.a === sel.b) {
       const inU = u.kind === 'state' ? () => true : u.kind === 'district' ? (r) => r.d === +u.id : (r) => OT.regionOf(r) === u.id;
       sheet = `<div class="ss mss"><div class="ssh"><b>${sel.a}</b><span>state placers</span></div>${OT.placeMatrix(sel.a, inU, u.kind === 'state')}</div>`;
     }
-    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}">${ctl}<div class="mcb"><div class="mcm">${map}</div>${unitList(u, null)}</div>${sheet}</div>`;
+    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}"><div class="mcb"><div class="mcm">${map}</div>${unitList(u, null)}</div>${sheet}</div>`;
   }
+  /* the state map's Regions/Districts switch; it lives on the page's title row */
+  const mapModeSeg = () => `<div class="seg sm" role="group" aria-label="Map" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div>`;
   function ratingMap(u) {
     if (!M || !M.topo || !window.d3) return '';
     try { return mapCard(u); } catch (e) { console.warn('map', e); }
     return '';
   }
-  Object.assign(OT, { ratingMap, mapCard, timeScrubber });
+  Object.assign(OT, { ratingMap, mapCard, timeScrubber, mapModeSeg });
 })();
