@@ -1,5 +1,5 @@
 {
- "sd_ref": 233.3003926983264,
+ "sd_ref": 191.79144074698885,
  "bad_loss_gap": 150,
  "weights": "per neighbour-availability pattern, see eval.txt",
  "prior_sd": 273.5427590919177,

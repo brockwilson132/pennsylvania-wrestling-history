@@ -774,9 +774,16 @@ def theta(k, y): return T.get(y, {}).get(ID(k, y))
 # bracket on file), not the wrestlers who happened to be in the state bracket. State brackets held about 4 per weight
 # before 1974 (the regional champions), 16 from 1974, 20 from 2015 and 8 in 2021, so "the average state qualifier" was
 # a much more select group in some seasons than in others, and every rating in those seasons moved with it (before 1974
-# the average qualifier was close to a champion, which pulled the 1950s and 60s down). Sixteen is the state bracket
-# for most of the record. RATINGS_ANCHOR=state restores the old group, for comparison.
-ANCHOR_N = 16
+# the average qualifier was close to a champion, which pulled the 1950s and 60s down).
+# Tested offline on the raw season strengths (2026-11-05), groups of 4, 8 and 16 and the old state-bracket group. The
+# check that matters most: every state bracket gives out 8 medals, so in every era the season's expected medalists
+# (sum of P(medal | rating), the curve fitted on 2001-26) should come to 8 per bracket. Old group: 0.24-0.87 of that
+# before 1990 (the old eras read far too low). 16: 1.01 (1940s), 1.33 (50s), 1.15 (60s), 1.10 (70s), 0.95-1.01 since.
+# 4 and 8 overshoot the old eras more (4: 1.5-2.1 before 1980). 16 it is.
+# Known limit: the very top of the thinnest seasons (1934-53, few bouts each) still reads high, so those seasons take
+# more of the all-time top 200 than their share; that is a shape problem a per-season straight-line scale can't fix.
+# RATINGS_ANCHOR=state restores the old group, for comparison.
+ANCHOR_N = int(os.environ.get('RATINGS_ANCHOR_N', 16))
 state_vals = defaultdict(list)
 if os.environ.get('RATINGS_ANCHOR') == 'state':
     for (lvl, t, w), es in entrants.items():
@@ -847,6 +854,14 @@ def anc(y, c):
     if (y, c) in ANCHOR: return ANCHOR[(y, c)]
     near = sorted((abs(g[0] - y), g) for g in ANCHOR if g[1] == c) or sorted((abs(g[0] - y), g) for g in ANCHOR)
     return ANCHOR[near[0][1]]
+if os.environ.get('RATINGS_DUMP'):   # raw season strengths of every entrant, for testing scale choices offline
+    with open(os.environ['RATINGS_DUMP'], 'w', newline='') as f:
+        wr = csv.writer(f); wr.writerow(['key', 'year', 'cls', 'weight', 'level', 'raw', 'nb'])
+        for (lvl, t, w), es in entrants.items():
+            y = bracket_meta[(lvl, t, w)][0]
+            for e in es:
+                i = ID(e[0], y); v = T.get(y, {}).get(i)
+                if v is not None: wr.writerow([i, y, CLS_OF.get((i, y)) or bracket_meta[(lvl, t, w)][1], wn(w), lvl, round(v, 1), nb_of[(i, y)]])
 LEVEL = [0.0]
 def norm(v, y, c):
     if v is None: return None
@@ -856,8 +871,8 @@ if os.environ.get('RATINGS_ANCHOR') != 'state':
     _q = [norm(theta(e[0], bracket_meta[bk][0]), bracket_meta[bk][0], bracket_meta[bk][1]) for bk, es in entrants.items() if bk[0] == 'state'
           and bracket_meta[bk][0] >= 1999 and bracket_meta[bk][1] in ('AAA', 'AA') for e in es]
     _q = [v for v in _q if v is not None]; LEVEL[0] = float(np.mean(_q)) - 1500
-    say(f'scale level: the average 1999-2026 state qualifier sits {-LEVEL[0]:+.0f} from the top-16 anchor; shifted so it reads 1500')
-say(f'\nscale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best per weight (rolling 11 seasons per class, returner-linked); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
+    say(f'scale level: the top-{ANCHOR_N} group sits {-LEVEL[0]:.0f} above the average 1999-2026 state qualifier; shifted so that qualifier reads 1500')
+say(f'\nscale: 1500 = average 1999-2026 state qualifier; seasons lined up on the {ANCHOR_N} best per weight (rolling 11 seasons per class, returner-linked); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
     f'sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}; spread {SD_REF:.0f}')
 # cls of a wrestler-season (for the scale): the class of his bouts that season
 def rating(k, y, c=None):

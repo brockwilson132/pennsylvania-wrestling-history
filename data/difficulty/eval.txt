@@ -105,23 +105,25 @@ held-out 10% of 2018-2026 bouts (n=11255), fit without them: season-batch streng
     .x.x g0 f0: n=766, slopes 0.49 0.30, sum 0.79, sd 255
     x... g0 f0: n=427, slopes 0.64, sum 0.64, sd 303
 prior sd (most common pattern, scaled): 274
+season level from returners (raw points, AAA): 1935:+0, 1938:+0, 1941:+0, 1944:+0, 1947:+0, 1950:+0, 1953:+0, 1956:+0, 1959:+0, 1962:+0, 1965:+0, 1968:+0, 1971:+0, 1974:+0, 1977:+103, 1980:+141, 1983:+172, 1986:+187, 1989:+239, 1992:+354, 1995:+383, 1998:+383, 2001:+358, 2004:+347, 2007:+504, 2010:+432, 2013:+372, 2016:+324, 2019:+262, 2022:+174, 2025:+71
+scale level: the top-16 group sits 55 above the average 1999-2026 state qualifier; shifted so that qualifier reads 1500
 
-scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1365-2093, sd 156-281; spread 233
-  district field strength 1980+: median 834 (p10 515, p90 1160)
-  regional field strength 1980+: median 1291 (p10 1132, p90 1460)
-  state    field strength 1980+: median 1687 (p10 1605, p90 1760)
+scale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best per weight (rolling 11 seasons per class, returner-linked); raw anchor means 524-2198, sd 169-281; spread 192
+  district field strength 1980+: median 838 (p10 510, p90 1174)
+  regional field strength 1980+: median 1299 (p10 1138, p90 1461)
+  state    field strength 1980+: median 1697 (p10 1624, p90 1764)
 
 state brackets (6+ rated, champion known, n=1532): champion rated #1 88.1%, top 2 96.3%; mean Spearman(rating, place) 0.789
 same-season bouts where the winner is rated below the loser: 5.0% of 574212
 
-state placement points 1980+ (n=20747): own season rating R2 0.6512
-  + best win: R2 0.6513 (gain +0.0002), coefficient -0.0006
-  + mean of opponents beaten: R2 0.6526 (gain +0.0015), coefficient -0.0015
-  + bad losses: R2 0.6525 (gain +0.0014), coefficient +0.5481
-  + field strength: R2 0.6799 (gain +0.0287), coefficient -0.0141
-next-season state points of returners (n=7508): rating + this season placement R2 0.3826
-  + best win: R2 0.3890 (gain +0.0064), coefficient -0.00431
-  + mean of opponents beaten: R2 0.3842 (gain +0.0016), coefficient -0.00196
-  + bad losses: R2 0.3828 (gain +0.0001), coefficient +0.20393
-  + field strength: R2 0.3897 (gain +0.0071), coefficient -0.00862
+state placement points 1980+ (n=20747): own season rating R2 0.6547
+  + best win: R2 0.6548 (gain +0.0001), coefficient -0.0004
+  + mean of opponents beaten: R2 0.6574 (gain +0.0027), coefficient -0.0021
+  + bad losses: R2 0.6558 (gain +0.0011), coefficient +0.4760
+  + field strength: R2 0.6792 (gain +0.0245), coefficient -0.0143
+next-season state points of returners (n=7508): rating + this season placement R2 0.3913
+  + best win: R2 0.3970 (gain +0.0057), coefficient -0.00405
+  + mean of opponents beaten: R2 0.3938 (gain +0.0025), coefficient -0.00243
+  + bad losses: R2 0.3914 (gain +0.0001), coefficient +0.17916
+  + field strength: R2 0.3931 (gain +0.0017), coefficient -0.00464
 RTG as of each round: 1148424 bout checkpoints, last checkpoint vs season RTG max gap 0.55 (should be ~0)
