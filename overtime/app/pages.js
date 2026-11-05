@@ -45,7 +45,7 @@
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
     else if (v === 'time') parts.push(`<section class="sec tlsec"><div class="sech"><h2>Timeline</h2></div>${OT.timelineView(u)}</section>`);
-    else if (v === 'team') parts.push(`<section class="sec atsec"><div class="sech"><h2>All-time team</h2>${OT.attToggle()}</div>${OT.teamGrid(u)}</section>`);
+    else if (v === 'team') parts.push(`<section class="sec atsec"><div class="sech"><h2>All-time team</h2></div>${OT.teamGrid(u)}</section>`);
     else { parts.push(section('Seasons', seasonsDrawer(u))); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
     return parts.join('');
   }
