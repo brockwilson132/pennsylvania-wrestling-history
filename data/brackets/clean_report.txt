@@ -1,6 +1,14 @@
-entrants 400924 -> 400924, bouts 586693 -> 586693
-      1  bouts: name letters woven into school taken back out
-      3  bouts: name resolved to its entrant
-   1310  bouts: side still has no school (kept)
-      2  entrants: name letters woven into school taken back out
+entrants 400832 -> 400832, bouts 586693 -> 586693
+   1304  bouts: side still has no school (kept)
+      1  data/medals/1947_single.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1948_single.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1965_single.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1977_AA.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1993_AAA.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1997_AAA.csv: name spelled another way, filed under its one spelling
+      2  data/medals/1998_AA.csv: name spelled another way, filed under its one spelling
+      1  data/medals/1999_AAA.csv: name spelled another way, filed under its one spelling
+      1  data/medals/2017_AA.csv: name spelled another way, filed under its one spelling
+      1  data/sources/d3_champions.csv: name spelled another way, filed under its one spelling
+      1  data/sources/d7_champions.csv: name spelled another way, filed under its one spelling
     735  entrants: still no school (kept)
