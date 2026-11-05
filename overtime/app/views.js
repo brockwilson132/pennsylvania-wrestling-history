@@ -128,15 +128,32 @@
     const vbar = `<span class="atv" title="${s.rtg ? `Peak RTG ${OT.rtg10(s.rtg)} · bar runs from ${VLO} (average state qualifier) to ${VHI}` : 'No rating'}"><i style="height:${(100 * vf).toFixed(0)}%;background:${s.rtg ? OT.colorAt(vf) : 'transparent'}"></i></span>`;
     return `<a class="atc" href="${s.href}">${vbar}<span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}${u.kind === 'school' ? '' : `<small>${OT.stag(s.sch)}</small>`}</span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
   }
-  function teamGrid(u) {
-    const D = Math.max(3, state.attN || 3);
-    const T0 = OT.allTimeTeams(u, D);
-    if (T0 === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';
+  /* one column at a time: By team = one team, lightest to heaviest; By weight = one weight, 1st team down to the deepest.
+     The teams are always built ATT_DEPTH deep, so a team never changes with how many are shown. */
+  const ATT_DEPTH = 10;
+  function attParts(u) {
+    const T0 = OT.allTimeTeams(u, ATT_DEPTH);
+    if (T0 === null) return { body: '<div class="card empty" data-need-people="1">Loading every wrestler…</div>' };
     const T = state.f.weights.length ? T0.filter((x) => state.f.weights.includes(x.c.k)) : T0;
-    if (!T.length) return OT.empty('No one on record yet.');
-    const team = (i) => ordinal(i + 1);
-    const grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
-    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on one scale for every level, where the average state bracket sits at the orange mark.</div>`;
+    if (!T.length) return { body: OT.empty('No one on record yet.') };
+    const nT = Math.max(...T.map((x) => x.slots.reduce((m, s, i) => (s ? i + 1 : m), 0)));
+    const mode = state.attMode === 'weight' ? 'weight' : 'team';
+    const team = Math.min(Math.max(0, state.attTeam || 0), nT - 1);
+    const wx = Math.max(0, T.findIndex((x) => x.c.k === state.attW)); const W = T[wx];
+    const picks = mode === 'team'
+      ? d3.range(nT).map((i) => [i, ordinal(i + 1), i === team])
+      : T.map((x, i) => [x.c.k, x.c.label, i === wx]);
+    const pick = `<div class="atpick ${mode}" role="group" aria-label="${mode === 'team' ? 'Team' : 'Weight'}">${picks.map(([i, l, on]) => `<button type="button" data-attpick="${i}" aria-pressed="${on}">${l}</button>`).join('')}</div>`;
+    const rows = mode === 'team'
+      ? T.map((x) => [x.c.label, x.slots[team]])
+      : W.slots.map((s, i) => [ordinal(i + 1), s]).filter(([, s]) => s);
+    const cur = mode === 'team' ? team : wx, n = mode === 'team' ? nT : T.length;
+    const name = (i) => (mode === 'team' ? `${ordinal(i + 1)} team` : T[i].c.label === 'Hwt' ? 'Heavyweight' : T[i].c.label + ' lbs');
+    const step = (d, cls) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="chipb ${cls}" data-attpick="${mode === 'team' ? i : T[i].c.k}">${d < 0 ? '‹ ' : ''}${name(i)}${d > 0 ? ' ›' : ''}</button>` : '<span></span>'; };
+    const list = `<div class="atcol ${mode}"><div class="atcap">${name(cur)}</div>${rows.map(([l, s]) => `<span class="atw">${l}</span>${chip(s, u)}`).join('')}</div>`;
+    return { pick, body: `${pick}${list}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Teams fill in order, 1st team first; a weight with nobody left takes the best remaining wrestler who also wrestled there. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on one scale for every level, where the average state bracket sits at the orange mark.</div>` };
   }
-  Object.assign(OT, { timelineView, teamGrid });
+  const teamGrid = (u) => attParts(u).body;
+  const attToggle = () => `<div class="seg sm" role="group" aria-label="All-time team view"><button type="button" data-attmode="team" aria-pressed="${state.attMode !== 'weight'}">By team</button><button type="button" data-attmode="weight" aria-pressed="${state.attMode === 'weight'}">By weight</button></div>`;
+  Object.assign(OT, { timelineView, teamGrid, attToggle });
 })();

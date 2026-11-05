@@ -40,9 +40,10 @@
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
   let pop = '';
   /* View: what the page body shows for the current selection; remembered for the session */
-  const VIEWS = [['map', 'Map', 'The picture and its list'], ['rank', 'Rankings', 'Standings for this selection'], ['time', 'Timeline', 'Every team, season by season'], ['team', 'All-time team', 'The best at each weight, as deep as you like'], ['seasons', 'Seasons', 'Results season by season']];
+  const VIEWS = [['map', 'Map', 'The picture and its list'], ['rank', 'Rankings', 'Standings for this selection'], ['time', 'Timeline', 'Every team, season by season'], ['team', 'All-time team', 'The best at each weight, one team or one weight at a time'], ['seasons', 'Seasons', 'Results season by season']];
   try { const v = sessionStorage.getItem('ot-view'); if (VIEWS.some(([k]) => k === v)) state.view = v; } catch (e) { /* none */ }
   if (!state.view) state.view = 'map';
+  try { if (sessionStorage.getItem('ot-attmode') === 'weight') state.attMode = 'weight'; } catch (e) { /* none */ }
   /* a school page has no map: its first view is the season grid and the wrestler list */
   const viewLabel = (k, l) => (k === 'map' && route().page === 'school' && route().id ? 'Overview' : l);
   const viewName = () => (state.view === 'team' ? 'Team' : viewLabel(state.view, (VIEWS.find(([k]) => k === state.view) || VIEWS[0])[1]));
@@ -117,7 +118,7 @@
     const f = F(); state.ctxDistrict = f.d;
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.lastRoute = page + '/' + id; }
     main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
@@ -262,7 +263,8 @@
     const tu = e.target.closest('button[data-tlunit]'); if (tu) { state.tlunit = tu.dataset.tlunit; state.tln = 50; render(true); return; }
     if (e.target.closest('button[data-tlgroup]')) { state.tlgroup = !state.tlgroup; render(true); return; }
     if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
-    if (e.target.closest('button[data-attmore]')) { const y = window.scrollY; state.attN = (state.attN || 3) + 3; render(true); window.scrollTo(0, y); const x = main.querySelector('.atx'); if (x) x.scrollLeft = x.scrollWidth; return; }
+    const am = e.target.closest('button[data-attmode]'); if (am) { state.attMode = am.dataset.attmode; try { sessionStorage.setItem('ot-attmode', state.attMode); } catch (er) { /* none */ } render(true); return; }
+    const ap = e.target.closest('button[data-attpick]'); if (ap) { const v = ap.dataset.attpick; if (state.attMode === 'weight') state.attW = v; else state.attTeam = +v; render(true); if (ap.closest('.atstep')) { const sec = main.querySelector('.atsec'); if (sec) window.scrollTo(0, Math.max(0, sec.getBoundingClientRect().top + window.scrollY - 76)); } return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
