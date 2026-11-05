@@ -505,8 +505,11 @@
         const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
         const bwl = sx && sx[1] != null ? `<span class="bvbw2">Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
         const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
-        const sub = `${stag(r.sch, { cls: 'xs' })}${r.grade ? `<span>${r.grade}</span>` : ''}`;
-        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sd">${e.seedLabel || ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${sub}</small></span>${fin || '<span></span>'}<span class="dsp">${rtgTag(rOf(r))}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
+        /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
+        const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
+        const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
+        const pbar = path != null ? OT.sbar(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
+        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span>${fin || '<span></span>'}<span class="dsp">${rtgTag(rOf(r))}${pbar}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }
       return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
