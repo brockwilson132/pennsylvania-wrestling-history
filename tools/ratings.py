@@ -959,4 +959,14 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.
 open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/eval.txt', 'w').write('\n'.join(out) + '\n')
 json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': 'per neighbour-availability pattern, see eval.txt', 'prior_sd': RES_SD, 'params': params},
           open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/scale.json', 'w'), indent=1, default=float)
-print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments')
+# every entrant's season rating, bouts or not on this sheet (wrestler_seasons.csv only lists wrestlers with a scored bout in
+# that tournament, which leaves out section-only kids): tools/build_units.js reads this for Strength and Talent
+with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/entrant_ratings.csv', 'w', newline='') as f:
+    c = csv.writer(f, lineterminator='\n'); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'season'])
+    n_er = 0
+    for (lvl, t, w), es in entrants.items():
+        if (lvl, t, w) not in bracket_meta: continue
+        y, cl = bracket_meta[(lvl, t, w)][:2]
+        for e in es:
+            v = rating(e[0], y, clsg(cl)); c.writerow([lvl, t, w, y, cl, e[1], e[2], e[0], f'{v:.0f}' if v is not None else '']); n_er += 1
+print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments', n_er, 'entrant ratings')

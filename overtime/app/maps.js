@@ -29,8 +29,8 @@
   const scaleFor = (vals, kind = 'district') => { const [lo, hi] = OT.ratingDom(kind); return { lo, hi, f: (x) => OT.domFrac(kind, x) }; };
   const HATCH = '<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#1A1F26"/><line x1="0" y1="0" x2="0" y2="10" stroke="#3A424D" stroke-width="3"/></pattern></defs>';
   const NOFILL = 'url(#hatch)';
-  const legend = (sc, note, hatch) => `<div class="mlg"><span class="mlgl">Rating</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
-  const tip = (name, a) => `${name}${a && a.rating ? ' · RTG ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + fmt(Math.round(a.score)) : ''}`;
+  const legend = (sc, note, hatch) => `<div class="mlg"><span class="mlgl">Strength</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
+  const tip = (name, a) => `${name}${a && a.rating ? ' · Strength ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + fmt(Math.round(a.score)) : ''}`;
   const svgOpen = (vb, label) => `<svg class="pam" viewBox="${vb.join(' ')}" role="img" aria-label="${esc(label)}">${HATCH}`;
   const outline = () => `<path class="pao" d="${M.outline}"/>`;
 
@@ -203,8 +203,7 @@
     const U = listUnits(u);
     const full = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]));
     const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
-    const estF = new Map(U.L().filter((a) => a.est).map((a) => [a.k, a.estTip]));
-    const estS = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.est).map((a) => [a.k, a.estTip]))) : estF;
+    const nsF = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.nS]));
     let keys = U.keys || Array.from(new Set([...full.keys()]));
     let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => (r.s || r.v) && String(U.name(r.k) || '').trim());
     const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
@@ -232,14 +231,13 @@
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
       const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
       const v1 = two ? r.s : r.v;
-      const e1 = two ? estS.get(r.k) : estF.get(r.k), e2 = two ? estF.get(r.k) : null;
       const tint = v1 ? OT.ratingColor(U.kind, v1) : '#2F3640';
       const trk = `<span class="mlt" aria-hidden="true">${ref ? `<i class="mltl" style="left:${X(ref)}%"></i>` : ''}${r.band ? `<i class="mltb" style="left:${X(r.band[0])}%;width:${(X(r.band[1]) - X(r.band[0])).toFixed(2)}%;--tint:${tint}"></i>` : ''}${v1 ? `<i class="mltd" style="left:${X(v1)}%;--tint:${tint}"></i>` : ''}</span>`;
-      return `<div class="mlr ax${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a>${trk}<span class="mls${e1 ? ' est' : ''}" style="--tint:${tint}"${e1 ? ` title="${esc('est. · ' + e1)}"` : ''}>${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla${e2 ? ' est' : ''}"${e2 ? ` title="${esc('est. · ' + e2)}"` : ''}>${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
+      return `<div class="mlr ax${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a>${trk}<span class="mls" style="--tint:${tint}" title="${esc(`Strength ${v1 ? r10(v1) : '–'}` + (!two && nsF.get(r.k) ? ` · average of ${nsF.get(r.k)} season${nsF.get(r.k) === 1 ? '' : 's'}` : ''))}">${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
     const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';
-    return `<div class="ml">${contextTable(u, sel)}<div class="mlh ax${two ? '' : ' one'}"><span>${who}</span><span class="mltk">${refTxt ? `<i style="left:${X(ref)}%">${refTxt}</i>` : ''}${band ? '<em>band: middle 80% of its seasons</em>' : ''}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : `<button class="ht on" disabled title="${esc(OT.unitRtgTip(U.kind))}">${OT.unitRtgLabel(U.kind)}</button>`}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    return `<div class="ml"><div class="mlh ax${two ? '' : ' one'}"><span>${who}</span><span class="mltk">${refTxt ? `<i style="left:${X(ref)}%">${refTxt}</i>` : ''}${band ? '<em>band: middle 80% of its seasons</em>' : ''}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : `<button class="ht on" disabled title="${esc(OT.unitRtgTip(U.kind))}">${OT.unitRtgLabel(U.kind)}</button>`}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   /* the TIME scrubber (filter bar): the whole archive as a heat strip of the statewide rating per season, two handles
      for the window. Drawn with the window set to all-time so the strip always spans every season of the class. */

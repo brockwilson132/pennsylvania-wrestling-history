@@ -768,6 +768,14 @@ i.wdg{height:5px}
   .sxd{padding-left:46px}
   .sdh,.sdr{grid-template-columns:96px minmax(0,1fr)}
 }
+/* Strength / Talent / Score columns (titles, strength, talent, score; team and season count on wider screens) */
+.sxh,.sxr{grid-template-columns:20px minmax(0,1fr) 44px 54px 46px 54px;column-gap:6px}
+.sxh .vtn,.sxr .vtn{display:none}
+.sxr .vtl .rcs path{opacity:.6}
+@media(min-width:720px){
+  .sxh,.sxr{grid-template-columns:30px minmax(0,1fr) 64px 76px 64px 76px 64px 34px;column-gap:10px}
+  .sxr .vtn{display:block;font:700 13px var(--cond);color:var(--ash);text-align:center;font-variant-numeric:tabular-nums}.sxh .vtn{display:block;text-align:center;font-size:9.5px;letter-spacing:.06em}
+}
 /* heat grid: rows are cells, labels centred on their row, tooltip in the legend row */
 .perf.heat .pl-l.hl{display:flex;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .perf.heat .pl-l.hl>a,.perf.heat .pl-l.hl{line-height:1.1}
