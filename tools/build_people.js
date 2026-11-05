@@ -70,7 +70,7 @@ function splitCareers(apps) {
   return cs.map((c) => c.start);
 }
 function addAgg(k, lvl, year, cls, unit, w, place, name, sch, d) {
-  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0 }; P.set(k, p); }
+  let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0, sr: new Map() }; P.set(k, p); }
   p.cls.set(cls, (p.cls.get(cls) || 0) + (lvl === 'state' ? 3 : 1)); p.ws |= 1 << stdIdx(wNum(w));
   /* a transfer is listed under the school of his last state appearance (as the app's state records file him), else his
      last school: Randy Biggs won 1967 states for Bethlehem Liberty, then wrestled for Freedom (Brock, 2026-11-05) */
@@ -82,10 +82,10 @@ function addAgg(k, lvl, year, cls, unit, w, place, name, sch, d) {
   const cur = Math.floor(p.best / 10), curP = p.best % 10;
   if (L > cur || (L === cur && pl && (!curP || pl < curP))) p.best = L * 10 + pl;
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
-  const r = rating(key, name); if (r > p.peak) { p.peak = r; p.pw = wNum(w); }
+  const r = rating(key, name); if (r > p.peak) { p.peak = r; p.pw = wNum(w); } if (r && r > (p.sr.get(year) || 0)) p.sr.set(year, r);
   /* one result per level and season (the best place seen), for the all-time team credit */
   const rk = lvl + '|' + year, prev = p.res.get(rk);
-  if (!prev || (pl && (!prev.place || pl < prev.place))) p.res.set(rk, { lvl, year, place: pl, w: wNum(w) });
+  if (!prev || (pl && (!prev.place || pl < prev.place))) p.res.set(rk, { lvl, year, place: pl, w: wNum(w), cls });
   p.wc.set(wNum(w), (p.wc.get(wNum(w)) || 0) + (lvl === 'state' ? 3 : 1));
   if (lvl === 'regional' && unit && FIVE.includes(unit)) p.regs.set(unit, (p.regs.get(unit) || 0) + 1);
 }
@@ -103,6 +103,30 @@ fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).forEac
 const LS = W.WR_LOWER_META.strs;
 [['district', W.WR_LOWER_D], ['regional', W.WR_LOWER_R]].forEach(([lvl, rows]) => (rows || []).forEach(([, year, c, ui, wi, place, ni, si, g, , d]) => add(lvl, year, LCLS[c], LS[ui], LS[wi], place, LS[ni], LS[si], d, ['', 'FR', 'SO', 'JR', 'SR'][g] || '')));
 
+/* what a state finish is worth, measured on the rating scale (all-time teams, 2026-11-05): the average season rating of
+   everyone who finished in that place in that class, all seasons, minus the average non-placing state qualifier of the
+   two-class era (one baseline for every class), floored at 0
+   and made non-increasing down the places (7th and 8th come out of the consolation bracket, so a raw 7th can read above
+   6th). A trip without a place uses the class's average non-placing qualifier (one-class era: only 1st and 2nd are on record,
+   so its qualifiers include the real 3rd-4th placers and read higher). Because each class is measured on its own
+   finishers, a class with less depth gets a steeper drop-off from the data, not from a hand-set discount; it follows
+   whatever the rating scale says about AA versus AAA. people.json carries the career sum as stateValue. */
+const PV = (() => { const acc = new Map(); const put = (cls, place, r) => { if (!r) return; const k = cls + '|' + place; const a = acc.get(k) || acc.set(k, [0, 0]).get(k); a[0] += r; a[1]++; };
+  const seen = new Set();
+  const one = (year, cls, w, place, name) => { const k = `${year}|${cls}|${nkey(name)}`; if (seen.has(k)) return; seen.add(k); put(cls, place, rating(`${year}.${cls}.state.${wNum(w)}`, name)); };
+  (W.WR_MEDALS || []).forEach(([year, cls, w, place, name]) => one(year, cls, w, place, name));
+  (W.WR_DATA.champs || []).concat(W.WR_CHAMP_FILL || []).forEach(([year, cls, w, name]) => one(year, cls, w, 1, name));
+  (W.WR_QUAL || []).forEach(([year, cls, w, name]) => one(year, cls, w, 0, name));
+  /* one baseline for every class and era: the average non-placing state qualifier of the two-class era, so a medal is worth more than a trip */
+  const q2 = ['AAA', 'AA'].map((c) => acc.get(c + '|0') || [0, 0]), BASE = (q2[0][0] + q2[1][0]) / (q2[0][1] + q2[1][1]);
+  const T = {};
+  ['AAA', 'AA', 'single'].forEach((cls) => { const v = [1, 2, 3, 4, 5, 6, 7, 8, 0].map((pl) => { const a = acc.get(cls + '|' + pl); return a && a[1] >= 20 ? { pl, m: a[0] / a[1], n: a[1] } : null; }).filter(Boolean);
+    /* pool adjacent violators: non-increasing in finish order, weighted by count */
+    const B = []; v.forEach((x) => { B.push({ pls: [x.pl], m: x.m, n: x.n }); while (B.length > 1 && B[B.length - 1].m > B[B.length - 2].m) { const b = B.pop(), a = B.pop(); B.push({ pls: a.pls.concat(b.pls), m: (a.m * a.n + b.m * b.n) / (a.n + b.n), n: a.n + b.n }); } });
+    T[cls] = {}; B.forEach((b) => b.pls.forEach((pl) => { T[cls][pl] = Math.max(0, Math.round(b.m - BASE)); })); });
+  console.log('state place values (rating points above the average non-placing qualifier, ' + Math.round(BASE) + '):', JSON.stringify(T));
+  return T; })();
+const pv = (cls, place) => ((PV[cls] || PV.AAA)[place] || 0);
 /* careers: split every name+school, then aggregate each career as its own person. careers.js lists, for each
    name+school with more than one career, the start season of every career after the first (the app uses it to give
    each career its own key and page). */
@@ -134,6 +158,7 @@ fs.writeFileSync(path.join(OV, 'careers.js'), 'window.WR_CAREERS=' + JSON.string
 console.log('transfers linked', Object.keys(TRANSFER).length);
 console.log('name+school keys', RAW.size, 'split into several careers', nSplit, 'same-season two-weight state cases', nSameSeason);
 
+const top2 = (p) => { const v = Array.from(p.sr.values()).sort((a, b) => b - a).slice(0, 2); return v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length) : 0; };
 const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, schools.length); schools.push(s); } return sidx.get(s); };
 const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.peak).map((p) => {
   const d = p.ds.size ? Array.from(p.ds).sort((a, b) => b[1] - a[1])[0][0] : 0;
@@ -149,9 +174,10 @@ const out = Array.from(P.values()).sort((a, b) => b.best - a.best || b.peak - a.
   const reg = p.regs.size ? Array.from(p.regs).sort((a, b) => b[1] - a[1])[0][0] : '';
   /* [name, school, firstYear, span, district, best, peak/10, teamWeightIdx, statePts, regionalPts, districtPts,
       stateQuals, regionalQuals, [state year*10+place…], regionalBest, districtBest, regionalTitles, districtTitles, region,
-      class (0 AAA · 1 AA · 2 one-class era), weights wrestled (bitmask of standardized weights)] */
+      class (0 AAA · 1 AA · 2 one-class era), weights wrestled (bitmask of standardized weights),
+      average of his two best season ratings (his one season when he has only one), stateValue (sum of PV over his state results)] */
   const cl = Array.from(p.cls).sort((a, b) => b[1] - a[1])[0][0];
-  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg, cl === 'AAA' ? 0 : cl === 'AA' ? 1 : 2, p.ws];
+  return [p.name, S(p.sch), p.y0, p.y1 - p.y0, d, p.best, Math.round(p.peak), stdIdx(pw), pts('state'), pts('regional'), pts('district'), q('state'), q('regional'), sres, best('regional'), best('district'), titles('regional'), titles('district'), reg, cl === 'AAA' ? 0 : cl === 'AA' ? 1 : 2, p.ws, top2(p), Math.round(lv('state').reduce((a, x) => a + pv(x.cls, x.place), 0))];
 });
 fs.writeFileSync(path.join(OV, 'people.json'), JSON.stringify({ s: schools, p: out }));
 const st = fs.statSync(path.join(OV, 'people.json')).size;

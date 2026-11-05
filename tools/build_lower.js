@@ -69,7 +69,12 @@ const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.sch
 { const amb = (r) => { const y = SDall.get(r.sch); return y && y.get(r.year) && y.get(r.year).size > 1 ? y.get(r.year) : null; };
   const reg = new Map(); rows.forEach((r) => { if (r.level !== 'regional' || !r.d || amb(r)) return; const k = `${r.cls}|${r.year}|${r.d}`; const m = reg.get(k) || reg.set(k, new Map()).get(k); m.set(r.unit, (m.get(r.unit) || 0) + 1); });
   const top = (k) => { const m = reg.get(k); return m ? Array.from(m).sort((a, b) => b[1] - a[1])[0][0] : null; };
-  rows.forEach((r) => { if (r.level !== 'regional') return; const c = amb(r); if (!c) return; const fit = [...c].filter((d) => top(`${r.cls}|${r.year}|${d}`) === r.unit); if (fit.length === 1) r.d = fit[0]; }); }
+  /* best evidence first: the district (or section) bracket this wrestler came out of that season. Both Liberty schools
+     wrestle NE regionals, so region fit alone cannot split them (Pat Tocci's 1987-89 regional rows went to D4 Liberty) */
+  const fromD = new Map(); rows.forEach((r) => { if ((r.level !== 'district' && r.level !== 'section') || !r.d) return; const k = `${r.year}|${r.cls}|${nkey(r.name)}|${r.sch}`; (fromD.get(k) || fromD.set(k, new Set()).get(k)).add(r.d); });
+  rows.forEach((r) => { if (r.level !== 'regional') return; const c = amb(r); if (!c) return;
+    const seen = [...(fromD.get(`${r.year}|${r.cls}|${nkey(r.name)}|${r.sch}`) || [])].filter((d) => c.has(d)); if (seen.length === 1) { r.d = seen[0]; return; }
+    const fit = [...c].filter((d) => top(`${r.cls}|${r.year}|${d}`) === r.unit); if (fit.length === 1) r.d = fit[0]; }); }
 /* a section is the district round where its district has no district tournament that season (D7, D3, D1 sections):
    those sections ship with the app (career grid District row, bracket view); other sections stay build inputs only */
 const _dn = new Map(); rows.forEach((r) => { if (r.level === 'district' && r.d) { const k = `${r.year}|${r.cls}|${r.d}`; _dn.set(k, (_dn.get(k) || 0) + 1); } });

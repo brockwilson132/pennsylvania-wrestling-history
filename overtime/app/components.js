@@ -192,8 +192,9 @@
     return OT.lowerWrestlersOf(rows).map((w) => ({ name: w.name, href: w.href, sub: w.years, places: w.places, medals: w.medals, titles: w.titles, pts: w.pts, era: 100 * w.pts / tot * 100, power: 100 * d3.sum(w.rows, (r) => r.pts * Math.pow(0.5, (last - r.year) / 7)) / tot * 100, rtg: w.rtg ? w.rtg.peak : null }));
   }
 
-  /* all-time teams: one weight per wrestler, ranked by the page's placement credit plus peak rating */
-  const ATT_NOTE = { state: 'Ranked by state results and peak rating.', region: 'Ranked by state, then regional results, plus peak rating.', district: 'Ranked by state, regional and district results (state counts most), plus peak rating.', school: 'Ranked by state, regional and district results (state counts most), plus peak rating.' };
+  /* all-time teams: one weight per wrestler, ranked by one value that is the same on every page (model.js attValue) */
+  const ATT_NOTE_ALL = 'Ranked the same way on every page: state results count 60%, peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties.';
+  const ATT_NOTE = { state: ATT_NOTE_ALL, region: ATT_NOTE_ALL, district: ATT_NOTE_ALL, school: ATT_NOTE_ALL };
   function teamsBlock(u) {
     const T = allTimeTeams(u, 3);
     if (T === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';

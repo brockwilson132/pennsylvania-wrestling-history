@@ -410,44 +410,62 @@ var OT = window.OT || (window.OT = {});
     return { items, total };
   }
   /* all-time teams: every wrestler who appears in any bracket for the unit is a candidate, at ONE weight (the weight of
-     his highest-rated season). Value = ALPHA · z(placement credit) + (1 − ALPHA) · z(peak Overtime Rating), z within the
-     unit's candidates at that weight (the unit's whole pool when a weight has fewer than 10). Placement credit depends on
-     the page: State counts state results only (district strength varies too much to compare statewide); Region adds
-     regional results; District and School add district results too. Points 16-12-9-7-5-3-2-1 per place over his whole
-     career, times the level weight; advancing without placing earns a little (state 1, regional 0.5, times the weight).
-     The window decides who is eligible (any season inside it); his whole career counts. The level switch does not apply. */
+     his highest-rated season). Each wrestler has ONE value, the same on every page, so a wrestler ranked ahead of another
+     on the State team is ahead of him on their District, Region and School teams too:
+       value = ALPHA · (state credit − ref mean) / ref sd + (1 − ALPHA) · (peak RTG − ref mean) / ref sd
+     where the reference group is every state qualifier at his team weight, all seasons and classes (fixed: it does not
+     change with the page, the class or the window). State credit = the sum of what each of his state finishes is worth on
+     the rating scale (tools/build_people.js PV: the average rating of that finish in that class, above the average
+     non-placing qualifier), so the drop-off between places, and between classes, comes from the data. A wrestler with no rating takes the average peak of rated wrestlers at his weight with the same best finish.
+     Regional, then district results (same points) only break ties, so district strength never moves anyone past a
+     stronger state record. The window decides who is eligible (any season inside it); his whole career counts. The
+     level switch does not apply. Earlier versions scored each page differently (regional and district results counted
+     on lower pages) and z-scored within the page's own pool, so the order could flip between pages (Pat Tocci, 2026-11-05). */
   const ATT_ALPHA = 0.6;
-  const ATT_W = { state: { s: 1, r: 0, d: 0 }, region: { s: 1, r: 0.4, d: 0 }, district: { s: 1, r: 0.4, d: 0.15 }, school: { s: 1, r: 0.4, d: 0.15 } };
-  const attCredit = (p, kind) => { const w = ATT_W[kind]; return w.s * (p.sP + p.sQ) + w.r * (p.rP + 0.5 * p.rQ) + w.d * p.dP; };
+  const attState = (p) => p.sv, attReg = (p) => p.rP + 0.5 * p.rQ;
+  let ATT_REF = null;
+  const attRef = () => { if (ATT_REF) return ATT_REF; ATT_REF = new Map();
+    d3.group(PEOPLE.filter((p) => p.tw && attState(p) > 0), (p) => p.tw).forEach((arr, k) => { const rr = arr.filter((p) => p.peak).map((p) => p.peak);
+      ATT_REF.set(k, { mc: d3.mean(arr, attState), sc: d3.deviation(arr, attState) || 1, mr: rr.length ? d3.mean(rr) : 1500, sr: (rr.length > 1 && d3.deviation(rr)) || 200 }); });
+    /* no rating on file (no bouts in the archive for his seasons): his rating half is the average peak of rated wrestlers
+       at his weight with the same best finish (level and place), so a data gap neither helps nor hurts him */
+    ATT_IMP = new Map(); d3.rollup(PEOPLE.filter((p) => p.tw && p.peak), (v) => d3.mean(v, (p) => p.peak), (p) => p.tw + '|' + p.lvl + '|' + p.place).forEach((m, k) => ATT_IMP.set(k, m));
+    return ATT_REF; };
+  let ATT_IMP = null;
+  /* finish order within a level: 1st … 8th, then advanced/entered without a place (0). With no rated wrestler at his exact
+     finish (first-round ratings are hidden, so a district non-placer has none), take the nearest worse finish on file at
+     that level, else the nearest better one; none at all → no rating half (0, an average state qualifier) */
+  const FIN = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+  const attPeak = (p) => { if (p.peak) return p.peak; attRef(); const i = FIN.indexOf(p.place), key = (pl) => ATT_IMP.get(p.tw + '|' + p.lvl + '|' + pl);
+    for (let j = i; j < FIN.length; j++) if (key(FIN[j])) return key(FIN[j]);
+    for (let j = i - 1; j >= 0; j--) if (key(FIN[j])) return key(FIN[j]);
+    return null; };
+  const attValue = (p) => { if (p.attV != null) return p.attV; const R = attRef().get(p.tw) || { mc: 0, sc: 1, mr: 1500, sr: 200 };
+    return (p.attV = ATT_ALPHA * (attState(p) - R.mc) / R.sc + (1 - ATT_ALPHA) * (attPeak(p) ? (attPeak(p) - R.mr) / R.sr : 0)); };
+  const attCmp = (x, y) => attValue(y) - attValue(x) || attReg(y) - attReg(x) || y.dP - x.dP || (y.peak || 0) - (x.peak || 0) || x.name.localeCompare(y.name);
   const personClass = (p) => (p.cls === 'AAA' || p.cls === 'AA' ? p.cls : p.cls === 'single' ? lineage(p.sch) : homeOf(p.sch));
   const personRegion = (p) => regionOf({ cls: personClass(p), region: FIVE.includes(p.reg) ? p.reg : null, year: p.y1, d: p.d, lvl: 'regional' });
   const personIn = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (p) => personRegion(p) === u.id : u.kind === 'district' ? (p) => p.d === u.id : (p) => p.sch === u.id;
   const personScope = (p) => { if (state.cls !== 'ALL' && personClass(p) !== state.cls) return false; const [a, b] = yearsWindow(); if (p.y1 < a || p.y0 > b) return false;
     const f = state.f; return (!f.weights.length || f.weights.includes(p.tw)) && (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); };
-  const zf = (arr, g) => { if (!arr.length) return () => 0; const v = arr.map(g); const m = d3.mean(v); const sd = d3.deviation(v) || 1; return (x) => (g(x) - m) / sd; };
   function allTimeTeams(u, depth = 3) { if (!PEOPLE) return null; return memo('att|' + wkey() + '|' + u.kind + '|' + u.id + '|' + depth, () => allTimeTeams0(u, depth)); }
   function allTimeTeams0(u, depth) {
-    const kind = u.kind, inU = personIn(u);
+    const inU = personIn(u);
     const pool = PEOPLE.filter((p) => p.tw && inU(p) && personScope(p)); if (!pool.length) return [];
-    const cr = (p) => attCredit(p, kind), rated = pool.filter((p) => p.peak);
-    const zC0 = zf(pool, cr), zR0 = zf(rated, (p) => p.peak);
     const byW = d3.group(pool, (p) => p.tw);
-    const val = (p, zC, zR) => ATT_ALPHA * zC(p) + (1 - ATT_ALPHA) * (p.peak ? zR(p) : 0);
-    const slotOf = (p, credit, k, alt) => ({ name: p.name, sch: p.sch, d: p.d, href: '#wrestler/' + p.slug, rtg: p.peak, years: p.y0 === p.y1 ? String(p.y0) : `${p.y0}–${p.y1}`, sres: p.sres, rB: p.rB, dB: p.dB, rT: p.rT, dT: p.dT, credit, w: k, alt: !!alt });
+    const slotOf = (p, k, alt) => ({ name: p.name, sch: p.sch, d: p.d, href: '#wrestler/' + p.slug, rtg: p.peak, years: p.y0 === p.y1 ? String(p.y0) : `${p.y0}–${p.y1}`, sres: p.sres, rB: p.rB, dB: p.dB, rT: p.rT, dT: p.dT, value: attValue(p), w: k, alt: !!alt });
     const used = new Set();
-    const rows = STD.filter((c) => byW.has(c.k)).map((c) => { const arr = byW.get(c.k), big = arr.length >= 10, ra = arr.filter((p) => p.peak);
-      const zC = big ? zf(arr, cr) : zC0, zR = big && ra.length >= 5 ? zf(ra, (p) => p.peak) : zR0;
-      const ranked = arr.map((p) => ({ p, v: val(p, zC, zR), credit: cr(p) })).sort((x, y) => y.v - x.v || y.credit - x.credit || (y.p.peak || 0) - (x.p.peak || 0));
-      const slots = ranked.slice(0, depth).map(({ p, credit }) => { used.add(p); return slotOf(p, credit, c.k); });
+    const rows = STD.filter((c) => byW.has(c.k)).map((c) => { const ranked = byW.get(c.k).slice().sort(attCmp);
+      const slots = ranked.slice(0, depth).map((p) => { used.add(p); return slotOf(p, c.k); });
       return { c, slots }; });
     /* a weight with open slots is filled by wrestlers who also wrestled it but did not make a team at their own weight
        (still one weight per wrestler: nobody appears twice) */
     const wi = (k) => STD.findIndex((c) => c.k === k);
     const open = STD.filter((c) => !byW.has(c.k)).map((c) => ({ c, slots: [] })).concat(rows).filter((x) => x.slots.length < depth);
     if (open.length) {
-      const pairs = []; open.forEach((x) => { const bit = 1 << wi(x.c.k); pool.forEach((p) => { if (!used.has(p) && (p.ws & bit)) pairs.push({ x, p, v: val(p, zC0, zR0), credit: cr(p) }); }); });
-      pairs.sort((a, b) => b.v - a.v || b.credit - a.credit);
-      pairs.forEach(({ x, p, credit }) => { if (used.has(p) || x.slots.length >= depth) return; used.add(p); x.slots.push(slotOf(p, credit, x.c.k, true)); });
+      const pairs = []; open.forEach((x) => { const bit = 1 << wi(x.c.k); pool.forEach((p) => { if (!used.has(p) && (p.ws & bit)) pairs.push({ x, p }); }); });
+      pairs.sort((a, b) => attCmp(a.p, b.p));
+      pairs.forEach(({ x, p }) => { if (used.has(p) || x.slots.length >= depth) return; used.add(p); x.slots.push(slotOf(p, x.c.k, true)); });
       open.forEach((x) => { if (!rows.includes(x) && x.slots.length) rows.push(x); });
     }
     rows.sort((a, b) => wi(a.c.k) - wi(b.c.k));
@@ -523,7 +541,7 @@ var OT = window.OT || (window.OT = {});
   let PEOPLE = null, PEOPLE_BY = null, PPL = null;
   const LVLN = ['', 'district', 'regional', 'state'];
   const loadPeople = () => PPL || (PPL = fetch('people.json').then((r) => (r.ok ? r.json() : { s: [], p: [] })).catch(() => ({ s: [], p: [] })).then((D) => {
-    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: ((k) => TRF[k] || k)(nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : '')),   /* a transfer's key is his first school's, like wKey */ q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0 }; });
+    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws, pk2, sv]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: ((k) => TRF[k] || k)(nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : '')),   /* a transfer's key is his first school's, like wKey */ q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0, pk2: pk2 || null, sv: sv || 0 }; });
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
   const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
@@ -557,5 +575,5 @@ var OT = window.OT || (window.OT = {});
     const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional'), loadLower(y, 'section')])).then(() => { W.lower = mergeLower(W, years);
       const more = careerYears(W); const add = more.filter((y) => !years.includes(y)); if (add.length && n < 2) return pass(years.concat(add).sort((a, b) => a - b), n + 1); W.full = true; W.span = years; return true; });
     return pass(careerYears({ ...W, lower: W.lower0 }), 0); };
-  Object.assign(OT, { meetings, sosYear, loadUpsets, upsets, wNum, TEAMSCORES_FROM: 1976, loadH2HS, h2hsOf, h2hsLoaded, dualOdds, sectionFor, sectionCovered, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { meetings, sosYear, loadUpsets, upsets, wNum, TEAMSCORES_FROM: 1976, loadH2HS, h2hsOf, h2hsLoaded, dualOdds, sectionFor, sectionCovered, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, attValue, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();
