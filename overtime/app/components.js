@@ -14,7 +14,7 @@
      edge (D, jersey), and the name written in the first of its colours that reads on the fill (second, then third, then
      white or black). Colours are named presets, not each school's exact hex, so schools in "the same red" match.
      District 11 is set by hand from Brock's list (TAG_ASSIGN); other schools snap the badge file's colours to the presets;
-     a school with no colours on file gets the plain grey tag. TAG_STYLE picks the design: 'F' (default) or 'D'. */
+     a school with no colours on file gets the plain grey tag. The tag is a pill with a dot in the accent colour. */
   const TAG_PRESETS = {
     red: '#C8102E', maroon: '#7A1E2C', orange: '#E87722', gold: '#C9A227', yellow: '#FFD200', green: '#15803D', dkgreen: '#0B4D2C',
     royal: '#1F4E9C', navy: '#1B2A4A', ltblue: '#7EC8F2', purple: '#4B2E83', brown: '#4E2A1E', grey: '#8A8D8F', white: '#FFFFFF', black: '#111111',
@@ -36,7 +36,6 @@
     'Tamaqua': ['royal', 'white', 'black'], 'Tri-Valley': ['red', 'black', 'white'], 'West Hazleton': ['ltblue', 'black'], 'Whitehall': ['maroon', 'gold'],
     'William Allen': ['yellow', 'royal'], 'Williams Valley': ['royal', 'red', 'white'], 'Wilson Area': ['royal', 'gold'],
   };
-  const TAG_STYLE = (() => { try { const m = /[?&]tag=([DF])\b/.exec(location.search + location.hash); return m ? m[1] : 'F'; } catch (e) { return 'F'; } })();
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
   const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
   const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
@@ -64,7 +63,7 @@
   const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
   const stag = (sch, o = {}) => { const p = tagPaint(sch);
-    return `<span class="stag t${TAG_STYLE}${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}>${TAG_STYLE === 'F' ? '<i></i>' : ''}${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
+    return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
 
   /* brand */
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
