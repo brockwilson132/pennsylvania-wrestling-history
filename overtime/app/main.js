@@ -65,33 +65,85 @@
   const schoolItems = (f, qq) => { const t = (qq || '').trim().toLowerCase(); const all = schoolScope(f).filter((x) => !t || x.q.includes(t)); const L = all.slice(0, 80);
     return (L.length ? L.map((x) => `<a class="fpo${x.n === f.s ? ' on' : ''}" href="${hrefOf({ ...f, w: f.w && !f.who, s: x.n })}"><span>${esc(x.n)}</span><small>${x.d ? 'D' + x.d : ''}</small></a>`).join('') : '<div class="fpn">No school by that name here.</div>') + (all.length > 80 ? `<div class="fpn">${all.length - 80} more: type to narrow.</div>` : ''); };
   const POP = {
-    filters: () => { const f = F(); const w = f.w && !f.who, win = OT.windowLabel();
-      const crumbs = [['Pennsylvania', hrefOf({ w })]].concat(f.r ? [[OT.REGIONS[f.r], hrefOf({ w, r: f.r })]] : []).concat(f.d ? [['District ' + f.d, hrefOf({ w, r: f.r, d: f.d })]] : []).concat(f.s ? [[f.s, hrefOf({ ...f, w })]] : []);
-      const crumb = `<div class="fpcr">${crumbs.map(([n, h], i) => i === crumbs.length - 1 ? `<b>${esc(n)}</b>` : `<a href="${h}">${esc(n)}</a><span>›</span>`).join('')}</div>`;
-      const regs = OT.FIVE.map((g) => `<a class="fpc${f.r === g ? ' on' : ''}" href="${hrefOf({ w, r: g })}">${esc(OT.REGIONS[g])}</a>`).join('');
-      const mem = f.r ? OT.regionMembers(f.r) : d3.range(1, 13).map((d) => ({ d, span: win }));
-      const dis = mem.map((m) => `<a class="fpc${f.d === m.d ? ' on' : ''}" href="${hrefOf({ w, r: f.r && m.span === win ? f.r : regionOfD(m.d), d: m.d })}" title="${esc(OT.DISTRICTS[m.d] || '')}${m.span === win ? '' : ' · ' + esc(m.span)}">D${m.d}</a>`).join('');
-      const where = f.d ? 'District ' + f.d : f.r ? OT.REGIONS[f.r] : 'Pennsylvania';
-      return `<div class="fph"><b>Filters</b>${filtersOn() || f.r || f.d || f.s ? `<button class="fpx" type="button" data-freset>Reset</button>` : ''}</div>
-      <div class="fpsec"><div class="fpk">Place</div>${crumb}<div class="fpg fpg5">${regs}</div><div class="fpk fpk2">District${f.r ? ' · ' + esc(OT.REGIONS[f.r]) : ''}</div><div class="fpg fpg6">${dis}</div>
-      <div class="fpk fpk2">School · ${esc(where)}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl fpls" id="fpl">${schoolItems(f, '')}</div></div>
-      <div class="fpsec"><div class="fpk">Class</div><div class="seg" role="group" aria-label="Class">${[['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'All']].map(([k, l]) => `<button type="button" data-fdiv="${k}" aria-pressed="${state.cls === k}">${l}</button>`).join('')}</div>
-      <div class="fpk fpkw fpk2"><span>Weights</span>${state.f.weights.length ? '<button class="fpx" type="button" data-fwclear>Clear</button>' : ''}</div><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${state.f.weights.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${state.f.weights.includes(x.k)}">${x.label}</button>`).join('')}</div>
-      <div class="fpn">Before the split into two classes, every season counts under both. Weights narrow the wrestler lists, all-time teams and a school's timeline; ratings, scores and maps count every weight.</div></div>
-      <div class="fpsec"><div class="fpk">Seasons</div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div></div>`; },
+    filters: () => filtersPage(),
     search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
     menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
+  /* ---------- the filter page ----------
+     Changes are a draft until "Show": pick a place on the map, by search or from the path, then seasons, class and
+     weights, and see the result once. Closing the page drops the draft. */
+  let draft = null;
+  const DEF_WIN = { mode: 'all', from: null, to: null };
+  const newDraft = () => { const f = F(); return { r: f.r, d: f.d, s: f.s, cls: state.cls, win: { ...state.win }, w: state.f.weights.slice() }; };
+  const withWin = (win, fn) => { const keep = state.win; state.win = win; try { return fn(); } finally { state.win = keep; } };
+  const dPlace = (g) => g.s || (g.d ? 'District ' + g.d : g.r ? OT.REGIONS[g.r] + ' Region' : 'Pennsylvania');
+  const dWin = (g) => (g.win.mode === 'all' ? 'All-time' : g.win.mode === 'custom' ? withWin(g.win, () => OT.windowLabel()) : 'Last ' + g.win.mode + ' seasons');
+  const dCls = (g) => (g.cls === 'ALL' ? 'AAA and AA' : g.cls);
+  const dWts = (g) => (!g.w.length ? 'All weights' : g.w.length <= 3 ? g.w.map((k) => OT.STD.find((x) => x.k === k).label).join(', ') + ' lbs' : g.w.length + ' weights');
+  const sameDraft = (g) => { const f = F(); return g.r === f.r && g.d === f.d && g.s === f.s && g.cls === state.cls && same(g.win, state.win) && same(g.w.slice().sort(), state.f.weights.slice().sort()); };
+  function placeMap(g) {
+    const M = window.PA_MAP; if (!M || !M.d) return '';
+    const cls = (d) => (g.d === d ? 'on' : g.r && regionOfD(d) === g.r ? 'reg' : '');
+    const paths = d3.range(1, 13).filter((d) => M.d[d]).map((d) => `<path class="fmd ${cls(d)}" d="${M.d[d]}" data-dp="d:${d}"><title>District ${d} · ${esc(OT.DISTRICTS[d] || '')}</title></path>`).join('');
+    const labs = d3.range(1, 13).map((d) => { const p = M.dot[d]; if (!p) return ''; const small = !M.d[d];
+      return small ? `<g class="fm8 ${cls(d)}" data-dp="d:${d}"><circle cx="${p[0]}" cy="${p[1]}" r="26"/><text x="${p[0]}" y="${p[1] + 9}">8</text><title>District 8 · ${esc(OT.DISTRICTS[8] || '')}</title></g>` : `<text class="fml ${cls(d)}" x="${p[0]}" y="${p[1] + 12}">${d}</text>`; }).join('');
+    return `<svg class="fmap" viewBox="0 0 1000 560" role="group" aria-label="Pick a district on the map">${paths}${labs}</svg>`;
+  }
+  function placeHits(q) {
+    const t = q.toLowerCase().split(/\s+/).filter(Boolean); if (!t.length) return '';
+    const regs = OT.FIVE.filter((g) => t.every((w) => (OT.REGIONS[g] + ' region').toLowerCase().includes(w)));
+    const dis = DSEARCH.filter((x) => t.every((w) => x.q.split(/\s+/).some((y) => y.startsWith(w)))).slice(0, 4);
+    const sch = schools().filter((x) => t.every((w) => x.q.includes(w))).slice(0, 12);
+    const row = (dp, name, sub) => `<button type="button" class="fhit" data-dp="${esc(dp)}"><span>${name}</span><small>${esc(sub)}</small></button>`;
+    const h = regs.map((g) => row('r:' + g, esc(OT.REGIONS[g]) + ' Region', 'Region')).join('') + dis.map((x) => row('d:' + x.d, 'District ' + x.d, OT.DISTRICTS[x.d] || '')).join('') + sch.map((x) => row('s:' + x.n, esc(x.n), x.d ? 'District ' + x.d : '')).join('');
+    return h || '<div class="fpn">Nothing by that name.</div>';
+  }
+  function filtersPage() {
+    const g = draft || (draft = newDraft());
+    const path = [['', 'Pennsylvania']].concat(g.r ? [['r:' + g.r, OT.REGIONS[g.r]]] : []).concat(g.d ? [['d:' + g.d, 'District ' + g.d]] : []).concat(g.s ? [['s:' + g.s, g.s]] : []);
+    const crumb = `<nav class="fpath" aria-label="Place">${path.map(([dp, n], i) => `${i ? '<span aria-hidden="true">›</span>' : ''}<button type="button" data-dp="${esc(dp)}" class="${i === path.length - 1 ? 'on' : ''}">${esc(n)}</button>`).join('')}</nav>`;
+    const regs = `<div class="fregs">${OT.FIVE.map((r) => `<button type="button" class="fpc${g.r === r ? ' on' : ''}" data-dp="${g.r === r && !g.d && !g.s ? '' : 'r:' + r}" aria-pressed="${g.r === r}">${esc(OT.REGIONS[r])}</button>`).join('')}</div>`;
+    const inScope = (g.d || g.r) ? schools().filter((x) => (g.d ? x.d === g.d : x.r === g.r)) : [];
+    const slist = inScope.length ? `<details class="fsch"${g.s ? ' open' : ''}><summary><span>Schools in ${esc(g.d ? 'District ' + g.d : OT.REGIONS[g.r])}</span><small>${inScope.length}</small></summary><div class="fschl">${inScope.map((x) => `<button type="button" class="${g.s === x.n ? 'on' : ''}" data-dp="s:${esc(x.n)}">${esc(x.n)}</button>`).join('')}</div></details>` : '';
+    const seg = (key, items, cur) => `<div class="seg fseg" role="group">${items.map(([k, l]) => `<button type="button" data-${key}="${k}" aria-pressed="${cur === k}">${l}</button>`).join('')}</div>`;
+    const scr = withWin(g.win, () => OT.timeScrubber());
+    const wopen = g.w.length > 0;
+    return `<div class="fhd"><h2>Filters</h2><button type="button" class="fclose" data-fclose aria-label="Close">✕</button></div>
+      <div class="fsum" aria-live="polite"><b>${esc(dPlace(g))}</b><span>${esc(dCls(g))} · ${esc(dWin(g))} · ${esc(dWts(g))}</span></div>
+      <div class="fq"><input class="search" id="fsq" type="search" placeholder="Search a school, district or region" autocomplete="off" aria-label="Search a school, district or region"><div class="fhits" id="fsr"></div></div>
+      <section class="fsec fplace"><h3>Place</h3>${crumb}${placeMap(g)}${regs}${slist}</section>
+      <section class="fsec"><h3>Seasons</h3>${seg('tw', [['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']], g.win.mode)}${scr}</section>
+      <section class="fsec"><h3>Class</h3>${seg('fdiv', [['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'Both']], g.cls)}<p class="fpn">Before the split into two classes, every season counts under both.</p></section>
+      <section class="fsec"><details class="fwts"${wopen ? ' open' : ''}><summary><h3>Weights</h3><span>${esc(dWts(g))}</span></summary><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${g.w.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${g.w.includes(x.k)}">${x.label}</button>`).join('')}</div><p class="fpn">Weights narrow the wrestler lists, all-time teams and a school's timeline. Ratings, scores and maps count every weight.</p></details></section>
+      <div class="ffoot"><button type="button" class="freset" data-freset>Reset</button><button type="button" class="fgo" data-fapply>${sameDraft(g) ? 'Done' : 'Show ' + esc(dPlace(g))}</button></div>`;
+  }
+  function setDraftPlace(dp) {
+    const g = draft; if (!g) return;
+    if (!dp) Object.assign(g, { r: '', d: 0, s: '' });
+    else if (dp.startsWith('r:')) Object.assign(g, { r: dp.slice(2), d: 0, s: '' });
+    else if (dp.startsWith('d:')) { const d = +dp.slice(2); Object.assign(g, { d, r: regionOfD(d), s: '' }); }
+    else if (dp.startsWith('s:')) { const n = dp.slice(2), u = OT.U.school(n); Object.assign(g, { s: n, d: u.d || 0, r: u.region || (u.d ? regionOfD(u.d) : '') }); }
+  }
+  function applyDraft() {
+    const g = draft; if (!g) return closePop(); const f = F(); let filt = false;
+    if (g.cls !== state.cls) { setCls(g.cls); filt = true; }
+    if (!same(g.win, state.win)) { setWin({ ...DEF_WIN, ...g.win }); filt = true; }
+    if (!same(g.w.slice().sort(), state.f.weights.slice().sort())) { OT.clearFilters('weights'); g.w.forEach((k) => OT.toggleFilter('weights', k)); filt = true; }
+    SCH = null; closePop();
+    const h = hrefOf({ w: f.w && !f.who, r: g.r, d: g.d, s: g.s });
+    if (location.hash !== h) location.hash = h; else if (filt) changed();
+  }
   function paintPop() {
-    if (!pop) return; const keepTop = fpop.dataset.pop === pop ? fpop.scrollTop : 0; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.dataset.pop = pop; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'filters' ? ' time' : ''); fpop.scrollTop = keepTop;
+    if (!pop) return; const keepTop = fpop.dataset.pop === pop ? fpop.scrollTop : 0; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.dataset.pop = pop; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'filters' ? ' flt' : ''); fpop.scrollTop = keepTop;
     const btn = pop === 'menu' ? mbtn : pop === 'search' ? sbtn : fbar.querySelector(`[data-fb="${pop}"]`);
-    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'filters' ? 560 : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
+    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'filters' ? (window.innerWidth >= 1000 ? 920 : 600) : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
     else { fpop.style.left = ''; fpop.style.width = ''; }
     if (pop === 'search') wireGlobalSearch();
+    if (pop === 'filters') { const q = fpop.querySelector('#fsq'), out = fpop.querySelector('#fsr'); if (q) q.addEventListener('input', () => { out.innerHTML = placeHits(q.value); }); }
     const inp = fpop.querySelector('#fps'); if (inp) { inp.addEventListener('input', () => { fpop.querySelector('#fpl').innerHTML = schoolItems(F(), inp.value); }); if (window.innerWidth >= 720) inp.focus(); }
   }
-  function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); sbtn.setAttribute('aria-expanded', String(k === 'search')); paintPop(); drawBar(); }
-  function closePop() { if (!pop) return; pop = ''; fpop.dataset.pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
+  function openPop(k) { pop = k; if (k === 'filters') draft = newDraft(); fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); sbtn.setAttribute('aria-expanded', String(k === 'search')); paintPop(); drawBar(); }
+  function closePop() { if (!pop) return; pop = ''; draft = null; fpop.dataset.pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
   /* division, time and weights: each change is its own history entry, so Back steps through it */
   const snap = () => ({ cls: state.cls, win: { ...state.win }, w: state.f.weights.slice() });
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -236,7 +288,8 @@
     const up = () => { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up); setRange(Math.min(a, b), Math.max(a, b), y0, y1); };
     document.addEventListener('pointermove', move); document.addEventListener('pointerup', up);
   });
-  function setRange(lo, hi, y0, y1) { const w = lo === y0 && hi === y1 ? { mode: 'all' } : { mode: 'custom', from: lo, to: hi }; if (w.mode === state.win.mode && (w.mode === 'all' || (w.from === state.win.from && w.to === state.win.to))) return; setWin(w); changed(); }
+  function setRange(lo, hi, y0, y1) { const w = lo === y0 && hi === y1 ? { mode: 'all' } : { mode: 'custom', from: lo, to: hi };
+    if (pop === 'filters' && draft) { draft.win = { ...DEF_WIN, ...w }; paintPop(); return; } if (w.mode === state.win.mode && (w.mode === 'all' || (w.from === state.win.from && w.to === state.win.to))) return; setWin(w); changed(); }
   document.addEventListener('keydown', (e) => { const h = e.target.closest && e.target.closest('.tscr .sch'); if (!h || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return; e.preventDefault(); const scr = h.closest('.tscr'); const y0 = +scr.dataset.y0, y1 = +scr.dataset.y1; let a = +scr.dataset.a, b = +scr.dataset.b; const d = e.key === 'ArrowLeft' ? -1 : 1;
     if (h.dataset.h === 'a') a = Math.max(y0, Math.min(b, a + d)); else b = Math.min(y1, Math.max(a, b + d)); setRange(a, b, y0, y1); const nh = fpop.querySelector(`.tscr .sch[data-h="${h.dataset.h}"]`); if (nh) nh.focus(); });
   document.addEventListener('mouseover', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell, .perf .cc, .perf .hitc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = h.dataset.tip || ''; });
@@ -254,12 +307,21 @@
       if (f.w && k === 'rank' && !['wrestlers', 'team'].includes(state.child)) state.child = 'wrestlers';
       const same = state.view === k && !f.w; state.view = k; try { sessionStorage.setItem('ot-view', k); } catch (er) { /* none */ }
       if (f.w) location.hash = hrefOf({ ...g, w: false }); else if (same) window.scrollTo(0, 0); else { lastBase = ''; render(); } return; }
-    if (pop && e.target.closest('[data-freset]')) { setCls('AAA'); OT.clearFilters('weights'); setWin({ mode: 'all' }); SCH = null; closePop(); try { history.pushState({ ot: snap() }, ''); } catch (er) { /* none */ } const f = F(); const h = hrefOf({ w: f.w && !f.who }); if (location.hash !== h) location.hash = h; else render(true); return; }
     if (e.target.closest('#sbtn')) { if (pop === 'search') closePop(); else openPop('search'); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
     if (e.target === fscrim) { closePop(); return; }
     if (pop && fpop.contains(e.target)) {
-      const dv = e.target.closest('button[data-fdiv]'); if (dv) { if (dv.dataset.fdiv !== state.cls) { setCls(dv.dataset.fdiv); SCH = null; changed(); } closePop(); return; }
+      if (pop === 'filters' && draft) {
+        if (e.target.closest('[data-fclose]')) { closePop(); return; }
+        if (e.target.closest('[data-fapply]')) { applyDraft(); return; }
+        if (e.target.closest('[data-freset]')) { Object.assign(draft, { r: '', d: 0, s: '', cls: 'AAA', win: { ...DEF_WIN }, w: [] }); paintPop(); return; }
+        const dp = e.target.closest('[data-dp]'); if (dp) { setDraftPlace(dp.getAttribute('data-dp')); paintPop(); return; }
+        const dv = e.target.closest('button[data-fdiv]'); if (dv) { draft.cls = dv.dataset.fdiv; paintPop(); return; }
+        const fw = e.target.closest('button[data-fw]'); if (fw) { const k = fw.dataset.fw, i = draft.w.indexOf(k); if (i < 0) draft.w.push(k); else draft.w.splice(i, 1); paintPop(); return; }
+        const tw = e.target.closest('button[data-tw]'); if (tw) { draft.win = tw.dataset.tw === 'all' ? { ...DEF_WIN } : { mode: tw.dataset.tw, from: null, to: null }; paintPop(); return; }
+        const ty = e.target.closest('button[data-ty]'); if (ty) { const scr = ty.closest('.tscr'); const y = +ty.dataset.ty; const w = draft.win; const one = w.mode === 'custom' && w.from === y && w.to === y; setRange(one ? +scr.dataset.y0 : y, one ? +scr.dataset.y1 : y, +scr.dataset.y0, +scr.dataset.y1); return; }
+        return;
+      }
       const fw = e.target.closest('button[data-fw]'); if (fw) { OT.toggleFilter('weights', fw.dataset.fw); changed(); return; }
       if (e.target.closest('[data-fwclear]')) { OT.clearFilters('weights'); changed(); return; }
       const tw = e.target.closest('button[data-tw]'); if (tw) { if (tw.dataset.tw !== state.win.mode) { setWin({ mode: tw.dataset.tw }); changed(); } return; }
