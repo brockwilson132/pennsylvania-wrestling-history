@@ -907,8 +907,37 @@ def norm(v, y, c):
     if v is None: return None
     m, sd, res = anc(y, c)
     if SPREAD == 'raw': return 1500 + (v - m) - LEVEL[0]
-    return 1500 + _tail((v - m) / sd, res) * SD_REF - LEVEL[0]
+    return 1500 + _tail((v - m) / sd, res) * SD_REF - LEVEL[0] - (CLS_GAP.get(y, 0.0) if c == 'AA' else 0.0)
+# Class gap (2026-11-05). AAA and AA never meet in the postseason, so each season's fit has no bouts between them, and
+# the scale above lines up each class's 16 best per weight on its own: AA's best were set equal to AAA's best, a hidden
+# advantage for AA. Wrestlers whose school changed class tie the two together. With the classes on the right levels,
+# an AA wrestler moving up should gain what an AA wrestler staying in AA gains from the same starting rating, and the
+# same for AAA moving down. On the plain scale AA-to-AAA movers gained ~110 less than AA stayers and AAA-to-AA movers
+# ~110 more than AAA stayers, in every era since 1974; the season-to-season slopes match (0.87-0.92), so it is a level
+# gap, not a spread one. CLS_GAP[y] = half the difference between the two directions (so anything movers share, such
+# as a new school, cancels), from movers within +-10 seasons, residuals against each origin class's stayers.
+# RATINGS_CLASS_GAP=off turns it off.
+CLS_GAP = {}
 # keep the familiar meaning: 1500 = the average state qualifier of 1999-2026 (the top-16 anchor sits a little above it)
+if os.environ.get('RATINGS_CLASS_GAP') != 'off':
+    _mv = []   # (year, from class, to class, rating, next rating), plain scale
+    for y in YEARS:
+        if y + 1 not in T: continue
+        for i, v in T[y].items():
+            if i not in T[y + 1] or nb_of[(i, y)] < RET_MIN or nb_of[(i, y + 1)] < RET_MIN: continue
+            c0, c1 = CLS_OF.get((i, y)), CLS_OF.get((i, y + 1))
+            if c0 in ('AAA', 'AA') and c1 in ('AAA', 'AA'): _mv.append((y, c0, c1, norm(v, y, c0), norm(T[y + 1][i], y + 1, c1)))
+    _mv = np.array([(y, c0 == 'AAA', c1 == 'AAA', a, b) for y, c0, c1, a, b in _mv], float)
+    for y in YEARS:
+        w_ = _mv[np.abs(_mv[:, 0] - y) <= 10]
+        if not len(w_): continue
+        res = {}
+        for up in (1.0, 0.0):   # origin AAA (1) or AA (0)
+            o = w_[w_[:, 1] == up]; st_ = o[o[:, 2] == up]; mv_ = o[o[:, 2] != up]
+            if len(mv_) < 30 or len(st_) < 300: break
+            bb = np.polyfit(st_[:, 3], st_[:, 4], 1); res[up] = float(np.mean(mv_[:, 4] - (bb[0] * mv_[:, 3] + bb[1])))
+        if len(res) == 2: CLS_GAP[y] = (res[1.0] - res[0.0]) / 2
+    say('class gap, AA above AAA on the plain scale (points, from class changers): ' + ', '.join(f'{y}:{CLS_GAP[y]:.0f}' for y in sorted(CLS_GAP) if y % 4 == 2))
 if os.environ.get('RATINGS_ANCHOR') != 'state':
     _q = [norm(theta(e[0], bracket_meta[bk][0]), bracket_meta[bk][0], bracket_meta[bk][1]) for bk, es in entrants.items() if bk[0] == 'state'
           and bracket_meta[bk][0] >= 1999 and bracket_meta[bk][1] in ('AAA', 'AA') for e in es]
