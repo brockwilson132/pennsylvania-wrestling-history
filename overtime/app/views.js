@@ -98,7 +98,7 @@
   function chip(s, u) {
     if (!s) return '<div class="atc none"></div>';
     const pills = s.sres.map((r) => r.place ? `<span class="yp ${OT.pc(r.place)}" title="${ordinal(r.place)} at states, ${r.year}">${String(r.year).slice(2)}</span>` : `<span class="yp q" title="State qualifier, ${r.year}">${String(r.year).slice(2)}</span>`).join('');
-    return `<a class="atc" href="${s.href}" style="--sc:${schColor(s.sch)}"><span class="atn"><b>${esc(s.name)}</b>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}</span><small>${u.kind === 'school' ? '' : esc(s.sch) + ' · '}${s.years}</small>${pills ? `<span class="pl">${pills}</span>` : ''}</a>`;
+    return `<a class="atc" href="${s.href}" style="--sc:${schColor(s.sch)}"><span class="atn"><b>${esc(s.name)}</b>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}</span><small>${u.kind === 'school' ? '' : OT.stag(s.sch) + ' '}${s.years}</small>${pills ? `<span class="pl">${pills}</span>` : ''}</a>`;
   }
   function teamGrid(u) {
     const D = Math.max(3, state.attN || 3);

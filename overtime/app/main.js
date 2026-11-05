@@ -41,15 +41,18 @@
   const VIEWS = [['map', 'Map', 'The picture and its list'], ['rank', 'Rankings', 'Standings for this selection'], ['time', 'Timeline', 'Every team, season by season'], ['team', 'All-time team', 'The best at each weight, as deep as you like'], ['seasons', 'Seasons', 'Results season by season']];
   try { const v = sessionStorage.getItem('ot-view'); if (VIEWS.some(([k]) => k === v)) state.view = v; } catch (e) { /* none */ }
   if (!state.view) state.view = 'map';
-  const viewName = () => (state.view === 'team' ? 'Team' : (VIEWS.find(([k]) => k === state.view) || VIEWS[0])[1]);
+  /* a school page has no map: its first view is the season grid and the wrestler list */
+  const viewLabel = (k, l) => (k === 'map' && route().page === 'school' && route().id ? 'Overview' : l);
+  const viewName = () => (state.view === 'team' ? 'Team' : viewLabel(state.view, (VIEWS.find(([k]) => k === state.view) || VIEWS[0])[1]));
+  const NO_VIEW = new Set(['wrestler', 'wrestlers', 'about', 'tournaments', 'missing']);   // pages the View button does not change
   const paText = () => (state.cls === 'ALL' ? 'All' : state.cls) + (state.f.weights.length ? ' · ' + wtText() : '');
   function drawBar() {
     const f = F();
     const cell = (k, name, val, on, icon) => `<button class="fb${on ? ' on' : ''}" type="button" data-fb="${k}" aria-label="${name}: ${esc(val)}"${k === 'wrestlers' ? '' : ` aria-haspopup="dialog" aria-expanded="${pop === k}"`}>${icon || navIcon(k)}<span class="fbv">${esc(val)}</span></button>`;
-    const wv = f.w ? (f.who ? f.who.split(' ').slice(-1)[0] : 'List') : 'All';
+    const wv = f.w ? (f.who ? f.who.split(' ').slice(-1)[0] : 'List') : 'Wrestlers';
     const time = `<button class="fb ft${state.win.mode !== 'all' ? ' on' : ''}" type="button" data-fb="time" aria-label="Time: ${esc(winText())}" aria-haspopup="dialog" aria-expanded="${pop === 'time'}"><span class="ftc">${OT.stopwatch(30)}</span><span class="fbv">${esc(winText())}</span></button>`;
     const paOn = state.cls !== 'AAA' || state.f.weights.length > 0;
-    fbar.innerHTML = `<div class="fbi">${cell('pa', 'Pennsylvania', paText(), paOn, navIcon('state', paOn))}${cell('region', 'Region', f.r || 'All', !!f.r, navIcon('region', f.r))}${cell('district', 'District', f.d ? 'D' + f.d : 'All', !!f.d, navIcon('district', f.d))}${time}${cell('school', 'School', f.s || 'All', !!f.s)}${cell('wrestlers', 'Wrestlers', wv, f.w)}${cell('view', 'View', viewName(), false, navIcon('v_' + state.view))}</div>`;
+    fbar.innerHTML = `<div class="fbi">${cell('pa', 'Pennsylvania', paText(), paOn, navIcon('state', paOn))}${cell('region', 'Region', f.r || 'Region', !!f.r, navIcon('region', f.r))}${cell('district', 'District', f.d ? 'D' + f.d : 'District', !!f.d, navIcon('district', f.d))}${time}${cell('school', 'School', f.s || 'School', !!f.s)}${cell('wrestlers', 'Wrestlers', wv, f.w)}${NO_VIEW.has(route().page) ? '<span class="fb off" aria-hidden="true"></span>' : cell('view', 'View', viewName(), false, navIcon('v_' + state.view))}</div>`;
   }
   /* the popups: one at a time, a sheet above the bar on a phone, a panel anchored to its button on a desktop */
   let SCH = null; const schools = () => SCH || (SCH = OT.UD.schools.map((n) => { const u = OT.U.school(n); return { n, d: u.d || 0, r: u.region || '', q: n.toLowerCase() }; }).sort((a, b) => a.n.localeCompare(b.n)));
@@ -71,8 +74,8 @@
       return `<div class="fph"><b>District</b><span class="muted">${f.r ? esc(OT.REGIONS[f.r]) + ' Region' : 'Pennsylvania'}</span>${f.d ? `<a class="fpx" href="${hrefOf({ w: f.w && !f.who, r: f.r })}">All districts</a>` : ''}</div><div class="fpl">${mem.map(item).join('')}</div>${mem.some((m) => m.span !== win) ? '<div class="fpn">Membership as of each season.</div>' : ''}`; },
     school: () => { const f = F(); const where = f.d ? 'District ' + f.d : f.r ? OT.REGIONS[f.r] + ' Region' : 'Pennsylvania';
       return `<div class="fph"><b>School</b><span class="muted">${esc(where)}</span>${f.s ? `<a class="fpx" href="${hrefOf({ ...f, s: '' })}">All schools</a>` : ''}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
-    view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${l}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
-    time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season.</div>`,
+    view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${viewLabel(k, l)}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
+    time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
     menu: () => `<nav class="fpm" aria-label="More"><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {

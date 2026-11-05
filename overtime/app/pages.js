@@ -13,7 +13,7 @@
     if (u.kind === 'state') {
       const fin = ds.filter((d) => /championship match/i.test(d.round)).sort((a, b) => b.year - a.year || a.cls.localeCompare(b.cls));
       if (!fin.length) return '';
-      const rows = fin.map((d) => `<tr><td class="num">${d.year}</td><td>${d.cls}</td><td><a href="#school/${OT.slug(d.w)}"><b>${esc(d.w)}</b></a> <small class="ash">D${d.wd || '?'}</small></td><td class="num">${d.ws}–${d.ls}</td><td><a href="#school/${OT.slug(d.l)}">${esc(d.l)}</a></td></tr>`).join('');
+      const rows = fin.map((d) => `<tr><td class="num">${d.year}</td><td>${d.cls}</td><td><a href="#school/${OT.slug(d.w)}"><b>${esc(d.w)}</b></a> <span class="ash">D${d.wd || '?'}</span></td><td class="num">${d.ws}–${d.ls}</td><td><a href="#school/${OT.slug(d.l)}">${esc(d.l)}</a></td></tr>`).join('');
       return section('Team duals champions', `<div class="card tw"><table class="dt"><thead><tr><th>Year</th><th>Class</th><th>Champion</th><th>Final</th><th>Runner-up</th></tr></thead><tbody>${rows}</tbody></table></div>${src}`);
     }
     if (u.kind !== 'school') return '';
@@ -31,7 +31,7 @@
     if (a.rating && u.kind !== 'state') it.push([OT.r10(a.rating), 'Strength', OT.unitRtgTip(u.kind) + `, averaged over ${a.nS} season${a.nS === 1 ? '' : 's'} in the window`]);
     if (a.talent && u.kind !== 'state') it.push([OT.talTxt(a.talent, u.kind), 'Talent', `wrestlers rated ${OT.UD.talentAt || 1650}+ (state-medalist level)${u.kind === 'school' ? '' : ' per school'} per season, averaged over ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`]);
     if (a.nS && u.kind !== 'state') it.push([a.nS, 'Seasons', 'seasons in the window with the full district field on file, which Strength and Talent average over']);
-    if (a.score) it.push([fmt(Math.round(a.score)), 'Score', 'placement points in the window, weighted for this page']);
+    if (a.score && u.kind !== 'state') it.push([fmt(Math.round(a.score)), 'Score', 'placement points in the window, weighted for this page']);
     return `<div class="usum">${it.map(([v, l, t]) => `<span${t ? ` title="${esc(t)}"` : ''}><b>${v}</b><i>${l}</i></span>`).join('')}</div>`;
   }
   function levelPage(u, opts = {}) {

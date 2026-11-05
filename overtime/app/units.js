@@ -44,7 +44,7 @@
     return SS.filter((r) => r[1] >= a && r[1] <= b && f(r) && OT.homeOf(S[r[0]]) === state.cls); });
   /* a school's rated seasons in the other class, statewide (the Timeline's second row); never mixed into this class */
   const otherClass = (schoolIdx) => { if (state.cls === 'ALL') return []; const [a, b] = OT.yearsWindow();
-    return SS.filter((r) => r[0] === schoolIdx && r[1] >= a && r[1] <= b && r[2] !== state.cls && r[2] !== 'single' && r[5] && ratedYear(r[1])).map((r) => ({ y: r[1], v: r[5], c: r[2], e: !!r[19] })); };
+    return SS.filter((r) => r[0] === schoolIdx && r[1] >= a && r[1] <= b && r[2] !== state.cls && r[2] !== 'single' && r[5] && ratedYear(r[1])).map((r) => ({ y: r[1], v: r[5], c: r[2], e: false })); };
   function aggregateCore(kind, parent, pageKind, home) {
     return memo('core|' + kind + '|' + (parent ? parent.kind + ':' + parent.id : '') + '|' + pageKind + (home ? '|h' : ''), () => {
       const keyOf = kind === 'school' ? (r) => r[0] : kind === 'district' ? (r) => (r[3] >= 1 && r[3] <= 12 ? r[3] : null) : (r) => (FIVE.includes(r[4]) ? r[4] : null);
@@ -143,7 +143,7 @@
     const f = sFrac(v, lvl), p = pctIn(v, lvl);
     return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i></span><em>${p != null ? `tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
-  const legend = () => `<span class="clg"><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span>strength of competition, vs. brackets of the same level</span>`;
+  const legend = () => `<span class="clg"><span class="clgt">Bar under each result: how tough that bracket was. Easier</span><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span><span class="clgt">tougher</span></span>`;
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
@@ -195,7 +195,7 @@
       return `<${tag}${hr} class="cgc${c.sec ? ' sec' : ''}" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
     };
     const lab = (t, icon) => `<span class="cgl">${icon ? OT.navIcon(icon) : ''}<span>${t}</span></span>`;
-    const rows = M.rows.slice().reverse().map((row) => lab(row.k === 'district' && row.cells.some((c) => c && c.sec) ? 'District · section' : row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
+    const rows = M.rows.map((row) => lab(row.k === 'district' && row.cells.some((c) => c && c.sec) ? 'District · section' : row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
     return `<div class="cg">${head}${lab('Season rating', null)}${rt}${rows}</div>`;
   }
   function timeline(apps, lower, opts = {}) {
@@ -232,7 +232,6 @@
   function wrestlerCard(w, rank, opts = {}) {
     if (!w.lower) w.lower = OT.lowerFor(w.apps);
     const cr = OT.careerRating(w.apps, w.lower);
-    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 26, variant: 'chip', title: false }) : '';
     const years = Array.from(new Set(w.apps.map((a) => a.year).concat(w.lower.map((r) => r.year)))).sort();
     const wn = w.apps.concat(w.lower).sort((a, b) => a.year - b.year).map((a) => a.w).filter(Boolean); const wts = wn.length ? (wShort(wn[0]) === wShort(wn[wn.length - 1]) ? wShort(wn[0]) : wShort(wn[0]) + '–' + wShort(wn[wn.length - 1])) : '';
     const y0 = years[0], y1 = years[years.length - 1];
@@ -242,7 +241,7 @@
     if (rec) { st.push([`${rec[0]}–${rec[1]}`, 'postseason']); if (rec[0] + rec[1]) st.push([Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%', 'won']); st.push([rec[2], rec[2] === 1 ? 'fall' : 'falls']); if (rec[3]) st.push([rec[3], rec[3] === 1 ? 'OT win' : 'OT wins']); }
     const stats = `<span class="wst"${!BW ? ' data-need-bw="1"' : ''}>${st.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}${ttl.length ? `<span class="wide"><i>titles</i> ${ttl.map(([l, n]) => `${l} <b>${n}</b>`).join(' · ')}</span>` : ''}${bw ? `<span class="wide"><i>best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</span>`;
     return `<a class="wk" href="${w.href}" style="--p1:${colorOf(w.sch)}">
-      <span class="wk1">${rank ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="bdg">${badge}</span><span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : esc(w.sch) + ' · '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}${wts ? ' · ' + wts + ' lbs' : ''}</small></span>${cr ? `<span class="rv"><i>RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
+      <span class="wk1">${rank ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}${wts ? ' · ' + wts + ' lbs' : ''}</small></span>${cr ? `<span class="rv"><i>RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
       <span class="wkb">${timeline(w.apps, w.lower)}${stats}</span></a>`;
   }
 
@@ -368,7 +367,6 @@
     const rt = r10(a.rating), tint = rt ? colorAt(domFrac(a.kind, a.rating)) : '#2F3640';
     const dt = dualTitles(a.kind).get(a.k) || 0, team = a.tt + dt;
     const [y0, y1] = ctx.span;
-    const sTint = colorAt(ctx.scorePct(a.score));
     const tYears = a.ys.filter((y) => y.ti > 0).map((y) => y.y);
     const teamYears = a.ys.filter((y) => y.tt > 0).map((y) => y.y).concat(dualYears(a.kind).get(a.k) || []);
     const gold = (n, mx) => (n ? `--g:${(0.18 + 0.5 * Math.min(1, n / Math.max(1, mx))).toFixed(2)}` : '');
@@ -383,7 +381,7 @@
       + tile('vtt' + (a.ti ? '' : ' z'), 'titles', a.ti || '–', chipTicks(tYears, y0, y1), gold(a.ti, ctx.maxTi), `${a.ti} state title${a.ti === 1 ? '' : 's'}${tYears.length ? ' · ' + tYears.join(', ') : ''}`)
       + tile('vtr', 'rating', rt || '–', chipSpark(a.series), `--tint:${tint}`, `Strength ${rt} · average of ${a.nS} season${a.nS === 1 ? '' : 's'}`)
       + tile('vtl' + (a.talent ? '' : ' z'), 'talent', talTxt(a.talent, a.kind), chipSpark(a.tseries), '', `Talent ${talTxt(a.talent, a.kind)} · wrestlers rated ${UD.talentAt || 1650}+${a.kind === 'school' ? '' : ' per school'} per season, average of ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`)
-      + tile('vts', 'score', fmt(Math.round(a.score)), chipBars(a.ys.map((y) => [y.y, y.sp * a.w[0] + y.rp * a.w[1] + y.dp * a.w[2]]), y0, y1), `--tint:${sTint}`, `Score ${fmt(Math.round(a.score))} · placement points per season`)
+      + tile('vts', 'score', fmt(Math.round(a.score)), chipBars(a.ys.map((y) => [y.y, y.sp * a.w[0] + y.rp * a.w[1] + y.dp * a.w[2]]), y0, y1), '--tint:#2F3640', `Score ${fmt(Math.round(a.score))} · placement points per season`)
       + tile('vtm' + (team ? '' : ' z'), 'team', team || '–', chipTicks(teamYears, y0, y1), gold(team, ctx.maxTeam), team ? `${team} team title${team === 1 ? '' : 's'} · ${teamYears.sort((p, q) => p - q).join(', ')}` : 'no team titles')
       + `<span class="vtn" title="seasons with Strength in this window">${a.nS}</span></button>
       <div class="sxd" hidden>${a.sub ? `<div class="sxsub">${esc(a.sub)}</div>` : ''}${distRows(a)}<div class="sxf">${best}${tl}${il}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
