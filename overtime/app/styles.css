@@ -769,7 +769,9 @@ i.wdg{height:5px}
   .sdh,.sdr{grid-template-columns:96px minmax(0,1fr)}
 }
 /* Strength / Talent / Score columns (titles, strength, talent, score; team and season count on wider screens) */
-.sxh,.sxr{grid-template-columns:20px minmax(0,1fr) 44px 54px 46px 54px;column-gap:6px}
+.sxh,.sxr{grid-template-columns:18px minmax(0,1fr) 42px 52px 42px 52px;column-gap:5px}
+@media(max-width:719px){.sxh,.sxr{padding-left:10px;padding-right:8px}.sxr .nm b{font-size:14px;letter-spacing:0;hyphens:auto;overflow-wrap:anywhere}}
+@media(max-width:379px){.sxh,.sxr{grid-template-columns:16px minmax(0,1fr) 40px 50px 40px 50px;column-gap:4px}.sxr .nm b{font-size:12.5px}}
 .sxh .vtn,.sxr .vtn{display:none}
 .sxr .vtl .rcs path{opacity:.6}
 @media(min-width:720px){
