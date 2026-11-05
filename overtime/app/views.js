@@ -152,7 +152,7 @@
     const nRows = mode === 'team' ? T.length : Math.max(...cols.map((i) => T[i].slots.reduce((m, s, j) => (s ? j + 1 : m), 0)));
     const lab = (r) => (mode === 'team' ? T[r].c.label : ordinal(r + 1));
     const cell = (r, i) => (mode === 'team' ? T[r].slots[i] : T[i].slots[r]);
-    const grid = `<div class="atcol ${mode} n${cols.length}"><span class="atw"></span>${cols.map((i, k) => `<span class="atcap k${k}">${name(i)}</span>`).join('')}`
+    const grid = `<div class="atcol ${mode} n${cols.length}"><span class="atw athd"></span>${cols.map((i, k) => `<span class="atcap k${k}">${name(i)}</span>`).join('')}`
       + d3.range(nRows).map((r) => { const cells = cols.map((i) => cell(r, i)); if (mode === 'weight' && !cells[0] && cells.every((c) => !c)) return '';
         const x0 = cells[0] ? '' : ' x0';
         return `<span class="atw${x0}">${lab(r)}</span>${cells.map((c, k) => (c ? chip(c, u).replace(/^<a class="atc"/, `<a class="atc k${k}"`) : `<div class="atc none k${k}${k ? '' : x0}"></div>`)).join('')}`; }).join('') + '</div>';

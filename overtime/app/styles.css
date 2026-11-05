@@ -1191,17 +1191,18 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .atv{position:absolute;left:0;top:0;bottom:0;width:12px;background:#1E242C;border-right:1px solid var(--line);display:flex;align-items:flex-end}
 .atv>i{display:block;width:100%}
 /* all-time team: one control row (By team / By weight + ‹ picker ›); one column on phones, up to three on wide screens */
-.atctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:2px 0 14px}
-.atctl .seg button{padding:0 12px}
-.atnav{display:flex;align-items:center;gap:4px}
-.atar{all:unset;cursor:pointer;box-sizing:border-box;width:34px;height:32px;text-align:center;font:800 20px/30px var(--cond);color:var(--chalk);background:var(--slate);border:1px solid var(--line2);border-radius:999px}
+.atctl{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;margin:2px 0 14px;max-width:100%}
+.atctl .seg{flex:none}.atctl .seg button{padding:0 11px}
+.atnav{display:flex;align-items:center;gap:4px;min-width:0;flex:0 1 auto}.atsel{min-width:0;flex:0 1 auto}
+.atar{all:unset;flex:none;cursor:pointer;box-sizing:border-box;width:32px;height:32px;text-align:center;font:800 20px/30px var(--cond);color:var(--chalk);background:var(--slate);border:1px solid var(--line2);border-radius:999px}
 .atar:hover{border-color:var(--gold)}.atar[disabled]{opacity:.3;cursor:default;border-color:var(--line)}
-.atsel select{appearance:none;-webkit-appearance:none;height:32px;min-width:118px;border-radius:999px;border:1px solid var(--line2);background:var(--chalk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230E1116' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 12px center/10px 6px;color:var(--mat);font:800 14px var(--cond);letter-spacing:.04em;text-transform:uppercase;padding:0 30px 0 14px;cursor:pointer}
+.atsel select{appearance:none;-webkit-appearance:none;height:32px;width:100%;min-width:92px;max-width:170px;border-radius:999px;border:1px solid var(--line2);background:var(--chalk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230E1116' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 12px center/10px 6px;color:var(--mat);font:800 14px var(--cond);letter-spacing:.04em;text-transform:uppercase;padding:0 26px 0 12px;cursor:pointer}
 .atcol{display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px;align-items:stretch}
 .atcap{font:800 12px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash);padding:0 2px;align-self:end}
 .atcol .atw{position:static}
 .atcol.weight .atw{font-size:14px}
 .atcol .k1,.atcol .k2,.atcol .x0{display:none}
+@media (max-width:759px){.atcol .atcap.k0,.atcol .atw.athd{display:none}}
 @media (min-width:760px){.atcol.n2,.atcol.n3{grid-template-columns:44px repeat(2,minmax(0,1fr))}.atcol.n2 .k1,.atcol.n3 .k1,.atcol.n2 .x0,.atcol.n3 .x0{display:grid}.atcol .atw.x0{display:flex}.atcol .atcap.k1{display:block}}
 @media (min-width:1100px){.atcol.n3{grid-template-columns:44px repeat(3,minmax(0,1fr))}.atcol.n3 .k2{display:grid}.atcol .atcap.k2{display:block}}
 .atstep{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 4px}
