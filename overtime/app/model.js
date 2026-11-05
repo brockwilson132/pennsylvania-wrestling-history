@@ -138,7 +138,11 @@ const OT = (window.OT = {});
   const unitLabel = (lvl, unit) => { if (lvl === 'section') { const m = /^D(\d+)_(.+)$/.exec(unit || ''); if (!m) return String(unit); const s = m[2], nm = /^S\d+$/.test(s) ? 'Section ' + s.slice(1) : s === 'CAT' ? 'Catholic section' : s === 'PUB' ? 'Public section' : 'Section ' + s.replace(/^S/, ''); return `District ${m[1]} ${nm}`; } if (lvl === 'regional') return (REGIONS[unit] || unit) + ' Regional'; const m = /^D(\d+)(?:[_-](.+))?$/.exec(unit || ''); if (!m) return String(unit); return (m[2] && /^\d/.test(m[2]) ? `Districts ${m[1]}-${m[2]}` : `District ${m[1]}`) + (m[2] && !/^\d/.test(m[2]) ? ' ' + m[2] : ''); };
   const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
   const decodeLower = (lvl, rows) => rows.map(([, year, c, ui, wi, place, ni, si, g, sdi, d0]) => { const cls = LCLS[c], unit = LS[ui], w = LS[wi], d = unitDist(lvl, unit, d0), sch = splitName(LS[si], d); return { lvl, year, cls, unit, w, wn: wNum(w), place, name: LS[ni], school: sch, sch, d: d || null, region: lvl === 'regional' ? unit : dregOf(cls, year, d), grade: LGR[g] || '', seed: LS[sdi] || '', pts: ptsOf(place) }; });
-  const LOWER = decodeLower('district', window.WR_LOWER_D || []).concat(decodeLower('regional', window.WR_LOWER_R || []));
+  /* sub-regionals (1995-98) and the 2021 super-regionals are extra rounds on top of a district or regional: kept out of
+     LOWER so a wrestler has one place per level per season and medal counts, points and titles aren't doubled */
+  const extraRound = (r) => /_Sub$|Super/.test(r.unit || '');
+  const LOWER_ALL = decodeLower('district', window.WR_LOWER_D || []).concat(decodeLower('regional', window.WR_LOWER_R || []));
+  const LOWER = LOWER_ALL.filter((r) => !extraRound(r));
   /* section placers, where the section is the district round (its district held no district tournament that season):
      kept apart from LOWER so district counts, points and pages are unchanged; the career grid's District row uses them */
   const LSEC = decodeLower('section', window.WR_LOWER_X || []);

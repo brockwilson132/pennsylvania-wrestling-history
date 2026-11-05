@@ -218,8 +218,13 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
-    E = clean_entrants(E, B, rep)
-    B = clean_bouts(B, E, S, rep)
+    for _ in range(6):   # entrant schools filled from bouts let more bout names resolve, and back: repeat to a fixed point
+        r = Counter(); E = clean_entrants(E, B, r); B = clean_bouts(B, E, S, r)
+        moved = {k: v for k, v in r.items() if 'still' not in k and 'seed prefix stripped' not in k}
+        for k, v in r.items():
+            if 'still' in k: rep[k] = v
+            else: rep[k] += v
+        if not moved: break
     write('lower_entrants.csv', ef, E); write('bouts.csv', bf, B)
     lines = [f'entrants {n0e} -> {len(E)}, bouts {n0b} -> {len(B)}'] + [f'{v:7d}  {k}' for k, v in sorted(rep.items())]
     open(os.path.join(BR, 'clean_report.txt'), 'w').write('\n'.join(lines) + '\n'); print('\n'.join(lines))
