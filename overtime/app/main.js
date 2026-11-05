@@ -39,30 +39,25 @@
   const winText = () => state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? OT.windowLabel() : 'Last ' + state.win.mode;
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
   let pop = '';
-  /* Tabs (the bottom bar): what the page shows. Scope (the strip under the top bar): which place, class and seasons.
-     Map, Rankings, Timeline and Seasons are views of the place page; Wrestlers is the wrestler list for the same place,
-     with the all-time team as its second layout. The view is remembered for the session. */
-  const TABS = [['map', 'Map', 'v_map'], ['rank', 'Rankings', 'v_rank'], ['wrestlers', 'Wrestlers', 'wrestlers'], ['time', 'Timeline', 'v_time'], ['seasons', 'Seasons', 'v_seasons']];
+  /* The bottom bar: four tabs (what the page shows) around the filter button (which place, class and seasons).
+     Map, Rankings, Timeline and Seasons are views of the place page; Rankings also holds the wrestlers and the
+     all-time team. The view is remembered for the session. */
+  const TABS = [['map', 'Map', 'v_map'], ['rank', 'Rankings', 'v_rank'], null, ['time', 'Timeline', 'v_time'], ['seasons', 'Seasons', 'v_seasons']];
   const VIEWK = ['map', 'rank', 'time', 'seasons'];
-  try { const v = sessionStorage.getItem('ot-view'); if (v === 'team') state.wmode = 'team'; else if (VIEWK.includes(v)) state.view = v; } catch (e) { /* none */ }
-  try { if (sessionStorage.getItem('ot-wmode') === 'team') state.wmode = 'team'; } catch (e) { /* none */ }
+  try { const v = sessionStorage.getItem('ot-view'); if (v === 'team') { state.view = 'rank'; state.child = 'team'; } else if (VIEWK.includes(v)) state.view = v; } catch (e) { /* none */ }
   if (!VIEWK.includes(state.view)) state.view = 'map';
-  const SCOPED = new Set(['state', 'region', 'district', 'school', 'wrestlers']);
   /* a school page has no map: its first tab is the season grid and its best wrestlers */
   const tabLabel = (k, l) => (k === 'map' && route().page === 'school' && route().id ? 'Overview' : l);
-  const curTab = () => { const pg = route().page; if (pg === 'wrestlers' || pg === 'wrestler') return 'wrestlers'; return ['state', 'region', 'district', 'school'].includes(pg) ? state.view : ''; };
-  const paText = () => (state.cls === 'ALL' ? 'All classes' : state.cls) + (state.f.weights.length ? ' · ' + wtText() : '');
+  const curTab = () => { const pg = route().page; if (pg === 'wrestlers' || pg === 'wrestler') return 'rank'; return ['state', 'region', 'district', 'school'].includes(pg) ? state.view : ''; };
+  const clsText = () => (state.cls === 'ALL' ? 'All' : state.cls) + (state.f.weights.length ? ' · ' + wtText() : '');
   const placeText = (f) => f.s || (f.d ? 'District ' + f.d : f.r ? OT.REGIONS[f.r] : 'Pennsylvania');
-  const placeIcon = (f) => navIcon(f.s ? 'school' : f.d ? 'district' : f.r ? 'region' : 'state', true);
-  const scope = document.getElementById('scope');
+  const filtersOn = () => state.cls !== 'AAA' || state.f.weights.length > 0 || state.win.mode !== 'all';
   function drawBar() {
-    const f = F(), cur = curTab();
-    fbar.innerHTML = `<div class="fbi tabs">${TABS.map(([k, l, ic]) => `<button class="fb${cur === k ? ' on' : ''}" type="button" data-tab="${k}"${cur === k ? ' aria-current="page"' : ''}>${navIcon(ic)}<span class="fbv">${tabLabel(k, l)}</span></button>`).join('')}</div>`;
-    if (!scope) return;
-    if (!SCOPED.has(route().page)) { scope.hidden = true; scope.innerHTML = ''; return; }
-    const chip = (k, icon, val, on, name) => `<button class="sc${on ? ' on' : ''}" type="button" data-fb="${k}" aria-label="${name}: ${esc(val)}" aria-haspopup="dialog" aria-expanded="${pop === k}">${icon}<span>${esc(val)}</span><i class="car" aria-hidden="true"></i></button>`;
-    scope.hidden = false;
-    scope.innerHTML = `<div class="sci">${chip('place', placeIcon(f), placeText(f), !!(f.r || f.d || f.s), 'Place')}${chip('pa', '', paText(), state.cls !== 'AAA' || state.f.weights.length > 0, 'Class')}${chip('time', `<span class="scw">${OT.stopwatch(16)}</span>`, winText(), state.win.mode !== 'all', 'Seasons')}</div>`;
+    const cur = curTab();
+    const tab = ([k, l, ic]) => `<button class="fb${cur === k ? ' on' : ''}" type="button" data-tab="${k}"${cur === k ? ' aria-current="page"' : ''}>${navIcon(ic)}<span class="fbv">${tabLabel(k, l)}</span></button>`;
+    const val = clsText() + ' · ' + winText();
+    const mid = `<button class="fb ft${filtersOn() ? ' on' : ''}" type="button" data-fb="filters" aria-label="Filters: ${esc(placeText(F()))}, ${esc(val)}" aria-haspopup="dialog" aria-expanded="${pop === 'filters'}"><span class="ftc">${navIcon('filters')}</span><span class="fbv">${esc(val)}</span></button>`;
+    fbar.innerHTML = `<div class="fbi tabs">${TABS.map((t) => (t ? tab(t) : mid)).join('')}</div>`;
   }
   /* the popups: one at a time, a sheet above the bar on a phone, a panel anchored to its button on a desktop */
   let SCH = null; const schools = () => SCH || (SCH = OT.UD.schools.map((n) => { const u = OT.U.school(n); return { n, d: u.d || 0, r: u.region || '', q: n.toLowerCase() }; }).sort((a, b) => a.n.localeCompare(b.n)));
@@ -70,35 +65,33 @@
   const schoolItems = (f, qq) => { const t = (qq || '').trim().toLowerCase(); const all = schoolScope(f).filter((x) => !t || x.q.includes(t)); const L = all.slice(0, 80);
     return (L.length ? L.map((x) => `<a class="fpo${x.n === f.s ? ' on' : ''}" href="${hrefOf({ ...f, w: f.w && !f.who, s: x.n })}"><span>${esc(x.n)}</span><small>${x.d ? 'D' + x.d : ''}</small></a>`).join('') : '<div class="fpn">No school by that name here.</div>') + (all.length > 80 ? `<div class="fpn">${all.length - 80} more: type to narrow.</div>` : ''); };
   const POP = {
-    pa: () => { const f = F();
-      void f; return `<div class="fph"><b>Class and weights</b></div>
-      <div class="fpk">Division</div><div class="seg" role="group" aria-label="Division">${[['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'All']].map(([k, l]) => `<button type="button" data-fdiv="${k}" aria-pressed="${state.cls === k}">${l}</button>`).join('')}</div>
-      <div class="fpk fpkw"><span>Weights</span>${state.f.weights.length ? '<button class="fpx" type="button" data-fwclear>Clear</button>' : ''}</div><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${state.f.weights.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${state.f.weights.includes(x.k)}">${x.label}</button>`).join('')}</div>
-      <div class="fpn">Before the split into two classes, every season counts under both. Weights narrow the wrestler lists, all-time teams and a school's timeline; ratings, scores and maps count every weight.</div>`; },
-    place: () => { const f = F(); const w = f.w && !f.who, win = OT.windowLabel();
+    filters: () => { const f = F(); const w = f.w && !f.who, win = OT.windowLabel();
       const crumbs = [['Pennsylvania', hrefOf({ w })]].concat(f.r ? [[OT.REGIONS[f.r], hrefOf({ w, r: f.r })]] : []).concat(f.d ? [['District ' + f.d, hrefOf({ w, r: f.r, d: f.d })]] : []).concat(f.s ? [[f.s, hrefOf({ ...f, w })]] : []);
       const crumb = `<div class="fpcr">${crumbs.map(([n, h], i) => i === crumbs.length - 1 ? `<b>${esc(n)}</b>` : `<a href="${h}">${esc(n)}</a><span>›</span>`).join('')}</div>`;
       const regs = OT.FIVE.map((g) => `<a class="fpc${f.r === g ? ' on' : ''}" href="${hrefOf({ w, r: g })}">${esc(OT.REGIONS[g])}</a>`).join('');
       const mem = f.r ? OT.regionMembers(f.r) : d3.range(1, 13).map((d) => ({ d, span: win }));
       const dis = mem.map((m) => `<a class="fpc${f.d === m.d ? ' on' : ''}" href="${hrefOf({ w, r: f.r && m.span === win ? f.r : regionOfD(m.d), d: m.d })}" title="${esc(OT.DISTRICTS[m.d] || '')}${m.span === win ? '' : ' · ' + esc(m.span)}">D${m.d}</a>`).join('');
       const where = f.d ? 'District ' + f.d : f.r ? OT.REGIONS[f.r] : 'Pennsylvania';
-      return `<div class="fph"><b>Place</b></div>${crumb}<div class="fpk">Region</div><div class="fpg fpg5">${regs}</div><div class="fpk">District${f.r ? ' · ' + esc(OT.REGIONS[f.r]) : ''}</div><div class="fpg fpg6">${dis}</div>
-      <div class="fpk">School · ${esc(where)}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
-    time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
+      return `<div class="fph"><b>Filters</b>${filtersOn() || f.r || f.d || f.s ? `<button class="fpx" type="button" data-freset>Reset</button>` : ''}</div>
+      <div class="fpsec"><div class="fpk">Place</div>${crumb}<div class="fpg fpg5">${regs}</div><div class="fpk fpk2">District${f.r ? ' · ' + esc(OT.REGIONS[f.r]) : ''}</div><div class="fpg fpg6">${dis}</div>
+      <div class="fpk fpk2">School · ${esc(where)}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl fpls" id="fpl">${schoolItems(f, '')}</div></div>
+      <div class="fpsec"><div class="fpk">Class</div><div class="seg" role="group" aria-label="Class">${[['AAA', 'AAA'], ['AA', 'AA'], ['ALL', 'All']].map(([k, l]) => `<button type="button" data-fdiv="${k}" aria-pressed="${state.cls === k}">${l}</button>`).join('')}</div>
+      <div class="fpk fpkw fpk2"><span>Weights</span>${state.f.weights.length ? '<button class="fpx" type="button" data-fwclear>Clear</button>' : ''}</div><div class="fpg">${OT.STD.map((x) => `<button type="button" class="fpc${state.f.weights.includes(x.k) ? ' on' : ''}" data-fw="${esc(x.k)}" aria-pressed="${state.f.weights.includes(x.k)}">${x.label}</button>`).join('')}</div>
+      <div class="fpn">Before the split into two classes, every season counts under both. Weights narrow the wrestler lists, all-time teams and a school's timeline; ratings, scores and maps count every weight.</div></div>
+      <div class="fpsec"><div class="fpk">Seasons</div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div></div>`; },
     search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
     menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {
-    if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'time' ? ' time' : '');
-    const btn = pop === 'menu' ? mbtn : pop === 'search' ? sbtn : (scope && scope.querySelector(`[data-fb="${pop}"]`));
-    if (['place', 'pa', 'time'].includes(pop)) fpop.classList.add('scp');
-    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'time' ? 560 : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; fpop.style.top = fpop.classList.contains('scp') ? (r.bottom + 8) + 'px' : ''; }
-    else { fpop.style.left = ''; fpop.style.width = ''; fpop.style.top = ''; }
+    if (!pop) return; const keepTop = fpop.dataset.pop === pop ? fpop.scrollTop : 0; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.dataset.pop = pop; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'filters' ? ' time' : ''); fpop.scrollTop = keepTop;
+    const btn = pop === 'menu' ? mbtn : pop === 'search' ? sbtn : fbar.querySelector(`[data-fb="${pop}"]`);
+    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'filters' ? 560 : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
+    else { fpop.style.left = ''; fpop.style.width = ''; }
     if (pop === 'search') wireGlobalSearch();
     const inp = fpop.querySelector('#fps'); if (inp) { inp.addEventListener('input', () => { fpop.querySelector('#fpl').innerHTML = schoolItems(F(), inp.value); }); if (window.innerWidth >= 720) inp.focus(); }
   }
   function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); sbtn.setAttribute('aria-expanded', String(k === 'search')); paintPop(); drawBar(); }
-  function closePop() { if (!pop) return; pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
+  function closePop() { if (!pop) return; pop = ''; fpop.dataset.pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
   /* division, time and weights: each change is its own history entry, so Back steps through it */
   const snap = () => ({ cls: state.cls, win: { ...state.win }, w: state.f.weights.slice() });
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -255,13 +248,13 @@
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       void f; if (pop === k) closePop(); else openPop(k); return; }
     const tb = e.target.closest('[data-tab]'); if (tb) { const k = tb.dataset.tab, f = F(); closePop();
-      /* from a wrestler's page, the other tabs open his school */
+      /* from a wrestler's page or the wrestler list, the tabs open the place page (his school) */
       const W = f.who ? OT.getWrestler(route().id) : null; const g = W ? { r: '', d: 0, s: W.sch, w: false } : f;
       if (W) { const u = OT.U.school(W.sch); g.d = u.d || 0; g.r = u.region || (u.d ? regionOfD(u.d) : ''); }
-      if (k === 'wrestlers') { if (route().page !== 'wrestlers') location.hash = hrefOf({ ...g, w: true }); else window.scrollTo(0, 0); return; }
+      if (f.w && k === 'rank' && !['wrestlers', 'team'].includes(state.child)) state.child = 'wrestlers';
       const same = state.view === k && !f.w; state.view = k; try { sessionStorage.setItem('ot-view', k); } catch (er) { /* none */ }
       if (f.w) location.hash = hrefOf({ ...g, w: false }); else if (same) window.scrollTo(0, 0); else { lastBase = ''; render(); } return; }
-    const wm = e.target.closest('button[data-wmode]'); if (wm) { state.wmode = wm.dataset.wmode; try { sessionStorage.setItem('ot-wmode', state.wmode); } catch (er) { /* none */ } lastBase = ''; render(true); return; }
+    if (pop && e.target.closest('[data-freset]')) { setCls('AAA'); OT.clearFilters('weights'); setWin({ mode: 'all' }); SCH = null; closePop(); try { history.pushState({ ot: snap() }, ''); } catch (er) { /* none */ } const f = F(); const h = hrefOf({ w: f.w && !f.who }); if (location.hash !== h) location.hash = h; else render(true); return; }
     if (e.target.closest('#sbtn')) { if (pop === 'search') closePop(); else openPop('search'); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
     if (e.target === fscrim) { closePop(); return; }
@@ -278,7 +271,7 @@
     if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
     const am = e.target.closest('button[data-attmode]'); if (am) { state.attMode = am.dataset.attmode; try { sessionStorage.setItem('ot-attmode', state.attMode); } catch (er) { /* none */ } render(true); return; }
     const ap = e.target.closest('button[data-attpick]'); if (ap) { const v = ap.dataset.attpick; if (state.attMode === 'weight') state.attW = v; else state.attTeam = +v; render(true); if (ap.closest('.atstep')) { const sec = main.querySelector('.atsec'); if (sec) window.scrollTo(0, Math.max(0, sec.getBoundingClientRect().top + window.scrollY - 76)); } return; }
-    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; render(true); return; }
+    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }

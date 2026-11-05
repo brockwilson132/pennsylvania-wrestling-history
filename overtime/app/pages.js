@@ -85,7 +85,7 @@
     /* header: the title, then the four metric tiles */
     const head = `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1></div>${summary(u)}</header>`;
     const rk = opts.rankings();
-    const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
+    const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.sortSeg || ''}</span></div>${rk.toggle ? `<div class="rkk">${rk.toggle}</div>` : ''}${rk.html}</section>`;
     const parts = [head];
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
@@ -93,7 +93,16 @@
     else { parts.push(section('Seasons', seasonsDrawer(u))); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
     return parts.join('');
   }
-  const childToggle = (id, kinds, cur) => `<div class="seg sm" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
+  /* the Rankings tab: what to rank for this place. Units below it, then its wrestlers, then its all-time team */
+  function rankChoice(u, units, parent, pageKind) {
+    const ks = (u.kind === 'school' ? [['wrestlers', 'Wrestlers'], ['team', 'All-time team']].concat(units) : units.concat([['wrestlers', 'Wrestlers'], ['team', 'All-time team']]));
+    const kind = ks.some(([k]) => k === state.child) ? state.child : ks[0][0];
+    const toggle = childToggle(u.kind, ks, kind);
+    if (kind === 'wrestlers') return { ...wrestlerRank(OT.unitRows(u), { limit: 25, noSchool: u.kind === 'school' }), title: 'Rankings', toggle };
+    if (kind === 'team') return { title: 'Rankings', toggle, html: `<div class="atsec">${OT.teamGrid(u)}</div>` };
+    return unitRank(kind, parent, pageKind, toggle);
+  }
+  const childToggle = (id, kinds, cur) => `<div class="seg sm rkseg" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
   const KN = { school: 'Rankings', district: 'Rankings', region: 'Rankings' };
   const unitRank = (kind, parent, pageKind, toggle) => { const r = OT.unitRankings(kind, parent, pageKind); return typeof r === 'string' ? { title: KN[kind], toggle, html: r } : { title: KN[kind], toggle, sortSeg: r.sortSeg, html: r.html }; };
   /* wrestlers ranked by peak rating (or weighted score); the window decides who is in, the whole career counts */
@@ -112,14 +121,14 @@
   const PAGES = {};
   PAGES.state = () => {
     const u = U.state(); const kind = ['school', 'district', 'region'].includes(state.child) ? state.child : 'school';
-    return levelPage(u, { rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
+    void kind; return levelPage(u, { rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], null, 'state') });
   };
   PAGES.region = (id) => {
     if (!id) { const r = OT.unitRankings('region', null, 'state'); return `<header class="uh2"><h1>Regions</h1><div class="sub">The qualifying tournaments between districts and Hershey${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }
     const u = U.region(id); const kind = state.child === 'district' ? 'district' : 'school';
     const mem = OT.regionMembers(id), win = OT.windowLabel(); const full = mem.every((m) => m.span === win);
     const memSub = mem.length ? mem.map((m) => `<a href="#district/${m.d}">District ${m.d}</a>${full ? '' : ' ' + m.span}`).join(', ') + (full ? '' : ' · <span class="note1">membership as of each season</span>') : '';
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => unitRank(kind, { kind: 'region', id }, 'region', childToggle('region', [['school', 'Schools'], ['district', 'Districts']], kind)) });
+    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts']], { kind: 'region', id }, 'region') }); void kind;
   };
   /* "Missing from the archive": seasons the bracket archive itself marks as incomplete (WR_MISSING, tools/build_missing.js) */
   const MISS = window.WR_MISSING || { t: [], m: [], r: [] };
@@ -141,7 +150,7 @@
     const movers = OT.districtMovers(+id).filter((m) => m.span !== win && m.n < 0.85 * m.total).slice(0, 4);
     const moveNote = movers.length ? ` · part of the window: ${movers.map((m) => `<a href="#school/${OT.slug(m.sch)}">${esc(m.sch)}</a> ${m.span}`).join(', ')}` : '';
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}${moveNote}${!one || movers.length ? ' · <span class="note1">membership as of each season</span>' : ''}`,
-      rankings: () => unitRank('school', { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
+      rankings: () => rankChoice(u, [['school', 'Schools']], { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
   };
   /* School tab root: the schools of the district you were looking at (or pick one) */
   function schoolIndex() {
@@ -156,7 +165,7 @@
     const name = SCHOOL_BY_SLUG.get(sl) || OT.SLUG2S.get(sl); if (!name) return `<header class="uh2"><h1>Not found</h1></header>` + empty('No school at this address.');
     const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(u.region ? [{ name: REGIONS[u.region] + ' Region', href: '#region/' + u.region }] : []), ...(u.d ? [{ name: 'District ' + u.d, href: '#district/' + u.d }] : [])], sub: hist,
-      rankings: () => (state.view === 'rank' && u.d ? unitRank('school', { kind: 'district', id: u.d }, 'district', '') : wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true, title: 'Best wrestlers' })) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
+      rankings: () => (state.view === 'rank' ? rankChoice(u, u.d ? [['school', 'District ' + u.d + ' schools']] : [], { kind: 'district', id: u.d }, 'district') : wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true, title: 'Best wrestlers' })) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
   };
   /* a school's roster: everyone who wrestled for it in any bracket (the people index, loaded on demand) */
   function rosterBlock(u) {
@@ -168,18 +177,11 @@
   const bestTxt = (p) => (p.lvl ? `${p.lvl[0].toUpperCase() + p.lvl.slice(1)} ${p.place ? ordinal(p.place) : p.lvl === 'state' ? 'qualifier' : 'entrant'}` : '');
   const personRow = (p) => `<a class="prr" href="#wrestler/${p.slug}"><span class="pn"><b>${esc(p.name)}</b><small>${esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></span><span class="pb ${p.place ? 'm' + Math.min(p.place, 5) : ''}">${bestTxt(p)}</span>${p.peak ? OT.rtgTag(p.peak, { size: 'sm' }) : '<span></span>'}</a>`;
   OT.personRow = personRow;
-  /* the Wrestlers tab: one pool of wrestlers for the place in the scope strip, as a ranked list or as the all-time team */
+  /* the statewide placewinner list with search (old links, and the Rankings tab's wrestlers with a search box) */
   PAGES.wrestlers = () => {
-    const f = state.f, team = state.wmode === 'team';
+    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' }); const f = state.f;
     const where = f.schools[0] || (f.districts[0] ? 'District ' + f.districts[0] : f.regions[0] ? REGIONS[f.regions[0]] + ' Region' : '');
-    const seg = `<div class="seg wmode" role="group" aria-label="Layout"><button type="button" data-wmode="list" aria-pressed="${!team}">Ranked</button><button type="button" data-wmode="team" aria-pressed="${team}">All-time team</button></div>`;
-    const head = `<header class="uh2 uhc"><div class="uht"><h1>Wrestlers</h1>${seg}</div></header>`;
-    if (team) {
-      const u = f.schools[0] ? U.school(f.schools[0]) : f.districts[0] ? U.district(f.districts[0]) : f.regions[0] ? U.region(f.regions[0]) : U.state();
-      return head + `<section class="sec atsec">${OT.teamGrid(u)}</section>`;
-    }
-    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' });
-    return head + `<div class="sub wsub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div>
+    return `<header class="uh2"><h1>Wrestlers</h1><div class="sub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div></header>
       <input class="search" id="wsearch" type="search" placeholder="Search ${where ? esc(where) + ' wrestlers' : 'any wrestler or school'}" autocomplete="off" aria-label="Search wrestlers">
       <section class="sec"><div class="sech"><h2 id="whead">Placewinners</h2><span class="ctl" id="wctl">${r.sortSeg}</span></div><div id="wlist">${r.html}</div><div class="note" id="wmore"></div></section>`;
   };
