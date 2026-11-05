@@ -119,7 +119,7 @@
     if (main.querySelector('[data-need-bw]')) OT.loadBW().then(() => { if (route().base === base) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
     showBracket(q.b, page === 'wrestler' ? id : null);
   }
-  /* the wrestler page's best wins need his seasons' bout files */
+  /* the wrestler page's best wins and non-medalist season ratings need his seasons' bout files */
   /* his whole career: full district and regional fields for every season, then repaint */
   function loadCareer(sl) {
     const W = OT.getWrestler(sl); if (!W || W.full) return;
@@ -128,7 +128,8 @@
   function loadBestWins(sl) {
     const W = OT.getWrestler(sl); if (!W) return; if (!W.lower) W.lower = OT.lowerFor(W.apps);
     const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
-    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { const el = document.getElementById('bestwins'); if (el && el.dataset.w === W.slug) el.innerHTML = OT.bestWinsHTML(W); });
+    // repaint the whole page: the season files also carry the season ratings of non-medalist seasons (career grid row)
+    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { if (route().page === 'wrestler' && route().id === sl) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
   }
   /* search: everyone in any bracket (the people index loads on first use) */
   function wireSearch() {
