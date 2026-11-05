@@ -163,7 +163,7 @@ bySS.forEach((rows, k) => {
     st.filter((a) => a.place === 1).length, st.filter((a) => a.place >= 2 && a.place <= 4).length, st.filter((a) => a.place >= 5).length, st.filter((a) => !a.place).length,
     lv('regional').filter((a) => a.place === 1).length, lv('district').filter((a) => a.place === 1).length, TEAMWIN.has(year + '|' + c + '|' + sch) ? 1 : 0, covered ? 1 : 0,
     topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
-  SEAS.push({ row, lineup, covered, blind, c, year, d });
+  SEAS.push({ row, lineup, weights, sch, covered, blind, c, year, d });
   if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, Math.round(p.real), p.D, p.R, p.S]); }
 });
 /* the reference: the average AAA starter (a school's best wrestler at a weight, weights with nobody left out), over
@@ -212,3 +212,41 @@ const pct = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((q) => fsorted[Math
 const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ref: REF, talentAt: TALENT, ds, rs };
 fs.writeFileSync(path.join(OV, 'units.js'), 'window.WR_UNITS=' + JSON.stringify(out) + ';\n');
 console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'state brackets', fsorted.length, 'deciles', pct.join(' '));
+
+/* ---- head to head (overtime/h2h/<first letter of school slug>.json, keyed by slug, loaded by the head-to-head page) ----
+   o: every postseason bout between this school's wrestlers and another school's, as [year, won, lost] per opponent
+      (forfeits, injury defaults and DQs left out; a bout's schools are the ones its wrestlers are filed under above).
+   L: the lineup of every season with a Strength, [weight slot, real rating or null for a forfeit] — the app plays two
+      lineups against each other weight by weight for dual-meet odds. */
+{
+  const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const who = new Map(); // year|lvl|weight|name(|raw school) -> school
+  const put = (k, sch) => { const p = who.get(k); who.set(k, p === undefined || p === sch ? sch : null); };
+  A.forEach((a) => { const k = `${a.year}|${a.lvl}|${a.w}|${nkey(a.name)}`; put(k, a.sch); put(k + '|' + nkey(a.raw), a.sch); });
+  const schOf = (year, lvl, w, name, raw) => { const k = `${year}|${lvl}|${wNum(w)}|${nkey(name)}`; return who.get(k + '|' + nkey(raw)) || who.get(k) || splitName(canon(raw), 0); };
+  /* spellings that differ only in punctuation ("Bellwood Antis", "Bellwood-Antis") share an address in the app: one school here too */
+  const one = new Map(); schools.forEach((s) => { const k = slug(s); if (!one.has(k)) one.set(k, s); });
+  const same = (s) => { const k = slug(s); if (!one.has(k)) one.set(k, s); return one.get(k); };
+  const H = new Map(); const get = (s) => H.get(s) || H.set(s, { L: {}, o: {} }).get(s);
+  const lines = fs.readFileSync(path.join(__dirname, '..', 'data', 'brackets', 'bouts.csv'), 'utf8').split(/\r?\n/);
+  const hd = lines[0].split(','), ix = (c) => hd.indexOf(c);
+  const [iL, iY, iW, iWn, iWs, iLn, iLs, iR] = ['level', 'year', 'weight', 'winner', 'winner_school', 'loser', 'loser_school', 'result'].map(ix);
+  const csv = (line) => { const o = []; let cur = '', q = false; for (const ch of line) { if (ch === '"') q = !q; else if (ch === ',' && !q) { o.push(cur); cur = ''; } else cur += ch; } o.push(cur); return o; };
+  let nb = 0;
+  lines.slice(1).forEach((line) => { if (!line) return; const f = csv(line); if (['ff', 'inj', 'dq'].includes(f[iR])) return;
+    if (!String(f[iWs] || '').trim() || !String(f[iLs] || '').trim()) return;
+    const y = +f[iY], a = same(schOf(y, f[iL], f[iW], f[iWn], f[iWs])), b = same(schOf(y, f[iL], f[iW], f[iLn], f[iLs])); if (!a || !b || a === b) return;
+    const tally = (s, o, won) => { const m = get(s).o; const L = m[o] || (m[o] = []); let r = L[L.length - 1]; if (!r || r[0] !== y) { r = L.find((x) => x[0] === y); if (!r) { r = [y, 0, 0]; L.push(r); } } r[won ? 1 : 2]++; };
+    tally(a, b, true); tally(b, a, false); nb++; });
+  SEAS.forEach((s) => { if (!s.row[5]) return; const L = get(same(s.sch)).L, prev = L[s.year];
+    if (prev && prev.s >= s.row[5]) return; L[s.year] = { s: s.row[5], w: s.weights.map((i, j) => [i, s.lineup[j] == null ? null : Math.round(s.lineup[j])]) }; });
+  const dir = path.join(OV, 'h2h'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
+  const seen = new Map(), B = {}; let bytes = 0;
+  H.forEach((v, sch) => { const sl = slug(sch); if (!sl) return; if (seen.has(sl)) { console.log('h2h slug clash', sl, seen.get(sl), sch); return; } seen.set(sl, sch);
+    Object.values(v.o).forEach((L) => L.sort((p, q) => p[0] - q[0]));
+    const L = {}; Object.entries(v.L).forEach(([y, x]) => { L[y] = [x.s, x.w]; });
+    (B[sl[0]] = B[sl[0]] || {})[sl] = { n: sch, L, o: v.o }; });
+  /* one file per first letter of the slug: the published artifact holds at most 511 files, so 790 school files won't fit */
+  Object.entries(B).forEach(([c, o]) => { const txt = JSON.stringify(o); bytes += txt.length; fs.writeFileSync(path.join(dir, c + '.json'), txt); });
+  console.log('h2h: bouts between schools', nb, 'schools', seen.size, 'files', Object.keys(B).length, 'bytes', bytes);
+}

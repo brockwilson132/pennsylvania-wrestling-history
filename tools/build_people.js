@@ -72,7 +72,10 @@ function splitCareers(apps) {
 function addAgg(k, lvl, year, cls, unit, w, place, name, sch, d) {
   let p = P.get(k); if (!p) { p = { name, sch, y0: year, y1: year, ds: new Map(), best: 0, peak: 0, ny: 0, res: new Map(), regs: new Map(), pw: null, wc: new Map(), cls: new Map(), ws: 0 }; P.set(k, p); }
   p.cls.set(cls, (p.cls.get(cls) || 0) + (lvl === 'state' ? 3 : 1)); p.ws |= 1 << stdIdx(wNum(w));
-  if (year >= p.ny) { p.ny = year; p.name = name; p.sch = sch; }   // a transfer is listed under his last school
+  /* a transfer is listed under the school of his last state appearance (as the app's state records file him), else his
+     last school: Randy Biggs won 1967 states for Bethlehem Liberty, then wrestled for Freedom (Brock, 2026-11-05) */
+  if (lvl === 'state' ? year >= (p.ns || 0) : !p.ns && year >= p.ny) { p.name = name; p.sch = sch; if (lvl === 'state') p.ns = year; }
+  if (year >= p.ny) p.ny = year;
   p.y0 = Math.min(p.y0, year); p.y1 = Math.max(p.y1, year);
   if (d) p.ds.set(d, (p.ds.get(d) || 0) + (lvl === 'district' ? 3 : 1));
   const L = { district: 1, regional: 2, state: 3 }[lvl]; const pl = place >= 1 && place <= 8 ? place : 0;
