@@ -148,19 +148,16 @@
     const ctl = `<div class="atctl"><div class="seg sm" role="group" aria-label="Show"><button type="button" data-attmode="team" aria-pressed="${mode === 'team'}">By team</button><button type="button" data-attmode="weight" aria-pressed="${mode === 'weight'}">By weight</button></div>`
       + `<div class="atnav">${btn(-1, 'atar', '‹')}<label class="atsel"><select data-attsel aria-label="${mode === 'team' ? 'Team' : 'Weight'}">${d3.range(n).map((i) => `<option value="${key(i)}"${i === cur ? ' selected' : ''}>${name(i)}</option>`).join('')}</select></label>${btn(1, 'atar', '›')}</div></div>`;
     /* the picked column and the next two; CSS shows one on phones, more on wider screens */
-    const cols = d3.range(cur, Math.min(n, cur + 2));
+    const cols = d3.range(cur, Math.min(n, cur + 3));
     const nRows = mode === 'team' ? T.length : Math.max(...cols.map((i) => T[i].slots.reduce((m, s, j) => (s ? j + 1 : m), 0)));
-    /* the same career card as the Wrestlers list; the slot (weight or team) sits where that list shows the rank */
-    const card = (c, l) => { const W = OT.getWrestler(c.href.replace('#wrestler/', ''));
-      if (!W || !(W.apps.length || (W.lower && W.lower.length))) return chip(c, u);
-      return OT.wrestlerCard({ name: c.name, sch: c.sch, href: c.href, apps: W.apps, lower: W.lower && W.lower.length ? W.lower : OT.lowerFor(W.apps) }, l, { noSchool: u.kind === 'school' }); };
     const lab = (r) => (mode === 'team' ? T[r].c.label : ordinal(r + 1));
     const cell = (r, i) => (mode === 'team' ? T[r].slots[i] : T[i].slots[r]);
-    const grid = `${OT.wlegend()}<div class="atcol ${mode} n${cols.length}">${cols.map((i, k) => `<span class="atcap k${k}">${name(i)}</span>`).join('')}`
+    const grid = `<div class="atcol ${mode} n${cols.length}"><span class="atw athd"></span>${cols.map((i, k) => `<span class="atcap k${k}">${name(i)}</span>`).join('')}`
       + d3.range(nRows).map((r) => { const cells = cols.map((i) => cell(r, i)); if (mode === 'weight' && !cells[0] && cells.every((c) => !c)) return '';
-        return cells.map((c, k) => (c ? card(c, lab(r)).replace(/^<a class="wk"/, `<a class="wk k${k}"`) : `<div class="atc none k${k}${k ? '' : ' x0'}"></div>`)).join(''); }).join('') + '</div>';
+        const x0 = cells[0] ? '' : ' x0';
+        return `<span class="atw${x0}">${lab(r)}</span>${cells.map((c, k) => (c ? chip(c, u).replace(/^<a class="atc"/, `<a class="atc k${k}"`) : `<div class="atc none k${k}${k ? '' : x0}"></div>`)).join('')}`; }).join('') + '</div>';
     const step = (d, cls) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="chipb ${cls}" data-attpick="${key(i)}">${d < 0 ? '‹ ' : ''}${name(i)}${d > 0 ? ' ›' : ''}</button>` : '<span></span>'; };
-    return { body: `${ctl}${grid}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Teams fill in order, 1st team first; a weight with nobody left takes the best remaining wrestler who also wrestled there. Teams go as deep as the records allow, up to ${ATT_DEPTH}. Each card is the same career card as the Wrestlers list.</div>` };
+    return { body: `${ctl}${grid}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Teams fill in order, 1st team first; a weight with nobody left takes the best remaining wrestler who also wrestled there. Teams go as deep as the records allow, up to ${ATT_DEPTH}. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on one scale for every level, where the average state bracket sits at the orange mark.</div>` };
   }
   const teamGrid = (u) => attParts(u).body;
   Object.assign(OT, { timelineView, teamGrid });
