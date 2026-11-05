@@ -1,15 +1,15 @@
 {
- "sd_ref": 213.4725572794473,
+ "sd_ref": 214.24437079268995,
  "bad_loss_gap": 150,
  "weights": "per neighbour-availability pattern, see eval.txt",
- "prior_sd": 158.1917147508668,
+ "prior_sd": 157.74350226945376,
  "params": {
   "K": 56,
   "rho": 0.8,
   "grow": [
-   118.1,
-   117.2,
-   123.4
+   118.2,
+   117.3,
+   123.5
   ],
   "init": [
    1500,
