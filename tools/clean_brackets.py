@@ -80,8 +80,9 @@ WOVEN = {}   # (tournament, weight, garbled name, garbled school) -> (name, scho
 
 
 def unweave(sc, k):
-    """sc is the known school k with 2-12 letters of a name woven into it (any case, anywhere, usually its first word):
-    every way to read it as (k, those letters in order)."""
+    """sc is the known school k with 2-12 letters of a name woven into it (any case, anywhere, usually its first word;
+    a hyphen or apostrophe may ride along, "s-Santana" in "Ws-eSsat nCthaensater Henderson"): every way to read it as
+    (k, those letters in order)."""
     from functools import lru_cache
 
     @lru_cache(maxsize=None)
@@ -89,9 +90,26 @@ def unweave(sc, k):
         if j == len(sc): return {''} if i == len(k) else set()
         out = set(); ch = sc[j]
         if i < len(k) and ch == k[i]: out |= go(j + 1, i + 1)
-        if ch.isalpha() and len(out) < 200: out |= {ch + x for x in go(j + 1, i)}
+        if (ch.isalpha() or ch in "-'") and len(out) < 200: out |= {ch + x for x in go(j + 1, i)}
         return out
-    return {(k, x) for x in go(0, 0) if 2 <= len(x) <= 12 and x != ''}
+    return {(k, x) for x in go(0, 0) if 2 <= sum(c.isalpha() for c in x) and len(x) <= 14 and x[0] != "'" and x[-1].isalpha()
+            and (x.isalpha() or woven(sc, k, x))}   # "Manor-Millersville" is not "Millville" with "Manor-ers" woven in
+
+
+def woven(sc, k, x, j=0, i=0, l=0, run=0):
+    """sc reads as k with x woven in and the stray letters really interleaved: never more than 3 of them in a row"""
+    if run > 3: return False
+    if l == len(x): return i == len(k) or (j < len(sc) and sc[j] == k[i] and woven(sc, k, x, j + 1, i + 1, l, 0))
+    if j == len(sc): return False
+    return (i < len(k) and sc[j] == k[i] and woven(sc, k, x, j + 1, i + 1, l, 0)) or (sc[j] == x[l] and woven(sc, k, x, j + 1, i, l + 1, run + 1))
+
+
+def woven_schools(E):
+    """rare school cells that read as a common school with a name's letters woven in (what rule 4c undoes)"""
+    n = Counter(r['school'] for r in E)
+    known = [k for k, c in n.items() if c >= 20 and len(k) >= 4]
+    return [sc for sc, c in n.items() if 0 < c <= 4 and any(woven(sc, k, x) for k in known if len(k) + 2 <= len(sc) and k[-1] == sc[-1]
+                                                             for _, x in unweave(sc, k) if len(x) >= 3)]
 
 
 def removals(s, p):
@@ -293,7 +311,7 @@ JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – 
 
 def junk_left(E, B):
     bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])]
-    bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
+    bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + woven_schools(E) + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
     return bad
 
