@@ -90,7 +90,6 @@
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
     else if (v === 'time') parts.push(`<section class="sec tlsec"><div class="sech"><h2>Timeline</h2></div>${OT.timelineView(u)}</section>`);
-    else if (v === 'team') parts.push(`<section class="sec atsec"><div class="sech"><h2>All-time team</h2></div>${OT.teamGrid(u)}</section>`);
     else { parts.push(section('Seasons', seasonsDrawer(u))); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
     return parts.join('');
   }
@@ -157,7 +156,7 @@
     const name = SCHOOL_BY_SLUG.get(sl) || OT.SLUG2S.get(sl); if (!name) return `<header class="uh2"><h1>Not found</h1></header>` + empty('No school at this address.');
     const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(u.region ? [{ name: REGIONS[u.region] + ' Region', href: '#region/' + u.region }] : []), ...(u.d ? [{ name: 'District ' + u.d, href: '#district/' + u.d }] : [])], sub: hist,
-      rankings: () => wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true }) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
+      rankings: () => (state.view === 'rank' && u.d ? unitRank('school', { kind: 'district', id: u.d }, 'district', '') : wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true, title: 'Best wrestlers' })) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
   };
   /* a school's roster: everyone who wrestled for it in any bracket (the people index, loaded on demand) */
   function rosterBlock(u) {
@@ -169,10 +168,18 @@
   const bestTxt = (p) => (p.lvl ? `${p.lvl[0].toUpperCase() + p.lvl.slice(1)} ${p.place ? ordinal(p.place) : p.lvl === 'state' ? 'qualifier' : 'entrant'}` : '');
   const personRow = (p) => `<a class="prr" href="#wrestler/${p.slug}"><span class="pn"><b>${esc(p.name)}</b><small>${esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></span><span class="pb ${p.place ? 'm' + Math.min(p.place, 5) : ''}">${bestTxt(p)}</span>${p.peak ? OT.rtgTag(p.peak, { size: 'sm' }) : '<span></span>'}</a>`;
   OT.personRow = personRow;
+  /* the Wrestlers tab: one pool of wrestlers for the place in the scope strip, as a ranked list or as the all-time team */
   PAGES.wrestlers = () => {
-    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' }); const f = state.f;
+    const f = state.f, team = state.wmode === 'team';
     const where = f.schools[0] || (f.districts[0] ? 'District ' + f.districts[0] : f.regions[0] ? REGIONS[f.regions[0]] + ' Region' : '');
-    return `<header class="uh2"><h1>Wrestlers</h1><div class="sub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div></header>
+    const seg = `<div class="seg wmode" role="group" aria-label="Layout"><button type="button" data-wmode="list" aria-pressed="${!team}">Ranked</button><button type="button" data-wmode="team" aria-pressed="${team}">All-time team</button></div>`;
+    const head = `<header class="uh2 uhc"><div class="uht"><h1>Wrestlers</h1>${seg}</div></header>`;
+    if (team) {
+      const u = f.schools[0] ? U.school(f.schools[0]) : f.districts[0] ? U.district(f.districts[0]) : f.regions[0] ? U.region(f.regions[0]) : U.state();
+      return head + `<section class="sec atsec">${OT.teamGrid(u)}</section>`;
+    }
+    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' });
+    return head + `<div class="sub wsub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div>
       <input class="search" id="wsearch" type="search" placeholder="Search ${where ? esc(where) + ' wrestlers' : 'any wrestler or school'}" autocomplete="off" aria-label="Search wrestlers">
       <section class="sec"><div class="sech"><h2 id="whead">Placewinners</h2><span class="ctl" id="wctl">${r.sortSeg}</span></div><div id="wlist">${r.html}</div><div class="note" id="wmore"></div></section>`;
   };
