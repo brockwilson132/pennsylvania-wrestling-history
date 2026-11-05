@@ -15,9 +15,9 @@
      colour a school's hex is matched against; `c` is the border drawn, lifted where the true colour vanishes on black.
      A school whose main colour is black or white takes its second colour; unknown schools are grey. */
   const TAG_PRESETS = [
-    ['red', '#C8102E', '#E0293C'], ['maroon', '#7A1E2C', '#B0425A'], ['orange', '#E87722', '#F08A30'], ['gold', '#C9A227', '#D4AE3A'],
-    ['yellow', '#FFD200', '#F2D024'], ['green', '#15803D', '#2EA55A'], ['dkgreen', '#0B4D2C', '#2F8A55'], ['royal', '#1F4E9C', '#3A72D6'],
-    ['navy', '#1B2A4A', '#5878B4'], ['ltblue', '#5BA8E0', '#6BB6EA'], ['purple', '#4B2E83', '#8A63D2'], ['brown', '#5A3520', '#A0704A'],
+    ['red', '#C8102E', '#EE3340'], ['maroon', '#7A1E2C', '#9E3050'], ['orange', '#E87722', '#F08A30'], ['gold', '#C9A227', '#D4AE3A'],
+    ['yellow', '#FFD200', '#F2D024'], ['green', '#15803D', '#2EA55A'], ['dkgreen', '#0B4D2C', '#2F8A55'], ['royal', '#1F4E9C', '#2F7CF0'],
+    ['navy', '#1B2A4A', '#4E62A0'], ['ltblue', '#5BA8E0', '#7CCBF5'], ['purple', '#4B2E83', '#8A63D2'], ['brown', '#5A3520', '#A0704A'],
     ['silver', '#9EA2A2', '#B9BEC4'],
   ];
   const TAG_UNKNOWN = { key: 'none', c: '#4A5360' }, TAG_BW = { key: 'bw', c: '#D8D8D8' };
@@ -26,9 +26,27 @@
   const nearest = (h) => { const [r, g, b] = hexRgb(h); let best = null, bd = Infinity;
     TAG_PRESETS.forEach(([key, m, c]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = { key, c }; } }); return best; };
   const isBW = (h) => { if (!h) return true; const [r, g, b] = hexRgb(h); const sat = Math.max(r, g, b) - Math.min(r, g, b); return sat < 28 && (lumOf(h) < 0.16 || lumOf(h) > 0.85); };
+  /* schools assigned to a preset by hand (Brock, 2026-11-05): these win over snapping the badge file's hex.
+     Main colour first; a school whose main colour is black takes its second colour. District 11 is complete. */
+  const TAG_ASSIGN = {
+    // District 11, from Brock
+    'Allentown Central Catholic': 'green', 'Allentown Dieruff': 'royal', 'Bangor': 'maroon', 'Bethlehem Catholic': 'brown',
+    'Bethlehem Freedom': 'gold', 'Bethlehem Liberty': 'maroon', 'Liberty': 'maroon', 'Bishop Hafey': 'gold', 'Blue Mountain': 'navy',
+    'Catasauqua': 'brown', 'East Stroudsburg': 'purple', 'East Stroudsburg North': 'ltblue', 'East Stroudsburg South': 'purple',
+    'Easton': 'red', 'Emmaus': 'green', 'Hellertown Lower Saucon': 'red', 'Jim Thorpe': 'navy', 'Lehighton': 'maroon', 'Mahanoy': 'gold',
+    'Minersville': 'royal', 'Nazareth': 'royal', 'North Schuylkill': 'red', 'Northampton': 'orange', 'Northern Lehigh': 'navy',
+    'Northwestern Lehigh': 'gold', 'Notre Dame-Green Pond': 'navy', 'Palisades': 'purple', 'Palmerton': 'royal', 'Panther Valley': 'gold',
+    'Parkland': 'red', 'Pen Argyl': 'green', 'Pine Grove': 'red', 'Pius X (Roseto)': 'royal', 'Pleasant Valley': 'royal',
+    'Pocono Mountain': 'red', 'Pocono Mountain East': 'red', 'Pocono Mountain West': 'navy', 'Pottsville': 'red', 'Salisbury Township': 'navy',
+    'Saucon Valley': 'red', 'Schuylkill Haven': 'royal', 'Shenandoah Valley': 'ltblue', 'Slatington': 'navy', 'Southern Lehigh': 'royal',
+    'Stroudsburg': 'maroon', 'Tamaqua': 'royal', 'Tri-Valley': 'red', 'West Hazleton': 'ltblue', 'Whitehall': 'maroon',
+    'William Allen': 'yellow', 'Williams Valley': 'royal', 'Wilson Area': 'royal',
+  };
+  const TAG_BY_KEY = new Map(TAG_PRESETS.map(([key, , c]) => [key, { key, c }]));
   const TAGC = new Map();
   function schoolPreset(sch) {
     if (TAGC.has(sch)) return TAGC.get(sch);
+    if (TAG_ASSIGN[sch] && TAG_BY_KEY.has(TAG_ASSIGN[sch])) { const p = TAG_BY_KEY.get(TAG_ASSIGN[sch]); TAGC.set(sch, p); return p; }
     const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
     let p = TAG_UNKNOWN;
     if (id && id.primary) { const main = !isBW(id.primary) ? id.primary : id.secondary && !isBW(id.secondary) ? id.secondary : null; p = main ? nearest(main) : TAG_BW; }
@@ -477,5 +495,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament and the change across it. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { stag, schoolPreset, TAG_PRESETS, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { stag, schoolPreset, TAG_PRESETS, TAG_ASSIGN, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
