@@ -113,7 +113,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -142,9 +142,17 @@
     const yrs = Array.from(new Set(Ws.flatMap((W) => OT.yearsOf(W.apps, W.lower || [])))); if (yrs.every((y) => OT.sosLoaded(y))) return;
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(again);
   }
+  function loadH2HS(id) {
+    const sl = String(id).split('~').filter((s) => s && OT.SLUG2S.has(s)); if (sl.length < 2 || sl.every((s) => OT.h2hsLoaded(s))) return;
+    Promise.all(sl.map((s) => OT.loadH2HS(s))).then(() => { if (route().page === 'h2hs' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  const searchSchools = (q, n) => { const t = q.toLowerCase().split(/\s+/).filter(Boolean); const out = [];
+    OT.SLUG2S.forEach((name, sl) => { const k = name.toLowerCase(); if (t.every((x) => k.includes(x))) out.push({ sl, name, pre: k.startsWith(t[0]) ? 0 : 1 }); });
+    return out.sort((a, b) => a.pre - b.pre || a.name.localeCompare(b.name)).slice(0, n); };
   function wireH2H() {
     main.querySelectorAll('.h2i').forEach((inp) => { const box = inp.closest('.h2p'), list = box.querySelector('.h2l'), side = box.dataset.h2side, other = inp.dataset.h2other || '';
       let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = ''; return; }
+        if (inp.dataset.h2kind === 's') { const hit = searchSchools(q, 8); list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2hs/${side === 'a' ? p.sl + '~' + other : other + '~' + p.sl}"><b>${OT.esc(p.name)}</b><small>${OT.schoolDistrict(p.name) ? 'District ' + OT.schoolDistrict(p.name) : ''}</small></a>`).join('') : '<div class="muted">No school by that name.</div>'; return; }
         OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 8);
           list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2h/${side === 'a' ? p.slug + '~' + other : other + '~' + p.slug}"><b>${OT.esc(p.name)}</b><small>${OT.esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></a>`).join('') : '<div class="muted">No one by that name.</div>'; }); }, 150); }); });
   }

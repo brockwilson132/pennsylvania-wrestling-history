@@ -1219,3 +1219,8 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 @media (max-width:560px){.h2pick{grid-template-columns:1fr}.h2vs{justify-self:center}}
 .h2m .bwn small{white-space:normal}
 .h2l a{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.h2l small{color:var(--ash);font-size:12px}
+.h2tab{margin:0 0 4px}
+.h2st td,.h2st th{white-space:nowrap}
+.h2st{width:100%;margin-top:10px}.h2st td:nth-child(n+2),.h2st th:nth-child(n+2){text-align:right}
+.h2more summary{cursor:pointer;color:var(--ash);font:700 12px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 2px}
+table.h2st{min-width:0}.h2st td small{min-width:0}
