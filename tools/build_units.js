@@ -43,7 +43,7 @@ const fieldOf = (a) => FIELD.get([a.lvl, a.year, normCls(a.cls), a.lvl === 'stat
 /* ---- collect appearances ---- */
 const A = []; // {k, name, sch, year, cls, lvl, w, std, place, d, unit, rating, bw, bwn}
 function add(lvl, year, cls, unit, w, place, name, school, d) {
-  if (!name || !nkey(name)) return;
+  if (!name || !nkey(name) || /^(forfeit|bye|open|vacant)$/i.test(String(name).trim()) || !String(school || '').trim()) return;   // placeholder rows, not wrestlers
   if (lvl === 'state') { const mb = MEMB[`${year}|${cls}|${wNum(w)}|${nkey(name)}`]; if (mb) { d = mb[0]; if (mb[1]) school = mb[1]; } } else d = unitDist(lvl, unit, d);
   const sch = splitName(canon(school), d);
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
