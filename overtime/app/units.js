@@ -366,7 +366,7 @@
       return `<div class="sdr"><span class="sdl">${OT.navIcon(LVI[l])}<b>${LV[LVL3.indexOf(l)][0]}</b><i>${tot}</i></span><span class="sdb">${c.map((n, i) => `${((h) => `<span class="sdc" title="${ordinal(i + 1)}: ${n}" style="--h:${h}%"><em>${n || ''}</em><i style="height:${h}%;--c:${MEDC[i]}"></i></span>`)(n ? Math.max(8, Math.round(78 * n / mx)) : 0)}`).join('')}</span></div>`; }).join('');
     return `<div class="sdh"><span></span><span class="sdb">${[1, 2, 3, 4, 5, 6, 7, 8].map((p) => `<i>${ordinal(p)}</i>`).join('')}</span></div>${rows}`;
   }
-  const talTxt = (v, kind) => (!v ? '–' : kind === 'school' ? v.toFixed(1) : v.toFixed(2));
+  const talTxt = (v, kind) => (!v ? '–' : v.toFixed(2));
   function unitCard(a, rank, sort, pageKind, ctx) {
     const rt = r10(a.rating), tint = rt ? colorAt(domFrac(a.kind, a.rating)) : '#2F3640';
     const dt = dualTitles(a.kind).get(a.k) || 0, team = a.tt + dt;
