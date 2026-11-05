@@ -1156,10 +1156,9 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 /* school name tag: the school's own colours (identity, never strength). F = pill with a dot, D = jersey with an edge. */
 .stag{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;max-width:100%;overflow:hidden;white-space:nowrap;background:var(--tf);color:var(--ti);font:900 11.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
 .stag.tF{border-radius:999px;padding:1px 9px 1px 4px}.stag.tF>i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ta);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
-.stag.tD{border-radius:5px;padding:0 6px;border:1.5px solid var(--ta)}
 .stag.nc{font-weight:700;color:var(--ash)}
 .stag.ab{justify-content:center;min-width:34px;font-size:11px;letter-spacing:.04em}.stag.tF.ab{padding:1px 7px 1px 3px;min-width:0}
-.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.tF.xs>i{width:7px;height:7px}.stag.tD.xs{padding:0 3px;border-width:1px;border-radius:3px}
+.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.tF.xs>i{width:7px;height:7px}
 /* the school tag sits in the name line, so the old badge column is gone */
 .wk1{display:flex!important;gap:10px;align-items:center}.wk1>.nm{flex:1 1 auto;min-width:0}.wk1>.rk,.wk1>.rv{flex:none}
 .bvtop{display:flex!important;gap:8px;align-items:center}.bvtop>.nm{flex:1 1 auto;min-width:0}.bvtop>.sd{flex:none;min-width:30px}.bvtop>.dsp{flex:none}
@@ -1214,3 +1213,47 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .bvc .dsp{display:grid;gap:4px;justify-items:stretch}.bvc .dsp .smtr{width:100%}
 .bvop{display:flex;align-items:center;gap:8px;font:600 11.5px var(--cond);color:var(--ash);max-width:260px}.bvop b{color:var(--chalk)}.bvop .smtr{flex:0 0 60px}
 .bvcx .cm.bvm{max-width:420px;width:100%}
+/* global search (top bar) */
+.sbtn{margin-left:auto}.sbtn+.mbtn{margin-left:2px}
+.fpop.gs{width:min(460px,calc(100vw - 16px))}
+.gsr{display:grid;max-height:min(60vh,520px);overflow:auto;margin:0 -4px;padding:0 4px}
+.gsr .fpk{margin-top:10px}.gsr .fpk:first-child{margin-top:0}
+.gsr .fpo .stag{font-size:11px}
+.gsp{display:grid}.gsp .prr{border-top:1px solid var(--line)}
+/* ranking table: only Strength is a coloured tile (colour = strength). Talent, Score, Titles and Team are plain figures
+   with their small chart under them, so the eye goes to the one coloured column; an empty value is a faint dash. */
+.sxr .vt:not(.vtr){background:none;box-shadow:none;padding:0 2px}
+.sxr .vtt b,.sxr .vtm b{color:var(--gold)}
+.sxr .vt.z b{color:var(--line2);font-weight:700}
+.sxr .vt.z svg{visibility:hidden}
+.sxr .vtl b,.sxr .vts b{color:var(--chalk)}
+.sxr .vt.on:not(.vtr) b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--ash)}
+.sxr{border-left:0}
+.sx+.sx .sxr{border-top:1px solid var(--line)}
+/* head to head */
+.h2pick{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:start;margin:8px 0 14px}
+.h2p{display:grid;gap:6px;min-width:0}
+.h2w{font:700 17px var(--cond);text-transform:uppercase;letter-spacing:.02em;color:var(--chalk);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h2w a{color:inherit;text-decoration:none;display:grid}.h2w small{font:500 12px var(--sans,inherit);text-transform:none;color:var(--ash)}
+.h2i{width:100%;min-height:40px;padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--slate2);color:var(--chalk);font:500 14px var(--sans,inherit)}
+.h2l{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.h2l a{display:block;padding:8px 10px;border-radius:8px;background:var(--slate2);color:var(--chalk);text-decoration:none;font-size:13.5px}
+.h2vs{font:900 14px var(--cond);letter-spacing:.12em;color:var(--ash);align-self:center;padding-top:4px}
+@media (max-width:560px){.h2pick{grid-template-columns:1fr}.h2vs{justify-self:center}}
+.h2m .bwn small{white-space:normal}
+.h2l a{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.h2l small{color:var(--ash);font-size:12px}
+.h2tab{margin:0 0 4px}
+.h2st td,.h2st th{white-space:nowrap}
+.h2st{width:100%;margin-top:10px}.h2st td:nth-child(n+2),.h2st th:nth-child(n+2){text-align:right}
+.h2more summary{cursor:pointer;color:var(--ash);font:700 12px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 2px}
+table.h2st{min-width:0}.h2st td small{min-width:0}
+/* season recap */
+.slist{list-style:none;margin:0;padding:0;display:grid}
+.slist li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);min-height:40px}.slist li:last-child{border-bottom:0}
+.slist .sw{font:900 15px var(--cond);color:var(--ash);letter-spacing:.02em}
+.slist .sn{display:grid;min-width:0;line-height:1.2}.slist .sn a{color:inherit;text-decoration:none}.slist .sn b{font:700 15px var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slist .sn small{color:var(--ash);font-size:11.5px;white-space:normal}
+.slist .sr{font:900 18px var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums;white-space:nowrap}.slist .sr i{font:700 10.5px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-left:2px}
+.rpt{display:inline-block;margin-left:6px;padding:0 6px;border-radius:5px;background:var(--gold);color:var(--mat);font:800 10.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;vertical-align:1px}
+.sdual{font-size:13.5px;margin-top:4px}.sdual a{color:inherit;text-decoration:none}.sdual b{font:700 15px var(--cond);text-transform:uppercase}
+.bwr{display:grid;justify-items:end;line-height:1}.bwr b{font:900 20px var(--cond);color:var(--chalk)}.bwr i{font:700 10px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+.snr{display:flex;align-items:center;gap:6px;min-width:0}.snr a{min-width:0;overflow:hidden}.rpt{margin-left:0;flex:none}

@@ -1,14 +1,16 @@
 /* Overtime — router and interactions */
 'use strict';
 (() => {
-  const { PAGES, state, setCls, setWin, wordmark, navIcon, esc } = OT;
-  const main = document.getElementById('main'), brand = document.getElementById('brand'), fbar = document.getElementById('fbar'), fpop = document.getElementById('fpop'), fscrim = document.getElementById('fscrim'), mbtn = document.getElementById('mbtn');
-  brand.innerHTML = wordmark(); mbtn.innerHTML = navIcon('menu');
+  /* OT is rebuilt once, when the second boot stage lands (below): read PAGES and the setters through OT at call time */
+  const { state, wordmark, navIcon, esc } = OT;
+  const setCls = (c) => OT.setCls(c), setWin = (w) => OT.setWin(w);
+  const main = document.getElementById('main'), brand = document.getElementById('brand'), fbar = document.getElementById('fbar'), fpop = document.getElementById('fpop'), fscrim = document.getElementById('fscrim'), mbtn = document.getElementById('mbtn'), sbtn = document.getElementById('sbtn');
+  brand.innerHTML = wordmark(); mbtn.innerHTML = navIcon('menu'); sbtn.innerHTML = navIcon('search');
   function route() {
     const raw = (location.hash || '#state').slice(1); const [h, qs] = raw.split('?'); const [page, ...rest] = h.split('/'); const id = rest.join('/');
     const q = {}; (qs || '').split('&').forEach((kv) => { const [k, v] = kv.split('='); if (k) q[k] = decodeURIComponent(v || ''); });
     const keep = Object.entries(q).filter(([k]) => k !== 'b').map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
-    return { page: PAGES[page] ? page : 'state', id: decodeURIComponent(id || ''), q, base: '#' + h + (keep ? '?' + keep : '') };
+    return { page: OT.PAGES[page] ? page : 'state', id: decodeURIComponent(id || ''), q, base: '#' + h + (keep ? '?' + keep : '') };
   }
   /* href for the same page with a bracket overlay open (key) or closed (null) */
   OT.bhref = (key) => { const r = route(); return key ? `${r.base}${r.base.includes('?') ? '&' : '?'}b=${encodeURIComponent(key)}` : r.base; };
@@ -76,17 +78,19 @@
       return `<div class="fph"><b>School</b><span class="muted">${esc(where)}</span>${f.s ? `<a class="fpx" href="${hrefOf({ ...f, s: '' })}">All schools</a>` : ''}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
     view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${viewLabel(k, l)}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
     time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
-    menu: () => `<nav class="fpm" aria-label="More"><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
+    search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
+    menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {
-    if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : '') + (pop === 'time' ? ' time' : '');
-    const btn = pop === 'menu' ? mbtn : fbar.querySelector(`[data-fb="${pop}"]`);
-    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'time' ? 560 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, pop === 'menu' ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
+    if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'time' ? ' time' : '');
+    const btn = pop === 'menu' ? mbtn : pop === 'search' ? sbtn : fbar.querySelector(`[data-fb="${pop}"]`);
+    if (window.innerWidth >= 720 && btn) { const r = btn.getBoundingClientRect(), W = Math.min(pop === 'time' ? 560 : pop === 'search' ? 460 : 380, window.innerWidth - 24); const L = Math.max(12, Math.min(window.innerWidth - 12 - W, (pop === 'menu' || pop === 'search') ? r.right - W : r.left + r.width / 2 - W / 2)); fpop.style.left = L + 'px'; fpop.style.width = W + 'px'; }
     else { fpop.style.left = ''; fpop.style.width = ''; }
+    if (pop === 'search') wireGlobalSearch();
     const inp = fpop.querySelector('#fps'); if (inp) { inp.addEventListener('input', () => { fpop.querySelector('#fpl').innerHTML = schoolItems(F(), inp.value); }); if (window.innerWidth >= 720) inp.focus(); }
   }
-  function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); paintPop(); drawBar(); }
-  function closePop() { if (!pop) return; pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
+  function openPop(k) { pop = k; fpop.hidden = false; fscrim.hidden = false; fscrim.classList.toggle('menu', k === 'menu'); mbtn.setAttribute('aria-expanded', String(k === 'menu')); sbtn.setAttribute('aria-expanded', String(k === 'search')); paintPop(); drawBar(); }
+  function closePop() { if (!pop) return; pop = ''; fpop.hidden = true; fscrim.hidden = true; fpop.innerHTML = ''; mbtn.setAttribute('aria-expanded', 'false'); sbtn.setAttribute('aria-expanded', 'false'); drawBar(); }
   /* division, time and weights: each change is its own history entry, so Back steps through it */
   const snap = () => ({ cls: state.cls, win: { ...state.win }, w: state.f.weights.slice() });
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -107,13 +111,14 @@
   let lastBase = '', lastHash = '';
   function render(keepScroll) {
     const { page, id, q, base } = route(); lastHash = location.hash;
+    if (!OT.full && !coreRoute(page, q)) { waiting = true; if (main.firstChild) { lastBase = ''; main.innerHTML = '<div class="card empty" role="status">Loading the archive…</div>'; } return; }
     if (base === lastBase && (q.b || bview && !bview.hidden)) { showBracket(q.b, page === 'wrestler' ? id : null); stamp(); return; }
     lastBase = base;
     const f = F(); state.ctxDistrict = f.d;
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -133,6 +138,53 @@
     const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
     // repaint the whole page: the season files also carry the season ratings of non-medalist seasons (career grid row)
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { if (route().page === 'wrestler' && route().id === sl) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  /* head to head: both careers in full, then both wrestlers' season files, then repaint */
+  function loadH2H(id) {
+    const sl = String(id).split('~').filter(Boolean); const Ws = sl.map((s) => OT.getWrestler(s)).filter(Boolean); if (Ws.length < 2) return;
+    const again = () => { if (route().page === 'h2h' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } };
+    if (Ws.some((W) => !W.full)) { Promise.all(Ws.map((W) => OT.fullCareer(W))).then(again); return; }
+    const yrs = Array.from(new Set(Ws.flatMap((W) => OT.yearsOf(W.apps, W.lower || [])))); if (yrs.every((y) => OT.sosLoaded(y))) return;
+    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(again);
+  }
+  function loadSeason(id) {
+    const y = OT.YEARS.includes(+id) ? +id : OT.yearsWindow()[1]; if (OT.sosLoaded(y)) return;
+    OT.loadSOS(y).then(() => { if (route().page === 'season') { lastBase = ''; render(true); } });
+  }
+  function loadH2HS(id) {
+    const sl = String(id).split('~').filter((s) => s && OT.SLUG2S.has(s)); if (sl.length < 2 || sl.every((s) => OT.h2hsLoaded(s))) return;
+    Promise.all(sl.map((s) => OT.loadH2HS(s))).then(() => { if (route().page === 'h2hs' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  const searchSchools = (q, n) => { const t = q.toLowerCase().split(/\s+/).filter(Boolean); const out = [];
+    OT.SLUG2S.forEach((name, sl) => { const k = name.toLowerCase(); if (t.every((x) => k.includes(x))) out.push({ sl, name, pre: k.startsWith(t[0]) ? 0 : 1 }); });
+    return out.sort((a, b) => a.pre - b.pre || a.name.localeCompare(b.name)).slice(0, n); };
+  function wireH2H() {
+    main.querySelectorAll('.h2i').forEach((inp) => { const box = inp.closest('.h2p'), list = box.querySelector('.h2l'), side = box.dataset.h2side, other = inp.dataset.h2other || '';
+      let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = ''; return; }
+        if (inp.dataset.h2kind === 's') { const hit = searchSchools(q, 8); list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2hs/${side === 'a' ? p.sl + '~' + other : other + '~' + p.sl}"><b>${OT.esc(p.name)}</b><small>${OT.schoolDistrict(p.name) ? 'District ' + OT.schoolDistrict(p.name) : ''}</small></a>`).join('') : '<div class="muted">No school by that name.</div>'; return; }
+        OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 8);
+          list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2h/${side === 'a' ? p.slug + '~' + other : other + '~' + p.slug}"><b>${OT.esc(p.name)}</b><small>${OT.esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></a>`).join('') : '<div class="muted">No one by that name.</div>'; }); }, 150); }); });
+  }
+  /* global search (top bar): schools and districts at once, then wrestlers once the people index is in. Ignores the filters. */
+  const DSEARCH = d3.range(1, 13).map((d) => ({ d, q: ('district ' + d + ' d' + d + ' ' + (OT.DISTRICTS[d] || '')).toLowerCase() }));
+  function wireGlobalSearch() {
+    const inp = fpop.querySelector('#gsq'), out = fpop.querySelector('#gsr'); if (!inp) return;
+    OT.loadPeople(); setTimeout(() => inp.focus(), 30);
+    const hd = (t) => `<div class="fpk">${t}</div>`;
+    const paint = () => { const q = inp.value.trim(), t = q.toLowerCase().split(/\s+/).filter(Boolean);
+      if (q.length < 2) { out.innerHTML = '<div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div>'; return; }
+      const has = (x) => t.every((w) => x.q.includes(w));
+      const sch = schools().filter(has).slice(0, 6), dis = DSEARCH.filter((x) => t.every((w) => x.q.split(/\s+/).some((y) => y.startsWith(w))) || x.q.includes(q.toLowerCase())).slice(0, 3);
+      const ppl = OT.peopleLoaded() ? OT.searchPeople(q, 25, true) : null;
+      let h = '';
+      if (dis.length) h += hd('Districts') + dis.map((x) => `<a class="fpo" href="#district/${x.d}"><span>District ${x.d}<i class="fpd">${esc(OT.DISTRICTS[x.d] || '')}</i></span></a>`).join('');
+      if (sch.length) h += hd('Schools') + sch.map((x) => `<a class="fpo" href="${hrefOf({ s: x.n })}"><span>${OT.stag(x.n)}</span><small>${x.d ? 'D' + x.d : ''}</small></a>`).join('');
+      h += hd('Wrestlers') + (ppl === null ? '<div class="fpn">Loading every wrestler…</div>' : ppl.length ? `<div class="gsp">${ppl.map(OT.personRow).join('')}</div>${ppl.length >= 25 ? '<div class="fpn">Top 25 by rating. Add more of the name or a school to narrow it.</div>' : ''}` : '<div class="fpn">No wrestler by that name.</div>');
+      out.innerHTML = h; };
+    let tm; inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(paint, 120); });
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const a = out.querySelector('a'); if (a) { location.hash = a.getAttribute('href'); closePop(); } } });
+    OT.loadPeople().then(() => { if (pop === 'search' && inp.value.trim().length >= 2) paint(); });
+    out.addEventListener('click', (e) => { if (e.target.closest('a')) closePop(); });
   }
   /* search: everyone in any bracket (the people index loads on first use) */
   function wireSearch() {
@@ -195,6 +247,7 @@
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       if (k === 'wrestlers') { closePop(); location.hash = hrefOf({ ...f, w: !f.w || !!f.who }); return; }
       if (pop === k) closePop(); else openPop(k); return; }
+    if (e.target.closest('#sbtn')) { if (pop === 'search') closePop(); else openPop('search'); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
     if (e.target === fscrim) { closePop(); return; }
     if (pop && fpop.contains(e.target)) {
@@ -241,7 +294,7 @@
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
-  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; });
+  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   window.addEventListener('resize', () => { if (pop) paintPop(); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
@@ -252,7 +305,31 @@
     setTimeout(() => { location.hash = bl.getAttribute('href'); }, 280);
   }
   window.addEventListener('hashchange', () => render());
+
+  /* ---------- two-stage boot ----------
+     The landing page (the State map) needs only the scripts index.html loads up front. Everything in
+     OT_LATE (medals, brackets, district fields, ratings, ...) is fetched after the first paint, without blocking it;
+     once it is all in, the app files run again over the same OT so every index is built from the full archive, and
+     any page that was waiting for it renders. Other pages opened first wait for the archive (the boot loader shows). */
+  let waiting = false;
+  function coreRoute(page, q) { return page === 'state' && state.view === 'map' && !q.b; }
+  function addScript(src) { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error('could not load ' + src)); document.body.appendChild(s); }); }
+  function loadFull() {
+    const late = window.OT_LATE || [];
+    const app = Array.from(document.scripts).map((s) => s.getAttribute('src')).filter((s) => s && /^app\//.test(s) && !/main\.js$/.test(s));
+    if (!late.length) { OT.full = true; return Promise.resolve(); }
+    // the boot loader (index.html) shows only while #main is empty, i.e. when a page other than the State map was opened first
+    let got = 0; const tick = () => { got++; if (window.OTBoot) window.OTBoot.progress(0.9 * got / late.length); };
+    return Promise.all(late.map((f) => addScript(f).then(tick))).then(() => Promise.all(app.map(addScript))).then(() => {
+      OT.full = true; SCH = null;
+      // repaint whatever is showing from the full archive (the State map comes out the same; a waiting page appears)
+      waiting = false; const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y);
+      document.dispatchEvent(new Event('ot-full'));
+    });
+  }
+  OT.full = !(window.OT_LATE || []).length;
   render();
+  OT.ready = loadFull();
 
   /* hovering a chip or a line label brightens that series */
   const hlSeries = (e, on) => { const t = e.target.closest && e.target.closest('[data-cmp],[data-focus]'); if (!t) return; const box = t.closest('.perf'); if (!box) return; const id = t.getAttribute('data-cmp') || t.getAttribute('data-focus');

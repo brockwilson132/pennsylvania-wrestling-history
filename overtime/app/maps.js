@@ -193,7 +193,7 @@
      lists (the 12 districts, the 5 regions) and the 5th percentile for long ones (schools), where one tiny program would
      otherwise set it. */
   const p5of = (A) => { const S = A.slice().sort((a, b) => a - b); return S[Math.max(0, Math.round(0.05 * (S.length - 1)))]; };
-  const bstat = (L) => { const A = L.map((a) => a.rating).filter(Boolean); if (!A.length) return null; return { best: Math.max(...A), avg: A.reduce((t, v) => t + v, 0) / A.length, low: A.length < 20 ? Math.min(...A) : p5of(A), p5: A.length >= 20 }; };
+  const bstat = (L) => { const A = L.map((a) => a.rating).filter(Boolean); if (!A.length) return null; const S = A.slice().sort((a, b) => a - b), m = S.length >> 1; return { best: Math.max(...A), avg: A.reduce((t, v) => t + v, 0) / A.length, med: S.length % 2 ? S[m] : (S[m - 1] + S[m]) / 2, low: A.length < 20 ? Math.min(...A) : p5of(A), p5: A.length >= 20 }; };
   function benchScopes(u, U) {
     if (u.kind === 'district') { const g = membership().of[+u.id]; return [['State', () => OT.aggregateCore('school', null, 'state')]].concat(g ? [['Region', () => OT.aggregateCore('school', { kind: 'region', id: g }, 'region')]] : []).concat([['District', () => U.L()]]); }
     if (u.kind === 'region') return [['State', () => OT.aggregateCore('district', null, 'state')], ['Region', () => U.L()]];
@@ -209,13 +209,13 @@
     const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
     rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
     const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
-    /* every row on one shared horizontal scale, with a single line for the state average running through the rows:
-       distance between units is visible, not just their order, and above/below average reads at a glance. Optional
+    /* every row on one shared horizontal scale, with a single line for the statewide median running through the rows:
+       distance between units is visible, not just their order, and above/below the middle reads at a glance. Optional
        band (sessionStorage ot-band, for review): the 10th-90th percentile of the unit's own season values in the window,
        the same measure as its dot, so steady units and up-and-down ones look different. */
-    const stScope = () => OT.aggregateCore(U.kind, null, 'state');   // the line: the average unit of this list's kind statewide (school, district or region)
+    const stScope = () => OT.aggregateCore(U.kind, null, 'state');   // the line: the median unit of this list's kind statewide (school, district or region)
     const stB = bstat(stScope()), stS = sel ? OT.withSub([sel.a, sel.b], () => bstat(stScope())) : stB;
-    const two = !!sel; const ref = two ? (stS && stS.avg) : (stB && stB.avg);
+    const two = !!sel; const ref = two ? (stS && stS.med) : (stB && stB.med);   // median, so one very weak or very strong unit doesn't move the line
     const vis = rows.slice(0, lim);
     const band = (() => { try { return sessionStorage.getItem('ot-band') === '1'; } catch (e) { return false; } })(), q = (A, p) => { const S = A.slice().sort((x, y) => x - y); return S[Math.max(0, Math.min(S.length - 1, Math.round(p * (S.length - 1))))]; };
     const bandOf = (k) => { if (!band) return null; const L_ = two ? OT.withSub([sel.a, sel.b], () => U.L()) : U.L(); const it = L_.find((a) => a.k === k);
@@ -226,7 +226,7 @@
     const X = (v) => (100 * (v - lo) / (hi - lo)).toFixed(2);
     const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
     const [wy0, wy1] = OT.yearsWindow(), span = (a, b) => (a === b ? String(a) : a + '–' + b);
-    const refTxt = ref ? `Avg ${U.kind} ${r10(ref)}` : '';
+    const refTxt = ref ? `Median ${U.kind} ${r10(ref)}` : '';
     const body = vis.map((r) => {
       const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
       const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
