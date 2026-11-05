@@ -40,7 +40,7 @@
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
   const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
   const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-  const BV_STYLE = (() => { try { const m = /[?&]bv=([AB])\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare field layouts
+  const BV_STYLE = (() => { try { const m = /[?&]bv=(C)\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare field layouts
   const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
   const PK = Object.entries(TAG_PRESETS);
   const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
@@ -504,10 +504,9 @@
         const fin = r.place ? `<span class="bvfin ${pc(r.place)}" title="Finished ${ordinal(r.place)}">${ordinal(r.place)}</span>` : e.adv ? '<span class="bvfin adv" title="Advanced">Adv</span>' : '';
         const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
         const bwl = sx && sx[1] != null ? `<span class="bvbw2">Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
-        const head = `<span class="bvh"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b></a>${fin}<span class="dsp">${rtgTag(rOf(r))}</span></span><span class="bvsub">${stag(r.sch)}${meta ? `<span>${meta}</span>` : ''}</span>`;
         const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
-        return BV_STYLE === 'A' ? `<div class="bvl v2 vA${me ? ' me' : ''}">${head}${bouts}${bwl}${entrantMatrix(e, F)}</div>`
-          : `<div class="bvl v2 vB${me ? ' me' : ''}">${head}<span class="bvcols"><span class="bvleft">${bouts}${bwl}</span>${entrantMatrix(e, F)}</span></div>`;
+        const sub = `${stag(r.sch, { cls: 'xs' })}${r.grade ? `<span>${r.grade}</span>` : ''}`;
+        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sd">${e.seedLabel || ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${sub}</small></span>${fin || '<span></span>'}<span class="dsp">${rtgTag(rOf(r))}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }
       return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
