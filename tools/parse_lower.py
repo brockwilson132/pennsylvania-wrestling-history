@@ -187,3 +187,5 @@ if __name__ == '__main__':
     flagged = [l for l in L if 'WEIGHTS' in l or 'PLACERS' in l or 'ERROR' in l]
     open(os.path.join(out, 'lower_parse_log.txt'), 'w').write('\n'.join(L) + '\n\n== FLAGGED (%d) ==\n' % len(flagged) + '\n'.join(flagged))
     print('files', len(files), 'entrants', len(E), 'placed', sum(1 for e in E if e[6]), 'team rows', len(T), 'flagged', len(flagged))
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import clean_brackets
+    clean_brackets.run(out)   # strip Forfeit / team-score lines / seed prefixes / phantom placers (see clean_brackets.py)
