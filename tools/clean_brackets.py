@@ -25,7 +25,7 @@ The PDF parsers leave text in the name column that is not a wrestler. Every rule
 Names whose first name is unknown in the source ("? Miller") are real wrestlers and are kept.
 Writes data/brackets/clean_report.txt.
 """
-import csv, os, re, sys
+import csv, io, os, re, sys
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,8 +35,9 @@ JUNK = re.compile(r'^(?:(?:double\s+)?forfeit|forf\.?|bye|place|pts|points|team|
 NUM = re.compile(r'^[\d.\s,-]+$')
 RESULT = re.compile(r'^(?:sup\.?|maj\.?|tech\.?|dec\.?|fall|tf|def\.?|inj\.?|dq|disq\.?|forf\.?|med\.?|ff)(?:\s|$)', re.I)
 SLOT = re.compile(r'^[A-Z?]\.?\s.+\([A-Z0-9&\-]{1,6}\)\s*(?:Dec|Maj|Fall|TF|Disq|DQ|Sup|Def|Inj|Forf|Med|Bye)', re.I)   # a later-round slot "F. Last (ABBR)Dec. 8-2", not an entrant
-SEED = re.compile(r'^(?:[A-Z]{1,3}\d?|\d{1,2}[A-Z]?)-{1,2}\d{1,2}\s+(?=\S)|^\d{1,2}\s+(?=[A-Z?])')
+SEED = re.compile(r'^(?:[A-Z]{1,3}\d?|\d{1,2}[A-Z]?)-{1,2}\d{1,2}\s+(?=\S)|^\d{1,2}\s+(?=[A-Z?])|^(?:NW|NE|SW|SE|CW|CE)\s+(?=[A-Z])')   # "NW Keith Sterner": 1974 D11 sub-district tags
 GRADE_TAIL = re.compile(r',?\s+(\d{1,2}(?:st|nd|rd|th))$')
+GLUED_GRADE = re.compile(r'(?<=[a-z])(FR|SO|JR|SR)$')   # "Atakora-BediakoFR"
 SCHOOL_GRADE = re.compile(r'^(.+?),\s*(FR|SO|JR|SR)\s*,\s*-?[\d-]+$')   # school cell that swallowed grade and a garbled record: "Maplewood, JR, -1-17"
 SCHOOL_LINE = re.compile(r'^(.+?),\s*(FR|SO|JR|SR|Fr|So|Jr|Sr|\d{1,2}(?:th)?)\b(?:,\s*\d+-\d+(?:-\d+)?\s*\d?|\s+\d)\s*$')   # needs a record or a place: "Josh Barlow, Jr" is a wrestler
 GLUE = re.compile(r'(?<=\))\s*(?:Dec|Maj|Fall|TF|Disq|DQ|Sup|Def|Inj|Forf|Med)\b.*$', re.I)
@@ -129,10 +130,71 @@ def removals(s, p):
 SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan'}
 
 
+def name_merges():
+    """data/sources/name_merges.csv (tools/find_name_merges.py, reviewed): (name key, school key) -> the one spelling"""
+    p = os.path.join(ROOT, 'data', 'sources', 'name_merges.csv')
+    if not os.path.exists(p): return {}
+    with open(p, newline='') as f: return {(key(r['from']), r['school']): r['to'] for r in csv.DictReader(f)}
+
+
+def same_name(rows, pairs, merges, rep):
+    """rows whose (name, school) is a listed spelling of a wrestler get his one spelling"""
+    for r in rows:
+        for nm, sc in pairs:
+            to = merges.get((key(r[nm]), key(r[sc])))
+            if to and r[nm] != to: r[nm] = to; rep['name spelled another way, filed under its one spelling'] += 1
+
+
+# the other files that carry wrestler names: the state placewinners and the district champion lists
+NAME_FILES = [(os.path.join(ROOT, 'data', 'medals'), r'^\d{4}_(?:AAA|AA|single)\.csv$', 'wrestler', 'school'),
+              (os.path.join(ROOT, 'data', 'sources'), r'^d\d+_champions\.csv$', 'name', 'school')]
+
+
+def name_files():
+    for d, pat, nm, sc in NAME_FILES:
+        if os.path.isdir(d):
+            for f in sorted(os.listdir(d)):
+                if re.match(pat, f): yield os.path.join(d, f), nm, sc
+
+
+def same_name_files(merges, rep, check=False):
+    """apply (or with check=True only count) the merge list in the medal and champion files"""
+    bad = []
+    for path, nm, sc in name_files():
+        with open(path, newline='') as f: text = f.read()
+        rd = csv.DictReader(io.StringIO(text)); rows = list(rd)
+        if nm not in (rd.fieldnames or []): continue
+        if check:
+            bad += [r[nm] for r in rows if merges.get((key(r[nm]), key(r[sc]))) not in (None, r[nm])]; continue
+        r0 = Counter(); same_name(rows, [(nm, sc)], merges, r0)
+        if not r0: continue
+        with open(path, 'w', newline='') as f:
+            w = csv.DictWriter(f, fieldnames=rd.fieldnames, lineterminator='\r\n' if '\r\n' in text else '\n'); w.writeheader(); w.writerows(rows)
+        rep[f'{os.path.relpath(path, ROOT)}: name spelled another way, filed under its one spelling'] += sum(r0.values())
+    return bad
+
+
 def same_school(rows, keys, rep):
     for r in rows:
         for k in keys:
             if r[k] in SCHOOL_SAME: r[k] = SCHOOL_SAME[r[k]]; rep['school spelled another way, filed under its one name'] += 1
+
+
+GRADES = ('FR', 'SO', 'JR', 'SR')
+SCHOOL_LINE_PREFIX = re.compile(r'^.+?,\s*(?:FR|SO|JR|SR),\s*[\d-]+\s+\d+\s+([A-Z].+)$')
+
+
+def grade_out(name):
+    """(name, grade) when the grade is printed glued to or woven into the name's last word, else None"""
+    m = GLUED_GRADE.search(name)
+    if m: return name[:m.start()], m.group(1)
+    head, _, last = name.rpartition(' ')
+    if not re.search(r'[a-z][A-Z]', last): return None            # an interior capital is the sign; "DiGiovanni" has none after a lowercase
+    for gr in GRADES:
+        for rest, pos in removals(last, gr):
+            if all(last[i].isupper() for i in pos) and len(rest) >= 3 and not re.search(r"(?<!^)(?<![-'])(?<!Mc)(?<!Mac)[A-Z]", rest):
+                return (head + ' ' + rest).strip(), gr
+    return None
 
 
 def clean_entrants(E, B, rep):
@@ -160,6 +222,13 @@ def clean_entrants(E, B, rep):
             r['school'] = g.group(1).strip()
             if not r['grade']: r['grade'] = g.group(2)
             rep['entrants: grade and record cut from school'] += 1
+        m = SCHOOL_LINE_PREFIX.match(r['name'])   # "Reynolds, SR, 18-1 2 Guy Rocco John-Daniello": a school line glued in front
+        if m: r['name'] = m.group(1); rep['entrants: school line cut from the front of the name'] += 1
+        # 4e. a long (hyphenated) name ran into the grade column: "Atakora-BediakoFR", "Leytham-PetersoJnR", "BlackbuSrRn"
+        fixed = grade_out(r['name'])
+        if fixed:
+            if not r['grade']: r['grade'] = fixed[1]
+            r['name'] = fixed[0]; rep['entrants: grade glued or woven into the end of the name taken out'] += 1
         out.append(r)
     # 4b. the name's last letter printed inside the school ("Stephen Laudermilc", "Nhortheast Bradford"): put it back
     n = Counter(r['school'] for r in out)
@@ -309,8 +378,13 @@ def clean_bouts(B, E, S, rep):
 JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – ')   # "est Chester", "BattiPstlyamouth", "Maplewood, JR, -1-17", a glued second entry
 
 
-def junk_left(E, B):
-    bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])]
+def junk_left(E, B, S=()):
+    bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])
+           or SCHOOL_LINE_PREFIX.match(r['name']) or grade_out(r['name'])]
+    M = name_merges()
+    bad += [r['name'] for r in list(E) + list(S) if (key(r['name']), key(r['school'])) in M and r['name'] != M[(key(r['name']), key(r['school']))]]
+    bad += [b[s] for b in B for s in ('winner', 'loser') if (key(b[s]), key(b[s + '_school'])) in M and b[s] != M[(key(b[s]), key(b[s + '_school']))]]
+    bad += same_name_files(M, Counter(), check=True)
     bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + woven_schools(E) + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
     return bad
@@ -325,11 +399,18 @@ def run(folder=None, check=False):
     ef, E = read('lower_entrants.csv'); bf, B = read('bouts.csv')
     S = read('state_entrants.csv')[1] if os.path.exists(os.path.join(BR, 'state_entrants.csv')) else []
     if check:
-        bad = junk_left(E, B)
+        bad = junk_left(E, B, S)
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
     same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep)
+    M = name_merges()
+    if M:
+        same_name(E, [('name', 'school')], M, rep); same_name(B, [('winner', 'winner_school'), ('loser', 'loser_school')], M, rep)
+        if S:
+            r0 = Counter(); same_name(S, [('name', 'school')], M, r0)
+            if r0: write('state_entrants.csv', read('state_entrants.csv')[0], S); rep.update(r0)
+        same_name_files(M, rep)   # then: node tools/build_medals.js && node tools/build_brackets.js, copy site/medals.js brackets.js to overtime/
     if os.path.exists(os.path.join(BR, 'lower_teams.csv')):
         tf, T = read('lower_teams.csv'); r0 = Counter(); same_school(T, ['school'], r0)
         if r0: write('lower_teams.csv', tf, T); rep.update(r0)

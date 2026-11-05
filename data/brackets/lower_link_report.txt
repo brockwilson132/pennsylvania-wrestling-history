@@ -1,6 +1,6 @@
-exact 7929
-last-name 53
-missing 1488
+exact 7939
+last-name 48
+missing 1483
 of 9470
 
 sample missing:
@@ -40,7 +40,7 @@ sample missing:
 1976 AA 132 Keith Smith (Dover)
 1976 AA 145 Denny Jacobs (Northern York)
 1976 AA 155 Bryant Watlington (Susquehanna Township)
-1976 AA 167 Joe Zombeck (Fort Cherry)
 1976 AA 167 Chuck Colburn (Beth-Center)
 1976 AAA 119 Ken Newcomer (Southmoreland)
 1976 AAA 126 Randy Bigler (Trinity)
+1976 AAA 132 Crist Cooley (Central Tech)
