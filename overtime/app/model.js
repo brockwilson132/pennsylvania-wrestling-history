@@ -1,13 +1,15 @@
 /* Overtime — model. One object: an appearance (one wrestler, one season, one weight, one level).
    Levels are filters over appearances; dominance is computed per level and never mixed. */
 'use strict';
-const OT = (window.OT = {});
+/* var, not const: the second boot stage runs this file again over the same OT (see app/main.js, two-stage boot) */
+var OT = window.OT || (window.OT = {});
 (() => {
   const RAW = window.WR_DATA, SB = window.SchoolBadge;
   const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
+  /* nkey and canon run on every one of ~150k rows at startup, mostly on repeated strings: cached (both are pure) */
+  const NKC = new Map(); const nkey = (s) => { let k = NKC.get(s); if (k === undefined) { k = String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, ''); NKC.set(s, k); } return k; };
   /* careers (tools/build_people.js): one name at one school can be several people (father and son, or unrelated
      wrestlers decades apart). WR_CAREERS lists, per name+school, the start season of every career after the first;
      a row belongs to the latest career that started on or before its season. */
@@ -16,7 +18,7 @@ const OT = (window.OT = {});
   const fmt = d3.format(',');
   const ordinal = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 'st', 'nd', 'rd'][n % 100] || 'th');
   const SAME = { Allentown: 'William Allen', Allen: 'William Allen' };
-  const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
+  const CANC = new Map(); const canon = (s) => { let c = CANC.get(s); if (c === undefined) { const id = SB && SB.identity(s); const n = id ? id.school : s; c = SAME[n] || n; CANC.set(s, c); } return c; };
   const wShort = (w) => (w === 'UNL' ? 'Unl' : w === 'HWT' ? 'Hwt' : String(w));
   const DISTRICTS = { 1: 'Southeast', 2: 'Scranton–Wilkes-Barre', 3: 'South Central', 4: 'North Central', 5: 'Bedford–Somerset', 6: 'Central', 7: 'WPIAL', 8: 'Pittsburgh City', 9: 'Northwest Central', 10: 'Northwest', 11: 'Lehigh Valley', 12: 'Philadelphia' };
   const REGIONS = { NE: 'Northeast', SE: 'Southeast', SW: 'Southwest', NW: 'Northwest', SC: 'South Central', W: 'West', E: 'East', CNW: 'Central Northwest' };
@@ -24,11 +26,14 @@ const OT = (window.OT = {});
 
   /* scope */
   const EMPTY_F = () => ({ weights: [], regions: [], districts: [], schools: [] });
-  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
-  try { const mm = localStorage.getItem('ot-mapmode'); if (mm === 'districts' || mm === 'regions') state.mapmode = mm; } catch (e) { /* none */ }
-  try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
-  try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
-  try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
+  /* the same state object survives the second boot stage, so filters chosen meanwhile carry over */
+  const state = OT.state || { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
+  if (!OT.state) {
+    try { const mm = localStorage.getItem('ot-mapmode'); if (mm === 'districts' || mm === 'regions') state.mapmode = mm; } catch (e) { /* none */ }
+    try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
+    try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
+    try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
+  }
   const MEMO = new Map(); const memo = (k, f) => { if (!MEMO.has(k)) MEMO.set(k, f()); return MEMO.get(k); };
   const clearCaches = () => { MEMO.clear(); STATS.clear(); RANKS.clear(); SEASONS.clear(); WIN.clear(); SREG.clear(); DREG.clear(); };
   const save = (k, v) => { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) { /* none */ } };
@@ -304,7 +309,6 @@ const OT = (window.OT = {});
      eight, on the same scale, so a district reads below a regional below states. Data: sos.js (eager: every bracket's
      field, the rating of every state entrant and district/regional medalist) and sos/<year>.json (lazy: every entrant's
      rating, best win and bad losses per tournament, and every bout). */
-  const stateByYK = new Map(); APP.forEach((r) => { const k = r.year + '|' + wKey(r); stateByYK.set(k, (stateByYK.get(k) || 0) + r.pts); });
   const SOSD = window.WR_SOS || {}, RTG_META = window.WR_RTG_META || { field: {}, lo: 1000, hi: 1750 };
   const L1 = { state: 's', regional: 'r', district: 'd', section: 'x' };
   const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
@@ -463,19 +467,18 @@ const OT = (window.OT = {});
   const lowerTeamRows = (u, lvl) => LTEAMS.filter((t) => t.lvl === lvl && inWindow(t.year) && (state.cls === 'ALL' || t.cls === state.cls || (t.cls === 'single' && (LIN.get(t.sch) || 'AAA') === state.cls)) && (u.kind === 'district' ? (t.unit === 'D' + u.id || t.unit.startsWith('D' + u.id + '_') || t.unit.replace('D', '').split('-').includes(String(u.id)) && t.unit.includes('-')) : u.kind === 'region' ? t.unit === u.id : u.kind === 'school' ? t.sch === u.id : true));
   const lowerCoverage = (u, lvl) => { const ks = LM.cov.map((c) => c.split('|')).filter((p) => p[0] === lvl && (state.cls === 'ALL' || p[2] === state.cls || p[2] === 'single') && (u.kind === 'district' ? (p[3] === 'D' + u.id || p[3].startsWith('D' + u.id + '_') || (p[3].includes('-') && p[3].replace('D', '').split('-').includes(String(u.id)))) : u.kind === 'region' ? p[3] === u.id : true)); const ys = Array.from(new Set(ks.map((p) => +p[1]))).sort((a, b) => a - b); return { n: ks.length, years: ys, first: ys[0], last: ys[ys.length - 1] }; };
   /* a state wrestler's district and regional rows: exact key, then last name + school + season as a fallback */
-  const LIDX = new Map(), LIDX2 = new Map();
-  LOWER.forEach((r) => { const k = wKey(r); (LIDX.get(k) || LIDX.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (LIDX2.get(k2) || LIDX2.set(k2, []).get(k2)).push(r); });
+  /* built on first use (a wrestler page), not at startup: indexing every district and regional row costs a phone ~1 s */
+  const idx2 = (rows) => { const A = new Map(), B = new Map(); rows.forEach((r) => { const k = wKey(r); (A.get(k) || A.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (B.get(k2) || B.set(k2, []).get(k2)).push(r); }); return [A, B]; };
+  let LIX = null, LSIX = null; const lidx = () => LIX || (LIX = idx2(LOWER)), lsidx = () => LSIX || (LSIX = idx2(LSEC));
   const lastName = (n) => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/).pop().toLowerCase().replace(/[^a-z]/g, '');
   const firstName = (n) => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
   /* same person, different spelling of the first name (Joe / Joey, Matt / Matthew); brothers (Tyler / Trevor) stay apart */
   const sameFirst = (a, b) => { const x = firstName(a), y = firstName(b); return x === y || (Math.min(x.length, y.length) >= 3 && (x.startsWith(y) || y.startsWith(x))); };
-  const LSIDX = new Map(), LSIDX2 = new Map();
-  LSEC.forEach((r) => { const k = wKey(r); (LSIDX.get(k) || LSIDX.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (LSIDX2.get(k2) || LSIDX2.set(k2, []).get(k2)).push(r); });
   /* his section result in a season: exact key, then last name + school + season + weight */
-  const sectionFor = (apps, year) => { const a0 = apps && apps[0]; if (!a0) return null; const ex = (LSIDX.get(wKey(a0)) || []).find((r) => r.year === year); if (ex) return ex;
+  const sectionFor = (apps, year) => { const a0 = apps && apps[0]; if (!a0) return null; const [LSIDX, LSIDX2] = lsidx(); const ex = (LSIDX.get(wKey(a0)) || []).find((r) => r.year === year); if (ex) return ex;
     const ln = lastName(a0.name); const near = apps.find((a) => a.year === year) || a0;
     return (LSIDX2.get(near.sch + '|' + year) || []).find((r) => lastName(r.name) === ln && sameFirst(r.name, a0.name) && (!near.wn || Math.abs(r.wn - near.wn) <= 20)) || null; };
-  const lowerFor = (apps) => { if (!apps || !apps.length) return []; const out = (LIDX.get(wKey(apps[0])) || []).slice(); const have = new Set(out.map((r) => r.lvl + '|' + r.year)); const ln = lastName(apps[0].name);
+  const lowerFor = (apps) => { if (!apps || !apps.length) return []; const [LIDX, LIDX2] = lidx(); const out = (LIDX.get(wKey(apps[0])) || []).slice(); const have = new Set(out.map((r) => r.lvl + '|' + r.year)); const ln = lastName(apps[0].name);
     apps.forEach((a) => (LIDX2.get(a.sch + '|' + a.year) || []).forEach((r) => { if (!have.has(r.lvl + '|' + r.year) && lastName(r.name) === ln && sameFirst(r.name, apps[0].name) && Math.abs(r.wn - a.wn) <= 20) { out.push(r); have.add(r.lvl + '|' + r.year); } }));
     return out.sort((a, b) => a.year - b.year || (a.lvl === 'district' ? 0 : 1) - (b.lvl === 'district' ? 0 : 1)); };
   /* wrestlers who only appear in the archive (never placed at states) still get a page */

@@ -9,7 +9,7 @@ const ctx = { console, Math, Date, JSON, Map, Set, Array, Object, String, Number
 ctx.window = ctx; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(D3, 'utf8'), ctx);
 const html = fs.readFileSync(path.join(OV, 'index.html'), 'utf8');
-Array.from(html.matchAll(/<script src="([^"]+)"/g)).map((m) => m[1]).filter((f) => !/^https?:|icongeo/.test(f) && !/components|pages|main|units\.js$|maps/.test(f) || f === 'units.js')
+require('./app_scripts')(html).filter((f) => !/^https?:|icongeo/.test(f) && !/components|pages|main|units\.js$|maps/.test(f) || f === 'units.js')
   .forEach((f) => vm.runInContext(fs.readFileSync(path.join(OV, f), 'utf8'), ctx, { filename: f }));
 const OT = ctx.OT, M = ctx.PA_MAP, T = ctx.topojson, d3 = ctx.d3;
 OT.setCls('ALL'); OT.setWin({ mode: '5' });
