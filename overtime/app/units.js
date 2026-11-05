@@ -77,10 +77,10 @@
       });
     });
   }
-  /* list members need enough seasons with Strength in the window: a third of them for schools, half for districts and regions */
+  /* list members need enough seasons with Strength in the window: a third of them (D3 and D7 have none for 1975-98) */
   function aggregate(kind, parent, pageKind) {
     const [wa, wb] = OT.yearsWindow(); const rs = new Set(ssIn(null).map((r) => r[1]).filter(ratedYear));
-    const n = Math.max(1, rs.size), minS = kind === 'school' ? Math.max(1, Math.ceil(n / 3)) : Math.max(1, Math.ceil(n / 2));
+    const n = Math.max(1, rs.size), minS = Math.max(1, Math.ceil(n / 3));
     const home = kind === 'school' && state.cls !== 'ALL';
     if (wb < RATED_FROM) return aggregateCore(kind, parent, pageKind, home).filter((a) => a.score > 0).map((a) => { a.rating = a.rating || 0; return a; });
     return aggregateCore(kind, parent, pageKind, home).filter((a) => a.rating && a.series.length >= minS);
