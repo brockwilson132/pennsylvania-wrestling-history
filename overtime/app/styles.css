@@ -549,6 +549,7 @@ i.wdg{height:5px}
 .fg4{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}
 .fg4 .fgl{display:grid;line-height:1;gap:3px}.fg4 .fgl span{font:700 10px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash);max-width:96px}.fg4 .fgl b{font:900 22px var(--cond)}
 .fgw4{display:grid;gap:5px}.fgtrk4{display:block;position:relative;height:6px;border-radius:3px;background:#242A32;overflow:hidden}.fgtrk4 u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:#EEEAE1;opacity:.7}.fgtrk4 i{display:block;height:100%;border-radius:3px}
+.fgtk{position:relative;display:block;height:11px;margin-top:-2px}.fgtk s{position:absolute;top:0;transform:translateX(-50%);text-decoration:none;white-space:nowrap;font:700 9px/1 var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}.fgtk s:last-child{transform:translateX(-70%)}
 .fgw4 em{font:600 11.5px var(--sans,inherit);font-style:normal;color:var(--ash)}
 .ss .srh .f,.ss .sr .f{gap:6px}.ss .sr .tp{width:24px;height:16px;font-size:11px}
 .ss .srh .f i{width:30px;text-align:center}

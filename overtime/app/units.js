@@ -139,7 +139,7 @@
     if (!LP) { LP = { s: [], r: [], d: [] }; const SO = window.WR_SOS || {};
       for (const y in SO) { const Y = SO[y]; for (const k in Y) { const e = Y[k]; if (!e || e[0] == null) continue; const l = k.split('.')[1]; if (LP[l]) LP[l].push(e[0] * 10); } }
       Object.values(LP).forEach((a) => a.sort((x, z) => x - z)); }
-    return LP[LK[lvl] || 's'];
+    return LK[lvl] ? LP[LK[lvl]] : [];
   };
   const pctIn = (v, lvl = 'state') => { const A = lvlArr(lvl); if (!A.length) return null; let lo = 0, hi = A.length; while (lo < hi) { const m = (lo + hi) >> 1; if (A[m] < v) lo = m + 1; else hi = m; } return Math.round(100 * lo / A.length); };
   /* cold → hot: ice blue, cyan, green, yellow, orange, fire red. One ramp for every rating and strength colour. */
@@ -147,9 +147,10 @@
   const colorAt = (f) => { let i = 0; while (i < STOPS.length - 2 && f > STOPS[i + 1][0]) i++; const [a, ca] = STOPS[i], [b, cb] = STOPS[i + 1]; const t = Math.max(0, Math.min(1, (f - a) / (b - a))); return 'rgb(' + ca.map((x, k) => Math.round(x + (cb[k] - x) * t)).join(',') + ')'; };
   const S_AT = 0.8;   // where the average state bracket sits on every bar
   let SAX = null;
-  const sAnchor = () => { if (!SAX) { const S = lvlArr('state'), D = lvlArr('district');
-      const avg = S.length ? S.reduce((a, b) => a + b, 0) / S.length : 1710, lo = D.length ? D[Math.floor(0.05 * (D.length - 1))] : 500;
-      SAX = { avg, lo: Math.min(lo, avg - 400) }; }
+  const mean = (A) => A.reduce((a, b) => a + b, 0) / A.length;
+  const sAnchor = () => { if (!SAX) { const S = lvlArr('state'), R = lvlArr('regional'), D = lvlArr('district');
+      const avg = S.length ? mean(S) : 1710, lo = D.length ? D[Math.floor(0.05 * (D.length - 1))] : 500;
+      SAX = { avg, lo: Math.min(lo, avg - 400), lvl: { state: avg, regional: R.length ? mean(R) : null, district: D.length ? mean(D) : null } }; }
     return SAX; };
   const sFrac = (v) => { const { avg, lo } = sAnchor(); return Math.max(0.06, Math.min(1, S_AT * (v - lo) / (avg - lo))); };
   const vsState = (v) => { const d = Math.round((v - sAnchor().avg) / 10) * 10; return Math.abs(d) < 10 ? 'level with the average state bracket' : `${Math.abs(d)} ${d > 0 ? 'above' : 'below'} the average state bracket`; };
@@ -164,11 +165,15 @@
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
-  /* bracket header: the same bar lying flat on the same scale, with a tick where the average state bracket sits */
+  /* bracket header: the same bar lying flat on the same scale, with ticks for the average bracket at its own level and at
+     every level above it (a district header shows district, regional and state), labelled under the track */
+  const TICK_L = { district: 'Avg district', regional: 'Avg regional', state: 'Avg state' };
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
-    const f = sFrac(v, lvl), p = pctIn(v, lvl);
-    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i><u style="left:${100 * S_AT}%" title="Average state bracket ${r10(sAnchor().avg)}"></u></span><em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
+    const f = sFrac(v, lvl), p = pctIn(v, lvl), L = sAnchor().lvl;
+    const from = { state: 0, regional: 1, district: 2, section: 2 }[lvl] ?? 0;   // ticks for this level and every level above it
+    const ticks = ['state', 'regional', 'district'].slice(0, from + 1).map((k) => [k, L[k]]).filter((t) => t[1] != null).reverse();
+    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i>${ticks.map(([k, a]) => `<u style="left:${(100 * sFrac(a)).toFixed(1)}%"></u>`).join('')}</span>${ticks.length ? `<span class="fgtk">${ticks.map(([k, a]) => `<s style="left:${(100 * sFrac(a)).toFixed(1)}%" title="Average ${k} bracket ${r10(a)}">${TICK_L[k]}</s>`).join('')}</span>` : ''}<em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
   const legend = () => `<span class="clg"><span class="clgt">Bar under each result: how tough that bracket was. Easier</span><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span><span class="clgt">tougher</span></span>`;
 
