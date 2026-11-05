@@ -40,7 +40,6 @@
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
   const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
   const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-  const BV_STYLE = (() => { try { const m = /[?&]bv=([AB])\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare field layouts
   const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
   const PK = Object.entries(TAG_PRESETS);
   const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
@@ -495,21 +494,22 @@
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
-      const meta = [r.grade, r.record].filter(Boolean).join(' · ');
       const sx = SB_ && SB_.s[nk(r.name)]; const bl = boutsOf(r.name);
       const net = NET.get(nk(r.name));
-      const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
-      const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
-      if (BV_STYLE) {
+      {
         const fin = r.place ? `<span class="bvfin ${pc(r.place)}" title="Finished ${ordinal(r.place)}">${ordinal(r.place)}</span>` : e.adv ? '<span class="bvfin adv" title="Advanced">Adv</span>' : '';
         const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
-        const bwl = sx && sx[1] != null ? `<span class="bvbw2">Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
-        const head = `<span class="bvh"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b></a>${fin}<span class="dsp">${rtgTag(rOf(r))}</span></span><span class="bvsub">${stag(r.sch)}${meta ? `<span>${meta}</span>` : ''}</span>`;
+        const bwl = (sx && sx[1] != null) || r.record ? `<span class="bvbw2">${r.record ? `Record <b>${esc(r.record)}</b>${sx && sx[1] != null ? ' · ' : ''}` : ''}${sx && sx[1] != null ? `Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}` : ''}</span>` : '';
         const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
-        return BV_STYLE === 'A' ? `<div class="bvl v2 vA${me ? ' me' : ''}">${head}${bouts}${bwl}${entrantMatrix(e, F)}</div>`
-          : `<div class="bvl v2 vB${me ? ' me' : ''}">${head}<span class="bvcols"><span class="bvleft">${bouts}${bwl}</span>${entrantMatrix(e, F)}</span></div>`;
+        /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
+        const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
+        const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
+        const pbar = path != null ? OT.sbar(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
+        const rf = (v) => Math.max(0.04, Math.min(1, (v - 1000) / 1200));   // fixed RTG scale so a field spreads out
+        const rv = rOf(r), rbar = rv ? `<span class="smtr" title="RTG ${OT.rtg10(rv)} · bar runs from 1000 to 2200"><i><b style="width:${(100 * rf(rv)).toFixed(0)}%;background:${OT.colorAt(rf(rv))}"></b></i></span>` : '<span class="smtr sm0"><i></i></span>';
+        const pline = path != null ? `<span class="bvop"><span>Opponents averaged <b>${Math.round(path)}</b></span>${pbar}</span>` : '';
+        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span>${fin || '<span></span>'}<span class="dsp">${rtgTag(rOf(r))}${rbar}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }
-      return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
