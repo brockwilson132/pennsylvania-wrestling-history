@@ -290,7 +290,7 @@
   function addScript(src) { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error('could not load ' + src)); document.body.appendChild(s); }); }
   function loadFull() {
     const late = window.OT_LATE || [];
-    const app = Array.from(document.scripts).map((s) => s.getAttribute('src')).filter((s) => s && /^app\//.test(s) && !/main\.js$/.test(s));
+    const app = Array.from(document.scripts).map((s) => s.getAttribute('src')).filter((s) => s && /^app\//.test(s) && !/main\.js(\?|$)/.test(s));
     if (!late.length) { OT.full = true; return Promise.resolve(); }
     // the boot loader (index.html) shows only while #main is empty, i.e. when a page other than the State map was opened first
     let got = 0; const tick = () => { got++; if (window.OTBoot) window.OTBoot.progress(0.9 * got / late.length); };
