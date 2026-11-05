@@ -29,7 +29,9 @@
   const scaleFor = (vals, kind = 'district') => { const [lo, hi] = OT.ratingDom(kind); return { lo, hi, f: (x) => OT.domFrac(kind, x) }; };
   const HATCH = '<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#1A1F26"/><line x1="0" y1="0" x2="0" y2="10" stroke="#3A424D" stroke-width="3"/></pattern></defs>';
   const NOFILL = 'url(#hatch)';
-  const legend = (sc, note, hatch) => `<div class="mlg"><span class="mlgl">Strength</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
+  /* the colour key: the full-width cold → hot ramp between a weak icon (one bar lit) and a strong one (all four lit) */
+  const sig = (n, c) => `<svg viewBox="0 0 22 18" width="22" height="18" aria-hidden="true">${[0, 1, 2, 3].map((i) => `<rect x="${i * 5.5 + 0.5}" y="${13 - i * 4}" width="4" height="${5 + i * 4}" rx="1" fill="${i < n ? c : 'none'}" stroke="${i < n ? c : '#5F6B78'}" stroke-width="1"/>`).join('')}</svg>`;
+  const legend = (sc, note, hatch) => `<div class="mlg"><div class="mlgr"><span class="mlgi" title="Weaker${sc.lo ? ' · ' + r10(sc.lo) : ''}">${sig(1, '#2C5BD8')}</span><i class="mlgbar" role="img" aria-label="Strength colour scale, ${r10(sc.lo) || '–'} to ${r10(sc.hi) || '–'}" title="Strength ${r10(sc.lo) || '–'} to ${r10(sc.hi) || '–'}"></i><span class="mlgi" title="Stronger${sc.hi ? ' · ' + r10(sc.hi) : ''}">${sig(4, '#E8392B')}</span></div>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
   const tip = (name, a) => `${name}${a && a.rating ? ' · Strength ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + OT.sfmt(a.score) : ''}`;
   const svgOpen = (vb, label) => `<svg class="pam" viewBox="${vb.join(' ')}" role="img" aria-label="${esc(label)}">${HATCH}`;
   const outline = () => `<path class="pao" d="${M.outline}"/>`;
@@ -142,6 +144,7 @@
   const pageKey = (u) => u.kind + ':' + u.id;
   function listUnits(u) {
     if (u.kind === 'state') {
+      if (OT.state.mlevel === 'school') return { kind: 'school', L: () => OT.aggregateCore('school', null, 'state'), keys: null, mk: (k) => 's' + k, name: (k) => OT.UD.schools[k], href: (k) => '#school/' + slug(OT.UD.schools[k]) };
       if (OT.mapMode() === 'districts') return { kind: 'district', L: () => OT.aggregateCore('district', null, 'state'), keys: Array.from({ length: 12 }, (_, i) => i + 1), mk: (k) => 'd' + k, name: (k) => 'D' + k + ' ' + (DISTRICTS[k] || ''), href: (k) => '#district/' + k };
       return { kind: 'region', L: () => OT.aggregateCore('region', null, 'state'), keys: FIVE, mk: (k) => k, name: (k) => REGIONS[k], href: (k) => '#region/' + k };
     }
@@ -199,45 +202,53 @@
     if (u.kind === 'region') return [['State', () => OT.aggregateCore('district', null, 'state')], ['Region', () => U.L()]];
     return [['State', () => U.L()]];
   }
+  /* the list under the map, by the metric picked on the page's tiles (Strength by default). Strength keeps its own axis
+     (the rating scale, padded around the rows) and the map colours; Talent, Score and Titles run from zero, Talent on the
+     cold → hot ramp, Score and Titles in gold. One line for the statewide median of the list's kind. */
+  const MNAME = { rating: 'Strength', talent: 'Talent', score: 'Score', ti: 'Titles' };
+  const GOLD = '#D9A441';
   function unitList(u, sel) {
     const U = listUnits(u);
-    const full = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]));
-    const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.rating]))) : full;
+    const m = MNAME[OT.state.mmetric] && u.kind !== 'school' ? OT.state.mmetric : 'rating', isR = m === 'rating';
+    const f = (a) => (a && a[m]) || 0;
+    const txt = (v) => (!v ? '–' : isR ? r10(v) : m === 'talent' ? OT.talTxt(v, U.kind) : m === 'score' ? OT.sfmt(v) : fmt(v));
+    const full = new Map(U.L().filter((a) => f(a)).map((a) => [a.k, f(a)]));
+    const now = sel ? OT.withSub([sel.a, sel.b], () => new Map(U.L().filter((a) => f(a)).map((a) => [a.k, f(a)]))) : full;
     const nsF = new Map(U.L().filter((a) => a.rating).map((a) => [a.k, a.nS]));
     let keys = U.keys || Array.from(new Set([...full.keys()]));
     let rows = keys.map((k) => ({ k, s: now.get(k) || 0, v: full.get(k) || 0 })).filter((r) => (r.s || r.v) && String(U.name(r.k) || '').trim());
-    const srt = OT.state.msort === 'avg' ? 'avg' : 'sel', key = (r) => (srt === 'avg' ? r.v : r.s);
+    const srt = OT.state.msort === 'avg' ? 'avg' : 'sel';
     rows.sort(srt === 'avg' ? (p, q) => q.v - p.v || q.s - p.s : (p, q) => q.s - p.s || q.v - p.v);
-    const lim = u.kind === 'district' && !OT.state.mlall ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
-    /* every row on one shared horizontal scale, with a single line for the statewide median running through the rows:
-       distance between units is visible, not just their order, and above/below the middle reads at a glance. Optional
-       band (sessionStorage ot-band, for review): the 10th-90th percentile of the unit's own season values in the window,
-       the same measure as its dot, so steady units and up-and-down ones look different. */
-    const stScope = () => OT.aggregateCore(U.kind, null, 'state');   // the line: the median unit of this list's kind statewide (school, district or region)
-    const stB = bstat(stScope()), stS = sel ? OT.withSub([sel.a, sel.b], () => bstat(stScope())) : stB;
-    const two = !!sel; const ref = two ? (stS && stS.med) : (stB && stB.med);   // median, so one very weak or very strong unit doesn't move the line
+    const lim = !OT.state.mlall && rows.length > 12 ? 12 : rows.length, more = rows.length > lim ? rows.length : 0;
+    /* every row on one shared horizontal scale, with a single line for the statewide median running through the rows */
+    const stScope = () => OT.aggregateCore(U.kind, null, 'state');
+    const med = (L) => { const A = L.map(f).filter(Boolean).sort((x, y) => x - y); if (!A.length) return null; const i = A.length >> 1; return A.length % 2 ? A[i] : (A[i - 1] + A[i]) / 2; };
+    const two = !!sel; const ref = !isR ? null : two ? OT.withSub([sel.a, sel.b], () => med(stScope())) : med(stScope());   // zero-based metrics: most units sit at or near zero, so a median line says nothing
     const vis = rows.slice(0, lim);
-    const band = (() => { try { return sessionStorage.getItem('ot-band') === '1'; } catch (e) { return false; } })(), q = (A, p) => { const S = A.slice().sort((x, y) => x - y); return S[Math.max(0, Math.min(S.length - 1, Math.round(p * (S.length - 1))))]; };
+    const band = isR && (() => { try { return sessionStorage.getItem('ot-band') === '1'; } catch (e) { return false; } })(), q = (A, p) => { const S = A.slice().sort((x, y) => x - y); return S[Math.max(0, Math.min(S.length - 1, Math.round(p * (S.length - 1))))]; };
     const bandOf = (k) => { if (!band) return null; const L_ = two ? OT.withSub([sel.a, sel.b], () => U.L()) : U.L(); const it = L_.find((a) => a.k === k);
       const A = it && it.series ? it.series.map((x) => x[1]).filter(Boolean) : []; return A.length >= 3 ? [q(A, 0.1), q(A, 0.9)] : null; };
     vis.forEach((r) => { r.band = bandOf(r.k); });
     const vals = vis.flatMap((r) => [two ? r.s : r.v].concat(r.band || [])).filter(Boolean).concat(ref ? [ref] : []);
-    const lo0 = Math.min(...vals), hi0 = Math.max(...vals), pad = Math.max(10, (hi0 - lo0) * 0.06), lo = lo0 - pad, hi = hi0 + pad;
+    let lo, hi;
+    if (isR) { const lo0 = Math.min(...vals), hi0 = Math.max(...vals), pad = Math.max(10, (hi0 - lo0) * 0.06); lo = lo0 - pad; hi = hi0 + pad; } else { lo = 0; hi = Math.max(...vals, 0) * 1.04 || 1; }
     const X = (v) => (100 * (v - lo) / (hi - lo)).toFixed(2);
+    const top = Math.max(...stScope().map(f), 0) || 1;
+    const tintOf = (v) => (!v ? '#2F3640' : isR ? OT.ratingColor(U.kind, v) : m === 'talent' ? OT.colorAt(v / top) : GOLD);
     const hd = (k, l) => `<button class="ht${srt === k ? ' on' : ''}" data-msort="${k}">${l}</button>`;
     const [wy0, wy1] = OT.yearsWindow(), span = (a, b) => (a === b ? String(a) : a + '–' + b);
-    const refTxt = ref ? `Median ${U.kind} ${r10(ref)}` : '';
+    const refTxt = ref ? `Median ${U.kind} ${txt(ref)}` : '';
     const body = vis.map((r) => {
-      const d = r.s && r.v ? Math.round((r.s - r.v) / 10) * 10 : 0;
-      const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${d}</em>` : d < 0 ? `<em class="dn">▼${-d}</em>` : '<em>·</em>';
+      const d = r.s && r.v ? (isR ? Math.round((r.s - r.v) / 10) * 10 : r.s - r.v) : 0;
+      const dl = !two || !r.s || !r.v ? '' : d > 0 ? `<em class="up">▲${isR ? d : txt(d)}</em>` : d < 0 ? `<em class="dn">▼${isR ? -d : txt(-d)}</em>` : '<em>·</em>';
       const v1 = two ? r.s : r.v;
-      const tint = v1 ? OT.ratingColor(U.kind, v1) : '#2F3640';
+      const tint = tintOf(v1);
       const trk = `<span class="mlt" aria-hidden="true">${ref ? `<i class="mltl" style="left:${X(ref)}%"></i>` : ''}${r.band ? `<i class="mltb" style="left:${X(r.band[0])}%;width:${(X(r.band[1]) - X(r.band[0])).toFixed(2)}%;--tint:${tint}"></i>` : ''}${v1 ? `<i class="mltd" style="left:${X(v1)}%;--tint:${tint}"></i>` : ''}</span>`;
-      return `<div class="mlr ax${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a>${trk}<span class="mls" style="--tint:${tint}" title="${esc(`Strength ${v1 ? r10(v1) : '–'}` + (!two && nsF.get(r.k) ? ` · average of ${nsF.get(r.k)} season${nsF.get(r.k) === 1 ? '' : 's'}` : ''))}">${v1 ? r10(v1) : '–'}</span>${two ? `<span class="mla">${r.v ? r10(r.v) : '–'}${dl}</span>` : ''}</div>`;
+      return `<div class="mlr ax${two ? '' : ' one'}" data-mk="${U.mk(r.k)}"><a class="mln" href="${U.href(r.k)}">${esc(U.name(r.k))}</a>${trk}<span class="mls" style="--tint:${tint}" title="${esc(`${MNAME[m]} ${txt(v1)}` + (isR && !two && nsF.get(r.k) ? ` · average of ${nsF.get(r.k)} season${nsF.get(r.k) === 1 ? '' : 's'}` : ''))}">${txt(v1)}</span>${two ? `<span class="mla">${txt(r.v)}${dl}</span>` : ''}</div>`;
     }).join('');
     const moreBtn = more ? `<button class="more" data-mlall="${OT.state.mlall ? '0' : '1'}">${OT.state.mlall ? 'Show top 12' : 'Show all ' + more}</button>` : '';
     const who = U.kind === 'school' ? 'Teams' : U.kind === 'district' ? 'Districts' : 'Regions';
-    return `<div class="ml"><div class="mlh ax${two ? '' : ' one'}"><span>${who}</span><span class="mltk">${refTxt ? `<i style="left:${X(ref)}%">${refTxt}</i>` : ''}${band ? '<em>band: middle 80% of its seasons</em>' : ''}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : `<button class="ht on" disabled title="${esc(OT.unitRtgTip(U.kind))}">${OT.unitRtgLabel(U.kind)}</button>`}</div>${body || '<div class="note1">No rated units in this window.</div>'}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
+    return `<div class="ml"><div class="mlh ax${two ? '' : ' one'}"><span>${who}</span><span class="mltk">${refTxt ? `<i style="left:${X(ref)}%">${refTxt}</i>` : ''}${band ? '<em>band: middle 80% of its seasons</em>' : ''}</span>${two ? hd('sel', span(sel.a, sel.b)) + hd('avg', span(wy0, wy1)) : `<button class="ht on" disabled title="${esc(isR ? OT.unitRtgTip(U.kind) : MNAME[m])}">${MNAME[m]}</button>`}</div>${body || `<div class="note1">No ${MNAME[m].toLowerCase()} in this window.</div>`}${moreBtn ? `<div class="bmore">${moreBtn}</div>` : ''}</div>`;
   }
   /* the TIME scrubber (filter bar): the whole archive as a heat strip of the statewide rating per season, two handles
      for the window. Drawn with the window set to all-time so the strip always spans every season of the class. */
@@ -257,18 +268,19 @@
     const [w0, w1] = OT.yearsWindow(); const sel = w0 === w1 ? { a: w0, b: w1 } : null;
     const map = mapOnly(u);
     if (!map) return '';
-    const ctl = u.kind === 'state' ? `<div class="mapctl"><div class="seg sm" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div></div>` : '';
     let sheet = '';
     if (sel && sel.a === sel.b) {
       const inU = u.kind === 'state' ? () => true : u.kind === 'district' ? (r) => r.d === +u.id : (r) => OT.regionOf(r) === u.id;
       sheet = `<div class="ss mss"><div class="ssh"><b>${sel.a}</b><span>state placers</span></div>${OT.placeMatrix(sel.a, inU, u.kind === 'state')}</div>`;
     }
-    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}">${ctl}<div class="mcb"><div class="mcm">${map}</div>${unitList(u, null)}</div>${sheet}</div>`;
+    return `<div class="mapcard" data-mapcard="${esc(pageKey(u))}"><div class="mcb"><div class="mcm">${map}</div>${unitList(u, null)}</div>${sheet}</div>`;
   }
+  /* the state map's Regions/Districts switch; it lives on the page's title row */
+  const mapModeSeg = () => `<div class="seg sm" role="group" aria-label="Map" data-mapmode-seg="1">${[['regions', 'Regions'], ['districts', 'Districts']].map(([k, l]) => `<button data-mapmode="${k}" aria-pressed="${OT.mapMode() === k}">${l}</button>`).join('')}</div>`;
   function ratingMap(u) {
     if (!M || !M.topo || !window.d3) return '';
     try { return mapCard(u); } catch (e) { console.warn('map', e); }
     return '';
   }
-  Object.assign(OT, { ratingMap, mapCard, timeScrubber });
+  Object.assign(OT, { ratingMap, mapCard, timeScrubber, mapModeSeg });
 })();

@@ -283,6 +283,8 @@
     const bs = e.target.closest('button[data-bvsort]'); if (bs) { state.bvsort = bs.dataset.bvsort; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; bview.scrollTop = top; } return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }
     const bl = e.target.closest('a.bl[data-bl]'); if (bl) { e.preventDefault(); slideTo(bl); return; }
+    const mt = e.target.closest('button[data-mmetric]'); if (mt) { state.mmetric = mt.dataset.mmetric; state.mlall = false; render(true); return; }
+    const ml = e.target.closest('button[data-mlevel]'); if (ml) { state.mlevel = ml.dataset.mlevel; state.mapmode = ml.dataset.mlevel === 'region' ? 'regions' : 'districts'; try { localStorage.setItem('ot-mapmode', state.mapmode); } catch (er) { /* none */ } state.mlall = false; state.pseason = null; render(true); return; }
     const mcard = e.target.closest && e.target.closest('.mapcard');
     if (mcard) {
       const [kd, ...rest] = mcard.dataset.mapcard.split(':'); const u = { kind: kd, id: rest.join(':') }; const key = mcard.dataset.mapcard;
