@@ -8,6 +8,36 @@
   const pc = (p) => (p >= 5 ? 'c5' : 'c' + p);
   const score = (v) => (v >= 100 ? fmt(Math.round(v)) : v >= 10 ? v.toFixed(0) : v.toFixed(1));
 
+
+  /* ---- school name tags ----
+     A school is shown as a black tag with white text and a border in its colour. Colours snap to a short list of presets
+     (not each school's exact hex), so every border reads on black and two schools never sit a shade apart. `m` is the
+     colour a school's hex is matched against; `c` is the border drawn, lifted where the true colour vanishes on black.
+     A school whose main colour is black or white takes its second colour; unknown schools are grey. */
+  const TAG_PRESETS = [
+    ['red', '#C8102E', '#E0293C'], ['maroon', '#7A1E2C', '#B0425A'], ['orange', '#E87722', '#F08A30'], ['gold', '#C9A227', '#D4AE3A'],
+    ['yellow', '#FFD200', '#F2D024'], ['green', '#15803D', '#2EA55A'], ['dkgreen', '#0B4D2C', '#2F8A55'], ['royal', '#1F4E9C', '#3A72D6'],
+    ['navy', '#1B2A4A', '#5878B4'], ['ltblue', '#5BA8E0', '#6BB6EA'], ['purple', '#4B2E83', '#8A63D2'], ['brown', '#5A3520', '#A0704A'],
+    ['silver', '#9EA2A2', '#B9BEC4'],
+  ];
+  const TAG_UNKNOWN = { key: 'none', c: '#4A5360' }, TAG_BW = { key: 'bw', c: '#D8D8D8' };
+  const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  const lumOf = (h) => { const [r, g, b] = hexRgb(h); return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255; };
+  const nearest = (h) => { const [r, g, b] = hexRgb(h); let best = null, bd = Infinity;
+    TAG_PRESETS.forEach(([key, m, c]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = { key, c }; } }); return best; };
+  const isBW = (h) => { if (!h) return true; const [r, g, b] = hexRgb(h); const sat = Math.max(r, g, b) - Math.min(r, g, b); return sat < 28 && (lumOf(h) < 0.16 || lumOf(h) > 0.85); };
+  const TAGC = new Map();
+  function schoolPreset(sch) {
+    if (TAGC.has(sch)) return TAGC.get(sch);
+    const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
+    let p = TAG_UNKNOWN;
+    if (id && id.primary) { const main = !isBW(id.primary) ? id.primary : id.secondary && !isBW(id.secondary) ? id.secondary : null; p = main ? nearest(main) : TAG_BW; }
+    TAGC.set(sch, p); return p;
+  }
+  const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
+  /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
+  const stag = (sch, o = {}) => `<span class="stag${o.abbr ? ' ab' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tagc:${schoolPreset(sch).c}"${o.abbr ? ` title="${esc(sch)}"` : ''}>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`;
+
   /* brand */
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
     return `<svg viewBox="0 0 560 170" aria-label="Overtime"><rect x="${cx - R * .16}" y="${cy - R - R * .30}" width="${R * .32}" height="${R * .22}" rx="3" fill="currentColor"/><rect x="${cx - R * .09}" y="${cy - R - R * .12}" width="${R * .18}" height="${R * .14}" fill="currentColor"/><circle cx="${cx}" cy="${cy}" r="${R * .88}" fill="none" stroke="currentColor" stroke-width="${R * .24}"/><path d="M ${cx} ${cy - R * .62} A ${R * .62} ${R * .62} 0 0 1 ${cx + R * .62 * Math.sin(a)} ${cy - R * .62 * Math.cos(a)} L ${cx} ${cy} Z" fill="${C.red}"/><line x1="${cx}" y1="${cy}" x2="${cx + R * .55 * Math.sin(a)}" y2="${cy - R * .55 * Math.cos(a)}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3" fill="currentColor"/><text x="${cx + R + F * .09}" y="${cy + F * .355}" font-family="'Archivo Black'" font-size="${F}" letter-spacing="-1" fill="currentColor">VERTIME</text></svg>`; };
@@ -167,7 +197,7 @@
       return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${s.year}</span><span class="c">${label}</span><span class="n">${n}</span></div>${podium}`;
     }).join('');
     const first = S[S.length - 1].S.year, last = S[0].S.year;
-    return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
+    return `<details class="drawer" open><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
   }
 
   /* lower-level dominance (district / regional brackets): the unit's own tournament results, never mixed with state */
@@ -181,7 +211,7 @@
       const byW = d3.groups(rs.sort((a, b) => a.wn - b.wn || a.place - b.place), (r) => r.unit + '|' + r.w);
       const podium = lazyPod(() => `${OT.podiumC(placeCounts(rs), { sm: true })}${byW.map(([k, v]) => `<div class="prow"><a class="w" href="${OT.bhref(OT.bkey(v[0]))}" title="open the ${y} ${wShort(v[0].w)} bracket">${wShort(v[0].w)}${byW.some(([k2]) => k2 !== k && k2.split('|')[1] === v[0].w) ? ` <small class="muted">${esc(OT.unitLabel(lvl, v[0].unit).replace(/^District \d+ ?/, ''))}</small>` : ''}</a><div class="ps">${v.map((r) => `<span><i style="color:${MED[Math.min(r.place, 8) - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`} ${rtgTag(OT.ratingOf(r, r.lvl), { size: 'xs' })}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}`);
       return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${y}</span><span class="c">${label}</span><span class="n">${rs.length} medal${rs.length === 1 ? '' : 's'}</span></div>${podium}`; }).join('');
-    return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${years.length}</b> <span class="muted">seasons · ${years[years.length - 1]}–${years[0]}</span></span><span class="k">Open</span></summary><div class="body">${body}</div></details>`;
+    return `<details class="drawer" open><summary><span><b class="num" style="font-size:20px">${years.length}</b> <span class="muted">seasons · ${years[years.length - 1]}–${years[0]}</span></span><span class="k">Open</span></summary><div class="body">${body}</div></details>`;
   }
   /* medal chips */
   const chips = (places) => places.map((n, i) => n ? `<span class="chip ${pc(i + 1)}" title="${n} × ${ordinal(i + 1)}">${n}×${i + 1}</span>` : '').join('');
@@ -189,7 +219,7 @@
   const LVL_ICON = { district: 'district', regional: 'region', state: 'state' };
   const wrestlerCard = (w) => {
     const id = OT.SB && OT.SB.identity(w.sch); const p1 = (id && id.primary) || '#5F6B78', p2 = (id && id.secondary) || '#EEEAE1';
-    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 34, variant: 'chip', title: false }) : '';
+    const badge = stag(w.sch, { abbr: true });
     const reg = (OT.schoolRegion && OT.schoolRegion(w.sch)) || '';
     const M = careerCells(w.apps, w.lower); const cr = w.rtg;
     return `<a class="wc" href="${w.href}" style="--p1:${p1};--p2:${p2}">
@@ -232,7 +262,7 @@
       if (lvl === 'district' && s && p.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'from the state seed; no district file' };
       return { ...base, nodata: true };
     };
-    return { cols, rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((i) => cell(k, i)) })) };
+    return { cols, rows: [['state', 'State'], ['regional', 'Regional'], ['district', 'District']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((i) => cell(k, i)) })) };
   }
   const cellHTML = (c, cls, band, href) => {
     const tag = href ? 'a' : 'div', hr = href ? ` href="${href}"` : '';
@@ -262,7 +292,7 @@
 
   /* entrant career matrix inside a bracket view: same pills as the wrestler cards, with this tournament highlighted
      (its season column outlined, its level row tinted, the intersection ringed in gold) */
-  const BV_LVLS = ['district', 'regional', 'state'];
+  const BV_LVLS = ['state', 'regional', 'district'];   // same order as careerCells rows: State on top everywhere
   function entrantMatrix(e, F) {
     const r = e.r, W = e.W;
     let apps = W ? (W.apps || []) : [], low = W ? (W.lower || OT.lowerFor(apps)) : [];
@@ -361,7 +391,7 @@
   /* the eight medalists: top three on a podium (name, school, season rating, net Δ for the tournament), 4th–8th as rows */
   function medalists(placers, info) {
     const by = (p) => placers.filter((r) => r.place === p);
-    const chip = (r, n) => (OT.SB ? OT.SB.svg(r.sch, { size: n, variant: 'chip', title: false }) : '');
+    const chip = (r) => stag(r.sch, { abbr: true });
     const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament and his change across it' : 'season rating and his change across the tournament'}">${i.rt != null ? `<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
     const H = { 1: 70, 2: 52, 3: 40 };
     const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
@@ -408,7 +438,7 @@
     const focusN = (() => { const e = F.entrants.find((x) => x.slug === focusSlug); return e ? nk(e.r.name) : null; })();
     const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
       line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n); const d = pr ? (rt == null ? null : won ? b[9] - b[7] : b[10] - b[8]) : DL.get(b); const dd = d == null ? null : pr ? d : won ? d : -d;
-        const chip = e && OT.SB ? OT.SB.svg(e.r.sch, { size: 14, variant: 'chip', title: false }) : '<i class="bxnc"></i>';
+        const chip = e ? stag(e.r.sch, { abbr: true, cls: 'xs' }) : '<i class="bxnc"></i>';
         const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
         const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt == null && pr ? ' · season ended in the first round: no rating shown' : ''}${rt != null ? (pr ? ' · RTG before ' + Math.round(rt) + ', after ' + Math.round(rt + dd) : ' · RTG ' + OT.rtg10(rt)) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
         const inner = `${chip}${nm}<span class="bxv${rt == null ? ' nr' : ''}">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</span>${dTxt(dd)}`;
@@ -432,13 +462,12 @@
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
-      const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
       const meta = [r.grade, r.record].filter(Boolean).join(' · ');
       const sx = SB_ && SB_.s[nk(r.name)]; const bl = boutsOf(r.name);
       const net = NET.get(nk(r.name));
       const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
       const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
-      return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
+      return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
@@ -448,5 +477,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament and the change across it. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { stag, schoolPreset, TAG_PRESETS, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
