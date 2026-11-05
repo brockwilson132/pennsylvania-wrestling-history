@@ -2683,8 +2683,764 @@
 2026_D7_SN_AAA: 156 entrants, 78 placed (max place 6), 13 weights, 0 team rows
 2026_D7_SS_AA: 111 entrants, 76 placed (max place 6), 13 weights, 0 team rows
 2026_D7_SS_AAA: 139 entrants, 78 placed (max place 6), 13 weights, 0 team rows
+1949_D10_SN_single: 52 entrants, 21 placed (max place 2), 11 weights, 5 team rows
+1949_D10_SS_single: 33 entrants, 22 placed (max place 2), 11 weights, 0 team rows
+1950_D10_SN_single: 51 entrants, 20 placed (max place 2), 11 weights, 0 team rows
+1950_D10_SS_single: 46 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1951_D10_SN_single: 50 entrants, 18 placed (max place 2), 11 weights, 0 team rows
+1951_D10_SS_single: 51 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1952_D10_SN_single: 51 entrants, 22 placed (max place 2), 11 weights, 0 team rows
+1952_D10_SS_single: 53 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1953_D10_SN_single: 39 entrants, 22 placed (max place 2), 11 weights, 0 team rows
+1953_D10_SS_single: 67 entrants, 24 placed (max place 2), 12 weights, 6 team rows
+1954_D10_SN_single: 52 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1954_D10_SS_single: 66 entrants, 22 placed (max place 2), 12 weights, 6 team rows
+1955_D10_SN_single: 49 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1955_D10_SS_single: 78 entrants, 21 placed (max place 2), 12 weights, 7 team rows
+1956_D10_SN_single: 22 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1956_D10_SS1_single: 46 entrants, 22 placed (max place 2), 11 weights, 0 team rows
+1956_D10_SS4_single: 42 entrants, 21 placed (max place 2), 11 weights, 0 team rows
+1956_D10_SS_single: 88 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1957_D10_SN_single: 22 entrants, 20 placed (max place 2), 11 weights, 0 team rows
+1957_D10_SS1_single: 45 entrants, 22 placed (max place 2), 11 weights, 5 team rows
+1957_D10_SS4_single: 46 entrants, 20 placed (max place 2), 11 weights, 0 team rows
+1957_D10_SS_single: 88 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1957_D4_SN_single: 114 entrants, 0 placed (max place 0), 11 weights, 12 team rows NO PLACERS
+1957_D4_SS_single: 111 entrants, 0 placed (max place 0), 11 weights, 11 team rows NO PLACERS
+1958_D10_SN_single: 22 entrants, 22 placed (max place 2), 11 weights, 8 team rows
+1958_D10_SS1_single: 47 entrants, 22 placed (max place 2), 11 weights, 5 team rows
+1958_D10_SS2_single: 55 entrants, 22 placed (max place 2), 12 weights, 5 team rows
+1958_D10_SS3_single: 51 entrants, 22 placed (max place 2), 11 weights, 5 team rows
+1958_D10_SS4_single: 44 entrants, 22 placed (max place 2), 11 weights, 6 team rows
+1958_D10_SS_single: 22 entrants, 21 placed (max place 2), 11 weights, 7 team rows
+1958_D4_SN_single: 135 entrants, 0 placed (max place 0), 11 weights, 14 team rows NO PLACERS
+1958_D4_SS_single: 152 entrants, 0 placed (max place 0), 11 weights, 14 team rows NO PLACERS
+1959_D10_SN_single: 22 entrants, 22 placed (max place 2), 11 weights, 7 team rows
+1959_D10_SS1_single: 52 entrants, 22 placed (max place 2), 11 weights, 5 team rows
+1959_D10_SS2_single: 59 entrants, 23 placed (max place 2), 12 weights, 5 team rows
+1959_D10_SS3_single: 80 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1959_D10_SS4_single: 43 entrants, 22 placed (max place 2), 11 weights, 5 team rows
+1959_D10_SS_single: 24 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1959_D4_SEC_single: 89 entrants, 21 placed (max place 2), 12 weights, 8 team rows
+1959_D4_SN_single: 74 entrants, 20 placed (max place 2), 11 weights, 7 team rows
+1959_D4_SS_single: 87 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1959_D4_SWC_single: 73 entrants, 21 placed (max place 2), 11 weights, 7 team rows
+1960_D10_S1_single: 58 entrants, 22 placed (max place 2), 12 weights, 5 team rows
+1960_D10_S2_single: 72 entrants, 24 placed (max place 2), 12 weights, 6 team rows
+1960_D10_S3_single: 95 entrants, 26 placed (max place 2), 13 weights, 8 team rows
+1960_D10_S4_single: 24 entrants, 22 placed (max place 2), 12 weights, 0 team rows
+1960_D4_SEC_single: 93 entrants, 24 placed (max place 2), 13 weights, 8 team rows
+1960_D4_SN_single: 82 entrants, 23 placed (max place 2), 13 weights, 7 team rows
+1960_D4_SS_single: 93 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1960_D4_SWC_single: 87 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1960_D6_SE_single: 143 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1960_D6_SW_single: 108 entrants, 0 placed (max place 0), 12 weights, 10 team rows NO PLACERS
+1961_D10_S1_single: 52 entrants, 22 placed (max place 2), 12 weights, 5 team rows
+1961_D10_S2_single: 101 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1961_D10_S3_single: 107 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1961_D10_S4_single: 27 entrants, 22 placed (max place 2), 12 weights, 6 team rows
+1961_D1_S1_single: 111 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1961_D1_S2_single: 24 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1961_D1_S3_single: 108 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1961_D1_S4_single: 94 entrants, 23 placed (max place 2), 12 weights, 0 team rows
+1961_D4_SEC_single: 93 entrants, 22 placed (max place 2), 12 weights, 8 team rows
+1961_D4_SN_single: 83 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1961_D4_SS_single: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1961_D4_SWC_single: 96 entrants, 26 placed (max place 2), 13 weights, 8 team rows
+1961_D6_SE_single: 149 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1961_D6_SW_single: 128 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1962_D10_S1_single: 24 entrants, 23 placed (max place 2), 12 weights, 5 team rows
+1962_D10_S2_single: 96 entrants, 20 placed (max place 2), 12 weights, 8 team rows
+1962_D10_S3_single: 98 entrants, 24 placed (max place 2), 13 weights, 8 team rows
+1962_D10_S4_single: 30 entrants, 22 placed (max place 2), 12 weights, 6 team rows
+1962_D11_SE_single: 99 entrants, 0 placed (max place 0), 12 weights, 9 team rows NO PLACERS
+1962_D11_SW_single: 93 entrants, 0 placed (max place 0), 12 weights, 8 team rows NO PLACERS
+1962_D1_S1_single: 95 entrants, 22 placed (max place 2), 12 weights, 0 team rows
+1962_D1_S2_single: 24 entrants, 22 placed (max place 2), 12 weights, 0 team rows
+1962_D1_S3_single: 114 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1962_D1_S4_single: 104 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1962_D4_SEC_single: 107 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1962_D4_SN_single: 95 entrants, 22 placed (max place 2), 12 weights, 8 team rows
+1962_D4_SS_single: 98 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1962_D4_SWC_single: 96 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1962_D6_SE_single: 142 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1962_D6_SW_single: 151 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1963_D10_S1_single: 64 entrants, 22 placed (max place 2), 12 weights, 6 team rows
+1963_D10_S2_single: 88 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1963_D10_S3_single: 100 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1963_D10_S4_single: 93 entrants, 22 placed (max place 2), 12 weights, 8 team rows
+1963_D11_SE_single: 96 entrants, 0 placed (max place 0), 12 weights, 8 team rows NO PLACERS
+1963_D11_SW_single: 100 entrants, 0 placed (max place 0), 12 weights, 9 team rows NO PLACERS
+1963_D1_S1_single: 134 entrants, 22 placed (max place 2), 12 weights, 0 team rows
+1963_D1_S2_single: 24 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1963_D1_S3_single: 121 entrants, 33 placed (max place 4), 12 weights, 0 team rows
+1963_D1_S4_single: 126 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1963_D4_SEC_single: 106 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1963_D4_SN_single: 124 entrants, 25 placed (max place 2), 13 weights, 11 team rows
+1963_D4_SS_single: 90 entrants, 22 placed (max place 2), 12 weights, 8 team rows
+1963_D4_SWC_single: 95 entrants, 26 placed (max place 2), 13 weights, 8 team rows
+1963_D6_S1_single: 82 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1963_D6_S2_single: 82 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1963_D6_S3_single: 128 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1964_D10_S1_single: 72 entrants, 23 placed (max place 2), 12 weights, 6 team rows
+1964_D10_S2_single: 95 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1964_D10_S3_single: 101 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1964_D10_S4_single: 95 entrants, 22 placed (max place 2), 12 weights, 8 team rows
+1964_D11_SE_single: 118 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1964_D11_SW_single: 116 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1964_D1_S1_single: 153 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1964_D1_S2_single: 44 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1964_D1_S3_single: 134 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1964_D1_S4_single: 130 entrants, 23 placed (max place 2), 12 weights, 0 team rows
+1964_D4_SEC_single: 106 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1964_D4_SN_single: 151 entrants, 24 placed (max place 2), 13 weights, 13 team rows
+1964_D4_SS_single: 98 entrants, 24 placed (max place 2), 13 weights, 8 team rows
+1964_D4_SWC_single: 97 entrants, 24 placed (max place 2), 13 weights, 8 team rows
+1964_D6_S1_single: 81 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1964_D6_S2_single: 81 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1964_D6_S3_single: 124 entrants, 0 placed (max place 0), 12 weights, 11 team rows NO PLACERS
+1965_D10_S1_single: 95 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1965_D10_S2_single: 24 entrants, 22 placed (max place 2), 12 weights, 0 team rows
+1965_D10_S3_single: 119 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1965_D10_S4_single: 131 entrants, 22 placed (max place 2), 12 weights, 11 team rows
+1965_D11_SE_single: 140 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1965_D11_SW_single: 140 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1965_D1_S1_single: 152 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1965_D1_S2_single: 162 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1965_D1_S3_single: 150 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1965_D1_S4_single: 117 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1965_D4_SEC_single: 106 entrants, 24 placed (max place 2), 13 weights, 9 team rows
+1965_D4_SN_single: 137 entrants, 24 placed (max place 2), 13 weights, 11 team rows
+1965_D4_SS_single: 110 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1965_D4_SWC_single: 93 entrants, 22 placed (max place 2), 13 weights, 8 team rows
+1965_D6_S1_single: 84 entrants, 22 placed (max place 2), 12 weights, 7 team rows
+1965_D6_S2_single: 96 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1965_D6_S3_single: 149 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1966_D10_S1_single: 96 entrants, 26 placed (max place 2), 13 weights, 8 team rows
+1966_D10_S2_single: 112 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1966_D10_S3_single: 120 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1966_D10_S4_single: 125 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1966_D11_SE_single: 101 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1966_D11_SW_single: 104 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1966_D1_S1_single: 180 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1966_D1_S2_single: 64 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1966_D1_S3_single: 160 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1966_D1_S4_single: 113 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1966_D4_SEC_single: 107 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1966_D4_SN_single: 99 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1966_D4_SS_single: 117 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1966_D4_SWC_single: 132 entrants, 23 placed (max place 2), 13 weights, 11 team rows
+1966_D6_S1_single: 82 entrants, 23 placed (max place 2), 12 weights, 7 team rows
+1966_D6_S2_single: 96 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1966_D6_S3_single: 81 entrants, 22 placed (max place 2), 12 weights, 7 team rows
+1966_D6_S4_single: 96 entrants, 21 placed (max place 2), 12 weights, 8 team rows
+1967_D10_S1_single: 89 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1967_D10_S2_single: 94 entrants, 26 placed (max place 2), 13 weights, 8 team rows
+1967_D10_S3_single: 120 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1967_D10_S4_single: 123 entrants, 49 placed (max place 4), 13 weights, 10 team rows
+1967_D11_SE_single: 101 entrants, 0 placed (max place 0), 13 weights, 9 team rows NO PLACERS
+1967_D11_SN_single: 97 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1967_D11_SS_single: 94 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1967_D11_SW_single: 85 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1967_D1_S1_single: 173 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1967_D1_S2_single: 97 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1967_D1_S3_single: 165 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1967_D1_S4_single: 108 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1967_D4_SEC_single: 105 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1967_D4_SN_single: 124 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1967_D4_SS_single: 121 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1967_D4_SWC_single: 109 entrants, 21 placed (max place 2), 13 weights, 10 team rows
+1967_D6_S1_single: 94 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1967_D6_S2_single: 96 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1967_D6_S3_single: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1967_D6_S4_single: 96 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1968_D10_S1_single: 114 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1968_D10_S2_single: 95 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1968_D10_S3_single: 120 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1968_D10_S4_single: 126 entrants, 51 placed (max place 4), 13 weights, 10 team rows
+1968_D1_S1_single: 52 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1968_D1_S2_single: 161 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1968_D1_S3_single: 148 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1968_D1_S4_single: 172 entrants, 23 placed (max place 2), 12 weights, 0 team rows
+1968_D4_SEC_single: 109 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1968_D4_SN_single: 125 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1968_D4_SS_single: 122 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1968_D4_SWC_single: 112 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1968_D6_S1_single: 104 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1968_D6_S2_single: 95 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1968_D6_S3_single: 89 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1968_D6_S4_single: 95 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1969_D10_S1_single: 53 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1969_D10_S2_single: 45 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1969_D10_S3_single: 119 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1969_D10_S4_single: 116 entrants, 50 placed (max place 4), 13 weights, 10 team rows
+1969_D1_S1_single: 58 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1969_D1_S2_single: 163 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1969_D1_S3_single: 141 entrants, 23 placed (max place 2), 12 weights, 0 team rows
+1969_D1_S4_single: 162 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1969_D4_SEC_single: 112 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1969_D4_SN_single: 119 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1969_D4_SS_single: 116 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1969_D4_SWC_single: 109 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1969_D6_S1_single: 102 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1969_D6_S2_single: 95 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1969_D6_S3_single: 103 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1969_D6_S4_single: 102 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1970_D10_S1_single: 26 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1970_D10_S2_single: 111 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1970_D10_S3_single: 117 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1970_D10_S4_single: 117 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1970_D1_S1_single: 181 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1970_D1_S2_single: 180 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1970_D1_S3_single: 175 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1970_D1_S4_single: 186 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1970_D4_SEC_single: 110 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1970_D4_SN_single: 111 entrants, 25 placed (max place 2), 13 weights, 9 team rows
+1970_D4_SS_single: 124 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1970_D4_SWC_single: 116 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1970_D6_S1_single: 106 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1970_D6_S2_single: 106 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1970_D6_S3_single: 99 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1970_D6_S4_single: 100 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1971_D10_S1_single: 120 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1971_D10_S2_single: 119 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1971_D10_S3_single: 123 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1971_D10_S4_single: 113 entrants, 48 placed (max place 4), 13 weights, 9 team rows
+1971_D1_S1_single: 90 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S2_single: 95 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S3_single: 89 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S4_single: 90 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S5_single: 76 entrants, 23 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S6_single: 72 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S7_single: 94 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D1_S8_single: 90 entrants, 24 placed (max place 2), 12 weights, 0 team rows
+1971_D4_SEC_single: 97 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1971_D4_SN_single: 118 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1971_D4_SS_single: 126 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1971_D4_SWC_single: 111 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1971_D6_S1_single: 88 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1971_D6_S2_single: 108 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1971_D6_S3_single: 103 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1971_D6_S4_single: 101 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1972_D10_S1_single: 26 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1972_D10_S2_single: 122 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1972_D10_S3_single: 124 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1972_D10_S4_single: 114 entrants, 51 placed (max place 4), 13 weights, 9 team rows
+1972_D1_S1_single: 85 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D1_S2_single: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D1_S3_single: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D1_S4_single: 92 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D1_S5_single: 83 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1972_D1_S6_single: 75 entrants, 23 placed (max place 2), 12 weights, 7 team rows
+1972_D1_S7_single: 87 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D1_S8_single: 93 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1972_D4_SEC_single: 115 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1972_D4_SN_single: 115 entrants, 26 placed (max place 2), 13 weights, 11 team rows
+1972_D4_SS_single: 126 entrants, 24 placed (max place 2), 13 weights, 10 team rows
+1972_D4_SWC_single: 111 entrants, 23 placed (max place 2), 13 weights, 10 team rows
+1972_D6_S1_single: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1972_D6_S2_single: 100 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1972_D6_S3_single: 101 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1972_D6_S4_single: 103 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1973_D10_S1_single: 52 entrants, 25 placed (max place 2), 13 weights, 11 team rows
+1973_D10_S2_single: 121 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1973_D10_S3_single: 123 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1973_D10_S4_single: 128 entrants, 51 placed (max place 4), 13 weights, 10 team rows
+1973_D1_S1_single: 88 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S2_single: 94 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S3_single: 94 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S4_single: 95 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S5_single: 82 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1973_D1_S6_single: 95 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S7_single: 94 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D1_S8_single: 95 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D4_SEC_single: 126 entrants, 26 placed (max place 2), 13 weights, 10 team rows
+1973_D4_SN_single: 126 entrants, 26 placed (max place 2), 13 weights, 11 team rows
+1973_D4_SS_single: 136 entrants, 26 placed (max place 2), 13 weights, 11 team rows
+1973_D4_SWC_single: 115 entrants, 25 placed (max place 2), 13 weights, 10 team rows
+1973_D6_S1_single: 94 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1973_D6_S2_single: 105 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1973_D6_S3_single: 99 entrants, 23 placed (max place 2), 12 weights, 9 team rows
+1973_D6_S4_single: 107 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1974_D10_S1_AA: 32 entrants, 26 placed (max place 2), 13 weights, 7 team rows
+1974_D10_S1_AAA: 26 entrants, 26 placed (max place 2), 13 weights, 7 team rows
+1974_D10_S2_AA: 90 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1974_D10_S2_AAA: 73 entrants, 51 placed (max place 4), 13 weights, 6 team rows
+1974_D10_S3_AA: 78 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1974_D10_S4_AA: 79 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1974_D11_SE_AAA: 97 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SNorthEast_AA: 81 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SNorthWest_AA: 77 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SSouthEast_AA: 85 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SSouthWest_AA: 85 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SW_AAA: 98 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D1_S1_AA: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1974_D1_S2_AA: 89 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1974_D4_SEC_AA: 102 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1974_D4_SN_AA: 123 entrants, 26 placed (max place 2), 13 weights, 11 team rows
+1974_D4_SS_AA: 100 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1974_D4_SWC_AA: 93 entrants, 25 placed (max place 2), 13 weights, 8 team rows
+1974_D6_S1_AA: 66 entrants, 21 placed (max place 2), 12 weights, 6 team rows
+1974_D6_S1_AAA: 47 entrants, 24 placed (max place 2), 12 weights, 4 team rows
+1974_D6_S2_AA: 70 entrants, 24 placed (max place 2), 12 weights, 6 team rows
+1974_D6_S2_AAA: 47 entrants, 24 placed (max place 2), 12 weights, 4 team rows
+1974_D6_S3_AA: 55 entrants, 24 placed (max place 2), 12 weights, 5 team rows
+1974_D6_S3_AAA: 34 entrants, 23 placed (max place 2), 12 weights, 3 team rows
+1974_D6_S4_AA: 91 entrants, 23 placed (max place 2), 12 weights, 8 team rows
+1974_D6_S4_AAA: 36 entrants, 23 placed (max place 2), 12 weights, 3 team rows
+1975_D10_S1_AA: 27 entrants, 26 placed (max place 2), 13 weights, 6 team rows
+1975_D10_S1_AAA: 27 entrants, 26 placed (max place 2), 13 weights, 0 team rows
+1975_D10_S2_AA: 79 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1975_D10_S2_AAA: 88 entrants, 50 placed (max place 4), 13 weights, 7 team rows
+1975_D10_S3_AA: 76 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1975_D10_S4_AA: 71 entrants, 52 placed (max place 4), 13 weights, 6 team rows
+1975_D11_SE_AA: 159 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1975_D11_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1975_D1_S1_AA: 100 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1975_D1_S2_AA: 81 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1975_D4_SEC_AA: 109 entrants, 26 placed (max place 2), 13 weights, 9 team rows
+1975_D4_SN_AA: 128 entrants, 24 placed (max place 2), 12 weights, 11 team rows
+1975_D4_SS_AA: 93 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1975_D4_SWC_AA: 95 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1975_D6_SE_AA: 168 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1975_D6_SW_AA: 160 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1976_D10_S1_AA: 48 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1976_D10_S1_AAA: 49 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1976_D10_S2_AA: 81 entrants, 24 placed (max place 2), 12 weights, 7 team rows
+1976_D10_S2_AAA: 85 entrants, 47 placed (max place 4), 12 weights, 7 team rows
+1976_D10_S3_AA: 78 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1976_D10_S4_AA: 68 entrants, 48 placed (max place 4), 12 weights, 6 team rows
+1976_D11_SE_AA: 146 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D11_SW_AA: 152 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D1_S1_AA: 96 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1976_D1_S2_AA: 79 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1976_D4_SEC_AA: 120 entrants, 23 placed (max place 2), 12 weights, 11 team rows
+1976_D4_SN_AA: 114 entrants, 23 placed (max place 2), 12 weights, 11 team rows
+1976_D4_SS_AA: 90 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1976_D4_SWC_AA: 89 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1976_D6_SE_AA: 155 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D6_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D9_SN_AA: 97 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1976_D9_SS_AA: 89 entrants, 48 placed (max place 4), 12 weights, 0 team rows
+1977_D10_S1_AA: 88 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1977_D10_S1_AAA: 37 entrants, 23 placed (max place 2), 12 weights, 7 team rows
+1977_D10_S2_AA: 79 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1977_D10_S2_AAA: 73 entrants, 48 placed (max place 4), 12 weights, 6 team rows
+1977_D10_S3_AA: 76 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1977_D10_S4_AA: 94 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1977_D11_SE_AA: 139 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D11_SW_AA: 156 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D1_S1_AA: 92 entrants, 47 placed (max place 4), 12 weights, 10 team rows
+1977_D1_S2_AA: 84 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1977_D4_SEC_AA: 112 entrants, 24 placed (max place 2), 12 weights, 10 team rows
+1977_D4_SN_AA: 104 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1977_D4_SS_AA: 106 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1977_D4_SWC_AA: 103 entrants, 33 placed (max place 4), 12 weights, 10 team rows
+1977_D6_SE_AA: 164 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D6_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D10_S1_AA: 90 entrants, 50 placed (max place 4), 13 weights, 8 team rows
+1978_D10_S1_AAA: 82 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1978_D10_S2_AA: 83 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1978_D10_S2_AAA: 79 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1978_D10_S3_AA: 72 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1978_D10_S4_AA: 80 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1978_D11_SE_AA: 114 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D11_SW_AA: 132 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D4_SEC_AA: 91 entrants, 26 placed (max place 4), 12 weights, 8 team rows
+1978_D4_SN_AA: 102 entrants, 47 placed (max place 4), 12 weights, 9 team rows
+1978_D4_SS_AA: 93 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1978_D4_SWC_AA: 99 entrants, 25 placed (max place 4), 12 weights, 9 team rows
+1978_D6_SE_AA: 151 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1978_D6_SW_AA: 146 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1979_D10_S1_AA: 92 entrants, 47 placed (max place 4), 12 weights, 9 team rows
+1979_D10_S1_AAA: 79 entrants, 47 placed (max place 4), 12 weights, 7 team rows
+1979_D10_S2_AA: 86 entrants, 36 placed (max place 3), 12 weights, 8 team rows
+1979_D10_S2_AAA: 83 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1979_D10_S3_AA: 77 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1979_D10_S4_AA: 86 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1979_D11_SE_AA: 110 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1979_D11_SW_AA: 135 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1979_D4_SEC_AA: 87 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1979_D4_SN_AA: 107 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1979_D4_SS_AA: 104 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1979_D4_SWC_AA: 100 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1979_D6_SE_AA: 165 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1979_D6_SW_AA: 166 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1980_D10_S1_AA: 27 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1980_D10_S2_AA: 87 entrants, 36 placed (max place 3), 12 weights, 8 team rows
+1980_D10_S3_AA: 95 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1980_D10_S4_AA: 98 entrants, 46 placed (max place 4), 12 weights, 9 team rows
+1980_D1_S1_AA: 64 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1980_D1_S2_AA: 78 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1980_D4_SEC_AA: 88 entrants, 28 placed (max place 4), 12 weights, 8 team rows
+1980_D4_SN_AA: 99 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1980_D4_SS_AA: 102 entrants, 42 placed (max place 4), 12 weights, 9 team rows
+1980_D4_SWC_AA: 82 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1980_D6_SE_AA: 167 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1980_D6_SW_AA: 154 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1981_D10_S1_AA: 25 entrants, 24 placed (max place 2), 12 weights, 8 team rows
+1981_D10_S2_AA: 86 entrants, 36 placed (max place 3), 12 weights, 8 team rows
+1981_D10_S3_AA: 96 entrants, 36 placed (max place 3), 12 weights, 9 team rows
+1981_D10_S4_AA: 95 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1981_D1_S1_AA: 79 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1981_D1_S2_AA: 78 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1981_D4_SEC_AA: 89 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1981_D4_SN_AA: 100 entrants, 47 placed (max place 4), 12 weights, 9 team rows
+1981_D4_SS_AA: 106 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1981_D4_SWC_AA: 77 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1981_D6_SE_AA: 164 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1981_D6_SW_AA: 152 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1982_D10_S1_AA: 97 entrants, 24 placed (max place 2), 12 weights, 9 team rows
+1982_D10_S1_AAA: 25 entrants, 25 placed (max place 3), 12 weights, 6 team rows
+1982_D10_S2_AA: 88 entrants, 36 placed (max place 3), 12 weights, 8 team rows
+1982_D10_S2_AAA: 59 entrants, 36 placed (max place 3), 12 weights, 5 team rows
+1982_D10_S3_AA: 96 entrants, 35 placed (max place 3), 12 weights, 9 team rows
+1982_D10_S4_AA: 91 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1982_D1_S1_AA: 65 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1982_D1_S2_AA: 99 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1982_D4_SEC_AA: 96 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1982_D4_SN_AA: 101 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1982_D4_SS_AA: 93 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1982_D4_SWC_AA: 79 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1982_D6_SE_AA: 177 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1982_D6_SW_AA: 163 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1983_D10_S1_AA: 81 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1983_D10_S1_AAA: 74 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1983_D10_S2_AA: 68 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1983_D10_S2_AAA: 98 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1983_D10_S3_AA: 80 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1983_D10_S4_AA: 89 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1983_D4_SEC_AA: 87 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1983_D4_SN_AA: 87 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1983_D4_SS_AA: 93 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1983_D4_SWC_AA: 95 entrants, 47 placed (max place 4), 12 weights, 9 team rows
+1983_D6_SE_AA: 153 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1983_D6_SW_AA: 127 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1984_D10_S1_AA: 89 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1984_D10_S1_AAA: 59 entrants, 48 placed (max place 4), 12 weights, 5 team rows
+1984_D10_S2_AA: 87 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1984_D10_S2_AAA: 69 entrants, 48 placed (max place 4), 12 weights, 6 team rows
+1984_D10_S3_AA: 86 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1984_D10_S4_AA: 100 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1984_D4_SEC_AA: 87 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1984_D4_SN_AA: 86 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1984_D4_SS_AA: 100 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1984_D4_SWC_AA: 87 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1984_D6_SE_AA: 145 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1984_D6_SW_AA: 136 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1985_D10_S1_AA: 85 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1985_D10_S1_AAA: 79 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1985_D10_S2_AA: 88 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1985_D10_S2_AAA: 71 entrants, 48 placed (max place 4), 12 weights, 6 team rows
+1985_D10_S3_AA: 90 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1985_D10_S4_AA: 92 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1985_D4_SEC_AA: 88 entrants, 47 placed (max place 4), 12 weights, 8 team rows
+1985_D4_SN_AA: 91 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1985_D4_SS_AA: 101 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1985_D4_SWC_AA: 86 entrants, 40 placed (max place 4), 12 weights, 8 team rows
+1985_D6_SE_AA: 162 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1985_D6_SW_AA: 136 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1986_D10_S1_AA: 81 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1986_D10_S1_AAA: 72 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1986_D10_S2_AA: 91 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1986_D10_S2_AAA: 71 entrants, 48 placed (max place 4), 12 weights, 6 team rows
+1986_D10_S3_AA: 80 entrants, 47 placed (max place 4), 12 weights, 7 team rows
+1986_D10_S4_AA: 92 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1986_D4_SEC_AA: 88 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1986_D4_SN_AA: 84 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1986_D4_SS_AA: 102 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1986_D4_SWC_AA: 94 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1986_D6_SE_AA: 149 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1986_D6_SW_AA: 142 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1987_D10_S1_AA: 108 entrants, 48 placed (max place 4), 12 weights, 10 team rows
+1987_D10_S1_AAA: 77 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1987_D10_S2_AA: 111 entrants, 48 placed (max place 4), 12 weights, 10 team rows
+1987_D10_S2_AAA: 81 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1987_D10_S3_AA: 108 entrants, 47 placed (max place 4), 12 weights, 10 team rows
+1987_D4_SEC_AA: 89 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1987_D4_SN_AA: 84 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1987_D4_SS_AA: 82 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1987_D4_SWC_AA: 93 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1987_D6_SE_AA: 138 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1987_D6_SW_AA: 148 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1988_D10_S1_AA: 96 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1988_D10_S1_AAA: 80 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1988_D10_S2_AA: 109 entrants, 48 placed (max place 4), 12 weights, 10 team rows
+1988_D10_S2_AAA: 78 entrants, 48 placed (max place 4), 12 weights, 7 team rows
+1988_D10_S3_AA: 106 entrants, 48 placed (max place 4), 12 weights, 10 team rows
+1988_D4_SEC_AA: 87 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1988_D4_SN_AA: 79 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1988_D4_SS_AA: 83 entrants, 48 placed (max place 4), 12 weights, 8 team rows
+1988_D4_SWC_AA: 84 entrants, 48 placed (max place 4), 12 weights, 9 team rows
+1988_D6_SE_AA: 140 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1988_D6_SW_AA: 139 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1989_D10_S1_AA: 110 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1989_D10_S1_AAA: 70 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1989_D10_S2_AA: 123 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1989_D10_S2_AAA: 83 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1989_D10_S3_AA: 110 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1989_D4_SEC_AA: 90 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1989_D4_SN_AA: 88 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1989_D4_SS_AA: 85 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1989_D4_SWC_AA: 102 entrants, 50 placed (max place 4), 13 weights, 9 team rows
+1989_D6_SE_AA: 125 entrants, 0 placed (max place 0), 13 weights, 11 team rows NO PLACERS
+1989_D6_SW_AA: 104 entrants, 0 placed (max place 0), 13 weights, 12 team rows NO PLACERS
+1990_D10_S1_AA: 111 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1990_D10_S1_AAA: 74 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1990_D10_S2_AA: 121 entrants, 51 placed (max place 4), 13 weights, 10 team rows
+1990_D10_S2_AAA: 77 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1990_D10_S3_AA: 103 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1990_D4_SEC_AA: 88 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1990_D4_SN_AA: 93 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1990_D4_SS_AA: 98 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1990_D4_SWC_AA: 89 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+1991_D10_S1_AA: 127 entrants, 52 placed (max place 4), 13 weights, 12 team rows
+1991_D10_S2_AA: 110 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1991_D10_S3_AA: 116 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1991_D10_S_AAA: 132 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+1991_D1_S1_AA: 71 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1991_D1_S2_AA: 99 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1991_D4_SEC_AA: 92 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1991_D4_SN_AA: 97 entrants, 51 placed (max place 4), 14 weights, 0 team rows
+1991_D4_SS_AA: 83 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1991_D4_SWC_AA: 83 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+1992_D10_S1_AA: 117 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1992_D10_S2_AA: 110 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1992_D10_S3_AA: 113 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1992_D10_S_AAA: 139 entrants, 52 placed (max place 4), 13 weights, 13 team rows
+1992_D4_SEC_AA: 83 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1992_D4_SN_AA: 78 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1992_D4_SS_AA: 82 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1992_D4_SWC_AA: 74 entrants, 50 placed (max place 4), 13 weights, 7 team rows
+1993_D10_S1_AA: 114 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1993_D10_S2_AA: 112 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1993_D10_S3_AA: 107 entrants, 52 placed (max place 4), 13 weights, 9 team rows
+1993_D10_S_AAA: 152 entrants, 52 placed (max place 4), 13 weights, 13 team rows
+1993_D4_SEC_AA: 89 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1993_D4_SN_AA: 78 entrants, 50 placed (max place 4), 13 weights, 7 team rows
+1993_D4_SS_AA: 80 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1993_D4_SWC_AA: 67 entrants, 49 placed (max place 4), 13 weights, 7 team rows
+1994_D10_S1_AA: 115 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1994_D10_S2_AA: 120 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1994_D10_S3_AA: 101 entrants, 52 placed (max place 4), 13 weights, 9 team rows
+1994_D10_S_AAA: 148 entrants, 52 placed (max place 4), 13 weights, 13 team rows
+1994_D4_SEC_AA: 96 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1994_D4_SN_AA: 83 entrants, 49 placed (max place 4), 13 weights, 7 team rows
+1994_D4_SS_AA: 79 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1994_D4_SWC_AA: 64 entrants, 50 placed (max place 4), 13 weights, 6 team rows
+1995_D10_S1_AA: 127 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+1995_D10_S2_AA: 117 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1995_D10_S3_AA: 115 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1995_D10_S_AAA: 139 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+1995_D4_SEC_AA: 71 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1995_D4_SN_AA: 77 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1995_D4_SS_AA: 83 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1995_D4_SWC_AA: 79 entrants, 49 placed (max place 4), 13 weights, 8 team rows
+1996_D10_S1_AA: 128 entrants, 51 placed (max place 4), 13 weights, 11 team rows
+1996_D10_S2_AA: 114 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1996_D10_S3_AA: 102 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1996_D10_S_AAA: 120 entrants, 51 placed (max place 4), 13 weights, 11 team rows
+1996_D4_SEC_AA: 80 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1996_D4_SN_AA: 81 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1996_D4_SS_AA: 78 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1996_D4_SWC_AA: 79 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+1997_D10_S1_AA: 113 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1997_D10_S2_AA: 109 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1997_D10_S3_AA: 111 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1997_D10_S_AAA: 139 entrants, 50 placed (max place 4), 13 weights, 12 team rows
+1997_D4_SEC_AA: 85 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1997_D4_SN_AA: 78 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+1997_D4_SS_AA: 87 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1997_D4_SWC_AA: 84 entrants, 50 placed (max place 4), 13 weights, 8 team rows
+1998_D10_S1_AA: 105 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1998_D10_S2_AA: 105 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1998_D10_S3_AA: 113 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+1998_D10_S_AAA: 132 entrants, 51 placed (max place 4), 13 weights, 12 team rows
+1998_D4_SEC_AA: 81 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1998_D4_SN_AA: 77 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1998_D4_SS_AA: 92 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1998_D4_SWC_AA: 77 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+1999_D10_S1_AA: 105 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+1999_D10_S2_AA: 104 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+1999_D10_S3_AA: 106 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+1999_D10_S_AAA: 161 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+1999_D4_SEC_AA: 77 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1999_D4_SN_AA: 79 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+1999_D4_SS_AA: 80 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+1999_D4_SWC_AA: 76 entrants, 50 placed (max place 4), 13 weights, 8 team rows
+2000_D10_S1_AA: 106 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+2000_D10_S2_AA: 100 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+2000_D10_S3_AA: 111 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+2000_D10_S_AAA: 148 entrants, 52 placed (max place 4), 13 weights, 0 team rows
+2000_D4_SEC_AA: 73 entrants, 51 placed (max place 4), 13 weights, 7 team rows
+2000_D4_SN_AA: 76 entrants, 52 placed (max place 4), 13 weights, 7 team rows
+2000_D4_SS_AA: 84 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+2000_D4_SWC_AA: 86 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+2001_D10_S1_AA: 108 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2001_D10_S2_AA: 113 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2001_D10_S3_AA: 96 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2001_D4_SEC_AA: 89 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+2001_D4_SN_AA: 88 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+2001_D4_SS_AA: 91 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+2001_D4_SWC_AA: 94 entrants, 51 placed (max place 4), 13 weights, 9 team rows
+2002_D10_S1_AA: 100 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2002_D10_S2_AA: 115 entrants, 51 placed (max place 4), 13 weights, 10 team rows
+2002_D10_S3_AA: 99 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2002_D4_SEC_AA: 89 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+2002_D4_SN_AA: 92 entrants, 52 placed (max place 4), 13 weights, 8 team rows
+2002_D4_SS_AA: 84 entrants, 51 placed (max place 4), 13 weights, 8 team rows
+2002_D4_SWC_AA: 98 entrants, 51 placed (max place 4), 13 weights, 9 team rows
+2003_D10_S1_AA: 129 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2003_D10_S2_AA: 118 entrants, 55 placed (max place 4), 14 weights, 10 team rows
+2003_D10_S3_AA: 103 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2003_D4_SEC_AA: 89 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2003_D4_SN_AA: 102 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2003_D4_SS_AA: 96 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2003_D4_SWC_AA: 89 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2004_D10_S1_AA: 132 entrants, 56 placed (max place 4), 14 weights, 12 team rows
+2004_D10_S2_AA: 113 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2004_D10_S3_AA: 115 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2004_D4_SE_AA: 101 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2004_D4_SN_AA: 103 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2004_D4_SS_AA: 99 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2004_D4_SW_AA: 86 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2005_D10_S1_AA: 161 entrants, 84 placed (max place 6), 14 weights, 14 team rows
+2005_D10_S2_AA: 145 entrants, 84 placed (max place 6), 14 weights, 13 team rows
+2005_D4_SE_AA: 91 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2005_D4_SN_AA: 97 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2005_D4_SS_AA: 80 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2005_D4_SW_AA: 83 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2005_D6_SE_AA: 135 entrants, 84 placed (max place 6), 14 weights, 12 team rows
+2005_D6_SW_AA: 148 entrants, 84 placed (max place 6), 14 weights, 13 team rows
+2006_D10_S1_AA: 166 entrants, 84 placed (max place 6), 14 weights, 14 team rows
+2006_D10_S2_AA: 146 entrants, 83 placed (max place 6), 14 weights, 13 team rows
+2006_D4_SE_AA: 89 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2006_D4_SN_AA: 99 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2006_D4_SS_AA: 89 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2006_D4_SW_AA: 81 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2007_D10_S1_AA: 170 entrants, 84 placed (max place 6), 14 weights, 14 team rows
+2007_D10_S2_AA: 164 entrants, 84 placed (max place 6), 14 weights, 14 team rows
+2007_D4_SE_AA: 88 entrants, 55 placed (max place 4), 14 weights, 8 team rows
+2007_D4_SN_AA: 103 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2007_D4_SS_AA: 94 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2007_D4_SW_AA: 98 entrants, 55 placed (max place 4), 14 weights, 9 team rows
+2008_D10_S1_AA: 165 entrants, 81 placed (max place 6), 14 weights, 14 team rows
+2008_D10_S2_AA: 164 entrants, 83 placed (max place 6), 14 weights, 14 team rows
+2008_D4_SE_AA: 95 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2008_D4_SN_AA: 104 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2008_D4_SS_AA: 93 entrants, 55 placed (max place 4), 14 weights, 8 team rows
+2008_D4_SW_AA: 103 entrants, 55 placed (max place 4), 14 weights, 9 team rows
+2009_D10_S1_AA: 153 entrants, 82 placed (max place 6), 14 weights, 14 team rows
+2009_D10_S2_AA: 146 entrants, 82 placed (max place 6), 14 weights, 14 team rows
+2009_D4_SE_AA: 95 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2009_D4_SN_AA: 103 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2009_D4_SS_AA: 90 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2009_D4_SW_AA: 92 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2010_D10_S1_AA: 160 entrants, 83 placed (max place 6), 14 weights, 14 team rows
+2010_D10_S2_AA: 159 entrants, 82 placed (max place 6), 14 weights, 14 team rows
+2010_D4_SE_AA: 98 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2010_D4_SN_AA: 93 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2010_D4_SS_AA: 95 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2010_D4_SW_AA: 101 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2011_D10_S1_AA: 123 entrants, 55 placed (max place 4), 14 weights, 10 team rows
+2011_D10_S2_AA: 108 entrants, 55 placed (max place 4), 14 weights, 10 team rows
+2011_D10_S3_AA: 103 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2011_D4_SE_AA: 100 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2011_D4_SN_AA: 102 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2011_D4_SS_AA: 79 entrants, 55 placed (max place 4), 14 weights, 8 team rows
+2011_D4_SW_AA: 92 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2012_D10_S1_AA: 109 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2012_D10_S2_AA: 112 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2012_D10_S3_AA: 90 entrants, 55 placed (max place 4), 14 weights, 9 team rows
+2012_D4_SE_AA: 97 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2012_D4_SN_AA: 96 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2012_D4_SS_AA: 91 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2012_D4_SW_AA: 88 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2013_D10_S1_AA: 102 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2013_D10_S2_AA: 113 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2013_D10_S3_AA: 107 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2013_D4_SE_AA: 85 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2013_D4_SN_AA: 91 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2013_D4_SS_AA: 95 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2013_D4_SW_AA: 79 entrants, 56 placed (max place 4), 14 weights, 8 team rows
+2014_D10_S1_AA: 112 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2014_D10_S2_AA: 108 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2014_D10_S3_AA: 101 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2014_D4_SC_AA: 115 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2014_D4_SN_AA: 123 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2014_D4_SS_AA: 114 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2015_D10_S1_AA: 101 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2015_D10_S2_AA: 104 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2015_D10_S3_AA: 93 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2015_D4_SC_AA: 111 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2015_D4_SN_AA: 106 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2015_D4_SS_AA: 117 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2016_D10_S1_AA: 107 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2016_D10_S2_AA: 110 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2016_D10_S3_AA: 97 entrants, 56 placed (max place 4), 14 weights, 9 team rows
+2016_D4_SC_AA: 111 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2016_D4_SN_AA: 110 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2016_D4_SS_AA: 112 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2017_D10_S1_AA: 101 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2017_D10_S2_AA: 102 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2017_D10_S3_AA: 111 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2017_D4_SC_AA: 115 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2017_D4_SN_AA: 104 entrants, 55 placed (max place 4), 14 weights, 11 team rows
+2017_D4_SS_AA: 114 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2018_D10_S1_AA: 106 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2018_D10_S2_AA: 108 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2018_D10_S3_AA: 113 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2018_D4_SC_AA: 109 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2018_D4_SN_AA: 100 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2018_D4_SS_AA: 113 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2019_D10_S1_AA: 162 entrants, 112 placed (max place 8), 14 weights, 16 team rows
+2019_D10_S2_AA: 152 entrants, 112 placed (max place 8), 14 weights, 15 team rows
+2019_D4_SC_AA: 107 entrants, 56 placed (max place 4), 14 weights, 10 team rows
+2019_D4_SN_AA: 112 entrants, 56 placed (max place 4), 14 weights, 12 team rows
+2019_D4_SS_AA: 116 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2020_D10_S1_AA: 171 entrants, 112 placed (max place 8), 14 weights, 16 team rows
+2020_D10_S2_AA: 146 entrants, 112 placed (max place 8), 14 weights, 15 team rows
+2020_D4_SC_AA: 118 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2020_D4_SN_AA: 114 entrants, 56 placed (max place 4), 14 weights, 12 team rows
+2020_D4_SS_AA: 118 entrants, 56 placed (max place 4), 14 weights, 11 team rows
+2021_D10_S1_AA: 59 entrants, 39 placed (max place 3), 13 weights, 6 team rows
+2021_D10_S2_AA: 72 entrants, 39 placed (max place 3), 13 weights, 7 team rows
+2021_D10_S3_AA: 74 entrants, 39 placed (max place 3), 13 weights, 7 team rows
+2021_D10_S4_AA: 46 entrants, 37 placed (max place 3), 13 weights, 7 team rows
+2021_D4_SC_AA: 108 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+2021_D4_SN_AA: 94 entrants, 52 placed (max place 4), 13 weights, 12 team rows
+2021_D4_SS_AA: 95 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2021_D6_S1_AA: 59 entrants, 39 placed (max place 3), 13 weights, 6 team rows
+2021_D6_S2_AA: 44 entrants, 35 placed (max place 3), 13 weights, 5 team rows
+2021_D6_S3_AA: 63 entrants, 38 placed (max place 3), 13 weights, 7 team rows
+2021_D6_S4_AA: 55 entrants, 38 placed (max place 3), 13 weights, 7 team rows
+2022_D10_S1_AA: 135 entrants, 104 placed (max place 8), 13 weights, 15 team rows
+2022_D10_S2_AA: 117 entrants, 99 placed (max place 8), 13 weights, 12 team rows
+2022_D4_SC_AA: 117 entrants, 52 placed (max place 4), 13 weights, 12 team rows
+2022_D4_SN_AA: 92 entrants, 51 placed (max place 4), 13 weights, 11 team rows
+2022_D4_SS_AA: 98 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+2023_D10_S1_AA: 133 entrants, 104 placed (max place 8), 13 weights, 13 team rows
+2023_D10_S2_AA: 138 entrants, 104 placed (max place 8), 13 weights, 14 team rows
+2023_D4_SC_AA: 107 entrants, 52 placed (max place 4), 13 weights, 11 team rows
+2023_D4_SN_AA: 94 entrants, 51 placed (max place 4), 13 weights, 11 team rows
+2023_D4_SS_AA: 92 entrants, 52 placed (max place 4), 13 weights, 10 team rows
+2024_D10_S1_AA: 131 entrants, 103 placed (max place 8), 13 weights, 13 team rows
+2024_D10_S2_AA: 146 entrants, 104 placed (max place 8), 13 weights, 14 team rows
+2024_D4_SC_AA: 93 entrants, 76 placed (max place 6), 13 weights, 10 team rows
+2024_D4_SN_AA: 101 entrants, 77 placed (max place 6), 13 weights, 11 team rows
+2024_D4_SS_AA: 98 entrants, 78 placed (max place 6), 13 weights, 10 team rows
+2025_D10_S1_AA: 143 entrants, 104 placed (max place 8), 13 weights, 14 team rows
+2025_D10_S2_AA: 137 entrants, 103 placed (max place 8), 13 weights, 14 team rows
+2025_D4_SC_AA: 85 entrants, 76 placed (max place 6), 13 weights, 10 team rows
+2025_D4_SN_AA: 92 entrants, 77 placed (max place 6), 13 weights, 10 team rows
+2025_D4_SS_AA: 106 entrants, 78 placed (max place 6), 13 weights, 10 team rows
+2026_D10_S1_AA: 122 entrants, 101 placed (max place 8), 13 weights, 12 team rows
+2026_D10_S2_AA: 133 entrants, 103 placed (max place 8), 13 weights, 14 team rows
+2026_D4_SC_AA: 100 entrants, 77 placed (max place 6), 13 weights, 10 team rows
+2026_D4_SN_AA: 90 entrants, 75 placed (max place 6), 13 weights, 10 team rows
+2026_D4_SS_AA: 104 entrants, 76 placed (max place 6), 13 weights, 10 team rows
 
-== FLAGGED (7) ==
+== FLAGGED (80) ==
 1959_D12_single: 22 entrants, 0 placed (max place 0), 11 weights, 2 team rows NO PLACERS
 1970_D3_SLancasterLeague_single: 183 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
 1971_D3_SLancasterLeague_single: 177 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
@@ -2692,3 +3448,76 @@
 1972_D3_SBerksCounty_single: 178 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
 1972_D3_SLancasterLeague_single: 174 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
 1972_D3_SYorkAdams_single: 166 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1957_D4_SN_single: 114 entrants, 0 placed (max place 0), 11 weights, 12 team rows NO PLACERS
+1957_D4_SS_single: 111 entrants, 0 placed (max place 0), 11 weights, 11 team rows NO PLACERS
+1958_D4_SN_single: 135 entrants, 0 placed (max place 0), 11 weights, 14 team rows NO PLACERS
+1958_D4_SS_single: 152 entrants, 0 placed (max place 0), 11 weights, 14 team rows NO PLACERS
+1960_D6_SE_single: 143 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1960_D6_SW_single: 108 entrants, 0 placed (max place 0), 12 weights, 10 team rows NO PLACERS
+1961_D6_SE_single: 149 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1961_D6_SW_single: 128 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1962_D11_SE_single: 99 entrants, 0 placed (max place 0), 12 weights, 9 team rows NO PLACERS
+1962_D11_SW_single: 93 entrants, 0 placed (max place 0), 12 weights, 8 team rows NO PLACERS
+1962_D6_SE_single: 142 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1962_D6_SW_single: 151 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1963_D11_SE_single: 96 entrants, 0 placed (max place 0), 12 weights, 8 team rows NO PLACERS
+1963_D11_SW_single: 100 entrants, 0 placed (max place 0), 12 weights, 9 team rows NO PLACERS
+1963_D6_S3_single: 128 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1964_D11_SE_single: 118 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1964_D11_SW_single: 116 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1964_D6_S3_single: 124 entrants, 0 placed (max place 0), 12 weights, 11 team rows NO PLACERS
+1965_D11_SE_single: 140 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1965_D11_SW_single: 140 entrants, 0 placed (max place 0), 12 weights, 12 team rows NO PLACERS
+1965_D6_S3_single: 149 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1966_D11_SE_single: 101 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1966_D11_SW_single: 104 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1967_D11_SE_single: 101 entrants, 0 placed (max place 0), 13 weights, 9 team rows NO PLACERS
+1967_D11_SN_single: 97 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1967_D11_SS_single: 94 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1967_D11_SW_single: 85 entrants, 0 placed (max place 0), 13 weights, 8 team rows NO PLACERS
+1974_D11_SE_AAA: 97 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SNorthEast_AA: 81 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SNorthWest_AA: 77 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SSouthEast_AA: 85 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SSouthWest_AA: 85 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1974_D11_SW_AAA: 98 entrants, 0 placed (max place 0), 13 weights, 0 team rows NO PLACERS
+1975_D11_SE_AA: 159 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1975_D11_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1975_D6_SE_AA: 168 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1975_D6_SW_AA: 160 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1976_D11_SE_AA: 146 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D11_SW_AA: 152 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D6_SE_AA: 155 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1976_D6_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D11_SE_AA: 139 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D11_SW_AA: 156 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D6_SE_AA: 164 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1977_D6_SW_AA: 158 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D11_SE_AA: 114 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D11_SW_AA: 132 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1978_D6_SE_AA: 151 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1978_D6_SW_AA: 146 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1979_D11_SE_AA: 110 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1979_D11_SW_AA: 135 entrants, 0 placed (max place 0), 12 weights, 0 team rows NO PLACERS
+1979_D6_SE_AA: 165 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1979_D6_SW_AA: 166 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1980_D6_SE_AA: 167 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1980_D6_SW_AA: 154 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1981_D6_SE_AA: 164 entrants, 0 placed (max place 0), 12 weights, 15 team rows NO PLACERS
+1981_D6_SW_AA: 152 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1982_D6_SE_AA: 177 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1982_D6_SW_AA: 163 entrants, 0 placed (max place 0), 12 weights, 16 team rows NO PLACERS
+1983_D6_SE_AA: 153 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1983_D6_SW_AA: 127 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1984_D6_SE_AA: 145 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1984_D6_SW_AA: 136 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1985_D6_SE_AA: 162 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1985_D6_SW_AA: 136 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1986_D6_SE_AA: 149 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1986_D6_SW_AA: 142 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1987_D6_SE_AA: 138 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1987_D6_SW_AA: 148 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1988_D6_SE_AA: 140 entrants, 0 placed (max place 0), 12 weights, 13 team rows NO PLACERS
+1988_D6_SW_AA: 139 entrants, 0 placed (max place 0), 12 weights, 14 team rows NO PLACERS
+1989_D6_SE_AA: 125 entrants, 0 placed (max place 0), 13 weights, 11 team rows NO PLACERS
+1989_D6_SW_AA: 104 entrants, 0 placed (max place 0), 13 weights, 12 team rows NO PLACERS
