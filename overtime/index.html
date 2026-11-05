@@ -17,6 +17,33 @@
 <main id="main"></main>
 <div class="bview" id="bview" role="dialog" aria-label="Tournament bracket" hidden></div>
 <nav class="fbar" id="fbar" aria-label="Filters"></nav>
+<!-- boot loader: shows while the data scripts load, fades out on the first render (or when OTBoot.hide() is called) -->
+<style>
+#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;opacity:0;animation:otb-in .2s .25s forwards}
+#otboot.out{animation:none;opacity:0;transition:opacity .25s;pointer-events:none}
+#otboot .w{display:grid;justify-items:center;gap:14px}
+#otboot svg.sw{width:84px;height:84px;overflow:visible}
+#otboot .hand{transform-origin:13px 14.5px;animation:otb-spin 1.6s linear infinite}
+#otboot .pie{transform-origin:13px 14.5px;transform:rotate(-90deg);stroke-dasharray:0 18;animation:otb-pie 1.6s linear infinite}
+#otboot .wm{font:400 26px/1 'Archivo Black',system-ui,sans-serif;letter-spacing:.02em}
+#otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
+@keyframes otb-in{to{opacity:1}}
+@keyframes otb-spin{to{transform:rotate(360deg)}}
+@keyframes otb-pie{to{stroke-dasharray:17.91 18}}
+@media (prefers-reduced-motion:reduce){#otboot .hand,#otboot .pie{animation-duration:6s}}
+</style>
+<div id="otboot" role="status" aria-live="polite" aria-label="Loading Overtime"><div class="w">
+<svg class="sw" viewBox="0 0 26 26" aria-hidden="true"><rect x="10.6" y="1.2" width="4.8" height="2.6" rx="1" fill="currentColor"/><rect x="11.8" y="3.4" width="2.4" height="2.2" fill="currentColor"/><circle cx="13" cy="14.5" r="8.28" fill="none" stroke="currentColor" stroke-width="2.6"/><circle class="pie" cx="13" cy="14.5" r="2.85" fill="none" stroke="#FF3B2F" stroke-width="5.7"/><line class="hand" x1="13" y1="14.5" x2="13" y2="8.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="13" cy="14.5" r="1.3" fill="currentColor"/></svg>
+<div class="wm">OVERTIME</div><div class="msg" id="otbootmsg">Loading results</div></div></div>
+<script>
+(function () { var el = document.getElementById('otboot'), done = false;
+  function hide() { if (done || !el) return; done = true; el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300); }
+  window.OTBoot = { hide: hide, say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
+  var main = document.getElementById('main');
+  if (main && window.MutationObserver) new MutationObserver(function (r, o) { if (main.childElementCount) { o.disconnect(); hide(); } }).observe(main, { childList: true });
+  window.addEventListener('error', function () { window.OTBoot.say('Something failed to load. Try reloading.'); }, { once: true });
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="data.js"></script>
 <script src="medals.js"></script>
