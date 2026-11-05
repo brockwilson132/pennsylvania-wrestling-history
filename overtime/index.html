@@ -17,12 +17,13 @@
 <main id="main"></main>
 <div class="bview" id="bview" role="dialog" aria-label="Tournament bracket" hidden></div>
 <nav class="fbar" id="fbar" aria-label="Filters"></nav>
-<!-- boot loader: shows while the data scripts load, fades out on the first render (or when OTBoot.hide() is called) -->
+<!-- boot loader: shows at once and stays at least MIN ms (Brock: the intro should be seen), then fades out on the first render
+     (or when OTBoot.hide() is called). A slow load is not made slower: the hold only covers what is left of MIN. -->
 <style>
-#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;opacity:0;animation:otb-in .2s .25s forwards}
+#otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;opacity:0;animation:otb-in .15s forwards}
 #otboot.out{animation:none;opacity:0;transition:opacity .25s;pointer-events:none}
 #otboot .w{display:grid;justify-items:center;gap:22px}
-#otboot svg.lk{width:min(520px,88vw);height:auto;overflow:visible;animation:otb-st .5s .25s both}
+#otboot svg.lk{width:min(520px,88vw);height:auto;overflow:visible;animation:otb-st .5s both}
 #otboot .bar{width:min(220px,60vw);height:6px;border-radius:3px;background:#262C35;overflow:hidden}
 #otboot .bar i{display:block;height:100%;background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B);clip-path:inset(0 100% 0 0);transition:clip-path .3s ease-out}
 #otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
@@ -37,10 +38,13 @@
 (function () { var el = document.getElementById('otboot'), done = false;
   // progress bar: the gradient is fixed to the track and only revealed left to right. Until real numbers arrive through
   // OTBoot.progress(f), it eases toward 90% on a timer; it never moves backwards and fills to 100% on hide.
-  var bar = document.getElementById('otbootbar'), shown = 0, real = 0, t0 = Date.now(), tick;
+  var bar = document.getElementById('otbootbar'), shown = 0, real = 0, t0 = Date.now(), tick, MIN = 1200;
   function draw(f) { f = Math.max(shown, Math.min(1, f)); shown = f; if (bar) bar.style.clipPath = 'inset(0 ' + (100 - f * 100).toFixed(1) + '% 0 0)'; }
   tick = setInterval(function () { draw(Math.max(real, 0.9 * (1 - Math.exp(-(Date.now() - t0) / 2500)))); }, 120);
-  function hide() { if (done || !el) return; done = true; clearInterval(tick); draw(1); setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300); }, 200); }
+  /* on hide the bar sweeps to full over whatever is left of MIN (at least 150 ms), then the loader fades */
+  function hide() { if (done || !el) return; done = true; clearInterval(tick); var wait = Math.max(150, MIN - (Date.now() - t0));
+    if (bar) bar.style.transition = 'clip-path ' + wait + 'ms ease-in-out'; draw(1);
+    setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300); }, wait + 80); }
   window.OTBoot = { hide: hide, progress: function (f) { real = +f || 0; draw(real); }, say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
   var main = document.getElementById('main');
   if (main && window.MutationObserver) new MutationObserver(function (r, o) { if (main.childElementCount) { o.disconnect(); hide(); } }).observe(main, { childList: true });
