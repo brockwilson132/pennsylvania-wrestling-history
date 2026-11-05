@@ -96,7 +96,6 @@
   /* ---------- All-time team: weights × depth, as deep as you like ---------- */
   /* one line per season, FR to SR: how tough his toughest bracket that year was (the bar, ranked within its level) and how
      far he got. A state result is a medal pill; a season that ended at regionals or districts says so in plain text. */
-  const ATT_STYLE = (() => { try { const m = /[?&]att=(top|bot)\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare 2x2 season layouts
   const LV_SHORT = { regional: 'Reg', district: 'Dist' };
   function seasonLines(s) {
     const W = OT.getWrestler(s.href.replace('#wrestler/', ''));
@@ -118,10 +117,15 @@
       return `<span class="sx"><span class="sg">${OT.GRADE_L[i]}<i>${yr}</i></span>${f ? OT.sbar(f, lvl, `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
     }).join('');
   }
+  /* the left bar: peak RTG on a fixed scale from the average state qualifier (1500) to 2200, about the best on record, so the
+     all-time greats spread out instead of all reading full */
+  const VLO = 1500, VHI = 2200;
   function chip(s, u) {
     if (!s) return '<div class="atc none"></div>';
     const lines = seasonLines(s);
-    return `<a class="atc" href="${s.href}"><span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}<small>${u.kind === 'school' ? '' : OT.stag(s.sch)}${s.years}</small></span>${lines ? `<span class="ats${ATT_STYLE ? ' q4 ' + ATT_STYLE : ''}">${lines}</span>` : ''}</a>`;
+    const vf = s.rtg ? Math.max(0.04, Math.min(1, (s.rtg - VLO) / (VHI - VLO))) : 0;
+    const vbar = `<span class="atv" title="${s.rtg ? `Peak RTG ${OT.rtg10(s.rtg)} · bar runs from ${VLO} (average state qualifier) to ${VHI}` : 'No rating'}"><i style="height:${(100 * vf).toFixed(0)}%;background:${s.rtg ? OT.colorAt(vf) : 'transparent'}"></i></span>`;
+    return `<a class="atc" href="${s.href}">${vbar}<span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}<small>${u.kind === 'school' ? '' : OT.stag(s.sch)}${s.years}</small></span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
   }
   function teamGrid(u) {
     const D = Math.max(3, state.attN || 3);

@@ -1192,13 +1192,7 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 @media(min-width:720px){.vB .bvcols{grid-template-columns:minmax(0,1fr) 300px;margin-left:44px}}
 .bvl.v2 .bvbl{max-width:230px}.vB .bvleft{min-width:0}
 .ats .sx{display:contents}
-/* 2x2 season variant (?att=top bar above the result, ?att=bot bar below) */
-.ats.q4{display:grid;grid-template-columns:repeat(2,52px);gap:5px 6px;align-content:start}
-.ats.q4 .sx{display:grid;grid-template-columns:1fr;justify-items:stretch;row-gap:3px;padding:3px 4px 4px;border-radius:6px;background:rgba(255,255,255,.03)}
-.ats.q4 .sg{text-align:center;line-height:12px}
-.ats.q4 .smtr{width:auto}
-.ats.q4 .yp,.ats.q4 .srl,.ats.q4 .sr0{text-align:center}
-.ats.q4 .srl{font-size:10px}
-.ats.q4.top .sg{order:0}.ats.q4.top .smtr{order:1}.ats.q4.top .yp,.ats.q4.top .srl,.ats.q4.top .sr0{order:2}
-.ats.q4.bot .sg{order:0}.ats.q4.bot .yp,.ats.q4.bot .srl,.ats.q4.bot .sr0{order:1}.ats.q4.bot .smtr{order:2}
-.ats.q4 .sx{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+/* peak-rating bar down the card's left side: fills from the bottom, cold to hot */
+.atc{position:relative;padding-left:22px;overflow:hidden}
+.atv{position:absolute;left:0;top:0;bottom:0;width:12px;background:#1E242C;border-right:1px solid var(--line);display:flex;align-items:flex-end}
+.atv>i{display:block;width:100%}
