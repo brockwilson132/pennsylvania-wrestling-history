@@ -38,7 +38,7 @@
   }
   const winText = () => state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? OT.windowLabel() : 'Last ' + state.win.mode;
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
-  let pop = '';
+  let pop = '', sgOpen = false;
   /* The bottom bar: four tabs (what the page shows) around the filter button (which place, class and seasons).
      Map, Rankings, Timeline and Seasons are views of the place page; Rankings also holds the wrestlers and the
      all-time team. The view is remembered for the session. */
@@ -57,7 +57,10 @@
     const tab = ([k, l, ic]) => `<button class="fb${cur === k ? ' on' : ''}" type="button" data-tab="${k}"${cur === k ? ' aria-current="page"' : ''}>${navIcon(ic)}<span class="fbv">${tabLabel(k, l)}</span></button>`;
     const val = clsText() + ' · ' + winText();
     const mid = `<button class="fb ft${filtersOn() ? ' on' : ''}" type="button" data-fb="filters" aria-label="Filters: ${esc(placeText(F()))}, ${esc(val)}" aria-haspopup="dialog" aria-expanded="${pop === 'filters'}"><span class="ftc">${navIcon('filters')}</span><span class="fbv">${esc(val)}</span></button>`;
-    fbar.innerHTML = `<div class="fbi tabs">${TABS.map((t) => (t ? tab(t) : mid)).join('')}</div>`;
+    /* the bracket-toughness key rides on top of the bar whenever the page shows signal bars; tap it to open the cut points */
+    const sgOn = !pop && !!main.querySelector('.sgn:not(.sg0)'); document.body.classList.toggle('sgk-on', sgOn);
+    const key = sgOn ? `<div class="sgkey${sgOpen ? ' open' : ''}" role="button" tabindex="0" aria-expanded="${sgOpen}" aria-label="Bracket toughness key"><div class="sgki">${OT.sgKey(sgOpen)}</div></div>` : '';
+    fbar.innerHTML = key + `<div class="fbi tabs">${TABS.map((t) => (t ? tab(t) : mid)).join('')}</div>`;
   }
   /* the popups: one at a time, a sheet above the bar on a phone, a panel anchored to its button on a desktop */
   let SCH = null; const schools = () => SCH || (SCH = OT.UD.schools.map((n) => { const u = OT.U.school(n); return { n, d: u.d || 0, r: u.region || '', q: n.toLowerCase() }; }).sort((a, b) => a.n.localeCompare(b.n)));
@@ -298,6 +301,7 @@
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   document.addEventListener('click', (e) => {
     /* filter bar and its popups */
+    if (e.target.closest('.sgkey')) { sgOpen = !sgOpen; drawBar(); return; }
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       void f; if (pop === k) closePop(); else openPop(k); return; }
     const tb = e.target.closest('[data-tab]'); if (tb) { const k = tb.dataset.tab, f = F(); closePop();
@@ -366,6 +370,7 @@
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('change', (e) => { const s = e.target.closest && e.target.closest('select[data-attsel]'); if (!s) return; if (state.attMode === 'weight') state.attW = s.value; else state.attTeam = +s.value; render(true); });
+  document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('sgkey')) { e.preventDefault(); e.target.click(); } });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });

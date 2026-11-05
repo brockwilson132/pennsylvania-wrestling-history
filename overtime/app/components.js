@@ -351,7 +351,7 @@
           cell = r.place ? `<span class="${cls} ${pc(r.place)}" title="${r.year} · ${wShort(r.w)} · ${ordinal(r.place)}${e.adv ? ' · advanced' : ''}">${r.place}</span>` : `<span class="${cls} cq" title="${r.year} · ${F.lvl === 'state' ? 'qualified' : 'did not place'}">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
         } else cell = cellHTML(c, 'pill');
         const rr = here ? r : c && c.r && !c.dnc && !c.nodata ? c.r : null; const fv = rr ? OT.fieldOf(rr, row.k) : null;
-        h += `<span class="pw" style="${at(k + 2, i + 2)}">${cell}${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<span class="sm sm0"><i></i></span>'}</span>`;
+        h += `<span class="pw" style="${at(k + 2, i + 2)}">${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<span class="sgn sg0"></span>'}${cell}</span>`;
       });
     });
     return `<span class="cm bvm">${h}</span>`;
@@ -509,7 +509,7 @@
         /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
         const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
         const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
-        const pbar = path != null ? OT.sbar(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
+        const pbar = path != null ? OT.lineMeter(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
         const rf = (v) => Math.max(0.04, Math.min(1, (v - 1000) / 1200));   // fixed RTG scale so a field spreads out
         const rv = rOf(r), rbar = rv ? `<span class="smtr" title="RTG ${OT.rtg10(rv)} · bar runs from 1000 to 2200"><i><b style="width:${(100 * rf(rv)).toFixed(0)}%;background:${OT.colorAt(rf(rv))}"></b></i></span>` : '<span class="smtr sm0"><i></i></span>';
         const pline = path != null ? `<span class="bvop"><span>Opponents averaged <b>${Math.round(path)}</b></span>${pbar}</span>` : '';
