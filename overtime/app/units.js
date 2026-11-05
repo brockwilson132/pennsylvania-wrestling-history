@@ -356,6 +356,10 @@
     return `<svg class="rcs rcb" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true">${vals.filter((v) => v[1] > 0).map(([y, v]) => `<rect x="${((y - y0) * bw).toFixed(2)}" y="${(14 - 13 * v / mx).toFixed(2)}" width="${Math.max(0.6, bw * 0.72).toFixed(2)}" height="${(13 * v / mx).toFixed(2)}"/>`).join('')}</svg>`; };
   /* ticks for the seasons something happened (Titles, Team) */
   const chipTicks = (years, y0, y1) => { const n = Math.max(1, y1 - y0); return `<svg class="rcs rct" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 13.5 H60" vector-effect="non-scaling-stroke"/>${years.map((y) => `<path d="M${(1 + 58 * (y - y0) / n).toFixed(2)} 2 V13" vector-effect="non-scaling-stroke"/>`).join('')}</svg>`; };
+  /* titles per decade (per season when the window is short), as bars on the same scale for every row */
+  const chipCount = (years, y0, y1, mx) => { const span = y1 - y0 + 1, step = span > 15 ? 10 : 1, b0 = step === 10 ? Math.floor(y0 / 10) * 10 : y0, nb = Math.floor((y1 - b0) / step) + 1, cnt = new Array(nb).fill(0);
+    years.forEach((y) => { const i = Math.floor((y - b0) / step); if (i >= 0 && i < nb) cnt[i]++; }); const m = Math.max(1, mx || Math.max(...cnt)), bw = 60 / nb;
+    return `<svg class="rcs rcb" viewBox="0 0 60 14" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 13.5 H60" vector-effect="non-scaling-stroke"/>${cnt.map((c, i) => (c ? `<rect x="${(i * bw + bw * 0.14).toFixed(2)}" y="${(14 - 13 * Math.min(1, c / m)).toFixed(2)}" width="${(bw * 0.72).toFixed(2)}" height="${(13 * Math.min(1, c / m)).toFixed(2)}"/>` : '')).join('')}</svg>`; };
   function distRows(a) {
     const lv = LVL3.filter((l, i) => a.w[i]);
     const rows = lv.map((l) => { const c = placeDist(a.kind, l).get(a.k) || [0, 0, 0, 0, 0, 0, 0, 0]; const mx = Math.max(1, ...c), tot = c.reduce((t, x) => t + x, 0);
@@ -378,11 +382,11 @@
     const hl = (k) => (sort === k ? ' on' : '');
     const tile = (cls, k, val, gfx, style, title) => `<span class="vt ${cls}${hl(k)}"${style ? ` style="${style}"` : ''}${title ? ` title="${esc(title)}"` : ''}><b>${val}</b>${gfx}</span>`;
     return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b></span>`
-      + tile('vtt' + (a.ti ? '' : ' z'), 'titles', a.ti || '–', chipTicks(tYears, y0, y1), gold(a.ti, ctx.maxTi), `${a.ti} state title${a.ti === 1 ? '' : 's'}${tYears.length ? ' · ' + tYears.join(', ') : ''}`)
+      + tile('vtt' + (a.ti ? '' : ' z'), 'titles', a.ti || '–', chipCount(tYears, y0, y1), gold(a.ti, ctx.maxTi), `${a.ti} state title${a.ti === 1 ? '' : 's'}${tYears.length ? ' · ' + tYears.join(', ') : ''}`)
       + tile('vtr', 'rating', rt || '–', chipSpark(a.series), `--tint:${tint}`, `Strength ${rt} · average of ${a.nS} season${a.nS === 1 ? '' : 's'}`)
       + tile('vtl' + (a.talent ? '' : ' z'), 'talent', talTxt(a.talent, a.kind), chipSpark(a.tseries), '', `Talent ${talTxt(a.talent, a.kind)} · wrestlers rated ${UD.talentAt || 1650}+${a.kind === 'school' ? '' : ' per school'} per season, average of ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`)
       + tile('vts', 'score', fmt(Math.round(a.score)), chipBars(a.ys.map((y) => [y.y, y.sp * a.w[0] + y.rp * a.w[1] + y.dp * a.w[2]]), y0, y1), '--tint:#2F3640', `Score ${fmt(Math.round(a.score))} · placement points per season`)
-      + tile('vtm' + (team ? '' : ' z'), 'team', team || '–', chipTicks(teamYears, y0, y1), gold(team, ctx.maxTeam), team ? `${team} team title${team === 1 ? '' : 's'} · ${teamYears.sort((p, q) => p - q).join(', ')}` : 'no team titles')
+      + tile('vtm' + (team ? '' : ' z'), 'team', team || '–', chipCount(teamYears, y0, y1), gold(team, ctx.maxTeam), team ? `${team} team title${team === 1 ? '' : 's'} · ${teamYears.sort((p, q) => p - q).join(', ')}` : 'no team titles')
       + `<span class="vtn" title="seasons with Strength in this window">${a.nS}</span></button>
       <div class="sxd" hidden>${a.sub ? `<div class="sxsub">${esc(a.sub)}</div>` : ''}${distRows(a)}<div class="sxf">${best}${tl}${il}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
   }
