@@ -102,7 +102,7 @@
     if (!W || !(W.apps.length || (W.lower && W.lower.length))) {   // index entry with no matching rows: state results only, no bars
       if (!s.sres.length) return ''; const y1 = Math.max(...s.sres.map((r) => r.year)), ys = [y1 - 3, y1 - 2, y1 - 1, y1];
       return ys.map((y, i) => { const r = s.sres.find((x) => x.year === y);
-        return `<span class="sx"><span class="sg">${OT.GRADE_L[i]}<i>'${String(y).slice(2)}</i></span><span class="smtr sm0"><i></i></span>${r ? (r.place ? `<span class="yp ${OT.pc(r.place)}">${ordinal(r.place)}</span>` : '<span class="yp q">Q</span>') : '<span class="sr0">–</span>'}</span>`; }).join(''); }
+        return `<span class="sx"><span class="sg">'${String(y).slice(2)}<i>${OT.GRADE_L[i]}</i></span><span class="smtr sm0"><i></i></span>${r ? (r.place ? `<span class="yp ${OT.pc(r.place)}">${ordinal(r.place)}</span>` : '<span class="yp q">Q</span>') : '<span class="sr0">–</span>'}</span>`; }).join(''); }
     const M = OT.careerCells(W.apps, W.lower && W.lower.length ? W.lower : null);
     const at = (k) => M.rows.find((r) => r.k === k).cells;
     return M.cols.map((col, i) => {
@@ -114,7 +114,7 @@
       if (!c) res = `<span class="sr0">${col ? '–' : ''}</span>`;
       else if (lvl === 'state') res = c.place ? `<span class="yp ${OT.pc(c.place)}" title="${tip} ${ordinal(c.place)}">${ordinal(c.place)}</span>` : `<span class="yp q" title="${tip} qualifier">Q</span>`;
       else res = `<span class="srl" title="${tip}${c.place ? ' ' + ordinal(c.place) : c.q ? ', advanced' : ', did not place'}">${LV_SHORT[lvl]} ${c.place ? ordinal(c.place) : c.q ? 'Q' : 'DNP'}</span>`;
-      return `<span class="sx"><span class="sg">${OT.GRADE_L[i]}<i>${yr}</i></span>${f ? OT.sbar(f, lvl, `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
+      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, lvl, `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
     }).join('');
   }
   /* the left bar: peak RTG on a fixed scale from the average state qualifier (1500) to 2200, about the best on record, so the
@@ -125,7 +125,7 @@
     const lines = seasonLines(s);
     const vf = s.rtg ? Math.max(0.04, Math.min(1, (s.rtg - VLO) / (VHI - VLO))) : 0;
     const vbar = `<span class="atv" title="${s.rtg ? `Peak RTG ${OT.rtg10(s.rtg)} · bar runs from ${VLO} (average state qualifier) to ${VHI}` : 'No rating'}"><i style="height:${(100 * vf).toFixed(0)}%;background:${s.rtg ? OT.colorAt(vf) : 'transparent'}"></i></span>`;
-    return `<a class="atc" href="${s.href}">${vbar}<span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}<small>${u.kind === 'school' ? '' : OT.stag(s.sch)}${s.years}</small></span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
+    return `<a class="atc" href="${s.href}">${vbar}<span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}${u.kind === 'school' ? '' : `<small>${OT.stag(s.sch)}</small>`}</span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
   }
   function teamGrid(u) {
     const D = Math.max(3, state.attN || 3);
