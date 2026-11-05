@@ -127,12 +127,12 @@
     return `<svg class="spk" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${d}" fill="none" stroke="#EEEAE1" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity=".85"/>${lone}<circle cx="${X(pk[0])}" cy="${Y(pk[1])}" r="2.6" fill="#D9A441"/></svg>`;
   }
   /* ---------- strength of competition ----------
-     A bracket's strength is the mean rating of its top eight. Everywhere a result appears it gets one slim vertical bar
-     beside it: height and colour (blue → cyan → green → yellow → orange → red) follow where that bracket ranks among brackets of the
-     SAME level, so a loaded district reads as loaded and a thin state bracket as thin. The bracket header lays the same
-     bar flat. */
-  const FLO = 1000, FHI = () => (UD.typField.state || 1640) + 160;
-  const fpos = (v) => Math.max(0.06, Math.min(1, (v - FLO) / (FHI() - FLO)));
+     A bracket's strength is the mean rating of its top eight. Everywhere a result appears it gets one slim bar beside it.
+     Every level shares ONE scale anchored to the average state bracket: that bracket sits at 80% of the bar (orange), the
+     weakest district brackets (5th percentile) at the empty end, and the scale runs on in straight rating points, so the
+     toughest state brackets reach red. A loaded district therefore reads close to a state bracket, a thin one reads cold,
+     and a state bracket always reads as the state bracket it is. The bracket header lays the same bar flat, with a tick at
+     the average state bracket. */
   const LK = { state: 's', regional: 'r', district: 'd' };
   let LP = null;
   const lvlArr = (lvl) => {
@@ -145,11 +145,18 @@
   /* cold → hot: ice blue, cyan, green, yellow, orange, fire red. One ramp for every rating and strength colour. */
   const STOPS = [[0, [44, 91, 216]], [0.2, [32, 168, 216]], [0.42, [46, 194, 126]], [0.62, [229, 197, 58]], [0.8, [240, 138, 36]], [1, [232, 57, 43]]];
   const colorAt = (f) => { let i = 0; while (i < STOPS.length - 2 && f > STOPS[i + 1][0]) i++; const [a, ca] = STOPS[i], [b, cb] = STOPS[i + 1]; const t = Math.max(0, Math.min(1, (f - a) / (b - a))); return 'rgb(' + ca.map((x, k) => Math.round(x + (cb[k] - x) * t)).join(',') + ')'; };
-  const sFrac = (v, lvl = 'state') => { const p = pctIn(v, lvl); return p == null ? fpos(v) : Math.max(0.08, p / 100); };
-  const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)}` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
+  const S_AT = 0.8;   // where the average state bracket sits on every bar
+  let SAX = null;
+  const sAnchor = () => { if (!SAX) { const S = lvlArr('state'), D = lvlArr('district');
+      const avg = S.length ? S.reduce((a, b) => a + b, 0) / S.length : 1710, lo = D.length ? D[Math.floor(0.05 * (D.length - 1))] : 500;
+      SAX = { avg, lo: Math.min(lo, avg - 400) }; }
+    return SAX; };
+  const sFrac = (v) => { const { avg, lo } = sAnchor(); return Math.max(0.06, Math.min(1, S_AT * (v - lo) / (avg - lo))); };
+  const vsState = (v) => { const d = Math.round((v - sAnchor().avg) / 10) * 10; return Math.abs(d) < 10 ? 'level with the average state bracket' : `${Math.abs(d)} ${d > 0 ? 'above' : 'below'} the average state bracket`; };
+  const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)} · ${vsState(v)} (${r10(sAnchor().avg)})` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
   const compColor = (v, lvl = 'state') => colorAt(sFrac(v, lvl));
-  /* the glyph: a short horizontal strength meter beside a result: a track filled from the left by the bracket's rank among
-     brackets of its own level, on the cold → hot ramp; optional value above it. Never on or under a medal pill. */
+  /* the glyph: a short horizontal strength meter beside a result: a track filled from the left on the shared, state-anchored
+     scale, on the cold → hot ramp; optional value above it. Never on or under a medal pill. */
   const smeter = (v, lvl, ctx, num) => {
     if (!v) return '<span class="smtr sm0" aria-hidden="true"><i></i></span>';
     const f = sFrac(v, lvl), c = colorAt(f);
@@ -157,11 +164,11 @@
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
-  /* bracket header: the same bar lying flat, its length and colour from the same within-level rank */
+  /* bracket header: the same bar lying flat on the same scale, with a tick where the average state bracket sits */
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
     const f = sFrac(v, lvl), p = pctIn(v, lvl);
-    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i></span><em>${p != null ? `tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
+    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i><u style="left:${100 * S_AT}%" title="Average state bracket ${r10(sAnchor().avg)}"></u></span><em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
   const legend = () => `<span class="clg"><span class="clgt">Bar under each result: how tough that bracket was. Easier</span><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span><span class="clgt">tougher</span></span>`;
 
@@ -203,7 +210,7 @@
       if (!c) return '<span class="cgc none"></span>';
       const lv = c.sec ? 'section' : lvl;   // a section result stands in the District row where the section is the district round
       const ok = c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
-      const f = ok ? OT.fieldOf(c.r, lv) : null; const fr = f ? sFrac(f, 'district') : 0;
+      const f = ok ? OT.fieldOf(c.r, lv) : null; const fr = f ? sFrac(f) : 0;
       const tag = href ? 'a' : 'span', hr = href ? ` href="${href}"` : '';
       let cls = 'cgp', txt = '', tip = `${c.year}${c.w ? ' · ' + wShort(c.w) : ''} · ${c.sec ? OT.unitLabel('section', c.r.unit) : lvl}`;
       if (c.place) { cls += ' ' + pcls(c.place); txt = ordinal(c.place); tip += ' ' + ordinal(c.place); }
@@ -211,7 +218,7 @@
       else if (c.nodata) { cls += ' nod'; txt = '–'; tip += ': ' + (c.src || 'no bracket on record'); }
       else if (c.dnp) { cls += ' dnp'; txt = 'DNP'; tip += ': entered, did not place'; }
       else { cls += ' q'; txt = 'Q'; tip += ': ' + (c.src || 'qualified'); }
-      if (f) tip += ' · ' + fieldTip(f, 'district');
+      if (f) tip += ' · ' + fieldTip(f, lv);
       return `<${tag}${hr} class="cgc${c.sec ? ' sec' : ''}" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
     };
     const lab = (t, icon) => `<span class="cgl">${icon ? OT.navIcon(icon) : ''}<span>${t}</span></span>`;
