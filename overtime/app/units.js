@@ -291,23 +291,42 @@
   const LVLN = { s: 'state', r: 'regional', d: 'district' };
   const recordOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 3) { any = true; t[0] += v[3]; t[1] += v[4]; t[2] += v[5]; t[3] += v[6]; } }); return any ? t : null; };
 
-  /* ---------- wrestler card ----------
-     Row 1: identity and RTG. Row 2: the season grid at its natural width (rating dots above, each result with its strength
-     bar), and beside it what the grid can't say: postseason record, falls, OT wins, win rate, titles by level, best win. */
+  /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team) ----------
+     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Seasons run down, District → Regional →
+     State run across, each result with its bracket-toughness signal bars; each row ends with that season's rating. Four
+     tiles under it: postseason record, win rate, falls, titles by level; then the best win. `rank` is whatever sits left
+     of the name: a list rank, a weight or a team. */
+  const PK_LO = 1500, PK_HI = 2200;
+  const pkFrac = (v) => Math.max(0.04, Math.min(1, (v - PK_LO) / (PK_HI - PK_LO)));
+  const WC_LV = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
+  function wcPill(c, lvl) {
+    if (!c) return '<span class="wqp x">–</span>';
+    if (c.place) return `<span class="wqp ${OT.pc(c.place)}">${ordinal(c.place)}</span>`;
+    if (c.q) return `<span class="wqp q">${lvl === 'state' ? 'Q' : 'Adv'}</span>`;
+    if (c.dnp) return '<span class="wqp x">DNP</span>'; if (c.dnc) return '<span class="wqp x">DNC</span>'; if (c.nodata) return '<span class="wqp x" title="No bracket on record">n/a</span>';
+    return '<span class="wqp x">–</span>';
+  }
   function wrestlerCard(w, rank, opts = {}) {
     if (!w.lower) w.lower = OT.lowerFor(w.apps);
-    const cr = OT.careerRating(w.apps, w.lower);
+    const cr = OT.careerRating(w.apps, w.lower), sr = cr ? cr.seasons : [];
     const years = Array.from(new Set(w.apps.map((a) => a.year).concat(w.lower.map((r) => r.year)))).sort();
-    const wn = w.apps.concat(w.lower).sort((a, b) => a.year - b.year).map((a) => a.w).filter(Boolean); const wts = wn.length ? (wShort(wn[0]) === wShort(wn[wn.length - 1]) ? wShort(wn[0]) : wShort(wn[0]) + '–' + wShort(wn[wn.length - 1])) : '';
     const y0 = years[0], y1 = years[years.length - 1];
+    const M = OT.careerCells(w.apps, w.lower); const at = (k) => M.rows.find((r) => r.k === k).cells;
+    const rows = M.cols.map((col, i) => { if (!col) return '';
+      const cells = WC_LV.map(([lvl]) => { const c = at(lvl)[i]; const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null;
+        return `<span class="wqc">${f ? sbar(f, c.sec ? 'section' : lvl, `${col.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>'}${wcPill(c, lvl)}</span>`; }).join('');
+      const r = sr.find((x) => x.year === col.year); const wt = col.w || (r && r.w);
+      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i>${wt ? `<em>${wShort(wt)}</em>` : ''}</span>${cells}<span class="wqr"${r ? ` style="color:${colorAt(pkFrac(r.rating))}"` : ''}>${r ? rw(r.rating) : '–'}</span>`; }).join('');
     const rec = recordOf(w.name, years), bw = bestWinOf(w.name, years);
-    const ttl = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]].filter(([, n]) => n);
-    const st = [];
-    if (rec) { st.push([`${rec[0]}–${rec[1]}`, 'postseason']); if (rec[0] + rec[1]) st.push([Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%', 'won']); st.push([rec[2], rec[2] === 1 ? 'fall' : 'falls']); if (rec[3]) st.push([rec[3], rec[3] === 1 ? 'OT win' : 'OT wins']); }
-    const stats = `<span class="wst"${!BW ? ' data-need-bw="1"' : ''}>${st.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}${ttl.length ? `<span class="wide"><i>titles</i> ${ttl.map(([l, n]) => `${l} <b>${n}</b>`).join(' · ')}</span>` : ''}${bw ? `<span class="wide"><i>best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</span>`;
-    return `<a class="wk" href="${w.href}" style="--p1:${colorOf(w.sch)}">
-      <span class="wk1">${rank ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}${wts ? ' · ' + wts + ' lbs' : ''}</small></span>${cr ? `<span class="rv"><i>RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
-      <span class="wkb">${timeline(w.apps, w.lower)}${stats}</span></a>`;
+    const ti = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]];
+    const nT = ti.reduce((a, [, n]) => a + n, 0);
+    const tile = (k, v, sub) => `<span class="wqt"><i>${k}</i><b>${v}</b>${sub ? `<small>${sub}</small>` : ''}</span>`;
+    const tiles = `<span class="wqts"${!BW ? ' data-need-bw="1"' : ''}>${tile('Record', rec ? `${rec[0]}–${rec[1]}` : '–')}${tile('Won', rec && rec[0] + rec[1] ? Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%' : '–')}${tile('Falls', rec ? rec[2] : '–', rec && rec[3] ? `${rec[3]} OT` : '')}${tile('Titles', nT, nT ? ti.filter(([, n]) => n).map(([l, n]) => l + n).join(' ') : '')}</span>`;
+    const pk = cr ? `<span class="wqpk" title="Peak RTG ${rw(cr.peak)} · bar runs from ${PK_LO} (average state qualifier) to ${PK_HI}"><i style="height:${(100 * pkFrac(cr.peak)).toFixed(0)}%;background:${colorAt(pkFrac(cr.peak))}"></i></span>` : '<span class="wqpk"></span>';
+    return `<a class="wq" href="${w.href}">${pk}
+      <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</small></span>${cr ? `<span class="rv"><i>Peak RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
+      <span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}<span class="wql r">RTG</span>${rows}</span>
+      ${tiles}${bw ? `<span class="wqb"><i>Best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</a>`;
   }
 
   /* ---------- unit card ----------
