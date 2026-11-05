@@ -309,6 +309,9 @@ var OT = window.OT || (window.OT = {});
      eight, on the same scale, so a district reads below a regional below states. Data: sos.js (eager: every bracket's
      field, the rating of every state entrant and district/regional medalist) and sos/<year>.json (lazy: every entrant's
      rating, best win and bad losses per tournament, and every bout). */
+  /* a district/regional entrant's state row the same season, built on first use (opening a lower bracket), not at startup */
+  let SYK = null;
+  const stateRowYK = (k) => { if (!SYK) { SYK = new Map(); APP.forEach((x) => { const kk = x.year + '|' + wKey(x); if (!SYK.has(kk)) SYK.set(kk, x); }); } return SYK.get(k) || null; };
   const SOSD = window.WR_SOS || {}, RTG_META = window.WR_RTG_META || { field: {}, lo: 1000, hi: 1750 };
   const L1 = { state: 's', regional: 'r', district: 'd', section: 'x' };
   const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
@@ -497,7 +500,7 @@ var OT = window.OT || (window.OT = {});
     const w = rows[0] ? rows[0].w : String(k.wn);
     const field = fieldAt(k.lvl, k.year, k.cls, k.unit, k.wn != null ? k.wn : wNum(w));
     const adv = k.lvl === 'state' ? null : advOf(k.lvl, k.year, k.cls, k.unit, w);
-    const entrants = rows.map((r) => { const W = WRESTLER.get(rSlug(r)) || lowerWrestler(rSlug(r)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; const sameSeason = k.lvl === 'state' ? null : (stateByYK.get(r.year + '|' + wKey(r)) ? APP.find((x) => x.year === r.year && wKey(x) === wKey(r)) : null);
+    const entrants = rows.map((r) => { const W = WRESTLER.get(rSlug(r)) || lowerWrestler(rSlug(r)); const career = W ? W.rows.filter((x) => x.year !== r.year) : []; const sameSeason = k.lvl === 'state' ? null : stateRowYK(r.year + '|' + wKey(r));
       return { r, W, slug: rSlug(r), career, sameSeason, adv: adv && r.place && r.place <= adv, seedLabel: r.lvl === 'state' || !r.lvl ? (r.year >= 1951 ? (r.region ? `${r.region}-${r.reg || '?'}` : (r.reg ? String(r.reg) : '')) : (r.dist ? `D${r.d}-${r.dist}` : `D${r.d}`)) : (r.seed ? String(r.seed) : '') }; });
     const src = (LM.src || {})[`${k.lvl}|${k.year}|${k.cls}|${k.unit}`] || null;
     return { ...k, key, w, field, adv, loading, src, covered: k.lvl === 'state' || LM.cov.concat(LM.scov || []).includes(`${k.lvl}|${k.year}|${k.cls}|${k.unit}`), entrants, unitLabel: k.lvl === 'state' ? 'PIAA' : unitLabel(k.lvl, k.unit), next: k.lvl === 'state' ? 'HERSHEY' : k.lvl === 'regional' ? 'TO STATES' : 'TO REGIONALS' };
