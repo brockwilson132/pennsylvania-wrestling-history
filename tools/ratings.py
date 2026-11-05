@@ -663,7 +663,10 @@ if FIRST == 'prior':
 # tuned on hidden 1990-2017 bouts
 random.seed(5)
 tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
-tb = [b for b in bouts if b['i'] in tune_held]
+# scored on the hidden regional and state bouts only: a hidden district or section bout mostly pairs an advancer with a
+# first-round exit, and the first-round label is that same season's outcome, so scoring those bouts rewards a narrow
+# prior that trusts the label (it picked 0.7, the edge of the grid; regional + state picks 1.5). Review thread, 2026-11-05.
+tb = [b for b in bouts if b['i'] in tune_held and b['level'] in ('regional', 'state')]
 scores = {}
 for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
     Tt, *_ = smoother(mask=tune_held, sd_scale=sc, shift=SHIFT)

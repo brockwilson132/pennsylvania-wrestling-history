@@ -52,78 +52,75 @@ district prior refit 12 with first-round prior: largest residual 2
 district prior refit 13 with first-round prior: largest residual 2
 district prior refit 14 with first-round prior: largest residual 2
 district prior refit 15 with first-round prior: largest residual 2
-prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.4383, 1.0: 0.4399, 1.5: 0.4509, 2.0: 0.4663, 2.5: 0.4829, 3.0: 0.4996, 4.5: 0.5472 -> 0.7
-district prior refit 1 at prior sd scale 0.7: largest residual 100
-district prior refit 2 at prior sd scale 0.7: largest residual 27
-district prior refit 3 at prior sd scale 0.7: largest residual 13
-district prior refit 4 at prior sd scale 0.7: largest residual 9
-district prior refit 5 at prior sd scale 0.7: largest residual 7
-district prior refit 6 at prior sd scale 0.7: largest residual 6
-district prior refit 7 at prior sd scale 0.7: largest residual 5
-district prior refit 8 at prior sd scale 0.7: largest residual 4
-district prior refit 9 at prior sd scale 0.7: largest residual 3
-district prior refit 10 at prior sd scale 0.7: largest residual 3
-district prior refit 11 at prior sd scale 0.7: largest residual 2
-district prior refit 12 at prior sd scale 0.7: largest residual 2
-district prior refit 13 at prior sd scale 0.7: largest residual 2
-  first-round prior offset -400 at prior sd scale 0.7: log loss 0.4956
-  first-round prior offset -500 at prior sd scale 0.7: log loss 0.4918
-  first-round prior offset -600 at prior sd scale 0.7: log loss 0.4895
-  first-round prior offset -700 at prior sd scale 0.7: log loss 0.4887
-  first-round prior offset -800 at prior sd scale 0.7: log loss 0.4892
-  first-round prior offset -900 at prior sd scale 0.7: log loss 0.4910
-  first-round prior offset -1000 at prior sd scale 0.7: log loss 0.4939
-first-round prior offset at the final width: -700
-district prior refit 1 after the offset change: largest residual 58
-district prior refit 2 after the offset change: largest residual 13
-district prior refit 3 after the offset change: largest residual 4
+prior sd scale (hidden 5% of 1990-2017 bouts): 0.7: 0.4918, 1.0: 0.4851, 1.5: 0.4819, 2.0: 0.4832, 2.5: 0.4866, 3.0: 0.4913, 4.5: 0.5103 -> 1.5
+district prior refit 1 at prior sd scale 1.5: largest residual 29
+district prior refit 2 at prior sd scale 1.5: largest residual 16
+district prior refit 3 at prior sd scale 1.5: largest residual 9
+district prior refit 4 at prior sd scale 1.5: largest residual 6
+district prior refit 5 at prior sd scale 1.5: largest residual 5
+district prior refit 6 at prior sd scale 1.5: largest residual 4
+district prior refit 7 at prior sd scale 1.5: largest residual 4
+district prior refit 8 at prior sd scale 1.5: largest residual 3
+district prior refit 9 at prior sd scale 1.5: largest residual 3
+district prior refit 10 at prior sd scale 1.5: largest residual 3
+district prior refit 11 at prior sd scale 1.5: largest residual 2
+district prior refit 12 at prior sd scale 1.5: largest residual 2
+district prior refit 13 at prior sd scale 1.5: largest residual 2
+district prior refit 14 at prior sd scale 1.5: largest residual 2
+district prior refit 15 at prior sd scale 1.5: largest residual 2
+  first-round prior offset -400 at prior sd scale 1.5: log loss 0.4872
+  first-round prior offset -500 at prior sd scale 1.5: log loss 0.4849
+  first-round prior offset -600 at prior sd scale 1.5: log loss 0.4851
+  first-round prior offset -700 at prior sd scale 1.5: log loss 0.4875
+  first-round prior offset -800 at prior sd scale 1.5: log loss 0.4920
+  first-round prior offset -900 at prior sd scale 1.5: log loss 0.4984
+  first-round prior offset -1000 at prior sd scale 1.5: log loss 0.5066
+first-round prior offset at the final width: -500
+district prior refit 1 after the offset change: largest residual 20
+district prior refit 2 after the offset change: largest residual 9
+district prior refit 3 after the offset change: largest residual 5
 district prior refit 4 after the offset change: largest residual 3
 district prior refit 5 after the offset change: largest residual 3
-district prior refit 6 after the offset change: largest residual 3
-district prior refit 7 after the offset change: largest residual 2
-district prior refit 8 after the offset change: largest residual 2
-district prior refit 9 after the offset change: largest residual 2
-district prior refit 10 after the offset change: largest residual 2
-district prior refit 11 after the offset change: largest residual 2
-held-out 10% of 2018-2026 bouts (n=11189), fit without them: season-batch strength log loss 0.3972 accuracy 0.808; forward rating 0.5484
+district prior refit 6 after the offset change: largest residual 2
+held-out 10% of 2018-2026 bouts (n=11189), fit without them: season-batch strength log loss 0.4080 accuracy 0.795; forward rating 0.5484
   (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)
-  prior pass: largest change from season-only estimates 1111
+  prior pass: largest change from season-only estimates 853
   prior models by neighbour pattern (t-2 t-1 t+1 t+2 | graduated | freshman): n, slopes, slope sum, resid sd
-    xx.. g1 f0: n=24801, slopes 0.23 0.48, sum 0.71, sd 158
-    .xx. g0 f0: n=11878, slopes 0.41 0.38, sum 0.78, sd 151
-    .x.. g1 f0: n=11664, slopes 0.63, sum 0.63, sd 169
-    xxx. g0 f0: n=10801, slopes 0.14 0.31 0.40, sum 0.85, sd 139
-    .xxx g0 f0: n=9198, slopes 0.37 0.33 0.16, sum 0.86, sd 145
-    ..xx g0 f1: n=7765, slopes 0.46 0.21, sum 0.67, sd 169
-    ..x. g0 f0: n=7602, slopes 0.53, sum 0.53, sd 165
-    ..xx g0 f0: n=6391, slopes 0.41 0.17, sum 0.58, sd 164
-    .x.. g0 f0: n=3651, slopes 0.68, sum 0.68, sd 162
-    x... g1 f0: n=3001, slopes 0.60, sum 0.60, sd 179
-    xx.. g0 f0: n=1765, slopes 0.25 0.49, sum 0.75, sd 160
-    ..x. g0 f1: n=1547, slopes 0.60, sum 0.60, sd 162
-    x.x. g0 f0: n=1253, slopes 0.36 0.43, sum 0.79, sd 155
-    ...x g0 f0: n=909, slopes 0.44, sum 0.44, sd 169
-    ...x g0 f1: n=893, slopes 0.48, sum 0.48, sd 183
-    .x.x g0 f0: n=764, slopes 0.49 0.29, sum 0.78, sd 152
-    x... g0 f0: n=427, slopes 0.61, sum 0.61, sd 179
-prior sd (most common pattern, scaled): 158
+    xx.. g1 f0: n=24801, slopes 0.25 0.50, sum 0.75, sd 273
+    .xx. g0 f0: n=11878, slopes 0.42 0.37, sum 0.79, sd 254
+    .x.. g1 f0: n=11664, slopes 0.65, sum 0.65, sd 289
+    xxx. g0 f0: n=10801, slopes 0.15 0.31 0.41, sum 0.87, sd 238
+    .xxx g0 f0: n=9198, slopes 0.38 0.32 0.16, sum 0.86, sd 245
+    ..xx g0 f1: n=7765, slopes 0.47 0.21, sum 0.68, sd 288
+    ..x. g0 f0: n=7602, slopes 0.55, sum 0.55, sd 280
+    ..xx g0 f0: n=6391, slopes 0.42 0.17, sum 0.59, sd 278
+    .x.. g0 f0: n=3651, slopes 0.71, sum 0.71, sd 275
+    x... g1 f0: n=3001, slopes 0.63, sum 0.63, sd 304
+    xx.. g0 f0: n=1765, slopes 0.27 0.50, sum 0.78, sd 273
+    ..x. g0 f1: n=1547, slopes 0.62, sum 0.62, sd 276
+    x.x. g0 f0: n=1253, slopes 0.36 0.43, sum 0.80, sd 262
+    ...x g0 f0: n=909, slopes 0.46, sum 0.46, sd 287
+    ...x g0 f1: n=893, slopes 0.51, sum 0.51, sd 317
+    .x.x g0 f0: n=764, slopes 0.49 0.30, sum 0.79, sd 255
+    x... g0 f0: n=427, slopes 0.64, sum 0.64, sd 303
+prior sd (most common pattern, scaled): 273
 
-scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1178-1895, sd 179-296; spread 214
-  district field strength 1980+: median 763 (p10 439, p90 1121)
-  regional field strength 1980+: median 1330 (p10 1162, p90 1482)
-  state    field strength 1980+: median 1670 (p10 1581, p90 1747)
+scale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means 1368-2089, sd 156-282; spread 233
+  district field strength 1980+: median 835 (p10 515, p90 1161)
+  regional field strength 1980+: median 1290 (p10 1132, p90 1456)
+  state    field strength 1980+: median 1687 (p10 1604, p90 1759)
 
-state brackets (6+ rated, champion known, n=1532): champion rated #1 76.6%, top 2 91.2%; mean Spearman(rating, place) 0.743
-same-season bouts where the winner is rated below the loser: 8.3% of 573094
+state brackets (6+ rated, champion known, n=1532): champion rated #1 88.3%, top 2 96.3%; mean Spearman(rating, place) 0.789
+same-season bouts where the winner is rated below the loser: 5.0% of 573094
 
-state placement points 1980+ (n=20747): own season rating R2 0.5490
-  + best win: R2 0.5516 (gain +0.0026), coefficient +0.0021
-  + mean of opponents beaten: R2 0.5492 (gain +0.0002), coefficient +0.0005
-  + bad losses: R2 0.5496 (gain +0.0006), coefficient -0.3199
-  + field strength: R2 0.5876 (gain +0.0386), coefficient -0.0153
-next-season state points of returners (n=7508): rating + this season placement R2 0.4059
-  + best win: R2 0.4124 (gain +0.0065), coefficient -0.00420
-  + mean of opponents beaten: R2 0.4071 (gain +0.0012), coefficient -0.00131
-  + bad losses: R2 0.4069 (gain +0.0010), coefficient +0.46837
-  + field strength: R2 0.4192 (gain +0.0133), coefficient -0.01101
-RTG as of each round: 1146188 bout checkpoints, last checkpoint vs season RTG max gap 1.31 (should be ~0)
+state placement points 1980+ (n=20747): own season rating R2 0.6507
+  + best win: R2 0.6509 (gain +0.0002), coefficient -0.0006
+  + mean of opponents beaten: R2 0.6522 (gain +0.0014), coefficient -0.0015
+  + bad losses: R2 0.6522 (gain +0.0014), coefficient +0.5610
+  + field strength: R2 0.6797 (gain +0.0289), coefficient -0.0141
+next-season state points of returners (n=7508): rating + this season placement R2 0.3827
+  + best win: R2 0.3891 (gain +0.0064), coefficient -0.00434
+  + mean of opponents beaten: R2 0.3841 (gain +0.0014), coefficient -0.00187
+  + bad losses: R2 0.3828 (gain +0.0001), coefficient +0.18941
+  + field strength: R2 0.3899 (gain +0.0072), coefficient -0.00864
+RTG as of each round: 1146188 bout checkpoints, last checkpoint vs season RTG max gap 0.54 (should be ~0)
