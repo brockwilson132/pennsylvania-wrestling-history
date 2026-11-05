@@ -79,7 +79,7 @@
     view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${viewLabel(k, l)}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
     time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
     search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
-    menu: () => `<nav class="fpm" aria-label="More"><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
+    menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {
     if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'time' ? ' time' : '');
@@ -118,7 +118,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -138,6 +138,32 @@
     const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
     // repaint the whole page: the season files also carry the season ratings of non-medalist seasons (career grid row)
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { if (route().page === 'wrestler' && route().id === sl) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  /* head to head: both careers in full, then both wrestlers' season files, then repaint */
+  function loadH2H(id) {
+    const sl = String(id).split('~').filter(Boolean); const Ws = sl.map((s) => OT.getWrestler(s)).filter(Boolean); if (Ws.length < 2) return;
+    const again = () => { if (route().page === 'h2h' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } };
+    if (Ws.some((W) => !W.full)) { Promise.all(Ws.map((W) => OT.fullCareer(W))).then(again); return; }
+    const yrs = Array.from(new Set(Ws.flatMap((W) => OT.yearsOf(W.apps, W.lower || [])))); if (yrs.every((y) => OT.sosLoaded(y))) return;
+    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(again);
+  }
+  function loadSeason(id) {
+    const y = OT.YEARS.includes(+id) ? +id : OT.yearsWindow()[1]; if (OT.sosLoaded(y)) return;
+    OT.loadSOS(y).then(() => { if (route().page === 'season') { lastBase = ''; render(true); } });
+  }
+  function loadH2HS(id) {
+    const sl = String(id).split('~').filter((s) => s && OT.SLUG2S.has(s)); if (sl.length < 2 || sl.every((s) => OT.h2hsLoaded(s))) return;
+    Promise.all(sl.map((s) => OT.loadH2HS(s))).then(() => { if (route().page === 'h2hs' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  const searchSchools = (q, n) => { const t = q.toLowerCase().split(/\s+/).filter(Boolean); const out = [];
+    OT.SLUG2S.forEach((name, sl) => { const k = name.toLowerCase(); if (t.every((x) => k.includes(x))) out.push({ sl, name, pre: k.startsWith(t[0]) ? 0 : 1 }); });
+    return out.sort((a, b) => a.pre - b.pre || a.name.localeCompare(b.name)).slice(0, n); };
+  function wireH2H() {
+    main.querySelectorAll('.h2i').forEach((inp) => { const box = inp.closest('.h2p'), list = box.querySelector('.h2l'), side = box.dataset.h2side, other = inp.dataset.h2other || '';
+      let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = ''; return; }
+        if (inp.dataset.h2kind === 's') { const hit = searchSchools(q, 8); list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2hs/${side === 'a' ? p.sl + '~' + other : other + '~' + p.sl}"><b>${OT.esc(p.name)}</b><small>${OT.schoolDistrict(p.name) ? 'District ' + OT.schoolDistrict(p.name) : ''}</small></a>`).join('') : '<div class="muted">No school by that name.</div>'; return; }
+        OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 8);
+          list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2h/${side === 'a' ? p.slug + '~' + other : other + '~' + p.slug}"><b>${OT.esc(p.name)}</b><small>${OT.esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></a>`).join('') : '<div class="muted">No one by that name.</div>'; }); }, 150); }); });
   }
   /* global search (top bar): schools and districts at once, then wrestlers once the people index is in. Ignores the filters. */
   const DSEARCH = d3.range(1, 13).map((d) => ({ d, q: ('district ' + d + ' d' + d + ' ' + (OT.DISTRICTS[d] || '')).toLowerCase() }));
@@ -268,7 +294,7 @@
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
-  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; });
+  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   window.addEventListener('resize', () => { if (pop) paintPop(); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
