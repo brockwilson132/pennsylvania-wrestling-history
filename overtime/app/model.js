@@ -486,7 +486,7 @@ const OT = (window.OT = {});
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
   const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
-  const searchPeople = (q, n = 60) => { const t = q.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length || !PEOPLE) return []; const out = []; const f = state.f, geo = (p) => (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); for (const p of PEOPLE) { if (t.every((x) => p.q.includes(x)) && geo(p)) { out.push(p); if (out.length >= 2000) break; } } return out.sort((a, b) => (b.peak || 0) - (a.peak || 0)).slice(0, n).concat([]).map((p) => p); };
+  const searchPeople = (q, n = 60, all = false) => { const t = q.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length || !PEOPLE) return []; const out = []; const f = state.f, geo = (p) => all || (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); for (const p of PEOPLE) { if (t.every((x) => p.q.includes(x)) && geo(p)) { out.push(p); if (out.length >= 2000) break; } } return out.sort((a, b) => (b.peak || 0) - (a.peak || 0)).slice(0, n).concat([]).map((p) => p); };
   const personOf = (sl) => (PEOPLE_BY ? PEOPLE_BY.get(sl) || null : null);
   const PW = new Map();
   /* any wrestler by address: state record, archive medalist, or (once the index is in) anyone in a bracket */

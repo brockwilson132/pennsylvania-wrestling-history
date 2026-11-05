@@ -1213,3 +1213,10 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .bvc .dsp{display:grid;gap:4px;justify-items:stretch}.bvc .dsp .smtr{width:100%}
 .bvop{display:flex;align-items:center;gap:8px;font:600 11.5px var(--cond);color:var(--ash);max-width:260px}.bvop b{color:var(--chalk)}.bvop .smtr{flex:0 0 60px}
 .bvcx .cm.bvm{max-width:420px;width:100%}
+/* global search (top bar) */
+.sbtn{margin-left:auto}.sbtn+.mbtn{margin-left:2px}
+.fpop.gs{width:min(460px,calc(100vw - 16px))}
+.gsr{display:grid;max-height:min(60vh,520px);overflow:auto;margin:0 -4px;padding:0 4px}
+.gsr .fpk{margin-top:10px}.gsr .fpk:first-child{margin-top:0}
+.gsr .fpo .stag{font-size:11px}
+.gsp{display:grid}.gsp .prr{border-top:1px solid var(--line)}

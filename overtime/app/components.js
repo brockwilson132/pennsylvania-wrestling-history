@@ -82,6 +82,7 @@
     wrestlers: `<g fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.4" r="2.2"/><circle cx="17" cy="7.4" r="2.2"/><path d="M7.4 10.2 C5.6 11.4 4.8 13.2 4.9 15.4 L3.6 22.5 M4.9 15.4 C6.4 17 7.2 19.4 7.6 22.5"/><path d="M18.6 10.2 C20.4 11.4 21.2 13.2 21.1 15.4 L22.4 22.5 M21.1 15.4 C19.6 17 18.8 19.4 18.4 22.5"/><path d="M8.2 12.6 L15.6 10 M17.8 12.6 L10.4 10"/></g>`,
     division: `<rect x="3.5" y="15" width="5" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="10" width="5" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17.5" y="4" width="5" height="19" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>`,
     weights: `<path d="M9 8.5 A4 4 0 1 1 17 8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 11 H19.5 L22 23 H4 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+    search: `<circle cx="11.5" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 L22 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
     menu: `<path d="M4 8 H22 M4 13 H22 M4 18 H22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
     /* the View item: one glyph per view */
     v_map: `<path d="M3 7 L9 4.5 L17 7 L23 4.5 V19 L17 21.5 L9 19 L3 21.5 Z M9 4.5 V19 M17 7 V21.5" fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linejoin="round"/>`,
