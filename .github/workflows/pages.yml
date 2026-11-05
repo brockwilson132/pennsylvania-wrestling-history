@@ -1,11 +1,7 @@
-# Publishes the Overtime app (overtime/) to GitHub Pages on every push to rebuild.
-# One-time setup in repo Settings: Pages > Source = "GitHub Actions", and
-# Environments > github-pages > allow branch "rebuild".
-name: Publish website
+name: Publish site
 on:
   push:
-    branches: [rebuild]
-    paths: ['overtime/**', 'tools/build_pages.py', '.github/workflows/pages.yml']
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,7 +9,7 @@ permissions:
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,12 +17,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: Build site from overtime/
-        run: python3 tools/build_pages.py _site "${GITHUB_SHA::8}"
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4
