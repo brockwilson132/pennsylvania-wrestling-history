@@ -4,8 +4,8 @@
  * Strength (per season) = the school's lineup as a dual-meet team: best wrestler at each weight at his real season
  *   rating, a weight with nobody entered is a forfeit; the average chance of beating an average state qualifier, turned
  *   back into a rating. Only seasons whose full district field is on file. District / region = average of its schools.
- * Talent = wrestlers rated 1650+ (state-medalist level); district / region = count / schools.
- * Score  = placement points (summed in the app).
+ * Talent = expected state medalists, sum of P(medal | season rating); district / region = per school.
+ * Score  = era-fair placement points per season (per school per season for districts and regions); see below.
  * Identity keys follow tools/build_people.js.
  */
 'use strict';
@@ -120,15 +120,80 @@ const realOf = (a) => { const L = REAL.get(a.year + '|' + a.w + '|' + nkey(a.nam
 let nReal = 0; APP.forEach((a) => { const v = realOf(a); a.real = v == null ? (a.rating || null) : v; if (v != null) nReal++; });
 console.log('real season ratings', WSF.split('/').pop(), 'matched', nReal, 'of', APP.length);
 
+/* ---- era-fair placement points ----
+   Score counts placement points (16 12 9 7 5 3 2 1 for 1st-8th). Two things made raw totals unfair across eras:
+   1. Places on file. The state record keeps 1st-2nd before 1974 (when only about four wrestlers reached states at a
+      weight), 1st-4th for 1974-82, 1st-6th for 1983-2000 and 1st-8th since. Every weight still had a 3rd-8th best
+      wrestler; we just don't know who. Each missing state place is shared out at its expected value: first among the
+      bracket's state entrants with no place on file (a place they could have won), then, where the state bracket was
+      too small to hold eight places, among the regional finalists of that weight who did not reach states (the next
+      round down, best regional place first). Where neither list is on file (1938-50: no regionals) the place is left
+      out rather than guessed.
+   2. How much there was to win. Seasons had 9 to 14 weights, one class until 1974 and two since, and anywhere from
+      about 50 to 500 schools wrestling, so a season's points per school swing threefold from era to era. Each season's
+      points are therefore put in today's terms (below, after the school spans): points per school that season, at that
+      level and in that class, are scaled to the 1999-2026 average.
+   Regional and district points keep only the places on file: their entrant lists depend on which brackets survive, so
+   filling them would reward districts with fuller archives. */
+const bkOf = (a) => [a.lvl, a.year, normCls(a.cls), a.lvl === 'state' ? '' : a.unit, a.lvl === 'state' ? a.std : a.w].join('|');
+const BKT = new Map(); APP.forEach((a) => { const k = bkOf(a); (BKT.get(k) || BKT.set(k, []).get(k)).push(a); });
+APP.forEach((a) => { a.pts = a.place ? PTS[a.place - 1] : 0; a.fill = 0; });
+/* regional finalists (by weight bucket) who did not reach states, per (year, class, weight bucket) */
+const REGP = new Map(); APP.filter((a) => a.lvl === 'regional' && a.place).forEach((a) => { const k = a.year + '|' + normCls(a.cls) + '|' + a.std; (REGP.get(k) || REGP.set(k, []).get(k)).push(a); });
+const atState = new Set(APP.filter((a) => a.lvl === 'state').map((a) => a.k + '|' + a.year));
+let filled = 0, unfilled = 0;
+BKT.forEach((rows, k) => {
+  if (!k.startsWith('state|')) return;
+  const have = new Set(rows.filter((a) => a.place).map((a) => a.place));
+  let missing = [1, 2, 3, 4, 5, 6, 7, 8].filter((p) => !have.has(p));
+  if (!missing.length) return;
+  const share = (group) => {   // the group takes the next places in order, shared equally
+    if (!group.length || !missing.length) return;
+    const take = missing.slice(0, group.length); missing = missing.slice(take.length);
+    const each = take.reduce((t, p) => t + PTS[p - 1], 0) / group.length; group.forEach((a) => { a.fill += each; }); filled += take.length;
+  };
+  share(rows.filter((a) => !a.place));
+  if (missing.length) {
+    const r0 = rows[0], reg = (REGP.get(r0.year + '|' + normCls(r0.cls) + '|' + r0.std) || []).filter((a) => !atState.has(a.k + '|' + a.year));
+    const byPl = new Map(); reg.forEach((a) => { (byPl.get(a.place) || byPl.set(a.place, []).get(a.place)).push(a); });
+    Array.from(byPl.keys()).sort((p, q) => p - q).forEach((p) => share(byPl.get(p)));
+  }
+  unfilled += missing.length;
+});
+console.log('state places not on file: shared out', filled, 'left out', unfilled);
+/* era-fair points of one appearance (state places include the shared-out missing places) */
+const fairPts = (a) => a.pts + (a.lvl === 'state' ? a.fill : 0);
+
 /* ---- school seasons ----
    Strength: the school's lineup as a dual-meet team. At each weight its best wrestler that season at his real rating
    (first-round kids included); a weight with nobody entered is a forfeit (no chance). Average every weight's chance of
    beating the reference wrestler, then turn that average chance back into a rating: "wrestles like a lineup of
    wrestlers rated X at every weight" (reference: an average state qualifier, see REF). Only where the district's full field is on file: elsewhere a weight we can't see
    could be a forfeit or a kid who lost at districts, so the season gets no Strength (no estimate, no penalty).
-   Talent: wrestlers rated at state-medalist level (TALENT+) that season, same seasons as Strength.
-   Score parts: placement points, as before. */
-const TALENT = 1650;
+   Talent: expected state medalists that season (above), same seasons as Strength.
+   Score parts: era-fair placement points (above). */
+const TALENT = 1650;   // kept for the before/after comparison only (TALENT_MODE=cut)
+/* Talent = expected state medalists: each wrestler counts his chance of placing in the top eight at states given his
+   season rating, P(medal | rating), so a 1640 and a 1660 count about the same and a 1900 counts nearly 1. The chance is
+   a logistic fit on every rated wrestler-season from 2001 on (when all eight places are on file): medalled at states or
+   not, against his season rating. Ratings are on one scale where 1500 is the average state qualifier of the class, so
+   the same curve applies to every season and class. */
+const wsx = new Map();
+APP.forEach((a) => { if (a.real == null) return; const k = a.k + '|' + a.year; const x = wsx.get(k) || wsx.set(k, { r: a.real, y: a.year, m: 0 }).get(k); if (a.real > x.r) x.r = a.real; if (a.lvl === 'state' && a.place) x.m = 1; });
+const fitX = Array.from(wsx.values()).filter((x) => x.y >= 2001);
+let B0 = -2, B1 = 1;
+for (let it = 0; it < 50; it++) {   // Newton steps on the logistic log-likelihood, rating centred at 1500
+  let g0 = 0, g1 = 0, h00 = 0, h01 = 0, h11 = 0;
+  fitX.forEach((x) => { const z = (x.r - 1500) / 100, p = 1 / (1 + Math.exp(-(B0 + B1 * z))), w = p * (1 - p); g0 += x.m - p; g1 += (x.m - p) * z; h00 += w; h01 += w * z; h11 += w * z * z; });
+  const det = h00 * h11 - h01 * h01, d0 = (h11 * g0 - h01 * g1) / det, d1 = (h00 * g1 - h01 * g0) / det; B0 += d0; B1 += d1; if (Math.abs(d0) + Math.abs(d1) < 1e-9) break;
+}
+const pMedal = (r) => 1 / (1 + Math.exp(-(B0 + B1 * (r - 1500) / 100)));
+const half = Math.round(1500 - 100 * B0 / B1);
+const TALENT_MODE = process.env.TALENT_MODE || 'expected';
+console.log(`Talent: P(state medal | rating) fitted on ${fitX.length} wrestler-seasons 2001-26; 50% at ${half};`, [1400, 1500, 1600, 1650, 1700, 1800, 1900].map((r) => r + ' ' + (100 * pMedal(r)).toFixed(0) + '%').join(', '),
+  `; medalists counted ${fitX.filter((x) => x.m).length}, expected ${fitX.reduce((t, x) => t + pMedal(x.r), 0).toFixed(0)}`);
+{ const by = {}; Array.from(wsx.values()).filter((x) => x.y >= 1974).forEach((x) => { const d = Math.floor(x.y / 10) * 10; const t = by[d] || (by[d] = [0, 0, 0]); t[0] += pMedal(x.r); t[1] += x.m; t[2] += x.r >= TALENT ? 1 : 0; });
+  console.log('Talent by decade: expected medalists / medalists on file / wrestlers 1650+:', Object.entries(by).map(([d, t]) => d + ' ' + t.map((v) => Math.round(v)).join('/')).join(', ')); }
 const pWin = (r, ref) => 1 / (1 + Math.pow(10, (ref - r) / 400));
 const TEAMWIN = new Set((W.WR_TEAMS || []).filter((t) => t[2] === 1).map(([year, cls, , , sch]) => year + '|' + cls + '|' + canon(sch)));
 const names = [], nidx = new Map(); const N = (s) => { if (!nidx.has(s)) { nidx.set(s, names.length); names.push(s); } return nidx.get(s); };
@@ -154,12 +219,14 @@ bySS.forEach((rows, k) => {
   /* an entrant with no rating (his bracket's bouts are not on file) is not a forfeit, and we can't say how good he was:
      the season gets no Strength */
   const blind = weights.some((i) => !best.get(i) && unrated.has(i));
-  const talent = Array.from(per.values()).filter((p) => p.real != null && p.real >= TALENT).length;
+  const talent = TALENT_MODE === 'cut' ? Array.from(per.values()).filter((p) => p.real != null && p.real >= TALENT).length
+    : Math.round(100 * Array.from(per.values()).reduce((t, p) => t + (p.real != null ? pMedal(p.real) : 0), 0)) / 100;
   const topW = Array.from(per.values()).filter((p) => p.shown).sort((a, b) => b.shown - a.shown)[0];
   const lv = (L) => rows.filter((a) => a.lvl === L);
-  const pts = (L) => lv(L).reduce((t, a) => t + (a.place ? PTS[a.place - 1] : 0), 0);
+  const pts = (L) => lv(L).reduce((t, a) => t + fairPts(a), 0);
+  const regFill = lv('regional').reduce((t, a) => t + a.fill, 0);   // shared-out state places earned at regionals
   const st = lv('state');
-  const row = [S(sch), year, c, d, reg, 0, pts('state'), pts('regional'), pts('district'),
+  const row = [S(sch), year, c, d, reg, 0, pts('state') + regFill, pts('regional'), pts('district'),
     st.filter((a) => a.place === 1).length, st.filter((a) => a.place >= 2 && a.place <= 4).length, st.filter((a) => a.place >= 5).length, st.filter((a) => !a.place).length,
     lv('regional').filter((a) => a.place === 1).length, lv('district').filter((a) => a.place === 1).length, TEAMWIN.has(year + '|' + c + '|' + sch) ? 1 : 0, covered ? 1 : 0,
     topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
@@ -181,35 +248,77 @@ const ss = SEAS.map((s) => { if (s.covered && !s.blind && s.row[20]) s.row[5] = 
   console.log('school-seasons from 1974: [all, field not on file, entrant without a rating]'); console.log(Object.entries(t).sort().map(([k, v]) => k + ' ' + v.join('/')).join('  ')); }
 console.log('school-seasons', ss.length, 'schools', schools.length, 'with Strength', ss.filter((r) => r[5]).length);
 
+/* ---- school spans ----
+   Score is a per-season average, so it needs to know how many seasons a school was wrestling, and a district's Score
+   is per school, so it needs to know how many schools it had. A school only shows up in a season when one of its
+   wrestlers is in a bracket on file, and where a district's brackets are missing (D3 and D7 1975-98) its weaker
+   schools vanish from those seasons. Counting only the seasons and schools we can see would divide a gap district's
+   points by too few and lift it. So a school counts in every season from its first to its last on file, in the
+   district, region and class of its nearest season on file. */
+const byS = new Map(); ss.forEach((r) => { (byS.get(r[0]) || byS.set(r[0], []).get(r[0])).push(r); });
+const span = schools.map(() => [0, 0]);
+const unitCnt = new Map();   // 'd|' or 'r|' + unit|year|cls -> schools wrestling that season
+byS.forEach((rows, i) => {
+  rows.sort((p, q) => p[1] - q[1]); const y0 = rows[0][1], y1 = rows[rows.length - 1][1]; span[i] = [y0, y1];
+  let j = 0;
+  for (let y = y0; y <= y1; y++) {
+    while (j + 1 < rows.length && Math.abs(rows[j + 1][1] - y) < Math.abs(rows[j][1] - y)) j++;
+    const near = rows.filter((r) => r[1] === y); (near.length ? near : [rows[j]]).forEach((r) => {
+      const c = r[2], rg = regionOf(y, c, r[3]), reg = r[1] === y || !['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(rg) ? r[4] : rg;
+      if (r[3]) { const k = 'd|' + r[3] + '|' + y + '|' + c; unitCnt.set(k, (unitCnt.get(k) || 0) + 1); }
+      if (reg) { const k = 'r|' + reg + '|' + y + '|' + c; unitCnt.set(k, (unitCnt.get(k) || 0) + 1); }
+      { const k = 'all|' + y + '|' + c; unitCnt.set(k, (unitCnt.get(k) || 0) + 1); }
+    });
+  }
+});
+
+/* ---- points in today's terms ----
+   For each season, class and level: points per school = the level's points that season / schools wrestling that season
+   (spans above). Scale every school's points so that number equals its 1999-2026 average. District points are averaged
+   only over district-seasons whose full field is on file, so missing district brackets don't move the scale. */
+{
+  const tot = new Map();
+  ss.forEach((r) => { const k = r[1] + '|' + r[2]; const x = tot.get(k) || tot.set(k, [0, 0, 0, 0, 0]).get(k); x[0] += r[6]; x[1] += r[7]; if (r[16]) { x[2] += r[8]; x[4]++; } });
+  const perSch = new Map(); tot.forEach((x, k) => { const n = unitCnt.get('all|' + k) || 0; if (n) perSch.set(k, [x[0] / n, x[1] / n, x[4] ? x[2] / x[4] : 0]); });
+  const ref = [0, 1, 2].map((i) => { const v = Array.from(perSch).filter(([k, x]) => +k.split('|')[0] >= 1999 && x[i] > 0).map(([, x]) => x[i]); return v.reduce((a, b) => a + b, 0) / v.length; });
+  console.log("today's terms: points per school per class-season 1999-2026: state", ref[0].toFixed(2), 'regional', ref[1].toFixed(2), 'district', ref[2].toFixed(2));
+  const dec = {}; perSch.forEach((x, k) => { const d = Math.floor(+k.split('|')[0] / 10) * 10; const t = dec[d] || (dec[d] = [0, 0]); t[0] += x[0]; t[1]++; });
+  console.log('state points per school before scaling, by decade:', Object.entries(dec).map(([d, t]) => d + ' ' + (t[0] / t[1]).toFixed(2)).join(', '));
+  ss.forEach((r) => { const x = perSch.get(r[1] + '|' + r[2]); [6, 7, 8].forEach((c, i) => { r[c] = x && x[i] > 0 ? Math.round(10 * r[c] * ref[i] / x[i]) / 10 : 0; }); });
+}
+
 /* ---- district and region seasons ----
    Strength: the average Strength of its top quarter of schools that season (at least one school). A fixed share, not a
    fixed count, so a 50-school district isn't rewarded for its size and a 5-school district isn't made to count every
    school; every district is judged by its leading programs in the same proportion (Brock, 2026-11-05).
-   Talent: its wrestlers at TALENT+ divided by its schools.
+   Talent: its expected state medalists divided by its schools.
    Both only where every member school's full field is on file (otherwise the schools we can't see would be missing
    from the ranking and the school count). Score sums come from ss in the app. */
 const TOP_SHARE = 0.25;
-const unitRoll = (keyOf) => {
+const unitRoll = (keyOf, kk) => {
   const m = new Map();
   ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || { u, y: r[1], c: r[2], n: 0, nCov: 0, str: [], tal: 0 }; x.n++; if (r[16]) { x.nCov++; x.tal += r[19]; if (r[5]) x.str.push(r[5]); } m.set(k, x); });
   return Array.from(m.values()).map((x) => {
     const all = x.n && x.nCov === x.n; const top = x.str.sort((a, b) => b - a).slice(0, Math.max(1, Math.ceil(x.str.length * TOP_SHARE)));
-    return [x.u, x.y, x.c, all && top.length ? Math.round(top.reduce((a, b) => a + b, 0) / top.length) : 0, all ? Math.round(100 * x.tal / x.n) / 100 : 0, x.n];
+    return [x.u, x.y, x.c, all && top.length ? Math.round(top.reduce((a, b) => a + b, 0) / top.length) : 0, all ? Math.round(100 * x.tal / x.n) / 100 : 0, x.n, Math.max(x.n, unitCnt.get(kk + '|' + x.u + '|' + x.y + '|' + x.c) || 0)];
   });
 };
-const ds = unitRoll((r) => r[3]), rs = unitRoll((r) => r[4]);
+const ds = unitRoll((r) => r[3], 'd'), rs = unitRoll((r) => r[4], 'r');
 console.log('district-seasons', ds.length, 'with Strength', ds.filter((x) => x[3]).length, 'region-seasons', rs.length, 'with Strength', rs.filter((x) => x[3]).length);
 
 /* ---- output ----
    ss  [schoolIdx, year, cls, district, region, strength, statePts, regPts, distPts, stateTitles, podium2to4,
         placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, fullFieldOnFile, bestNameIdx, bestRating,
         talent, weightsFilled, weightsContested]   strength 0 = none (field not on file); talent counts only when on file
-   ds / rs  [unit, year, cls, strength, talentPerSchool, schools]  (0 = not on file for every member school) */
+   ds / rs  [unit, year, cls, strength, talentPerSchool, schools, schoolsWrestling]  (0 = not on file for every member school;
+            schoolsWrestling counts every school between its first and last season on file, for Score per school)
+   span     [firstSeason, lastSeason] per school index, for Score per season
+   statePts, regPts, distPts are era-fair placement points (see above), one decimal */
 const typ = {}; ['district', 'regional', 'state'].forEach((L) => { const v = APP.filter((a) => a.lvl === L && a.field && a.year >= 1980).map((a) => a.field); typ[L] = Math.round(v.reduce((x, y) => x + y, 0) / v.length); });
 const fset = new Map(); APP.filter((a) => a.lvl === 'state' && a.field).forEach((a) => fset.set(a.year + '|' + a.cls + '|' + a.w, a.field));
 const fsorted = Array.from(fset.values()).sort((a, b) => a - b);
 const pct = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((q) => fsorted[Math.min(fsorted.length - 1, Math.floor(q / 100 * (fsorted.length - 1)))]);
-const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ref: REF, talentAt: TALENT, ds, rs };
+const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, span, ss, ref: REF, talentAt: TALENT_MODE === 'cut' ? TALENT : 0, talentHalf: half, ds, rs };
 fs.writeFileSync(path.join(OV, 'units.js'), 'window.WR_UNITS=' + JSON.stringify(out) + ';\n');
 console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'state brackets', fsorted.length, 'deciles', pct.join(' '));
 

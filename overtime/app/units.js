@@ -14,11 +14,17 @@
   const clsOk = (c) => state.cls === 'ALL' || c === state.cls;
   const SIDX = new Map(S.map((s, i) => [s, i]));
   const SLUG2S = new Map(S.map((s) => [slug(s), s]));
-  /* district / region seasons: Strength (average of its schools) and Talent (1650+ wrestlers per school); both are
+  /* district / region seasons: Strength (average of its schools) and Talent (expected state medalists per school); both are
      left out of a season unless every member school's full district field is on file (tools/build_units.js) */
   const RATE = { district: new Map(), region: new Map() }, TAL = { district: new Map(), region: new Map() };
   UD.ds.forEach(([u, y, c, r, t]) => { if (r) { RATE.district.set(u + '|' + y + '|' + c, r); TAL.district.set(u + '|' + y + '|' + c, t); } });
   UD.rs.forEach(([u, y, c, r, t]) => { const uu = u === 'W' ? 'SW' : u; if (r) { RATE.region.set(uu + '|' + y + '|' + c, r); TAL.region.set(uu + '|' + y + '|' + c, t); } });
+  /* schools wrestling per district / region season (every school from its first to its last season on file), the
+     divisor for Score per school; and each school's first and last season, the divisor for Score per season */
+  const NSCH = { district: new Map(), region: new Map() };
+  UD.ds.forEach(([u, y, c, , , n, nw]) => NSCH.district.set(u + '|' + y + '|' + c, nw || n));
+  UD.rs.forEach(([u, y, c, , , n, nw]) => NSCH.region.set((u === 'W' ? 'SW' : u) + '|' + y + '|' + c, nw || n));
+  const SPAN = UD.span || [];
   /* Unit-season ratings need enough rated wrestlers in the lineup / top-4 per weight. Before 1974 (one class, regional
      fields of one wrestler per district, partial old brackets) most weights are padded with fill values, so unit
      ratings there read far too low; they are not plotted or averaged. Results (bars, stars, podiums) still count. */
@@ -26,6 +32,8 @@
   const ratedYear = (y) => y >= RATED_FROM;
   const OFFW = OT.OFF_CLASS || 0.85;
   const colorOf = (s) => { const id = OT.SB && OT.SB.identity(s); return id && id.primary ? id.primary : '#5F6B78'; };
+  /* Score is a per-season average: one decimal under 100 */
+  const sfmt = (v) => (v >= 100 ? fmt(Math.round(v)) : (Math.round(v * 10) / 10).toFixed(1));
   const r10 = (v) => (v ? Math.round(v / 10) * 10 : null);
   const rw = (v) => (v ? Math.round(v) : null);   // a wrestler's own rating, to the point (matches his bracket numbers); r10 is for averages
   const MEM = new Map(); const memo = (k, f) => { const kk = OT.wkey() + '|' + k; if (!MEM.has(kk)) MEM.set(kk, f()); return MEM.get(kk); };
@@ -53,7 +61,8 @@
         const k = keyOf(r); if (k == null) return;
         const inC = !home || r[2] === state.cls || r[2] === 'single', m = inC ? 1 : OFFW;
         let a = M.get(k); if (!a) M.set(k, (a = { k, kind, years: new Map(), sp: 0, rp: 0, dp: 0, ti: 0, pod: 0, plc: 0, q: 0, rt: 0, dt: 0, tt: 0, best: null }));
-        const y = a.years.get(r[1]) || { y: r[1], rs: 0, rn: 0, ts: 0, tn: 0, sp: 0, rp: 0, dp: 0, ti: 0, rt: 0, dt: 0, tt: 0 }; a.years.set(r[1], y);
+        const y = a.years.get(r[1]) || { y: r[1], rs: 0, rn: 0, ts: 0, tn: 0, sp: 0, rp: 0, dp: 0, ti: 0, rt: 0, dt: 0, tt: 0, nsch: 0 }; a.years.set(r[1], y);
+        if (kind !== 'school' && !y['n' + r[2]]) { y['n' + r[2]] = 1; y.nsch += NSCH[kind].get(k + '|' + r[1] + '|' + r[2]) || 0; }
         if (!ratedYear(r[1]) || !inC) { /* no Strength or Talent */ }
         else if (kind === 'school') { if (r[5]) { y.rs += r[5]; y.rn++; y.ts += r[19]; y.tn++; } }
         else if (!y['c' + r[2]]) { y['c' + r[2]] = 1; const kk = k + '|' + r[1] + '|' + r[2], v = RATE[kind].get(kk); if (v) { y.rs += v; y.rn++; y.ts += TAL[kind].get(kk) || 0; y.tn++; } }
@@ -65,10 +74,18 @@
       return Array.from(M.values()).map((a) => {
         a.ys = Array.from(a.years.values()).sort((p, q) => p.y - q.y); a.series = a.ys.filter((y) => y.rn).map((y) => [y.y, y.rs / y.rn]);
         a.rating = a.series.length ? a.series.reduce((t, x) => t + x[1], 0) / a.series.length : 0;
-        /* Talent: wrestlers rated 1650+ per season (per school for districts and regions), over the same seasons as Strength */
+        /* Talent: expected state medalists per season (per school for districts and regions), over the same seasons as Strength */
         a.tseries = a.ys.filter((y) => y.tn).map((y) => [y.y, y.ts / y.tn]); a.talent = a.tseries.length ? a.tseries.reduce((t, x) => t + x[1], 0) / a.tseries.length : 0;
         a.nS = a.series.length;
-        a.parts = [a.sp * w[0], a.rp * w[1], a.dp * w[2]]; a.score = a.parts[0] + a.parts[1] + a.parts[2]; a.w = w;
+        /* Score: era-fair placement points per season (tools/build_units.js), per school for districts and regions. A
+           school's seasons are every season of the window from its first to its last on file, scoreless ones included;
+           a district's or region's are the seasons it had schools, each divided by the schools wrestling that season. */
+        const [wa, wb] = OT.yearsWindow();
+        let nSc;
+        if (kind === 'school') { const sp = SPAN[a.k]; nSc = sp && sp[1] ? Math.max(1, Math.min(wb, sp[1]) - Math.max(wa, sp[0]) + 1) : a.ys.length; }
+        else nSc = a.ys.filter((y) => y.nsch).length || 1;
+        a.ys.forEach((y) => { const dv = kind === 'school' ? 1 : y.nsch || 1; y.sc = (y.sp * w[0] + y.rp * w[1] + y.dp * w[2]) / dv; y.pp = [y.sp * w[0] / dv, y.rp * w[1] / dv, y.dp * w[2] / dv]; });
+        a.parts = [0, 1, 2].map((i) => a.ys.reduce((t, y) => t + y.pp[i], 0) / nSc); a.score = a.parts[0] + a.parts[1] + a.parts[2]; a.w = w; a.nSc = nSc;
         a.name = kind === 'school' ? S[a.k] : kind === 'district' ? 'District ' + a.k : REGIONS[a.k];
         a.sub = kind === 'district' ? DISTRICTS[a.k] : '';
         a.href = kind === 'school' ? '#school/' + slug(S[a.k]) : kind === 'district' ? '#district/' + a.k : '#region/' + a.k;
@@ -89,7 +106,10 @@
   function unitAgg(u) {
     if (u.kind === 'state') return memo('own|state', () => { const L = aggregateCore('region', null, 'state'); const ys = new Map(); L.forEach((a) => a.series.forEach(([y, v]) => { const x = ys.get(y) || [0, 0]; x[0] += v; x[1]++; ys.set(y, x); }));
       const series = Array.from(ys).sort((a, b) => a[0] - b[0]).map(([y, x]) => [y, x[0] / x[1]]); const all = ssIn(null);
-      return { rating: series.length ? series.reduce((t, x) => t + x[1], 0) / series.length : 0, series, score: all.reduce((t, r) => t + r[6], 0), ti: all.reduce((t, r) => t + r[9], 0), tt: 0 }; });
+      /* Score: state points per school per season, statewide */
+      const per = new Map(); L.forEach((a) => a.ys.forEach((y) => { const x = per.get(y.y) || [0, 0]; x[0] += y.sp; x[1] += y.nsch; per.set(y.y, x); }));
+      const pv = Array.from(per.values()).filter((x) => x[1]);
+      return { rating: series.length ? series.reduce((t, x) => t + x[1], 0) / series.length : 0, series, score: pv.length ? pv.reduce((t, x) => t + x[0] / x[1], 0) / pv.length : 0, ti: all.reduce((t, r) => t + r[9], 0), tt: 0 }; });
     const id = u.kind === 'school' ? SIDX.get(u.id) : u.id;
     return aggregateCore(u.kind, { kind: u.kind, id: u.id }, u.kind).find((a) => a.k === id) || null;
   }
@@ -317,8 +337,8 @@
     const pods = lv.map((l) => podium(placeDist(a.kind, l).get(a.k) || [0, 0, 0, 0, 0, 0, 0, 0], l)).join('');
     const best = a.best ? `<span class="ukbw"><i>Best wrestler</i> <b>${esc(a.best.name)}</b>${a.kind !== 'school' ? ' · ' + esc(a.best.sch) : ''} · <span class="ukbr">RTG ${rw(a.best.r)}</span> · ${a.best.y}</span>` : '';
     // Score tile
-    const tot = Math.max(1, a.parts[0] + a.parts[1] + a.parts[2]);
-    const split = lv.length > 1 ? `<span class="t2sp">${lv.map((l, i) => `<i style="width:${(100 * a.parts[i] / tot).toFixed(1)}%;background:${LV[i][1]}" title="${LV[i][0]} ${fmt(Math.round(a.parts[i]))}"></i>`).join('')}</span><span class="t2sl">${lv.map((l, i) => `<em>${'SRD'[i]} ${fmt(Math.round(a.parts[i]))}</em>`).join('')}</span>` : '';
+    const tot = Math.max(0.01, a.parts[0] + a.parts[1] + a.parts[2]);
+    const split = lv.length > 1 ? `<span class="t2sp">${lv.map((l, i) => `<i style="width:${(100 * a.parts[i] / tot).toFixed(1)}%;background:${LV[i][1]}" title="${LV[i][0]} ${sfmt(a.parts[i])}"></i>`).join('')}</span><span class="t2sl">${lv.map((l, i) => `<em>${'SRD'[i]} ${sfmt(a.parts[i])}</em>`).join('')}</span>` : '';
     // Rating tile: tint by where this unit sits on the list's rating range
     const f = rt ? domFrac(a.kind, a.rating) : 0.5;
     const tint = rt ? colorAt(f) : '#2F3640';
@@ -331,7 +351,7 @@
     return `<a class="uk2" href="${a.href}"${a.color ? ` style="--p1:${a.color}"` : ''}>
       <span class="ukL"><span class="ukh"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b>${a.sub || offNote ? `<small>${[a.sub ? esc(a.sub) : '', offNote].filter(Boolean).join(' · ')}</small>` : ''}</span></span>${best}<span class="ukp">${pods}</span></span>
       <span class="ukM">
-        <span class="t2 t2s${hl('score')}"><i class="t2k">Score</i><b>${fmt(Math.round(a.score))}</b>${split}</span>
+        <span class="t2 t2s${hl('score')}"><i class="t2k">Score</i><b>${sfmt(a.score)}</b>${split}</span>
         <span class="t2 t2r${hl('rating')}" style="--tint:${tint}"><i class="t2k">Rating</i><b>${rt || '–'}</b>${miniChart(a.series, '#EEEAE1', false)}</span>
         <span class="t2 t2t"><i class="t2k">Team titles</i><b>${team}</b><span class="t2sl">${a.tt ? `<em>PIAA ${a.tt}</em>` : ''}${dt ? `<em>Duals ${dt}</em>` : ''}${!team ? '<em>—</em>' : ''}</span></span>
         <span class="t2 t2i${hl('titles')}"><i class="t2k">Individual titles</i><b>${a.ti}</b><span class="t2sl">${ind.slice(1).map(([n, l]) => `<em>${l} ${n}</em>`).join('')}</span></span>
@@ -366,6 +386,9 @@
       return `<div class="sdr"><span class="sdl">${OT.navIcon(LVI[l])}<b>${LV[LVL3.indexOf(l)][0]}</b><i>${tot}</i></span><span class="sdb">${c.map((n, i) => `${((h) => `<span class="sdc" title="${ordinal(i + 1)}: ${n}" style="--h:${h}%"><em>${n || ''}</em><i style="height:${h}%;--c:${MEDC[i]}"></i></span>`)(n ? Math.max(8, Math.round(78 * n / mx)) : 0)}`).join('')}</span></div>`; }).join('');
     return `<div class="sdh"><span></span><span class="sdb">${[1, 2, 3, 4, 5, 6, 7, 8].map((p) => `<i>${ordinal(p)}</i>`).join('')}</span></div>${rows}`;
   }
+  /* Talent: expected state medalists (each wrestler counts his chance of medalling at his season rating); talentAt is
+     set only for the old 1650+ count (TALENT_MODE=cut in tools/build_units.js) */
+  const talWhat = () => (UD.talentAt ? `wrestlers rated ${UD.talentAt}+` : 'expected state medalists');
   const talTxt = (v, kind) => (!v ? '–' : v.toFixed(2));
   function unitCard(a, rank, sort, pageKind, ctx) {
     const rt = r10(a.rating), tint = rt ? colorAt(domFrac(a.kind, a.rating)) : '#2F3640';
@@ -384,8 +407,8 @@
     return `<div class="sx"${a.color ? ` style="--p1:${a.color}"` : ''}><button class="sxr" data-sx aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm"><b>${esc(a.name)}</b></span>`
       + tile('vtt' + (a.ti ? '' : ' z'), 'titles', a.ti || '–', chipCount(tYears, y0, y1), gold(a.ti, ctx.maxTi), `${a.ti} state title${a.ti === 1 ? '' : 's'}${tYears.length ? ' · ' + tYears.join(', ') : ''}`)
       + tile('vtr', 'rating', rt || '–', chipSpark(a.series), `--tint:${tint}`, `Strength ${rt} · average of ${a.nS} season${a.nS === 1 ? '' : 's'}`)
-      + tile('vtl' + (a.talent ? '' : ' z'), 'talent', talTxt(a.talent, a.kind), chipSpark(a.tseries), '', `Talent ${talTxt(a.talent, a.kind)} · wrestlers rated ${UD.talentAt || 1650}+${a.kind === 'school' ? '' : ' per school'} per season, average of ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`)
-      + tile('vts', 'score', fmt(Math.round(a.score)), chipBars(a.ys.map((y) => [y.y, y.sp * a.w[0] + y.rp * a.w[1] + y.dp * a.w[2]]), y0, y1), '--tint:#2F3640', `Score ${fmt(Math.round(a.score))} · placement points per season`)
+      + tile('vtl' + (a.talent ? '' : ' z'), 'talent', talTxt(a.talent, a.kind), chipSpark(a.tseries), '', `Talent ${talTxt(a.talent, a.kind)} · ${talWhat()}${a.kind === 'school' ? '' : ' per school'} per season, average of ${a.tseries.length} season${a.tseries.length === 1 ? '' : 's'}`)
+      + tile('vts', 'score', sfmt(a.score), chipBars(a.ys.map((y) => [y.y, y.sc]), y0, y1), '--tint:#2F3640', `Score ${sfmt(a.score)} · ${a.kind === 'school' ? 'placement points per season' : 'placement points per school per season'}`)
       + tile('vtm' + (team ? '' : ' z'), 'team', team || '–', chipCount(teamYears, y0, y1), gold(team, ctx.maxTeam), team ? `${team} team title${team === 1 ? '' : 's'} · ${teamYears.sort((p, q) => p - q).join(', ')}` : 'no team titles')
       + `<span class="vtn" title="seasons with Strength in this window">${a.nS}</span></button>
       <div class="sxd" hidden>${a.sub ? `<div class="sxsub">${esc(a.sub)}</div>` : ''}${distRows(a)}<div class="sxf">${best}${tl}${il}</div>${off}<a class="sxo" href="${a.href}">Open ${esc(a.name)} →</a></div></div>`;
@@ -651,5 +674,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

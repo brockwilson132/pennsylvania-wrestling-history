@@ -30,7 +30,7 @@
   const HATCH = '<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#1A1F26"/><line x1="0" y1="0" x2="0" y2="10" stroke="#3A424D" stroke-width="3"/></pattern></defs>';
   const NOFILL = 'url(#hatch)';
   const legend = (sc, note, hatch) => `<div class="mlg"><span class="mlgl">Strength</span><b>${r10(sc.lo) || '–'}</b><i class="mlgbar"></i><b>${r10(sc.hi) || '–'}</b>${hatch ? `<span class="mlgh"><i></i>${hatch}</span>` : ''}${note ? `<span class="mlgn">${note}</span>` : ''}</div>`;
-  const tip = (name, a) => `${name}${a && a.rating ? ' · Strength ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + fmt(Math.round(a.score)) : ''}`;
+  const tip = (name, a) => `${name}${a && a.rating ? ' · Strength ' + r10(a.rating) : ''}${a && a.score ? ' · Score ' + OT.sfmt(a.score) : ''}`;
   const svgOpen = (vb, label) => `<svg class="pam" viewBox="${vb.join(' ')}" role="img" aria-label="${esc(label)}">${HATCH}`;
   const outline = () => `<path class="pao" d="${M.outline}"/>`;
 
