@@ -1224,3 +1224,13 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .h2st{width:100%;margin-top:10px}.h2st td:nth-child(n+2),.h2st th:nth-child(n+2){text-align:right}
 .h2more summary{cursor:pointer;color:var(--ash);font:700 12px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 2px}
 table.h2st{min-width:0}.h2st td small{min-width:0}
+/* season recap */
+.slist{list-style:none;margin:0;padding:0;display:grid}
+.slist li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);min-height:40px}.slist li:last-child{border-bottom:0}
+.slist .sw{font:900 15px var(--cond);color:var(--ash);letter-spacing:.02em}
+.slist .sn{display:grid;min-width:0;line-height:1.2}.slist .sn a{color:inherit;text-decoration:none}.slist .sn b{font:700 15px var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slist .sn small{color:var(--ash);font-size:11.5px;white-space:normal}
+.slist .sr{font:900 18px var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums;white-space:nowrap}.slist .sr i{font:700 10.5px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-left:2px}
+.rpt{display:inline-block;margin-left:6px;padding:0 6px;border-radius:5px;background:var(--gold);color:var(--mat);font:800 10.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;vertical-align:1px}
+.sdual{font-size:13.5px;margin-top:4px}.sdual a{color:inherit;text-decoration:none}.sdual b{font:700 15px var(--cond);text-transform:uppercase}
+.bwr{display:grid;justify-items:end;line-height:1}.bwr b{font:900 20px var(--cond);color:var(--chalk)}.bwr i{font:700 10px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+.snr{display:flex;align-items:center;gap:6px;min-width:0}.snr a{min-width:0;overflow:hidden}.rpt{margin-left:0;flex:none}

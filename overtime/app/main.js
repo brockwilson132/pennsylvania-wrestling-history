@@ -76,7 +76,7 @@
       return `<div class="fph"><b>School</b><span class="muted">${esc(where)}</span>${f.s ? `<a class="fpx" href="${hrefOf({ ...f, s: '' })}">All schools</a>` : ''}</div><input class="search fps" id="fps" type="search" placeholder="Find a school" autocomplete="off" aria-label="Find a school"><div class="fpl" id="fpl">${schoolItems(f, '')}</div>`; },
     view: () => `<div class="fph"><b>View</b></div><div class="fpl fpv">${VIEWS.map(([k, l, d]) => `<button type="button" class="fpo${state.view === k ? ' on' : ''}" data-view="${k}" aria-pressed="${state.view === k}">${navIcon('v_' + k)}<span>${viewLabel(k, l)}<i class="fpd">${d}</i></span></button>`).join('')}</div>`,
     time: () => `<div class="fph"><b>Time</b></div><div class="fpg">${[['all', 'All-time'], ['5', 'Last 5'], ['10', 'Last 10'], ['25', 'Last 25']].map(([k, l]) => `<button type="button" class="fpc${state.win.mode === k ? ' on' : ''}" data-tw="${k}" aria-pressed="${state.win.mode === k}">${l}</button>`).join('')}</div>${OT.timeScrubber()}<div class="fpn">Drag either end, or tap a season. The strip is the statewide rating each season; grey seasons, before 1974, have no rating.</div>`,
-    menu: () => `<nav class="fpm" aria-label="More"><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
+    menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   function paintPop() {
     if (!pop) return; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : '') + (pop === 'time' ? ' time' : '');
@@ -113,7 +113,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -141,6 +141,10 @@
     if (Ws.some((W) => !W.full)) { Promise.all(Ws.map((W) => OT.fullCareer(W))).then(again); return; }
     const yrs = Array.from(new Set(Ws.flatMap((W) => OT.yearsOf(W.apps, W.lower || [])))); if (yrs.every((y) => OT.sosLoaded(y))) return;
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(again);
+  }
+  function loadSeason(id) {
+    const y = OT.YEARS.includes(+id) ? +id : OT.yearsWindow()[1]; if (OT.sosLoaded(y)) return;
+    OT.loadSOS(y).then(() => { if (route().page === 'season') { lastBase = ''; render(true); } });
   }
   function loadH2HS(id) {
     const sl = String(id).split('~').filter((s) => s && OT.SLUG2S.has(s)); if (sl.length < 2 || sl.every((s) => OT.h2hsLoaded(s))) return;
@@ -263,7 +267,7 @@
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
-  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; });
+  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   window.addEventListener('resize', () => { if (pop) paintPop(); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
