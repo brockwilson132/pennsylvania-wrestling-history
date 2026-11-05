@@ -215,6 +215,8 @@ def main():
             cw.writerows(rows); logs.append(log)
     with open(os.path.join(odir, 'bouts_log.txt'), 'w') as f: f.write('\n'.join(sorted(logs)) + '\n')
     print('files', len(tasks))
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import clean_brackets
+    clean_brackets.run(odir)   # same name cleanup as parse_lower.py, then garbled bout names resolved to entrants
 
 if __name__ == '__main__':
     main()

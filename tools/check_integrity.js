@@ -102,6 +102,18 @@ const setScope = (cls, mode) => { OT.clearAll(); OT.setCls(cls); OT.setWin({ mod
     check('district/regional medalists: at most one result per level per season', lowDup.length <= 0.002 * LG.size, `${lowDup.length} of ${LG.size}${lowDup.length ? ': ' + lowDup.slice(0, 5).map(([k, n]) => k + '×' + n).join('; ') : ''}`, lowDup.length > 0);
   }
 
+  /* names: nothing that is not a wrestler ("Forfeit", "2.", "Sup. Dec. 13-1", "LL2-1 Bob Funk") in the bracket CSVs or the app */
+  { const cp = require('child_process');
+    let out = '', code = 0;
+    try { out = cp.execFileSync('python3', [path.join(__dirname, 'clean_brackets.py'), '--check'], { cwd: path.join(__dirname, '..'), encoding: 'utf8' }); } catch (e) { out = String(e.stdout || e.message); code = e.status || 1; }
+    check('bracket CSVs: no junk names (tools/clean_brackets.py --check)', code === 0, out.trim());
+    const JUNK = /^(?:(?:double\s+)?forfeit|forf\.?|bye|place|pts|points)$|^[\d.\s,-]+$|^(?:sup\.?|maj\.?|tech\.?|dec\.?|fall|tf|def\.?|inj\.?|dq|disq\.?|forf\.?|med\.?|ff)(?:\s|$)|^(?:[A-Z]{1,3}\d?|\d{1,2}[A-Z]?)-{1,2}\d{1,2}\s/i;
+    const bad = new Map(); const see = (n, where) => { if (JUNK.test(String(n || '').trim())) bad.set(n, where); };
+    fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).forEach((f) => JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach((r) => see(r[5], f)));
+    const P = await OT.loadPeople(); P.forEach((p) => see(p.name, 'people.json'));
+    check('app: no junk wrestler names in lower/*.json or people.json', !bad.size, bad.size ? `${bad.size} names: ${Array.from(bad).slice(0, 6).map(([n, f]) => `"${n}" (${f})`).join('; ')}` : 'none');
+  }
+
   const w = Math.max(...results.map((r) => r.name.length));
   results.forEach((r) => console.log(`${r.ok ? 'PASS' : r.soft ? 'NOTE' : 'FAIL'}  ${r.name.padEnd(w)}  ${r.detail || ''}`));
   const hard = results.filter((r) => !r.ok && !r.soft);
