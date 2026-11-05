@@ -272,7 +272,8 @@
     if (g) { const fr = g.year - GI[g.grade]; if (pseudo.every((p) => p.year >= fr && p.year <= fr + 3)) cols = [0, 1, 2, 3].map((i) => pseudo.find((p) => p.year === fr + i) || gap(fr + i)); }
     if (!cols) cols = [0, 1, 2, 3].map((i) => pseudo.find((p) => gradeSlot(p, pseudo) === i) || null);
     const higher = (lvl, y) => (lvl === 'district' ? apps.some((a) => a.year === y) || low.some((r) => r.lvl === 'regional' && r.year === y) : apps.some((a) => a.year === y));
-    const dist = (p) => { if (!p.cls || !p.d || p.year > OT.YEARS[OT.YEARS.length - 1]) return null; if (!OT.lowerCovered('district', p.year, p.cls, p.d)) return { year: p.year, nodata: true, src: 'no district bracket on record' };
+    const dist = (p) => { if (!p.cls || !p.d || p.year > OT.YEARS[OT.YEARS.length - 1]) return null;
+      if (!OT.lowerCovered('district', p.year, p.cls, p.d)) { if (OT.sectionCovered(p.year, p.cls, p.d)) return opts.full && OT.lowerLoaded(p.year, 'section') ? { year: p.year, dnc: true } : null; return { year: p.year, nodata: true, src: 'no district bracket on record' }; }
       return opts.full && OT.lowerLoaded(p.year, 'district') ? { year: p.year, dnc: true } : null; };
     const cell = (lvl, i) => {
       const p = cols[i]; if (!p) return null;
@@ -280,7 +281,9 @@
       const s = apps.find((a) => a.year === p.year); const base = { year: p.year, w: p.w, r: s || p };
       if (lvl === 'state') return s ? (s.place ? { ...base, place: s.place } : { ...base, q: true }) : null;
       const r = low.find((x) => x.lvl === lvl && x.year === p.year);
-      if (!r && lvl === 'district') { const sr = OT.sectionFor(apps.length ? apps : low, p.year); if (sr) return { ...base, r: sr, w: sr.w, place: sr.place, sec: true }; }
+      if (!r && lvl === 'district') { // a section that was the district round: placed, advanced or entered (full field loaded)
+        const sr = low.find((x) => x.lvl === 'section' && x.year === p.year) || OT.sectionFor(apps.length ? apps : low, p.year);
+        if (sr) return sr.place ? { ...base, r: sr, w: sr.w, place: sr.place, sec: true } : higher(lvl, p.year) ? { ...base, r: sr, w: sr.w, q: true, sec: true } : { ...base, r: sr, w: sr.w, dnp: true, sec: true }; }
       if (r) return r.place ? { ...base, r, w: r.w, place: r.place } : higher(lvl, p.year) ? { ...base, r, w: r.w, q: true } : { ...base, r, w: r.w, dnp: true };
       if (!higher(lvl, p.year)) return lvl === 'district' ? dist(p) : null;
       const cls = s ? s.cls : p.cls; const unit = lvl === 'district' ? (s ? s.d : p.d) : (s ? (s.region || OT.regionOf(s, cls === 'single' ? s.k : cls)) : p.region);

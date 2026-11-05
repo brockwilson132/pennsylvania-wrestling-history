@@ -5,3 +5,4 @@ shots/
 site/test.html
 data/difficulty/wrestler_seasons.csv
 tools/__pycache__/
+data/difficulty/entrant_ratings.csv
