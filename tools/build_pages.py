@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""Build the public website copy of the Overtime app.
+"""Build the public website copy of the Overtime app (GitHub Pages).
 
-usage: python3 tools/build_pages.py <out-dir> [version]
-
-Cloudflare Pages runs this on every push to rebuild (build command: python3 tools/build_pages.py _site,
-output directory: _site). The version defaults to the commit Cloudflare is building.
+usage: python3 tools/build_pages.py <out-dir> <version>
 
 Copies overtime/ to <out-dir>, leaving out the screenshot scripts and old proposals, then stamps every local
-script and stylesheet in index.html (and the OT_LATE list) with ?v=<version>. Browsers keep files for a while, so
-without the stamp a visitor who comes back right after a deploy can get new code mixed with old data files. The stamp makes each deploy one consistent set.
+script and stylesheet in index.html (and the OT_LATE list) with ?v=<version>. GitHub Pages lets browsers keep
+files for 10 minutes and we cannot change that header, so without the stamp a visitor who comes back right after
+a deploy can get new code mixed with old data files. The stamp makes each deploy one consistent set.
 The claude.ai artifact is published from overtime/ itself and does not use this.
 """
-import os, re, shutil, subprocess, sys
+import re, shutil, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / 'overtime'
@@ -32,6 +30,5 @@ def main(out, ver):
     print(f'built {out} v={ver}: {a} scripts, {b} stylesheet, OT_LATE stamped')
 
 if __name__ == '__main__':
-    if len(sys.argv) not in (2, 3): sys.exit(__doc__)
-    ver = sys.argv[2] if len(sys.argv) == 3 else (os.environ.get('CF_PAGES_COMMIT_SHA') or subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip())
-    main(sys.argv[1], (ver or 'dev')[:8])
+    if len(sys.argv) != 3: sys.exit(__doc__)
+    main(*sys.argv[1:])
