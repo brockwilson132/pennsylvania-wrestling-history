@@ -149,7 +149,40 @@
       <div class="usum"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div></header>`;
     const tl = section('Career', `<div class="card cgcard">${OT.careerGrid(W.apps, W.lower, { full: W.full })}<div class="note">Tap a result for its bracket. Bar = how tough that bracket was. Q advanced · DNP didn't place · DNC didn't compete · – no bracket on file.${W.full ? '' : ' Loading his full career…'}</div></div>`);
     const bw = section('Best wins', `<div class="card" id="bestwins" data-w="${W.slug}">${bestWinsHTML(W)}</div>`);
-    return head + tl + bw;
+    const vs = `<div class="note"><a href="#h2h/${W.slug}~">Head to head with another wrestler →</a></div>`;
+    return head + tl + bw + vs;
+  };
+  /* head to head: two wrestlers, every bout between them, and the odds at their best */
+  const pct = (p) => Math.round(100 * p) + '%';
+  const h2hOdds = (a, b) => 1 / (1 + Math.pow(10, (b - a) / 400));
+  const h2hIds = (id) => { const [a, b] = String(id || '').split('~'); return [a || '', b || '']; };
+  function h2hPick(side, W, other) {
+    const ph = side === 'a' ? 'First wrestler' : 'Second wrestler';
+    return `<div class="h2p" data-h2side="${side}"><input class="search h2i" type="search" placeholder="${W ? esc(W.name) + ' · change' : 'Search ' + ph.toLowerCase()}" autocomplete="off" aria-label="${ph}" data-h2other="${esc(other || '')}"><div class="h2l"></div>
+      ${W ? `<div class="h2w"><a href="#wrestler/${W.slug}"><b>${esc(W.name)}</b></a><small>${esc(W.sch)}</small></div>` : `<div class="h2w muted">${ph}</div>`}</div>`;
+  }
+  PAGES.h2h = (id) => {
+    const [sa, sb] = h2hIds(id); const A = sa ? OT.getWrestler(sa) : null, B = sb ? OT.getWrestler(sb) : null;
+    const need = (sa && !A) || (sb && !B);
+    const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Any two wrestlers in any bracket: every bout between them, and the odds at their best.</div></header>
+      <div class="card h2pick">${h2hPick('a', A, sb)}<span class="h2vs">vs</span>${h2hPick('b', B, sa)}</div>`;
+    if (need) return head + (OT.peopleLoaded() ? empty('No wrestler at this address.') : '<div class="card empty" data-need-people="1">Looking up the wrestlers…</div>');
+    if (!A || !B) return head;
+    if (A.slug === B.slug) return head + empty('Pick two different wrestlers.');
+    [A, B].forEach((W) => { if (!W.lower) W.lower = OT.lowerFor(W.apps); });
+    const ready = A.full && B.full && OT.yearsOf(A.apps, A.lower).concat(OT.yearsOf(B.apps, B.lower)).every((y) => OT.sosLoaded(y));
+    const ca = OT.careerRating(A.apps, A.lower), cb = OT.careerRating(B.apps, B.lower);
+    let odds = '';
+    if (ca && cb) { const p = h2hOdds(ca.peak, cb.peak);
+      odds = section('At their best', `<div class="card"><div class="usum"><span><b>${pct(p)}</b><i>${esc(A.name)} · peak ${OT.rw(ca.peak)} (${ca.peakYear})</i></span><span><b>${pct(1 - p)}</b><i>${esc(B.name)} · peak ${OT.rw(cb.peak)} (${cb.peakYear})</i></span></div><div class="note">Odds for one bout between each at his best season, ${Math.abs(Math.round(ca.peak - cb.peak))} points apart. Weight, style and the day decide a real bout.</div></div>`); }
+    else odds = section('At their best', `<div class="card"><div class="note">${esc((ca ? B : A).name)} has no season rating (first-round exits carry none), so there are no odds.</div></div>`);
+    let met;
+    if (!ready) met = '<div class="muted bwl">Loading their bouts…</div>';
+    else { const M = OT.meetings(A, B); const wa = M.filter((m) => m.aWon).length;
+      met = !M.length ? '<div class="muted bwl">They never met in a bracket on record.</div>'
+        : `<div class="usum"><span><b>${wa}–${M.length - wa}</b><i>${esc(A.name)}'s record against ${esc(B.name)}</i></span></div><ol class="bw h2m">${M.map((m) => { const win = m.aWon ? A : B, los = m.aWon ? B : A; const rw = m.aWon ? m.ra : m.rb, rl = m.aWon ? m.rb : m.ra;
+          return `<li><a href="${OT.bhref(m.key)}"><span class="bwn"><b>${esc(win.name)} over ${esc(los.name)}</b><small>${m.year} · ${m.lvl} · ${OT.wShort(m.w)} · ${RN(m.side, m.round)} · ${[RES[m.result] || m.result, m.score, m.flags].filter(Boolean).join(' ')}${rw != null && rl != null ? ` · ${OT.rw(rw)} vs ${OT.rw(rl)}, ${pct(h2hOdds(rw, rl))} for the winner` : ''}</small></span></a></li>`; }).join('')}</ol>`; }
+    return head + section('Meetings', `<div class="card" id="h2hmeet">${met}</div>`) + odds;
   };
   PAGES.about = () => `<header class="uh2"><h1>Overtime</h1><div class="sub">Pennsylvania high school wrestling history, from districts to Hershey.</div></header><div class="card about">
     <h3>Overtime Rating</h3><p>Every bout in the archive is read from the brackets (about 374,000, 1938–2026). Each season, every wrestler's rating is fit from all of his postseason bouts at once: sections, districts, regionals and states. So beating the eventual state champion at districts counts the same as beating him at Hershey. Falls and tech falls count a little more than decisions. A wrestler's neighbouring seasons give the starting point, and each district starts at its own level, measured from how its wrestlers do against other districts at regionals and states. A win over someone who went out in the first round counts for very little, because those wrestlers start well below the rest. That rule is the same in every district, so a district with bigger fields doesn't collect extra credit. A wrestler's RTG is his best season. Wrestlers whose season ended in the first round get no rating in the app: their numbers exist only to set that starting point, not to rank them. In brackets, the number beside each name is his rating from the bouts up to that point, with every opponent at his full-season strength; after his last bout it is his season rating. Checked on bouts hidden from the fit, the rating picks the winner of 78% of 2018–26 regional and state bouts.</p>

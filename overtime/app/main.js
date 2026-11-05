@@ -113,7 +113,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.attN = 3; state.lastRoute = page + '/' + id; }
-    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -133,6 +133,20 @@
     const yrs = OT.yearsOf(W.apps, W.lower); if (yrs.every((y) => OT.sosLoaded(y))) return;
     // repaint the whole page: the season files also carry the season ratings of non-medalist seasons (career grid row)
     Promise.all(yrs.map((y) => OT.loadSOS(y))).then(() => { if (route().page === 'wrestler' && route().id === sl) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  /* head to head: both careers in full, then both wrestlers' season files, then repaint */
+  function loadH2H(id) {
+    const sl = String(id).split('~').filter(Boolean); const Ws = sl.map((s) => OT.getWrestler(s)).filter(Boolean); if (Ws.length < 2) return;
+    const again = () => { if (route().page === 'h2h' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } };
+    if (Ws.some((W) => !W.full)) { Promise.all(Ws.map((W) => OT.fullCareer(W))).then(again); return; }
+    const yrs = Array.from(new Set(Ws.flatMap((W) => OT.yearsOf(W.apps, W.lower || [])))); if (yrs.every((y) => OT.sosLoaded(y))) return;
+    Promise.all(yrs.map((y) => OT.loadSOS(y))).then(again);
+  }
+  function wireH2H() {
+    main.querySelectorAll('.h2i').forEach((inp) => { const box = inp.closest('.h2p'), list = box.querySelector('.h2l'), side = box.dataset.h2side, other = inp.dataset.h2other || '';
+      let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (!q) { list.innerHTML = ''; return; }
+        OT.loadPeople().then(() => { if (inp.value.trim() !== q) return; const hit = OT.searchPeople(q, 8);
+          list.innerHTML = hit.length ? hit.map((p) => `<a href="#h2h/${side === 'a' ? p.slug + '~' + other : other + '~' + p.slug}"><b>${OT.esc(p.name)}</b><small>${OT.esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></a>`).join('') : '<div class="muted">No one by that name.</div>'; }); }, 150); }); });
   }
   /* search: everyone in any bracket (the people index loads on first use) */
   function wireSearch() {

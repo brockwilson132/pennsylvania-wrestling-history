@@ -1207,3 +1207,15 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .atc{position:relative;padding-left:22px;overflow:hidden}
 .atv{position:absolute;left:0;top:0;bottom:0;width:12px;background:#1E242C;border-right:1px solid var(--line);display:flex;align-items:flex-end}
 .atv>i{display:block;width:100%}
+/* head to head */
+.h2pick{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:start;margin:8px 0 14px}
+.h2p{display:grid;gap:6px;min-width:0}
+.h2w{font:700 17px var(--cond);text-transform:uppercase;letter-spacing:.02em;color:var(--chalk);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h2w a{color:inherit;text-decoration:none;display:grid}.h2w small{font:500 12px var(--sans,inherit);text-transform:none;color:var(--ash)}
+.h2i{width:100%;min-height:40px;padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--slate2);color:var(--chalk);font:500 14px var(--sans,inherit)}
+.h2l{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.h2l a{display:block;padding:8px 10px;border-radius:8px;background:var(--slate2);color:var(--chalk);text-decoration:none;font-size:13.5px}
+.h2vs{font:900 14px var(--cond);letter-spacing:.12em;color:var(--ash);align-self:center;padding-top:4px}
+@media (max-width:560px){.h2pick{grid-template-columns:1fr}.h2vs{justify-self:center}}
+.h2m .bwn small{white-space:normal}
+.h2l a{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.h2l small{color:var(--ash);font-size:12px}
