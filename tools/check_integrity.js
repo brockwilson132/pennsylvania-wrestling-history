@@ -112,8 +112,9 @@ const setScope = (cls, mode) => { OT.clearAll(); OT.setCls(cls); OT.setWin({ mod
     fs.readdirSync(path.join(OV, 'lower')).filter((f) => f.endsWith('.json')).forEach((f) => JSON.parse(fs.readFileSync(path.join(OV, 'lower', f), 'utf8')).forEach((r) => see(r[5], f)));
     const P = await OT.loadPeople(); P.forEach((p) => see(p.name, 'people.json'));
     check('app: no junk wrestler names in lower/*.json or people.json', !bad.size, bad.size ? `${bad.size} names: ${Array.from(bad).slice(0, 6).map(([n, f]) => `"${n}" (${f})`).join('; ')}` : 'none');
-    /* school names: no record, weight or second entry glued on ("Maplewood, JR, -1-17", "Seneca Valley) 138 – Nick Coy (Penn-Trafford") */
-    const SJ = (n) => /\d/.test(n.replace(/ \(\d{1,2}\)$/, '')) || (n.match(/\(/g) || []).length !== (n.match(/\)/g) || []).length || /,\s*(?:FR|SO|JR|SR)\b/.test(n);
+    /* school names: no record, weight or second entry glued on ("Maplewood, JR, -1-17", "Seneca Valley) 138 – Nick Coy (Penn-Trafford"),
+       no name letters woven in ("BattiPstlyamouth Whitemarsh") or first letter lost to the name ("est Chester Henderson") */
+    const SJ = (n) => /\d/.test(n.replace(/ \(\d{1,2}\)$/, '')) || /^[a-z]|[a-z]{3}[A-Z]/.test(n) || (n.match(/\(/g) || []).length !== (n.match(/\)/g) || []).length || /,\s*(?:FR|SO|JR|SR)\b/.test(n);
     const sbad = Array.from((OT.SLUG2S || new Map()).values()).filter(SJ);
     check('app: no junk school names (units.js)', !sbad.length, sbad.length ? `${sbad.length}: ${sbad.slice(0, 6).map((n) => '"' + n + '"').join('; ')}` : 'none');
   }
