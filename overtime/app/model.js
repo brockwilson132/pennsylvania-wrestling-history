@@ -1,13 +1,15 @@
 /* Overtime — model. One object: an appearance (one wrestler, one season, one weight, one level).
    Levels are filters over appearances; dominance is computed per level and never mixed. */
 'use strict';
-const OT = (window.OT = {});
+/* var, not const: the second boot stage runs this file again over the same OT (see app/main.js, two-stage boot) */
+var OT = window.OT || (window.OT = {});
 (() => {
   const RAW = window.WR_DATA, SB = window.SchoolBadge;
   const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
+  /* nkey and canon run on every one of ~150k rows at startup, mostly on repeated strings: cached (both are pure) */
+  const NKC = new Map(); const nkey = (s) => { let k = NKC.get(s); if (k === undefined) { k = String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, ''); NKC.set(s, k); } return k; };
   /* careers (tools/build_people.js): one name at one school can be several people (father and son, or unrelated
      wrestlers decades apart). WR_CAREERS lists, per name+school, the start season of every career after the first;
      a row belongs to the latest career that started on or before its season. */
@@ -16,7 +18,7 @@ const OT = (window.OT = {});
   const fmt = d3.format(',');
   const ordinal = (n) => n + (['th', 'st', 'nd', 'rd'][(n % 100 - 20) % 10] || ['th', 'st', 'nd', 'rd'][n % 100] || 'th');
   const SAME = { Allentown: 'William Allen', Allen: 'William Allen' };
-  const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
+  const CANC = new Map(); const canon = (s) => { let c = CANC.get(s); if (c === undefined) { const id = SB && SB.identity(s); const n = id ? id.school : s; c = SAME[n] || n; CANC.set(s, c); } return c; };
   const wShort = (w) => (w === 'UNL' ? 'Unl' : w === 'HWT' ? 'Hwt' : String(w));
   const DISTRICTS = { 1: 'Southeast', 2: 'Scranton–Wilkes-Barre', 3: 'South Central', 4: 'North Central', 5: 'Bedford–Somerset', 6: 'Central', 7: 'WPIAL', 8: 'Pittsburgh City', 9: 'Northwest Central', 10: 'Northwest', 11: 'Lehigh Valley', 12: 'Philadelphia' };
   const REGIONS = { NE: 'Northeast', SE: 'Southeast', SW: 'Southwest', NW: 'Northwest', SC: 'South Central', W: 'West', E: 'East', CNW: 'Central Northwest' };
@@ -24,11 +26,14 @@ const OT = (window.OT = {});
 
   /* scope */
   const EMPTY_F = () => ({ weights: [], regions: [], districts: [], schools: [] });
-  const state = { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
-  try { const mm = localStorage.getItem('ot-mapmode'); if (mm === 'districts' || mm === 'regions') state.mapmode = mm; } catch (e) { /* none */ }
-  try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
-  try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
-  try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
+  /* the same state object survives the second boot stage, so filters chosen meanwhile carry over */
+  const state = OT.state || { cls: 'AAA', win: { mode: 'all', from: null, to: null }, f: EMPTY_F() };
+  if (!OT.state) {
+    try { const mm = localStorage.getItem('ot-mapmode'); if (mm === 'districts' || mm === 'regions') state.mapmode = mm; } catch (e) { /* none */ }
+    try { const s = localStorage.getItem('ot-scope'); if (['AAA', 'AA', 'ALL'].includes(s)) state.cls = s; } catch (e) { /* none */ }
+    try { const w = JSON.parse(localStorage.getItem('ot-window') || 'null'); if (w && ['all', '5', '10', '25', 'custom'].includes(w.mode)) state.win = w; } catch (e) { /* none */ }
+    try { const f = JSON.parse(localStorage.getItem('ot-filters') || 'null'); if (f && Array.isArray(f.weights)) state.f = { ...EMPTY_F(), weights: f.weights }; } catch (e) { /* none */ }  // only weights remain a filter
+  }
   const MEMO = new Map(); const memo = (k, f) => { if (!MEMO.has(k)) MEMO.set(k, f()); return MEMO.get(k); };
   const clearCaches = () => { MEMO.clear(); STATS.clear(); RANKS.clear(); SEASONS.clear(); WIN.clear(); SREG.clear(); DREG.clear(); };
   const save = (k, v) => { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch (e) { /* none */ } };
@@ -138,7 +143,11 @@ const OT = (window.OT = {});
   const unitLabel = (lvl, unit) => { if (lvl === 'section') { const m = /^D(\d+)_(.+)$/.exec(unit || ''); if (!m) return String(unit); const s = m[2], nm = /^S\d+$/.test(s) ? 'Section ' + s.slice(1) : s === 'CAT' ? 'Catholic section' : s === 'PUB' ? 'Public section' : 'Section ' + s.replace(/^S/, ''); return `District ${m[1]} ${nm}`; } if (lvl === 'regional') return (REGIONS[unit] || unit) + ' Regional'; const m = /^D(\d+)(?:[_-](.+))?$/.exec(unit || ''); if (!m) return String(unit); return (m[2] && /^\d/.test(m[2]) ? `Districts ${m[1]}-${m[2]}` : `District ${m[1]}`) + (m[2] && !/^\d/.test(m[2]) ? ' ' + m[2] : ''); };
   const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
   const decodeLower = (lvl, rows) => rows.map(([, year, c, ui, wi, place, ni, si, g, sdi, d0]) => { const cls = LCLS[c], unit = LS[ui], w = LS[wi], d = unitDist(lvl, unit, d0), sch = splitName(LS[si], d); return { lvl, year, cls, unit, w, wn: wNum(w), place, name: LS[ni], school: sch, sch, d: d || null, region: lvl === 'regional' ? unit : dregOf(cls, year, d), grade: LGR[g] || '', seed: LS[sdi] || '', pts: ptsOf(place) }; });
-  const LOWER = decodeLower('district', window.WR_LOWER_D || []).concat(decodeLower('regional', window.WR_LOWER_R || []));
+  /* sub-regionals (1995-98) and the 2021 super-regionals are extra rounds on top of a district or regional: kept out of
+     LOWER so a wrestler has one place per level per season and medal counts, points and titles aren't doubled */
+  const extraRound = (r) => /_Sub$|Super/.test(r.unit || '');
+  const LOWER_ALL = decodeLower('district', window.WR_LOWER_D || []).concat(decodeLower('regional', window.WR_LOWER_R || []));
+  const LOWER = LOWER_ALL.filter((r) => !extraRound(r));
   /* section placers, where the section is the district round (its district held no district tournament that season):
      kept apart from LOWER so district counts, points and pages are unchanged; the career grid's District row uses them */
   const LSEC = decodeLower('section', window.WR_LOWER_X || []);
@@ -150,6 +159,7 @@ const OT = (window.OT = {});
   const LKH = new Map(); LOWER.forEach((r) => { if (!LKH.has(r.sch)) LKH.set(r.sch, r.k); });
   const lowerHome = (s) => HOME.get(s) || HOME.get(SUCCESSOR[s]) || LKH.get(s) || 'AAA';
   const lowerSrc = (lvl, year, cls, unit) => (LM.src || {})[`${lvl}|${year}|${cls}|${lvl === 'district' ? 'D' + unit : unit}`] || null;
+  const sectionCovered = (year, cls, d) => (LM.scov || []).some((k) => k.startsWith(`section|${year}|${cls}|D${d}_`));
   const lowerCovered = (lvl, year, cls, unit) => { if (lvl === 'regional') return COV.has(`regional|${year}|${cls}|${unit}`); const p = `district|${year}|${cls}|D${unit}`; return COV.has(p) || COV.has(p + '_North') || COV.has(p + '_South') || COV.has(p + '_Central') || COV.has(p + '_East') || COV.has(p + '_West') || Array.from(COV).some((k) => k.startsWith(p + '-') || (k.startsWith(`district|${year}|${cls}|D`) && k.split('|')[3].split('-').length > 1 && k.split('|')[3].replace('D', '').split('-').includes(String(unit)))); };
   const advOf = (lvl, year, cls, unit, w) => { const a = LM.adv[`${lvl}|${year}|${cls}|${unit}`]; if (!a) return null; return (a[1] && a[1][w]) || a[0] || null; };
 
@@ -299,7 +309,6 @@ const OT = (window.OT = {});
      eight, on the same scale, so a district reads below a regional below states. Data: sos.js (eager: every bracket's
      field, the rating of every state entrant and district/regional medalist) and sos/<year>.json (lazy: every entrant's
      rating, best win and bad losses per tournament, and every bout). */
-  const stateByYK = new Map(); APP.forEach((r) => { const k = r.year + '|' + wKey(r); stateByYK.set(k, (stateByYK.get(k) || 0) + r.pts); });
   const SOSD = window.WR_SOS || {}, RTG_META = window.WR_RTG_META || { field: {}, lo: 1000, hi: 1750 };
   const L1 = { state: 's', regional: 'r', district: 'd', section: 'x' };
   const nk8 = (n) => (n.length <= 8 ? n : n.slice(0, 5) + n.slice(-3));
@@ -310,6 +319,7 @@ const OT = (window.OT = {});
   /* his season rating, from any bracket he wrestled in that season */
   const ratingOf = (r, lvl) => { const e = entryOf(r, lvl); if (!e) return null; const m = rmap(e), t = nk8(nkey(r.name)); let v = m.get(t);
     if (v == null) { const c = []; m.forEach((x, k) => { if (k[0] === t[0] && k.slice(-3) === t.slice(-3)) c.push(x); }); if (c.length === 1) v = c[0]; }  // Joe / Joey, nicknames
+    if (v == null) { const B = sosBracket(bkey(r, lvl)), x = B && B.s[nkey(r.name)]; if (x && x[0] != null) v = x[0]; }  // non-medalists (section and DNP seasons): the season file, once loaded
     return v == null ? null : v; };
   const fieldOf = (r, lvl) => { const e = entryOf(r, lvl); return e && e[0] != null ? e[0] * 10 : null; };
   const fieldAt = (lvl, year, cls, unit, wn) => { const e = sosEntry(lvl, year, cls, unit, wn); return e && e[0] != null ? e[0] * 10 : null; };
@@ -324,9 +334,41 @@ const OT = (window.OT = {});
   const careerRating = (apps, lower) => { const s = seasonRatings(apps, lower); if (!s.length) return null; const pk = s.reduce((a, b) => (b.rating > a.rating ? b : a)); return { peak: pk.rating, peakYear: pk.year, avg: d3.mean(s, (x) => x.rating), seasons: s }; };
   /* bouts and every entrant's path, per season, fetched when a bracket opens */
   const SOSY = new Map();
+  /* all-time upset lists (tools/build_upsets.js), loaded on first use */
+  let UPS = null, UPSP = null;
+  const loadUpsets = () => UPSP || (UPSP = fetch('upsets.json').then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => { UPS = d || { top: [], states: [], finals: [], killers: [] }; return UPS; }));
+  const upsets = () => UPS;
+  const sosYear = (year) => { const d = SOSY.get(year); return d && !(d instanceof Promise) ? d : null; };   // every bracket of one season (after loadSOS)
   const sosLoaded = (year) => SOSY.has(year) && !(SOSY.get(year) instanceof Promise);
   const loadSOS = (year) => { if (SOSY.has(year)) { const v = SOSY.get(year); return v instanceof Promise ? v : Promise.resolve(v); } const p = fetch(`sos/${year}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => { SOSY.set(year, d); return d; }); SOSY.set(year, p); return p; };
   /* a wrestler's best wins across his career, from the lazy season files (load his years first) */
+  /* every bout between two wrestlers: scan the brackets A wrestled in (state, regional, district, section) for bouts with
+     B on the other side, from the lazy season files (load both careers and their years first) */
+  const meetings = (A, B) => { const out = [];
+    const rowsOf = (W) => (W.apps || []).map((r) => [r, 'state']).concat((W.lower || []).map((r) => [r, r.lvl]));
+    const bRows = new Map(rowsOf(B).map(([r, lvl]) => [bkey(r, lvl), r])), seen = new Set();
+    rowsOf(A).forEach(([r, lvl]) => { const key = bkey(r, lvl), rb = bRows.get(key); if (!rb || seen.has(key)) return; seen.add(key); const S = sosBracket(key); if (!S) return;
+      const ka = nkey(r.name), kb = nkey(rb.name);
+      S.b.forEach((b) => { const w = nkey(b[2]), l = nkey(b[3]); if (!((w === ka && l === kb) || (w === kb && l === ka))) return;
+        const sa = S.s[ka], sb = S.s[kb];
+        out.push({ key, lvl, year: r.year, w: r.w, side: b[0], round: b[1], aWon: w === ka, result: b[4], score: b[5], flags: b[6], ra: sa && sa[0] != null ? sa[0] : null, rb: sb && sb[0] != null ? sb[0] : null }); }); });
+    const LV = { section: 0, district: 1, regional: 2, state: 3 };
+    return out.sort((a, b) => a.year - b.year || LV[a.lvl] - LV[b.lvl]); };
+  /* head to head for schools: overtime/h2h/<slug>.json (tools/build_units.js) — bouts between the two schools' wrestlers
+     by year, and each season's lineup for dual-meet odds */
+  const H2HS = new Map();
+  const loadH2HS = (sl) => { if (!H2HS.has(sl)) { const p = fetch(`h2h/${sl}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((d) => { H2HS.set(sl, d); return d; }); H2HS.set(sl, p); } const v = H2HS.get(sl); return v instanceof Promise ? v : Promise.resolve(v); };
+  const h2hsOf = (sl) => { const v = H2HS.get(sl); return v && !(v instanceof Promise) ? v : null; };
+  const h2hsLoaded = (sl) => H2HS.has(sl) && !(H2HS.get(sl) instanceof Promise);
+  /* one dual meet, weight by weight: each bout won at the two wrestlers' season-rating odds; a weight one side has no
+     one at is a forfeit to the other. Chance that A wins more bouts than B (a tie counts half). Counts bouts, not team
+     points, so bonus-point wins don't move it. common: only weights both lineups have (seasons from different eras). */
+  const dualOdds = (La, Lb, common) => { const a = new Map(La), b = new Map(Lb); const ps = [];
+    new Set([...a.keys(), ...b.keys()]).forEach((k) => { if (common && !(a.has(k) && b.has(k))) return; const x = a.get(k), y = b.get(k); const ha = x != null, hb = y != null;
+      if (!ha && !hb) return; ps.push(ha && hb ? 1 / (1 + Math.pow(10, (y - x) / 400)) : ha ? 1 : 0); });
+    let dist = [1]; ps.forEach((p) => { const nd = new Array(dist.length + 1).fill(0); dist.forEach((v, i) => { nd[i] += v * (1 - p); nd[i + 1] += v * p; }); dist = nd; });
+    const n = ps.length; let win = 0; dist.forEach((v, i) => { if (2 * i > n) win += v; else if (2 * i === n) win += v / 2; });
+    return { p: win, n, exp: ps.reduce((t, p) => t + p, 0) }; };
   const bestWins = (apps, lower, n = 5) => { const out = [], seen = new Set();
     const rows = (apps || []).map((r) => [r, 'state']).concat((lower || []).map((r) => [r, r.lvl]));
     rows.forEach(([r, lvl]) => { const key = bkey(r, lvl); const B = sosBracket(key); if (!B) return; const me = nkey(r.name);
@@ -457,19 +499,18 @@ const OT = (window.OT = {});
   const lowerTeamRows = (u, lvl) => LTEAMS.filter((t) => t.lvl === lvl && inWindow(t.year) && (state.cls === 'ALL' || t.cls === state.cls || (t.cls === 'single' && (LIN.get(t.sch) || 'AAA') === state.cls)) && (u.kind === 'district' ? (t.unit === 'D' + u.id || t.unit.startsWith('D' + u.id + '_') || t.unit.replace('D', '').split('-').includes(String(u.id)) && t.unit.includes('-')) : u.kind === 'region' ? t.unit === u.id : u.kind === 'school' ? t.sch === u.id : true));
   const lowerCoverage = (u, lvl) => { const ks = LM.cov.map((c) => c.split('|')).filter((p) => p[0] === lvl && (state.cls === 'ALL' || p[2] === state.cls || p[2] === 'single') && (u.kind === 'district' ? (p[3] === 'D' + u.id || p[3].startsWith('D' + u.id + '_') || (p[3].includes('-') && p[3].replace('D', '').split('-').includes(String(u.id)))) : u.kind === 'region' ? p[3] === u.id : true)); const ys = Array.from(new Set(ks.map((p) => +p[1]))).sort((a, b) => a - b); return { n: ks.length, years: ys, first: ys[0], last: ys[ys.length - 1] }; };
   /* a state wrestler's district and regional rows: exact key, then last name + school + season as a fallback */
-  const LIDX = new Map(), LIDX2 = new Map();
-  LOWER.forEach((r) => { const k = wKey(r); (LIDX.get(k) || LIDX.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (LIDX2.get(k2) || LIDX2.set(k2, []).get(k2)).push(r); });
+  /* built on first use (a wrestler page), not at startup: indexing every district and regional row costs a phone ~1 s */
+  const idx2 = (rows) => { const A = new Map(), B = new Map(); rows.forEach((r) => { const k = wKey(r); (A.get(k) || A.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (B.get(k2) || B.set(k2, []).get(k2)).push(r); }); return [A, B]; };
+  let LIX = null, LSIX = null; const lidx = () => LIX || (LIX = idx2(LOWER)), lsidx = () => LSIX || (LSIX = idx2(LSEC));
   const lastName = (n) => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/).pop().toLowerCase().replace(/[^a-z]/g, '');
   const firstName = (n) => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
   /* same person, different spelling of the first name (Joe / Joey, Matt / Matthew); brothers (Tyler / Trevor) stay apart */
   const sameFirst = (a, b) => { const x = firstName(a), y = firstName(b); return x === y || (Math.min(x.length, y.length) >= 3 && (x.startsWith(y) || y.startsWith(x))); };
-  const LSIDX = new Map(), LSIDX2 = new Map();
-  LSEC.forEach((r) => { const k = wKey(r); (LSIDX.get(k) || LSIDX.set(k, []).get(k)).push(r); const k2 = r.sch + '|' + r.year; (LSIDX2.get(k2) || LSIDX2.set(k2, []).get(k2)).push(r); });
   /* his section result in a season: exact key, then last name + school + season + weight */
-  const sectionFor = (apps, year) => { const a0 = apps && apps[0]; if (!a0) return null; const ex = (LSIDX.get(wKey(a0)) || []).find((r) => r.year === year); if (ex) return ex;
+  const sectionFor = (apps, year) => { const a0 = apps && apps[0]; if (!a0) return null; const [LSIDX, LSIDX2] = lsidx(); const ex = (LSIDX.get(wKey(a0)) || []).find((r) => r.year === year); if (ex) return ex;
     const ln = lastName(a0.name); const near = apps.find((a) => a.year === year) || a0;
     return (LSIDX2.get(near.sch + '|' + year) || []).find((r) => lastName(r.name) === ln && sameFirst(r.name, a0.name) && (!near.wn || Math.abs(r.wn - near.wn) <= 20)) || null; };
-  const lowerFor = (apps) => { if (!apps || !apps.length) return []; const out = (LIDX.get(wKey(apps[0])) || []).slice(); const have = new Set(out.map((r) => r.lvl + '|' + r.year)); const ln = lastName(apps[0].name);
+  const lowerFor = (apps) => { if (!apps || !apps.length) return []; const [LIDX, LIDX2] = lidx(); const out = (LIDX.get(wKey(apps[0])) || []).slice(); const have = new Set(out.map((r) => r.lvl + '|' + r.year)); const ln = lastName(apps[0].name);
     apps.forEach((a) => (LIDX2.get(a.sch + '|' + a.year) || []).forEach((r) => { if (!have.has(r.lvl + '|' + r.year) && lastName(r.name) === ln && sameFirst(r.name, apps[0].name) && Math.abs(r.wn - a.wn) <= 20) { out.push(r); have.add(r.lvl + '|' + r.year); } }));
     return out.sort((a, b) => a.year - b.year || (a.lvl === 'district' ? 0 : 1) - (b.lvl === 'district' ? 0 : 1)); };
   /* wrestlers who only appear in the archive (never placed at states) still get a page */
@@ -480,19 +521,22 @@ const OT = (window.OT = {});
   let PEOPLE = null, PEOPLE_BY = null, PPL = null;
   const LVLN = ['', 'district', 'regional', 'state'];
   const loadPeople = () => PPL || (PPL = fetch('people.json').then((r) => (r.ok ? r.json() : { s: [], p: [] })).catch(() => ({ s: [], p: [] })).then((D) => {
-    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : ''), q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0 }; });
+    PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: ((k) => TRF[k] || k)(nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : '')),   /* a transfer's key is his first school's, like wKey */ q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0 }; });
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
   const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
-  const searchPeople = (q, n = 60) => { const t = q.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length || !PEOPLE) return []; const out = []; const f = state.f, geo = (p) => (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); for (const p of PEOPLE) { if (t.every((x) => p.q.includes(x)) && geo(p)) { out.push(p); if (out.length >= 2000) break; } } return out.sort((a, b) => (b.peak || 0) - (a.peak || 0)).slice(0, n).concat([]).map((p) => p); };
+  const searchPeople = (q, n = 60, all = false) => { const t = q.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length || !PEOPLE) return []; const out = []; const f = state.f, geo = (p) => all || (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); for (const p of PEOPLE) { if (t.every((x) => p.q.includes(x)) && geo(p)) { out.push(p); if (out.length >= 2000) break; } } return out.sort((a, b) => (b.peak || 0) - (a.peak || 0)).slice(0, n).concat([]).map((p) => p); };
   const personOf = (sl) => (PEOPLE_BY ? PEOPLE_BY.get(sl) || null : null);
   const PW = new Map();
   /* any wrestler by address: state record, archive medalist, or (once the index is in) anyone in a bracket */
   const getWrestler = (sl) => { let W = WRESTLER.get(sl) || lowerWrestler(sl); if (W) return W; if (PW.has(sl)) return PW.get(sl); const p = personOf(sl); if (!p) return null;
+    if (SLUGK.has(p.key) && WRESTLER.has(SLUGK.get(p.key))) return WRESTLER.get(SLUGK.get(p.key));   // a transfer filed under his last school: the same wrestler as his state rows
     const apps = APP.filter((r) => wKey(r) === p.key).sort((a, b) => a.year - b.year);
     W = { name: p.name, sch: p.sch, d: p.d, apps, rows: apps.filter((r) => r.place), lower: [], slug: sl, lowerOnly: !apps.length, person: p }; PW.set(sl, W); return W; };
-  /* his whole career: load the full district and regional fields for every season FR to SR and pick out his rows, so a
-     season he sat out reads DNC and a season he entered without placing reads DNP */
+  /* his whole career: load the full district, regional and section fields for every season FR to SR and pick out his
+     rows, so a season he sat out reads DNC and a season he entered without placing reads DNP. Sections count where they
+     are the district round (the shipped lower/<year>-section.json files), so a kid who only ever wrestled a section has
+     a career too */
   const GI = { FR: 0, SO: 1, JR: 2, SR: 3 };
   const careerYears = (W) => { const rows = (W.apps || []).concat(W.lower || []); const ys = rows.map((r) => r.year); if (W.person) ys.push(W.person.y0, W.person.y1); if (!ys.length) return [];
     const g = rows.find((r) => r.grade in GI); if (g) { const fr = g.year - GI[g.grade]; const out = [0, 1, 2, 3].map((i) => fr + i); if (ys.every((y) => out.includes(y))) return out; }
@@ -502,14 +546,14 @@ const OT = (window.OT = {});
     const base = new Map(); (W.lower0 || W.lower || []).forEach((r) => base.set(r.lvl + '|' + r.year, r));
     const wts = (W.apps || []).concat(W.lower0 || W.lower || []).map((r) => r.wn).filter((x) => x && x < 999);
     const near = (wn, y) => { const same = (W.apps || []).concat(W.lower0 || []).filter((r) => r.year === y).map((r) => r.wn); const ref = same.length ? same : wts; return !ref.length || ref.some((x) => Math.abs(x - wn) <= (same.length ? 20 : 40)); };
-    years.forEach((y) => ['district', 'regional'].forEach((lvl) => { const F = LFIELD.get(y + '-' + lvl); if (!F) return;
+    years.forEach((y) => ['district', 'regional', 'section'].forEach((lvl) => { const F = LFIELD.get(y + '-' + lvl); if (!F) return;
       let m = F.find((r) => wKey(r) === key); if (!m && !base.has(lvl + '|' + y)) m = F.find((r) => r.sch === W.sch && lastName(r.name) === ln && sameFirst(r.name, W.name) && near(r.wn, y));
       if (m) base.set(lvl + '|' + y, m); }));
     return Array.from(base.values()).sort((a, b) => a.year - b.year || (a.lvl === 'district' ? 0 : 1) - (b.lvl === 'district' ? 0 : 1));
   }
   const fullCareer = (W) => { if (!W || W.full) return Promise.resolve(false); if (!W.lower0) W.lower0 = (W.lower && W.lower.length ? W.lower : lowerFor(W.apps)).slice();
-    const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional')])).then(() => { W.lower = mergeLower(W, years);
+    const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional'), loadLower(y, 'section')])).then(() => { W.lower = mergeLower(W, years);
       const more = careerYears(W); const add = more.filter((y) => !years.includes(y)); if (add.length && n < 2) return pass(years.concat(add).sort((a, b) => a - b), n + 1); W.full = true; W.span = years; return true; });
     return pass(careerYears({ ...W, lower: W.lower0 }), 0); };
-  Object.assign(OT, { sectionFor, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { meetings, sosYear, loadUpsets, upsets, wNum, TEAMSCORES_FROM: 1976, loadH2HS, h2hsOf, h2hsLoaded, dualOdds, sectionFor, sectionCovered, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, ATT_W, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();

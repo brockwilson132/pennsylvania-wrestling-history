@@ -1,13 +1,11 @@
-/* Unit ratings and per-season results for the app (overtime/units.js).
+/* School, district and region numbers for the app (overtime/units.js).
  *   node tools/build_units.js
- * Emits overtime/proposals/data.json:
- *   schools    [name…]
- *   ss         per school-season: [schoolIdx, year, cls, district, region, teamRating, statePts, regPts, distPts,
- *               stateTitles, podium2to4, placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, coverage]
- *   lineups    {schoolName: {year: [[stdIdx, name, rating, D, R, S]…]}} for a few showcase schools
- *   wrestlers  {AAA: [...], AA: [...]} card pool: each season's ten best careers; the page picks any window's top ten
- * Team rating (per season) = mean Overtime Rating of the school's best wrestler at each standardized weight;
- * a weight with no entrant counts as a replacement-level 1000 (1100 where the district bracket is missing).
+ * Emits window.WR_UNITS = { schools, names, ss, ds, rs, ref, talentAt, typField, fieldPct } (layout under "output").
+ * Strength (per season) = the school's lineup as a dual-meet team: best wrestler at each weight at his real season
+ *   rating, a weight with nobody entered is a forfeit; the average chance of beating an average state qualifier, turned
+ *   back into a rating. Only seasons whose full district field is on file. District / region = average of its schools.
+ * Talent = wrestlers rated 1650+ (state-medalist level); district / region = count / schools.
+ * Score  = placement points (summed in the app).
  * Identity keys follow tools/build_people.js.
  */
 'use strict';
@@ -27,7 +25,6 @@ const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section'
 const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
 const stdIdx = (wn) => { const i = STDK.findIndex(([, a, b]) => wn >= a && wn <= b); return i < 0 ? STDK.length - 1 : i; };
 const PTS = [16, 12, 9, 7, 5, 3, 2, 1];
-const FILL = 1000; // replacement level for a weight where the school entered no one
 const FIVE = ['NE', 'NW', 'SC', 'SE', 'SW'];
 const normCls = (c) => (c === 'A' ? 'AAA' : c === 'B' ? 'AA' : c);
 
@@ -46,13 +43,14 @@ const fieldOf = (a) => FIELD.get([a.lvl, a.year, normCls(a.cls), a.lvl === 'stat
 /* ---- collect appearances ---- */
 const A = []; // {k, name, sch, year, cls, lvl, w, std, place, d, unit, rating, bw, bwn}
 function add(lvl, year, cls, unit, w, place, name, school, d) {
-  if (!name || !nkey(name)) return;
+  if (!name || !nkey(name) || /^(forfeit|bye|open|vacant)$/i.test(String(name).trim()) || !String(school || '').trim()) return;   // placeholder rows, not wrestlers
+  if (/_Sub$|Super/.test(String(unit || ''))) return;   // sub-regionals (1995–98) and 2021 super-regionals are extra rounds on top of a district or regional: counting them would give those seasons two sets of places and titles at one level
   if (lvl === 'state') { const mb = MEMB[`${year}|${cls}|${wNum(w)}|${nkey(name)}`]; if (mb) { d = mb[0]; if (mb[1]) school = mb[1]; } } else d = unitDist(lvl, unit, d);
   const sch = splitName(canon(school), d);
   const key = lvl === 'state' ? `${year}.${cls}.state.${wNum(w)}` : `${year}.${cls}.${lvl}.${unit}.${wNum(w)}`;
   const s = sosRow(key, name);
   const base = nkey(name) + '|' + sch; const cs = (W.WR_CAREERS || {})[base]; let k = base; if (cs) cs.forEach((y0) => { if (year >= y0) k = base + '#' + y0; });
-  A.push({ k, name, sch, year, cls, lvl, w: wNum(w), std: stdIdx(wNum(w)), place: place >= 1 && place <= 8 ? place : 0, d: d || 0, unit, rating: s && s[0] ? s[0] : 0, field: 0, bw: s && s[1] ? s[1] : 0, bwn: s && s[2] ? s[2] : '' });
+  A.push({ k, name, raw: school, sch, year, cls, lvl, w: wNum(w), std: stdIdx(wNum(w)), place: place >= 1 && place <= 8 ? place : 0, d: d || 0, unit, rating: s && s[0] ? s[0] : 0, field: 0, bw: s && s[1] ? s[1] : 0, bwn: s && s[2] ? s[2] : '' });
 }
 (W.WR_MEDALS || []).forEach(([year, cls, w, place, name, school, d]) => add('state', year, cls, null, w, place, name, school, d));
 (W.WR_DATA.champs || []).concat(W.WR_CHAMP_FILL || []).forEach(([year, cls, w, name, school, d]) => add('state', year, cls, null, w, 1, name, school, d));
@@ -103,142 +101,150 @@ const cov = new Set(); fullCnt.forEach((n, k) => { if (n >= 24) cov.add(k); }); 
 const nW = new Map();
 APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + clsOf(a); const s = nW.get(k) || new Set(); s.add(a.std); nW.set(k, s); });
 
-/* typical rating of a wrestler whose season ended at districts (used where a district bracket is missing) */
-const endedAt = new Map(); APP.forEach((a) => { const k = a.k + '|' + a.year; const L = { section: 0.5, district: 1, regional: 2, state: 3 }[a.lvl]; const x = endedAt.get(k) || { L: 0, r: 0 }; x.L = Math.max(x.L, L); x.r = Math.max(x.r, a.rating); endedAt.set(k, x); });
-const dOnly = Array.from(endedAt.values()).filter((x) => x.L === 1 && x.r).map((x) => x.r);
-const DIST_ONLY = dOnly.length ? Math.round(dOnly.reduce((a, b) => a + b, 0) / dOnly.length) : FILL;   // first-round-only seasons carry no rating now
-console.log('typical district-only rating', DIST_ONLY);
+/* ---- real season ratings (tools/ratings.py entrant_ratings.csv: every entrant, sections included) ----
+   The app hides first-round-only ratings, so overtime/sos leaves them out; Strength needs them, so read the season
+   rating of every entrant from the ratings output. Key: year | weight | name, matched on school where names repeat. */
+const WSF = ['entrant_ratings.csv', 'entrant_ratings.csv.gz', 'wrestler_seasons.csv', 'wrestler_seasons.csv.gz'].map((f) => path.join(__dirname, '..', 'data', 'difficulty', f)).find((f) => fs.existsSync(f));
+const REAL = new Map();
+{
+  const txt = WSF.endsWith('.gz') ? require('zlib').gunzipSync(fs.readFileSync(WSF)).toString('utf8') : fs.readFileSync(WSF, 'utf8');
+  const lines = txt.split('\n'); const h = lines[0].replace(/\r$/, '').split(','); const ix = (k) => h.indexOf(k);
+  const iW = ix('weight'), iY = ix('year'), iN = ix('name'), iK = ix('key'), iS = ix('season');
+  for (let i = 1; i < lines.length; i++) {
+    const f = lines[i].replace(/\r$/, '').split(','); if (f.length !== h.length || f[iS] === '') continue;   // names with commas are quoted; rare, skipped
+    const k = f[iY] + '|' + wNum(f[iW]) + '|' + nkey(f[iN]); const sk = (f[iK] || '').split('|')[1] || '';
+    const L = REAL.get(k) || REAL.set(k, []).get(k); if (!L.some((x) => x[0] === sk)) L.push([sk, +f[iS]]);
+  }
+}
+const realOf = (a) => { const L = REAL.get(a.year + '|' + a.w + '|' + nkey(a.name)); if (!L) return null; if (L.length === 1) return L[0][1]; const m = L.find((x) => x[0] === nkey(a.raw)); return m ? m[1] : null; };
+let nReal = 0; APP.forEach((a) => { const v = realOf(a); a.real = v == null ? (a.rating || null) : v; if (v != null) nReal++; });
+console.log('real season ratings', WSF.split('/').pop(), 'matched', nReal, 'of', APP.length);
 
-/* ---- school seasons ---- */
+/* ---- school seasons ----
+   Strength: the school's lineup as a dual-meet team. At each weight its best wrestler that season at his real rating
+   (first-round kids included); a weight with nobody entered is a forfeit (no chance). Average every weight's chance of
+   beating the reference wrestler, then turn that average chance back into a rating: "wrestles like a lineup of
+   wrestlers rated X at every weight" (reference: an average state qualifier, see REF). Only where the district's full field is on file: elsewhere a weight we can't see
+   could be a forfeit or a kid who lost at districts, so the season gets no Strength (no estimate, no penalty).
+   Talent: wrestlers rated at state-medalist level (TALENT+) that season, same seasons as Strength.
+   Score parts: placement points, as before. */
+const TALENT = 1650;
+const pWin = (r, ref) => 1 / (1 + Math.pow(10, (ref - r) / 400));
 const TEAMWIN = new Set((W.WR_TEAMS || []).filter((t) => t[2] === 1).map(([year, cls, , , sch]) => year + '|' + cls + '|' + canon(sch)));
 const names = [], nidx = new Map(); const N = (s) => { if (!nidx.has(s)) { nidx.set(s, names.length); names.push(s); } return nidx.get(s); };
 const schools = [], sidx = new Map(); const S = (s) => { if (!sidx.has(s)) { sidx.set(s, schools.length); schools.push(s); } return sidx.get(s); };
 const bySS = new Map();
 APP.forEach((a) => { const c = clsOf(a); const k = a.sch + '|' + a.year + '|' + c; (bySS.get(k) || bySS.set(k, []).get(k)).push(a); });
-const ss = [];
-const FEAT = []; // parallel to ss: observable features for the coverage estimator
 const SHOW = ['Nazareth', 'Easton', 'Northampton', 'Bethlehem Catholic', 'Bethlehem Liberty', 'Parkland', 'Notre Dame-Green Pond'];
 const lineups = {};
+const SEAS = []; // per school-season: {row, lineup: [real rating or null per contested weight], covered}
 bySS.forEach((rows, k) => {
   const [sch, ys, c] = k.split('|'); const year = +ys;
   const dc = new Map(); rows.forEach((a) => { if (a.d) dc.set(a.d, (dc.get(a.d) || 0) + (a.lvl === 'district' || a.lvl === 'section' ? 3 : 1)); });
   const d = dc.size ? Array.from(dc).sort((a, b) => b[1] - a[1])[0][0] : 0;
   let reg = regionOf(year, c, d) || (rows.find((a) => a.lvl === 'regional' && a.unit) || {}).unit || ''; if (reg === 'W') reg = 'SW'; if (!['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(reg)) reg = '';
   const covered = cov.has(year + '|' + c + '|' + d);
-  /* lineup: best rated wrestler per weight */
-  const best = new Map();
-  const per = new Map(); // wrestler → {std, rating, D,R,S}
-  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, rating: 0, fwd: 0, X: -1, D: -1, R: -1, S: -1 }; p.rating = Math.max(p.rating, a.rating); if (a.lvl !== 'district' && a.lvl !== 'section') p.fwd = 1; const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
-  per.forEach((p) => { const b = best.get(p.std); if (!b || p.rating > b.rating) best.set(p.std, p); });
-  /* team rating counts only wrestlers who advanced past districts (regional or state entrants): the regional fields
-     are on file for every district, while some district brackets are not, so this stays fair across districts */
-  const fwdBest = new Map(); per.forEach((p) => { if (!p.rating) return; const b = fwdBest.get(p.std); if (!b || p.rating > b.rating) fwdBest.set(p.std, p); });
-  const weights = nW.get(year + '|' + c) || new Set(Array.from(best.keys()));
-  /* observable whether or not the district bracket is on file: the school's best wrestler at each weight who
-     reached regionals or states */
-  const obsBest = new Map(); per.forEach((p) => { if (!p.rating || !p.fwd) return; const b = obsBest.get(p.std); if (!b || p.rating > b.rating) obsBest.set(p.std, p); });
-  let sum = 0, n = 0, nObs = 0, sumObs = 0; const unobsY = [];
-  weights.forEach((i) => { n++; const o = obsBest.get(i); if (o) { nObs++; sumObs += o.rating; } const b = fwdBest.get(i); sum += b ? b.rating : FILL; if (!o) unobsY.push(b ? b.rating : FILL); });
-  const rated = fwdBest.size > 0 || Array.from(best.values()).some((b) => b.rating);
-  const full = rated && n ? sum / n : 0;
-  FEAT.push({ year, c, d, covered, n, k: nObs, sumObs, meanObs: nObs ? sumObs / nObs : 0, unobsY, full, rated });
-  const teamRating = 0; // filled in after the estimator is fitted
-  const topW = Array.from(per.values()).filter((p) => p.rating).sort((a, b) => b.rating - a.rating)[0];
+  const per = new Map(); // wrestler → {std, real, shown, D,R,S}
+  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, real: null, shown: 0, X: -1, D: -1, R: -1, S: -1 };
+    if (a.real != null && (p.real == null || a.real > p.real)) p.real = a.real; p.shown = Math.max(p.shown, a.rating);
+    const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
+  const best = new Map(), unrated = new Set(); per.forEach((p) => { if (p.real == null) { unrated.add(p.std); return; } const b = best.get(p.std); if (!b || p.real > b.real) best.set(p.std, p); });
+  const weights = Array.from(nW.get(year + '|' + c) || new Set(best.keys())).sort((a, b) => a - b);
+  const lineup = weights.map((i) => (best.get(i) ? best.get(i).real : null));
+  /* an entrant with no rating (his bracket's bouts are not on file) is not a forfeit, and we can't say how good he was:
+     the season gets no Strength */
+  const blind = weights.some((i) => !best.get(i) && unrated.has(i));
+  const talent = Array.from(per.values()).filter((p) => p.real != null && p.real >= TALENT).length;
+  const topW = Array.from(per.values()).filter((p) => p.shown).sort((a, b) => b.shown - a.shown)[0];
   const lv = (L) => rows.filter((a) => a.lvl === L);
   const pts = (L) => lv(L).reduce((t, a) => t + (a.place ? PTS[a.place - 1] : 0), 0);
   const st = lv('state');
-  ss.push([S(sch), year, c, d, reg, teamRating, pts('state'), pts('regional'), pts('district'),
+  const row = [S(sch), year, c, d, reg, 0, pts('state'), pts('regional'), pts('district'),
     st.filter((a) => a.place === 1).length, st.filter((a) => a.place >= 2 && a.place <= 4).length, st.filter((a) => a.place >= 5).length, st.filter((a) => !a.place).length,
     lv('regional').filter((a) => a.place === 1).length, lv('district').filter((a) => a.place === 1).length, TEAMWIN.has(year + '|' + c + '|' + sch) ? 1 : 0, covered ? 1 : 0,
-    topW ? N(topW.name) : -1, topW ? topW.rating : 0, 0]);
-  if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, p.rating, p.D, p.R, p.S]); }
+    topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
+  SEAS.push({ row, lineup, weights, sch, covered, blind, c, year, d });
+  if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, Math.round(p.real), p.D, p.R, p.S]); }
 });
-console.log('school-seasons', ss.length, 'schools', schools.length);
-
-/* ---- coverage estimator ----
-   Where a district bracket is not on file we only see the school's wrestlers who reached regionals or states. Fit, on
-   seasons where the bracket IS on file, what the best district-only wrestler at an unobserved weight rates (FILL when
-   the school had nobody there), from the school's observed strength, how many weights it got through, class and era;
-   then rating = (observed sum + unobserved weights × predicted value) / weights. */
-const eraOf = (y) => (y < 1990 ? 0 : y < 2005 ? 1 : 2);
-/* how selective the district is: regional entrants per school that season (the WPIAL sends few per school, so getting
-   a wrestler through says more there than in a small district) */
-const advN = new Map(), schN = new Map();
-APP.filter((a) => a.lvl === 'regional' && a.d).forEach((a) => { const k = a.year + '|' + clsOf(a) + '|' + a.d; const s2 = advN.get(k) || new Set(); s2.add(a.k); advN.set(k, s2); });
-FEAT.forEach((f) => { const k = f.year + '|' + f.c + '|' + f.d; schN.set(k, (schN.get(k) || 0) + 1); });
-FEAT.forEach((f) => { const k = f.year + '|' + f.c + '|' + f.d; f.adv = ((advN.get(k) || new Set()).size) / (schN.get(k) || 1); });
-const xrow = (f) => [1, f.k ? f.meanObs - 1500 : 0, f.k ? 0 : 1, f.k / f.n, eraOf(f.year) === 1 ? 1 : 0, eraOf(f.year) === 2 ? 1 : 0, f.c === 'AA' ? 1 : 0];
-function ols(X, y) { const p = X[0].length; const A = Array.from({ length: p }, () => new Array(p).fill(0)), b = new Array(p).fill(0);
-  X.forEach((r, i) => { for (let a = 0; a < p; a++) { b[a] += r[a] * y[i]; for (let c2 = 0; c2 < p; c2++) A[a][c2] += r[a] * r[c2]; } });
-  for (let a = 0; a < p; a++) A[a][a] += 1e-6; // tiny ridge for safety
-  for (let col = 0; col < p; col++) { let piv = col; for (let r = col + 1; r < p; r++) if (Math.abs(A[r][col]) > Math.abs(A[piv][col])) piv = r; [A[col], A[piv]] = [A[piv], A[col]]; [b[col], b[piv]] = [b[piv], b[col]];
-    for (let r = 0; r < p; r++) if (r !== col) { const f = A[r][col] / A[col][col]; for (let c2 = col; c2 < p; c2++) A[r][c2] -= f * A[col][c2]; b[r] -= f * b[col]; } }
-  return b.map((v, i) => v / A[i][i]); }
-const trainOn = (keep) => { const X = [], y = []; FEAT.forEach((f) => { if (!f.covered || !f.rated || f.year < 1974 || !(f.c === 'AAA' || f.c === 'AA') || !keep(f)) return; f.unobsY.forEach((v) => { X.push(xrow(f)); y.push(v); }); }); return ols(X, y); };
-const estimate = (f, beta) => { if (!f.rated || !f.n) return 0; const x = xrow(f); const yhat = x.reduce((t, v, i) => t + v * beta[i], 0); return (f.sumObs + (f.n - f.k) * yhat) / f.n; };
-// hold-out check: fit without Districts 1 and 11, estimate their covered seasons as if the bracket were missing
-const betaHO = trainOn((f) => f.d !== 1 && f.d !== 11);
-const ho = FEAT.filter((f) => f.covered && f.rated && f.year >= 1974 && (f.d === 1 || f.d === 11) && f.n);
-const errs = ho.map((f) => Math.abs(estimate(f, betaHO) - f.full)), bias = ho.map((f) => estimate(f, betaHO) - f.full);
-const oldErr = ho.map((f) => Math.abs((f.sumObs + (f.n - f.k) * DIST_ONLY) / f.n - f.full));
-const mean = (a) => a.reduce((x, y) => x + y, 0) / (a.length || 1);
-console.log(`hold-out D1+D11 school-seasons n=${ho.length}: estimator MAE ${mean(errs).toFixed(1)} bias ${mean(bias).toFixed(1)}; old constant fill MAE ${mean(oldErr).toFixed(1)}`);
-// second check on the district this exists for: the few WPIAL (D7) AAA seasons whose full bracket IS on file
-const betaNo7 = trainOn((f) => f.d !== 7);
-const d7 = FEAT.filter((f) => f.covered && f.rated && f.year >= 1974 && f.d === 7 && f.c === 'AAA' && f.n);
-const e7 = d7.map((f) => estimate(f, betaNo7) - f.full);
-console.log(`D7 AAA covered school-seasons n=${d7.length} (years ${Array.from(new Set(d7.map((f) => f.year))).join(',')}): estimator bias ${mean(e7).toFixed(1)} MAE ${mean(e7.map(Math.abs)).toFixed(1)}`);
-const BETA = trainOn(() => true);
-console.log('estimator coefficients', BETA.map((v) => v.toFixed(3)).join(' '));
-let nEst = 0;
-ss.forEach((r, i) => { const f = FEAT[i]; if (!f.rated || !f.n) { r[5] = 0; return; } if (f.covered) r[5] = Math.round(f.full); else { r[5] = Math.round(estimate(f, BETA)); r[19] = 1; nEst++; } });
-console.log('estimated school-seasons', nEst, 'of', ss.filter((r) => r[5]).length);
-fs.writeFileSync(path.join(__dirname, '..', 'data', 'difficulty', 'coverage_estimator.txt'), [
-  'School season rating where the district bracket is not on file',
-  `features: [1, meanObserved-1500, noObserved, observedShare, era1990-2004, era2005+, classAA]`,
-  `coefficients: ${BETA.map((v) => v.toFixed(3)).join(' ')}`,
-  `hold-out (fit without D1/D11, estimate their covered seasons): n=${ho.length} MAE ${mean(errs).toFixed(1)} bias ${mean(bias).toFixed(1)}; old constant-fill MAE ${mean(oldErr).toFixed(1)}`,
-  `estimated school-seasons: ${nEst}`].join('\n') + '\n');
+/* the reference: the average AAA starter (a school's best wrestler at a weight, weights with nobody left out), over
+   every season from 1974 on where the full district field is on file */
+const refPool = []; SEAS.forEach((s) => { if (s.covered && s.c === 'AAA' && s.year >= 1974) s.lineup.forEach((v) => { if (v != null) refPool.push(v); }); });
+/* The lineup is scored against an average state qualifier (1500), not the average starter: the average starter rates
+   far below (first-round kids are rated low), which puts every lineup's number far under the wrestler scale and lets
+   the weakest kids' ratings, which rest mostly on the first-round rule, decide it. UNIT_REF overrides it for tests. */
+const AVG_STARTER = Math.round(refPool.reduce((a, b) => a + b, 0) / refPool.length);
+const REF = process.env.UNIT_REF ? +process.env.UNIT_REF : 1500;
+console.log('reference', REF, '(average AAA starter would be', AVG_STARTER, 'from', refPool.length, 'lineup spots)');
+const strengthOf = (lineup) => { if (!lineup.length) return 0; const P = lineup.reduce((t, v) => t + (v == null ? 0 : pWin(v, REF)), 0) / lineup.length; if (P <= 0) return 0; return REF + 400 * Math.log10(P / (1 - P)); };
+const ss = SEAS.map((s) => { if (s.covered && !s.blind && s.row[20]) s.row[5] = Math.round(strengthOf(s.lineup)); return s.row; });
+{ const t = {}; SEAS.forEach((s) => { if (s.year < 1974) return; const k = 'D' + s.d + ' ' + (s.year < 1999 ? '74-98' : '99-26'); const x = t[k] || (t[k] = [0, 0, 0]); x[0]++; if (!s.covered) x[1]++; else if (s.blind) x[2]++; });
+  console.log('school-seasons from 1974: [all, field not on file, entrant without a rating]'); console.log(Object.entries(t).sort().map(([k, v]) => k + ' ' + v.join('/')).join('  ')); }
+console.log('school-seasons', ss.length, 'schools', schools.length, 'with Strength', ss.filter((r) => r[5]).length);
 
 /* ---- district and region seasons ----
-   district rating = mean Overtime Rating of the wrestlers it sent to regionals that season (one per wrestler);
-   region rating   = mean Overtime Rating of the wrestlers it sent to states.
-   Both are averages per wrestler sent, so a big district is not rated higher for being big; slot counts already
-   scale with the number of schools. */
-/* a unit's season rating = how strong its tournament is at the top: the mean Overtime Rating of its four best wrestlers
-   at each weight that season (wherever they wrestled), averaged over the weights. Top-4 is the district/regional
-   podium that advances; it does not depend on which brackets are on file, and a bigger district earns a higher number
-   only when its top four really are better. */
-const unitSeason = (unitOf) => {
-  const pw = new Map(); // u|year|cls|std -> [ratings of wrestlers]
-  const seen = new Map();
-  APP.filter((a) => a.rating).forEach((a) => { const c = clsOf(a); const u = unitOf(a, c); if (!u) return; const wk = a.k + '|' + a.year; const k = u + '|' + a.year + '|' + c + '|' + a.std; const s = seen.get(k) || new Map(); s.set(wk, Math.max(s.get(wk) || 0, a.rating)); seen.set(k, s); });
+   Strength: the average Strength of its top quarter of schools that season (at least one school). A fixed share, not a
+   fixed count, so a 50-school district isn't rewarded for its size and a 5-school district isn't made to count every
+   school; every district is judged by its leading programs in the same proportion (Brock, 2026-11-05).
+   Talent: its wrestlers at TALENT+ divided by its schools.
+   Both only where every member school's full field is on file (otherwise the schools we can't see would be missing
+   from the ranking and the school count). Score sums come from ss in the app. */
+const TOP_SHARE = 0.25;
+const unitRoll = (keyOf) => {
   const m = new Map();
-  seen.forEach((s, k) => { const [u, y, c] = k.split('|'); const top = Array.from(s.values()).sort((a, b) => b - a).slice(0, 4); while (top.length < 4) top.push(DIST_ONLY); const avg = top.reduce((a, b) => a + b, 0) / 4; const kk = u + '|' + y + '|' + c; const x = m.get(kk) || { sum: 0, n: 0 }; x.sum += avg; x.n++; m.set(kk, x); });
-  return m;
+  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || { u, y: r[1], c: r[2], n: 0, nCov: 0, str: [], tal: 0 }; x.n++; if (r[16]) { x.nCov++; x.tal += r[19]; if (r[5]) x.str.push(r[5]); } m.set(k, x); });
+  return Array.from(m.values()).map((x) => {
+    const all = x.n && x.nCov === x.n; const top = x.str.sort((a, b) => b - a).slice(0, Math.max(1, Math.ceil(x.str.length * TOP_SHARE)));
+    return [x.u, x.y, x.c, all && top.length ? Math.round(top.reduce((a, b) => a + b, 0) / top.length) : 0, all ? Math.round(100 * x.tal / x.n) / 100 : 0, x.n];
+  });
 };
-const dRate = unitSeason((a) => a.d);
-const dCov = (u, y, c) => cov.has(y + '|' + c + '|' + u);
-const rRate = unitSeason((a, c) => regionOf(a.year, c, a.d) || '');
-const rollup = (keyOf, rate) => {
-  const m = new Map();
-  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || [u, r[1], r[2], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; for (let i = 6; i <= 15; i++) x[i - 2] += r[i]; x[14] = (x[14] || 0) + 1; m.set(k, x); });
-  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const x = m.get(u + '|' + r[1] + '|' + r[2]); if (x) { x[15] = (x[15] || 0) + (r[19] ? 1 : 0); } });
-  return Array.from(m.values()).map((x) => { const q = rate.get(x[0] + '|' + x[1] + '|' + x[2]); x[3] = q ? Math.round(q.sum / q.n) : 0; x[16] = (x[15] || 0) / (x[14] || 1) >= 0.5 ? 1 : 0; return x; });
-};
-/* [unit, year, cls, rating, statePts, regPts, distPts, stateTitles, podium2to4, placers5to8, qualsNoPlace, regTitles, distTitles, teamTitles, schools] */
-const ds = rollup((r) => r[3], dRate), rs = rollup((r) => r[4], rRate);
-console.log('district-seasons', ds.length, 'region-seasons', rs.length);
+const ds = unitRoll((r) => r[3]), rs = unitRoll((r) => r[4]);
+console.log('district-seasons', ds.length, 'with Strength', ds.filter((x) => x[3]).length, 'region-seasons', rs.length, 'with Strength', rs.filter((x) => x[3]).length);
 
 /* ---- output ----
-   ss  [schoolIdx, year, cls, district, region, teamRating, statePts, regPts, distPts, stateTitles, podium2to4,
-        placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, coverage, bestNameIdx, bestRating]
-   ds / rs  [unit, year, cls, rating]  (sums come from ss, grouped by the season's own district / region) */
+   ss  [schoolIdx, year, cls, district, region, strength, statePts, regPts, distPts, stateTitles, podium2to4,
+        placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, fullFieldOnFile, bestNameIdx, bestRating,
+        talent, weightsFilled, weightsContested]   strength 0 = none (field not on file); talent counts only when on file
+   ds / rs  [unit, year, cls, strength, talentPerSchool, schools]  (0 = not on file for every member school) */
 const typ = {}; ['district', 'regional', 'state'].forEach((L) => { const v = APP.filter((a) => a.lvl === L && a.field && a.year >= 1980).map((a) => a.field); typ[L] = Math.round(v.reduce((x, y) => x + y, 0) / v.length); });
-const stateFields = APP.filter((a) => a.lvl === 'state' && a.field).map((a) => a.field);
 const fset = new Map(); APP.filter((a) => a.lvl === 'state' && a.field).forEach((a) => fset.set(a.year + '|' + a.cls + '|' + a.w, a.field));
 const fsorted = Array.from(fset.values()).sort((a, b) => a - b);
 const pct = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((q) => fsorted[Math.min(fsorted.length - 1, Math.floor(q / 100 * (fsorted.length - 1)))]);
-const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ds: ds.map((x) => x.slice(0, 4).concat([x[16] || 0])), rs: rs.map((x) => x.slice(0, 4).concat([x[16] || 0])) };
+const out = { typField: typ, fieldPct: fsorted.filter((_, i) => i % 5 === 0), schools, names, ss, ref: REF, talentAt: TALENT, ds, rs };
 fs.writeFileSync(path.join(OV, 'units.js'), 'window.WR_UNITS=' + JSON.stringify(out) + ';\n');
 console.log('units.js bytes', fs.statSync(path.join(OV, 'units.js')).size, 'state brackets', fsorted.length, 'deciles', pct.join(' '));
+
+/* ---- head to head (overtime/h2h/<school-slug>.json, loaded by the head-to-head page) ----
+   o: every postseason bout between this school's wrestlers and another school's, as [year, won, lost] per opponent
+      (forfeits, injury defaults and DQs left out; a bout's schools are the ones its wrestlers are filed under above).
+   L: the lineup of every season with a Strength, [weight slot, real rating or null for a forfeit] — the app plays two
+      lineups against each other weight by weight for dual-meet odds. */
+{
+  const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const who = new Map(); // year|lvl|weight|name(|raw school) -> school
+  const put = (k, sch) => { const p = who.get(k); who.set(k, p === undefined || p === sch ? sch : null); };
+  A.forEach((a) => { const k = `${a.year}|${a.lvl}|${a.w}|${nkey(a.name)}`; put(k, a.sch); put(k + '|' + nkey(a.raw), a.sch); });
+  const schOf = (year, lvl, w, name, raw) => { const k = `${year}|${lvl}|${wNum(w)}|${nkey(name)}`; return who.get(k + '|' + nkey(raw)) || who.get(k) || splitName(canon(raw), 0); };
+  /* spellings that differ only in punctuation ("Bellwood Antis", "Bellwood-Antis") share an address in the app: one school here too */
+  const one = new Map(); schools.forEach((s) => { const k = slug(s); if (!one.has(k)) one.set(k, s); });
+  const same = (s) => { const k = slug(s); if (!one.has(k)) one.set(k, s); return one.get(k); };
+  const H = new Map(); const get = (s) => H.get(s) || H.set(s, { L: {}, o: {} }).get(s);
+  const lines = fs.readFileSync(path.join(__dirname, '..', 'data', 'brackets', 'bouts.csv'), 'utf8').split(/\r?\n/);
+  const hd = lines[0].split(','), ix = (c) => hd.indexOf(c);
+  const [iL, iY, iW, iWn, iWs, iLn, iLs, iR] = ['level', 'year', 'weight', 'winner', 'winner_school', 'loser', 'loser_school', 'result'].map(ix);
+  const csv = (line) => { const o = []; let cur = '', q = false; for (const ch of line) { if (ch === '"') q = !q; else if (ch === ',' && !q) { o.push(cur); cur = ''; } else cur += ch; } o.push(cur); return o; };
+  let nb = 0;
+  lines.slice(1).forEach((line) => { if (!line) return; const f = csv(line); if (['ff', 'inj', 'dq'].includes(f[iR])) return;
+    if (!String(f[iWs] || '').trim() || !String(f[iLs] || '').trim()) return;
+    const y = +f[iY], a = same(schOf(y, f[iL], f[iW], f[iWn], f[iWs])), b = same(schOf(y, f[iL], f[iW], f[iLn], f[iLs])); if (!a || !b || a === b) return;
+    const tally = (s, o, won) => { const m = get(s).o; const L = m[o] || (m[o] = []); let r = L[L.length - 1]; if (!r || r[0] !== y) { r = L.find((x) => x[0] === y); if (!r) { r = [y, 0, 0]; L.push(r); } } r[won ? 1 : 2]++; };
+    tally(a, b, true); tally(b, a, false); nb++; });
+  SEAS.forEach((s) => { if (!s.row[5]) return; const L = get(same(s.sch)).L, prev = L[s.year];
+    if (prev && prev.s >= s.row[5]) return; L[s.year] = { s: s.row[5], w: s.weights.map((i, j) => [i, s.lineup[j] == null ? null : Math.round(s.lineup[j])]) }; });
+  const dir = path.join(OV, 'h2h'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
+  const seen = new Map(); let bytes = 0;
+  H.forEach((v, sch) => { const sl = slug(sch); if (!sl) return; if (seen.has(sl)) { console.log('h2h slug clash', sl, seen.get(sl), sch); return; } seen.set(sl, sch);
+    Object.values(v.o).forEach((L) => L.sort((p, q) => p[0] - q[0]));
+    const L = {}; Object.entries(v.L).forEach(([y, x]) => { L[y] = [x.s, x.w]; });
+    const txt = JSON.stringify({ n: sch, L, o: v.o }); bytes += txt.length; fs.writeFileSync(path.join(dir, sl + '.json'), txt); });
+  console.log('h2h: bouts between schools', nb, 'school files', seen.size, 'bytes', bytes);
+}

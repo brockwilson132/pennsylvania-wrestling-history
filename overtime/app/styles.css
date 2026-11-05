@@ -738,6 +738,7 @@ i.wdg{height:5px}
 .sxr .vtt b,.sxr .vtm b{color:#F2D79A}.vt.z b{color:var(--ash2)}
 .rcb rect{fill:var(--chalk);opacity:.8}
 .rct path{stroke:#F2D79A;stroke-width:1.6}.rct path.base{stroke:rgba(238,234,225,.22);stroke-width:1}
+.rcb path.base{stroke:rgba(238,234,225,.22);stroke-width:1}.vtt .rcb rect,.vtm .rcb rect{fill:#F2D79A;opacity:.9}
 .vt.est b::after{content:'*';font-size:11px;color:var(--ash);margin-left:1px}
 .sxsub{font:700 12.5px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash);margin:2px 0 6px}
 .rcs{width:100%;height:14px;display:block}.rcs path{fill:none;stroke:var(--chalk);stroke-width:1.3;opacity:.85}
@@ -767,6 +768,16 @@ i.wdg{height:5px}
   .sxr{height:60px}.vt{height:44px}.vt b{font-size:17px}
   .sxd{padding-left:46px}
   .sdh,.sdr{grid-template-columns:96px minmax(0,1fr)}
+}
+/* Strength / Talent / Score columns (titles, strength, talent, score; team and season count on wider screens) */
+.sxh,.sxr{grid-template-columns:18px minmax(0,1fr) 42px 52px 42px 52px;column-gap:5px}
+@media(max-width:719px){.sxh,.sxr{padding-left:10px;padding-right:8px}.sxr .nm b{font-size:14px;letter-spacing:0;hyphens:auto;overflow-wrap:anywhere}}
+@media(max-width:379px){.sxh,.sxr{grid-template-columns:16px minmax(0,1fr) 40px 50px 40px 50px;column-gap:4px}.sxr .nm b{font-size:12.5px}}
+.sxh .vtn,.sxr .vtn{display:none}
+.sxr .vtl .rcs path{opacity:.6}
+@media(min-width:720px){
+  .sxh,.sxr{grid-template-columns:30px minmax(0,1fr) 64px 76px 64px 76px 64px 34px;column-gap:10px}
+  .sxr .vtn{display:block;font:700 13px var(--cond);color:var(--ash);text-align:center;font-variant-numeric:tabular-nums}.sxh .vtn{display:block;text-align:center;font-size:9.5px;letter-spacing:.06em}
 }
 /* heat grid: rows are cells, labels centred on their row, tooltip in the legend row */
 .perf.heat .pl-l.hl{display:flex;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1118,3 +1129,131 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .ladl-r{display:grid;grid-template-columns:52px 1fr;gap:2px 10px;align-items:center}
 .ladl-r b{font:900 18px var(--cond)}.ladl-r span{font:700 13px/1.2 var(--cond);color:var(--chalk)}.ladl-r em{display:block;font-style:normal;font-weight:600;font-size:11px;color:var(--ash)}
 .ladl-r i{grid-column:1/3;position:relative;height:4px;border-radius:2px;background:rgba(238,234,225,.08)}.ladl-r s{position:absolute;top:-3px;width:10px;height:10px;border-radius:50%;transform:translateX(-50%)}}
+
+/* ---- UI review fixes (2026-11-05) ---- */
+/* Q (advanced without a recorded place): Barlow draws Q like a zero; Archivo Black's Q has a clear tail */
+.cq,.chip.q,.tp.q,.cgp.q,.pl.q,.yp.q{font-family:'Archivo Black',var(--body);font-weight:400;font-size:.85em}
+/* colour means strength or medals only: no school-colour edges, no hot/cold on rating changes, no gold on plain numbers */
+.uk,.wk,.uk2,.pmc,.sxr,.sxd{border-left-color:var(--line2)}
+.uk:hover,.wk:hover,.uk2:hover{border-left-color:var(--ash2)}
+.wc{background:var(--slate);border-left:1px solid var(--line)}
+.dl.up{color:var(--chalk)}.dl.dn{color:var(--ash)}
+.usum span:first-child b{color:var(--chalk)}
+.ht.on{color:var(--chalk)}
+/* smallest reading text: labels in wrestler cards, timeline names, rating chips */
+.tl .tlab{font-size:10px;height:12px}
+.tl .th b,.tl .th i,.tl .tv{font-size:11px}
+.wks>i,.wst>span>i,.wk .rv i,.rv i{font-size:10.5px}
+.rtg i{font-size:10px}.rtg.xs i{font-size:9px}
+.tll{font-size:11px;line-height:14px}
+.cm .ch i{font-size:11px}
+/* strength legend above wrestler lists */
+.clg{gap:6px;flex-wrap:wrap;text-transform:none;letter-spacing:.02em;font:600 12px var(--body)}
+.clg .smtr{width:28px;margin-right:0}
+/* team duals table: text columns read left to right */
+.dt td{text-align:left}
+.fb.off{pointer-events:none}
+/* school name tag: the school's own colours (identity, never strength). F = pill with a dot, D = jersey with an edge. */
+.stag{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;max-width:100%;overflow:hidden;white-space:nowrap;background:var(--tf);color:var(--ti);font:900 11.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.stag.tF{border-radius:999px;padding:1px 9px 1px 4px}.stag.tF>i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ta);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
+.stag.nc{font-weight:700;color:var(--ash)}
+.stag.ab{justify-content:center;min-width:34px;font-size:11px;letter-spacing:.04em}.stag.tF.ab{padding:1px 7px 1px 3px;min-width:0}
+.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.tF.xs>i{width:7px;height:7px}
+/* the school tag sits in the name line, so the old badge column is gone */
+.wk1{display:flex!important;gap:10px;align-items:center}.wk1>.nm{flex:1 1 auto;min-width:0}.wk1>.rk,.wk1>.rv{flex:none}
+.bvtop{display:flex!important;gap:8px;align-items:center}.bvtop>.nm{flex:1 1 auto;min-width:0}.bvtop>.sd{flex:none;min-width:30px}.bvtop>.dsp{flex:none}
+.bxl{grid-template-columns:auto minmax(0,1fr) auto 28px}
+.wk .nm small .stag,.bvl .nm small .stag,.atc small .stag{margin:5px 5px 1px 0}
+.wk .nm small,.bvl .nm small{line-height:1.5}
+.atc,.atc:hover{border-left:1px solid var(--line)}.atc:hover{border-left-color:var(--line2)}
+.atc small .stag{font-size:10.5px;line-height:14px}
+.drawer[open]>summary>.k{font-size:0}.drawer[open]>summary>.k::after{content:'Close';font-size:12px}
+/* all-time team card: who on the left, his four seasons on the right (grade, strength bar, result) */
+.atsec .sech .chipb{margin:0}
+.atg{grid-template-columns:44px repeat(var(--c),minmax(236px,1fr))}
+.atc{grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:start}
+.atl{display:grid;gap:3px;min-width:0;align-content:start;justify-items:start}
+.atl .atn{width:100%}
+.atc small{display:flex;flex-wrap:wrap;align-items:center;column-gap:5px;white-space:normal}
+.atc small .stag{margin:2px 0 0}
+.ats{display:grid;grid-template-columns:auto 30px 40px;align-items:center;column-gap:6px;row-gap:3px}
+.ats .sg{font:800 10.5px/16px var(--cond);letter-spacing:.04em;color:var(--ash);white-space:nowrap}.ats .sg i{font-style:normal;margin-left:3px;color:var(--ash);opacity:.7}
+.ats .smtr{flex:none;width:30px}
+.ats .yp{display:block;line-height:16px}.ats .yp.q{line-height:14px}
+.ats .srl{font:700 10.5px/16px var(--cond);color:var(--chalk);white-space:nowrap;text-align:center}
+.ats .sr0{font:700 10.5px/16px var(--cond);color:var(--ash);text-align:center}
+.atc small{max-width:100%}.atc small .stag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+.atc small .stag.tF>i{display:inline-block;vertical-align:-1px;margin-right:4px}
+.ats .sx{display:contents}
+/* peak-rating bar down the card's left side: fills from the bottom, cold to hot */
+.atc{position:relative;padding-left:22px;overflow:hidden}
+.atv{position:absolute;left:0;top:0;bottom:0;width:12px;background:#1E242C;border-right:1px solid var(--line);display:flex;align-items:flex-end}
+.atv>i{display:block;width:100%}
+/* compact field (?bv=C): one row per wrestler, tap to open his bouts and career grid */
+.bvc{border-bottom:1px solid var(--line)}.bvc:last-child{border-bottom:0}
+.bvc>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px minmax(0,1fr) auto auto 14px;align-items:center;gap:8px;padding:7px 10px}
+.bvc>summary::-webkit-details-marker{display:none}
+.bvc .sd{font:900 11.5px var(--cond);color:var(--ash);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bvc .cn{display:grid;min-width:0;gap:2px}.bvc .cn b{font:700 15px/1.1 var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bvc .cn small{display:flex;align-items:center;gap:6px;color:var(--ash);font-size:11px;min-width:0}.bvc .cn small .stag{max-width:70%}
+.bvc .dsp{width:auto;height:auto}
+.bvc .chev{width:8px;height:8px;border-right:2px solid var(--ash);border-bottom:2px solid var(--ash);transform:rotate(45deg) translate(-2px,-2px);transition:transform .15s}
+.bvc[open] .chev{transform:rotate(225deg)}
+.bvc[open]>summary{background:var(--slate2)}
+.bvc.me>summary{box-shadow:inset 3px 0 0 var(--gold)}.bvc.me .cn b{color:var(--gold)}
+.bvcx{padding:6px 10px 12px 54px;display:grid;gap:8px;background:var(--slate2)}
+.bvfin{font:800 12px/18px var(--cond);padding:0 7px;border-radius:5px;color:var(--mat)}
+.bvfin.c1{background:var(--m1)}.bvfin.c2{background:var(--m2)}.bvfin.c3{background:var(--m3)}.bvfin.c4{background:var(--m4);color:var(--chalk)}.bvfin.c5{background:var(--m5);color:var(--chalk)}.bvfin.adv{background:transparent;border:1px solid var(--ash);color:var(--ash);line-height:16px}
+.bvbl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:2px;font:600 12px/17px var(--cond);letter-spacing:.02em;color:var(--ash);max-width:260px}
+.bvbl .bvr{font-weight:700;font-size:11px;letter-spacing:.06em}.bvbl .bo-w{color:var(--chalk)}.bvbl .bvd{text-align:right}
+.bvbw2{display:block;font:600 11.5px var(--cond);color:var(--ash)}.bvbw2 b{color:var(--chalk)}
+.bvgo{font:700 12px var(--cond);color:var(--chalk);text-decoration:underline;text-underline-offset:2px;justify-self:start}
+@media(max-width:400px){.bvc>summary{grid-template-columns:30px minmax(0,1fr) auto auto 12px;gap:6px}.bvcx{padding-left:12px}}
+.bvc .sdg{display:grid;gap:2px;min-width:0}.bvc .sdg i{font:700 11px var(--cond);font-style:normal;color:var(--ash);opacity:.8}
+.bvc .dsp{display:grid;gap:4px;justify-items:stretch}.bvc .dsp .smtr{width:100%}
+.bvop{display:flex;align-items:center;gap:8px;font:600 11.5px var(--cond);color:var(--ash);max-width:260px}.bvop b{color:var(--chalk)}.bvop .smtr{flex:0 0 60px}
+.bvcx .cm.bvm{max-width:420px;width:100%}
+/* global search (top bar) */
+.sbtn{margin-left:auto}.sbtn+.mbtn{margin-left:2px}
+.fpop.gs{width:min(460px,calc(100vw - 16px))}
+.gsr{display:grid;max-height:min(60vh,520px);overflow:auto;margin:0 -4px;padding:0 4px}
+.gsr .fpk{margin-top:10px}.gsr .fpk:first-child{margin-top:0}
+.gsr .fpo .stag{font-size:11px}
+.gsp{display:grid}.gsp .prr{border-top:1px solid var(--line)}
+/* ranking table: only Strength is a coloured tile (colour = strength). Talent, Score, Titles and Team are plain figures
+   with their small chart under them, so the eye goes to the one coloured column; an empty value is a faint dash. */
+.sxr .vt:not(.vtr){background:none;box-shadow:none;padding:0 2px}
+.sxr .vtt b,.sxr .vtm b{color:var(--gold)}
+.sxr .vt.z b{color:var(--line2);font-weight:700}
+.sxr .vt.z svg{visibility:hidden}
+.sxr .vtl b,.sxr .vts b{color:var(--chalk)}
+.sxr .vt.on:not(.vtr) b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--ash)}
+.sxr{border-left:0}
+.sx+.sx .sxr{border-top:1px solid var(--line)}
+/* head to head */
+.h2pick{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:start;margin:8px 0 14px}
+.h2p{display:grid;gap:6px;min-width:0}
+.h2w{font:700 17px var(--cond);text-transform:uppercase;letter-spacing:.02em;color:var(--chalk);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h2w a{color:inherit;text-decoration:none;display:grid}.h2w small{font:500 12px var(--sans,inherit);text-transform:none;color:var(--ash)}
+.h2i{width:100%;min-height:40px;padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--slate2);color:var(--chalk);font:500 14px var(--sans,inherit)}
+.h2l{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.h2l a{display:block;padding:8px 10px;border-radius:8px;background:var(--slate2);color:var(--chalk);text-decoration:none;font-size:13.5px}
+.h2vs{font:900 14px var(--cond);letter-spacing:.12em;color:var(--ash);align-self:center;padding-top:4px}
+@media (max-width:560px){.h2pick{grid-template-columns:1fr}.h2vs{justify-self:center}}
+.h2m .bwn small{white-space:normal}
+.h2l a{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}.h2l small{color:var(--ash);font-size:12px}
+.h2tab{margin:0 0 4px}
+.h2st td,.h2st th{white-space:nowrap}
+.h2st{width:100%;margin-top:10px}.h2st td:nth-child(n+2),.h2st th:nth-child(n+2){text-align:right}
+.h2more summary{cursor:pointer;color:var(--ash);font:700 12px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 2px}
+table.h2st{min-width:0}.h2st td small{min-width:0}
+/* season recap */
+.slist{list-style:none;margin:0;padding:0;display:grid}
+.slist li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);min-height:40px}.slist li:last-child{border-bottom:0}
+.slist .sw{font:900 15px var(--cond);color:var(--ash);letter-spacing:.02em}
+.slist .sn{display:grid;min-width:0;line-height:1.2}.slist .sn a{color:inherit;text-decoration:none}.slist .sn b{font:700 15px var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slist .sn small{color:var(--ash);font-size:11.5px;white-space:normal}
+.slist .sr{font:900 18px var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums;white-space:nowrap}.slist .sr i{font:700 10.5px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-left:2px}
+.rpt{display:inline-block;margin-left:6px;padding:0 6px;border-radius:5px;background:var(--gold);color:var(--mat);font:800 10.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;vertical-align:1px}
+.sdual{font-size:13.5px;margin-top:4px}.sdual a{color:inherit;text-decoration:none}.sdual b{font:700 15px var(--cond);text-transform:uppercase}
+.bwr{display:grid;justify-items:end;line-height:1}.bwr b{font:900 20px var(--cond);color:var(--chalk)}.bwr i{font:700 10px var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+.snr{display:flex;align-items:center;gap:6px;min-width:0}.snr a{min-width:0;overflow:hidden}.rpt{margin-left:0;flex:none}

@@ -84,7 +84,7 @@ year,cls,weight,place,name,school,source
 2021,AAA,132,1,Dylan Chappell,Seneca Valley,wpial
 2021,AAA,138,1,Cole Homet,Waynesburg Central,wpial
 2021,AAA,145,1,Wyatt Henson,Waynesburg Central,wpial
-2021,AAA,152,1,Alejandro Herrera-Rondon,Seneca Valley) 138 – Nick Coy (Penn-Trafford,wpial
+2021,AAA,152,1,Alejandro Herrera-Rondon,Seneca Valley,wpial
 2021,AAA,160,1,Cole Spencer,Pine-Richland,wpial
 2021,AAA,172,1,Luca Augustine,Waynesburg Central,wpial
 2021,AAA,189,1,Justin Hart,Hampton,wpial
@@ -370,7 +370,7 @@ year,cls,weight,place,name,school,source
 2011,AA,103,1,Jason Nolf,Kittanning,wpial
 2011,AA,112,1,Zach Kelly,Burrell,wpial
 2011,AA,119,1,James Gulibon,Derry,wpial
-2011,AA,125,1,Geoff Alexander,Shady Side Academy) 125 – Dave Makara (Burrell,wpial
+2011,AA,125,1,Geoff Alexander,Shady Side Academy,wpial
 2011,AA,130,1,Dave Makara,Burrell,wpial
 2011,AA,135,1,Jeremy Landowski,Burrell,wpial
 2011,AA,140,1,Travis Shaffer,Derry,wpial
@@ -397,7 +397,7 @@ year,cls,weight,place,name,school,source
 2010,AAA,285,1,Adam Lazenga,Bethel Park,wpial
 2010,AA,103,1,Nick Hough,Mt. Pleasant,wpial
 2010,AA,112,1,Aaron Toth,Charleroi,wpial
-2010,AA,119,1,Geoff Alexander,Shady Side Academy) 119 – Travis McKillop (Burrell,wpial
+2010,AA,119,1,Geoff Alexander,Shady Side Academy,wpial
 2010,AA,125,1,Dave Makara,Burrell,wpial
 2010,AA,130,1,Frank Marellotti,Shady Side Academy,wpial
 2010,AA,135,1,Colton Blumer,West Greene,wpial
@@ -405,7 +405,7 @@ year,cls,weight,place,name,school,source
 2010,AA,145,1,Nick Carr,South Fayette,wpial
 2010,AA,152,1,Travis McKillop,Burrell,wpial
 2010,AA,160,1,Sam Guidi,Fort Cherry,wpial
-2010,AA,171,1,Matthew Cunningham,Shady Side Academy) 171 – Kurt Brendel (Shady Side Academy,wpial
+2010,AA,171,1,Matthew Cunningham,Shady Side Academy,wpial
 2010,AA,189,1,Gary Kiefer,Fort Cherry,wpial
 2010,AA,215,1,Brian Beattie,Burrell,wpial
 2010,AA,285,1,Jeff Tarley,Bethlehem-Center,wpial
@@ -424,14 +424,14 @@ year,cls,weight,place,name,school,source
 2009,AAA,215,1,Nate Gaffney,Connellsville,wpial
 2009,AAA,285,1,Sam Brownlee,Canon-McMillan,wpial
 2009,AA,103,1,Andrew Lucarini,Fort Cherry,wpial
-2009,AA,112,1,Geoff Alexander,Shady Side Academy) 112 – Dane Johnson (Shady Side Academy,wpial
+2009,AA,112,1,Geoff Alexander,Shady Side Academy,wpial
 2009,AA,119,1,Anthony Zanetta,Keystone Oaks,wpial
-2009,AA,130,1,Frank Martellotti,Shady Side Academy) 130 – Jordan Shields (Burrell,wpial
+2009,AA,130,1,Frank Martellotti,Shady Side Academy,wpial
 2009,AA,135,1,Mitch Spencer,Avella,wpial
 2009,AA,140,1,Dane Johnson,Shady Side Academy,wpial
 2009,AA,145,1,Nick Carr,South Fayette,wpial
 2009,AA,152,1,Kyle Appleby,Avella,wpial
-2009,AA,160,1,Matthew Cunningham,Shady Side Academy) 160 – Alex Evans (Washington,wpial
+2009,AA,160,1,Matthew Cunningham,Shady Side Academy,wpial
 2009,AA,171,1,Cody Catalina,Bethlehem-Center,wpial
 2009,AA,189,1,Roman San Doval,Shady Side Academy,wpial
 2009,AA,215,1,Ryan Watson,Burgettstown,wpial
@@ -663,7 +663,7 @@ year,cls,weight,place,name,school,source
 2000,AAA,160,1,Greg Jones,Greensburg Salem,wpial
 2000,AAA,171,1,Todd Schuchert,Norwin,wpial
 2000,AAA,189,1,Mike Croyle,Norwin,wpial
-2000,AAA,HWT,1,Lanfer Simpson,Waynesburg Central) HWT – Clay McKendree (Kiski Area,wpial
+2000,AAA,HWT,1,Lanfer Simpson,Waynesburg Central,wpial
 2000,AA,103,1,Joe Makara,Burrell,wpial
 2000,AA,112,1,Josh Peterson,Southmoreland,wpial
 2000,AA,119,1,Matt Schomburg,Freedom Area,wpial
@@ -1007,7 +1007,7 @@ year,cls,weight,place,name,school,source
 1986,AA,98,1,Scott Marciniak,Northgate,wpial
 1986,AA,105,1,Vic Freeberg,Elderton,wpial
 1986,AA,112,1,Ralph Parise,Washington,wpial
-1986,AA,119,1,Dave Nelson,Bethelhem-Center,wpial
+1986,AA,119,1,Dave Nelson,Bethlehem-Center,wpial
 1986,AA,126,1,Todd Lowry,German,wpial
 1986,AA,132,1,Mike Wood,Elderton,wpial
 1986,AA,138,1,Domanick Snyder,Bentworth,wpial
@@ -1102,7 +1102,7 @@ year,cls,weight,place,name,school,source
 1982,AAA,HWT,1,Bob Riley,North Allegheny,wpial
 1982,AA,98,1,Gary Bassinger,Jefferson-Morgan,wpial
 1982,AA,105,1,Larry LeGrand,South Park,wpial
-1982,AA,112,1,Marc Bartolomucci,Bethlehem-Center) 112 – Ron Nutt (Charleroi,wpial
+1982,AA,112,1,Marc Bartolomucci,Bethlehem-Center,wpial
 1982,AA,119,1,Scott Heim,Richland,wpial
 1982,AA,126,1,Ed Shriver,Waynesburg Central,wpial
 1982,AA,132,1,Todd Eddy,Waynesburg Central,wpial
@@ -1197,7 +1197,7 @@ year,cls,weight,place,name,school,source
 1978,AA,98,1,Tim Nelson,Bethlehem-Center,wpial
 1978,AA,105,1,Kevin Brown,McGuffey,wpial
 1978,AA,112,1,Bob Salvadore,Richland,wpial
-1978,AA,119,1,Lloyd Johnston,Bethelhem-Center,wpial
+1978,AA,119,1,Lloyd Johnston,Bethlehem-Center,wpial
 1978,AA,126,1,Tim Heim,Richland,wpial
 1978,AA,132,1,Jeff Gordon,Avella,wpial
 1978,AA,138,1,Gary Havelka,Burgettstown,wpial
@@ -1249,7 +1249,7 @@ year,cls,weight,place,name,school,source
 1976,AA,132,1,Randy Brasco,Jeannette,wpial
 1976,AA,138,1,Ed Bredniak,Avella,wpial
 1976,AA,145,1,Bob McCaffrey,Fort Cherry,wpial
-1976,AA,155,1,Jim Hargrove,Immaculate Conception) 138 – Abby Rush (Avella,wpial
+1976,AA,155,1,Jim Hargrove,Immaculate Conception,wpial
 1976,AA,167,1,Joe Zombek,Fort Cherry,wpial
 1976,AA,185,1,Tom Bertrand,Burgettstown,wpial
 1976,AA,HWT,1,Mark Cuneo,Greensburg C.C.,wpial

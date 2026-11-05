@@ -316,6 +316,7 @@
     colorFor: colorFor,
     palette: palette,
     identity: function (s) { var d = identity(s); return d ? JSON.parse(JSON.stringify(d)) : null; },
+    resolve: resolve,
     list: function () { return DATA.map(function (d) { return d.school; }); },
     escape: esc,
     _util: { contrast: contrast, deltaE: deltaE, toLch: toLch, textOn: textOn },

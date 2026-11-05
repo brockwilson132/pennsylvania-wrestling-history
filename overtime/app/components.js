@@ -8,6 +8,63 @@
   const pc = (p) => (p >= 5 ? 'c5' : 'c' + p);
   const score = (v) => (v >= 100 ? fmt(Math.round(v)) : v >= 10 ? v.toFixed(0) : v.toFixed(1));
 
+
+  /* ---- school name tags ----
+     A school is a small tag in its own colours: filled with its main colour, its second colour as the dot (F, pill) or the
+     edge (D, jersey), and the name written in the first of its colours that reads on the fill (second, then third, then
+     white or black). Colours are named presets, not each school's exact hex, so schools in "the same red" match.
+     District 11 is set by hand from Brock's list (TAG_ASSIGN); other schools snap the badge file's colours to the presets;
+     a school with no colours on file gets the plain grey tag. The tag is a pill with a dot in the accent colour. */
+  const TAG_PRESETS = {
+    red: '#C8102E', maroon: '#7A1E2C', orange: '#E87722', gold: '#C9A227', yellow: '#FFD200', green: '#15803D', dkgreen: '#0B4D2C',
+    royal: '#1F4E9C', navy: '#1B2A4A', ltblue: '#7EC8F2', purple: '#4B2E83', brown: '#4E2A1E', grey: '#8A8D8F', white: '#FFFFFF', black: '#111111',
+  };
+  /* District 11, from Brock (2026-11-05): colours in order, main first. Old names follow the school that replaced them. */
+  const TAG_ASSIGN = {
+    'Allentown Central Catholic': ['green', 'gold'], 'Allentown Dieruff': ['royal', 'grey'], 'Bangor': ['maroon', 'white'],
+    'Bethlehem Catholic': ['brown', 'gold'], 'Bethlehem Freedom': ['black', 'gold'], 'Bethlehem Liberty': ['maroon', 'navy', 'white'],
+    'Liberty': ['maroon', 'navy', 'white'], 'Bishop Hafey': ['gold', 'white'], 'Blue Mountain': ['navy', 'white'], 'Catasauqua': ['brown', 'white'],
+    'East Stroudsburg': ['purple', 'white'], 'East Stroudsburg North': ['ltblue', 'black', 'white'], 'East Stroudsburg South': ['purple', 'white'],
+    'Easton': ['red', 'white', 'black'], 'Emmaus': ['green', 'gold'], 'Hellertown Lower Saucon': ['red', 'black'], 'Jim Thorpe': ['navy', 'red', 'white'],
+    'Lehighton': ['maroon', 'white'], 'Mahanoy': ['black', 'gold'], 'Minersville': ['royal', 'white', 'black'], 'Nazareth': ['royal', 'white', 'black'],
+    'North Schuylkill': ['red', 'royal'], 'Northampton': ['orange', 'black'], 'Northern Lehigh': ['navy', 'white'], 'Northwestern Lehigh': ['black', 'gold'],
+    'Notre Dame-Green Pond': ['navy', 'gold'], 'Palisades': ['purple', 'gold', 'white'], 'Palmerton': ['royal', 'white'], 'Panther Valley': ['black', 'gold', 'white'],
+    'Parkland': ['red', 'grey', 'black'], 'Pen Argyl': ['green', 'white'], 'Pine Grove': ['red', 'grey'], 'Pius X (Roseto)': ['royal', 'white'],
+    'Pleasant Valley': ['royal', 'white'], 'Pocono Mountain': ['red', 'white'], 'Pocono Mountain East': ['red', 'white'], 'Pocono Mountain West': ['navy', 'grey'],
+    'Pottsville': ['red', 'white'], 'Salisbury Township': ['navy', 'white'], 'Saucon Valley': ['red', 'black'], 'Schuylkill Haven': ['royal', 'gold'],
+    'Shenandoah Valley': ['ltblue', 'white'], 'Slatington': ['navy', 'white'], 'Southern Lehigh': ['royal', 'white'], 'Stroudsburg': ['maroon', 'white'],
+    'Tamaqua': ['royal', 'white', 'black'], 'Tri-Valley': ['red', 'black', 'white'], 'West Hazleton': ['ltblue', 'black'], 'Whitehall': ['maroon', 'gold'],
+    'William Allen': ['yellow', 'royal'], 'Williams Valley': ['royal', 'red', 'white'], 'Wilson Area': ['royal', 'gold'],
+  };
+  const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
+  const PK = Object.entries(TAG_PRESETS);
+  const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
+    PK.forEach(([k, m]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = k; } }); return best; };
+  const TAGC = new Map();
+  /* a school's colours as preset keys, main first; null when nothing is on file */
+  function schoolColours(sch) {
+    if (TAGC.has(sch)) return TAGC.get(sch);
+    let ks = TAG_ASSIGN[sch] || null;
+    if (!ks) { const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
+      if (id && id.primary) ks = [id.primary, id.secondary, id.accent].filter(Boolean).map(nearestKey).filter((k, i, a) => a.indexOf(k) === i); }
+    TAGC.set(sch, ks); return ks;
+  }
+  /* fill, accent (dot or edge) and text colour for one school */
+  function tagPaint(sch) {
+    const ks = schoolColours(sch);
+    if (!ks || !ks.length) return { fill: '#2A3038', acc: '#4A5360', ink: '#EEEAE1', none: true };
+    const fill = TAG_PRESETS[ks[0]], acc = TAG_PRESETS[ks[1] || ks[0]];
+    const ink = ks.slice(1).map((k) => TAG_PRESETS[k]).find((c) => contrast(fill, c) >= READS) || (contrast(fill, '#FFFFFF') >= contrast(fill, '#000000') ? '#FFFFFF' : '#000000');
+    return { fill, acc, ink };
+  }
+  const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
+  /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
+  const stag = (sch, o = {}) => { const p = tagPaint(sch);
+    return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
+
   /* brand */
   const wordmark = () => { const F = 92, R = F * 0.36, cx = 14 + R, cy = 120, a = 35 * Math.PI / 180;
     return `<svg viewBox="0 0 560 170" aria-label="Overtime"><rect x="${cx - R * .16}" y="${cy - R - R * .30}" width="${R * .32}" height="${R * .22}" rx="3" fill="currentColor"/><rect x="${cx - R * .09}" y="${cy - R - R * .12}" width="${R * .18}" height="${R * .14}" fill="currentColor"/><circle cx="${cx}" cy="${cy}" r="${R * .88}" fill="none" stroke="currentColor" stroke-width="${R * .24}"/><path d="M ${cx} ${cy - R * .62} A ${R * .62} ${R * .62} 0 0 1 ${cx + R * .62 * Math.sin(a)} ${cy - R * .62 * Math.cos(a)} L ${cx} ${cy} Z" fill="${C.red}"/><line x1="${cx}" y1="${cy}" x2="${cx + R * .55 * Math.sin(a)}" y2="${cy - R * .55 * Math.cos(a)}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3" fill="currentColor"/><text x="${cx + R + F * .09}" y="${cy + F * .355}" font-family="'Archivo Black'" font-size="${F}" letter-spacing="-1" fill="currentColor">VERTIME</text></svg>`; };
@@ -25,6 +82,7 @@
     wrestlers: `<g fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.4" r="2.2"/><circle cx="17" cy="7.4" r="2.2"/><path d="M7.4 10.2 C5.6 11.4 4.8 13.2 4.9 15.4 L3.6 22.5 M4.9 15.4 C6.4 17 7.2 19.4 7.6 22.5"/><path d="M18.6 10.2 C20.4 11.4 21.2 13.2 21.1 15.4 L22.4 22.5 M21.1 15.4 C19.6 17 18.8 19.4 18.4 22.5"/><path d="M8.2 12.6 L15.6 10 M17.8 12.6 L10.4 10"/></g>`,
     division: `<rect x="3.5" y="15" width="5" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="10" width="5" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17.5" y="4" width="5" height="19" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>`,
     weights: `<path d="M9 8.5 A4 4 0 1 1 17 8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 11 H19.5 L22 23 H4 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
+    search: `<circle cx="11.5" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 L22 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
     menu: `<path d="M4 8 H22 M4 13 H22 M4 18 H22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
     /* the View item: one glyph per view */
     v_map: `<path d="M3 7 L9 4.5 L17 7 L23 4.5 V19 L17 21.5 L9 19 L3 21.5 Z M9 4.5 V19 M17 7 V21.5" fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linejoin="round"/>`,
@@ -159,7 +217,7 @@
     const S = seasonsInScope().map((s) => ({ S: s, t: u.kind === 'state' ? { pts: s.avail, titles: s.lineup.length, n: s.meds.length, rows: s.rows, score: null } : s.by[u.kind].get(u.id) })).filter((x) => x.t).reverse();
     if (!S.length) return empty('No seasons in scope.');
     const rows = S.map(({ S: s, t }) => {
-      const champ = s.champion; const label = u.kind === 'school' ? (t.realRank ? ordinal(t.realRank) + ' as a team' : ordinal(t.rank) + ' by points') : u.kind === 'state' ? (champ ? esc(champ.id) + (s.real ? ` ${champ.score}` : '') : '') : (t.rows[0] ? esc(t.rows.filter((r) => r.place === 1).map((r) => r.name).slice(0, 2).join(', ')) || '–' : '–');
+      const champ = s.champion; const label = u.kind === 'school' ? (t.realRank ? ordinal(t.realRank) + ' as a team' : ordinal(t.rank) + ' by points') : u.kind === 'state' ? (champ ? esc(champ.id) + (s.real ? ` ${champ.score}` : s.year < OT.TEAMSCORES_FROM ? ' <small class="ash">by points · team scores not published before 1976</small>' : ' <small class="ash">by points</small>') : '') : (t.rows[0] ? esc(t.rows.filter((r) => r.place === 1).map((r) => r.name).slice(0, 2).join(', ')) || '–' : '–');
       const n = `${t.n || 0} medal${t.n === 1 ? '' : 's'}${t.titles ? ` · ${t.titles} title${t.titles === 1 ? '' : 's'}` : ''}`;
       const pod = t.rows.filter((r) => r.place).sort((a, b) => a.slot - b.slot || a.place - b.place);
       const byW = d3.groups(pod, (r) => r.w);
@@ -167,7 +225,7 @@
       return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${s.year}</span><span class="c">${label}</span><span class="n">${n}</span></div>${podium}`;
     }).join('');
     const first = S[S.length - 1].S.year, last = S[0].S.year;
-    return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
+    return `<details class="drawer" open><summary><span><b class="num" style="font-size:20px">${S.length}</b> <span class="muted">seasons · ${first}–${last}</span></span><span class="k">Open</span></summary><div class="body">${rows}</div></details>`;
   }
 
   /* lower-level dominance (district / regional brackets): the unit's own tournament results, never mixed with state */
@@ -181,7 +239,7 @@
       const byW = d3.groups(rs.sort((a, b) => a.wn - b.wn || a.place - b.place), (r) => r.unit + '|' + r.w);
       const podium = lazyPod(() => `${OT.podiumC(placeCounts(rs), { sm: true })}${byW.map(([k, v]) => `<div class="prow"><a class="w" href="${OT.bhref(OT.bkey(v[0]))}" title="open the ${y} ${wShort(v[0].w)} bracket">${wShort(v[0].w)}${byW.some(([k2]) => k2 !== k && k2.split('|')[1] === v[0].w) ? ` <small class="muted">${esc(OT.unitLabel(lvl, v[0].unit).replace(/^District \d+ ?/, ''))}</small>` : ''}</a><div class="ps">${v.map((r) => `<span><i style="color:${MED[Math.min(r.place, 8) - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` <span class="muted">${esc(r.sch)}</span>`} ${rtgTag(OT.ratingOf(r, r.lvl), { size: 'xs' })}</span>`).join('')}</div></div>`).join('') || '<div class="muted">No medals this season.</div>'}`);
       return `<div class="srow" role="button" tabindex="0" aria-expanded="false"><span class="y">${y}</span><span class="c">${label}</span><span class="n">${rs.length} medal${rs.length === 1 ? '' : 's'}</span></div>${podium}`; }).join('');
-    return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${years.length}</b> <span class="muted">seasons · ${years[years.length - 1]}–${years[0]}</span></span><span class="k">Open</span></summary><div class="body">${body}</div></details>`;
+    return `<details class="drawer" open><summary><span><b class="num" style="font-size:20px">${years.length}</b> <span class="muted">seasons · ${years[years.length - 1]}–${years[0]}</span></span><span class="k">Open</span></summary><div class="body">${body}</div></details>`;
   }
   /* medal chips */
   const chips = (places) => places.map((n, i) => n ? `<span class="chip ${pc(i + 1)}" title="${n} × ${ordinal(i + 1)}">${n}×${i + 1}</span>` : '').join('');
@@ -189,7 +247,7 @@
   const LVL_ICON = { district: 'district', regional: 'region', state: 'state' };
   const wrestlerCard = (w) => {
     const id = OT.SB && OT.SB.identity(w.sch); const p1 = (id && id.primary) || '#5F6B78', p2 = (id && id.secondary) || '#EEEAE1';
-    const badge = OT.SB ? OT.SB.svg(w.sch, { size: 34, variant: 'chip', title: false }) : '';
+    const badge = stag(w.sch, { abbr: true });
     const reg = (OT.schoolRegion && OT.schoolRegion(w.sch)) || '';
     const M = careerCells(w.apps, w.lower); const cr = w.rtg;
     return `<a class="wc" href="${w.href}" style="--p1:${p1};--p2:${p2}">
@@ -213,7 +271,8 @@
     if (g) { const fr = g.year - GI[g.grade]; if (pseudo.every((p) => p.year >= fr && p.year <= fr + 3)) cols = [0, 1, 2, 3].map((i) => pseudo.find((p) => p.year === fr + i) || gap(fr + i)); }
     if (!cols) cols = [0, 1, 2, 3].map((i) => pseudo.find((p) => gradeSlot(p, pseudo) === i) || null);
     const higher = (lvl, y) => (lvl === 'district' ? apps.some((a) => a.year === y) || low.some((r) => r.lvl === 'regional' && r.year === y) : apps.some((a) => a.year === y));
-    const dist = (p) => { if (!p.cls || !p.d || p.year > OT.YEARS[OT.YEARS.length - 1]) return null; if (!OT.lowerCovered('district', p.year, p.cls, p.d)) return { year: p.year, nodata: true, src: 'no district bracket on record' };
+    const dist = (p) => { if (!p.cls || !p.d || p.year > OT.YEARS[OT.YEARS.length - 1]) return null;
+      if (!OT.lowerCovered('district', p.year, p.cls, p.d)) { if (OT.sectionCovered(p.year, p.cls, p.d)) return opts.full && OT.lowerLoaded(p.year, 'section') ? { year: p.year, dnc: true } : null; return { year: p.year, nodata: true, src: 'no district bracket on record' }; }
       return opts.full && OT.lowerLoaded(p.year, 'district') ? { year: p.year, dnc: true } : null; };
     const cell = (lvl, i) => {
       const p = cols[i]; if (!p) return null;
@@ -221,7 +280,9 @@
       const s = apps.find((a) => a.year === p.year); const base = { year: p.year, w: p.w, r: s || p };
       if (lvl === 'state') return s ? (s.place ? { ...base, place: s.place } : { ...base, q: true }) : null;
       const r = low.find((x) => x.lvl === lvl && x.year === p.year);
-      if (!r && lvl === 'district') { const sr = OT.sectionFor(apps.length ? apps : low, p.year); if (sr) return { ...base, r: sr, w: sr.w, place: sr.place, sec: true }; }
+      if (!r && lvl === 'district') { // a section that was the district round: placed, advanced or entered (full field loaded)
+        const sr = low.find((x) => x.lvl === 'section' && x.year === p.year) || OT.sectionFor(apps.length ? apps : low, p.year);
+        if (sr) return sr.place ? { ...base, r: sr, w: sr.w, place: sr.place, sec: true } : higher(lvl, p.year) ? { ...base, r: sr, w: sr.w, q: true, sec: true } : { ...base, r: sr, w: sr.w, dnp: true, sec: true }; }
       if (r) return r.place ? { ...base, r, w: r.w, place: r.place } : higher(lvl, p.year) ? { ...base, r, w: r.w, q: true } : { ...base, r, w: r.w, dnp: true };
       if (!higher(lvl, p.year)) return lvl === 'district' ? dist(p) : null;
       const cls = s ? s.cls : p.cls; const unit = lvl === 'district' ? (s ? s.d : p.d) : (s ? (s.region || OT.regionOf(s, cls === 'single' ? s.k : cls)) : p.region);
@@ -232,7 +293,7 @@
       if (lvl === 'district' && s && p.year < 1951 && s.dist) return { ...base, place: s.dist, src: 'from the state seed; no district file' };
       return { ...base, nodata: true };
     };
-    return { cols, rows: [['district', 'District'], ['regional', 'Regional'], ['state', 'State']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((i) => cell(k, i)) })) };
+    return { cols, rows: [['state', 'State'], ['regional', 'Regional'], ['district', 'District']].map(([k, l]) => ({ k, l, cells: [0, 1, 2, 3].map((i) => cell(k, i)) })) };
   }
   const cellHTML = (c, cls, band, href) => {
     const tag = href ? 'a' : 'div', hr = href ? ` href="${href}"` : '';
@@ -262,7 +323,7 @@
 
   /* entrant career matrix inside a bracket view: same pills as the wrestler cards, with this tournament highlighted
      (its season column outlined, its level row tinted, the intersection ringed in gold) */
-  const BV_LVLS = ['district', 'regional', 'state'];
+  const BV_LVLS = ['state', 'regional', 'district'];   // same order as careerCells rows: State on top everywhere
   function entrantMatrix(e, F) {
     const r = e.r, W = e.W;
     let apps = W ? (W.apps || []) : [], low = W ? (W.lower || OT.lowerFor(apps)) : [];
@@ -361,7 +422,7 @@
   /* the eight medalists: top three on a podium (name, school, season rating, net Δ for the tournament), 4th–8th as rows */
   function medalists(placers, info) {
     const by = (p) => placers.filter((r) => r.place === p);
-    const chip = (r, n) => (OT.SB ? OT.SB.svg(r.sch, { size: n, variant: 'chip', title: false }) : '');
+    const chip = (r) => stag(r.sch, { abbr: true });
     const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament and his change across it' : 'season rating and his change across the tournament'}">${i.rt != null ? `<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
     const H = { 1: 70, 2: 52, 3: 40 };
     const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
@@ -408,7 +469,7 @@
     const focusN = (() => { const e = F.entrants.find((x) => x.slug === focusSlug); return e ? nk(e.r.name) : null; })();
     const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
       line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n); const d = pr ? (rt == null ? null : won ? b[9] - b[7] : b[10] - b[8]) : DL.get(b); const dd = d == null ? null : pr ? d : won ? d : -d;
-        const chip = e && OT.SB ? OT.SB.svg(e.r.sch, { size: 14, variant: 'chip', title: false }) : '<i class="bxnc"></i>';
+        const chip = e ? stag(e.r.sch, { abbr: true, cls: 'xs' }) : '<i class="bxnc"></i>';
         const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
         const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt == null && pr ? ' · season ended in the first round: no rating shown' : ''}${rt != null ? (pr ? ' · RTG before ' + Math.round(rt) + ', after ' + Math.round(rt + dd) : ' · RTG ' + OT.rtg10(rt)) : ''}${dd != null ? ` · ${dd >= 0 ? '+' : '−'}${Math.round(Math.abs(dd))} this bout` : ''}`;
         const inner = `${chip}${nm}<span class="bxv${rt == null ? ' nr' : ''}">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</span>${dTxt(dd)}`;
@@ -429,16 +490,26 @@
     const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
     const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
       const d = b.length > 8 ? (won ? b[9] - b[7] : -(b[10] - b[8])) : DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
+    const RSH = (b) => { const d = b[1]; if (b[0] === 'champ') return ['Final', 'SF', 'QF', 'R16', 'R32', 'Pig'][d] || 'Pre'; if (b[0] === 'p3') return '3rd'; if (b[0] === 'p5') return '5th'; if (b[0] === 'p7') return '7th'; return d === 1 ? 'C-SF' : 'C' + d; };
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
-      const chip = OT.SB ? OT.SB.svg(r.sch, { size: 22, variant: 'chip', title: false }) : '';
-      const meta = [r.grade, r.record].filter(Boolean).join(' · ');
       const sx = SB_ && SB_.s[nk(r.name)]; const bl = boutsOf(r.name);
       const net = NET.get(nk(r.name));
-      const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
-      const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
-      return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><span class="chp">${chip}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${esc(r.sch)}${meta ? ' · ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
+      {
+        const fin = r.place ? `<span class="bvfin ${pc(r.place)}" title="Finished ${ordinal(r.place)}">${ordinal(r.place)}</span>` : e.adv ? '<span class="bvfin adv" title="Advanced">Adv</span>' : '';
+        const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
+        const bwl = (sx && sx[1] != null) || r.record ? `<span class="bvbw2">${r.record ? `Record <b>${esc(r.record)}</b>${sx && sx[1] != null ? ' · ' : ''}` : ''}${sx && sx[1] != null ? `Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}` : ''}</span>` : '';
+        const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
+        /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
+        const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
+        const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
+        const pbar = path != null ? OT.sbar(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
+        const rf = (v) => Math.max(0.04, Math.min(1, (v - 1000) / 1200));   // fixed RTG scale so a field spreads out
+        const rv = rOf(r), rbar = rv ? `<span class="smtr" title="RTG ${OT.rtg10(rv)} · bar runs from 1000 to 2200"><i><b style="width:${(100 * rf(rv)).toFixed(0)}%;background:${OT.colorAt(rf(rv))}"></b></i></span>` : '<span class="smtr sm0"><i></i></span>';
+        const pline = path != null ? `<span class="bvop"><span>Opponents averaged <b>${Math.round(path)}</b></span>${pbar}</span>` : '';
+        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span>${fin || '<span></span>'}<span class="dsp">${rtgTag(rOf(r))}${rbar}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
+      }
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
@@ -448,5 +519,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament and the change across it. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { stag, schoolColours, tagPaint, TAG_PRESETS, TAG_ASSIGN, boutDelta, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();

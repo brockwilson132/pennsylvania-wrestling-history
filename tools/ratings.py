@@ -663,7 +663,10 @@ if FIRST == 'prior':
 # tuned on hidden 1990-2017 bouts
 random.seed(5)
 tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
-tb = [b for b in bouts if b['i'] in tune_held]
+# scored on the hidden regional and state bouts only: a hidden district or section bout mostly pairs an advancer with a
+# first-round exit, and the first-round label is that same season's outcome, so scoring those bouts rewards a narrow
+# prior that trusts the label (it picked 0.7, the edge of the grid; regional + state picks 1.5). Review thread, 2026-11-05.
+tb = [b for b in bouts if b['i'] in tune_held and b['level'] in ('regional', 'state')]
 scores = {}
 for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
     Tt, *_ = smoother(mask=tune_held, sd_scale=sc, shift=SHIFT)
@@ -959,4 +962,14 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/wrestler_seasons.
 open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/eval.txt', 'w').write('\n'.join(out) + '\n')
 json.dump({'sd_ref': SD_REF, 'bad_loss_gap': BAD, 'weights': 'per neighbour-availability pattern, see eval.txt', 'prior_sd': RES_SD, 'params': params},
           open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/scale.json', 'w'), indent=1, default=float)
-print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments')
+# every entrant's season rating, bouts or not on this sheet (wrestler_seasons.csv only lists wrestlers with a scored bout in
+# that tournament, which leaves out section-only kids): tools/build_units.js reads this for Strength and Talent
+with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/entrant_ratings.csv', 'w', newline='') as f:
+    c = csv.writer(f, lineterminator='\n'); c.writerow(['level', 'tournament', 'weight', 'year', 'cls', 'name', 'school', 'key', 'season'])
+    n_er = 0
+    for (lvl, t, w), es in entrants.items():
+        if (lvl, t, w) not in bracket_meta: continue
+        y, cl = bracket_meta[(lvl, t, w)][:2]
+        for e in es:
+            v = rating(e[0], y, clsg(cl)); c.writerow([lvl, t, w, y, cl, e[1], e[2], e[0], f'{v:.0f}' if v is not None else '']); n_er += 1
+print('wrote', len(brackets), 'brackets', len(recs), 'wrestler-tournaments', n_er, 'entrant ratings')
