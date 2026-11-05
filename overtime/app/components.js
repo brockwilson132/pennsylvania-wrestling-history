@@ -193,7 +193,7 @@
   }
 
   /* all-time teams: one weight per wrestler, ranked by one value that is the same on every page (model.js attValue) */
-  const ATT_NOTE_ALL = 'Ranked the same way on every page: state results count 60%, peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties.';
+  const ATT_NOTE_ALL = 'Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties.';
   const ATT_NOTE = { state: ATT_NOTE_ALL, region: ATT_NOTE_ALL, district: ATT_NOTE_ALL, school: ATT_NOTE_ALL };
   function teamsBlock(u) {
     const T = allTimeTeams(u, 3);

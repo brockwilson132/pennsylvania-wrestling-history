@@ -94,7 +94,8 @@
   document.addEventListener('click', (e) => { const c = e.target.closest && e.target.closest('.tls i'); if (c) showTip(c); }); }
 
   /* ---------- All-time team: weights × depth, as deep as you like ---------- */
-  /* one line per season, FR to SR: how tough his toughest bracket that year was (the bar, ranked within its level) and how
+  /* one line per season, FR to SR: how tough his toughest bracket that year was (the bar, on the career grid's shared
+     scale: every level measured against district brackets, so states read tougher than districts) and how
      far he got. A state result is a medal pill; a season that ended at regionals or districts says so in plain text. */
   const LV_SHORT = { regional: 'Reg', district: 'Dist' };
   function seasonLines(s) {
@@ -114,7 +115,7 @@
       if (!c) res = `<span class="sr0">${col ? '–' : ''}</span>`;
       else if (lvl === 'state') res = c.place ? `<span class="yp ${OT.pc(c.place)}" title="${tip} ${ordinal(c.place)}">${ordinal(c.place)}</span>` : `<span class="yp q" title="${tip} qualifier">Q</span>`;
       else res = `<span class="srl" title="${tip}${c.place ? ' ' + ordinal(c.place) : c.q ? ', advanced' : ', did not place'}">${LV_SHORT[lvl]} ${c.place ? ordinal(c.place) : c.q ? 'Q' : 'DNP'}</span>`;
-      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, lvl, `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
+      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, 'district', `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
     }).join('');
   }
   /* the left bar: peak RTG on a fixed scale from the average state qualifier (1500) to 2200, about the best on record, so the
@@ -135,7 +136,7 @@
     if (!T.length) return OT.empty('No one on record yet.');
     const team = (i) => ordinal(i + 1);
     const grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
-    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state results count 60%, peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, ranked against brackets of the same level.</div>`;
+    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on the same scale as his wrestler page, so a state bracket reads tougher than a district one.</div>`;
   }
   Object.assign(OT, { timelineView, teamGrid });
 })();
