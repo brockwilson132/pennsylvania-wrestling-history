@@ -1,18 +1,3 @@
-entrants 401917 -> 399986, bouts 585532 -> 585522
-   2973  bouts: name resolved to its entrant
-     84  bouts: result text cut off a name
-   1007  bouts: seed prefix stripped
-     10  bouts: side is not a wrestler, dropped
-   1667  bouts: side still has no school (kept)
-   1445  entrants: blank school filled from bouts
-    695  entrants: duplicate row merged
-     10  entrants: garbled row (school is a wrestler) dropped
-     90  entrants: grade moved out of name/school
-     61  entrants: letter moved back from school to name
-    967  entrants: not a wrestler (Forfeit)
-     91  entrants: not a wrestler (number/result/label)
-     37  entrants: phantom placer, place given to its wrestler
-     33  entrants: phantom school-line row dropped
-    486  entrants: seed prefix moved to seed
-   1183  entrants: still no school (kept)
-    103  entrants: team-score line at a non-weight
+entrants 400984 -> 400984, bouts 586693 -> 586693
+   1502  bouts: side still has no school (kept)
+    735  entrants: still no school (kept)
