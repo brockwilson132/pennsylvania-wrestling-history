@@ -80,18 +80,41 @@ WOVEN = {}   # (tournament, weight, garbled name, garbled school) -> (name, scho
 
 
 def unweave(sc, k):
-    """sc is k with 2-10 lowercase letters woven into k's first word: every way to read it as (k, those letters)."""
-    sp = sc.find(' '); first = sp if sp > 0 else len(sc)
+    """sc is the known school k with 2-12 letters of a name woven into it (any case, anywhere, usually its first word):
+    every way to read it as (k, those letters in order)."""
     from functools import lru_cache
 
     @lru_cache(maxsize=None)
-    def go(j, i, started, woven):   # position in sc, in k; a stray letter seen; a school letter after one
-        if j == len(sc): return {''} if i == len(k) and woven else set()
+    def go(j, i):   # position in sc, in k
+        if j == len(sc): return {''} if i == len(k) else set()
         out = set(); ch = sc[j]
-        if i < len(k) and ch == k[i]: out |= go(j + 1, i + 1, started, woven or (started and j < first))
-        if j < first and ch.islower(): out |= {ch + x for x in go(j + 1, i, True, woven)}
+        if i < len(k) and ch == k[i]: out |= go(j + 1, i + 1)
+        if ch.isalpha() and len(out) < 200: out |= {ch + x for x in go(j + 1, i)}
         return out
-    return {(k, x) for x in go(0, 0, False, False) if 2 <= len(x) <= 10}
+    return {(k, x) for x in go(0, 0) if 2 <= len(x) <= 12 and x != ''}
+
+
+def removals(s, p):
+    """every way to take the letters of p, in order, out of s: the strings left and where the letters sat"""
+    out = []
+
+    def go(j, i, kept, pos):
+        if len(out) > 300: return
+        if i == len(p): out.append((kept + s[j:], pos)); return
+        for t in range(j, len(s) - (len(p) - i) + 1):
+            if s[t] == p[i]: go(t + 1, i + 1, kept + s[j:t], pos + [t])
+    go(0, 0, '', [])
+    return out
+
+
+# one school printed under two names (not a parse garble: a spelling the archive uses): the name the app files it under
+SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan'}
+
+
+def same_school(rows, keys, rep):
+    for r in rows:
+        for k in keys:
+            if r[k] in SCHOOL_SAME: r[k] = SCHOOL_SAME[r[k]]; rep['school spelled another way, filed under its one name'] += 1
 
 
 def clean_entrants(E, B, rep):
@@ -126,15 +149,16 @@ def clean_entrants(E, B, rep):
         sc = r['school']
         if len(sc) > 4 and n[sc] <= 30 and n[sc[0] + sc[2:]] >= 20 * n[sc] and r['name'][-1:].isalpha():
             r['name'] += sc[1]; r['school'] = sc[0] + sc[2:]; rep['entrants: letter moved back from school to name'] += 1
-    # 4c. the end of the name woven letter by letter into the school's first word ("Que'Shawn Jenkins-Bar",
-    #     "Bkissdhaolpe McDevitt (3)" = "Bishop" + "ksdale"): take the known school back out, the rest ends the name
+    # 4c. the end of the name woven letter by letter into the school ("Que'Shawn Jenkins-Bar" / "Bkissdhaolpe McDevitt (3)"
+    #     = "Bishop" + "ksdale"; "Gianpiero Di" / "BattiPstlyamouth Whitemarsh" = "Plymouth" + "Battista"; or simply glued
+    #     on the front, "Mc" / "InnisWest Chester Henderson"): take the known school back out, the rest ends the name
     n = Counter(r['school'] for r in out)
     known = [k for k, c in n.items() if c >= 20 and len(k) >= 4]
     names = set(r['name'] for r in out)
     for r in out:
         sc = r['school']
-        if n[sc] > 3 or not r['name'][-1:].isalpha(): continue
-        hits = set().union(*[unweave(sc, k) for k in known if k[0] == sc[:1] and len(k) < len(sc)])
+        if n[sc] > 4 or not r['name'][-1:].isalpha(): continue
+        hits = set().union(*[unweave(sc, k) for k in known if len(k) + 2 <= len(sc) and k[-1] == sc[-1]])
         if len({k for k, _ in hits}) == 1 and hits:
             # the letters can often be read more than one way ("Higginbot" + "ham"/"hma"): take the reading that gives a
             # name seen elsewhere, else the one that keeps the letters in the order they were printed (the first found)
@@ -142,6 +166,21 @@ def clean_entrants(E, B, rep):
             k, extra = (seen or sorted(hits, key=lambda h: order_key(sc, h[1])))[0]
             WOVEN[(r['tournament'], r['weight'], r['name'], sc)] = (r['name'] + extra, k)
             r['name'] += extra; r['school'] = k; rep['entrants: name letters woven into school taken back out'] += 1
+    # 4d. the other way round: the school's first letters printed inside the end of the name ("Steve GoodmaWn" /
+    #     "est Chester Henderson", "Larry HarnatkNieewshiacmz" / "iny-Maple Point"): put them back on the school
+    n = Counter(r['school'] for r in out)
+    for r in out:
+        sc = r['school']
+        if n[sc] > 4 or len(sc) < 3 or ' ' not in r['name']: continue
+        ks = [k for k in known if k.endswith(sc) and 1 <= len(k) - len(sc) <= 10]
+        if len(ks) != 1: continue
+        k = ks[0]; pre = k[:len(k) - len(sc)]; head, last = r['name'].rsplit(' ', 1)
+        opts = [(head + ' ' + rest, pos) for rest, pos in removals(last, pre) if len(rest) >= 2]
+        if not opts: continue
+        seen = [o for o in opts if o[0] in names]
+        name = (seen or sorted(opts, key=lambda o: [-x for x in o[1]]))[0][0]   # else the reading with the letters latest
+        WOVEN[(r['tournament'], r['weight'], r['name'], sc)] = (name, k)
+        r['name'] = name; r['school'] = k; rep["entrants: school's first letters taken back out of the name"] += 1
     # group by bracket
     by = defaultdict(list)
     for r in out: by[(r['level'], r['tournament'], r['weight'])].append(r)
@@ -249,8 +288,12 @@ def clean_bouts(B, E, S, rep):
     return out
 
 
+JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – ')   # "est Chester", "BattiPstlyamouth", "Maplewood, JR, -1-17", a glued second entry
+
+
 def junk_left(E, B):
     bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])]
+    bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
     return bad
 
@@ -268,6 +311,10 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
+    same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep)
+    if os.path.exists(os.path.join(BR, 'lower_teams.csv')):
+        tf, T = read('lower_teams.csv'); r0 = Counter(); same_school(T, ['school'], r0)
+        if r0: write('lower_teams.csv', tf, T); rep.update(r0)
     for _ in range(6):   # entrant schools filled from bouts let more bout names resolve, and back: repeat to a fixed point
         r = Counter(); E = clean_entrants(E, B, r); B = clean_bouts(B, E, S, r)
         moved = {k: v for k, v in r.items() if 'still' not in k and 'seed prefix stripped' not in k}
