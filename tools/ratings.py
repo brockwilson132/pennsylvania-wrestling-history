@@ -8,7 +8,8 @@ Outputs:            data/difficulty/brackets.csv          per bracket: field str
                     data/difficulty/wrestler_seasons.csv  per wrestler per tournament: season rating, quality of wins, bad losses
                     data/difficulty/eval.txt              every number quoted in the doc
 v2 (docs/RATING_AUDIT.md): identity linking across name variants (tools/identity.py); one absolute scale where
-1500 = the average state qualifier (rolling 11-season window per class); path SOS and the 0-99 per-level scales
+1500 = the average 1999-2026 state qualifier; each season is placed by its 16 best per weight (rolling 11-season
+window per class, linked year to year by returning wrestlers); path SOS and the 0-99 per-level scales
 are retired in favour of the wrestler's own rating, quality of wins and bad losses.
 Usage: python3 -I tools/ratings.py [--grid]
 
@@ -763,34 +764,100 @@ say(f'prior sd (most common pattern, scaled): {RES_SD:.0f}')
 def theta(k, y): return T.get(y, {}).get(ID(k, y))
 
 # ============================================================ v2: one absolute scale, quality of wins, bad losses
-# Scale: 1500 = the average state qualifier. Anchor per class group (AAA, AA, one-class era) on a rolling 11-season
-# window of state entrants' season strength, so long drift between separately fitted seasons is removed while a
-# deep year still reads deeper than its neighbours. Spread: the median sd of modern state qualifiers (raw Elo
-# points), so a 400-point gap still means about 10:1.
+# Scale: 1500 = the average 1999-2026 state qualifier. Anchor per class group (AAA, AA, one-class era) on a rolling
+# 11-season window of the reference group's season strength (below), so long drift between separately fitted seasons is
+# removed, with the year-to-year level taken from returning wrestlers (DELTA) so a step in the priors doesn't leak into
+# neighbouring seasons. Spread: the median within-season sd of the reference group (raw Elo points), so a 400-point gap
+# still means about 10:1. (Tested 2026-11-05: leaving raw spreads unscaled stretches the thin early seasons, 1940s and
+# 50s take 120 of the top 200; rescaling per window is kept.)
+# The reference group is the 16 best wrestlers at each weight in the class that season (by season strength, from every
+# bracket on file), not the wrestlers who happened to be in the state bracket. State brackets held about 4 per weight
+# before 1974 (the regional champions), 16 from 1974, 20 from 2015 and 8 in 2021, so "the average state qualifier" was
+# a much more select group in some seasons than in others, and every rating in those seasons moved with it (before 1974
+# the average qualifier was close to a champion, which pulled the 1950s and 60s down). Sixteen is the state bracket
+# for most of the record. RATINGS_ANCHOR=state restores the old group, for comparison.
+ANCHOR_N = 16
 state_vals = defaultdict(list)
-for (lvl, t, w), es in entrants.items():
-    if lvl != 'state': continue
-    y, c = bracket_meta[(lvl, t, w)][:2]
-    for e in es:
-        v = theta(e[0], y)
-        if v is not None: state_vals[(y, c)].append(v)
+if os.environ.get('RATINGS_ANCHOR') == 'state':
+    for (lvl, t, w), es in entrants.items():
+        if lvl != 'state': continue
+        y, c = bracket_meta[(lvl, t, w)][:2]
+        for e in es:
+            v = theta(e[0], y)
+            if v is not None: state_vals[(y, c)].append(v)
+else:
+    _byw = defaultdict(dict)   # (year, class, weight) -> wrestler -> strength
+    for (lvl, t, w), es in entrants.items():
+        y = bracket_meta[(lvl, t, w)][0]; wt = wn(w)
+        if wt is None: continue
+        for e in es:
+            i = ID(e[0], y); v = T.get(y, {}).get(i)
+            if v is None: continue
+            c = CLS_OF.get((i, y)) or bracket_meta[(lvl, t, w)][1]
+            _byw[(y, c, wt)][i] = v
+    for (y, c, wt), d in _byw.items():
+        if len(d) >= ANCHOR_N: state_vals[(y, c)].extend(sorted(d.values(), reverse=True)[:ANCHOR_N])
+# Season levels. Each season is fitted on its own bouts, which only say how that season's wrestlers compare with each
+# other; the season's overall level comes from its priors, and it wanders from year to year (the district prior offsets
+# change at each era boundary, 1956, 1974, 1990 and 2005, and the first-round rule moves with the share of first-round
+# exits). The rolling window below takes out slow drift but not a step: an 11-season mean across a step leaves the
+# seasons before it too low and the ones after it too high (2002-04 read ~90 low and 2005-07 ~60 high), and the 2000s
+# lost their place in the all-time lists.
+# The wrestlers who come back the next season tie neighbouring seasons together: from year to year their average raw
+# change should be steady. DELTA[(y, c)] chains those changes (minus their long-run average), so it moves with the
+# season's level but not with real depth. The anchor then uses the window to set the long-run level and DELTA for the
+# year-to-year part: level(y) = DELTA(y) + window mean of (state qualifier mean - DELTA).
+RET_MIN = 4   # bouts in both seasons for a returner to count
+DELTA = {}
+for c in ('AAA', 'AA', 'single'):
+    steps = {}
+    for y in YEARS:
+        if y + 1 not in T: continue
+        d = [T[y + 1][i] - v for i, v in T[y].items() if i in T[y + 1] and CLS_OF.get((i, y), 'single') == c and CLS_OF.get((i, y + 1), 'single') == c
+             and nb_of[(i, y)] >= RET_MIN and nb_of[(i, y + 1)] >= RET_MIN]
+        if len(d) >= 100: steps[y] = float(np.mean(d))
+    if not steps: continue
+    g = float(np.mean(list(steps.values()))); lv = 0.0
+    for y in YEARS:
+        DELTA[(y, c)] = lv
+        lv += (steps[y] - g) if y in steps else 0.0
+say('season level from returners (raw points, AAA): ' + ', '.join(f'{y}:{DELTA[(y, "AAA")]:+.0f}' for y in YEARS if (y, 'AAA') in DELTA and y % 3 == 0))
 def _window(y, c):
-    vals = [v for yy in range(y - 5, y + 6) for v in state_vals.get((yy, c), [])]
-    return (float(np.mean(vals)), float(np.std(vals))) if len(vals) >= 40 else None
+    # spread = the average WITHIN-season spread of the window's state qualifiers. The sd of all the window's values
+    # pooled together also counts how far the season averages differ from each other, so wherever season levels
+    # wander, the pooled sd is too big and every rating in those seasons is squeezed toward 1500.
+    yrs = [(yy, state_vals[(yy, c)]) for yy in range(y - 5, y + 6) if len(state_vals.get((yy, c), [])) >= 2]
+    n = sum(len(v) for _, v in yrs)
+    if n < 40: return None
+    dl = lambda yy: DELTA.get((yy, c), 0.0)
+    # long-run level: a local straight line through the window's (qualifier mean - DELTA), read off at y. A plain mean
+    # would be biased wherever the window is one-sided (the first and last five seasons of a class) and DELTA trends.
+    xs = np.array([yy - y for yy, v in yrs for _ in v], float); vs = np.array([x - dl(yy) for yy, v in yrs for x in v])
+    m = (float(np.polyfit(xs, vs, 1)[1]) if len(set(xs)) >= 3 else float(vs.mean())) + dl(y)
+    sd = math.sqrt(sum(len(v) * float(np.var(v)) for _, v in yrs) / n)
+    return (m, sd)
 ANCHOR = {}
 for y in YEARS:
     for c in ('AAA', 'AA', 'single'):
         a = _window(y, c)
         if a: ANCHOR[(y, c)] = a
+SPREAD = os.environ.get('RATINGS_SPREAD', 'window')
 SD_REF = float(np.median([sd for (y, c), (m, sd) in ANCHOR.items() if y >= 1980 and c != 'single']))
 def anc(y, c):
     if (y, c) in ANCHOR: return ANCHOR[(y, c)]
     near = sorted((abs(g[0] - y), g) for g in ANCHOR if g[1] == c) or sorted((abs(g[0] - y), g) for g in ANCHOR)
     return ANCHOR[near[0][1]]
+LEVEL = [0.0]
 def norm(v, y, c):
     if v is None: return None
-    m, sd = anc(y, c); return 1500 + (v - m) / sd * SD_REF
-say(f'\nscale: 1500 = average state qualifier (rolling 11 seasons per class); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
+    m, sd = anc(y, c); return 1500 + (v - m) * (1.0 if SPREAD == 'raw' else SD_REF / sd) - LEVEL[0]
+# keep the familiar meaning: 1500 = the average state qualifier of 1999-2026 (the top-16 anchor sits a little above it)
+if os.environ.get('RATINGS_ANCHOR') != 'state':
+    _q = [norm(theta(e[0], bracket_meta[bk][0]), bracket_meta[bk][0], bracket_meta[bk][1]) for bk, es in entrants.items() if bk[0] == 'state'
+          and bracket_meta[bk][0] >= 1999 and bracket_meta[bk][1] in ('AAA', 'AA') for e in es]
+    _q = [v for v in _q if v is not None]; LEVEL[0] = float(np.mean(_q)) - 1500
+    say(f'scale level: the average 1999-2026 state qualifier sits {-LEVEL[0]:+.0f} from the top-16 anchor; shifted so it reads 1500')
+say(f'\nscale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best per weight (rolling 11 seasons per class, returner-linked); raw anchor means {min(m for m,s in ANCHOR.values()):.0f}-{max(m for m,s in ANCHOR.values()):.0f}, '
     f'sd {min(s for m,s in ANCHOR.values()):.0f}-{max(s for m,s in ANCHOR.values()):.0f}; spread {SD_REF:.0f}')
 # cls of a wrestler-season (for the scale): the class of his bouts that season
 def rating(k, y, c=None):
