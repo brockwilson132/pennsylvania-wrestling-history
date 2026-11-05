@@ -50,7 +50,9 @@ def meta(path):
     if cls.endswith('Super'): cls, unit = parts[-2], '_'.join(parts[:-2]) + '_Super'
     if cls.endswith('Sub'): cls, unit = parts[-2], '_'.join(parts[:-2]) + '_Sub'
     level = 'district' if unit.startswith('D') else 'regional'
-    if os.sep + 'section' + os.sep in path: level = 'section'   # section/sub-section qualifiers below districts
+    folders = os.path.normpath(path).split(os.sep)[:-1]     # works for `section/x.pdf` as well as `brackets/section/x.pdf`
+    if 'section' in folders: level = 'section'   # section/sub-section qualifiers below districts
+    if 'league' in folders: level = 'league'     # league/conference tournaments, off the PIAA path
     if level == 'regional': unit = REGION.get(unit, unit)
     return base, year, cls, unit, level
 
@@ -170,6 +172,8 @@ if __name__ == '__main__':
     for folder in args:
         files += [os.path.join(folder, f) for f in sorted(os.listdir(folder)) if f.endswith('.pdf')]
     out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'brackets')
+    # --out=DIR writes the three files somewhere else (leagues go to data/brackets/league so ratings never read them)
+    out = next((x.split('=', 1)[1] for x in sys.argv[1:] if x.startswith('--out=')), out)
     os.makedirs(out, exist_ok=True)
     E, T, L = [], [], []
     with Pool(jobs) as pool:
