@@ -40,6 +40,7 @@
   const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
   const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
   const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const BV_STYLE = (() => { try { const m = /[?&]bv=([AB])\b/.exec(location.search + location.hash); return m ? m[1] : ''; } catch (e) { return ''; } })();   // temporary: compare field layouts
   const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
   const PK = Object.entries(TAG_PRESETS);
   const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
@@ -487,6 +488,7 @@
     const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
     const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
       const d = b.length > 8 ? (won ? b[9] - b[7] : -(b[10] - b[8])) : DL.get(b); return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}${d != null ? ' ' + dTxt(won ? d : -d) : ''}</span>`; };
+    const RSH = (b) => { const d = b[1]; if (b[0] === 'champ') return ['Final', 'SF', 'QF', 'R16', 'R32', 'Pig'][d] || 'Pre'; if (b[0] === 'p3') return '3rd'; if (b[0] === 'p5') return '5th'; if (b[0] === 'p7') return '7th'; return d === 1 ? 'C-SF' : 'C' + d; };
     const ents = sortBy === 'rtg' ? F.entrants.slice().sort((a, b) => (rOf(b.r) || 0) - (rOf(a.r) || 0)) : F.entrants;
     const lines = ents.map((e) => {
       const r = e.r, me = e.slug === focusSlug;
@@ -495,6 +497,15 @@
       const net = NET.get(nk(r.name));
       const bw = sx && sx[1] != null ? `<span class="bvbw">Best win: <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${sx[3] ? ` <em title="a loss to someone rated 150+ below him">· ${sx[3]} upset loss${sx[3] === 1 ? '' : 'es'}</em>` : ''}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
       const line = bl.length ? `<span class="bvb">${bl.map((b) => boutTxt(b, r.name)).join('<i>·</i>')}${bw}</span>` : '';
+      if (BV_STYLE) {
+        const fin = r.place ? `<span class="bvfin ${pc(r.place)}" title="Finished ${ordinal(r.place)}">${ordinal(r.place)}</span>` : e.adv ? '<span class="bvfin adv" title="Advanced">Adv</span>' : '';
+        const rows = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const t = boutTxt(b, r.name); return `<span class="bvr">${RSH(b)}</span>${t.replace(/<em class="dl[^]*<\/em>/, '')}<span class="bvd">${(t.match(/<em class="dl[^]*<\/em>/) || [''])[0]}</span>`; }).join('');
+        const bwl = sx && sx[1] != null ? `<span class="bvbw2">Best win <b>${esc(shortName(sx[2]))}</b> ${OT.rtg10(sx[1])}${net != null ? ` · net ${dTxt(net)}` : ''}</span>` : '';
+        const head = `<span class="bvh"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b></a>${fin}<span class="dsp">${rtgTag(rOf(r))}</span></span><span class="bvsub">${stag(r.sch)}${meta ? `<span>${meta}</span>` : ''}</span>`;
+        const bouts = rows ? `<span class="bvbl">${rows}</span>` : '';
+        return BV_STYLE === 'A' ? `<div class="bvl v2 vA${me ? ' me' : ''}">${head}${bouts}${bwl}${entrantMatrix(e, F)}</div>`
+          : `<div class="bvl v2 vB${me ? ' me' : ''}">${head}<span class="bvcols"><span class="bvleft">${bouts}${bwl}</span>${entrantMatrix(e, F)}</span></div>`;
+      }
       return `<div class="bvl${me ? ' me' : ''}"><span class="bvtop"><span class="sd">${e.seedLabel || ''}</span><a class="nm" href="#wrestler/${e.slug}"><b>${esc(r.name)}</b><small>${stag(r.sch)}${meta ? ' ' + meta : ''}${e.adv ? ' · <em class="advk">advanced</em>' : ''}</small></a><span class="dsp">${rtgTag(rOf(r))}</span></span>${line}${entrantMatrix(e, F)}</div>`;
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
