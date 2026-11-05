@@ -181,15 +181,21 @@ const ss = SEAS.map((s) => { if (s.covered && !s.blind && s.row[20]) s.row[5] = 
 console.log('school-seasons', ss.length, 'schools', schools.length, 'with Strength', ss.filter((r) => r[5]).length);
 
 /* ---- district and region seasons ----
-   Strength: the average of its schools' Strength that season. Talent: its wrestlers at TALENT+ divided by its schools.
-   Both only where every member district's full field is on file (otherwise the schools we can't see would be missing
-   from the average and the school count). Score sums come from ss in the app. */
+   Strength: the average Strength of its top quarter of schools that season (at least one school). A fixed share, not a
+   fixed count, so a 50-school district isn't rewarded for its size and a 5-school district isn't made to count every
+   school; every district is judged by its leading programs in the same proportion (Brock, 2026-11-05).
+   Talent: its wrestlers at TALENT+ divided by its schools.
+   Both only where every member school's full field is on file (otherwise the schools we can't see would be missing
+   from the ranking and the school count). Score sums come from ss in the app. */
+const TOP_SHARE = 0.25;
 const unitRoll = (keyOf) => {
   const m = new Map();
-  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || { u, y: r[1], c: r[2], n: 0, nCov: 0, sum: 0, tal: 0 }; x.n++; if (r[16]) { x.nCov++; x.tal += r[19]; if (r[5]) x.sum += r[5]; } m.set(k, x); });
-  return Array.from(m.values()).map((x) => { const all = x.nCov === x.n; return [x.u, x.y, x.c, all && x.n ? Math.round(x.sum / Math.max(1, x.nCov)) : 0, all && x.n ? Math.round(100 * x.tal / x.n) / 100 : 0, x.n]; });
+  ss.forEach((r) => { const u = keyOf(r); if (!u) return; const k = u + '|' + r[1] + '|' + r[2]; const x = m.get(k) || { u, y: r[1], c: r[2], n: 0, nCov: 0, str: [], tal: 0 }; x.n++; if (r[16]) { x.nCov++; x.tal += r[19]; if (r[5]) x.str.push(r[5]); } m.set(k, x); });
+  return Array.from(m.values()).map((x) => {
+    const all = x.n && x.nCov === x.n; const top = x.str.sort((a, b) => b - a).slice(0, Math.max(1, Math.ceil(x.str.length * TOP_SHARE)));
+    return [x.u, x.y, x.c, all && top.length ? Math.round(top.reduce((a, b) => a + b, 0) / top.length) : 0, all ? Math.round(100 * x.tal / x.n) / 100 : 0, x.n];
+  });
 };
-/* a school's Strength only counts when it fielded someone; schools in covered seasons always did */
 const ds = unitRoll((r) => r[3]), rs = unitRoll((r) => r[4]);
 console.log('district-seasons', ds.length, 'with Strength', ds.filter((x) => x[3]).length, 'region-seasons', rs.length, 'with Strength', rs.filter((x) => x[3]).length);
 
