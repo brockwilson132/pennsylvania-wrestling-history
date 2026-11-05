@@ -1061,7 +1061,7 @@ a.tll:hover{color:var(--gold)}
 .cgr b{font:900 16px/1 var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums}
 .cgr.pk{box-shadow:inset 0 0 0 2px var(--gold)}
 .cgr.none{background:none;box-shadow:none}
-.cgc{display:grid;gap:3px;text-decoration:none;color:inherit;min-width:0}
+.cgc{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px;text-decoration:none;color:inherit;min-width:0}
 .cgc.none{height:34px}
 .cgp{height:30px;border-radius:7px;display:grid;place-items:center;font:900 15px var(--cond);color:var(--mat);background:var(--slate);border:1px solid var(--line2)}
 .cgp.c1{background:var(--m1);border-color:var(--m1)}.cgp.c2{background:var(--m2);border-color:var(--m2)}.cgp.c3{background:var(--m3);border-color:var(--m3)}.cgp.c4{background:var(--m4);border-color:var(--m4)}.cgp.c5{background:var(--m5);border-color:var(--m5);color:var(--chalk)}
@@ -1288,3 +1288,34 @@ button.mtile:hover{border-color:var(--line2)}
 .mtile.pick select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px}
 .mtile>s{text-decoration:none;font:700 10.5px var(--cond);letter-spacing:.04em;text-transform:uppercase;color:var(--chalk);opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:-1px}
 .mtile.pick>i{color:var(--gold)}
+
+/* ---------- bracket toughness: six signal bars to the left of each result, and their key above the bottom bar ---------- */
+.sgn{flex:none;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:20px}
+.sgn .sgv{display:block;width:20px;height:12px}
+.sgn.sg0{height:12px}
+.sgn>em{font:800 9px/1 var(--cond);font-style:normal;letter-spacing:.02em;white-space:nowrap}
+.wk .sgn>em{display:none}
+@media(min-width:900px){.wk .sgn>em{display:block}}
+.tl.big .sgn{width:30px;gap:3px}.tl.big .sgn .sgv{width:30px;height:18px}.tl.big .sgn>em{font-size:12px}
+.pw .sgn{width:16px}.pw .sgn .sgv{width:16px;height:10px}
+.ss .sgn,.ats .sgn,.pmf .sgn{width:18px}.ss .sgn .sgv,.ats .sgn .sgv,.pmf .sgn .sgv{width:18px;height:11px}
+.fgsg{display:inline-flex;align-items:center;gap:6px}.fgsg .sgv{width:23px;height:14px}.fgsg i{font:800 12px/1 var(--cond);font-style:normal;letter-spacing:.06em;text-transform:uppercase}
+.sgkey{display:block;border-bottom:1px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sgkey:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.sgki{max-width:760px;margin:0 auto;padding:7px 2px 6px}
+.sgk{display:grid;grid-template-columns:repeat(3,1fr) 76px repeat(3,1fr)}
+.sgk>span{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.sgk .sgv{width:23px;height:14px}
+.sgk b{font:700 9.5px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;color:var(--ash);white-space:nowrap}
+.sgx{display:grid;gap:10px;padding:12px 12px 6px;max-height:min(60vh,520px);overflow:auto}
+.sgx p{margin:0;font-size:12.5px;line-height:1.45;color:var(--ash)}.sgx p.sgf{font-size:11.5px;color:var(--ash2)}
+.sgt{display:grid;grid-template-columns:34px minmax(0,1fr) repeat(3,minmax(54px,auto));gap:8px 10px;align-items:center}
+.sgl{display:grid;justify-items:end;gap:2px}.sgl i{font:700 10px/1 var(--cond);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk)}.sgl em{font:600 10px/1 var(--cond);font-style:normal;color:var(--ash2)}
+.sgr{display:contents}
+.sgr .sgv.big{width:30px;height:18px}
+.sgm{display:grid;gap:2px;min-width:0}.sgm b{font:900 16px/1 var(--cond)}.sgm small{font-size:11px;color:var(--ash2);line-height:1.2}
+.sgv2{font:700 12.5px/1 var(--cond);color:var(--chalk);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bottom))}
+.cgc .sgn{width:16px}.cgc .sgn .sgv{width:16px;height:10px}
+@media(min-width:720px){.cgc .sgn{width:22px}.cgc .sgn .sgv{width:22px;height:13px}}
+.sgv2.avg{color:var(--gold)}.sgv2.avg::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:5px;vertical-align:1px}

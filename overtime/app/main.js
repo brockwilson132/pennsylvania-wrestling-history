@@ -38,7 +38,7 @@
   }
   const winText = () => state.win.mode === 'all' ? 'All-time' : state.win.mode === 'custom' ? OT.windowLabel() : 'Last ' + state.win.mode;
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
-  let pop = '';
+  let pop = '', sgOpen = false;
   /* View: what the page body shows for the current selection; remembered for the session */
   const VIEWS = [['map', 'Map', 'The picture and its list'], ['rank', 'Rankings', 'Standings for this selection'], ['time', 'Timeline', 'Every team, season by season'], ['team', 'All-time team', 'The best at each weight, as deep as you like'], ['seasons', 'Seasons', 'Results season by season']];
   try { const v = sessionStorage.getItem('ot-view'); if (VIEWS.some(([k]) => k === v)) state.view = v; } catch (e) { /* none */ }
@@ -54,7 +54,10 @@
     const wv = f.w ? (f.who ? f.who.split(' ').slice(-1)[0] : 'List') : 'Wrestlers';
     const time = `<button class="fb ft${state.win.mode !== 'all' ? ' on' : ''}" type="button" data-fb="time" aria-label="Time: ${esc(winText())}" aria-haspopup="dialog" aria-expanded="${pop === 'time'}"><span class="ftc">${OT.stopwatch(30)}</span><span class="fbv">${esc(winText())}</span></button>`;
     const paOn = state.cls !== 'AAA' || state.f.weights.length > 0;
-    fbar.innerHTML = `<div class="fbi">${cell('pa', 'Pennsylvania', paText(), paOn, navIcon('state', paOn))}${cell('region', 'Region', f.r || 'Region', !!f.r, navIcon('region', f.r))}${cell('district', 'District', f.d ? 'D' + f.d : 'District', !!f.d, navIcon('district', f.d))}${time}${cell('school', 'School', f.s || 'School', !!f.s)}${cell('wrestlers', 'Wrestlers', wv, f.w)}${NO_VIEW.has(route().page) ? '<span class="fb off" aria-hidden="true"></span>' : cell('view', 'View', viewName(), false, navIcon('v_' + state.view))}</div>`;
+    /* the bracket-toughness key rides on top of the bar whenever the page shows signal bars; tap it to open the cut points */
+    const sgOn = !pop && !!main.querySelector('.sgn:not(.sg0)'); document.body.classList.toggle('sgk-on', sgOn);
+    const key = sgOn ? `<div class="sgkey${sgOpen ? ' open' : ''}" role="button" tabindex="0" aria-expanded="${sgOpen}" aria-label="Bracket toughness key"><div class="sgki">${OT.sgKey(sgOpen)}</div></div>` : '';
+    fbar.innerHTML = key + `<div class="fbi">${cell('pa', 'Pennsylvania', paText(), paOn, navIcon('state', paOn))}${cell('region', 'Region', f.r || 'Region', !!f.r, navIcon('region', f.r))}${cell('district', 'District', f.d ? 'D' + f.d : 'District', !!f.d, navIcon('district', f.d))}${time}${cell('school', 'School', f.s || 'School', !!f.s)}${cell('wrestlers', 'Wrestlers', wv, f.w)}${NO_VIEW.has(route().page) ? '<span class="fb off" aria-hidden="true"></span>' : cell('view', 'View', viewName(), false, navIcon('v_' + state.view))}</div>`;
   }
   /* the popups: one at a time, a sheet above the bar on a phone, a panel anchored to its button on a desktop */
   let SCH = null; const schools = () => SCH || (SCH = OT.UD.schools.map((n) => { const u = OT.U.school(n); return { n, d: u.d || 0, r: u.region || '', q: n.toLowerCase() }; }).sort((a, b) => a.n.localeCompare(b.n)));
@@ -244,6 +247,7 @@
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
   document.addEventListener('click', (e) => {
     /* filter bar and its popups */
+    if (e.target.closest('.sgkey')) { sgOpen = !sgOpen; drawBar(); return; }
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       if (k === 'wrestlers') { closePop(); location.hash = hrefOf({ ...f, w: !f.w || !!f.who }); return; }
       if (pop === k) closePop(); else openPop(k); return; }
@@ -295,6 +299,7 @@
     const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) { if (!open && pod.dataset.sd && !pod.dataset.done) { pod.innerHTML = OT.seasonDetail(pod.dataset.sd); pod.dataset.done = '1'; } pod.hidden = open; } }
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
+  document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('sgkey')) { e.preventDefault(); e.target.click(); } });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });

@@ -115,7 +115,7 @@
       if (!c) res = `<span class="sr0">${col ? '–' : ''}</span>`;
       else if (lvl === 'state') res = c.place ? `<span class="yp ${OT.pc(c.place)}" title="${tip} ${ordinal(c.place)}">${ordinal(c.place)}</span>` : `<span class="yp q" title="${tip} qualifier">Q</span>`;
       else res = `<span class="srl" title="${tip}${c.place ? ' ' + ordinal(c.place) : c.q ? ', advanced' : ', did not place'}">${LV_SHORT[lvl]} ${c.place ? ordinal(c.place) : c.q ? 'Q' : 'DNP'}</span>`;
-      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, 'district', `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
+      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, c.sec ? 'section' : lvl, `${col.year} ${lvl}`) : '<span class="sgn sg0"></span>'}${res}</span>`;
     }).join('');
   }
   /* the left bar: peak RTG on a fixed scale from the average state qualifier (1500) to 2200, about the best on record, so the
@@ -136,7 +136,7 @@
     if (!T.length) return OT.empty('No one on record yet.');
     const team = (i) => ordinal(i + 1);
     const grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
-    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on one scale for every level, where the average state bracket sits at the orange mark.</div>`;
+    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the signal bars show how tough the last bracket he wrestled that season was for its level, from Docile (one bar) to Violent (six).</div>`;
   }
   Object.assign(OT, { timelineView, teamGrid });
 })();
