@@ -107,6 +107,16 @@ def removals(s, p):
     return out
 
 
+# one school printed under two names (not a parse garble: a spelling the archive uses): the name the app files it under
+SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan'}
+
+
+def same_school(rows, keys, rep):
+    for r in rows:
+        for k in keys:
+            if r[k] in SCHOOL_SAME: r[k] = SCHOOL_SAME[r[k]]; rep['school spelled another way, filed under its one name'] += 1
+
+
 def clean_entrants(E, B, rep):
     out = []
     for r in E:
@@ -283,7 +293,7 @@ JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – 
 
 def junk_left(E, B):
     bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])]
-    bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school'])] + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
+    bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
     return bad
 
@@ -301,6 +311,10 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
+    same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep)
+    if os.path.exists(os.path.join(BR, 'lower_teams.csv')):
+        tf, T = read('lower_teams.csv'); r0 = Counter(); same_school(T, ['school'], r0)
+        if r0: write('lower_teams.csv', tf, T); rep.update(r0)
     for _ in range(6):   # entrant schools filled from bouts let more bout names resolve, and back: repeat to a fixed point
         r = Counter(); E = clean_entrants(E, B, r); B = clean_bouts(B, E, S, r)
         moved = {k: v for k, v in r.items() if 'still' not in k and 'seed prefix stripped' not in k}

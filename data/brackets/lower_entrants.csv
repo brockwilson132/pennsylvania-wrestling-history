@@ -153097,7 +153097,7 @@ district,2025_D11_AAA,2025,AAA,D11,285,,,Alonzo Parker,Easton,SO,20-10
 district,2025_D11_AAA,2025,AAA,D11,285,,,Logan Roth,Emmaus,JR,10-13
 district,2025_D11_AAA,2025,AAA,D11,285,3,,Daunte Morrison,Bethlehem Liberty,SR,21-3
 district,2025_D12_AA,2025,AA,D12,107,1,,Hunter Webster,Conwell-Egan,FR,32-5
-district,2025_D12_AA,2025,AA,D12,107,2,,Naliyah Irby,Mastery Charter Lenfest,FR,1-3
+district,2025_D12_AA,2025,AA,D12,107,2,,Naliyah Irby,Mastery Charter School Lenfest,FR,1-3
 district,2025_D12_AA,2025,AA,D12,114,1,,Thomas Boyce,Conwell-Egan,SO,32-5
 district,2025_D12_AA,2025,AA,D12,114,2,,Drew Buzbee,Devon Prep,SO,13-8
 district,2025_D12_AA,2025,AA,D12,121,1,,Jeffrey Spofford,Conwell-Egan,SR,31-6
@@ -153114,11 +153114,11 @@ district,2025_D12_AA,2025,AA,D12,139,3,,Charlie Kleiner,Devon Prep,FR,2-7
 district,2025_D12_AA,2025,AA,D12,139,,,Luis Feliz Diaz,Simon Gratz Mastery Charter,JR,3-5
 district,2025_D12_AA,2025,AA,D12,139,2,,Cole Tancredi,Archbishop Carroll,SO,11-9
 district,2025_D12_AA,2025,AA,D12,145,1,,Gabe Vallejo,Archbishop Carroll,SR,22-4
-district,2025_D12_AA,2025,AA,D12,145,3,,Jalen Langford,Mastery Charter Lenfest,FR,1-5
+district,2025_D12_AA,2025,AA,D12,145,3,,Jalen Langford,Mastery Charter School Lenfest,FR,1-5
 district,2025_D12_AA,2025,AA,D12,145,,,Ben Veith,Devon Prep,FR,3-10
 district,2025_D12_AA,2025,AA,D12,145,2,,Anthony Swartz,Conwell-Egan,FR,15-13
 district,2025_D12_AA,2025,AA,D12,152,1,,Jaiden Goffman,Conwell-Egan,JR,14-10
-district,2025_D12_AA,2025,AA,D12,152,3,,David Orlando-Ortiz,Mastery Charter Lenfest,SR,4-2
+district,2025_D12_AA,2025,AA,D12,152,3,,David Orlando-Ortiz,Mastery Charter School Lenfest,SR,4-2
 district,2025_D12_AA,2025,AA,D12,152,2,,William Wood,Archbishop Carroll,SO,14-13
 district,2025_D12_AA,2025,AA,D12,160,2,,Shane Dugan,Devon Prep,SR,17-11
 district,2025_D12_AA,2025,AA,D12,160,3,,Robert Bower,Archbishop Carroll,FR,1-2
@@ -153132,7 +153132,7 @@ district,2025_D12_AA,2025,AA,D12,215,1,,Grant Napoletano,Devon Prep,SO,9-13
 district,2025_D12_AA,2025,AA,D12,215,2,,Avery Clark,Simon Gratz Mastery Charter,JR,5-4
 district,2025_D12_AA,2025,AA,D12,215,3,,Luke McGuigan,Conwell-Egan,FR,3-14
 district,2025_D12_AA,2025,AA,D12,285,1,,Connor Horger,Conwell-Egan,JR,23-10
-district,2025_D12_AA,2025,AA,D12,285,2,,Shamar Brunson,Mastery Charter Lenfest,SR,2-8
+district,2025_D12_AA,2025,AA,D12,285,2,,Shamar Brunson,Mastery Charter School Lenfest,SR,2-8
 district,2025_D12_AAA,2025,AAA,D12,107,2,,Camilo Davidson,Father Judge,SO,19-7
 district,2025_D12_AAA,2025,AAA,D12,107,,,Mekhi Adams,Mariana Bracetti Academy,FR,6-6
 district,2025_D12_AAA,2025,AAA,D12,107,,,Vinny Buonanno,Archbishop Wood,FR,5-14
@@ -232828,7 +232828,7 @@ regional,2025_South_East_AA,2025,AA,SE,107,,11-4,Magnus Monger,Williams Valley,S
 regional,2025_South_East_AA,2025,AA,SE,107,,3-7,Channing Hickok,Delone Catholic,FR,31-11
 regional,2025_South_East_AA,2025,AA,SE,107,4,3-2,Trapp Walsh,Berks Catholic,FR,25-11
 regional,2025_South_East_AA,2025,AA,SE,107,3,3-3,Camron Smith,Trinity,FR,33-6
-regional,2025_South_East_AA,2025,AA,SE,107,,12-2,Naliyah Irby,Mastery Charter Lenfest,FR,1-4
+regional,2025_South_East_AA,2025,AA,SE,107,,12-2,Naliyah Irby,Mastery Charter School Lenfest,FR,1-4
 regional,2025_South_East_AA,2025,AA,SE,107,8,3-5,Marek Polcha,Newport,SO,30-8
 regional,2025_South_East_AA,2025,AA,SE,107,2,11-1,Carter Chunko,Saucon Valley,SO,33-4
 regional,2025_South_East_AA,2025,AA,SE,114,1,1-1,Freddy Bachmann,Faith Christian Academy,FR,35-0
@@ -233010,7 +233010,7 @@ regional,2025_South_East_AA,2025,AA,SE,215,2,1-1,Jason Singer,Faith Christian Ac
 regional,2025_South_East_AA,2025,AA,SE,285,1,1-1,Mark Effendian,Faith Christian Academy,JR,34-3
 regional,2025_South_East_AA,2025,AA,SE,285,8,11-4,Marc Macias,Lehighton,SO,32-12
 regional,2025_South_East_AA,2025,AA,SE,285,4,3-3,Jack Heckman,Tulpehocken,JR,40-5
-regional,2025_South_East_AA,2025,AA,SE,285,,12-2,Shamar Brunson,Mastery Charter Lenfest,SR,2-9
+regional,2025_South_East_AA,2025,AA,SE,285,,12-2,Shamar Brunson,Mastery Charter School Lenfest,SR,2-9
 regional,2025_South_East_AA,2025,AA,SE,285,,3-7,Julian Diaz-Mendez,Biglerville,SR,21-12
 regional,2025_South_East_AA,2025,AA,SE,285,3,3-2,Eoghan Savage,Upper Dauphin,SO,28-6
 regional,2025_South_East_AA,2025,AA,SE,285,,3-5,Hayden Adams,Northern Lebanon,SR,34-10

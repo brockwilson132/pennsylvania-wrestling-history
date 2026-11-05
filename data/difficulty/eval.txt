@@ -1,5 +1,5 @@
-transfers: 1894 name+school keys linked to the same wrestler at an earlier school
-identity linking: 914 of 155130 name keys merged into another (955 merge events)
+transfers: 1892 name+school keys linked to the same wrestler at an earlier school
+identity linking: 914 of 155128 name keys merged into another (955 merge events)
 bouts 586693 (rated: 574212), brackets 46196, wrestlers with a grade-season 290867
 forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (118.1, 117.3, 123.5), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
 missed-season rule decay: held-out 2018-26 log loss 0.5485; bouts with a wrestler back after a missed season (n=1924) 0.5550
