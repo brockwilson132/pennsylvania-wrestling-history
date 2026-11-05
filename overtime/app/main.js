@@ -99,7 +99,7 @@
     if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
     const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; };
     paint(); bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
-    const me = bview.querySelector('.bvl.me'); if (me) me.scrollIntoView({ block: 'center' });
+    const me = bview.querySelector('.bvc.me'); if (me) me.scrollIntoView({ block: 'center' });
     const again = () => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; paint(); bview.scrollTop = top; } };
     const k = OT.parseBkey(key); if (k && k.lvl !== 'state' && !OT.lowerLoaded(k.year, k.lvl)) OT.loadLower(k.year, k.lvl).then(again);
     if (k && !OT.sosLoaded(k.year)) OT.loadSOS(k.year).then(again);
