@@ -49,26 +49,29 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="data.js"></script>
-<script src="medals.js"></script>
-<script src="brackets.js"></script>
-<script src="seeds.js"></script>
 <script src="badges.js"></script>
 <script src="pa-map.js"></script>
 <script src="icongeo.js"></script>
 <script src="vendor/topojson-client.min.js"></script>
 <script src="schoolgeo.js"></script>
-<script src="lowermeta.js"></script>
-<script src="lower-district.js"></script>
-<script src="sos.js"></script>
-<script src="lower-regional.js"></script>
-<script src="lower-section.js"></script>
-<script src="lowerteams.js"></script>
-<script src="duals.js"></script>
-<script src="membership.js"></script>
-<script src="missing.js"></script>
-<script src="wstats.js"></script>
-<script src="careers.js"></script>
 <script src="units.js"></script>
+<!-- loaded after the first screen by app/main.js (two-stage boot); a data file only another page needs goes here -->
+<script>window.OT_LATE = [
+  'medals.js',
+  'brackets.js',
+  'seeds.js',
+  'lowermeta.js',
+  'lower-district.js',
+  'sos.js',
+  'lower-regional.js',
+  'lower-section.js',
+  'lowerteams.js',
+  'duals.js',
+  'membership.js',
+  'missing.js',
+  'wstats.js',
+  'careers.js'
+];</script>
 <script src="app/model.js"></script>
 <script src="app/components.js"></script>
 <script src="app/units.js"></script>

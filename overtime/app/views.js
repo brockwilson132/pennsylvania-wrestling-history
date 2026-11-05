@@ -90,7 +90,7 @@
     const R = TL.rank.get(y) || []; const k = R.indexOf(v) + 1; const nn = NOUN[TL.kind];
     return `<b>${esc(r.name)}</b> · ${y} · <b class="num">${OT.r10(v)}</b>${r.est.has(y) ? ' est.' : ''}${r.who && r.who.get(y) ? ' · ' + esc(r.who.get(y)) : ''} · ${ordinal(k)} of ${R.length} ${nn[R.length === 1 ? 0 : 1]}`; };
   const showTip = (el) => { const t = document.getElementById('tltip'); if (!t || !el.dataset.c) return; t.innerHTML = tipFor(el.dataset.c); document.querySelectorAll('.tls i.hl').forEach((x) => x.classList.remove('hl')); el.classList.add('hl'); };
-  if (typeof document !== 'undefined') { document.addEventListener('mouseover', (e) => { const c = e.target.closest && e.target.closest('.tls i'); if (c) showTip(c); });
+  if (typeof document !== 'undefined' && !OT.tipWired) { OT.tipWired = true; document.addEventListener('mouseover', (e) => { const c = e.target.closest && e.target.closest('.tls i'); if (c) showTip(c); });
   document.addEventListener('click', (e) => { const c = e.target.closest && e.target.closest('.tls i'); if (c) showTip(c); }); }
 
   /* ---------- All-time team: weights × depth, as deep as you like ---------- */
