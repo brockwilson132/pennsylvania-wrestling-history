@@ -679,7 +679,7 @@
     let sheet = '';
     if (sel && sa === sb) sheet = seasonSheet(u, sa, null, team.get(sa));
     else if (sel) sheet = rangeSummary(u, sa, sb, rating, ind, team);
-    return `<div class="perf heat sgrid" data-perf="${esc(u.kind + ':' + u.id)}" data-y0="${y0}" data-cw="${cw}">${pill}<div class="pwrap"><div class="plabs" style="height:${H}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Season grid">${g}</svg></div></div><div class="plg">${legend}<span class="ptip" aria-live="polite"></span></div>${sheet}</div>`;
+    return `<div class="perf heat sgrid" data-perf="${esc(u.kind + ':' + u.id)}" data-y0="${y0}" data-cw="${cw}">${pill}<div class="pwrap"><div class="plabs" style="height:${H}px;flex-basis:${labW}px">${labs}</div><div class="pscr${scroll ? ' scroll' : ''}" data-y0="${y0}" data-y1="${y1}"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Season grid">${g}</svg></div></div><div class="plg">${legend}<span class="ptip" aria-live="polite"></span></div>${sheet}</div>`;
   }
   /* a range of seasons on a school: averages and totals across it */
   function rangeSummary(u, a, b, rating, ind, team) {

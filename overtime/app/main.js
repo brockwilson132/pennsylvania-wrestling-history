@@ -41,10 +41,21 @@
   let pop = '', sgOpen = false;
   /* The bottom bar: four tabs (what the page shows) around the filter button (which place, class and seasons).
      Map, Rankings, Timeline and Seasons are views of the place page; Rankings also holds the wrestlers and the
-     all-time team. The view is remembered for the session. */
+     all-time team. The view lives in the address (?v=rank, ?v=time, ?v=seasons; none = Map) and the Rankings list in
+     ?l=, so each tab is its own history entry: Back steps through the tabs, and a link opens the same tab. */
   const TABS = [['map', 'Map', 'v_map'], ['rank', 'Rankings', 'v_rank'], null, ['time', 'Timeline', 'v_time'], ['seasons', 'Seasons', 'v_seasons']];
   const VIEWK = ['map', 'rank', 'time', 'seasons'];
-  try { const v = sessionStorage.getItem('ot-view'); if (v === 'team') { state.view = 'rank'; state.child = 'team'; } else if (VIEWK.includes(v)) state.view = v; } catch (e) { /* none */ }
+  const PLACEP = ['state', 'region', 'district', 'school'];
+  const isPlace = (h) => { const m = /^#([a-z]+)(\/[^?]*)?/.exec(h || ''); return !!m && PLACEP.includes(m[1]) && (m[1] === 'state' || !!(m[2] && m[2].length > 1)); };
+  /* the same address with its view (and Rankings list) set; Map drops the parameter */
+  function withView(h, v, l) {
+    const [p, qs] = (h || '#state').split('?'); const q = new URLSearchParams(qs || ''); q.delete('b');
+    if (v && v !== 'map') q.set('v', v); else q.delete('v');
+    if (l !== undefined) { if (l) q.set('l', l); else q.delete('l'); }
+    const s = q.toString(); return p + (s ? '?' + s : '');
+  }
+  /* a link to another place keeps the tab you are on (the logo always goes home to the Map) */
+  const keepView = (h) => (isPlace(h) && !/[?&]v=/.test(h) && state.view !== 'map' ? withView(h, state.view) : h);
   if (!VIEWK.includes(state.view)) state.view = 'map';
   /* a school page has no map: its first tab is the season grid and its best wrestlers */
   const tabLabel = (k, l) => (k === 'map' && route().page === 'school' && route().id ? 'Overview' : l);
@@ -134,7 +145,7 @@
     if (!same(g.w.slice().sort(), state.f.weights.slice().sort())) { OT.clearFilters('weights'); g.w.forEach((k) => OT.toggleFilter('weights', k)); filt = true; }
     SCH = null; closePop();
     const h = hrefOf({ w: f.w && !f.who, r: g.r, d: g.d, s: g.s });
-    if (location.hash !== h) location.hash = h; else if (filt) changed();
+    const hv = keepView(h); if (location.hash !== hv) location.hash = hv; else if (filt) changed();
   }
   function paintPop() {
     if (!pop) return; const keepTop = fpop.dataset.pop === pop ? fpop.scrollTop : 0; fpop.innerHTML = `<div class="fpi">${POP[pop]()}</div>`; fpop.dataset.pop = pop; fpop.className = 'fpop' + (pop === 'menu' ? ' menu' : pop === 'search' ? ' menu gs' : '') + (pop === 'filters' ? ' flt' : ''); fpop.scrollTop = keepTop;
@@ -167,6 +178,8 @@
   let lastBase = '', lastHash = '';
   function render(keepScroll) {
     const { page, id, q, base } = route(); lastHash = location.hash;
+    if (PLACEP.includes(page)) { state.view = VIEWK.includes(q.v) ? q.v : 'map'; if (q.l) state.child = q.l; }
+    document.body.classList.remove('bars-off');
     if (!OT.full && !coreRoute(page, q)) { waiting = true; if (main.firstChild) { lastBase = ''; main.innerHTML = '<div class="card empty" role="status">Loading the archive…</div>'; } return; }
     if (base === lastBase && (q.b || bview && !bview.hidden)) { showBracket(q.b, page === 'wrestler' ? id : null); stamp(); return; }
     lastBase = base;
@@ -174,7 +187,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.lastRoute = page + '/' + id; }
-    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); edgeScroll(main); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -238,7 +251,7 @@
       h += hd('Wrestlers') + (ppl === null ? '<div class="fpn">Loading every wrestler…</div>' : ppl.length ? `<div class="gsp">${ppl.map(OT.personRow).join('')}</div>${ppl.length >= 25 ? '<div class="fpn">Top 25 by rating. Add more of the name or a school to narrow it.</div>' : ''}` : '<div class="fpn">No wrestler by that name.</div>');
       out.innerHTML = h; };
     let tm; inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(paint, 120); });
-    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const a = out.querySelector('a'); if (a) { location.hash = a.getAttribute('href'); closePop(); } } });
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const a = out.querySelector('a'); if (a) { location.hash = keepView(a.getAttribute('href')); closePop(); } } });
     OT.loadPeople().then(() => { if (pop === 'search' && inp.value.trim().length >= 2) paint(); });
     out.addEventListener('click', (e) => { if (e.target.closest('a')) closePop(); });
   }
@@ -257,8 +270,39 @@
     const [kd, ...rest] = box.dataset.perf.split(':'); const id = rest.join(':');
     const u = kd === 'state' ? OT.U.state() : kd === 'region' ? OT.U.region(id) : kd === 'district' ? OT.U.district(+id) : OT.U.school(id);
     const sx = box.querySelector('.pscr'), left = sx ? sx.scrollLeft : null; const key = box.dataset.perf; box.outerHTML = OT.perfChart(u);
-    const nb = main.querySelector(`.perf[data-perf="${CSS.escape(key)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left;
+    const nb = main.querySelector(`.perf[data-perf="${CSS.escape(key)}"] .pscr`); if (nb && left != null) nb.scrollLeft = left; edgeScroll(main);
   }
+  /* long season grids open at the newest seasons: a fade on the hidden side and a chip that jumps to the first
+     season (or back to the latest) show that there is more history sideways */
+  function edgeScroll(root) {
+    root.querySelectorAll('.pscr.scroll[data-y0]').forEach((el) => {
+      if (!el.parentElement.classList.contains('pedge')) {
+        const w = document.createElement('div'); w.className = 'pedge' + (el.classList.contains('tlx') ? ' axtop' : '');
+        const left = el.scrollLeft; el.before(w); w.append(el); el.scrollLeft = left; w.insertAdjacentHTML('beforeend', '<i class="pfade l" aria-hidden="true"></i><i class="pfade r" aria-hidden="true"></i><button type="button" class="pjump" data-pjump="l"></button>');
+      }
+      edgeState(el);
+    });
+  }
+  function edgeState(el) {
+    const w = el.parentElement, b = w.querySelector('.pjump'); if (!b) return;
+    const max = el.scrollWidth - el.clientWidth, atL = el.scrollLeft < 6, atR = el.scrollLeft > max - 6;
+    w.classList.toggle('fits', max < 6); w.classList.toggle('atl', atL); w.classList.toggle('atr', atR);
+    const back = !atL; b.dataset.pjump = back ? 'l' : 'r'; b.textContent = back ? '← ' + el.dataset.y0 : el.dataset.y1 + ' →';
+    b.setAttribute('aria-label', back ? 'Jump to the first season, ' + el.dataset.y0 : 'Jump to the latest season, ' + el.dataset.y1);
+  }
+  let edgeRaf = 0;
+  document.addEventListener('scroll', (e) => { const el = e.target; if (!el.classList || !el.classList.contains('pscr') || !el.parentElement.classList.contains('pedge')) return;
+    if (!edgeRaf) edgeRaf = requestAnimationFrame(() => { edgeRaf = 0; edgeState(el); }); }, true);
+  window.addEventListener('resize', () => edgeScroll(main));
+  /* on a phone the bottom bar (and the key on it) slides away while you scroll down and comes back when you scroll up,
+     at the top or at the end of the page */
+  let barY = window.scrollY, barRun = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY, dy = y - barY; barY = y; const B = document.body;
+    if (pop || window.innerWidth >= 720 || y < 80 || y + window.innerHeight >= document.documentElement.scrollHeight - 24) { B.classList.remove('bars-off'); barRun = 0; return; }
+    barRun = Math.sign(dy) === Math.sign(barRun) ? barRun + dy : dy;
+    if (barRun > 28) B.classList.add('bars-off'); else if (barRun < -28) B.classList.remove('bars-off');
+  }, { passive: true });
   /* hovering a season shows every line's value for it */
   document.addEventListener('mouseover', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) { const c = mk.closest('.mapcard'); c.querySelectorAll('[data-mk]').forEach((el) => el.classList.toggle('hlk', el.dataset.mk === mk.dataset.mk)); } });
   document.addEventListener('mouseout', (e) => { const mk = e.target.closest && e.target.closest('.mapcard [data-mk]'); if (mk) mk.closest('.mapcard').querySelectorAll('.hlk').forEach((el) => el.classList.remove('hlk')); });
@@ -299,9 +343,13 @@
   document.addEventListener('mouseout', (e) => { const h = e.target.closest && e.target.closest('.perf .hit, .perf .hcell, .perf .cc, .perf .hitc'); if (!h) return; const tip = h.closest('.perf').querySelector('.ptip'); if (tip) tip.textContent = ''; });
   document.addEventListener('change', (e) => { const inp = e.target.closest && e.target.closest('input[data-cmpadd]'); if (!inp || !state.cmp) return; const v = inp.value.trim(); const s = OT.UD.schools.find((x) => x.toLowerCase() === v.toLowerCase());
     if (s && !state.cmp.extra.includes(s) && state.cmp.extra.length < 3 && 'school:' + s !== state.cmp.key) { state.cmp.extra.push(s); state.cmp.on.add('s:' + s); } repaintPerf(inp.closest('.perf')); });
+  /* links to other places keep the tab you are on: the href is set just before the browser follows it */
+  document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a || a.id === 'brand') return;
+    const h = a.getAttribute('href'), k = keepView(h); if (k !== h) a.setAttribute('href', k); }, true);
   document.addEventListener('click', (e) => {
     /* filter bar and its popups */
     if (e.target.closest('.sgkey')) { sgOpen = !sgOpen; drawBar(); return; }
+    const pj = e.target.closest('button[data-pjump]'); if (pj) { const el = pj.parentElement.querySelector('.pscr'); if (el) el.scrollTo({ left: pj.dataset.pjump === 'l' ? 0 : el.scrollWidth, behavior: 'smooth' }); return; }
     const fb = e.target.closest('[data-fb]'); if (fb) { const k = fb.dataset.fb, f = F();
       void f; if (pop === k) closePop(); else openPop(k); return; }
     const tb = e.target.closest('[data-tab]'); if (tb) { const k = tb.dataset.tab, f = F(); closePop();
@@ -309,8 +357,10 @@
       const W = f.who ? OT.getWrestler(route().id) : null; const g = W ? { r: '', d: 0, s: W.sch, w: false } : f;
       if (W) { const u = OT.U.school(W.sch); g.d = u.d || 0; g.r = u.region || (u.d ? regionOfD(u.d) : ''); }
       if (f.w && k === 'rank' && !['wrestlers', 'team'].includes(state.child)) state.child = 'wrestlers';
-      const same = state.view === k && !f.w; state.view = k; try { sessionStorage.setItem('ot-view', k); } catch (er) { /* none */ }
-      if (f.w) location.hash = hrefOf({ ...g, w: false }); else if (same) window.scrollTo(0, 0); else { lastBase = ''; render(); } return; }
+      const onPlace = PLACEP.includes(route().page);
+      if (onPlace && !f.w && state.view === k) { window.scrollTo(0, 0); return; }
+      const to = onPlace && !f.w ? withView(route().base, k) : withView(hrefOf({ ...g, w: false }), k, f.w && k === 'rank' ? state.child : undefined);
+      location.hash = to; return; }
     if (e.target.closest('#sbtn')) { if (pop === 'search') closePop(); else openPop('search'); return; }
     if (e.target.closest('#mbtn')) { if (pop === 'menu') closePop(); else openPop('menu'); return; }
     if (e.target === fscrim) { closePop(); return; }
@@ -337,7 +387,7 @@
     if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
     const am = e.target.closest('button[data-attmode]'); if (am) { state.attMode = am.dataset.attmode; try { sessionStorage.setItem('ot-attmode', state.attMode); } catch (er) { /* none */ } render(true); return; }
     const ap = e.target.closest('button[data-attpick]'); if (ap) { const v = ap.dataset.attpick; if (state.attMode === 'weight') state.attW = v; else state.attTeam = +v; render(true); if (ap.closest('.atstep')) { const sec = main.querySelector('.atsec'); if (sec) window.scrollTo(0, Math.max(0, sec.getBoundingClientRect().top + window.scrollY - 76)); } return; }
-    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; lastBase = ''; render(true); return; }
+    const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; if (PLACEP.includes(route().page)) { const h = withView(location.hash, state.view, state.child); try { history.replaceState(history.state, '', h); } catch (er) { /* none */ } lastHash = location.hash; } lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }
@@ -380,7 +430,7 @@
   function slideTo(bl) {
     const box = bl.parentElement, top = box.getBoundingClientRect().top, me = bl.getBoundingClientRect().top;
     box.classList.add('sliding'); bl.classList.add('go'); bl.style.transform = `translateY(${top - me}px)`;
-    setTimeout(() => { location.hash = bl.getAttribute('href'); }, 280);
+    setTimeout(() => { location.hash = keepView(bl.getAttribute('href')); }, 280);
   }
   window.addEventListener('hashchange', () => render());
 

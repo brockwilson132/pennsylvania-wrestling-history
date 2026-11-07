@@ -1429,3 +1429,31 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .wqts.wqhero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:10px;max-width:760px;width:100%}@media(min-width:720px){.wqts.wqhero{grid-template-columns:repeat(6,minmax(0,1fr))}}.wqhero .wqt b{font-size:22px}
 @media(max-width:340px){.sgk b{font-size:8px;letter-spacing:0}}
 .wqm .wqc{justify-content:center}.wqm .wql{padding-left:0;text-align:center}
+/* flow fixes (2026-11-07) */
+/* off the Map tab the header is one line: the place, then the tab */
+.uhs .uht h1{font-size:24px;display:flex;align-items:baseline;gap:10px;min-width:0}
+.uhs .uht h1 .uhv{font:700 13px var(--cond);letter-spacing:.14em;color:var(--ash);flex:none}
+@media(min-width:720px){.uhs .uht h1{font-size:30px}}
+.sechs{justify-content:flex-end}.sechs:has(.ctl:empty),.sechs:empty{display:none}
+.uh2.uhs{padding:6px 0 8px}
+/* Compare: head to head from the top of a wrestler or school page */
+.whd{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}.whd h1{min-width:0}
+.cmpb{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:1px solid var(--line2);border-radius:999px;background:var(--slate);color:var(--chalk);font:700 13px var(--cond);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.cmpb::before{content:'';width:14px;height:14px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5h11M10 2l3 3-3 3M14 11H3M6 8l-3 3 3 3'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5h11M10 2l3 3-3 3M14 11H3M6 8l-3 3 3 3'/%3E%3C/svg%3E") center/contain no-repeat}
+.cmpb:hover{border-color:var(--gold)}
+/* sideways season grids: fade on the hidden side, a chip to jump to the first (or latest) season */
+.pedge{position:relative;display:block;flex:1;min-width:0;--pbg:var(--mat)}.pedge>.pscr{width:100%}
+.perf .pedge{--pbg:var(--slate)}
+.pfade{position:absolute;top:0;bottom:18px;width:28px;pointer-events:none;z-index:1;transition:opacity .2s}
+.pfade.l{left:0;background:linear-gradient(90deg,var(--pbg),transparent)}.pfade.r{right:0;background:linear-gradient(270deg,var(--pbg),transparent)}
+.pedge.atl .pfade.l,.pedge.atr .pfade.r,.pedge.fits .pfade{opacity:0}
+.pjump{position:absolute;bottom:-2px;left:0;z-index:3;height:22px;padding:0 9px;border-radius:999px;background:var(--slate2);border:1px solid var(--gold);color:var(--gold);font:700 12px/20px var(--cond);letter-spacing:.06em;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.pedge.atl .pjump{left:auto;right:0}
+.pedge.axtop .pfade{top:18px;bottom:0}.pedge.axtop .pjump{top:-3px;bottom:auto}
+.pedge.fits .pjump{display:none}
+/* the bottom bar slides away while scrolling down on a phone */
+.fbar{transition:transform .25s ease}
+@media(max-width:719px){body.bars-off .fbar{transform:translateY(calc(100% + 2px))}}
+@media(prefers-reduced-motion:reduce){.fbar{transition:none}}
+.pedge.axtop .pfade.l{display:none}
+@media(max-width:359px){.cmpb{width:40px;padding:0;justify-content:center;font-size:0;letter-spacing:0}.cmpb::before{width:16px;height:16px}}
