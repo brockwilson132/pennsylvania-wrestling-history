@@ -47,6 +47,10 @@ for y in $(seq 1974 2026); do for c in AAA AA; do k=$(cls $y $c)
     try "$OUT/regional/${y}_${r}_${c}.pdf" "${y}_${r}_${k}" "${y}_${r}_${c}" "${y}_${r}_${k}_Regional" "${y}_${r}_${c}_Regional"
   done
 done; done
+# The archive files the 1974 North West regionals under 1984 names (its 1973-74 season page links
+# 1984_North_West_A/B, and those PDFs are headed "1974 North West A/B Regional"); 1974_North_West_* do not exist.
+try "$OUT/regional/1974_North_West_AAA.pdf" "1984_North_West_A"
+try "$OUT/regional/1974_North_West_AA.pdf" "1984_North_West_B"
 for y in $(seq 1951 1973); do for r in North_East South_East South_West Central_North_West; do try "$OUT/regional/${y}_${r}_single.pdf" "${y}_${r}" "${y}_${r}_Regional"; done; done
 for y in 2021; do for r in East West; do for c in AAA AA; do try "$OUT/regional/${y}_${r}_${c}_Super.pdf" "${y}_${r}_${c}_Super_Regional" "${y}_Super_Region_${r}_${c}" "${y}_${r}_${c}_Super"; done; done; done
 for y in $(seq 2000 2026); do
