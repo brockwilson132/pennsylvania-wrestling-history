@@ -1,14 +1,3 @@
-entrants 400832 -> 400832, bouts 586693 -> 586693
+entrants 401048 -> 401048, bouts 586937 -> 586937
    1304  bouts: side still has no school (kept)
-      1  data/medals/1947_single.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1948_single.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1965_single.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1977_AA.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1993_AAA.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1997_AAA.csv: name spelled another way, filed under its one spelling
-      2  data/medals/1998_AA.csv: name spelled another way, filed under its one spelling
-      1  data/medals/1999_AAA.csv: name spelled another way, filed under its one spelling
-      1  data/medals/2017_AA.csv: name spelled another way, filed under its one spelling
-      1  data/sources/d3_champions.csv: name spelled another way, filed under its one spelling
-      1  data/sources/d7_champions.csv: name spelled another way, filed under its one spelling
     735  entrants: still no school (kept)
