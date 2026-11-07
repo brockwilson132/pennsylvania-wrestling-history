@@ -1544,3 +1544,20 @@ a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
 .wlg{padding:0 2px 6px}
 .cdcard .cd{row-gap:12px}
 @media(max-width:359px){.smx .cdc{grid-template-columns:16px 26px;gap:3px}.smx .cdc .dk{width:26px!important;height:26px!important;font-size:14px}.smx .cdl{padding-left:19px}.smx .cdh b{font-size:16px}}
+/* v5: the seasons-down matrix fills the card: big level icons, big medals, readable year / grade / weight */
+.smx{grid-template-columns:52px repeat(3,minmax(0,1fr));gap:10px 4px}
+.smx .cdl{padding-left:0;justify-content:center;display:flex}
+.smx .cdl .lvi{width:76px;justify-content:center;display:inline-flex;margin-left:24px}
+.smx .cdl .lvi svg{width:28px;height:28px;color:var(--ash)}
+.smx .cdh{gap:5px}.smx .cdh b{font-size:24px;line-height:.9}.smx .cdh i{font-size:13px;gap:6px;letter-spacing:.06em}.smx .cdh i em{color:var(--chalk);font-weight:800}
+.smx .cdc{grid-template-columns:26px 40px;gap:6px;justify-content:center}
+.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:26px}.smx .cdc .sgn .sgv{height:16px}
+.smx .cdc .dk{width:40px!important;height:40px!important;font-size:20px!important}
+.smx .cdc .dk.q{font-size:17px!important}
+@media(max-width:400px){.smx{grid-template-columns:44px repeat(3,minmax(0,1fr));gap:9px 2px}.smx .cdh b{font-size:21px}.smx .cdh i{font-size:12px;gap:4px}
+ .smx .cdc{grid-template-columns:22px 36px;gap:4px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:22px}.smx .cdc .sgn .sgv{height:14px}
+ .smx .cdc .dk{width:36px!important;height:36px!important;font-size:18px!important}.smx .cdl .lvi{margin-left:26px;width:36px}.smx .cdl .lvi svg{width:26px;height:26px}}
+@media(max-width:359px){.smx{grid-template-columns:40px repeat(3,minmax(0,1fr))}.smx .cdh b{font-size:19px}.smx .cdh i{font-size:10.5px;gap:3px;letter-spacing:.02em}
+ .smx .cdc{grid-template-columns:18px 32px;gap:3px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:18px}.smx .cdc .sgn .sgv{height:12px}
+ .smx .cdc .dk{width:32px!important;height:32px!important;font-size:16px!important}.smx .cdl .lvi{margin-left:21px;width:32px}.smx .cdl .lvi svg{width:22px;height:22px}}
+.wq{gap:10px}.wq .wtb{height:20px}.wq .wtb>span{font-size:12.5px}

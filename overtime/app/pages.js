@@ -205,7 +205,7 @@
       <div class="whd"><h1>${esc(W.name)}</h1><a class="cmpb" href="#h2h/${W.slug}~" aria-label="Compare ${esc(W.name)} head to head with another wrestler" title="Head to head">Compare</a></div><div class="sub wsub">${OT.stag(W.sch)}<span>${first === last ? first : first + '–' + last}</span>${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
       <div class="wqts wqhero"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span class="wqt"><i>${l}</i><b>${v}</b></span>`).join('')}</div></header>`;
     const wt4 = OT.winTypesOf(W.name, yrs), rc = OT.recordOf(W.name, yrs);
-    const tl = section('Career', `<div class="card cgcard cdcard"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${window.OT_CDB ? OT.careerDiscs(W.apps, W.lower, { full: W.full }) : OT.seasonRows(W.apps, W.lower, { full: W.full, link: true, sr: cr ? cr.seasons : [] })}<div class="wtw">${OT.winBar(wt4, rc)}${OT.winKey()}</div>${W.full ? '' : '<div class="note">Loading his full career…</div>'}</div>`);
+    const tl = section('Career', `<div class="card cgcard cdcard"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${OT.seasonRows(W.apps, W.lower, { full: W.full, link: true, sr: cr ? cr.seasons : [] })}<div class="wtw">${OT.winBar(wt4, rc)}${OT.winKey()}</div>${W.full ? '' : '<div class="note">Loading his full career…</div>'}</div>`);
     const bw = section('Best wins', `<div class="card" id="bestwins" data-w="${W.slug}">${bestWinsHTML(W)}</div>`);
     return head + tl + bw;
   };

@@ -354,13 +354,6 @@
       <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${OT.stag(w.sch)}<span>${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</span></small></span>${pk}</span>
       ${seasonRows(w.apps, w.lower, { sr })}${winBar(winTypesOf(w.name, years), recordOf(w.name, years))}</a>`;
   }
-  /* the wrestler page's second option: one column per season, a row per level, District on top and State at the bottom */
-  function careerDiscs(apps, lower, opts = {}) {
-    const M = OT.careerCells(apps, lower, { full: opts.full }), cols = M.cols, n = cols.length;
-    const rows = ['district', 'regional', 'state'].map((k) => { const row = M.rows.find((r) => r.k === k); return `<span class="cdl">${lvIcon(k)}</span>` + row.cells.map((c) => dcell(c, k, true)).join(''); }).join('');
-    return `<div class="cd" style="--n:${n}"><span></span>${cols.map(yhead).join('')}${rows}</div>`;
-  }
-
   /* ---------- unit card ----------
      Rating is the graphic: a mini chart of the unit's rating across the window with the 1500 line. Beside it Score and one
      podium per level that counts on this page (State; + Regional on a Region page; + District on District and School). */
@@ -770,5 +763,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, careerDiscs, winBar, rtgBars, sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, winBar, rtgBars, sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
