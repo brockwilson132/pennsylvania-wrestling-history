@@ -98,8 +98,8 @@ lowerFiles.filter((fp) => /-(district|section)\.json$/.test(fp)).forEach((fp) =>
 });
 const cov = new Set(); fullCnt.forEach((n, k) => { if (n >= 24) cov.add(k); }); // more than champions + runners-up for ~12 weights
 /* weights contested per (year, class) */
-const nW = new Map();
-APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + clsOf(a); const s = nW.get(k) || new Set(); s.add(a.std); nW.set(k, s); });
+const nW = new Map(), nWA = new Map();
+APP.filter((a) => a.lvl === 'state').forEach((a) => { const k = a.year + '|' + clsOf(a); const s = nW.get(k) || new Set(); s.add(a.std); nW.set(k, s); const t = nWA.get(k) || new Set(); t.add(a.w); nWA.set(k, t); });
 
 /* ---- real season ratings (tools/ratings.py entrant_ratings.csv: every entrant, sections included) ----
    The app hides first-round-only ratings, so overtime/sos leaves them out; Strength needs them, so read the season
@@ -210,7 +210,7 @@ bySS.forEach((rows, k) => {
   let reg = regionOf(year, c, d) || (rows.find((a) => a.lvl === 'regional' && a.unit) || {}).unit || ''; if (reg === 'W') reg = 'SW'; if (!['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(reg)) reg = '';
   const covered = cov.has(year + '|' + c + '|' + d);
   const per = new Map(); // wrestler → {std, real, shown, D,R,S}
-  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, real: null, shown: 0, X: -1, D: -1, R: -1, S: -1 };
+  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, shown: 0, X: -1, D: -1, R: -1, S: -1 };
     if (a.real != null && (p.real == null || a.real > p.real)) p.real = a.real; p.shown = Math.max(p.shown, a.rating);
     const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
   const best = new Map(), unrated = new Set(); per.forEach((p) => { if (p.real == null) { unrated.add(p.std); return; } const b = best.get(p.std); if (!b || p.real > b.real) best.set(p.std, p); });
@@ -232,7 +232,11 @@ bySS.forEach((rows, k) => {
     topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
   /* the lineup as far as regionals show it (regional and state entrants): all we can see where the district field is not on file */
   const bestR = new Map(); per.forEach((p) => { if (p.real == null || (p.R < 0 && p.S < 0)) return; const b = bestR.get(p.std); if (!b || p.real > b.real) bestR.set(p.std, p); });
-  SEAS.push({ row, lineup, weights, sch, covered, blind, c, year, d, best, bestR, med: Array.from(per.values()).filter((p) => p.S > 0).map((p) => p.S).sort((a, b) => a - b).join('') });
+  /* the lineup by the season's own weights (not weight brackets): [weight, his rating, his rating if he reached regionals] */
+  const ws = Array.from(nWA.get(year + '|' + c) || new Set(rows.map((a) => a.w))).sort((a, b) => a - b);
+  const bw = new Map(), bwR = new Map(); per.forEach((p) => { if (p.real == null) return; const w = p.w; if (!bw.has(w) || p.real > bw.get(w).real) bw.set(w, p); if ((p.R >= 0 || p.S >= 0) && (!bwR.has(w) || p.real > bwR.get(w).real)) bwR.set(w, p); });
+  const lw = ws.map((w) => [w, bw.get(w) ? bw.get(w).real : null, bwR.get(w) ? bwR.get(w).real : null, bw.get(w) || null, bwR.get(w) || null]);
+  SEAS.push({ lw, row, lineup, weights, sch, covered, blind, c, year, d, best, bestR, med: Array.from(per.values()).filter((p) => p.S > 0).map((p) => p.S).sort((a, b) => a - b).join('') });
   if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, Math.round(p.real), p.D, p.R, p.S]); }
 });
 /* the reference: the average AAA starter (a school's best wrestler at a weight, weights with nobody left out), over
@@ -294,7 +298,7 @@ byS.forEach((rows, i) => {
    At each weight the two lineups' wrestlers meet at their season ratings: the chance of each result comes from the
    rating gap, so a 50-point edge isn't a sure win. Win chance on the rating scale (400); given a win, the split between
    decision 3, major 4, tech fall 5 and fall 6 comes from every 2010-26 bout between two rated wrestlers at that gap, so
-   every era is scored by today's rules. A weight with nobody entered is a forfeit (6). Weights are matched by weight
+   every era is scored by today's rules. A weight with nobody entered is scored as a district entrant who didn't place. Weights are matched by weight
    bracket (STDK); a weight only one season contested isn't wrestled, and the score is scaled to 13 bouts. A dual's win
    chance is the normal approximation of the team-score difference. Ranking = share of the 500 duals won.
    Where the district field is not on file (D3 and D7 1975-98, and seasons with an unrated entrant) the lineup is what
@@ -343,24 +347,43 @@ byS.forEach((rows, i) => {
     R.forEach((r, j) => { if (r == null) (UNK.get(k) || UNK.set(k, []).get(k)).push(s.lineup[j]); }); });
   const FILL = new Map(); UNK.forEach((a, k) => { const f = a.filter((v) => v == null).length / a.length, v = a.filter((x) => x != null).sort((p, q) => p - q);
     FILL.set(k, [[null, f]].concat([0.1, 0.3, 0.5, 0.7, 0.9].map((q) => [v[Math.floor(q * (v.length - 1))], (1 - f) / 5]))); });
+  /* an empty weight (nobody entered in the postseason) is not a forfeit: the school had someone in the room who didn't make
+     the postseason lineup, so he is scored as a typical district entrant who didn't place, of the same era (five rating
+     quantiles). The same rule for every era and district. SEASON_EMPTY=forfeit scores it as a forfeit instead. */
+  const BK = [0, 1].map((e) => { const v = []; SEAS.forEach((s) => { if (s.year < SEASON_FROM || eraOf(s.year) !== e || !s.covered) return;
+    s.lw.forEach((l) => { const p = l[3]; if (p && p.D === 0 && p.R < 0 && p.S < 0) v.push(p.real); }); }); v.sort((p, q) => p - q);
+    return [0.1, 0.3, 0.5, 0.7, 0.9].map((q) => [v[Math.floor(q * (v.length - 1))], 0.2]); });
+  const FORFEIT = process.env.SEASON_EMPTY === 'forfeit';
+  const empty = (y, wt) => (FORFEIT ? [[null, wt]] : BK[eraOf(y)].map(([r, w]) => [r, w * wt]));
+  console.log('empty weight scored as a district non-placer, era quantiles:', BK.map((b) => b.map((x) => Math.round(x[0])).join('/')).join(' | '), FORFEIT ? '(off: forfeit)' : '');
+  FILL.forEach((f, k) => { const e = +k.split('|')[0]; FILL.set(k, f.flatMap(([r, w]) => (r == null ? empty(e ? 2000 : 1990, w) : [[r, w]]))); });
   /* the pool: every school season from 1974 with a lineup we can see */
   const pool = [];
   SEAS.forEach((s) => { if (s.year < SEASON_FROM || !s.weights.length) return; const exact = s.covered && !s.blind && s.row[5]; const R = regLine(s);
     if (!exact && !R.some((r) => r != null)) return;
-    const slot = new Array(STDK.length); const fill = exact ? null : FILL.get(eraOf(s.year) + '|' + binOf(s, R));
-    s.weights.forEach((i, j) => { slot[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; });
+    const fill = exact ? null : FILL.get(eraOf(s.year) + '|' + binOf(s, R));
+    /* one slot per weight the season actually had, lightest first (a weight bracket of STDK can hold two of a season's
+       weights, 130 and 135 in 2002-11 or 182 and 195 in 2012-23, so slots are by position, not by bracket) */
+    const lw = s.lw; const slot = lw.map((x) => (exact ? (x[1] != null ? [[x[1], 1]] : empty(s.year, 1)) : x[2] != null ? [[x[2], 1]] : fill));
+    if (process.env.SEASON_ALIGN === 'bucket') { const o = new Array(STDK.length); s.weights.forEach((i, j) => { o[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; }); pool.push({ s, slot: o, est: !exact }); return; }
     pool.push({ s, slot, est: !exact }); });
-  const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0;
-    for (let b = 0; b < A.length; b++) { const a = A[b], c = B[b]; if (!a || !c) continue; n++;
+  /* two lineups meet weight by weight; when one season had more weights, each of its weights meets the other's weight at the
+     same relative position (lightest to lightest, heaviest to heaviest) */
+  const pairs = (n, m) => { const N = Math.max(n, m), out = []; for (let k = 0; k < N; k++) out.push([N === 1 ? 0 : Math.round(k * (n - 1) / (N - 1)), N === 1 ? 0 : Math.round(k * (m - 1) / (N - 1))]); return out; };
+  const PAIRS = new Map(); const pairsOf = (n, m) => { const k = n * 100 + m; return PAIRS.get(k) || PAIRS.set(k, pairs(n, m)).get(k); };
+  const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0; const bucket = process.env.SEASON_ALIGN === 'bucket';
+    const P = bucket ? null : pairsOf(A.length, B.length);
+    for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : A[P[b][0]], c = bucket ? B[b] : B[P[b][1]]; if (!a || !c) continue; n++;
       if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
       let mm = 0, ee = 0; for (const [ra, wa] of a) for (const [rb, wb] of c) { const r = bout(ra, rb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
     return n ? [m * 13 / n, q * 13 / n, h * 13 / n] : [0, 1, 0]; };
   const Phi = (z) => 0.5 * (1 + Math.tanh(0.7978845608 * (z + 0.044715 * z * z * z)));
   /* the 500: best by expected margin against every season (opponents at each weight pooled, rounded to 10 points) */
-  const H = STDK.map(() => new Map()), HN = STDK.map(() => 0);
-  pool.forEach((p) => p.slot.forEach((o, b) => { if (!o) return; HN[b]++; o.forEach(([r, w]) => { const k = r == null ? 'x' : Math.round(r / 10) * 10; H[b].set(k, (H[b].get(k) || 0) + w); }); }));
-  const HA = H.map((m, b) => Array.from(m).map(([k, w]) => [k === 'x' ? null : k, w / HN[b]]));
-  pool.forEach((p) => { let m = 0, n = 0; p.slot.forEach((o, b) => { if (!o) return; n++; for (const [ra, wa] of o) for (const [rb, wb] of HA[b]) m += wa * wb * bout(ra, rb)[0]; }); p.m1 = n ? m * 13 / n : -99; });
+  const NB = 14, posB = (j, n) => (n <= 1 ? 0 : Math.round(j * (NB - 1) / (n - 1)));
+  const H = Array.from({ length: NB }, () => new Map()), HN = new Array(NB).fill(0);
+  pool.forEach((p) => p.slot.forEach((o, j) => { if (!o) return; const b = posB(j, p.slot.length); HN[b]++; o.forEach(([r, w]) => { const k = r == null ? 'x' : Math.round(r / 10) * 10; H[b].set(k, (H[b].get(k) || 0) + w); }); }));
+  const HA = H.map((m, b) => Array.from(m).map(([k, w]) => [k === 'x' ? null : k, w / Math.max(1, HN[b])]));
+  pool.forEach((p) => { let m = 0, n = 0; p.slot.forEach((o, j) => { if (!o) return; n++; for (const [ra, wa] of o) for (const [rb, wb] of HA[posB(j, p.slot.length)]) m += wa * wb * bout(ra, rb)[0]; }); p.m1 = n ? m * 13 / n : -99; });
   let field = pool.slice().sort((a, b) => b.m1 - a.m1).slice(0, FIELD_N);
   /* expected: chance of winning each dual; hard: the dual scored with cutoffs, a win 1, a tie a half */
   const rate = (F) => pool.forEach((p) => { let w = 0, m = 0, n = 0, hw = 0, hm = 0; for (const o of F) { if (o === p) continue; const [mm, v, hh] = dual(p.slot, o.slot); w += Phi(mm / Math.sqrt(v + 1e-9)); m += mm; hw += hh > 0.05 ? 1 : hh < -0.05 ? 0 : 0.5; hm += hh; n++; } p.win = w / n; p.mar = m / n; p.hwin = hw / n; p.hmar = hm / n; });
@@ -368,6 +391,10 @@ byS.forEach((rows, i) => {
   /* once more against the 500 best by the duals themselves */
   field = pool.slice().sort((a, b) => b.win - a.win).slice(0, FIELD_N); rate(field);
   pool.sort((a, b) => b.win - a.win || b.mar - a.mar);
+  if (process.env.SEASON_DEBUG) { const [x, y] = process.env.SEASON_DEBUG.split(',').map((k) => pool.find((p) => p.s.sch + '|' + p.s.year + '|' + p.s.c === k));
+    const P = pairsOf(x.slot.length, y.slot.length); let tot = 0;
+    P.forEach(([i, j]) => { const a = x.slot[i], b = y.slot[j]; let r = 0, h = 0; for (const [ra, wa] of a) for (const [rb, wb] of b) { r += wa * wb * bout(ra, rb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', x.s.lw[i][0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', y.s.lw[j][0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
+    console.log('  expected margin', tot.toFixed(1), 'ranks', pool.indexOf(x) + 1, pool.indexOf(y) + 1); }
   console.log(`school seasons as duals: ${pool.length} seasons (${pool.filter((p) => p.est).length} with weights filled), field ${FIELD_N}, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
   { const hr = pool.slice().sort((a, b) => b.hwin - a.hwin || b.hmar - a.hmar); const hk = new Map(hr.map((p, i) => [p, i + 1]));
     pool.forEach((p) => { p.hrk = hk.get(p); });
@@ -378,13 +405,13 @@ byS.forEach((rows, i) => {
              two with hard cutoffs, weights
              filled (1) or field on file (0), Strength, state points, state titles, state medals, team title, state places ('1135')]
      seasons/<first letter of the school slug>.json (loaded when a row is opened): { slug: { year: lineup } }, lineup =
-       [[weight bracket, name, rating, district place, regional place, state place], ...] (place -1 not there, 0 entered
+       [[weight (999 = heavyweight), name, rating, district place, regional place, state place], ...] (place -1 not there, 0 entered
        without a place; a weight with nobody is [weight bracket]) */
   const slugS = (x) => String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const LB = {};
-  const rows = pool.map((p) => { const s = p.s, r = s.row, src = p.est ? s.bestR : s.best;
+  const rows = pool.map((p) => { const s = p.s, r = s.row;
     const sl = slugS(s.sch); if (sl) { const o = (LB[sl[0]] = LB[sl[0]] || {}); const x = o[sl] || (o[sl] = {});
-      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.weights.map((i) => { const w = src.get(i); return w ? [i, w.name, Math.round(w.real), w.D, w.R, w.S] : [i]; }); }
+      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.lw.map((l) => { const w = p.est ? l[4] : l[3]; return w ? [l[0], w.name, Math.round(w.real), w.D, w.R, w.S] : [l[0]]; }); }
     return [r[0], s.year, s.c === 'AA' ? 1 : 0, r[3], r[4], Math.round(1000 * p.win), Math.round(10 * p.mar), Math.round(1000 * p.hwin), Math.round(10 * p.hmar), p.est ? 1 : 0, r[5], r[6], r[9], r[10] + r[11], r[15], s.med]; });
   fs.writeFileSync(path.join(OV, 'seasons.json'), JSON.stringify({ field: FIELD_N, from: SEASON_FROM, w: STDK.map((x) => x[0]), rows }));
   const dir = path.join(OV, 'seasons'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
