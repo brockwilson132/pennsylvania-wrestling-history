@@ -198,17 +198,23 @@
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
-  /* bracket header: the same bar lying flat on the same scale, with ticks for the average bracket at its own level and at
-     every level above it (a district header shows district, regional and state), labelled under the track */
-  const TICK_L = { district: 'Avg district', regional: 'Avg regional', state: 'Avg state' };
+  /* bracket header: tier name on the left, signal bars beside the exact number on the right, then the six tiers of the
+     bracket's own level in a row (each level's 5th to 95th percentile in six equal steps, the cut points the signal bars
+     use everywhere). A tier is a category: the bracket's tier is lit, the others are off. No sentences. */
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
-    const f = sFrac(v, lvl), p = pctIn(v, lvl), L = sAnchor().lvl;
-    const from = { state: 0, regional: 1, district: 2, section: 2 }[lvl] ?? 0;   // ticks for this level and every level above it
-    const ticks = ['state', 'regional', 'district'].slice(0, from + 1).map((k) => [k, L[k]]).filter((t) => t[1] != null).reverse();
-    const st = sgTier(v, lvl);
-    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><span class="fgsg">${sgSvg(st)}<i style="color:${sgCol(st)}">${SG_N[st]}</i><b style="color:${colorAt(f)}">${r10(v)}</b></span></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i>${ticks.map(([k, a]) => `<u style="left:${(100 * sFrac(a)).toFixed(1)}%"></u>`).join('')}</span>${ticks.length ? `<span class="fgtk">${ticks.map(([k, a]) => `<s style="left:${(100 * sFrac(a)).toFixed(1)}%" title="Average ${k} bracket ${r10(a)}">${TICK_L[k]}</s>`).join('')}</span>` : ''}<em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
+    const l = sgLvl(lvl), C = sgCuts(l); if (!C.length) return '';
+    const st = sgTier(v, l);
+    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i></i><s>${n}</s></span>`).join('');
+    return `<div class="bvs" title="${esc(fieldTip(v, lvl))}">
+      <small class="bvsl">Strength of competition</small>
+      <div class="bvs1"><b class="bvst" style="color:${sgCol(st)}">${SG_N[st]}</b><span class="bvsn">${sgSvg(st, ' big')}<b>${r10(v)}</b></span></div>
+      <div class="bvsk">${segs}</div>
+    </div>`;
   }
+
+
+
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
@@ -738,5 +744,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
