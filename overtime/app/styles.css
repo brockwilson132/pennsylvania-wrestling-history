@@ -1446,7 +1446,7 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .zsw{font:800 13px var(--cond);color:var(--ash)}
 .zsm{font:700 14px var(--cond);color:var(--chalk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.zsm.zsx0{color:var(--ash2);font-weight:500;font-style:italic}
 .zsv{font:900 13px var(--cond);text-align:center;color:var(--chalk);border-radius:5px;padding:2px 0;background:color-mix(in srgb,var(--tint) 38%,var(--slate))}
-.zsr .wqp{justify-self:center}
+.zsf{display:flex;justify-content:center}
 .sxh.zsh,.zsx .sxr{grid-template-columns:22px minmax(0,1fr) 84px 76px;column-gap:8px}
 .zsx .sxr{height:64px}
 @media(min-width:720px){.sxh.zsh,.zsx .sxr{grid-template-columns:30px minmax(0,1fr) 110px 96px;column-gap:14px}.zsx .sxr .zsy{font-size:24px}.zsx .sxr .vt b{font-size:17px}.zsl{max-width:560px}}

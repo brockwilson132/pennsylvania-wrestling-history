@@ -57,13 +57,14 @@
     return { sortSeg: seg, html: `<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
   }
   /* an opened row: the lineup, weight by weight */
-  const fin = (p, lvl) => (p == null || p < 0 ? '<span class="wqp x">–</span>' : p ? `<span class="wqp ${OT.pc ? OT.pc(p) : ''}">${ordinal(p)}</span>` : '<span class="wqp q">Q</span>');
+  /* finishes as the wrestler card's medal discs: place, Q (entered, no place), dash (not there) */
+  const fin = (p) => `<span class="zsf">${p == null || p < 0 ? '<span class="dk none"></span>' : p ? `<span class="dk p${Math.min(p, 5)}" title="${ordinal(p)}">${p}</span>` : '<span class="dk q">Q</span>'}</span>`;
   function fillLineup(el) {
     const key = el.dataset.sslb; if (!key) return; const [sl, yk] = key.split('|'); const c = sl[0];
     const draw = (d) => {
       const L = d && d[sl] && d[sl][yk]; if (!L) { el.textContent = 'No lineup on file.'; return; }
       const r = SD.rows.find((x) => slug(S[x[C.sch]]) === sl && String(x[C.y]) + (x[C.cls] ? 'b' : '') === yk); const est = r && r[C.est];
-      const rows = L.map(([w, name, rt, D, R, St]) => `<div class="zsr"><span class="zsw">${w >= 999 ? 'Hwt' : w}</span>${name ? `<span class="zsm">${esc(name)}</span><span class="zsv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${fin(D, 'D')}${fin(R, 'R')}${fin(St, 'S')}` : `<span class="zsm zsx0">${est ? 'not on file' : '—'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
+      const rows = L.map(([w, name, rt, D, R, St]) => `<div class="zsr"><span class="zsw">${w >= 999 ? 'Hwt' : w}</span>${name ? `<span class="zsm">${esc(name)}</span><span class="zsv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${fin(D)}${fin(R)}${fin(St)}` : `<span class="zsm zsx0">${est ? 'not on file' : '—'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
       el.innerHTML = `<div class="zsr zsrh"><span>Wt</span><span>Wrestler</span><span>RTG</span><span>Dist</span><span>Reg</span><span>State</span></div>${rows}`
 ;
     };
