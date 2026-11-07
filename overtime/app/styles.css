@@ -1429,3 +1429,24 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .wqts.wqhero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:10px;max-width:760px;width:100%}@media(min-width:720px){.wqts.wqhero{grid-template-columns:repeat(6,minmax(0,1fr))}}.wqhero .wqt b{font-size:22px}
 @media(max-width:340px){.sgk b{font-size:8px;letter-spacing:0}}
 .wqm .wqc{justify-content:center}.wqm .wql{padding-left:0;text-align:center}
+/* School seasons (Rankings): school tag + season line, then Titles · Expected · Cutoffs · Medals; an opened row shows the lineup */
+.sck{font-size:12.5px;line-height:1.45;color:var(--ash);margin:0 0 12px;max-width:880px}.sck b{color:var(--chalk);font-weight:700}
+.scx .sxr .scn{gap:4px;align-items:flex-start}.scx .sxr .scn .stag{max-width:100%}
+.scx .sxr .vtt b{color:#F2D79A}.scx .sxr .vtd b{color:var(--chalk)}
+.scx .sxr .vt b{font-size:14.5px}
+.scl{display:flex;flex-direction:column;font-size:13px;color:var(--ash)}
+.scr{display:grid;grid-template-columns:34px minmax(0,1fr) 40px 34px 34px 34px;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line)}
+.scrh{font:700 10px var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash2);border-bottom:1px solid var(--line2)}
+.scrh span:nth-child(n+3){text-align:center}
+.scw{font:800 13px var(--cond);color:var(--ash)}
+.scm{font:700 14px var(--cond);color:var(--chalk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scm.scx0{color:var(--ash2);font-weight:500;font-style:italic}
+.scv{font:900 13px var(--cond);text-align:center;color:var(--chalk);border-radius:5px;padding:2px 0;background:color-mix(in srgb,var(--tint) 38%,var(--slate))}
+.scr .wqp{justify-self:center}
+@media(min-width:720px){
+  .sxh.sch,.scx .sxr{grid-template-columns:30px minmax(0,1fr) 64px 84px 84px 64px;column-gap:10px}
+  .scx .sxr .vt b{font-size:16px}
+  .scl{max-width:560px}
+}
+@media(max-width:719px){.sxh.sch,.scx .sxr{grid-template-columns:18px minmax(0,1fr) 30px 56px 56px 32px;column-gap:5px}}
+@media(max-width:379px){.sxh.sch,.scx .sxr{grid-template-columns:16px minmax(0,1fr) 26px 52px 52px 28px;column-gap:4px}.scx .sxr .vt b{font-size:13px}}
+@media(max-width:719px){.scx .sxr .scn .stag{font-size:10.5px;letter-spacing:.03em;padding-right:7px}}
