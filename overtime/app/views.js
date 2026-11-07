@@ -115,7 +115,7 @@
       if (!c) res = `<span class="sr0">${col ? '–' : ''}</span>`;
       else if (lvl === 'state') res = c.place ? `<span class="yp ${OT.pc(c.place)}" title="${tip} ${ordinal(c.place)}">${ordinal(c.place)}</span>` : `<span class="yp q" title="${tip} qualifier">Q</span>`;
       else res = `<span class="srl" title="${tip}${c.place ? ' ' + ordinal(c.place) : c.q ? ', advanced' : ', did not place'}">${LV_SHORT[lvl]} ${c.place ? ordinal(c.place) : c.q ? 'Q' : 'DNP'}</span>`;
-      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, 'district', `${col.year} ${lvl}`) : '<span class="smtr sm0"><i></i></span>'}${res}</span>`;
+      return `<span class="sx"><span class="sg">${yr || OT.GRADE_L[i]}${yr ? `<i>${OT.GRADE_L[i]}</i>` : ''}</span>${f ? OT.sbar(f, c.sec ? 'section' : lvl, `${col.year} ${lvl}`) : '<span class="sgn sg0"></span>'}${res}</span>`;
     }).join('');
   }
   /* the left bar: peak RTG on a fixed scale from the average state qualifier (1500) to 2200, about the best on record, so the
@@ -128,15 +128,40 @@
     const vbar = `<span class="atv" title="${s.rtg ? `Peak RTG ${OT.rtg10(s.rtg)} · bar runs from ${VLO} (average state qualifier) to ${VHI}` : 'No rating'}"><i style="height:${(100 * vf).toFixed(0)}%;background:${s.rtg ? OT.colorAt(vf) : 'transparent'}"></i></span>`;
     return `<a class="atc" href="${s.href}">${vbar}<span class="atl"><span class="atn"><b>${esc(s.name)}</b></span>${s.rtg ? OT.rtgTag(s.rtg, { size: 'xs' }) : ''}${u.kind === 'school' ? '' : `<small>${OT.stag(s.sch)}</small>`}</span>${lines ? `<span class="ats">${lines}</span>` : ''}</a>`;
   }
-  function teamGrid(u) {
-    const D = Math.max(3, state.attN || 3);
-    const T0 = OT.allTimeTeams(u, D);
-    if (T0 === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';
+  /* one column at a time on phones (wider screens show the next one or two beside it): By team = one team, lightest to
+     heaviest; By weight = one weight, 1st team down. The teams are always built ATT_DEPTH deep and filled one team at a
+     time, so a team never changes with how many are shown. */
+  const ATT_DEPTH = 25;
+  function attParts(u) {
+    const T0 = OT.allTimeTeams(u, ATT_DEPTH);
+    if (T0 === null) return { body: '<div class="card empty" data-need-people="1">Loading every wrestler…</div>' };
     const T = state.f.weights.length ? T0.filter((x) => state.f.weights.includes(x.c.k)) : T0;
-    if (!T.length) return OT.empty('No one on record yet.');
-    const team = (i) => ordinal(i + 1);
-    const grid = `<div class="atg" style="--c:${D}"><span class="ath atw"></span>${d3.range(D).map((i) => `<span class="ath">${team(i)} team</span>`).join('')}${T.map(({ c, slots }) => `<span class="atw">${c.label}</span>${slots.map((s) => chip(s, u)).join('')}`).join('')}</div>`;
-    return `<div class="atx">${grid}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Each card lists his seasons FR to SR: the bar is the strength of the last bracket he wrestled that season, on one scale for every level, where the average state bracket sits at the orange mark.</div>`;
+    if (!T.length) return { body: OT.empty('No one on record yet.') };
+    const nT = Math.max(...T.map((x) => x.slots.reduce((m, s, i) => (s ? i + 1 : m), 0)));
+    const mode = state.attMode === 'weight' ? 'weight' : 'team';
+    const team = Math.min(Math.max(0, state.attTeam || 0), nT - 1);
+    const wx = Math.max(0, T.findIndex((x) => x.c.k === state.attW));
+    const cur = mode === 'team' ? team : wx, n = mode === 'team' ? nT : T.length;
+    const key = (i) => (mode === 'team' ? i : T[i].c.k);
+    const name = (i) => (mode === 'team' ? `${ordinal(i + 1)} team` : T[i].c.label === 'Hwt' ? 'Heavyweight' : T[i].c.label + ' lbs');
+    const btn = (d, cls, txt) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="${cls}" data-attpick="${key(i)}" aria-label="${name(i)}">${txt}</button>` : `<button type="button" class="${cls}" disabled aria-hidden="true">${txt}</button>`; };
+    const ctl = `<div class="atctl"><div class="seg sm" role="group" aria-label="Show"><button type="button" data-attmode="team" aria-pressed="${mode === 'team'}">By team</button><button type="button" data-attmode="weight" aria-pressed="${mode === 'weight'}">By weight</button></div>`
+      + `<div class="atnav">${btn(-1, 'atar', '‹')}<label class="atsel"><select data-attsel aria-label="${mode === 'team' ? 'Team' : 'Weight'}">${d3.range(n).map((i) => `<option value="${key(i)}"${i === cur ? ' selected' : ''}>${name(i)}</option>`).join('')}</select></label>${btn(1, 'atar', '›')}</div></div>`;
+    /* the picked column and the next one; CSS shows one on phones, two on wide screens (as the Wrestlers list does) */
+    const cols = d3.range(cur, Math.min(n, cur + 2));
+    const nRows = mode === 'team' ? T.length : Math.max(...cols.map((i) => T[i].slots.reduce((m, s, j) => (s ? j + 1 : m), 0)));
+    /* the standard wrestler card (as on the Wrestlers list); the weight or team sits where that list shows the rank */
+    const card = (c, l) => { const W = OT.getWrestler(c.href.replace('#wrestler/', ''));
+      if (!W || !(W.apps.length || (W.lower && W.lower.length))) return chip(c, u);
+      return OT.wrestlerCard({ name: c.name, sch: c.sch, href: c.href, apps: W.apps, lower: W.lower && W.lower.length ? W.lower : OT.lowerFor(W.apps) }, l, { noSchool: u.kind === 'school' }); };
+    const lab = (r) => (mode === 'team' ? T[r].c.label : ordinal(r + 1));
+    const cell = (r, i) => (mode === 'team' ? T[r].slots[i] : T[i].slots[r]);
+    const grid = `<div class="atcol ${mode} n${cols.length}">${cols.map((i, k) => `<span class="atcap k${k}">${name(i)}</span>`).join('')}`
+      + d3.range(nRows).map((r) => { const cells = cols.map((i) => cell(r, i)); if (mode === 'weight' && !cells[0] && cells.every((c) => !c)) return '';
+        return cells.map((c, k) => (c ? card(c, lab(r)).replace(/^<a class="(wq|atc)"/, (m0, c0) => `<a class="${c0} k${k}"`) : `<div class="atc none k${k}${k ? '' : ' x0'}"></div>`)).join(''); }).join('') + '</div>';
+    const step = (d, cls) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="chipb ${cls}" data-attpick="${key(i)}">${d < 0 ? '‹ ' : ''}${name(i)}${d > 0 ? ' ›' : ''}</button>` : '<span></span>'; };
+    return { body: `${ctl}${grid}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Teams fill in order, 1st team first; a weight with nobody left takes the best remaining wrestler who also wrestled there. Teams go as deep as the records allow, up to ${ATT_DEPTH}.</div>` };
   }
+  const teamGrid = (u) => attParts(u).body;
   Object.assign(OT, { timelineView, teamGrid });
 })();

@@ -457,23 +457,22 @@ var OT = window.OT || (window.OT = {});
     const pool = PEOPLE.filter((p) => p.tw && inU(p) && personScope(p)); if (!pool.length) return [];
     const byW = d3.group(pool, (p) => p.tw);
     const slotOf = (p, k, alt) => ({ name: p.name, sch: p.sch, d: p.d, href: '#wrestler/' + p.slug, rtg: p.peak, years: p.y0 === p.y1 ? String(p.y0) : `${p.y0}–${p.y1}`, sres: p.sres, rB: p.rB, dB: p.dB, rT: p.rT, dT: p.dT, value: attValue(p), w: k, alt: !!alt });
-    const used = new Set();
-    const rows = STD.filter((c) => byW.has(c.k)).map((c) => { const ranked = byW.get(c.k).slice().sort(attCmp);
-      const slots = ranked.slice(0, depth).map((p) => { used.add(p); return slotOf(p, c.k); });
-      return { c, slots }; });
-    /* a weight with open slots is filled by wrestlers who also wrestled it but did not make a team at their own weight
+    /* filled one team at a time, so a team never depends on how deep the list goes: each weight first takes its best
+       unused wrestler of its own; a weight with nobody left then takes the best unused wrestler who also wrestled it
        (still one weight per wrestler: nobody appears twice) */
-    const wi = (k) => STD.findIndex((c) => c.k === k);
-    const open = STD.filter((c) => !byW.has(c.k)).map((c) => ({ c, slots: [] })).concat(rows).filter((x) => x.slots.length < depth);
-    if (open.length) {
-      const pairs = []; open.forEach((x) => { const bit = 1 << wi(x.c.k); pool.forEach((p) => { if (!used.has(p) && (p.ws & bit)) pairs.push({ x, p }); }); });
-      pairs.sort((a, b) => attCmp(a.p, b.p));
-      pairs.forEach(({ x, p }) => { if (used.has(p) || x.slots.length >= depth) return; used.add(p); x.slots.push(slotOf(p, x.c.k, true)); });
-      open.forEach((x) => { if (!rows.includes(x) && x.slots.length) rows.push(x); });
+    const used = new Set(), wi = (k) => STD.findIndex((c) => c.k === k);
+    const rows = STD.map((c) => ({ c, slots: [], ranked: (byW.get(c.k) || []).slice().sort(attCmp) }));
+    for (let t = 0; t < depth; t++) {
+      rows.forEach((x) => { const p = x.ranked.find((q) => !used.has(q)); if (p) { used.add(p); x.slots.push(slotOf(p, x.c.k)); } });
+      const open = rows.filter((x) => x.slots.length === t);
+      if (open.length) {
+        const pairs = []; open.forEach((x) => { const bit = 1 << wi(x.c.k); pool.forEach((p) => { if (!used.has(p) && (p.ws & bit)) pairs.push({ x, p }); }); });
+        pairs.sort((a, b) => attCmp(a.p, b.p));
+        pairs.forEach(({ x, p }) => { if (used.has(p) || x.slots.length > t) return; used.add(p); x.slots.push(slotOf(p, x.c.k, true)); });
+      }
+      rows.forEach((x) => { if (x.slots.length === t) x.slots.push(null); });
     }
-    rows.sort((a, b) => wi(a.c.k) - wi(b.c.k));
-    rows.forEach((x) => { while (x.slots.length < depth) x.slots.push(null); });
-    return rows;
+    return rows.filter((x) => x.slots.some(Boolean)).map(({ c, slots }) => ({ c, slots }));
   }
   const unitByKind = { region: (id) => U.region(id), district: (id) => U.district(id), school: (id) => U.school(id) };
 

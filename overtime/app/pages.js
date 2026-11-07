@@ -85,16 +85,24 @@
     /* header: the title, then the four metric tiles */
     const head = `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1></div>${summary(u)}</header>`;
     const rk = opts.rankings();
-    const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.toggle || ''}${rk.sortSeg || ''}</span></div>${rk.html}</section>`;
+    const rankSec = `<section class="sec"><div class="sech"><h2>${rk.title}</h2><span class="ctl">${rk.sortSeg || ''}</span></div>${rk.toggle ? `<div class="rkk">${rk.toggle}</div>` : ''}${rk.html}</section>`;
     const parts = [head];
     if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
     else if (v === 'rank') parts.push(rankSec);
     else if (v === 'time') parts.push(`<section class="sec tlsec"><div class="sech"><h2>Timeline</h2></div>${OT.timelineView(u)}</section>`);
-    else if (v === 'team') parts.push(`<section class="sec atsec"><div class="sech"><h2>All-time team</h2><button type="button" class="chipb" data-attmore>+ 3 teams</button></div>${OT.teamGrid(u)}</section>`);
     else { parts.push(section('Seasons', seasonsDrawer(u))); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
     return parts.join('');
   }
-  const childToggle = (id, kinds, cur) => `<div class="seg sm" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
+  /* the Rankings tab: what to rank for this place. Units below it, then its wrestlers, then its all-time team */
+  function rankChoice(u, units, parent, pageKind) {
+    const ks = (u.kind === 'school' ? [['wrestlers', 'Wrestlers'], ['team', 'All-time team']].concat(units) : units.concat([['wrestlers', 'Wrestlers'], ['team', 'All-time team']]));
+    const kind = ks.some(([k]) => k === state.child) ? state.child : ks[0][0];
+    const toggle = childToggle(u.kind, ks, kind);
+    if (kind === 'wrestlers') return { ...wrestlerRank(OT.unitRows(u), { limit: 25, noSchool: u.kind === 'school' }), title: 'Rankings', toggle };
+    if (kind === 'team') return { title: 'Rankings', toggle, html: `<div class="atsec">${OT.teamGrid(u)}</div>` };
+    return unitRank(kind, parent, pageKind, toggle);
+  }
+  const childToggle = (id, kinds, cur) => `<div class="seg sm rkseg" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
   const KN = { school: 'Rankings', district: 'Rankings', region: 'Rankings' };
   const unitRank = (kind, parent, pageKind, toggle) => { const r = OT.unitRankings(kind, parent, pageKind); return typeof r === 'string' ? { title: KN[kind], toggle, html: r } : { title: KN[kind], toggle, sortSeg: r.sortSeg, html: r.html }; };
   /* wrestlers ranked by peak rating (or weighted score); the window decides who is in, the whole career counts */
@@ -113,14 +121,14 @@
   const PAGES = {};
   PAGES.state = () => {
     const u = U.state(); const kind = ['school', 'district', 'region'].includes(state.child) ? state.child : 'school';
-    return levelPage(u, { rankings: () => unitRank(kind, null, 'state', childToggle('state', [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], kind)) });
+    void kind; return levelPage(u, { rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], null, 'state') });
   };
   PAGES.region = (id) => {
     if (!id) { const r = OT.unitRankings('region', null, 'state'); return `<header class="uh2"><h1>Regions</h1><div class="sub">The qualifying tournaments between districts and Hershey${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }
     const u = U.region(id); const kind = state.child === 'district' ? 'district' : 'school';
     const mem = OT.regionMembers(id), win = OT.windowLabel(); const full = mem.every((m) => m.span === win);
     const memSub = mem.length ? mem.map((m) => `<a href="#district/${m.d}">District ${m.d}</a>${full ? '' : ' ' + m.span}`).join(', ') + (full ? '' : ' · <span class="note1">membership as of each season</span>') : '';
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => unitRank(kind, { kind: 'region', id }, 'region', childToggle('region', [['school', 'Schools'], ['district', 'Districts']], kind)) });
+    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts']], { kind: 'region', id }, 'region') }); void kind;
   };
   /* "Missing from the archive": seasons the bracket archive itself marks as incomplete (WR_MISSING, tools/build_missing.js) */
   const MISS = window.WR_MISSING || { t: [], m: [], r: [] };
@@ -142,7 +150,7 @@
     const movers = OT.districtMovers(+id).filter((m) => m.span !== win && m.n < 0.85 * m.total).slice(0, 4);
     const moveNote = movers.length ? ` · part of the window: ${movers.map((m) => `<a href="#school/${OT.slug(m.sch)}">${esc(m.sch)}</a> ${m.span}`).join(', ')}` : '';
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}${moveNote}${!one || movers.length ? ' · <span class="note1">membership as of each season</span>' : ''}`,
-      rankings: () => unitRank('school', { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
+      rankings: () => rankChoice(u, [['school', 'Schools']], { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
   };
   /* School tab root: the schools of the district you were looking at (or pick one) */
   function schoolIndex() {
@@ -157,7 +165,7 @@
     const name = SCHOOL_BY_SLUG.get(sl) || OT.SLUG2S.get(sl); if (!name) return `<header class="uh2"><h1>Not found</h1></header>` + empty('No school at this address.');
     const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
     return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(u.region ? [{ name: REGIONS[u.region] + ' Region', href: '#region/' + u.region }] : []), ...(u.d ? [{ name: 'District ' + u.d, href: '#district/' + u.d }] : [])], sub: hist,
-      rankings: () => wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true }) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
+      rankings: () => (state.view === 'rank' ? rankChoice(u, u.d ? [['school', 'District ' + u.d + ' schools']] : [], { kind: 'district', id: u.d }, 'district') : wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true, title: 'Best wrestlers' })) }) + `<div class="note"><a href="#h2hs/${sl}~">Head to head with another school →</a></div>`;
   };
   /* a school's roster: everyone who wrestled for it in any bracket (the people index, loaded on demand) */
   function rosterBlock(u) {
@@ -169,6 +177,7 @@
   const bestTxt = (p) => (p.lvl ? `${p.lvl[0].toUpperCase() + p.lvl.slice(1)} ${p.place ? ordinal(p.place) : p.lvl === 'state' ? 'qualifier' : 'entrant'}` : '');
   const personRow = (p) => `<a class="prr" href="#wrestler/${p.slug}"><span class="pn"><b>${esc(p.name)}</b><small>${esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></span><span class="pb ${p.place ? 'm' + Math.min(p.place, 5) : ''}">${bestTxt(p)}</span>${p.peak ? OT.rtgTag(p.peak, { size: 'sm' }) : '<span></span>'}</a>`;
   OT.personRow = personRow;
+  /* the statewide placewinner list with search (old links, and the Rankings tab's wrestlers with a search box) */
   PAGES.wrestlers = () => {
     const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' }); const f = state.f;
     const where = f.schools[0] || (f.districts[0] ? 'District ' + f.districts[0] : f.regions[0] ? REGIONS[f.regions[0]] + ' Region' : '');
@@ -191,8 +200,8 @@
     const sumI = (cr ? [[OT.rw(cr.peak), 'Peak RTG'], [OT.rw(cr.avg), 'Career avg']] : []).concat(heroK.filter(([, v]) => v !== 0 && v !== '0 / 0').map(([l, v]) => [typeof v === 'number' ? fmt(v) : v, l])).concat(recI);
     const head = `<header class="uh2"><div class="crumb"><a href="#state">Pennsylvania</a><span>›</span><a href="#district/${W.d}">District ${W.d}</a><span>›</span><a href="${u.href}">${esc(W.sch)}</a></div>
       <h1>${esc(W.name)}</h1><div class="sub">${esc(W.sch)} · ${first === last ? first : first + '–' + last}${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
-      <div class="usum"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div></header>`;
-    const tl = section('Career', `<div class="card cgcard">${OT.careerGrid(W.apps, W.lower, { full: W.full })}<div class="note">Tap a result for its bracket. Bar = how tough that bracket was. Q advanced · DNP didn't place · DNC didn't compete · – no bracket on file.${W.full ? '' : ' Loading his full career…'}</div></div>`);
+      <div class="wqts wqhero"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span class="wqt"><i>${l}</i><b>${v}</b></span>`).join('')}</div></header>`;
+    const tl = section('Career', `<div class="card cgcard">${OT.careerGrid(W.apps, W.lower, { full: W.full })}<div class="note">Tap a result for its bracket. Signal bars = how tough that bracket was for its level. Q advanced · DNP didn't place · DNC didn't compete · – no bracket on file.${W.full ? '' : ' Loading his full career…'}</div></div>`);
     const bw = section('Best wins', `<div class="card" id="bestwins" data-w="${W.slug}">${bestWinsHTML(W)}</div>`);
     const vs = `<div class="note"><a href="#h2h/${W.slug}~">Head to head with another wrestler →</a></div>`;
     return head + tl + bw + vs;
@@ -345,7 +354,7 @@
     ${OT.aboutViz ? OT.aboutViz() : ''}
     <h3>Strength, Talent and Score</h3><p>Every school, district and region gets the same three numbers. RTG is for wrestlers only.</p><p>Strength: how good the lineup is, like a dual-meet team. At each weight, take the school's best wrestler that season at his rating, including kids who lost in the first round. A weight with nobody entered is a forfeit. Each wrestler's chance of beating an average state qualifier is averaged over the weights, and that average is put back on the rating scale. A Strength of 1300 means the lineup wrestles like a wrestler rated 1300 at every weight. A district's or region's Strength is the average of its top quarter of schools each season (at least one), so a big district isn't rewarded for its size and a small one isn't made to count every school.</p><p>Talent: expected state medalists per season. Each wrestler counts his chance of placing in the top eight at states at his season rating, so a 1550 counts about half, a 1700 about nine-tenths and a 1900 nearly one. The chances come from every season since 2001, when all eight places are on file. For a district or region it is per school.</p><p>Score: placement points per season (per school per season for a district or region).</p><p>Over several seasons, Strength and Talent are plain averages of the season values, and the season count is shown. A season counts only when the district's full field is on file (every entrant, not just the placewinners), because otherwise an empty weight can't be told from a kid who lost early. District 3 and District 7 have no brackets below regionals from 1975 to 1998, so those seasons have Score but no Strength or Talent. Lists rank a school, district or region only when it has Strength for at least a third of the seasons in the window.</p>
     <h3>Score</h3><p>Score is how much a unit wins in a typical season: placement points, 16-12-9-7-5-3-2-1 for 1st through 8th, weighted by the page, averaged over the seasons in the window. On the State page only state results count. A Region page adds regional results at 0.4. District and School pages add district results at 0.15. District strength varies too much to compare district medals statewide, which is why the State page ignores them.</p><p>Three things keep it fair across eras and sizes. Every season is scaled to 13 weights, because seasons had anywhere from 9 to 14. The state record only names the top 2 places before 1974, the top 4 for 1974–82 and the top 6 for 1983–2000, but every weight still had a 3rd through 8th; each missing place is shared equally among the wrestlers who could have won it (state entrants with no place on file, then, when the state bracket was smaller than eight, the regional finalists who didn't reach states). Before regionals existed (1938–50) the missing places are left out. A school's seasons run from its first to its last on file, scoreless seasons included. A district's or region's points are divided by its schools that season, counting every school between its first and last season on file, so a district with missing brackets isn't divided by fewer schools.</p>
-    <h3>Strength of competition</h3><p>A bracket's strength of competition is the average rating of its top eight. Every result in the app, on cards, career grids, brackets and season sheets, carries a slim bar beside it: the taller and hotter the bar, the tougher that bracket was. Every level shares one scale, anchored to the average state bracket: it sits at four-fifths of the bar, in orange, and the scale runs in straight rating points either side of it. So a district bracket that reads orange was about as tough as a typical state bracket, and a cold blue one was thin. The bracket header lays the same bar flat, with a tick at the average state bracket. Tap or hover for the number, how far it sits above or below the average state bracket, and how it ranks among brackets of its own level.</p>
+    <h3>Strength of competition</h3><p>A bracket's strength of competition is the average rating of its top eight. Every result in the app, on cards, career grids, brackets and season sheets, has a set of signal bars to its left showing how tough that bracket was <em>for its level</em>: a district bracket is compared only with district brackets, a regional with regionals, a state bracket with state brackets. There are six tiers, from Docile (one bar) through Formidable, Competitive, Aggressive and Hostile to Violent (six bars). Each level is cut into six equal steps of rating points between its 5th and 95th percentile, using every bracket on file. Because the steps are per level, a Violent district bracket can still be easier than a Docile state bracket. The key above the bottom bar lists the tiers, and tapping it shows the cut points at each level. For the comparison across levels, tap a result or open a bracket: the header gives the exact strength, its tier, and how far it sits above or below the average state bracket.</p>
     <h3>Colour</h3><p>Every rating and strength colour in the app uses one cold-to-hot scale: blue is ice, then cyan, green, yellow and orange, and red is on fire. Maps, the season grid, rating chips and strength bars all read from it, so a colour means the same strength everywhere. Each kind of unit (school, district, region) has its own range, taken from its season ratings since 1974, and the legend under each picture shows it.</p>
     <h3>Seasons and classes</h3><p>The filter bar at the bottom sets the division, the place (region, district, school) and the seasons (TIME: all-time, the last 5, 10 or 25, or any range on the strip); weights narrow the wrestler lists and all-time teams. Totals count each result in the class it was wrestled in. For wrestlers the seasons decide who is in, not what counts: anyone who wrestled a season inside the window is included with his whole career. Region and district membership is taken as of each season.</p>
     <h3>All-time teams</h3><p>Every wrestler who appears in any bracket for the place is a candidate, at one weight: the weight of his highest-rated season. Each wrestler gets one value, the same on every page: 0.6 × his state finishes plus 0.4 × his peak rating, each measured against every state qualifier at that weight, all years and both classes. Each state finish is worth the average rating of the wrestlers who finished there in that class, above an average state qualifier who did not place, added up over his career. So a AAA title counts for more than an AA title, and the drop-off from 1st to 8th is what the results show, not a set points table. Regional results, then district results, only break ties. So a wrestler ahead of another on the Pennsylvania team is ahead of him on their region, district and school teams too.</p>

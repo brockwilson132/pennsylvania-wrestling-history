@@ -156,12 +156,45 @@
   const vsState = (v) => { const d = Math.round((v - sAnchor().avg) / 10) * 10; return Math.abs(d) < 10 ? 'level with the average state bracket' : `${Math.abs(d)} ${d > 0 ? 'above' : 'below'} the average state bracket`; };
   const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)} · ${vsState(v)} (${r10(sAnchor().avg)})` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
   const compColor = (v, lvl = 'state') => colorAt(sFrac(v, lvl));
-  /* the glyph: a short horizontal strength meter beside a result: a track filled from the left on the shared, state-anchored
-     scale, on the cold → hot ramp; optional value above it. Never on or under a medal pill. */
+  /* ---------- the toughness signal: six signal bars beside every result ----------
+     Each bracket is measured against brackets at its OWN level (section counts as district): six equal steps of rating
+     points between that level's 5th and 95th percentile, from Docile (one bar) to Violent (six). The column a result sits
+     in already says the level, so the bars spend all six steps on "how tough for a district / regional / state bracket".
+     The comparison across levels (exact number, how far from the average state bracket) lives in the tooltip and the
+     bracket header. Cut points come from every bracket on file, so they follow each rebuild. */
+  const SG_N = ['Docile', 'Formidable', 'Competitive', 'Aggressive', 'Hostile', 'Violent'];
+  const SG_LV = ['district', 'regional', 'state'];
+  const sgLvl = (lvl) => (lvl === 'section' || !LK[lvl] ? (lvl === 'state' ? 'state' : 'district') : lvl);
+  let SGC = null;
+  const sgCuts = (lvl) => {
+    if (!SGC) { SGC = {}; SG_LV.forEach((l) => { const A = lvlArr(l); if (!A.length) return; const q = (p) => A[Math.floor(p * (A.length - 1))], lo = q(0.05), hi = q(0.95);
+      SGC[l] = [1, 2, 3, 4, 5].map((i) => Math.round((lo + (hi - lo) * i / 6) / 10) * 10); }); }
+    return SGC[sgLvl(lvl)] || [];
+  };
+  const sgTier = (v, lvl) => sgCuts(lvl).filter((c) => v >= c).length;
+  const sgCol = (t) => colorAt(0.08 + 0.9 * t / 5);
+  const sgSvg = (t, cls = '') => `<svg class="sgv${cls}" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i <= t ? sgCol(t) : '#2F3640'}"/>`).join('')}</svg>`;
+  const sgRange = (t, lvl) => { const C = sgCuts(lvl); return t === 0 ? `under ${r10(C[0])}` : t === 5 ? `${r10(C[4])}+` : `${r10(C[t - 1])}–${r10(C[t] - 10)}`; };
+  const sgTip = (v, lvl, ctx) => { const l = sgLvl(lvl), t = sgTier(v, l), p = pctIn(v, l);
+    return `${SG_N[t]} for a ${l} bracket · strength ${r10(v)} · ${vsState(v)}` + (p != null ? ` · tougher than ${p}% of ${l} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
   const smeter = (v, lvl, ctx, num) => {
-    if (!v) return '<span class="smtr sm0" aria-hidden="true"><i></i></span>';
-    const f = sFrac(v, lvl), c = colorAt(f);
-    return `<span class="smtr${num ? ' n' : ''}" title="${esc(fieldTip(v, lvl, ctx))}">${num ? `<em style="color:${c}">${r10(v)}</em>` : ''}<i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`;
+    if (!v) return '<span class="sgn sg0" aria-hidden="true"></span>';
+    const t = sgTier(v, lvl);
+    return `<span class="sgn${num ? ' n' : ''}" title="${esc(sgTip(v, lvl, ctx))}" aria-label="${SG_N[t]}">${num ? `<em style="color:${sgCol(t)}">${r10(v)}</em>` : ''}${sgSvg(t)}</span>`;
+  };
+  /* the old thin line, kept for the one place that is not a bracket: a wrestler's path through a bracket */
+  const lineMeter = (v, lvl, ctx) => { if (!v) return '<span class="smtr sm0" aria-hidden="true"><i></i></span>'; const f = sFrac(v, lvl), c = colorAt(f);
+    return `<span class="smtr" title="${esc(fieldTip(v, lvl, ctx))}"><i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`; };
+  /* the key: one row of the six tiers above the bottom bar; tapping it opens what each tier means at each level */
+  const sgKey = (open) => {
+    const cell = (t) => `<span>${sgSvg(t)}<b>${SG_N[t]}</b></span>`;   // three tiers either side of the bar's centre button, column for column
+    const row = `<span class="sgk">${[0, 1, 2].map(cell).join('')}<span class="sgkc" aria-hidden="true"></span>${[3, 4, 5].map(cell).join('')}</span>`;
+    if (!open) return row;
+    const SG_D = ['The thinnest brackets at its level', 'Below the average bracket', 'Around the average bracket', 'Above the average bracket', 'Among the toughest at its level', 'The toughest at its level'];
+    const L = sAnchor().lvl;
+    const lvls = SG_LV.map((l) => `<span class="sgl"><i>${l[0].toUpperCase() + l.slice(1)}</i><em>avg ${r10(L[l])}</em></span>`).join('');
+    const rows = SG_N.map((n, t) => `<div class="sgr">${sgSvg(t, ' big')}<span class="sgm"><b style="color:${sgCol(t)}">${n}</b><small>${SG_D[t]}</small></span>${SG_LV.map((l) => `<span class="sgv2${sgTier(L[l], l) === t ? ' avg' : ''}">${sgRange(t, l)}</span>`).join('')}</div>`).join('');
+    return `${row}<div class="sgx"><p>Signal bars compare a bracket only with brackets at the same level. Its column (district, regional or state) tells you which. A Violent district bracket is still easier than most state brackets: tap a result or open a bracket for the exact strength and how it compares with the average state bracket (${r10(L.state)}).</p><div class="sgt"><span></span><span></span>${lvls}${rows}</div><p class="sgf">The gold dot marks the tier holding each level's average bracket. Strength is the average rating of a bracket's top eight. Each level is cut into six equal steps between its 5th and 95th percentile, using every bracket on file.</p></div>`;
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
@@ -173,9 +206,9 @@
     const f = sFrac(v, lvl), p = pctIn(v, lvl), L = sAnchor().lvl;
     const from = { state: 0, regional: 1, district: 2, section: 2 }[lvl] ?? 0;   // ticks for this level and every level above it
     const ticks = ['state', 'regional', 'district'].slice(0, from + 1).map((k) => [k, L[k]]).filter((t) => t[1] != null).reverse();
-    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><b style="color:${colorAt(f)}">${r10(v)}</b></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i>${ticks.map(([k, a]) => `<u style="left:${(100 * sFrac(a)).toFixed(1)}%"></u>`).join('')}</span>${ticks.length ? `<span class="fgtk">${ticks.map(([k, a]) => `<s style="left:${(100 * sFrac(a)).toFixed(1)}%" title="Average ${k} bracket ${r10(a)}">${TICK_L[k]}</s>`).join('')}</span>` : ''}<em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
+    const st = sgTier(v, lvl);
+    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><span class="fgsg">${sgSvg(st)}<i style="color:${sgCol(st)}">${SG_N[st]}</i><b style="color:${colorAt(f)}">${r10(v)}</b></span></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i>${ticks.map(([k, a]) => `<u style="left:${(100 * sFrac(a)).toFixed(1)}%"></u>`).join('')}</span>${ticks.length ? `<span class="fgtk">${ticks.map(([k, a]) => `<s style="left:${(100 * sFrac(a)).toFixed(1)}%" title="Average ${k} bracket ${r10(a)}">${TICK_L[k]}</s>`).join('')}</span>` : ''}<em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
   }
-  const legend = () => `<span class="clg"><span class="clgt">Bar under each result: how tough that bracket was. Easier</span><span class="smtr"><i><b style="width:30%;background:${colorAt(0.2)}"></b></i></span><span class="smtr"><i><b style="width:65%;background:${colorAt(0.6)}"></b></i></span><span class="smtr"><i><b style="width:100%;background:${colorAt(0.97)}"></b></i></span><span class="clgt">tougher</span></span>`;
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
@@ -197,12 +230,12 @@
     const lv = c && c.sec ? 'section' : lvl;
     const ok = c && c.r && !c.dnc && !c.nodata; const href = link && ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
     const f = ok ? OT.fieldOf(c.r, lv) : null;
-    return `<span class="tc">${cellPill(c, lvl, href)}${smeter(f, lvl, f ? `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}` : '', num)}</span>`;
+    return `<span class="tc">${smeter(f, lvl, f ? `${c.year} ${lvl}${c.w ? ' ' + wShort(c.w) : ''}` : '', num)}${cellPill(c, lvl, href)}</span>`;
   }
   /* ---------- career grid (wrestler page) ----------
      One compact card that fits a phone screen: a column per high-school season, his season rating on top as a tile on
      the strength scale (peak ringed gold), then one row per level. Each result is a medal-coloured place with the
-     bracket's strength of competition as a thin bar under it (number on tap/hover), so the only numbers in the grid
+     bracket's toughness for its level as signal bars to its left (number on tap/hover), so the only numbers in the grid
      are places and ratings. Labels sit on a hairline above their row. */
   function careerGrid(apps, lower, opts = {}) {
     const M = OT.careerCells(apps, lower, { full: opts.full }), cr = OT.careerRating(apps, lower), cols = M.cols;
@@ -215,7 +248,7 @@
       if (!c) return '<span class="cgc none"></span>';
       const lv = c.sec ? 'section' : lvl;   // a section result stands in the District row where the section is the district round
       const ok = c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
-      const f = ok ? OT.fieldOf(c.r, lv) : null; const fr = f ? sFrac(f) : 0;
+      const f = ok ? OT.fieldOf(c.r, lv) : null;
       const tag = href ? 'a' : 'span', hr = href ? ` href="${href}"` : '';
       let cls = 'cgp', txt = '', tip = `${c.year}${c.w ? ' · ' + wShort(c.w) : ''} · ${c.sec ? OT.unitLabel('section', c.r.unit) : lvl}`;
       if (c.place) { cls += ' ' + pcls(c.place); txt = ordinal(c.place); tip += ' ' + ordinal(c.place); }
@@ -223,8 +256,8 @@
       else if (c.nodata) { cls += ' nod'; txt = '–'; tip += ': ' + (c.src || 'no bracket on record'); }
       else if (c.dnp) { cls += ' dnp'; txt = 'DNP'; tip += ': entered, did not place'; }
       else { cls += ' q'; txt = 'Q'; tip += ': ' + (c.src || 'qualified'); }
-      if (f) tip += ' · ' + fieldTip(f, lv);
-      return `<${tag}${hr} class="cgc${c.sec ? ' sec' : ''}" title="${esc(tip)}"><span class="${cls}">${txt}</span>${f ? `<span class="cgs"><i style="width:${(100 * fr).toFixed(0)}%;background:${colorAt(fr)}"></i></span>` : '<span class="cgs off"></span>'}</${tag}>`;
+      if (f) tip += ' · ' + sgTip(f, lv);
+      return `<${tag}${hr} class="cgc${c.sec ? ' sec' : ''}" title="${esc(tip)}">${f ? `<span class="sgn">${sgSvg(sgTier(f, lv))}</span>` : '<span class="sgn sg0"></span>'}<span class="${cls}">${txt}</span></${tag}>`;
     };
     const lab = (t, icon) => `<span class="cgl">${icon ? OT.navIcon(icon) : ''}<span>${t}</span></span>`;
     const rows = M.rows.map((row) => lab(row.k === 'district' && row.cells.some((c) => c && c.sec) ? 'District · section' : row.l, LVI[row.k]) + row.cells.map((c) => cell(c, row.k)).join('')).join('');
@@ -258,23 +291,42 @@
   const LVLN = { s: 'state', r: 'regional', d: 'district' };
   const recordOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 3) { any = true; t[0] += v[3]; t[1] += v[4]; t[2] += v[5]; t[3] += v[6]; } }); return any ? t : null; };
 
-  /* ---------- wrestler card ----------
-     Row 1: identity and RTG. Row 2: the season grid at its natural width (rating dots above, each result with its strength
-     bar), and beside it what the grid can't say: postseason record, falls, OT wins, win rate, titles by level, best win. */
+  /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team) ----------
+     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Seasons run down, District → Regional →
+     State run across, each result with its bracket-toughness signal bars; each row ends with that season's rating. Four
+     tiles under it: postseason record, win rate, falls, titles by level; then the best win. `rank` is whatever sits left
+     of the name: a list rank, a weight or a team. */
+  const PK_LO = 1500, PK_HI = 2200;
+  const pkFrac = (v) => Math.max(0.04, Math.min(1, (v - PK_LO) / (PK_HI - PK_LO)));
+  const WC_LV = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
+  function wcPill(c, lvl) {
+    if (!c) return '<span class="wqp x">–</span>';
+    if (c.place) return `<span class="wqp ${OT.pc(c.place)}">${ordinal(c.place)}</span>`;
+    if (c.q) return `<span class="wqp q">${lvl === 'state' ? 'Q' : 'Adv'}</span>`;
+    if (c.dnp) return '<span class="wqp x">DNP</span>'; if (c.dnc) return '<span class="wqp x">DNC</span>'; if (c.nodata) return '<span class="wqp x" title="No bracket on record">n/a</span>';
+    return '<span class="wqp x">–</span>';
+  }
   function wrestlerCard(w, rank, opts = {}) {
     if (!w.lower) w.lower = OT.lowerFor(w.apps);
-    const cr = OT.careerRating(w.apps, w.lower);
+    const cr = OT.careerRating(w.apps, w.lower), sr = cr ? cr.seasons : [];
     const years = Array.from(new Set(w.apps.map((a) => a.year).concat(w.lower.map((r) => r.year)))).sort();
-    const wn = w.apps.concat(w.lower).sort((a, b) => a.year - b.year).map((a) => a.w).filter(Boolean); const wts = wn.length ? (wShort(wn[0]) === wShort(wn[wn.length - 1]) ? wShort(wn[0]) : wShort(wn[0]) + '–' + wShort(wn[wn.length - 1])) : '';
     const y0 = years[0], y1 = years[years.length - 1];
+    const M = OT.careerCells(w.apps, w.lower); const at = (k) => M.rows.find((r) => r.k === k).cells;
+    const rows = M.cols.map((col, i) => { if (!col) return '';
+      const cells = WC_LV.map(([lvl]) => { const c = at(lvl)[i]; const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null;
+        return `<span class="wqc">${f ? sbar(f, c.sec ? 'section' : lvl, `${col.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>'}${wcPill(c, lvl)}</span>`; }).join('');
+      const r = sr.find((x) => x.year === col.year); const wt = col.w || (r && r.w);
+      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i>${wt ? `<em>${wShort(wt)}</em>` : ''}</span>${cells}`; }).join('');
     const rec = recordOf(w.name, years), bw = bestWinOf(w.name, years);
-    const ttl = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]].filter(([, n]) => n);
-    const st = [];
-    if (rec) { st.push([`${rec[0]}–${rec[1]}`, 'postseason']); if (rec[0] + rec[1]) st.push([Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%', 'won']); st.push([rec[2], rec[2] === 1 ? 'fall' : 'falls']); if (rec[3]) st.push([rec[3], rec[3] === 1 ? 'OT win' : 'OT wins']); }
-    const stats = `<span class="wst"${!BW ? ' data-need-bw="1"' : ''}>${st.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}${ttl.length ? `<span class="wide"><i>titles</i> ${ttl.map(([l, n]) => `${l} <b>${n}</b>`).join(' · ')}</span>` : ''}${bw ? `<span class="wide"><i>best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</span>`;
-    return `<a class="wk" href="${w.href}" style="--p1:${colorOf(w.sch)}">
-      <span class="wk1">${rank ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}${wts ? ' · ' + wts + ' lbs' : ''}</small></span>${cr ? `<span class="rv"><i>RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
-      <span class="wkb">${timeline(w.apps, w.lower)}${stats}</span></a>`;
+    const ti = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]];
+    const nT = ti.reduce((a, [, n]) => a + n, 0);
+    const tile = (k, v, sub) => `<span class="wqt"><i>${k}</i><b>${v}</b>${sub ? `<small>${sub}</small>` : ''}</span>`;
+    const tiles = `<span class="wqts"${!BW ? ' data-need-bw="1"' : ''}>${tile('Record', rec ? `${rec[0]}–${rec[1]}` : '–')}${tile('Won', rec && rec[0] + rec[1] ? Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%' : '–')}${tile('Falls', rec ? rec[2] : '–', rec && rec[3] ? `${rec[3]} OT` : '')}${tile('Titles', nT, nT ? ti.filter(([, n]) => n).map(([l, n]) => l + n).join(' ') : '')}</span>`;
+    const pk = cr ? `<span class="wqpk" title="Peak RTG ${rw(cr.peak)} · bar runs from ${PK_LO} (average state qualifier) to ${PK_HI}"><i style="height:${(100 * pkFrac(cr.peak)).toFixed(0)}%;background:${colorAt(pkFrac(cr.peak))}"></i></span>` : '<span class="wqpk"></span>';
+    return `<a class="wq" href="${w.href}">${pk}
+      <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</small></span>${cr ? `<span class="rv"><i>Peak RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
+      <span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}${rows}</span>
+      ${tiles}${bw ? `<span class="wqb"><i>Best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</a>`;
   }
 
   /* ---------- unit card ----------
@@ -656,7 +708,7 @@
       low.forEach((r) => add(r, r.lvl === 'district' ? 'D' : 'R')); st.forEach((r) => add(r, 'S'));
       const L = Array.from(by.values()).sort((a, b) => (a.wn || 999) - (b.wn || 999));
       const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="smtr sm0"><i></i></span></span>'; const f = OT.fieldOf(rr, lvl);
-        return `<span class="tc">${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="smtr sm0"><i></i></span>'}</span>`; };
+        return `<span class="tc">${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="sgn sg0"></span>'}${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}</span>`; };
       const rows = L.map((x) => { const rt = OT.ratingOf(x.r, x.S != null ? 'state' : x.r.lvl); return `<a class="sr" href="${OT.wrestlerHref(x.r)}"><span class="w">${wShort(x.w)}</span><span class="n">${esc(x.name)}</span><span class="f">${cell(x, 'D')}${cell(x, 'R')}${cell(x, 'S')}</span><span class="r">${rt ? rw(rt) : ''}</span></a>`; }).join('');
       const mx = placeMatrix(y, (r) => r.sch === u.id, false);
       return `<div class="ss">${head}${mx.indexOf('pmx') >= 0 ? mx : ''}${rows ? `<div class="srh"><span></span><span></span><span class="f"><i>D</i><i>R</i><i>S</i></span><span class="r">RTG</span></div>${rows}` : '<div class="note1">No district, regional or state results on file for this season.</div>'}</div>`;
@@ -686,5 +738,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: legend, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

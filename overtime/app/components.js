@@ -84,6 +84,7 @@
     school: `<path d="M3.5 22.5 V12.5 C6 8 9.2 5.5 13 5.5 C16.8 5.5 20 8 22.5 12.5 V22.5 Z" fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linejoin="round"/><path d="M2 22.5 H24" stroke="currentColor" stroke-width="${SW}" stroke-linecap="round"/><ellipse cx="13" cy="18" rx="5.6" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><ellipse cx="13" cy="18" rx="1.5" ry=".7" fill="currentColor"/><path d="M8 10.6 H18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>`,
     wrestlers: `<g fill="none" stroke="currentColor" stroke-width="${SW}" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.4" r="2.2"/><circle cx="17" cy="7.4" r="2.2"/><path d="M7.4 10.2 C5.6 11.4 4.8 13.2 4.9 15.4 L3.6 22.5 M4.9 15.4 C6.4 17 7.2 19.4 7.6 22.5"/><path d="M18.6 10.2 C20.4 11.4 21.2 13.2 21.1 15.4 L22.4 22.5 M21.1 15.4 C19.6 17 18.8 19.4 18.4 22.5"/><path d="M8.2 12.6 L15.6 10 M17.8 12.6 L10.4 10"/></g>`,
     division: `<rect x="3.5" y="15" width="5" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="10" width="5" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17.5" y="4" width="5" height="19" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>`,
+    filters: `<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7H22M4 13H22M4 19H22"/></g><circle cx="9" cy="7" r="2.6" fill="var(--slate)" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="13" r="2.6" fill="var(--slate)" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="19" r="2.6" fill="var(--slate)" stroke="currentColor" stroke-width="2"/>`,
     weights: `<path d="M9 8.5 A4 4 0 1 1 17 8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 11 H19.5 L22 23 H4 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>`,
     search: `<circle cx="11.5" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 L22 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
     menu: `<path d="M4 8 H22 M4 13 H22 M4 18 H22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
@@ -350,7 +351,7 @@
           cell = r.place ? `<span class="${cls} ${pc(r.place)}" title="${r.year} · ${wShort(r.w)} · ${ordinal(r.place)}${e.adv ? ' · advanced' : ''}">${r.place}</span>` : `<span class="${cls} cq" title="${r.year} · ${F.lvl === 'state' ? 'qualified' : 'did not place'}">${F.lvl === 'state' ? 'Q' : 'DNP'}</span>`;
         } else cell = cellHTML(c, 'pill');
         const rr = here ? r : c && c.r && !c.dnc && !c.nodata ? c.r : null; const fv = rr ? OT.fieldOf(rr, row.k) : null;
-        h += `<span class="pw" style="${at(k + 2, i + 2)}">${cell}${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<span class="sm sm0"><i></i></span>'}</span>`;
+        h += `<span class="pw" style="${at(k + 2, i + 2)}">${fv ? OT.sbar(fv, row.k, (rr.year || '') + ' ' + row.k) : '<span class="sgn sg0"></span>'}${cell}</span>`;
       });
     });
     return `<span class="cm bvm">${h}</span>`;
@@ -508,7 +509,7 @@
         /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
         const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
         const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
-        const pbar = path != null ? OT.sbar(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
+        const pbar = path != null ? OT.lineMeter(path, F.lvl, `his ${opp.length} opponent${opp.length === 1 ? '' : 's'} averaged ${Math.round(path)}`) : '<span class="smtr sm0"><i></i></span>';
         const rf = (v) => Math.max(0.04, Math.min(1, (v - 1000) / 1200));   // fixed RTG scale so a field spreads out
         const rv = rOf(r), rbar = rv ? `<span class="smtr" title="RTG ${OT.rtg10(rv)} · bar runs from 1000 to 2200"><i><b style="width:${(100 * rf(rv)).toFixed(0)}%;background:${OT.colorAt(rf(rv))}"></b></i></span>` : '<span class="smtr sm0"><i></i></span>';
         const pline = path != null ? `<span class="bvop"><span>Opponents averaged <b>${Math.round(path)}</b></span>${pbar}</span>` : '';
