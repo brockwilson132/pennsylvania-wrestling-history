@@ -1528,3 +1528,19 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .cdc .dk,.cdc .dk.p4,.cdc .dk.p5,.cdc .dk.q,.cdc .dk.dnp,.cdc .dk.none{width:30px;height:30px;font-size:16px}
 a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
 .cdcard{max-width:760px}.cdcard .wlg{padding:4px 0 0;border-top:1px solid var(--line);padding-top:10px}
+/* v4: seasons-down matrix at career size, Q discs, wins bar below with its own key */
+.dk.q{font:800 11px/1 var(--body);color:var(--chalk)}
+.cdc .dk.q{font:800 14px/1 var(--body)!important}
+.smx{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:8px 6px;align-items:center}
+.smx .cdl{padding-left:24px}
+.smx .cdh{justify-items:start;gap:4px;padding-right:4px}.smx .cdh b{font-size:19px}.smx .cdh i{font-size:10.5px;gap:5px}
+.smx .cdc{grid-template-columns:20px 30px;gap:4px}
+.wq .smx{margin-top:2px}
+.wq .wtb{margin-top:2px}
+.wtw{display:grid;gap:7px;padding-top:12px;border-top:1px solid var(--line)}
+.wtk{display:flex;flex-wrap:wrap;gap:4px 12px;font:700 10.5px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}
+.wtk>span{display:inline-flex;align-items:center;gap:5px}
+.wtk i{width:10px;height:10px;border-radius:2px;display:inline-block}.wtk i.d{background:#4A5360}.wtk i.m{background:#7D8794}.wtk i.t{background:#B8BFC6}.wtk i.f{background:#EEEAE1}.wtk i.l{background:#4A2328}
+.wlg{padding:0 2px 6px}
+.cdcard .cd{row-gap:12px}
+@media(max-width:359px){.smx .cdc{grid-template-columns:16px 26px;gap:3px}.smx .cdc .dk{width:26px!important;height:26px!important;font-size:14px}.smx .cdl{padding-left:19px}.smx .cdh b{font-size:16px}}

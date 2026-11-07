@@ -314,50 +314,51 @@
     return `<svg class="rtb" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
   }
   /* a result is a disc, every one the same size: gold / silver / bronze with the place, 4th–8th plain with the place,
-     an open ring for qualified or advanced without a place, a ring with a dot for did not place, an empty socket for
-     not entered; the bracket-toughness bars sit left of it in a slot of their own, so discs centre under their level */
+     a ring with Q for qualified or advanced without a place, an empty socket for no place or not entered; the
+     bracket-toughness bars sit left of it in a slot of their own, so discs centre under their level */
   function disc(c, lvl) {
     if (c && c.place) return `<span class="dk p${Math.min(c.place, 5)}" title="${ordinal(c.place)}">${c.place}</span>`;
-    if (c && c.q) return `<span class="dk q" title="${lvl === 'state' ? 'Qualified' : 'Advanced'}, no place"></span>`;
-    if (c && (c.dnp || c.dnc)) return `<span class="dk dnp" title="${c.dnc ? 'Did not compete' : 'Did not place'}"></span>`;
-    return `<span class="dk none" title="${c && c.nodata ? 'No bracket on record' : 'Not entered'}"></span>`;
-  }
-  function wcPill(c, lvl) {
-    const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null; const sb = f ? sbar(f, c.sec ? 'section' : lvl, `${c.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>';
-    return `${sb}${disc(c, lvl)}<span></span>`;
+    if (c && c.q) return `<span class="dk q" title="${lvl === 'state' ? 'Qualified' : 'Advanced'}, no place">Q</span>`;
+    return `<span class="dk none" title="${c && c.dnc ? 'Did not compete' : c && c.dnp ? 'Did not place' : c && c.nodata ? 'No bracket on record' : 'Not entered'}"></span>`;
   }
   const LV_ICON = { district: 'district', regional: 'region', state: 'state' };
   const lvIcon = (lvl) => `<span class="lvi" title="${lvl[0].toUpperCase() + lvl.slice(1)}">${OT.navIcon(LV_ICON[lvl])}</span>`;
-  /* the key above a list of cards: what the wins colours, the level icons and the discs mean, said once */
-  const wlegend = () => `<div class="wlg"><span class="wlg-w">${WT_K.map(([k, l]) => `<span><i class="${k}"></i>${l === 'Major decision' ? 'Major' : l}</span>`).join('')}</span><span class="wlg-l">${WC_LV.map(([k, l]) => `<span>${lvIcon(k)}${l}</span>`).join('')}</span><span class="wlg-d"><span><span class="dk q"></span>Qualified</span><span><span class="dk dnp"></span>No place</span><span>${rtgBars(2000)}Peak rating</span></span></div>`;
+  /* the wins bar's key: one swatch per type, under the bar it explains */
+  const WT_S = ['Dec', 'Major', 'Tech fall', 'Fall', 'Loss'];
+  const winKey = () => `<span class="wtk">${WT_K.map(([k], j) => `<span><i class="${k}"></i>${WT_S[j]}</span>`).join('')}</span>`;
+  const wlegend = () => `<div class="wlg">${winKey()}</div>`;
+  /* one result cell: toughness bars, disc, spacer; a link to the bracket when there is one */
+  function dcell(c, lvl, link) {
+    if (lvl === 'regional' && c && c.year < 1951) return '<span class="cdc"><span class="sgn sg0"></span><span class="dk none" title="No regionals before 1951"></span><span></span></span>';
+    const lv = c && c.sec ? 'section' : lvl; const ok = c && c.r && !c.dnc && !c.nodata; const href = ok && link ? OT.bhref(OT.bkey(c.r, lv)) : null;
+    const f = ok ? OT.fieldOf(c.r, lv) : null; const tag = href ? 'a' : 'span';
+    return `<${tag}${href ? ` href="${href}"` : ''} class="cdc">${f ? sbar(f, lv, `${c.year} ${lv}`) : '<span class="sgn sg0"></span>'}${disc(c, lvl)}<span></span></${tag}>`;
+  }
+  const yhead = (c, i) => `<span class="cdh${c ? '' : ' off'}"><b>${c ? "'" + String(c.year).slice(2) : '–'}</b><i>${OT.GRADE_L[i]}${c && c.w ? `<em>${wShort(c.w)}</em>` : ''}</i></span>`;
+  /* seasons down, District → Regional → State across (the list card, and the wrestler page's first option) */
+  function seasonRows(apps, lower, opts = {}) {
+    const M = OT.careerCells(apps, lower, { full: opts.full }); const at = (k) => M.rows.find((r) => r.k === k).cells;
+    const sr = opts.sr || [];
+    const rows = M.cols.map((col, i) => { if (!col) return '';
+      const r = sr.find((x) => x.year === col.year); const c2 = col.w ? col : Object.assign({}, col, { w: r && r.w });
+      return yhead(c2, i) + WC_LV.map(([lvl]) => dcell(at(lvl)[i], lvl, opts.link)).join(''); }).join('');
+    return `<div class="smx"><span></span>${WC_LV.map(([k]) => `<span class="cdl">${lvIcon(k)}</span>`).join('')}${rows}</div>`;
+  }
   function wrestlerCard(w, rank) {
     if (!w.lower) w.lower = OT.lowerFor(w.apps);
     const cr = OT.careerRating(w.apps, w.lower), sr = cr ? cr.seasons : [];
     const years = Array.from(new Set(w.apps.map((a) => a.year).concat(w.lower.map((r) => r.year)))).sort();
     const y0 = years[0], y1 = years[years.length - 1];
-    const M = OT.careerCells(w.apps, w.lower); const at = (k) => M.rows.find((r) => r.k === k).cells;
-    const rows = M.cols.map((col, i) => { if (!col) return '';
-      const cells = WC_LV.map(([lvl]) => `<span class="wqc">${wcPill(at(lvl)[i], lvl)}</span>`).join('');
-      const r = sr.find((x) => x.year === col.year); const wt = col.w || (r && r.w);
-      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i></span>${cells}<span class="wqw">${wt ? wShort(wt) : ''}</span>`; }).join('');
     const pk = cr ? `<span class="rv2" title="Peak RTG ${rw(cr.peak)}">${rtgBars(cr.peak)}<b>${rw(cr.peak)}</b></span>` : '';
     return `<a class="wq" href="${w.href}">
       <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${OT.stag(w.sch)}<span>${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</span></small></span>${pk}</span>
-      ${winBar(winTypesOf(w.name, years), recordOf(w.name, years))}<span class="wqm"><span></span>${WC_LV.map(([k]) => `<span class="wql">${lvIcon(k)}</span>`).join('')}<span></span>${rows}</span></a>`;
+      ${seasonRows(w.apps, w.lower, { sr })}${winBar(winTypesOf(w.name, years), recordOf(w.name, years))}</a>`;
   }
-  /* the wrestler page's career: one column per season (year, then grade and weight), a row per level marked by its icon,
-     each result a disc with its bracket's toughness bars beside it; tap a result for its bracket */
+  /* the wrestler page's second option: one column per season, a row per level, District on top and State at the bottom */
   function careerDiscs(apps, lower, opts = {}) {
     const M = OT.careerCells(apps, lower, { full: opts.full }), cols = M.cols, n = cols.length;
-    const head = cols.map((c, i) => `<span class="cdh${c ? '' : ' off'}"><b>${c ? "'" + String(c.year).slice(2) : '–'}</b><i>${OT.GRADE_L[i]}${c && c.w ? `<em>${wShort(c.w)}</em>` : ''}</i></span>`).join('');
-    const cell = (c, lvl) => {
-      if (lvl === 'regional' && c && c.year < 1951) return '<span class="cdc"><span class="sgn sg0"></span><span class="dk none" title="No regionals before 1951"></span><span></span></span>';
-      const lv = c && c.sec ? 'section' : lvl; const ok = c && c.r && !c.dnc && !c.nodata; const href = ok ? OT.bhref(OT.bkey(c.r, lv)) : null;
-      const f = ok ? OT.fieldOf(c.r, lv) : null; const tag = href ? 'a' : 'span';
-      return `<${tag}${href ? ` href="${href}"` : ''} class="cdc">${f ? sbar(f, lv, `${c.year} ${lv}`) : '<span class="sgn sg0"></span>'}${disc(c, lvl)}<span></span></${tag}>`;
-    };
-    const rows = ['state', 'regional', 'district'].map((k) => { const row = M.rows.find((r) => r.k === k); return `<span class="cdl">${lvIcon(k)}</span>` + row.cells.map((c) => cell(c, k)).join(''); }).join('');
-    return `<div class="cd" style="--n:${n}"><span></span>${head}${rows}</div>`;
+    const rows = ['district', 'regional', 'state'].map((k) => { const row = M.rows.find((r) => r.k === k); return `<span class="cdl">${lvIcon(k)}</span>` + row.cells.map((c) => dcell(c, k, true)).join(''); }).join('');
+    return `<div class="cd" style="--n:${n}"><span></span>${cols.map(yhead).join('')}${rows}</div>`;
   }
 
   /* ---------- unit card ----------
@@ -769,5 +770,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, careerDiscs, winBar, rtgBars, sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, careerDiscs, winBar, rtgBars, sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
