@@ -1,0 +1,76 @@
+PIAA team duals: changes made when data/sources/piaa_duals.csv was checked against PA-Wrestling.com dual meet pages (2026-11-07).
+Each PA-Wrestling dual page lists all 13-14 bouts with a running team score, so a score was only changed when the bout sheet adds up to the new score (or the page notes a team-point deduction or a forfeited dual).
+Rows the site has that the file lacked were added (all of 2015 AAA, 2024 after the first round, 2025, 2026 and 8 scattered rows); rows only District III Records has were kept.
+2026 AA Montgomery 37 Honesdale 26 follows the official PIAA bracket; the PA-Wrestling bout sheet adds to 38-26.
+
+FIX   2023 AAA Championship semifinals: Bethlehem Catholic 55-3 Central Mountain  ->  Bethlehem Catholic 53-3 Central Mountain
+FIX   2023 AAA Consolation first round: Council Rock South 37-21 Shikellamy  ->  Council Rock South 37-24 Shikellamy
+FIX   2023 AA Championship first round: Berks Catholic 28-15 Canton  ->  Berks Catholic 38-15 Canton
+FIX   2023 AA Consolation second round: Brookville 27-25 Warrior Run  ->  Brookville 27-26 Warrior Run
+FIX   2022 AA Championship first round: Brookville 31-10 Burgettstown  ->  Brookville 31-30 Burgettstown
+FIX   2020 AAA Championship first round: Spring-Ford 36-26 Delaware Valley  ->  Spring-Ford 37-26 Delaware Valley
+FIX   2020 AAA Consolation first round: State College 38-28 Garnet Valley  ->  State College 38-18 Garnet Valley
+FIX   2019 AAA Championship quarterfinals: Bethlehem Catholic 56-8 Seneca Valley  ->  Bethlehem Catholic 52-11 Seneca Valley
+FIX   2019 AAA Championship quarterfinals: Northampton 48-19 Cedar Cliff  ->  Northampton 48-25 Cedar Cliff
+FIX   2019 AAA Consolation third round: Cedar Cliff 33-25 Cathedral Prep  ->  Cedar Cliff 32-25 Erie Cathedral Prep
+FIX   2019 AAA Consolation third round: Canon McMillan 39-39 Spring-Ford  ->  Canon-McMillan 39-26 Spring-Ford
+FIX   2019 AAA Consolation semifinals: Kiski Area 30-24 Canon McMillan  ->  Kiski Area 30-25 Canon-McMillan
+FIX   2019 AA Championship first round: Saucon Valley 36-22 Muncy  ->  Saucon Valley 38-22 Muncy
+FIX   2019 AA Consolation first round: Notre Dame-Green Pond 45-18 Faith Christian  ->  Notre Dame-Green Pond 45-19 Faith Christian Academy
+FIX   2018 AAA Preliminary round: Downingtown West 51-15 Archbishop Ryan  ->  Downingtown West 52-15 Archbishop Ryan
+FIX   2018 AAA Championship quarterfinals: Bethlehem Catholic 56-0 Delaware Valley  ->  Bethlehem Catholic 55-0 Delaware Valley
+FIX   2018 AAA Consolation first round: Downingtown West 44-22 Cumberland Valley  ->  Downingtown West 50-20 Cumberland Valley
+FIX   2018 AAA Consolation semifinals: Cathedral Prep 40-28 Nazareth  ->  Erie Cathedral Prep 40-25 Nazareth
+FIX   2018 AA Preliminary round: Muncy 51-18 Brockway  ->  Muncy 52-18 Brockway
+FIX   2017 AAA Championship first round: Kiski Area 53-11 Central Dauphin  ->  Kiski Area 52-11 Central Dauphin
+FIX   2017 AAA Championship first round: Bethlehem Catholic 49-6 Central Mountain  ->  Bethlehem Catholic 49-12 Central Mountain
+FIX   2017 AAA Consolation first round: Boyertown 43-22 Father Judge  ->  Boyertown 42-22 Father Judge
+FIX   2017 AA Preliminary round: Harbor Creek 47-12 Derry Area  ->  Harbor Creek 47-14 Derry Area
+FIX   2015 AA Championship quarterfinals: Boiling Springs 28-24 Brookville  ->  Boiling Springs 26-24 Brookville  (forfeited dual / deduction, see note)
+FIX   2015 AA Championship quarterfinals: Wyalusing Valley 27-14 Northern Lehigh  ->  Wyalusing 27-24 Northern Lehigh
+FIX   2014 AAA Championship match: Franklin Regional 37-37 Greater Latrobe  ->  Franklin Regional 37-23 Greater Latrobe
+FIX   2013 AAA Consolation second round: Owen J. Roberts 34-26 DuBois  ->  Owen J. Roberts 34-28 DuBois
+FIX   2013 AA Championship first round: Redbank Valley 45-20 Western Wayne  ->  Redbank Valley 45-30 Western Wayne
+FIX   2013 AA Championship semifinals: Bethlehem Catholic 43-9 Bermudian Springs  ->  Bethlehem Catholic 48-9 Bermudian Springs
+FIX   2013 AA Consolation second round: Central Columbia 43-15 West Branch  ->  Central Columbia 40-18 West Branch
+FIX   2012 AA Championship quarterfinals: Boiling Springs 40-21 Central Columbia  ->  Boiling Springs 44-21 Central Columbia
+FIX   2012 AA Championship quarterfinals: Bethlehem Catholic 32-15 Fort LeBoeuf  ->  Bethlehem Catholic 32-18 Fort LeBoeuf
+FIX   2011 AAA Consolation second round: Nazareth 41-10 Cumberland Valley  ->  Nazareth 41-13 Cumberland Valley
+FIX   2011 AA Championship quarterfinals: Bethlehem Catholic 32-19 Reynolds  ->  Bethlehem Catholic 39-19 Reynolds
+FIX   2011 AA Consolation third round: Pen Argyl 33-26 Boiling Springs  ->  Pen Argyl 33-27 Boiling Springs
+FIX   2011 AA Consolation semifinals: Burrell 36-29 Pen Argyl  ->  Burrell 36-30 Pen Argyl
+FIX   2010 AAA Championship second round: Parkland 28-26 Connellsville  ->  Parkland 28-25 Connellsville
+FIX   2010 AAA Championship quarterfinals: Parkland 31-21 Boyertown  ->  Parkland 31-27 Boyertown
+FIX   2009 AAA Championship second round: Connellsville 34-24 Council Rock North  ->  Connellsville 35-24 Council Rock North
+FIX   2009 AAA Championship quarterfinals: Cumberland Valley 38-27 Bethel Park  ->  Cumberland Valley 36-27 Bethel Park
+FIX   2009 AAA Consolation first round: Boyertown 32-20 Quakertown  ->  Boyertown 32-30 Quakertown
+FIX   2009 AA Championship second round: Shady Side Academy 39-26 Ridgway  ->  Shady Side Academy 39-27 Ridgway
+FIX   2009 AA Consolation first round: Bedford 39-28 Pen Argyl  ->  Bedford 40-28 Pen Argyl
+FIX   2009 AA Consolation second round: Bedford 36-25 Troy  ->  Bedford 36-24 Troy
+FIX   2008 AA Championship quarterfinals: Bermudian Springs 38-27 Northwestern Lehigh  ->  Bermudian Springs 36-27 Northwestern Lehigh
+KEPT  2008 AA Championship quarterfinals: Bedford 38-22 Towanda (District III Records; the PA-Wrestling header says 35-22 but its bout sheet adds to 38-22)
+FIX   2007 AAA Championship quarterfinals: Upper Perkiomen 39-20 Penn-Trafford  ->  Penn-Trafford 1-0 Upper Perkiomen  (forfeited dual / deduction, see note)
+FIX   2007 AAA Consolation semifinals: Upper Perkiomen 30-24 Council Rock South  ->  Council Rock South 1-0 Upper Perkiomen  (forfeited dual / deduction, see note)
+FIX   2007 AA Championship second round: Greenville 66-10 Pottstown  ->  Greenville 60-7 Pottstown
+FIX   2007 AA Championship quarterfinals: Burrell 33-20 Westmont Hilltop  ->  Burrell 32-20 Westmont Hilltop
+FIX   2007 AA Consolation semifinals: Burrell 35-25 Boiling Springs  ->  Burrell 36-25 Boiling Springs
+FIX   2006 AAA Championship first round: Council Rock South 73-0 Frankford  ->  Council Rock South 74-0 Frankford
+FIX   2006 AA Championship second round: Port Allegany 59-8 Pottstown  ->  Port Allegany 58-8 Pottstown
+FIX   2000 AAA Championship quarterfinals: Upper Perkiomen 28-27 Milton  ->  Upper Perkiomen 34-27 Milton
+DROP  2023 AA Preliminary round: Burgettstown 34-28 Fort LeBoeuf (an exact copy of the 2022 row; the 2023 PA-Wrestling bracket has different preliminary matches)
+DROP  2023 AA Preliminary round: Corry 36-29 Tyrone (an exact copy of the 2022 row; the 2023 PA-Wrestling bracket has different preliminary matches)
+DROP  2023 AA Preliminary round: Saucon Valley 50-14 Canton (an exact copy of the 2022 row; the 2023 PA-Wrestling bracket has different preliminary matches)
+DROP  2023 AA Preliminary round: West Perry 36-28 Montgomery (an exact copy of the 2022 row; the 2023 PA-Wrestling bracket has different preliminary matches)
+FIX   2018 AA Championship first round: Harrisburg Bishop McDevitt 35-19 Westmont-Hilltop  ->  Championship first round: Bishop McDevitt 35-19 Westmont Hilltop
+FIX   2016 AAA Preliminary round: Kiski Area 64-11 Carrick  ->  Championship first round: Kiski Area 62-11 Carrick
+FIX   2016 AA Championship first round: Reynolds 42-22 Southern Columbia  ->  Championship second round: Reynolds 44-22 Southern Columbia
+FIX   2014 AAA Preliminary round: Spring-Ford 38-19 Exeter Township  ->  Championship first round: Spring-Ford 39-19 Exeter
+FIX   2014 AAA Preliminary round: West Lawn Wilson 30-30 Council Rock South  ->  Championship first round: Wilson (West Lawn) 30-26 Council Rock South
+FIX   2014 AA Preliminary round: Fort LeBoeuf 41-19 Jefferson-Morgan  ->  Championship first round: Fort LeBoeuf 47-19 Jefferson-Morgan
+FIX   2014 AA Championship first round: Brookville 54-12 Western Wayne  ->  Championship second round: Brookville 55-12 Western Wayne
+FIX   2014 AA Championship first round: Boiling Springs 53-15 Redbank Valley  ->  Championship second round: Boiling Springs 47-18 Redbank Valley
+FIX   2013 AAA Preliminary round: North Allegheny 73-7 Taylor Allderdice  ->  Championship first round: North Allegheny 72-7 Taylor Allderdice
+FIX   2012 AAA Preliminary round: Big Spring 42-20 Council Rock North  ->  Championship first round: Big Spring 42-30 Council Rock North
+FIX   2012 AA Consolation semifinals: Brookville 32-24 Brookville  ->  Consolation semifinals: Brookville 32-24 Bermudian Springs
+FIX   2011 AAA Championship first round: Central Dauphin 49-12 Norristown  ->  Championship second round: Central Dauphin 48-12 Norristown
+FIX   2002 AA First round: Brockway 32-22 Berlin-Brothersvalley  ->  Preliminary round: Brockway 35-22 Berlin Brothersvalley
