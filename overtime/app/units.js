@@ -182,9 +182,6 @@
     const t = sgTier(v, lvl);
     return `<span class="sgn${num ? ' n' : ''}" title="${esc(sgTip(v, lvl, ctx))}" aria-label="${SG_N[t]}">${num ? `<em style="color:${sgCol(t)}">${r10(v)}</em>` : ''}${sgSvg(t)}</span>`;
   };
-  /* the old thin line, kept for the one place that is not a bracket: a wrestler's path through a bracket */
-  const lineMeter = (v, lvl, ctx) => { if (!v) return '<span class="smtr sm0" aria-hidden="true"><i></i></span>'; const f = sFrac(v, lvl), c = colorAt(f);
-    return `<span class="smtr" title="${esc(fieldTip(v, lvl, ctx))}"><i><b style="width:${(100 * f).toFixed(0)}%;background:${c}"></b></i></span>`; };
   /* the key: one row of the six tiers above the bottom bar; tapping it opens what each tier means at each level */
   const sgKey = (open) => {
     const cell = (t) => `<span>${sgSvg(t)}<b>${SG_N[t]}</b></span>`;   // three tiers either side of the bar's centre button, column for column
@@ -738,7 +735,7 @@
       const by = new Map(); const add = (r, L) => { const k = nkey(r.name); const x = by.get(k) || { name: r.name, w: r.w, wn: r.wn || +r.w || 999, r }; x[L] = r.place || 0; x['r' + L] = r; if (L === 'S') { x.w = r.w; x.wn = r.wn; x.r = r; } by.set(k, x); };
       low.forEach((r) => add(r, r.lvl === 'district' ? 'D' : 'R')); st.forEach((r) => add(r, 'S'));
       const L = Array.from(by.values()).sort((a, b) => (a.wn || 999) - (b.wn || 999));
-      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="smtr sm0"><i></i></span></span>'; const f = OT.fieldOf(rr, lvl);
+      const cell = (x, L2) => { const p = x[L2], rr = x['r' + L2], lvl = LV2[L2]; if (p == null) return '<span class="tc"><span class="tp tp0"></span><span class="sgn sg0"></span></span>'; const f = OT.fieldOf(rr, lvl);
         return `<span class="tc">${f ? sbar(f, lvl, `${y} ${lvl} ${wShort(x.w)}`) : '<span class="sgn sg0"></span>'}${p ? `<b class="tp ${pcls(p)}" title="${lvl} ${ordinal(p)}">${p}</b>` : `<b class="tp q" title="${lvl} qualifier">Q</b>`}</span>`; };
       const rows = L.map((x) => { const rt = OT.ratingOf(x.r, x.S != null ? 'state' : x.r.lvl); return `<a class="sr" href="${OT.wrestlerHref(x.r)}"><span class="w">${wShort(x.w)}</span><span class="n">${esc(x.name)}</span><span class="f">${cell(x, 'D')}${cell(x, 'R')}${cell(x, 'S')}</span><span class="r">${rt ? rw(rt) : ''}</span></a>`; }).join('');
       const mx = placeMatrix(y, (r) => r.sch === u.id, false);
@@ -769,5 +766,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, winBar, rtgBars, sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, winBar, rtgBars, sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
