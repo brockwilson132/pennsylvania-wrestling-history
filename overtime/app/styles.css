@@ -1429,3 +1429,35 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .wqts.wqhero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:10px;max-width:760px;width:100%}@media(min-width:720px){.wqts.wqhero{grid-template-columns:repeat(6,minmax(0,1fr))}}.wqhero .wqt b{font-size:22px}
 @media(max-width:340px){.sgk b{font-size:8px;letter-spacing:0}}
 .wqm .wqc{justify-content:center}.wqm .wql{padding-left:0;text-align:center}
+
+/* ---- bracket header: strength of competition (tier as big signal bars, exact number, the level's six tiers as one scale) ---- */
+.bvfield{margin:2px 0 14px}
+.bvs{display:grid;gap:9px;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:12px 14px 10px}
+.bvs1{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center}
+.bvsg .sgv{display:block;width:46px;height:28px}
+.bvst{display:grid;gap:3px;min-width:0;line-height:1}
+.bvsl,.bvsn small{display:block;font:700 10px/1.1 var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+.bvst b{font:900 22px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bvsn{display:grid;justify-items:end;gap:3px;line-height:1;text-align:right}
+.bvsn b{font:900 28px/1 var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums}
+.bvsn small{letter-spacing:.04em;text-transform:none;font-size:11px;max-width:170px}
+.bvsc{padding:0 2px}
+.bvsk{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
+.bvseg{display:grid;gap:4px;min-width:0}
+.bvseg i{display:block;height:8px;border-radius:2px;background:var(--c);opacity:.28}
+.bvseg.on i{opacity:1}
+.bvseg s{text-decoration:none;font:700 9.5px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;color:var(--ash);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bvseg.on s{color:var(--chalk)}
+.bvsm{position:absolute;top:-4px;width:4px;height:16px;margin-left:-2px;border-radius:2px;background:var(--chalk);box-shadow:0 0 0 2px var(--slate)}
+.bvsa{position:absolute;top:1px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#D9A441;box-shadow:0 0 0 1.5px var(--slate)}
+.bvsx{margin:0;font-size:12px;line-height:1.35;color:var(--ash)}
+.bvsad{display:inline-block;width:6px;height:6px;border-radius:50%;background:#D9A441;vertical-align:1px}
+@media(max-width:400px){.bvst b{font-size:19px}.bvsn b{font-size:24px}.bvsg .sgv{width:38px;height:23px}.bvseg s{font-size:8.5px;letter-spacing:.02em}}
+
+/* ---- medalists 4th–8th: number columns at fixed widths so ratings and changes line up down the list ---- */
+.mdr{grid-template-columns:26px minmax(0,1fr) 44px 48px;gap:10px}
+.mdnm{gap:4px;justify-items:start}
+.mdnm .stag{max-width:100%}
+.mdd{text-align:right;font-variant-numeric:tabular-nums}.mdd .dl{font-size:13px}
+.mdrt{text-align:right;font:800 16px var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums}
+@media(max-width:360px){.bvseg s{font-size:7.5px;letter-spacing:0}.bvs{padding:12px 10px 10px}}

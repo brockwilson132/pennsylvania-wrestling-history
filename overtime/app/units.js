@@ -198,17 +198,24 @@
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
-  /* bracket header: the same bar lying flat on the same scale, with ticks for the average bracket at its own level and at
-     every level above it (a district header shows district, regional and state), labelled under the track */
-  const TICK_L = { district: 'Avg district', regional: 'Avg regional', state: 'Avg state' };
+  /* bracket header: the bracket's tier as big signal bars, its exact strength, then the six tiers of its own level laid
+     out as one scale (each level's 5th to 95th percentile in six equal steps, the same cut points as the signal bars
+     everywhere else) with a marker at this bracket and a gold dot at the level's average bracket. One line under it
+     carries the cross-level comparison (how far from the average state bracket) and the percentile at its level. */
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
-    const f = sFrac(v, lvl), p = pctIn(v, lvl), L = sAnchor().lvl;
-    const from = { state: 0, regional: 1, district: 2, section: 2 }[lvl] ?? 0;   // ticks for this level and every level above it
-    const ticks = ['state', 'regional', 'district'].slice(0, from + 1).map((k) => [k, L[k]]).filter((t) => t[1] != null).reverse();
-    const st = sgTier(v, lvl);
-    return `<div class="fg4" title="${esc(fieldTip(v, lvl))}"><div class="fgl"><span>Strength of competition</span><span class="fgsg">${sgSvg(st)}<i style="color:${sgCol(st)}">${SG_N[st]}</i><b style="color:${colorAt(f)}">${r10(v)}</b></span></div><div class="fgw4"><span class="fgtrk4"><i style="width:${(100 * f).toFixed(1)}%;background:${colorAt(f)}"></i>${ticks.map(([k, a]) => `<u style="left:${(100 * sFrac(a)).toFixed(1)}%"></u>`).join('')}</span>${ticks.length ? `<span class="fgtk">${ticks.map(([k, a]) => `<s style="left:${(100 * sFrac(a)).toFixed(1)}%" title="Average ${k} bracket ${r10(a)}">${TICK_L[k]}</s>`).join('')}</span>` : ''}<em>${vsState(v)}${p != null ? ` · tougher than ${p}% of ${lvl} brackets` : ''}</em></div></div>`;
+    const l = sgLvl(lvl), C = sgCuts(l); if (!C.length) return '';
+    const st = sgTier(v, l), p = pctIn(v, l), step = (C[4] - C[0]) / 4, lo = C[0] - step, hi = C[4] + step;
+    const at = (x) => Math.max(0.5, Math.min(99.5, 100 * (x - lo) / (hi - lo)));
+    const avg = sAnchor().lvl[l], lname = { district: 'district', regional: 'regional', state: 'state' }[l];
+    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i></i><s>${n}</s></span>`).join('');
+    return `<div class="bvs" title="${esc(fieldTip(v, lvl))}">
+      <small class="bvsl">Strength of competition</small><div class="bvs1"><span class="bvsg">${sgSvg(st, ' big')}</span><span class="bvst"><b style="color:${sgCol(st)}">${SG_N[st]}</b></span><span class="bvsn"><b>${r10(v)}</b></span></div>
+      <div class="bvsc"><div class="bvsk">${segs}<u class="bvsm" style="left:${at(v).toFixed(1)}%"></u>${avg != null ? `<em class="bvsa" style="left:${at(avg).toFixed(1)}%" title="Average ${lname} bracket ${r10(avg)}"></em>` : ''}</div></div>
+      <p class="bvsx">${p != null ? `Tougher than ${p}% of ${lname} brackets · ` : ''}${vsState(v)} (${r10(sAnchor().avg)})${avg != null ? ` · <i class="bvsad"></i> average ${lname} bracket${l !== 'state' ? ' ' + r10(avg) : ''}` : ''}</p>
+    </div>`;
   }
+
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
      Every result carries its strength bar. Used by wrestler cards (compact) and the wrestler page (full width). */
