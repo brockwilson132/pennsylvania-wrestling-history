@@ -113,17 +113,17 @@ scale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best
   regional field strength 1980+: median 1304 (p10 1139, p90 1472)
   state    field strength 1980+: median 1694 (p10 1592, p90 1799)
 
-state brackets (6+ rated, champion known, n=1532): champion rated #1 87.9%, top 2 96.4%; mean Spearman(rating, place) 0.789
+state brackets (6+ rated, champion known, n=1532): champion rated #1 87.9%, top 2 96.4%; mean Spearman(rating, place) 0.790
 same-season bouts where the winner is rated below the loser: 5.0% of 574453
 
-state placement points 1980+ (n=20747): own season rating R2 0.6180
-  + best win: R2 0.6181 (gain +0.0000), coefficient -0.0003
-  + mean of opponents beaten: R2 0.6239 (gain +0.0058), coefficient -0.0030
-  + bad losses: R2 0.6197 (gain +0.0016), coefficient +0.5934
-  + field strength: R2 0.6764 (gain +0.0584), coefficient -0.0155
-next-season state points of returners (n=7508): rating + this season placement R2 0.3797
-  + best win: R2 0.3853 (gain +0.0056), coefficient -0.00404
-  + mean of opponents beaten: R2 0.3833 (gain +0.0036), coefficient -0.00290
-  + bad losses: R2 0.3799 (gain +0.0002), coefficient +0.21335
-  + field strength: R2 0.3910 (gain +0.0113), coefficient -0.00884
+state placement points 1980+ (n=20747): own season rating R2 0.6258
+  + best win: R2 0.6259 (gain +0.0000), coefficient -0.0003
+  + mean of opponents beaten: R2 0.6319 (gain +0.0060), coefficient -0.0030
+  + bad losses: R2 0.6275 (gain +0.0017), coefficient +0.5980
+  + field strength: R2 0.6850 (gain +0.0591), coefficient -0.0156
+next-season state points of returners (n=7508): rating + this season placement R2 0.3895
+  + best win: R2 0.3948 (gain +0.0053), coefficient -0.00395
+  + mean of opponents beaten: R2 0.3930 (gain +0.0035), coefficient -0.00288
+  + bad losses: R2 0.3897 (gain +0.0002), coefficient +0.24128
+  + field strength: R2 0.4007 (gain +0.0112), coefficient -0.00884
 RTG as of each round: 1148906 bout checkpoints, last checkpoint vs season RTG max gap 0.55 (should be ~0)
