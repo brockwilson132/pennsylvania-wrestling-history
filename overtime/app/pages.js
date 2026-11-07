@@ -105,10 +105,11 @@
   }
   /* the Rankings tab: what to rank for this place. Units below it, then its wrestlers, then its all-time team */
   function rankChoice(u, units, parent, pageKind) {
-    const ks = (u.kind === 'school' ? [['wrestlers', 'Wrestlers'], ['team', 'All-time team']].concat(units) : units.concat([['wrestlers', 'Wrestlers'], ['team', 'All-time team']])).concat([['records', 'Records']]);
+    const ks = (u.kind === 'school' ? [['seasons', 'Seasons'], ['wrestlers', 'Wrestlers'], ['team', 'All-time team']].concat(units) : units.concat([['seasons', 'School seasons'], ['wrestlers', 'Wrestlers'], ['team', 'All-time team']])).concat([['records', 'Records']]);
     const kind = ks.some(([k]) => k === state.child) ? state.child : ks[0][0];
     const toggle = childToggle(u.kind, ks, kind);
     if (kind === 'wrestlers') return { ...wrestlerRank(OT.unitRows(u), { limit: 25, noSchool: u.kind === 'school' }), title: 'Rankings', toggle };
+    if (kind === 'seasons') return { title: 'Rankings', toggle, ...OT.seasonRankings(u.kind === 'state' ? null : { kind: u.kind, id: u.id }) };
     if (kind === 'team') return { title: 'Rankings', toggle, html: `<div class="atsec">${OT.teamGrid(u)}</div>` };
     if (kind === 'records') return { title: 'Rankings', toggle, html: recordsView(u) };
     return unitRank(kind, parent, pageKind, toggle);

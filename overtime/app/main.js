@@ -198,6 +198,7 @@
     drawBar(); paintPop(); stamp();
     if (!keepScroll) window.scrollTo(0, 0);
     wireSearch();
+    if (main.querySelector('[data-need-ss]')) OT.loadSeasons().then(() => { if (route().base === base) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
     if (main.querySelector('[data-need-bw]')) OT.loadBW().then(() => { if (route().base === base) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
     showBracket(q.b, page === 'wrestler' ? id : null);
   }
@@ -395,6 +396,8 @@
     const qs = e.target.closest('button[data-qset]'); if (qs) { const [k, v] = qs.dataset.qset.split(':'); setQ(k, v); return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; if (PLACEP.includes(route().page)) { const h = withView(location.hash, state.view, state.child); try { history.replaceState(history.state, '', h); } catch (er) { /* none */ } lastHash = location.hash; } lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
+    const sm = e.target.closest('button[data-smode]'); if (sm) { state.smode = sm.dataset.smode; render(true); return; }
+    const ss = e.target.closest('button[data-ssort]'); if (ss) { state.ssort = ss.dataset.ssort; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }
     const mm = e.target.closest('button[data-mapmode]'); if (mm) { state.mapmode = mm.dataset.mapmode; try { localStorage.setItem('ot-mapmode', state.mapmode); } catch (er) { /* none */ } state.pseason = null; render(true); return; }
@@ -421,7 +424,7 @@
       const ma = e.target.closest('button[data-mlall]'); if (ma) { state.mlall = ma.dataset.mlall === '1'; repaint(); return; }
       const row = e.target.closest('.mlr'); if (row && !e.target.closest('a')) { const k = row.dataset.mk; const on = !row.classList.contains('pin'); mcard.querySelectorAll('[data-mk]').forEach((el) => el.classList.toggle('pin', on && el.dataset.mk === k)); return; }
     }
-    const sx = e.target.closest('button[data-sx]'); if (sx) { const open = sx.getAttribute('aria-expanded') === 'true'; sx.setAttribute('aria-expanded', String(!open)); const d = sx.nextElementSibling; if (d) d.hidden = open; sx.parentElement.classList.toggle('open', !open); return; }
+    const sx = e.target.closest('button[data-sx]'); if (sx) { const open = sx.getAttribute('aria-expanded') === 'true'; sx.setAttribute('aria-expanded', String(!open)); const d = sx.nextElementSibling; if (d) d.hidden = open; sx.parentElement.classList.toggle('open', !open); if (!open && d) { const lb = d.querySelector('[data-sslb]'); if (lb && !lb.dataset.done) { lb.dataset.done = '1'; OT.fillLineup(lb); } } return; }
     const s = e.target.closest('.srow'); if (s) { const open = s.getAttribute('aria-expanded') === 'true'; s.setAttribute('aria-expanded', String(!open)); const pod = s.nextElementSibling; if (pod) { if (!open && pod.dataset.sd && !pod.dataset.done) { pod.innerHTML = OT.seasonDetail(pod.dataset.sd); pod.dataset.done = '1'; } pod.hidden = open; } }
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('srow')) e.target.click(); });
