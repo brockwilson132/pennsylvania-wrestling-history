@@ -194,19 +194,18 @@
     const W = OT.getWrestler(sl);
     if (!W) return OT.peopleLoaded() ? `<header class="uh"><h1>Not found</h1></header>` + empty('No wrestler at this address.') : `<header class="uh"><h1>Loading…</h1></header><div class="card empty" data-need-people="1">Looking up this wrestler…</div>`;
     if (!W.lower) W.lower = OT.lowerFor(W.apps);
-    const u = U.school(W.sch); const places = placeCounts(W.rows); const pts = d3.sum(W.rows, (r) => r.pts);
+    const u = U.school(W.sch); const places = placeCounts(W.rows);
     const all = W.apps.concat(W.lower); const first = all.length ? d3.min(all, (r) => r.year) : W.person && W.person.y0, last = all.length ? d3.max(all, (r) => r.year) : W.person && W.person.y1;
-    const dMed = W.lower.filter((r) => r.lvl === 'district' && r.place).length, rMed = W.lower.filter((r) => r.lvl === 'regional' && r.place).length;
-    const hero = W.lowerOnly ? [['District medals', dMed], ['Regional medals', rMed], ['District titles', W.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['Seasons', new Set(all.map((r) => r.year)).size]] : [['State titles', places[0]], ['State medals', W.rows.length], ['Regional medals', rMed], ['District medals', dMed]];
     const cr = OT.careerRating(W.apps, W.lower);
-    const yrs = OT.yearsOf(W.apps, W.lower); const rec = OT.bwLoaded() ? OT.recordOf(W.name, yrs) : null;
-    const recI = rec ? [[`${rec[0]}–${rec[1]}`, 'Postseason']].concat(rec[2] ? [[rec[2], rec[2] === 1 ? 'Fall' : 'Falls']] : []) : [];
-    const heroK = W.lowerOnly ? hero : [['State medals', W.rows.length], ['State titles', places[0]]];
-    const sumI = (cr ? [[OT.rw(cr.peak), 'Peak RTG'], [OT.rw(cr.avg), 'Career avg']] : []).concat(heroK.filter(([, v]) => v !== 0 && v !== '0 / 0').map(([l, v]) => [typeof v === 'number' ? fmt(v) : v, l])).concat(recI);
+    const yrs = OT.yearsOf(W.apps, W.lower);
+    /* the header: peak rating (with its signal bars), career average and titles by level; the wins and every result are in Career below */
+    const tD = W.lower.filter((r) => r.lvl === 'district' && r.place === 1).length, tR = W.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length, tS = places[0];
+    const sumI = (cr ? [[`${OT.rtgBars(cr.peak)}${OT.rw(cr.peak)}`, 'Peak RTG'], [OT.rw(cr.avg), 'Career avg']] : []).concat([[`${tD + tR + tS}<small>${[['D', tD], ['R', tR], ['S', tS]].map(([l, n]) => `<span>${l}${n}</span>`).join('')}</small>`, 'Titles']]);
     const head = `<header class="uh2"><div class="crumb"><a href="#state">Pennsylvania</a><span>›</span><a href="#district/${W.d}">District ${W.d}</a><span>›</span><a href="${u.href}">${esc(W.sch)}</a></div>
-      <div class="whd"><h1>${esc(W.name)}</h1><a class="cmpb" href="#h2h/${W.slug}~" aria-label="Compare ${esc(W.name)} head to head with another wrestler" title="Head to head">Compare</a></div><div class="sub">${esc(W.sch)} · ${first === last ? first : first + '–' + last}${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
+      <div class="whd"><h1>${esc(W.name)}</h1><a class="cmpb" href="#h2h/${W.slug}~" aria-label="Compare ${esc(W.name)} head to head with another wrestler" title="Head to head">Compare</a></div><div class="sub wsub">${OT.stag(W.sch)}<span>${first === last ? first : first + '–' + last}</span>${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
       <div class="wqts wqhero"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span class="wqt"><i>${l}</i><b>${v}</b></span>`).join('')}</div></header>`;
-    const tl = section('Career', `<div class="card cgcard">${OT.careerGrid(W.apps, W.lower, { full: W.full })}<div class="note">Tap a result for its bracket. Signal bars = how tough that bracket was for its level. Q advanced · DNP didn't place · DNC didn't compete · – no bracket on file.${W.full ? '' : ' Loading his full career…'}</div></div>`);
+    const wt4 = OT.winTypesOf(W.name, yrs), rc = OT.recordOf(W.name, yrs);
+    const tl = section('Career', `<div class="card cgcard cdcard"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${OT.winBar ? OT.winBar(wt4, rc) : ''}${OT.careerDiscs(W.apps, W.lower, { full: W.full })}${OT.wlegend()}${W.full ? '' : '<div class="note">Loading his full career…</div>'}</div>`);
     const bw = section('Best wins', `<div class="card" id="bestwins" data-w="${W.slug}">${bestWinsHTML(W)}</div>`);
     return head + tl + bw;
   };

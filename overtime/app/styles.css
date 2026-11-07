@@ -1483,3 +1483,48 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .wtb-b>span{display:grid;place-items:center;min-width:20px}.wtb-b b{font:900 12px/1 var(--cond);color:var(--mat)}
 .wtb-b .d{background:#5F6B78}.wtb-b .m{background:#8E98A4}.wtb-b .t{background:#B8BFC6}.wtb-b .f{background:#EEEAE1}.wtb-b .l{background:#3A1F22}.wtb-b .l b,.wtb-b .d b{color:var(--chalk)}.wtb-b .l b{color:#E8A0A0}
 .wtb-k{display:flex;gap:2px}.wtb-k>span{min-width:20px;text-align:center;font:700 9px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--ash2)}
+/* ---------- card v3 + wrestler page career (2026-11-07) ---------- */
+/* one size for every result: medal, plain place, ring, ring-with-dot, empty socket */
+.dk,.dk.p4,.dk.p5,.dk.q,.dk.dnp,.dk.none{width:22px;height:22px;font-size:12.5px;box-sizing:border-box}
+.dk.p4{background:#6E4A33}.dk.p5{background:#3E4650}
+.dk.q{border:2px solid var(--ash);background:none}
+.dk.dnp{background:none;border:2px solid var(--line2);position:relative}.dk.dnp::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--ash2)}
+.dk.none{background:#181C22;border:1px solid #20262E;border-radius:50%}
+/* the card: no side bar; name, tag and years on the left, peak rating with its signal bars on the right */
+.wq{padding:10px 12px 11px;gap:8px}.wqpk{display:none}
+.wqh{grid-template-columns:auto minmax(0,1fr) auto;gap:10px}
+.wqh .nm small{display:flex;align-items:center;gap:6px;margin-top:3px}.wqh .nm small>span{color:var(--ash);font:700 12.5px var(--cond)}
+.rv2{display:flex;align-items:center;gap:6px}.rv2 b{font:900 26px/1 var(--cond);color:var(--chalk)}
+.rtb{width:23px;height:14px;display:block}
+/* wins bar: counts only, colours keyed once above the list */
+.wtb{display:flex;gap:2px;height:18px;border-radius:5px;overflow:hidden}.wtb:empty{display:none}
+.wtb>span{display:grid;place-items:center;min-width:18px;font:900 11.5px/1 var(--cond);color:var(--mat)}
+.wtb .d{background:#4A5360;color:var(--chalk)}.wtb .m{background:#7D8794}.wtb .t{background:#B8BFC6}.wtb .f{background:#EEEAE1}.wtb .l{background:#4A2328;color:#F0A8A8}
+/* grid: icons over the three levels, year + grade left, weight right */
+.wqm{grid-template-columns:auto repeat(3,minmax(0,1fr)) auto;gap:4px 6px}
+.wql{display:flex;justify-content:center;padding:0}.lvi{display:inline-grid;place-items:center;color:var(--ash2)}.lvi svg{width:16px;height:16px}
+.wqm .wqc{grid-template-columns:18px 22px 18px;gap:3px}
+.wqy{font:800 13px/1 var(--cond);color:var(--chalk)}.wqy i{color:var(--ash2);font-size:10px;margin-left:4px}
+.wqw{font:700 12px var(--cond);color:var(--ash);text-align:right;min-width:22px}
+/* the key above a list of cards */
+.wlg{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:2px 2px 10px;font:700 10.5px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}
+.wlg>span{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}.wlg>span>span{display:inline-flex;align-items:center;gap:4px}
+.wlg-w i{width:10px;height:10px;border-radius:2px;display:inline-block}.wlg-w i.d{background:#4A5360}.wlg-w i.m{background:#7D8794}.wlg-w i.t{background:#B8BFC6}.wlg-w i.f{background:#EEEAE1}.wlg-w i.l{background:#4A2328}
+.wlg .dk{width:14px!important;height:14px!important}.wlg .lvi svg{width:14px;height:14px}.wlg .rtb{width:18px;height:11px}
+/* wrestler page header: school tag beside the years; titles split by level */
+.wsub{display:flex;align-items:center;gap:8px}.wsub>span{color:var(--ash)}
+.wqhero .wqt b{display:flex;align-items:center;gap:6px}.wqhero .rtb{width:26px;height:16px}
+.wqhero .wqt b small{display:inline-flex;gap:6px;font:700 11px var(--cond);color:var(--ash);letter-spacing:.06em}
+@media(min-width:720px){.wqts.wqhero{grid-template-columns:repeat(3,minmax(0,220px))}}
+/* wrestler page career: a column per season, a row per level */
+.cdcard{display:grid;gap:14px;padding:14px 12px}
+.cdcard .wtb{height:22px}.cdcard .wtb>span{font-size:13px}
+.cd{display:grid;grid-template-columns:24px repeat(var(--n),minmax(0,1fr));row-gap:10px;align-items:center}
+.cdh{display:grid;justify-items:center;gap:3px;line-height:1}.cdh b{font:900 20px var(--cond);color:var(--chalk)}.cdh i{font:700 11px var(--cond);color:var(--ash2);font-style:normal;letter-spacing:.1em;display:flex;gap:6px}.cdh i em{font-style:normal;color:var(--ash);letter-spacing:0}
+.cdh.off b{color:var(--ash2)}
+.cdl{display:grid;place-items:center}.cdl .lvi svg{width:18px;height:18px}
+.cdc{display:grid;grid-template-columns:20px 30px 20px;gap:4px;justify-content:center;align-items:center;text-decoration:none;color:inherit}
+.cdc .sgn{justify-self:end}
+.cdc .dk,.cdc .dk.p4,.cdc .dk.p5,.cdc .dk.q,.cdc .dk.dnp,.cdc .dk.none{width:30px;height:30px;font-size:16px}
+a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
+.cdcard{max-width:760px}.cdcard .wlg{padding:4px 0 0;border-top:1px solid var(--line);padding-top:10px}
