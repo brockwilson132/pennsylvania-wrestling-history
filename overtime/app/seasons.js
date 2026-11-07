@@ -57,8 +57,8 @@
     return { sortSeg: seg, html: `<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
   }
   /* an opened row: the lineup, weight by weight */
-  /* finishes as the wrestler card's medal discs: place, Q (entered, no place), dash (not there) */
-  const fin = (p) => `<span class="zsf">${p == null || p < 0 ? '<span class="dk none"></span>' : p ? `<span class="dk p${Math.min(p, 5)}" title="${ordinal(p)}">${p}</span>` : '<span class="dk q">Q</span>'}</span>`;
+  /* finishes as small place pills: place, Q (entered, no place), dash (not there) */
+  const fin = (p) => (p == null || p < 0 ? '<span class="zsq x">–</span>' : p ? `<span class="zsq ${OT.pc ? OT.pc(p) : ''}">${ordinal(p)}</span>` : '<span class="zsq q">Q</span>');
   function fillLineup(el) {
     const key = el.dataset.sslb; if (!key) return; const [sl, yk] = key.split('|'); const c = sl[0];
     const draw = (d) => {
