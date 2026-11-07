@@ -316,7 +316,7 @@
       const cells = WC_LV.map(([lvl]) => { const c = at(lvl)[i]; const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null;
         return `<span class="wqc">${f ? sbar(f, c.sec ? 'section' : lvl, `${col.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>'}${wcPill(c, lvl)}</span>`; }).join('');
       const r = sr.find((x) => x.year === col.year); const wt = col.w || (r && r.w);
-      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i>${wt ? `<em>${wShort(wt)}</em>` : ''}</span>${cells}<span class="wqr"${r ? ` style="color:${colorAt(pkFrac(r.rating))}"` : ''}>${r ? rw(r.rating) : '–'}</span>`; }).join('');
+      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i>${wt ? `<em>${wShort(wt)}</em>` : ''}</span>${cells}`; }).join('');
     const rec = recordOf(w.name, years), bw = bestWinOf(w.name, years);
     const ti = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]];
     const nT = ti.reduce((a, [, n]) => a + n, 0);
@@ -325,7 +325,7 @@
     const pk = cr ? `<span class="wqpk" title="Peak RTG ${rw(cr.peak)} · bar runs from ${PK_LO} (average state qualifier) to ${PK_HI}"><i style="height:${(100 * pkFrac(cr.peak)).toFixed(0)}%;background:${colorAt(pkFrac(cr.peak))}"></i></span>` : '<span class="wqpk"></span>';
     return `<a class="wq" href="${w.href}">${pk}
       <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</small></span>${cr ? `<span class="rv"><i>Peak RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
-      <span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}<span class="wql r">RTG</span>${rows}</span>
+      <span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}${rows}</span>
       ${tiles}${bw ? `<span class="wqb"><i>Best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</a>`;
   }
 
