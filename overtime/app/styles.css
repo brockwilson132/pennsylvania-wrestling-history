@@ -1192,7 +1192,7 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .atstep .chipb{margin:0;justify-self:start;padding:7px 12px}.atstep .next{justify-self:end}
 /* compact field (?bv=C): one row per wrestler, tap to open his bouts and career grid */
 .bvc{border-bottom:1px solid var(--line)}.bvc:last-child{border-bottom:0}
-.bvc>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px minmax(0,1fr) auto auto 14px;align-items:center;gap:8px;padding:7px 10px}
+.bvc>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px 36px minmax(0,1fr) auto 14px;align-items:center;gap:8px;padding:7px 10px}
 .bvc>summary::-webkit-details-marker{display:none}
 .bvc .sd{font:900 11.5px var(--cond);color:var(--ash);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bvc .cn{display:grid;min-width:0;gap:2px}.bvc .cn b{font:700 15px/1.1 var(--cond);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1203,13 +1203,14 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .bvc[open]>summary{background:var(--slate2)}
 .bvc.me>summary{box-shadow:inset 3px 0 0 var(--gold)}.bvc.me .cn b{color:var(--gold)}
 .bvcx{padding:6px 10px 12px 54px;display:grid;gap:8px;background:var(--slate2)}
-.bvfin{font:800 12px/18px var(--cond);padding:0 7px;border-radius:5px;color:var(--mat)}
+.bvfin{font:800 12px/18px var(--cond);padding:0 4px;border-radius:5px;color:var(--mat);text-align:center}
+.bvrt{font:800 19px/1 var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
 .bvfin.c1{background:var(--m1)}.bvfin.c2{background:var(--m2)}.bvfin.c3{background:var(--m3)}.bvfin.c4{background:var(--m4);color:var(--chalk)}.bvfin.c5{background:var(--m5);color:var(--chalk)}.bvfin.adv{background:transparent;border:1px solid var(--ash);color:var(--ash);line-height:16px}
 .bvbl{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;row-gap:2px;font:600 12px/17px var(--cond);letter-spacing:.02em;color:var(--ash);max-width:260px}
 .bvbl .bvr{font-weight:700;font-size:11px;letter-spacing:.06em}.bvbl .bo-w{color:var(--chalk)}
 .bvbw2{display:block;font:600 11.5px var(--cond);color:var(--ash)}.bvbw2 b{color:var(--chalk)}
 .bvgo{font:700 12px var(--cond);color:var(--chalk);text-decoration:underline;text-underline-offset:2px;justify-self:start}
-@media(max-width:400px){.bvc>summary{grid-template-columns:30px minmax(0,1fr) auto auto 12px;gap:6px}.bvcx{padding-left:12px}}
+@media(max-width:400px){.bvc>summary{grid-template-columns:34px 30px minmax(0,1fr) auto 12px;gap:6px}.bvcx{padding-left:12px}}
 .bvc .sdg{display:grid;gap:2px;min-width:0}.bvc .sdg i{font:700 11px var(--cond);font-style:normal;color:var(--ash);opacity:.8}
 .bvc .dsp{display:flex;align-items:center;gap:6px}.bvc .dsp .sgv{display:block;width:20px;height:12px}
 .bvop{display:flex;align-items:center;gap:8px;font:600 11.5px var(--cond);color:var(--ash);max-width:260px}.bvop b{color:var(--chalk)}.bvop .sgv{display:block;width:20px;height:12px;flex:none}

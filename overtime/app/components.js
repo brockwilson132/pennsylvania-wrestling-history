@@ -501,7 +501,7 @@
         /* his rating with the same six signal bars the medalists use: the tiers of this bracket's own level */
         const rv = rOf(r), rbar = rv ? OT.sgIcon(rv, F.lvl) : '';
         const pline = path != null ? `<span class="bvop"><span>Opponents averaged</span>${pbar}<b>${Math.round(path)}</b></span>` : '';
-        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary><span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span>${fin || '<span></span>'}<span class="dsp">${rbar}${rtgTag(rOf(r))}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
+        return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary>${fin || '<span></span>'}<span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span><span class="dsp">${rbar}${rv ? `<b class="bvrt" title="RTG">${OT.rtg10(rv)}</b>` : ''}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }
     }).join('');
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
