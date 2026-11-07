@@ -424,17 +424,19 @@
     return `<div class="bxs"><div class="bxc" style="width:${W}px;height:${H}px">${heads.join('')}<svg class="bxj" width="${W}" height="${H}" aria-hidden="true"><path d="${paths.join(' ')}"/><path class="g" d="${gold.join(' ')}"/></svg>${boxes}</div></div>`;
   }
 
-  /* the eight medalists: top three on a podium (name, school, season rating, net Δ for the tournament), 4th–8th as rows */
-  function medalists(placers, info) {
+  /* the eight medalists: top three on a podium (name, school, his rating with its signal bars), 4th–8th as rows. The
+     bars on a rating are the same six tiers as the bracket's own level, so a rating reads against that level's brackets. */
+  function medalists(placers, info, lvl) {
+    const rtg = (i) => (i.rt == null ? '' : `<span class="mdsg">${OT.sgIcon(i.rt, lvl)}<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b></span>`);
     const by = (p) => placers.filter((r) => r.place === p);
     const chip = (r) => stag(r.sch, { abbr: true });
-    const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament and his change across it' : 'season rating and his change across the tournament'}">${i.rt != null ? `<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b>` : ''}${i.net != null ? dTxt(i.net) : ''}</span>`; };
+    const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament' : 'season rating'}">${rtg(i)}</span>`; };
     const H = { 1: 70, 2: 52, 3: 40 };
     const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
     /* 4th–8th: place, name over his full school tag (as in the field below), then two fixed columns so the numbers line
        up down the list: his change across the tournament, then his rating at the right edge */
     const rest = [4, 5, 6, 7, 8].flatMap((p) => by(p).map((r) => { const i = info(r);
-      return `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i><span class="mdnm"><b>${esc(r.name)}</b>${stag(r.sch)}</span><span class="mdd">${i.net != null ? dTxt(i.net) : ''}</span><b class="mdrt">${i.rt != null ? (i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)) : ''}</b></a>`; })).join('');
+      return `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i><span class="mdnm"><b>${esc(r.name)}</b>${stag(r.sch)}</span><span class="mdd">${i.net != null ? dTxt(i.net) : ''}</span><span class="mdrt">${rtg(i)}</span></a>`; })).join('');
     return `<div class="md"><div class="mdtop">${top}</div>${rest ? `<div class="mdrest">${rest}</div>` : ''}</div>`;
   }
 
@@ -489,7 +491,7 @@
     const placeB = bouts.filter((b) => b[0] === 'p5' || b[0] === 'p7').sort((p, q) => (p[0] > q[0]) - (p[0] < q[0]));
     const finish = (lab) => (n) => { const e = EN.get(nk(n)); return `<i>${lab}</i><b>${esc(shortName(n))}</b>`; };
     const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
-    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk"><h3>Championship</h3><span>${hasElo ? 'RTG going into each bout, and how much it moved: the number after one bout is the number going into the next' : 'Season rating · Δ = rating points won or lost in that bout against expectation'}</span></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
+    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk" title="${hasElo ? 'RTG going into each bout, and how much it moved: the number after one bout is the number going into the next' : 'Season rating · Δ = rating points won or lost in that bout against expectation'}"><h3>Championship</h3></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
       + (consT.length ? `<section class="bxsec"><div class="bxk"><h3>Consolation</h3></div>${bracketTree(consT, ctx, { roundName: RNX, finish: finish('3rd') })}</section>` : '')
       + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '') : '';
     // the field: every entrant with his bouts and career matrix
@@ -522,7 +524,7 @@
     const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
     const info = (r) => ({ rt: hasElo && EOUT.has(nk(r.name)) ? EOUT.get(nk(r.name)) : rOf(r), raw: hasElo && EOUT.has(nk(r.name)), net: NET.has(nk(r.name)) ? NET.get(nk(r.name)) : null });
-    return head + (placers.length ? medalists(placers, info) : '') + bracketHTML
+    return head + (placers.length ? medalists(placers, info, F.lvl) : '') + bracketHTML
       + `<section class="bxsec"><div class="bxk"><h3>The field</h3>${sortSeg}</div><div class="bvlist"${F.loading ? ' data-loading="1"' : ''}>${lines}</div></section>`
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament and the change across it. ' : 'Δ is the Elo step each result is worth given both wrestlers’ season ratings. ') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }

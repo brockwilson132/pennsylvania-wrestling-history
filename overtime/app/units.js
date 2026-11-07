@@ -198,23 +198,24 @@
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
-  /* bracket header: the bracket's tier as big signal bars, its exact strength, then the six tiers of its own level laid
-     out as one scale (each level's 5th to 95th percentile in six equal steps, the same cut points as the signal bars
-     everywhere else) with a marker at this bracket and a gold dot at the level's average bracket. One line under it
-     carries the cross-level comparison (how far from the average state bracket) and the percentile at its level. */
+  /* bracket header: tier name on the left, signal bars beside the exact number on the right, then the six tiers of the
+     bracket's own level as one bar (each level's 5th to 95th percentile in six equal steps, the cut points the signal
+     bars use everywhere). The bar fills through the tiers up to this bracket's strength; a gold dot marks the level's
+     average bracket, whose number sits under this one beside the same gold dot. No sentences. */
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
     const l = sgLvl(lvl), C = sgCuts(l); if (!C.length) return '';
-    const st = sgTier(v, l), p = pctIn(v, l), step = (C[4] - C[0]) / 4, lo = C[0] - step, hi = C[4] + step;
-    const at = (x) => Math.max(0.5, Math.min(99.5, 100 * (x - lo) / (hi - lo)));
-    const avg = sAnchor().lvl[l], lname = { district: 'district', regional: 'regional', state: 'state' }[l];
-    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i></i><s>${n}</s></span>`).join('');
+    const st = sgTier(v, l), step = (C[4] - C[0]) / 4, lo = C[0] - step;
+    const fill = (t) => Math.max(0, Math.min(100, 100 * (v - (lo + t * step)) / step));   // how much of tier t this bracket fills
+    const avg = sAnchor().lvl[l], aT = avg != null ? Math.min(5, Math.max(0, sgTier(avg, l))) : null, aAt = avg != null ? Math.max(4, Math.min(96, 100 * (avg - (lo + aT * step)) / step)) : null;
+    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i><b style="width:${(t < st ? 100 : t === st ? Math.max(fill(t), 6) : 0).toFixed(1)}%"></b>${t === aT ? `<em class="bvsa" style="left:${aAt.toFixed(1)}%"></em>` : ''}</i><s>${n}</s></span>`).join('');
     return `<div class="bvs" title="${esc(fieldTip(v, lvl))}">
-      <small class="bvsl">Strength of competition</small><div class="bvs1"><span class="bvsg">${sgSvg(st, ' big')}</span><span class="bvst"><b style="color:${sgCol(st)}">${SG_N[st]}</b></span><span class="bvsn"><b>${r10(v)}</b></span></div>
-      <div class="bvsc"><div class="bvsk">${segs}<u class="bvsm" style="left:${at(v).toFixed(1)}%"></u>${avg != null ? `<em class="bvsa" style="left:${at(avg).toFixed(1)}%" title="Average ${lname} bracket ${r10(avg)}"></em>` : ''}</div></div>
-      <p class="bvsx">${p != null ? `Tougher than ${p}% of ${lname} brackets · ` : ''}${vsState(v)} (${r10(sAnchor().avg)})${avg != null ? ` · <i class="bvsad"></i> average ${lname} bracket${l !== 'state' ? ' ' + r10(avg) : ''}` : ''}</p>
+      <small class="bvsl">Strength of competition</small>
+      <div class="bvs1"><b class="bvst" style="color:${sgCol(st)}">${SG_N[st]}</b><span class="bvsr"><span class="bvsn">${sgSvg(st, ' big')}<b>${r10(v)}</b></span>${avg != null ? `<span class="bvsav" title="Average ${l} bracket ${r10(avg)}"><i class="bvsad"></i>${sgSvg(aT)}<b>${r10(avg)}</b></span>` : ''}</span></div>
+      <div class="bvsk">${segs}</div>
     </div>`;
   }
+
 
 
   /* ---------- season timeline: rating dots on top, D / R / S results beneath, one column per season ----------
@@ -745,5 +746,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
