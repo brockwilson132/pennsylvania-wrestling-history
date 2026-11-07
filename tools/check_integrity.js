@@ -35,6 +35,26 @@ const setScope = (cls, mode) => { OT.clearAll(); OT.setCls(cls); OT.setWin({ mod
     for (const [cls, mode] of [['AAA', '5'], ['AA', '5']]) { setScope(cls, mode); const c = OT.placeCounts(OT.ROWS().filter((r) => r.place)); const nw = new Set(OT.ROWS().map((r) => r.year + '|' + r.wn)).size;
       check(`state podium ${cls} last 5: each place = weights × seasons (${nw})`, c.every((x) => x === nw), c.join(' ')); }
   }
+  /* 1b. state places match the official "Place Winners" box printed on each bracket (data/brackets/state_places.csv,
+     tools/parse_state.py --places): every medal at the box's place, every box place filled. Matched on last name, so a
+     spelling difference alone ("Illingsworth" / "Illingworth") is not an error; a wrestler at another place is. */
+  { const csvRows = (f) => { const [h, ...L] = fs.readFileSync(f, 'utf8').trim().split('\n'); const H = h.split(','); return L.map((l) => { const v = []; let cur = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { v.push(cur); cur = ''; } else cur += ch; } v.push(cur); return Object.fromEntries(H.map((k, i) => [k, v[i]])); }); };
+    const last = (n) => { const t = String(n || '').replace(/\(.*?\)/g, ' ').trim().replace(/\b(Jr|Sr|II|III|IV)\.?$/, '').toLowerCase().replace(/[^a-z\- ]/g, '').split(/\s+/).filter(Boolean); return t.length ? t[t.length - 1].replace(/-/g, '') : ''; };
+    const wn = (w) => (/^(UNL|HWT)/i.test(w) ? 'UNL' : String(w).replace(/^0+/, ''));
+    const box = new Map(); csvRows(path.join(__dirname, '..', 'data/brackets/state_places.csv')).forEach((r) => { const k = `${r.year}|${r.cls}|${wn(r.weight)}`; (box.get(k) || box.set(k, new Map()).get(k)).set(+r.place, last(r.name)); });
+    const med = new Map(); JSON.parse(fs.readFileSync(path.join(OV, 'medals.js'), 'utf8').split('window.WR_MEDALS=')[1].split(';\n')[0]).forEach(([y, c, w, p, n]) => { const k = `${y}|${c}|${wn(w)}`; (med.get(k) || med.set(k, new Map()).get(k)).set(p, last(n)); });
+    const wrong = [], missing = [];
+    box.forEach((B, k) => { const M = med.get(k) || new Map();
+      B.forEach((nm, p) => { if (!M.has(p)) missing.push(`${k} ${p}`); });
+      M.forEach((nm, p) => { const at = [...B].filter(([, n]) => n === nm).map(([q]) => q); if (at.length && !at.includes(p)) wrong.push(`${k.replace(/\|/g, ' ')}: ${nm} listed ${p}, bracket ${at.join('/')}`); }); });
+    check('state places = the bracket\'s Place Winners box (every weight, 1938–2026)', !wrong.length && !missing.length, wrong.length || missing.length ? `${wrong.length} at the wrong place, ${missing.length} missing: ${wrong.concat(missing).slice(0, 6).join('; ')}` : `${box.size} weights`);
+    /* the placement bouts (final, 3rd, 5th, 7th) say the same: their winner and loser hold those places in the box */
+    const pb = [], seen = new Set();
+    csvRows(path.join(__dirname, '..', 'data/brackets/bouts.csv')).forEach((r) => { if (r.level !== 'state' || r.round !== '0') return; const b = { champ: 1, p3: 3, p5: 5, p7: 7 }[r.side]; if (!b) return;
+      const k = `${r.year}|${r.cls}|${wn(r.weight)}`, B = box.get(k); if (!B) return; seen.add(k);
+      if (B.get(b) !== last(r.winner) || B.get(b + 1) !== last(r.loser)) pb.push(`${k.replace(/\|/g, ' ')} ${r.side}: ${r.winner} over ${r.loser}`); });
+    check('state placement bouts agree with the Place Winners box', pb.length <= 30, `${pb.length} of ${seen.size} weights differ (name spellings and bracket misreads, see tools/sync_state_places.py)${pb.length ? ': ' + pb.slice(0, 4).join('; ') : ''}`, pb.length > 0);
+  }
   /* 2–3. regions: every state entrant sits in his district's region; a district feeds one region per season */
   for (const cls of ['AAA', 'AA']) { setScope(cls, 'all');
     const rows = OT.APP.filter((r) => r.cls === cls && r.year >= 1974 && r.d);

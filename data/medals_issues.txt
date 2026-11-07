@@ -1,6 +1,5 @@
 1942 single 145: champion not in data (John Zukowski, Mount Carmel)
 1942 single 185: champion not in data (George Young, Forty Fort)
-1954 single: empty
 1965 single 180: champion not in data (Joe Yerg, State College)
 1973 single 105: champion not in data (Denny Zuk, Carlynton)
 1976 AAA 105: champion not in data (Jim Zenz, Saucon Valley)
