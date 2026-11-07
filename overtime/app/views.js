@@ -78,7 +78,7 @@
     const more = rows.length > lim ? `<div class="bmore"><button class="more" type="button" data-tlmore>Show ${Math.min(50, rows.length - lim)} more of ${rows.length}</button></div>` : '';
     const nn = NOUN[d.kind];
     return `${ctl}<div class="tltip" id="tltip" aria-live="polite">${rows.length} ${nn[rows.length === 1 ? 0 : 1]}, ${d.years[0]}–${d.years[n - 1]}. Tap a season for its rating and rank.</div>
-      <div class="tlx pscr scroll" style="--n:${n}"><div class="tlin">${ax}${body}</div></div>${more}${legendBar(d.kind)}
+      <div class="tlx pscr scroll" style="--n:${n}" data-y0="${d.years[0]}" data-y1="${d.years[n - 1]}"><div class="tlin">${ax}${body}</div></div>${more}${legendBar(d.kind)}
       <div class="note">${d.kind === 'weight' ? 'Each weight: the rating of the school\'s best wrestler on record there that season (state entrants and district and regional placewinners).' : 'Each strip: the ' + nn[0] + '\'s season rating, cold to hot.'} Dotted cells are estimated. The number beside each name follows the sort.${d.kind === 'weight' ? '' : ' ' + nn[1][0].toUpperCase() + nn[1].slice(1) + ' rated in fewer than ' + minS + ' of these seasons come last.'}</div>`;
   }
   /* the tip: value and rank among the rows that season */
