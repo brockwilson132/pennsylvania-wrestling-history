@@ -1145,8 +1145,8 @@ a.cgc:hover .cgp,a.cgc:focus-visible .cgp{outline:2px solid var(--gold);outline-
 .stag{display:inline-flex;align-items:center;gap:4px;vertical-align:1px;max-width:100%;overflow:hidden;white-space:nowrap;background:var(--tf);color:var(--ti);font:900 11.5px/16px var(--cond);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
 .stag.tF{border-radius:999px;padding:1px 9px 1px 4px}.stag.tF>i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ta);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
 .stag.nc{font-weight:700;color:var(--ash)}
-.stag.ab{justify-content:center;min-width:34px;font-size:11px;letter-spacing:.04em}.stag.tF.ab{padding:1px 7px 1px 3px;min-width:0}
-.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.tF.xs>i{width:7px;height:7px}
+.stag.ab{box-sizing:border-box;flex:none;width:46px;font-size:11px;letter-spacing:.04em}.stag.tF.ab{padding:1px 5px 1px 3px}.stag.ab>u{flex:1;text-decoration:none;text-align:center}
+.stag.xs{min-width:0;font-size:9.5px;line-height:12px;gap:3px}.stag.tF.xs{padding:0 5px 0 2px}.stag.ab.xs{width:36px}.stag.tF.ab.xs{padding:0 3px 0 2px}.stag.tF.xs>i{width:7px;height:7px}
 /* the school tag sits in the name line, so the old badge column is gone */
 .wk1{display:flex!important;gap:10px;align-items:center}.wk1>.nm{flex:1 1 auto;min-width:0}.wk1>.rk,.wk1>.rv{flex:none}
 .bvtop{display:flex!important;gap:8px;align-items:center}.bvtop>.nm{flex:1 1 auto;min-width:0}.bvtop>.sd{flex:none;min-width:30px}.bvtop>.dsp{flex:none}

@@ -63,7 +63,7 @@
   const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
   const stag = (sch, o = {}) => { const p = tagPaint(sch);
-    return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${esc(o.abbr ? abbrOf(sch) : sch)}</span>`; };
+    return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${o.abbr ? `<u>${esc(abbrOf(sch))}</u>` : esc(sch)}</span>`; };
 
   /* brand */
   /* the top-bar logo: the loader's lockup (index.html #boot) without its tagline. OVERTIME sits across the state
@@ -383,7 +383,7 @@
   }
   function bracketTree(trees, ctx, opts) {
     if (!trees.length) return '';
-    const BW = ctx.phone ? 140 : 160, GAP = 30, SH = 33, LH = 22, TOP = 26;
+    const BW = ctx.phone ? 150 : 170, GAP = 30, SH = 33, LH = 22, TOP = 26;
     const maxD = Math.max(...trees.map((t) => t.maxD)), minD = Math.min(...trees.map((t) => t.x.d));
     const cols = maxD - minD + 1, END = 112;
     const W = cols * (BW + GAP) + END;
