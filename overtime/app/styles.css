@@ -1528,56 +1528,31 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .cdc .dk,.cdc .dk.p4,.cdc .dk.p5,.cdc .dk.q,.cdc .dk.dnp,.cdc .dk.none{width:30px;height:30px;font-size:16px}
 a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
 .cdcard{max-width:760px}.cdcard .wlg{padding:4px 0 0;border-top:1px solid var(--line);padding-top:10px}
-/* v4: seasons-down matrix at career size, Q discs, wins bar below with its own key */
+/* Q discs */
 .dk.q{font:800 11px/1 var(--body);color:var(--chalk)}
-.cdc .dk.q{font:800 14px/1 var(--body)!important}
-.smx{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:8px 6px;align-items:center}
-.smx .cdl{padding-left:24px}
-.smx .cdh{justify-items:start;gap:4px;padding-right:4px}.smx .cdh b{font-size:19px}.smx .cdh i{font-size:10.5px;gap:5px}
-.smx .cdc{grid-template-columns:20px 30px;gap:4px}
-.wq .smx{margin-top:2px}
-.wq .wtb{margin-top:2px}
-.wtw{display:grid;gap:7px;padding-top:12px;border-top:1px solid var(--line)}
-.wtk{display:flex;flex-wrap:wrap;gap:4px 12px;font:700 10.5px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}
-.wtk>span{display:inline-flex;align-items:center;gap:5px}
-.wtk i{width:10px;height:10px;border-radius:2px;display:inline-block}.wtk i.d{background:#4A5360}.wtk i.m{background:#7D8794}.wtk i.t{background:#B8BFC6}.wtk i.f{background:#EEEAE1}.wtk i.l{background:#4A2328}
+/* the seasons-down matrix, every part sized from the medal (--dk): toughness bars ~0.65 wide, level icons as wide as
+   the medal, year ~0.6, grade and weight ~0.32, wins bar ~0.55; three steps by width */
+.smx{--dk:52px;--yc:62px;display:grid;grid-template-columns:var(--yc) repeat(3,minmax(0,1fr));gap:calc(var(--dk)*.22) 4px;align-items:center}
+@media(max-width:400px){.smx{--dk:46px;--yc:54px;gap:calc(var(--dk)*.22) 2px}}
+@media(max-width:359px){.smx{--dk:40px;--yc:46px}}
+.smx .cdl{display:flex;justify-content:center;padding:0 0 2px calc(var(--dk)*.7)}
+.smx .cdl .lvi{width:var(--dk);display:inline-flex;justify-content:center;color:#C9CFD6}
+.smx .cdl .lvi svg{width:var(--dk);height:calc(var(--dk)*.72)}
+.smx .cdh{display:grid;justify-items:start;gap:calc(var(--dk)*.08);padding:0}
+.smx .cdh b{font:900 calc(var(--dk)*.6)/.9 var(--cond);color:var(--chalk)}
+.smx .cdh i{display:flex;gap:calc(var(--dk)*.1);font:700 calc(var(--dk)*.32)/1 var(--cond);letter-spacing:.04em;color:var(--ash2);font-style:normal}
+.smx .cdh i em{font-style:normal;color:var(--chalk);letter-spacing:0;font-weight:800}
+.smx .cdc{display:grid;grid-template-columns:calc(var(--dk)*.62) var(--dk);gap:calc(var(--dk)*.08);justify-content:center;align-items:center}
+.smx .cdc .sgn{width:calc(var(--dk)*.62);justify-self:end}
+.smx .cdc .sgn .sgv{width:calc(var(--dk)*.62);height:calc(var(--dk)*.4)}
+.smx .cdc .dk{width:var(--dk)!important;height:var(--dk)!important;font-size:calc(var(--dk)*.5)!important}
+.smx .cdc .dk.q{font:800 calc(var(--dk)*.4)/1 var(--body)!important;border-width:2.5px}
+.smx .cdc .dk.none{border-width:1.5px;border-color:#232A33}
+.wq{gap:12px}.wq .smx{margin-top:2px}
+@media(max-width:400px){.wq{padding:10px 10px 12px}}
+.wq .wtb,.cdcard .wtb{height:26px;border-radius:6px}.wq .wtb>span,.cdcard .wtb>span{font-size:15px;min-width:24px}
+.wtw{display:grid;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.wtk{display:flex;flex-wrap:wrap;gap:5px 14px;font:700 13px var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}
+.wtk>span{display:inline-flex;align-items:center;gap:6px}
+.wtk i{width:13px;height:13px;border-radius:3px;display:inline-block}.wtk i.d{background:#4A5360}.wtk i.m{background:#7D8794}.wtk i.t{background:#B8BFC6}.wtk i.f{background:#EEEAE1}.wtk i.l{background:#4A2328}
 .wlg{padding:0 2px 6px}
-.cdcard .cd{row-gap:12px}
-@media(max-width:359px){.smx .cdc{grid-template-columns:16px 26px;gap:3px}.smx .cdc .dk{width:26px!important;height:26px!important;font-size:14px}.smx .cdl{padding-left:19px}.smx .cdh b{font-size:16px}}
-/* v5: the seasons-down matrix fills the card: big level icons, big medals, readable year / grade / weight */
-.smx{grid-template-columns:52px repeat(3,minmax(0,1fr));gap:10px 4px}
-.smx .cdl{padding-left:0;justify-content:center;display:flex}
-.smx .cdl .lvi{width:76px;justify-content:center;display:inline-flex;margin-left:24px}
-.smx .cdl .lvi svg{width:28px;height:28px;color:var(--ash)}
-.smx .cdh{gap:5px}.smx .cdh b{font-size:24px;line-height:.9}.smx .cdh i{font-size:13px;gap:6px;letter-spacing:.06em}.smx .cdh i em{color:var(--chalk);font-weight:800}
-.smx .cdc{grid-template-columns:26px 40px;gap:6px;justify-content:center}
-.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:26px}.smx .cdc .sgn .sgv{height:16px}
-.smx .cdc .dk{width:40px!important;height:40px!important;font-size:20px!important}
-.smx .cdc .dk.q{font-size:17px!important}
-@media(max-width:400px){.smx{grid-template-columns:44px repeat(3,minmax(0,1fr));gap:9px 2px}.smx .cdh b{font-size:21px}.smx .cdh i{font-size:12px;gap:4px}
- .smx .cdc{grid-template-columns:22px 36px;gap:4px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:22px}.smx .cdc .sgn .sgv{height:14px}
- .smx .cdc .dk{width:36px!important;height:36px!important;font-size:18px!important}.smx .cdl .lvi{margin-left:26px;width:36px}.smx .cdl .lvi svg{width:26px;height:26px}}
-@media(max-width:359px){.smx{grid-template-columns:40px repeat(3,minmax(0,1fr))}.smx .cdh b{font-size:19px}.smx .cdh i{font-size:10.5px;gap:3px;letter-spacing:.02em}
- .smx .cdc{grid-template-columns:18px 32px;gap:3px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:18px}.smx .cdc .sgn .sgv{height:12px}
- .smx .cdc .dk{width:32px!important;height:32px!important;font-size:16px!important}.smx .cdl .lvi{margin-left:21px;width:32px}.smx .cdl .lvi svg{width:22px;height:22px}}
-.wq{gap:10px}.wq .wtb{height:20px}.wq .wtb>span{font-size:12.5px}
-/* v6: larger still; phones get the biggest medals the width allows */
-.smx{grid-template-columns:60px repeat(3,minmax(0,1fr));gap:12px 4px}
-.smx .cdh b{font-size:30px}.smx .cdh i{font-size:14px}
-.smx .cdc{grid-template-columns:30px 52px;gap:6px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:30px}.smx .cdc .sgn .sgv{height:19px}
-.smx .cdc .dk{width:52px!important;height:52px!important;font-size:26px!important}.smx .cdc .dk.q{font-size:21px!important}
-.smx .cdl .lvi{margin-left:36px;width:52px}.smx .cdl .lvi svg{width:36px;height:36px}
-@media(max-width:400px){.smx{grid-template-columns:48px repeat(3,minmax(0,1fr));gap:10px 2px}.smx .cdh b{font-size:26px}.smx .cdh i{font-size:13px;gap:5px}
- .smx .cdc{grid-template-columns:24px 46px;gap:4px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:24px}.smx .cdc .sgn .sgv{height:16px}
- .smx .cdc .dk{width:46px!important;height:46px!important;font-size:23px!important}.smx .cdc .dk.q{font-size:19px!important}
- .smx .cdl .lvi{margin-left:28px;width:46px}.smx .cdl .lvi svg{width:32px;height:32px}
- .wq{padding:10px 10px 11px}}
-@media(max-width:359px){.smx{grid-template-columns:40px repeat(3,minmax(0,1fr))}.smx .cdh b{font-size:22px}.smx .cdh i{font-size:11px;gap:3px}
- .smx .cdc{grid-template-columns:19px 40px;gap:3px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:19px}.smx .cdc .sgn .sgv{height:13px}
- .smx .cdc .dk{width:40px!important;height:40px!important;font-size:20px!important}.smx .cdc .dk.q{font-size:16px!important}
- .smx .cdl .lvi{margin-left:22px;width:40px}.smx .cdl .lvi svg{width:28px;height:28px}}
-.smx .cdh i{font-size:15px!important}
-@media(max-width:400px){.smx .cdh i{font-size:14px!important}}
-@media(max-width:359px){.smx .cdh i{font-size:12.5px!important}}
-.wq .wtb,.cdcard .wtb{height:24px}.wq .wtb>span,.cdcard .wtb>span{font-size:14px;min-width:22px}
-.wtk{font-size:12px}.wtk i{width:12px;height:12px}
