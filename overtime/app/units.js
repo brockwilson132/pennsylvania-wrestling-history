@@ -286,25 +286,38 @@
   /* ---------- best wins and postseason record (lazy) ---------- */
   let BW = null, BWP = null;
   const loadBW = () => BWP || (BWP = fetch('bestwins.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => { BW = d; return d; }));
-  const bestWinOf = (name, years) => { if (!BW) return null; const k = nkey(name); let b = null; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && (!b || v[0] > b[0])) b = [v[0], v[1], y, v[2]]; }); return b; };
-  const shortName = (n) => { const t = String(n || '').replace(/\(.*?\)/g, '').trim().split(/\s+/); return t.length > 1 ? t[0][0] + '. ' + t.slice(1).join(' ') : n; };
-  const LVLN = { s: 'state', r: 'regional', d: 'district' };
   const recordOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 3) { any = true; t[0] += v[3]; t[1] += v[4]; t[2] += v[5]; t[3] += v[6]; } }); return any ? t : null; };
+  const shortName = (n) => { const t = String(n || '').replace(/\(.*?\)/g, '').trim().split(/\s+/); return t.length > 1 ? t[0][0] + '. ' + t.slice(1).join(' ') : n; };
+  /* wins by type over the postseason: [decisions, major decisions, tech falls, falls] */
+  const winTypesOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 9) { any = true; t[0] += v[7]; t[1] += v[8]; t[2] += v[9]; t[3] += v[5]; } }); return any ? t : null; };
 
-  /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team) ----------
-     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Seasons run down, District → Regional →
-     State run across, each result with its bracket-toughness signal bars; the three levels share the width evenly. Four
-     tiles under it: postseason record, win rate, falls, titles by level; then the best win. `rank` is whatever sits left
-     of the name: a list rank, a weight or a team. */
+  /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team, school pages) ----------
+     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Four tiles first: postseason wins by
+     type (decisions, majors, tech falls, falls). Then seasons run down: year and grade on the left, District → Regional
+     → State across (each result carries its bracket-toughness signal bars inside it, so results centre under their
+     level), the weight on the right. The school tag always shows. `rank` is whatever sits left of the name: a list
+     rank, a weight or a team. */
   const PK_LO = 1500, PK_HI = 2200;
   const pkFrac = (v) => Math.max(0.04, Math.min(1, (v - PK_LO) / (PK_HI - PK_LO)));
   const WC_LV = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
+  /* postseason wins by type as one bar, decisions → falls getting brighter, losses dark red at the end; the count sits in
+     each piece, the type under it */
+  function winBar(t, rec) {
+    if (!t) return `<span class="wtb"${!BW ? ' data-need-bw="1"' : ''}></span>`;
+    const L = rec ? rec[1] : 0; const seg = [['Dec', t[0], 'd'], ['MD', t[1], 'm'], ['TF', t[2], 't'], ['Fall', t[3], 'f'], ['L', L, 'l']].filter(([, v]) => v);
+    const tip = `Decisions ${t[0]} · major decisions ${t[1]} · tech falls ${t[2]} · falls ${t[3]} · losses ${L}`;
+    return `<span class="wtb" title="${tip}" aria-label="${tip}"><span class="wtb-b">${seg.map(([, v, k]) => `<span class="${k}" style="flex:${v}"><b>${v}</b></span>`).join('')}</span><span class="wtb-k">${seg.map(([l, v]) => `<span style="flex:${v}">${l}</span>`).join('')}</span></span>`;
+  }
+  /* a result is a medal disc (1st gold, 2nd silver, 3rd bronze, 4th+ smaller and plain), Q an open ring, DNP a dot;
+     the bracket-toughness bars sit beside it in a slot of their own, so discs centre under their level */
   function wcPill(c, lvl) {
-    if (!c) return '<span class="wqp x">–</span>';
-    if (c.place) return `<span class="wqp ${OT.pc(c.place)}">${ordinal(c.place)}</span>`;
-    if (c.q) return `<span class="wqp q">${lvl === 'state' ? 'Q' : 'Adv'}</span>`;
-    if (c.dnp) return '<span class="wqp x">DNP</span>'; if (c.dnc) return '<span class="wqp x">DNC</span>'; if (c.nodata) return '<span class="wqp x" title="No bracket on record">n/a</span>';
-    return '<span class="wqp x">–</span>';
+    const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null; const sb = f ? sbar(f, c.sec ? 'section' : lvl, `${c.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>';
+    let d = '<span class="dk none"></span>';
+    if (c && c.place) d = `<span class="dk p${Math.min(c.place, 5)}" title="${ordinal(c.place)}">${c.place}</span>`;
+    else if (c && c.q) d = `<span class="dk q" title="${lvl === 'state' ? 'Qualified' : 'Advanced'}"></span>`;
+    else if (c && c.dnp) d = '<span class="dk dnp" title="Did not place"></span>';
+    else if (c && c.dnc) d = '<span class="dk dnp" title="Did not compete"></span>';
+    return `${sb}${d}<span></span>`;
   }
   function wrestlerCard(w, rank, opts = {}) {
     if (!w.lower) w.lower = OT.lowerFor(w.apps);
@@ -313,20 +326,15 @@
     const y0 = years[0], y1 = years[years.length - 1];
     const M = OT.careerCells(w.apps, w.lower); const at = (k) => M.rows.find((r) => r.k === k).cells;
     const rows = M.cols.map((col, i) => { if (!col) return '';
-      const cells = WC_LV.map(([lvl]) => { const c = at(lvl)[i]; const f = c && c.r ? OT.fieldOf(c.r, c.sec ? 'section' : lvl) : null;
-        return `<span class="wqc">${f ? sbar(f, c.sec ? 'section' : lvl, `${col.year} ${c.sec ? 'section' : lvl}`) : '<span class="sgn sg0"></span>'}${wcPill(c, lvl)}</span>`; }).join('');
+      const cells = WC_LV.map(([lvl]) => `<span class="wqc">${wcPill(at(lvl)[i], lvl)}</span>`).join('');
       const r = sr.find((x) => x.year === col.year); const wt = col.w || (r && r.w);
-      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i>${wt ? `<em>${wShort(wt)}</em>` : ''}</span>${cells}`; }).join('');
-    const rec = recordOf(w.name, years), bw = bestWinOf(w.name, years);
-    const ti = [['D', w.lower.filter((r) => r.lvl === 'district' && r.place === 1).length], ['R', w.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length], ['S', w.apps.filter((a) => a.place === 1).length]];
-    const nT = ti.reduce((a, [, n]) => a + n, 0);
-    const tile = (k, v, sub) => `<span class="wqt"><i>${k}</i><b>${v}</b>${sub ? `<small>${sub}</small>` : ''}</span>`;
-    const tiles = `<span class="wqts"${!BW ? ' data-need-bw="1"' : ''}>${tile('Record', rec ? `${rec[0]}–${rec[1]}` : '–')}${tile('Won', rec && rec[0] + rec[1] ? Math.round(100 * rec[0] / (rec[0] + rec[1])) + '%' : '–')}${tile('Falls', rec ? rec[2] : '–', rec && rec[3] ? `${rec[3]} OT` : '')}${tile('Titles', nT, nT ? ti.filter(([, n]) => n).map(([l, n]) => l + n).join(' ') : '')}</span>`;
+      return `<span class="wqy">'${String(col.year).slice(2)}<i>${OT.GRADE_L[i]}</i></span>${cells}<span class="wqw">${wt ? wShort(wt) : ''}</span>`; }).join('');
+    const wt4 = winTypesOf(w.name, years);
+    const tiles = winBar(wt4, recordOf(w.name, years));
     const pk = cr ? `<span class="wqpk" title="Peak RTG ${rw(cr.peak)} · bar runs from ${PK_LO} (average state qualifier) to ${PK_HI}"><i style="height:${(100 * pkFrac(cr.peak)).toFixed(0)}%;background:${colorAt(pkFrac(cr.peak))}"></i></span>` : '<span class="wqpk"></span>';
     return `<a class="wq" href="${w.href}">${pk}
-      <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${opts.noSchool ? '' : OT.stag(w.sch) + ' '}${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</small></span>${cr ? `<span class="rv"><i>Peak RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
-      <span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}${rows}</span>
-      ${tiles}${bw ? `<span class="wqb"><i>Best win</i> <b>${esc(shortName(bw[1]))}</b> ${rw(bw[0])} · '${String(bw[2]).slice(2)} ${LVLN[bw[3]] || ''}</span>` : ''}</a>`;
+      <span class="wqh">${rank != null && rank !== '' ? `<i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>` : ''}<span class="nm"><b>${esc(w.name)}</b><small>${OT.stag(w.sch)} ${y0 === y1 ? y0 : y0 + '–' + String(y1).slice(2)}</small></span>${cr ? `<span class="rv"><i>Peak RTG</i><b>${rw(cr.peak)}</b></span>` : ''}</span>
+      ${tiles}<span class="wqm"><span></span>${WC_LV.map(([, l]) => `<span class="wql">${l}</span>`).join('')}<span class="wql r">Wt</span>${rows}</span></a>`;
   }
 
   /* ---------- unit card ----------
@@ -738,5 +746,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend: () => '', sgKey, sgTier, SG_N, lineMeter, spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();
