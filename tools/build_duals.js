@@ -1,4 +1,4 @@
-/* PIAA team duals (1999–2024, from District III Records) → overtime/duals.js
+/* PIAA team duals (1999–2026: PA-Wrestling.com dual meet pages, bout-checked, plus District III Records rows the site lacks; the source column says which) → overtime/duals.js
  *   node tools/build_duals.js
  * row = [year, cls, round, winner, winnerDistrict, winnerScore, loser, loserDistrict, loserScore, note] */
 'use strict';
