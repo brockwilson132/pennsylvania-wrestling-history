@@ -433,10 +433,10 @@
     const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament' : 'season rating'}">${rtg(i)}</span>`; };
     const H = { 1: 70, 2: 52, 3: 40 };
     const top = [2, 1, 3].map((p) => { const rs = by(p); return `<div class="mdst p${p}">${rs.map((r) => `<a class="mdn" href="${OT.wrestlerHref(r)}">${chip(r, 26)}<b>${esc(r.name)}</b><small>${esc(r.sch)}</small>${stats(r)}</a>`).join('') || '<span class="mdn"><b class="muted">—</b></span>'}<div class="mdb m${p}" style="height:${H[p]}px"><span>${p}</span></div></div>`; }).join('');
-    /* 4th–8th: place, name over his full school tag (as in the field below), then two fixed columns so the numbers line
-       up down the list: his change across the tournament, then his rating at the right edge */
+    /* 4th–8th: place, name over his full school tag (as in the field below), then his rating with its signal bars in a
+       fixed column at the right edge so the numbers line up down the list */
     const rest = [4, 5, 6, 7, 8].flatMap((p) => by(p).map((r) => { const i = info(r);
-      return `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i><span class="mdnm"><b>${esc(r.name)}</b>${stag(r.sch)}</span><span class="mdd">${i.net != null ? dTxt(i.net) : ''}</span><span class="mdrt">${rtg(i)}</span></a>`; })).join('');
+      return `<a class="mdr" href="${OT.wrestlerHref(r)}"><i class="pill ${pc(p)}">${p}</i><span class="mdnm"><b>${esc(r.name)}</b>${stag(r.sch)}</span><span class="mdrt">${rtg(i)}</span></a>`; })).join('');
     return `<div class="md"><div class="mdtop">${top}</div>${rest ? `<div class="mdrest">${rest}</div>` : ''}</div>`;
   }
 

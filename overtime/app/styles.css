@@ -1443,8 +1443,8 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .bvsav b{font:800 14px/1 var(--cond);font-variant-numeric:tabular-nums}
 .bvsk{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
 .bvseg{display:grid;gap:5px;min-width:0}
-.bvseg i{position:relative;display:block;height:8px;border-radius:2px;background:#242A32}
-.bvseg i b{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--c)}
+.bvseg i{display:block;height:8px;border-radius:2px;background:#242A32}
+.bvseg.on i{background:var(--c)}
 .bvseg s{text-decoration:none;font:700 9.5px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;color:var(--ash2);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bvseg.on s{color:var(--c)}
 .bvsa{position:absolute;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#D9A441;box-shadow:0 0 0 2px var(--slate)}
@@ -1462,3 +1462,6 @@ body.sgk-on main{padding-bottom:calc(var(--nav) + 76px + env(safe-area-inset-bot
 .mdr{grid-template-columns:26px minmax(0,1fr) 40px 74px}
 .mdrt{display:flex;justify-content:flex-end}.mdrt b{font:800 16px var(--cond);color:var(--chalk);font-variant-numeric:tabular-nums}
 @media(max-width:360px){.mdr{grid-template-columns:24px minmax(0,1fr) 32px 62px;gap:6px}.mdnm .stag{font-size:10px;padding-right:7px}.mdrt b{font-size:15px}.mdsg{gap:4px}.mdsg .sgv{width:17px;height:10px}}
+
+.mdr{grid-template-columns:26px minmax(0,1fr) 74px}
+@media(max-width:360px){.mdr{grid-template-columns:24px minmax(0,1fr) 62px}}

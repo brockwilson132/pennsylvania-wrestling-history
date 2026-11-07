@@ -199,22 +199,20 @@
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
   /* bracket header: tier name on the left, signal bars beside the exact number on the right, then the six tiers of the
-     bracket's own level as one bar (each level's 5th to 95th percentile in six equal steps, the cut points the signal
-     bars use everywhere). The bar fills through the tiers up to this bracket's strength; a gold dot marks the level's
-     average bracket, whose number sits under this one beside the same gold dot. No sentences. */
+     bracket's own level in a row (each level's 5th to 95th percentile in six equal steps, the cut points the signal bars
+     use everywhere). A tier is a category: the bracket's tier is lit, the others are off. No sentences. */
   function fieldGauge(v, lvl = 'state') {
     if (v == null) return '';
     const l = sgLvl(lvl), C = sgCuts(l); if (!C.length) return '';
-    const st = sgTier(v, l), step = (C[4] - C[0]) / 4, lo = C[0] - step;
-    const fill = (t) => Math.max(0, Math.min(100, 100 * (v - (lo + t * step)) / step));   // how much of tier t this bracket fills
-    const avg = sAnchor().lvl[l], aT = avg != null ? Math.min(5, Math.max(0, sgTier(avg, l))) : null, aAt = avg != null ? Math.max(4, Math.min(96, 100 * (avg - (lo + aT * step)) / step)) : null;
-    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i><b style="width:${(t < st ? 100 : t === st ? Math.max(fill(t), 6) : 0).toFixed(1)}%"></b>${t === aT ? `<em class="bvsa" style="left:${aAt.toFixed(1)}%"></em>` : ''}</i><s>${n}</s></span>`).join('');
+    const st = sgTier(v, l);
+    const segs = SG_N.map((n, t) => `<span class="bvseg${t === st ? ' on' : ''}" style="--c:${sgCol(t)}" title="${n}: ${sgRange(t, l)}"><i></i><s>${n}</s></span>`).join('');
     return `<div class="bvs" title="${esc(fieldTip(v, lvl))}">
       <small class="bvsl">Strength of competition</small>
-      <div class="bvs1"><b class="bvst" style="color:${sgCol(st)}">${SG_N[st]}</b><span class="bvsr"><span class="bvsn">${sgSvg(st, ' big')}<b>${r10(v)}</b></span>${avg != null ? `<span class="bvsav" title="Average ${l} bracket ${r10(avg)}"><i class="bvsad"></i>${sgSvg(aT)}<b>${r10(avg)}</b></span>` : ''}</span></div>
+      <div class="bvs1"><b class="bvst" style="color:${sgCol(st)}">${SG_N[st]}</b><span class="bvsn">${sgSvg(st, ' big')}<b>${r10(v)}</b></span></div>
       <div class="bvsk">${segs}</div>
     </div>`;
   }
+
 
 
 
