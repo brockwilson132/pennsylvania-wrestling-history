@@ -293,7 +293,7 @@
 
   /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team) ----------
      Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Seasons run down, District → Regional →
-     State run across, each result with its bracket-toughness signal bars; each row ends with that season's rating. Four
+     State run across, each result with its bracket-toughness signal bars; the three levels share the width evenly. Four
      tiles under it: postseason record, win rate, falls, titles by level; then the best win. `rank` is whatever sits left
      of the name: a list rank, a weight or a team. */
   const PK_LO = 1500, PK_HI = 2200;
