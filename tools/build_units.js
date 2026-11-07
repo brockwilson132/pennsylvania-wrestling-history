@@ -232,7 +232,7 @@ bySS.forEach((rows, k) => {
     topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
   /* the lineup as far as regionals show it (regional and state entrants): all we can see where the district field is not on file */
   const bestR = new Map(); per.forEach((p) => { if (p.real == null || (p.R < 0 && p.S < 0)) return; const b = bestR.get(p.std); if (!b || p.real > b.real) bestR.set(p.std, p); });
-  SEAS.push({ row, lineup, weights, sch, covered, blind, c, year, d, best, bestR });
+  SEAS.push({ row, lineup, weights, sch, covered, blind, c, year, d, best, bestR, med: Array.from(per.values()).filter((p) => p.S > 0).map((p) => p.S).sort((a, b) => a - b).join('') });
   if (SHOW.includes(sch)) { (lineups[sch] = lineups[sch] || {})[year] = Array.from(best.entries()).sort((a, b) => a[0] - b[0]).map(([i, p]) => [i, p.name, Math.round(p.real), p.D, p.R, p.S]); }
 });
 /* the reference: the average AAA starter (a school's best wrestler at a weight, weights with nobody left out), over
@@ -376,7 +376,7 @@ byS.forEach((rows, i) => {
   /* output. seasons.json (loaded when the list is opened):
        rows [schoolIdx (WR_UNITS.schools), year, class, district, region, duals won per 1000, average margin x10, the same
              two with hard cutoffs, weights
-             filled (1) or field on file (0), Strength, state points, state titles, state medals, team title]
+             filled (1) or field on file (0), Strength, state points, state titles, state medals, team title, state places ('1135')]
      seasons/<first letter of the school slug>.json (loaded when a row is opened): { slug: { year: lineup } }, lineup =
        [[weight bracket, name, rating, district place, regional place, state place], ...] (place -1 not there, 0 entered
        without a place; a weight with nobody is [weight bracket]) */
@@ -385,7 +385,7 @@ byS.forEach((rows, i) => {
   const rows = pool.map((p) => { const s = p.s, r = s.row, src = p.est ? s.bestR : s.best;
     const sl = slugS(s.sch); if (sl) { const o = (LB[sl[0]] = LB[sl[0]] || {}); const x = o[sl] || (o[sl] = {});
       x[s.year + (s.c === 'AA' ? 'b' : '')] = s.weights.map((i) => { const w = src.get(i); return w ? [i, w.name, Math.round(w.real), w.D, w.R, w.S] : [i]; }); }
-    return [r[0], s.year, s.c === 'AA' ? 1 : 0, r[3], r[4], Math.round(1000 * p.win), Math.round(10 * p.mar), Math.round(1000 * p.hwin), Math.round(10 * p.hmar), p.est ? 1 : 0, r[5], r[6], r[9], r[10] + r[11], r[15]]; });
+    return [r[0], s.year, s.c === 'AA' ? 1 : 0, r[3], r[4], Math.round(1000 * p.win), Math.round(10 * p.mar), Math.round(1000 * p.hwin), Math.round(10 * p.hmar), p.est ? 1 : 0, r[5], r[6], r[9], r[10] + r[11], r[15], s.med]; });
   fs.writeFileSync(path.join(OV, 'seasons.json'), JSON.stringify({ field: FIELD_N, from: SEASON_FROM, w: STDK.map((x) => x[0]), rows }));
   const dir = path.join(OV, 'seasons'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
   let lb = 0; Object.entries(LB).forEach(([c, o]) => { const t = JSON.stringify(o); lb += t.length; fs.writeFileSync(path.join(dir, c + '.json'), t); });

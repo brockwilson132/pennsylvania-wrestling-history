@@ -340,6 +340,7 @@
     const ap = e.target.closest('button[data-attpick]'); if (ap) { const v = ap.dataset.attpick; if (state.attMode === 'weight') state.attW = v; else state.attTeam = +v; render(true); if (ap.closest('.atstep')) { const sec = main.querySelector('.atsec'); if (sec) window.scrollTo(0, Math.max(0, sec.getBoundingClientRect().top + window.scrollY - 76)); } return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
+    const sm = e.target.closest('button[data-smode]'); if (sm) { state.smode = sm.dataset.smode; render(true); return; }
     const ss = e.target.closest('button[data-ssort]'); if (ss) { state.ssort = ss.dataset.ssort; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
     const ws = e.target.closest('button[data-wsort]'); if (ws) { state.wsort = ws.dataset.wsort; render(true); return; }

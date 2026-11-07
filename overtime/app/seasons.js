@@ -20,43 +20,37 @@
       SD['p' + c] = (x) => { let lo = 0, hi = n; while (lo < hi) { const m = (lo + hi) >> 1; if (v[m] < x) lo = m + 1; else hi = m; } return n > 1 ? lo / (n - 1) : 0.5; }; });
     return SD; }));
   const loadLineups = (c) => LUP[c] || (LUP[c] = fetch('seasons/' + c + '.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => { LU[c] = d; return d; }));
-  const C = { sch: 0, y: 1, cls: 2, d: 3, reg: 4, exp: 5, expM: 6, cut: 7, cutM: 8, est: 9, str: 10, sp: 11, ti: 12, med: 13, tt: 14 };
-  const SORTS = {
-    exp: (a, b) => b[C.exp] - a[C.exp] || b[C.expM] - a[C.expM],
-    cut: (a, b) => b[C.cut] - a[C.cut] || b[C.cutM] - a[C.cutM] || b[C.exp] - a[C.exp],
-    titles: (a, b) => b[C.ti] - a[C.ti] || b[C.exp] - a[C.exp],
-    medals: (a, b) => b[C.med] - a[C.med] || b[C.exp] - a[C.exp],
-  };
+  const C = { sch: 0, y: 1, cls: 2, d: 3, reg: 4, exp: 5, expM: 6, cut: 7, cutM: 8, est: 9, str: 10, sp: 11, ti: 12, med: 13, tt: 14, pl: 15 };
+  const MODES = { exp: [C.exp, C.expM, 'p5'], cut: [C.cut, C.cutM, 'p7'] };
+  const medalPts = (r) => String(r[C.pl] || '').split('').reduce((t, p) => t + OT.PTS[+p - 1], 0);
   const inPlace = (p) => !p || p.kind === 'state' ? () => true : p.kind === 'region' ? (r) => r[C.reg] === p.id : p.kind === 'district' ? (r) => r[C.d] === +p.id : (r) => r[C.sch] === SIDX.get(p.id);
   const clsOk = (r) => state.cls === 'ALL' || (r[C.cls] ? 'AA' : 'AAA') === state.cls;
   const pct = (v) => (v / 10).toFixed(1) + '%';
-  /* duals won, tinted by where the season sits among every season on file (colour = strength) */
-  const tile = (cls, on, val, f, title) => `<span class="vt ${cls}${on ? ' on' : ''}" style="--tint:${OT.colorAt(Math.max(0.04, f))}" title="${esc(title)}"><b>${val}</b></span>`;
-  const plain = (cls, on, n, title) => `<span class="vt ${cls}${on ? ' on' : ''}${n ? '' : ' z'}" title="${esc(title)}"><b>${n || '–'}</b></span>`;
-  function seasonRow(r, rank, sort, own) {
-    const sch = S[r[C.sch]], cls = r[C.cls] ? 'AA' : 'AAA', key = slug(sch) + '|' + r[C.y] + (r[C.cls] ? 'b' : '');
-    const sub = [r[C.y], cls, r[C.d] ? 'D' + r[C.d] : '', r[C.est] ? 'estimated' : ''].filter(Boolean).join(' · ');
-    const fld = SD.field;
-    return `<div class="sx scx" style="--p1:${OT.colorOf(sch)}"><button class="sxr" data-sx data-ssl="${esc(key)}" aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i><span class="nm scn">${own ? `<b>${r[C.y]}</b><small>${sub.replace(r[C.y] + ' · ', '')}</small>` : `${OT.stag(sch)}<small>${sub}</small>`}</span>`
-      + plain('vtt', sort === 'titles', r[C.ti], `${r[C.ti]} state title${r[C.ti] === 1 ? '' : 's'}`)
-      + tile('vtr vte', sort === 'exp', pct(r[C.exp]), SD.p5(r[C.exp]), `Expected: wins ${pct(r[C.exp])} of duals against the ${fld} best seasons, by expected points · average margin ${(r[C.expM] / 10).toFixed(1)}`)
-      + tile('vtr vtc', sort === 'cut', pct(r[C.cut]), SD.p7(r[C.cut]), `Cutoffs: wins ${pct(r[C.cut])} of duals against the ${fld} best seasons when the higher-rated wrestler always wins · average margin ${(r[C.cutM] / 10).toFixed(1)}`)
-      + plain('vtd', sort === 'medals', r[C.med], `${r[C.med]} state medal${r[C.med] === 1 ? '' : 's'}`)
-      + `</button><div class="sxd" hidden><div class="scl" data-sslb="${esc(key)}">Loading the lineup…</div><a class="sxo" href="#school/${slug(sch)}">Open ${esc(sch)} →</a></div></div>`;
+  const counts = (r) => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; String(r[C.pl] || '').split('').forEach((p) => { if (+p) c[+p - 1]++; }); return c; };
+  function seasonRow(r, rank, mode, sort, own) {
+    const sch = S[r[C.sch]], key = slug(sch) + '|' + r[C.y] + (r[C.cls] ? 'b' : ''); const [vi, mi, pk] = MODES[mode];
+    const est = r[C.est] ? '≈' : '';
+    const tip = `${mode === 'exp' ? 'Expected' : 'Cutoffs'} · wins ${pct(r[vi])} of duals vs the ${SD.field} best · margin ${(r[mi] / 10).toFixed(1)}${est ? ' · estimated lineup' : ''}`;
+    return `<div class="sx zsx" style="--p1:${OT.colorOf(sch)}"><button class="sxr" data-sx data-ssl="${esc(key)}" aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>`
+      + `<span class="nm zsn"><b class="zsy">${r[C.y]}</b>${own ? '' : OT.stag(sch)}</span>`
+      + `<span class="zsp${sort === 'medals' ? ' on' : ''}">${OT.podium(counts(r), 'state', { h: 18 })}</span>`
+      + `<span class="vt vtr${sort === 'duals' ? ' on' : ''}" style="--tint:${OT.colorAt(Math.max(0.04, SD[pk](r[vi])))}" title="${esc(tip)}"><b>${est}${pct(r[vi])}</b></span>`
+      + `</button><div class="sxd" hidden><div class="zsl" data-sslb="${esc(key)}"></div><a class="sxo" href="#school/${slug(sch)}">${esc(sch)} →</a></div></div>`;
   }
   /* the list for a place (null = Pennsylvania) */
   function seasonRankings(parent) {
-    if (!SD) { loadSeasons(); return { sortSeg: '', html: '<div class="fpn" data-need-ss="1">Loading every school season…</div>' }; }
-    const sort = SORTS[state.ssort] ? state.ssort : 'exp';
+    if (!SD) { loadSeasons(); return { sortSeg: '', html: '<div class="fpn" data-need-ss="1"></div>' }; }
+    const mode = MODES[state.smode] ? state.smode : 'exp', sort = state.ssort === 'medals' ? 'medals' : 'duals'; const [vi, mi] = MODES[mode];
     const [wa, wb] = OT.yearsWindow(), f = inPlace(parent);
-    const L = SD.rows.filter((r) => r[C.y] >= wa && r[C.y] <= wb && clsOk(r) && f(r)).sort(SORTS[sort]);
-    if (!L.length) return { sortSeg: '', html: OT.empty(wb < SD.from ? `School seasons start in ${SD.from}: earlier season ratings read too low to compare.` : 'No school seasons in this window.') };
+    const L = SD.rows.filter((r) => r[C.y] >= wa && r[C.y] <= wb && clsOk(r) && f(r))
+      .sort(sort === 'medals' ? (a, b) => medalPts(b) - medalPts(a) || b[vi] - a[vi] : (a, b) => b[vi] - a[vi] || b[mi] - a[mi]);
+    const seg = `<div class="seg sm zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
+    if (!L.length) return { sortSeg: seg, html: OT.empty(wb < SD.from ? `Ranked from ${SD.from}.` : 'No school seasons in this window.') };
     const lim = state.uall ? Math.min(L.length, 200) : 25;
-    const hb = (k, l, c = '') => `<span class="vth${c}"><button class="ht${sort === k ? ' on' : ''}" data-ssort="${k}" aria-pressed="${sort === k}">${l}</button></span>`;
-    const head = `<div class="sxh sch"><span class="rk"></span><span class="nm"></span>${hb('titles', 'Titles')}${hb('exp', 'Expected')}${hb('cut', 'Cutoffs')}${hb('medals', 'Medals')}</div>`;
-    const note = `<div class="sck">Each season wrestles a dual against each of the ${SD.field} best seasons since ${SD.from}. The share it wins: <b>Expected</b> counts each bout's chance of a decision, major, tech fall or fall; <b>Cutoffs</b> gives every bout to the higher-rated wrestler.${wa < SD.from ? ` Seasons before ${SD.from} aren't ranked.` : ''}</div>`;
-    const more = L.length > 25 ? `<div class="bmore"><button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Show top 25' : 'Show ' + Math.min(L.length, 200) + (L.length > 200 ? ' of ' + fmt(L.length) : '')}</button></div>` : '';
-    return { sortSeg: '', html: `${note}<div class="sxl scl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
+    const hb = (k, l) => `<span class="vth"><button class="ht${sort === k ? ' on' : ''}" data-ssort="${k}" aria-pressed="${sort === k}">${l}</button></span>`;
+    const head = `<div class="sxh zsh"><span class="rk"></span><span class="nm"></span>${hb('medals', 'Medals')}${hb('duals', 'Duals won')}</div>`;
+    const more = L.length > 25 ? `<div class="bmore"><button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Top 25' : 'Show ' + Math.min(L.length, 200) + (L.length > 200 ? ' of ' + fmt(L.length) : '')}</button></div>` : '';
+    return { sortSeg: seg, html: `<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
   }
   /* an opened row: the lineup, weight by weight */
   const fin = (p, lvl) => (p == null || p < 0 ? '<span class="wqp x">–</span>' : p ? `<span class="wqp ${OT.pc ? OT.pc(p) : ''}">${ordinal(p)}</span>` : `<span class="wqp q">${lvl === 'S' ? 'Q' : 'Adv'}</span>`);
@@ -65,10 +59,9 @@
     const draw = (d) => {
       const L = d && d[sl] && d[sl][yk]; if (!L) { el.textContent = 'No lineup on file.'; return; }
       const r = SD.rows.find((x) => slug(S[x[C.sch]]) === sl && String(x[C.y]) + (x[C.cls] ? 'b' : '') === yk); const est = r && r[C.est];
-      const rows = L.map(([w, name, rt, D, R, St]) => `<div class="scr"><span class="scw">${OT.wShort(SD.w[w])}</span>${name ? `<span class="scm">${esc(name)}</span><span class="scv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${fin(D, 'D')}${fin(R, 'R')}${fin(St, 'S')}` : `<span class="scm scx0">${est ? 'not on file' : 'nobody entered'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
-      el.innerHTML = `<div class="scr scrh"><span>Wt</span><span>Wrestler</span><span title="Season rating; colour from 1500 (average state qualifier) to 2200">RTG</span><span>Dist</span><span>Reg</span><span>State</span></div>${rows}`
-        + (est ? `<div class="sxn">This district's full field isn't on file for ${yk.replace('b', '')}: only wrestlers who reached regionals are shown, and each other weight counts as what that spot held for teams like this one in seasons that are on file.</div>` : '')
-        + (r ? `<div class="sxn">Expected ${pct(r[C.exp])} · Cutoffs ${pct(r[C.cut])} against the ${SD.field} best · Strength ${r[C.str] || '–'}</div>` : '');
+      const rows = L.map(([w, name, rt, D, R, St]) => `<div class="zsr"><span class="zsw">${OT.wShort(SD.w[w])}</span>${name ? `<span class="zsm">${esc(name)}</span><span class="zsv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${fin(D, 'D')}${fin(R, 'R')}${fin(St, 'S')}` : `<span class="zsm zsx0">${est ? 'not on file' : '—'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
+      el.innerHTML = `<div class="zsr zsrh"><span>Wt</span><span>Wrestler</span><span>RTG</span><span>Dist</span><span>Reg</span><span>State</span></div>${rows}`
+;
     };
     if (LU[c]) draw(LU[c]); else loadLineups(c).then(draw);
   }
