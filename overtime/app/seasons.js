@@ -27,13 +27,17 @@
   const clsOk = (r) => state.cls === 'ALL' || (r[C.cls] ? 'AA' : 'AAA') === state.cls;
   const pct = (v) => (v / 10).toFixed(1) + '%';
   const counts = (r) => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; String(r[C.pl] || '').split('').forEach((p) => { if (+p) c[+p - 1]++; }); return c; };
+  /* state medals by place, 1st to 8th left to right: bar height = how many, top edge in the medal colour */
+  const MEDC = ['#D9A441', '#B8BFC6', '#B5733A', '#8E5A3C', '#5F6B78', '#5F6B78', '#5F6B78', '#5F6B78'];
+  const medalBars = (c) => { const tot = c.reduce((a, b) => a + b, 0), mx = Math.max(1, ...c), H = 18;
+    return `<span class="pz${tot ? '' : ' pz0'}" title="${c.map((n, i) => ordinal(i + 1) + ' ' + n).join(' · ')}"><span class="pzh">${OT.navIcon('state')}<b>${tot}</b><i>${c[0] ? c[0] + ' ★' : ''}</i></span><span class="pzs" style="height:${H}px">${c.map((n, i) => `<i style="height:${n ? Math.max(3, Math.round(H * n / mx)) : 1}px;--c:${MEDC[i]}"></i>`).join('')}</span></span>`; };
   function seasonRow(r, rank, mode, sort, own) {
     const sch = S[r[C.sch]], key = slug(sch) + '|' + r[C.y] + (r[C.cls] ? 'b' : ''); const [vi, mi, pk] = MODES[mode];
     const est = r[C.est] ? '≈' : '';
     const tip = `${mode === 'exp' ? 'Expected' : 'Cutoffs'} · wins ${pct(r[vi])} of duals vs the ${SD.field} best · margin ${(r[mi] / 10).toFixed(1)}${est ? ' · estimated lineup' : ''}`;
     return `<div class="sx zsx" style="--p1:${OT.colorOf(sch)}"><button class="sxr" data-sx data-ssl="${esc(key)}" aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>`
       + `<span class="nm zsn"><b class="zsy">${r[C.y]}</b>${own ? '' : OT.stag(sch)}</span>`
-      + `<span class="zsp${sort === 'medals' ? ' on' : ''}">${OT.podium(counts(r), 'state', { h: 18 })}</span>`
+      + `<span class="zsp${sort === 'medals' ? ' on' : ''}">${medalBars(counts(r))}</span>`
       + `<span class="vt vtr${sort === 'duals' ? ' on' : ''}" style="--tint:${OT.colorAt(Math.max(0.04, SD[pk](r[vi])))}" title="${esc(tip)}"><b>${est}${pct(r[vi])}</b></span>`
       + `</button><div class="sxd" hidden><div class="zsl" data-sslb="${esc(key)}"></div><a class="sxo" href="#school/${slug(sch)}">${esc(sch)} →</a></div></div>`;
   }
@@ -53,7 +57,7 @@
     return { sortSeg: seg, html: `<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
   }
   /* an opened row: the lineup, weight by weight */
-  const fin = (p, lvl) => (p == null || p < 0 ? '<span class="wqp x">–</span>' : p ? `<span class="wqp ${OT.pc ? OT.pc(p) : ''}">${ordinal(p)}</span>` : `<span class="wqp q">${lvl === 'S' ? 'Q' : 'Adv'}</span>`);
+  const fin = (p, lvl) => (p == null || p < 0 ? '<span class="wqp x">–</span>' : p ? `<span class="wqp ${OT.pc ? OT.pc(p) : ''}">${ordinal(p)}</span>` : '<span class="wqp q">Q</span>');
   function fillLineup(el) {
     const key = el.dataset.sslb; if (!key) return; const [sl, yk] = key.split('|'); const c = sl[0];
     const draw = (d) => {
