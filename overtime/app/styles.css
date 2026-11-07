@@ -1556,3 +1556,7 @@ a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
 .wtk>span{display:inline-flex;align-items:center;gap:6px}
 .wtk i{width:13px;height:13px;border-radius:3px;display:inline-block}.wtk i.d{background:#4A5360}.wtk i.m{background:#7D8794}.wtk i.t{background:#B8BFC6}.wtk i.f{background:#EEEAE1}.wtk i.l{background:#4A2328}
 .wlg{padding:0 2px 6px}
+/* Brackets tab: season picker and level row, weights with this place's placers marked */
+.brkhd{display:grid;gap:10px;margin:2px 0 12px}.brkhd .typick{margin-top:0}
+.twl{position:relative}.twl.has{border-color:var(--gold);color:var(--gold)}.twl i{position:absolute;top:-6px;right:-6px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;background:var(--gold);color:#111;font:800 10px/15px var(--cond);font-style:normal;text-align:center}
+.hsub{margin-bottom:10px}

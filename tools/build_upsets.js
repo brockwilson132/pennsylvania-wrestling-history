@@ -7,6 +7,7 @@
  * Ratings per bout come from data/difficulty/bout_rtg.csv (tools/ratings.py); names and schools from bouts.csv.
  *   top     the 200 biggest upsets at any level      finals  the 100 biggest in state finals
  *   states  the 100 biggest at states                killers the 100 wrestlers with the most upset wins
+ *   all     every upset, biggest first (the Records list in Rankings scopes it to a district, region or school)
  * Row: [year, cls, level, unit, weight, side, round, winner, winnerSchool, loser, loserSchool, result, score, flags, preW, preL]
  */
 'use strict';
@@ -44,7 +45,7 @@ const top = rows(ups, 200), states = rows(ups.filter((u) => u.row[2] === 'state'
 const K = new Map();
 ups.forEach((u) => { const [year, , , , , , , w, ws] = u.row; const k = nkey(w) + '|' + ws; const x = K.get(k) || { name: w, sch: ws, n: 0, best: 1, y0: year, y1: year, big: 0 }; x.n++; x.best = Math.min(x.best, u.p); x.y0 = Math.min(x.y0, year); x.y1 = Math.max(x.y1, year); if (u.row[2] === 'state') x.big++; K.set(k, x); });
 const killers = Array.from(K.values()).sort((a, b) => b.n - a.n || a.best - b.best).slice(0, 100).map((x) => [x.name, x.sch, x.n, Math.round(1000 * x.best) / 1000, x.y0, x.y1, x.big]);
-const out = { minLoser: MIN_LOSER, maxOdds: MAX_ODDS, minPrior: MIN_PRIOR, n: ups.length, top, states, finals, killers };
+const out = { minLoser: MIN_LOSER, maxOdds: MAX_ODDS, minPrior: MIN_PRIOR, n: ups.length, top, states, finals, killers, all: rows(ups, ups.length) };
 fs.writeFileSync(path.join(OV, 'upsets.json'), JSON.stringify(out));
 console.log('upsets', ups.length, 'of', R.size, 'rated bouts; top odds', ups[0] && ups[0].p.toFixed(3), 'bytes', fs.statSync(path.join(OV, 'upsets.json')).size);
 console.log('giant killers', killers.slice(0, 5).map((k) => `${k[0]} (${k[1]}) ${k[2]}`).join('; '));

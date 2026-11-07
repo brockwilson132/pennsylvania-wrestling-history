@@ -40,11 +40,13 @@
   const wtText = () => { const w = state.f.weights; return !w.length ? 'All' : w.length === 1 ? OT.STD.find((x) => x.k === w[0]).label : w.length + ' wts'; };
   let pop = '', sgOpen = false;
   /* The bottom bar: four tabs (what the page shows) around the filter button (which place, class and seasons).
-     Map, Rankings, Timeline and Seasons are views of the place page; Rankings also holds the wrestlers and the
-     all-time team. The view lives in the address (?v=rank, ?v=time, ?v=seasons; none = Map) and the Rankings list in
+     Map, Rankings, History and Brackets are views of the place page; Rankings also holds the wrestlers, the
+     all-time team and the records. The view lives in the address (?v=rank, ?v=hist, ?v=brk; none = Map) and the Rankings list in
      ?l=, so each tab is its own history entry: Back steps through the tabs, and a link opens the same tab. */
-  const TABS = [['map', 'Map', 'v_map'], ['rank', 'Rankings', 'v_rank'], null, ['time', 'Timeline', 'v_time'], ['seasons', 'Seasons', 'v_seasons']];
-  const VIEWK = ['map', 'rank', 'time', 'seasons'];
+  const TABS = [['map', 'Map', 'v_map'], ['rank', 'Rankings', 'v_rank'], null, ['hist', 'History', 'v_seasons'], ['brk', 'Brackets', 'v_brk']];
+  const VIEWK = ['map', 'rank', 'hist', 'brk'];
+  /* old addresses: Timeline and Seasons are now the two halves of History */
+  const OLDV = { time: ['hist', 'time'], seasons: ['hist', ''] };
   const PLACEP = ['state', 'region', 'district', 'school'];
   const isPlace = (h) => { const m = /^#([a-z]+)(\/[^?]*)?/.exec(h || ''); return !!m && PLACEP.includes(m[1]) && (m[1] === 'state' || !!(m[2] && m[2].length > 1)); };
   /* the same address with its view (and Rankings list) set; Map drops the parameter */
@@ -81,7 +83,7 @@
   const POP = {
     filters: () => filtersPage(),
     search: () => `<input class="search" id="gsq" type="search" placeholder="Wrestler, school or district" autocomplete="off" aria-label="Search wrestlers, schools and districts"><div class="gsr" id="gsr"><div class="fpn">Type at least two letters. Wrestlers include everyone in any bracket on file.</div></div>`,
-    menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#upsets">Upsets<small>The biggest all-time, and the giant killers</small></a><a href="#tournaments">Tournaments<small>Every bracket, season by season</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
+    menu: () => `<nav class="fpm" aria-label="More"><a href="#season">Season recap<small>Champions, team titles, upsets, one season at a time</small></a><a href="#h2h/">Head to head<small>Two wrestlers or two schools, with odds</small></a><a href="#missing">Missing from the archive<small>Tournaments on record only in part</small></a><a href="#about">About<small>How ratings and scores work</small></a></nav>`,
   };
   /* ---------- the filter page ----------
      Changes are a draft until "Show": pick a place on the map, by search or from the path, then seasons, class and
@@ -175,9 +177,12 @@
     const k = OT.parseBkey(key); if (k && k.lvl !== 'state' && !OT.lowerLoaded(k.year, k.lvl)) OT.loadLower(k.year, k.lvl).then(again);
     if (k && !OT.sosLoaded(k.year)) OT.loadSOS(k.year).then(again);
   }
+  /* a choice inside a tab (History half, Brackets season and level, Records list) rewrites its parameter in place */
+  function setQ(k, v) { const [p0, qs] = (location.hash || '#state').split('?'); const u = new URLSearchParams(qs || ''); u.delete('b'); u.set(k, v); try { history.replaceState(history.state, '', p0 + '?' + u); } catch (er) { /* none */ } lastHash = location.hash; lastBase = ''; render(true); }
   let lastBase = '', lastHash = '';
   function render(keepScroll) {
     const { page, id, q, base } = route(); lastHash = location.hash;
+    if (PLACEP.includes(page) && OLDV[q.v]) { const [v, h] = OLDV[q.v]; const [p0, qs] = location.hash.split('?'); const u = new URLSearchParams(qs || ''); u.set('v', v); if (h) u.set('h', h); try { history.replaceState(history.state, '', p0 + '?' + u); } catch (er) { /* none */ } return render(keepScroll); }
     if (PLACEP.includes(page)) { state.view = VIEWK.includes(q.v) ? q.v : 'map'; if (q.l) state.child = q.l; }
     document.body.classList.remove('bars-off');
     if (!OT.full && !coreRoute(page, q)) { waiting = true; if (main.firstChild) { lastBase = ''; main.innerHTML = '<div class="card empty" role="status">Loading the archive…</div>'; } return; }
@@ -187,7 +192,7 @@
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
     if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.lastRoute = page + '/' + id; }
-    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); edgeScroll(main); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'upsets' && !OT.upsets()) OT.loadUpsets().then(() => { if (route().page === 'upsets') { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); edgeScroll(main); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (main.querySelector('[data-need-upsets]')) OT.loadUpsets().then(() => { if (route().base === base) { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -387,6 +392,7 @@
     if (e.target.closest('button[data-tlmore]')) { const y = window.scrollY; state.tln = (state.tln || 50) + 50; render(true); window.scrollTo(0, y); return; }
     const am = e.target.closest('button[data-attmode]'); if (am) { state.attMode = am.dataset.attmode; try { sessionStorage.setItem('ot-attmode', state.attMode); } catch (er) { /* none */ } render(true); return; }
     const ap = e.target.closest('button[data-attpick]'); if (ap) { const v = ap.dataset.attpick; if (state.attMode === 'weight') state.attW = v; else state.attTeam = +v; render(true); if (ap.closest('.atstep')) { const sec = main.querySelector('.atsec'); if (sec) window.scrollTo(0, Math.max(0, sec.getBoundingClientRect().top + window.scrollY - 76)); } return; }
+    const qs = e.target.closest('button[data-qset]'); if (qs) { const [k, v] = qs.dataset.qset.split(':'); setQ(k, v); return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; if (PLACEP.includes(route().page)) { const h = withView(location.hash, state.view, state.child); try { history.replaceState(history.state, '', h); } catch (er) { /* none */ } lastHash = location.hash; } lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }
@@ -422,7 +428,7 @@
   document.addEventListener('change', (e) => { const s = e.target.closest && e.target.closest('select[data-attsel]'); if (!s) return; if (state.attMode === 'weight') state.attW = s.value; else state.attTeam = +s.value; render(true); });
   document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('sgkey')) { e.preventDefault(); e.target.click(); } });
   document.addEventListener('change', (e) => { const s = e.target.closest('select[data-sortsel]'); if (!s) return; state[s.dataset.sortsel] = s.value; render(true); });
-  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
+  document.addEventListener('change', (e) => { const s = e.target.closest('select[data-tyear]'); if (s) location.hash = '#tournaments?y=' + s.value; const qq = e.target.closest('select[data-qsel]'); if (qq) setQ(qq.dataset.qsel, qq.value); const sy = e.target.closest('select[data-syear]'); if (sy) location.hash = '#' + sy.dataset.syear + '/' + sy.value; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) closePop(); else if (e.key === 'Escape' && !bview.hidden) location.hash = OT.bhref(null); });
   window.addEventListener('resize', () => { if (pop) paintPop(); });
   bview.addEventListener('click', (e) => { if (e.target === bview) location.hash = OT.bhref(null); });
