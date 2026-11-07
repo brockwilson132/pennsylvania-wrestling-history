@@ -1561,3 +1561,23 @@ a.cdc:hover .dk{box-shadow:0 0 0 2px var(--gold)}
  .smx .cdc{grid-template-columns:18px 32px;gap:3px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:18px}.smx .cdc .sgn .sgv{height:12px}
  .smx .cdc .dk{width:32px!important;height:32px!important;font-size:16px!important}.smx .cdl .lvi{margin-left:21px;width:32px}.smx .cdl .lvi svg{width:22px;height:22px}}
 .wq{gap:10px}.wq .wtb{height:20px}.wq .wtb>span{font-size:12.5px}
+/* v6: larger still; phones get the biggest medals the width allows */
+.smx{grid-template-columns:60px repeat(3,minmax(0,1fr));gap:12px 4px}
+.smx .cdh b{font-size:30px}.smx .cdh i{font-size:14px}
+.smx .cdc{grid-template-columns:30px 52px;gap:6px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:30px}.smx .cdc .sgn .sgv{height:19px}
+.smx .cdc .dk{width:52px!important;height:52px!important;font-size:26px!important}.smx .cdc .dk.q{font-size:21px!important}
+.smx .cdl .lvi{margin-left:36px;width:52px}.smx .cdl .lvi svg{width:36px;height:36px}
+@media(max-width:400px){.smx{grid-template-columns:48px repeat(3,minmax(0,1fr));gap:10px 2px}.smx .cdh b{font-size:26px}.smx .cdh i{font-size:13px;gap:5px}
+ .smx .cdc{grid-template-columns:24px 46px;gap:4px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:24px}.smx .cdc .sgn .sgv{height:16px}
+ .smx .cdc .dk{width:46px!important;height:46px!important;font-size:23px!important}.smx .cdc .dk.q{font-size:19px!important}
+ .smx .cdl .lvi{margin-left:28px;width:46px}.smx .cdl .lvi svg{width:32px;height:32px}
+ .wq{padding:10px 10px 11px}}
+@media(max-width:359px){.smx{grid-template-columns:40px repeat(3,minmax(0,1fr))}.smx .cdh b{font-size:22px}.smx .cdh i{font-size:11px;gap:3px}
+ .smx .cdc{grid-template-columns:19px 40px;gap:3px}.smx .cdc .sgn,.smx .cdc .sgn .sgv{width:19px}.smx .cdc .sgn .sgv{height:13px}
+ .smx .cdc .dk{width:40px!important;height:40px!important;font-size:20px!important}.smx .cdc .dk.q{font-size:16px!important}
+ .smx .cdl .lvi{margin-left:22px;width:40px}.smx .cdl .lvi svg{width:28px;height:28px}}
+.smx .cdh i{font-size:15px!important}
+@media(max-width:400px){.smx .cdh i{font-size:14px!important}}
+@media(max-width:359px){.smx .cdh i{font-size:12.5px!important}}
+.wq .wtb,.cdcard .wtb{height:24px}.wq .wtb>span,.cdcard .wtb>span{font-size:14px;min-width:22px}
+.wtk{font-size:12px}.wtk i{width:12px;height:12px}
