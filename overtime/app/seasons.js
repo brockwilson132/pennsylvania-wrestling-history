@@ -97,7 +97,7 @@
   /* one bout between ratings (na, nb = bouts behind each rating): [A's expected points, B's, mean of (A - B) squared,
      A's points with cutoffs minus B's, A's win chance] */
   const bout1 = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0, 0, 0, 0.5] : [0, 6, 36, -6, 0]; if (rb == null) return [6, 0, 36, 6, 1];
-    const U = SD.sim.unc || 0, vr = (n) => (n == null ? 0 : U * U / (1 + n)), g0 = ra - rb, g = U ? g0 / Math.sqrt(1 + K2 * (vr(na) + vr(nb))) : g0;
+    const U = SD.sim.unc || 0, vr = (n) => (n == null ? 0 : n < 0 ? -n : U * U / (1 + n)), g0 = ra - rb, g = U ? g0 / Math.sqrt(1 + K2 * (vr(na) + vr(nb))) : g0;
     const p = 1 / (1 + Math.pow(10, -g / 400)), ma = mixAt(g), mb = mixAt(-g); let ea = 0, eb = 0, s2 = 0;
     ma.forEach((q, k) => { ea += p * q * BP[k]; s2 += p * q * BP[k] * BP[k]; }); mb.forEach((q, k) => { eb += (1 - p) * q * BP[k]; s2 += (1 - p) * q * BP[k] * BP[k]; });
     const C = SD.sim.cut, hp = (x) => (x < C[0] ? 3 : x < C[1] ? 4 : x < C[2] ? 5 : 6);
