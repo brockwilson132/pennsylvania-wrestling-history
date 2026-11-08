@@ -310,14 +310,16 @@
     const tip = `${v[0]} decisions · ${v[1]} majors · ${v[2]} tech falls · ${v[3]} falls · ${v[4]} losses`;
     return `<span class="wtb" title="${tip}" aria-label="${tip}">${WT_K.map(([k], j) => (v[j] ? `<span class="${k}" style="flex:${v[j]}">${v[j]}</span>` : '')).join('')}</span>`;
   }
-  /* a rating as signal bars, one bar per rung of the postseason ladder: the cut points sit halfway between the median
-     season rating (1999-2026) of wrestlers whose season ended at districts (302), at regionals (993), at states without
-     a medal (1347), with a 3rd-8th medal (1613), in 2nd (1802) and as champion (1965). So one bar reads as a district
-     wrestler, three as a state qualifier, six as a state champion, in every list, lineup and card. */
-  const RB_CUT = [650, 1170, 1480, 1710, 1880];
+  /* a rating as signal bars on the postseason ladder (Brock, 2026-11-08: every state qualifier at four bars or more).
+     Cut points on 1999-2026 season ratings: 1150 = the 5th percentile of state qualifiers (95% of qualifiers get four
+     bars or more), 1500 = the average state qualifier (the scale's anchor), 1800 = the median state finalist; below
+     states, 500 and 850 split district and regional level (median district-only 302, median regional 993). So four
+     bars reads as a state qualifier, five as a likely medalist, six as finalist level, in every list, lineup, bracket
+     and card. Bracket toughness keeps its own six tiers (Docile ... Violent). */
+  const RB_CUT = [500, 850, 1150, 1500, 1800];
   function rtgBars(v) {
     const n = 1 + RB_CUT.filter((x) => v >= x).length, c = colorAt(0.08 + 0.92 * (n - 1) / 5);
-    return `<svg class="rtb" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
+    return `<svg class="rtb sgv" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
   }
   /* a result is a disc, every one the same size: gold / silver / bronze with the place, 4th–8th plain with the place,
      a ring with Q for qualified or advanced without a place, an empty socket for no place or not entered; the
