@@ -311,12 +311,12 @@
     return `<span class="wtb" title="${tip}" aria-label="${tip}">${WT_K.map(([k], j) => (v[j] ? `<span class="${k}" style="flex:${v[j]}">${v[j]}</span>` : '')).join('')}</span>`;
   }
   /* a rating as signal bars on the postseason ladder (Brock, 2026-11-08: every state qualifier at four bars or more).
-     Cut points on 1999-2026 season ratings: 1150 = the 5th percentile of state qualifiers (95% of qualifiers get four
-     bars or more), 1500 = the average state qualifier (the scale's anchor), 1800 = the median state finalist; below
-     states, 500 and 850 split district and regional level (median district-only 302, median regional 993). So four
-     bars reads as a state qualifier, five as a likely medalist, six as finalist level, in every list, lineup, bracket
-     and card. Bracket toughness keeps its own six tiers (Docile ... Violent). */
-  const RB_CUT = [500, 850, 1150, 1500, 1800];
+     Cut points on 1999-2026 season ratings (margin model): 1050 = the 5th percentile of state qualifiers (96% of
+     qualifiers get four bars or more), 1500 = the average state qualifier (the scale's anchor), 1850 = top 1.3% of
+     wrestler-seasons (70% of state finalists get six bars); below states, 400 and 750 split district-only wrestlers
+     (half get one bar). So four bars reads as a state qualifier, five as a likely medalist, six as finalist level, in
+     every list, lineup, bracket and card. Bracket toughness keeps its own six tiers (Docile ... Violent). */
+  const RB_CUT = [400, 750, 1050, 1500, 1850];
   function rtgBars(v) {
     const n = 1 + RB_CUT.filter((x) => v >= x).length, c = colorAt(0.08 + 0.92 * (n - 1) / 5);
     return `<svg class="rtb sgv" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;

@@ -35,7 +35,9 @@ def rtype(r):
 
 # season ratings (the ones duals and Compare use)
 SR = {}
-for r in csv.DictReader(gzip.open('data/difficulty/wrestler_seasons.csv.gz', 'rt')):
+import os
+WSF = 'data/difficulty/wrestler_seasons.csv'
+for r in csv.DictReader(open(WSF) if os.path.exists(WSF) else gzip.open(WSF + '.gz', 'rt')):
     if r['season']: SR[(r['key'], int(r['year']))] = float(r['season'])
 
 B = []
