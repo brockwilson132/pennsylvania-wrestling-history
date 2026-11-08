@@ -24,7 +24,7 @@ Two layers:
     bouts he had that season. A senior who beat a freshman who later won a title gets credit for the
     freshman he beat, mostly, not for the champion the freshman became.
 """
-import csv, json, math, os, re, sys, itertools, random
+import csv, json, math, os, re, sys, itertools, random, zlib
 from collections import defaultdict, Counter
 import numpy as np
 from scipy.optimize import lsq_linear
@@ -70,6 +70,11 @@ for b in csv.DictReader(open('data/brackets/bouts.csv')):
     bouts.append(b)
 bouts.sort(key=lambda b: (b['year'], b['lr'], b['tournament'], b['weight'], b['side'] != 'champ', -b['round']))
 for i, b in enumerate(bouts): b['i'] = i
+def pick(b, salt, pct):
+    """a fixed pct% of bouts for a hidden test set, chosen by the bout itself (not its position in the file), so a
+    correction to some brackets does not reshuffle which bouts every tuning step hides"""
+    k = '|'.join((salt, b['tournament'], b['weight'], b['side'], str(b['round']), b['winner'], b['loser']))
+    return zlib.crc32(k.encode()) % 100 < pct
 med = json.loads(open('overtime/medals.js').read().split('window.WR_MEDALS=', 1)[1].split(';')[0])
 state_place = {(y, c, wn(w), nk(n)): p for y, c, w, p, n, s, d in med}
 def state_tname(y, c):
@@ -662,8 +667,7 @@ if FIRST == 'prior':
         for g, (c, n) in res.items(): SHIFT[g] = SHIFT.get(g, 0.0) + c
 # prior strength: the regression residual overstates the prior sd (its target is itself noisy), so scale it,
 # tuned on hidden 1990-2017 bouts
-random.seed(5)
-tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.05}
+tune_held = {b['i'] for b in bouts if 1990 <= b['year'] <= 2017 and b['result'] not in SKIP and pick(b, 'sd', 5)}
 # scored on the hidden regional and state bouts only: a hidden district or section bout mostly pairs an advancer with a
 # first-round exit, and the first-round label is that same season's outcome, so scoring those bouts rewards a narrow
 # prior that trusts the label (it picked 0.7, the edge of the grid; regional + state picks 1.5). Review thread, 2026-11-05.
@@ -713,8 +717,7 @@ if SDS != 2.0 and not os.environ.get('RATINGS_NO_SHIFT'):
 # them (shift fitted on the remaining bouts only), and score the hidden bouts with and without the shift. The subset that
 # matters is bouts where exactly one wrestler has no district (or section) bracket on file.
 if os.environ.get('RATINGS_SHIFT_TEST'):
-    random.seed(11)
-    SH = {b['i'] for b in bouts if b['level'] == 'state' and 1980 <= b['year'] <= 2017 and b['result'] not in SKIP and random.random() < 0.15}
+    SH = {b['i'] for b in bouts if b['level'] == 'state' and 1980 <= b['year'] <= 2017 and b['result'] not in SKIP and pick(b, 'shift', 15)}
     shH = {}
     for it in range(NIT):
         Tq, *_ = smoother(mask=SH, sd_scale=SDS, shift=shH)
@@ -750,8 +753,7 @@ if os.environ.get('RATINGS_SHIFT_TEST'):
     sc_, n_ = score(Tm, hm); acc_ = np.mean([Tm[b['year']][b['wi']] > Tm[b['year']][b['li']] for b in hm])
     say(f'common test, hidden 10% of 2018-26 regional + state bouts (n={n_}): log loss {sc_:.4f}, accuracy {acc_:.3f}')
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
-random.seed(3)
-held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and random.random() < 0.10}
+held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and pick(b, 'held', 10)}
 Th, *_ = smoother(mask=held, sd_scale=SDS, shift=SHIFT)
 hb = [b for b in bouts if b['i'] in held]
 ll_batch = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Th[b['year']][b['li']] - Th[b['year']][b['wi']]) / 400)))) for b in hb])

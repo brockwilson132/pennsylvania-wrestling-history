@@ -343,7 +343,10 @@ var OT = window.OT || (window.OT = {});
   const upsets = () => UPS;
   const sosYear = (year) => { const d = SOSY.get(year); return d && !(d instanceof Promise) ? d : null; };   // every bracket of one season (after loadSOS)
   const sosLoaded = (year) => SOSY.has(year) && !(SOSY.get(year) instanceof Promise);
-  const loadSOS = (year) => { if (SOSY.has(year)) { const v = SOSY.get(year); return v instanceof Promise ? v : Promise.resolve(v); } const p = fetch(`sos/${year}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => { SOSY.set(year, d); return d; }); SOSY.set(year, p); return p; };
+  /* the season's upset bouts (tools/build_upsets.js) ride along: each upset bout row gets .u, which draws the bolt */
+  const getJ = (u) => fetch(u).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+  const markUpsets = (d, U) => Object.entries(U).forEach(([k, L]) => { const B = d[k]; if (!B) return; L.forEach(([side, round, w]) => { const b = B.b.find((x) => x[0] === side && x[1] === round && x[2] === w); if (b) b.u = 1; }); });
+  const loadSOS = (year) => { if (SOSY.has(year)) { const v = SOSY.get(year); return v instanceof Promise ? v : Promise.resolve(v); } const p = Promise.all([getJ(`sos/${year}.json`), getJ(`upsets/${year}.json`)]).then(([d, U]) => { markUpsets(d, U); SOSY.set(year, d); return d; }); SOSY.set(year, p); return p; };
   /* a wrestler's best wins across his career, from the lazy season files (load his years first) */
   /* every bout between two wrestlers: scan the brackets A wrestled in (state, regional, district, section) for bouts with
      B on the other side, from the lazy season files (load both careers and their years first) */
