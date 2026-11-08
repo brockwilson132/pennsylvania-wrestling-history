@@ -1,0 +1,274 @@
+[
+ {
+  "school": "West Mifflin South",
+  "identified_as": "South High School (West Mifflin South), West Mifflin, Allegheny Co.",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_School_District",
+   "search:https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "https://www.e-yearbook.com/South_High_School_West_Mifflin_PA_Sohian_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/South_High_School_West_Mifflin_PA_Sohian_Yearbook/1967/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/South_High_School_West_Mifflin_PA_Sohian_Yearbook/1980/Page_2.html"
+  ],
+  "era": "Merged into West Mifflin Area HS (blue and gold, Titans).",
+  "notes": "Colours and nickname from the school's own 1967 'Sohian' yearbook; same colours as the later merged West Mifflin Area HS but taken from South's own years.",
+  "evidence": "e-yearbook OCR of South HS (West Mifflin) 'Sohian' 1967: cheerleaders ran 'Blue and Gold Week'; homecoming goal posts decorated 'using blue and gold streamers' at 'Spartan Stadium'; teams called 'the Spartans' throughout. Page images are not downloadable (410), so no hex."
+ },
+ {
+  "school": "Oliver",
+  "identified_as": "Oliver High School, Pittsburgh (North Side)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Seal Brown",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "medium",
+  "wikipedia": "Oliver High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oliver_High_School",
+   "search:https://thenorthsidechronicle.com/2012/02/16/perry-and-oliver-work-towards-becoming-one-school",
+   "search:https://heinzhistorycenter.emuseum.com/objects/6942/patch-insignia",
+   "https://www.e-yearbook.com/David_B_Oliver_High_School_Omicron_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/David_B_Oliver_High_School_Omicron_Yearbook/1955/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/David_B_Oliver_High_School_Omicron_Yearbook/1950/Page_2.html"
+  ],
+  "era": "School closed (later Oliver Citywide Academy).",
+  "notes": null,
+  "evidence": "Wikipedia and its mirrors say the colours are orange and seal brown (after David Brown Oliver), mascot Bears; a Northside Chronicle piece mentions 'the orange of the Oliver Bears'. Retry: e-yearbook OCR of Oliver's 'Omicron' (1947, 1950, 1955, 1960) confirms the Bears nickname ('entered the House of the Bears') but no colour statement was found; page images not downloadable and the Heinz History Center patch page is behind a bot check, so no hex."
+ },
+ {
+  "school": "Pitcairn",
+  "identified_as": "Pitcairn High School, Pitcairn (Allegheny Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Gateway High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Gateway_High_School_(Pennsylvania)",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1953/Page_9.html",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1950/Page_20.html",
+   "https://www.e-yearbook.com/Pitcairn_High_School_Retrospect_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1945/Page_39.html",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1947/Page_52.html",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1953/Page_16.html",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1944/Page_2.html"
+  ],
+  "era": "Pitcairn now served by Gateway HS (black and gold).",
+  "notes": "From Pitcairn HS's own 'Retrospect' yearbooks (1945, 1947, 1953 agree). Mascot not found.",
+  "evidence": "e-yearbook OCR of Pitcairn HS 'Retrospect': band page 'new, colorful uniforms. They are of maroon and white - School colors'; another year 'the column of maroon and white uniformed students twirling batons'; juniors 'sold maroon and white hats with locomotives on them'. Page images not downloadable (410), so no hex."
+ },
+ {
+  "school": "Lititz",
+  "identified_as": "Lititz High School, Lititz",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Warwick High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warwick_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Warwick_School_District",
+   "search:https://en.wikipedia.org/wiki/Warwick_High_School_(Pennsylvania)",
+   "https://hub.catalogit.app/lititz-historical-foundation/folder/entry/band-sash",
+   "https://hub.catalogit.app/lititz-historical-foundation/folder/entry/lititz-high-school-pennant-1940",
+   "https://hub.catalogit.app/lititz-historical-foundation/folder/entry/lititz-high-school-cheerleaders",
+   "https://www.e-yearbook.com/yearbooks/Lititz_High_School_Reflector_Yearbook/1950/Page_51.html",
+   "search:https://hub.catalogit.app/lititz-historical-foundation/folder/entry/lititz-sports-team"
+  ],
+  "era": "Succeeded by Warwick HS (red and black, Warriors).",
+  "notes": "Red and black appear in Lititz HS's own years (1927 band sash; 1950 yearbook sports text). A 1940 class pennant is navy and gold, likely class colours, not school colours.",
+  "evidence": "Lititz Historical Foundation catalogue: LHS band (est. 1927) first uniforms had 'a red and black hat, this red and black sash ... and a red tie'; photo of sash shows red (~#912B2B, faded fabric) and black stripes. 1950 'Reflector' yearbook OCR (garbled) has 'the Red and Bl[..] fell before a strong Shillington team'. The 1940 class pennant photo is navy with gold felt letters (class item). No clean graphic, so no hex."
+ },
+ {
+  "school": "North-Mont",
+  "identified_as": "North Mont (North-Mont) High School, Turbotville, Northumberland Co. (District 4)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/North_Mont_High_School_Survey_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/North_Mont_High_School_Survey_Yearbook/1955/Page_36.html",
+   "https://www.e-yearbook.com/yearbooks/North_Mont_High_School_Survey_Yearbook/1955/Page_21.html"
+  ],
+  "era": "Closed; Turbotville area later served by Warrior Run HS (Warrior Run SD).",
+  "notes": "Identity found via e-yearbook (North Mont HS 'Survey' 1955, Turbotville, PA; school had a wrestling team, teams listed as 'Turbotville'). Colours are only inferred from the school paper/club named 'Blue and White'; no explicit school-colours statement found. Successor named from geography, not checked.",
+  "evidence": "e-yearbook OCR of North Mont HS 'Survey' 1955 (only year online): alma mater 'good-bye dear old North-Mont'; seniors list 'Wrestling 3, 4'; a club/staff page headed 'BLUE AND WHITE' and seniors list 'Blue & White 3, 4' (likely the school paper, named after colours). Class colours (green and white) are class-only. Page images not downloadable, so no hex."
+ },
+ {
+  "school": "Ambler Joint",
+  "identified_as": "Ambler High School / Ambler Joint High School, Ambler, Montgomery Co.",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Wissahickon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wissahickon_School_District",
+   "https://en.wikipedia.org/wiki/Wissahickon_High_School",
+   "https://en.wikipedia.org/wiki/Ambler,_Pennsylvania",
+   "https://www.e-yearbook.com/Ambler_High_School_Pinnacle_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Ambler_High_School_Pinnacle_Yearbook/1950/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/Ambler_High_School_Pinnacle_Yearbook/1940/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/Ambler_High_School_Pinnacle_Yearbook/1957/Page_2.html"
+  ],
+  "era": "Predecessor of Wissahickon HS (blue and gold, Trojans).",
+  "notes": "From Ambler's own 'Pinnacle' yearbooks (1940-1957); Wissahickon later kept the same Trojans / blue and gold.",
+  "evidence": "e-yearbook OCR of Ambler HS 'Pinnacle': teams called 'the Trojans' in 1940, 1950 and 1957 (paper 'Trojan Times'); 1950 football page (garbled OCR) 'Our young Blue and [G]old footballer[s] tallied 65 points'. Only one colour mention, page scans not downloadable, so no hex."
+ },
+ {
+  "school": "Sandy Township",
+  "identified_as": "Sandy Township High School, DuBois (Sandy Twp.), Clearfield Co.",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "DuBois Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/DuBois_Area_School_District",
+   "https://www.e-yearbook.com/Sandy_Township_High_School_Flambeau_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Sandy_Township_High_School_Flambeau_Yearbook/1958/Page_81.html",
+   "https://www.e-yearbook.com/yearbooks/Sandy_Township_High_School_Flambeau_Yearbook/1957/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/Sandy_Township_High_School_Flambeau_Yearbook/1950/Page_2.html",
+   "search:https://www.e-yearbook.com/yearbooks/Sandy_Township_High_School_Flambeau_Yearbook/1956/Page_30.html"
+  ],
+  "era": "Merged into DuBois Area SD (red, black and white).",
+  "notes": "From Sandy Township HS's own 1958 yearbook; the class colours listed in other years (blue and gold, light blue and white, red and gold) are class colours, not the school's.",
+  "evidence": "e-yearbook OCR of Sandy Township HS 'Flambeau' 1958, page 81 (alma mater 'Dear Old Sandy High' and cheer): 'Fight, fight, fight for the red and black / Victory will our slogan be / Dear Sandy Hi School'. Page images not downloadable, so no hex. Mascot not found."
+ },
+ {
+  "school": "Kingston Central Catholic",
+  "identified_as": "West Side Central Catholic High School, 316 N. Maple Ave., Kingston, Luzerne Co. (opened 1954; renamed Bishop O'Reilly HS in 1973)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Queensmen",
+  "confidence": "medium",
+  "wikipedia": "Holy Redeemer High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Redeemer_High_School",
+   "https://bishoporeilly.org/history/",
+   "https://bishoporeilly.org/alma-mater/",
+   "https://bishoporeilly.org/wp-content/uploads/2023/08/cropped-west-side-central-catholic-high-school.png",
+   "https://en.wikipedia.org/wiki/Holy_Redeemer_High_School_(Pennsylvania)",
+   "search:https://digital-release.2822news.com/?p=329437"
+  ],
+  "era": "Renamed Bishop O'Reilly HS (1973); closed 2007, merged into Holy Redeemer HS (red, white and gold, Royals).",
+  "notes": "Identity is the only Catholic central high school in Kingston (the bracket name is read as West Side Central Catholic). Colours and Queensmen nickname are documented for the same school under its later O'Reilly name; not confirmed for the 1950s-60s years specifically.",
+  "evidence": "bishoporeilly.org (alumni site 'Bishop O'Reilly/Central Catholic Alumni'): history says West Side Central Catholic HS opened 8 Sept 1954 and was renamed Bishop O'Reilly in 1973; the crest description has 'a wreath of the colors, gold and blue'; alma mater 'Raise a cheer, O Queensmen ... Let her colors fly. Gold of Christ's great Kingship / Blazoned on Queen Mary's blue'. The site's WSCC crest image is greyscale (logocolors: only black/greys), so no hex."
+ },
+ {
+  "school": "Rothrock",
+  "identified_as": "Rothrock High School, McVeytown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Rothrock_High_School_Le_Livre_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1958/Page_1.html",
+   "search:https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1954/Page_40.html",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1951/Page_2.html",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1954/Page_40.html"
+  ],
+  "era": "Closed; later part of Mifflin County School District.",
+  "notes": "Colours and nickname from the school's own yearbooks (1954 alma mater, 1958 cheerleaders, sports pages 1951-1958). Sports pages also use 'BMO' (Bratton-McVeytown-Oliver jointure) for the team.",
+  "evidence": "Rothrock 'Le Livre' yearbooks (e-yearbook OCR): 1954 alma mater 'All hail! Alma Mater, Our own Gold and Blue'; 1958 cheerleaders 'Blue and Gold clad gals'; basketball and wrestling pages call the teams 'the Golden Eagles' / 'the Eagles' (e.g. 'BMO 74 Armagh-Brown 60 The Eagles kept their unbeaten string going'). Page scans are black-and-white / not downloadable, so no hex."
+ }
+]

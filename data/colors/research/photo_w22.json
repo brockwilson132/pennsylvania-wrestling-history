@@ -1,0 +1,231 @@
+[
+ {
+  "school": "Yeadon",
+  "identified_as": "Yeadon High School, Yeadon (Delaware County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School",
+   "https://www.e-yearbook.com/yearbooks/Yeadon_High_School_Memoirs_Yearbook/1971/Page_1.html"
+  ],
+  "era": "Later merged into Penn Wood HS (maroon, white, navy); do not use Penn Wood colours without confirmation.",
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": "No school site (closed; merged 1982 into Penn Wood). Only e-yearbook book is the 1971 Memoirs yearbook; its OCR text has no school colours or team nickname. Page thumbnails refused (HTTP 410). WebSearch budget spent this pass. Colours unknown."
+ },
+ {
+  "school": "Reynoldsville",
+  "identified_as": "Reynoldsville High School, Reynoldsville (Jefferson County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/yearbooks/Reynoldsville_High_School_Bulldog_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Reynoldsville_High_School_Bulldog_Yearbook/1950/Page_1.html"
+  ],
+  "era": null,
+  "notes": "Colours from the school's own 1951 yearbook (football write-ups); one source, no image. The 1950 yearbook's 'Royal blue and white' are class colours, not school colours. e-yearbook has Bulldog yearbooks to 1988.",
+  "evidence": "Reynoldsville HS 'Bulldog' yearbooks on e-yearbook.com (OCR of 1947, 1950, 1951, 1956, 1972, 1973, 1983, 1984, 1986): 1951 football page 'Twice in the last half the Black and Gold attack stalled...The Bulldogs had to strike back' and 'one of the best...ever to play for the Black and Gold'. Cover thumbnails refused (HTTP 410), so no image to take a hex from."
+ },
+ {
+  "school": "Shade",
+  "identified_as": "Shade Junior/Senior High School, Cairnbrook",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Shade Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shade_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Shade-Central_City_School_District",
+   "search:https://www.maxpreps.com/pa/cairnbrook/shade-panthers/",
+   "https://www.shade.k12.pa.us",
+   "https://1.cdn.edl.io/jUvobokegVP1W76O0NBwf0jJQ1n5RQ1mXlcozNDC95xEcngB.jpg",
+   "https://www.e-yearbook.com/yearbooks/Shade_Township_High_School_Shadonian_Yearbook/1951/Page_81.html",
+   "https://www.e-yearbook.com/yearbooks/Shade_Township_High_School_Shadonian_Yearbook/1947/Page_1.html"
+  ],
+  "era": null,
+  "notes": "District page says \"Blue and gold\"; HS page says Navy Blue and Gold.",
+  "evidence": "School site has no colour logo (panther mural photo only; other district images are flyers); site text 'PBIS Spirit Day - Wear Blue and Gold'. Shade Township HS Shadonian yearbooks (e-yearbook OCR): 1951 'The blue and gold clad Panthers of Shade Township High School', 'the blue and gold cohorts of Shade'; 1947 cheerleaders in blue sweaters/skirts with blue and gold beanies. No clean image for a hex (shadeathletics.com and shadepanthers.com are unrelated businesses)."
+ },
+ {
+  "school": "Nether Providence",
+  "identified_as": "Nether Providence High School, Wallingford",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Nether Providence High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Nether_Providence_High_School",
+   "https://www.e-yearbook.com/yearbooks/Nether_Providence_High_School_Non_Pareil_Yearbook/1950/Page_1.html"
+  ],
+  "era": "Merged with Swarthmore High School in 1983 to form Strath Haven High School (Panthers, black/silver/white).",
+  "notes": null,
+  "evidence": "Closed 1983; no image of its own era could be found. Non Pareil yearbooks 1950, 1955, 1958 on e-yearbook.com (OCR) checked: no school-colour or team-name phrase found. Names kept from Wikipedia infobox (Blue & Gold); no hex."
+ },
+ {
+  "school": "Wilkinsburg",
+  "identified_as": "Wilkinsburg High School, Wilkinsburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D4232A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#1E295D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Wilkinsburg School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilkinsburg_School_District",
+   "https://www.wilkinsburgschools.org",
+   "https://resources.finalsite.net/images/v1783528646/wilkinsburgschoolsorg/i1rbp0kdufzeeeno8fji/tiger_logo.png",
+   "https://www.e-yearbook.com/yearbooks/Wilkinsburg_High_School_Annual_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Wilkinsburg_High_School_Annual_Yearbook/1955/Page_1.html"
+  ],
+  "era": "High school closed in 2016; students now attend Westinghouse (Pittsburgh).",
+  "notes": "High-school-era yearbooks call the teams 'the Red and Blue' (Tigers); the hex values come from the current district tiger logo, which uses the same two colours.",
+  "evidence": "Wilkinsburg HS 'Annual' yearbooks on e-yearbook.com (OCR): 1950 'the boys cheered our Red and Blue to victory', W.H.S. Tigers, cheerleaders in blue skirts with red pleats and white sweaters with tiger heads; 1955 alma mater 'Dear old Red and Blue'. Current Wilkinsburg SD tiger logo: red #D4232A and navy #1E295D."
+ },
+ {
+  "school": "Phil-Mont Christian",
+  "identified_as": "Philadelphia-Montgomery Christian Academy, Erdenheim",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0071BC",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Philadelphia-Montgomery Christian Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Philadelphia-Montgomery_Christian_Academy",
+   "search:https://www.phil-mont.com/",
+   "https://www.phil-mont.com (HTTP 406, not readable)",
+   "https://www.philmontfalcons.com/",
+   "https://assets-rst7.rschooltoday.com/rst7files/uploads/sites/2150/2026/06/demo45753_bigteams_com.png"
+  ],
+  "era": null,
+  "notes": "Main school site phil-mont.com refused requests (406/409); athletics site readable.",
+  "evidence": "Official athletics site philmontfalcons.com (rSchoolToday, title 'Phil Mont Christian Academy'): crest logo demo45753_bigteams_com.png is flat medium blue #0071BC with white (falcon head, open Bible, 'PHIL-MONT CHRISTIAN ACADEMY', 'Est. 1943'). Agrees with Wikipedia 'Blue and White'."
+ },
+ {
+  "school": "Scranton Tech",
+  "identified_as": "Scranton Technical High School, Scranton",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "low",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)",
+   "https://www.e-yearbook.com/sitemap_sum_index.xml"
+  ],
+  "era": "Became Scranton High School in 1990 (Knights, cardinal red and Vegas gold; red inherited from Tech).",
+  "notes": "Only red is attested (via successor page); Tech's secondary colour not found.",
+  "evidence": "Closed 1990; no era image found. e-yearbook.com has no Scranton Technical yearbook (its 'Scranton High School' books are Arkansas and Iowa schools). Wikipedia (Scranton High School) confirms only red from the Tech Red Raiders. Name 'Red' kept."
+ },
+ {
+  "school": "Olney",
+  "identified_as": "Olney High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": "#000033",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Light Blue",
+    "hex": "#9999CC",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Olney High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Olney_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Olney_High_School_Trojan_Yearbook/1967/Page_16.html",
+   "https://olney.philasd.org",
+   "https://www.maxpreps.com/pa/philadelphia/olney-trojans/",
+   "https://image.maxpreps.io/school-mascot/9/2/2/922f5041-1be4-43b7-a6f5-6ea791e1828d.gif",
+   "https://www.e-yearbook.com/yearbooks/Olney_High_School_Trojan_Yearbook/1967/Page_1.html"
+  ],
+  "era": "Was Olney East/West; Aspira charter 2011-2022 (see \"Olney Charter\"); returned to the School District of Philadelphia 2022.",
+  "notes": "Same school as 'Olney Charter'. The logo is from the Aspira era (c. 2021); MaxPreps colour fields say Dark Blue and White. 1967 yearbook mentions 'blue and white' only in a list of memories. Light blue appears only in the logo plume.",
+  "evidence": "MaxPreps Olney Trojans mascot logo (saved by an earlier pass, looked at again here): Trojan helmet in very dark navy #000033 with periwinkle #9999CC plume on white. MaxPreps lists Dark Blue/White. Olney Trojan yearbooks 1950-1975 on e-yearbook.com (OCR): 1967 '...Peace...blue and white...' in the class memories list; no other colour mention (poor OCR)."
+ },
+ {
+  "school": "Cresson",
+  "identified_as": "Cresson High School, Cresson",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Penn Cambria School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Cambria_School_District",
+   "https://www.e-yearbook.com/yearbooks/Cresson_Joint_High_School_Tomahawk_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Cresson_Joint_High_School_Tomahawk_Yearbook/1951/Page_1.html",
+   "https://en.wikipedia.org/wiki/Westmont_Hilltop_High_School"
+  ],
+  "era": "Penn Cambria School District formed 1966 (Panthers; blue, black, white); Cresson HS colours before that unknown.",
+  "notes": "No colours found for Cresson HS itself. The 1952 'boys of scarlet and grey' are opponents Westmont (red and gray), not Cresson. A 1953 homecoming float was decorated in red and white (not enough to call them school colours).",
+  "evidence": "Cresson Joint HS 'Tomahawk' yearbooks 1951-1955 on e-yearbook.com (OCR): teams are the Cresson Indians (1951, 1952 football pages); alma mater text has no colours; no colour phrase for Cresson's own teams found. Colours unknown."
+ }
+]

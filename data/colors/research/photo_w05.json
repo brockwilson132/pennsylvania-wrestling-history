@@ -1,0 +1,260 @@
+[
+ {
+  "school": "Kingston",
+  "identified_as": "Kingston High School, Kingston (Luzerne County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District",
+   "https://www.e-yearbook.com/yearbooks/Kingston_High_School_Kingstonian_Yearbook/1951/Page_19.html",
+   "https://www.e-yearbook.com/yearbooks/Kingston_High_School_Kingstonian_Yearbook/1951/Page_88.html",
+   "https://www.e-yearbook.com/yearbooks/Kingston_High_School_Kingstonian_Yearbook/1948/Page_100.html",
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1999-03-10/ed-1/seq-8.pdf"
+  ],
+  "era": "Bracket years 1936-1967; Kingston merged into Wyoming Valley West School District (successor Wyoming Valley West HS, Spartans).",
+  "notes": "Mascot Huskies confirmed by Kingston's own 1951 Kingstonian yearbook (football, basketball, wrestling write-ups). Colours maroon and gray come only from the 1951 senior class song ('The class of fifty one / With our maroon and gray'), which may be class rather than school colours; no second source. A 1999 Dallas Post snippet about orange and black refers to Kingston Township school, not this one.",
+  "evidence": "e-yearbook.com OCR text of 1951 Kingstonian (Kingston HS, Kingston PA): class song page 20 names 'our maroon and gray'; sports pages 84-99 call teams the Kingston Huskies (Wyoming Valley wrestling champs). 1948/1953/1955 pages scanned: no colour mention. Scans black-and-white, no hex."
+ },
+ {
+  "school": "Erie Academy",
+  "identified_as": "Academy High School, Erie",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1932/Page_29.html",
+   "https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1932/Page_29.html",
+   "https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1988/Page_1.html",
+   "search:https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1988/Page_6.html"
+  ],
+  "era": "Closed 1992-93; merged with Technical Memorial into Central High School (later Central Tech, then Erie High School in 2017). The building's later occupant, Northwest PA Collegiate Academy, also uses blue and gold, which may continue Academy's colours.",
+  "notes": "Colour names from Academy's own 1932 yearbook text; no hex found.",
+  "evidence": "Academy's own 1932 'Academe' yearbook (e-yearbook page 29, text): football squads split into 'Blue team' and 'Gold team' and the team is called 'the Blue and Gold Standard Bearers'. Scans are black-and-white, so no hex. Image searches could not be run (search engines and Commons unavailable). Retry: 1988 Academe OCR (pages 1-60) confirms Lions/Lady Lions but names no colours; still no colour image, no hex."
+ },
+ {
+  "school": "East",
+  "identified_as": "East High School, Erie",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/East_High_School_(Erie%2C_Pennsylvania).html",
+   "https://en.wikipedia.org/wiki/Erie_High_School_(Pennsylvania)",
+   "https://www.e-yearbook.com/yearbooks/East_High_School_Sunrise_Yearbook/1982/Page_1.html",
+   "search:https://www.e-yearbook.com/yearbooks/East_High_School_Sunrise_Yearbook/1982/Page_11.html"
+  ],
+  "era": "Converted to a middle school in 2017; high school students consolidated into Erie High School (Royals, gold and royal purple).",
+  "notes": "Colours confirmed by East's own 1982 Sunrise yearbook as well as the archived Wikipedia mirror.",
+  "evidence": "East's own 1982 'Sunrise' yearbook (e-yearbook OCR text): 'welcomes back Mr. Danowski to the home of the Scarlet and Gray'; sports pages call teams the Warriors. Agrees with archived Wikipedia mirror. Scans black-and-white, no hex."
+ },
+ {
+  "school": "Middleburg",
+  "identified_as": "Middleburg High School, Middleburg (Snyder Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Middies",
+  "confidence": "high",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School",
+   "https://en.wikipedia.org/wiki/Midd-West_School_District",
+   "https://www.e-yearbook.com/yearbooks/Middleburg_High_School_Monitor_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Middleburg_High_School_Monitor_Yearbook/1967/Page_1.html"
+  ],
+  "era": "Merged with West Snyder (red/white Mounties) into Midd-West High School in 2004-05 (Mustangs, Carolina blue and silver).",
+  "notes": "Blue and gold confirmed by Middleburg's own Monitor yearbooks (1950 alma mater, 1967 band) and by Wikipedia (Midd-West HS and district articles); Middies nickname confirmed by 1967 Monitor.",
+  "evidence": "e-yearbook OCR of Middleburg HS 'Monitor': 1950 alma mater 'Show highest honors to the gold and blue'; 1967 'Blue and Gold Band' and soccer teams called the Middies. Scans black-and-white, no hex."
+ },
+ {
+  "school": "Neshaminy-Maple Point",
+  "identified_as": "Neshaminy Maple Point High School, Langhorne",
+  "colors": [],
+  "mascot": "Cougars",
+  "confidence": "low",
+  "wikipedia": "Neshaminy High School",
+  "sources": [
+   "search:https://neshaminyfootball.com/1975-1982-maple-point-cougars/",
+   "https://en.wikipedia.org/wiki/Neshaminy_High_School",
+   "search:https://neshaminyfootball.com/?p=17632",
+   "search:https://neshaminyfootball.com/1982-season-recap/"
+  ],
+  "era": "Operated 1975-1982 as a second Neshaminy SD high school, then re-merged into Neshaminy High School (red and blue).",
+  "notes": "Colours not found; Neshaminy's red and blue not assumed.",
+  "evidence": "neshaminyfootball.com Maple Point pages found in search but the host is not reachable from this session (DNS blocked), so not read; no other source names Maple Point colours. No colours given."
+ },
+ {
+  "school": "GAR Memorial",
+  "identified_as": "G.A.R. Memorial Junior/Senior High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Grenadiers",
+  "confidence": "high",
+  "wikipedia": "G. A. R. Memorial Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/G._A._R._Memorial_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/gar-memorial-grenadiers/football/schedule/all-time",
+   "search:https://www.timesleader.com/news/1718542/it-still-feels-like-home-community-celebrates-100th-anniversary-of-gar",
+   "https://www.wbasd.k12.pa.us/garjrsrhighschool_home.aspx",
+   "https://www.wbasd.k12.pa.us/PageImages/Gar%20Crop%20Photoshop3.png",
+   "search:https://timesleader.com/uncategorized/1710874/heres-to-the-memories-the-history-of-gar",
+   "search:https://www.timesleader.com/news/1495607/gar-alumni-plan-parade-for-final-graduation-day",
+   "https://www.e-yearbook.com/yearbooks/G_A_R_Memorial_High_School_Garchive_Yearbook/1958/Page_1.html",
+   "search:https://www.e-yearbook.com//yearbooks/G_A_R_Memorial_High_School_Garchive_Yearbook/1958/Page_43.html"
+  ],
+  "era": "High school closed 2022; merged with Coughlin and Meyers into Wilkes-Barre Area High School (Wolfpack).",
+  "notes": "Wikipedia, MaxPreps, Times Leader (motto 'Sons of the Blue and Gray', Union/Confederate uniforms) and GAR's own 1958 yearbook agree on blue and gray.",
+  "evidence": "GAR's own 1958 'Garchive' yearbook (e-yearbook OCR): school newspaper named 'the Blue and Gray'. WBASD GAR page shows no Grenadiers logo or uniform, so no hex."
+ },
+ {
+  "school": "Clarks Summit/Abington",
+  "identified_as": "Clarks Summit-Abington High School, Clarks Summit (predecessor of Abington Heights)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "high",
+  "wikipedia": "Abington Heights School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Abington_Heights_School_District",
+   "https://en.wikipedia.org/wiki/Abington_Heights_High_School",
+   "https://www.e-yearbook.com/yearbooks/Clarks_Summit_Clarks_Green_High_School_Cliffs_Yearbook/1928/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Clarks_Summit_Clarks_Green_High_School_Cliffs_Yearbook/1929/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Clarks_Summit_Clarks_Green_High_School_Cliffs_Yearbook/1940/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Clarks_Summit_Clarks_Green_High_School_Cliffs_Yearbook/1948/Page_1.html"
+  ],
+  "era": "Clarks Summit-Abington (brackets 1959-1964) became Abington Heights; Abington Heights HS opened 1967.",
+  "notes": "Blue and white confirmed by the school's own yearbooks (as Clarks Summit-Clarks Green HS, 'Cliffs'): 1928/1929 alma mater, 1940 'Blue and White Band'/teams; 1948 Cliffs calls the teams the Comets. Same colours continue at Abington Heights. 1940 yearbook places the school in District No. 12 (then), which may explain the batch's District 12 listing.",
+  "evidence": "e-yearbook OCR of Clarks Summit-Clarks Green HS 'Cliffs': 1928 and 1929 alma mater ends 'The Blue and the White'; 1940: band in 'blue and white uniforms', 'Blue and White squad'; 1948: football 'the Comets'. Scans black-and-white, no hex."
+ },
+ {
+  "school": "Franklin Towne Charter",
+  "identified_as": "Franklin Towne Charter High School, Philadelphia (Bridesburg)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#071B3D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Maroon",
+    "hex": "#802234",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Warriors (earlier Coyotes)",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://northeasttimes.com/?p=5113",
+   "search:https://www.maxpreps.com/pa/philadelphia/franklin-towne-warriors/volleyball/history",
+   "https://www.franklintowne.org/",
+   "https://hs.franklintowne.org/",
+   "https://www.franklintowne.org/UserFiles/Servers/Server_11992800/Image/thumbnail_FTC%20Logo%203.jpg",
+   "https://www.franklintowne.org/UserFiles/Servers/Server_11992800/Templates/Logo.png",
+   "https://hs.franklintowne.org/UserFiles/Servers/Server_11994520/Templates/FTCHS_Warriors.JPG",
+   "https://hs.franklintowne.org/student_life/athletics",
+   "https://franklintownehs.ss12.sharpschool.com//Userfiles/DBFiles/server_11994520/202310/23531953/athletes_handbook.pdf",
+   "search:https://inquirer.com/philly/sports/high_school/20070517_Franklin_Towne_Charter_shocks_Northeast_to_gain_final.html"
+  ],
+  "era": null,
+  "notes": "Current athletics logo is a navy-and-maroon Warrior (Spartan helmet with maroon crest) over 'FRANKLIN TOWNE CHARTER HIGH SCHOOL', matching the HS site theme navy/maroon. Coyotes was the earlier nickname (2007 Inquirer, District 12 soccer); Warriors now (MaxPreps, HS site). Light blue appears only on the network crest, not the athletics logo, so dropped. Silver/grey of the helmet is shading, not listed.",
+  "evidence": "hs.franklintowne.org header logo Templates/FTCHS_Warriors.JPG (looked at): navy #071B3D Warrior outline and 'TOWNE' lettering, maroon #802234 crest, banner and 'CHARTER HIGH SCHOOL' text; HS site theme #000099/#860000 agrees on navy+maroon."
+ },
+ {
+  "school": "Technical Memorial",
+  "identified_as": "Technical Memorial High School, Erie (earlier Erie Technical High School; closed 1993)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Centaurs",
+  "confidence": "medium",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://digital-release.yourerie.com/news/local-news/students-to-choose-new-name-mascot-and-colors-for-central-tech",
+   "https://www.e-yearbook.com/yearbooks/Erie_Technical_High_School_Torch_Yearbook/1932/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Erie_Technical_High_School_Torch_Yearbook/1957/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Erie_Technical_High_School_Torch_Yearbook/1951/Page_52.html",
+   "search:https://digital-release.yourerie.com/?p=67110"
+  ],
+  "era": "Merged with Academy HS after 1992-93 to form Central HS (later Central Tech, black and gold, Falcons; now Erie High, purple and gold, Royals). Tech Memorial's own colours not found.",
+  "notes": "Own-era sources: Erie Technical HS 'Torch' yearbooks. Centaurs also named as 'old mascot of Tech Memorial HS' in a 2017 Erie SD mascot-vote item. Assumes Erie Technical HS is the same school later called Technical Memorial (Torch yearbook continues; standard Erie history). Not successor colours (Central Tech black/gold; Erie High purple/gold).",
+  "evidence": "e-yearbook OCR: 1932 Torch calls the football team 'the Centaurs' and the school dance band 'the Green and White Serenaders'; 1957 Torch alma mater 'Hail to Tech our Alma Mater ... To the green and white'. Scans black-and-white, no hex."
+ }
+]

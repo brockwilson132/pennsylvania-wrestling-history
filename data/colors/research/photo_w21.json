@@ -1,0 +1,238 @@
+[
+ {
+  "school": "Executive Education Academy",
+  "identified_as": "Executive Education Academy Charter School, Allentown",
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/allentown/executive-education-academy-charter-school-raptors/basketball"
+  ],
+  "era": null,
+  "notes": "Same school as 'Executive Education Acad.'; MaxPreps listing only (search snippet).",
+  "evidence": "Same school as 'Executive Education Acad.'; eeacs.org and MaxPreps refused this environment (403); no image looked at. First-pass names kept, no hex. Retry: eeacs.org still returned 403 and was not pursued; web search budget was used up; nothing new."
+ },
+ {
+  "school": "Tyrone Christian Academy",
+  "identified_as": "Tyrone Christian Academy, Tyrone (Blair County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#2384C7",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.altoonamirror.com/sports/scholastic/miscellaneous/2025/12/rifle-tyrone-christian-academy-drops-opener/",
+   "https://www.tyronechristianacademy.org/",
+   "https://www.tyronechristianacademy.org/sports/",
+   "https://www.tyronechristianacademy.org/wp-content/uploads/2022/03/cropped-Icon-270x270.png",
+   "https://www.tyronechristianacademy.org/wp-content/uploads/2023/01/Asset-4.png",
+   "https://www.tyronechristianacademy.org/wp-content/uploads/2025/03/tca-boys-basketball-1.jpg",
+   "https://www.tyronechristianacademy.org/wp-content/uploads/2025/03/tca-wrestling.jpg"
+  ],
+  "era": null,
+  "notes": "Not Tyrone Area HS (orange and black, Golden Eagles). Colours are not stated in words anywhere seen; taken from the site wordmark and uniforms.",
+  "evidence": "School site reachable this time. Header wordmark 'CHRISTIAN ACADEMY' flat blue #2384C7 (logocolors) on white; crest 'Tyrone Christian Warriors' is greyscale. Team photos on /sports/: basketball uniforms royal blue with white 'WARRIORS', wrestling hoodies navy/slate with grey; coaches in navy. Blue and white is the clear brand pair."
+ },
+ {
+  "school": "Peabody",
+  "identified_as": "Peabody High School, Pittsburgh (East Liberty)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "high",
+  "wikipedia": "Peabody High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Peabody_High_School_(Pennsylvania)",
+   "https://www.alumniclass.com/peabody-high-school-highlanders-pittsburgh-pa/",
+   "https://archive.org/details/classmates-yearbook-31489-1929-peabody-high-school",
+   "https://archive.org/details/classmates-yearbook-56614-1975-peabody-high-school",
+   "https://archive.org/details/classmates-yearbook-33768-1974-peabody-high-school"
+  ],
+  "era": "Closed 2011; students moved to Pittsburgh Obama Academy (former Peabody building).",
+  "notes": "Maroon (red) and gray: the 1929 yearbook calls the football team 'the Red and Gray'; Wikipedia says maroon and gray. Gray is the same in both, and the red is probably the maroon shade.",
+  "evidence": "Wikipedia infobox text 'Maroon and gray' (no colour boxes). archive.org OCR of the 1929 Peabody HS (Pittsburgh) yearbook: 'the Red and Gray warriors', 'the Red and Gray team' in the football write-up. The 1975 yearbook confirms 'Highlanders'; 1974 and 1975 have no colour words. AlumniClass page theme maroon #800000 (generic web colour, not used). Text only, so no hex."
+ },
+ {
+  "school": "Ford City",
+  "identified_as": "Ford City High School, Ford City (Armstrong County)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Sabers",
+  "confidence": "high",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Ford_City_High_School.html",
+   "search:https://www.alumniclass.com/fordcity/military-alumni-view",
+   "https://www.alumniclass.com/ford-city-high-school-sabers-pa/",
+   "https://archive.org/details/classmates-yearbook-40027-1952-ford-city-high-school",
+   "https://archive.org/details/classmates-yearbook-40443-1956-ford-city-high-school",
+   "https://archive.org/details/classmates-yearbook-28224-1973-ford-city-high-school",
+   "https://archive.org/details/classmates-yearbook-19817-1970-ford-city-high-school"
+  ],
+  "era": "Closed 2015, merged with Kittanning into Armstrong Jr/Sr HS (Riverhawks, blue and orange).",
+  "notes": "Purple and gold is confirmed by the school's own yearbooks (1952, 1956). In 1952 the teams were called the 'Purple Hurricane'; by 1973 the nickname was Sabers.",
+  "evidence": "archive.org OCR of Ford City HS (Ford City, PA) yearbooks: 1952 Alma Mater 'Steadfast to purple and gold', and the band would 'march the Purple and Gold on to victory'; 1956 mentions 'Purple and Gold'; 1973 has 'Saberscript' and 'Jr. High Sabers'. AlumniClass page theme purple #990099 / gold #ECC013 (site-chosen, not used). Text only; no image looked at, so no hex."
+ },
+ {
+  "school": "Armstrong Central",
+  "identified_as": "Unconfirmed: likely an Armstrong County school (Armstrong School District area), 1991-92",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Identity doubt: could not identify 'Armstrong Central' with certainty; Wikipedia has no page. Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": "Retry: archive.org has no 'Armstrong Central' yearbooks; the Armstrong School District Wikipedia page does not name it; web search budget was used up. Still unidentified; no colours."
+ },
+ {
+  "school": "Bellevue",
+  "identified_as": "Bellevue High School, Bellevue (Allegheny County)",
+  "colors": [
+   {
+    "name": "Red (cardinal)",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://archive.org/details/classmates-yearbook-53385-1944-bellevue-high-school",
+   "https://archive.org/details/classmates-yearbook-61614-1938-bellevue-high-school",
+   "https://en.wikipedia.org/wiki/Northgate_School_District",
+   "https://en.wikipedia.org/wiki/Bellevue,_Pennsylvania"
+  ],
+  "era": "Bellevue School District later merged with Avalon to form Northgate (Flames, red and gold); do not use Northgate colours.",
+  "notes": "Attested from the 1938 and 1944 yearbooks only; not confirmed for later decades before the Northgate merger.",
+  "evidence": "archive.org OCR of Bellevue HS (Bellevue, PA) yearbooks: 1944 says 'our Red and Black' and the team's 'red and black uniforms'; 1938 says the band wore 'snappy red and black' and calls the football team 'Bellevue cardinal-clad Bulldogs'. Text only; no image looked at, so no hex."
+ },
+ {
+  "school": "Sewickley",
+  "identified_as": "Sewickley (public) High School, Sewickley",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sewickley_High_School",
+   "https://en.wikipedia.org/wiki/Quaker_Valley_School_District",
+   "https://archive.org/details/classmates-yearbook-56650-1934-sewickley-high-school",
+   "https://archive.org/details/classmates-yearbook-10450-1942-sewickley-high-school",
+   "https://archive.org/details/classmates-yearbook-11482-1940-sewickley-high-school",
+   "https://archive.org/details/classmates-yearbook-54562-1943-sewickley-high-school",
+   "https://archive.org/details/classmates-yearbook-32137-1962-sewickley-high-school"
+  ],
+  "era": "Sewickley HS (Sewickley, Allegheny Co.) closed 1956 when Quaker Valley SD formed; do not use Quaker Valley colours.",
+  "notes": "Identity doubt: there was also a Sewickley (Township) High School in Herminie, Westmoreland Co., still open in 1962 (later Yough SD). The colours here are for the Sewickley borough school; check the wrestling record's era and opponents. The 1942 yearbook mentions 'the Indians' and a 'Sewihi Pow-wow', so the nickname may have been Indians, but this is not confirmed. Not Sewickley Academy.",
+  "evidence": "archive.org OCR of Sewickley HS (Sewickley, PA) yearbooks: 1934 says 'The gym was decorated in red and blue, the school's colors' and its school song says 'Here to our school, the red and blue'; in 1942 the yearbook was called 'The Red and Blue' and cheerleaders wore 'red and blue uniforms'. The 'Colors:' lines in 1942/43 (rose and silver, blue and silver) are class colours. Text only, so no hex."
+ },
+ {
+  "school": "Rankin Township",
+  "identified_as": "Rankin High School, Rankin (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Rankin,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Woodland_Hills_School_District"
+  ],
+  "era": "Rankin later folded into Woodland Hills SD.",
+  "notes": "Rankin, PA is a borough, so 'Rankin Township' is odd; the only 'Rankin Township High School' yearbook on archive.org is in Rankin, Illinois. Identity is unconfirmed. Do not use Woodland Hills colours.",
+  "evidence": "Retry: Wikipedia pages for Rankin, PA and Woodland Hills SD have no colours for the old school; archive.org has no Rankin, PA yearbooks (only the 1970 Rankin Township HS in Rankin, IL); web search budget was used up. No colours found."
+ },
+ {
+  "school": "Wilkes-Barre Township",
+  "identified_as": "Wilkes-Barre Township High School",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://archive.org/details/classmates-yearbook-59341-1924-wilkes-barre-township-high-school",
+   "https://archive.org/details/classmates-yearbook-60998-1925-wilkes-barre-township-high-school",
+   "https://en.wikipedia.org/wiki/Wilkes-Barre_Area_School_District"
+  ],
+  "era": "Later part of Wilkes-Barre Area SD.",
+  "notes": "Colours only attested from the 1924 yearbook; not confirmed for later decades. A 1924 poem calls the football players 'purple and white plumed knights', but Knights is not confirmed as the mascot. Do not use Wilkes-Barre Area colours.",
+  "evidence": "archive.org OCR of the 1924 Wilkes-Barre Township HS yearbook (Wilkes-Barre, PA): an Alma Mater poem says 'The purple and white plumed knights fought well when the football tourney had begun'; the Class Day programme lists 'COLORS: PURPLE AND WHITE'. The 1925 yearbook gives only class colours (green and white, purple and white). Text only; no image with colours looked at, so no hex."
+ }
+]

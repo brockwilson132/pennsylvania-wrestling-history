@@ -1,0 +1,258 @@
+[
+ {
+  "school": "Ramsey",
+  "identified_as": "Ramsay High School (spelled 'Ramsay'), Mount Pleasant (Westmoreland Co.); its high school until 1965",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Pleasant_Area_School_District",
+   "search:http://rhsacr.com/",
+   "search:http://rhsacr.com/about",
+   "https://www.e-yearbook.com/Ramsay_High_School_Mounty_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Ramsay_High_School_Mounty_Yearbook/1958/Page_1.html",
+   "search:https://archive.org/details/classmates-yearbook-42723-1962-ramsay-high-school",
+   "https://www.e-yearbook.com/yearbooks/Ramsay_High_School_Mounty_Yearbook/1954/Page_40.html",
+   "https://www.e-yearbook.com/yearbooks/Ramsay_High_School_Mounty_Yearbook/1956/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Ramsay_High_School_Mounty_Yearbook/1959/Page_1.html"
+  ],
+  "era": "Closed school (brackets 1937-1939); successor likely Mount Pleasant Area HS (red, white and blue today).",
+  "notes": "Identity not confirmed. Retry pass: only a band-uniform description, no explicit colour statement.",
+  "evidence": "e-yearbook 'Mounty' covers 1942-1959 looked at earlier (no consistent colour scheme). Retry: full OCR of 1954, 1956, 1959 books; 1954 band page: 'a blue and white unit of smartly-uniformed high school boys and girls ... The fast-stepping Ramsay band'. No alma mater or 'school colors' text; no mascot found. Blue and white inferred from band uniform only."
+ },
+ {
+  "school": "Cecil Township",
+  "identified_as": "Cecil Township High School, Cecil Township (Washington Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Canon-McMillan School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canon-McMillan_School_District",
+   "https://www.e-yearbook.com/Cecil_Township_High_School_Codicil_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Cecil_Township_High_School_Codicil_Yearbook/1956/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Cecil_Township_High_School_Codicil_Yearbook/1920/Page_1.html",
+   "search:https://www.ancestry.com/yearbooks/school/wdm-Cecil+Township+High+School"
+  ],
+  "era": "Merged into Canon-McMillan (district founded 1954 from Canonsburg, Cecil Twp and North Strabane; Canon-McMillan colours blue and gold).",
+  "notes": "No source for Cecil HS's own colours. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "Cecil Twp HS 'Codicil' 1956 yearbook (e-yearbook OCR): band called 'the blue and white marchers'. 1920 book has a 'Gold and White' cheer, but for the Philo literary society, not the school. Band-uniform wording only, no explicit colour statement or image."
+ },
+ {
+  "school": "Wattsburg",
+  "identified_as": "Wattsburg High School, Wattsburg (Erie Co.)",
+  "colors": [],
+  "mascot": "Bobcats",
+  "confidence": "low",
+  "wikipedia": "Seneca High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wattsburg_Area_School_District",
+   "https://en.wikipedia.org/wiki/Seneca_High_School_(Pennsylvania)",
+   "search:https://www.facebook.com/groups/3102144833254193/",
+   "search:https://www.smethporthistory.org/raymondvinerhall/wattsburg.html",
+   "https://www.wattsburg.org/",
+   "https://www.wattsburg.org/about-wattsburg-home",
+   "https://www.e-yearbook.com/Wattsburg_Area_High_School_Grail_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Wattsburg_Area_High_School_Grail_Yearbook/1958/Page_34.html",
+   "https://www.e-yearbook.com/yearbooks/Wattsburg_Area_High_School_Grail_Yearbook/1966/Page_88.html"
+  ],
+  "era": "Wattsburg Area SD's high school is now Seneca High School.",
+  "notes": "Neither Wikipedia page gives colours. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "Retry: full OCR of Grail 1954, 1956, 1958, 1960, 1966 (e-yearbook): teams called the Bobcats (1958 'likes to have the Bobcats on top', school paper 'Bobcats' Review'; 1966 'The Bobcats struggling to win'), but no alma mater, 'school colors' or uniform-colour text. Alumni Facebook group title 'Wattsburg Area High School Golden Bobcats' (search result only). Current Seneca HS site not used for the old school. Unresolved."
+ },
+ {
+  "school": "Westmoreland",
+  "identified_as": "Westmoreland High School, Trucksville (Luzerne Co.), a joint school of Kingston Township and Dallas Borough ('Dal-King' yearbook)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dallas_School_District",
+   "https://www.e-yearbook.com/Westmoreland_High_School_Dal_King_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Westmoreland_High_School_Dal_King_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Westmoreland_High_School_Dal_King_Yearbook/1954/Page_1.html",
+   "search:https://www.facebook.com/groups/770454218095929/posts/897229328751750/",
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1955-02-25/ed-1/seq-12.pdf",
+   "https://www.e-yearbook.com/yearbooks/Westmoreland_High_School_Dal_King_Yearbook/1952/Page_6.html",
+   "search:https://en.wikipedia.org/wiki/Dallas_High_School_(Dallas,_Pennsylvania)"
+  ],
+  "era": "Closed (brackets 1959-1961); merged into the Dallas School District. Do not use Dallas colours.",
+  "notes": "Identity uncertain; no colour source found. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "e-yearbook 'Dal King' 1952 and 1954 full OCR: only class colours (1952 green and white; 1954 purple and white) and student-council 'Orange and Black parties', not school colours; 1952 page 6 is the alma mater but its OCR is empty (an image) and the page image could not be fetched. A Facebook post title calls the 1959 yearbook 'Westmoreland High School Eagles' (search result only, mascot unconfirmed). Dallas Post archive (panewsarchive.psu.edu) not reachable from this session. Westmoreland merged with Dallas Twp, Dallas Boro and Kingston Twp into Dallas HS in 1962."
+ },
+ {
+  "school": "Lawrence Park",
+  "identified_as": "Lawrence Park High School, Lawrence Park Township (Erie Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Iroquois School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Iroquois_School_District",
+   "https://archive.org/details/classmates-yearbook-32830-1951-lawrence-park-high-school",
+   "https://archive.org/details/classmates-yearbook-13632-1956-lawrence-park-high-school",
+   "https://www.e-yearbook.com/Lawrence_Park_High_School_Lawrentian_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Lawrence_Park_High_School_Lawrentian_Yearbook/1947/Page_72.html",
+   "https://www.e-yearbook.com/yearbooks/Lawrence_Park_High_School_Lawrentian_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lawrence_Park_High_School_Lawrentian_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lawrence_Park_High_School_Lawrentian_Yearbook/1956/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lawrence_Park_High_School_Lawrentian_Yearbook/1958/Page_1.html"
+  ],
+  "era": "Merged in 1966 with Wesleyville into the Iroquois School District (Iroquois Braves).",
+  "notes": "Retry pass: colours from a cheerleader-uniform description only (no alma mater or explicit 'school colors' text). Class colours varied by year and are not school colours.",
+  "evidence": "Full OCR of Lawrentian 1947, 1951, 1953, 1956, 1958 (e-yearbook). 1947 cheerleader page: the varsity girls 'looked snappy in their blue and white uniforms' and the junior squad wore 'neat blue and white uniforms'. Class colours (1951 red and white, 1956 white and green) ignored. No image looked at, so no hex."
+ },
+ {
+  "school": "Scotland School",
+  "identified_as": "Scotland School for Veterans' Children, Scotland (Franklin Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cadets",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference",
+   "search:https://www.prepsportswear.com/school/us/pennsylvania/scotland/scotland-school-for-veterans-children-cadets?schoolid=1001453",
+   "https://pa-soldiers-orphan-schools.org/",
+   "https://pa-soldiers-orphan-schools.org/documents/Cadets-to-Vets-2025-Part-II.pdf",
+   "search:https://www.hmdb.org/m.asp?m=84015",
+   "https://www.e-yearbook.com/Scotland_School_Veterans_Children_Taps_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Scotland_School_Veterans_Children_Taps_Yearbook/1958/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Scotland_School_Veterans_Children_Taps_Yearbook/1962/Page_12.html",
+   "search:https://dickinson.hykucommons.org/concern/generic_works/981e80fc-538d-4f04-a2f2-7c8d51a312a5"
+  ],
+  "era": "School closed 2009 (Mid-Penn member 1992-2009).",
+  "notes": "Only evidence is the Mid-Penn Conference Wikipedia table cell styling (background #ba0c2f with black/#002d6c borders), not a stated colour; second colour may be black or navy.",
+  "evidence": "No colour image found. Mascot 'Cadets' from Prep Sportswear store title. Red only from the first pass's Mid-Penn Conference table styling. Cadets-to-Vets slideshow: black-and-white photos only. Retry: full OCR of Taps 1958, 1962, 1965, 1968 (e-yearbook): no school colour, alma mater text or uniform colour (only a 'red fire truck'); two WebSearch queries found nothing on athletic colours."
+ },
+ {
+  "school": "Turtle Creek Union",
+  "identified_as": "Turtle Creek Union High School, Turtle Creek (Allegheny Co.)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Creekers",
+  "confidence": "medium",
+  "wikipedia": "Woodland Hills School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Turtle_Creek,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Woodland_Hills_School_District",
+   "https://www.e-yearbook.com/Turtle_Creek_High_School_Memories_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Turtle_Creek_High_School_Memories_Yearbook/1947/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Turtle_Creek_High_School_Memories_Yearbook/1961/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Turtle_Creek_High_School_Memories_Yearbook/1928/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Turtle_Creek_High_School_Memories_Yearbook/1924/Page_1.html",
+   "search:https://digitalarchives.powerlibrary.org/papd/islandora/object/papd%3A597802"
+  ],
+  "era": "Turtle Creek SD merged into Woodland Hills SD in 1981.",
+  "notes": "No colour source found. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "Turtle Creek HS 'Memories' yearbooks (e-yearbook OCR): 1947 alma mater 'Proudly we hold thy colors up for all to see, The royal blue and white for truth and loyalty' (also in 1950/1951 books); teams called the Creekers, 1961 mascot tumbler 'Creeker Blue Devil'. 1924 book still calls the school 'Union'; a 1928 senior blurb mentions 'blue and gold girls', so the earliest (Union-era) colours may have differed. No colour image checked, so no hex."
+ },
+ {
+  "school": "Lancaster Boys",
+  "identified_as": "Lancaster Boys' High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Tornado",
+  "confidence": "medium",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School",
+   "https://lancasteronline.com/opinion/columnists/the-scribbler-what-s-the-origin-of-mccaskey-s-red-tornado-nickname/article_ade6a91a-4fc7-11e4-809a-0017a43b2370.html",
+   "https://mccaskeyalumni.org/connect/history-of-the-alumni-association/history-of-the-mccaskey-high-school-campus/"
+  ],
+  "era": "Predecessor of J. P. McCaskey High School (opened 1938; red and black, Red Tornado).",
+  "notes": "Did not find whether the boys' high school used the same colours. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "LancasterOnline 'Scribbler' column on the Red Tornado name: Boys High football began 1923 as the 'Red & Black Warriors', then 'Red and Black Tornado'; historian Jack Loose says 'red' came from the red and black school colors; 1935 Boys High Vidette yearbook uses Tornado. Same colours carried to McCaskey (1938). No image, so no hex."
+ },
+ {
+  "school": "Franklin Township",
+  "identified_as": "Probably Franklin Township High School, Murrysville (Westmoreland Co.), predecessor of Franklin Regional; not certain (Franklin Township, Greene Co. is another candidate)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Franklin Regional High School",
+  "sources": [
+   "https://www.e-yearbook.com/pennsylvania-yearbooks.html",
+   "search:https://en.wikipedia.org/wiki/Franklin_Regional_High_School",
+   "https://www.e-yearbook.com/yearbooks/Franklin_Regional_High_School_Quill_Yearbook/1953/Page_6.html",
+   "https://www.e-yearbook.com/yearbooks/Franklin_Regional_High_School_Quill_Yearbook/1958/Page_76.html",
+   "https://www.e-yearbook.com/yearbooks/Franklin_Regional_High_School_Quill_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Franklin_Regional_High_School_Quill_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Franklin_Regional_High_School_Quill_Yearbook/1956/Page_1.html"
+  ],
+  "era": "Closed (brackets 1937-1939); Franklin Township HS (Murrysville) became Franklin Regional HS (district formed 1962; Panthers, blue and gold today).",
+  "notes": "Identity inferred: the 1937-1939 D7 brackets put it with Westmoreland Co. schools (Greensburg, Norwin, Trafford, Ramsey) but also Greene/Fayette ones (Waynesburg, Cumberland Twp, Mapletown, German Twp). Colours are from the Murrysville school's own 1950s yearbooks, not the successor.",
+  "evidence": "e-yearbook 'Quill' (Franklin Township High School, Murrysville) full OCR 1950-1958: 1953 book 'Our flashy cheerleaders ... have added their encouraging cheers to the blue and gold'; 1958 alma mater ends 'Dear old Franklin High ... Franklin High School blue and gold.' Two statements agree, but the identity of the bracket school is not confirmed, and the books are 15+ years after 1937-1939. No image, so no hex."
+ }
+]

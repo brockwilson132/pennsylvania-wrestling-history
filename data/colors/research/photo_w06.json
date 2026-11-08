@@ -1,0 +1,270 @@
+[
+ {
+  "school": "Strath Haven",
+  "identified_as": "Strath Haven High School, Wallingford",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#9A9A9A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Strath Haven High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Strath_Haven_High_School",
+   "https://www.wssd.org/",
+   "https://www.wssd.org/departments/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1790085714/wssdorg/bbueafeuk1ctldvqdded/Football518SEPT26.jpg",
+   "https://www.havenfootball.net",
+   "https://havenfootball.net/wp-content/uploads/2025/06/shlogo.png",
+   "search:https://www.maxpreps.com/pa/wallingford/strath-haven-panthers/softball/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "Black, silver, white per Wikipedia and MaxPreps. Hex from the Haven Football program site logo (havenfootball.net, football boosters, not the district); district Finalsite pages show no logo.",
+  "evidence": "havenfootball.net logo (2025): crouching black #000000 panther with silver-grey #9A9A9A highlights and white outline over a football, 'STRATH HAVEN' wordmark in black. Agrees with WSSD football photo (black/silver/white) and Wikipedia/MaxPreps."
+ },
+ {
+  "school": "Boswell",
+  "identified_as": "Boswell High School / Jenner-Boswell Joint High School, Boswell (Somerset County) (closed)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "medium",
+  "wikipedia": "North Star School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_13.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_16.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_59.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_1.html"
+  ],
+  "era": "1940s school; later Jenner-Boswell Joint HS, merged into North Star SD in 1969 (North Star: forest green and white, Cougars).",
+  "notes": "From the 1942 Rex Collium yearbook (Jenner-Boswell Joint HS, Boswell PA) OCR text: football team called 'the Gold and Blue boys' and 'the Boswell Blue and Gold'; basketball 'Bears ... in their new gold and blue uniforms'. Class of 1942 class colours were red and white (class only, not school). No colour image seen, so no hex.",
+  "evidence": "e-yearbook.com OCR of the 1942 Jenner-Boswell yearbook (pages 1-90): sports pages repeatedly name the team 'Blue and Gold' / 'Gold and Blue' and the Bears; no colour photo, no hex."
+ },
+ {
+  "school": "Sugar Valley",
+  "identified_as": "Sugar Valley Area High School, Loganton (Clinton County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District",
+   "search:https://www.wikipedia.org/wiki/User:GMorris419/Sugar_Valley_Rural_Charter_School",
+   "https://www.svrcs.org/",
+   "https://content.schoolinsites.com/api/documents/c6ae118ed8b64cde826d6cb60ce050ea.png",
+   "search:https://ldsgenealogy.com/PA/Loganton.htm",
+   "search:https://www.lockhaven.com/news/https-www-lockhaven-com-news-progress/2025/03/where-every-child-is-known-svrcs-celebrates-25th-year"
+  ],
+  "era": "Keystone Central SD high school (Loganton) closed in the 1990s; Sugar Valley Rural Charter School (K-12, opened 2000, has wrestling) now serves the valley: Phoenix, dark green #114E13 phoenix logo on svrcs.org, site accent #006E33, green and white per a Wikipedia user draft.",
+  "notes": "Old Sugar Valley Area HS colours still not found (no e-yearbook.com scans; yearbooks 1961-1984 only on Classmates/Ancestry/MyHeritage per ldsgenealogy.com). Identity doubt: if this school's PIAA wrestling results are post-2000, they belong to the charter school, whose colours are green (and white).",
+  "evidence": "Looked at svrcs.org (charter school): dark-green #114E13 phoenix logo, site theme green #006E33 (rest stock Bootstrap). Nothing seen for the old high school's own colours; charter colours deliberately not assigned."
+ },
+ {
+  "school": "Armstrong",
+  "identified_as": "Armstrong Junior/Senior High School, Kittanning (Armstrong SD)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#07249B",
+    "hex_from": "photo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#FB4515",
+    "hex_from": "photo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "River Hawks",
+  "confidence": "medium",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)",
+   "https://www.asd.k12.pa.us/",
+   "https://ajshs.asd.k12.pa.us/",
+   "https://ajshs.asd.k12.pa.us/pics/school_logo.png",
+   "https://archive.triblive.com/news/use-of-riverhawks-may-be-hard-to-exterminate-at-new-armstrong-school",
+   "https://archive.triblive.com/wp-content/uploads/2018/11/LTRiverhawks1.jpg",
+   "search:https://www.maxpreps.com/pa/kittanning/armstrong-river-hawks/football/schedule/all-time",
+   "search:https://www.eliteprospects.com/team/19825/armstrong-high/2024-2025"
+  ],
+  "era": "Opened 2016 from the merger of Kittanning and Ford City high schools.",
+  "notes": "Blue and orange per MaxPreps, a PIAA football teams list and Elite Prospects (search snippets). Mascot spelled both 'Riverhawks' (board-approved 2013) and 'River Hawks' (district trademark, osprey) per TribLIVE 2015. Hex from an early (2015) unofficial fan-page hawk logo, so the current official shade may differ.",
+  "evidence": "TribLIVE 2015 article image (screenshot of 'Armstrong Riverhawks' unofficial Facebook page) shows a clean hawk-head logo in royal blue #07249B and orange #FB4515 on white (logocolors on the crop). Matches MaxPreps/PIAA-list snippets 'Blue, Orange'. District sites show only the blue district seal."
+ },
+ {
+  "school": "West Snyder",
+  "identified_as": "West Snyder High School, Beaver Springs (Snyder County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "high",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School",
+   "https://www.e-yearbook.com/yearbooks/West_Snyder_High_School_Legend_Yearbook/1959/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/West_Snyder_High_School_Legend_Yearbook/1964/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/West_Snyder_High_School_Legend_Yearbook/1956/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/West_Snyder_High_School_Legend_Yearbook/1973/Page_1.html"
+  ],
+  "era": "Merged with Middleburg HS in 2005 to form Midd-West (Carolina blue).",
+  "notes": "Red and white per the Midd-West HS Wikipedia article and the school's own 1959 Legend yearbook ('The red and white of West Snyder Varsity Basketball team', baseball 'big wins for the red and white'). 1959 class colours (powder blue and black) were class-only. No colour image seen, so no hex.",
+  "evidence": "e-yearbook.com OCR of West Snyder Legend yearbooks 1956/1959/1964/1973: 1959 sports pages call the teams 'the red and white'; Mounties nickname used in 1964. No colour photo seen, no hex."
+ },
+ {
+  "school": "Chief Logan",
+  "identified_as": "Chief Logan High School, Highland Park/Lewistown area (Mifflin County SD)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mingoes",
+  "confidence": "medium",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflin_County_School_District",
+   "https://www.e-yearbook.com/yearbooks/Chief_Logan_High_School_Legend_Yearbook/1955/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Chief_Logan_High_School_Legend_Yearbook/1958/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Chief_Logan_High_School_Legend_Yearbook/1965/Page_1.html",
+   "search:https://www.lewistownsentinel.com/opinion/local-columns/2023/01/for-heres-to-thee-chief-logan/"
+  ],
+  "era": "Part of Penn Highlands HS 1971-76; merged with Kishacoquillas in 1989 into Indian Valley HS; Indian Valley later merged into Mifflin County HS (2011).",
+  "notes": "From the school's own Legend yearbooks (e-yearbook.com OCR): 1955 'Nine seniors leave the green and white band'; 1958 'The Chief Logan Mingoes in their green uniforms'. Mingoes nickname also in a 2023 Lewistown Sentinel alumni column. 1965 class colours (royal blue, light grey) were class-only. No colour image seen, so no hex.",
+  "evidence": "e-yearbook.com OCR of Chief Logan Legend yearbooks 1955/1958/1965: green-and-white band and green team uniforms, Mingoes nickname. No colour photo seen, no hex."
+ },
+ {
+  "school": "Franklin",
+  "identified_as": "Franklin Area High School, Franklin (Venango County)",
+  "colors": [
+   {
+    "name": "Red (cardinal)",
+    "hex": "#C41E3A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "high",
+  "wikipedia": "Franklin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Franklin_Area_School_District",
+   "https://sites.google.com/students.fasd.k12.pa.us/franklin-area-school-district/home",
+   "https://sites.google.com/students.fasd.k12.pa.us/franklin-area-school-district/district",
+   "search:https://www.maxpreps.com/pa/franklin/franklin-knights/football",
+   "https://pafootballnews.com/franklin-knights/"
+  ],
+  "era": null,
+  "notes": "District Google Site (students.fasd.k12.pa.us) theme is #C41E3A red with #1F1F1F near-black; MaxPreps snippet lists Black and Red. Knight logo also has grey armour (#B0B2B6), not counted as a school colour. Do not confuse with Franklin Regional (blue/gold Panthers).",
+  "evidence": "FASD district Google Site: knight-helmet logo in black outline, grey armour #B0B2B6 and a red plume #C41E3A (pixel count), the same red as the site theme rgba(196,30,58); 2026-27 district goals graphic is red and black. Agrees with MaxPreps 'Black, Red'."
+ },
+ {
+  "school": "Brockway",
+  "identified_as": "Brockway Area Junior/Senior High School, Brockway",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A91A1F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#150709",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rovers",
+  "confidence": "high",
+  "wikipedia": "Brockway Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brockway_Area_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/brockway/brockway-rovers/",
+   "search:https://www.si.com/high-school/stats/pennsylvania/football/teams/251225-brockway-rovers/rankings",
+   "https://sites.google.com/brockwaysd.org/foundation/home"
+  ],
+  "era": null,
+  "notes": "Red and black per Wikipedia and MaxPreps; the Brockway School/Community Foundation Google Site (brockwaysd.org) uses a red #FF0000/black theme. District site brockway.k12.pa.us unreachable.",
+  "evidence": "Brockway HS Class of 1973 alumni flyer on the brockwaysd.org foundation site: Rover dog-head logo, black/white dog in a red disc (red #A91A1F, black #150709 via logocolors on the crop; small JPEG, red slightly shaded). Foundation site theme red #FF0000 with black. Agrees with Wikipedia/MaxPreps red and black."
+ },
+ {
+  "school": "Forty Fort",
+  "identified_as": "Forty Fort High School, Forty Fort (Luzerne County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Flyers",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1930/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1957/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1958/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Forty_Fort_High_School_Fort_Yearbook/1959/Page_1.html"
+  ],
+  "era": "Closed; Forty Fort borough now in Wyoming Valley West School District (Spartans); Forty Fort HS presumably merged into Wyoming Valley West in the late 1960s.",
+  "notes": "Inferred: the school newspaper was named 'The Red and White' (1951-1959 Fort yearbooks), and teams were the Flyers (football, wrestling). No yearbook line states the school colours outright; 1930 class colours were green and gold (class only). Successor Wyoming Valley West colours not used.",
+  "evidence": "e-yearbook.com OCR of Forty Fort 'The Fort' yearbooks 1930-1959: teams called the Flyers; school paper 'The Red and White'. No explicit school-colours statement and no colour photo, so names are an inference and no hex."
+ }
+]

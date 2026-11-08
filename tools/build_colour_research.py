@@ -40,7 +40,7 @@ STD = {
     'purple': '#4B2E83', 'violet': '#4B2E83',
     'brown': '#4E2A1E',
     'gray': '#8A8D8F', 'grey': '#8A8D8F', 'silver': '#A7A9AC', 'steel gray': '#708090', 'steel grey': '#708090',
-    'white': '#FFFFFF', 'black': '#111111', 'cerise': '#DE3163', 'steel': '#708090',
+    'white': '#FFFFFF', 'black': '#111111', 'cerise': '#DE3163', 'steel': '#708090', 'rose': '#C21E56',
 }
 CONF = {'high': 3, 'medium': 2, 'low': 1}
 FROM = {'logo': 'l', 'photo': 'p', 'school-site': 's', 'wikipedia-infobox': 'w'}

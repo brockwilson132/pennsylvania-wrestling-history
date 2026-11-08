@@ -1,0 +1,240 @@
+[
+ {
+  "school": "Cumberland Township",
+  "identified_as": "Cumberland Township High School, Carmichaels (Greene Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mikes",
+  "confidence": "medium",
+  "wikipedia": "Carmichaels Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_Junior/Senior_High_School",
+   "https://archive.org/details/classmates-yearbook-56214-1944-cumberland-township-high-school",
+   "https://www.e-yearbook.com/yearbooks/Cumberland_Township_High_School_Cumberlander_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Cumberland_Township_High_School_Cumberlander_Yearbook/1951/Page_1.html"
+  ],
+  "era": "Merged 1962 with Carmichaels Borough into Carmichaels Area (Mikes; blue, gold and white).",
+  "notes": "Blue and gold from the school's own 1953 yearbook (one mention); consistent with successor but found independently. No image for hex.",
+  "evidence": "1953 Cumberland Township HS 'Cumberlander' yearbook OCR text: basketball seniors 'played their last season in the Blue and Gold line-up'; news clippings call the 1952 WPIAL Class B champion football team the 'Mikes'. 1944/1951 books gave only class colours. No image looked at, so no hex."
+ },
+ {
+  "school": "Nanticoke",
+  "identified_as": "Nanticoke High School, Nanticoke",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Greater Nanticoke Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.e-yearbook.com/yearbooks/Nanticoke_High_School_Nannual_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Nanticoke_High_School_Nannual_Yearbook/1958/Page_1.html"
+  ],
+  "era": "Predecessor of Greater Nanticoke Area (formed c.1967-68; Trojans, blue and red per PIAA table). Colours here are Nanticoke HS's own.",
+  "notes": "Blue and white from the school's own 1951 and 1958 yearbooks; no image for a hex. Nickname not found in the yearbook text.",
+  "evidence": "1951 and 1958 Nanticoke HS 'Nannual' yearbook OCR text: alma mater chorus 'Flag we love, blue and white, float for aye, Nanticoke High, o'er thee'; 1958 class poem 'our football team ... our blue and white'. Class colours (blue/gold etc.) ignored. No image looked at, so no hex."
+ },
+ {
+  "school": "Blairsville",
+  "identified_as": "Blairsville Middle-High School, Blairsville (Indiana County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "high",
+  "wikipedia": "River Valley Middle\u2013High School",
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Blairsville_Middle-High_School",
+   "search:https://www.maxpreps.com/pa/blairsville/blairsville-bobcats/",
+   "search:https://wiki.riteme.site/wiki/Blairsville_Middle-High_School",
+   "https://en.wikipedia.org/wiki/River_Valley_Middle%E2%80%93High_School",
+   "https://www.e-yearbook.com/yearbooks/Blairsville_High_School_Blaire_Yearbook/1958/Page_1.html"
+  ],
+  "era": "Blairsville and Saltsburg combined into River Valley Middle-High School (Panthers, black and teal / aero blue) around 2022. Colours here are Blairsville's.",
+  "notes": "Orange and black confirmed by the school's own 1958 yearbook and Wikipedia; no hex (yearbook images not served to curl, no logo found).",
+  "evidence": "1958 Blairsville HS 'Blaire' yearbook OCR text: 'the orange and black band' at half time; alma mater 'Hail, Blairsville High'. Agrees with Wikipedia/MaxPreps snippets (Orange and Black, Bobcats). Yearbook page images returned HTML instead of images; no logo looked at, so no hex. River Valley (successor) is black and teal."
+ },
+ {
+  "school": "Erie Strong Vincent",
+  "identified_as": "Strong Vincent High School, Erie",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Colonels",
+  "confidence": "high",
+  "wikipedia": "Erie City School District",
+  "sources": [
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Strong_Vincent_High_School.html",
+   "search:https://www.maxpreps.com/pa/erie/strong-vincent-colonels/football/schedule/all-time",
+   "https://commons.wikimedia.org/wiki/File:1946_-_Football_Program_Allentown_vs_Erie_Strong-Vincent_High_School.jpg",
+   "https://strongvincentms.bigteams.com/",
+   "https://www.e-yearbook.com/yearbooks/Strong_Vincent_High_School_Spokesman_Yearbook/1944/Page_1.html"
+  ],
+  "era": "Closed as a high school in 2017 when Erie's high schools merged into Erie High School (gold and royal purple); building became Strong Vincent Middle School.",
+  "notes": "Red and black confirmed by the school's own 1944 yearbook; no clean image for a hex.",
+  "evidence": "1944 Strong Vincent 'Spokesman' yearbook OCR text: 'the colors red and black typify the life of Strong Vincent High School' and alma mater 'To the Red and Black that floats upon the breeze'. Agrees with Wikipedia mirror and MaxPreps snippet (black and red). No logo image looked at, so no hex. Earlier: 1946 program cover showed no school colours."
+ },
+ {
+  "school": "Indian Valley",
+  "identified_as": "Indian Valley High School, Lewistown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "low",
+  "wikipedia": "Indian Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Indian_Valley_High_School_(Pennsylvania)",
+   "search:https://wikipedia2006.classicistranieri.com/en/i/n/d/Indian_Valley_High_School_%28Pennsylvania%29_51a4.html",
+   "https://kaweah.freedombox.rocks/kiwix/wikipedia_en_all_maxi_2023-10/Indian_Valley_High_School_(Pennsylvania)"
+  ],
+  "era": "Formed 1989 from Chief Logan and Kishacoquillas high schools; closed 2011 when Mifflin County SD merged Indian Valley and Lewistown into Mifflin County High School.",
+  "notes": "Red and black from 2006 Wikipedia mirror snippet only; no hex verified.",
+  "evidence": "No image looked at: old site indianvalleywarriors.com only via Wayback, which was unreachable; MaxPreps 403; image search unusable. Current Wikipedia infobox has no colours (mascot Warrior, closed 2011). Retry: 2023 Wikipedia snapshot has no colours; web searches for yearbooks, uniforms and wrestling photos found nothing on the Lewistown school's colours (other 'Indian Valley' schools in OH differ). Red/black still rests on the 2006 mirror only."
+ },
+ {
+  "school": "Bishop O'Hara",
+  "identified_as": "Bishop O'Hara High School, Dunmore (closed 2007)",
+  "colors": [],
+  "mascot": "Bruins",
+  "confidence": "low",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "search:https://www.wikipedia.org/wiki/Bishop_O%27Hara_High_School",
+   "https://en.wikipedia.org/w/index.php?title=Holy_Cross_High_School_(Pennsylvania)&action=raw"
+  ],
+  "era": "Closed 2007; merged with Bishop Hannan into Holy Cross High School (Dunmore), whose colours (silver, forest green, black) are the successor's, not O'Hara's.",
+  "notes": "Colours still not found after retry; nickname Bruins confirmed (Lady Bruins 2001; 1990 PIAA AA wrestling champion Mark McLafferty).",
+  "evidence": "Retry: Holy Cross Wikipedia raw text names O'Hara's Bruins, its 1990 state wrestling champion and theater, but no O'Hara colours; three web searches (yearbook, alumni, colour phrases) returned only other O'Hara schools (Cardinal O'Hara, Archbishop O'Hara) and the successor's silver/forest green/black. e-yearbook URL guess for an O'Hara yearbook was invalid. Nothing looked at that shows colours."
+ },
+ {
+  "school": "Manheim Borough",
+  "identified_as": "Manheim Borough High School, Manheim (Lancaster County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/w/index.php?title=Manheim_Central_School_District&action=raw",
+   "https://en.wikipedia.org/w/index.php?title=Manheim_Central_High_School&action=raw",
+   "search:https://collections.lancasterhistory.org/en/permalink/lhdo6439"
+  ],
+  "era": "Pre-1950s borough school; Manheim borough is now in Manheim Central SD (Barons, maroon and gray) - successor's colours, not verified for the borough school.",
+  "notes": "No yearbook of the borough school found online (e-yearbook has only Manheim Township's 'Neff Vue', a different school); LancasterHistory holds a 1936 school history booklet.",
+  "evidence": "Retry: two web searches found no Manheim Borough HS yearbook or colour mention; Wikipedia raw for Manheim Central SD/HS gives only the successor's maroon and gray (Barons). Nothing looked at that shows the borough school's colours."
+ },
+ {
+  "school": "Sheffield",
+  "identified_as": "Sheffield Area Middle/High School, Sheffield (Warren County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "high",
+  "wikipedia": "Sheffield Area Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sheffield_Area_Middle/High_School",
+   "search:https://www.wcsdpa.org/o/samhs/live_feeds/9632806",
+   "search:https://nfhsnetwork.com/schools/sheffield-area-high-school-sheffield-pa",
+   "search:https://www.maxpreps.com/pa/sheffield/sheffield-wolverines/",
+   "https://pafootballnews.com/pfn/sheffield-makes-a-marvelous-memory-on-wolverine-mountain-in-an-historical-game/",
+   "https://pafootballnews.com/wp-content/uploads/2024/10/20241012_145947-e1728789109412.jpg",
+   "https://en.wikipedia.org/w/index.php?title=Sheffield_Area_Middle/High_School&action=raw",
+   "search:https://www.maxpreps.com/pa/sheffield/sheffield-wolverines/football/schedule/all-time"
+  ],
+  "era": "High school grades reportedly closed 2025 (building now Sheffield Area Elementary/Middle School; students rezoned to Warren Area HS) - per search summary of Wikipedia, not verified on district site.",
+  "notes": "Orange and black confirmed by a game photo; white as third colour per Wikipedia infobox only. No hex: only a sunlit uniform photo.",
+  "evidence": "PA Football News 2024 photo at Sheffield's home field (Wolverine Mountain): home team in bright orange jerseys, black pants and black helmets (opponent in white/green). Wikipedia infobox: Orange, Black, and White, Wolverine; MaxPreps snippet: black and orange. Uniform photo in sunlight, so no hex."
+ },
+ {
+  "school": "Elderton",
+  "identified_as": "Elderton Junior/Senior High School, Elderton (Armstrong SD; closed 2012)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)",
+   "https://www.e-yearbook.com/yearbooks/Elderton_High_School_El_Hy_An_Yearbook/1959/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Elderton_High_School_El_Hy_An_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Elderton_High_School_El_Hy_An_Yearbook/1956/Page_1.html",
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Elderton_High_School.html"
+  ],
+  "era": "Closed June 2012 (Armstrong SD).",
+  "notes": "Green and white inferred from band uniforms only (no explicit 'school colors' line found). Mascot Bobcats per a Wikipedia mirror snippet, not verified (the 1949 book's 'Bobcats' is an intramural team).",
+  "evidence": "1959 Elderton HS 'El-Hi-An' yearbook OCR text: 'The smart green and white uniforms of the Senior Band'; alma mater gives no colours; class/club colours (light blue/white, red/white) ignored. 1949 and 1956 books: no school colours. No image looked at, so no hex."
+ }
+]
