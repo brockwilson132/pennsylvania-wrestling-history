@@ -44,7 +44,7 @@ year,cls,weight,place,name,school,source
 2023,AA,127,1,Cooper Hornack,Burrell,wpial
 2023,AA,133,1,Peter Chacon,Montour,wpial
 2023,AA,139,1,Joey Sentipal,Burgettstown,wpial
-2023,AA,145,1,Tyler Debnar,Bethlehem-Center,wpial
+2023,AA,145,1,Tyler Debnar,Beth-Center,wpial
 2023,AA,152,1,Ryan Celaschi,Frazier,wpial
 2023,AA,160,1,Grant MacKay,Laurel,wpial
 2023,AA,172,1,Braedon Welsh,Fort Cherry,wpial
@@ -209,7 +209,7 @@ year,cls,weight,place,name,school,source
 2017,AA,152,1,Logan Witwicki,Carlynton,wpial
 2017,AA,160,1,Christian Clutter,McGuffey,wpial
 2017,AA,170,1,R.J. Hall,Chartiers-Houston,wpial
-2017,AA,182,1,Dominic Fundy,Bethlehem-Center,wpial
+2017,AA,182,1,Dominic Fundy,Beth-Center,wpial
 2017,AA,195,1,Bryson Miller,Freedom Area,wpial
 2017,AA,220,1,Bishop McCoy,South Side,wpial
 2017,AA,285,1,Evan Sweesy,Freedom Area,wpial
@@ -236,7 +236,7 @@ year,cls,weight,place,name,school,source
 2016,AA,145,1,Mike Carr,South Fayette,wpial
 2016,AA,152,1,Damon Greenwald,Burrell,wpial
 2016,AA,160,1,Jake Wentzel,South Park,wpial
-2016,AA,170,1,Anthony Welsh,Bethlehem-Center,wpial
+2016,AA,170,1,Anthony Welsh,Beth-Center,wpial
 2016,AA,182,1,Greg Bulsak,South Park,wpial
 2016,AA,195,1,Bill Bowlen,Jefferson-Morgan,wpial
 2016,AA,220,1,Alex Moses,Burrell,wpial
@@ -380,7 +380,7 @@ year,cls,weight,place,name,school,source
 2011,AA,171,1,Dakota DesLauriers,Burrell,wpial
 2011,AA,189,1,Jordan Kitta,Southmoreland,wpial
 2011,AA,215,1,Brian Beattie,Burrell,wpial
-2011,AA,285,1,Jeff Tarley,Bethlehem-Center,wpial
+2011,AA,285,1,Jeff Tarley,Beth-Center,wpial
 2010,AAA,103,1,Ethan Kenney,Connellsville,wpial
 2010,AAA,112,1,James Gulibon,Derry,wpial
 2010,AAA,119,1,Nico Megaludis,Franklin Regional,wpial
@@ -408,7 +408,7 @@ year,cls,weight,place,name,school,source
 2010,AA,171,1,Matthew Cunningham,Shady Side Academy,wpial
 2010,AA,189,1,Gary Kiefer,Fort Cherry,wpial
 2010,AA,215,1,Brian Beattie,Burrell,wpial
-2010,AA,285,1,Jeff Tarley,Bethlehem-Center,wpial
+2010,AA,285,1,Jeff Tarley,Beth-Center,wpial
 2009,AAA,103,1,James Guilbon,Derry,wpial
 2009,AAA,112,1,Nico Megaludis,Franklin Regional,wpial
 2009,AAA,119,1,Shane Young,Penn-Trafford,wpial
@@ -432,7 +432,7 @@ year,cls,weight,place,name,school,source
 2009,AA,145,1,Nick Carr,South Fayette,wpial
 2009,AA,152,1,Kyle Appleby,Avella,wpial
 2009,AA,160,1,Matthew Cunningham,Shady Side Academy,wpial
-2009,AA,171,1,Cody Catalina,Bethlehem-Center,wpial
+2009,AA,171,1,Cody Catalina,Beth-Center,wpial
 2009,AA,189,1,Roman San Doval,Shady Side Academy,wpial
 2009,AA,215,1,Ryan Watson,Burgettstown,wpial
 2009,AA,285,1,Jordan Roussos,Carlynton,wpial
@@ -668,7 +668,7 @@ year,cls,weight,place,name,school,source
 2000,AA,112,1,Josh Peterson,Southmoreland,wpial
 2000,AA,119,1,Matt Schomburg,Freedom Area,wpial
 2000,AA,125,1,Dan Mousetis,Washington,wpial
-2000,AA,130,1,Ulysses Davis,Bethlehem-Center,wpial
+2000,AA,130,1,Ulysses Davis,Beth-Center,wpial
 2000,AA,135,1,Don Rush Jr.,Avella,wpial
 2000,AA,140,1,Garrett Rossero,Washington,wpial
 2000,AA,145,1,Will Durkee,Shady Side Academy,wpial
@@ -691,7 +691,7 @@ year,cls,weight,place,name,school,source
 1999,AAA,189,1,Joe Ross,Connellsville,wpial
 1999,AAA,HWT,1,John Wise,Albert Gallatin,wpial
 1999,AA,103,1,Josh Peterson,Southmoreland,wpial
-1999,AA,112,1,Ulysses Davis,Bethlehem-Center,wpial
+1999,AA,112,1,Ulysses Davis,Beth-Center,wpial
 1999,AA,119,1,Dan Butera,Carlynton,wpial
 1999,AA,125,1,Brad Yoder,Southmoreland,wpial
 1999,AA,130,1,Andrew Courtwright,West Greene,wpial
@@ -753,7 +753,7 @@ year,cls,weight,place,name,school,source
 1997,AA,160,1,Brandon Shafer,Freedom Area,wpial
 1997,AA,171,1,Brock White,Burrell,wpial
 1997,AA,189,1,Ryan Haile,Jeannette,wpial
-1997,AA,HWT,1,Bob Sweany,Bethlehem-Center,wpial
+1997,AA,HWT,1,Bob Sweany,Beth-Center,wpial
 1996,AAA,103,1,Andy Migyanko,Trinity,wpial
 1996,AAA,112,1,Bill Smith,Greensburg Salem,wpial
 1996,AAA,119,1,Jeremy Hunter,McGuffey,wpial
@@ -771,15 +771,15 @@ year,cls,weight,place,name,school,source
 1996,AA,112,1,Wes Watson,West Greene,wpial
 1996,AA,119,1,Shawn Whyte,West Greene,wpial
 1996,AA,125,1,J.J. Lagoni,Chartiers-Houston,wpial
-1996,AA,130,1,Randy Mort,Bethlehem-Center,wpial
-1996,AA,135,1,Demetrius Davis,Bethlehem-Center,wpial
+1996,AA,130,1,Randy Mort,Beth-Center,wpial
+1996,AA,135,1,Demetrius Davis,Beth-Center,wpial
 1996,AA,140,1,Joel DesLauriers,Burrell,wpial
 1996,AA,145,1,Jason Wheeler,Chartiers-Houston,wpial
-1996,AA,152,1,Bill Meyers,Bethlehem-Center,wpial
+1996,AA,152,1,Bill Meyers,Beth-Center,wpial
 1996,AA,160,1,Sean Clark,Elderton,wpial
 1996,AA,171,1,Justin Tracanna,Jefferson-Morgan,wpial
 1996,AA,189,1,Aaron Gatten,Washington,wpial
-1996,AA,HWT,1,Bob Sweany,Bethlehem-Center,wpial
+1996,AA,HWT,1,Bob Sweany,Beth-Center,wpial
 1995,AAA,103,1,Bill Smith,Greensburg Salem,wpial
 1995,AAA,112,1,Jeremy Hunter,McGuffey,wpial
 1995,AAA,119,1,Teague Moore,North Allegheny,wpial
@@ -799,7 +799,7 @@ year,cls,weight,place,name,school,source
 1995,AA,125,1,Travis Makel,Jefferson-Morgan,wpial
 1995,AA,130,1,Chad Teasdale,Jefferson-Morgan,wpial
 1995,AA,135,1,Kevin Bednarski,Washington,wpial
-1995,AA,140,1,Brad Kime,Bethlehem-Center,wpial
+1995,AA,140,1,Brad Kime,Beth-Center,wpial
 1995,AA,145,1,Brandon Shafer,Freedom Area,wpial
 1995,AA,152,1,Jason Wheeler,Chartiers-Houston,wpial
 1995,AA,160,1,Jarrod Vezzi,South Fayette,wpial
@@ -822,7 +822,7 @@ year,cls,weight,place,name,school,source
 1994,AA,103,1,Todd Porter,Chartiers-Houston,wpial
 1994,AA,112,1,Justin Watson,West Greene,wpial
 1994,AA,119,1,Chris Tarr,Washington,wpial
-1994,AA,125,1,Brad Kime,Bethlehem-Center,wpial
+1994,AA,125,1,Brad Kime,Beth-Center,wpial
 1994,AA,130,1,Travis Makel,Jefferson-Morgan,wpial
 1994,AA,135,1,Brock Baird,Fort Cherry,wpial
 1994,AA,140,1,Brandon Teasdale,Jefferson-Morgan,wpial
@@ -846,8 +846,8 @@ year,cls,weight,place,name,school,source
 1993,AAA,189,1,Jason Robison,Hampton,wpial
 1993,AAA,HWT,1,Bill Closson,Plum,wpial
 1993,AA,103,1,Todd Porter,Chartiers-Houston,wpial
-1993,AA,112,1,Brad Kime,Bethlehem-Center,wpial
-1993,AA,119,1,Chad Kime,Bethlehem-Center,wpial
+1993,AA,112,1,Brad Kime,Beth-Center,wpial
+1993,AA,119,1,Chad Kime,Beth-Center,wpial
 1993,AA,125,1,Rick Thorne,Jefferson-Morgan,wpial
 1993,AA,130,1,Travis Makel,Jefferson-Morgan,wpial
 1993,AA,135,1,Justin Tracanna,Jefferson-Morgan,wpial
@@ -871,7 +871,7 @@ year,cls,weight,place,name,school,source
 1992,AAA,171,1,Mark Eckley,Thomas Jefferson,wpial
 1992,AAA,189,1,Jason Robison,Hampton,wpial
 1992,AAA,HWT,1,Wally Wickline,Moon,wpial
-1992,AA,103,1,Chad Kime,Bethlehem-Center,wpial
+1992,AA,103,1,Chad Kime,Beth-Center,wpial
 1992,AA,112,1,Chris Tarr,Washington,wpial
 1992,AA,119,1,Mark Villee,Fort Cherry,wpial
 1992,AA,125,1,Bill White,Jefferson-Morgan,wpial
@@ -902,7 +902,7 @@ year,cls,weight,place,name,school,source
 1991,AA,119,1,Bill White,Jefferson-Morgan,wpial
 1991,AA,125,1,Jay Allen,Avella,wpial
 1991,AA,130,1,Cary Kolat,Jefferson-Morgan,wpial
-1991,AA,135,1,Jim Yuratovich,Bethlehem-Center,wpial
+1991,AA,135,1,Jim Yuratovich,Beth-Center,wpial
 1991,AA,140,1,Eric Yanek,West Allegheny,wpial
 1991,AA,145,1,C.J. Lowry,Carmichaels,wpial
 1991,AA,152,1,George Penrod,Northgate,wpial
@@ -925,7 +925,7 @@ year,cls,weight,place,name,school,source
 1990,AAA,HWT,1,Wayne Anderson,Woodland Hills,wpial
 1990,AA,103,1,Matt Scripps,Burrell,wpial
 1990,AA,112,1,Dan Higgins,Chartiers-Houston,wpial
-1990,AA,119,1,Bill Mylan,Bethlehem-Center,wpial
+1990,AA,119,1,Bill Mylan,Beth-Center,wpial
 1990,AA,125,1,Cary Kolat,Jefferson-Morgan,wpial
 1990,AA,130,1,Rob Keys,Jefferson-Morgan,wpial
 1990,AA,135,1,Eric Yanek,West Allegheny,wpial
@@ -987,8 +987,8 @@ year,cls,weight,place,name,school,source
 1987,AAA,167,1,Eric Unger,Hopewell,wpial
 1987,AAA,185,1,Todd Smith,Derry,wpial
 1987,AAA,HWT,1,Kurt Angle,Mt. Lebanon,wpial
-1987,AAA,126,1,Todd Lowry,German,wpial
-1987,AAA,155,1,Jody Conti,Bethlehem-Center,wpial
+1987,AAA,126,1,Todd Lowry,German Township,wpial
+1987,AAA,155,1,Jody Conti,Beth-Center,wpial
 1987,AAA,167,1,Jon Schlegel,Richland,wpial
 1987,AAA,185,1,Bill Schlegel,Richland,wpial
 1987,AAA,HWT,1,Bill Kennedy,Carlynton,wpial
@@ -1007,12 +1007,12 @@ year,cls,weight,place,name,school,source
 1986,AA,98,1,Scott Marciniak,Northgate,wpial
 1986,AA,105,1,Vic Freeberg,Elderton,wpial
 1986,AA,112,1,Ralph Parise,Washington,wpial
-1986,AA,119,1,Dave Nelson,Bethlehem-Center,wpial
-1986,AA,126,1,Todd Lowry,German,wpial
+1986,AA,119,1,Dave Nelson,Beth-Center,wpial
+1986,AA,126,1,Todd Lowry,German Township,wpial
 1986,AA,132,1,Mike Wood,Elderton,wpial
 1986,AA,138,1,Domanick Snyder,Bentworth,wpial
 1986,AA,145,1,Randy Jackson,Washington,wpial
-1986,AA,155,1,Jody Conti,Bethlehem-Center,wpial
+1986,AA,155,1,Jody Conti,Beth-Center,wpial
 1986,AA,167,1,Rob Zajac,Northgate,wpial
 1986,AA,185,1,Eric Smith,Avella,wpial
 1986,AA,HWT,1,Mike Yorio,Northgate,wpial
@@ -1028,10 +1028,10 @@ year,cls,weight,place,name,school,source
 1985,AAA,167,1,Jim Walsh,Seneca Valley,wpial
 1985,AAA,185,1,Jeff Spinetti,Uniontown,wpial
 1985,AAA,HWT,1,Rob Benjamin,Canon-McMillan,wpial
-1985,AA,98,1,Dave Lowery,German,wpial
+1985,AA,98,1,Dave Lowery,German Township,wpial
 1985,AA,105,1,Dan Strope,Burgettstown,wpial
-1985,AA,112,1,Scott Rhodes,Bethlehem-Center,wpial
-1985,AA,119,1,Dave Nelson,Bethlehem-Center,wpial
+1985,AA,112,1,Scott Rhodes,Beth-Center,wpial
+1985,AA,119,1,Dave Nelson,Beth-Center,wpial
 1985,AA,126,1,Dave Ciafre,Riverview,wpial
 1985,AA,132,1,Derrick Hall,Jeannette,wpial
 1985,AA,138,1,Domanick Snyder,Bentworth,wpial
@@ -1052,10 +1052,10 @@ year,cls,weight,place,name,school,source
 1984,AAA,167,1,Mike Blair,Keystone Oaks,wpial
 1984,AAA,185,1,Ken Hackman,Derry,wpial
 1984,AAA,HWT,1,Ray Huckstein,North Allegheny,wpial
-1984,AA,98,1,Dave Kriebel,Bethlehem-Center,wpial
+1984,AA,98,1,Dave Kriebel,Beth-Center,wpial
 1984,AA,105,1,Rod Fuqua,Washington,wpial
 1984,AA,112,1,Dave Ciafre,Riverview,wpial
-1984,AA,119,1,Marc Bartolomucci,Bethlehem-Center,wpial
+1984,AA,119,1,Marc Bartolomucci,Beth-Center,wpial
 1984,AA,126,1,Derrick Hall,Jeannette,wpial
 1984,AA,132,1,Phil DeAugustino,West Mifflin South,wpial
 1984,AA,138,1,Lance Phaturos,Riverview,wpial
@@ -1079,7 +1079,7 @@ year,cls,weight,place,name,school,source
 1983,AA,98,1,Dave Williams,Carmichaels,wpial
 1983,AA,105,1,Dave Wisniewski,Northgate,wpial
 1983,AA,112,1,Rich Harris,Avella,wpial
-1983,AA,119,1,Marc Bartolomucci,Bethlehem-Center,wpial
+1983,AA,119,1,Marc Bartolomucci,Beth-Center,wpial
 1983,AA,126,1,Warren Terhorst,Fort Cherry,wpial
 1983,AA,132,1,Jeff Frazier,Washington,wpial
 1983,AA,138,1,Dean Simonelli,Avella,wpial
@@ -1102,7 +1102,7 @@ year,cls,weight,place,name,school,source
 1982,AAA,HWT,1,Bob Riley,North Allegheny,wpial
 1982,AA,98,1,Gary Bassinger,Jefferson-Morgan,wpial
 1982,AA,105,1,Larry LeGrand,South Park,wpial
-1982,AA,112,1,Marc Bartolomucci,Bethlehem-Center,wpial
+1982,AA,112,1,Marc Bartolomucci,Beth-Center,wpial
 1982,AA,119,1,Scott Heim,Richland,wpial
 1982,AA,126,1,Ed Shriver,Waynesburg Central,wpial
 1982,AA,132,1,Todd Eddy,Waynesburg Central,wpial
@@ -1171,7 +1171,7 @@ year,cls,weight,place,name,school,source
 1979,AAA,185,1,Darrell Patterson,Canon-McMillan,wpial
 1979,AAA,HWT,1,Todd Campbell,Valley,wpial
 1979,AA,98,1,Dave Stewart,Waynesburg Central,wpial
-1979,AA,105,1,Marty Marish,Bethlehem-Center,wpial
+1979,AA,105,1,Marty Marish,Beth-Center,wpial
 1979,AA,112,1,Rich Bongiorni,Burgettstown,wpial
 1979,AA,119,1,Joe Throckmorton,Waynesburg Central,wpial
 1979,AA,126,1,Andy Pordash,Bentworth,wpial
@@ -1194,10 +1194,10 @@ year,cls,weight,place,name,school,source
 1978,AAA,167,1,Kurt Hertz,North Allegheny,wpial
 1978,AAA,185,1,Wayne Bloom,Seneca Valley,wpial
 1978,AAA,HWT,1,Leo Wisniewski,Fox Chapel,wpial
-1978,AA,98,1,Tim Nelson,Bethlehem-Center,wpial
+1978,AA,98,1,Tim Nelson,Beth-Center,wpial
 1978,AA,105,1,Kevin Brown,McGuffey,wpial
 1978,AA,112,1,Bob Salvadore,Richland,wpial
-1978,AA,119,1,Lloyd Johnston,Bethlehem-Center,wpial
+1978,AA,119,1,Lloyd Johnston,Beth-Center,wpial
 1978,AA,126,1,Tim Heim,Richland,wpial
 1978,AA,132,1,Jeff Gordon,Avella,wpial
 1978,AA,138,1,Gary Havelka,Burgettstown,wpial
@@ -1219,14 +1219,14 @@ year,cls,weight,place,name,school,source
 1977,AAA,185,1,Wayne Bloom,Seneca Valley,wpial
 1977,AAA,HWT,1,Leo Wisniewski,Fox Chapel,wpial
 1977,AA,98,1,Kevin Brown,McGuffey,wpial
-1977,AA,112,1,Lloyd Johnston,Bethlehem-Center,wpial
+1977,AA,112,1,Lloyd Johnston,Beth-Center,wpial
 1977,AA,119,1,Jeff Gordon,Avella,wpial
 1977,AA,126,1,Rob Bogo,Avella,wpial
 1977,AA,132,1,Gary Havelka,Burgettstown,wpial
 1977,AA,138,1,Ted Cawoski,Greensburg Central Catholic,wpial
 1977,AA,145,1,Chad Menzie,Greensburg Central Catholic,wpial
 1977,AA,155,1,John Chendy,Ligonier Valley,wpial
-1977,AA,167,1,Charles Colburn,Bethlehem-Center,wpial
+1977,AA,167,1,Charles Colburn,Beth-Center,wpial
 1977,AA,185,1,Jess Caravaggio,Greensburg Central Catholic,wpial
 1977,AA,HWT,1,Jim Covert,Freedom Area,wpial
 1976,AAA,98,1,Curt Ellis,Washington,wpial
@@ -1556,7 +1556,7 @@ year,cls,weight,place,name,school,source
 1954,single,138,1,Nick Petronka,Washington,wpial
 1954,single,145,1,Bill Gallo,Trinity,wpial
 1954,single,154,1,Luis Craig,Trinity,wpial
-1954,single,165,1,George Terembes,Jefferson,wpial
+1954,single,165,1,George Terembes,Jefferson-Morgan,wpial
 1954,single,185,1,Gene Smittle,Canonsburg,wpial
 1953,single,88,1,Paul Shazer,Uniontown,wpial
 1953,single,95,1,Richard Bongiorini,Burgettstown,wpial
@@ -1600,7 +1600,7 @@ year,cls,weight,place,name,school,source
 1950,single,112,1,Ronald Roman,Canonsburg,wpial
 1950,single,120,1,Robert Cadman,Munhall,wpial
 1950,single,127,1,Joseph DeVito,Farrell,wpial
-1950,single,133,1,Vincent Cottle,Jefferson,wpial
+1950,single,133,1,Vincent Cottle,Jefferson-Morgan,wpial
 1950,single,138,1,Donald Young,Washington,wpial
 1950,single,145,1,Joseph Solomon,Canonsburg,wpial
 1950,single,154,1,Donald Haney,Canonsburg,wpial
@@ -1619,7 +1619,7 @@ year,cls,weight,place,name,school,source
 1949,single,168,1,Wayne Cimino,Chartiers Township,wpial
 1949,single,185,1,Cornelius Mullins,Chartiers Township,wpial
 1948,single,88,1,Ronald Roman,Canonsburg,wpial
-1948,single,95,1,Enrico Noble,Greensburg,wpial
+1948,single,95,1,Enrico Noble,Greensburg Salem,wpial
 1948,single,103,1,James Bencivengo,Farrell,wpial
 1948,single,112,1,Anthony Gizoni,Washington,wpial
 1948,single,120,1,Harold Miller,Washington,wpial
@@ -1654,7 +1654,7 @@ year,cls,weight,place,name,school,source
 1946,single,154,1,Joseph Ogrodowski,Canonsburg,wpial
 1946,single,165,1,William Scott,Waynesburg,wpial
 1946,single,185,1,William George,Waynesburg,wpial
-1945,single,88,1,Bill Grimm,Greensburg,wpial
+1945,single,88,1,Bill Grimm,Greensburg Salem,wpial
 1945,single,95,1,Bill DePaoli,Chartiers Township,wpial
 1945,single,103,1,George Lewis,Farrell,wpial
 1945,single,112,1,Eugene Bowman,Canonsburg,wpial
@@ -1662,7 +1662,7 @@ year,cls,weight,place,name,school,source
 1945,single,127,1,Victor DeVito,Farrell,wpial
 1945,single,133,1,Achilles Mouganis,Farrell,wpial
 1945,single,138,1,David Solomon,Canonsburg,wpial
-1945,single,145,1,Joseph Yourchek,Jefferson,wpial
+1945,single,145,1,Joseph Yourchek,Jefferson-Morgan,wpial
 1945,single,154,1,William George,Waynesburg,wpial
 1945,single,165,1,John Bralich,Farrell,wpial
 1945,single,185,1,John Mullins,Chartiers Township,wpial
@@ -1677,9 +1677,9 @@ year,cls,weight,place,name,school,source
 1944,single,145,1,Tony George,Canonsburg,wpial
 1944,single,154,1,James Cooklis,Canonsburg,wpial
 1944,single,165,1,John Mullins,Chartiers Township,wpial
-1944,single,185,1,Robert Flath,Greensburg,wpial
+1944,single,185,1,Robert Flath,Greensburg Salem,wpial
 1943,single,88,1,Aldo Zanoni,Canonsburg,wpial
-1943,single,95,1,Charles Barno,Jefferson,wpial
+1943,single,95,1,Charles Barno,Jefferson-Morgan,wpial
 1943,single,103,1,Charles Patterson,Waynesburg,wpial
 1943,single,112,1,Larry Dudzik,Canonsburg,wpial
 1943,single,120,1,James Conklin,Waynesburg,wpial
@@ -1706,7 +1706,7 @@ year,cls,weight,place,name,school,source
 1941,single,95,1,James Conklin,Waynesburg,wpial
 1941,single,105,1,Edward Champ,Canonsburg,wpial
 1941,single,115,1,Mike Kusturis,Canonsburg,wpial
-1941,single,125,1,Ralph Abraham,Greensburg,wpial
+1941,single,125,1,Ralph Abraham,Greensburg Salem,wpial
 1941,single,135,1,Paul Bronofsky,Waynesburg,wpial
 1941,single,145,1,Ernest Closser,Waynesburg,wpial
 1941,single,155,1,John Walter,West View,wpial
@@ -1727,30 +1727,30 @@ year,cls,weight,place,name,school,source
 1939,single,105,1,George Custer,Canonsburg,wpial
 1939,single,115,1,William Stanley,Canonsburg,wpial
 1939,single,125,1,Andrew Puchany,Canonsburg,wpial
-1939,single,135,1,Thomas Abraham,Greensburg,wpial
+1939,single,135,1,Thomas Abraham,Greensburg Salem,wpial
 1939,single,145,1,Theodore Sarafin,Trafford,wpial
 1939,single,155,1,John Abraham,Canonsburg,wpial
 1939,single,165,1,Malvin Podrasky,Canonsburg,wpial
 1939,single,185,1,Tony Mazza,Canonsburg,wpial
-1938,single,85,1,Sandy DeMarino,Greensburg,wpial
+1938,single,85,1,Sandy DeMarino,Greensburg Salem,wpial
 1938,single,95,1,George Custer,Canonsburg,wpial
 1938,single,105,1,George Phillips,Dormont,wpial
 1938,single,115,1,Andrew Puchany,Canonsburg,wpial
 1938,single,125,1,Edward Pappert,Dormont,wpial
-1938,single,135,1,John Metzler,Greensburg,wpial
+1938,single,135,1,John Metzler,Greensburg Salem,wpial
 1938,single,145,1,Virgil Volmassoni,Trafford,wpial
 1938,single,155,1,Fred Paul,Canonsburg,wpial
-1938,single,165,1,Don Bitler,Greensburg,wpial
+1938,single,165,1,Don Bitler,Greensburg Salem,wpial
 1938,single,185,1,Philip Ahwesh,Canonsburg,wpial
 1937,single,85,1,William Stanley,Canonsburg,wpial
 1937,single,95,1,Andrew Puchany,Canonsburg,wpial
 1937,single,105,1,John Mikos,Canonsburg,wpial
 1937,single,115,1,Theodore Blyshak,Canonsburg,wpial
-1937,single,125,1,John Metzler,Greensburg,wpial
+1937,single,125,1,John Metzler,Greensburg Salem,wpial
 1937,single,135,1,Tom Davies,Carmichaels,wpial
-1937,single,145,1,Mike Abraham,Greensburg,wpial
+1937,single,145,1,Mike Abraham,Greensburg Salem,wpial
 1937,single,155,1,Jim Hawk,Turtle Creek,wpial
-1937,single,165,1,George Kline,Greensburg,wpial
+1937,single,165,1,George Kline,Greensburg Salem,wpial
 1937,single,185,1,Stanley Walkowicz,Canonsburg,wpial
 1936,single,85,1,Andrew Puchany,Canonsburg,wpial
 1936,single,95,1,Raymond Koon,Trafford,wpial

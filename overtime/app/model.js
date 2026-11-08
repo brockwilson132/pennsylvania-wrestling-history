@@ -204,6 +204,15 @@ var OT = window.OT || (window.OT = {});
   /* school → district, school → region (majority, per scope), district → regions (majority, per scope) */
   const SCHOOL_D = new Map(), SCHOOL_BY_SLUG = new Map();
   d3.groups(APP, (r) => r.sch).forEach(([s, rs]) => { SCHOOL_D.set(s, d3.rollups(rs, (v) => v.length, (r) => r.d).sort((a, b) => b[1] - a[1])[0][0]); SCHOOL_BY_SLUG.set(slug(s), s); });
+  /* lineage (overtime/lineage.js): a school that split counts as history of each school it split into. schIs: does a row
+     filed under school sch belong to school id's page; listSch: school names for a list, a predecessor listed through its
+     successors (its seasons are theirs) */
+  const LINEAGE = window.OT_LINEAGE || {};
+  const schIs = (sch, id) => sch === id || (LINEAGE[sch] ? LINEAGE[sch].includes(id) : false);
+  const predOf = (id) => Object.keys(LINEAGE).filter((p) => LINEAGE[p].includes(id));
+  /* a season's standing of a unit; a school with no entry that season takes its predecessor's (they never overlap) */
+  const byOf = (S, u) => S.by[u.kind].get(u.id) || (u.kind === 'school' ? predOf(u.id).map((p) => S.by.school.get(p)).find(Boolean) : undefined);
+  const listSch = (names) => Array.from(new Set(names.flatMap((s) => LINEAGE[s] || [s])));
   const SREG = new Map(), DREG = new Map();
   const schoolRegion = (s) => { const k = state.cls + '|' + s; if (SREG.has(k)) return SREG.get(k); const rs = APP.filter((r) => r.sch === s && (state.cls === 'ALL' || r.k === state.cls)).map((r) => regionOf(r)).filter(Boolean); const v = rs.length ? d3.rollups(rs, (x) => x.length, (x) => x).sort((a, b) => b[1] - a[1])[0][0] : null; SREG.set(k, v); return v; };
   const distRegions = (d) => { const k = state.cls + '|' + d; if (DREG.has(k)) return DREG.get(k); const rs = APP.filter((r) => r.d === d && actScope(r) && (state.cls !== 'ALL' || r.year >= 1974)).map((r) => regionOf(r)).filter(Boolean); const tot = rs.length || 1; const v = d3.rollups(rs, (x) => x.length, (x) => x).sort((a, b) => b[1] - a[1]).filter((x) => x[1] >= 0.05 * tot).map((x) => x[0]); DREG.set(k, v); return v; };
@@ -229,8 +238,8 @@ var OT = window.OT || (window.OT = {});
     district: (d) => ({ kind: 'district', id: +d, name: 'District ' + d, sub: DISTRICTS[d], href: '#district/' + d }),
     school: (name) => ({ kind: 'school', id: name, name, d: schoolDistrict(name), get region() { return schoolRegion(name); }, href: '#school/' + slug(name) }),
   };
-  const inUnit = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (r) => regionOf(r) === u.id : u.kind === 'district' ? (r) => r.d === u.id : (r) => r.sch === u.id;
-  const unitRows = (u) => (u.kind === 'school' ? memo('sr|' + wkey() + '|' + u.id, () => APP.filter((r) => r.sch === u.id && schoolScope(r))) : ROWS().filter(inUnit(u)));
+  const inUnit = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (r) => regionOf(r) === u.id : u.kind === 'district' ? (r) => r.d === u.id : (r) => schIs(r.sch, u.id);
+  const unitRows = (u) => (u.kind === 'school' ? memo('sr|' + wkey() + '|' + u.id, () => APP.filter((r) => schIs(r.sch, u.id) && schoolScope(r))) : ROWS().filter(inUnit(u)));
   const regionsInScope = () => regionOrder().filter((c) => ROWS().some((r) => regionOf(r) === c));
 
   /* seasons */
@@ -260,7 +269,7 @@ var OT = window.OT || (window.OT = {});
   function unitStats(u, p) {
     const key = wkey() + '|' + u.kind + '|' + u.id + (p ? '|' + p.kind + ':' + p.id : ''); if (STATS.has(key)) return STATS.get(key);
     const [first0, last] = yearsInScope(), seasons = []; const nSeasons = seasonsInScope().length;
-    seasonsInScope().forEach((S) => { const t = u.kind === 'state' ? { pts: S.avail, share: 1, rank: 1, rows: S.rows, titles: S.lineup.length } : S.by[u.kind].get(u.id); if (t) seasons.push({ year: S.year, S, t, pts: t.pts, share: t.share, rank: t.rank }); });
+    seasonsInScope().forEach((S) => { const t = u.kind === 'state' ? { pts: S.avail, share: 1, rank: 1, rows: S.rows, titles: S.lineup.length } : byOf(S, u); if (t) seasons.push({ year: S.year, S, t, pts: t.pts, share: t.share, rank: t.rank }); });
     const apps = p ? unitRows(u).filter(inUnit(p)) : unitRows(u), rows = apps.filter((r) => r.place), places = placeCounts(rows);
     // per-season share of the scope's available points, with off-class rows discounted
     const sh = new Map();
@@ -285,7 +294,7 @@ var OT = window.OT || (window.OT = {});
     const rows = p ? unitRows(p) : ROWS(); let units;
     if (kind === 'region') units = regionsInScope().filter((c) => rows.some((r) => regionOf(r) === c)).map(U.region);
     else if (kind === 'district') units = d3.range(1, 13).filter((d) => rows.some((r) => r.d === d)).map(U.district);
-    else units = Array.from(new Set(rows.filter((r) => r.place).map((r) => r.sch))).filter((s) => state.cls === 'ALL' || homeOf(s) === state.cls).map(U.school);
+    else units = listSch(rows.filter((r) => r.place).map((r) => r.sch)).filter((s) => state.cls === 'ALL' || homeOf(s) === state.cls).map(U.school);
     const out = units.map((x) => unitStats(x, p && p.kind !== 'state' ? p : null)).filter((o) => o.medals);
     out.slice().sort((a, b) => b.era - a.era).forEach((o, i) => { o.eraRank = i + 1; });
     out.slice().sort((a, b) => b.power - a.power).forEach((o, i) => { o.powerRank = i + 1; });
@@ -468,7 +477,7 @@ var OT = window.OT || (window.OT = {});
   const attCmp = (x, y) => attValue(y) - attValue(x) || attReg(y) - attReg(x) || y.dP - x.dP || (y.peak || 0) - (x.peak || 0) || x.name.localeCompare(y.name);
   const personClass = (p) => (p.cls === 'AAA' || p.cls === 'AA' ? p.cls : p.cls === 'single' ? lineage(p.sch) : homeOf(p.sch));
   const personRegion = (p) => regionOf({ cls: personClass(p), region: FIVE.includes(p.reg) ? p.reg : null, year: p.y1, d: p.d, lvl: 'regional' });
-  const personIn = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (p) => personRegion(p) === u.id : u.kind === 'district' ? (p) => p.d === u.id : (p) => p.sch === u.id;
+  const personIn = (u) => u.kind === 'state' ? () => true : u.kind === 'region' ? (p) => personRegion(p) === u.id : u.kind === 'district' ? (p) => p.d === u.id : (p) => schIs(p.sch, u.id);
   const personScope = (p) => { if (state.cls !== 'ALL' && personClass(p) !== state.cls) return false; const [a, b] = yearsWindow(); if (p.y1 < a || p.y0 > b) return false;
     const f = state.f; return (!f.weights.length || f.weights.includes(p.tw)) && (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); };
   function allTimeTeams(u, depth = 3) { if (!PEOPLE) return null; return memo('att|' + wkey() + '|' + u.kind + '|' + u.id + '|' + depth, () => allTimeTeams0(u, depth)); }
@@ -528,7 +537,7 @@ var OT = window.OT || (window.OT = {});
   /* ---- lower-level dominance: a district's (or region's, or school's) own tournament results, never mixed with state ---- */
   const lowerIn = (r) => actScope(r) && inWindow(r.year) && passFilters(r);
   const lowerSchoolIn = (r) => homeScope(r) && inWindow(r.year) && passFilters(r);
-  const lowerUnitRows = (u, lvl) => memo('lur|' + wkey() + '|' + lvl + '|' + u.kind + '|' + u.id, () => LOWER.filter((r) => r.lvl === lvl && (u.kind === 'school' ? lowerSchoolIn(r) : lowerIn(r)) && (u.kind === 'district' ? r.d === u.id : u.kind === 'region' ? regionOf(r) === u.id : u.kind === 'school' ? r.sch === u.id : true)));
+  const lowerUnitRows = (u, lvl) => memo('lur|' + wkey() + '|' + lvl + '|' + u.kind + '|' + u.id, () => LOWER.filter((r) => r.lvl === lvl && (u.kind === 'school' ? lowerSchoolIn(r) : lowerIn(r)) && (u.kind === 'district' ? r.d === u.id : u.kind === 'region' ? regionOf(r) === u.id : u.kind === 'school' ? schIs(r.sch, u.id) : true)));
   const LAV = new Map(); LOWER.forEach((r) => { if (!r.place) return; const cont = r.lvl === 'district' ? r.d : r.region; const k = `${r.lvl}|${r.year}|${cont}|${r.k}`; LAV.set(k, (LAV.get(k) || 0) + r.pts); });
   const lowerAvail = (lvl, year, cont) => (state.cls === 'ALL' ? ['AAA', 'AA'].reduce((a, c) => a + (LAV.get(`${lvl}|${year}|${cont}|${c}`) || 0), 0) : LAV.get(`${lvl}|${year}|${cont}|${state.cls}`) || 0);
   function lowerStats(u, lvl, rows) {
@@ -537,8 +546,8 @@ var OT = window.OT || (window.OT = {});
     const offRows = state.cls === 'ALL' ? [] : meds.filter(isOff);
     return { u, lvl, rows: meds, apps: rows, places: placeCounts(meds), medals: meds.length, titles: meds.filter((r) => r.place === 1).length, pts: Math.round(d3.sum(meds, wpts)), era: 100 * era, power: 100 * power, offMedals: offRows.length, offCls: offRows.length ? offRows[0].cls : null, offClass: OFF_CLASS, first: meds.length ? d3.min(meds, (r) => r.year) : null, last: meds.length ? d3.max(meds, (r) => r.year) : null };
   }
-  const lowerRankings = (u, lvl, kind) => { const rows = lowerUnitRows(u, lvl); const g = kind === 'region' ? d3.groups(rows, (r) => regionOf(r)).filter(([c]) => c && regionOrder().includes(c)).map(([c, v]) => lowerStats(U.region(c), lvl, v)) : kind === 'district' ? d3.groups(rows, (r) => r.d).filter(([d]) => d).map(([d, v]) => lowerStats(U.district(d), lvl, v)) : Array.from(new Set(rows.map((r) => r.sch))).filter((s) => state.cls === 'ALL' || lowerHome(s) === state.cls).map((s) => lowerStats(U.school(s), lvl, lowerUnitRows(U.school(s), lvl).filter((r) => u.kind === 'district' ? r.d === u.id : u.kind === 'region' ? regionOf(r) === u.id : true))); return g.filter((o) => o.medals).sort((a, b) => b.era - a.era || b.pts - a.pts); };
-  const lowerTeamRows = (u, lvl) => LTEAMS.filter((t) => t.lvl === lvl && inWindow(t.year) && (state.cls === 'ALL' || t.cls === state.cls || (t.cls === 'single' && (LIN.get(t.sch) || 'AAA') === state.cls)) && (u.kind === 'district' ? (t.unit === 'D' + u.id || t.unit.startsWith('D' + u.id + '_') || t.unit.replace('D', '').split('-').includes(String(u.id)) && t.unit.includes('-')) : u.kind === 'region' ? t.unit === u.id : u.kind === 'school' ? t.sch === u.id : true));
+  const lowerRankings = (u, lvl, kind) => { const rows = lowerUnitRows(u, lvl); const g = kind === 'region' ? d3.groups(rows, (r) => regionOf(r)).filter(([c]) => c && regionOrder().includes(c)).map(([c, v]) => lowerStats(U.region(c), lvl, v)) : kind === 'district' ? d3.groups(rows, (r) => r.d).filter(([d]) => d).map(([d, v]) => lowerStats(U.district(d), lvl, v)) : listSch(rows.map((r) => r.sch)).filter((s) => state.cls === 'ALL' || lowerHome(s) === state.cls).map((s) => lowerStats(U.school(s), lvl, lowerUnitRows(U.school(s), lvl).filter((r) => u.kind === 'district' ? r.d === u.id : u.kind === 'region' ? regionOf(r) === u.id : true))); return g.filter((o) => o.medals).sort((a, b) => b.era - a.era || b.pts - a.pts); };
+  const lowerTeamRows = (u, lvl) => LTEAMS.filter((t) => t.lvl === lvl && inWindow(t.year) && (state.cls === 'ALL' || t.cls === state.cls || (t.cls === 'single' && (LIN.get(t.sch) || 'AAA') === state.cls)) && (u.kind === 'district' ? (t.unit === 'D' + u.id || t.unit.startsWith('D' + u.id + '_') || t.unit.replace('D', '').split('-').includes(String(u.id)) && t.unit.includes('-')) : u.kind === 'region' ? t.unit === u.id : u.kind === 'school' ? schIs(t.sch, u.id) : true));
   const lowerCoverage = (u, lvl) => { const ks = LM.cov.map((c) => c.split('|')).filter((p) => p[0] === lvl && (state.cls === 'ALL' || p[2] === state.cls || p[2] === 'single') && (u.kind === 'district' ? (p[3] === 'D' + u.id || p[3].startsWith('D' + u.id + '_') || (p[3].includes('-') && p[3].replace('D', '').split('-').includes(String(u.id)))) : u.kind === 'region' ? p[3] === u.id : true)); const ys = Array.from(new Set(ks.map((p) => +p[1]))).sort((a, b) => a - b); return { n: ks.length, years: ys, first: ys[0], last: ys[ys.length - 1] }; };
   /* a state wrestler's district and regional rows: exact key, then last name + school + season as a fallback */
   /* built on first use (a wrestler page), not at startup: indexing every district and regional row costs a phone ~1 s */
@@ -566,7 +575,7 @@ var OT = window.OT || (window.OT = {});
     PEOPLE = D.p.map(([name, si, y0, sp, d, best, peak, tw, sP, rP, dP, sQ, rQ, sres, rB, dB, rT, dT, reg, cl, ws, pk2, sv]) => { const sch = D.s[si]; return { name, sch, y0, y1: y0 + sp, d, lvl: LVLN[Math.floor(best / 10)], place: best % 10, peak: peak || null, slug: wSlug(name, sch) + (cStart(nkey(name) + '|' + sch, y0) ? '-' + cStart(nkey(name) + '|' + sch, y0) : ''), key: ((k) => TRF[k] || k)(nkey(name) + '|' + sch + (cStart(nkey(name) + '|' + sch, y0) ? '#' + cStart(nkey(name) + '|' + sch, y0) : '')),   /* a transfer's key is his first school's, like wKey */ q: (name + ' ' + sch).toLowerCase(), tw: tw != null ? STD[tw].k : null, sP: sP || 0, rP: rP || 0, dP: dP || 0, sQ: sQ || 0, rQ: rQ || 0, sres: (sres || []).map((v) => ({ year: Math.floor(v / 10), place: v % 10 })), rB: rB || 0, dB: dB || 0, rT: rT || 0, dT: dT || 0, reg: reg || null, cls: cl === 0 ? 'AAA' : cl === 1 ? 'AA' : cl === 2 ? 'single' : null, ws: ws || 0, pk2: pk2 || null, sv: sv || 0 }; });
     PEOPLE_BY = new Map(PEOPLE.map((p) => [p.slug, p])); return PEOPLE; }));
   const peopleLoaded = () => !!PEOPLE;
-  const peopleOf = (sch) => (PEOPLE || []).filter((p) => p.sch === sch).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
+  const peopleOf = (sch) => (PEOPLE || []).filter((p) => schIs(p.sch, sch)).sort((a, b) => (b.peak || 0) - (a.peak || 0) || b.y1 - a.y1);
   const searchPeople = (q, n = 60, all = false) => { const t = q.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length || !PEOPLE) return []; const out = []; const f = state.f, geo = (p) => all || (!f.districts.length || f.districts.includes(p.d)) && (!f.schools.length || f.schools.includes(p.sch)) && (!f.regions.length || f.regions.includes(personRegion(p))); for (const p of PEOPLE) { if (t.every((x) => p.q.includes(x)) && geo(p)) { out.push(p); if (out.length >= 2000) break; } } return out.sort((a, b) => (b.peak || 0) - (a.peak || 0)).slice(0, n).concat([]).map((p) => p); };
   const personOf = (sl) => (PEOPLE_BY ? PEOPLE_BY.get(sl) || null : null);
   const PW = new Map();
@@ -597,5 +606,5 @@ var OT = window.OT || (window.OT = {});
     const pass = (years, n) => Promise.all(years.flatMap((y) => [loadLower(y, 'district'), loadLower(y, 'regional'), loadLower(y, 'section')])).then(() => { W.lower = mergeLower(W, years);
       const more = careerYears(W); const add = more.filter((y) => !years.includes(y)); if (add.length && n < 2) return pass(years.concat(add).sort((a, b) => a - b), n + 1); W.full = true; W.span = years; return true; });
     return pass(careerYears({ ...W, lower: W.lower0 }), 0); };
-  Object.assign(OT, { meetings, styleMix, styleOf, sosYear, loadUpsets, upsets, wNum, TEAMSCORES_FROM: 1976, loadH2HS, h2hsOf, h2hsLoaded, dualOdds, sectionFor, sectionCovered, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, attValue, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
+  Object.assign(OT, { LINEAGE, schIs, predOf, listSch, byOf, meetings, styleMix, styleOf, sosYear, loadUpsets, upsets, wNum, TEAMSCORES_FROM: 1976, loadH2HS, h2hsOf, h2hsLoaded, dualOdds, sectionFor, sectionCovered, LSEC, clearCaches, withSub, TEAMSCORES, rSlug, lvlsFor, pageLvl, LOWER, lowerHome, spanText, regionMembers, districtRegionSpans, districtMovers, actScope, homeScope, splitName, ATT_ALPHA, attValue, peopleOf, searchPeople, setLvl, levelRows, levelStats, levelRankings, lowerWrestlersOf, rtgOf, loadPeople, peopleLoaded, personOf, getWrestler, fullCareer, careerYears, LFIELD, careerOf, ratingOf, fieldOf, fieldAt, rtg10, seasonRatings, careerRating, bestWins, yearsOf, RTG_META, loadSOS, sosLoaded, sosBracket, lowerSrc, bkey, parseBkey, bracketField, SB, LTEAMS, lowerAvail, lowerIn, lowerUnitRows, lowerStats, lowerRankings, lowerTeamRows, lowerCoverage, lowerFor, lowerWrestler, lowerLoaded, loadLower, lowerCovered, advOf, dregOf, unitLabel, lowerUnitFor, COV, apts, toggleFilter, clearFilters, clearAll, nFilters, passFilters, inScopeNoWin, careerRows, OFF_CLASS, wt, wpts, isOff, homeOf, setWin, wkey, yearsWindow, inWindow, windowLabel, FIVE, regionOf, regionOrder, schoolRegion, distRegions, bracketOf, esc, slug, nkey, fmt, ordinal, canon, wShort, DISTRICTS, REGIONS, REGION_ORDER, state, setCls, clsName, PTS, APP, ROWS, YEARS, STD, stdOf, placeCounts, LOWER, lowerRows, SCHOOL_BY_SLUG, SCHOOL_D, schoolDistrict, classHistory, U, unitRows, regionsInScope, seasonOf, seasonsInScope, yearsInScope, unitStats, rankings, WRESTLER, wrestlerHref, wrestlersOf, GRADE_L, gradeSlot, allTimeTeams, unitByKind, wKey });
 })();

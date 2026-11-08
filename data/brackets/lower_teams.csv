@@ -23,7 +23,7 @@ district,1938_D6-9_single,1938,single,D6-9,4,7.0,Blairsville,BLV
 district,1938_D6-9_single,1938,single,D6-9,5,4.0,Lock Haven,LKHV
 district,1938_D6-9_single,1938,single,D6-9,6,3.0,State College,SC
 district,1938_D7_single,1938,single,D7,1,33.0,Canonsburg,CNB
-district,1938_D7_single,1938,single,D7,2,27.0,Greensburg,GRNB
+district,1938_D7_single,1938,single,D7,2,27.0,Greensburg Salem,GRNB
 district,1938_D7_single,1938,single,D7,3,20.0,Trafford,TRFD
 district,1938_D7_single,1938,single,D7,4,11.0,Dormont,DRMT
 district,1938_D7_single,1938,single,D7,5,8.0,Cumberland Township,CLTP
@@ -67,7 +67,7 @@ district,1939_D6-9_single,1939,single,D6-9,6,0.0,Tyrone,TYR
 district,1939_D7_single,1939,single,D7,1,40.0,Canonsburg,CNB
 district,1939_D7_single,1939,single,D7,2,20.0,Waynesburg Central,WYC
 district,1939_D7_single,1939,single,D7,3,16.0,Trafford,TRFD
-district,1939_D7_single,1939,single,D7,4,14.0,Greensburg,GRNB
+district,1939_D7_single,1939,single,D7,4,14.0,Greensburg Salem,GRNB
 district,1939_D7_single,1939,single,D7,5,12.0,Cumberland Township,CLTP
 district,1939_D7_single,1939,single,D7,6,4.0,Elizabeth,ELZ
 district,1939_D7_single,1939,single,D7,7,3.0,Mount Lebanon,ML
@@ -118,7 +118,7 @@ district,1940_D7_single,1940,single,D7,2,32.0,Waynesburg Central,WYC
 district,1940_D7_single,1940,single,D7,3,12.0,Trafford,TRFD
 district,1940_D7_single,1940,single,D7,4,9.0,Cumberland Township,CLTP
 district,1940_D7_single,1940,single,D7,5,8.0,Mapletown,MPT
-district,1940_D7_single,1940,single,D7,6,6.0,Greensburg,GRNB
+district,1940_D7_single,1940,single,D7,6,6.0,Greensburg Salem,GRNB
 district,1940_D7_single,1940,single,D7,7,5.0,Monessen,MNSN
 district,1940_D7_single,1940,single,D7,8,1.0,Carnegie,CRNG
 district,1940_D7_single,1940,single,D7,8,1.0,German Township,GMTW
@@ -172,7 +172,7 @@ district,1941_D7_single,1941,single,D7,1,29.0,Canonsburg,CNB
 district,1941_D7_single,1941,single,D7,1,29.0,Waynesburg Central,WYC
 district,1941_D7_single,1941,single,D7,3,21.0,West View,WSTV
 district,1941_D7_single,1941,single,D7,4,9.0,Cumberland Township,CLTP
-district,1941_D7_single,1941,single,D7,4,9.0,Greensburg,GRNB
+district,1941_D7_single,1941,single,D7,4,9.0,Greensburg Salem,GRNB
 district,1941_D7_single,1941,single,D7,6,3.0,Monessen,MNSN
 district,1941_D7_single,1941,single,D7,7,1.0,German Township,GMTW
 district,1941_D7_single,1941,single,D7,8,0.0,Carnegie,CRNG
@@ -215,7 +215,7 @@ district,1942_D6-9_single,1942,single,D6-9,8,2.0,Lewistown,LWST
 district,1942_D6-9_single,1942,single,D6-9,9,0.0,Emporium Borough,EMP
 district,1942_D7_single,1942,single,D7,1,36.0,Waynesburg Central,WYC
 district,1942_D7_single,1942,single,D7,2,28.0,Canonsburg,CNB
-district,1942_D7_single,1942,single,D7,3,22.0,Greensburg,GRNB
+district,1942_D7_single,1942,single,D7,3,22.0,Greensburg Salem,GRNB
 district,1942_D7_single,1942,single,D7,4,9.0,West View,WSTV
 district,1942_D7_single,1942,single,D7,5,5.0,Washington,WSH
 district,1942_D7_single,1942,single,D7,6,4.0,Cumberland Township,CLTP
@@ -224,7 +224,7 @@ district,1942_D7_single,1942,single,D7,8,2.0,German Township,GMTW
 district,1942_D7_single,1942,single,D7,9,0.0,Carnegie,CRNG
 district,1942_D7_single,1942,single,D7,9,0.0,Chartiers Township,CHRT
 district,1942_D7_single,1942,single,D7,9,0.0,Dormont,DRMT
-district,1942_D7_single,1942,single,D7,9,0.0,Jefferson,JFS
+district,1942_D7_single,1942,single,D7,9,0.0,Jefferson-Morgan,JFS
 district,1942_D7_single,1942,single,D7,9,0.0,Mapletown,MPT
 district,1943_D10_single,1943,single,D10,1,16.0,Grove City,GRC
 district,1943_D10_single,1943,single,D10,2,11.0,Farrell,FRL
@@ -257,7 +257,7 @@ district,1943_D6-9_single,1943,single,D6-9,5,14.0,DuBois,DUB
 district,1943_D6-9_single,1943,single,D6-9,6,12.0,Philipsburg,PHLB
 district,1943_D7_single,1943,single,D7,1,46.0,Waynesburg Central,WYC
 district,1943_D7_single,1943,single,D7,2,33.0,Canonsburg,CNB
-district,1943_D7_single,1943,single,D7,3,9.0,Jefferson,JFS
+district,1943_D7_single,1943,single,D7,3,9.0,Jefferson-Morgan,JFS
 district,1943_D7_single,1943,single,D7,3,9.0,West View,WSTV
 district,1943_D7_single,1943,single,D7,5,8.0,Chartiers Township,CHRT
 district,1943_D7_single,1943,single,D7,6,0.0,Dormont,DRMT
@@ -289,8 +289,8 @@ district,1944_D7_single,1944,single,D7,1,31.0,Canonsburg,CNB
 district,1944_D7_single,1944,single,D7,2,22.0,Chartiers Township,CHRT
 district,1944_D7_single,1944,single,D7,3,19.0,Waynesburg Central,WYC
 district,1944_D7_single,1944,single,D7,4,12.0,Dormont,DRMT
-district,1944_D7_single,1944,single,D7,5,11.0,Greensburg,GRNB
-district,1944_D7_single,1944,single,D7,6,6.0,Jefferson,JFS
+district,1944_D7_single,1944,single,D7,5,11.0,Greensburg Salem,GRNB
+district,1944_D7_single,1944,single,D7,6,6.0,Jefferson-Morgan,JFS
 district,1944_D7_single,1944,single,D7,7,4.0,Millvale,MLV
 district,1944_D7_single,1944,single,D7,8,3.0,West View,WSTV
 district,1944_D7_single,1944,single,D7,9,0.0,Carnegie,CRNG
@@ -327,9 +327,9 @@ district,1945_D7_single,1945,single,D7,1,24.0,Waynesburg Central,WYC
 district,1945_D7_single,1945,single,D7,2,23.0,Farrell,FRL
 district,1945_D7_single,1945,single,D7,3,17.0,Chartiers Township,CHRT
 district,1945_D7_single,1945,single,D7,4,13.0,Canonsburg,CNB
-district,1945_D7_single,1945,single,D7,5,10.0,Greensburg,GRNB
+district,1945_D7_single,1945,single,D7,5,10.0,Greensburg Salem,GRNB
 district,1945_D7_single,1945,single,D7,6,7.0,Washington,WSH
-district,1945_D7_single,1945,single,D7,7,5.0,Jefferson,JFS
+district,1945_D7_single,1945,single,D7,7,5.0,Jefferson-Morgan,JFS
 district,1945_D7_single,1945,single,D7,8,4.0,Dormont,DRMT
 district,1945_D7_single,1945,single,D7,8,4.0,West View,WSTV
 district,1945_D7_single,1945,single,D7,10,0.0,Carnegie,CRNG
@@ -362,17 +362,17 @@ district,1946_D7_single,1946,single,D7,2,27.0,Canonsburg,CNB
 district,1946_D7_single,1946,single,D7,3,16.0,Washington,WSH
 district,1946_D7_single,1946,single,D7,4,15.0,Farrell,FRL
 district,1946_D7_single,1946,single,D7,5,11.0,Chartiers Township,CHRT
-district,1946_D7_single,1946,single,D7,6,9.0,Greensburg,GRNB
+district,1946_D7_single,1946,single,D7,6,9.0,Greensburg Salem,GRNB
 district,1946_D7_single,1946,single,D7,7,1.0,Carnegie,CRNG
 district,1946_D7_single,1946,single,D7,7,1.0,Dormont,DRMT
-district,1946_D7_single,1946,single,D7,7,1.0,Jefferson,JFS
+district,1946_D7_single,1946,single,D7,7,1.0,Jefferson-Morgan,JFS
 district,1946_D7_single,1946,single,D7,7,1.0,West View,WSTV
 district,1946_D7_single,1946,single,D7,11,0.0,Millvale,MLV
 district,1947_D10_single,1947,single,D10,1,14.0,Erie Academy,EAC
 district,1947_D10_single,1947,single,D10,2,11.0,Erie Strong Vincent,ESV
 district,1947_D10_single,1947,single,D10,2,11.0,Greenville,GRNV
 district,1947_D10_single,1947,single,D10,4,3.0,Grove City,GRC
-district,1947_D10_single,1947,single,D10,5,2.0,East,EAST
+district,1947_D10_single,1947,single,D10,5,2.0,Erie East,EAST
 district,1947_D10_single,1947,single,D10,6,1.0,Oil City,OC
 district,1947_D10_single,1947,single,D10,6,1.0,Technical Memorial,TMM
 district,1947_D11_single,1947,single,D11,1,26.0,Bethlehem Liberty,BLIB
@@ -415,8 +415,8 @@ district,1947_D7_single,1947,single,D7,1,33.0,Canonsburg,CNB
 district,1947_D7_single,1947,single,D7,2,19.0,Chartiers Township,CHRT
 district,1947_D7_single,1947,single,D7,2,19.0,Farrell,FRL
 district,1947_D7_single,1947,single,D7,4,17.0,Waynesburg Central,WYC
-district,1947_D7_single,1947,single,D7,5,16.0,Jefferson,JFS
-district,1947_D7_single,1947,single,D7,6,7.0,Greensburg,GRNB
+district,1947_D7_single,1947,single,D7,5,16.0,Jefferson-Morgan,JFS
+district,1947_D7_single,1947,single,D7,6,7.0,Greensburg Salem,GRNB
 district,1947_D7_single,1947,single,D7,7,6.0,Washington,WSH
 district,1947_D7_single,1947,single,D7,8,4.0,Dormont,DRMT
 district,1947_D7_single,1947,single,D7,9,1.0,Carnegie,CRNG
@@ -463,10 +463,10 @@ district,1948_D6-9_single,1948,single,D6-9,10,2.0,Lewistown,LWST
 district,1948_D7_single,1948,single,D7,1,31.0,Farrell,FRL
 district,1948_D7_single,1948,single,D7,1,31.0,Washington,WSH
 district,1948_D7_single,1948,single,D7,3,19.0,Canonsburg,CNB
-district,1948_D7_single,1948,single,D7,4,17.0,Greensburg,GRNB
+district,1948_D7_single,1948,single,D7,4,17.0,Greensburg Salem,GRNB
 district,1948_D7_single,1948,single,D7,5,16.0,Chartiers Township,CHRT
 district,1948_D7_single,1948,single,D7,6,13.0,Waynesburg Central,WYC
-district,1948_D7_single,1948,single,D7,7,9.0,Jefferson,JFS
+district,1948_D7_single,1948,single,D7,7,9.0,Jefferson-Morgan,JFS
 district,1948_D7_single,1948,single,D7,8,5.0,West View,WSTV
 district,1948_D7_single,1948,single,D7,9,4.0,Carnegie,CRNG
 district,1948_D7_single,1948,single,D7,10,2.0,Donora,DON
@@ -480,7 +480,7 @@ district,1949_D10_single,1949,single,D10,1,27.0,Grove City,GRC
 district,1949_D10_single,1949,single,D10,2,26.0,Erie Academy,EAC
 district,1949_D10_single,1949,single,D10,3,16.0,Greenville,GRNV
 district,1949_D10_single,1949,single,D10,4,9.0,Erie Strong Vincent,ESV
-district,1949_D10_single,1949,single,D10,5,6.0,East,EAST
+district,1949_D10_single,1949,single,D10,5,6.0,Erie East,EAST
 district,1949_D10_single,1949,single,D10,5,6.0,Technical Memorial,TMM
 district,1949_D11_single,1949,single,D11,1,56.0,Easton,EAS
 district,1949_D11_single,1949,single,D11,2,21.0,Allentown,ALNT
@@ -528,8 +528,8 @@ district,1949_D7_single,1949,single,D7,2,23.0,Washington,WSH
 district,1949_D7_single,1949,single,D7,2,23.0,Waynesburg Central,WYC
 district,1949_D7_single,1949,single,D7,4,20.0,Farrell,FRL
 district,1949_D7_single,1949,single,D7,5,18.0,Chartiers Township,CHRT
-district,1949_D7_single,1949,single,D7,6,8.0,Jefferson,JFS
-district,1949_D7_single,1949,single,D7,7,6.0,Greensburg,GRNB
+district,1949_D7_single,1949,single,D7,6,8.0,Jefferson-Morgan,JFS
+district,1949_D7_single,1949,single,D7,7,6.0,Greensburg Salem,GRNB
 district,1949_D7_single,1949,single,D7,8,3.0,Dormont,DRMT
 district,1949_D7_single,1949,single,D7,8,3.0,Shaler,SHA
 district,1949_D7_single,1949,single,D7,8,3.0,Trinity,TRIN
@@ -583,10 +583,10 @@ district,1950_D7_single,1950,single,D7,4,15.0,Munhall,MNH
 district,1950_D7_single,1950,single,D7,5,10.0,Trinity,TRIN
 district,1950_D7_single,1950,single,D7,6,8.0,Burgettstown,BGT
 district,1950_D7_single,1950,single,D7,6,8.0,Farrell,FRL
-district,1950_D7_single,1950,single,D7,6,8.0,Greensburg,GRNB
+district,1950_D7_single,1950,single,D7,6,8.0,Greensburg Salem,GRNB
 district,1950_D7_single,1950,single,D7,6,8.0,Uniontown,UNT
 district,1950_D7_single,1950,single,D7,10,5.0,Carnegie,CRNG
-district,1950_D7_single,1950,single,D7,10,5.0,Jefferson,JFS
+district,1950_D7_single,1950,single,D7,10,5.0,Jefferson-Morgan,JFS
 district,1950_D7_single,1950,single,D7,12,2.0,Shaler,SHA
 district,1950_D7_single,1950,single,D7,13,1.0,California,CAL
 district,1950_D7_single,1950,single,D7,13,1.0,Chartiers Township,CHRT
@@ -686,7 +686,7 @@ district,1952_D6-9_single,1952,single,D6-9,15,0.0,Redbank Valley,RBV
 district,1953_D10_single,1953,single,D10,1,9.0,Grove City,GRC
 district,1953_D10_single,1953,single,D10,1,9.0,Oil City,OC
 district,1953_D10_single,1953,single,D10,3,6.0,Greenville,GRNV
-district,1953_D10_single,1953,single,D10,4,3.0,East,EAST
+district,1953_D10_single,1953,single,D10,4,3.0,Erie East,EAST
 district,1953_D10_single,1953,single,D10,4,3.0,Titusville,TTV
 district,1953_D10_single,1953,single,D10,4,3.0,Warren,WRN
 district,1953_D10_single,1953,single,D10,7,0.0,Erie Academy,EAC
@@ -749,7 +749,7 @@ district,1954_D10_single,1954,single,D10,1,9.0,Warren,WRN
 district,1954_D10_single,1954,single,D10,4,3.0,Erie Strong Vincent,ESV
 district,1954_D10_single,1954,single,D10,4,3.0,Grove City,GRC
 district,1954_D10_single,1954,single,D10,4,3.0,Oil City,OC
-district,1954_D10_single,1954,single,D10,7,0.0,East,EAST
+district,1954_D10_single,1954,single,D10,7,0.0,Erie East,EAST
 district,1954_D10_single,1954,single,D10,7,0.0,Technical Memorial,TMM
 district,1954_D11_single,1954,single,D11,1,35.0,Bethlehem Liberty,BLIB
 district,1954_D11_single,1954,single,D11,2,32.0,Easton,EAS
@@ -808,7 +808,7 @@ district,1954_D9_single,1954,single,D9,2,54.0,DuBois,DUB
 district,1954_D9_single,1954,single,D9,3,30.0,Redbank Valley,RBV
 district,1954_D9_single,1954,single,D9,4,15.0,Brockway,BRWY
 district,1955_D10_single,1955,single,D10,1,11.0,Greenville,GRNV
-district,1955_D10_single,1955,single,D10,2,9.0,East,EAST
+district,1955_D10_single,1955,single,D10,2,9.0,Erie East,EAST
 district,1955_D10_single,1955,single,D10,2,9.0,Oil City,OC
 district,1955_D10_single,1955,single,D10,4,8.0,Warren,WRN
 district,1955_D10_single,1955,single,D10,5,3.0,Erie Academy,EAC
@@ -876,7 +876,7 @@ district,1955_D9_single,1955,single,D9,3,46.0,DuBois,DUB
 district,1955_D9_single,1955,single,D9,4,24.0,Brockway,BRWY
 district,1956_D10_single,1956,single,D10,1,9.0,Greenville,GRNV
 district,1956_D10_single,1956,single,D10,2,8.0,Warren,WRN
-district,1956_D10_single,1956,single,D10,3,6.0,East,EAST
+district,1956_D10_single,1956,single,D10,3,6.0,Erie East,EAST
 district,1956_D10_single,1956,single,D10,3,6.0,Erie Academy,EAC
 district,1956_D10_single,1956,single,D10,5,5.0,Titusville,TTV
 district,1956_D10_single,1956,single,D10,6,3.0,Commodore Perry,CP
@@ -971,7 +971,7 @@ district,1956_D9_single,1956,single,D9,6,20.0,St. Marys,STM
 district,1957_D10_single,1957,single,D10,1,9.0,Erie Strong Vincent,ESV
 district,1957_D10_single,1957,single,D10,2,8.0,Erie Academy,EAC
 district,1957_D10_single,1957,single,D10,2,8.0,Greenville,GRNV
-district,1957_D10_single,1957,single,D10,4,6.0,East,EAST
+district,1957_D10_single,1957,single,D10,4,6.0,Erie East,EAST
 district,1957_D10_single,1957,single,D10,4,6.0,Oil City,OC
 district,1957_D10_single,1957,single,D10,4,6.0,Warren,WRN
 district,1957_D10_single,1957,single,D10,7,5.0,Titusville,TTV
@@ -1030,7 +1030,7 @@ district,1957_D9_single,1957,single,D9,5,35.0,Brockway,BRWY
 district,1957_D9_single,1957,single,D9,6,10.0,St. Marys,STM
 district,1958_D10_single,1958,single,D10,1,33.0,Greenville,GRNV
 district,1958_D10_single,1958,single,D10,2,11.0,Titusville,TTV
-district,1958_D10_single,1958,single,D10,3,9.0,East,EAST
+district,1958_D10_single,1958,single,D10,3,9.0,Erie East,EAST
 district,1958_D10_single,1958,single,D10,3,9.0,Erie Strong Vincent,ESV
 district,1958_D10_single,1958,single,D10,5,8.0,Technical Memorial,TMM
 district,1958_D10_single,1958,single,D10,6,6.0,Union City,UC
@@ -1090,7 +1090,7 @@ district,1958_D9_single,1958,single,D9,7,2.0,Sandy Township,SNDT
 district,1958_D9_single,1958,single,D9,9,0.0,Karns City,KCY
 district,1959_D10_single,1959,single,D10,1,21.0,Greenville,GRNV
 district,1959_D10_single,1959,single,D10,2,15.0,Technical Memorial,TMM
-district,1959_D10_single,1959,single,D10,3,11.0,East,EAST
+district,1959_D10_single,1959,single,D10,3,11.0,Erie East,EAST
 district,1959_D10_single,1959,single,D10,3,11.0,Titusville,TTV
 district,1959_D10_single,1959,single,D10,5,9.0,Erie Strong Vincent,ESV
 district,1959_D10_single,1959,single,D10,6,5.0,Commodore Perry,CP
@@ -1173,7 +1173,7 @@ district,1959_D9_single,1959,single,D9,4,41.0,DuBois,DUB
 district,1959_D9_single,1959,single,D9,5,13.0,Brockway,BRWY
 district,1959_D9_single,1959,single,D9,6,4.0,St. Marys,STM
 district,1959_D9_single,1959,single,D9,7,0.0,Karns City,KCY
-district,1960_D10_single,1960,single,D10,1,27.0,East,EAST
+district,1960_D10_single,1960,single,D10,1,27.0,Erie East,EAST
 district,1960_D10_single,1960,single,D10,2,23.0,Greenville,GRNV
 district,1960_D10_single,1960,single,D10,3,13.0,Erie Strong Vincent,ESV
 district,1960_D10_single,1960,single,D10,4,10.0,Erie Academy,EAC
@@ -1269,7 +1269,7 @@ district,1960_D9_single,1960,single,D9,3,70.0,DuBois,DUB
 district,1960_D9_single,1960,single,D9,4,53.0,Brockway,BRWY
 district,1960_D9_single,1960,single,D9,5,33.0,Redbank Valley,RBV
 district,1960_D9_single,1960,single,D9,6,4.0,St. Marys,STM
-district,1961_D10_single,1961,single,D10,1,23.0,East,EAST
+district,1961_D10_single,1961,single,D10,1,23.0,Erie East,EAST
 district,1961_D10_single,1961,single,D10,2,20.0,Erie Strong Vincent,ESV
 district,1961_D10_single,1961,single,D10,3,12.0,Grove City,GRC
 district,1961_D10_single,1961,single,D10,4,11.0,Greenville,GRNV
@@ -1365,7 +1365,7 @@ district,1961_D9_single,1961,single,D9,5,21.0,Brockway,BRWY
 district,1961_D9_single,1961,single,D9,6,19.0,St. Marys,STM
 district,1961_D9_single,1961,single,D9,7,9.0,Brookville,BRV
 district,1962_D10_single,1962,single,D10,1,26.0,Greenville,GRNV
-district,1962_D10_single,1962,single,D10,2,22.0,East,EAST
+district,1962_D10_single,1962,single,D10,2,22.0,Erie East,EAST
 district,1962_D10_single,1962,single,D10,3,14.0,Erie Strong Vincent,ESV
 district,1962_D10_single,1962,single,D10,4,9.0,Oil City,OC
 district,1962_D10_single,1962,single,D10,5,7.0,Fort LeBoeuf,FLB
@@ -1456,7 +1456,7 @@ district,1963_D10_single,1963,single,D10,4,8.0,Warren,WRN
 district,1963_D10_single,1963,single,D10,6,5.0,Grove City,GRC
 district,1963_D10_single,1963,single,D10,6,5.0,Hickory,HCK
 district,1963_D10_single,1963,single,D10,8,4.0,Corry Area,COR
-district,1963_D10_single,1963,single,D10,8,4.0,East,EAST
+district,1963_D10_single,1963,single,D10,8,4.0,Erie East,EAST
 district,1963_D10_single,1963,single,D10,8,4.0,Townville,TWV
 district,1963_D10_single,1963,single,D10,11,3.0,Cambridge Springs,CS
 district,1963_D10_single,1963,single,D10,11,3.0,Oil City,OC
@@ -1538,7 +1538,7 @@ district,1964_D10_single,1964,single,D10,7,5.0,Hickory,HCK
 district,1964_D10_single,1964,single,D10,7,5.0,North East,NE
 district,1964_D10_single,1964,single,D10,7,5.0,Oil City,OC
 district,1964_D10_single,1964,single,D10,10,4.0,Warren,WRN
-district,1964_D10_single,1964,single,D10,11,3.0,East,EAST
+district,1964_D10_single,1964,single,D10,11,3.0,Erie East,EAST
 district,1964_D10_single,1964,single,D10,11,3.0,Erie Academy,EAC
 district,1964_D10_single,1964,single,D10,11,3.0,Harbor Creek,HCR
 district,1964_D10_single,1964,single,D10,11,3.0,Meadville,MDV
@@ -1621,7 +1621,7 @@ district,1964_D9_single,1964,single,D9,6,20.0,Brockway,BRWY
 district,1964_D9_single,1964,single,D9,7,0.0,Ridgway,RGW
 district,1965_D10_single,1965,single,D10,1,15.0,Greenville,GRNV
 district,1965_D10_single,1965,single,D10,2,11.0,Commodore Perry,CP
-district,1965_D10_single,1965,single,D10,2,11.0,East,EAST
+district,1965_D10_single,1965,single,D10,2,11.0,Erie East,EAST
 district,1965_D10_single,1965,single,D10,2,11.0,Warren,WRN
 district,1965_D10_single,1965,single,D10,5,9.0,Meadville,MDV
 district,1965_D10_single,1965,single,D10,6,6.0,Erie McDowell,EMD
@@ -1714,7 +1714,7 @@ district,1965_D9_single,1965,single,D9,8,2.0,North Clarion,NCLR
 district,1965_D9_single,1965,single,D9,9,0.0,Emporium,EMP
 district,1966_D10_single,1966,single,D10,1,15.0,Greenville,GRNV
 district,1966_D10_single,1966,single,D10,2,13.0,Meadville,MDV
-district,1966_D10_single,1966,single,D10,3,12.0,East,EAST
+district,1966_D10_single,1966,single,D10,3,12.0,Erie East,EAST
 district,1966_D10_single,1966,single,D10,4,11.0,Reynolds,REY
 district,1966_D10_single,1966,single,D10,5,9.0,Saegertown,SGT
 district,1966_D10_single,1966,single,D10,6,8.0,Franklin,FRA
@@ -1831,7 +1831,7 @@ district,1966_D9_single,1966,single,D9,6,15.0,Ridgway,RGW
 district,1966_D9_single,1966,single,D9,7,4.0,Brockway,BRWY
 district,1966_D9_single,1966,single,D9,8,0.0,North Clarion,NCLR
 district,1967_D10_single,1967,single,D10,1,19.0,Reynolds,REY
-district,1967_D10_single,1967,single,D10,2,11.0,East,EAST
+district,1967_D10_single,1967,single,D10,2,11.0,Erie East,EAST
 district,1967_D10_single,1967,single,D10,2,11.0,Saegertown,SGT
 district,1967_D10_single,1967,single,D10,4,10.0,Commodore Perry,CP
 district,1967_D10_single,1967,single,D10,5,9.0,Fort LeBoeuf,FLB
@@ -1950,7 +1950,7 @@ district,1968_D10_single,1968,single,D10,3,10.0,Greenville,GRNV
 district,1968_D10_single,1968,single,D10,4,8.0,Fort LeBoeuf,FLB
 district,1968_D10_single,1968,single,D10,4,8.0,Oil City,OC
 district,1968_D10_single,1968,single,D10,4,8.0,Titusville,TTV
-district,1968_D10_single,1968,single,D10,7,6.0,East,EAST
+district,1968_D10_single,1968,single,D10,7,6.0,Erie East,EAST
 district,1968_D10_single,1968,single,D10,8,5.0,Erie McDowell,EMD
 district,1968_D10_single,1968,single,D10,8,5.0,Fairview,FV
 district,1968_D10_single,1968,single,D10,8,5.0,Saegertown,SGT
@@ -2092,7 +2092,7 @@ district,1969_D10_single,1969,single,D10,6,7.0,Fort LeBoeuf,FLB
 district,1969_D10_single,1969,single,D10,6,7.0,Titusville,TTV
 district,1969_D10_single,1969,single,D10,8,6.0,Union City,UC
 district,1969_D10_single,1969,single,D10,9,5.0,Conneaut Lake,CLK
-district,1969_D10_single,1969,single,D10,9,5.0,East,EAST
+district,1969_D10_single,1969,single,D10,9,5.0,Erie East,EAST
 district,1969_D10_single,1969,single,D10,9,5.0,Grove City,GRC
 district,1969_D10_single,1969,single,D10,9,5.0,Iroquois,IRQ
 district,1969_D10_single,1969,single,D10,9,5.0,Reynolds,REY
@@ -2365,7 +2365,7 @@ district,1970_D9_single,1970,single,D9,10,11.0,Clarion,CLR
 district,1970_D9_single,1970,single,D9,11,1.0,North Clarion,NCLR
 district,1970_D9_single,1970,single,D9,11,1.0,St. Marys,STM
 district,1971_D10_single,1971,single,D10,1,16.0,Hickory,HCK
-district,1971_D10_single,1971,single,D10,2,12.0,East,EAST
+district,1971_D10_single,1971,single,D10,2,12.0,Erie East,EAST
 district,1971_D10_single,1971,single,D10,3,10.0,Reynolds,REY
 district,1971_D10_single,1971,single,D10,4,8.0,Corry Area,COR
 district,1971_D10_single,1971,single,D10,4,8.0,Oil City,OC
@@ -2520,7 +2520,7 @@ district,1971_D9_single,1971,single,D9,12,1.0,North Clarion,NCLR
 district,1971_D9_single,1971,single,D9,14,0.0,Kane,KANE
 district,1972_D10_single,1972,single,D10,1,17.5,Oil City,OC
 district,1972_D10_single,1972,single,D10,2,10.0,Reynolds,REY
-district,1972_D10_single,1972,single,D10,3,9.0,East,EAST
+district,1972_D10_single,1972,single,D10,3,9.0,Erie East,EAST
 district,1972_D10_single,1972,single,D10,4,8.0,Greenville,GRNV
 district,1972_D10_single,1972,single,D10,5,7.0,Union City,UC
 district,1972_D10_single,1972,single,D10,6,6.0,Franklin,FRA
@@ -2727,7 +2727,7 @@ district,1973_D10_single,1973,single,D10,5,8.5,Hickory,HCK
 district,1973_D10_single,1973,single,D10,6,7.0,Lakeview,LKV
 district,1973_D10_single,1973,single,D10,7,5.5,Cranberry,CRB
 district,1973_D10_single,1973,single,D10,7,5.5,Union City,UC
-district,1973_D10_single,1973,single,D10,9,5.0,East,EAST
+district,1973_D10_single,1973,single,D10,9,5.0,Erie East,EAST
 district,1973_D10_single,1973,single,D10,9,5.0,Erie McDowell,EMD
 district,1973_D10_single,1973,single,D10,9,5.0,Oil City,OC
 district,1973_D10_single,1973,single,D10,12,3.5,Conneaut Lake,CLK
@@ -3124,7 +3124,7 @@ district,1974_D6_AA,1974,AA,D6,6,25.5,Mount Union,MU
 district,1974_D6_AA,1974,AA,D6,7,22.0,Central Cambria,CCA
 district,1974_D6_AA,1974,AA,D6,8,21.5,Moshannon Valley,MSV
 district,1974_D6_AA,1974,AA,D6,9,19.5,Huntingdon,HTD
-district,1974_D6_AA,1974,AA,D6,10,19.0,Bellwood Antis,BA
+district,1974_D6_AA,1974,AA,D6,10,19.0,Bellwood-Antis,BA
 district,1974_D6_AA,1974,AA,D6,11,13.5,Claysburg-Kimmel,CK
 district,1974_D6_AA,1974,AA,D6,11,13.5,Westmont Hilltop,WMH
 district,1974_D6_AA,1974,AA,D6,13,11.0,Central,CEN
@@ -3602,7 +3602,7 @@ district,1976_D6_AA,1976,AA,D6,4,91.5,Mount Union,MU
 district,1976_D6_AA,1976,AA,D6,5,87.5,Chief Logan,CFLG
 district,1976_D6_AA,1976,AA,D6,6,82.0,Moshannon Valley,MSV
 district,1976_D6_AA,1976,AA,D6,7,68.5,Westmont Hilltop,WMH
-district,1976_D6_AA,1976,AA,D6,8,67.0,Bellwood Antis,BA
+district,1976_D6_AA,1976,AA,D6,8,67.0,Bellwood-Antis,BA
 district,1976_D6_AA,1976,AA,D6,9,59.0,Portage,PRT
 district,1976_D6_AA,1976,AA,D6,10,57.5,United,UNTD
 district,1976_D6_AA,1976,AA,D6,11,56.0,Central Cambria,CCA
@@ -3863,7 +3863,7 @@ district,1977_D6_AA,1977,AA,D6,17,24.5,Marion Center,MAC
 district,1977_D6_AA,1977,AA,D6,18,23.5,United,UNTD
 district,1977_D6_AA,1977,AA,D6,19,18.5,Juniata Valley,JV
 district,1977_D6_AA,1977,AA,D6,20,18.0,Kishacoquillas,KCQ
-district,1977_D6_AA,1977,AA,D6,21,17.0,Bellwood Antis,BA
+district,1977_D6_AA,1977,AA,D6,21,17.0,Bellwood-Antis,BA
 district,1977_D6_AA,1977,AA,D6,22,15.0,Ferndale,FRND
 district,1977_D6_AA,1977,AA,D6,23,14.0,Forest Hills,FH
 district,1977_D6_AA,1977,AA,D6,24,12.0,Claysburg-Kimmel,CK
@@ -4149,7 +4149,7 @@ district,1978_D6_AA,1978,AA,D6,14,40.5,Penns Valley,PNV
 district,1978_D6_AA,1978,AA,D6,15,38.5,Central,CEN
 district,1978_D6_AA,1978,AA,D6,16,37.0,Sugar Valley,SGVY
 district,1978_D6_AA,1978,AA,D6,17,33.0,Kishacoquillas,KCQ
-district,1978_D6_AA,1978,AA,D6,18,32.5,Bellwood Antis,BA
+district,1978_D6_AA,1978,AA,D6,18,32.5,Bellwood-Antis,BA
 district,1978_D6_AA,1978,AA,D6,19,30.0,Juniata Valley,JV
 district,1978_D6_AA,1978,AA,D6,20,27.0,Marion Center,MAC
 district,1978_D6_AA,1978,AA,D6,21,25.5,Claysburg-Kimmel,CK
@@ -4412,7 +4412,7 @@ district,1979_D6_AA,1979,AA,D6,9,64.0,Blairsville,BLV
 district,1979_D6_AA,1979,AA,D6,10,58.5,Mount Union,MU
 district,1979_D6_AA,1979,AA,D6,11,56.0,Huntingdon,HTD
 district,1979_D6_AA,1979,AA,D6,12,54.5,Moshannon Valley,MSV
-district,1979_D6_AA,1979,AA,D6,13,54.0,Bellwood Antis,BA
+district,1979_D6_AA,1979,AA,D6,13,54.0,Bellwood-Antis,BA
 district,1979_D6_AA,1979,AA,D6,14,50.5,Richland,RCHL
 district,1979_D6_AA,1979,AA,D6,15,49.5,United,UNTD
 district,1979_D6_AA,1979,AA,D6,16,43.0,Bishop Carroll,BSHC
@@ -4671,7 +4671,7 @@ district,1980_D6_AA,1980,AA,D6,2,98.0,Bald Eagle Nittany,BEN
 district,1980_D6_AA,1980,AA,D6,3,87.0,Blairsville,BLV
 district,1980_D6_AA,1980,AA,D6,4,84.0,Ligonier Valley,LGV
 district,1980_D6_AA,1980,AA,D6,5,80.0,Moshannon Valley,MSV
-district,1980_D6_AA,1980,AA,D6,6,75.5,Bellwood Antis,BA
+district,1980_D6_AA,1980,AA,D6,6,75.5,Bellwood-Antis,BA
 district,1980_D6_AA,1980,AA,D6,7,74.0,Cambria Heights,CAH
 district,1980_D6_AA,1980,AA,D6,7,74.0,Central,CEN
 district,1980_D6_AA,1980,AA,D6,9,69.5,Chief Logan,CFLG
@@ -4728,7 +4728,7 @@ district,1981_D10_AA,1981,AA,D10,4,0.0,Cambridge Springs,CS
 district,1981_D10_AA,1981,AA,D10,4,0.0,Commodore Perry,CP
 district,1981_D10_AA,1981,AA,D10,4,0.0,Conneaut Lake,CLK
 district,1981_D10_AA,1981,AA,D10,4,0.0,Cranberry,CRB
-district,1981_D10_AA,1981,AA,D10,4,0.0,East,EAST
+district,1981_D10_AA,1981,AA,D10,4,0.0,Erie East,EAST
 district,1981_D10_AA,1981,AA,D10,4,0.0,Eisenhower,EH
 district,1981_D10_AA,1981,AA,D10,4,0.0,Erie Strong Vincent,ESV
 district,1981_D10_AA,1981,AA,D10,4,0.0,Fairview,FV
@@ -4965,7 +4965,7 @@ district,1981_D6_AA,1981,AA,D6,3,84.0,Westmont Hilltop,WMH
 district,1981_D6_AA,1981,AA,D6,4,83.0,Marion Center,MAC
 district,1981_D6_AA,1981,AA,D6,5,82.0,Mount Union,MU
 district,1981_D6_AA,1981,AA,D6,6,65.5,Central,CEN
-district,1981_D6_AA,1981,AA,D6,7,63.5,Bellwood Antis,BA
+district,1981_D6_AA,1981,AA,D6,7,63.5,Bellwood-Antis,BA
 district,1981_D6_AA,1981,AA,D6,8,63.0,Cambria Heights,CAH
 district,1981_D6_AA,1981,AA,D6,9,61.0,Chief Logan,CFLG
 district,1981_D6_AA,1981,AA,D6,10,56.5,Penns Valley,PNV
@@ -5050,7 +5050,7 @@ district,1982_D10_AAA,1982,AAA,D10,4,47.0,Technical Memorial,TMM
 district,1982_D10_AAA,1982,AAA,D10,5,32.0,Hickory,HCK
 district,1982_D10_AAA,1982,AAA,D10,6,30.0,Erie McDowell,EMD
 district,1982_D10_AAA,1982,AAA,D10,7,10.0,Franklin,FRA
-district,1982_D10_AAA,1982,AAA,D10,8,9.0,East,EAST
+district,1982_D10_AAA,1982,AAA,D10,8,9.0,Erie East,EAST
 district,1982_D10_AAA,1982,AAA,D10,8,9.0,Harbor Creek,HCR
 district,1982_D10_AAA,1982,AAA,D10,10,6.0,Erie Academy,EAC
 district,1982_D10_AAA,1982,AAA,D10,11,3.0,Warren,WRN
@@ -5255,7 +5255,7 @@ district,1982_D6_AA,1982,AA,D6,8,56.0,Portage,PRT
 district,1982_D6_AA,1982,AA,D6,8,56.0,Richland,RCHL
 district,1982_D6_AA,1982,AA,D6,10,52.5,Ligonier Valley,LGV
 district,1982_D6_AA,1982,AA,D6,11,51.0,Kishacoquillas,KCQ
-district,1982_D6_AA,1982,AA,D6,12,50.5,Bellwood Antis,BA
+district,1982_D6_AA,1982,AA,D6,12,50.5,Bellwood-Antis,BA
 district,1982_D6_AA,1982,AA,D6,13,47.0,Cambria Heights,CAH
 district,1982_D6_AA,1982,AA,D6,14,46.0,Saltsburg,SLTB
 district,1982_D6_AA,1982,AA,D6,15,44.0,Central Cambria,CCA
@@ -5542,7 +5542,7 @@ district,1983_D6_AA,1983,AA,D6,2,123.5,Bald Eagle Nittany,BEN
 district,1983_D6_AA,1983,AA,D6,3,122.5,Mount Union,MU
 district,1983_D6_AA,1983,AA,D6,4,100.5,Westmont Hilltop,WMH
 district,1983_D6_AA,1983,AA,D6,5,79.5,Chief Logan,CFLG
-district,1983_D6_AA,1983,AA,D6,6,69.0,Bellwood Antis,BA
+district,1983_D6_AA,1983,AA,D6,6,69.0,Bellwood-Antis,BA
 district,1983_D6_AA,1983,AA,D6,7,64.5,West Branch,WB
 district,1983_D6_AA,1983,AA,D6,8,61.0,Ligonier Valley,LGV
 district,1983_D6_AA,1983,AA,D6,9,59.0,Moshannon Valley,MSV
@@ -5618,7 +5618,7 @@ district,1984_D10_AA,1984,AA,D10,28,2.0,Mercer,MER
 district,1984_D10_AA,1984,AA,D10,28,2.0,Sharon,SHR
 district,1984_D10_AA,1984,AA,D10,28,2.0,Sharpsville,SHRP
 district,1984_D10_AA,1984,AA,D10,31,1.0,Northwestern,NW
-district,1984_D10_AA,1984,AA,D10,32,0.0,East,EAST
+district,1984_D10_AA,1984,AA,D10,32,0.0,Erie East,EAST
 district,1984_D10_AAA,1984,AAA,D10,1,144.0,Meadville,MDV
 district,1984_D10_AAA,1984,AAA,D10,2,72.5,Oil City,OC
 district,1984_D10_AAA,1984,AAA,D10,3,70.0,Erie McDowell,EMD
@@ -5829,7 +5829,7 @@ district,1984_D6_AA,1984,AA,D6,3,101.5,Tyrone,TYR
 district,1984_D6_AA,1984,AA,D6,4,95.0,Portage,PRT
 district,1984_D6_AA,1984,AA,D6,5,92.5,Mount Union,MU
 district,1984_D6_AA,1984,AA,D6,6,83.5,Chief Logan,CFLG
-district,1984_D6_AA,1984,AA,D6,7,75.5,Bellwood Antis,BA
+district,1984_D6_AA,1984,AA,D6,7,75.5,Bellwood-Antis,BA
 district,1984_D6_AA,1984,AA,D6,8,65.5,Kishacoquillas,KCQ
 district,1984_D6_AA,1984,AA,D6,9,64.0,Glendale,GD
 district,1984_D6_AA,1984,AA,D6,10,62.0,Moshannon Valley,MSV
@@ -5902,7 +5902,7 @@ district,1985_D10_AA,1985,AA,D10,22,8.5,Seneca,SEN
 district,1985_D10_AA,1985,AA,D10,23,8.0,Youngsville,YNG
 district,1985_D10_AA,1985,AA,D10,24,6.0,Iroquois,IRQ
 district,1985_D10_AA,1985,AA,D10,25,2.0,Jamestown,JMT
-district,1985_D10_AA,1985,AA,D10,26,0.0,East,EAST
+district,1985_D10_AA,1985,AA,D10,26,0.0,Erie East,EAST
 district,1985_D10_AA,1985,AA,D10,26,0.0,Maplewood,MPW
 district,1985_D10_AA,1985,AA,D10,26,0.0,Mercer,MER
 district,1985_D10_AA,1985,AA,D10,26,0.0,Sharon,SHR
@@ -6129,7 +6129,7 @@ district,1985_D6_AA,1985,AA,D6,15,48.5,Moshannon Valley,MSV
 district,1985_D6_AA,1985,AA,D6,16,41.0,Marion Center,MAC
 district,1985_D6_AA,1985,AA,D6,17,40.5,Central,CEN
 district,1985_D6_AA,1985,AA,D6,18,40.0,Ligonier Valley,LGV
-district,1985_D6_AA,1985,AA,D6,19,35.0,Bellwood Antis,BA
+district,1985_D6_AA,1985,AA,D6,19,35.0,Bellwood-Antis,BA
 district,1985_D6_AA,1985,AA,D6,20,31.5,Juniata Valley,JV
 district,1985_D6_AA,1985,AA,D6,21,30.5,Southern Huntingdon,SHD
 district,1985_D6_AA,1985,AA,D6,22,29.0,West Branch,WB
@@ -6191,7 +6191,7 @@ district,1986_D10_AA,1986,AA,D10,23,12.0,Sharpsville,SHRP
 district,1986_D10_AA,1986,AA,D10,24,6.0,Youngsville,YNG
 district,1986_D10_AA,1986,AA,D10,25,5.0,Sheffield,SHF
 district,1986_D10_AA,1986,AA,D10,25,5.0,Union City,UC
-district,1986_D10_AA,1986,AA,D10,27,3.0,East,EAST
+district,1986_D10_AA,1986,AA,D10,27,3.0,Erie East,EAST
 district,1986_D10_AA,1986,AA,D10,28,2.0,Fairview,FV
 district,1986_D10_AA,1986,AA,D10,29,1.0,Sharon,SHR
 district,1986_D10_AA,1986,AA,D10,30,0.0,Mercyhurst Prep,MHP
@@ -6407,7 +6407,7 @@ district,1986_D6_AA,1986,AA,D6,12,54.0,Southern Huntingdon,SHD
 district,1986_D6_AA,1986,AA,D6,13,48.5,Claysburg-Kimmel,CK
 district,1986_D6_AA,1986,AA,D6,14,48.0,Cambria Heights,CAH
 district,1986_D6_AA,1986,AA,D6,15,43.0,United,UNTD
-district,1986_D6_AA,1986,AA,D6,16,41.0,Bellwood Antis,BA
+district,1986_D6_AA,1986,AA,D6,16,41.0,Bellwood-Antis,BA
 district,1986_D6_AA,1986,AA,D6,17,40.5,Forest Hills,FH
 district,1986_D6_AA,1986,AA,D6,18,36.5,Penn Cambria,PEC
 district,1986_D6_AA,1986,AA,D6,19,28.0,Saltsburg,SLTB
@@ -6470,7 +6470,7 @@ district,1987_D10_AA,1987,AA,D10,15,18.0,Greenville,GRNV
 district,1987_D10_AA,1987,AA,D10,15,18.0,Sheffield,SHF
 district,1987_D10_AA,1987,AA,D10,15,18.0,Union City,UC
 district,1987_D10_AA,1987,AA,D10,19,12.5,Rocky Grove,RKGR
-district,1987_D10_AA,1987,AA,D10,20,12.0,East,EAST
+district,1987_D10_AA,1987,AA,D10,20,12.0,Erie East,EAST
 district,1987_D10_AA,1987,AA,D10,21,10.0,Seneca,SEN
 district,1987_D10_AA,1987,AA,D10,22,9.0,Jamestown,JMT
 district,1987_D10_AA,1987,AA,D10,23,6.0,Maplewood,MPW
@@ -6700,7 +6700,7 @@ district,1987_D6_AA,1987,AA,D6,14,34.0,Portage,PRT
 district,1987_D6_AA,1987,AA,D6,15,31.5,Juniata Valley,JV
 district,1987_D6_AA,1987,AA,D6,15,31.5,Ligonier Valley,LGV
 district,1987_D6_AA,1987,AA,D6,17,29.0,Penn Cambria,PEC
-district,1987_D6_AA,1987,AA,D6,18,27.0,Bellwood Antis,BA
+district,1987_D6_AA,1987,AA,D6,18,27.0,Bellwood-Antis,BA
 district,1987_D6_AA,1987,AA,D6,19,24.5,United,UNTD
 district,1987_D6_AA,1987,AA,D6,20,19.0,Cambria Heights,CAH
 district,1987_D6_AA,1987,AA,D6,21,17.5,Marion Center,MAC
@@ -6779,7 +6779,7 @@ district,1988_D10_AAA,1988,AAA,D10,10,24.5,Erie Strong Vincent,ESV
 district,1988_D10_AAA,1988,AAA,D10,11,24.0,Franklin,FRA
 district,1988_D10_AAA,1988,AAA,D10,12,8.0,Warren,WRN
 district,1988_D10_AAA,1988,AAA,D10,13,6.0,General McLane,GML
-district,1988_D10_AAA,1988,AAA,D10,14,0.0,East,EAST
+district,1988_D10_AAA,1988,AAA,D10,14,0.0,Erie East,EAST
 district,1988_D10_AAA,1988,AAA,D10,14,0.0,Oil City,OC
 district,1988_D11_AA,1988,AA,D11,1,241.5,North Schuylkill,NSC
 district,1988_D11_AA,1988,AA,D11,2,176.0,Pine Grove,PNG
@@ -6988,7 +6988,7 @@ district,1988_D6_AA,1988,AA,D6,17,30.0,Penn Cambria,PEC
 district,1988_D6_AA,1988,AA,D6,18,27.0,Bucktail,BUCK
 district,1988_D6_AA,1988,AA,D6,18,27.0,Sugar Valley,SGVY
 district,1988_D6_AA,1988,AA,D6,20,25.0,Blairsville,BLV
-district,1988_D6_AA,1988,AA,D6,21,24.5,Bellwood Antis,BA
+district,1988_D6_AA,1988,AA,D6,21,24.5,Bellwood-Antis,BA
 district,1988_D6_AA,1988,AA,D6,22,24.0,Glendale,GD
 district,1988_D6_AA,1988,AA,D6,23,19.0,Juniata Valley,JV
 district,1988_D6_AA,1988,AA,D6,24,17.5,Southern Huntingdon,SHD
@@ -7045,7 +7045,7 @@ district,1989_D10_AA,1989,AA,D10,15,31.0,Union City,UC
 district,1989_D10_AA,1989,AA,D10,17,20.0,Maplewood,MPW
 district,1989_D10_AA,1989,AA,D10,18,16.0,Grove City,GRC
 district,1989_D10_AA,1989,AA,D10,19,14.0,Cranberry,CRB
-district,1989_D10_AA,1989,AA,D10,20,9.0,East,EAST
+district,1989_D10_AA,1989,AA,D10,20,9.0,Erie East,EAST
 district,1989_D10_AA,1989,AA,D10,21,8.0,North East,NE
 district,1989_D10_AA,1989,AA,D10,21,8.0,Sheffield,SHF
 district,1989_D10_AA,1989,AA,D10,23,5.0,Cochranton,CRT
@@ -7276,7 +7276,7 @@ district,1989_D6_AA,1989,AA,D6,16,24.0,Sugar Valley,SGVY
 district,1989_D6_AA,1989,AA,D6,17,17.0,Southern Huntingdon,SHD
 district,1989_D6_AA,1989,AA,D6,18,9.0,Bucktail,BUCK
 district,1989_D6_AA,1989,AA,D6,18,9.0,Juniata Valley,JV
-district,1989_D6_AA,1989,AA,D6,20,4.0,Bellwood Antis,BA
+district,1989_D6_AA,1989,AA,D6,20,4.0,Bellwood-Antis,BA
 district,1989_D6_AAA,1989,AAA,D6,1,161.0,Philipsburg-Osceola,PO
 district,1989_D6_AAA,1989,AAA,D6,2,149.5,Lock Haven,LKHV
 district,1989_D6_AAA,1989,AAA,D6,3,148.5,Bald Eagle Area,BEA
@@ -7352,7 +7352,7 @@ district,1990_D10_AAA,1990,AAA,D10,8,34.0,General McLane,GML
 district,1990_D10_AAA,1990,AAA,D10,8,34.0,Warren,WRN
 district,1990_D10_AAA,1990,AAA,D10,10,16.0,Oil City,OC
 district,1990_D10_AAA,1990,AAA,D10,11,14.0,Fort LeBoeuf,FLB
-district,1990_D10_AAA,1990,AAA,D10,12,6.0,East,EAST
+district,1990_D10_AAA,1990,AAA,D10,12,6.0,Erie East,EAST
 district,1990_D10_AAA,1990,AAA,D10,13,0.0,Erie Academy,EAC
 district,1990_D10_AAA,1990,AAA,D10,13,0.0,Technical Memorial,TMM
 district,1990_D11_AA,1990,AA,D11,1,141.5,Catasauqua,CAT
@@ -7555,7 +7555,7 @@ district,1990_D6_AA,1990,AA,D6,11,56.0,Sugar Valley,SGVY
 district,1990_D6_AA,1990,AA,D6,12,50.0,Westmont Hilltop,WMH
 district,1990_D6_AA,1990,AA,D6,13,48.0,Southern Huntingdon,SHD
 district,1990_D6_AA,1990,AA,D6,14,47.0,Richland,RCHL
-district,1990_D6_AA,1990,AA,D6,15,44.0,Bellwood Antis,BA
+district,1990_D6_AA,1990,AA,D6,15,44.0,Bellwood-Antis,BA
 district,1990_D6_AA,1990,AA,D6,16,38.0,Portage,PRT
 district,1990_D6_AA,1990,AA,D6,17,37.0,Forest Hills,FH
 district,1990_D6_AA,1990,AA,D6,18,34.0,Ferndale,FRND
@@ -7624,7 +7624,7 @@ district,1991_D10_AA,1991,AA,D10,24,13.0,Cambridge Springs,CS
 district,1991_D10_AA,1991,AA,D10,25,10.0,Cochranton,CRT
 district,1991_D10_AA,1991,AA,D10,26,9.5,Iroquois,IRQ
 district,1991_D10_AA,1991,AA,D10,27,9.0,Sheffield,SHF
-district,1991_D10_AA,1991,AA,D10,28,4.0,East,EAST
+district,1991_D10_AA,1991,AA,D10,28,4.0,Erie East,EAST
 district,1991_D10_AA,1991,AA,D10,29,0.0,Girard,GIR
 district,1991_D10_AA,1991,AA,D10,29,0.0,Rocky Grove,RKGR
 district,1991_D10_AA,1991,AA,D10,29,0.0,Sharon,SHR
@@ -7826,7 +7826,7 @@ district,1991_D5_AA,1991,AA,D5,10,17.5,Rockwood,RKW
 district,1991_D5_AA,1991,AA,D5,11,0.0,Hyndman,HYN
 district,1991_D6_AA,1991,AA,D6,1,181.5,Bald Eagle Nittany,BEN
 district,1991_D6_AA,1991,AA,D6,2,114.0,Tyrone,TYR
-district,1991_D6_AA,1991,AA,D6,3,103.0,Bellwood Antis,BA
+district,1991_D6_AA,1991,AA,D6,3,103.0,Bellwood-Antis,BA
 district,1991_D6_AA,1991,AA,D6,4,97.5,Sugar Valley,SGVY
 district,1991_D6_AA,1991,AA,D6,5,97.0,Penns Valley,PNV
 district,1991_D6_AA,1991,AA,D6,6,89.5,Claysburg-Kimmel,CK
@@ -7905,7 +7905,7 @@ district,1992_D10_AA,1992,AA,D10,22,12.0,Northwestern,NW
 district,1992_D10_AA,1992,AA,D10,23,10.0,Cochranton,CRT
 district,1992_D10_AA,1992,AA,D10,24,4.0,Lakeview,LKV
 district,1992_D10_AA,1992,AA,D10,24,4.0,Sharon,SHR
-district,1992_D10_AA,1992,AA,D10,26,3.0,East,EAST
+district,1992_D10_AA,1992,AA,D10,26,3.0,Erie East,EAST
 district,1992_D10_AA,1992,AA,D10,26,3.0,Rocky Grove,RKGR
 district,1992_D10_AA,1992,AA,D10,28,2.0,Cambridge Springs,CS
 district,1992_D10_AA,1992,AA,D10,29,0.0,Girard,GIR
@@ -8106,7 +8106,7 @@ district,1992_D5_AA,1992,AA,D5,10,7.0,Hyndman,HYN
 district,1992_D6_AA,1992,AA,D6,1,216.5,Bald Eagle Nittany,BEN
 district,1992_D6_AA,1992,AA,D6,2,141.0,Tyrone,TYR
 district,1992_D6_AA,1992,AA,D6,3,114.0,Mount Union,MU
-district,1992_D6_AA,1992,AA,D6,4,113.0,Bellwood Antis,BA
+district,1992_D6_AA,1992,AA,D6,4,113.0,Bellwood-Antis,BA
 district,1992_D6_AA,1992,AA,D6,5,99.5,United,UNTD
 district,1992_D6_AA,1992,AA,D6,6,91.5,Claysburg-Kimmel,CK
 district,1992_D6_AA,1992,AA,D6,7,85.0,Glendale,GD
@@ -8183,7 +8183,7 @@ district,1993_D10_AA,1993,AA,D10,21,9.0,Northwestern,NW
 district,1993_D10_AA,1993,AA,D10,21,9.0,Sharpsville,SHRP
 district,1993_D10_AA,1993,AA,D10,23,8.0,Greenville,GRNV
 district,1993_D10_AA,1993,AA,D10,24,4.0,Fairview,FV
-district,1993_D10_AA,1993,AA,D10,25,0.0,East,EAST
+district,1993_D10_AA,1993,AA,D10,25,0.0,Erie East,EAST
 district,1993_D10_AA,1993,AA,D10,25,0.0,Girard,GIR
 district,1993_D10_AA,1993,AA,D10,25,0.0,Rocky Grove,RKGR
 district,1993_D10_AA,1993,AA,D10,25,0.0,Sheffield,SHF
@@ -8393,7 +8393,7 @@ district,1993_D6_AA,1993,AA,D6,7,74.0,United,UNTD
 district,1993_D6_AA,1993,AA,D6,8,73.5,Forest Hills,FH
 district,1993_D6_AA,1993,AA,D6,9,73.0,Central,CEN
 district,1993_D6_AA,1993,AA,D6,10,71.0,Juniata Valley,JV
-district,1993_D6_AA,1993,AA,D6,11,69.0,Bellwood Antis,BA
+district,1993_D6_AA,1993,AA,D6,11,69.0,Bellwood-Antis,BA
 district,1993_D6_AA,1993,AA,D6,12,68.5,Glendale,GD
 district,1993_D6_AA,1993,AA,D6,13,66.0,Blairsville,BLV
 district,1993_D6_AA,1993,AA,D6,14,62.5,Claysburg-Kimmel,CK
@@ -8672,7 +8672,7 @@ district,1994_D6_AA,1994,AA,D6,7,86.0,Sugar Valley,SGVY
 district,1994_D6_AA,1994,AA,D6,8,85.5,Blairsville,BLV
 district,1994_D6_AA,1994,AA,D6,9,85.0,Southern Huntingdon,SHD
 district,1994_D6_AA,1994,AA,D6,10,82.0,United,UNTD
-district,1994_D6_AA,1994,AA,D6,11,81.0,Bellwood Antis,BA
+district,1994_D6_AA,1994,AA,D6,11,81.0,Bellwood-Antis,BA
 district,1994_D6_AA,1994,AA,D6,12,65.5,Forest Hills,FH
 district,1994_D6_AA,1994,AA,D6,13,63.0,Penn Cambria,PEC
 district,1994_D6_AA,1994,AA,D6,14,58.0,Central,CEN
@@ -8953,7 +8953,7 @@ district,1995_D6_AA,1995,AA,D6,12,58.0,Richland,RCHL
 district,1995_D6_AA,1995,AA,D6,13,56.0,Mount Union,MU
 district,1995_D6_AA,1995,AA,D6,14,55.0,Ferndale,FRND
 district,1995_D6_AA,1995,AA,D6,15,50.0,Juniata Valley,JV
-district,1995_D6_AA,1995,AA,D6,16,47.0,Bellwood Antis,BA
+district,1995_D6_AA,1995,AA,D6,16,47.0,Bellwood-Antis,BA
 district,1995_D6_AA,1995,AA,D6,17,42.5,Bucktail,BUCK
 district,1995_D6_AA,1995,AA,D6,18,33.0,Moshannon Valley,MSV
 district,1995_D6_AA,1995,AA,D6,19,31.0,Claysburg-Kimmel,CK
@@ -9020,7 +9020,7 @@ district,1996_D10_AA,1996,AA,D10,21,9.0,Youngsville,YNG
 district,1996_D10_AA,1996,AA,D10,22,8.0,Cambridge Springs,CS
 district,1996_D10_AA,1996,AA,D10,23,7.0,Fairview,FV
 district,1996_D10_AA,1996,AA,D10,23,7.0,Union City,UC
-district,1996_D10_AA,1996,AA,D10,25,1.0,East,EAST
+district,1996_D10_AA,1996,AA,D10,25,1.0,Erie East,EAST
 district,1996_D10_AA,1996,AA,D10,25,1.0,Erie Strong Vincent,ESV
 district,1996_D10_AA,1996,AA,D10,27,0.0,Conneaut Lake,CLK
 district,1996_D10_AA,1996,AA,D10,27,0.0,Iroquois,IRQ
@@ -9234,7 +9234,7 @@ district,1996_D6_AA,1996,AA,D6,13,62.5,West Branch,WB
 district,1996_D6_AA,1996,AA,D6,14,62.0,Portage,PRT
 district,1996_D6_AA,1996,AA,D6,15,61.0,Forest Hills,FH
 district,1996_D6_AA,1996,AA,D6,16,46.0,Juniata Valley,JV
-district,1996_D6_AA,1996,AA,D6,17,39.5,Bellwood Antis,BA
+district,1996_D6_AA,1996,AA,D6,17,39.5,Bellwood-Antis,BA
 district,1996_D6_AA,1996,AA,D6,18,37.0,Claysburg-Kimmel,CK
 district,1996_D6_AA,1996,AA,D6,19,34.0,Richland,RCHL
 district,1996_D6_AA,1996,AA,D6,20,9.0,Westmont Hilltop,WMH
@@ -9518,7 +9518,7 @@ district,1997_D6_AA,1997,AA,D6,16,42.0,Portage,PRT
 district,1997_D6_AA,1997,AA,D6,17,39.5,Mount Union,MU
 district,1997_D6_AA,1997,AA,D6,18,37.0,Richland,RCHL
 district,1997_D6_AA,1997,AA,D6,19,17.0,Westmont Hilltop,WMH
-district,1997_D6_AA,1997,AA,D6,20,11.0,Bellwood Antis,BA
+district,1997_D6_AA,1997,AA,D6,20,11.0,Bellwood-Antis,BA
 district,1997_D6_AAA,1997,AAA,D6,1,286.5,Bald Eagle Area,BEA
 district,1997_D6_AAA,1997,AAA,D6,2,133.0,Philipsburg-Osceola,PO
 district,1997_D6_AAA,1997,AAA,D6,3,125.0,Lewistown,LWST
@@ -9785,7 +9785,7 @@ district,1998_D6_AA,1998,AA,D6,11,69.0,Moshannon Valley,MSV
 district,1998_D6_AA,1998,AA,D6,12,61.0,Richland,RCHL
 district,1998_D6_AA,1998,AA,D6,13,58.0,Westmont Hilltop,WMH
 district,1998_D6_AA,1998,AA,D6,14,57.0,Southern Huntingdon,SHD
-district,1998_D6_AA,1998,AA,D6,15,53.0,Bellwood Antis,BA
+district,1998_D6_AA,1998,AA,D6,15,53.0,Bellwood-Antis,BA
 district,1998_D6_AA,1998,AA,D6,16,29.0,Mount Union,MU
 district,1998_D6_AA,1998,AA,D6,17,18.0,Juniata Valley,JV
 district,1998_D6_AA,1998,AA,D6,18,16.0,Portage,PRT
@@ -10063,7 +10063,7 @@ district,1999_D6_AA,1999,AA,D6,15,55.0,Westmont Hilltop,WMH
 district,1999_D6_AA,1999,AA,D6,16,53.0,Portage,PRT
 district,1999_D6_AA,1999,AA,D6,17,48.0,Central Cambria,CCA
 district,1999_D6_AA,1999,AA,D6,17,48.0,Moshannon Valley,MSV
-district,1999_D6_AA,1999,AA,D6,19,47.0,Bellwood Antis,BA
+district,1999_D6_AA,1999,AA,D6,19,47.0,Bellwood-Antis,BA
 district,1999_D6_AA,1999,AA,D6,20,46.0,Juniata Valley,JV
 district,1999_D6_AA,1999,AA,D6,21,45.0,Mount Union,MU
 district,1999_D6_AA,1999,AA,D6,22,41.5,Central,CEN
@@ -10339,7 +10339,7 @@ district,2000_D6_AA,2000,AA,D6,17,64.5,Juniata Valley,JV
 district,2000_D6_AA,2000,AA,D6,19,54.0,Tyrone,TYR
 district,2000_D6_AA,2000,AA,D6,20,43.0,Central Cambria,CCA
 district,2000_D6_AA,2000,AA,D6,21,39.0,Bucktail,BUCK
-district,2000_D6_AA,2000,AA,D6,22,22.0,Bellwood Antis,BA
+district,2000_D6_AA,2000,AA,D6,22,22.0,Bellwood-Antis,BA
 district,2000_D6_AA,2000,AA,D6,23,4.0,Northern Cambria,NCMB
 district,2000_D6_AAA,2000,AAA,D6,1,198.5,State College,SC
 district,2000_D6_AAA,2000,AAA,D6,2,196.0,Philipsburg-Osceola,PO
@@ -10652,7 +10652,7 @@ district,2001_D6_AA,2001,AA,D6,16,61.5,Southern Huntingdon,SHD
 district,2001_D6_AA,2001,AA,D6,17,59.5,Glendale,GD
 district,2001_D6_AA,2001,AA,D6,18,55.0,Central Cambria,CCA
 district,2001_D6_AA,2001,AA,D6,19,46.0,Juniata Valley,JV
-district,2001_D6_AA,2001,AA,D6,20,43.0,Bellwood Antis,BA
+district,2001_D6_AA,2001,AA,D6,20,43.0,Bellwood-Antis,BA
 district,2001_D6_AA,2001,AA,D6,21,25.0,Marion Center,MAC
 district,2001_D6_AA,2001,AA,D6,22,2.0,Northern Cambria,NCMB
 district,2001_D6_AAA,2001,AAA,D6,1,222.5,State College,SC
@@ -10963,7 +10963,7 @@ district,2002_D6_AA,2002,AA,D6,11,87.0,Mount Union,MU
 district,2002_D6_AA,2002,AA,D6,12,77.0,Richland,RCHL
 district,2002_D6_AA,2002,AA,D6,13,74.0,Westmont Hilltop,WMH
 district,2002_D6_AA,2002,AA,D6,14,55.5,Marion Center,MAC
-district,2002_D6_AA,2002,AA,D6,15,51.5,Bellwood Antis,BA
+district,2002_D6_AA,2002,AA,D6,15,51.5,Bellwood-Antis,BA
 district,2002_D6_AA,2002,AA,D6,16,48.5,Moshannon Valley,MSV
 district,2002_D6_AA,2002,AA,D6,17,47.5,Glendale,GD
 district,2002_D6_AA,2002,AA,D6,18,36.0,Ligonier Valley,LGV
@@ -11284,7 +11284,7 @@ district,2003_D6_AA,2003,AA,D6,14,66.0,Juniata Valley,JV
 district,2003_D6_AA,2003,AA,D6,15,63.0,Blairsville,BLV
 district,2003_D6_AA,2003,AA,D6,16,60.5,Richland,RCHL
 district,2003_D6_AA,2003,AA,D6,17,52.0,Southern Huntingdon,SHD
-district,2003_D6_AA,2003,AA,D6,18,51.0,Bellwood Antis,BA
+district,2003_D6_AA,2003,AA,D6,18,51.0,Bellwood-Antis,BA
 district,2003_D6_AA,2003,AA,D6,18,51.0,Moshannon Valley,MSV
 district,2003_D6_AA,2003,AA,D6,20,39.5,Central,CEN
 district,2003_D6_AA,2003,AA,D6,21,34.0,Somerset,SMS
@@ -11610,7 +11610,7 @@ district,2004_D6_AA,2004,AA,D6,19,53.5,Juniata Valley,JV
 district,2004_D6_AA,2004,AA,D6,20,47.0,Cambria Heights,CAH
 district,2004_D6_AA,2004,AA,D6,21,35.5,Northern Cambria,NCMB
 district,2004_D6_AA,2004,AA,D6,22,33.0,Central,CEN
-district,2004_D6_AA,2004,AA,D6,23,11.0,Bellwood Antis,BA
+district,2004_D6_AA,2004,AA,D6,23,11.0,Bellwood-Antis,BA
 district,2004_D6_AA,2004,AA,D6,24,2.0,Ligonier Valley,LGV
 district,2004_D6_AAA,2004,AAA,D6,1,234.0,Bald Eagle Area,BEA
 district,2004_D6_AAA,2004,AAA,D6,2,181.5,State College,SC
@@ -11647,7 +11647,7 @@ district,2004_D7_AA,2004,AA,D7,21,10.5,Carlynton,CRLT
 district,2004_D7_AA,2004,AA,D7,22,9.0,Washington,WSH
 district,2004_D7_AA,2004,AA,D7,23,8.0,Steel Valley,STV
 district,2004_D7_AA,2004,AA,D7,24,7.0,Laurel,LRL
-district,2004_D7_AA,2004,AA,D7,25,4.0,Brownsville,BRWV
+district,2004_D7_AA,2004,AA,D7,25,4.0,Brownsville Area,BRWV
 district,2004_D7_AA,2004,AA,D7,26,3.0,Summit Academy,SMA
 district,2004_D7_AA,2004,AA,D7,27,1.0,South Allegheny,SALG
 district,2004_D7_AA,2004,AA,D7,28,0.0,Riverview,RV
@@ -11954,7 +11954,7 @@ district,2005_D6_AA,2005,AA,D6,20,20.5,Glendale,GD
 district,2005_D6_AA,2005,AA,D6,21,20.0,Central,CEN
 district,2005_D6_AA,2005,AA,D6,22,18.0,Ligonier Valley,LGV
 district,2005_D6_AA,2005,AA,D6,23,14.0,Moshannon Valley,MSV
-district,2005_D6_AA,2005,AA,D6,24,9.0,Bellwood Antis,BA
+district,2005_D6_AA,2005,AA,D6,24,9.0,Bellwood-Antis,BA
 district,2005_D6_AA,2005,AA,D6,25,8.0,Portage,PRT
 district,2005_D6_AAA,2005,AAA,D6,1,234.5,Bald Eagle Area,BEA
 district,2005_D6_AAA,2005,AAA,D6,2,181.0,Central Mountain,CMT
@@ -12298,7 +12298,7 @@ district,2006_D6_AA,2006,AA,D6,11,103.5,Huntingdon,HTD
 district,2006_D6_AA,2006,AA,D6,12,89.0,West Branch,WB
 district,2006_D6_AA,2006,AA,D6,13,87.5,Claysburg-Kimmel,CK
 district,2006_D6_AA,2006,AA,D6,14,86.5,Penn Cambria,PEC
-district,2006_D6_AA,2006,AA,D6,15,74.5,Bellwood Antis,BA
+district,2006_D6_AA,2006,AA,D6,15,74.5,Bellwood-Antis,BA
 district,2006_D6_AA,2006,AA,D6,16,74.0,Blairsville,BLV
 district,2006_D6_AA,2006,AA,D6,17,69.0,Cambria Heights,CAH
 district,2006_D6_AA,2006,AA,D6,18,62.5,United,UNTD
@@ -12670,7 +12670,7 @@ district,2007_D6_AA,2007,AA,D6,20,53.0,United,UNTD
 district,2007_D6_AA,2007,AA,D6,21,52.0,Juniata Valley,JV
 district,2007_D6_AA,2007,AA,D6,22,50.5,Moshannon Valley,MSV
 district,2007_D6_AA,2007,AA,D6,23,40.0,Glendale,GD
-district,2007_D6_AA,2007,AA,D6,24,39.0,Bellwood Antis,BA
+district,2007_D6_AA,2007,AA,D6,24,39.0,Bellwood-Antis,BA
 district,2007_D6_AA,2007,AA,D6,25,35.5,Central,CEN
 district,2007_D6_AAA,2007,AAA,D6,1,224.5,Central Mountain,CMT
 district,2007_D6_AAA,2007,AAA,D6,2,206.5,Bald Eagle Area,BEA
@@ -13034,7 +13034,7 @@ district,2008_D6_AA,2008,AA,D6,20,48.0,Marion Center,MAC
 district,2008_D6_AA,2008,AA,D6,21,47.0,Northern Cambria,NCMB
 district,2008_D6_AA,2008,AA,D6,22,42.0,Central,CEN
 district,2008_D6_AA,2008,AA,D6,23,40.0,Moshannon Valley,MSV
-district,2008_D6_AA,2008,AA,D6,24,39.5,Bellwood Antis,BA
+district,2008_D6_AA,2008,AA,D6,24,39.5,Bellwood-Antis,BA
 district,2008_D6_AA,2008,AA,D6,25,28.5,Juniata Valley,JV
 district,2008_D6_AA,2008,AA,D6,26,7.5,Sugar Valley Rural Charter,SVC
 district,2008_D6_AAA,2008,AAA,D6,1,226.0,Central Mountain,CMT
@@ -13336,7 +13336,7 @@ district,2009_D6_AA,2009,AA,D6,17,53.0,West Branch,WB
 district,2009_D6_AA,2009,AA,D6,20,47.0,Ligonier Valley,LGV
 district,2009_D6_AA,2009,AA,D6,21,46.0,Cambria Heights,CAH
 district,2009_D6_AA,2009,AA,D6,22,37.0,Northern Cambria,NCMB
-district,2009_D6_AA,2009,AA,D6,23,36.0,Bellwood Antis,BA
+district,2009_D6_AA,2009,AA,D6,23,36.0,Bellwood-Antis,BA
 district,2009_D6_AA,2009,AA,D6,24,19.5,Marion Center,MAC
 district,2009_D6_AA,2009,AA,D6,25,7.0,Central,CEN
 district,2009_D6_AAA,2009,AAA,D6,1,265.0,Central Mountain,CMT
@@ -13661,7 +13661,7 @@ district,2010_D6_AA,2010,AA,D6,12,99.5,Richland,RCHL
 district,2010_D6_AA,2010,AA,D6,13,80.5,Portage,PRT
 district,2010_D6_AA,2010,AA,D6,14,70.0,United,UNTD
 district,2010_D6_AA,2010,AA,D6,15,65.0,Ligonier Valley,LGV
-district,2010_D6_AA,2010,AA,D6,16,61.0,Bellwood Antis,BA
+district,2010_D6_AA,2010,AA,D6,16,61.0,Bellwood-Antis,BA
 district,2010_D6_AA,2010,AA,D6,17,60.5,Glendale,GD
 district,2010_D6_AA,2010,AA,D6,18,59.5,Cambria Heights,CAH
 district,2010_D6_AA,2010,AA,D6,19,53.5,Juniata Valley,JV
@@ -13947,7 +13947,7 @@ district,2011_D6_AA,2011,AA,D6,6,141.0,Penn Cambria,PEC
 district,2011_D6_AA,2011,AA,D6,7,100.5,Tyrone,TYR
 district,2011_D6_AA,2011,AA,D6,8,97.0,Central Cambria,CCA
 district,2011_D6_AA,2011,AA,D6,9,96.0,Cambria Heights,CAH
-district,2011_D6_AA,2011,AA,D6,10,89.5,Bellwood Antis,BA
+district,2011_D6_AA,2011,AA,D6,10,89.5,Bellwood-Antis,BA
 district,2011_D6_AA,2011,AA,D6,10,89.5,Penns Valley,PNV
 district,2011_D6_AA,2011,AA,D6,12,84.5,Moshannon Valley,MSV
 district,2011_D6_AA,2011,AA,D6,13,80.0,Marion Center,MAC
@@ -14046,7 +14046,7 @@ district,2012_D10_AAA,2012,AAA,D10,7,62.0,Warren,WRN
 district,2012_D10_AAA,2012,AAA,D10,8,61.5,Meadville,MDV
 district,2012_D10_AAA,2012,AAA,D10,9,59.0,Franklin,FRA
 district,2012_D10_AAA,2012,AAA,D10,10,48.5,Erie Strong Vincent,ESV
-district,2012_D10_AAA,2012,AAA,D10,11,38.0,East,EAST
+district,2012_D10_AAA,2012,AAA,D10,11,38.0,Erie East,EAST
 district,2012_D11_AA,2012,AA,D11,1,274.0,Bethlehem Catholic,BECA
 district,2012_D11_AA,2012,AA,D11,2,187.0,Pen Argyl,PAR
 district,2012_D11_AA,2012,AA,D11,3,154.0,Saucon Valley,SAV
@@ -14264,7 +14264,7 @@ district,2012_D6_AA,2012,AA,D6,8,111.0,Central Cambria,CCA
 district,2012_D6_AA,2012,AA,D6,9,110.0,West Branch,WB
 district,2012_D6_AA,2012,AA,D6,10,107.5,Forest Hills,FH
 district,2012_D6_AA,2012,AA,D6,11,100.0,Richland,RCHL
-district,2012_D6_AA,2012,AA,D6,12,98.0,Bellwood Antis,BA
+district,2012_D6_AA,2012,AA,D6,12,98.0,Bellwood-Antis,BA
 district,2012_D6_AA,2012,AA,D6,13,91.0,Tyrone,TYR
 district,2012_D6_AA,2012,AA,D6,14,87.0,Ligonier Valley,LGV
 district,2012_D6_AA,2012,AA,D6,15,83.0,Penns Valley,PNV
@@ -14357,7 +14357,7 @@ district,2013_D10_AAA,2013,AAA,D10,4,80.0,Meadville,MDV
 district,2013_D10_AAA,2013,AAA,D10,5,64.0,Titusville,TTV
 district,2013_D10_AAA,2013,AAA,D10,6,62.5,Warren,WRN
 district,2013_D10_AAA,2013,AAA,D10,7,47.0,Central Tech,CT
-district,2013_D10_AAA,2013,AAA,D10,8,45.0,East,EAST
+district,2013_D10_AAA,2013,AAA,D10,8,45.0,Erie East,EAST
 district,2013_D10_AAA,2013,AAA,D10,9,43.5,Erie Strong Vincent,ESV
 district,2013_D10_AAA,2013,AAA,D10,10,32.0,Oil City,OC
 district,2013_D11_AA,2013,AA,D11,1,317.5,Bethlehem Catholic,BECA
@@ -14608,7 +14608,7 @@ district,2013_D6_AA,2013,AA,D6,18,47.0,Penn Cambria,PEC
 district,2013_D6_AA,2013,AA,D6,19,39.0,Central Cambria,CCA
 district,2013_D6_AA,2013,AA,D6,20,37.0,Portage,PRT
 district,2013_D6_AA,2013,AA,D6,21,33.0,Tyrone,TYR
-district,2013_D6_AA,2013,AA,D6,22,32.5,Bellwood Antis,BA
+district,2013_D6_AA,2013,AA,D6,22,32.5,Bellwood-Antis,BA
 district,2013_D6_AA,2013,AA,D6,23,17.0,Glendale,GD
 district,2013_D6_AA,2013,AA,D6,24,9.0,Juniata Valley,JV
 district,2013_D6_AA,2013,AA,D6,25,2.0,Northern Cambria,NCMB
@@ -14696,7 +14696,7 @@ district,2014_D10_AAA,2014,AAA,D10,6,82.5,Warren,WRN
 district,2014_D10_AAA,2014,AAA,D10,7,72.0,Meadville,MDV
 district,2014_D10_AAA,2014,AAA,D10,8,45.0,Oil City,OC
 district,2014_D10_AAA,2014,AAA,D10,9,35.0,Central Tech,CT
-district,2014_D10_AAA,2014,AAA,D10,10,28.0,East,EAST
+district,2014_D10_AAA,2014,AAA,D10,10,28.0,Erie East,EAST
 district,2014_D11_AA,2014,AA,D11,1,302.5,Bethlehem Catholic,BECA
 district,2014_D11_AA,2014,AA,D11,2,127.0,Tri-Valley,TV
 district,2014_D11_AA,2014,AA,D11,3,126.0,North Schuylkill,NSC
@@ -14946,7 +14946,7 @@ district,2014_D6_AA,2014,AA,D6,16,78.5,Penn Cambria,PEC
 district,2014_D6_AA,2014,AA,D6,17,78.0,Central,CEN
 district,2014_D6_AA,2014,AA,D6,18,66.0,Glendale,GD
 district,2014_D6_AA,2014,AA,D6,19,58.0,Westmont Hilltop,WMH
-district,2014_D6_AA,2014,AA,D6,20,40.5,Bellwood Antis,BA
+district,2014_D6_AA,2014,AA,D6,20,40.5,Bellwood-Antis,BA
 district,2014_D6_AA,2014,AA,D6,21,33.0,Juniata Valley,JV
 district,2014_D6_AA,2014,AA,D6,22,32.0,Claysburg-Kimmel,CK
 district,2014_D6_AA,2014,AA,D6,23,26.5,Northern Cambria,NCMB
@@ -15019,7 +15019,7 @@ district,2015_D10_AAA,2015,AAA,D10,4,108.5,Warren,WRN
 district,2015_D10_AAA,2015,AAA,D10,5,106.0,Titusville,TTV
 district,2015_D10_AAA,2015,AAA,D10,6,87.0,Meadville,MDV
 district,2015_D10_AAA,2015,AAA,D10,7,16.0,Erie Strong Vincent,ESV
-district,2015_D10_AAA,2015,AAA,D10,8,10.0,East,EAST
+district,2015_D10_AAA,2015,AAA,D10,8,10.0,Erie East,EAST
 district,2015_D10_AAA,2015,AAA,D10,9,9.0,Oil City,OC
 district,2015_D10_AAA,2015,AAA,D10,10,6.0,Central Tech,CT
 district,2015_D11_AA,2015,AA,D11,1,167.0,Northern Lehigh,NLH
@@ -15278,7 +15278,7 @@ district,2015_D6_AA,2015,AA,D6,18,72.0,Tyrone,TYR
 district,2015_D6_AA,2015,AA,D6,19,52.0,Glendale,GD
 district,2015_D6_AA,2015,AA,D6,20,46.5,Claysburg-Kimmel,CK
 district,2015_D6_AA,2015,AA,D6,21,44.0,Richland,RCHL
-district,2015_D6_AA,2015,AA,D6,22,38.0,Bellwood Antis,BA
+district,2015_D6_AA,2015,AA,D6,22,38.0,Bellwood-Antis,BA
 district,2015_D6_AA,2015,AA,D6,23,28.5,Juniata Valley,JV
 district,2015_D6_AA,2015,AA,D6,24,20.5,Greater Johnstown,GJ
 district,2015_D6_AA,2015,AA,D6,25,16.0,Portage,PRT
@@ -15354,7 +15354,7 @@ district,2016_D10_AAA,2016,AAA,D10,4,113.5,Titusville,TTV
 district,2016_D10_AAA,2016,AAA,D10,5,94.0,Meadville,MDV
 district,2016_D10_AAA,2016,AAA,D10,6,85.5,Warren,WRN
 district,2016_D10_AAA,2016,AAA,D10,7,32.5,Oil City,OC
-district,2016_D10_AAA,2016,AAA,D10,8,25.0,East,EAST
+district,2016_D10_AAA,2016,AAA,D10,8,25.0,Erie East,EAST
 district,2016_D10_AAA,2016,AAA,D10,9,23.0,Erie Strong Vincent,ESV
 district,2016_D10_AAA,2016,AAA,D10,10,0.0,Central Tech,CT
 district,2016_D11_AA,2016,AA,D11,1,191.5,Saucon Valley,SAV
@@ -15616,7 +15616,7 @@ district,2016_D6_AA,2016,AA,D6,19,44.5,Richland,RCHL
 district,2016_D6_AA,2016,AA,D6,20,39.5,Glendale,GD
 district,2016_D6_AA,2016,AA,D6,21,34.5,Forest Hills,FH
 district,2016_D6_AA,2016,AA,D6,21,34.5,Juniata Valley,JV
-district,2016_D6_AA,2016,AA,D6,23,28.0,Bellwood Antis,BA
+district,2016_D6_AA,2016,AA,D6,23,28.0,Bellwood-Antis,BA
 district,2016_D6_AA,2016,AA,D6,24,26.0,United,UNTD
 district,2016_D6_AA,2016,AA,D6,25,24.0,St. Joseph's Academy,SJA
 district,2016_D6_AA,2016,AA,D6,26,18.0,Claysburg-Kimmel,CK
@@ -15696,7 +15696,7 @@ district,2017_D10_AAA,2017,AAA,D10,4,126.5,Erie McDowell,EMD
 district,2017_D10_AAA,2017,AAA,D10,5,87.0,Meadville,MDV
 district,2017_D10_AAA,2017,AAA,D10,6,38.0,Erie Strong Vincent,ESV
 district,2017_D10_AAA,2017,AAA,D10,7,34.5,Oil City,OC
-district,2017_D10_AAA,2017,AAA,D10,8,24.0,East,EAST
+district,2017_D10_AAA,2017,AAA,D10,8,24.0,Erie East,EAST
 district,2017_D10_AAA,2017,AAA,D10,9,14.0,Central Tech,CT
 district,2017_D11_AA,2017,AA,D11,1,220.5,Saucon Valley,SAV
 district,2017_D11_AA,2017,AA,D11,2,135.5,Wilson Area,WLA
@@ -15949,7 +15949,7 @@ district,2017_D6_AA,2017,AA,D6,20,56.0,Blairsville,BLV
 district,2017_D6_AA,2017,AA,D6,21,53.0,Southern Huntingdon,SHD
 district,2017_D6_AA,2017,AA,D6,22,49.5,Portage,PRT
 district,2017_D6_AA,2017,AA,D6,23,47.0,Claysburg-Kimmel,CK
-district,2017_D6_AA,2017,AA,D6,24,35.0,Bellwood Antis,BA
+district,2017_D6_AA,2017,AA,D6,24,35.0,Bellwood-Antis,BA
 district,2017_D6_AA,2017,AA,D6,25,27.0,United,UNTD
 district,2017_D6_AA,2017,AA,D6,26,24.0,Richland,RCHL
 district,2017_D6_AA,2017,AA,D6,27,23.0,Juniata Valley,JV
@@ -16282,7 +16282,7 @@ district,2018_D6_AA,2018,AA,D6,22,54.5,Central,CEN
 district,2018_D6_AA,2018,AA,D6,23,52.5,Blairsville,BLV
 district,2018_D6_AA,2018,AA,D6,24,51.0,Southern Huntingdon,SHD
 district,2018_D6_AA,2018,AA,D6,25,38.0,United,UNTD
-district,2018_D6_AA,2018,AA,D6,26,33.0,Bellwood Antis,BA
+district,2018_D6_AA,2018,AA,D6,26,33.0,Bellwood-Antis,BA
 district,2018_D6_AA,2018,AA,D6,27,11.0,Juniata Valley,JV
 district,2018_D6_AAA,2018,AAA,D6,1,205.0,Central Mountain,CMT
 district,2018_D6_AAA,2018,AAA,D6,2,190.0,Mifflin County,MFC
@@ -16605,7 +16605,7 @@ district,2019_D6_AA,2019,AA,D6,9,107.0,Huntingdon,HTD
 district,2019_D6_AA,2019,AA,D6,10,90.0,Penn Cambria,PEC
 district,2019_D6_AA,2019,AA,D6,11,86.0,Mount Union,MU
 district,2019_D6_AA,2019,AA,D6,12,83.5,Cambria Heights,CAH
-district,2019_D6_AA,2019,AA,D6,13,75.0,Bellwood Antis,BA
+district,2019_D6_AA,2019,AA,D6,13,75.0,Bellwood-Antis,BA
 district,2019_D6_AA,2019,AA,D6,14,74.0,Tyrone,TYR
 district,2019_D6_AA,2019,AA,D6,15,71.0,Richland,RCHL
 district,2019_D6_AA,2019,AA,D6,16,69.0,Central Cambria,CCA
@@ -16935,7 +16935,7 @@ district,2020_D6_AA,2020,AA,D6,7,145.0,Philipsburg-Osceola,PO
 district,2020_D6_AA,2020,AA,D6,8,136.0,St. Joseph's Academy,SJA
 district,2020_D6_AA,2020,AA,D6,9,111.0,Tyrone,TYR
 district,2020_D6_AA,2020,AA,D6,10,106.5,Marion Center,MAC
-district,2020_D6_AA,2020,AA,D6,11,97.5,Bellwood Antis,BA
+district,2020_D6_AA,2020,AA,D6,11,97.5,Bellwood-Antis,BA
 district,2020_D6_AA,2020,AA,D6,12,95.0,Richland,RCHL
 district,2020_D6_AA,2020,AA,D6,13,81.5,Mount Union,MU
 district,2020_D6_AA,2020,AA,D6,14,73.5,West Branch,WB
@@ -17227,7 +17227,7 @@ district,2021_D6_AA,2021,AA,D6,15,26.0,Cambria Heights,CAH
 district,2021_D6_AA,2021,AA,D6,16,23.0,Central Cambria,CCA
 district,2021_D6_AA,2021,AA,D6,17,22.5,Bishop McCort,BMCT
 district,2021_D6_AA,2021,AA,D6,18,19.5,Mount Union,MU
-district,2021_D6_AA,2021,AA,D6,19,7.0,Bellwood Antis,BA
+district,2021_D6_AA,2021,AA,D6,19,7.0,Bellwood-Antis,BA
 district,2021_D6_AA,2021,AA,D6,20,3.0,Blairsville,BLV
 district,2021_D6_AA,2021,AA,D6,20,3.0,Claysburg-Kimmel,CK
 district,2021_D6_AA,2021,AA,D6,22,2.0,Juniata Valley,JV
@@ -17533,7 +17533,7 @@ district,2022_D6_AA,2022,AA,D6,9,94.5,Marion Center,MAC
 district,2022_D6_AA,2022,AA,D6,10,88.0,Mount Union,MU
 district,2022_D6_AA,2022,AA,D6,11,80.0,United,UNTD
 district,2022_D6_AA,2022,AA,D6,12,75.0,Central Cambria,CCA
-district,2022_D6_AA,2022,AA,D6,13,74.0,Bellwood Antis,BA
+district,2022_D6_AA,2022,AA,D6,13,74.0,Bellwood-Antis,BA
 district,2022_D6_AA,2022,AA,D6,14,73.0,West Branch,WB
 district,2022_D6_AA,2022,AA,D6,15,63.0,River Valley,RIV
 district,2022_D6_AA,2022,AA,D6,16,61.0,Moshannon Valley,MSV
@@ -17860,7 +17860,7 @@ district,2023_D6_AA,2023,AA,D6,17,47.0,Moshannon Valley,MSV
 district,2023_D6_AA,2023,AA,D6,18,36.0,Claysburg-Kimmel,CK
 district,2023_D6_AA,2023,AA,D6,19,35.0,Central Cambria,CCA
 district,2023_D6_AA,2023,AA,D6,20,28.5,Central,CEN
-district,2023_D6_AA,2023,AA,D6,21,26.0,Bellwood Antis,BA
+district,2023_D6_AA,2023,AA,D6,21,26.0,Bellwood-Antis,BA
 district,2023_D6_AA,2023,AA,D6,22,22.0,Richland,RCHL
 district,2023_D6_AA,2023,AA,D6,23,20.0,Westmont Hilltop,WMH
 district,2023_D6_AA,2023,AA,D6,24,19.0,Juniata Valley,JV
@@ -18194,7 +18194,7 @@ district,2024_D6_AA,2024,AA,D6,23,36.0,Claysburg-Kimmel,CK
 district,2024_D6_AA,2024,AA,D6,24,28.0,Juniata Valley,JV
 district,2024_D6_AA,2024,AA,D6,25,15.0,West Shamokin,WSMK
 district,2024_D6_AA,2024,AA,D6,26,14.0,Southern Huntingdon,SHD
-district,2024_D6_AA,2024,AA,D6,27,2.0,Bellwood Antis,BA
+district,2024_D6_AA,2024,AA,D6,27,2.0,Bellwood-Antis,BA
 district,2024_D6_AAA,2024,AAA,D6,1,206.0,Central Mountain,CMT
 district,2024_D6_AAA,2024,AAA,D6,2,199.5,Mifflin County,MFC
 district,2024_D6_AAA,2024,AAA,D6,3,195.0,State College,SC
@@ -18865,7 +18865,7 @@ district,2026_D9_AA,2026,AA,D9,14,0.0,Cameron County,CCT
 regional,1951_South_West_single,1951,single,SW,1,25.0,Canonsburg,CNB
 regional,1951_South_West_single,1951,single,SW,2,23.0,Waynesburg Central,WYC
 regional,1951_South_West_single,1951,single,SW,3,22.0,Washington,WSH
-regional,1951_South_West_single,1951,single,SW,4,14.0,Greensburg,GRNB
+regional,1951_South_West_single,1951,single,SW,4,14.0,Greensburg Salem,GRNB
 regional,1951_South_West_single,1951,single,SW,4,14.0,Uniontown,UNT
 regional,1951_South_West_single,1951,single,SW,6,12.0,Chartiers Township,CHRT
 regional,1951_South_West_single,1951,single,SW,7,7.0,Shaler,SHA
@@ -18873,7 +18873,7 @@ regional,1951_South_West_single,1951,single,SW,8,6.0,Dormont,DRMT
 regional,1951_South_West_single,1951,single,SW,9,5.0,Carnegie,CRNG
 regional,1951_South_West_single,1951,single,SW,10,4.0,Burgettstown,BGT
 regional,1951_South_West_single,1951,single,SW,10,4.0,California,CAL
-regional,1951_South_West_single,1951,single,SW,12,3.0,Jefferson,JFS
+regional,1951_South_West_single,1951,single,SW,12,3.0,Jefferson-Morgan,JFS
 regional,1951_South_West_single,1951,single,SW,13,1.0,German Township,GMTW
 regional,1951_South_West_single,1951,single,SW,13,1.0,Jeannette,JNT
 regional,1951_South_West_single,1951,single,SW,13,1.0,Munhall,MNH
@@ -18893,10 +18893,10 @@ regional,1952_South_West_single,1952,single,SW,7,8.0,Chartiers Township,CHRT
 regional,1952_South_West_single,1952,single,SW,8,7.0,Uniontown,UNT
 regional,1952_South_West_single,1952,single,SW,9,6.0,West View,WSTV
 regional,1952_South_West_single,1952,single,SW,10,4.0,Munhall,MNH
-regional,1952_South_West_single,1952,single,SW,11,3.0,Jefferson,JFS
+regional,1952_South_West_single,1952,single,SW,11,3.0,Jefferson-Morgan,JFS
 regional,1952_South_West_single,1952,single,SW,12,1.0,California,CAL
 regional,1952_South_West_single,1952,single,SW,12,1.0,Claysville,CLYV
-regional,1952_South_West_single,1952,single,SW,12,1.0,Greensburg,GRNB
+regional,1952_South_West_single,1952,single,SW,12,1.0,Greensburg Salem,GRNB
 regional,1952_South_West_single,1952,single,SW,15,0.0,Burgettstown,BGT
 regional,1952_South_West_single,1952,single,SW,15,0.0,Center Township,CNTP
 regional,1952_South_West_single,1952,single,SW,15,0.0,Dormont,DRMT
@@ -19705,7 +19705,7 @@ regional,1982_North_West_AAA,1982,AAA,NW,10,25.5,Somerset,SMS
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Bellefonte,BLF
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Bradford,BRF
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,DuBois,DUB
-regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,East,EAST
+regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Erie East,EAST
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Erie Academy,EAC
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Erie McDowell,EMD
 regional,1982_North_West_AAA,1982,AAA,NW,11,0.0,Franklin,FRA
@@ -20193,7 +20193,7 @@ regional,1984_North_West_AA,1984,AA,NW,25,14.0,Berlin Brothersvalley,BBV
 regional,1984_North_West_AA,1984,AA,NW,26,13.0,Curwensville,CWV
 regional,1984_North_West_AA,1984,AA,NW,26,13.0,Eisenhower,EH
 regional,1984_North_West_AA,1984,AA,NW,26,13.0,Oswayo Valley,OSV
-regional,1984_North_West_AA,1984,AA,NW,29,12.0,Bellwood Antis,BA
+regional,1984_North_West_AA,1984,AA,NW,29,12.0,Bellwood-Antis,BA
 regional,1984_North_West_AA,1984,AA,NW,29,12.0,Clarion,CLR
 regional,1984_North_West_AA,1984,AA,NW,29,12.0,Commodore Perry,CP
 regional,1984_North_West_AA,1984,AA,NW,29,12.0,Tyrone,TYR
@@ -20505,7 +20505,7 @@ regional,1985_North_West_AA,1985,AA,NW,46,3.0,Portage,PRT
 regional,1985_North_West_AA,1985,AA,NW,46,3.0,Saltsburg,SLTB
 regional,1985_North_West_AA,1985,AA,NW,51,2.0,Blairsville,BLV
 regional,1985_North_West_AA,1985,AA,NW,51,2.0,North East,NE
-regional,1985_North_West_AA,1985,AA,NW,53,0.0,Bellwood Antis,BA
+regional,1985_North_West_AA,1985,AA,NW,53,0.0,Bellwood-Antis,BA
 regional,1985_North_West_AA,1985,AA,NW,53,0.0,Brookville,BRV
 regional,1985_North_West_AA,1985,AA,NW,53,0.0,Clarion,CLR
 regional,1985_North_West_AA,1985,AA,NW,53,0.0,Curwensville,CWV
@@ -20770,7 +20770,7 @@ regional,1986_North_West_AA,1986,AA,NW,24,14.0,Brookville,BRV
 regional,1986_North_West_AA,1986,AA,NW,24,14.0,Iroquois,IRQ
 regional,1986_North_West_AA,1986,AA,NW,24,14.0,Tussey Mountain,TM
 regional,1986_North_West_AA,1986,AA,NW,27,13.0,Kennedy Christian,KCHR
-regional,1986_North_West_AA,1986,AA,NW,28,12.0,Bellwood Antis,BA
+regional,1986_North_West_AA,1986,AA,NW,28,12.0,Bellwood-Antis,BA
 regional,1986_North_West_AA,1986,AA,NW,29,11.0,Conneaut Lake,CLK
 regional,1986_North_West_AA,1986,AA,NW,29,11.0,Hickory,HCK
 regional,1986_North_West_AA,1986,AA,NW,31,9.5,Curwensville,CWV
@@ -21658,7 +21658,7 @@ regional,1989_North_West_AA,1989,AA,NW,35,5.0,Saegertown,SGT
 regional,1989_North_West_AA,1989,AA,NW,36,4.0,Clarion,CLR
 regional,1989_North_West_AA,1989,AA,NW,36,4.0,Smethport,SMP
 regional,1989_North_West_AA,1989,AA,NW,36,4.0,Union City,UC
-regional,1989_North_West_AA,1989,AA,NW,39,3.0,East,EAST
+regional,1989_North_West_AA,1989,AA,NW,39,3.0,Erie East,EAST
 regional,1989_North_West_AA,1989,AA,NW,40,2.0,Cranberry,CRB
 regional,1989_North_West_AA,1989,AA,NW,40,2.0,Lakeview,LKV
 regional,1989_North_West_AA,1989,AA,NW,42,0.0,Cambridge Springs,CS
@@ -21934,7 +21934,7 @@ regional,1990_North_West_AA,1990,AA,NW,39,3.0,Brockway,BRWY
 regional,1990_North_West_AA,1990,AA,NW,40,2.0,Bucktail,BUCK
 regional,1990_North_West_AA,1990,AA,NW,40,2.0,Hickory,HCK
 regional,1990_North_West_AA,1990,AA,NW,42,1.0,Union City,UC
-regional,1990_North_West_AA,1990,AA,NW,43,0.0,Bellwood Antis,BA
+regional,1990_North_West_AA,1990,AA,NW,43,0.0,Bellwood-Antis,BA
 regional,1990_North_West_AA,1990,AA,NW,43,0.0,Cambridge Springs,CS
 regional,1990_North_West_AA,1990,AA,NW,43,0.0,Curwensville,CWV
 regional,1990_North_West_AA,1990,AA,NW,43,0.0,Ferndale,FRND
@@ -22223,7 +22223,7 @@ regional,1991_North_West_AA,1991,AA,NW,35,7.0,Commodore Perry,CP
 regional,1991_North_West_AA,1991,AA,NW,35,7.0,Ferndale,FRND
 regional,1991_North_West_AA,1991,AA,NW,35,7.0,Youngsville,YNG
 regional,1991_North_West_AA,1991,AA,NW,38,6.0,Saegertown,SGT
-regional,1991_North_West_AA,1991,AA,NW,39,5.0,Bellwood Antis,BA
+regional,1991_North_West_AA,1991,AA,NW,39,5.0,Bellwood-Antis,BA
 regional,1991_North_West_AA,1991,AA,NW,40,4.0,Forest Hills,FH
 regional,1991_North_West_AA,1991,AA,NW,40,4.0,United,UNTD
 regional,1991_North_West_AA,1991,AA,NW,42,3.0,Eisenhower,EH
@@ -22503,7 +22503,7 @@ regional,1992_North_West_AA,1992,AA,NW,24,18.0,Mercer,MER
 regional,1992_North_West_AA,1992,AA,NW,24,18.0,Saegertown,SGT
 regional,1992_North_West_AA,1992,AA,NW,27,14.0,Cameron County,CCT
 regional,1992_North_West_AA,1992,AA,NW,27,14.0,Seneca,SEN
-regional,1992_North_West_AA,1992,AA,NW,29,13.0,Bellwood Antis,BA
+regional,1992_North_West_AA,1992,AA,NW,29,13.0,Bellwood-Antis,BA
 regional,1992_North_West_AA,1992,AA,NW,30,11.0,Clarion,CLR
 regional,1992_North_West_AA,1992,AA,NW,31,9.0,Mount Union,MU
 regional,1992_North_West_AA,1992,AA,NW,32,7.0,Greenville,GRNV
@@ -22830,7 +22830,7 @@ regional,1993_North_West_AA,1993,AA,NW,34,5.0,Mercer,MER
 regional,1993_North_West_AA,1993,AA,NW,37,4.0,Coudersport,CDP
 regional,1993_North_West_AA,1993,AA,NW,37,4.0,Tyrone,TYR
 regional,1993_North_West_AA,1993,AA,NW,39,3.0,Conneaut Lake,CLK
-regional,1993_North_West_AA,1993,AA,NW,40,2.0,Bellwood Antis,BA
+regional,1993_North_West_AA,1993,AA,NW,40,2.0,Bellwood-Antis,BA
 regional,1993_North_West_AA,1993,AA,NW,40,2.0,Kane,KANE
 regional,1993_North_West_AA,1993,AA,NW,40,2.0,Sugar Valley,SGVY
 regional,1993_North_West_AA,1993,AA,NW,40,2.0,United,UNTD
@@ -23113,7 +23113,7 @@ regional,1994_North_West_AA,1994,AA,NW,36,5.0,West Branch,WB
 regional,1994_North_West_AA,1994,AA,NW,38,4.0,Johnsonburg,JNBG
 regional,1994_North_West_AA,1994,AA,NW,38,4.0,United,UNTD
 regional,1994_North_West_AA,1994,AA,NW,40,3.0,Clarion,CLR
-regional,1994_North_West_AA,1994,AA,NW,41,2.0,Bellwood Antis,BA
+regional,1994_North_West_AA,1994,AA,NW,41,2.0,Bellwood-Antis,BA
 regional,1994_North_West_AA,1994,AA,NW,42,1.0,Brockway,BRWY
 regional,1994_North_West_AA,1994,AA,NW,43,0.0,Claysburg-Kimmel,CK
 regional,1994_North_West_AA,1994,AA,NW,43,0.0,Girard,GIR
@@ -23390,7 +23390,7 @@ regional,1995_North_West_AA,1995,AA,NW,35,2.0,Port Allegany,PAL
 regional,1995_North_West_AA,1995,AA,NW,38,1.0,Brockway,BRWY
 regional,1995_North_West_AA,1995,AA,NW,38,1.0,Sharpsville,SHRP
 regional,1995_North_West_AA,1995,AA,NW,38,1.0,United,UNTD
-regional,1995_North_West_AA,1995,AA,NW,41,0.0,Bellwood Antis,BA
+regional,1995_North_West_AA,1995,AA,NW,41,0.0,Bellwood-Antis,BA
 regional,1995_North_West_AA,1995,AA,NW,41,0.0,Erie Strong Vincent,ESV
 regional,1995_North_West_AA,1995,AA,NW,41,0.0,Glendale,GD
 regional,1995_North_West_AA,1995,AA,NW,41,0.0,North East,NE
@@ -23653,7 +23653,7 @@ regional,1996_North_West_AA,1996,AA,NW,34,3.0,Moshannon Valley,MSV
 regional,1996_North_West_AA,1996,AA,NW,34,3.0,United,UNTD
 regional,1996_North_West_AA,1996,AA,NW,37,2.0,Brockway,BRWY
 regional,1996_North_West_AA,1996,AA,NW,37,2.0,Mercer,MER
-regional,1996_North_West_AA,1996,AA,NW,39,0.0,Bellwood Antis,BA
+regional,1996_North_West_AA,1996,AA,NW,39,0.0,Bellwood-Antis,BA
 regional,1996_North_West_AA,1996,AA,NW,39,0.0,Clarion,CLR
 regional,1996_North_West_AA,1996,AA,NW,39,0.0,Kane,KANE
 regional,1996_North_West_AA,1996,AA,NW,39,0.0,North East,NE
@@ -24724,7 +24724,7 @@ regional,1999_South_West_AA,1999,AA,SW,36,11.0,North Star,NST
 regional,1999_South_West_AA,1999,AA,SW,36,11.0,Riverview,RV
 regional,1999_South_West_AA,1999,AA,SW,38,9.5,Penns Valley,PNV
 regional,1999_South_West_AA,1999,AA,SW,39,8.5,Northern Bedford,NOB
-regional,1999_South_West_AA,1999,AA,SW,40,8.0,Bellwood Antis,BA
+regional,1999_South_West_AA,1999,AA,SW,40,8.0,Bellwood-Antis,BA
 regional,1999_South_West_AA,1999,AA,SW,40,8.0,Cambria Heights,CAH
 regional,1999_South_West_AA,1999,AA,SW,42,7.0,Avella,AVL
 regional,1999_South_West_AA,1999,AA,SW,42,7.0,Portage,PRT
@@ -24740,7 +24740,7 @@ regional,1999_South_West_AA,1999,AA,SW,52,2.0,Greensburg Central Catholic,GCC
 regional,1999_South_West_AA,1999,AA,SW,52,2.0,Juniata Valley,JV
 regional,1999_South_West_AA,1999,AA,SW,52,2.0,Southern Huntingdon,SHD
 regional,1999_South_West_AA,1999,AA,SW,55,1.0,Mount Union,MU
-regional,1999_South_West_AA,1999,AA,SW,56,0.0,Brownsville,BRWV
+regional,1999_South_West_AA,1999,AA,SW,56,0.0,Brownsville Area,BRWV
 regional,1999_South_West_AA,1999,AA,SW,56,0.0,Chartiers-Houston,CHH
 regional,1999_South_West_AA,1999,AA,SW,56,0.0,Fort Cherry,FC
 regional,1999_South_West_AA,1999,AA,SW,56,0.0,Rockwood,RKW
@@ -25125,7 +25125,7 @@ regional,2000_South_West_AA,2000,AA,SW,42,4.0,Chestnut Ridge,CNRG
 regional,2000_South_West_AA,2000,AA,SW,42,4.0,Hyndman,HYN
 regional,2000_South_West_AA,2000,AA,SW,44,3.0,Jefferson-Morgan,JM
 regional,2000_South_West_AA,2000,AA,SW,44,3.0,Moshannon Valley,MSV
-regional,2000_South_West_AA,2000,AA,SW,46,0.0,Brownsville,BRWV
+regional,2000_South_West_AA,2000,AA,SW,46,0.0,Brownsville Area,BRWV
 regional,2000_South_West_AA,2000,AA,SW,46,0.0,Central,CEN
 regional,2000_South_West_AA,2000,AA,SW,46,0.0,Central Cambria,CCA
 regional,2000_South_West_AA,2000,AA,SW,46,0.0,Southern Huntingdon,SHD
@@ -25505,7 +25505,7 @@ regional,2001_South_West_AA,2001,AA,SW,40,9.0,Ligonier Valley,LGV
 regional,2001_South_West_AA,2001,AA,SW,41,7.5,Southern Huntingdon,SHD
 regional,2001_South_West_AA,2001,AA,SW,42,7.0,Beth-Center,BCTR
 regional,2001_South_West_AA,2001,AA,SW,42,7.0,Central Cambria,CCA
-regional,2001_South_West_AA,2001,AA,SW,44,4.0,Bellwood Antis,BA
+regional,2001_South_West_AA,2001,AA,SW,44,4.0,Bellwood-Antis,BA
 regional,2001_South_West_AA,2001,AA,SW,44,4.0,Meyersdale,MYD
 regional,2001_South_West_AA,2001,AA,SW,44,4.0,South Side Beaver,SSB
 regional,2001_South_West_AA,2001,AA,SW,47,3.0,Chartiers-Houston,CHH
@@ -25900,13 +25900,13 @@ regional,2002_South_West_AA,2002,AA,SW,40,5.0,Central,CEN
 regional,2002_South_West_AA,2002,AA,SW,41,4.0,Chestnut Ridge,CNRG
 regional,2002_South_West_AA,2002,AA,SW,41,4.0,Meyersdale,MYD
 regional,2002_South_West_AA,2002,AA,SW,43,3.0,Ligonier Valley,LGV
-regional,2002_South_West_AA,2002,AA,SW,44,2.0,Bellwood Antis,BA
+regional,2002_South_West_AA,2002,AA,SW,44,2.0,Bellwood-Antis,BA
 regional,2002_South_West_AA,2002,AA,SW,44,2.0,Glendale,GD
 regional,2002_South_West_AA,2002,AA,SW,44,2.0,Marion Center,MAC
 regional,2002_South_West_AA,2002,AA,SW,44,2.0,Moshannon Valley,MSV
 regional,2002_South_West_AA,2002,AA,SW,44,2.0,Tussey Mountain,TM
 regional,2002_South_West_AA,2002,AA,SW,44,2.0,Westmont Hilltop,WMH
-regional,2002_South_West_AA,2002,AA,SW,50,1.0,Brownsville,BRWV
+regional,2002_South_West_AA,2002,AA,SW,50,1.0,Brownsville Area,BRWV
 regional,2002_South_West_AA,2002,AA,SW,50,1.0,South Park,SPK
 regional,2002_South_West_AA,2002,AA,SW,52,0.0,Carlynton,CRLT
 regional,2002_South_West_AA,2002,AA,SW,52,0.0,Southern Huntingdon,SHD
@@ -26298,7 +26298,7 @@ regional,2003_South_West_AA,2003,AA,SW,44,5.0,Conemaugh Township,CMTW
 regional,2003_South_West_AA,2003,AA,SW,46,4.0,Riverview,RV
 regional,2003_South_West_AA,2003,AA,SW,46,4.0,Tussey Mountain,TM
 regional,2003_South_West_AA,2003,AA,SW,48,3.0,Our Lady of the Sacred Heart,OLSH
-regional,2003_South_West_AA,2003,AA,SW,49,0.0,Bellwood Antis,BA
+regional,2003_South_West_AA,2003,AA,SW,49,0.0,Bellwood-Antis,BA
 regional,2003_South_West_AA,2003,AA,SW,49,0.0,Bentworth,BNW
 regional,2003_South_West_AA,2003,AA,SW,49,0.0,Blairsville,BLV
 regional,2003_South_West_AA,2003,AA,SW,49,0.0,Central,CEN
@@ -27502,7 +27502,7 @@ regional,2006_South_West_AA,2006,AA,SW,39,9.0,Burgettstown,BGT
 regional,2006_South_West_AA,2006,AA,SW,39,9.0,Meyersdale,MYD
 regional,2006_South_West_AA,2006,AA,SW,42,8.0,Conemaugh Township,CMTW
 regional,2006_South_West_AA,2006,AA,SW,42,8.0,Everett,EV
-regional,2006_South_West_AA,2006,AA,SW,44,6.0,Bellwood Antis,BA
+regional,2006_South_West_AA,2006,AA,SW,44,6.0,Bellwood-Antis,BA
 regional,2006_South_West_AA,2006,AA,SW,44,6.0,Charleroi,CHL
 regional,2006_South_West_AA,2006,AA,SW,44,6.0,Jefferson-Morgan,JM
 regional,2006_South_West_AA,2006,AA,SW,44,6.0,Marion Center,MAC
@@ -27918,7 +27918,7 @@ regional,2007_South_West_AA,2007,AA,SW,48,2.0,Elderton,ELD
 regional,2007_South_West_AA,2007,AA,SW,48,2.0,Portage,PRT
 regional,2007_South_West_AA,2007,AA,SW,51,1.0,Laurel,LRL
 regional,2007_South_West_AA,2007,AA,SW,51,1.0,United,UNTD
-regional,2007_South_West_AA,2007,AA,SW,53,0.0,Bellwood Antis,BA
+regional,2007_South_West_AA,2007,AA,SW,53,0.0,Bellwood-Antis,BA
 regional,2007_South_West_AA,2007,AA,SW,53,0.0,Center,CNTR
 regional,2007_South_West_AA,2007,AA,SW,53,0.0,Meyersdale,MYD
 regional,2007_South_West_AA,2007,AA,SW,53,0.0,Riverview,RV
@@ -29147,7 +29147,7 @@ regional,2010_South_West_AA,2010,AA,SW,44,5.0,Southmoreland,SML
 regional,2010_South_West_AA,2010,AA,SW,45,4.0,Berlin Brothersvalley,BBV
 regional,2010_South_West_AA,2010,AA,SW,45,4.0,Laurel,LRL
 regional,2010_South_West_AA,2010,AA,SW,45,4.0,West Greene,WG
-regional,2010_South_West_AA,2010,AA,SW,48,3.0,Bellwood Antis,BA
+regional,2010_South_West_AA,2010,AA,SW,48,3.0,Bellwood-Antis,BA
 regional,2010_South_West_AA,2010,AA,SW,48,3.0,Kittanning,KIT
 regional,2010_South_West_AA,2010,AA,SW,48,3.0,Tussey Mountain,TM
 regional,2010_South_West_AA,2010,AA,SW,51,1.0,Highlands,HL
@@ -29560,7 +29560,7 @@ regional,2011_South_West_AA,2011,AA,SW,34,13.0,Carlynton,CRLT
 regional,2011_South_West_AA,2011,AA,SW,35,12.5,Burgettstown,BGT
 regional,2011_South_West_AA,2011,AA,SW,36,12.0,Somerset,SMS
 regional,2011_South_West_AA,2011,AA,SW,36,12.0,United,UNTD
-regional,2011_South_West_AA,2011,AA,SW,38,11.0,Bellwood Antis,BA
+regional,2011_South_West_AA,2011,AA,SW,38,11.0,Bellwood-Antis,BA
 regional,2011_South_West_AA,2011,AA,SW,38,11.0,Berlin Brothersvalley,BBV
 regional,2011_South_West_AA,2011,AA,SW,40,9.0,South Allegheny,SALG
 regional,2011_South_West_AA,2011,AA,SW,40,9.0,West Greene,WG
@@ -29773,7 +29773,7 @@ regional,2012_North_West_AAA,2012,AAA,NW,24,14.0,Erie Strong Vincent,ESV
 regional,2012_North_West_AAA,2012,AAA,NW,25,10.0,Carrick,CAR
 regional,2012_North_West_AAA,2012,AAA,NW,26,9.0,St. Marys,STM
 regional,2012_North_West_AAA,2012,AAA,NW,26,9.0,Warren,WRN
-regional,2012_North_West_AAA,2012,AAA,NW,28,4.0,East,EAST
+regional,2012_North_West_AAA,2012,AAA,NW,28,4.0,Erie East,EAST
 regional,2012_North_West_AAA,2012,AAA,NW,28,4.0,Obama Academy,OBA
 regional,2012_North_West_AAA,2012,AAA,NW,30,2.0,Corry Area,COR
 regional,2012_North_West_AAA,2012,AAA,NW,31,0.0,Perry Traditional Acad.,PTA
@@ -29970,7 +29970,7 @@ regional,2012_South_West_AA,2012,AA,SW,16,38.0,Juniata,JUN
 regional,2012_South_West_AA,2012,AA,SW,17,37.0,Northern Bedford,NOB
 regional,2012_South_West_AA,2012,AA,SW,18,36.0,Central Cambria,CCA
 regional,2012_South_West_AA,2012,AA,SW,19,34.0,Conemaugh Township,CMTW
-regional,2012_South_West_AA,2012,AA,SW,20,31.0,Bellwood Antis,BA
+regional,2012_South_West_AA,2012,AA,SW,20,31.0,Bellwood-Antis,BA
 regional,2012_South_West_AA,2012,AA,SW,21,28.5,South Side Beaver,SSB
 regional,2012_South_West_AA,2012,AA,SW,22,28.0,Keystone Oaks,KO
 regional,2012_South_West_AA,2012,AA,SW,22,28.0,Meyersdale,MYD
@@ -30216,7 +30216,7 @@ regional,2013_North_West_AAA,2013,AAA,NW,26,9.5,Oil City,OC
 regional,2013_North_West_AAA,2013,AAA,NW,27,9.0,Carrick,CAR
 regional,2013_North_West_AAA,2013,AAA,NW,28,8.0,Williamsport,WPT
 regional,2013_North_West_AAA,2013,AAA,NW,29,7.0,State College,SC
-regional,2013_North_West_AAA,2013,AAA,NW,30,4.0,East,EAST
+regional,2013_North_West_AAA,2013,AAA,NW,30,4.0,Erie East,EAST
 regional,2013_North_West_AAA,2013,AAA,NW,30,4.0,Greater Johnstown,GJ
 regional,2013_North_West_AAA,2013,AAA,NW,32,3.0,Obama Academy,OBA
 regional,2013_North_West_AAA,2013,AAA,NW,33,2.0,Brashear,BRS
@@ -30631,7 +30631,7 @@ regional,2014_North_West_AAA,2014,AAA,NW,23,23.0,Meadville,MDV
 regional,2014_North_West_AAA,2014,AAA,NW,24,21.0,Williamsport,WPT
 regional,2014_North_West_AAA,2014,AAA,NW,25,13.0,Carrick,CAR
 regional,2014_North_West_AAA,2014,AAA,NW,25,13.0,Taylor Allderdice,TA
-regional,2014_North_West_AAA,2014,AAA,NW,27,7.0,East,EAST
+regional,2014_North_West_AAA,2014,AAA,NW,27,7.0,Erie East,EAST
 regional,2014_North_West_AAA,2014,AAA,NW,28,4.0,Bradford,BRF
 regional,2014_North_West_AAA,2014,AAA,NW,28,4.0,Central Tech,CT
 regional,2014_North_West_AAA,2014,AAA,NW,30,2.0,Obama Academy,OBA
@@ -31053,7 +31053,7 @@ regional,2015_North_West_AAA,2015,AAA,NW,24,5.0,Carrick,CAR
 regional,2015_North_West_AAA,2015,AAA,NW,25,4.0,Brashear,BRS
 regional,2015_North_West_AAA,2015,AAA,NW,25,4.0,Obama Academy,OBA
 regional,2015_North_West_AAA,2015,AAA,NW,27,2.0,Bradford,BRF
-regional,2015_North_West_AAA,2015,AAA,NW,28,1.0,East,EAST
+regional,2015_North_West_AAA,2015,AAA,NW,28,1.0,Erie East,EAST
 regional,2015_North_West_AAA,2015,AAA,NW,28,1.0,Perry Traditional Acad.,PTA
 regional,2015_South_Central_AAA,2015,AAA,SC,1,131.0,Cumberland Valley,CUV
 regional,2015_South_Central_AAA,2015,AAA,SC,2,112.5,Central Dauphin,CD
@@ -31266,7 +31266,7 @@ regional,2015_South_West_AA,2015,AA,SW,38,10.0,Richland,RCHL
 regional,2015_South_West_AA,2015,AA,SW,38,10.0,Somerset,SMS
 regional,2015_South_West_AA,2015,AA,SW,43,9.0,Yough,YGH
 regional,2015_South_West_AA,2015,AA,SW,44,7.0,West Shamokin,WSMK
-regional,2015_South_West_AA,2015,AA,SW,45,6.0,Bellwood Antis,BA
+regional,2015_South_West_AA,2015,AA,SW,45,6.0,Bellwood-Antis,BA
 regional,2015_South_West_AA,2015,AA,SW,46,5.0,Glendale,GD
 regional,2015_South_West_AA,2015,AA,SW,46,5.0,McGuffey,MCG
 regional,2015_South_West_AA,2015,AA,SW,48,4.0,Southern Huntingdon,SHD
@@ -31483,7 +31483,7 @@ regional,2016_North_West_AAA,2016,AAA,NW,24,8.0,Taylor Allderdice,TA
 regional,2016_North_West_AAA,2016,AAA,NW,25,4.0,Bradford,BRF
 regional,2016_North_West_AAA,2016,AAA,NW,26,3.0,Brashear,BRS
 regional,2016_North_West_AAA,2016,AAA,NW,27,2.0,Westinghouse,WH
-regional,2016_North_West_AAA,2016,AAA,NW,28,1.0,East,EAST
+regional,2016_North_West_AAA,2016,AAA,NW,28,1.0,Erie East,EAST
 regional,2016_North_West_AAA,2016,AAA,NW,28,1.0,Erie Strong Vincent,ESV
 regional,2016_North_West_AAA,2016,AAA,NW,28,1.0,Oil City,OC
 regional,2016_North_West_AAA,2016,AAA,NW,31,0.0,Perry Traditional Acad.,PTA
@@ -31698,7 +31698,7 @@ regional,2016_South_West_AA,2016,AA,SW,48,2.0,Frazier,FRZ
 regional,2016_South_West_AA,2016,AA,SW,48,2.0,Hyndman,HYN
 regional,2016_South_West_AA,2016,AA,SW,48,2.0,Portage,PRT
 regional,2016_South_West_AA,2016,AA,SW,48,2.0,West Greene,WG
-regional,2016_South_West_AA,2016,AA,SW,53,1.0,Bellwood Antis,BA
+regional,2016_South_West_AA,2016,AA,SW,53,1.0,Bellwood-Antis,BA
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Carlynton,CRLT
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Conemaugh Township,CMTW
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Greensburg Central Catholic,GCC
@@ -31899,7 +31899,7 @@ regional,2017_North_West_AAA,2017,AAA,NW,20,16.5,Somerset,SMS
 regional,2017_North_West_AAA,2017,AAA,NW,21,15.0,Philipsburg-Osceola,PO
 regional,2017_North_West_AAA,2017,AAA,NW,22,13.0,Carrick,CAR
 regional,2017_North_West_AAA,2017,AAA,NW,23,12.0,Oil City,OC
-regional,2017_North_West_AAA,2017,AAA,NW,24,9.0,East,EAST
+regional,2017_North_West_AAA,2017,AAA,NW,24,9.0,Erie East,EAST
 regional,2017_North_West_AAA,2017,AAA,NW,25,8.0,Erie Strong Vincent,ESV
 regional,2017_North_West_AAA,2017,AAA,NW,26,6.0,Perry Traditional Acad.,PTA
 regional,2017_North_West_AAA,2017,AAA,NW,27,3.0,Obama Academy,OBA
@@ -32955,7 +32955,7 @@ regional,2019_South_West_AA,2019,AA,SW,37,15.0,Bentworth,BNW
 regional,2019_South_West_AA,2019,AA,SW,37,15.0,Richland,RCHL
 regional,2019_South_West_AA,2019,AA,SW,39,14.0,Valley,VLY
 regional,2019_South_West_AA,2019,AA,SW,40,13.0,Blairsville,BLV
-regional,2019_South_West_AA,2019,AA,SW,41,12.0,Bellwood Antis,BA
+regional,2019_South_West_AA,2019,AA,SW,41,12.0,Bellwood-Antis,BA
 regional,2019_South_West_AA,2019,AA,SW,41,12.0,Central Cambria,CCA
 regional,2019_South_West_AA,2019,AA,SW,41,12.0,Huntingdon,HTD
 regional,2019_South_West_AA,2019,AA,SW,41,12.0,Marion Center,MAC
@@ -33364,7 +33364,7 @@ regional,2020_South_West_AA,2020,AA,SW,19,36.0,Richland,RCHL
 regional,2020_South_West_AA,2020,AA,SW,20,34.0,Mount Union,MU
 regional,2020_South_West_AA,2020,AA,SW,21,33.5,Freedom Area,FRE
 regional,2020_South_West_AA,2020,AA,SW,22,32.0,Laurel,LRL
-regional,2020_South_West_AA,2020,AA,SW,23,31.0,Bellwood Antis,BA
+regional,2020_South_West_AA,2020,AA,SW,23,31.0,Bellwood-Antis,BA
 regional,2020_South_West_AA,2020,AA,SW,24,29.5,Frazier,FRZ
 regional,2020_South_West_AA,2020,AA,SW,25,29.0,Northern Bedford,NOB
 regional,2020_South_West_AA,2020,AA,SW,26,28.5,Marion Center,MAC
@@ -34093,7 +34093,7 @@ regional,2022_South_West_AA,2022,AA,SW,34,17.0,Northern Bedford,NOB
 regional,2022_South_West_AA,2022,AA,SW,36,15.0,Berlin Brothersvalley,BBV
 regional,2022_South_West_AA,2022,AA,SW,36,15.0,Fort Cherry,FC
 regional,2022_South_West_AA,2022,AA,SW,36,15.0,Jefferson-Morgan,JM
-regional,2022_South_West_AA,2022,AA,SW,39,12.0,Bellwood Antis,BA
+regional,2022_South_West_AA,2022,AA,SW,39,12.0,Bellwood-Antis,BA
 regional,2022_South_West_AA,2022,AA,SW,39,12.0,Hopewell,HPW
 regional,2022_South_West_AA,2022,AA,SW,39,12.0,Meyersdale,MYD
 regional,2022_South_West_AA,2022,AA,SW,42,11.5,Conemaugh Township,CMTW
@@ -34511,7 +34511,7 @@ regional,2023_South_West_AA,2023,AA,SW,50,8.0,Central Cambria,CCA
 regional,2023_South_West_AA,2023,AA,SW,51,6.0,Elizabeth Forward,EF
 regional,2023_South_West_AA,2023,AA,SW,52,5.5,Albert Gallatin,AGL
 regional,2023_South_West_AA,2023,AA,SW,53,4.0,Avonworth,AVW
-regional,2023_South_West_AA,2023,AA,SW,53,4.0,Bellwood Antis,BA
+regional,2023_South_West_AA,2023,AA,SW,53,4.0,Bellwood-Antis,BA
 regional,2023_South_West_AA,2023,AA,SW,53,4.0,Central,CEN
 regional,2023_South_West_AA,2023,AA,SW,53,4.0,Hampton,HMT
 regional,2023_South_West_AA,2023,AA,SW,53,4.0,Southmoreland,SML
@@ -35762,7 +35762,7 @@ regional,2026_West_AAA,2026,AAA,W,49,2.5,Baldwin,BALD
 regional,2026_West_AAA,2026,AAA,W,50,2.0,Obama Academy,OBA
 regional,2026_West_AAA,2026,AAA,W,51,0.0,Carrick,CAR
 regional,2026_West_AAA,2026,AAA,W,51,0.0,Taylor Allderdice,TA
-section,1953_D7_S1_single,1953,single,D7_S1,1,34.0,Greensburg,GRNB
+section,1953_D7_S1_single,1953,single,D7_S1,1,34.0,Greensburg Salem,GRNB
 section,1953_D7_S1_single,1953,single,D7_S1,2,31.0,Shaler,SHA
 section,1953_D7_S1_single,1953,single,D7_S1,3,24.0,Uniontown,UNT
 section,1953_D7_S1_single,1953,single,D7_S1,4,22.0,Carnegie,CRNG
@@ -35780,14 +35780,14 @@ section,1953_D7_S2_single,1953,single,D7_S2,3,17.0,Trinity,TRIN
 section,1953_D7_S2_single,1953,single,D7_S2,3,17.0,Waynesburg Central,WYC
 section,1953_D7_S2_single,1953,single,D7_S2,5,14.0,Washington,WSH
 section,1953_D7_S2_single,1953,single,D7_S2,6,13.0,Burgettstown,BGT
-section,1953_D7_S2_single,1953,single,D7_S2,6,13.0,Jefferson,JFS
+section,1953_D7_S2_single,1953,single,D7_S2,6,13.0,Jefferson-Morgan,JFS
 section,1953_D7_S2_single,1953,single,D7_S2,8,3.0,Center Township,CNTP
 section,1953_D7_S2_single,1953,single,D7_S2,9,0.0,Charleroi,CHL
 section,1953_D7_S2_single,1953,single,D7_S2,9,0.0,Claysville,CLYV
 section,1953_D7_S2_single,1953,single,D7_S2,9,0.0,West Allegheny,WAG
 section,1954_D7_S1_single,1954,single,D7_S1,1,17.0,Mapletown,MPT
 section,1954_D7_S1_single,1954,single,D7_S1,2,16.0,Carnegie,CRNG
-section,1954_D7_S1_single,1954,single,D7_S1,2,16.0,Greensburg,GRNB
+section,1954_D7_S1_single,1954,single,D7_S1,2,16.0,Greensburg Salem,GRNB
 section,1954_D7_S1_single,1954,single,D7_S1,4,14.0,Shaler,SHA
 section,1954_D7_S1_single,1954,single,D7_S1,5,13.0,Latrobe,LTRB
 section,1954_D7_S1_single,1954,single,D7_S1,6,12.0,Jeannette,JNT
@@ -35808,7 +35808,7 @@ section,1954_D7_S2_single,1954,single,D7_S2,8,9.0,Jefferson-Morgan,JM
 section,1954_D7_S2_single,1954,single,D7_S2,9,3.0,Claysville,CLYV
 section,1954_D7_S2_single,1954,single,D7_S2,10,1.0,Charleroi,CHL
 section,1954_D7_S2_single,1954,single,D7_S2,11,0.0,Center Township,CNTP
-section,1955_D7_S1_single,1955,single,D7_S1,1,31.0,Greensburg,GRNB
+section,1955_D7_S1_single,1955,single,D7_S1,1,31.0,Greensburg Salem,GRNB
 section,1955_D7_S1_single,1955,single,D7_S1,2,27.0,Jeannette,JNT
 section,1955_D7_S1_single,1955,single,D7_S1,3,26.0,Shaler,SHA
 section,1955_D7_S1_single,1955,single,D7_S1,4,22.0,Latrobe,LTRB
@@ -35853,7 +35853,7 @@ section,1956_D7_S1_single,1956,single,D7_S1,5,6.0,Scott Township,SCTP
 section,1956_D7_S1_single,1956,single,D7_S1,6,3.0,North Allegheny,NA
 section,1956_D7_S1_single,1956,single,D7_S1,6,3.0,West View,WSTV
 section,1956_D7_S2_single,1956,single,D7_S2,1,43.0,Latrobe,LTRB
-section,1956_D7_S2_single,1956,single,D7_S2,2,21.0,Greensburg,GRNB
+section,1956_D7_S2_single,1956,single,D7_S2,2,21.0,Greensburg Salem,GRNB
 section,1956_D7_S2_single,1956,single,D7_S2,3,17.0,Jeannette,JNT
 section,1956_D7_S2_single,1956,single,D7_S2,4,15.0,Munhall,MNH
 section,1956_D7_S2_single,1956,single,D7_S2,5,12.0,Wilkinsburg,WLKB
@@ -35906,7 +35906,7 @@ section,1957_D7_S2_single,1957,single,D7_S2,1,46.0,Latrobe,LTRB
 section,1957_D7_S2_single,1957,single,D7_S2,2,18.0,Wilkinsburg,WLKB
 section,1957_D7_S2_single,1957,single,D7_S2,3,15.0,Munhall,MNH
 section,1957_D7_S2_single,1957,single,D7_S2,4,11.0,Jeannette,JNT
-section,1957_D7_S2_single,1957,single,D7_S2,5,10.0,Greensburg,GRNB
+section,1957_D7_S2_single,1957,single,D7_S2,5,10.0,Greensburg Salem,GRNB
 section,1957_D7_S2_single,1957,single,D7_S2,6,8.0,Hempfield Area,HMPA
 section,1957_D7_S2_single,1957,single,D7_S2,7,3.0,North Huntingdon,NHNT
 section,1957_D7_S3_single,1957,single,D7_S3,1,31.0,Chartiers-Houston,CHH
@@ -35965,7 +35965,7 @@ section,1958_D7_S2_single,1958,single,D7_S2,3,14.0,North Huntingdon,NHNT
 section,1958_D7_S2_single,1958,single,D7_S2,4,13.0,Munhall,MNH
 section,1958_D7_S2_single,1958,single,D7_S2,5,10.0,Jeannette,JNT
 section,1958_D7_S2_single,1958,single,D7_S2,6,6.0,Hempfield Area,HMPA
-section,1958_D7_S2_single,1958,single,D7_S2,7,1.0,Greensburg,GRNB
+section,1958_D7_S2_single,1958,single,D7_S2,7,1.0,Greensburg Salem,GRNB
 section,1958_D7_S2_single,1958,single,D7_S2,8,0.0,Irwin,IRW
 section,1958_D7_S3_single,1958,single,D7_S3,1,34.0,Burgettstown,BGT
 section,1958_D7_S3_single,1958,single,D7_S3,2,32.0,Trinity,TRIN
@@ -36026,7 +36026,7 @@ section,1959_D7_S2_single,1959,single,D7_S2,1,45.0,Norwin,NRW
 section,1959_D7_S2_single,1959,single,D7_S2,2,29.0,Wilkinsburg,WLKB
 section,1959_D7_S2_single,1959,single,D7_S2,3,27.0,Latrobe,LTRB
 section,1959_D7_S2_single,1959,single,D7_S2,4,9.0,Munhall,MNH
-section,1959_D7_S2_single,1959,single,D7_S2,5,7.0,Greensburg,GRNB
+section,1959_D7_S2_single,1959,single,D7_S2,5,7.0,Greensburg Salem,GRNB
 section,1959_D7_S2_single,1959,single,D7_S2,5,7.0,Hempfield Area,HMPA
 section,1959_D7_S2_single,1959,single,D7_S2,7,3.0,Baldwin,BALD
 section,1959_D7_S2_single,1959,single,D7_S2,8,1.0,Jeannette,JNT
@@ -41806,7 +41806,7 @@ section,2026_D3_S4_AAA,2026,AAA,D3_S4,14,37.0,Dover,DOV
 section,2026_D3_S4_AAA,2026,AAA,D3_S4,15,22.5,West York,WY
 section,2026_D3_S4_AAA,2026,AAA,D3_S4,16,20.0,York Tech,YT
 section,1949_D10_SN_single,1949,single,D10_SN,1,37.0,Erie Academy,EAC
-section,1949_D10_SN_single,1949,single,D10_SN,2,25.0,East,EAST
+section,1949_D10_SN_single,1949,single,D10_SN,2,25.0,Erie East,EAST
 section,1949_D10_SN_single,1949,single,D10_SN,3,17.0,Erie Strong Vincent,ESV
 section,1949_D10_SN_single,1949,single,D10_SN,4,9.0,Technical Memorial,TMM
 section,1949_D10_SN_single,1949,single,D10_SN,5,6.0,Erie Cathedral Prep,ECP
@@ -41839,7 +41839,7 @@ section,1956_D10_SS_single,1956,single,D10_SS,7,0.0,Jamestown,JMT
 section,1956_D10_SS_single,1956,single,D10_SS,7,0.0,Oil City,OC
 section,1957_D10_SS1_single,1957,single,D10_SS1,1,29.0,Erie Strong Vincent,ESV
 section,1957_D10_SS1_single,1957,single,D10_SS1,2,25.0,Erie Academy,EAC
-section,1957_D10_SS1_single,1957,single,D10_SS1,3,19.0,East,EAST
+section,1957_D10_SS1_single,1957,single,D10_SS1,3,19.0,Erie East,EAST
 section,1957_D10_SS1_single,1957,single,D10_SS1,4,16.0,Erie Cathedral Prep,ECP
 section,1957_D10_SS1_single,1957,single,D10_SS1,5,11.0,Technical Memorial,TMM
 section,1957_D10_SS_single,1957,single,D10_SS,1,99.0,Greenville,GRNV
@@ -41873,7 +41873,7 @@ section,1957_D4_SS_single,1957,single,D4_SS,8,4.0,Mount Carmel,MTC
 section,1957_D4_SS_single,1957,single,D4_SS,9,3.0,Milton,MLT
 section,1957_D4_SS_single,1957,single,D4_SS,10,2.0,Coal Township,CTWP
 section,1957_D4_SS_single,1957,single,D4_SS,11,1.0,West Snyder,WSND
-section,1958_D10_SN_single,1958,single,D10_SN,1,23.0,East,EAST
+section,1958_D10_SN_single,1958,single,D10_SN,1,23.0,Erie East,EAST
 section,1958_D10_SN_single,1958,single,D10_SN,2,17.0,Erie Strong Vincent,ESV
 section,1958_D10_SN_single,1958,single,D10_SN,3,12.0,Erie McDowell,EMD
 section,1958_D10_SN_single,1958,single,D10_SN,4,11.0,Technical Memorial,TMM
@@ -41881,7 +41881,7 @@ section,1958_D10_SN_single,1958,single,D10_SN,4,11.0,Union City,UC
 section,1958_D10_SN_single,1958,single,D10_SN,6,9.0,Erie Academy,EAC
 section,1958_D10_SN_single,1958,single,D10_SN,6,9.0,Fort LeBoeuf,FLB
 section,1958_D10_SN_single,1958,single,D10_SN,8,3.0,Wattsburg,WTB
-section,1958_D10_SS1_single,1958,single,D10_SS1,1,18.0,East,EAST
+section,1958_D10_SS1_single,1958,single,D10_SS1,1,18.0,Erie East,EAST
 section,1958_D10_SS1_single,1958,single,D10_SS1,2,9.0,Erie Strong Vincent,ESV
 section,1958_D10_SS1_single,1958,single,D10_SS1,3,6.0,Erie Cathedral Prep,ECP
 section,1958_D10_SS1_single,1958,single,D10_SS1,4,5.0,Technical Memorial,TMM
@@ -41938,14 +41938,14 @@ section,1958_D4_SS_single,1958,single,D4_SS,12,2.0,Coal Township,CTWP
 section,1958_D4_SS_single,1958,single,D4_SS,12,2.0,Selinsgrove,SLG
 section,1958_D4_SS_single,1958,single,D4_SS,14,1.0,West Snyder,WSND
 section,1959_D10_SN_single,1959,single,D10_SN,1,22.0,Erie Strong Vincent,ESV
-section,1959_D10_SN_single,1959,single,D10_SN,2,21.0,East,EAST
+section,1959_D10_SN_single,1959,single,D10_SN,2,21.0,Erie East,EAST
 section,1959_D10_SN_single,1959,single,D10_SN,3,12.0,Union City,UC
 section,1959_D10_SN_single,1959,single,D10_SN,4,11.0,Erie McDowell,EMD
 section,1959_D10_SN_single,1959,single,D10_SN,4,11.0,Technical Memorial,TMM
 section,1959_D10_SN_single,1959,single,D10_SN,6,6.0,Fort LeBoeuf,FLB
 section,1959_D10_SN_single,1959,single,D10_SN,7,3.0,Northwestern,NW
 section,1959_D10_SS1_single,1959,single,D10_SS1,1,36.0,Erie Strong Vincent,ESV
-section,1959_D10_SS1_single,1959,single,D10_SS1,2,23.0,East,EAST
+section,1959_D10_SS1_single,1959,single,D10_SS1,2,23.0,Erie East,EAST
 section,1959_D10_SS1_single,1959,single,D10_SS1,3,22.0,Erie Cathedral Prep,ECP
 section,1959_D10_SS1_single,1959,single,D10_SS1,4,14.0,Technical Memorial,TMM
 section,1959_D10_SS1_single,1959,single,D10_SS1,5,4.0,Erie Academy,EAC
@@ -42003,7 +42003,7 @@ section,1959_D4_SWC_single,1959,single,D4_SWC,4,11.0,Lewisburg,LWB
 section,1959_D4_SWC_single,1959,single,D4_SWC,5,7.0,Montoursville,MNTV
 section,1959_D4_SWC_single,1959,single,D4_SWC,6,5.0,Montgomery,MTG
 section,1959_D4_SWC_single,1959,single,D4_SWC,6,5.0,South Williamsport,SWLP
-section,1960_D10_S1_single,1960,single,D10_S1,1,86.0,East,EAST
+section,1960_D10_S1_single,1960,single,D10_S1,1,86.0,Erie East,EAST
 section,1960_D10_S1_single,1960,single,D10_S1,2,65.0,Erie Strong Vincent,ESV
 section,1960_D10_S1_single,1960,single,D10_S1,3,54.0,Erie Academy,EAC
 section,1960_D10_S1_single,1960,single,D10_S1,4,25.0,Technical Memorial,TMM
@@ -42077,7 +42077,7 @@ section,1960_D6_SW_single,1960,single,D6_SW,1,0.0,Marion Center,MAC
 section,1960_D6_SW_single,1960,single,D6_SW,1,0.0,Morrison Cove,MRCV
 section,1960_D6_SW_single,1960,single,D6_SW,1,0.0,Tyrone,TYR
 section,1961_D10_S1_single,1961,single,D10_S1,1,71.0,Erie Strong Vincent,ESV
-section,1961_D10_S1_single,1961,single,D10_S1,2,68.0,East,EAST
+section,1961_D10_S1_single,1961,single,D10_S1,2,68.0,Erie East,EAST
 section,1961_D10_S1_single,1961,single,D10_S1,3,42.0,Erie Academy,EAC
 section,1961_D10_S1_single,1961,single,D10_S1,4,0.0,Erie Cathedral Prep,ECP
 section,1961_D10_S1_single,1961,single,D10_S1,4,0.0,Technical Memorial,TMM
@@ -42161,7 +42161,7 @@ section,1961_D6_SW_single,1961,single,D6_SW,8,8.0,Marion Center,MAC
 section,1961_D6_SW_single,1961,single,D6_SW,8,8.0,United,UNTD
 section,1961_D6_SW_single,1961,single,D6_SW,11,3.0,Central,CEN
 section,1961_D6_SW_single,1961,single,D6_SW,12,1.0,Huntingdon,HTD
-section,1962_D10_S1_single,1962,single,D10_S1,1,92.0,East,EAST
+section,1962_D10_S1_single,1962,single,D10_S1,1,92.0,Erie East,EAST
 section,1962_D10_S1_single,1962,single,D10_S1,1,92.0,Erie Strong Vincent,ESV
 section,1962_D10_S1_single,1962,single,D10_S1,3,36.0,Erie Academy,EAC
 section,1962_D10_S1_single,1962,single,D10_S1,4,15.0,Erie McDowell,EMD
@@ -42265,7 +42265,7 @@ section,1962_D6_SW_single,1962,single,D6_SW,12,7.0,Captain Jack,CPTJ
 section,1962_D6_SW_single,1962,single,D6_SW,13,5.0,Altoona,ALT
 section,1962_D6_SW_single,1962,single,D6_SW,14,1.0,Huntingdon,HTD
 section,1963_D10_S1_single,1963,single,D10_S1,1,47.0,Erie Strong Vincent,ESV
-section,1963_D10_S1_single,1963,single,D10_S1,2,24.0,East,EAST
+section,1963_D10_S1_single,1963,single,D10_S1,2,24.0,Erie East,EAST
 section,1963_D10_S1_single,1963,single,D10_S1,3,21.0,Erie Academy,EAC
 section,1963_D10_S1_single,1963,single,D10_S1,4,14.0,Erie McDowell,EMD
 section,1963_D10_S1_single,1963,single,D10_S1,5,10.0,Technical Memorial,TMM
@@ -42374,7 +42374,7 @@ section,1963_D6_S3_single,1963,single,D6_S3,10,0.0,Cresson,CRSN
 section,1963_D6_S3_single,1963,single,D6_S3,10,0.0,Ferndale,FRND
 section,1963_D6_S3_single,1963,single,D6_S3,10,0.0,Marion Center,MAC
 section,1964_D10_S1_single,1964,single,D10_S1,1,31.0,Erie Strong Vincent,ESV
-section,1964_D10_S1_single,1964,single,D10_S1,2,29.0,East,EAST
+section,1964_D10_S1_single,1964,single,D10_S1,2,29.0,Erie East,EAST
 section,1964_D10_S1_single,1964,single,D10_S1,3,20.0,Erie Academy,EAC
 section,1964_D10_S1_single,1964,single,D10_S1,4,15.0,Erie McDowell,EMD
 section,1964_D10_S1_single,1964,single,D10_S1,5,14.0,Technical Memorial,TMM
@@ -42466,7 +42466,7 @@ section,1964_D6_S3_single,1964,single,D6_S3,8,1.0,Westmont Hilltop,WMH
 section,1964_D6_S3_single,1964,single,D6_S3,9,0.0,Cresson,CRSN
 section,1964_D6_S3_single,1964,single,D6_S3,9,0.0,Greater Johnstown,GJ
 section,1964_D6_S3_single,1964,single,D6_S3,9,0.0,Marion Center,MAC
-section,1965_D10_S1_single,1965,single,D10_S1,1,71.0,East,EAST
+section,1965_D10_S1_single,1965,single,D10_S1,1,71.0,Erie East,EAST
 section,1965_D10_S1_single,1965,single,D10_S1,2,35.0,Erie McDowell,EMD
 section,1965_D10_S1_single,1965,single,D10_S1,3,33.0,Erie Strong Vincent,ESV
 section,1965_D10_S1_single,1965,single,D10_S1,4,24.0,Technical Memorial,TMM
@@ -42585,7 +42585,7 @@ section,1965_D6_S3_single,1965,single,D6_S3,9,0.0,Cresson,CRSN
 section,1965_D6_S3_single,1965,single,D6_S3,9,0.0,Ferndale,FRND
 section,1965_D6_S3_single,1965,single,D6_S3,9,0.0,Westmont Hilltop,WMH
 section,1966_D10_S1_single,1966,single,D10_S1,1,106.0,Erie Strong Vincent,ESV
-section,1966_D10_S1_single,1966,single,D10_S1,2,73.0,East,EAST
+section,1966_D10_S1_single,1966,single,D10_S1,2,73.0,Erie East,EAST
 section,1966_D10_S1_single,1966,single,D10_S1,3,44.0,Erie McDowell,EMD
 section,1966_D10_S1_single,1966,single,D10_S1,4,29.0,Erie Academy,EAC
 section,1966_D10_S1_single,1966,single,D10_S1,5,24.0,Fairview,FV
@@ -42718,7 +42718,7 @@ section,1966_D6_S4_single,1966,single,D6_S4,5,2.0,Marion Center,MAC
 section,1966_D6_S4_single,1966,single,D6_S4,7,1.0,Saltsburg,SLTB
 section,1966_D6_S4_single,1966,single,D6_S4,7,1.0,United,UNTD
 section,1967_D10_S1_single,1967,single,D10_S1,1,55.0,Erie Strong Vincent,ESV
-section,1967_D10_S1_single,1967,single,D10_S1,2,54.0,East,EAST
+section,1967_D10_S1_single,1967,single,D10_S1,2,54.0,Erie East,EAST
 section,1967_D10_S1_single,1967,single,D10_S1,3,50.0,Fairview,FV
 section,1967_D10_S1_single,1967,single,D10_S1,4,49.0,Erie McDowell,EMD
 section,1967_D10_S1_single,1967,single,D10_S1,5,35.0,Technical Memorial,TMM
@@ -42859,7 +42859,7 @@ section,1967_D6_S4_single,1967,single,D6_S4,7,16.0,Ferndale,FRND
 section,1967_D6_S4_single,1967,single,D6_S4,8,11.0,Saltsburg,SLTB
 section,1968_D10_S1_single,1968,single,D10_S1,1,48.0,Fairview,FV
 section,1968_D10_S1_single,1968,single,D10_S1,2,46.0,Harbor Creek,HCR
-section,1968_D10_S1_single,1968,single,D10_S1,3,43.0,East,EAST
+section,1968_D10_S1_single,1968,single,D10_S1,3,43.0,Erie East,EAST
 section,1968_D10_S1_single,1968,single,D10_S1,4,41.0,Erie Strong Vincent,ESV
 section,1968_D10_S1_single,1968,single,D10_S1,4,41.0,Iroquois,IRQ
 section,1968_D10_S1_single,1968,single,D10_S1,6,40.0,Erie McDowell,EMD
@@ -42971,7 +42971,7 @@ section,1968_D6_S4_single,1968,single,D6_S4,8,3.0,Ferndale,FRND
 section,1969_D10_S1_single,1969,single,D10_S1,1,75.0,Harbor Creek,HCR
 section,1969_D10_S1_single,1969,single,D10_S1,2,72.0,Erie McDowell,EMD
 section,1969_D10_S1_single,1969,single,D10_S1,3,64.0,Iroquois,IRQ
-section,1969_D10_S1_single,1969,single,D10_S1,4,47.0,East,EAST
+section,1969_D10_S1_single,1969,single,D10_S1,4,47.0,Erie East,EAST
 section,1969_D10_S1_single,1969,single,D10_S1,5,0.0,Erie Academy,EAC
 section,1969_D10_S1_single,1969,single,D10_S1,5,0.0,Erie Strong Vincent,ESV
 section,1969_D10_S1_single,1969,single,D10_S1,5,0.0,Fairview,FV
@@ -43087,7 +43087,7 @@ section,1970_D10_S1_single,1970,single,D10_S1,3,43.0,Erie McDowell,EMD
 section,1970_D10_S1_single,1970,single,D10_S1,4,30.0,Fairview,FV
 section,1970_D10_S1_single,1970,single,D10_S1,5,20.0,Technical Memorial,TMM
 section,1970_D10_S1_single,1970,single,D10_S1,6,14.0,North East,NE
-section,1970_D10_S1_single,1970,single,D10_S1,7,10.0,East,EAST
+section,1970_D10_S1_single,1970,single,D10_S1,7,10.0,Erie East,EAST
 section,1970_D10_S1_single,1970,single,D10_S1,8,3.0,Erie Strong Vincent,ESV
 section,1970_D10_S1_single,1970,single,D10_S1,8,3.0,Girard,GIR
 section,1970_D10_S1_single,1970,single,D10_S1,10,2.0,Erie Academy,EAC
@@ -43194,7 +43194,7 @@ section,1970_D6_S4_single,1970,single,D6_S4,7,15.0,Indiana,IND
 section,1970_D6_S4_single,1970,single,D6_S4,8,10.0,United,UNTD
 section,1970_D6_S4_single,1970,single,D6_S4,9,0.0,Homer-Center,HC
 section,1971_D10_S1_single,1971,single,D10_S1,1,81.0,Iroquois,IRQ
-section,1971_D10_S1_single,1971,single,D10_S1,2,44.0,East,EAST
+section,1971_D10_S1_single,1971,single,D10_S1,2,44.0,Erie East,EAST
 section,1971_D10_S1_single,1971,single,D10_S1,3,38.0,Harbor Creek,HCR
 section,1971_D10_S1_single,1971,single,D10_S1,4,34.0,Fairview,FV
 section,1971_D10_S1_single,1971,single,D10_S1,5,26.0,Technical Memorial,TMM
@@ -43308,7 +43308,7 @@ section,1971_D6_S4_single,1971,single,D6_S4,8,11.0,Ferndale,FRND
 section,1971_D6_S4_single,1971,single,D6_S4,8,11.0,Marion Center,MAC
 section,1972_D10_S1_single,1972,single,D10_S1,1,70.0,Harbor Creek,HCR
 section,1972_D10_S1_single,1972,single,D10_S1,2,61.0,Iroquois,IRQ
-section,1972_D10_S1_single,1972,single,D10_S1,3,41.5,East,EAST
+section,1972_D10_S1_single,1972,single,D10_S1,3,41.5,Erie East,EAST
 section,1972_D10_S1_single,1972,single,D10_S1,4,35.0,Erie McDowell,EMD
 section,1972_D10_S1_single,1972,single,D10_S1,5,20.0,Fairview,FV
 section,1972_D10_S1_single,1972,single,D10_S1,6,18.0,North East,NE
@@ -43484,7 +43484,7 @@ section,1972_D6_S4_single,1972,single,D6_S4,7,10.0,Blairsville,BLV
 section,1972_D6_S4_single,1972,single,D6_S4,8,9.5,Saltsburg,SLTB
 section,1972_D6_S4_single,1972,single,D6_S4,9,2.0,Marion Center,MAC
 section,1973_D10_S1_single,1973,single,D10_S1,1,71.5,Harbor Creek,HCR
-section,1973_D10_S1_single,1973,single,D10_S1,2,66.0,East,EAST
+section,1973_D10_S1_single,1973,single,D10_S1,2,66.0,Erie East,EAST
 section,1973_D10_S1_single,1973,single,D10_S1,3,51.5,Iroquois,IRQ
 section,1973_D10_S1_single,1973,single,D10_S1,4,40.0,Erie McDowell,EMD
 section,1973_D10_S1_single,1973,single,D10_S1,5,19.5,Erie Cathedral Prep,ECP
@@ -43676,7 +43676,7 @@ section,1974_D10_S1_AAA,1974,AAA,D10_S1,1,77.5,Technical Memorial,TMM
 section,1974_D10_S1_AAA,1974,AAA,D10_S1,3,55.5,Erie Cathedral Prep,ECP
 section,1974_D10_S1_AAA,1974,AAA,D10_S1,4,50.0,Erie Strong Vincent,ESV
 section,1974_D10_S1_AAA,1974,AAA,D10_S1,5,41.5,Harbor Creek,HCR
-section,1974_D10_S1_AAA,1974,AAA,D10_S1,6,38.0,East,EAST
+section,1974_D10_S1_AAA,1974,AAA,D10_S1,6,38.0,Erie East,EAST
 section,1974_D10_S1_AAA,1974,AAA,D10_S1,7,29.5,Erie Academy,EAC
 section,1974_D10_S2_AA,1974,AA,D10_S2,1,129.0,Greenville,GRNV
 section,1974_D10_S2_AA,1974,AA,D10_S2,2,71.5,General McLane,GML
@@ -43926,7 +43926,7 @@ section,1976_D10_S1_AAA,1976,AAA,D10_S1,2,110.0,Technical Memorial,TMM
 section,1976_D10_S1_AAA,1976,AAA,D10_S1,4,67.0,Harbor Creek,HCR
 section,1976_D10_S1_AAA,1976,AAA,D10_S1,5,38.0,Erie Strong Vincent,ESV
 section,1976_D10_S1_AAA,1976,AAA,D10_S1,6,22.5,Erie Academy,EAC
-section,1976_D10_S1_AAA,1976,AAA,D10_S1,7,22.0,East,EAST
+section,1976_D10_S1_AAA,1976,AAA,D10_S1,7,22.0,Erie East,EAST
 section,1976_D10_S2_AA,1976,AA,D10_S2,1,147.5,Greenville,GRNV
 section,1976_D10_S2_AA,1976,AA,D10_S2,2,142.0,General McLane,GML
 section,1976_D10_S2_AA,1976,AA,D10_S2,3,121.0,Commodore Perry,CP
@@ -44032,7 +44032,7 @@ section,1977_D10_S1_AAA,1977,AAA,D10_S1,2,159.0,Erie McDowell,EMD
 section,1977_D10_S1_AAA,1977,AAA,D10_S1,3,137.0,Technical Memorial,TMM
 section,1977_D10_S1_AAA,1977,AAA,D10_S1,4,62.5,Harbor Creek,HCR
 section,1977_D10_S1_AAA,1977,AAA,D10_S1,5,25.0,Erie Academy,EAC
-section,1977_D10_S1_AAA,1977,AAA,D10_S1,6,24.0,East,EAST
+section,1977_D10_S1_AAA,1977,AAA,D10_S1,6,24.0,Erie East,EAST
 section,1977_D10_S1_AAA,1977,AAA,D10_S1,7,7.0,Erie Strong Vincent,ESV
 section,1977_D10_S2_AA,1977,AA,D10_S2,1,174.0,General McLane,GML
 section,1977_D10_S2_AA,1977,AA,D10_S2,2,167.5,Greenville,GRNV
@@ -44132,7 +44132,7 @@ section,1978_D10_S1_AAA,1978,AAA,D10_S1,3,127.0,Erie Cathedral Prep,ECP
 section,1978_D10_S1_AAA,1978,AAA,D10_S1,4,106.5,Harbor Creek,HCR
 section,1978_D10_S1_AAA,1978,AAA,D10_S1,5,25.0,Erie Strong Vincent,ESV
 section,1978_D10_S1_AAA,1978,AAA,D10_S1,6,12.0,Erie Academy,EAC
-section,1978_D10_S1_AAA,1978,AAA,D10_S1,7,6.0,East,EAST
+section,1978_D10_S1_AAA,1978,AAA,D10_S1,7,6.0,Erie East,EAST
 section,1978_D10_S2_AA,1978,AA,D10_S2,1,169.0,Greenville,GRNV
 section,1978_D10_S2_AA,1978,AA,D10_S2,2,168.0,Commodore Perry,CP
 section,1978_D10_S2_AA,1978,AA,D10_S2,3,161.5,General McLane,GML
@@ -44239,7 +44239,7 @@ section,1979_D10_S1_AAA,1979,AAA,D10_S1,2,133.0,Erie McDowell,EMD
 section,1979_D10_S1_AAA,1979,AAA,D10_S1,3,129.0,Erie Cathedral Prep,ECP
 section,1979_D10_S1_AAA,1979,AAA,D10_S1,4,111.0,Harbor Creek,HCR
 section,1979_D10_S1_AAA,1979,AAA,D10_S1,5,76.5,Erie Academy,EAC
-section,1979_D10_S1_AAA,1979,AAA,D10_S1,6,25.0,East,EAST
+section,1979_D10_S1_AAA,1979,AAA,D10_S1,6,25.0,Erie East,EAST
 section,1979_D10_S1_AAA,1979,AAA,D10_S1,6,25.0,Erie Strong Vincent,ESV
 section,1979_D10_S2_AA,1979,AA,D10_S2,1,169.0,General McLane,GML
 section,1979_D10_S2_AA,1979,AA,D10_S2,2,112.0,Greenville,GRNV
@@ -44340,7 +44340,7 @@ section,1979_D6_SW_AA,1979,AA,D6_SW,16,0.0,Ferndale,FRND
 section,1980_D10_S1_AA,1980,AA,D10_S1,1,184.5,Fort LeBoeuf,FLB
 section,1980_D10_S1_AA,1980,AA,D10_S1,2,107.5,Fairview,FV
 section,1980_D10_S1_AA,1980,AA,D10_S1,3,103.5,North East,NE
-section,1980_D10_S1_AA,1980,AA,D10_S1,4,83.0,East,EAST
+section,1980_D10_S1_AA,1980,AA,D10_S1,4,83.0,Erie East,EAST
 section,1980_D10_S1_AA,1980,AA,D10_S1,5,79.0,Iroquois,IRQ
 section,1980_D10_S1_AA,1980,AA,D10_S1,6,69.5,Erie Strong Vincent,ESV
 section,1980_D10_S1_AA,1980,AA,D10_S1,7,48.0,St. John Kanty Prep,SJKP
@@ -44460,7 +44460,7 @@ section,1981_D10_S1_AA,1981,AA,D10_S1,4,81.5,Erie Strong Vincent,ESV
 section,1981_D10_S1_AA,1981,AA,D10_S1,5,78.5,Iroquois,IRQ
 section,1981_D10_S1_AA,1981,AA,D10_S1,6,50.5,Mercyhurst Prep,MHP
 section,1981_D10_S1_AA,1981,AA,D10_S1,7,49.0,Girard,GIR
-section,1981_D10_S1_AA,1981,AA,D10_S1,8,46.0,East,EAST
+section,1981_D10_S1_AA,1981,AA,D10_S1,8,46.0,Erie East,EAST
 section,1981_D10_S2_AA,1981,AA,D10_S2,1,186.5,General McLane,GML
 section,1981_D10_S2_AA,1981,AA,D10_S2,2,129.5,Greenville,GRNV
 section,1981_D10_S2_AA,1981,AA,D10_S2,3,102.0,Cambridge Springs,CS
@@ -44579,7 +44579,7 @@ section,1982_D10_S1_AA,1982,AA,D10_S1,9,0.0,Mercyhurst Prep,MHP
 section,1982_D10_S1_AAA,1982,AAA,D10_S1,1,162.0,Erie Cathedral Prep,ECP
 section,1982_D10_S1_AAA,1982,AAA,D10_S1,2,121.0,Erie McDowell,EMD
 section,1982_D10_S1_AAA,1982,AAA,D10_S1,3,85.5,Technical Memorial,TMM
-section,1982_D10_S1_AAA,1982,AAA,D10_S1,4,0.0,East,EAST
+section,1982_D10_S1_AAA,1982,AAA,D10_S1,4,0.0,Erie East,EAST
 section,1982_D10_S1_AAA,1982,AAA,D10_S1,4,0.0,Erie Academy,EAC
 section,1982_D10_S1_AAA,1982,AAA,D10_S1,4,0.0,Harbor Creek,HCR
 section,1982_D10_S2_AA,1982,AA,D10_S2,1,204.0,Greenville,GRNV
@@ -44707,7 +44707,7 @@ section,1983_D10_S1_AAA,1983,AAA,D10_S1,3,107.0,General McLane,GML
 section,1983_D10_S1_AAA,1983,AAA,D10_S1,4,101.5,Technical Memorial,TMM
 section,1983_D10_S1_AAA,1983,AAA,D10_S1,5,70.5,Harbor Creek,HCR
 section,1983_D10_S1_AAA,1983,AAA,D10_S1,6,22.5,Erie Academy,EAC
-section,1983_D10_S1_AAA,1983,AAA,D10_S1,7,2.0,East,EAST
+section,1983_D10_S1_AAA,1983,AAA,D10_S1,7,2.0,Erie East,EAST
 section,1983_D10_S2_AA,1983,AA,D10_S2,1,163.0,Greenville,GRNV
 section,1983_D10_S2_AA,1983,AA,D10_S2,2,150.5,Commodore Perry,CP
 section,1983_D10_S2_AA,1983,AA,D10_S2,3,145.0,Conneaut Lake,CLK
@@ -44806,7 +44806,7 @@ section,1984_D10_S1_AA,1984,AA,D10_S1,5,68.0,Girard,GIR
 section,1984_D10_S1_AA,1984,AA,D10_S1,6,63.0,Erie Academy,EAC
 section,1984_D10_S1_AA,1984,AA,D10_S1,7,38.5,Fairview,FV
 section,1984_D10_S1_AA,1984,AA,D10_S1,8,31.0,Erie Strong Vincent,ESV
-section,1984_D10_S1_AA,1984,AA,D10_S1,9,15.0,East,EAST
+section,1984_D10_S1_AA,1984,AA,D10_S1,9,15.0,Erie East,EAST
 section,1984_D10_S1_AAA,1984,AAA,D10_S1,1,175.5,Erie McDowell,EMD
 section,1984_D10_S1_AAA,1984,AAA,D10_S1,2,132.0,Technical Memorial,TMM
 section,1984_D10_S1_AAA,1984,AAA,D10_S1,3,122.5,Erie Cathedral Prep,ECP
@@ -44910,7 +44910,7 @@ section,1985_D10_S1_AA,1985,AA,D10_S1,3,114.0,Erie Academy,EAC
 section,1985_D10_S1_AA,1985,AA,D10_S1,4,96.5,North East,NE
 section,1985_D10_S1_AA,1985,AA,D10_S1,5,70.5,Seneca,SEN
 section,1985_D10_S1_AA,1985,AA,D10_S1,6,67.0,Mercyhurst Prep,MHP
-section,1985_D10_S1_AA,1985,AA,D10_S1,7,65.0,East,EAST
+section,1985_D10_S1_AA,1985,AA,D10_S1,7,65.0,Erie East,EAST
 section,1985_D10_S1_AA,1985,AA,D10_S1,8,51.0,Fairview,FV
 section,1985_D10_S1_AAA,1985,AAA,D10_S1,1,159.0,Erie McDowell,EMD
 section,1985_D10_S1_AAA,1985,AAA,D10_S1,2,154.0,Erie Cathedral Prep,ECP
@@ -45013,7 +45013,7 @@ section,1986_D10_S1_AA,1986,AA,D10_S1,1,155.0,Erie Strong Vincent,ESV
 section,1986_D10_S1_AA,1986,AA,D10_S1,2,116.0,Girard,GIR
 section,1986_D10_S1_AA,1986,AA,D10_S1,3,108.0,Iroquois,IRQ
 section,1986_D10_S1_AA,1986,AA,D10_S1,4,95.0,North East,NE
-section,1986_D10_S1_AA,1986,AA,D10_S1,5,74.0,East,EAST
+section,1986_D10_S1_AA,1986,AA,D10_S1,5,74.0,Erie East,EAST
 section,1986_D10_S1_AA,1986,AA,D10_S1,6,73.5,Seneca,SEN
 section,1986_D10_S1_AA,1986,AA,D10_S1,7,65.5,Fairview,FV
 section,1986_D10_S1_AA,1986,AA,D10_S1,8,27.5,Mercyhurst Prep,MHP
@@ -45121,7 +45121,7 @@ section,1987_D10_S1_AA,1987,AA,D10_S1,3,124.5,Union City,UC
 section,1987_D10_S1_AA,1987,AA,D10_S1,4,111.0,Eisenhower,EH
 section,1987_D10_S1_AA,1987,AA,D10_S1,5,84.5,Mercyhurst Prep,MHP
 section,1987_D10_S1_AA,1987,AA,D10_S1,6,83.5,Sheffield,SHF
-section,1987_D10_S1_AA,1987,AA,D10_S1,7,53.5,East,EAST
+section,1987_D10_S1_AA,1987,AA,D10_S1,7,53.5,Erie East,EAST
 section,1987_D10_S1_AA,1987,AA,D10_S1,8,52.5,Seneca,SEN
 section,1987_D10_S1_AA,1987,AA,D10_S1,9,38.0,Iroquois,IRQ
 section,1987_D10_S1_AA,1987,AA,D10_S1,10,34.5,North East,NE
@@ -45235,7 +45235,7 @@ section,1988_D10_S1_AAA,1988,AAA,D10_S1,4,81.5,Erie Strong Vincent,ESV
 section,1988_D10_S1_AAA,1988,AAA,D10_S1,5,63.5,Harbor Creek,HCR
 section,1988_D10_S1_AAA,1988,AAA,D10_S1,6,61.5,Erie Academy,EAC
 section,1988_D10_S1_AAA,1988,AAA,D10_S1,7,51.5,Technical Memorial,TMM
-section,1988_D10_S1_AAA,1988,AAA,D10_S1,8,20.0,East,EAST
+section,1988_D10_S1_AAA,1988,AAA,D10_S1,8,20.0,Erie East,EAST
 section,1988_D10_S2_AA,1988,AA,D10_S2,1,176.5,Hickory,HCK
 section,1988_D10_S2_AA,1988,AA,D10_S2,2,135.5,Conneaut Lake,CLK
 section,1988_D10_S2_AA,1988,AA,D10_S2,3,118.5,Commodore Perry,CP
@@ -45331,7 +45331,7 @@ section,1989_D10_S1_AA,1989,AA,D10_S1,5,95.0,Saegertown,SGT
 section,1989_D10_S1_AA,1989,AA,D10_S1,6,64.0,North East,NE
 section,1989_D10_S1_AA,1989,AA,D10_S1,7,54.0,Iroquois,IRQ
 section,1989_D10_S1_AA,1989,AA,D10_S1,8,52.0,Sheffield,SHF
-section,1989_D10_S1_AA,1989,AA,D10_S1,9,49.0,East,EAST
+section,1989_D10_S1_AA,1989,AA,D10_S1,9,49.0,Erie East,EAST
 section,1989_D10_S1_AA,1989,AA,D10_S1,10,42.5,Mercyhurst Prep,MHP
 section,1989_D10_S1_AAA,1989,AAA,D10_S1,1,167.0,Erie Cathedral Prep,ECP
 section,1989_D10_S1_AAA,1989,AAA,D10_S1,2,161.0,Erie McDowell,EMD
@@ -45438,7 +45438,7 @@ section,1990_D10_S1_AAA,1990,AAA,D10_S1,3,112.0,Fort LeBoeuf,FLB
 section,1990_D10_S1_AAA,1990,AAA,D10_S1,4,96.0,Erie McDowell,EMD
 section,1990_D10_S1_AAA,1990,AAA,D10_S1,5,33.0,Erie Academy,EAC
 section,1990_D10_S1_AAA,1990,AAA,D10_S1,6,29.0,Technical Memorial,TMM
-section,1990_D10_S1_AAA,1990,AAA,D10_S1,7,19.0,East,EAST
+section,1990_D10_S1_AAA,1990,AAA,D10_S1,7,19.0,Erie East,EAST
 section,1990_D10_S2_AA,1990,AA,D10_S2,1,155.5,Greenville,GRNV
 section,1990_D10_S2_AA,1990,AA,D10_S2,2,150.0,Commodore Perry,CP
 section,1990_D10_S2_AA,1990,AA,D10_S2,3,136.0,Hickory,HCK
@@ -45508,7 +45508,7 @@ section,1991_D10_S1_AA,1991,AA,D10_S1,7,82.5,Seneca,SEN
 section,1991_D10_S1_AA,1991,AA,D10_S1,8,75.5,Erie Strong Vincent,ESV
 section,1991_D10_S1_AA,1991,AA,D10_S1,9,69.0,North East,NE
 section,1991_D10_S1_AA,1991,AA,D10_S1,10,30.0,Iroquois,IRQ
-section,1991_D10_S1_AA,1991,AA,D10_S1,11,27.0,East,EAST
+section,1991_D10_S1_AA,1991,AA,D10_S1,11,27.0,Erie East,EAST
 section,1991_D10_S1_AA,1991,AA,D10_S1,12,17.0,Mercyhurst Prep,MHP
 section,1991_D10_S2_AA,1991,AA,D10_S2,1,136.5,Jamestown,JMT
 section,1991_D10_S2_AA,1991,AA,D10_S2,2,131.5,Commodore Perry,CP
@@ -45588,7 +45588,7 @@ section,1992_D10_S1_AA,1992,AA,D10_S1,6,83.0,Youngsville,YNG
 section,1992_D10_S1_AA,1992,AA,D10_S1,7,80.0,Saegertown,SGT
 section,1992_D10_S1_AA,1992,AA,D10_S1,8,73.5,Sheffield,SHF
 section,1992_D10_S1_AA,1992,AA,D10_S1,9,60.5,Iroquois,IRQ
-section,1992_D10_S1_AA,1992,AA,D10_S1,10,25.0,East,EAST
+section,1992_D10_S1_AA,1992,AA,D10_S1,10,25.0,Erie East,EAST
 section,1992_D10_S2_AA,1992,AA,D10_S2,1,158.5,Hickory,HCK
 section,1992_D10_S2_AA,1992,AA,D10_S2,2,149.5,Jamestown,JMT
 section,1992_D10_S2_AA,1992,AA,D10_S2,3,136.0,Maplewood,MPW
@@ -45660,7 +45660,7 @@ section,1993_D10_S1_AA,1993,AA,D10_S1,6,67.0,North East,NE
 section,1993_D10_S1_AA,1993,AA,D10_S1,7,60.0,Union City,UC
 section,1993_D10_S1_AA,1993,AA,D10_S1,8,50.5,Iroquois,IRQ
 section,1993_D10_S1_AA,1993,AA,D10_S1,9,29.0,Sheffield,SHF
-section,1993_D10_S1_AA,1993,AA,D10_S1,10,20.0,East,EAST
+section,1993_D10_S1_AA,1993,AA,D10_S1,10,20.0,Erie East,EAST
 section,1993_D10_S2_AA,1993,AA,D10_S2,1,188.0,Jamestown,JMT
 section,1993_D10_S2_AA,1993,AA,D10_S2,2,124.0,Commodore Perry,CP
 section,1993_D10_S2_AA,1993,AA,D10_S2,3,119.0,Hickory,HCK
@@ -45731,7 +45731,7 @@ section,1994_D10_S1_AA,1994,AA,D10_S1,6,111.5,Youngsville,YNG
 section,1994_D10_S1_AA,1994,AA,D10_S1,7,76.0,North East,NE
 section,1994_D10_S1_AA,1994,AA,D10_S1,8,24.0,Sheffield,SHF
 section,1994_D10_S1_AA,1994,AA,D10_S1,9,21.0,Iroquois,IRQ
-section,1994_D10_S1_AA,1994,AA,D10_S1,10,16.0,East,EAST
+section,1994_D10_S1_AA,1994,AA,D10_S1,10,16.0,Erie East,EAST
 section,1994_D10_S2_AA,1994,AA,D10_S2,1,209.0,Jamestown,JMT
 section,1994_D10_S2_AA,1994,AA,D10_S2,2,174.0,Greenville,GRNV
 section,1994_D10_S2_AA,1994,AA,D10_S2,3,121.0,Maplewood,MPW
@@ -45797,7 +45797,7 @@ section,1995_D10_S1_AA,1995,AA,D10_S1,2,190.0,Seneca,SEN
 section,1995_D10_S1_AA,1995,AA,D10_S1,3,187.0,Eisenhower,EH
 section,1995_D10_S1_AA,1995,AA,D10_S1,4,163.0,Saegertown,SGT
 section,1995_D10_S1_AA,1995,AA,D10_S1,5,92.0,Union City,UC
-section,1995_D10_S1_AA,1995,AA,D10_S1,6,0.0,East,EAST
+section,1995_D10_S1_AA,1995,AA,D10_S1,6,0.0,Erie East,EAST
 section,1995_D10_S1_AA,1995,AA,D10_S1,6,0.0,Erie Strong Vincent,ESV
 section,1995_D10_S1_AA,1995,AA,D10_S1,6,0.0,Iroquois,IRQ
 section,1995_D10_S1_AA,1995,AA,D10_S1,6,0.0,North East,NE
@@ -45871,7 +45871,7 @@ section,1996_D10_S1_AA,1996,AA,D10_S1,5,102.5,Union City,UC
 section,1996_D10_S1_AA,1996,AA,D10_S1,6,96.5,Youngsville,YNG
 section,1996_D10_S1_AA,1996,AA,D10_S1,7,75.5,North East,NE
 section,1996_D10_S1_AA,1996,AA,D10_S1,8,42.0,Erie Strong Vincent,ESV
-section,1996_D10_S1_AA,1996,AA,D10_S1,9,34.0,East,EAST
+section,1996_D10_S1_AA,1996,AA,D10_S1,9,34.0,Erie East,EAST
 section,1996_D10_S1_AA,1996,AA,D10_S1,10,27.5,Sheffield,SHF
 section,1996_D10_S1_AA,1996,AA,D10_S1,11,19.0,Iroquois,IRQ
 section,1996_D10_S2_AA,1996,AA,D10_S2,1,187.5,Commodore Perry,CP
@@ -45975,7 +45975,7 @@ section,1997_D10_S_AAA,1997,AAA,D10_S,8,71.0,Corry Area,COR
 section,1997_D10_S_AAA,1997,AAA,D10_S,9,70.5,Erie Cathedral Prep,ECP
 section,1997_D10_S_AAA,1997,AAA,D10_S,10,54.0,Harbor Creek,HCR
 section,1997_D10_S_AAA,1997,AAA,D10_S,11,37.5,Titusville,TTV
-section,1997_D10_S_AAA,1997,AAA,D10_S,12,7.0,East,EAST
+section,1997_D10_S_AAA,1997,AAA,D10_S,12,7.0,Erie East,EAST
 section,1997_D4_SEC_AA,1997,AA,D4_SEC,1,144.0,Milton,MLT
 section,1997_D4_SEC_AA,1997,AA,D4_SEC,2,139.5,Hughesville,HSV
 section,1997_D4_SEC_AA,1997,AA,D4_SEC,3,107.5,Central Columbia,CCO
@@ -46048,7 +46048,7 @@ section,1998_D10_S_AAA,1998,AAA,D10_S,8,86.0,Central Tech,CT
 section,1998_D10_S_AAA,1998,AAA,D10_S,8,86.0,Corry Area,COR
 section,1998_D10_S_AAA,1998,AAA,D10_S,10,48.0,Harbor Creek,HCR
 section,1998_D10_S_AAA,1998,AAA,D10_S,11,1.0,Titusville,TTV
-section,1998_D10_S_AAA,1998,AAA,D10_S,12,0.0,East,EAST
+section,1998_D10_S_AAA,1998,AAA,D10_S,12,0.0,Erie East,EAST
 section,1998_D4_SEC_AA,1998,AA,D4_SEC,1,150.5,Benton,BNT
 section,1998_D4_SEC_AA,1998,AA,D4_SEC,2,149.0,Warrior Run,WR
 section,1998_D4_SEC_AA,1998,AA,D4_SEC,3,135.0,Milton,MLT
@@ -46467,7 +46467,7 @@ section,2005_D6_SE_AA,2005,AA,D6_SE,8,73.0,Glendale,GD
 section,2005_D6_SE_AA,2005,AA,D6_SE,9,70.0,Moshannon Valley,MSV
 section,2005_D6_SE_AA,2005,AA,D6_SE,10,64.0,Juniata Valley,JV
 section,2005_D6_SE_AA,2005,AA,D6_SE,11,59.0,Central,CEN
-section,2005_D6_SE_AA,2005,AA,D6_SE,12,53.0,Bellwood Antis,BA
+section,2005_D6_SE_AA,2005,AA,D6_SE,12,53.0,Bellwood-Antis,BA
 section,2005_D6_SW_AA,2005,AA,D6_SW,1,238.0,Forest Hills,FH
 section,2005_D6_SW_AA,2005,AA,D6_SW,2,154.5,United,UNTD
 section,2005_D6_SW_AA,2005,AA,D6_SW,3,140.5,Penn Cambria,PEC
@@ -47481,7 +47481,7 @@ section,2021_D4_SS_AA,2021,AA,D4_SS,10,9.0,Sugar Valley Rural Charter,SVC
 section,2021_D6_S1_AA,2021,AA,D6_S1,1,171.0,Tyrone,TYR
 section,2021_D6_S1_AA,2021,AA,D6_S1,2,170.0,Huntingdon,HTD
 section,2021_D6_S1_AA,2021,AA,D6_S1,3,128.0,Mount Union,MU
-section,2021_D6_S1_AA,2021,AA,D6_S1,4,84.0,Bellwood Antis,BA
+section,2021_D6_S1_AA,2021,AA,D6_S1,4,84.0,Bellwood-Antis,BA
 section,2021_D6_S1_AA,2021,AA,D6_S1,5,56.0,Southern Huntingdon,SHD
 section,2021_D6_S1_AA,2021,AA,D6_S1,6,35.0,Juniata Valley,JV
 section,2021_D6_S2_AA,2021,AA,D6_S2,1,134.5,Penns Valley,PNV
@@ -47827,7 +47827,7 @@ district,1936_D3_single,1936,single,D3,2,30.0,Manheim Borough,MHB
 district,1936_D3_single,1936,single,D3,3,19.0,Hershey,HER
 district,1936_D3_single,1936,single,D3,4,14.0,West York,WY
 district,1936_D7_single,1936,single,D7,1,53.0,Canonsburg,CNB
-district,1936_D7_single,1936,single,D7,2,25.0,Greensburg,GRNB
+district,1936_D7_single,1936,single,D7,2,25.0,Greensburg Salem,GRNB
 district,1936_D7_single,1936,single,D7,3,17.0,Trafford,TRFD
 district,1936_D7_single,1936,single,D7,4,16.0,Norwin,NRW
 district,1936_D7_single,1936,single,D7,5,12.0,Trinity,TRIN
@@ -47861,7 +47861,7 @@ district,1937_D3_single,1937,single,D3,4,14.0,Steelton,STLT
 district,1937_D3_single,1937,single,D3,5,11.0,Lancaster Boys,LNCB
 district,1937_D3_single,1937,single,D3,6,0.0,Hanover,HAN
 district,1937_D7_single,1937,single,D7,1,49.0,Canonsburg,CNB
-district,1937_D7_single,1937,single,D7,2,19.0,Greensburg,GRNB
+district,1937_D7_single,1937,single,D7,2,19.0,Greensburg Salem,GRNB
 district,1937_D7_single,1937,single,D7,3,18.0,Cumberland Township,CLTP
 district,1937_D7_single,1937,single,D7,3,18.0,Trafford,TRFD
 district,1937_D7_single,1937,single,D7,5,12.0,Turtle Creek Union,TCU
