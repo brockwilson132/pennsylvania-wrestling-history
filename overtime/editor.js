@@ -137,11 +137,6 @@
   const newId = () => { let id; do { id = Math.random().toString(36).slice(2, 6); } while (doc.sets[id] || /^\d/.test(id)); return id; };
   const pill = (name, p, cls = '') => `<span class="stag tF${p.none ? ' nc' : ''}${cls ? ' ' + cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"><i></i>${esc(name)}</span>`;
   const abbr = (sch) => T.abbr(sch, doc);
-  /* look-alikes: schools in the same district whose tags are identical (same colours), so its brackets can't tell them apart */
-  let LA = null;
-  const lookAlikes = () => { if (LA) return LA; LA = new Map(); const by = new Map();
-    [...new Set([...UD.schools, ...Object.keys(doc.schools)])].forEach((s) => { const d = DIST.get(s), p = T.paint(s, doc); if (!d || p.none) return; const k = d[1] + '|' + p.fill + p.acc + p.ink; (by.get(k) || by.set(k, []).get(k)).push(s); });
-    by.forEach((L) => { if (L.length > 1) L.forEach((s) => LA.set(s, L.filter((x) => x !== s))); }); return LA; };
   /* short names already used in the same district */
   const abClash = (s) => { const d = DIST.get(s); if (!d) return []; const a = abbr(s); return UD.schools.filter((x) => x !== s && DIST.get(x) && DIST.get(x)[1] === d[1] && abbr(x) === a); };
   const hexOk = (h) => /^#?[0-9a-f]{6}$/i.test(h.trim());
@@ -184,7 +179,6 @@
     return all.filter((s) => { const k = s.toLowerCase(); if (t.length && !t.every((x) => k.includes(x))) return false;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
       if (ui.f === 'notes') return !!notes[s];
-      if (ui.f === 'same') return lookAlikes().has(s);
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; });
   }
   /* pill themes in the list: every distinct fill + dot + text, in colour order, with how many schools wear it */
@@ -233,17 +227,15 @@
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
     const bid = window.SchoolBadge && window.SchoolBadge.identity(s), bh = bid ? [bid.primary, bid.secondary, bid.accent].filter(Boolean).map((h) => h.toUpperCase()) : [];
     const badge = bh.length ? `<div class="ce-bdg">${svg('shield')}${bh.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!none && h === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}</div>` : '';
-    const la = lookAlikes().get(s) || [];
-    const twins = la.length ? `<div class="ce-kin ce-twin">${svg('warn')}${la.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
     const sim = similar(s);
     const kin = sim.length ? `<div class="ce-kin">${svg('link')}${sim.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
     const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
-    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${twins}${kin}${sets}${parts}${badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${kin}${sets}${parts}${badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
     const ss = schoolsShown();
     const chips = [['all', 'All'], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
-      .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`], ['same', `<span class="ce-mini ce-lam">${svg('warn')}${lookAlikes().size}</span>`]])
+      .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     const tp = ui.th && themes(baseShown()).find((t) => t.k === ui.th), tq = tp ? tp.p : null;
     const thChip = `<button data-thopen aria-pressed="${ui.thOpen}" aria-label="Pill themes">${tq ? `<span class="ce-mini" style="--f:${tq.fill};--a:${tq.acc}"><b><i></i></b></span>` : svg('palette')}</button>`;
@@ -252,10 +244,9 @@
     return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label><div class="ce-so" role="group" aria-label="Sort">${sorts.map(([k, l]) => `<button data-sort="${k}" aria-pressed="${ui.sort === k}" aria-label="${{ az: 'Name', D: 'District medals', R: 'Regional medals', S: 'State medals' }[k]}">${l}</button>`).join('')}</div></div>
       <div class="ce-ch" role="group" aria-label="Show">${thChip}${chips.map(([k, l]) => `<button data-f="${k}" aria-pressed="${ui.f === k}">${l}</button>`).join('')}</div>${thRow}
       <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), d = DIST.get(s);
-        return `<li class="ce-sr${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-nm"><span class="ce-nmr">${pill(s, p)}${lookAlikes().has(s) ? `<span class="ce-la" role="img" aria-label="Same tag as another school in the district">${svg('warn')}</span>` : ''}${changed(s) ? `<button class="ce-rv" data-rv aria-label="Back to saved colours">${svg('undo')}${pill(abbr(s), T.paint(s, base), 'ab xs')}</button>` : ''}</span><small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button></li>`; }).join('')}</ul>`;
+        return `<li class="ce-sr${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-nm"><span class="ce-nmr">${pill(s, p)}${changed(s) ? `<button class="ce-rv" data-rv aria-label="Back to saved colours">${svg('undo')}${pill(abbr(s), T.paint(s, base), 'ab xs')}</button>` : ''}</span><small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button></li>`; }).join('')}</ul>`;
   }
   function draw() {
-    LA = null;
     const n = changes(), focusQ = document.activeElement && document.activeElement.id === 'q', caret = focusQ ? document.activeElement.selectionStart : 0;
     const sv = ui.save === 'busy' ? 'spin' : ui.save === 'ok' ? 'ok' : ui.save === 'err' ? 'err' : 'save';
     const y = window.scrollY, sc = root.querySelector('.ce-cs'), csy = sc ? sc.scrollTop : 0;
