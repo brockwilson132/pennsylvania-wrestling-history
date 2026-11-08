@@ -24,7 +24,9 @@
      exit the districts burst apart to show the app. It leaves at the later of: the intro being done, and the app's
      first render (or OTBoot.hide()), so it never ends before the app is ready and never makes a slow load slower.
      Only transform/opacity animate, so it stays smooth while the data scripts block the main thread.
-     Tap/click/key skips the rest once the app is ready. Reduced motion: no movement, a plain fade in and out. -->
+     Once both are true the bar gives way to an "Enter the stadium" button (Brock): the loader waits for it or the Enter key,
+     and an Enter pressed early is kept until the app is ready. Music: intro.m4a (Brock's own Suno track, v2, full),
+     looped; browsers allow sound only after a tap or key, so it starts on the first one, and Enter fades it out. The speaker toggle is remembered. Reduced motion: plain fades. -->
 <style>
 #otboot{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0B0D10;color:#EEEAE1;overflow:hidden}
 #otboot .w{position:relative;display:grid;justify-items:center;gap:22px}
@@ -48,6 +50,20 @@
 #otboot .bar b{overflow:hidden}
 #otboot .bar i{position:relative;overflow:hidden;transform:translateX(100%);background:linear-gradient(90deg,#2C5BD8,#20A8D8 20%,#2EC27E 42%,#E5C53A 62%,#F08A24 80%,#E8392B)}
 #otboot .bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:otb-sh 1.3s 2s ease-in-out infinite}
+#otboot .lo{position:relative}
+#otboot .msg,#otboot .bar{transition:opacity .3s}
+#otboot.rd .msg,#otboot.rd .bar{opacity:0}
+#otboot .ent{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.92);opacity:0;visibility:hidden;transition:opacity .35s,transform .35s cubic-bezier(.2,1.4,.4,1),visibility 0s .35s;
+  display:inline-flex;align-items:center;gap:12px;white-space:nowrap;padding:13px 18px 13px 24px;border-radius:999px;border:1.5px solid #D9A441;background:rgba(217,164,65,.08);color:#EEEAE1;
+  font:700 18px/1 'Barlow Condensed',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#otboot .ent kbd{display:inline-grid;place-items:center;min-width:30px;height:24px;padding:0 6px;border-radius:5px;border:1px solid #5A4A2A;border-bottom-width:3px;color:#D9A441;font:700 15px/1 system-ui,sans-serif;letter-spacing:0}
+#otboot.rd .ent{opacity:1;visibility:visible;transform:translate(-50%,-50%);transition:opacity .35s,transform .35s cubic-bezier(.2,1.4,.4,1);animation:otb-glow 2.4s .4s ease-in-out infinite}
+#otboot .ent:hover,#otboot .ent:focus-visible{background:rgba(217,164,65,.18);outline:none}
+#otboot .ent:active{transform:translate(-50%,-50%) scale(.96)}
+#otboot .snd{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:none;color:#8A939E;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#otboot .snd:hover,#otboot .snd:focus-visible{color:#EEEAE1;background:#1A1F26;outline:none}
+#otboot .snd svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#otboot .snd .on,#otboot .snd[aria-pressed="true"] .off{display:none}#otboot .snd[aria-pressed="true"] .on{display:inline}
 #otboot .msg{font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A939E;min-height:12px}
 /* exit: the state breaks back into its districts, which burst outward; the word and tagline fall away */
 #otboot.out{pointer-events:none;animation:otb-out .4s .25s ease-in both}
@@ -55,6 +71,7 @@
 #otboot.out .pf{animation:none;opacity:1}
 #otboot.out .pc{animation:otb-burst .6s cubic-bezier(.5,0,.75,0) both}
 #otboot.out .ch{animation:otb-fall .45s cubic-bezier(.5,0,1,1) both}
+#otboot.out .snd{opacity:0}
 #otboot.out .tg,#otboot.out .lo{animation:otb-out .25s ease-in both}
 @keyframes otb-pc{from{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(.55)}25%{opacity:1}}
 @keyframes otb-flash{0%,60%{opacity:0}75%{opacity:.75}to{opacity:.12}}
@@ -66,17 +83,21 @@
 @keyframes otb-fd{from{opacity:0}}
 @keyframes otb-sh{to{transform:translateX(100%)}}
 @keyframes otb-out{to{opacity:0}}
+@keyframes otb-glow{0%,100%{box-shadow:0 0 0 0 rgba(217,164,65,0)}50%{box-shadow:0 0 22px 2px rgba(217,164,65,.28)}}
 @keyframes otb-burst{to{opacity:0;transform:translate(calc(var(--dx) * 1.6),calc(var(--dy) * 1.6)) rotate(calc(var(--r) * -1.5)) scale(1.25)}}
 @keyframes otb-fall{to{opacity:0;transform:translateY(90%) rotate(var(--fr))}}
 @media (prefers-reduced-motion:reduce){
   #otboot .a{animation:otb-fd .4s ease-out both;animation-play-state:paused}
   #otboot .nm,#otboot .ol,#otboot .sm,#otboot .pf,#otboot .bar i::after{display:none}
+  #otboot.rd .ent{animation:none}
   #otboot.out{animation:otb-out .3s ease-out both}#otboot.out *{animation:none!important}
 }
 </style>
 <div id="otboot" role="status" aria-live="polite" aria-label="Loading Overtime"><div class="w">
 <div class="lk" id="otbootlk" role="img" aria-label="Overtime, Pennsylvania wrestling history"></div>
-<div class="lo a"><div class="msg" id="otbootmsg">Loading results</div><div class="bar" aria-hidden="true"><b id="otbootbar"><i></i></b></div></div></div></div>
+<div class="lo a"><div class="msg" id="otbootmsg">Loading results</div><div class="bar" aria-hidden="true"><b id="otbootbar"><i></i></b></div>
+<button class="ent" id="otbgo" type="button" tabindex="-1">Enter the stadium<kbd aria-hidden="true">&#x23CE;</kbd></button></div></div>
+<button class="snd" id="otbsnd" type="button" aria-label="Music" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z"/><path class="on" d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.3a8 8 0 0 1 0 11.4"/><path class="off" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button></div>
 <script>
 (function () { var el = document.getElementById('otboot'), lk = document.getElementById('otbootlk'), done = false, ready = false;
   var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -114,16 +135,39 @@
     bar.style.transition = fill.style.transition = RM ? 'none' : tr; bar.style.transform = 'translateX(' + ((f - 1) * 100).toFixed(2) + '%)'; fill.style.transform = 'translateX(' + ((1 - f) * 100).toFixed(2) + '%)'; }
   var t0 = performance.now(), started = false, creep;
   /* start once the lockup fonts are in (so letters never swap face mid-animation), or after 500 ms regardless */
-  function go() { if (started) return; started = true; t0 = performance.now(); el.classList.add('go'); 
+  function go() { if (started) return; started = true; t0 = performance.now(); el.classList.add('go');
     creep = setTimeout(function () { to(0.85, 4000); }, RM ? 0 : 1900); setTimeout(maybeLeave, INTRO); }
   if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('96px "Archivo Black"'), document.fonts.load('700 22px "Barlow Condensed"')]).then(go, go);
   setTimeout(go, 500);
-  function maybeLeave() { if (!ready || done || !started || performance.now() - t0 < INTRO - 20) return; leave(); }
-  function leave() { done = true; clearTimeout(creep); var sweep = RM ? 0 : 200; to(1, sweep, 'ease-in-out');
-    setTimeout(function () { el.classList.add('out'); setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, RM ? 320 : 580); }, sweep); }
-  function hide() { if (ready) return; ready = true; maybeLeave(); }
-  el.addEventListener('click', function () { if (ready && !done) leave(); });
-  window.addEventListener('keydown', function k() { if (ready && !done) { leave(); window.removeEventListener('keydown', k); } });
+  /* when the intro is done and the app is ready, the bar fills and the Enter button takes its place */
+  var go_ = document.getElementById('otbgo'), armed = false, want = false;
+  function maybeLeave() { if (!ready || done || armed || !started || performance.now() - t0 < INTRO - 20) return; armed = true; clearTimeout(creep);
+    to(1, RM ? 0 : 250, 'ease-in-out'); setTimeout(function () { if (done) return; el.classList.add('rd'); go_.tabIndex = 0; try { go_.focus({ preventScroll: true }); } catch (e) {} if (want) leave(); }, RM ? 0 : 300); }
+  function leave() { if (done) return; done = true; clearTimeout(creep); music(true); el.classList.add('out');
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, RM ? 320 : 580); }
+  function hide() { if (ready) return; ready = true; fetchSong(); maybeLeave(); }
+  go_.addEventListener('click', function () { if (armed) leave(); });
+  window.addEventListener('keydown', function (e) { if (done) return; music(); if (e.key === 'Enter') { e.preventDefault(); if (el.classList.contains('rd')) leave(); else want = true; } });
+  /* music: sound is only allowed after the visitor's first tap or key, so the AudioContext is made inside that gesture.
+     The file is fetched once the app is ready (or on the first gesture), so it never slows the app's own loading. */
+  var sndB = document.getElementById('otbsnd'), on = true, ac = null, gain = null, src = null, song = null;
+  try { on = localStorage.getItem('ot-music') !== '0'; } catch (e) {}
+  sndB.setAttribute('aria-pressed', on);
+  function fetchSong() { if (!song && window.fetch) song = fetch('intro.m4a').then(function (r) { if (!r.ok) throw r.status; return r.arrayBuffer(); }); }
+  function music(entering) { if (!on) return;
+    if (!ac) { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      ac = new AC(); gain = ac.createGain(); gain.connect(ac.destination); fetchSong();
+      if (song) song.then(function (b) { return new Promise(function (ok, no) { ac.decodeAudioData(b, ok, no); }); }).then(function (buf) {
+        if (src || ac.state === 'closed') return; if (!done) gain.gain.value = on ? 1 : 0; src = ac.createBufferSource(); src.buffer = buf; src.loop = true; src.connect(gain); src.start();
+        if (done) fade(); }).catch(function () {}); }
+    if (ac.state !== 'running') ac.resume();
+    if (entering) fade(); }
+  /* leaving: the music fades out under the app over 2.5 s */
+  function fade() { if (!gain) return; var t = ac.currentTime; gain.gain.cancelScheduledValues(t); gain.gain.setValueAtTime(gain.gain.value, t); gain.gain.linearRampToValueAtTime(0, t + 2.5);
+    setTimeout(function () { try { if (src) src.stop(); if (ac.state !== 'closed') ac.close(); } catch (e) {} }, 2700); }
+  sndB.addEventListener('click', function () { on = !on; sndB.setAttribute('aria-pressed', on); try { localStorage.setItem('ot-music', on ? '1' : '0'); } catch (e) {}
+    if (gain) gain.gain.setTargetAtTime(on ? 1 : 0, ac.currentTime, 0.05); if (on) music(); });
+  el.addEventListener('pointerdown', function (e) { if (!done && !sndB.contains(e.target)) music(); });
   window.OTBoot = { hide: hide, progress: function (f) { if (done) return; clearTimeout(creep); f = +f || 0; to(f, 400); creep = setTimeout(function () { to(Math.min(0.95, f + 0.06), 4000); }, 450); },
     say: function (t) { var m = document.getElementById('otbootmsg'); if (m) m.textContent = t; } };
   var main = document.getElementById('main');
