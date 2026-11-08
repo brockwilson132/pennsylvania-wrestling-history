@@ -45,6 +45,11 @@
     return m;
   }
 
+  /* identical sets fold into the first one (schools follow it), so copies and re-creations never pile up */
+  function dedupe(m) { const seen = new Map(), alias = {};
+    Object.keys(m.sets).forEach((id) => { const k = m.sets[id].map((h) => h.toUpperCase()).join(); if (seen.has(k)) { alias[id] = seen.get(k); delete m.sets[id]; } else seen.set(k, id); });
+    Object.keys(m.schools).forEach((s) => { if (alias[m.schools[s]]) m.schools[s] = alias[m.schools[s]]; });
+    Object.defineProperty(m, 'alias', { value: alias, enumerable: false, configurable: true, writable: true }); return m; }
   /* ---- GitHub ---- */
   const token = () => ls.get(K_TOKEN) || '';
   const b64d = (s) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, '')), (c) => c.charCodeAt(0)));
@@ -67,10 +72,10 @@
     ui.save = 'busy'; ui.err = ''; draw();
     try {
       for (let i = 0; i < 3; i++) {
-        const L = await latest(), m = merge(L.doc), txt = T.serialize(m);
+        const L = await latest(), m = dedupe(merge(L.doc)), txt = T.serialize(m);
         try {
           if (txt !== L.txt) await gh('PUT', { message: message(diff(base, doc)), content: b64e(txt), sha: L.sha, branch: BRANCH });
-          base = m; doc = clone(m); if (ui.sel && !doc.sets[ui.sel]) ui.sel = Object.keys(doc.sets)[0] || null; undo.length = 0; keep();
+          base = m; doc = clone(m); if (ui.sel && m.alias[ui.sel]) ui.sel = m.alias[ui.sel]; delete m.alias; delete doc.alias; delete base.alias; if (ui.sel && !doc.sets[ui.sel]) ui.sel = Object.keys(doc.sets)[0] || null; undo.length = 0; keep();
           ui.save = 'ok'; draw(); setTimeout(() => { if (ui.save === 'ok') { ui.save = ''; draw(); } }, 4000); return;
         } catch (e) { if (e.status !== 409) throw e; }   // someone saved in between: fetch again and re-merge
       }
@@ -87,9 +92,15 @@
 
   /* ---- helpers ---- */
   const setPaint = (id) => { const s = doc.sets[id]; return s ? { fill: s[0], acc: s[1], ink: s[2] } : T.NONE; };
+  const greyN = () => { const all = new Set([...UD.schools, ...Object.keys(doc.schools)]); let n = 0; all.forEach((x) => { if (!doc.schools[x] && T.auto(x).none) n++; }); return n; };
+  /* sets in colour order (greys and blacks first, then by hue, then by the dot) so similar sets sit together */
+  const hue = (h) => { const n = parseInt(h.slice(1), 16), r = (n >> 16) / 255, g = ((n >> 8) & 255) / 255, b = (n & 255) / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
+    if (d < 0.12) return -1 + mx; const x = mx === r ? ((g - b) / d + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return x * 60; };
+  const byColour = (a, b) => { const A = doc.sets[a], B = doc.sets[b]; return hue(A[0]) - hue(B[0]) || hue(A[1]) - hue(B[1]); };
   const uses = (id) => Object.values(doc.schools).filter((v) => v === id).length;
   const newId = () => { let id; do { id = Math.random().toString(36).slice(2, 6); } while (doc.sets[id] || /^\d/.test(id)); return id; };
   const pill = (name, p, cls = '') => `<span class="stag tF${p.none ? ' nc' : ''}${cls ? ' ' + cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"><i></i>${esc(name)}</span>`;
+  const abbr = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   const hexOk = (h) => /^#?[0-9a-f]{6}$/i.test(h.trim());
   const hexN = (h) => '#' + h.trim().replace('#', '').toUpperCase();
   const I = {
@@ -129,20 +140,21 @@
       <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${s[0]}"></span></button>
       <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${s[1]}"></span></button>
       <button class="ce-pb" data-part="2" aria-pressed="${ui.part === 2}" aria-label="Text"><span class="ce-sw2" style="--fill:${s[0]};color:${s[2]}">Aa</span></button>
-      ${low ? `<svg class="ce-warn" viewBox="0 0 24 24" role="img" aria-label="Text is hard to read on this fill">${I.warn}</svg>` : ''}</div>`;
+      ${low ? `<button class="ce-warn" data-fix aria-label="Make the text readable">${svg('warn')}</button>` : ''}</div>`;
     const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && ui.sel && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
       <button class="ce-sw ce-tool" data-swadd aria-pressed="${ui.add}" aria-label="Add a colour">${svg('plus')}</button></div>`;
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
     const sets = `<div class="ce-ss" role="group" aria-label="Sets">
       <button class="ce-sb ce-tool" data-snew aria-label="New set">${svg('plus')}</button>
       ${ui.sel ? `<button class="ce-sb ce-tool" data-scopy aria-label="Copy set">${svg('copy')}</button><button class="ce-sb ce-tool${ui.armDel ? ' ce-arm' : ''}" data-sdel aria-label="Delete set">${svg('trash')}</button>` : ''}
-      ${Object.keys(doc.sets).map((id) => { const q = setPaint(id); return `<button class="ce-sb" data-set="${id}" aria-pressed="${id === ui.sel}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>${uses(id)}</button>`; }).join('')}</div>`;
+      ${Object.keys(doc.sets).sort(byColour).map((id) => { const q = setPaint(id); return `<button class="ce-sb" data-set="${id}" aria-pressed="${id === ui.sel}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>${uses(id)}</button>`; }).join('')}</div>`;
     const big = ui.sel ? name : 'School';
-    return `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(big.length, 1))))}px">${ui.sel ? pill(name, p) : pill('School', T.NONE)}</div>${ui.min ? '' : parts + sw + cx}${sets}`;
+    const pp = ui.sel ? p : T.NONE;
+    return `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(big.length, 1))))}px"><span class="ce-pvb">${pill(big, pp)}</span><span class="ce-pvs">${pill(big, pp)}${pill(abbr(big), pp, 'ab')}${pill(abbr(big), pp, 'ab xs')}</span></div>${ui.min ? '' : parts + sw + cx}${sets}`;
   }
   function list() {
     const ss = schoolsShown(), sp = setPaint(ui.sel);
-    const chips = [['all', 'All'], ['set', `<span class="ce-mini" style="--f:${sp.fill};--a:${sp.acc}"><b><i></i></b></span>`], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b></span>`]]
+    const chips = [['all', 'All'], ['set', `<span class="ce-mini" style="--f:${sp.fill};--a:${sp.acc}"><b><i></i></b>${ui.sel ? uses(ui.sel) : 0}</span>`], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label></div>
       <div class="ce-ch" role="group" aria-label="Show">${chips.map(([k, l]) => `<button data-f="${k}" aria-pressed="${ui.f === k}">${l}</button>`).join('')}</div>
@@ -196,6 +208,8 @@
     else if (d.f) { ui.f = d.f; draw(); }
     else if (d.pick != null) { e.stopPropagation(); pickSchool(t.closest('[data-s]').dataset.s); }
     else if (d.s) tapSchool(d.s);
+    else if (d.fix != null) { const c = doc.sets[ui.sel], ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
+      edit(() => { doc.sets[ui.sel] = [c[0], c[1], ink]; }); }
     else if (d.min != null) { ui.min = !ui.min; draw(); }
     else if (d.undo != null) { const u = undo.pop(); if (u) { const o = JSON.parse(u); doc = o.doc; ui.sel = o.sel; ui.save = ''; keep(); draw(); } }
     else if (d.save != null) { if (ui.save === 'err' && !changes()) { ui.save = ''; ui.err = ''; draw(); } else save(); }
