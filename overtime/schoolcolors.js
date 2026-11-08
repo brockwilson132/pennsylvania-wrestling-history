@@ -1,6 +1,6 @@
 /* School name tag colours, written by the colour editor (colors.html). sets: id -> [fill, dot, text]; schools: name -> set id; abbr: name -> short name. */
 window.OT_COLORS = {
-"swatches": ["#C8102E", "#7A1E2C", "#E87722", "#C9A227", "#FFD200", "#15803D", "#0B4D2C", "#1F4E9C", "#1B2A4A", "#7EC8F2", "#4B2E83", "#4E2A1E", "#8A8D8F", "#FFFFFF", "#111111", "#7A0019", "#B5121B", "#0A0A0A", "#1A1A1A", "#A9B2B9", "#F8F9FA"],
+"swatches": ["#C8102E", "#7A1E2C", "#E87722", "#C9A227", "#FFD200", "#15803D", "#0B4D2C", "#1F4E9C", "#1B2A4A", "#7EC8F2", "#4B2E83", "#4E2A1E", "#8A8D8F", "#FFFFFF", "#111111", "#7A0019", "#B5121B", "#0A0A0A", "#1A1A1A", "#A9B2B9", "#F8F9FA", "#C3AF73", "#0D3400"],
 "sets": {
 "s1": ["#15803D", "#C9A227", "#FFFFFF"],
 "s2": ["#1F4E9C", "#8A8D8F", "#FFFFFF"],
@@ -31,7 +31,8 @@ window.OT_COLORS = {
 "s27": ["#1F4E9C", "#C8102E", "#FFFFFF"],
 "vqx8": ["#7A0019", "#111111", "#EEEAE1"],
 "q205": ["#B5121B", "#0A0A0A", "#FFFFFF"],
-"op3n": ["#1A1A1A", "#A9B2B9", "#F8F9FA"]
+"op3n": ["#1A1A1A", "#A9B2B9", "#F8F9FA"],
+"vegz": ["#0D3400", "#C3AF73", "#C3AF73"]
 },
 "schools": {
 "Abington": "vqx8",
@@ -39,6 +40,7 @@ window.OT_COLORS = {
 "Allentown Dieruff": "s2",
 "Athens": "op3n",
 "Bangor": "s3",
+"Belle Vernon": "vegz",
 "Bethlehem Catholic": "s4",
 "Bethlehem Freedom": "s5",
 "Bethlehem Liberty": "s6",
