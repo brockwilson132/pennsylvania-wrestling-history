@@ -175,7 +175,7 @@
    {
     "name": "Silver",
     "hex": "#96999B",
-    "hex_from": "school-site"
+    "hex_from": "logo"
    }
   ],
   "mascot": "Knights (currently; formerly Crusaders)",
@@ -228,38 +228,57 @@
   "colors": [
    {
     "name": "Orange",
-    "hex": null,
-    "hex_from": null
+    "hex": "#D16729",
+    "hex_from": "logo"
    },
    {
     "name": "Black",
-    "hex": null,
-    "hex_from": null
+    "hex": "#2E2322",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Tigers",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Beaver Falls High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Beaver_Falls_High_School"
+   "https://en.wikipedia.org/wiki/Beaver_Falls_High_School",
+   "https://www.tigerweb.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1730116275/tigerweborg/vyflhjz6xoz2yjjnmer7/BBFTigerwithName.ai",
+   "https://resources.finalsite.net/images/v1729774794/tigerweborg/axlsi1umc3bvdtesseag/favicon.png"
   ],
   "era": null,
   "notes": null,
-  "evidence": ""
+  "evidence": "Big Beaver Falls Area SD header tiger logo: burnt orange #D16729 ring/tiger with near-black #2E2322 ring, lettering and stripes on white; favicon same orange. Site CSS is stock Finalsite. Agrees with Wikipedia orange and black."
  },
  {
   "school": "Neighborhood Academy",
   "identified_as": "The Neighborhood Academy, Pittsburgh (Stanton Heights)",
-  "colors": [],
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#003C6C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#E76F1F",
+    "hex_from": "logo"
+   }
+  ],
   "mascot": "Bulldogs",
-  "confidence": "low",
+  "confidence": "high",
   "wikipedia": null,
   "sources": [
-   "search:https://www.maxpreps.com/pa/pittsburgh/neighborhood-academy-bulldogs/"
+   "search:https://www.maxpreps.com/pa/pittsburgh/neighborhood-academy-bulldogs/",
+   "https://www.theneighborhoodacademy.org",
+   "https://www.theneighborhoodacademy.org/athletics",
+   "https://resources.finalsite.net/images/v1747206509/theneighborhoodacademyorg/b5mraqoesovf8dh29jgm/Logo2.svg",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1746539262/theneighborhoodacademyorg/fmfavmk6cczcn4ko6lx9/DSC_8962.jpg",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1746539349/theneighborhoodacademyorg/hbvhr7djwbznona6syq3/91-A7401037.jpg"
   ],
   "era": null,
   "notes": "MaxPreps colours field blank in search snippet. Do not confuse with Westinghouse HS Bulldogs (blue and gold).",
-  "evidence": ""
+  "evidence": "School logo SVG: navy #003C6C hands and wordmark, orange #E76F1F triskele. Athletics page photos: 2025 PIAA basketball champions in navy jerseys with orange trim; wrestler in navy/orange singlet. Not Westinghouse blue/gold."
  },
  {
   "school": "Executive Education Academy",
@@ -303,7 +322,7 @@
   ],
   "era": null,
   "notes": "No colours found. Do not use Tyrone Area HS colours (orange and black, Golden Eagles); that is a different school.",
-  "evidence": ""
+  "evidence": "School site tyronechristianacademy.org refused the request (HTTP 406); one web search found only an Altoona Mirror rifle result with no colours. Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Peabody",
@@ -324,11 +343,12 @@
   "confidence": "medium",
   "wikipedia": "Peabody High School (Pennsylvania)",
   "sources": [
-   "https://en.wikipedia.org/wiki/Peabody_High_School_(Pennsylvania)"
+   "https://en.wikipedia.org/wiki/Peabody_High_School_(Pennsylvania)",
+   "https://www.alumniclass.com/peabody-high-school-highlanders-pittsburgh-pa/"
   ],
   "era": "Closed 2011; students moved to Pittsburgh Obama Academy (former Peabody building).",
   "notes": null,
-  "evidence": ""
+  "evidence": "Wikipedia infobox text 'Maroon and gray' (no colour boxes); AlumniClass Peabody Highlanders (Pittsburgh) alumni page themed maroon (#800000, a generic web colour, not used as a hex). Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Ford City",
@@ -350,11 +370,12 @@
   "wikipedia": "Armstrong School District (Pennsylvania)",
   "sources": [
    "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Ford_City_High_School.html",
-   "search:https://www.alumniclass.com/fordcity/military-alumni-view"
+   "search:https://www.alumniclass.com/fordcity/military-alumni-view",
+   "https://www.alumniclass.com/ford-city-high-school-sabers-pa/"
   ],
   "era": "Closed 2015, merged with Kittanning into Armstrong Jr/Sr HS (Riverhawks, blue and orange).",
   "notes": "Purple and gold from search-result listings (old Wikipedia mirror and a school profile); not confirmed for the 1970s specifically.",
-  "evidence": ""
+  "evidence": "AlumniClass 'Ford City High School Sabers' alumni page is themed purple #990099 and gold #ECC013 (site-chosen web colours, not the school's own artwork, so hex not used); agrees with purple and gold from the first pass. Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Aliquippa",
@@ -362,24 +383,28 @@
   "colors": [
    {
     "name": "Red",
-    "hex": null,
-    "hex_from": null
+    "hex": "#B20200",
+    "hex_from": "school-site"
    },
    {
     "name": "Black",
-    "hex": null,
-    "hex_from": null
+    "hex": "#000000",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Quips",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Aliquippa Junior/Senior High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Aliquippa_Junior/Senior_High_School"
+   "https://en.wikipedia.org/wiki/Aliquippa_Junior/Senior_High_School",
+   "https://www.aliquippa.k12.pa.us",
+   "https://www.aliquippa.k12.pa.us/sysimages/header_logoNEW.png",
+   "https://www.quipsd.org/GalleryImages/20252485023375_image.png",
+   "https://filecabinet1.eschoolview.com/62D6E49B-9F7D-4CCA-BE2D-BD37FDAC9130/2ead294b-b646-446e-918b-9002a88bd511.png"
   ],
   "era": null,
-  "notes": null,
-  "evidence": ""
+  "notes": "Logo too small for a clean red hex; red taken from the site's theme CSS.",
+  "evidence": "District header logo (Indian head in headdress, 123px): red feathers (anti-aliased, median about #BA3C2A) and black linework on white; district site theme CSS reds #B20200/#C10500/#A10200. 'QUIPS' community logo black. Agrees with Wikipedia red and black."
  },
  {
   "school": "Armstrong Central",
@@ -391,7 +416,7 @@
   "sources": [],
   "era": null,
   "notes": "Identity doubt: could not identify 'Armstrong Central' with certainty; Wikipedia has no page. Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Bellevue",
@@ -403,7 +428,7 @@
   "sources": [],
   "era": "Bellevue School District later merged with Avalon to form Northgate (Flames, red and gold); do not use Northgate colours.",
   "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours. Search found nothing for pre-Northgate Bellevue HS.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at. Web search returned only Bellevue schools in other states (OH, KY, WA, NE)."
  },
  {
   "school": "Sewickley",
@@ -417,7 +442,7 @@
   ],
   "era": "Public Sewickley HS later absorbed into Quaker Valley.",
   "notes": "Wikipedia page 'Sewickley High School' has no colours field. Not Sewickley Academy (red and black).",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Rankin Township",
@@ -429,7 +454,7 @@
   "sources": [],
   "era": "Rankin later folded into Woodland Hills SD.",
   "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Wilkes-Barre Township",
@@ -441,7 +466,7 @@
   "sources": [],
   "era": "Later part of Wilkes-Barre Area SD.",
   "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  },
  {
   "school": "Yeadon",
@@ -455,7 +480,7 @@
   ],
   "era": "Later merged into Penn Wood HS (maroon, white, navy); do not use Penn Wood colours without confirmation.",
   "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at. Web search confirmed only the 1982 merger (Lansdowne-Aldan, Yeadon, Darby-Colwyn into Penn Wood); no Yeadon colours."
  },
  {
   "school": "Reynoldsville",
@@ -467,6 +492,6 @@
   "sources": [],
   "era": null,
   "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
-  "evidence": ""
+  "evidence": "No school site (closed/merged school). Tried AlumniClass alumni pages by name (none found) and a web search where noted; Image search (Bing/DuckDuckGo) returned no usable results from this environment and Wikimedia/archive.org were rate-limited, so no photo could be found to look at."
  }
 ]

@@ -36,6 +36,8 @@
   const resOf = (s) => { const r = RES[s]; return r && r.c && r.c.length ? r : null; };
   /* a suggestion as a tag: fill = the first colour, dot = the second, text = the first later colour that reads on the fill */
   const resCols = (r) => { const hs = r.c.map((c) => c[1]); const p = T.fromColours(hs); return [p.fill, hs.length > 1 ? hs[1] : p.ink, p.ink]; };
+  /* a school with a suggestion that its tag doesn't wear yet (unset, or set to other colours) */
+  const resDiff = (s) => { const r = resOf(s); if (!r) return false; const id = doc.schools[s], cur = id && doc.sets[id]; return !cur || J(cur.map((h) => h.toUpperCase())) !== J(resCols(r).map((h) => h.toUpperCase())); };
 
   /* ---- state ---- */
   let base = norm(clone(window.OT_COLORS)), doc = clone(base);
@@ -190,7 +192,7 @@
       if (ui.cl && !(CLS.has(s) && CLS.get(s)[1] === ui.cl)) return false;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
       if (ui.f === 'notes') return !!notes[s];
-      if (ui.f === 'res') return !doc.schools[s] && !!resOf(s);
+      if (ui.f === 'res') return resDiff(s);
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; });
   }
   /* pill themes in the list: every distinct fill + dot + text, in colour order, with how many schools wear it */
@@ -252,7 +254,7 @@
     const ss = schoolsShown();
     const chips = [['all', 'All'], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
       .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
-      .concat([['res', `<span class="ce-mini">${svg('flask')}${Object.keys(RES).filter((k) => !doc.schools[k] && resOf(k)).length}</span>`]])
+      .concat([['res', `<span class="ce-mini">${svg('flask')}${Object.keys(RES).filter(resDiff).length}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     const tp = ui.th && themes(baseShown()).find((t) => t.k === ui.th), tq = tp ? tp.p : null;
     const thChip = `<button data-thopen aria-pressed="${ui.thOpen}" aria-label="Pill themes">${tq ? `<span class="ce-mini" style="--f:${tq.fill};--a:${tq.acc}"><b><i></i></b></span>` : svg('palette')}</button>`;

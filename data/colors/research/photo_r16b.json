@@ -29,16 +29,34 @@
  {
   "school": "Kensington",
   "identified_as": "Kensington High School, Philadelphia",
-  "colors": [],
-  "mascot": null,
-  "confidence": "low",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Yellow Gold",
+    "hex": "#FFFF00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers (logo shows a white tiger; name not confirmed)",
+  "confidence": "medium",
   "wikipedia": "Kensington High School (Philadelphia)",
   "sources": [
-   "https://en.wikipedia.org/wiki/Kensington_High_School_(Philadelphia)"
+   "https://en.wikipedia.org/wiki/Kensington_High_School_(Philadelphia)",
+   "https://kensingtonhs.philasd.org/",
+   "https://www.philasd.org/kensingtonhs/wp-content/uploads/sites/434/2018/02/logo.png"
   ],
   "era": "Kensington was split into several small schools (e.g. Kensington CAPA, Kensington Health Sciences) around 2006-2010",
-  "notes": "Wikipedia has no colours; web search budget exhausted before further lookup.",
-  "evidence": null
+  "notes": "Colours from the current Kensington High School (School District of Philadelphia) logo; not verified for the pre-2006 comprehensive Kensington HS era.",
+  "evidence": "school site logo.png: white/black striped tiger with bright yellow #FFFF00 block K outlined in black, 'Kensington' lettering"
  },
  {
   "school": "Friends Select",
@@ -86,11 +104,13 @@
   "confidence": "medium",
   "wikipedia": "Kennedy\u2013Kenrick Catholic High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Kennedy%E2%80%93Kenrick_Catholic_High_School"
+   "https://en.wikipedia.org/wiki/Kennedy%E2%80%93Kenrick_Catholic_High_School",
+   "search:http://www.kkchs.org",
+   "search:https://web.archive.org/web/20000818145542/http://www.kkchs.org/"
   ],
   "era": "Closed 2010; replaced by Pope John Paul II HS",
   "notes": "Royal blue given only as a named color box.",
-  "evidence": null
+  "evidence": "No image found: Wayback copies of kkchs.org unreachable and image search not usable; kept Wikipedia infobox gold"
  },
  {
   "school": "Cardinal Wuerl North Catholic",
@@ -178,25 +198,32 @@
   "colors": [
    {
     "name": "Black",
-    "hex": null,
-    "hex_from": null
+    "hex": "#1B1709",
+    "hex_from": "logo"
    },
    {
     "name": "Gold",
+    "hex": "#F3C728",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
     "hex": null,
     "hex_from": null
    }
   ],
   "mascot": "Falcons",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Brownsville Area High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Brownsville_Area_High_School",
-   "https://en.wikipedia.org/wiki/Brownsville_Area_School_District"
+   "https://en.wikipedia.org/wiki/Brownsville_Area_School_District",
+   "https://www.basd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/10956/logo/12325/white_letters_Mission_Statement_logo.png"
   ],
   "era": null,
-  "notes": "District page says black, white and gold; high school page says black and gold.",
-  "evidence": null
+  "notes": "District site theme CSS is mostly a template purple/gold (#662E80, #E5B73B); the district logo itself is gold FALCONS lettering outlined in black.",
+  "evidence": "district site logo: gold #F3C728 'FALCONS' outlined black #1B1709 over grey script B seal; district graphics black and gold"
  },
  {
   "school": "Mohawk Area",
@@ -242,7 +269,7 @@
   ],
   "era": "Absorbed into West Shore SD (Cedar Cliff, navy/gold/silver, Colts) in the 1960s",
   "notes": "No source for New Cumberland HS colours found; web search budget exhausted.",
-  "evidence": null
+  "evidence": "No images found; image search not usable from this environment and no school site (closed school)."
  },
  {
   "school": "Northumberland",
@@ -256,7 +283,7 @@
   ],
   "era": "Merged with Sunbury HS in 1965 to form Shikellamy (Braves; maroon, white, blue)",
   "notes": "No source for Northumberland HS colours found.",
-  "evidence": null
+  "evidence": "No images found; image search not usable and no school site (merged 1965). Successor Shikellamy colours not used."
  },
  {
   "school": "Ashland",
@@ -270,7 +297,7 @@
   ],
   "era": "Merged into North Schuylkill (Spartans; crimson red and royal blue) in the late 1960s/1970s",
   "notes": "No source for Ashland HS colours found. 'Black Diamonds' is the town's nickname, not confirmed as the school's.",
-  "evidence": null
+  "evidence": "No images found; image search not usable and no school site (merged into North Schuylkill). Successor colours not used."
  },
  {
   "school": "Homer-Center",
@@ -309,7 +336,7 @@
   "sources": [],
   "era": "Now part of Chester County IU Technical College High School",
   "notes": "No Wikipedia page found and web search budget exhausted.",
-  "evidence": null
+  "evidence": "No images found for the NCCT era; successor TCHS branding not used."
  },
  {
   "school": "St. John Neumann Regional Acad",
@@ -369,25 +396,27 @@
   "identified_as": "Brentwood High School, Brentwood, Allegheny Co.",
   "colors": [
    {
-    "name": "Blue",
-    "hex": null,
-    "hex_from": null
+    "name": "Navy Blue",
+    "hex": "#112739",
+    "hex_from": "logo"
    },
    {
-    "name": "Gold",
-    "hex": "#A98F52",
-    "hex_from": "wikipedia-infobox"
+    "name": "Vegas Gold",
+    "hex": "#C5B358",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Spartans",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Brentwood High School (Pennsylvania)",
   "sources": [
-   "https://en.wikipedia.org/wiki/Brentwood_High_School_(Pennsylvania)"
+   "https://en.wikipedia.org/wiki/Brentwood_High_School_(Pennsylvania)",
+   "https://www.bb-sd.com/",
+   "https://www.bb-sd.com/sysimages/Logo.png"
   ],
   "era": null,
-  "notes": "Blue given as named 'navy' color box.",
-  "evidence": null
+  "notes": "Gold is a muted Vegas gold, not yellow; replaces the infobox #A98F52.",
+  "evidence": "district site Logo.png: Spartan helmet in navy #112739 and Vegas gold #C5B358; site CSS #C5B358 x9, #172A3D x14"
  },
  {
   "school": "Coventry Christian",

@@ -8,11 +8,13 @@
   "wikipedia": "Glen Mills Schools",
   "sources": [
    "https://en.wikipedia.org/wiki/Glen_Mills_Schools",
-   "search:https://papreplive.com/football/glen-mills-has-a-clear-agenda-after-latest-victory"
+   "search:https://papreplive.com/football/glen-mills-has-a-clear-agenda-after-latest-victory",
+   "search:https://npaaa.org/NPKnightsFootball/2003_glenmills.htm",
+   "search:https://www.pressreader.com/usa/daily-times-primos-pa/20170930/281943133082159"
   ],
   "era": "Residential reform school; closed 2019 after state licence revoked.",
   "notes": "No source found stating colours; Wikipedia article has no infobox colours.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session. papreplive.com blocked; npaaa.org page refused."
  },
  {
   "school": "Lansdowne-Aldan",
@@ -26,7 +28,7 @@
   ],
   "era": "Merged 1982 with Yeadon and Darby-Colwyn into Penn Wood High School (Patriots; maroon, white, navy).",
   "notes": "Could not find Lansdowne-Aldan's own colours; do not assume Penn Wood's.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "Central Bucks South",
@@ -92,26 +94,27 @@
   "identified_as": "Rockwood Area Junior/Senior High School, Rockwood (Somerset County)",
   "colors": [
    {
-    "name": "Red",
-    "hex": null,
-    "hex_from": null
+    "name": "Dark Red (cardinal/maroon-like)",
+    "hex": "#7D0A03",
+    "hex_from": "logo"
    },
    {
-    "name": "White",
+    "name": "White (cream)",
     "hex": null,
     "hex_from": null
    }
   ],
   "mascot": "Rockets",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Rockwood Area Junior/Senior High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Rockwood_Area_School_District",
-   "https://en.wikipedia.org/wiki/Rockwood_Area_Junior/Senior_High_School"
+   "https://en.wikipedia.org/wiki/Rockwood_Area_Junior/Senior_High_School",
+   "https://upload.wikimedia.org/wikipedia/en/8/8a/Rockwood_Area_School_District_logo.png"
   ],
   "era": null,
   "notes": "Colours from the district infobox; the high-school page lists none.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "district logo (Wikipedia upload 'Rockwood Area School District logo.png'): 'Home of the Rockets' roundel in dark red #7D0A03 with cream/white lettering and silver rocket; district infobox says red. School site rockwoodschools.org could not be fetched (TLS chain error). The red is a deep red, near maroon."
  },
  {
   "school": "Mariana Bracetti Academy",
@@ -178,34 +181,19 @@
  {
   "school": "Steelton",
   "identified_as": "Steelton High School, Steelton (Dauphin County)",
-  "colors": [
-   {
-    "name": "Blue",
-    "hex": null,
-    "hex_from": null
-   },
-   {
-    "name": "White",
-    "hex": null,
-    "hex_from": null
-   },
-   {
-    "name": "Grey",
-    "hex": null,
-    "hex_from": null
-   }
-  ],
+  "colors": [],
   "mascot": "Steamrollers",
   "confidence": "low",
   "wikipedia": "Steelton-Highspire School District",
   "sources": [
    "https://en.wikipedia.org/wiki/Steelton-Highspire_School_District",
    "https://en.wikipedia.org/wiki/Steelton_High_School",
-   "search:https://www.maxpreps.com/pa/steelton/steelton-highspire-steamrollers"
+   "search:https://www.maxpreps.com/pa/steelton/steelton-highspire-steamrollers",
+   "https://www.shsd.k12.pa.us"
   ],
-  "era": "Steelton HS (1930s-40s) later merged with Highspire to form Steelton-Highspire; colours shown are the successor district's.",
+  "era": "Steelton High School later absorbed Highspire to form Steelton-Highspire High School (Steamrollers; blue, white and grey per Wikipedia). Those successor colours are not assigned here.",
   "notes": "No source for pre-merger Steelton's own colours; inferred continuity from the successor (same Steamrollers nickname).",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "First-pass colours were the successor district's, so removed. Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "James Buchanan",
@@ -252,7 +240,7 @@
   ],
   "era": "Kish Jr/Sr High closed 2011, consolidated into Mifflin County High School (Huskies; purple, black, silver).",
   "notes": "No source found for Kish's own colours. Mascot from the district article.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "Trafford",
@@ -267,7 +255,7 @@
   ],
   "era": "Merged with Penn Joint to form Penn-Trafford (Warriors; green and gold) around 1971-72.",
   "notes": "Trafford's own colours not found; nickname from search snippet of Penn-Trafford Wikipedia.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "Millersburg",
@@ -401,7 +389,7 @@
   ],
   "era": "Merged into Keystone Oaks High School (Golden Eagles; gold, white, black) in the late 1960s.",
   "notes": "No source for Dormont's own colours.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "Munhall",
@@ -416,7 +404,7 @@
   ],
   "era": "Merged with Homestead into Steel Valley (Ironmen; maroon and gold) around 1970.",
   "notes": "No source for Munhall's own colours.",
-  "evidence": "not re-examined in photo pass"
+  "evidence": "Photo pass: no image of the school's own era could be found; web/image search (Bing, DuckDuckGo, Mojeek) returned only unrelated or blocked results this session."
  },
  {
   "school": "Cedar Crest",
@@ -510,14 +498,14 @@
   "identified_as": "Carmichaels Area Junior/Senior High School, Carmichaels (Greene County)",
   "colors": [
    {
-    "name": "Blue",
-    "hex": null,
-    "hex_from": null
+    "name": "Navy Blue",
+    "hex": "#112E66",
+    "hex_from": "logo"
    },
    {
     "name": "Gold",
-    "hex": null,
-    "hex_from": null
+    "hex": "#E9B512",
+    "hex_from": "logo"
    },
    {
     "name": "White",
@@ -526,15 +514,18 @@
    }
   ],
   "mascot": "Mikes",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Carmichaels Area Junior/Senior High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Carmichaels_Area_Junior/Senior_High_School",
-   "https://en.wikipedia.org/wiki/Carmichaels_Area_School_District"
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_School_District",
+   "https://www.carmarea.org/",
+   "https://files.smartsites.parentsquare.com/13627/header_logo_img_9bivmgv71qovagmafal.png",
+   "https://files.smartsites.parentsquare.com/13627/TEMPLATE_1788458358.png"
   ],
   "era": null,
   "notes": null,
-  "evidence": "not re-examined in photo pass"
+  "evidence": "district header logo: navy #112E66 block C with gold #E9B512 outline and lightning bolt; site theme #112E66; 'Home of the Mikes' graphic navy and gold. Blue is navy."
  },
  {
   "school": "Woodland Hills",

@@ -68,16 +68,18 @@
   "school": "Mastery Charter School Lenfest",
   "identified_as": "Mastery Charter School Lenfest Campus, Philadelphia",
   "colors": [],
-  "mascot": null,
+  "mascot": "Pumas",
   "confidence": "low",
   "wikipedia": "Mastery Charter Schools",
   "sources": [
    "https://en.wikipedia.org/wiki/Mastery_Charter_Schools",
-   "search:https://masterycharter.org/secondary-schools/lenfest-campus"
+   "search:https://masterycharter.org/secondary-schools/lenfest-campus",
+   "https://masterycharter.org/secondary-schools/lenfest-campus",
+   "https://masterycharter.org/athletics"
   ],
   "era": null,
-  "notes": "No mascot or colours found.",
-  "evidence": null
+  "notes": "Mascot Pumas found; no colours found.",
+  "evidence": "Mastery athletics page lists 'Lenfest Campus Pumas'; Lenfest campus page lists PIAA sports incl. wrestling but no colours or campus logo; MaxPreps Lenfest page blocked (403)."
  },
  {
   "school": "Reading CC",
@@ -156,8 +158,8 @@
   "colors": [
    {
     "name": "Black",
-    "hex": null,
-    "hex_from": null
+    "hex": "#000000",
+    "hex_from": "logo"
    },
    {
     "name": "Silver",
@@ -166,14 +168,19 @@
    }
   ],
   "mascot": "Wolves",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "West Shamokin High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/West_Shamokin_High_School"
+   "https://en.wikipedia.org/wiki/West_Shamokin_High_School",
+   "https://wshs.asd.k12.pa.us",
+   "https://wshs.asd.k12.pa.us/pics/school_logo.png",
+   "https://get.nfhsnetwork.com/schools/west-shamokin-high-school-rural-valley-pa",
+   "https://cfunity-school-logos.nfhsnetwork.com/v1/1616bc9770_p283.png",
+   "search:https://en.wikipedia.org/wiki/West_Shamokin_High_School"
   ],
   "era": null,
-  "notes": null,
-  "evidence": null
+  "notes": "Silver appears only as grey shading in the logo, so no hex given for it.",
+  "evidence": "NFHS Network West Shamokin school logo: black and white wolf head with 'S', shaded in greys (#B9B9B9/#D5D5D5, silver); Wikipedia lists black and silver. School site wshs.asd.k12.pa.us only shows the Armstrong SD blue district seal."
  },
  {
   "school": "Bonner & Prendie",
@@ -383,37 +390,75 @@
   "confidence": "medium",
   "wikipedia": "Cardinal Dougherty High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Cardinal_Dougherty_High_School"
+   "https://en.wikipedia.org/wiki/Cardinal_Dougherty_High_School",
+   "https://upload.wikimedia.org/wikipedia/en/1/1c/Cardinal_Dougherty_High_School_Logo.png",
+   "https://www.alumniclass.com/cardinal-dougherty-high-school-cardinals-philadelphia-pa/military-alumni-view",
+   "search:https://archphila.org/cardinal-dougherty-high-school-alumni-to-celebrate-heritage-with-dedication-of-legacy-room-at-archbishop-ryan-high-school/"
   ],
   "era": "Closed in 2010.",
-  "notes": null,
-  "evidence": null
+  "notes": "Bing image search was not usable in this pass; no period uniform photos checked.",
+  "evidence": "Wikipedia infobox logo is the school seal printed in one dark green (#1C500E), not the school colours; infobox gives garnet and gold. Alumniclass Cardinal Dougherty page theme uses maroon #800000 and gold #CFB53B (third-party template). No clean garnet/gold artwork found."
  },
  {
   "school": "Olney Charter",
   "identified_as": "Aspira Olney Charter High School (Olney High School), Philadelphia",
-  "colors": [],
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": "#000033",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Light Blue",
+    "hex": "#9999CC",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
   "mascot": "Trojans",
-  "confidence": "low",
+  "confidence": "medium",
   "wikipedia": "Olney High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Olney_High_School"
+   "https://en.wikipedia.org/wiki/Olney_High_School",
+   "https://www.maxpreps.com/pa/philadelphia/olney-trojans/",
+   "https://image.maxpreps.io/school-mascot/9/2/2/922f5041-1be4-43b7-a6f5-6ea791e1828d.gif",
+   "search:https://pafootballnews.com/district12/2021-pfn-team-preview-the-olney-trojans-ronnieflowers16-ochstrojans-zahfir1-reggie_mcneil/"
   ],
   "era": "Aspira-run charter 2011-2022, same school as \"Olney\".",
-  "notes": "No colours found. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "MaxPreps lists dark blue and white; the light blue appears only in the logo plume.",
+  "evidence": "MaxPreps Olney Trojans page: colour fields Dark Blue (#022C66) and White; mascot logo (2021, Aspira era) is a Trojan helmet in very dark navy #000033 with a periwinkle/light-blue #9999CC plume."
  },
  {
   "school": "Beaver County Christian",
   "identified_as": "Beaver County Christian School, Beaver Falls",
-  "colors": [],
-  "mascot": null,
-  "confidence": "low",
-  "wikipedia": null,
-  "sources": [],
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1A3759",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Beaver County Christian High School",
+  "sources": [
+   "https://www.bccspa.org",
+   "https://www.bccspa.org/editoruploads/images/Logos/logo.png",
+   "https://en.wikipedia.org/wiki/Beaver_County_Christian_High_School",
+   "search:https://ncsaa.org/schools/pa/beaver-county-christian-school"
+  ],
   "era": null,
-  "notes": "No Wikipedia page. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "Logo blue is navy; grey in the logo is accent only.",
+  "evidence": "bccspa.org header logo: 'bccs' wordmark and eagle in navy #1A3759 with white and silver-grey #A3ABB4 accents; site theme #1A3759; Wikipedia infobox blue (#005288) and white."
  },
  {
   "school": "West Mifflin North",

@@ -53,7 +53,7 @@
   ],
   "era": "Closed 2021.",
   "notes": "Conflict: school infobox says Gold and White; PIAA football table and MaxPreps say black and gold.",
-  "evidence": null
+  "evidence": "Re-read Wikipedia infobox: 'Gold and White', established 1958, closed 2021. No school artwork found: the old school sites (mcdevitths.org etc.) exist only in the Wayback Machine, which is blocked from here, and image search is unusable. Conflict with black and gold (PIAA table, MaxPreps) is unresolved."
  },
  {
   "school": "Windber",
@@ -166,11 +166,14 @@
   "wikipedia": "Waynesburg Central High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Waynesburg_Central_High_School",
-   "https://en.wikipedia.org/wiki/PIAA_football"
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.cgsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1710254361/cgsdorg/qv22wlqzokx7xuqklogu/Raider_Head_Logo1.jpg",
+   "https://en.wikipedia.org/wiki/Central_Greene_School_District"
   ],
-  "era": "Bracket years 1951-68 predate Central Greene's Waynesburg Central; colours shown are Waynesburg Central's.",
-  "notes": "Not verified that the older Waynesburg HS wore red and black. Web search budget ran out mid-batch; only Wikipedia was checked.",
-  "evidence": null
+  "era": "Waynesburg HS predates Waynesburg Central HS (Central Greene SD), which opened in 1969 (Raiders, red and black). Bracket years 1951-68 are the old Waynesburg HS.",
+  "notes": "Red and black are Waynesburg Central's colours; not verified for the pre-1969 Waynesburg HS.",
+  "evidence": "Looked at Central Greene SD site (cgsd.org) Raider head logo: red #DE0F0F and black, but that is the successor school's, so no hex given. Wikipedia confirms Waynesburg Central opened 1969. No image of the pre-1969 Waynesburg HS found; image search unusable here."
  },
  {
   "school": "Academy at Palumbo",
@@ -257,7 +260,7 @@
  },
  {
   "school": "Bishop O'Reilly",
-  "identified_as": "Bishop O'Reilly High School, Kingston",
+  "identified_as": "Bishop O'Reilly High School, Kingston (Luzerne Co.; opened 1954 as West Side Central Catholic)",
   "colors": [
    {
     "name": "Blue",
@@ -271,15 +274,20 @@
    }
   ],
   "mascot": "Queensmen",
-  "confidence": "low",
+  "confidence": "medium",
   "wikipedia": null,
   "sources": [
    "search:https://bishoporeilly.org/alma-mater/",
-   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1985-08-28/ed-1/seq-36/"
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1985-08-28/ed-1/seq-36/",
+   "https://bishoporeilly.org/alma-mater/",
+   "https://bishoporeilly.org/history/",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/image005.png",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/image014.png",
+   "https://bishoporeilly.org/wp-content/uploads/2023/08/cropped-west-side-central-catholic-high-school.png"
   ],
-  "era": "Later closed as a high school (per search; reportedly became an elementary school).",
-  "notes": "Colours inferred only from alma mater lyrics ('Queen Mary's blue', gold); no explicit colour statement found.",
-  "evidence": null
+  "era": "Opened 1954 as West Side Central Catholic HS, renamed Bishop O'Reilly; last class graduated May 2007, building became a regional elementary school; most students went to Holy Redeemer HS, Wilkes-Barre.",
+  "notes": "Alumni site states the colours outright: alma mater 'Forever Gold and Blue' and the crest description 'a wreath of the colors, gold and blue'. Blue is 'Queen Mary's blue' (a Marian blue).",
+  "evidence": "Read bishoporeilly.org alma mater and history pages (explicit gold and blue). Site images (header, history graphics, closing photo) are greyscale/photographic, so no hex."
  },
  {
   "school": "Overbrook",
@@ -386,11 +394,12 @@
   "wikipedia": null,
   "sources": [
    "search:https://aphspage.sedelco.org/our_school/general_information",
-   "https://en.wikipedia.org/wiki/Academy_Park_High_School"
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School",
+   "https://www.easternpafootball.com/?s=Collingdale"
   ],
-  "era": "Merged with Sharon Hill HS into Academy Park HS in 1982 (Knights, blue and silver).",
+  "era": "Merged with Sharon Hill HS into Academy Park HS in 1982 (Knights, blue and silver); old Collingdale HS served as Academy Park's west campus until 1984 and part of it is now Collingdale borough hall.",
   "notes": "Collingdale's own colours not found.",
-  "evidence": null
+  "evidence": "Academy Park Wikipedia page read for merger details; no Collingdale-era colour source or image found (EasternPAFootball site search, image search and PA newspaper archive unavailable or empty)."
  },
  {
   "school": "Greensburg CC",
@@ -412,37 +421,46 @@
   "wikipedia": "Greensburg Central Catholic High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School",
-   "https://en.wikipedia.org/wiki/PIAA_football"
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.gcchs.org",
+   "https://www.maxpreps.com/pa/greensburg/greensburg-central-catholic-centurions/"
   ],
   "era": null,
   "notes": null,
-  "evidence": null
+  "evidence": "School site gcchs.org is behind a Cloudflare challenge and the MaxPreps mascot image could not be downloaded, so no artwork was seen. Wikipedia infobox colour boxes use the generic CSS names maroon and Gray; MaxPreps text lists Maroon and Gray."
  },
  {
   "school": "Bethlehem-Center",
   "identified_as": "Bethlehem-Center High School, Fredericktown",
   "colors": [
    {
-    "name": "Blue",
-    "hex": null,
-    "hex_from": null
+    "name": "Navy Blue",
+    "hex": "#1F385A",
+    "hex_from": "logo"
    },
    {
-    "name": "Gold",
-    "hex": null,
-    "hex_from": null
+    "name": "Vegas Gold",
+    "hex": "#C3B682",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#A9AAAA",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Bulldogs",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Bethlehem-Center School District",
   "sources": [
    "https://en.wikipedia.org/wiki/Bethlehem-Center_School_District",
-   "https://en.wikipedia.org/wiki/PIAA_football"
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.bcasd.net",
+   "https://sites.google.com/bcasd.net/bc-athletics/home"
   ],
   "era": null,
   "notes": null,
-  "evidence": null
+  "evidence": "District site bcasd.net bulldog logo: navy #1F385A collar and ring, muted Vegas gold #C3B682 disc, grey #A9AAAA bulldog. Confirms blue and gold, specifically navy and Vegas/old gold. Wikipedia: blue and gold."
  },
  {
   "school": "Mansfield",
@@ -457,7 +475,7 @@
   ],
   "era": "Merged with North Penn (Blossburg) in 2014 as North Penn-Mansfield (Panthers, blue and white).",
   "notes": "Pre-merger Mansfield colours not found. Web search budget ran out mid-batch; only Wikipedia was checked.",
-  "evidence": null
+  "evidence": "No new source reached; search engines and image search unusable from this environment. Not given North Penn-Mansfield's colours."
  },
  {
   "school": "Plains",
@@ -469,7 +487,7 @@
   "sources": [],
   "era": "Bracket years 1936-39 only; likely closed/merged long ago.",
   "notes": "Identity unconfirmed and no colour source found. Wikipedia 'Plains High School' is a Texas school, not this one.",
-  "evidence": null
+  "evidence": "No new source reached; identity still unconfirmed (likely Plains Township, Luzerne Co.)."
  },
  {
   "school": "Northern",

@@ -215,25 +215,28 @@
   "identified_as": "Academy Park High School, Sharon Hill",
   "colors": [
    {
-    "name": "Blue",
-    "hex": null,
-    "hex_from": null
+    "name": "Royal blue",
+    "hex": "#00157B",
+    "hex_from": "logo"
    },
    {
     "name": "Silver",
-    "hex": "#C0C0C0",
-    "hex_from": "wikipedia-infobox"
+    "hex": "#9B9B9B",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Knights",
   "confidence": "medium",
   "wikipedia": "Academy Park High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Academy_Park_High_School"
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School",
+   "https://www.sedelco.org/o/aphs",
+   "https://cmsv2-assets.apptegy.net/uploads/26101/file/6362750/755cd55e-2429-45a6-bee4-aad1c848acbd.png",
+   "https://cmsv2-assets.apptegy.net/uploads/26101/logo/28914/SDSD_Logo.png"
   ],
   "era": null,
-  "notes": null,
-  "evidence": null
+  "notes": "School page uses the district (Southeast Delco, navy #0C0F4A) logo; the Knights mascot appears only small on a school flyer: royal-blue plume, silver helmet. Hexes from a small JPEG graphic.",
+  "evidence": "sedelco.org/o/aphs 'First Week of School' flyer: Academy Park knight mascot with royal blue #00157B plume and silver/grey #9B9B9B helmet; site theme is district navy #0C0F4A."
  },
  {
   "school": "George Washington",
@@ -340,8 +343,8 @@
    "https://en.wikipedia.org/wiki/Abington_Heights_High_School"
   ],
   "era": "Clarks Summit-Abington (brackets 1959-1964) became Abington Heights; Abington Heights HS opened 1967.",
-  "notes": "Wikipedia says the Comets nickname came from Clarks Summit HS; colours (blue/white) are Abington Heights' and only inferred for the predecessor. Batch lists District 12 but Clarks Summit is District 2.",
-  "evidence": null
+  "notes": "Wikipedia says the Comets nickname came from Clarks Summit HS; colours (blue/white) are Abington Heights' and only inferred for the predecessor. Not confirmed by any image. Batch lists District 12 but Clarks Summit is District 2.",
+  "evidence": "No image looked at: closed predecessor (pre-1967); Bing/DDG image search returned unrelated results this session and no era photo was found. First-pass names kept, no hex."
  },
  {
   "school": "Erie",
@@ -349,24 +352,26 @@
   "colors": [
    {
     "name": "Royal purple",
-    "hex": null,
-    "hex_from": null
+    "hex": "#331460",
+    "hex_from": "logo"
    },
    {
     "name": "Gold",
-    "hex": null,
-    "hex_from": null
+    "hex": "#FFCC00",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Royals",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Erie High School (Pennsylvania)",
   "sources": [
-   "https://en.wikipedia.org/wiki/Erie_High_School_%28Pennsylvania%29"
+   "https://en.wikipedia.org/wiki/Erie_High_School_%28Pennsylvania%29",
+   "https://www.eriesd.org/o/ehs",
+   "https://cmsv2-assets.apptegy.net/uploads/31411/logo/34536/Erie_Royals_crest_logo_final_crop_4.png"
   ],
   "era": "Opened 2017 from the merger of Central Tech and Strong Vincent; new colours/brand chosen then.",
-  "notes": "Infobox lists 'Gold and Royal Purple'; order unclear.",
-  "evidence": null
+  "notes": "Purple is the primary (dominant) colour in the crest; site theme #330066 / #CC9900.",
+  "evidence": "eriesd.org/o/ehs crest logo Erie_Royals_crest: purple #331460 (lighter #60348F half) shield, gold #FFCC00 crown and border; school site theme #330066 and #CC9900."
  },
  {
   "school": "Perry Traditional Acad.",
@@ -402,24 +407,26 @@
   "colors": [
    {
     "name": "Purple",
-    "hex": null,
-    "hex_from": null
+    "hex": "#5B2B99",
+    "hex_from": "logo"
    },
    {
     "name": "Gold",
-    "hex": null,
-    "hex_from": null
+    "hex": "#F6C84E",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Cougars",
-  "confidence": "medium",
+  "confidence": "high",
   "wikipedia": "Martin Luther King High School (Philadelphia)",
   "sources": [
-   "https://en.wikipedia.org/wiki/Martin_Luther_King_High_School_%28Philadelphia%29"
+   "https://en.wikipedia.org/wiki/Martin_Luther_King_High_School_%28Philadelphia%29",
+   "https://mlkhs.philasd.org/",
+   "https://mlkhs.philasd.org/wp-content/uploads/sites/520/2026/04/Screenshot-2026-04-14-at-3.31.54-PM.png"
   ],
   "era": null,
   "notes": null,
-  "evidence": null
+  "evidence": "mlkhs.philasd.org homepage graphic: round 'Martin Luther King High School' cougar badge, purple #5B2B99 ring and cougar, gold #F6C84E border/lettering, grey field."
  },
  {
   "school": "Penn Wood",
@@ -437,34 +444,60 @@
    },
    {
     "name": "Navy blue",
-    "hex": null,
-    "hex_from": null
+    "hex": "#242D67",
+    "hex_from": "logo"
    }
   ],
   "mascot": "Patriots",
   "confidence": "medium",
   "wikipedia": "Penn Wood High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/Penn_Wood_High_School"
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School",
+   "https://williampennsd.org/",
+   "https://williampennsd.org/departments/athletics/",
+   "https://williampennsd.org/wp-content/uploads/2026/06/WPLogo.png",
+   "https://williampennsd.org/wp-content/uploads/2026/09/2026-football-1.jpg",
+   "https://williampennsd.org/wp-content/uploads/2026/09/Volleyball-2026.jpg",
+   "https://williampennsd.org/wp-content/uploads/2026/09/092426_Boys-Soccer-1.png"
   ],
   "era": null,
-  "notes": null,
-  "evidence": null
+  "notes": "Penn Wood photos show maroon-and-white football/volleyball uniforms and navy soccer kits; no school logo found. Navy hex is from the William Penn SD 'WP' logo (navy #242D67, red #BE2130), a district mark.",
+  "evidence": "williampennsd.org athletics photos: football and volleyball in maroon with white numbers, soccer in navy, navy/red track; district WPLogo.png navy #242D67 with red #BE2130 bars."
  },
  {
   "school": "Franklin Towne Charter",
   "identified_as": "Franklin Towne Charter High School, Philadelphia (Bridesburg)",
-  "colors": [],
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#800000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#18356C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Light blue",
+    "hex": "#74A8D8",
+    "hex_from": "logo"
+   }
+  ],
   "mascot": "Coyotes",
   "confidence": "low",
   "wikipedia": null,
   "sources": [
    "search:https://northeasttimes.com/?p=5113",
-   "search:https://www.maxpreps.com/pa/philadelphia/franklin-towne-warriors/volleyball/history"
+   "search:https://www.maxpreps.com/pa/philadelphia/franklin-towne-warriors/volleyball/history",
+   "https://www.franklintowne.org/",
+   "https://hs.franklintowne.org/",
+   "https://www.franklintowne.org/UserFiles/Servers/Server_11992800/Image/thumbnail_FTC%20Logo%203.jpg",
+   "https://www.franklintowne.org/UserFiles/Servers/Server_11992800/Templates/Logo.png"
   ],
   "era": null,
-  "notes": "No colours found. Nickname conflict: Northeast Times uses Coyotes, MaxPreps URLs use Warriors.",
-  "evidence": null
+  "notes": "No source names official colours. High school crest is a maroon Liberty Bell with light-blue lettering; network wordmark is navy with maroon border; HS site uses navy #000099 and maroon #860000. Nickname conflict (Coyotes vs Warriors) unresolved.",
+  "evidence": "franklintowne.org 'Franklin Towne Charter High School' crest (thumbnail_FTC Logo 3.jpg): maroon #800000 bell, light blue #74A8D8 lettering; Templates/Logo.png wordmark navy #18356C with maroon #880015 border; hs.franklintowne.org theme #000099/#860000."
  },
  {
   "school": "Jenkintown",
