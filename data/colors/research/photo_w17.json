@@ -1,0 +1,244 @@
+[
+ {
+  "school": "Northern York",
+  "identified_as": "Northern High School, Dillsburg",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#562C9C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Polar Bears",
+  "confidence": "high",
+  "wikipedia": "Northern High School (Dillsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_High_School_(Dillsburg,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Northern_York_County_School_District",
+   "search:https://www.nycsd.net",
+   "https://www.northernpolarbears.com/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1789056559/northernpolarbearscom/ngqaodqxmksr1vyo7hud/NorthernNonWhite-HighQuality002.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "District site northernpolarbears.com (Northern York County SD): header logo is a block 'N' split purple #562C9C / white with black outline; site theme --primary-color #3E0D90 (purple). Agrees with Wikipedia purple and white."
+ },
+ {
+  "school": "Central Columbia",
+  "identified_as": "Central Columbia High School, Bloomsburg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Jays",
+  "confidence": "medium",
+  "wikipedia": "Central Columbia High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Columbia_High_School",
+   "https://en.wikipedia.org/wiki/Central_Columbia_School_District",
+   "search:https://www.ccsd.cc",
+   "search:https://ccsd.cc/o/high/page/2017",
+   "search:https://ccsd.ss5.sharpschool.com/district/superintendent/stadium_and_wellness_center/about",
+   "https://www.maxpreps.com/pa/bloomsburg/central-columbia-blue-jays/"
+  ],
+  "era": null,
+  "notes": "HS page infobox: Blue, White, Silver (navy colour boxes); district page: Blue and silver, and says official colours were red, white and blue with red replaced by silver/grey (silver football helmets).",
+  "evidence": "Retry: ccsd.cc (and /athletics) still serves a bot 'Client Challenge' page; Wayback snapshot of ccsd.cc refused (403); old sharpschool site behind Cloudflare check; MaxPreps 403; WebSearch found no logo image. No image looked at; names kept from Wikipedia."
+ },
+ {
+  "school": "Lansdowne",
+  "identified_as": "Lansdowne High School, Lansdowne (Delaware County)",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School",
+   "https://archive.org/details/classmates-yearbook-18908-1940-lansdowne-high-school",
+   "https://archive.org/details/classmates-yearbook-52911-1944-lansdowne-high-school",
+   "https://archive.org/details/classmates-yearbook-42644-1961-lansdowne-aldan-high-school"
+  ],
+  "era": "Later Lansdowne-Aldan HS; merged 1982 into Penn Wood HS (maroon, white, navy) - successor's colours.",
+  "notes": "Colours Garnet and Gray from 1940s and 1961 yearbook text; not the successor Penn Wood's maroon/white/navy.",
+  "evidence": "OCR text of 1940 and 1944 Lansdowne HS yearbooks: school paper 'Garnet and Gray', cheerleaders in garnet. 1961 Lansdowne-Aldan HS (Lansdowne, Pennsylvania) yearbook LAHIAN: paper still 'Garnet and Gray', and 'Garnet and gray-clad bandsters' supported the football team. No colour image seen, so no hex."
+ },
+ {
+  "school": "Greensburg",
+  "identified_as": "Greensburg High School, Greensburg (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Lions",
+  "confidence": "medium",
+  "wikipedia": "Greensburg Salem High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Salem_High_School",
+   "https://archive.org/details/classmates-yearbook-56145-1926-greensburg-high-school",
+   "https://archive.org/details/classmates-yearbook-24997-1951-greensburg-high-school",
+   "https://archive.org/details/classmates-yearbook-28025-1951-greensburg-high-school",
+   "https://archive.org/details/classmates-yearbook-13108-1952-greensburg-high-school"
+  ],
+  "era": "Later merged into Greensburg Salem (gold, brown, white; Golden Lions), which kept the old Greensburg HS colours.",
+  "notes": "Brown/gold/white from Greensburg HS's own 1926 and 1951 yearbooks (publication 'Brown and White', band in gold and brown uniforms, 'our golden lions').",
+  "evidence": "1951 Greensburg HS yearbook OCR (Greensburg, Pennsylvania; Westmoreland Hospital, Jeannette): yearbook/paper named 'Brown and White'; 'The gold and brown uniforms' of the band at football games; 'the roar of our golden lions', 'cheers for our Lions'. 1926 yearbook: publication 'The Brown and White'. No colour image seen, so no hex."
+ },
+ {
+  "school": "Plymouth",
+  "identified_as": "Plymouth High School, Plymouth (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://archive.org/details/classmates-yearbook-57434-1943-plymouth-high-school",
+   "https://archive.org/details/classmates-yearbook-37774-1942-plymouth-high-school",
+   "search:https://archive.org/advancedsearch.php?q=plymouth high school yearbook",
+   "https://en.wikipedia.org/wiki/Plymouth,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Wyoming_Valley_West_High_School",
+   "https://archive.org/details/classmates-yearbook-25263-1952-plymouth-high-school",
+   "https://archive.org/details/classmates-yearbook-27011-1949-plymouth-high-school"
+  ],
+  "era": "Plymouth HS (Luzerne Co.) existed at least to class of 1966 (Wikipedia notable alumni); later Wyoming Valley West (burgundy and gold, Spartans) - successor's colours.",
+  "notes": "No source for Plymouth (Luzerne Co.) HS colours found; do not use Wyoming Valley West burgundy/gold.",
+  "evidence": "Retry: fetched OCR of 19 archive.org 'Plymouth High School' yearbooks (1935-1968); every one with a place cue is Plymouth MA (Blue and White), WI or OH; none is Plymouth, Luzerne Co. WebSearch and Wikipedia (Plymouth PA, WVW) give no old Plymouth HS colours. Colours left empty."
+ },
+ {
+  "school": "Philipsburg",
+  "identified_as": "Philipsburg High School, Philipsburg (Centre County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Philipsburg-Osceola Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_High_School",
+   "https://www.phmc.state.pa.us/portal/communities/school-preservation/files/150016@20-@20philipsburg-osceola@20senior@20high@20school.pdf",
+   "https://archive.org/details/classmates-yearbook-60974-1942-philipsburg-osceola-high-school",
+   "https://archive.org/details/classmates-yearbook-60953-1947-philipsburg-osceola-high-school",
+   "https://archive.org/details/classmates-yearbook-60978-1948-philipsburg-osceola-high-school"
+  ],
+  "era": "Bracket years 1940-1954, before the Philipsburg-Osceola merger; successor P-O Mounties wear navy and white.",
+  "notes": "Blue and white inferred only from the Philipsburg HS newspaper name 'Blue and White' (1947, 1948); yearbook was 'The Mountaineer'. Matches successor P-O navy/white, but here it comes from Philipsburg HS's own yearbooks.",
+  "evidence": "OCR of 1942, 1947 and 1948 yearbooks of Philipsburg High School, Philipsburg, Pa. (filed by classmates under Philipsburg-Osceola): school newspaper is the 'Blue and White' (1947: 'the BLUE AND WHITE newspaper staff'; 1948 also); yearbook 'The Mountaineer'; school had wrestling. No explicit 'school colours' line or uniform description, no colour image, so no hex."
+ },
+ {
+  "school": "Lake Consolidated",
+  "identified_as": "Lake Consolidated School, Lake Ariel (Lake Township, Wayne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake Ariel, Pennsylvania",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District",
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Lake_Ariel,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Western_Wayne_School_District",
+   "/home/user/pennsylvania-wrestling-history/overtime/lower/1970-district.json"
+  ],
+  "era": "Lake Ariel's K-12 Lake Consolidated School (built 1936); became part of Western Wayne SD (formed 1969), whose new high school opened in Varden in 1973. Not Lake-Lehman.",
+  "notes": "Identity revised: in the 1970-71 District 12 brackets Lake Consolidated wrestles alongside Honesdale, Wallenpaupack, Elk Lake, Abington Heights, Tunkhannock, Blue Ridge, Lackawanna Trail (NE tier), which fits Lake Ariel (Wayne Co.), not Lake-Lehman (Luzerne, D2). No colour source found.",
+  "evidence": "Repo 1970/1971 D12 brackets put Lake Consolidated with Wayne/Lackawanna/Susquehanna schools; Wikipedia 'Lake Ariel, PA': Lake Ariel Elementary was formerly the Lake Consolidated School, K-12 in the 1950s, elementary only since the Varden high school opened in 1973. Western Wayne SD infobox has no colours; archive.org has no Lake Ariel/Western Wayne yearbooks. Colours left empty."
+ },
+ {
+  "school": "Reading Central Catholic",
+  "identified_as": "Reading Central Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "Reading Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Central_Catholic_High_School",
+   "search:https://berksnostalgia.com/tag/central-catholic-cardinals",
+   "https://berksnostalgia.com/wp-content/uploads/2020/05/central-catholic-1988-e1595615286757.png",
+   "https://archive.org/details/Reading-PA-Central-Catholic-Cards-1987-1988-Basketball-schedule-95-x-195-conrail6619",
+   "https://archive.org/details/Reading-PA-Central-Catholic-Cards-1975-1976-Basketball-schedule-11-x-21-conrail6619",
+   "search:http://web.archive.org/web/20081220141251/http://www.cchscardinals.org:80/"
+  ],
+  "era": "Closed 2011; merged with Holy Name into Berks Catholic HS (do not use Berks Catholic colours).",
+  "notes": null,
+  "evidence": "Wikipedia infobox: 'Red and white', mascot Cardinal; closed 2011. Retry: looked at two archive.org photos of Pepsi-sponsored Central Catholic 'Cardinals'/'Cards' basketball schedules (1975-76, 1987-88): stock Pepsi artwork (yellow/blue panels), not school colours. Wayback snapshot of cchscardinals.org (2008) refused (403). No logo seen, so no hex."
+ },
+ {
+  "school": "Center",
+  "identified_as": "Center Area High School, Center Township/Monaca (Beaver Co.)",
+  "colors": [],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Center Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Center_Area_School_District",
+   "https://en.wikipedia.org/wiki/Central_Valley_School_District_(Pennsylvania)",
+   "search:https://www.eliteprospects.com/team/21506/center-area-high/2006-2007",
+   "search:https://www.eliteprospects.com/team/21506/center-area-high/2009-2010",
+   "search:https://heinzhistorycenter.emuseum.com/objects/36380/trophy",
+   "https://en.wikipedia.org/wiki/Central_Valley_High_School_(Pennsylvania)"
+  ],
+  "era": "Center Area SD merged with Monaca in 2009 into Central Valley SD (Carolina blue and navy).",
+  "notes": "Center's own colours not given. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "Wikipedia Center Area SD infobox: mascot Trojans, colours field blank. Retry: WebSearch found no Center-era colour source (only successor Central Valley navy/Carolina blue, and other Trojans schools); Elite Prospects pages returned nothing readable this time and their Navy + Carolina Blue likely reflect the successor; Heinz History Center object page behind Cloudflare check; no Center Area yearbooks on archive.org. Colours left empty."
+ }
+]

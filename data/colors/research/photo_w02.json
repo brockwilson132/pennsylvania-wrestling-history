@@ -1,0 +1,270 @@
+[
+ {
+  "school": "Edinboro",
+  "identified_as": "Edinboro High School, Edinboro (Erie Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "General McLane School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/General_McLane_School_District",
+   "https://www.e-yearbook.com/Edinboro_High_School_Turtle_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Edinboro_High_School_Turtle_Yearbook/1955/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Edinboro_High_School_Turtle_Yearbook/1958/Page_1.html",
+   "search:https://www.classmates.com/yearbooks/school/Edinboro-High-School/4111",
+   "search:https://www.e-yearbook.com/yearbooks/Edinboro_High_School_Turtle_Yearbook/1946/Page_29.html"
+  ],
+  "era": "Area now served by General McLane HS.",
+  "notes": "Red and White from the high school's own 1955 alma mater. Note Edinboro State Teachers College in the same town also used red and white, so a casual source could confuse the two; the alma mater is the school's own. No nickname found. e-yearbook cover images now return 410 Gone; no Edinboro HS yearbook on archive.org, so no hex.",
+  "evidence": "Edinboro HS 'Turtle' 1955 yearbook (e-yearbook OCR): alma mater '...Round the colors bright, We'll stick together for the Red and the White'. No colour image checked, so no hex."
+ },
+ {
+  "school": "Millvale",
+  "identified_as": "Millvale High School, Millvale (Allegheny Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Chieftains",
+  "confidence": "medium",
+  "wikipedia": "Shaler Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Millvale,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Shaler_Area_School_District",
+   "https://www.e-yearbook.com/Millvale_High_School_Millvalean_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Millvale_High_School_Millvalean_Yearbook/1943/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Millvale_High_School_Millvalean_Yearbook/1941/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Millvale_High_School_Millvalean_Yearbook/1940/Page_1.html",
+   "https://www.millvalelibrary.org/using-the-library/historic-archives-millvale-and-shaler-yearbook-collection/",
+   "search:https://www.e-yearbook.com/yearbooks/Millvale_High_School_Millvalean_Yearbook/1943/Page_80.html",
+   "search:https://www.e-yearbook.com/yearbooks/Millvale_High_School_Millvalean_Yearbook/1943/Page_79.html"
+  ],
+  "era": "Millvale now part of Shaler Area SD (Titans).",
+  "notes": "Red and White from the school's own yearbooks. Nickname Chieftains from a 1943 yearbook page (via search summary, not read directly; the yearbook also had a 'Chieftain' staff). e-yearbook page/cover images now return 410 Gone, so no colour image and no hex.",
+  "evidence": "Millvale HS 'Millvalean' yearbooks (e-yearbook OCR): 1943 senior blurb 'a true defender of the Red and White'; 1940 and 1941 books describe the band's red and white uniforms. Library has PDFs 1955-1971 (list seen, not downloadable). No colour image, so no hex."
+ },
+ {
+  "school": "Mill Hall",
+  "identified_as": "Mill Hall High School, Mill Hall (Clinton Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Keystone Central School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District",
+   "search:https://www.ebay.com/itm/372902069618",
+   "search:https://www.ebay.com/itm/366325527527",
+   "https://www.e-yearbook.com/pennsylvania-yearbooks.html",
+   "https://en.wikipedia.org/wiki/Bald_Eagle-Nittany_High_School",
+   "https://archive.org/advancedsearch.php?q=title:(mill hall high school)"
+  ],
+  "era": "Mill Hall HS (bracket years 1950-54) predates Bald Eagle-Nittany HS, which opened in Mill Hall in 1955 (Panthers, black and white) and merged into Central Mountain HS (Wildcats) in 1999; neither successor's colours apply.",
+  "notes": "No colour source found. Second pass (photo/yearbook search) done; see evidence.",
+  "evidence": "Searches found only an eBay 1930 yearbook and a 1998 centennial book; no Mill Hall yearbook on e-yearbook or archive.org (title search). Wikipedia: Bald Eagle-Nittany opened 1955-56, drawing Mill Hall students. Two web searches (retry pass) found nothing on pre-1955 Mill Hall HS colours or nickname."
+ },
+ {
+  "school": "Watsontown",
+  "identified_as": "Watsontown High School, Watsontown (Northumberland Co.)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "high",
+  "wikipedia": "Warrior Run High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warrior_Run_High_School",
+   "https://susquehannavalley.blogspot.com/2020/04/watsontown-high-school.html",
+   "https://archive.org/details/classmates-yearbook-18928-1958-watsontown-high-school",
+   "search:https://susquehannavalley.blogspot.com/2021/06/orange-blue-may-1957-watson",
+   "search:http://notheathersgen.blogspot.com/2014/03/the-watsontown-huskies-football.html",
+   "https://www.e-yearbook.com/Watsontown_High_School_Les_Memoires_Yearbook",
+   "https://archive.org/download/classmates-yearbook-30597-1956-watsontown-high-school/30597_djvu.txt",
+   "https://archive.org/download/classmates-yearbook-30597-1956-watsontown-high-school/page/n0_w600.jpg",
+   "https://archive.org/download/classmates-yearbook-18928-1958-watsontown-high-school/18928_djvu.txt"
+  ],
+  "era": "Last class as Watsontown HS was 1957; from 1958 Warrior Run HS (blue and gray, Defenders).",
+  "notes": "Orange and Blue confirmed by the 1956 yearbook's football write-up, which calls the team 'the Orange and Blue' as well as 'the Huskies'; the school paper was also 'The Orange and Blue'. 1956 yearbook cover is orange cloth (faded), so no hex. Class colours (scarlet and white) are a single class's, not the school's.",
+  "evidence": "archive.org 1956 Watsontown HS yearbook ('The Warrior') OCR: 'On a mud-covered field at Mifflinburg, the Orange and Blue easily defeated...', 'the Huskies suffered their second loss'; 'The Orange and Blue is the school news magazine'. Cover scan: faded orange/peach cloth (~#F2B88A). 1958 yearbook OCR also lists 'Orange and Blue Staff'."
+ },
+ {
+  "school": "Townville",
+  "identified_as": "Townville High School, Townville (Crawford Co.)",
+  "colors": [
+   {
+    "name": "Blue (navy)",
+    "hex": "#26324A",
+    "hex_from": "photo"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/yearbooks/Townville_High_School_Memories_Yearbook/1951/Page_1.html",
+   "https://archive.org/details/classmates-yearbook-28508-1964-townville-high-school",
+   "search:https://www.facebook.com/groups/823561894339173/",
+   "https://archive.org/download/classmates-yearbook-28508-1964-townville-high-school/page/n0_w600.jpg",
+   "https://archive.org/download/classmates-yearbook-28508-1964-townville-high-school/28508_djvu.txt"
+  ],
+  "era": "Closed (brackets 1961-1973); per an alumni group the school was later renamed Maplewood (PENNCREST SD). Colours below are Townville's own.",
+  "notes": "Blue and Gold from the 1951 school song; the 1964 yearbook cover (navy design on gold cloth) agrees. Blue hex is the navy ink of the 1964 cover scan; the gold cloth is faded/pale in the scan, so no gold hex. Mascot Eagles from 1964 yearbook sports text.",
+  "evidence": "Townville HS 'Memories' 1951 yearbook text (e-yearbook OCR): school song 'The Gold and the Blue ... We will fight on Gold and Blue'. archive.org 1964 'Memories' yearbook cover scan: navy #26324A diamond/spire design on pale gold cloth (~#F0D88C, faded); 1964 sports pages call the teams 'the Eagles'. e-yearbook cover images now return 410 Gone."
+ },
+ {
+  "school": "Bishop McDevitt (12)",
+  "identified_as": "Bishop McDevitt High School, Wyncote",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#FFD800",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Royal Lancers",
+  "confidence": "medium",
+  "wikipedia": "Bishop McDevitt High School (Wyncote, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McDevitt_High_School_(Wyncote,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "search:https://www.maxpreps.com/pa/wyncote/bishop-mcdevitt-royal-lancers/soccer/schedule/all-time",
+   "https://sites.google.com/view/friends-of-bishop-mcdevitt/home",
+   "search:https://www.maxpreps.com/pa/wyncote/bishop-mcdevitt-royal-lancers/soccer"
+  ],
+  "era": "Closed 2021.",
+  "notes": "Gold is certain. Official school colours were gold and white (Wikipedia infobox; the alumni group's 'Gold and White Grants'); athletics used black and gold (MaxPreps, PIAA football table, alumni logo). Gold hex is from the alumni group's logo (post-closure), not a school-era logo.",
+  "evidence": "Friends of Bishop McDevitt (alumni group) Google Site: logo is a gold #FFD800 block 'M' and gold ring on black #000000; site names its fund 'Gold and White Grants'. Wikipedia infobox: Gold and White. MaxPreps (403 now; snippet): Black, Gold."
+ },
+ {
+  "school": "Woodrow Wilson",
+  "identified_as": "Woodrow Wilson High School, Levittown (Bristol Township SD)",
+  "colors": [
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Rams",
+  "confidence": "medium",
+  "wikipedia": "Harry S Truman High School (Levittown, Pennsylvania)",
+  "sources": [
+   "search:https://easternpafootball.com/?p=18532",
+   "https://en.wikipedia.org/wiki/Harry_S_Truman_High_School_(Levittown,_Pennsylvania)",
+   "https://easternpafootball.com/?p=18532",
+   "https://www.easternpafootball.com/throwback-thursday-woodrow-wilson-golden-rams-1959-1980/"
+  ],
+  "era": "Woodrow Wilson HS 1959-1980; Bristol Township closed Delhaas and Wilson after 1980 and opened Harry S Truman HS (Tigers, black and gold) in the Wilson building in 1981.",
+  "notes": "Gray and gold stated in the EasternPAFootball retrospective. Retry: no Woodrow Wilson (Levittown) yearbook on archive.org and the article has no school images, so no hex.",
+  "evidence": "Read the EasternPAFootball 'Throwback Thursday: Woodrow Wilson Golden Rams 1959-1980' article: 'They were the Golden Rams and their official colors were gray and gold.' No image of Wilson-era artwork found, so no hex."
+ },
+ {
+  "school": "Waynesburg",
+  "identified_as": "Waynesburg High School, Waynesburg (predecessor of Waynesburg Central)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "low",
+  "wikipedia": "Waynesburg Central High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Waynesburg_Central_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.cgsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1710254361/cgsdorg/qv22wlqzokx7xuqklogu/Raider_Head_Logo1.jpg",
+   "https://en.wikipedia.org/wiki/Central_Greene_School_District",
+   "https://archive.org/download/classmates-yearbook-20757-1952-waynesburg-central-high-school/20757_djvu.txt",
+   "https://archive.org/download/classmates-yearbook-20757-1952-waynesburg-central-high-school/page/n0_w600.jpg"
+  ],
+  "era": "Waynesburg HS predates Waynesburg Central HS (Central Greene SD), which opened in 1969 (Raiders, red and black). Bracket years 1951-68 are the old Waynesburg HS.",
+  "notes": "Red and black are Waynesburg Central's colours; not verified for the pre-1969 Waynesburg HS. The Raiders nickname did exist at Waynesburg HS by 1952, and the 1952 yearbook cover is maroon/dark red, which fits red but is not a colour statement.",
+  "evidence": "Central Greene SD (cgsd.org) Raider head logo: red #DE0F0F and black (successor school, so no hex given). archive.org 1952 Waynesburg HS yearbook 'Oracle' OCR: basketball write-ups call the team 'the Raiders'; cover is maroon cloth (~#661F12, aged). No colour statement in the OCR."
+ },
+ {
+  "school": "Delhaas",
+  "identified_as": "Delhaas High School, Bristol Township (Bucks Co.)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://neshaminyfootball.com/wp-content/uploads/Writing-2018-DHS-VS.-NESHAMINY-1959.pdf",
+   "https://www.easternpafootball.com/throwback-thursday-woodrow-wilson-golden-rams-1959-1980/",
+   "https://www.easternpafootball.com/looking-back-at-sixty-five-seasons-of-pennsylvania-high-school-football/",
+   "https://www.easternpafootball.com/looking-back-at-sixty-five-seasons-of-pennsylvania-high-school-football-part-3-of-30/",
+   "https://archive.org/download/classmates-yearbook-33124-1974-delhaas-high-school/33124_djvu.txt",
+   "https://archive.org/download/classmates-yearbook-33124-1974-delhaas-high-school/page/n0_w600.jpg",
+   "search:https://lowerbuckssource.net/?p=8975"
+  ],
+  "era": "Bristol Township's first high school (opened c. 1951, in the Lower Bucks County League from 1953); closed after the 1980 season when Delhaas and Woodrow Wilson were replaced by Harry S Truman HS (1981).",
+  "notes": "Inference: nickname Tigers is certain (1974 yearbook); colours inferred from the 1974 yearbook cover (crimson and old-gold cloth) and the band's 'Crimson Girl' feature twirler. No explicit colour statement found. Cover cloth is aged, so no hex.",
+  "evidence": "archive.org 1974 Delhaas HS yearbook 'Images 74': cover is crimson (~#7F2A1C, aged) and olive-gold (~#817441) cloth; OCR text: 'Tiger Wrestling', 'Delhaas Tiger Marching Band', 'CRIMSON GIRL\u2014L. Monico' in the band section. lowerbuckssource.net article refused (Not Acceptable)."
+ }
+]

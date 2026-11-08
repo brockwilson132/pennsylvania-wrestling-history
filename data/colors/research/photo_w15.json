@@ -1,0 +1,243 @@
+[
+ {
+  "school": "North York Borough",
+  "identified_as": "North York Borough High School, North York (York County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/North_York_High_School_Panther_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/North_York_High_School_Panther_Yearbook/1953/Page_1.html"
+  ],
+  "era": null,
+  "notes": "One team reference; class colours (navy/white, green/white) ignored.",
+  "evidence": "North York Panther yearbook 1953 OCR: \"A hard-fighting Orange and Black squad of North York High booters\"."
+ },
+ {
+  "school": "Manor-Millersville",
+  "identified_as": "Manor-Millersville High School (Lancaster County)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Penn_Manor_High_School_Trumpeter_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Penn_Manor_High_School_Trumpeter_Yearbook/1946/Page_1.html",
+   "search:https://en.wikipedia.org/wiki/Penn_Manor_High_School"
+  ],
+  "era": "Manor Township HS -> Manor-Millersville HS (1932) -> Penn Manor HS (blue and gold, Comets).",
+  "notes": "Same school under its own 1940s name; colours match later Penn Manor.",
+  "evidence": "1946 Trumpeter yearbook of \"Manor High School, Millersville\" OCR: alma mater \"Manor, you're our Alma Mater ... May we ever bear the mem'ry ... of our gold and blue\"."
+ },
+ {
+  "school": "Osceola Mills",
+  "identified_as": "Osceola Mills High School, Osceola Mills (Clearfield County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Osceola_Mills_High_School_Osceolian_Yearbook",
+   "search:https://tyronepa.com/?p=42365",
+   "https://www.e-yearbook.com/yearbooks/Osceola_Mills_High_School_Osceolian_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Osceola_Mills_High_School_Osceolian_Yearbook/1950/Page_1.html"
+  ],
+  "era": "Later merged into Philipsburg-Osceola (navy and white).",
+  "notes": "School-level colours stated on the 1949 school page (separate from that year's class colours violet/white); class colours (scarlet/gray, navy/silver, maroon/gray etc.) ignored. Text only, no hex.",
+  "evidence": "1949 Osceolian OCR, school page: \"The Osceola High School ... MOTTO: This One Thing I Do / COLORS: Blue and White / THE CREED I believe in the Osceola High School...\" (1949 class colours listed separately as violet and white); 1950: seniors \"clad in blue and white gowns\". Mascot \"Indians\" from Tyrone article."
+ },
+ {
+  "school": "Burnham-Derry",
+  "identified_as": "Burnham-Derry High School (Mifflin County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Burnham_High_School_Burgoblac_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Burnham_High_School_Burgoblac_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Burnham_High_School_Burgoblac_Yearbook/1951/Page_1.html",
+   "https://en.wikipedia.org/w/index.php?title=Mifflin_County_School_District&action=raw",
+   "search:https://www.lewistownsentinel.com/opinion/letters-to-the-editor/2023/02/letters-to-the-editor-59/"
+  ],
+  "era": "Burnham HS and Derry Township HS (Yeagertown) shared a supervising principal by 1951 ('Burnham & Derry Schools'); later folded into the Lewistown-area / Mifflin County system (now Mifflin County HS, purple/black/silver).",
+  "notes": "Retry: still no source for the joint Burnham-Derry school's own colours; predecessors differ (Burnham blue/white, Derry crimson), so none assigned.",
+  "evidence": "No Burnham-Derry yearbook online. Predecessor Burnham HS (Burgoblac yearbook 1950) teams \"blue and white clads\", \"playing for the Blue and White\"; Derry Township HS (Yeagertown) was Red Devils/crimson. Retry: Burnham 1927/28/50/51 books scanned; 1951 lists \"Supervising Principal Burnham & Derry Schools\" but Burnham and Derry still separate high schools (played each other in football). No joint-school colours found."
+ },
+ {
+  "school": "North Huntingdon",
+  "identified_as": "North Huntingdon Township High School (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://development.triblive.com/local/norwin/shared-memories-of-simpler-times-sustain-strong-ties-for-north-huntingdons-final-class-of-58",
+   "https://www.e-yearbook.com/North_Huntingdon_High_School_Norhiscope_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/North_Huntingdon_High_School_Norhiscope_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/North_Huntingdon_High_School_Norhiscope_Yearbook/1958/Page_1.html"
+  ],
+  "era": "Merged with Irwin into Norwin (blue and gold) in 1958; final North Huntingdon class 1958.",
+  "notes": "Two yearbook years agree; text only, no hex.",
+  "evidence": "North Huntingdon Norhiscope yearbook OCR: 1954 \"the Blue and Gold grapplers\", \"Bulldog matmen\", \"victorious over the Blue and Gold\"; 1958 majorettes \"blue and gold jackets\", cheerleaders \"gold and blue uniforms\"."
+ },
+ {
+  "school": "McVeytown",
+  "identified_as": "McVeytown High School, McVeytown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Rothrock_High_School_Le_Livre_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1958/Page_1.html",
+   "search:https://en.wikipedia.org/wiki/McVeytown,_Pennsylvania"
+  ],
+  "era": "McVeytown-Oliver HS renamed Bratton-McVeytown-Oliver 1950, Rothrock HS 1956; closed 1978 (later Lewistown Area / Mifflin County).",
+  "notes": "Evidence is from 1951 onward (same school after renaming); pre-1950 McVeytown-Oliver colours not seen directly.",
+  "evidence": "Successor-by-renaming Bratton-McVeytown-Oliver HS (Le Livre yearbook 1951) OCR: yearbook section \"the Blue and Gold\"; alma mater \"All hail! Alma Mater, Our own Gold and Blue\"; same alma mater in 1958 Rothrock HS book, cheerleaders \"Blue and Gold clad\"."
+ },
+ {
+  "school": "Scott Township",
+  "identified_as": "Scott Township High School (Allegheny County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Scott_Township_High_School_Scottie_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Scott_Township_High_School_Scottie_Yearbook/1939/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Scott_Township_High_School_Scottie_Yearbook/1946/Page_1.html",
+   "https://www.e-yearbook.com/Scott_Township_High_School_Rocket_Yearbook",
+   "https://en.wikipedia.org/w/index.php?title=Chartiers_Valley_School_District&action=raw"
+  ],
+  "era": "Scott Township became part of Chartiers Valley SD (formed 1956; red and blue Colts).",
+  "notes": "Identity: e-yearbook lists Scott Township HS (Carnegie), Allegheny County, matching. Yearbooks 1939-46; later mascot unknown (1956 book titled Rocket).",
+  "evidence": "Scott Township HS (Carnegie) Scottie yearbook OCR: 1939 \"starred for the Blue and Gold warriors\", \"the Blue and Gold cagers\", cheerleaders \"decked in blue and white, wearing gold letters\"; 1946 alma mater-style song \"a blue and golden hue\"."
+ },
+ {
+  "school": "Irwin",
+  "identified_as": "Irwin High School, Irwin (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Norwin_High_School",
+   "https://www.e-yearbook.com/Irwin_High_School_Carillon_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Irwin_High_School_Carillon_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Irwin_High_School_Carillon_Yearbook/1957/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Irwin_High_School_Carillon_Yearbook/1950/Page_1.html"
+  ],
+  "era": "Merged with North Huntingdon into Norwin (blue and gold) in 1958.",
+  "notes": "Own-era yearbooks, several years agree on blue and gold; scarlet and gray appears as the junior-high colours. Same colours as successor Norwin, but attested from Irwin's own books.",
+  "evidence": "Irwin Carillon yearbook OCR: 1950 band \"blue and gold banner\"; 1953 \"Let's Go Knights ... cheerleaders dressed in gold and blue\"; 1957 varsity cheerleaders \"navy and gold\", junior-high squad \"abandoning their scarlet and gray for Varsity colors, gold and blue\". 1956 basketball calls a team \"the scarlet and grey\" (ambiguous, likely junior-high or opponent)."
+ },
+ {
+  "school": "Morrison Cove",
+  "identified_as": "Morrison Cove High School (Blair/Bedford County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Morrison_Cove_High_School_Pine_Crest_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Morrison_Cove_High_School_Pine_Crest_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Morrison_Cove_High_School_Pine_Crest_Yearbook/1955/Page_1.html",
+   "https://en.wikipedia.org/w/index.php?title=Central_High_School_(Martinsburg,_Pennsylvania)&action=raw"
+  ],
+  "era": "Merged with Roaring Spring HS and Martinsburg HS into Central HS, Spring Cove SD (1960; red and gray Dragons).",
+  "notes": "Alma mater names the colours outright.",
+  "evidence": "Morrison Cove Pine Crest yearbook OCR: 1953 alma mater \"Hail to old Cove High ... Hail to her colors, Loyal white and blue\"; cheerleaders \"in blue and white uniforms\" (1953, 1955)."
+ }
+]
