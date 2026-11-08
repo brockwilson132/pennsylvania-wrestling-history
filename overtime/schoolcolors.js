@@ -950,7 +950,7 @@ window.OT_COLORS = {
 "Muncy": "r_330",
 "Munhall": "r_331",
 "Naeinghborhood Academy": "r_332",
-"Nazareth": "s15",
+"Nazareth": "r_179",
 "Neighborhood Academy": "r_332",
 "Neshaminy": "r_333",
 "Neshaminy-Langhorne": "r_334",
