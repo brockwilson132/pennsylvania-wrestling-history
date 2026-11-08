@@ -366,7 +366,8 @@
      Bouts carry side, depth from the final, winner, loser and result, not bracket slots, so the tree is rebuilt from who
      advanced: a bout's two feeders are each wrestler's previous win on the same side. Top/bottom follows the order the
      bouts were read off the PDF, which runs top to bottom. Wrestlers with no feeder (byes, consolation drop-ins) enter
-     where they first wrestled. Each match box: two lines (name, season rating, Δ), result above, winner bright. */
+     where they first wrestled. Each match box: two bout lines, the result above (with the bolt on an upset), winner bright.
+     Desktop draws the whole tree; a phone pages through it one round at a time (bracketPager). */
   function buildTrees(bouts, sideOk) {
     const B = bouts.map((b, i) => ({ b, i, d: b[1] })).filter((x) => sideOk(x.b[0]));
     const by = new Map(); const nk = OT.nkey;
@@ -383,7 +384,7 @@
   }
   function bracketTree(trees, ctx, opts) {
     if (!trees.length) return '';
-    const BW = ctx.phone ? 150 : 170, GAP = 30, SH = 33, LH = 22, TOP = 26;
+    const BW = 300, GAP = 30, SH = 37, LH = 26, TOP = 26;
     const maxD = Math.max(...trees.map((t) => t.maxD)), minD = Math.min(...trees.map((t) => t.x.d));
     const cols = maxD - minD + 1, END = 112;
     const W = cols * (BW + GAP) + END;
@@ -396,7 +397,7 @@
       n.ps.forEach((p, k) => { if (p.child) { const c = p.child; const x1 = X(c.x.d) + BW, yc = c.cy, xm = x - GAP / 2; const d = `M${x1} ${yc} H${xm} V${lineY[k]} H${x}`; (ctx.isFocus(p.name) ? gold : paths).push(d); } });
       n.cy = cy;
       const b = n.x.b; const rows = n.ps.map((p) => ctx.line(p.name, p.won, b)).join('');
-      boxes += `<div class="bxm${n.ps.some((p) => ctx.isFocus(p.name)) ? ' me' : ''}" style="left:${x}px;top:${cy - LH}px;width:${BW}px"><span class="bxr">${esc(resTxt(b))}</span>${rows}</div>`;
+      boxes += `<div class="bxm${n.ps.some((p) => ctx.isFocus(p.name)) ? ' me' : ''}" style="left:${x}px;top:${cy - LH}px;width:${BW}px"><span class="bxr">${b.u ? BOLT : ''}${esc(resTxt(b))}</span>${rows}</div>`;
       return cy;
     };
     const heads = [];
@@ -410,6 +411,38 @@
     });
     const H = y0;
     return `<div class="bxs"><div class="bxc" style="width:${W}px;height:${H}px">${heads.join('')}<svg class="bxj" width="${W}" height="${H}" aria-hidden="true"><path d="${paths.join(' ')}"/><path class="g" d="${gold.join(' ')}"/></svg>${boxes}</div></div>`;
+  }
+
+  /* ---- the bracket on a phone: one round per page ----
+     A bout line with the full name, his school pill, grade, signal bars and rating needs the whole width, so a phone shows
+     one round at a time: swipe or tap a round chip. The two bouts that meet in the next round share a bracket on the right;
+     the next round peeks in from the edge. Championship and consolation (with the placement bouts) each have their pages. */
+  const BOLT = '<svg class="ubolt" viewBox="0 0 12 16" role="img" aria-label="Upset"><title>Upset</title><path d="M7.2 0 1 9h4.2L3.8 16 11 6.4H6.6z" fill="currentColor"/></svg>';
+  function roundsOf(trees) { const by = new Map(); const visit = (n, par) => { n.par = par; n.ps.forEach((p) => { if (p.child) visit(p.child, n); }); (by.get(n.x.d) || by.set(n.x.d, []).get(n.x.d)).push(n); }; trees.forEach((t) => visit(t, null)); return by; }
+  function bracketPager(pages, ctx, side) {
+    if (!pages.length) return '';
+    const card = (b) => `<div class="b2m${[b[2], b[3]].some((n) => ctx.isFocus(n)) ? ' me' : ''}"><div class="bxr2">${b.u ? BOLT : ''}<span>${esc(resTxt(b))}</span></div>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div>`;
+    let at = pages.findIndex((pg) => pg.groups.some((g) => g.some((b) => ctx.isFocus(b[2]) || ctx.isFocus(b[3])))); if (at < 0) at = 0;
+    const chips = `<div class="b2chips" role="tablist">${pages.map((pg, i) => `<button role="tab" data-b2pg="${i}" aria-selected="${i === at}" title="${esc(pg.name)}">${pg.chip}</button>`).join('')}</div>`;
+    const body = pages.map((pg) => `<div class="b2pg">${pg.groups.map((g) => `<div class="b2g${g.length > 1 ? ' pair' : ''}">${g.map(card).join('')}</div>`).join('')}</div>`).join('');
+    return `${chips}<div class="b2pager" data-b2side="${side}" data-b2at="${at}">${body}</div>`;
+  }
+  /* pages from the bout trees: one per round, earliest first; bouts paired by the bout they feed */
+  function pagesOf(trees, name, chip) {
+    const by = roundsOf(trees);
+    return Array.from(by.keys()).sort((a, b) => b - a).map((d, i, all) => { const groups = []; by.get(d).forEach((n) => { const g = groups[groups.length - 1]; if (g && n.par && g.par === n.par) g.push(n.x.b); else { const ng = [n.x.b]; ng.par = n.par; groups.push(ng); } });
+      return { name: name(d), chip: chip(d, i, all.length), groups }; });
+  }
+  /* swipe and chips: the chip row follows the page in view, and the pager is as tall as that page */
+  function wirePager(root) {
+    root.querySelectorAll('.b2pager').forEach((pg) => {
+      const chips = pg.previousElementSibling, pages = Array.from(pg.children);
+      const fit = (i) => { pg.style.height = pages[i].offsetHeight + 'px'; Array.from(chips.children).forEach((c, j) => c.setAttribute('aria-selected', String(j === i))); const c = chips.children[i]; if (c && (c.offsetLeft < chips.scrollLeft || c.offsetLeft + c.offsetWidth > chips.scrollLeft + chips.clientWidth)) chips.scrollLeft = c.offsetLeft - 8; pg.dataset.b2at = i; };
+      const go = (i, smooth) => { const left = pages[i].offsetLeft - pages[0].offsetLeft; pg.scrollTo({ left, behavior: smooth ? 'smooth' : 'auto' }); fit(i); };
+      go(+pg.dataset.b2at || 0, false);
+      let t = 0; pg.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => { const x = pg.scrollLeft; let best = 0; pages.forEach((p, i) => { if (Math.abs(p.offsetLeft - pages[0].offsetLeft - x) < Math.abs(pages[best].offsetLeft - pages[0].offsetLeft - x)) best = i; }); fit(best); }, 60); }, { passive: true });
+      chips.addEventListener('click', (e) => { const b = e.target.closest('[data-b2pg]'); if (b) go(+b.dataset.b2pg, true); });
+    });
   }
 
   /* the eight medalists: top three on a podium (name, school, his rating with its signal bars), 4th–8th as rows. The
@@ -442,7 +475,7 @@
     const srcNote = SRCI ? `<div class="bvsrc">${SRCI[0]} · <a href="${SRCI[2]}" target="_blank" rel="noopener">${SRCI[1]}</a> · the bracket archive has no file for this tournament</div>` : '';
     if (SRCI && F.entrants.length) return head + srcNote + `<div class="bvsrclist">${F.entrants.map((e) => `<a class="bvsrcrow" href="#wrestler/${e.slug}"><span class="pill ${pc(e.r.place)}">${e.r.place}</span><span class="bvsrcn"><b>${esc(e.r.name)}</b><small>${esc(e.r.sch)}</small></span></a>`).join('')}</div>`;
     if (!F.entrants.length) return head + empty(F.lvl === 'state' ? 'No entrants on record for this bracket.' : F.covered ? (F.loading ? 'Loading the field…' : 'No placewinners recorded at this weight.') : 'The archive has no file for this tournament.');
-    const phone = (window.innerWidth || 390) < 720;
+    const phone = (window.innerWidth || 390) < 900;
     const EN = new Map(F.entrants.map((e) => [nk(e.r.name), e]));
     const rOfName = (n) => { const x = SB_ && SB_.s[nk(n)]; if (x) return x[0]; const e = EN.get(nk(n)); return e ? OT.ratingOf(e.r, F.lvl) : null; };
     const rOf = (r) => rOfName(r.name);
@@ -464,20 +497,26 @@
     const ctx = { phone, isFocus: (n) => focusN && nk(n) === focusN,
       line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n);
         const chip = e ? stag(e.r.sch, { abbr: true, cls: 'xs' }) : '<i class="bxnc"></i>';
-        const nm = `<span class="bxn">${esc(shortName(n))}</span>`;
-        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt == null && pr ? ' · season ended in the first round: no rating shown' : ''}${rt != null ? (pr ? ' · RTG going in ' + Math.round(rt) : ' · RTG ' + OT.rtg10(rt)) : ''}`;
-        const inner = `${chip}${nm}<span class="bxv${rt == null ? ' nr' : ''}">${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</span>`;
-        return e ? `<a class="bxl${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="bxl${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
+        const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? (pr ? ' · RTG going in ' + Math.round(rt) : ' · RTG ' + OT.rtg10(rt)) : ''}`;
+        const inner = `${chip}<i class="b2gr">${e && e.r.grade ? esc(e.r.grade) : ''}</i><span class="b2n">${esc(n)}</span><span class="b2v">${rt != null ? OT.sgIcon(rt, F.lvl) : '<i class="b2sg"></i>'}<b${rt == null ? ' class="nr"' : ''}>${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</b></span>`;
+        return e ? `<a class="b2l${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="b2l${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
     const RNC = (d) => ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16', 'Round of 32', 'Pigtails'][d] || 'Prelims';
     const RNX = (d) => (d === 0 ? '3rd place' : d === 1 ? 'Consolation semis' : 'Consolation R' + d);
     const champT = buildTrees(bouts, (s) => s === 'champ');
     const consT = buildTrees(bouts, (s) => s === 'p3' || s === 'cons');
     const placeB = bouts.filter((b) => b[0] === 'p5' || b[0] === 'p7').sort((p, q) => (p[0] > q[0]) - (p[0] < q[0]));
-    const finish = (lab) => (n) => { const e = EN.get(nk(n)); return `<i>${lab}</i><b>${esc(shortName(n))}</b>`; };
-    const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
-    const bracketHTML = champT.length ? `<section class="bxsec"><div class="bxk" title="${hasElo ? 'RTG going into each bout: the number after one bout is the number going into the next' : 'Season rating'}"><h3>Championship</h3></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
+    const finish = (lab) => (n) => `<i>${lab}</i><b>${esc(n)}</b>`;
+    const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${b.u ? BOLT : ''}${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
+    const bxside = state.bxside === 'cons' && consT.length + placeB.length ? 'cons' : 'champ';
+    const sideSeg = consT.length || placeB.length ? `<div class="seg sm b2side" role="group" aria-label="Side"><button data-bxside="champ" aria-pressed="${bxside === 'champ'}">Championship</button><button data-bxside="cons" aria-pressed="${bxside === 'cons'}">Consolation</button></div>` : '';
+    const CHC = (d) => ['F', 'SF', 'QF', 'R16', 'R32', 'PIG'][d] || 'PRE';
+    const CHX = (d, i) => (d === 0 ? '3RD' : d === 1 ? 'CSF' : 'C' + (i + 1));
+    const pages = bxside === 'champ' ? pagesOf(champT, RNC, CHC)
+      : pagesOf(consT, RNX, CHX).concat(placeB.map((b) => ({ name: b[0] === 'p5' ? '5th place' : '7th place', chip: b[0] === 'p5' ? '5TH' : '7TH', groups: [[b]] })));
+    const bracketHTML = !champT.length ? '' : phone ? `<section class="bxsec b2sec">${sideSeg}${bracketPager(pages, ctx, bxside)}</section>`
+      : `<section class="bxsec"><div class="bxk"><h3>Championship</h3></div>${bracketTree(champT, ctx, { roundName: RNC, finish: finish('Champion') })}</section>`
       + (consT.length ? `<section class="bxsec"><div class="bxk"><h3>Consolation</h3></div>${bracketTree(consT, ctx, { roundName: RNX, finish: finish('3rd') })}</section>` : '')
-      + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '') : '';
+      + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '');
     // the field: every entrant with his bouts and career matrix
     const sortBy = state.bvsort === 'rtg' ? 'rtg' : 'seed';
     const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
@@ -512,5 +551,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament. ' : '') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { stag, schoolColours, tagPaint, TAG_PRESETS, TAG_ASSIGN, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { wirePager, stag, schoolColours, tagPaint, TAG_PRESETS, TAG_ASSIGN, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();

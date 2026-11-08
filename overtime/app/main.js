@@ -170,7 +170,7 @@
   const bview = document.getElementById('bview');
   function showBracket(key, focus) {
     if (!key) { if (!bview.hidden) { bview.hidden = true; bview.innerHTML = ''; document.body.classList.remove('noscroll'); } return; }
-    const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; };
+    const paint = () => { bview.innerHTML = `<div class="bvcard">${OT.bracketView(key, focus)}</div>`; OT.wirePager(bview); };
     paint(); bview.hidden = false; document.body.classList.add('noscroll'); bview.scrollTop = 0;
     const me = bview.querySelector('.bvc.me'); if (me) me.scrollIntoView({ block: 'center' });
     const again = () => { if (!bview.hidden && route().q.b === key) { const top = bview.scrollTop; paint(); bview.scrollTop = top; } };
@@ -411,7 +411,7 @@
       else state.pseason = p && p.k === k && p.a === y && p.b === y ? null : { k, a: y, b: y }; repaintPerf(box); } return; }
     const ra = e.target.closest('button[data-rall]'); if (ra) { state.rall = ra.dataset.rall === '1'; render(true); return; }
     const f = e.target.closest('button[data-mode]'); if (f) { state.bmode = f.dataset.mode; render(); return; }
-    const bs = e.target.closest('button[data-bvsort]'); if (bs) { state.bvsort = bs.dataset.bvsort; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; bview.scrollTop = top; } return; }
+    const bs = e.target.closest('button[data-bvsort],button[data-bxside]'); if (bs) { if (bs.dataset.bvsort) state.bvsort = bs.dataset.bvsort; else state.bxside = bs.dataset.bxside; const k = route().q.b; if (k) { const top = bview.scrollTop; bview.innerHTML = `<div class="bvcard">${OT.bracketView(k, route().page === 'wrestler' ? route().id : null)}</div>`; OT.wirePager(bview); bview.scrollTop = top; } return; }
     const ba = e.target.closest('button[data-bracket-all]'); if (ba) { state.bracketAll = ba.dataset.bracketAll === '1'; render(); return; }
     const bl = e.target.closest('a.bl[data-bl]'); if (bl) { e.preventDefault(); slideTo(bl); return; }
     const mt = e.target.closest('button[data-mmetric]'); if (mt) { state.mmetric = mt.dataset.mmetric; state.mlall = false; render(true); return; }
