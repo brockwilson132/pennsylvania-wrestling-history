@@ -20,7 +20,9 @@ from geometry, not guessed from text:
 The text sitting on a slot names its wrestler: first-round slots carry "SEED Full Name ... School, GR, W-L",
 later slots "F. Last (ABBR)". The result ("Dec. 3-2", "Fall 2:57", "Maj. Dec. 13-4", "TF 19-3 3:18",
 "Dec. 6-3 SV", "Bye", "Forfeit") is printed just under the winner's slot. Abbreviated names are resolved to the
-bracket's own entrants by first initial + last name. A tree whose leaves include full entrants is the
+bracket's own entrants by first initial + last name (see match_abbr): the last name must be a whole-word ending of
+the entrant's name, so "C. Houser" is never read as Chad Frankhouser, and a name that fits two entrants is left
+unresolved rather than given to whichever comes first on the page. A tree whose leaves include full entrants is the
 championship side; trees made only of abbreviated slots are consolation / placement bouts.
 """
 import csv, os, re, sys
@@ -50,6 +52,74 @@ def norm(s):
     s = re.sub(r'\([^)]*\)', ' ', s or '')
     return re.sub(r'[^a-z]', '', s.lower())
 
+SUFFIX = {'jr', 'sr', 'ii', 'iii', 'iv', 'v'}
+
+def name_keys(name):
+    """(first-name key, set of last-name keys) for a full name. Last-name keys are the whole-word endings of the
+    name ("Van Horn" -> vanhorn and horn), with and without a generational suffix ("Smith Jr" -> smithjr, smith),
+    plus each part of a hyphenated surname ("Mejias-Santana" -> mejiassantana, mejias, santana) and the whole name."""
+    t = [w for w in re.sub(r'\([^)]*\)', ' ', name or '').split() if norm(w)]
+    if not t: return '', set()
+    first, rest = norm(t[0]), t[1:]
+    keys = set()
+    for tail in (rest, rest[:-1] if len(rest) > 1 and norm(rest[-1]) in SUFFIX else None):
+        if not tail: continue
+        for i in range(len(tail)): keys.add(''.join(norm(w) for w in tail[i:]))
+        keys.update(norm(p) for p in re.split(r'-', tail[-1]) if len(norm(p)) >= 3)
+    keys.add(''.join(norm(w) for w in t))   # some sheets (2021 pools) print the whole name in later slots
+    keys -= SUFFIX | {''}
+    return first, keys
+
+def one_edit(a, b):
+    """a and b differ by at most one letter added, dropped or changed (a misprint in the abbreviated slot)."""
+    if a == b: return True
+    if abs(len(a) - len(b)) > 1 or min(len(a), len(b)) < 5: return False
+    if len(a) == len(b): return sum(x != y for x, y in zip(a, b)) == 1
+    if len(a) > len(b): a, b = b, a
+    return any(b[:i] + b[i + 1:] == a for i in range(len(b)))
+
+def tag_fit(tag, school, teams):
+    """How well the school tag in "F. Last (TAG)" fits a school: 3 the file's own team table gives TAG to this
+    school, 2 TAG is made of the starts of the school's words in order ("BOS" = Boiling Springs, "PO" =
+    Philipsburg-Osceola), 1 TAG's letters appear in order in the name, 0 it cannot be this school.
+    A tag the team table gives to another school scores 0."""
+    t, s = norm(tag), norm(school)
+    if not t or not s: return 1
+    if t in teams:
+        a = teams[t]
+        return 3 if a == s or a.startswith(s) or s.startswith(a) else 0
+    words = [norm(w) for w in re.split(r'[\s\-/().]+', school) if norm(w)]
+    def pre(i, j):   # tag[i:] built from prefixes of words[j:], each word used at most once, in order
+        if i == len(t): return True
+        return any(t[i:i + k] == words[jj][:k] and pre(i + k, jj + 1)
+                   for jj in range(j, len(words)) for k in range(1, len(words[jj]) + 1) if i + k <= len(t))
+    if pre(0, 0): return 2
+    it = iter(s)
+    return 1 if all(ch in it for ch in t) else 0
+
+def match_abbr(ini, last, tag, cands, teams=None):
+    """The one entrant an abbreviated slot "F. Last (TAG)" names, or None when no entrant or more than one fits.
+    Tried in order, each step only if the previous found nobody:
+      1. last name is a whole-word ending of the entrant's name and the initial agrees
+      2. the same with a one-letter misprint in the last name, initial agrees
+      3. last name exact, initial disagrees (a nickname, or a first name printed differently on the sheet)
+    Within a step, when more than one entrant fits, the school tag picks the one whose school it fits best
+    (tag_fit); a tie is ambiguous and the slot stays unresolved."""
+    ini = norm(ini)
+    def ok_ini(e): return not ini or e['first'].startswith(ini)
+    steps = (lambda e: last in e['keys'] and ok_ini(e),
+             lambda e: ok_ini(e) and any(one_edit(last, k) for k in e['keys']),
+             lambda e: last in e['keys'])
+    for test in steps:
+        hit = [e for e in cands if test(e)]
+        if len({(e['n'], norm(e['school'])) for e in hit}) > 1 and tag:
+            fit = {id(e): tag_fit(tag, e['school'], teams or {}) for e in hit}
+            best = max(fit.values())
+            if best > 0: hit = [e for e in hit if fit[id(e)] == best]
+        if len({(e['n'], norm(e['school'])) for e in hit}) == 1: return hit[0]
+        if hit: return None
+    return None
+
 def classify(text):
     t = (text or '').strip()
     flags = []
@@ -74,7 +144,17 @@ def classify(text):
     if typ == 'tf' and tm and sc: score = sc.group(0).replace(' ', '') + ' ' + tm.group(1)
     return typ, score, ' '.join(flags)
 
-def page_bouts(page):
+TEAM = re.compile(r'^(\d+)\.\s+([\d.]+)\s+(.+?)\s+((?=[A-Z0-9&\-]*[A-Z])[A-Z0-9&\-]{1,6})(?:\s+(?:[\d\-]+\s*)+)?$')
+
+def team_tags(page):
+    """the team-score table on a tournament's first page(s): {tag: school key}, e.g. {'sc': 'statecollege'}"""
+    out = {}
+    for line in (page.extract_text() or '').split('\n'):
+        m = TEAM.match(line.strip())
+        if m: out.setdefault(norm(m.group(4)), norm(m.group(3)))
+    return out
+
+def page_bouts(page, teams=None):
     ws = page.extract_words(keep_blank_chars=True, x_tolerance=1.2, y_tolerance=2)
     weight = None
     for w in ws:
@@ -106,7 +186,8 @@ def page_bouts(page):
         if L and 'full' in L:
             m = SEEDP.match(L['full']); nm = (m.group(4) if m else L['full']).strip()
             sch = re.split(r',', L['school'])[0].strip()
-            entr.append({'name': nm, 'school': sch, 'n': norm(nm)})
+            first, keys = name_keys(nm)
+            entr.append({'name': nm, 'school': sch, 'n': norm(nm), 'first': first, 'keys': keys})
     def resolve(L):
         if L is None: return None
         if 'full' in L:
@@ -114,13 +195,21 @@ def page_bouts(page):
             return {'name': nm, 'school': re.split(r',', L['school'])[0].strip()}
         t = L['abbr']
         if not t or RES.match(t) and not re.search(r'[A-Z][a-z]+', t[3:]): return None
+        # the result printed under a slot sometimes runs into its school tag: "H. Yacoviello-Andrus (BEDSe)c. 13-6";
+        # the name is everything before "(", the tag the capitals right after it
+        # (a nickname in brackets, "J. (Rocky) Miller" or "Jerome (JJ) Fitzsimmons", is not a tag: a tag starts with two
+        # capitals or digits, follows at least an initial and a last name, and no more name comes after it)
+        tm = [x for x in re.finditer(r'\(([A-Z0-9&\-]{2,})', t) if not re.search(r'\)\s+[A-Z][a-z]', t[x.end():])]
+        if tm and len(t[:tm[-1].start()].split()) >= 2: t, tag = t[:tm[-1].start()].strip(), tm[-1].group(1)
+        else: tag = None
         m = ABBR.match(t)
         ini = (m.group(1) or '').rstrip('.').lower(); last = norm(m.group(2))
         if not last: return None
-        cand = [e for e in entr if e['n'].endswith(last) and (not ini or norm(e['name'])[:1] == ini[:1])]
-        if not cand: cand = [e for e in entr if last and last in e['n']]
-        if len(cand) >= 1: return {'name': cand[0]['name'], 'school': cand[0]['school']}
-        return {'name': (m.group(1) or '') + ' ' + m.group(2), 'school': '', 'unresolved': True}
+        tag = tag or m.group(3)
+        e = match_abbr(ini, last, tag, entr, teams)
+        if e: return {'name': e['name'], 'school': e['school']}
+        return {'name': ((m.group(1) or '') + ' ' + m.group(2)).strip(), 'school': '', 'unresolved': True,
+                'ini': ini, 'last': last, 'tag': tag}
     near = lambda a, b, t=1.6: abs(a - b) <= t
     bouts = []
     for v in V:
@@ -133,14 +222,18 @@ def page_bouts(page):
         A, B, W = resolve(label(u)), resolve(label(l)), resolve(label(w))
         res = result(w); typ, score, flags = classify(res)
         if typ == 'bye' or A is None or B is None or W is None: continue
-        if norm(W['name']) == norm(A['name']): win, lose = A, B
-        elif norm(W['name']) == norm(B['name']): win, lose = B, A
-        else:
-            # winner slot printed abbreviated differently: fall back to last-name match
-            wl = norm(W['name'])[-5:]
-            if norm(A['name']).endswith(wl): win, lose = A, B
-            elif norm(B['name']).endswith(wl): win, lose = B, A
-            else: continue
+        who = lambda x: (norm(x['name']), norm(x['school']))   # two "Mike Snyder"s can share a bracket: name and school
+        if who(A) == who(B): continue
+        nA, nB, nW = norm(A['name']), norm(B['name']), norm(W['name'])
+        if who(W) == who(A) or (nW == nA != nB): win, lose = A, B
+        elif who(W) == who(B) or (nW == nB != nA): win, lose = B, A
+        elif W.get('unresolved'):
+            # winner slot not among the page's entrants: match it to one of the two wrestlers in this bout only
+            pair = [dict(x, n=norm(x['name']), first=name_keys(x['name'])[0], keys=name_keys(x['name'])[1]) for x in (A, B)]
+            hit = match_abbr(W['ini'], W['last'], W['tag'], pair, teams)
+            if hit is None: continue
+            win, lose = (A, B) if hit is pair[0] else (B, A)
+        else: continue
         bouts.append({'vx': vx, 'top': v['top'], 'bot': v['bottom'], 'wtop': w['top'], 'win': win, 'lose': lose,
                       'typ': typ or 'dec', 'score': score, 'flags': flags, 'u': id(u), 'l': id(l), 'w': id(w),
                       'leafA': 'full' in (label(u) or {}), 'leafB': 'full' in (label(l) or {})})
@@ -180,9 +273,12 @@ def parse_file(args):
     rows, nweights, nunres = [], 0, 0
     try:
         with pdfplumber.open(path) as pdf:
+            teams = {}
             for page in pdf.pages:
-                w, bs = page_bouts(page)
-                if w is None: continue
+                w, bs = page_bouts(page, teams)
+                if w is None:
+                    for k, v in team_tags(page).items(): teams.setdefault(k, v)
+                    continue
                 nweights += 1
                 for b in bs:
                     if b['win'].get('unresolved') or b['lose'].get('unresolved'): nunres += 1
