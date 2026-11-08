@@ -127,7 +127,14 @@ def removals(s, p):
 
 
 # one school printed under two names (not a parse garble: a spelling the archive uses): the name the app files it under
-SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan'}
+SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan',
+               # short forms and the district tag some seasons print: one school each, so the state entry and the district
+               # entry of the same season land on one lineup (Bishop McDevitt 2024 had its state qualifiers and its
+               # district-only wrestlers on two school seasons). Bishop McDevitt (12), Wyncote, is another school.
+               'Bishop McDevitt (3)': 'Bishop McDevitt', 'Pittsburgh CC': 'Pittsburgh Central Catholic', 'Greensburg CC': 'Greensburg Central Catholic',
+               'Greensburg C.C.': 'Greensburg Central Catholic', 'Reading CC': 'Reading Central Catholic'}
+# a name that means one school only in one file: the WPIAL list's "Central Catholic" is Pittsburgh's
+SCHOOL_SAME_IN = {'d7_champions.csv': {'Central Catholic': 'Pittsburgh Central Catholic'}}
 
 
 def name_merges():
@@ -174,10 +181,28 @@ def same_name_files(merges, rep, check=False):
     return bad
 
 
-def same_school(rows, keys, rep):
+def same_school(rows, keys, rep, extra=None):
+    m = {**SCHOOL_SAME, **(extra or {})}
     for r in rows:
         for k in keys:
-            if r[k] in SCHOOL_SAME: r[k] = SCHOOL_SAME[r[k]]; rep['school spelled another way, filed under its one name'] += 1
+            if r.get(k) in m: r[k] = m[r[k]]; rep['school spelled another way, filed under its one name'] += 1
+
+
+def same_school_files(rep):
+    """the same school names in the state lists (entrants, places, team scores) and the medal and champion files"""
+    for f in ('state_entrants.csv', 'state_places.csv', 'state_teams.csv'):
+        if not os.path.exists(os.path.join(BR, f)): continue
+        hd, rows = read(f); r0 = Counter(); same_school(rows, ['school'], r0)
+        if r0: write(f, hd, rows); rep[f'{f}: school spelled another way, filed under its one name'] += sum(r0.values())
+    for path, nm, sc in name_files():
+        with open(path, newline='') as f: text = f.read()
+        rd = csv.DictReader(io.StringIO(text)); rows = list(rd)
+        if sc not in (rd.fieldnames or []): continue
+        r0 = Counter(); same_school(rows, [sc], r0, SCHOOL_SAME_IN.get(os.path.basename(path)))
+        if not r0: continue
+        with open(path, 'w', newline='') as f:
+            w = csv.DictWriter(f, fieldnames=rd.fieldnames, lineterminator='\r\n' if '\r\n' in text else '\n'); w.writeheader(); w.writerows(rows)
+        rep[f'{os.path.relpath(path, ROOT)}: school spelled another way, filed under its one name'] += sum(r0.values())
 
 
 GRADES = ('FR', 'SO', 'JR', 'SR')
@@ -403,7 +428,8 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
-    same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep)
+    same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep); same_school_files(rep)
+    S = read('state_entrants.csv')[1] if os.path.exists(os.path.join(BR, 'state_entrants.csv')) else []
     M = name_merges()
     if M:
         same_name(E, [('name', 'school')], M, rep); same_name(B, [('winner', 'winner_school'), ('loser', 'loser_school')], M, rep)

@@ -9,6 +9,7 @@ reference: tools/parse_state.py --places reads it into data/brackets/state_place
 For each weight:
   - a wrestler in the list who is in the box gets the box's place (matched on last name, then first initial)
   - a season or weight missing from the lists is filled from the box (1954)
+  - a wrestler whose school differs from the box's takes the box's school (the school rode along with a shuffled line)
   - a spelling difference only ("Illingsworth" / "Illingworth") is left as the list has it and reported
 Writes the corrected CSVs in place and data/sources/state_places_report.txt.
 
@@ -45,7 +46,7 @@ def main():
     ref = collections.defaultdict(dict)
     for r in csv.DictReader(open(REF)):
         ref[(r['year'], r['cls'], wnorm(r['weight']))][int(r['place'])] = r
-    rep, moved_w, moved_rows, added = [], [], 0, 0
+    rep, moved_w, moved_rows, added, schools = [], [], 0, 0, 0
     files = sorted(f for f in os.listdir(MED) if re.match(r'^\d{4}_(AAA|AA|single)\.csv$', f))
     seen_keys = set()
     for f in files:
@@ -80,6 +81,11 @@ def main():
                 if len(hits) == 1 and hits[0] != p0:
                     notes.append(f'{r[2]} {p0}->{hits[0]}')
                     r = [r[0], str(hits[0])] + r[2:]
+                # the list's school came along with a shuffled place (2019 AAA 170: Dillon Keane of Bradford listed under
+                # West Chester East, the school of the wrestler who had that line): the box's school
+                if len(hits) == 1 and box[hits[0]]['school'] and r[3] != box[hits[0]]['school']:
+                    notes.append(f'{r[2]} school {r[3]} to {box[hits[0]]["school"]}'); schools += 1
+                    r = r[:3] + [box[hits[0]]['school']] + r[4:]
                 elif not hits and p0 in box:
                     rep.append(f'{y} {c} {w} place {p0}: list "{r[2]}", bracket "{box[p0]["name"]}" (spelling only, list kept)')
                 new.append(r)
@@ -100,7 +106,7 @@ def main():
     # seasons with no list file at all
     for k in sorted(set(ref) - seen_keys):
         rep.append(f'{k[0]} {k[1]} {k[2]}: in the brackets, no medal file for the season')
-    txt = [f'weights reordered: {len(moved_w)}, wrestlers moved: {moved_rows}, rows added: {added}', ''] + moved_w + [''] + rep
+    txt = [f'weights reordered: {len(moved_w)}, wrestlers moved: {moved_rows}, schools corrected: {schools}, rows added: {added}', ''] + moved_w + [''] + rep
     if not dry:
         open(REPORT, 'w').write('\n'.join(txt) + '\n')
     print('\n'.join(txt[:1]))

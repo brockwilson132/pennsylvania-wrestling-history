@@ -3,13 +3,13 @@ weight,place,wrestler,school
 106,2,Dylan Chappell,Seneca Valley
 106,3,Kyle Hauserman,Council Rock North
 106,4,Aiden Lewis,Cedar Cliff
-106,5,Mason Prinkey,Easton
+106,5,Mason Prinkey,Connellsville
 106,6,Kyle Waterman,Council Rock South
-106,7,Braxton Appello-Fries,Connellsville
+106,7,Braxton Appello-Fries,Easton
 106,8,Jay Maldonado,Boyertown
 113,1,Alejandro Herrera-Rondon,Seneca Valley
 113,2,Finn Solomon,Franklin Regional
-113,3,Karl Shindledecker,State College
+113,3,Karl Shindledecker,Chambersburg
 113,4,Matt Mayer,Bethlehem Catholic
 113,5,Kyle Burkholder,Hempfield Area
 113,6,Ben Monn,Cumberland Valley
@@ -28,8 +28,8 @@ weight,place,wrestler,school
 126,3,Patrick Gould,East Stroudsburg South
 126,4,Ken Hayman,Canon-McMillan
 126,5,J.J. Wilson,Cedar Cliff
-126,6,Trenton Donahue,Council Rock South
-126,7,Braden Ricchini,DuBois
+126,6,Trenton Donahue,DuBois
+126,7,Braden Ricchini,Council Rock South
 126,8,Michael Torres,Bethlehem Liberty
 132,1,Julian Chlebove,Northampton
 132,2,Kenny Herrmann,Bethlehem Catholic
@@ -40,7 +40,7 @@ weight,place,wrestler,school
 132,7,Cade Balestrini,Shikellamy
 132,8,Bryce Brennan,Red Land
 138,1,Ed Scott,DuBois
-138,2,Dashawn Farber,Bellefonte
+138,2,Dashawn Farber,Nazareth
 138,3,Tyler Williams,Souderton
 138,4,Ty Linsenbigler,Hempfield Area
 138,5,Antonio Petrucelli,Owen J. Roberts
@@ -77,7 +77,7 @@ weight,place,wrestler,school
 170,4,Luke Nichter,Chambersburg
 170,5,Maximus Hale,Downingtown West
 170,6,Angel Garcia,Mariana Bracetti Academy
-170,7,Dillon Keane,West Chester East
+170,7,Dillon Keane,Bradford
 170,8,Nick Delp,Kiski Area
 182,1,Carter Starocci,Erie Cathedral Prep
 182,2,Luke Stout,Mount Lebanon
