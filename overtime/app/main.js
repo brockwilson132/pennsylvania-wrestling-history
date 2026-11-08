@@ -191,8 +191,8 @@
     const f = F(); state.ctxDistrict = f.d;
     /* the place filters only narrow the wrestler list; the place pages scope themselves */
     const on = page === 'wrestlers'; Object.assign(state.f, { regions: on && f.r && !f.d && !f.s ? [f.r] : [], districts: on && f.d && !f.s ? [f.d] : [], schools: on && f.s ? [f.s] : [] });
-    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.lastRoute = page + '/' + id; }
-    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); edgeScroll(main); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (main.querySelector('[data-need-upsets]')) OT.loadUpsets().then(() => { if (route().base === base) { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
+    if (page + '/' + id !== state.lastRoute) { state.bracketAll = false; state.rall = false; state.uall = false; state.hall = false; state.pseason = null; state.mlall = false; state.tln = 50; state.cmpA = ''; state.lastRoute = page + '/' + id; }
+    main.innerHTML = OT.PAGES[page](id, q); main.querySelectorAll('.pscr.scroll, .tlx').forEach((el) => { el.scrollLeft = el.scrollWidth; }); edgeScroll(main); if (page === 'wrestler') { loadBestWins(id); loadCareer(id); } if (page === 'h2h') { loadH2H(id); wireH2H(); } if (page === 'h2hs') { loadH2HS(id); wireH2H(); } if (page === 'season') loadSeason(id); if (page === 'dual') { state.cmpA = ''; wireDual(id); } if (main.querySelector('[data-need-upsets]')) OT.loadUpsets().then(() => { if (route().base === base) { lastBase = ''; render(true); } }); if (page === 'about' && OT.wireAbout) OT.wireAbout(main);
     if (main.querySelector('[data-need-people]')) OT.loadPeople().then(() => { if (route().base === base) { lastBase = ''; render(true); } });
     document.title = (main.querySelector('h1') ? main.querySelector('h1').textContent + ' · ' : '') + 'Overtime';
     drawBar(); paintPop(); stamp();
@@ -229,6 +229,14 @@
   function loadH2HS(id) {
     const sl = String(id).split('~').filter((s) => s && OT.SLUG2S.has(s)); if (sl.length < 2 || sl.every((s) => OT.h2hsLoaded(s))) return;
     Promise.all(sl.map((s) => OT.loadH2HS(s))).then(() => { if (route().page === 'h2hs' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+  }
+  /* Compare (two school seasons): load both lineups (and the season's brackets), repaint once; the side picker's school search */
+  function wireDual(id) {
+    if (main.querySelector('[data-need-dual],[data-need-ss]')) OT.loadDual(id).then(() => { if (route().page === 'dual' && route().id === id) { const y = window.scrollY; lastBase = ''; render(true); window.scrollTo(0, y); } });
+    main.querySelectorAll('.dqp').forEach((box) => { const inp = box.querySelector('.dqi'), list = box.querySelector('.dql'); if (!inp) return;
+      let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const q = inp.value.trim(); if (q.length < 2) { list.innerHTML = ''; return; }
+        list.innerHTML = searchSchools(q, 8).map((x) => `<a href="#dual/${OT.esc(id)}?pick=${box.dataset.dqside}&s=${x.sl}"><b>${OT.esc(x.name)}</b></a>`).join(''); }, 120); });
+      if (!box.querySelector('.dqy') && window.innerWidth >= 720) inp.focus(); });
   }
   const searchSchools = (q, n) => { const t = q.toLowerCase().split(/\s+/).filter(Boolean); const out = [];
     OT.SLUG2S.forEach((name, sl) => { const k = name.toLowerCase(); if (t.every((x) => k.includes(x))) out.push({ sl, name, pre: k.startsWith(t[0]) ? 0 : 1 }); });
@@ -396,6 +404,9 @@
     const qs = e.target.closest('button[data-qset]'); if (qs) { const [k, v] = qs.dataset.qset.split(':'); setQ(k, v); return; }
     const c = e.target.closest('button[data-kind]'); if (c) { state.child = c.dataset.kind; if (PLACEP.includes(route().page)) { const h = withView(location.hash, state.view, state.child); try { history.replaceState(history.state, '', h); } catch (er) { /* none */ } lastHash = location.hash; } lastBase = ''; render(true); return; }
     const lv = e.target.closest('button[data-lvl]'); if (lv) { OT.setLvl(lv.dataset.lvl); state.rall = false; state.bracketAll = false; render(true); return; }
+    const dx = e.target.closest('button[data-dqalt]'); if (dx) { const b = dx.querySelector('b'), t = b.textContent; b.textContent = dx.dataset.dqalt; dx.dataset.dqalt = t; dx.classList.toggle('alt'); return; }
+    const cp = e.target.closest('button[data-dqpick]'); if (cp) { const r = route(); const side = cp.dataset.dqpick; location.hash = 'dual/' + r.id + (r.q.pick === side ? '' : '?pick=' + side); return; }
+    const ca = e.target.closest('button[data-cmpa]'); if (ca) { state.cmpA = ca.dataset.cmpa; const y = window.scrollY; render(true); window.scrollTo(0, y); return; }
     const sm = e.target.closest('button[data-smode]'); if (sm) { state.smode = sm.dataset.smode; render(true); return; }
     const ss = e.target.closest('button[data-ssort]'); if (ss) { state.ssort = ss.dataset.ssort; render(true); return; }
     const us = e.target.closest('button[data-usort]'); if (us) { state.usort = us.dataset.usort; render(true); return; }

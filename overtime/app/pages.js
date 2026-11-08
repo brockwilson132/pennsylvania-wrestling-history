@@ -314,6 +314,7 @@
     return `<div class="h2p" data-h2side="${side}"><input class="search h2i" data-h2kind="s" type="search" placeholder="${name ? esc(name) + ' · change' : 'Search ' + ph.toLowerCase()}" autocomplete="off" aria-label="${ph}" data-h2other="${esc(other || '')}"><div class="h2l"></div>
       ${name ? `<div class="h2w"><a href="#school/${OT.slug(name)}"><b>${esc(name)}</b><small>${OT.schoolDistrict(name) ? 'District ' + OT.schoolDistrict(name) : ''}</small></a></div>` : `<div class="h2w muted">${ph}</div>`}</div>`;
   }
+  PAGES.dual = (id, q) => OT.dualPage(id, q);
   PAGES.h2hs = (id) => {
     const [sa, sb] = h2hIds(id); const nA = sa ? OT.SLUG2S.get(sa) : null, nB = sb ? OT.SLUG2S.get(sb) : null;
     const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Two schools: every postseason bout between their wrestlers, their PIAA team duals, and the odds of a dual meet between their lineups.</div></header>${h2hTabs('s')}
