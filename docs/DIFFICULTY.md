@@ -37,9 +37,18 @@ district win was over a lesser wrestler only because the tournaments that showed
 
 So each season is fit **as one batch**:
 
-- **Bradley–Terry on the Elo scale**, every bout of that season at every level, weighted by result: fall 1.5,
-  tech fall 1.4, major 1.2, decision 1.0, decision in OT / SV / TB 0.8. Forfeits, injury defaults and DQs carry no
-  information and are dropped. A win counts by the opponent's full-season strength, regardless of round or level.
+- **Bradley–Terry on the Elo scale**, every bout of that season at every level, plus **how he won** (2026-11-08,
+  replacing the old fall 1.5 / tech 1.4 / major 1.2 / dec 1.0 / OT 0.8 weights). Each bout has two parts: who won,
+  P = σ(z) as before, and the margin given the win, a cumulative logit over one ladder of 11 categories ordered by the
+  edge each means: OT, decision by 1, by 2–3, by 4–7, fall after 4:00, major 8–11, fall 2:00–4:00, major 12+, fall
+  1:00–2:00, fall under 1:00, tech fall. P(at least category k | won) = σ(β·z − θₖ), with β and θ per era (scoring rules
+  and period lengths changed). β comes out far below 1: a margin is much noisier evidence than the win itself (a
+  shared latent, β = 1, made held-out log loss far worse). The β scale was chosen on hidden 1990–2017 regional + state
+  bouts (×0.7: .4507 vs .4821 with the old weights); on the untouched 2018–26 test log loss fell .4472 → .4192 and the
+  winner picked rose 78.5% → 80.0%, with district fairness unchanged. A missing score or pin time counts only for what
+  is known (some decision; at least a late fall; or the win alone). Losing to a star costs little, and now losing
+  close to one shows; getting pinned in 0:30 costs more than losing a decision. Forfeits, injury defaults and DQs carry
+  no information and are dropped. A win counts by the opponent's full-season strength, regardless of round or level.
 - **Placements as extra evidence** where a bracket has fewer bouts than placers (old partial brackets, the few
   files with no bout lines): each higher placer is treated as beating each lower placer, at weight
   0.3 / (placers − 1). 2,285 such pairs against 366k real bouts.

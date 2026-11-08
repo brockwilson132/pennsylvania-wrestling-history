@@ -278,6 +278,16 @@
   /* head to head: two wrestlers, every bout between them, and the odds at their best */
   const pct = (p) => (p < 0.005 ? '<1%' : p > 0.995 ? '>99%' : Math.round(100 * p) + '%');
   const h2hOdds = (a, b) => 1 / (1 + Math.pow(10, (b - a) / 400));
+  /* how a bout between the two ends: A's fall / tech / major / decision on the left, B's on the right, each piece as wide
+     as its chance (rating decides who wins, each wrestler's own record of wins and losses by type decides how) */
+  function h2hHow(A, ca, B, cb, p) {
+    const sa = OT.styleOf(A, ca.peakYear), sb = OT.styleOf(B, cb.peakYear), ma = OT.styleMix(ca.peak - cb.peak, sa, sb), mb = OT.styleMix(cb.peak - ca.peak, sb, sa);
+    if (!ma || !mb) return '';
+    const K = ['d', 'm', 't', 'f'], N = ['decision', 'major', 'tech fall', 'fall'];
+    const seg = (q, k, who) => (q < 0.005 ? '' : `<span class="${K[k]}" style="flex:${q.toFixed(4)}" title="${esc(who)} by ${N[k]} ${pct(q)}">${q >= 0.07 ? Math.round(100 * q) : ''}</span>`);
+    const left = [3, 2, 1, 0].map((k) => seg(p * ma[k], k, A.name)).join(''), right = [0, 1, 2, 3].map((k) => seg((1 - p) * mb[k], k, B.name)).join('');
+    return `<div class="h2how"><div class="wtb">${left}<i class="h2mid"></i>${right}</div>${OT.winKey ? `<div class="h2hk">${OT.winKey(true)}</div>` : ''}</div>`;
+  }
   const h2hIds = (id) => { const [a, b] = String(id || '').split('~'); return [a || '', b || '']; };
   function h2hPick(side, W, other) {
     const ph = side === 'a' ? 'First wrestler' : 'Second wrestler';
@@ -297,7 +307,7 @@
     const ca = OT.careerRating(A.apps, A.lower), cb = OT.careerRating(B.apps, B.lower);
     let odds = '';
     if (ca && cb) { const p = h2hOdds(ca.peak, cb.peak);
-      odds = section('At their best', `<div class="card"><div class="usum"><span><b>${pct(p)}</b><i>${esc(A.name)} · peak ${OT.rw(ca.peak)} (${ca.peakYear})</i></span><span><b>${pct(1 - p)}</b><i>${esc(B.name)} · peak ${OT.rw(cb.peak)} (${cb.peakYear})</i></span></div><div class="note">Odds for one bout between each at his best season, ${Math.abs(Math.round(ca.peak - cb.peak))} points apart. Weight, style and the day decide a real bout.</div></div>`); }
+      odds = section('At their best', `<div class="card"><div class="usum"><span><b>${pct(p)}</b><i>${esc(A.name)} · peak ${OT.rw(ca.peak)} (${ca.peakYear})</i></span><span><b>${pct(1 - p)}</b><i>${esc(B.name)} · peak ${OT.rw(cb.peak)} (${cb.peakYear})</i></span></div>${ready ? h2hHow(A, ca, B, cb, p) : ''}<div class="note">Odds for one bout between each at his best season, ${Math.abs(Math.round(ca.peak - cb.peak))} points apart. Weight, style and the day decide a real bout.</div></div>`); }
     else odds = section('At their best', `<div class="card"><div class="note">${esc((ca ? B : A).name)} has no season rating (first-round exits carry none), so there are no odds.</div></div>`);
     let met;
     if (!ready) met = '<div class="muted bwl">Loading their bouts…</div>';

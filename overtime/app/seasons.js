@@ -95,9 +95,9 @@
     const j = Math.min(gb.length - 1, i + 1), t = gb[j] === gb[i] ? 0 : Math.max(0, Math.min(1, (x - gb[i]) / (gb[j] - gb[i]))); return mix[i].map((v, k) => v + (mix[j][k] - v) * t); };
   /* one bout between ratings (na, nb = bouts behind each rating): [A's expected points, B's, mean of (A - B) squared,
      A's points with cutoffs minus B's, A's win chance] */
-  const bout1 = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0, 0, 0, 0.5] : [0, 6, 36, -6, 0]; if (rb == null) return [6, 0, 36, 6, 1];
+  const bout1 = (ra, rb, na, nb, sa, sb) => { if (ra == null) return rb == null ? [0, 0, 0, 0, 0.5] : [0, 6, 36, -6, 0]; if (rb == null) return [6, 0, 36, 6, 1];
     const U = SD.sim.unc || 0, vr = (n) => (n == null ? 0 : U * U / (1 + n)), g0 = ra - rb, g = U ? g0 / Math.sqrt(1 + K2 * (vr(na) + vr(nb))) : g0;
-    const p = 1 / (1 + Math.pow(10, -g / 400)), ma = mixAt(g), mb = mixAt(-g); let ea = 0, eb = 0, s2 = 0;
+    const St = SD.sim.style, p = 1 / (1 + Math.pow(10, -g / 400)), ma = St ? OT.styleMix(g, sa, sb, St) : mixAt(g), mb = St ? OT.styleMix(-g, sb, sa, St) : mixAt(-g); let ea = 0, eb = 0, s2 = 0;
     ma.forEach((q, k) => { ea += p * q * BP[k]; s2 += p * q * BP[k] * BP[k]; }); mb.forEach((q, k) => { eb += (1 - p) * q * BP[k]; s2 += (1 - p) * q * BP[k] * BP[k]; });
     const C = SD.sim.cut, hp = (x) => (x < C[0] ? 3 : x < C[1] ? 4 : x < C[2] ? 5 : 6);
     return [ea, eb, s2, g0 === 0 ? 0 : g0 > 0 ? hp(g0) : -hp(-g0), p]; };
@@ -108,11 +108,11 @@
      we can't see (field not on file) = the era's fill */
   function slotsOf(r, L) {
     const sim = SD.sim, era = r[C.y] < 1999 ? 0 : 1, empty = sim.forfeit ? [[null, 1]] : sim.empty[era];
-    if (!r[C.est]) return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7]]] : empty, gap: !e[1] }));
+    if (!r[C.est]) return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7], e[8] || null]] : empty, gap: !e[1] }));
     const pv = (v) => 1 / (1 + Math.pow(10, (sim.ref - v) / 400));
     const bin = Math.min(9, Math.floor(20 * L.reduce((t, e) => t + (e[2] != null ? pv(e[2]) : 0), 0) / L.length));
     const fill = sim.fill[era + '|' + bin] || empty;
-    return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7]]] : fill, gap: !e[1], fill: !e[1] }));
+    return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7], e[8] || null]] : fill, gap: !e[1], fill: !e[1] }));
   }
   /* each weight meets the nearest weight of the other season, nobody twice (tools/build_units.js pairs): weight order kept,
      fewest total pounds apart, an unpaired weight costs sim.sit pounds; returns [i, j] in weight order, -1 = the other
@@ -137,13 +137,13 @@
     const A = slotsOf(ra, La), B = slotsOf(rb, Lb), same = ra[C.y] === rb[C.y];
     let m = 0, v = 0, ta = 0, tb = 0, ha = 0, hb = 0;
     const P = pairs(A.map((x) => x.e[0]), B.map((x) => x.e[0]));
-    const avgOf = (X) => { let t = 0, w = 0; X.forEach((o) => o.mix.forEach(([r, q]) => { if (r != null) { t += r * q; w += q; } })); return { e: [null, null, Math.round(w ? t / w : SD.sim.ref)], mix: X.flatMap((o) => o.mix.map(([r, q, nb]) => [r, q / X.length, nb])), avg: true }; };   // any of the team's weights, equally likely (the number shown is their mean)
+    const avgOf = (X) => { let t = 0, w = 0; X.forEach((o) => o.mix.forEach(([r, q]) => { if (r != null) { t += r * q; w += q; } })); return { e: [null, null, Math.round(w ? t / w : SD.sim.ref)], mix: X.flatMap((o) => o.mix.map(([r, q, nb, st]) => [r, q / X.length, nb, st])), avg: true }; };   // any of the team's weights, equally likely (the number shown is their mean)
     const AA = avgOf(A), BA = avgOf(B);
     const bouts = P.map(([i, j]) => { const a = i < 0 ? AA : A[i], b = j < 0 ? BA : B[j];
       const real = same && !a.gap && !b.gap && !a.avg && !b.avg ? realBout(ra[C.y], a.e[1], b.e[1]) : null;
       let ea = 0, eb = 0, s2 = 0, h = 0, pa = 0;
       if (real) { ea = real.aWon ? real.pts : 0; eb = real.aWon ? 0 : real.pts; s2 = real.pts * real.pts; h = real.aWon ? real.pts : -real.pts; pa = real.aWon ? 1 : 0; }
-      else a.mix.forEach(([x, wa, na]) => b.mix.forEach(([y, wb, nb]) => { const o = bout1(x, y, na, nb), k = wa * wb; ea += k * o[0]; eb += k * o[1]; s2 += k * o[2]; h += k * o[3]; pa += k * o[4]; }));
+      else a.mix.forEach(([x, wa, na, sa]) => b.mix.forEach(([y, wb, nb, sb]) => { const o = bout1(x, y, na, nb, sa, sb), k = wa * wb; ea += k * o[0]; eb += k * o[1]; s2 += k * o[2]; h += k * o[3]; pa += k * o[4]; }));
       const mm = ea - eb; m += mm; v += real ? 0 : s2 - mm * mm; ta += Math.max(0, mm); tb += Math.max(0, -mm); ha += Math.max(0, h); hb += Math.max(0, -h);
       return { i, j, wa: a.e[0], wb: b.e[0], a, b, real, ea, eb, h, pa, est: !real && (a.gap || b.gap || a.avg || b.avg) }; });
     const t2 = Math.pow(SD.sim.tau || 0, 2);

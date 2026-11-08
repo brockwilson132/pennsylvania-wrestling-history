@@ -1672,3 +1672,7 @@ button.dqn{width:100%;cursor:pointer}button.dqn.alt b{color:var(--ash)}
 .dqwt i{display:block;font-style:normal;font-size:10.5px;color:var(--ash2)}
 @media(max-width:379px){.dqteams{gap:5px}.dqt{padding:6px 7px;column-gap:5px}.dqt em{font-size:26px}.dqt .zsy{font-size:18px}.dqt .stag{font-size:10px;letter-spacing:.03em}.dqr0{grid-template-columns:minmax(0,1fr) 34px 30px 34px minmax(0,1fr);gap:3px}.dqw b{font-size:13px}}
 .dqav>b{color:var(--ash2);font-style:italic}
+
+/* head to head: how a bout between the two ends */
+.h2how{margin-top:12px;display:grid;gap:6px}.h2how .wtb{height:24px}.h2how .wtb>span{min-width:0}
+.h2mid{flex:0 0 8px;display:block}

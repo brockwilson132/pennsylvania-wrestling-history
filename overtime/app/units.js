@@ -295,12 +295,11 @@
   const winTypesOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 9) { any = true; t[0] += v[7]; t[1] += v[8]; t[2] += v[9]; t[3] += v[5]; } }); return any ? t : null; };
 
   /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team, school pages) ----------
-     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Four tiles first: postseason wins by
+     Peak rating with its ladder bars (rtgBars). Four tiles first: postseason wins by
      type (decisions, majors, tech falls, falls). Then seasons run down: year and grade on the left, District → Regional
      → State across (each result carries its bracket-toughness signal bars inside it, so results centre under their
      level), the weight on the right. The school tag always shows. `rank` is whatever sits left of the name: a list
      rank, a weight or a team. */
-  const PK_LO = 1500, PK_HI = 2200;
   const WC_LV = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
   /* postseason wins by type as one bar, decisions → falls getting brighter, losses dark red at the end; only the count
      sits in each piece (the colours are explained once, in the key above the list) */
@@ -311,9 +310,13 @@
     const tip = `${v[0]} decisions · ${v[1]} majors · ${v[2]} tech falls · ${v[3]} falls · ${v[4]} losses`;
     return `<span class="wtb" title="${tip}" aria-label="${tip}">${WT_K.map(([k], j) => (v[j] ? `<span class="${k}" style="flex:${v[j]}">${v[j]}</span>` : '')).join('')}</span>`;
   }
-  /* peak rating as signal bars: six steps from 1500 (an average state qualifier) to 2200, coloured on the rating scale */
+  /* a rating as signal bars, one bar per rung of the postseason ladder: the cut points sit halfway between the median
+     season rating (1999-2026) of wrestlers whose season ended at districts (302), at regionals (993), at states without
+     a medal (1347), with a 3rd-8th medal (1613), in 2nd (1802) and as champion (1965). So one bar reads as a district
+     wrestler, three as a state qualifier, six as a state champion, in every list, lineup and card. */
+  const RB_CUT = [650, 1170, 1480, 1710, 1880];
   function rtgBars(v) {
-    const f = Math.max(0, Math.min(1, (v - PK_LO) / (PK_HI - PK_LO))), n = Math.max(1, Math.min(6, Math.ceil(f * 6))), c = colorAt(f);
+    const n = 1 + RB_CUT.filter((x) => v >= x).length, c = colorAt(0.08 + 0.92 * (n - 1) / 5);
     return `<svg class="rtb" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
   }
   /* a result is a disc, every one the same size: gold / silver / bronze with the place, 4th–8th plain with the place,
@@ -328,7 +331,7 @@
   const lvIcon = (lvl) => `<span class="lvi" title="${lvl[0].toUpperCase() + lvl.slice(1)}">${OT.navIcon(LV_ICON[lvl])}</span>`;
   /* the wins bar's key: one swatch per type, under the bar it explains */
   const WT_S = ['Dec', 'Major', 'Tech fall', 'Fall', 'Loss'];
-  const winKey = () => `<span class="wtk">${WT_K.map(([k], j) => `<span><i class="${k}"></i>${WT_S[j]}</span>`).join('')}</span>`;
+  const winKey = (noLoss) => `<span class="wtk">${WT_K.slice(0, noLoss ? 4 : 5).map(([k], j) => `<span><i class="${k}"></i>${WT_S[j]}</span>`).join('')}</span>`;
   const wlegend = () => `<div class="wlg">${winKey()}</div>`;
   /* one result cell: toughness bars, disc, spacer; a link to the bracket when there is one */
   function dcell(c, lvl, link) {
