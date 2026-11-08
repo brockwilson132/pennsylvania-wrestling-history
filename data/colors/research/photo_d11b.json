@@ -1,0 +1,692 @@
+[
+ {
+  "school": "Tamaqua",
+  "identified_as": "Tamaqua Area High School (Tamaqua Area School District), Tamaqua",
+  "colors": [
+   {
+    "name": "Blue (royal/navy)",
+    "hex": "#014790",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Raiders",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tamaqua_Area_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tamaqua_Area_School_District",
+   "https://www.tamaqua.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1729789921/tamaquak12paus/vmggmhgblo7etb66gwzb/TamaquaAreaSchoolDistrict.png",
+   "https://www.tamaqua.k12.pa.us/athleticsschedules-roster2025-spring-schedulesresultsschedules-rosters2025-spring-schedulesresults/athletics-tasd",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1769105596/tamaquak12paus/bjtrauaho5ove9u6hxwa/Logo_footballfield.png",
+   "https://www.maxpreps.com/pa/tamaqua/tamaqua-blue-raiders/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1972-2026.",
+  "evidence": "district seal: blue #014790 on white; site theme --primary-color #001173 (navy); athletics page Raider bird-head logo in navy/white/grey. Wikipedia district infobox: Blue and White. MaxPreps lists Black/Navy/Light Blue (not corroborated)."
+ },
+ {
+  "school": "Salisbury Township",
+  "identified_as": "Salisbury High School (Salisbury Township School District), Allentown",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#022851",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Salisbury_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Salisbury_High_School_(Pennsylvania)",
+   "https://www.salisburysd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/3298/logo/1473/logo.png"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1964-2026.",
+  "evidence": "district header logo: navy #022851 falcon head on white; site CSS dominated by #022851; Wikipedia infobox Navy and White."
+ },
+ {
+  "school": "Mahanoy",
+  "identified_as": "Mahanoy Area High School, Mahanoy City",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#00091A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F5C510",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Bears",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Mahanoy_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mahanoy_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mahanoy_Area_School_District",
+   "https://www.mabears.net",
+   "https://www.mabears.net/pics/header_logo.png",
+   "https://www.mabears.net/pics/footer_logo.png",
+   "https://www.mabears.net/shared/main.css",
+   "https://www.maxpreps.com/pa/mahanoy-city/mahanoy-area-golden-bears/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1967-2026.",
+  "evidence": "site header bear-head logo: gold #F5C510 and near-black #00091A; site CSS accent #EBB402 gold with #0D0D0D; Wikipedia district infobox Black and Gold; MaxPreps Black / Vegas Gold."
+ },
+ {
+  "school": "Pottsville",
+  "identified_as": "Pottsville Area High School, Pottsville",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#9B2743",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Crimson Tide",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pottsville_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pottsville_Area_High_School",
+   "https://hs.pottsville.k12.pa.us",
+   "https://resources.finalsite.net/images/v1722352265/pottsvillek12paus/cvttcssoeigifx8pnphi/TideLogoCrimsonandBlackonWhite.png"
+  ],
+  "era": "current",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1938-2026.",
+  "evidence": "HS site 'C TIDE' logo: crimson #9B2743 with black #000000 outline on white; site theme --primary-color #9b2743, --secondary-color #000000; Wikipedia infobox Crimson and White."
+ },
+ {
+  "school": "Pleasant Valley",
+  "identified_as": "Pleasant Valley High School, Brodheadsville",
+  "colors": [
+   {
+    "name": "Blue (navy)",
+    "hex": "#203D7C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pleasant_Valley_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pleasant_Valley_High_School_(Pennsylvania)",
+   "https://www.pvbears.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1760030846/pvbearsorg/byt0evidl2sxocx2ta3b/2BearPawLogo.png"
+  ],
+  "era": "current",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1974-2026.",
+  "evidence": "district bear-paw 'PV' logo: navy blue #203D7C with black claws and white letters; site theme --primary-color #203d7c; Wikipedia infobox Blue and white."
+ },
+ {
+  "school": "Allentown Central Catholic",
+  "identified_as": "Allentown Central Catholic High School, Allentown",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#102B15",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#DFAF53",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://www.acchs.info",
+   "https://www.acchs.info/athletics",
+   "https://static.wixstatic.com/media/757f86_92d032e7efbc4e02925ec01e7d2fda40~mv2.png",
+   "https://www.maxpreps.com/pa/allentown/allentown-central-catholic-vikings/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1973-2026.",
+  "evidence": "school-site centennial crest: dark green #102B15 with gold #DFAF53 (gold text has gradient) and small Viking head; site CSS also uses green #04723D; MaxPreps Green and Gold, mascot Vikings."
+ },
+ {
+  "school": "Panther Valley",
+  "identified_as": "Panther Valley Junior/Senior High School, Lansford",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#CFAF2D",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Panther_Valley_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Panther_Valley_High_School",
+   "https://pvhs.sharpschool.net/home",
+   "https://cdnsm5-ss2.sharpschool.com/UserFiles/Servers/Server_890754/Templates/logo.svg",
+   "https://www.maxpreps.com/pa/lansford/panther-valley-panthers/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1970-2026.",
+  "evidence": "HS site theme: gold #CFAF2D backgrounds/borders on black and white (site logo SVG is single-colour black); Wikipedia infobox Black, Gold, and White; MaxPreps Black and Gold. Site's #860000 link colour is a theme default, not a school colour."
+ },
+ {
+  "school": "Williams Valley",
+  "identified_as": "Williams Valley Junior/Senior High School, Tower City",
+  "colors": [
+   {
+    "name": "Blue (royal)",
+    "hex": "#033594",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#D61E1E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Williams_Valley_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Williams_Valley_School_District",
+   "https://www.wvschools.net",
+   "https://www.wvschools.net/apple-touch-icon.png",
+   "https://www.maxpreps.com/pa/tower-city/williams-valley-vikings/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1967-2026.",
+  "evidence": "MaxPreps Vikings roundel logo: royal blue #033594 on white; district site CSS blue #1636DB and red #D61E1E; Wikipedia infobox Blue, red, white; MaxPreps Blue/White/Red."
+ },
+ {
+  "school": "Bangor",
+  "identified_as": "Bangor Area High School, Bangor",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#660732",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Slaters",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Bangor_Area_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bangor_Area_School_District",
+   "https://www.bangor.k12.pa.us",
+   "https://www.maxpreps.com/pa/bangor/bangor-slaters/"
+  ],
+  "era": "current",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1967-2026.",
+  "evidence": "MaxPreps 'Slaters Bangor' miner logo: maroon #660732 with grey and white; district site theme --primary-color #640000 (maroon), secondary grey #6f6b6b; Wikipedia Maroon and White; MaxPreps Maroon/White."
+ },
+ {
+  "school": "Pius X (Roseto)",
+  "identified_as": "Pius X High School, Roseto (Catholic; closed 2015)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Royals",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pius_X_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pius_X_High_School_(Pennsylvania)"
+  ],
+  "era": "closed 2015",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1976-2015.",
+  "evidence": "Wikipedia infobox: Royal Blue and White, team name Royals. No logo or clean photo could be reached (image search returned junk; MaxPreps 404), so no hex."
+ },
+ {
+  "school": "Southern Lehigh",
+  "identified_as": "Southern Lehigh High School, Center Valley",
+  "colors": [
+   {
+    "name": "Blue (royal)",
+    "hex": "#033395",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Southern_Lehigh_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Lehigh_High_School",
+   "https://hs.slsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1750675855/slsdorg/lxnj1czocfeqxmotzjjf/SouthernLehighHighSchoolPrimaryLogoImage.png",
+   "https://www.maxpreps.com/pa/center-valley/southern-lehigh-spartans/"
+  ],
+  "era": "current",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1957-2026.",
+  "evidence": "HS primary logo: Spartan helmet roundel in royal blue #033395 on white; site theme --primary-color #003594 (secondary grey #a3a5ab); Wikipedia and MaxPreps Blue and White."
+ },
+ {
+  "school": "Pocono Mountain East",
+  "identified_as": "Pocono Mountain East High School, Swiftwater",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CC232A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#1F1615",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District",
+   "https://www.pmsd.org",
+   "https://www.pmsd.org/our-district/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1754582864/pmsdorg/b8ynwvybm6ijrd51dhhx/EastAthletics-Graphic.jpg",
+   "https://www.maxpreps.com/pa/swiftwater/pocono-mountain-east-cardinals/"
+  ],
+  "era": "current (original Pocono Mountain HS building; split 2002-03)",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 2003-2026.",
+  "evidence": "district 'Cardinal Athletics' graphic: red #CC232A cardinal head with black #1F1615 mask/outline and gold beak, dark red text; Wikipedia: 'Cardinals are red and white', infobox red, black, white; MaxPreps Red/Black/Gold."
+ },
+ {
+  "school": "Jim Thorpe",
+  "identified_as": "Jim Thorpe Area High School, Jim Thorpe",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#0104B6",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Olympians",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Jim_Thorpe_Area_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Jim_Thorpe_Area_School_District",
+   "https://www.jimthorpesd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/9744/logo/11248/JT_logo_web.png",
+   "https://www.maxpreps.com/pa/jim-thorpe/jim-thorpe-olympians/"
+  ],
+  "era": "current",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1965-2026.",
+  "evidence": "district 'JT' logo: red #FF0000 letters with blue #0104B6 and white outlines; site CSS red #C8000A, blue #10329C; MaxPreps Red and Blue."
+ },
+ {
+  "school": "East Stroudsburg South",
+  "identified_as": "East Stroudsburg High School South, East Stroudsburg",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#702F8A",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/East_Stroudsburg_High_School_South",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Stroudsburg_High_School_South",
+   "https://south.esasd.net",
+   "https://www.esasd.net/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1707898114/esasdnet/eh05epkjafdioftpieyq/EastStroudsburgAreaSchoolDistrict.png"
+  ],
+  "era": "current (continues original East Stroudsburg HS)",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 2001-2026.",
+  "evidence": "South HS site theme --primary-color #702f8a (purple); district logo has purple #774488 'C' for South beside light-blue 'N' for North; Wikipedia Purple and White."
+ },
+ {
+  "school": "Pocono Mountain",
+  "identified_as": "Pocono Mountain High School, Swiftwater (single district high school before 2002-03 split)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District"
+  ],
+  "era": "split 2002-03 into Pocono Mountain East (kept the Cardinals and the building) and Pocono Mountain West",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1964-2002.",
+  "evidence": "Wikipedia district article: 'The entire district was originally home of the Cardinals... Cardinals are red and white'; infobox red, black, white. No period logo found, so no hex (current PM East cardinal is a modern mark)."
+ },
+ {
+  "school": "Pocono Mountain West",
+  "identified_as": "Pocono Mountain West High School, Pocono Summit",
+  "colors": [
+   {
+    "name": "Blue (navy)",
+    "hex": "#053365",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#BBBEC4",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pocono_Mountain_School_District",
+   "https://www.pmsd.org/our-district/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1754582921/pmsdorg/lzwqh3h0svoaiflo59pp/WestAthletics-Graphic.jpg"
+  ],
+  "era": "current (opened 2002-03)",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 2003-2026.",
+  "evidence": "district 'Panther Athletics' graphic: navy #053365 panther head with silver/light grey #BBBEC4 highlights, navy text; Wikipedia: 'Panthers are blue and silver'."
+ },
+ {
+  "school": "West Hazleton",
+  "identified_as": "West Hazleton High School, West Hazleton (Hazleton Area SD; consolidated 1992)",
+  "colors": [],
+  "mascot": "Wildcats",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hazleton_Area_High_School",
+   "search:https://www.thebaseballcube.com/content/hs_team/11315/"
+  ],
+  "era": "closed 1992; merged into Hazleton Area High School (Cougars, red/silver/white) - not its colours",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1967-1992.",
+  "evidence": "Only the Wildcats nickname confirmed (Baseball Cube, newspaper references). No source or image found for its colours; Hazleton Area's red/silver/white belong to the successor."
+ },
+ {
+  "school": "Schuylkill Haven",
+  "identified_as": "Schuylkill Haven Area High School, Schuylkill Haven",
+  "colors": [
+   {
+    "name": "Blue (navy)",
+    "hex": "#000056",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C7B45A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hurricanes",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Schuylkill_Haven_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Schuylkill_Haven_High_School",
+   "https://www.shasd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/9611/logo/11199/Schuylkill_Haven_Area_School_District_v1_logo_template_300.png",
+   "https://www.maxpreps.com/pa/schuylkill-haven/schuylkill-haven-hurricanes/"
+  ],
+  "era": "current",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1969-2026.",
+  "evidence": "district 'SH' logo: navy #000056 letters with gold #C7B45A outline (red hurricane flag accent); site CSS #000056 and gold #D1BE4D; MaxPreps 'SH' logo navy/gold; Wikipedia and MaxPreps Blue and Gold."
+ },
+ {
+  "school": "East Stroudsburg",
+  "identified_as": "East Stroudsburg Area High School, East Stroudsburg (single high school before the 2000-01 North/South split)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "low",
+  "wikipedia": "https://en.wikipedia.org/wiki/East_Stroudsburg_Area_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Stroudsburg_Area_School_District",
+   "https://en.wikipedia.org/wiki/East_Stroudsburg_High_School_South",
+   "search:https://www.e-yearbook.com/yearbooks/East_Stroudsburg_High_School_Cavalier_Yearbook/1969/Page_8.html"
+  ],
+  "era": "split 2000-01; continued as East Stroudsburg South (same building, Cavaliers) with East Stroudsburg North added",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1962-2000.",
+  "evidence": "Wikipedia: original district mascot was the Cavalier, kept by South after the split; South's purple and white assumed carried over (not directly documented for pre-2001), so no hex."
+ },
+ {
+  "school": "Minersville",
+  "identified_as": "Minersville Area High School, Minersville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#002157",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Battlin' Miners",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Minersville_Area_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Minersville_Area_School_District",
+   "https://www.battlinminers.com",
+   "https://resources.finalsite.net/images/v1715193456/battlinminerscom/adxynorqj6u4qzlxrfqs/MinersvilleAreaSchoolDistrict_Logo.png"
+  ],
+  "era": "current school (bracket appearances 1966-1994)",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1966-1994.",
+  "evidence": "district miner logo: navy #002157 drawing on white; site theme --primary-color #001b64, secondary grey #6f7373. No independent colour-name source found."
+ },
+ {
+  "school": "Hellertown Lower Saucon",
+  "identified_as": "Hellertown-Lower Saucon (Joint) High School, Hellertown (predecessor of Saucon Valley High School)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "https://en.wikipedia.org/wiki/Saucon_Valley_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saucon_Valley_High_School",
+   "https://en.wikipedia.org/wiki/Saucon_Valley_School_District",
+   "https://www.svpanthers.org",
+   "search:https://sauconsource.com/2021/07/29/olden-days-1873-the-original-saucon-valley-panther"
+  ],
+  "era": "1953 jointure of Hellertown and Lower Saucon; became Saucon Valley (Panthers, red and black) - successor, not confirmed for this era",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 1961-1970.",
+  "evidence": "No source or image for the 1960s Hellertown-Lower Saucon colours/mascot found; successor Saucon Valley uses red (site theme #A60012) and black with a black panther. sauconsource.com local-history pages were not reachable from this session."
+ },
+ {
+  "school": "Slatington",
+  "identified_as": "Slatington High School, Slatington (renamed Northern Lehigh High School in 1981)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Slaters (1941-1968), Bulldogs (1968-1981)",
+  "confidence": "low",
+  "wikipedia": "https://en.wikipedia.org/wiki/Northern_Lehigh_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Lehigh_High_School",
+   "https://en.wikipedia.org/wiki/Northern_Lehigh_School_District",
+   "https://www.nlsd.org"
+  ],
+  "era": "renamed Northern Lehigh 1981 (navy and white, Bulldogs)",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1960-1981.",
+  "evidence": "Wikipedia Northern Lehigh 'Former school mascots': early-1930s 'Blue and White Warriors', 1939-41 'Blue and White Raiders', 1941-68 Slaters, 1968-81 Bulldogs; alma mater 'dear old white and blue'. Colours inferred, no period image, so no hex."
+ },
+ {
+  "school": "East Stroudsburg North",
+  "identified_as": "East Stroudsburg High School North, Dingmans Ferry",
+  "colors": [
+   {
+    "name": "Carolina/Columbia Blue",
+    "hex": "#8BB8E8",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#1F222A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Timberwolves",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/East_Stroudsburg_High_School_North",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Stroudsburg_High_School_North",
+   "https://north.esasd.net",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1707898114/esasdnet/eh05epkjafdioftpieyq/EastStroudsburgAreaSchoolDistrict.png",
+   "https://www.maxpreps.com/pa/dingmans-ferry/east-stroudsburg-north-timberwolves/"
+  ],
+  "era": "current (opened 2000-01)",
+  "notes": "District 11; region NE, AAA most recently, in PIAA brackets 2001-2026.",
+  "evidence": "North HS site theme --primary-color #8bb8e8 (light blue); district logo 'N' light blue #A0BBD8; MaxPreps 'N' + wolf logo bright blue #027DFB with black #1F222A outline; Wikipedia blue, silver, black; MaxPreps Carolina Blue/Silver/Black. Exact blue varies by source."
+ },
+ {
+  "school": "Shenandoah Valley",
+  "identified_as": "Shenandoah Valley Junior/Senior High School, Shenandoah",
+  "colors": [
+   {
+    "name": "Columbia Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Shenandoah_Valley_Junior_Senior_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shenandoah_Valley_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Shenandoah_Valley_School_District",
+   "http://www.svbluedevils.org"
+  ],
+  "era": "current school (bracket appearances 1972-1982)",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1972-1982.",
+  "evidence": "Wikipedia infobox Columbia Blue and White, Blue Devils. District site svbluedevils.org unreachable and MaxPreps blocked, so no logo looked at and no hex."
+ },
+ {
+  "school": "Bishop Hafey",
+  "identified_as": "Bishop Hafey High School, Hazleton (Catholic; closed 2007)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Bishop_Hafey_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Hafey_High_School",
+   "search:https://www.maxpreps.com/pa/hazelton/bishop-hafey-vikings/football/"
+  ],
+  "era": "closed June 2007; consolidated into Holy Redeemer HS, Wilkes-Barre (not its colours)",
+  "notes": "District 11; region SE, AA most recently, in PIAA brackets 1974-1983.",
+  "evidence": "Wikipedia: colours gold and white, mascot Viking, newspaper 'Golden Gazette'. No logo or clean photo looked at, so no hex."
+ }
+]
