@@ -177,7 +177,7 @@
   OT.seasonDetail = (id) => { const f = SD.get(id); return f ? f() : ''; };
   /* seasons drawer */
   function seasonsDrawer(u) {
-    const S = seasonsInScope().map((s) => ({ S: s, t: u.kind === 'state' ? { pts: s.avail, titles: s.lineup.length, n: s.meds.length, rows: s.rows, score: null } : s.by[u.kind].get(u.id) })).filter((x) => x.t).reverse();
+    const S = seasonsInScope().map((s) => ({ S: s, t: u.kind === 'state' ? { pts: s.avail, titles: s.lineup.length, n: s.meds.length, rows: s.rows, score: null } : OT.byOf(s, u) })).filter((x) => x.t).reverse();
     if (!S.length) return empty('No seasons in scope.');
     const rows = S.map(({ S: s, t }) => {
       const champ = s.champion; const label = u.kind === 'school' ? (t.realRank ? ordinal(t.realRank) + ' as a team' : ordinal(t.rank) + ' by points') : u.kind === 'state' ? (champ ? esc(champ.id) + (s.real ? ` ${champ.score}` : s.year < OT.TEAMSCORES_FROM ? ' <small class="ash">by points · team scores not published before 1976</small>' : ' <small class="ash">by points</small>') : '') : (t.rows[0] ? esc(t.rows.filter((r) => r.place === 1).map((r) => r.name).slice(0, 2).join(', ')) || '–' : '–');

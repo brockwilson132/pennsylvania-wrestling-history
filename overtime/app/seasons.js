@@ -24,7 +24,7 @@
   const C = { sch: 0, y: 1, cls: 2, d: 3, reg: 4, exp: 5, expM: 6, cut: 7, cutM: 8, est: 9, str: 10, sp: 11, ti: 12, med: 13, tt: 14, pl: 15 };
   const MODES = { exp: [C.exp, C.expM, 'p5'], cut: [C.cut, C.cutM, 'p7'] };
   const medalPts = (r) => String(r[C.pl] || '').split('').reduce((t, p) => t + OT.PTS[+p - 1], 0);
-  const inPlace = (p) => !p || p.kind === 'state' ? () => true : p.kind === 'region' ? (r) => r[C.reg] === p.id : p.kind === 'district' ? (r) => r[C.d] === +p.id : (r) => r[C.sch] === SIDX.get(p.id);
+  const inPlace = (p) => !p || p.kind === 'state' ? () => true : p.kind === 'region' ? (r) => r[C.reg] === p.id : p.kind === 'district' ? (r) => r[C.d] === +p.id : ((o) => (r) => o.has(r[C.sch]))(new Set([p.id, ...OT.predOf(p.id)].map((x) => SIDX.get(x))));
   const clsOk = (r) => state.cls === 'ALL' || (r[C.cls] ? 'AA' : 'AAA') === state.cls;
   /* PIAA team-duals champions (on file from 1999): a trophy beside the year, not part of the number */
   let DCH = null; const dualChamp = (r) => { if (!DCH) { DCH = new Set(); (window.WR_DUALS || []).forEach((d) => { if (/championship match/i.test(d[2])) DCH.add((OT.canon ? OT.canon(d[3]) : d[3]) + '|' + d[0] + '|' + (d[1] === 'AA' ? 1 : 0)); }); }
@@ -63,7 +63,7 @@
     const more = L.length > 25 ? `<div class="bmore"><button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Top 25' : 'Show ' + Math.min(L.length, 200) + (L.length > 200 ? ' of ' + fmt(L.length) : '')}</button></div>` : '';
     const cr = state.cmpA && SD.rows.find((x) => slug(S[x[C.sch]]) + '/' + x[C.y] + (x[C.cls] ? 'b' : '') === state.cmpA);
     const pick = cr ? `<div class="zspb"><b class="zsy">${cr[C.y]}</b>${OT.stag(S[cr[C.sch]])}<span class="dqvs">vs</span><b class="zsy">?</b><button class="zspx" data-cmpa="" aria-label="Cancel">×</button></div>` : '';
-    return { sortSeg: seg, html: `${pick}<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school')).join('')}</div>${more}` };
+    return { sortSeg: seg, html: `${pick}<div class="sxl zsl0">${head}${L.slice(0, lim).map((r, i) => seasonRow(r, i + 1, mode, sort, parent && parent.kind === 'school' && S[r[C.sch]] === parent.id)).join('')}</div>${more}` };
   }
   /* an opened row: the lineup, weight by weight */
   /* finishes as small place pills: place, Q (entered, no place), dash (not there) */

@@ -17,10 +17,10 @@
       return section('Team duals champions', `<div class="card tw"><table class="dt"><thead><tr><th>Year</th><th>Class</th><th>Champion</th><th>Final</th><th>Runner-up</th></tr></thead><tbody>${rows}</tbody></table></div>${src}`);
     }
     if (u.kind !== 'school') return '';
-    const mine = ds.filter((d) => d.w === u.id || d.l === u.id); if (!mine.length) return '';
-    const by = d3.groups(mine, (d) => d.year + '|' + d.cls).map(([k, v]) => { const [year, cls] = k.split('|'); const won = v.filter((d) => d.w === u.id).length, lost = v.length - won; const fin = v.find((d) => /championship match/i.test(d.round)); const best = fin ? (fin.w === u.id ? 'Champion' : 'Runner-up') : v.some((d) => /semifinal/i.test(d.round) && /championship/i.test(d.round)) ? 'Semifinal' : v.some((d) => /quarterfinal/i.test(d.round) && /championship/i.test(d.round)) ? 'Quarterfinal' : '—'; return { year: +year, cls, won, lost, best, v }; }).sort((a, b) => b.year - a.year);
+    const mine = ds.filter((d) => OT.schIs(d.w, u.id) || OT.schIs(d.l, u.id)); if (!mine.length) return '';
+    const by = d3.groups(mine, (d) => d.year + '|' + d.cls).map(([k, v]) => { const [year, cls] = k.split('|'); const won = v.filter((d) => OT.schIs(d.w, u.id)).length, lost = v.length - won; const fin = v.find((d) => /championship match/i.test(d.round)); const best = fin ? (OT.schIs(fin.w, u.id) ? 'Champion' : 'Runner-up') : v.some((d) => /semifinal/i.test(d.round) && /championship/i.test(d.round)) ? 'Semifinal' : v.some((d) => /quarterfinal/i.test(d.round) && /championship/i.test(d.round)) ? 'Quarterfinal' : '—'; return { year: +year, cls, won, lost, best, v }; }).sort((a, b) => b.year - a.year);
     const tw = d3.sum(by, (b) => b.won), tl = d3.sum(by, (b) => b.lost), titles = by.filter((b) => b.best === 'Champion').length;
-    const rows = by.map((b) => `<tr><td class="num">${b.year}</td><td>${b.cls}</td><td class="num">${b.won}–${b.lost}</td><td>${b.best === 'Champion' ? '<b class="gold">Champion</b>' : b.best}</td><td><small class="ash">${b.v.map((d) => (d.w === u.id ? 'W ' + d.ws + '–' + d.ls + ' ' + esc(d.l) : 'L ' + d.ls + '–' + d.ws + ' ' + esc(d.w))).join(' · ')}</small></td></tr>`).join('');
+    const rows = by.map((b) => `<tr><td class="num">${b.year}</td><td>${b.cls}</td><td class="num">${b.won}–${b.lost}</td><td>${b.best === 'Champion' ? '<b class="gold">Champion</b>' : b.best}</td><td><small class="ash">${b.v.map((d) => (OT.schIs(d.w, u.id) ? 'W ' + d.ws + '–' + d.ls + ' ' + esc(d.l) : 'L ' + d.ls + '–' + d.ws + ' ' + esc(d.w))).join(' · ')}</small></td></tr>`).join('');
     return section('Team duals', `<div class="card tw"><div class="k" style="margin-bottom:8px">${by.length} appearances · ${tw}–${tl}${titles ? ' · ' + titles + ' title' + (titles > 1 ? 's' : '') : ''}</div><table class="dt"><thead><tr><th>Year</th><th>Class</th><th>Record</th><th>Finish</th><th>Matches</th></tr></thead><tbody>${rows}</tbody></table></div>${src}`);
   }
   /* the one level page: name, rating and score inline → performance chart → rankings → all-time team → seasons */
@@ -119,7 +119,7 @@
   const qseg = (k, items, cur) => `<div class="seg sm rkseg">${items.map(([v, l]) => `<button type="button" data-qset="${k}:${v}" aria-pressed="${v === cur}">${l}</button>`).join('')}</div>`;
   const inClsP = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
   /* is a medal or bracket row (state APP or district/regional LOWER) from this place? */
-  const rowIn = (u) => u.kind === 'state' ? () => true : u.kind === 'school' ? (r) => r.sch === u.id
+  const rowIn = (u) => u.kind === 'state' ? () => true : u.kind === 'school' ? (r) => OT.schIs(r.sch, u.id)
     : u.kind === 'district' ? (r) => (r.d || OT.schoolDistrict(r.sch)) === u.id : (r) => (r.lvl ? r.region : OT.regionOf(r)) === u.id;
   /* Brackets: every bracket on record for one season at one level, scoped to the place; the latest season and the
      state tournament first. A weight with this place's placers in it is marked. */
@@ -153,7 +153,7 @@
     const kinds = [['upsets', 'Upsets'], ['states', 'At states'], ['killers', 'Giant killers'], ['titles', 'Most titles']];
     const k = kinds.some(([x]) => x === qv('rc')) ? qv('rc') : 'upsets';
     const seg = `<div class="rkk">${qseg('rc', kinds, k)}</div>`;
-    const sch = (r) => r[8], inPlace = u.kind === 'state' ? () => true : u.kind === 'school' ? (r) => sch(r) === u.id
+    const sch = (r) => r[8], inPlace = u.kind === 'state' ? () => true : u.kind === 'school' ? (r) => OT.schIs(sch(r), u.id)
       : u.kind === 'district' ? (r) => OT.schoolDistrict(sch(r)) === u.id : (r) => OT.schoolRegion(sch(r)) === u.id;
     const A = UP.all.filter((r) => inClsP(r[1]) && OT.inWindow(r[0]) && inPlace(r));
     const wl = (name, s) => `<a href="#wrestler/${OT.slug(name)}--${OT.slug(s)}">${esc(name)}</a>`;
