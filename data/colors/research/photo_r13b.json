@@ -2,14 +2,30 @@
  {
   "school": "Rothrock",
   "identified_as": "Rothrock High School, McVeytown (Mifflin County)",
-  "colors": [],
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
   "mascot": null,
-  "confidence": "low",
+  "confidence": "medium",
   "wikipedia": null,
-  "sources": [],
+  "sources": [
+   "https://www.e-yearbook.com/Rothrock_High_School_Le_Livre_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1958/Page_1.html",
+   "search:https://www.e-yearbook.com/yearbooks/Rothrock_High_School_Le_Livre_Yearbook/1954/Page_40.html"
+  ],
   "era": "Closed; later part of Mifflin County School District.",
-  "notes": "No Wikipedia page found; identity assumed from District 6 and name. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "Colours from the school's own yearbooks (two years agree); mascot not found.",
+  "evidence": "Rothrock 'Le Livre' yearbooks (e-yearbook OCR): 1954 alma mater 'All hail! Alma Mater, Our own Gold and Blue'; 1958 cheerleaders 'Blue and Gold clad gals'. Page scans are black-and-white, so no hex."
  },
  {
   "school": "Ridley Township",
@@ -27,15 +43,17 @@
    }
   ],
   "mascot": "Green Raiders",
-  "confidence": "low",
+  "confidence": "medium",
   "wikipedia": "Ridley High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Ridley_High_School",
-   "https://en.wikipedia.org/wiki/Ridley_School_District"
+   "https://en.wikipedia.org/wiki/Ridley_School_District",
+   "https://www.e-yearbook.com/yearbooks/Ridley_Township_High_School_Archive_Yearbook/1954/Page_32.html",
+   "https://www.e-yearbook.com/yearbooks/Ridley_Township_High_School_Archive_Yearbook/1954/Page_33.html"
   ],
-  "era": "Predecessor of Ridley High School (Ridley School District); colours given are the successor's.",
-  "notes": "Inferred from successor Ridley HS (green and white, infobox hex #0B3B0B not used because unverified for the 1960s school).",
-  "evidence": null
+  "era": "Ridley Township HS (building finished 1934) is the direct predecessor of Ridley High School; the 'Green Raiders' name dates back at least to 1954.",
+  "notes": "Green confirmed by the school's own 1954 nickname; white inferred from the continuing Ridley colours.",
+  "evidence": "1954 Ridley Township HS yearbook (e-yearbook OCR, pp.32-33) calls the football team the 'Green Raiders'; green and white continues at successor Ridley HS. No colour artwork from the old school seen, so no hex."
  },
  {
   "school": "West Philadelphia",
@@ -118,11 +136,12 @@
   "confidence": "low",
   "wikipedia": "Yough School District",
   "sources": [
-   "https://en.wikipedia.org/wiki/Yough_School_District"
+   "https://en.wikipedia.org/wiki/Yough_School_District",
+   "search:https://en.wikipedia.org/wiki/Yough_Senior_High_School"
   ],
   "era": "Likely a predecessor of Yough (Cougars; green and orange) \u2014 not verified.",
   "notes": "Identity uncertain (could also be Sewickley Twp. in Allegheny Co.). Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "evidence": "Web search found no page for a Sewickley Township High School; only Yough (Cougars, green and orange). No colours found."
  },
  {
   "school": "North Clarion",
@@ -257,7 +276,7 @@
   ],
   "era": "Predecessor of Elizabeth Forward (Warriors; red and black); 1936-40 colours unknown.",
   "notes": "No source for the 1930s school colours. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "evidence": "Not searched further in this pass (search tools limited); no colours found."
  },
  {
   "school": "Wyoming Seminary",
@@ -290,59 +309,90 @@
  },
  {
   "school": "Lake-Noxen",
-  "identified_as": "Lake-Noxen High School, Luzerne County",
-  "colors": [],
+  "identified_as": "Lake-Noxen Joint High School, Harveys Lake (Luzerne County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
   "mascot": null,
   "confidence": "low",
   "wikipedia": "Lake-Lehman School District",
   "sources": [
-   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District"
+   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District",
+   "https://www.e-yearbook.com/Lake_Noxen_Joint_High_School_Chieftain_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Lake_Noxen_Joint_High_School_Chieftain_Yearbook/1954/Page_1.html",
+   "search:https://www.e-yearbook.com/yearbooks/Lake_Noxen_Joint_High_School_Chieftain_Yearbook/1956/Page_1.html"
   ],
   "era": "Predecessor of Lake-Lehman (formed by later merger).",
-  "notes": "No colours found. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "Blue and white is Noxen High's colour per its alma mater; adopted by Lake-Noxen only by inference. Yearbook name 'Chieftain' hints at the nickname (unconfirmed).",
+  "evidence": "Lake Noxen Joint HS 'Chieftain' yearbook 1954 (e-yearbook OCR) prints both predecessor alma maters; the Noxen High one says 'Flag we love blue and white'. No statement of the joint school's own colours found in the 1954/56/57 books."
  },
  {
   "school": "Captain Jack",
-  "identified_as": "Captain Jack High School, Mount Union area (Huntingdon Co.)",
+  "identified_as": "Captain Jack Joint High School, Mount Union (Huntingdon Co.)",
   "colors": [],
   "mascot": null,
   "confidence": "low",
   "wikipedia": "Mount Union Area School District",
   "sources": [
-   "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District"
+   "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District",
+   "https://www.e-yearbook.com/Captain_Jack_Joint_High_School_Ilium_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Captain_Jack_Joint_High_School_Ilium_Yearbook/1955/Page_5.html"
   ],
   "era": "Probably a predecessor of Mount Union Area (Trojans; royal blue and Vegas gold) \u2014 not verified.",
-  "notes": "Identity unverified. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "Location confirmed as Mount Union; colours not found.",
+  "evidence": "e-yearbook lists 'Captain Jack Joint High School - Ilium Yearbook (Mount Union, PA)', 1955; OCR text gives no colours or nickname."
  },
  {
   "school": "Ralpho Township",
   "identified_as": "Ralpho Township High School, Elysburg",
-  "colors": [],
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
   "mascot": null,
-  "confidence": "low",
+  "confidence": "medium",
   "wikipedia": "Southern Columbia Area School District",
   "sources": [
-   "https://en.wikipedia.org/wiki/Southern_Columbia_Area_School_District"
+   "https://en.wikipedia.org/wiki/Southern_Columbia_Area_School_District",
+   "https://www.e-yearbook.com/Ralpho_Township_High_School_Blue_Gold_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Ralpho_Township_High_School_Blue_Gold_Yearbook/1951/Page_1.html"
   ],
   "era": "Ralpho Township is now served by Southern Columbia Area (Tigers; black and gold).",
-  "notes": "No colours found for the 1950s school. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "notes": "Not the successor Southern Columbia's black and gold.",
+  "evidence": "Ralpho Township HS 1951 yearbook is titled 'Blue and Gold' and its alma mater (e-yearbook OCR) ends 'To you our Alma Mater, Good old Gold and Blue'. Scans are black-and-white."
  },
  {
   "school": "Mahanoy Joint",
-  "identified_as": "Mahanoy Joint High School, Mahanoy City area",
+  "identified_as": "Mahanoy Joint High School, Herndon/Dalmatia (Northumberland County)",
   "colors": [],
   "mascot": null,
   "confidence": "low",
   "wikipedia": "Mahanoy Area School District",
   "sources": [
-   "https://en.wikipedia.org/wiki/Mahanoy_Area_School_District"
+   "https://en.wikipedia.org/wiki/Mahanoy_Area_School_District",
+   "https://www.lykensvalley.org/?p=31962",
+   "https://www.lykensvalley.org/wp-content/uploads/2020/04/1963-088a.jpg"
   ],
-  "era": "Probably a predecessor of Mahanoy Area (Golden Bears; black and gold) \u2014 not verified.",
-  "notes": "No colours found for the 1959-66 school. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "era": "Herndon-area joint school (yearbook 'The Bruin'); later part of Line Mountain School District, not Mahanoy Area.",
+  "notes": "First pass identity (Mahanoy City area) was wrong. Nickname probably Bruins (from yearbook title, unconfirmed). Successor identification (Line Mountain) is from geography, not a source read.",
+  "evidence": "Lykens Valley history site: 1962 football team photo captioned 'Mahanoy Joint High School, Herndon (Dalmatia), Northumberland County', from the 1963 yearbook 'The Bruin'. No colours stated; photo is black-and-white."
  },
  {
   "school": "Steelton Highspire",
@@ -468,25 +518,28 @@
   "confidence": "low",
   "wikipedia": "West Mifflin Area High School",
   "sources": [
-   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School"
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "search:https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School"
   ],
   "era": "Opened 1960; North and South later consolidated into West Mifflin Area High School (Titans; blue and gold).",
   "notes": "No colours found for North specifically. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
-  "evidence": null
+  "evidence": "Web search found only the opening date (1960) and the successor's Titans/blue-and-gold; no North colours. e-yearbook has only South's 'Sohian' and the later Titan books."
  },
  {
   "school": "Stowe Township",
   "identified_as": "Stowe Township High School, Stowe Township (Allegheny Co.)",
   "colors": [],
-  "mascot": null,
+  "mascot": "Stallions",
   "confidence": "low",
   "wikipedia": "Sto-Rox High School",
   "sources": [
    "https://en.wikipedia.org/wiki/Sto-Rox_High_School",
-   "https://en.wikipedia.org/wiki/Sto-Rox_School_District"
+   "https://en.wikipedia.org/wiki/Sto-Rox_School_District",
+   "https://steelcityblitz.com/?p=35050",
+   "https://archive.triblive.com/news/high-school-notebook-sto-rox-celebrates-50-years-of-football"
   ],
   "era": "Merged with McKees Rocks in 1966-67 to form Sto-Rox (Vikings; green and white).",
   "notes": "No colours found for the 1930s school.",
-  "evidence": null
+  "evidence": "Steel City Blitz Sto-Rox history: 'The Stowe Stallions competed in WPIAL football from 1928-1965' (1937 WPIAL Class A champions). No colours found."
  }
 ]
