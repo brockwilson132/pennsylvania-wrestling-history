@@ -239,7 +239,8 @@ bySS.forEach((rows, k) => {
   const row = [S(sch), year, c, d, reg, 0, pts('state') + regFill, pts('regional'), pts('district'),
     st.filter((a) => a.place === 1).length, st.filter((a) => a.place >= 2 && a.place <= 4).length, st.filter((a) => a.place >= 5).length, st.filter((a) => !a.place).length,
     lv('regional').filter((a) => a.place === 1).length, lv('district').filter((a) => a.place === 1).length, TEAMWIN.has(year + '|' + c + '|' + sch) ? 1 : 0, covered ? 1 : 0,
-    topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length];
+    topW ? N(topW.name) : -1, topW ? topW.shown : 0, covered ? talent : 0, lineup.filter((v) => v != null).length, weights.length,
+    lv('regional').filter((a) => a.place >= 1 && a.place <= 8).length, lv('district').filter((a) => a.place >= 1 && a.place <= 8).length];
   /* the lineup as far as regionals show it (regional and state entrants): all we can see where the district field is not on file */
   const bestR = new Map(); per.forEach((p) => { if (p.real == null || (p.R < 0 && p.S < 0)) return; const b = bestR.get(p.std); if (!b || p.real > b.real) bestR.set(p.std, p); });
   /* the lineup by the season's own weights (not weight brackets): [weight, his rating, his rating if he reached regionals] */
@@ -480,7 +481,7 @@ console.log('district-seasons', ds.length, 'with Strength', ds.filter((x) => x[3
 /* ---- output ----
    ss  [schoolIdx, year, cls, district, region, strength, statePts, regPts, distPts, stateTitles, podium2to4,
         placers5to8, stateQualsNoPlace, regTitles, distTitles, teamTitle, fullFieldOnFile, bestNameIdx, bestRating,
-        talent, weightsFilled, weightsContested]   strength 0 = none (field not on file); talent counts only when on file
+        talent, weightsFilled, weightsContested, regMedals, distMedals]   (medals = places 1-8; district leaves out sections)   strength 0 = none (field not on file); talent counts only when on file
    ds / rs  [unit, year, cls, strength, talentPerSchool, schools, schoolsWrestling]  (0 = not on file for every member school;
             schoolsWrestling counts every school between its first and last season on file, for Score per school)
    span     [firstSeason, lastSeason] per school index, for Score per season

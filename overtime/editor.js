@@ -6,7 +6,8 @@
 'use strict';
 (() => {
   const REPO = 'brockwilson132/pennsylvania-wrestling-history', BRANCH = 'rebuild', PATH = 'overtime/schoolcolors.js';
-  const API = `https://api.github.com/repos/${REPO}/contents/${PATH}`;
+  const NPATH = 'data/school_notes.json';   // Brock's notes on data issues, one per school, for a thread to research
+  const API = (p = PATH) => `https://api.github.com/repos/${REPO}/contents/${p}`;
   const K_TOKEN = 'ot-colors-token', K_DRAFT = 'ot-colors-draft';
   const T = window.OTTags, root = document.getElementById('ed');
   const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -18,14 +19,26 @@
   /* every school in the archive, with the district it wrestled in most recently */
   const UD = window.WR_UNITS || { schools: [], ss: [] };
   const DIST = new Map(); (UD.ss || []).forEach((r) => { const s = UD.schools[r[0]]; const o = DIST.get(s); if (r[3] && (!o || r[1] >= o[0])) DIST.set(s, [r[1], r[3]]); });
+  /* medals per school over every season and class, one count per level: [district, regional, state] (places 1-8) */
+  const MED = new Map(); (UD.ss || []).forEach((r) => { const s = UD.schools[r[0]]; const m = MED.get(s) || MED.set(s, [0, 0, 0]).get(s); m[0] += r[23] || 0; m[1] += r[22] || 0; m[2] += r[9] + r[10] + r[11]; });
+  /* the seasons a school shows up in any bracket (district, section, regional or state), as ranges: 1972–1988 · 2001–2025 */
+  const YRS = new Map(); (UD.ss || []).forEach((r) => { const s = UD.schools[r[0]]; (YRS.get(s) || YRS.set(s, new Set()).get(s)).add(r[1]); });
+  const RANGE = new Map();
+  const rangeOf = (s) => { if (RANGE.has(s)) return RANGE.get(s); const ys = [...(YRS.get(s) || [])].sort((a, b) => a - b), out = [];
+    ys.forEach((y) => { const L = out[out.length - 1]; if (L && y === L[1] + 1) L[1] = y; else out.push([y, y]); });
+    const t = out.map(([a, b]) => (a === b ? String(a) : a + '–' + b)).join(' · '); RANGE.set(s, t); return t; };
+  const medOf = (s, i) => (MED.get(s) || [0, 0, 0])[i];
+  const SORTS = { D: 0, R: 1, S: 2 };
 
   /* ---- state ---- */
   let base = norm(clone(window.OT_COLORS)), doc = clone(base);
   const draft = (() => { try { return JSON.parse(ls.get(K_DRAFT) || 'null'); } catch (e) { return null; } })();
   if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc); }
-  const ui = { sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
+  const nnorm = (o) => (o && typeof o === 'object' ? o : {});
+  let nBase = nnorm(draft && draft.nBase), notes = nnorm(clone((draft && draft.notes) || nBase));
+  const ui = { sort: 'az', note: '', sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
   const undo = [];
-  const keep = () => ls.set(K_DRAFT, changes() ? J({ base, doc }) : null);
+  const keep = () => ls.set(K_DRAFT, changes() ? J({ base, doc, nBase, notes }) : null);
   const edit = (fn) => { undo.push(J({ doc, sel: ui.sel })); if (undo.length > 100) undo.shift(); fn(); ui.save = ''; ui.err = ''; keep(); draw(); };
 
   /* what changed since the file was loaded: sets, schools and swatches, key by key */
@@ -34,7 +47,9 @@
     ['sets', 'schools'].forEach((k) => { new Set([...Object.keys(a[k]), ...Object.keys(b[k])]).forEach((x) => { if (J(a[k][x]) !== J(b[k][x])) out[k].push(x); }); });
     return out;
   }
-  const changes = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.swAdd.length + d.swDel.length; };
+  const ndiff = (a, b) => [...new Set([...Object.keys(a), ...Object.keys(b)])].filter((k) => J(a[k]) !== J(b[k]));
+  const changes = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.swAdd.length + d.swDel.length + ndiff(nBase, notes).length; };
+  const colourChanges = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.swAdd.length + d.swDel.length; };
   /* lay this browser's changes over the latest file on GitHub (another save may have landed since this page loaded) */
   function merge(remote) {
     const m = norm(clone(remote)), d = diff(base, doc);
@@ -54,12 +69,27 @@
   const token = () => ls.get(K_TOKEN) || '';
   const b64d = (s) => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, '')), (c) => c.charCodeAt(0)));
   const b64e = (s) => { const b = new TextEncoder().encode(s); let t = ''; b.forEach((x) => { t += String.fromCharCode(x); }); return btoa(t); };
-  async function gh(method, body) {
-    const r = await fetch(method === 'GET' ? `${API}?ref=${BRANCH}&t=${Date.now()}` : API, { method, cache: 'no-store',
+  async function gh(method, body, p = PATH) {
+    const r = await fetch(method === 'GET' ? `${API(p)}?ref=${BRANCH}&t=${Date.now()}` : API(p), { method, cache: 'no-store',
       headers: { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...(body ? { 'Content-Type': 'application/json' } : {}) },
       body: body ? J(body) : undefined });
     if (!r.ok) { const e = new Error(r.status === 401 ? 'Token not accepted (401)' : r.status === 403 || r.status === 404 ? `Token cannot write to the repo (${r.status})` : r.status === 409 ? 'conflict' : 'GitHub ' + r.status); e.status = r.status; throw e; }
     return r.json();
+  }
+  /* the notes file as it is on GitHub now (none yet: empty) */
+  const latestNotes = async () => { try { const j = await gh('GET', null, NPATH); const txt = b64d(j.content); return { sha: j.sha, txt, notes: nnorm(JSON.parse(txt)) }; }
+    catch (e) { if (e.status === 404) return { sha: null, txt: '', notes: {} }; throw e; } };
+  /* one school per line, in name order, so a thread can read it and every edit is a one-line diff */
+  const nserialize = (o) => '{\n' + Object.keys(o).sort((a, b) => a.localeCompare(b)).map((k) => J(k) + ': ' + J(o[k])).join(',\n') + '\n}\n';
+  const nmerge = (remote) => { const m = clone(remote); ndiff(nBase, notes).forEach((k) => { if (notes[k]) m[k] = notes[k]; else delete m[k]; }); return m; };
+  async function saveNotes() {
+    const ks = ndiff(nBase, notes); if (!ks.length) return;
+    for (let i = 0; i < 3; i++) {
+      const L = await latestNotes(), m = nmerge(L.notes), txt = nserialize(m);
+      try { if (txt !== L.txt) await gh('PUT', { message: 'School notes: ' + ks.slice(0, 3).join(', ') + (ks.length > 3 ? ` +${ks.length - 3}` : ''), content: b64e(txt), branch: BRANCH, ...(L.sha ? { sha: L.sha } : {}) }, NPATH);
+        nBase = m; notes = clone(m); return; } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    throw new Error('GitHub kept changing under the save; try again');
   }
   const latest = async () => { const j = await gh('GET'); const txt = b64d(j.content); return { sha: j.sha, txt, doc: norm(T.parse(txt)) }; };
   function message(d) {
@@ -71,6 +101,8 @@
     if (!token()) { ui.tok = true; draw(); return; }
     ui.save = 'busy'; ui.err = ''; draw();
     try {
+      await saveNotes(); keep();
+      if (!colourChanges()) { ui.save = 'ok'; draw(); setTimeout(() => { if (ui.save === 'ok') { ui.save = ''; draw(); } }, 4000); return; }
       for (let i = 0; i < 3; i++) {
         const L = await latest(), m = dedupe(merge(L.doc)), txt = T.serialize(m);
         try {
@@ -85,6 +117,8 @@
   /* on open, start from the latest file on GitHub rather than the published copy (a deploy takes a minute or two) */
   async function refresh() {
     if (!token()) return;
+    try { const N = await latestNotes(); if (J(N.notes) !== J(nBase)) { const m = ndiff(nBase, notes).length ? nmerge(N.notes) : N.notes; nBase = N.notes; notes = clone(m); keep(); draw(); } }
+    catch (e) { ui.err = e.message; draw(); }
     try { const L = await latest(); const had = changes(); const m = had ? merge(L.doc) : L.doc;
       if (J(L.doc) !== J(base)) { base = L.doc; doc = norm(m); if (ui.sel && !doc.sets[ui.sel]) ui.sel = Object.keys(doc.sets)[0] || null; keep(); draw(); } }
     catch (e) { ui.err = e.message; draw(); }
@@ -117,9 +151,16 @@
     trash: '<path d="M5 7 H19 M10 7 V4.5 H14 V7 M7 7 L8 20 H16 L17 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     copy: '<rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15.5 V6 A2 2 0 0 1 7 4 H15.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
     pick: '<path d="M14.5 5.5 L18.5 9.5 M16.5 3.5 A2.1 2.1 0 0 1 20.5 7.5 L17.5 10.5 L13.5 6.5 Z M14.8 9.2 L6.5 17.5 L5 21 L8.5 19.5 L16.8 11.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
+    note: '<path d="M5 4 H15 L19 8 V20 H5 Z M15 4 V8 H19 M8 12 H16 M8 16 H13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
+    noted: '<path d="M5 4 H15 L19 8 V20 H5 Z" fill="currentColor"/><path d="M8 12 H16 M8 16 H13" stroke="#0B0D10" stroke-width="1.9" stroke-linecap="round"/>',
     search: '<circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16 L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     warn: '<path d="M12 3 L22 20 H2 Z" fill="currentColor" opacity=".18"/><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9 V14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/>',
   };
+  /* the app's level icons (components.js NAVI): the state outline, its regions, its districts (icongeo.js) */
+  const IG = window.OT_ICONGEO || { outline: '', d: {}, r: {} };
+  const geo = (k) => { const line = `<path d="${IG.outline}" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>`;
+    const parts = (sh, w) => Object.values(sh).map((p) => `<path d="${p}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-opacity=".85" stroke-linejoin="round"/>`).join('');
+    return `<svg viewBox="0 0 26 26" aria-hidden="true">${k === 'district' ? parts(IG.d, 0.6) : k === 'region' ? parts(IG.r, 0.9) : ''}${line}</svg>`; };
   const svg = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${I[k]}</svg>`;
 
   /* ---- drawing ---- */
@@ -129,8 +170,9 @@
     return all.filter((s) => { const k = s.toLowerCase(); if (t.length && !t.every((x) => k.includes(x))) return false;
       if (ui.f === 'set') return doc.schools[s] === ui.sel;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
+      if (ui.f === 'notes') return !!notes[s];
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; })
-      .sort((a, b) => a.localeCompare(b));
+      .sort((a, b) => (ui.sort in SORTS ? medOf(b, SORTS[ui.sort]) - medOf(a, SORTS[ui.sort]) : 0) || a.localeCompare(b));
   }
   function brush() {
     const p = setPaint(ui.sel), name = ui.focus && doc.schools[ui.focus] === ui.sel ? ui.focus : (Object.keys(doc.schools).find((s) => doc.schools[s] === ui.sel) || 'School');
@@ -155,11 +197,13 @@
   function list() {
     const ss = schoolsShown(), sp = setPaint(ui.sel);
     const chips = [['all', 'All'], ['set', `<span class="ce-mini" style="--f:${sp.fill};--a:${sp.acc}"><b><i></i></b>${ui.sel ? uses(ui.sel) : 0}</span>`], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
+      .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
-    return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label></div>
+    const sorts = [['az', '<b class="ce-az">A–Z</b>'], ['D', geo('district')], ['R', geo('region')], ['S', geo('state')]];
+    return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label><div class="ce-so" role="group" aria-label="Sort">${sorts.map(([k, l]) => `<button data-sort="${k}" aria-pressed="${ui.sort === k}" aria-label="${{ az: 'Name', D: 'District medals', R: 'Regional medals', S: 'State medals' }[k]}">${l}</button>`).join('')}</div></div>
       <div class="ce-ch" role="group" aria-label="Show">${chips.map(([k, l]) => `<button data-f="${k}" aria-pressed="${ui.f === k}">${l}</button>`).join('')}</div>
       <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), use = ui.sel && doc.schools[s] === ui.sel, d = DIST.get(s);
-        return `<li class="ce-sr${use ? ' ce-use' : ''}${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-ck">${svg('ok')}</span><span class="ce-nm">${pill(s, p)}</span><span class="ce-dn">${d ? d[1] : ''}</span><button class="ce-pk${p.none && !doc.schools[s] ? ' ce-no' : ''}" data-pick aria-label="Use this school's colours">${svg('pick')}</button></li>`; }).join('')}</ul>`;
+        return `<li class="ce-sr${use ? ' ce-use' : ''}${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-ck">${svg('ok')}</span><span class="ce-nm">${pill(s, p)}<small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button><button class="ce-pk${p.none && !doc.schools[s] ? ' ce-no' : ''}" data-pick aria-label="Use this school's colours">${svg('pick')}</button></li>`; }).join('')}</ul>`;
   }
   function draw() {
     const n = changes(), focusQ = document.activeElement && document.activeElement.id === 'q', caret = focusQ ? document.activeElement.selectionStart : 0;
@@ -173,10 +217,12 @@
         <button class="ce-ib${ui.save ? " ce-" + ui.save : ""}" data-save aria-label="Save"${n || ui.save ? '' : ' disabled'}>${svg(sv)}${n && ui.save !== 'busy' ? `<span class="ce-bd">${n}</span>` : ''}</button>
       </div>${brush()}</div>
       ${ui.err ? `<div class="ce-msg" role="alert">${esc(ui.err)}</div>` : ''}<div class="ce-lw">${list()}</div>
+      ${ui.note ? `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-nt"><div class="ce-nth">${pill(ui.note, T.paint(ui.note, doc))}</div><textarea id="nt" rows="4" spellcheck="true">${esc(notes[ui.note] ? notes[ui.note].note : '')}</textarea><div class="ce-ntb">${notes[ui.note] ? `<button class="ce-ib" data-ntdel aria-label="Delete note">${svg('trash')}</button>` : ''}<span class="ce-sp"></span><button class="ce-ib" data-ntok aria-label="Keep note">${svg('ok')}</button></div></div></div>` : ''}
       ${ui.tok ? `<div class="ce-tk" data-tkbg><div class="ce-tkc"><input id="tok" type="password" placeholder="github_pat_…" value="${esc(token())}" autocomplete="off" spellcheck="false"><button class="ce-ib" data-tkok aria-label="Keep token">${svg('ok')}</button>${token() ? `<button class="ce-ib" data-tkdel aria-label="Forget token">${svg('trash')}</button>` : ''}</div></div>` : ''}`;
     window.scrollTo(0, y); const s2 = root.querySelector('.ce-ss'); if (s2) s2.scrollLeft = lsy;
     if (focusQ) { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(caret, caret); }
     if (ui.tok) document.getElementById('tok').focus();
+    if (ui.note) { const t = document.getElementById('nt'); t.focus(); t.setSelectionRange(t.value.length, t.value.length); }
   }
 
   /* ---- actions ---- */
@@ -206,6 +252,11 @@
     else if (d.sdel != null) { if (!ui.armDel) { ui.armDel = true; draw(); return; }
       edit(() => { const id = ui.sel; delete doc.sets[id]; Object.keys(doc.schools).forEach((k) => { if (doc.schools[k] === id) delete doc.schools[k]; }); ui.sel = Object.keys(doc.sets)[0] || null; ui.armDel = false; }); }
     else if (d.f) { ui.f = d.f; draw(); }
+    else if (d.sort) { ui.sort = d.sort; draw(); }
+    else if (d.note != null) { e.stopPropagation(); ui.note = t.closest('[data-s]').dataset.s; draw(); }
+    else if (d.ntok != null) { const v = document.getElementById('nt').value.trim(), k = ui.note; ui.note = '';
+      if (v) { if (!notes[k] || notes[k].note !== v) notes[k] = { note: v, at: new Date().toISOString().slice(0, 10) }; } else delete notes[k]; ui.save = ''; keep(); draw(); }
+    else if (d.ntdel != null) { delete notes[ui.note]; ui.note = ''; ui.save = ''; keep(); draw(); }
     else if (d.pick != null) { e.stopPropagation(); pickSchool(t.closest('[data-s]').dataset.s); }
     else if (d.s) tapSchool(d.s);
     else if (d.fix != null) { const c = doc.sets[ui.sel], ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
@@ -216,7 +267,7 @@
     else if (d.tok != null) { ui.tok = true; draw(); }
     else if (d.tkok != null) { ls.set(K_TOKEN, document.getElementById('tok').value.trim() || null); ui.tok = false; ui.err = ''; draw(); refresh(); }
     else if (d.tkdel != null) { ls.set(K_TOKEN, null); ui.tok = false; draw(); }
-    else if (d.tkbg != null && e.target === t) { ui.tok = false; draw(); }
+    else if (d.tkbg != null && e.target === t) { ui.tok = false; ui.note = ''; draw(); }
   });
   root.addEventListener('input', (e) => {
     if (e.target.id === 'q') { ui.q = e.target.value; const lw = root.querySelector('.ce-lw'); const pos = e.target.selectionStart; lw.innerHTML = list(); const q = document.getElementById('q'); q.focus(); q.setSelectionRange(pos, pos); }

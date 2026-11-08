@@ -56,8 +56,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .ce-sr{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 4px 0 8px;border-radius:12px;cursor:pointer}
 .ce-sr:hover{background:var(--slate)}.ce-sr.ce-foc{background:var(--slate2)}
 .ce-sr .ce-ck{flex:none;width:20px;height:20px;color:var(--chalk);opacity:0}.ce-sr.ce-use .ce-ck{opacity:1}
-.ce-sr .ce-nm{flex:1;min-width:0;display:flex}.ce-sr .stag{font-size:13.5px;line-height:20px}
+.ce-sr .ce-nm{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:5px 0}.ce-sr .ce-nm small{font:700 11.5px/1.2 var(--cond);letter-spacing:.03em;color:var(--ash2);font-variant-numeric:tabular-nums}.ce-sr .stag{font-size:13.5px;line-height:20px}
 .ce-sr .ce-dn{flex:none;width:28px;text-align:right;font:700 13px var(--cond);color:var(--ash2)}
+.ce-sr .ce-nb{flex:none;width:36px;height:40px;display:grid;place-items:center;color:var(--ash2);border-radius:10px}.ce-sr .ce-nb svg{width:19px;height:19px}.ce-sr .ce-nb.ce-has{color:var(--chalk)}.ce-sr .ce-nb:hover{color:var(--chalk);background:var(--line)}
+.ce-sr .ce-dn.ce-md{color:var(--chalk);font-weight:900}
+.ce-so{flex:none;display:flex;gap:4px}.ce-so button{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--slate);border:1px solid var(--line2);color:var(--ash)}.ce-so svg{width:24px;height:24px}.ce-so .ce-az{font:700 13px var(--cond);letter-spacing:.02em}.ce-so button[aria-pressed=true]{color:var(--mat);background:var(--chalk);border-color:var(--chalk)}
+.ce-ch .ce-mini svg{width:16px;height:16px}
+.ce-nt{flex-direction:column;align-items:stretch}.ce-nth{display:flex}.ce-nt textarea{width:100%;min-height:110px;border-radius:12px;border:1px solid var(--line2);background:var(--mat);color:var(--chalk);font:16px/1.4 var(--body);padding:10px 12px;resize:vertical}.ce-ntb{display:flex;gap:8px}
 .ce-sr .ce-pk{flex:none;width:40px;height:40px;display:grid;place-items:center;color:var(--ash2);border-radius:10px}.ce-sr .ce-pk:hover{color:var(--chalk);background:var(--line)}.ce-sr .ce-pk svg{width:19px;height:19px}
 .ce-sr .ce-pk.ce-no{visibility:hidden}
 .ce-tk{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);display:grid;align-items:end}
@@ -79,6 +84,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 <div class="ed" id="ed"><div class="ld">…</div></div>
 <script src="badges.js"></script>
 <script src="units.js"></script>
+<script src="icongeo.js"></script>
 <script src="schoolcolors.js"></script>
 <script src="tags.js"></script>
 <script src="editor.js"></script>
