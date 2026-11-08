@@ -1,6 +1,6 @@
-transfers: 1896 name+school keys linked to the same wrestler at an earlier school
-identity linking: 535 of 154413 name keys merged into another (574 merge events)
-bouts 587568 (rated: 575074), brackets 46220, wrestlers with a grade-season 291698
+transfers: 1887 name+school keys linked to the same wrestler at an earlier school
+identity linking: 531 of 154402 name keys merged into another (569 merge events)
+bouts 587568 (rated: 575074), brackets 46220, wrestlers with a grade-season 291703
 forward rating parameters (tuned on 1980-2017 bouts, grade steps fitted): {'K': 56, 'rho': 0.8, 'grow': (118.3, 117.2, 123.5), 'init': (1500, 1500, 1500, 1500), 'marg': (1.5, 1.35, 1.2, 1.0), 'prov': 2}
 missed-season rule decay: held-out 2018-26 log loss 0.5484; bouts with a wrestler back after a missed season (n=1925) 0.5543
 missed-season rule hold: held-out 2018-26 log loss 0.5476; bouts with a wrestler back after a missed season (n=1925) 0.5433
@@ -9,12 +9,12 @@ missed-season rule chosen: hold
 forward rating log loss: tuning years 0.5696; held-out 2018-2026 0.5476 over 111973 bouts, accuracy 0.720 (coin flip 0.6931)
   ablations held-out: no margin factor 0.5613 / 0.709; no grade step 0.6067 / 0.664
 state bouts 2018-2026 with both regional seeds (n=8291): seed-only 0.6162, rating-only 0.5646, seed+rating 0.5569
-careers: 888 name+school keys split into several careers
+careers: 889 name+school keys split into several careers
 
 season-batch fit: 575074 bouts + 4912 placement-implied pairs (weight 0.3/(placers-1)) for brackets with fewer bouts than placers
-reached regionals: 79034 wrestler-seasons on file + 157 inferred from placements in 122 brackets whose regional is missing
+reached regionals: 79039 wrestler-seasons on file + 157 inferred from placements in 122 brackets whose regional is missing
 coverage: 278597 wrestler-seasons with their district bracket on file; district tournaments with a full field: 2884 of 2909
-district prior pass 1: largest residual 255 over 84 groups
+district prior pass 1: largest residual 254 over 84 groups
 district prior pass 2: largest residual 51 over 84 groups
 district prior pass 3: largest residual 19 over 84 groups
 district prior pass 4: largest residual 10 over 84 groups
@@ -27,7 +27,7 @@ district prior pass 10: largest residual 2 over 84 groups
 district prior pass 11: largest residual 2 over 84 groups
 district prior pass 12: largest residual 2 over 84 groups
 district prior pass 13: largest residual 2 over 84 groups
-district prior offsets (raw points added to the prior mean): AA/2/1 -178, AA/2/10 -46, AA/2/11 -5, AA/2/12 -137, AA/2/2 -66, AA/2/3 +22, AA/2/4 -16, AA/2/5 -44, AA/2/6 -38, AA/2/7 +213, AA/2/9 -40, AA/3/1 -129, AA/3/10 -31, AA/3/11 +23, AA/3/12 -155, AA/3/2 -90, AA/3/3 +9, AA/3/4 +4, AA/3/5 -20, AA/3/6 -18, AA/3/7 +72, AA/3/9 -1, AA/4/1 -98, AA/4/10 -16, AA/4/11 +17, AA/4/12 -150, AA/4/2 -104, AA/4/3 -16, AA/4/4 +9, AA/4/5 -6, AA/4/6 +14, AA/4/7 -24, AA/4/9 -3, AAA/2/1 -157, AAA/2/10 -53, AAA/2/11 -2, AAA/2/2 -137, AAA/2/3 -3, AAA/2/4 -11, AAA/2/5 -78, AAA/2/6 -35, AAA/2/7 +193, AAA/2/9 -21, AAA/3/1 -96, AAA/3/10 -49, AAA/3/11 +60, AAA/3/2 -96, AAA/3/3 +56, AAA/3/4 -2, AAA/3/6 -21, AAA/3/7 +140, AAA/3/8 -244, AAA/3/9 -53, AAA/4/1 +24, AAA/4/10 +48, AAA/4/11 +132, AAA/4/12 -101, AAA/4/2 +29, AAA/4/3 +64, AAA/4/4 +30, AAA/4/6 +93, AAA/4/7 +116, AAA/4/8 -193, AAA/4/9 +22, single/0/1 -53, single/0/10 -15, single/0/11 +28, single/0/2 +6, single/0/3 -90, single/0/4 +26, single/0/5 -59, single/0/6 +101, single/0/7 +80, single/1/1 -36, single/1/10 +3, single/1/11 +76, single/1/12 -302, single/1/2 -52, single/1/3 -36, single/1/4 -24, single/1/5 -66, single/1/6 +77, single/1/7 +36, single/1/9 -11
+district prior offsets (raw points added to the prior mean): AA/2/1 -178, AA/2/10 -46, AA/2/11 -5, AA/2/12 -137, AA/2/2 -66, AA/2/3 +22, AA/2/4 -16, AA/2/5 -44, AA/2/6 -38, AA/2/7 +213, AA/2/9 -40, AA/3/1 -128, AA/3/10 -31, AA/3/11 +23, AA/3/12 -155, AA/3/2 -90, AA/3/3 +10, AA/3/4 +4, AA/3/5 -20, AA/3/6 -18, AA/3/7 +72, AA/3/9 -1, AA/4/1 -98, AA/4/10 -16, AA/4/11 +17, AA/4/12 -150, AA/4/2 -104, AA/4/3 -16, AA/4/4 +9, AA/4/5 -6, AA/4/6 +14, AA/4/7 -24, AA/4/9 -3, AAA/2/1 -157, AAA/2/10 -53, AAA/2/11 -2, AAA/2/2 -137, AAA/2/3 -3, AAA/2/4 -11, AAA/2/5 -78, AAA/2/6 -35, AAA/2/7 +193, AAA/2/9 -21, AAA/3/1 -96, AAA/3/10 -49, AAA/3/11 +60, AAA/3/2 -95, AAA/3/3 +56, AAA/3/4 -2, AAA/3/6 -21, AAA/3/7 +140, AAA/3/8 -243, AAA/3/9 -53, AAA/4/1 +24, AAA/4/10 +47, AAA/4/11 +132, AAA/4/12 -101, AAA/4/2 +29, AAA/4/3 +63, AAA/4/4 +30, AAA/4/6 +93, AAA/4/7 +116, AAA/4/8 -194, AAA/4/9 +22, single/0/1 -53, single/0/10 -15, single/0/11 +28, single/0/2 +6, single/0/3 -90, single/0/4 +26, single/0/5 -59, single/0/6 +101, single/0/7 +80, single/1/1 -36, single/1/10 +2, single/1/11 +78, single/1/12 -300, single/1/2 -51, single/1/3 -35, single/1/4 -23, single/1/5 -68, single/1/6 +76, single/1/7 +36, single/1/9 -12
   first-round prior offset -200: log loss on hidden 1990-2017 regional + state bouts 0.4962
   first-round prior offset -300: log loss on hidden 1990-2017 regional + state bouts 0.4920
   first-round prior offset -400: log loss on hidden 1990-2017 regional + state bouts 0.4902
@@ -48,7 +48,7 @@ district prior refit 8 with first-round prior: largest residual 3
 district prior refit 9 with first-round prior: largest residual 3
 district prior refit 10 with first-round prior: largest residual 3
 district prior refit 11 with first-round prior: largest residual 3
-district prior refit 12 with first-round prior: largest residual 3
+district prior refit 12 with first-round prior: largest residual 2
 district prior refit 13 with first-round prior: largest residual 2
 district prior refit 14 with first-round prior: largest residual 2
 district prior refit 15 with first-round prior: largest residual 2
@@ -78,13 +78,13 @@ district prior refit 15 at prior sd scale 1.5: largest residual 2
   first-round prior offset -1000 at prior sd scale 1.5: log loss 0.5032
 first-round prior offset pinned at -500 (tuner pick -600)
 first-round prior offset at the final width: -500
-district prior refit 1 after the offset change: largest residual 20
-district prior refit 2 after the offset change: largest residual 9
+district prior refit 1 after the offset change: largest residual 19
+district prior refit 2 after the offset change: largest residual 10
 district prior refit 3 after the offset change: largest residual 5
 district prior refit 4 after the offset change: largest residual 3
 district prior refit 5 after the offset change: largest residual 3
 district prior refit 6 after the offset change: largest residual 2
-held-out 10% of 2018-2026 bouts (n=11127), fit without them: season-batch strength log loss 0.4047 accuracy 0.806; forward rating 0.5495
+held-out 10% of 2018-2026 bouts (n=11127), fit without them: season-batch strength log loss 0.4046 accuracy 0.806; forward rating 0.5495
   (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)
   prior pass: largest change from season-only estimates 852
   prior models by neighbour pattern (t-2 t-1 t+1 t+2 | graduated | freshman): n, slopes, slope sum, resid sd
@@ -101,16 +101,16 @@ held-out 10% of 2018-2026 bouts (n=11127), fit without them: season-batch streng
     xx.. g0 f0: n=1734, slopes 0.27 0.50, sum 0.78, sd 274
     ..x. g0 f1: n=1549, slopes 0.62, sum 0.62, sd 276
     x.x. g0 f0: n=1254, slopes 0.36 0.43, sum 0.79, sd 263
-    ...x g0 f0: n=902, slopes 0.46, sum 0.46, sd 286
+    ...x g0 f0: n=902, slopes 0.46, sum 0.46, sd 287
     ...x g0 f1: n=895, slopes 0.50, sum 0.50, sd 318
     .x.x g0 f0: n=766, slopes 0.49 0.30, sum 0.79, sd 255
     x... g0 f0: n=416, slopes 0.64, sum 0.64, sd 302
 prior sd (most common pattern, scaled): 274
-season level from returners (raw points, AAA): 1935:+0, 1938:+0, 1941:+0, 1944:+0, 1947:+0, 1950:+0, 1953:+0, 1956:+0, 1959:+0, 1962:+0, 1965:+0, 1968:+0, 1971:+0, 1974:+0, 1977:+83, 1980:+123, 1983:+156, 1986:+174, 1989:+225, 1992:+339, 1995:+369, 1998:+372, 2001:+350, 2004:+341, 2007:+495, 2010:+425, 2013:+366, 2016:+319, 2019:+259, 2022:+172, 2025:+71
-class gap, AA above AAA on the plain scale (points, from class changers): 1974:107, 1978:121, 1982:102, 1986:111, 1990:112, 1994:117, 1998:120, 2002:137, 2006:142, 2010:140, 2014:116, 2018:109, 2022:107, 2026:96
+season level from returners (raw points, AAA): 1935:+0, 1938:+0, 1941:+0, 1944:+0, 1947:+0, 1950:+0, 1953:+0, 1956:+0, 1959:+0, 1962:+0, 1965:+0, 1968:+0, 1971:+0, 1974:+0, 1977:+83, 1980:+122, 1983:+155, 1986:+173, 1989:+224, 1992:+338, 1995:+368, 1998:+370, 2001:+349, 2004:+339, 2007:+495, 2010:+426, 2013:+367, 2016:+319, 2019:+259, 2022:+172, 2025:+71
+class gap, AA above AAA on the plain scale (points, from class changers): 1974:107, 1978:121, 1982:102, 1986:111, 1990:112, 1994:117, 1998:120, 2002:137, 2006:142, 2010:140, 2014:116, 2018:110, 2022:107, 2026:96
 scale level: the top-16 group sits 115 above the average 1999-2026 state qualifier; shifted so that qualifier reads 1500
 
-scale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best per weight (rolling 11 seasons per class, returner-linked); raw anchor means 506-2196, sd 176-282; spread 192
+scale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best per weight (rolling 11 seasons per class, returner-linked); raw anchor means 506-2197, sd 176-282; spread 192
   district field strength 1980+: median 851 (p10 507, p90 1150)
   regional field strength 1980+: median 1304 (p10 1139, p90 1471)
   state    field strength 1980+: median 1693 (p10 1592, p90 1799)
@@ -118,14 +118,14 @@ scale: 1500 = average 1999-2026 state qualifier; seasons lined up on the 16 best
 state brackets (6+ rated, champion known, n=1532): champion rated #1 87.9%, top 2 96.5%; mean Spearman(rating, place) 0.791
 same-season bouts where the winner is rated below the loser: 5.0% of 575074
 
-state placement points 1980+ (n=20740): own season rating R2 0.6293
-  + best win: R2 0.6293 (gain +0.0000), coefficient -0.0001
+state placement points 1980+ (n=20740): own season rating R2 0.6292
+  + best win: R2 0.6292 (gain +0.0000), coefficient -0.0001
   + mean of opponents beaten: R2 0.6354 (gain +0.0061), coefficient -0.0031
-  + bad losses: R2 0.6309 (gain +0.0017), coefficient +0.6042
+  + bad losses: R2 0.6309 (gain +0.0017), coefficient +0.5999
   + field strength: R2 0.6887 (gain +0.0594), coefficient -0.0157
 next-season state points of returners (n=7515): rating + this season placement R2 0.3899
   + best win: R2 0.3952 (gain +0.0053), coefficient -0.00395
   + mean of opponents beaten: R2 0.3933 (gain +0.0035), coefficient -0.00284
-  + bad losses: R2 0.3901 (gain +0.0002), coefficient +0.23218
+  + bad losses: R2 0.3900 (gain +0.0002), coefficient +0.23207
   + field strength: R2 0.4011 (gain +0.0112), coefficient -0.00887
 RTG as of each round: 1150148 bout checkpoints, last checkpoint vs season RTG max gap 0.55 (should be ~0)
