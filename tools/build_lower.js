@@ -10,7 +10,7 @@
 const fs = require('fs'), path = require('path');
 global.window = {}; require('../site/badges.js');
 const SB = window.SchoolBadge;
-const SAME = { Allentown: 'William Allen', Allen: 'William Allen', 'Notre Dame-GP': 'Notre Dame-Green Pond', 'St. Pius X': 'Pius X (Roseto)', 'Pius X': 'Pius X (Roseto)', 'Juniata Joint': 'Juniata' };
+const SAME = { Allentown: 'William Allen', Allen: 'William Allen', 'Notre Dame-GP': 'Notre Dame-Green Pond', 'Pius X': 'Pius X (Roseto)', 'Juniata Joint': 'Juniata' };
 const canon = (s) => { const id = SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
 const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
 
@@ -63,7 +63,7 @@ const parts = { district: [], regional: [], section: [] }; // section medalists 
 /* a district or section tournament named D<n>... belongs to district n whoever the school is: a school-name lookup would send
    same-named schools (Northwestern D7/D10, Trinity D3/D7) and blank-school rows to the wrong district. Joint tournaments
    (D4-9, D5-6_Sub, ...), super-regionals and regionals name no single district, so their rows take the school's district. */
-const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt (3)' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: (r.level === 'district' || r.level === 'section') && /^D\d+(?:_|$)/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit) }; });
+const rows = E.map((r) => { const { unit, cls } = norm(r); let sch = canon(r.school); if (sch === 'Bishop McDevitt') { const ud = unitDistrict(unit); sch = ud === 3 || /^S[CE]$/.test(unit) ? 'Bishop McDevitt' : 'Bishop McDevitt (12)'; } const year = +r.year; return { ...r, unit, cls, sch, year, place: r.place ? +r.place : 0, d: (r.level === 'district' || r.level === 'section') && /^D\d+(?:_|$)/.test(unit) ? unitDistrict(unit) : distOf(sch, year, unit) }; });
 /* two schools with one name in one season (Trinity D3/D7, Liberty D4/D11): a regional row goes to the candidate district
    whose schools wrestle in this region that season, judged from the rows whose school name is not shared */
 { const amb = (r) => { const y = SDall.get(r.sch); return y && y.get(r.year) && y.get(r.year).size > 1 ? y.get(r.year) : null; };

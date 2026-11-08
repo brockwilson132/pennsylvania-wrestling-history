@@ -1,0 +1,655 @@
+[
+ {
+  "school": "Redbank Valley",
+  "identified_as": "Redbank Valley Junior/Senior High School, New Bethlehem",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A32028",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Redbank Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Redbank_Valley_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Redbank_Valley_School_District",
+   "https://redbankvalley.org/",
+   "https://redbankvalley.org/wp-content/uploads/2020/04/cropped-Redbank-Valley-New-Bethlehem-PA-192x192.jpg",
+   "https://redbankvalley.org/wp-content/uploads/2017/04/RedbankValleyLogo-LONG-SMALL.png"
+  ],
+  "era": null,
+  "notes": "HS and district pages agree. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district site icon: white 'RV' block letters on flat red #A32028; matches Wikipedia red and white"
+ },
+ {
+  "school": "Hazleton Area",
+  "identified_as": "Hazleton Area High School, Hazleton",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FA0001",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#808080",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Hazleton Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hazleton_Area_High_School",
+   "https://en.wikipedia.org/wiki/Hazleton_Area_School_District",
+   "https://www.hasdk12.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/26724/logo/29537/Hazleton_Area_School_District.png"
+  ],
+  "era": null,
+  "notes": "HS and district pages agree. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district logo: red #FA0001 'H' with grey/silver #808080 'A', white fill, black outline; site theme red #E60001"
+ },
+ {
+  "school": "Curwensville",
+  "identified_as": "Curwensville Area Junior/Senior High School, Curwensville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#1A1A1A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C8B86A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Tide",
+  "confidence": "high",
+  "wikipedia": "Curwensville Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Curwensville_Area_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Curwensville_Area_School_District",
+   "https://www.curwensville.org/en-US",
+   "https://cdn.schoolblocks.com/organizations/a9dcd021-992a-4dcc-9f63-075603378c17/top_nav_logo_4vmq62-curwensville-topleft-logo.png"
+  ],
+  "era": null,
+  "notes": "Gold hex from infobox color box; black given only as a name. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district top-nav logo: black 'GT' monogram and black text with muted gold #C8B86A 'Curwensville' wordmark (infobox gave #A98F52)"
+ },
+ {
+  "school": "Spring-Ford",
+  "identified_as": "Spring-Ford Area High School, Royersford",
+  "colors": [
+   {
+    "name": "Oxford Blue",
+    "hex": "#002147",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C5B358",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Spring-Ford Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Spring-Ford_Area_School_District",
+   "https://www.spring-ford.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1770321539/springford/xovck1mfegtmqkzdvblg/RowdyRam2026.jpg"
+  ],
+  "era": null,
+  "notes": "HS title redirects to district page; hexes from its infobox. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district site theme CSS: #002147 navy (x94) and #C5B358 vegas gold (x44); mascot photo shows navy/gold RAMS banner; matches infobox"
+ },
+ {
+  "school": "Penns Valley",
+  "identified_as": "Penns Valley Area High School, Spring Mills",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#102044",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Penns Valley Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penns_Valley_Area_High_School",
+   "https://en.wikipedia.org/wiki/Penns_Valley_Area_School_District",
+   "https://www.pennsvalley.org/",
+   "https://files.smartsites.parentsquare.com/11359/header_logo_img_b5pv65dvan9taedblah.png"
+  ],
+  "era": null,
+  "notes": "Colours from district page infobox, which cites MaxPreps; HS page lists none. Gray shown as a silver box. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district header logo: navy #102044 ram head and wordmark on white; site theme #00214D. Gray not seen in logo (name kept from first pass)"
+ },
+ {
+  "school": "Methacton",
+  "identified_as": "Methacton High School, Eagleville",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2B5235",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Methacton High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Methacton_High_School",
+   "https://www.methacton.org/",
+   "https://resources.finalsite.net/images/v1786556130/methactonorg/ry6ksdebr0ljtb3akl7t/MethactonHS_Initial.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "Methacton HS 'M' logo: dark green #2B5235 block M, white inner stroke, black outline"
+ },
+ {
+  "school": "Kane",
+  "identified_as": "Kane Area High School, Kane",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#3637A1",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolves",
+  "confidence": "medium",
+  "wikipedia": "Kane Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kane_Area_School_District",
+   "https://kane.rst7.rschooltoday.com/",
+   "https://assets-rst7.rschooltoday.com/rst7files/uploads/sites/343/2026/04/29185625/Kane-Logo.png",
+   "https://www.maxpreps.com/pa/kane/kane-wolves/"
+  ],
+  "era": null,
+  "notes": "No colours found on Wikipedia (district page names the Kane Wolves, no colours). Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district site logo (small JPEG-like): royal blue #3637A1 block 'K' with dark red (~#701820, thin, compressed) outline and white wolf; MaxPreps lists blue and red"
+ },
+ {
+  "school": "Manheim Township",
+  "identified_as": "Manheim Township High School, Lancaster",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#00285A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Streaks",
+  "confidence": "high",
+  "wikipedia": "Manheim Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Manheim_Township_High_School",
+   "https://www.mtwp.net/",
+   "https://www.mtwp.net/wp-content/uploads/2024/08/bluestrap_header_mws.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district header seal: navy #00285A circle with white MT lightning-bolt monogram; site theme #002868. The blue is navy, not royal"
+ },
+ {
+  "school": "Southmoreland",
+  "identified_as": "Southmoreland High School, Scottdale",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#8E1607",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Scotties",
+  "confidence": "high",
+  "wikipedia": "Southmoreland High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southmoreland_High_School",
+   "https://en.wikipedia.org/wiki/Southmoreland_School_District",
+   "https://www.southmoreland.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1723563747/southmorelandnet/slu58rxjmmwnsaehquch/CRESTFINAL23.png"
+  ],
+  "era": null,
+  "notes": "District page: 'Red and Black'; HS page shows black then red colour boxes (order differs). Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district crest: deep red #8E1607 mantling and tartan with black #000000 helm/outline, white field"
+ },
+ {
+  "school": "Avella",
+  "identified_as": "Avella Area Junior/Senior High School, Avella",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#3C64B5",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FBD700",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Avella Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Avella_Area_School_District",
+   "https://www.avellasd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1681297674/avellak12paus/ml76a1ty19jdvpxn2v0h/A-Logo-Blue-Yellow-Outline21.png"
+  ],
+  "era": null,
+  "notes": "District page has no colours or mascot. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district 'A' logo: medium blue #3C64B5 script A with yellow-gold #FBD700 outline; site theme #3C64B5 and #FAD600"
+ },
+ {
+  "school": "Neshaminy",
+  "identified_as": "Neshaminy High School, Langhorne",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AD0303",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#033498",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Redskins (Skins)",
+  "confidence": "high",
+  "wikipedia": "Neshaminy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Neshaminy_High_School",
+   "https://www.neshaminy.org/",
+   "https://cdnsm5-ss4.sharpschool.com/UserFiles/Servers/Server_38300288/Image/logos/DISTRICT-COLOR.png"
+  ],
+  "era": null,
+  "notes": "Infobox: red & blue. Athletic teams now styled 'Skins'. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district colour logo: block 'N' split royal blue #033498 / dark red #AD0303 with white and blue outline"
+ },
+ {
+  "school": "Canton",
+  "identified_as": "Canton Junior/Senior High School, Canton (Bradford County)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Canton Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canton_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Canton_Area_School_District",
+   "https://www.canton.k12.pa.us/",
+   "https://www.canton.k12.pa.us/wp-content/uploads/2018/06/Warrior-head-black-transparent.svg",
+   "https://www.maxpreps.com/pa/canton/canton-warriors/"
+  ],
+  "era": null,
+  "notes": "HS and district pages agree. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district site only has a one-colour black warrior head; site reds (#FF2A13) are the stock X-theme accent, not branding; MaxPreps lists red and white. No clean crimson seen"
+ },
+ {
+  "school": "Council Rock",
+  "identified_as": "Council Rock High School, Newtown (now Council Rock High School North)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#353B5F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Council Rock High School North",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Council_Rock_High_School_North",
+   "https://en.wikipedia.org/wiki/Council_Rock_High_School_South",
+   "https://www.crsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/32278/logo/35446/council_rock_logo.png"
+  ],
+  "era": "Single Council Rock HS until 2002, colours navy blue and white; at the 2002 split North added silver (keeps Indians), South added gold (Golden Hawks).",
+  "notes": "From North's article: 'silver was given to North and gold given to South ... while still maintaining the two traditional colors of the original high school'. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "current Council Rock SD logo: navy #353B5F ring with gold accents (site theme navy #033264, gold #CDA557). Navy taken from district logo; the pre-2002 single school's navy and white predates the gold"
+ },
+ {
+  "school": "Cambria Heights",
+  "identified_as": "Cambria Heights High School, Patton",
+  "colors": [
+   {
+    "name": "Columbia Blue",
+    "hex": "#47A8CD",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Scarlet",
+    "hex": "#A51E30",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "high",
+  "wikipedia": "Cambria Heights High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cambria_Heights_High_School",
+   "https://en.wikipedia.org/wiki/Cambria_Heights_School_District",
+   "https://www.chsd1.org/",
+   "https://www.chsd1.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "HS and district pages agree. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district site Highlander logo: Columbia blue #47A8CD shield/tam/tartan and deep scarlet #A51E30 'CH' letters and sash, black outline; matches infobox 'Columbia blue and scarlet'"
+ },
+ {
+  "school": "Central Bucks West",
+  "identified_as": "Central Bucks High School West, Doylestown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "medium",
+  "wikipedia": "Central Bucks High School West",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_West",
+   "https://cbwest.cbsd.org/",
+   "https://www.maxpreps.com/pa/doylestown/central-bucks-west-bucks/",
+   "https://image.maxpreps.io/school-mascot/a/a/b/aab4cc54-1522-4fe2-ae4f-3924683263fb.gif"
+  ],
+  "era": null,
+  "notes": "Infobox mascot field reads 'Buckshot'; teams are the Bucks. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "school site carries only the navy district seal; MaxPreps buck-head mascot is black with bright yellow (#FCFC00, a crude upload, not used as hex); infobox says black and gold. Wikipedia logo bucks.gif could not be fetched (429)"
+ },
+ {
+  "school": "Pittsburgh Central Catholic",
+  "identified_as": "Central Catholic High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0F2D52",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC629",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Central Catholic High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Catholic_High_School_(Pittsburgh)",
+   "https://www.centralcatholichs.com/",
+   "https://resources.finalsite.net/images/v1764620394/centralcatholichscom/kemq7n7mxviusgw9lvfw/header-logo.svg"
+  ],
+  "era": null,
+  "notes": "Infobox shows navy colour box for blue. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "school header logo SVG fills: navy #0F2D52 (26 paths) and gold #FFC629; site theme #002855/#005EB8"
+ },
+ {
+  "school": "Selinsgrove",
+  "identified_as": "Selinsgrove Area High School, Selinsgrove",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ED1C24",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#303591",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Seals",
+  "confidence": "high",
+  "wikipedia": "Selinsgrove Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Selinsgrove_Area_High_School",
+   "https://www.seal-pa.org/",
+   "https://www.seal-pa.org/wp-content/uploads/2018/05/S_Only_Logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district 'S' seal logo: bright red #ED1C24 lower S, dark blue #303591 upper S, grey seal"
+ },
+ {
+  "school": "Lewistown",
+  "identified_as": "Lewistown Area High School, Lewistown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflin_County_High_School"
+  ],
+  "era": "Closed 2011; merged with Chief Logan into Mifflin County High School (Huskies, purple/black/silver).",
+  "notes": "Article also says the school's original colours were maroon and silver before switching to blue and white (date unclear, unverified). Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "closed 2011; infobox colours 'Blue & White' (CSS named colour boxes, not a real shade). No period logo or photo reachable (archive.org and image search unavailable), so no hex"
+ },
+ {
+  "school": "Downingtown",
+  "identified_as": "Downingtown Senior High School, Downingtown (pre-split)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#000065",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCB00",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Whippets",
+  "confidence": "medium",
+  "wikipedia": "Downingtown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Downingtown_High_School",
+   "https://en.wikipedia.org/wiki/Downingtown_Area_School_District",
+   "https://www.dasd.org/",
+   "https://resources.finalsite.net/images/v1653050937/dasdorg/i9vr5s7imgoxmeqs3nru/logo.png"
+  ],
+  "era": "Split in 2003 into Downingtown East (Cougars) and West (Whippets, the traditional mascot); both keep blue and gold.",
+  "notes": "Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "current DASD logo: navy #000065 lettering, gold #FFCB00 ring, lighter blue #3265CB map; site theme #010142 and #FFCC00. District-level colours shared by the pre-split school and both successors"
+ },
+ {
+  "school": "Mifflin County",
+  "identified_as": "Mifflin County High School, Lewistown",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#49176C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#C3C2C6",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "high",
+  "wikipedia": "Mifflin County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mifflin_County_High_School",
+   "https://www.mcsdk12.org/",
+   "https://files.smartsites.parentsquare.com/13805/header_logo_img_m4vvib6pno3e9gdjnlg.png"
+  ],
+  "era": "Formed 2011-12 from Lewistown Area and Chief Logan.",
+  "notes": "Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district header husky logo: purple #49176C ring, black and silver-grey #C3C2C6 husky; site theme #46166B"
+ },
+ {
+  "school": "Newport",
+  "identified_as": "Newport High School, Newport (Perry County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#26225D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buffaloes",
+  "confidence": "high",
+  "wikipedia": "Newport High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Newport_High_School_(Pennsylvania)",
+   "https://www.newportsd.org/",
+   "https://www.newportsd.org/pics/original_secondarylogo_NPORTSD.png",
+   "https://www.newportsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district secondary logo: dark navy/indigo #26225D buffalo with white 'N'; main crest navy #183861 with cream"
+ },
+ {
+  "school": "Hamburg",
+  "identified_as": "Hamburg Area High School, Hamburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C8102E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Charcoal Gray",
+    "hex": "#333F48",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hawks",
+  "confidence": "high",
+  "wikipedia": "Hamburg Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hamburg_Area_School_District",
+   "https://www.hasdhawks.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/28898/logo/31711/HamburgHawk_Logo.png",
+   "https://www.maxpreps.com/pa/hamburg/hamburg-hawks/"
+  ],
+  "era": null,
+  "notes": "District page infobox. Wikipedia only; web search unavailable (shared budget exhausted), school sites not checked.",
+  "evidence": "district hawk-head logo: red #C8102E with charcoal slate #333F48 outline/feathers and white face; site theme CSS #C8102E (x496) and #333F48 (x357). Charcoal is a current accent beyond the traditional red and white"
+ }
+]

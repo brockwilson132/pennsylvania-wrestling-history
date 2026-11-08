@@ -1,0 +1,715 @@
+[
+ {
+  "school": "Easton",
+  "identified_as": "Easton Area High School (Easton, Northampton Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C00F2F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Rovers",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Easton_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Easton_Area_High_School",
+   "https://www.eastonsd.org/",
+   "https://resources.finalsite.net/images/v1748026098/eastonsdorg/dqojxzepshrokyludi0d/EastonAreaSchoolDistrictPrimaryLogoImage.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district primary logo: red #C00F2F block E with black drop shadow and bulldog; site Finalsite theme primary #D00402 secondary #000000. Wikipedia infobox says red and white, so white kept as the official second colour but black is what the logo and site use"
+ },
+ {
+  "school": "Nazareth",
+  "identified_as": "Nazareth Area High School (Nazareth)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#121948",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Eagles",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Nazareth_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Nazareth_Area_High_School",
+   "https://www.nazarethasd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/28333/logo/31146/Nazareth_Area_Sd_PA_Logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: dark navy #121948/#0B1140 eagle and N with white and grey highlights; site theme is a brighter royal #1A3AD0, so the shade is uncertain. Wikipedia: blue, white, black (navy box)"
+ },
+ {
+  "school": "Northampton",
+  "identified_as": "Northampton Area High School (Northampton)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#ED700C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Konkrete Kids",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Northampton_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northampton_Area_High_School",
+   "https://www.nasdschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/6441/logo/7570/district_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: orange #ED700C block N with black outline and KONKRETE KIDS bar; site theme #ED700C; Wikipedia black and orange"
+ },
+ {
+  "school": "Bethlehem Catholic",
+  "identified_as": "Bethlehem Catholic High School (Bethlehem)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#4C3327",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#D9BC5D",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Golden Hawks",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Bethlehem_Catholic_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bethlehem_Catholic_High_School",
+   "https://becahi.org/",
+   "https://becahi.org/wp-content/uploads/2025/03/Becca-new-header-larger.4.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school header: brown #532719 crest with gold lettering; site CSS brown #4C3327 and gold #D9BC5D; Wikipedia brown and gold"
+ },
+ {
+  "school": "Saucon Valley",
+  "identified_as": "Saucon Valley High School (Hellertown)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A60012",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Saucon_Valley_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saucon_Valley_High_School",
+   "https://www.svpanthers.org/",
+   "https://www.svpanthers.org/uploaded/themes/fs-modular-themes/svsdseal.png",
+   "https://resources.finalsite.net/images/v1793891074/svpanthersorg/emjvkwa9aeem0exui0h9/PanthersNewRecordSportsPromo.png",
+   "https://sauconpanther.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district seal: black and red #AE252B quartered shield with black panther; site theme primary #A60012 secondary #272727; football promo photo shows black jerseys with red numbers; student paper header black and red. Wikipedia infobox says grey and black, which the school's own images do not support"
+ },
+ {
+  "school": "Bethlehem Liberty",
+  "identified_as": "Liberty High School (Bethlehem)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#7E0511",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy",
+    "hex": "#00185A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hurricanes",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Liberty_High_School_(Bethlehem,_Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Liberty_High_School_(Bethlehem,_Pennsylvania)",
+   "https://basdwpweb.beth.k12.pa.us/liberty",
+   "https://basdwpweb.beth.k12.pa.us/liberty/wp-content/uploads/sites/7/2016/12/LHS-Front_2016.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site header graphic: LIBERTY in maroon #7E0511, HIGH SCHOOL in navy #00185A, maroon #8C0000 L mark; Wikipedia burgundy and navy"
+ },
+ {
+  "school": "Northern Lehigh",
+  "identified_as": "Northern Lehigh High School (Slatington)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#1F3359",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Northern_Lehigh_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Lehigh_High_School",
+   "https://www.nlsd.org/",
+   "https://www.nlsd.org/resourcesforms/bulldog-branding/bulldog-logos",
+   "https://resources.finalsite.net/images/v1721248129/nlsdorg/ybc31cuq0ir7vn5tccfy/bulldog_logo_color_thumb.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district bulldog branding logo: navy NL with grey/silver bulldog on white; site theme primary #1F3359 secondary #4B69A6; Wikipedia navy and white"
+ },
+ {
+  "school": "Wilson Area",
+  "identified_as": "Wilson Area High School (Easton/Wilson Borough)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#000088",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FED865",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Wilson_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilson_Area_High_School",
+   "https://www.wilsonareasd.org/",
+   "https://www.wilsonareasd.org/our-district/athletics",
+   "https://resources.finalsite.net/images/v1750867640/wilsonareasdorg/hyeo87u5ua21jukkmhtm/MainHead.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "athletics header: Warrior head with royal blue and gold headdress, gold 'Wilson Area Athletics' text on blue; site theme primary #000088 secondary #FED865; Wikipedia blue and gold"
+ },
+ {
+  "school": "Notre Dame-Green Pond",
+  "identified_as": "Notre Dame High School (Green Pond, Easton)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#121C4E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEC526",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Notre_Dame_High_School_(Easton,_Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Notre_Dame_High_School_(Easton,_Pennsylvania)",
+   "https://ndcrusaders.org/",
+   "https://ndcrusaders.org/wp-content/uploads/2025/03/notre-dame-round-seal-300.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school round seal: navy #121C4E ring and shield with gold #FEC526 lettering and ND; site CSS gold #FFCB05; Wikipedia blue and gold"
+ },
+ {
+  "school": "Parkland",
+  "identified_as": "Parkland High School (South Whitehall Twp., Allentown)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CF1436",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#71696F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Parkland_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Parkland_High_School_(Pennsylvania)",
+   "https://www.parklandsd.org/",
+   "https://resources.finalsite.net/images/v1755175604/parklandsdorg/fohpntwhnajcioawsciq/PSD_logo_new_2025.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: red #CF1436 interlocked P with grey #71696F outline; site CSS red #DC0032; Wikipedia red and gray (#960000/#878787)"
+ },
+ {
+  "school": "North Schuylkill",
+  "identified_as": "North Schuylkill Jr./Sr. High School (Ashland/Fountain Springs)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0133A9",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#D10E1D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/North_Schuylkill_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Schuylkill_School_District",
+   "https://www.northschuylkill.net/",
+   "https://www.northschuylkill.net/images/website/helmet_nav.png",
+   "https://www.maxpreps.com/pa/ashland/north-schuylkill-spartans/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "site Spartan helmet logo: royal blue #0133A9 helmet with red #D10E1D trim in blue ring; site CSS #0032AA and #A80000; Wikipedia crimson red and royal blue; MaxPreps blue and red"
+ },
+ {
+  "school": "Northwestern Lehigh",
+  "identified_as": "Northwestern Lehigh High School (New Tripoli)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#FFB81C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Northwestern_Lehigh_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northwestern_Lehigh_High_School",
+   "https://www.nwlehighsd.org/",
+   "https://resources.finalsite.net/images/v1712077987/nwlehighsdorg/lqzwgjoa5ojjk3hfwm7m/NorthwesternLehighSchoolDistrict.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: gold #FFB81C tiger and N with black outline; site theme primary #000000 secondary #FFB91D; Wikipedia black and gold"
+ },
+ {
+  "school": "Pen Argyl",
+  "identified_as": "Pen Argyl Area High School (Pen Argyl)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2A932D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Green Knights",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pen_Argyl_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pen_Argyl_Area_High_School",
+   "https://www.penargylschooldistrict.org/",
+   "https://cdnsm5-ss20.sharpschool.com/UserFiles/Servers/Server_2721282/Templates/PAlogo_final_COLOR_v2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district Green Knight logo: green #2A932D plume, shield and banner (darker #1A581C shading) with silver armour; Wikipedia green and white"
+ },
+ {
+  "school": "Pine Grove",
+  "identified_as": "Pine Grove Area High School (Pine Grove, Schuylkill Co.)",
+  "colors": [
+   {
+    "name": "Cardinal red",
+    "hex": "#9B1620",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pine_Grove_Area_School_District",
+   "https://www.pgasd.com/",
+   "https://resources.finalsite.net/images/v1742555835/pgasdcom/arbcab9hraastb55xa2i/PineGroveAreaSchoolDistrictPrimaryLogoImage.png",
+   "https://resources.finalsite.net/images/v1761765638/pgasdcom/zwwphmsi3vh4xn5tvzv0/PineGroveLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district cardinal-head logo: cardinal red #9B1620 with black face and gold #FFCA00 beak; site theme secondary #9B1620 (primary is grey #606B77). No written colour names found; gold appears only as the beak"
+ },
+ {
+  "school": "Tri-Valley",
+  "identified_as": "Tri-Valley Jr./Sr. High School (Hegins, Schuylkill Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "low",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tri-Valley_School_District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tri-Valley_School_District",
+   "https://www.maxpreps.com/pa/hegins/tri-valley-bulldogs/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "no image looked at: district site tri-valley.k12.pa.us failed TLS, archive.org failed; MaxPreps page lists Black and Red (names only, not verified against a logo)"
+ },
+ {
+  "school": "Bethlehem Freedom",
+  "identified_as": "Freedom High School (Bethlehem)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDD508",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://basdwpweb.beth.k12.pa.us/freedom",
+   "https://basdwpweb.beth.k12.pa.us/freedom/wp-content/uploads/sites/6/2016/05/FHS.png",
+   "https://www.maxpreps.com/pa/bethlehem/freedom-patriots/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site header: black F mark and 'FREEDOM HIGH SCHOOL' in gold #FDD508 on black; MaxPreps Black and Gold"
+ },
+ {
+  "school": "Stroudsburg",
+  "identified_as": "Stroudsburg High School (Stroudsburg, Monroe Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#6C101A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties (Mountaineers)",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.sburg.org/",
+   "https://www.sburg.org/pics/header_logo.png",
+   "https://mountieathletics.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district header logo: maroon #6C101A block S with black shadow and 'Mountaineers' script; athletics site theme primary #650807; district site CSS all maroons. White is inferred from the logo, black is shadow only"
+ },
+ {
+  "school": "William Allen",
+  "identified_as": "William Allen High School (Allentown)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#015EC4",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Canary yellow",
+    "hex": "#FEE600",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Canaries",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/William_Allen_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/William_Allen_High_School",
+   "https://aln.allentownsd.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site Finalsite theme primary #015EC4 secondary #FEE600 (district site uses different colours); Wikipedia canary yellow and blue. No logo image found"
+ },
+ {
+  "school": "Blue Mountain",
+  "identified_as": "Blue Mountain High School (Schuylkill Haven area)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#1A2954",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Blue_Mountain_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Blue_Mountain_High_School",
+   "https://www.bmsd.org/",
+   "https://static.wixstatic.com/media/397af5_ed275be9335041269a267cf30f24d0c9~mv2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district circle logo: navy #1A2954 ring and eagle on white; Wikipedia navy and white (cites MaxPreps)"
+ },
+ {
+  "school": "Whitehall",
+  "identified_as": "Whitehall High School (Whitehall Twp., Lehigh Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#76232F",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#84754E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Zephyrs",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Whitehall_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Whitehall_High_School_(Pennsylvania)",
+   "https://www.whitehallcoplay.org/",
+   "https://resources.finalsite.net/images/v1788200995/whitehallcoplayorg/dcvd3czkvbgxdkxvw1wc/WTrainCircleLogo.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district train W logo: maroon #82140C with tan-gold #A09370; site theme primary #76232F secondary #84754E (Vegas-style gold); Wikipedia maroon and gold"
+ },
+ {
+  "school": "Catasauqua",
+  "identified_as": "Catasauqua High School (Catasauqua, Lehigh Co.)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#643200",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5BE52",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Rough Riders",
+  "confidence": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Catasauqua_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Catasauqua_High_School",
+   "https://www.cattysd.org/",
+   "https://resources.finalsite.net/images/v1702486377/cattysdorg/ozngkvwtfjatunoxcesx/District-Main-Logo.png",
+   "https://roughriderathletics.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site theme primary #643200 secondary #C5BE52; athletics site theme primary #4E3629; district seal black with tan-gold #A29373. Wikipedia says brown and white, so the second colour is uncertain"
+ },
+ {
+  "school": "Allentown Dieruff",
+  "identified_as": "Louis E. Dieruff High School (Allentown)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#0E2C54",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": "#848484",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Louis_E._Dieruff_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Louis_E._Dieruff_High_School",
+   "https://drf.allentownsd.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site Finalsite theme primary #0E2C54 secondary #848484; Wikipedia blue and gray. No logo image found"
+ },
+ {
+  "school": "Palisades",
+  "identified_as": "Palisades High School (Kintnersville, Bucks Co.)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#5C2B88",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F5B800",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Pirates",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Palisades_High_School_(Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Palisades_High_School_(Pennsylvania)",
+   "https://www.palisadessd.org/",
+   "https://hs.palisd.org/",
+   "https://hs.palisd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site CSS purple #5C2B88 and gold #F5B800 (few uses); high-school logo is white-only wordmark; Wikipedia purple and gold (cites MaxPreps)"
+ },
+ {
+  "school": "Lehighton",
+  "identified_as": "Lehighton Area High School (Lehighton, Carbon Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#800000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": "#808080",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.lehighton.org/",
+   "https://resources.finalsite.net/images/v1682589901/lehightonorg/j8xgahk3tqgyum4ov7st/SWCrop-logoUpload2.png",
+   "https://resources.finalsite.net/images/v1689613322/lehightonorg/hskynz1xhz4vfrpbwspp/Logo-On-Field-House.jpg",
+   "https://lehightonathletics.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site theme primary #800000 secondary #808080; athletics site theme #650A1B/#7B1F2D; Indian-head logo and field-house L both maroon (#780406) on white. Gray vs white as second colour not confirmed"
+ },
+ {
+  "school": "Emmaus",
+  "identified_as": "Emmaus High School (Emmaus)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#124734",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F3BD48",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Green Hornets",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Emmaus_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Emmaus_High_School",
+   "https://www.eastpennsd.org/",
+   "https://www.eastpennsd.org/athletics-activities/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "East Penn SD site and athletics page CSS: dark green #124734 and gold #F3BD48 most used; Wikipedia green and gold. No hornet logo found"
+ },
+ {
+  "school": "Palmerton",
+  "identified_as": "Palmerton Area High School (Palmerton)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0001FD",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Bombers",
+  "confidence": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Palmerton_Area_High_School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Palmerton_Area_High_School",
+   "https://www.palmerton.org/",
+   "https://resources.finalsite.net/images/v1744274806/palmertonorg/at0ube1dedhlvgienz8p/PalmertonAreaSchoolDistrictPrimaryLogoImage.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district primary logo: bright royal blue #0001FD block P with black outline and grey bomber plane; site theme primary #0000FE; Wikipedia blue and white"
+ }
+]

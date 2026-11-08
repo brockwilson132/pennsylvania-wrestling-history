@@ -1,0 +1,519 @@
+[
+ {
+  "school": "New Castle",
+  "identified_as": "New Castle Junior/Senior High School, New Castle",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CE0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Hurricanes",
+  "confidence": "high",
+  "wikipedia": "New Castle Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/New_Castle_Junior/Senior_High_School",
+   "https://www.ncasd.com",
+   "https://www.ncasd.com/wp-content/uploads/2023/06/ncasd-logo-3-280x78.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox cites MaxPreps; mascot listed as Hurricanes (commonly 'Red Hurricanes').",
+  "evidence": "ncasd.com header logo: red #CE0000 'NC' swirl (white/near-black accents); site CSS top colours #003388 (WP stock) then #DD0000 red. Black not clearly drawn in logo, kept from Wikipedia/MaxPreps."
+ },
+ {
+  "school": "South Philadelphia",
+  "identified_as": "South Philadelphia High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF3C1D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#1A1919",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "South Philadelphia High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Philadelphia_High_School",
+   "https://sphs.philasd.org",
+   "https://www.philasd.org/sphs/wp-content/uploads/sites/702/2018/02/Logo.png",
+   "https://sphs.philasd.org/wp-content/uploads/sites/702/2026/06/centered-image-SPHS.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "sphs.philasd.org school seal logo: red-orange #FF3C1D ring and shield with black #1A1919 lettering on white; 2026 school flyer is red/black/white. Matches Wikipedia 'Red and Black'."
+ },
+ {
+  "school": "West View",
+  "identified_as": "West View High School, West View (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Hills_High_School"
+  ],
+  "era": "West View HS (brackets 1939-1958) was absorbed into North Hills High School; Wikipedia's 'West View High School' redirects there.",
+  "notes": "No source found for West View HS's own colours. Successor North Hills is red and white (Indians); not applied.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found. Nothing new; successor North Hills colours not applied."
+ },
+ {
+  "school": "Steel Valley",
+  "identified_as": "Steel Valley High School, Munhall",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#d9c67c",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Ironmen",
+  "confidence": "medium",
+  "wikipedia": "Steel Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steel_Valley_School_District",
+   "https://www.maxpreps.com/pa/munhall/steel-valley-ironmen/"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps.",
+  "evidence": "District site steelvalleysd.org blocked by egress proxy (note: svsd.net is Seneca Valley, not Steel Valley). MaxPreps page viewed: colours named Maroon and Gold (picker hexes 8F0018/C8880A, not school artwork, not used). Kept infobox gold hex."
+ },
+ {
+  "school": "Saltsburg",
+  "identified_as": "Saltsburg Middle-High School, Saltsburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Saltsburg Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saltsburg_Middle-High_School",
+   "https://www.rvschools.org",
+   "https://files.smartsites.parentsquare.com/9690/header_logo_img_0365oias674lajpolgb.png"
+  ],
+  "era": "Saltsburg schools are now part of River Valley School District (formed from Blairsville-Saltsburg SD); colours here are Saltsburg's own.",
+  "notes": null,
+  "evidence": "No Saltsburg logo found. Successor district River Valley SD (rvschools.org) header logo is a black eagle, unrelated to Saltsburg's colours. Red and white remain from Wikipedia only. Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Penn Highlands",
+  "identified_as": "Penn Highlands High School, Mifflin County (Lewistown area)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School"
+  ],
+  "era": "Penn Highlands was the merged Mifflin County high school (1971-~1976); split back into Lewistown Area, Chief Logan, etc.",
+  "notes": "Lewistown Area HS article says Lewistown inherited the 'blue and white' uniforms of the defunct Penn Highlands school; only source, so low.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Coal Township",
+  "identified_as": "Coal Township High School, Coal Township (Northumberland County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shamokin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shamokin_Area_High_School"
+  ],
+  "era": "Merged into Shamokin Area High School (now located in Coal Township); successor is purple and white, Indians.",
+  "notes": "No source found for Coal Township HS's own colours; web search budget exhausted.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Blackhawk",
+  "identified_as": "Blackhawk High School, Chippewa Township (Beaver Falls)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#1F5B41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E3D169",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Blackhawk High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Blackhawk_High_School",
+   "https://en.wikipedia.org/wiki/Blackhawk_School_District",
+   "https://www.bsd.k12.pa.us",
+   "https://www.bsd.k12.pa.us/sysimages/logo_district2.png",
+   "https://www.bsd.k12.pa.us/sysimages/logo_districtB.png"
+  ],
+  "era": null,
+  "notes": "School and district Wikipedia pages agree (not fully independent).",
+  "evidence": "bsd.k12.pa.us athletic 'B' logo flat green #1F5B41 (white/grey outline); district logo cougar in gold #E3D169 with green #215C43 text; site theme #225A40."
+ },
+ {
+  "school": "Lewistown-Granville",
+  "identified_as": "Lewistown-Granville High School, Lewistown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "low",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School"
+  ],
+  "era": "Lewistown-Granville merged into Penn Highlands in 1971; when Lewistown re-formed (~1976) it switched to blue and white.",
+  "notes": "Lewistown Area HS article: 'original colors were maroon and silver'. Panthers nickname may be the later school's.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Ambridge",
+  "identified_as": "Ambridge Area High School, Ambridge",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#75323C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bridgers",
+  "confidence": "high",
+  "wikipedia": "Ambridge Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ambridge_Area_High_School",
+   "https://www.ambridge.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1763054523/ambridgek12paus/k7xhc4oilcvxgcoqeydm/banner_top-transparent1.png",
+   "https://www.maxpreps.com/pa/ambridge/ambridge-bridgers/"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps.",
+  "evidence": "ambridge.k12.pa.us header wordmark 'AMBRIDGE AREA' in flat maroon #75323C; site CSS is stock Finalsite. MaxPreps names Garnet and Gray. Gray not in logo artwork."
+ },
+ {
+  "school": "Knoch",
+  "identified_as": "Knoch High School, Saxonburg",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#1C2957",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#C5B358",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "high",
+  "wikipedia": "Knoch High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Knoch_High_School",
+   "https://www.knochsd.org",
+   "https://high.knochsd.org"
+  ],
+  "era": null,
+  "notes": "Infobox orders gold then blue; article text says 'blue and gold'.",
+  "evidence": "knochsd.org and high.knochsd.org theme CSS: navy #1C2957 (most used), gold #C5B358 (district) / #B2A46C (high school), i.e. navy and Vegas gold; agrees with Wikipedia blue and gold. Logo image not retrievable."
+ },
+ {
+  "school": "Northgate",
+  "identified_as": "Northgate Junior-Senior High School, Bellevue",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EC2624",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F4BC17",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Flames",
+  "confidence": "high",
+  "wikipedia": "Northgate Junior \u2013 Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northgate_Junior_%E2%80%93_Senior_High_School",
+   "https://www.northgatesd.net",
+   "https://www.northgatesd.net/uploaded/themes/meriden/favicon/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "northgatesd.net torch logo: red #EC2624 flame/banner, gold #F4BC17 leaves on grey; site theme red #C8102E and old gold #867447. (ngsd.org is a different district.)"
+ },
+ {
+  "school": "John Harris",
+  "identified_as": "John Harris High School, Harrisburg",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Harrisburg High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harrisburg_High_School_%28Pennsylvania%29"
+  ],
+  "era": "Opened 1926; merged with William Penn HS in 1971 to form Harrisburg High School (black and gray, Cougars).",
+  "notes": "No source found for John Harris HS's own colours; successor's colours not applied.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Immaculate Conception",
+  "identified_as": "Immaculate Conception High School, Washington, PA (presumed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://cs.observer-reporter.com/columns/2019/dec/29/the-ic-boys-basketball-team-finally-realized-a-goal/"
+  ],
+  "era": "Catholic school, appears 1975-1978; presumed closed.",
+  "notes": "Identity inferred from District 7 (Washington, PA IC existed in 1979 per Observer-Reporter). No colours found.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Mercyhurst Prep",
+  "identified_as": "Mercyhurst Preparatory School, Erie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#0A8442",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lakers",
+  "confidence": "high",
+  "wikipedia": "Mercyhurst Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mercyhurst_Preparatory_School",
+   "https://www.mpslakers.com",
+   "https://www.mpslakers.com/wp-content/uploads/2026/02/icon_256x256@2x.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "mpslakers.com site icon: green #0A8442 Mercy cross on white with small navy #0A143B corner squares (navy may be an accent). Green confirmed; white from first pass and logo field."
+ },
+ {
+  "school": "Conemaugh Valley",
+  "identified_as": "Conemaugh Valley Junior/Senior High School, Johnstown",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#262ED9",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Jays",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://sites.google.com/cvk12.org/conemaugh-valley-athletics/information",
+   "search:https://oldsite.piaad6.org/new_conemaugh_valley.htm",
+   "search:https://www.maxpreps.com/pa/johnstown/conemaugh-valley-blue-jays/",
+   "https://www.cvk12.org",
+   "https://www.cvk12.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "School athletics site and old PIAA D6 directory both say Royal Blue & White (search snippets only). Wikipedia district page has no colours.",
+  "evidence": "cvk12.org 'CV' Blue Jay logo: royal blue #262ED9 with black outline, grey/white bird. Agrees with Royal Blue & White. (cvsd.net is Chartiers Valley.)"
+ },
+ {
+  "school": "Calvary Christian",
+  "identified_as": "Calvary Christian Academy, Erie area (unconfirmed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "Could not identify this District 10 school with confidence; search budget exhausted. Not Calvary Baptist Christian Academy (Meadville) unless verified.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found. Identity still unconfirmed."
+ },
+ {
+  "school": "Northwest",
+  "identified_as": "Northwest Area High School, Shickshinny (presumed)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rangers",
+  "confidence": "low",
+  "wikipedia": "Northwest Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northwest_Area_School_District",
+   "search:https://www.maxpreps.com/pa/shickshinny/northwest-area-rangers/softball/schedule/all-time",
+   "https://www.maxpreps.com/pa/shickshinny/northwest-area-rangers/"
+  ],
+  "era": "Bracket years 1957-1961 predate/early in Northwest Area's history; colours are current.",
+  "notes": "Identity uncertain (District 2 'Northwest', 1957-61). Colours from a MaxPreps search snippet only; may not match the 1950s school.",
+  "evidence": "MaxPreps Northwest Area (Shickshinny) page viewed: Navy, Vegas Gold, White (picker hexes only, not used). Does not resolve whether the 1957-61 'Northwest' is this school."
+ },
+ {
+  "school": "Quigley Catholic",
+  "identified_as": "Quigley Catholic High School, Baden",
+  "colors": [
+   {
+    "name": "Burgundy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Quigley Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Quigley_Catholic_High_School",
+   "https://www.qchs.org",
+   "https://www.timesonline.com/story/lifestyle/features/2020/05/29/quigley-catholic-high-closing-at/1129036007/"
+  ],
+  "era": "Quigley Catholic closed in 2020 (Beaver County Times).",
+  "notes": null,
+  "evidence": "qchs.org now a hijacked gambling site (unusable); Wikipedia infobox image could not be fetched (rate limited). Burgundy and white from Wikipedia only."
+ },
+ {
+  "school": "Swissvale",
+  "identified_as": "Swissvale High School, Swissvale",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Woodland Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Woodland_Hills_High_School"
+  ],
+  "era": "Merged into Woodland Hills High School (1981 consolidation; Swissvale campus used into the mid-1980s).",
+  "notes": "No source found for Swissvale HS colours; search budget exhausted.",
+  "evidence": "Image search unavailable this pass (DuckDuckGo returned a block page; Bing ignored all but the first query word; Wikimedia rate-limited); no own-era image found."
+ },
+ {
+  "school": "Jr.,Mount Union",
+  "identified_as": "Mount Union Area Junior/Senior High School, Mount Union",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#0B3672",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#C9B04A",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Mount Union Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District",
+   "https://www.muasd.org",
+   "https://www.muasd.org/wp-content/uploads/2023/02/School-Logo.jpg",
+   "https://www.maxpreps.com/pa/mount-union/mount-union-trojans/"
+  ],
+  "era": null,
+  "notes": "App name 'Jr.,Mount Union' looks like a parsing artifact of 'Mount Union Area Jr./Sr.'.",
+  "evidence": "muasd.org Trojan head logo: navy #0B3672 and khaki-gold helmet (JPEG, muted); site CSS navy #002D61/#003366 and golds #C9B04A/#D4AD6A/#C4B454. MaxPreps: Blue and Gold."
+ },
+ {
+  "school": "Bristol",
+  "identified_as": "Bristol Junior/Senior High School, Bristol (Bucks County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D40308",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "low",
+  "wikipedia": "Bristol Borough School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bristol_Borough_School_District",
+   "https://bbsd.org/",
+   "https://bbsd.org/images/logo.jpg",
+   "https://bbsd.org/images/logoimage.jpg"
+  ],
+  "era": null,
+  "notes": "Wikipedia and search results gave no colours for the PA school.",
+  "evidence": "bbsd.org (Bristol Borough SD) header and seal banner flat red #D40308 with silver/grey #C0C0C0 lettering; second school colour not established (grey may be decoration only)."
+ }
+]

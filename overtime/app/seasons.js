@@ -19,6 +19,7 @@
     ['5', '7'].forEach((c) => { const v = SD.rows.map((r) => r[+c]).sort((a, b) => b - a).slice(0, SD.field).reverse(), n = v.length;
       SD['p' + c] = (x) => { let lo = 0, hi = n; while (lo < hi) { const m = (lo + hi) >> 1; if (v[m] < x) lo = m + 1; else hi = m; } return n > 1 ? lo / (n - 1) : 0.5; }; });
     return SD; }));
+  const DB = {}, DBP = {}; const loadDuals = (y) => DBP[y] || (DBP[y] = fetch('seasons/duals-' + y + '.json').then((r) => (r.ok ? r.json() : [])).catch(() => []).then((d) => { DB[y] = d; return d; }));   // that season's state-duals bouts
   const loadLineups = (c) => LUP[c] || (LUP[c] = fetch('seasons/' + c + '.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => { LU[c] = d; return d; }));
   const C = { sch: 0, y: 1, cls: 2, d: 3, reg: 4, exp: 5, expM: 6, cut: 7, cutM: 8, est: 9, str: 10, sp: 11, ti: 12, med: 13, tt: 14, pl: 15 };
   const MODES = { exp: [C.exp, C.expM, 'p5'], cut: [C.cut, C.cutM, 'p7'] };
@@ -72,7 +73,7 @@
     const draw = (d) => {
       const L = d && d[sl] && d[sl][yk]; if (!L) { el.textContent = 'No lineup on file.'; return; }
       const r = SD.rows.find((x) => slug(S[x[C.sch]]) === sl && String(x[C.y]) + (x[C.cls] ? 'b' : '') === yk); const est = r && r[C.est];
-      const rows = L.map(([w, name, rt, D, R, St]) => `<div class="zsr"><span class="zsw">${w >= 999 ? 'Hwt' : w}</span>${name ? `<span class="zsm">${esc(name)}</span><span class="zsv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${fin(D)}${fin(R)}${fin(St)}` : `<span class="zsm zsx0">${est ? 'not on file' : '—'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
+      const rows = L.map(([w, name, rt, D, R, St, , , du]) => `<div class="zsr"><span class="zsw">${w >= 999 ? 'Hwt' : w}</span>${name ? `<span class="zsm">${esc(name)}</span><span class="zsv" style="--tint:${OT.colorAt(Math.max(0.04, Math.min(1, (rt - 1500) / 700)))}">${rt}</span>${du ? `<span class="zsdu" aria-label="State duals">${OT.navIcon('v_dual')}</span><span></span><span></span>` : fin(D) + fin(R) + fin(St)}` : `<span class="zsm zsx0">${est ? 'not on file' : '—'}</span><span></span><span></span><span></span><span></span>`}</div>`).join('');
       el.innerHTML = `<div class="zsr zsrh"><span>Wt</span><span>Wrestler</span><span>RTG</span><span>Dist</span><span>Reg</span><span>State</span></div>${rows}`
 ;
     };
@@ -81,8 +82,9 @@
   /* ---- Compare: two school seasons wrestle one dual, weight by weight (#dual/<slug>/<year>~<slug>/<year>) ----
      The same model as the ranking (tools/build_units.js, seasons.json `sim`): each bout at the two wrestlers' season
      ratings (the gap shrunk for ratings resting on few bouts), Expected = the chance of each result, Cutoffs = the
-     higher-rated wrestler wins and the gap says how. Weights meet lightest to lightest, heaviest to heaviest (eras had
-     different weights); a weight with nobody entered is a district entrant who didn't place, and a weight we can't see is
+     higher-rated wrestler wins and the gap says how. Each weight meets the nearest weight of the other season, nobody
+     twice, and a weight with no close partner wrestles the other team's average wrestler: any
+     of its weights, equally likely (eras had different weights); a weight with nobody entered is a district entrant who didn't place, and a weight we can't see is
      the era's fill, both marked ≈.
      Where the two wrestlers met in a bracket THAT season, the real result replaces the model: the last meeting of the
      season (the postseason only moves up, so it is also the biggest stage), decided on the mat (dec, major, tech fall,
@@ -95,7 +97,7 @@
   /* one bout between ratings (na, nb = bouts behind each rating): [A's expected points, B's, mean of (A - B) squared,
      A's points with cutoffs minus B's, A's win chance] */
   const bout1 = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0, 0, 0, 0.5] : [0, 6, 36, -6, 0]; if (rb == null) return [6, 0, 36, 6, 1];
-    const U = SD.sim.unc || 0, vr = (n) => (n == null ? 0 : U * U / (1 + n)), g0 = ra - rb, g = U ? g0 / Math.sqrt(1 + K2 * (vr(na) + vr(nb))) : g0;
+    const U = SD.sim.unc || 0, vr = (n) => (n == null ? 0 : n < 0 ? -n : U * U / (1 + n)), g0 = ra - rb, g = U ? g0 / Math.sqrt(1 + K2 * (vr(na) + vr(nb))) : g0;
     const p = 1 / (1 + Math.pow(10, -g / 400)), ma = mixAt(g), mb = mixAt(-g); let ea = 0, eb = 0, s2 = 0;
     ma.forEach((q, k) => { ea += p * q * BP[k]; s2 += p * q * BP[k] * BP[k]; }); mb.forEach((q, k) => { eb += (1 - p) * q * BP[k]; s2 += (1 - p) * q * BP[k] * BP[k]; });
     const C = SD.sim.cut, hp = (x) => (x < C[0] ? 3 : x < C[1] ? 4 : x < C[2] ? 5 : 6);
@@ -113,30 +115,43 @@
     const fill = sim.fill[era + '|' + bin] || empty;
     return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7]]] : fill, gap: !e[1], fill: !e[1] }));
   }
-  /* weights meet by position, lightest to lightest and heaviest to heaviest */
-  const pairs = (n, m) => { const N = Math.max(n, m), out = []; for (let k = 0; k < N; k++) out.push([N === 1 ? 0 : Math.round(k * (n - 1) / (N - 1)), N === 1 ? 0 : Math.round(k * (m - 1) / (N - 1))]); return out; };
+  /* each weight meets the nearest weight of the other season, nobody twice (tools/build_units.js pairs): weight order kept,
+     fewest total pounds apart, an unpaired weight costs sim.sit pounds; returns [i, j] in weight order, -1 = the other
+     team's average wrestler */
+  const wLb = (w) => (w >= 999 ? 280 : w);
+  const pairs = (A, B) => { const G = SD.sim.sit || 8, n = A.length, m = B.length, d = (i, j) => Math.abs(wLb(A[i]) - wLb(B[j]));
+    const f = Array.from({ length: n + 1 }, (_, i) => Array.from({ length: m + 1 }, (_, j) => (i + j) * G));
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) f[i][j] = Math.min(f[i - 1][j - 1] + d(i - 1, j - 1), f[i - 1][j] + G, f[i][j - 1] + G);
+    const out = []; let i = n, j = m; while (i > 0 || j > 0) { if (i > 0 && j > 0 && f[i][j] === f[i - 1][j - 1] + d(i - 1, j - 1)) { out.push([i - 1, j - 1]); i--; j--; } else if (i > 0 && (j === 0 || f[i][j] === f[i - 1][j] + G)) { out.push([i - 1, -1]); i--; } else { out.push([-1, j - 1]); j--; } }
+    return out.reverse(); };
   /* the last meeting that season between two wrestlers, decided on the mat: { pts, aWon, key } or null */
-  function realBout(year, na, nb) {
+  function realBout(year, na, nb, sa, sb) {
     const Y = OT.sosYear(year); if (!Y || !na || !nb) return null; const ka = OT.nkey(na), kb = OT.nkey(nb); let best = null;
     Object.entries(Y).forEach(([key, B]) => { const lv = LVO[key.split('.')[2]]; if (lv == null) return;
       B.b.forEach((b, i) => { const w = OT.nkey(b[2]), l = OT.nkey(b[3]); if (!((w === ka && l === kb) || (w === kb && l === ka))) return;
         const o = { lv, i, key, aWon: w === ka, res: b[4] }; if (!best || lv > best.lv || (lv === best.lv && i > best.i)) best = o; }); });
-    return best && RPTS[best.res] ? { pts: RPTS[best.res], aWon: best.aWon, key: best.key, res: best.res } : null;
+    if (best && RPTS[best.res]) return { pts: RPTS[best.res], aWon: best.aWon, key: best.key, res: best.res };
+    /* no bracket meeting: the two teams' state dual that season (the team duals come before the individual postseason) */
+    const d = sa && sb && (DB[year] || []).filter((b) => ((OT.nkey(b[1]) === ka && b[2] === sa && OT.nkey(b[3]) === kb && b[4] === sb) || (OT.nkey(b[1]) === kb && b[2] === sb && OT.nkey(b[3]) === ka && b[4] === sa)) && RPTS[b[5]]).pop();
+    return d ? { pts: RPTS[d[5]], aWon: OT.nkey(d[1]) === ka, dual: true, res: d[5] } : null;
   }
   /* the whole dual: per weight both sides and what the bout is worth in match points to the side it favours (Expected:
      the expected points won minus lost; Cutoffs: 3 to 6; a real result: its points), and the team totals of those */
   function dualOf(ra, La, rb, Lb) {
     const A = slotsOf(ra, La), B = slotsOf(rb, Lb), same = ra[C.y] === rb[C.y];
     let m = 0, v = 0, ta = 0, tb = 0, ha = 0, hb = 0;
-    const bouts = pairs(A.length, B.length).map(([i, j]) => { const a = A[i], b = B[j];
-      const real = same && !a.gap && !b.gap ? realBout(ra[C.y], a.e[1], b.e[1]) : null;
+    const P = pairs(A.map((x) => x.e[0]), B.map((x) => x.e[0]));
+    const avgOf = (X) => { let t = 0, w = 0; X.forEach((o) => o.mix.forEach(([r, q]) => { if (r != null) { t += r * q; w += q; } })); return { e: [null, null, Math.round(w ? t / w : SD.sim.ref)], mix: X.flatMap((o) => o.mix.map(([r, q, nb]) => [r, q / X.length, nb])), avg: true }; };   // any of the team's weights, equally likely (the number shown is their mean)
+    const AA = avgOf(A), BA = avgOf(B);
+    const bouts = P.map(([i, j]) => { const a = i < 0 ? AA : A[i], b = j < 0 ? BA : B[j];
+      const real = same && !a.gap && !b.gap && !a.avg && !b.avg ? realBout(ra[C.y], a.e[1], b.e[1], slug(S[ra[C.sch]]), slug(S[rb[C.sch]])) : null;
       let ea = 0, eb = 0, s2 = 0, h = 0, pa = 0;
       if (real) { ea = real.aWon ? real.pts : 0; eb = real.aWon ? 0 : real.pts; s2 = real.pts * real.pts; h = real.aWon ? real.pts : -real.pts; pa = real.aWon ? 1 : 0; }
       else a.mix.forEach(([x, wa, na]) => b.mix.forEach(([y, wb, nb]) => { const o = bout1(x, y, na, nb), k = wa * wb; ea += k * o[0]; eb += k * o[1]; s2 += k * o[2]; h += k * o[3]; pa += k * o[4]; }));
       const mm = ea - eb; m += mm; v += real ? 0 : s2 - mm * mm; ta += Math.max(0, mm); tb += Math.max(0, -mm); ha += Math.max(0, h); hb += Math.max(0, -h);
-      return { wa: a.e[0], wb: b.e[0], a, b, real, ea, eb, h, pa, est: !real && (a.gap || b.gap) }; });
+      return { i, j, wa: a.e[0], wb: b.e[0], a, b, real, ea, eb, h, pa, est: !real && (a.gap || b.gap || a.avg || b.avg) }; });
     const t2 = Math.pow(SD.sim.tau || 0, 2);
-    return { bouts, ta, tb, ha, hb, p: v + t2 > 1e-9 ? Phi(m / Math.sqrt(v + t2)) : m > 0 ? 1 : m < 0 ? 0 : 0.5 };
+    return { bouts, rows: bouts, ta, tb, ha, hb, p: v + t2 > 1e-9 ? Phi(m / Math.sqrt(v + t2)) : m > 0 ? 1 : m < 0 ? 0 : 0.5 };
   }
   const keyOf = (r) => slug(S[r[C.sch]]) + '/' + r[C.y] + (r[C.cls] ? 'b' : '');
   const parseSide = (t) => { const m = /^(.+)\/(\d{4}b?)$/.exec(t || ''); return m ? { sl: m[1], yk: m[2] } : null; };
@@ -152,7 +167,7 @@
     const [ta, tb] = String(id || '').split('~'); const A = parseSide(ta), B = parseSide(tb);
     const mode = MODES[state.smode] ? state.smode : 'exp';
     const seg = `<div class="seg sm zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
-    const head = (inner) => `<header class="uh2 dqh"><h1>Compare</h1>${seg}</header>${inner}`;
+    const head = (inner) => `<header class="uh2 dqh"><h1>Compare</h1>${seg}</header>${OT.h2hTabs ? OT.h2hTabs('d') : ''}${inner}`;
     if (!SD) { loadSeasons(); return head('<div class="fpn" data-need-ss="1"></div>'); }
     const ra = A && rowOf(A.sl, A.yk), rb = B && rowOf(B.sl, B.yk);
     const team = (r, side, sc) => r ? `<button class="dqt${q.pick === side ? ' on' : ''}" data-dqpick="${side}"><b class="zsy">${r[C.y]}${r[C.cls] ? '<small>AA</small>' : ''}</b>${OT.stag(S[r[C.sch]])}${sc != null ? `<em>${sc}</em>` : ''}</button>`
@@ -162,28 +177,29 @@
     const c1 = ra[C.sch] === rb[C.sch] ? '' : '', ka = keyOf(ra).split('/'), kb = keyOf(rb).split('/');
     const La = LU[ka[0][0]] && LU[ka[0][0]][ka[0]] && LU[ka[0][0]][ka[0]][ka[1]], Lb = LU[kb[0][0]] && LU[kb[0][0]][kb[0]] && LU[kb[0][0]][kb[0]][kb[1]];
     const same = ra[C.y] === rb[C.y];
-    if (!La || !Lb || (same && !OT.sosLoaded(ra[C.y]))) return head(`<div class="card dqc"><div class="dqteams">${team(ra, 'a')}<span class="dqvs">vs</span>${team(rb, 'b')}</div></div><div class="fpn" data-need-dual="${esc(id)}"></div>`) + c1;
+    if (!La || !Lb || (same && (!OT.sosLoaded(ra[C.y]) || !DB[ra[C.y]]))) return head(`<div class="card dqc"><div class="dqteams">${team(ra, 'a')}<span class="dqvs">vs</span>${team(rb, 'b')}</div></div><div class="fpn" data-need-dual="${esc(id)}"></div>`) + c1;
     const D = dualOf(ra, La, rb, Lb), cut = mode === 'cut';
     const sa = cut ? D.ha : D.ta, sb = cut ? D.hb : D.tb, fmtS = (x) => String(Math.round(x)), f1 = (x) => (Math.round(x * 10) / 10).toFixed(cut && Number.isInteger(Math.round(x * 10) / 10) ? 0 : 1);
     const winBar = cut ? '' : `<div class="dqbar" title="${esc(S[ra[C.sch]])} ${pct(Math.round(1000 * D.p))}"><i style="width:${(100 * D.p).toFixed(1)}%"></i></div>`;
     const side = (sl, est) => { const e = sl.e; if (sl.fill) return `<span class="dqw dqx"><b>?</b></span>`;
+      if (sl.avg) return `<span class="dqw dqav"><b>Avg</b><span class="dqr">${OT.rtgBars(e[2])}<i>${e[2]}</i></span></span>`;
       if (!e[1]) return `<span class="dqw dqx"><b>—</b></span>`;
-      const g = e[6] >= 0 ? `<em class="dqg">${OT.GRADE_L[e[6]]}</em>` : '';
+      const g = e[8] ? `<em class="dqg dqdu" aria-label="State duals">${OT.navIcon('v_dual')}</em>` : e[6] >= 0 ? `<em class="dqg">${OT.GRADE_L[e[6]]}</em>` : '';
       return `<span class="dqw"><b>${esc(e[1])}</b><span class="dqr">${OT.rtgBars(e[2])}<i>${e[2]}</i>${g}</span></span>`; };
-    const rows = D.bouts.map((o) => {
+    const rows = D.rows.map((o) => {
       const aw = o.real ? o.real.aWon : cut ? o.h > 0 : o.ea > o.eb, bw = o.real ? !o.real.aWon : cut ? o.h < 0 : o.ea < o.eb;
       const num = o.real ? String(o.real.pts) : cut ? f1(Math.abs(o.h)) : f1(Math.abs(o.ea - o.eb)), wp = Math.min(99, Math.round(100 * Math.max(o.pa, 1 - o.pa))) + '%';
       const forfeit = !o.real && SD.sim.forfeit && (o.a.gap && !o.a.fill || o.b.gap && !o.b.fill);
-      const cell = (won) => won ? (o.real ? `<a class="dqn real" href="${OT.bhref(o.real.key)}" aria-label="Bracket">${OT.navIcon('v_brk')}<b>${num}</b></a>`
+      const cell = (won) => won ? (o.real ? (o.real.dual ? `<a class="dqn real" href="#h2hs/${slug(S[ra[C.sch]])}~${slug(S[rb[C.sch]])}" aria-label="State duals">${OT.navIcon('v_dual')}<b>${num}</b></a>` : `<a class="dqn real" href="${OT.bhref(o.real.key)}" aria-label="Bracket">${OT.navIcon('v_brk')}<b>${num}</b></a>`)
         : forfeit ? '<span class="dqn"><b>6</b></span>' : `<button class="dqn${o.est ? ' est' : ''}" data-dqalt="${wp}"><b>${o.est ? '≈' : ''}${num}</b></button>`) : '<span class="dqn"></span>';
-      return `<div class="dqr0${aw ? ' aw' : ''}${bw ? ' bw' : ''}">${side(o.a)}${cell(aw)}<span class="dqwt">${o.wa === o.wb ? wLab(o.wa) : `${wLab(o.wa)}<i>${wLab(o.wb)}</i>`}</span>${cell(bw)}${side(o.b)}</div>`; }).join('');
+      return `<div class="dqr0${aw ? ' aw' : ''}${bw ? ' bw' : ''}">${side(o.a)}${cell(aw)}<span class="dqwt">${o.wa == null || o.wb == null || o.wa === o.wb ? wLab(o.wa == null ? o.wb : o.wa) : `${wLab(o.wa)}<i>${wLab(o.wb)}</i>`}</span>${cell(bw)}${side(o.b)}</div>`; }).join('');
     return head(`<div class="card dqc"><div class="dqteams">${team(ra, 'a', fmtS(sa))}<span class="dqvs">vs</span>${team(rb, 'b', fmtS(sb))}</div>${winBar}${q.pick ? pickFor(q.pick) : ''}<div class="dqb">${rows}</div></div>`);
   }
   /* what the page needs before it can draw: both lineups, and that season's brackets when the two are the same year */
   function loadDual(id) {
     const ps = String(id || '').split('~').map(parseSide).filter(Boolean); const need = [loadSeasons()];
     ps.forEach((p) => need.push(loadLineups(p.sl[0])));
-    return Promise.all(need).then(() => { if (ps.length === 2 && ps[0].yk.slice(0, 4) === ps[1].yk.slice(0, 4) && OT.loadSOS) return OT.loadSOS(+ps[0].yk.slice(0, 4)); });
+    return Promise.all(need).then(() => { if (ps.length === 2 && ps[0].yk.slice(0, 4) === ps[1].yk.slice(0, 4) && OT.loadSOS) { const y = +ps[0].yk.slice(0, 4); return Promise.all([OT.loadSOS(y), loadDuals(y)]); } });
   }
   Object.assign(OT, { loadSeasons, seasonRankings, fillLineup, seasonsLoaded: () => !!SD, dualPage, loadDual, dualKey: keyOf, seasonsRowKey: (k) => k });
 })();

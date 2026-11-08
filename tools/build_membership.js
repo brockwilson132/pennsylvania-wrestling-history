@@ -21,7 +21,7 @@ global.window = {};
 ['badges.js', 'data.js', 'medals.js', 'brackets.js', 'seeds.js'].forEach((f) => { (0, eval)(fs.readFileSync(path.join(OV, f), 'utf8')); });
 const W = window, SB = W.SchoolBadge;
 const SAME_APP = { Allentown: 'William Allen', Allen: 'William Allen' };
-const SAME_LOW = { ...SAME_APP, 'Notre Dame-GP': 'Notre Dame-Green Pond', 'St. Pius X': 'Pius X (Roseto)', 'Pius X': 'Pius X (Roseto)', 'Juniata Joint': 'Juniata' };
+const SAME_LOW = { ...SAME_APP, 'Notre Dame-GP': 'Notre Dame-Green Pond', 'Pius X': 'Pius X (Roseto)', 'Juniata Joint': 'Juniata' };
 const canonApp = (s) => { const id = SB.identity(s); const n = id ? id.school : s; return SAME_APP[n] || n; };
 const canonLow = (s) => { const id = SB.identity(s); const n = id ? id.school : s; return SAME_LOW[n] || n; };
 const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');

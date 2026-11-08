@@ -1,3 +1,4 @@
 entrants 401059 -> 401059, bouts 587568 -> 587568
    1235  bouts: side still has no school (kept)
     715  entrants: still no school (kept)
+   2884  school spelled another way, filed under its one name

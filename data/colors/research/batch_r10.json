@@ -1,0 +1,950 @@
+[
+ {
+  "school": "Glen Mills",
+  "identified_as": "Glen Mills Schools, Glen Mills (Delaware County)",
+  "colors": [],
+  "mascot": "Battlin' Bulls",
+  "confidence": "low",
+  "wikipedia": "Glen Mills Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Glen_Mills_Schools",
+   "search:https://papreplive.com/football/glen-mills-has-a-clear-agenda-after-latest-victory"
+  ],
+  "era": "Residential reform school; closed 2019 after state licence revoked.",
+  "notes": "No source found stating colours; Wikipedia article has no infobox colours."
+ },
+ {
+  "school": "Lansdowne-Aldan",
+  "identified_as": "Lansdowne-Aldan High School, Lansdowne (Delaware County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School"
+  ],
+  "era": "Merged 1982 with Yeadon and Darby-Colwyn into Penn Wood High School (Patriots; maroon, white, navy).",
+  "notes": "Could not find Lansdowne-Aldan's own colours; do not assume Penn Wood's."
+ },
+ {
+  "school": "Central Bucks South",
+  "identified_as": "Central Bucks High School South, Warrington",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "medium",
+  "wikipedia": "Central Bucks High School South",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_South"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Wellsboro",
+  "identified_as": "Wellsboro Area High School, Wellsboro",
+  "colors": [],
+  "mascot": "Hornets",
+  "confidence": "low",
+  "wikipedia": "Wellsboro Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wellsboro_Area_High_School",
+   "https://en.wikipedia.org/wiki/Wellsboro_Area_School_District",
+   "search:https://www.piaad4.net/schools/wellsboro"
+  ],
+  "era": null,
+  "notes": "Infobox colours field empty; search snippets confirmed Hornets but no colours."
+ },
+ {
+  "school": "Rockwood",
+  "identified_as": "Rockwood Area Junior/Senior High School, Rockwood (Somerset County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "medium",
+  "wikipedia": "Rockwood Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Rockwood_Area_School_District",
+   "https://en.wikipedia.org/wiki/Rockwood_Area_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Colours from the district infobox; the high-school page lists none."
+ },
+ {
+  "school": "Mariana Bracetti Academy",
+  "identified_as": "Mariana Bracetti Academy Charter School, Philadelphia (Frankford)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/philadelphia/mariana-bracetti-academy/basketball/girls",
+   "search:https://mbacs.org/student-life"
+  ],
+  "era": null,
+  "notes": "Colours only from a MaxPreps search snippet; no mascot found. No Wikipedia article."
+ },
+ {
+  "school": "North Penn-Liberty",
+  "identified_as": "North Penn-Liberty Junior/Senior High School, Liberty (Tioga County; Southern Tioga SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "medium",
+  "wikipedia": "North Penn-Liberty High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Penn-Liberty_High_School",
+   "search:https://www.maxpreps.com/pa/liberty/north-penn-liberty-mountie/soccer/schedule/all-time",
+   "search:https://www.maxpreps.com/pa/liberty/north-penn-liberty-mountie/basketball"
+  ],
+  "era": "Formed when Southern Tioga merged North Penn (Blossburg) and Liberty high schools.",
+  "notes": "Wikipedia infobox colours empty; colours from MaxPreps search snippets only."
+ },
+ {
+  "school": "Steelton",
+  "identified_as": "Steelton High School, Steelton (Dauphin County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steamrollers",
+  "confidence": "low",
+  "wikipedia": "Steelton-Highspire School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steelton-Highspire_School_District",
+   "https://en.wikipedia.org/wiki/Steelton_High_School",
+   "search:https://www.maxpreps.com/pa/steelton/steelton-highspire-steamrollers"
+  ],
+  "era": "Steelton HS (1930s-40s) later merged with Highspire to form Steelton-Highspire; colours shown are the successor district's.",
+  "notes": "No source for pre-merger Steelton's own colours; inferred continuity from the successor (same Steamrollers nickname)."
+ },
+ {
+  "school": "James Buchanan",
+  "identified_as": "James Buchanan High School, Mercersburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "medium",
+  "wikipedia": "James Buchanan High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/James_Buchanan_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Kishacoquillas",
+  "identified_as": "Kishacoquillas High School, Reedsville/Belleville area (Mifflin County)",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Mifflin County School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mifflin_County_School_District",
+   "search:https://topoquest.com/place-detail.php?id=1178552"
+  ],
+  "era": "Kish Jr/Sr High closed 2011, consolidated into Mifflin County High School (Huskies; purple, black, silver).",
+  "notes": "No source found for Kish's own colours. Mascot from the district article."
+ },
+ {
+  "school": "Trafford",
+  "identified_as": "Trafford High School, Trafford (Westmoreland County)",
+  "colors": [],
+  "mascot": "Tomahawks",
+  "confidence": "low",
+  "wikipedia": "Penn-Trafford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn-Trafford_High_School",
+   "search:https://en.wikipedia.org/wiki/Penn-Trafford_School_District"
+  ],
+  "era": "Merged with Penn Joint to form Penn-Trafford (Warriors; green and gold) around 1971-72.",
+  "notes": "Trafford's own colours not found; nickname from search snippet of Penn-Trafford Wikipedia."
+ },
+ {
+  "school": "Millersburg",
+  "identified_as": "Millersburg Area High School, Millersburg (Dauphin County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Millersburg Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Millersburg_Area_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Central Clarion",
+  "identified_as": "Central Clarion co-op (Clarion Area, Clarion-Limestone, North Clarion), Clarion County",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://d9sports.com/?p=131786",
+   "search:https://clarionsportszone.com/?p=30835",
+   "search:https://www.exploreclarion.com/local/2020/09/09/central-clarion-wildcats-new-name-same-philosophy-701366/"
+  ],
+  "era": "Co-op team formed 2020 (football) and later wrestling; wrestling mats changed from Clarion's orange/black/white Bobcat mats to Central Clarion blue/orange/white.",
+  "notes": "From local sports-site search snippets only; football helmets described as navy blue, so the blue may be navy."
+ },
+ {
+  "school": "Twin Valley",
+  "identified_as": "Twin Valley High School, Elverson (Berks County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "low",
+  "wikipedia": "Twin Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Twin_Valley_School_District",
+   "search:https://ipfs.ssi.eecc.de/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Twin_Valley_School_District.html",
+   "search:https://www.eliteprospects.com/team/29835/twin-valley-high/2019-2020"
+  ],
+  "era": null,
+  "notes": "Current Wikipedia has no colours; an old Wikipedia mirror (search snippet) said green and white; EliteProspects hockey page says kelly green, black, white."
+ },
+ {
+  "school": "Riverview",
+  "identified_as": "Riverview Junior/Senior High School, Oakmont (Allegheny County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "medium",
+  "wikipedia": "Riverview High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Riverview_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Infobox text says 'Black and yellow' with gold colour box."
+ },
+ {
+  "school": "Dormont",
+  "identified_as": "Dormont High School, Dormont (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Keystone Oaks High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dormont,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Keystone_Oaks_High_School"
+  ],
+  "era": "Merged into Keystone Oaks High School (Golden Eagles; gold, white, black) in the late 1960s.",
+  "notes": "No source for Dormont's own colours."
+ },
+ {
+  "school": "Munhall",
+  "identified_as": "Munhall High School, Munhall (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Steel Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Munhall,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Steel_Valley_School_District"
+  ],
+  "era": "Merged with Homestead into Steel Valley (Ironmen; maroon and gold) around 1970.",
+  "notes": "No source for Munhall's own colours."
+ },
+ {
+  "school": "Cedar Crest",
+  "identified_as": "Cedar Crest High School, Lebanon",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#4559E1",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Cedar Crest High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cedar_Crest_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Laurel Highlands",
+  "identified_as": "Laurel Highlands Senior High School, Uniontown (Fayette County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "Laurel Highlands High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Laurel_Highlands_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "York Catholic",
+  "identified_as": "York Catholic High School, York",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Fighting Irish",
+  "confidence": "medium",
+  "wikipedia": "York Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Carmichaels",
+  "identified_as": "Carmichaels Area Junior/Senior High School, Carmichaels (Greene County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mikes",
+  "confidence": "medium",
+  "wikipedia": "Carmichaels Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Woodland Hills",
+  "identified_as": "Woodland Hills High School, Turtle Creek (Allegheny County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0096FF",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "medium",
+  "wikipedia": "Woodland Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Woodland_Hills_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Fairchance-Georges",
+  "identified_as": "Fairchance-Georges High School, Fairchance (Fayette County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Albert Gallatin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_Area_School_District",
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_High_School"
+  ],
+  "era": "Merged into Albert Gallatin High School (Colonials; black and silver).",
+  "notes": "No source for Fairchance-Georges' own colours."
+ },
+ {
+  "school": "Elk Lake",
+  "identified_as": "Elk Lake Junior/Senior High School, Dimock (Susquehanna County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Elk Lake School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elk_Lake_School_District"
+  ],
+  "era": null,
+  "notes": "District article has no colours or mascot; web search budget ran out before other sources could be checked."
+ },
+ {
+  "school": "Greater Nanticoke",
+  "identified_as": "Greater Nanticoke Area High School, Nanticoke (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Greater Nanticoke Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Nanticoke_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Infobox colours and mascot empty; no other source checked (search budget exhausted)."
+ },
+ {
+  "school": "Taylor Allderdice",
+  "identified_as": "Taylor Allderdice High School, Pittsburgh (Squirrel Hill)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "medium",
+  "wikipedia": "Taylor Allderdice High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Taylor_Allderdice_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia cites Pittsburgh Public Schools' Discover PPS page for colours."
+ },
+ {
+  "school": "Hanover Township",
+  "identified_as": "Hanover Township High School, Hanover Township (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Hanover Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hanover_Area_School_District"
+  ],
+  "era": "Merged into Hanover Area (blue and white) around 1966-71.",
+  "notes": "No source for Hanover Township's own colours."
+ },
+ {
+  "school": "Roman Catholic",
+  "identified_as": "Roman Catholic High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#501d4f",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#eda018",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Cahillites",
+  "confidence": "medium",
+  "wikipedia": "Roman Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Roman_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Annville-Cleona",
+  "identified_as": "Annville-Cleona High School, Annville (Lebanon County)",
+  "colors": [],
+  "mascot": "Dutchmen",
+  "confidence": "low",
+  "wikipedia": "Annville-Cleona School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Annville-Cleona_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox gives mascot but no colours; no other source checked (search budget exhausted)."
+ },
+ {
+  "school": "Columbia-Montour Vo-Tech",
+  "identified_as": "Columbia-Montour Area Vocational-Technical School, Bloomsburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Columbia-Montour Area Vocational-Technical School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Columbia-Montour_Area_Vocational-Technical_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Bishop Hoban",
+  "identified_as": "Bishop Hoban High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Argents",
+  "confidence": "medium",
+  "wikipedia": "Bishop Hoban High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Hoban_High_School"
+  ],
+  "era": "Closed 2007; consolidated into Holy Redeemer High School (Royals; red, white, gold).",
+  "notes": null
+ },
+ {
+  "school": "Sunbury",
+  "identified_as": "Sunbury High School, Sunbury (Northumberland County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School",
+   "https://en.wikipedia.org/wiki/Shikellamy_School_District"
+  ],
+  "era": "Merged into Shikellamy High School (Braves; maroon, white, blue) in the mid-1960s.",
+  "notes": "No source for Sunbury High's own colours. Wikipedia 'Sunbury High School' is a North Carolina building."
+ },
+ {
+  "school": "York",
+  "identified_as": "York High School / William Penn Senior High School, York",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": "#E86100",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Bearcats",
+  "confidence": "medium",
+  "wikipedia": "William Penn Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/William_Penn_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Assumed bracket name 'York' is the York city high school (William Penn Senior High). Wikipedia cites MaxPreps for blue and orange."
+ },
+ {
+  "school": "Avonworth",
+  "identified_as": "Avonworth High School, Ohio Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": "#BEBEBE",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Antelopes",
+  "confidence": "medium",
+  "wikipedia": "Avonworth High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Avonworth_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Monsignor Bonner",
+  "identified_as": "Monsignor Bonner High School, Drexel Hill (Delaware County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#225834",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC82D",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Friars",
+  "confidence": "medium",
+  "wikipedia": "Monsignor Bonner and Archbishop Prendergast High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Monsignor_Bonner_and_Archbishop_Prendergast_High_School"
+  ],
+  "era": "Merged with Archbishop Prendergast in 2012 (Prendergast side: garnet, grey, black, white); boys' teams kept Friars and Bonner colours.",
+  "notes": null
+ },
+ {
+  "school": "Northeast Catholic",
+  "identified_as": "Northeast Catholic High School for Boys, Philadelphia",
+  "colors": [
+   {
+    "name": "Cardinal Red",
+    "hex": "#C41E3A",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Northeast Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_Catholic_High_School"
+  ],
+  "era": "Closed June 2010.",
+  "notes": null
+ },
+ {
+  "school": "Cardinal O'Hara",
+  "identified_as": "Cardinal O'Hara High School, Springfield (Delaware County)",
+  "colors": [
+   {
+    "name": "Cardinal Red",
+    "hex": "#C41E3A",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Cardinal O'Hara High School (Springfield, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cardinal_O'Hara_High_School_(Springfield,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Northern Cambria",
+  "identified_as": "Northern Cambria High School, Barnesboro (Cambria County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Colts",
+  "confidence": "medium",
+  "wikipedia": "Northern Cambria High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Cambria_High_School",
+   "https://en.wikipedia.org/wiki/Northern_Cambria_School_District"
+  ],
+  "era": null,
+  "notes": "Infobox says 'gold and black'; body text says black (from Barnesboro) and gold (from Spangler)."
+ },
+ {
+  "school": "Mid Valley",
+  "identified_as": "Mid Valley Secondary Center, Throop (Lackawanna County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Mid Valley Secondary Center",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mid_Valley_Secondary_Center",
+   "https://en.wikipedia.org/wiki/Mid_Valley_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Smithfield-Ridgebury-Ulster",
+  "identified_as": "Smithfield-Ridgebury-Ulster High School, Bradford County",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Smithfield_Township,_Bradford_County,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Athens_Area_School_District"
+  ],
+  "era": "Closed; area now served by Athens Area School District (Wildcats). Exact merger date not confirmed.",
+  "notes": "No source found for its colours."
+ },
+ {
+  "school": "Our Lady of Lourdes Regional",
+  "identified_as": "Our Lady of Lourdes Regional High School, Coal Township (Shamokin area)",
+  "colors": [
+   {
+    "name": "Cerise",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Our Lady of Lourdes Regional School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Our_Lady_of_Lourdes_Regional_School"
+  ],
+  "era": "Now Our Lady of Lourdes Regional School (K-12).",
+  "notes": null
+ },
+ {
+  "school": "Greater Johnstown Vo-Tech",
+  "identified_as": "Greater Johnstown Area Vocational-Technical School (now Greater Johnstown Career and Technology Center), Johnstown",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Johnstown_High_School"
+  ],
+  "era": null,
+  "notes": "No Wikipedia article and no source found; do not assume Greater Johnstown HS's black and Columbia blue."
+ },
+ {
+  "school": "West Middlesex",
+  "identified_as": "West Middlesex Area Junior/Senior High School, West Middlesex (Mercer County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Middlesex Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Middlesex_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District article lists no colours or mascot; search budget exhausted before other sources checked."
+ },
+ {
+  "school": "Mapletown",
+  "identified_as": "Mapletown Junior/Senior High School, Greensboro (Greene County; Southeastern Greene SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Maples",
+  "confidence": "medium",
+  "wikipedia": "Mapletown Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mapletown_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ }
+]

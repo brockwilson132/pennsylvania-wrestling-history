@@ -1,0 +1,605 @@
+[
+ {
+  "school": "ELCO",
+  "identified_as": "Eastern Lebanon County High School, Myerstown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0F2D53",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E9AE3A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "high",
+  "wikipedia": "Eastern Lebanon County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eastern_Lebanon_County_High_School",
+   "https://www.elcosd.org",
+   "https://resources.finalsite.net/images/v1728066062/elcosdorg/bylh85popq64icmuy7hi/ELCO_Logo_Outline_Header_Footer.png"
+  ],
+  "era": null,
+  "notes": "Infobox color box uses navy.",
+  "evidence": "District header logo: navy #0F2D53 block 'E' with a gold spear (gold is a light gradient, main tone ~#E9AE3A) on white outline. Site CSS is Finalsite stock only."
+ },
+ {
+  "school": "Lansdowne",
+  "identified_as": "Lansdowne High School, Lansdowne (Delaware County)",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School",
+   "https://archive.org/details/classmates-yearbook-18908-1940-lansdowne-high-school",
+   "https://archive.org/details/classmates-yearbook-52911-1944-lansdowne-high-school"
+  ],
+  "era": "Later Lansdowne-Aldan HS; merged 1982 into Penn Wood HS (maroon, white, navy) - successor's colours.",
+  "notes": "Colours Garnet and Gray from 1940s yearbook text; not the successor Penn Wood's maroon/white/navy.",
+  "evidence": "OCR text of 1940 and 1944 Lansdowne HS yearbooks (Delaware County, mentions Aldan, Eddystone): school publication is the 'Garnet and Gray'; cheerleaders in garnet, garnet sweaters and robes. No colour image seen, so no hex."
+ },
+ {
+  "school": "Yough",
+  "identified_as": "Yough Senior High School, Herminie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#00703C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#F58026",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Yough Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Yough_Senior_High_School",
+   "https://www.youghsd.net",
+   "https://yhs.youghsd.net"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District 'Yough-Y_official' logo: block Y split orange #F58026 / green #00703C with dark brown outline; high-school site theme green #1D7F3A."
+ },
+ {
+  "school": "Greensburg",
+  "identified_as": "Greensburg High School, Greensburg (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Greensburg Salem High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Salem_High_School",
+   "https://archive.org/details/classmates-yearbook-56145-1926-greensburg-high-school",
+   "https://archive.org/details/classmates-yearbook-24997-1951-greensburg-high-school"
+  ],
+  "era": "Later merged into Greensburg Salem (gold, brown, white; Golden Lions per district handbook cited on Wikipedia) - successor's colours.",
+  "notes": "Brown and white inferred from 1926 publication name only; successor Greensburg Salem is gold/brown/white.",
+  "evidence": "1926 Greensburg (Pennsylvania) HS yearbook OCR: the school publication is 'The Brown and White' (suggests brown and white colours). A 1951 'Greensburg High School' yearbook had a 'Lions Den' but no Pennsylvania cue, so not used. Nothing for the 1936-59 bracket years."
+ },
+ {
+  "school": "Ellwood City",
+  "identified_as": "Lincoln High School, Ellwood City",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0000FF",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "high",
+  "wikipedia": "Lincoln High School (Ellwood City, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lincoln_High_School_(Ellwood_City,_Pennsylvania)",
+   "https://www.ecasdk12.org",
+   "https://images.squarespace-cdn.com/content/v1/62bbee5bd982ab116bdd5644/df05d76c-ed3e-4c4e-b8ae-c6aa9adc994b/ellwood_city_wolverines.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District site 'ellwood_city_wolverines' logo: wolverine head drawn in pure bright blue #0000FF and white. Site CSS is Squarespace stock."
+ },
+ {
+  "school": "Palmyra",
+  "identified_as": "Palmyra Area High School, Palmyra",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#DB5E00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Palmyra Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Palmyra_Area_High_School",
+   "https://www.pasd.us",
+   "https://www.pasd.us/get/files/image/galleries/1_Cougar_Orange_w_black_outline.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District site cougar logo ('Cougar_Orange_w_black_outline'): flat burnt orange #DB5E00 with black #000000 outline."
+ },
+ {
+  "school": "Greencastle-Antrim",
+  "identified_as": "Greencastle-Antrim High School, Greencastle",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#131D54",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCC300",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Greencastle-Antrim School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greencastle-Antrim_School_District",
+   "https://www.gcasd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/6184/logo/7306/GreencastleAntrim_Logo_color.png"
+  ],
+  "era": null,
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. District page has no colours field; 'Blue Devils' from a photo caption. Colours not stated.",
+  "evidence": "District logo: gold #FCC300 'GA' with navy #131D54 outline; site theme uses the same #131D54 and #FCC300."
+ },
+ {
+  "school": "Plymouth",
+  "identified_as": "Plymouth High School, Plymouth (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://archive.org/details/classmates-yearbook-57434-1943-plymouth-high-school",
+   "https://archive.org/details/classmates-yearbook-37774-1942-plymouth-high-school",
+   "search:https://archive.org/advancedsearch.php?q=plymouth high school yearbook"
+  ],
+  "era": "Closed late 1960s; merged into Wyoming Valley West (burgundy and gold, Spartans) - successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No page for Plymouth HS.",
+  "evidence": "Checked archive.org 'Plymouth High School' yearbook OCR texts; none could be tied clearly to Plymouth, Luzerne County (1942 is Massachusetts; 1943 plays Kingston but state unclear). Image search returned nothing relevant. No colours found."
+ },
+ {
+  "school": "Neshaminy-Langhorne",
+  "identified_as": "Neshaminy-Langhorne High School, Langhorne (Neshaminy SD)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#033499",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#AE0303",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Redskins",
+  "confidence": "high",
+  "wikipedia": "Neshaminy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Neshaminy_High_School",
+   "https://www.neshaminy.org",
+   "https://cdnsm5-ss4.sharpschool.com/UserFiles/Servers/Server_38300288/Image/logos/DISTRICT-COLOR.png"
+  ],
+  "era": "Neshaminy-Langhorne High School is the former name of Neshaminy High School (per infobox former_name).",
+  "notes": "Colours are the current Neshaminy HS infobox; same school, so likely the same in 1976-83.",
+  "evidence": "Neshaminy SD colour logo: block 'N' split royal blue #033499 / red #AE0303 with white and blue outline. (Shows today's Neshaminy colours; red and blue also per first pass.)"
+ },
+ {
+  "school": "Northeastern",
+  "identified_as": "Northeastern High School, Manchester (York County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F47421",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "high",
+  "wikipedia": "Northeastern High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeastern_High_School_(Pennsylvania)",
+   "https://www.nebobcats.org",
+   "https://northeastern-cdn.fxbrt.com/downloads/logos-image-assets/nsd_header_logo.png",
+   "https://northeastern-cdn.fxbrt.com/downloads/logos-image-assets/bobcat_square_white_background.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District header and square bobcat logos: orange #F47421 bobcat head with black #231F20 detail and white."
+ },
+ {
+  "school": "Latrobe",
+  "identified_as": "Latrobe High School, Latrobe",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#DD4726",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Greater Latrobe Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Latrobe_Senior_High_School",
+   "https://www.glsd.us",
+   "https://cmsv2-assets.apptegy.net/uploads/33358/logo/36482/District_Logo.png",
+   "https://archive.org/details/classmates-yearbook-25300-1959-greater-latrobe-high-school"
+  ],
+  "era": "Latrobe HS (to 1966) became Greater Latrobe Senior HS; orange and black confirmed for 1959. Hex values come from the modern Greater Latrobe logo.",
+  "notes": "Inferred continuity from Greater Latrobe; Latrobe HS colours not independently confirmed.",
+  "evidence": "1959 Latrobe HS yearbook OCR calls the football team 'the Orange and Black gridders', so the bracket-era colours were orange and black. Hex from today's Greater Latrobe district logo: orange #DD4726 wildcat and wordmark, black text; site theme orange #D64000."
+ },
+ {
+  "school": "York Tech",
+  "identified_as": "York County School of Technology, York",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#005744",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "York County School of Technology",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_County_School_of_Technology",
+   "https://www.ytech.edu",
+   "https://static.wixstatic.com/media/200bbc_c5317f1073664a179f10c9459d8e3e75~mv2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "York Tech header logo: Spartan medallion in dark green #005744 on white; site theme green #005745 (also a tan #B0A986 accent)."
+ },
+ {
+  "school": "McKeesport",
+  "identified_as": "McKeesport Area High School, McKeesport",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BB1D2E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#222245",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "McKeesport Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/McKeesport_Area_High_School",
+   "https://www.mckasd.net",
+   "https://resources.finalsite.net/images/v1714737221/mckasdnet/g6rzrj31ttqqbuhkmep4/McKeesportAreaSchoolDistrict.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District 'MA' logo: navy #222245 square, white letters, red #BB1D2E fill and border."
+ },
+ {
+  "school": "Bishop Canevin",
+  "identified_as": "Bishop Canevin High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#003D75",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Light Blue",
+    "hex": "#6E7AA6",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "medium",
+  "wikipedia": "Bishop Canevin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Canevin_High_School",
+   "https://en.wikipedia.org/wiki/Special:FilePath/Bishopcanevinhspgh.png",
+   "search:https://bishopcanevin.org (403)"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Crusaders shield logo (from the Wikipedia infobox file): navy #003D75 field, a muted light blue #6E7AA6 inner shield, white lettering. The light blue is greyer than true Columbia blue. School site refused the fetch (403)."
+ },
+ {
+  "school": "Lower Moreland",
+  "identified_as": "Lower Moreland High School, Huntingdon Valley",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#091D3F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Old Gold",
+    "hex": "#87744F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Lower Moreland Township School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lower_Moreland_Township_School_District",
+   "https://www.lmtsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/30102/logo/32915/Lower_Moreland_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District lion logo: navy #091D3F and muted old gold #87744F. Site theme instead uses royal blue #002892 and bright gold #FCB903, so the exact shades vary."
+ },
+ {
+  "school": "Mountain View",
+  "identified_as": "Mountain View Junior/Senior High School, Kingsley (Susquehanna County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#3853A4",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#F67F45",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Mountain View School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mountain_View_School_District_(Pennsylvania)",
+   "https://www.mvsd.net",
+   "https://www.mvsd.net/departments/athletics",
+   "https://resources.finalsite.net/images/v1736798342/mvsdnet/joiyfpxiaac8lstrmjop/Logowithoutwhite2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District 'M' eagle logo: top half blue #3853A4, bottom half orange #F67F45, white eagle. (mvsd.us is Mid Valley, not this school.)"
+ },
+ {
+  "school": "Scranton Prep",
+  "identified_as": "Scranton Preparatory School, Scranton",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#37246B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F5A81C",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "high",
+  "wikipedia": "Scranton Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_Preparatory_School",
+   "https://www.scrantonprep.org",
+   "https://www.scrantonprep.org/athletics",
+   "https://resources.finalsite.net/images/v1754580267/scrantonprepcom/jumzwp2iayzkdawfxbyp/Scranton_logo_purple.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School seal is drawn in purple #37246B (also the site primary); site CSS sets --secondary-color: #F5A81C (gold)."
+ },
+ {
+  "school": "Radnor",
+  "identified_as": "Radnor High School, Radnor",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#711212",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "high",
+  "wikipedia": "Radnor High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Radnor_High_School",
+   "https://www.rtsd.org",
+   "https://www.rtsd.org/uploaded/RadnorSchoolDistrictSeal.ico"
+  ],
+  "era": "Nickname changed from Red Raiders to Raptors in 2021.",
+  "notes": null,
+  "evidence": "District seal icon is maroon #711112 on white; site theme's main colour is #711212. No Raptors athletics logo found."
+ },
+ {
+  "school": "Brashear",
+  "identified_as": "Brashear High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#86764F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulls",
+  "confidence": "high",
+  "wikipedia": "Brashear High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brashear_High_School",
+   "https://www.pghschools.org/schools/9-12/brashear",
+   "https://resources.finalsite.net/images/v1724440692/pghschoolsorg/vzy51i16jziy1u4vco3m/Brashear-logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Pittsburgh Public Schools Brashear logo: black #231F20 bull head with a Vegas gold #86764F script 'B'."
+ },
+ {
+  "school": "Northeast High",
+  "identified_as": "Northeast High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Northeast High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_High_School_(Philadelphia)",
+   "https://www.nehsvikings.org",
+   "https://sportshub2-uploads.vnn-prod.zone/files/sites/2423/2020/06/16080516/northeast_blackred_logo.png"
+  ],
+  "era": null,
+  "notes": "northeasthigh.org is a Maryland school; not used.",
+  "evidence": "Official athletics site (Cottman Ave, Philadelphia) Viking logo: bright red #FF0000 and black. Site theme uses darker reds #A20705 and #802D3A; Wikipedia gives #8B0000, so the exact red varies."
+ },
+ {
+  "school": "Church Farm School",
+  "identified_as": "The Church Farm School, Exton",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#B20838",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Grey",
+    "hex": "#A7A9AC",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Griffins",
+  "confidence": "high",
+  "wikipedia": "Church Farm School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Church_Farm_School",
+   "https://www.gocfs.net",
+   "https://bbk12e1-cdn.myschoolcdn.com/ftpimages/991/logo/footer-logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School footer logo: crimson-maroon #B20838 block with chapel, grey #A7A9AC 'CFS' letters, dark #231F20 text. The red is closer to cardinal than to dark maroon."
+ },
+ {
+  "school": "Bellwood Antis",
+  "identified_as": "Bellwood-Antis High School, Bellwood",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#004FE2",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFDE59",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Bellwood-Antis School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bellwood-Antis_School_District",
+   "https://www.blwd.k12.pa.us",
+   "https://www.blwd.k12.pa.us/pics/school_logo.jpg",
+   "https://www.blwd.k12.pa.us/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District 'BA' logo: bright royal blue #004FE2 square, gold #FFDE59 script letters and border. (basd.net is Bellefonte, not this school.)"
+ }
+]

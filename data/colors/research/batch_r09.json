@@ -1,0 +1,972 @@
+[
+ {
+  "school": "Upper Moreland",
+  "identified_as": "Upper Moreland High School, Willow Grove",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Bears",
+  "confidence": "medium",
+  "wikipedia": "Upper Moreland High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Moreland_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Bishop O'Hara",
+  "identified_as": "Bishop O'Hara High School, Dunmore (closed 2007)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)"
+  ],
+  "era": "Closed 2007; merged with Bishop Hannan into Holy Cross High School (Dunmore), whose colours (silver, forest green, black) are the successor's, not O'Hara's.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Holy Cross article mentions O'Hara's 'Lady Bruins' (2001) but gives no O'Hara colours."
+ },
+ {
+  "school": "Northwestern",
+  "identified_as": "Northwestern Senior High School, Albion",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ff0000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Northwestern Senior High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northwestern_Senior_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Manheim Borough",
+  "identified_as": "Manheim Borough High School, Manheim (Lancaster County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Pre-1950s borough school, presumably succeeded by Manheim Central (maroon and gray, Barons) - not verified.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Wikipedia page found for Manheim Borough HS."
+ },
+ {
+  "school": "Kutztown",
+  "identified_as": "Kutztown Area High School, Kutztown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Kutztown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kutztown_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Sheffield",
+  "identified_as": "Sheffield Area Middle/High School, Sheffield (Warren County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "medium",
+  "wikipedia": "Sheffield Area Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sheffield_Area_Middle/High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Ferndale",
+  "identified_as": "Ferndale Area Junior/Senior High School, Johnstown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Yellowjackets",
+  "confidence": "medium",
+  "wikipedia": "Ferndale Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ferndale_Area_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "South Allegheny",
+  "identified_as": "South Allegheny Middle/Senior High School, Liberty (McKeesport)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Gladiators",
+  "confidence": "medium",
+  "wikipedia": "South Allegheny Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Allegheny_Middle/Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox color box uses 'darkblue'."
+ },
+ {
+  "school": "Elderton",
+  "identified_as": "Elderton Junior/Senior High School, Elderton (Armstrong SD; closed 2012)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)"
+  ],
+  "era": "Closed June 2012 (Armstrong SD).",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. 'Elderton High School' redirects to the Armstrong SD page, which gives no colours."
+ },
+ {
+  "school": "Mars",
+  "identified_as": "Mars Area High School, Mars",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#000080",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFDF00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Fightin' Planets",
+  "confidence": "medium",
+  "wikipedia": "Mars Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mars_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Fox Chapel",
+  "identified_as": "Fox Chapel Area High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Foxes",
+  "confidence": "medium",
+  "wikipedia": "Fox Chapel Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fox_Chapel_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Muhlenberg",
+  "identified_as": "Muhlenberg High School, Laureldale",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Muhls",
+  "confidence": "medium",
+  "wikipedia": "Muhlenberg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Muhlenberg_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Baldwin",
+  "identified_as": "Baldwin High School, Pittsburgh (Baldwin-Whitehall SD)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#9400D3",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Fighting Highlanders",
+  "confidence": "medium",
+  "wikipedia": "Baldwin High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Baldwin_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Meadowbrook Christian",
+  "identified_as": "Meadowbrook Christian School, Milton (Northumberland County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Wikipedia page found."
+ },
+ {
+  "school": "Churchill",
+  "identified_as": "Churchill Area High School, Pittsburgh (closed 1987)",
+  "colors": [],
+  "mascot": "Chargers",
+  "confidence": "low",
+  "wikipedia": "Churchill Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Churchill_Area_High_School"
+  ],
+  "era": "Merged 1987 into Woodland Hills High School.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Wikipedia infobox colours field is empty; nickname Chargers from article text."
+ },
+ {
+  "school": "Avon Grove",
+  "identified_as": "Avon Grove High School, West Grove",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Devils",
+  "confidence": "medium",
+  "wikipedia": "Avon Grove High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Avon_Grove_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Pottsgrove",
+  "identified_as": "Pottsgrove High School, Pottstown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Pottsgrove High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pottsgrove_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Marple Newtown",
+  "identified_as": "Marple Newtown High School, Newtown Square",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": "#ff8200",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Marple Newtown School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Marple_Newtown_School_District"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps for colours."
+ },
+ {
+  "school": "St. Joseph's Prep",
+  "identified_as": "St. Joseph's Preparatory School, Philadelphia",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hawks",
+  "confidence": "medium",
+  "wikipedia": "St. Joseph's Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._Joseph's_Preparatory_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Chichester",
+  "identified_as": "Chichester High School, Boothwyn/Aston (Chichester SD)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Chichester School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chichester_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Jenner-Boswell",
+  "identified_as": "Jenner-Boswell High School, Boswell (Somerset County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Star High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_High_School"
+  ],
+  "era": "Merged 1969 with Forbes SD into North Star (green and white, Cougars); those are the successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Jenner-Boswell colours found."
+ },
+ {
+  "school": "Oswayo Valley",
+  "identified_as": "Oswayo Valley High School, Shinglehouse",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Oswayo Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oswayo_Valley_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "ELCO",
+  "identified_as": "Eastern Lebanon County High School, Myerstown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "medium",
+  "wikipedia": "Eastern Lebanon County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eastern_Lebanon_County_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox color box uses navy."
+ },
+ {
+  "school": "Lansdowne",
+  "identified_as": "Lansdowne High School, Lansdowne (Delaware County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School"
+  ],
+  "era": "Later Lansdowne-Aldan HS; merged 1982 into Penn Wood HS (maroon, white, navy) - successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Lansdowne HS colours found."
+ },
+ {
+  "school": "Yough",
+  "identified_as": "Yough Senior High School, Herminie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Yough Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Yough_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Greensburg",
+  "identified_as": "Greensburg High School, Greensburg (Westmoreland County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Greensburg Salem High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Salem_High_School"
+  ],
+  "era": "Later merged into Greensburg Salem (gold, brown, white; Golden Lions per district handbook cited on Wikipedia) - successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Greensburg HS colours for 1936-59 not confirmed; may well be the same brown and gold, but unverified."
+ },
+ {
+  "school": "Ellwood City",
+  "identified_as": "Lincoln High School, Ellwood City",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "medium",
+  "wikipedia": "Lincoln High School (Ellwood City, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lincoln_High_School_(Ellwood_City,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Palmyra",
+  "identified_as": "Palmyra Area High School, Palmyra",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Palmyra Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Palmyra_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Greencastle-Antrim",
+  "identified_as": "Greencastle-Antrim High School, Greencastle",
+  "colors": [],
+  "mascot": "Blue Devils",
+  "confidence": "low",
+  "wikipedia": "Greencastle-Antrim School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greencastle-Antrim_School_District"
+  ],
+  "era": null,
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. District page has no colours field; 'Blue Devils' from a photo caption. Colours not stated."
+ },
+ {
+  "school": "Plymouth",
+  "identified_as": "Plymouth High School, Plymouth (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed late 1960s; merged into Wyoming Valley West (burgundy and gold, Spartans) - successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No page for Plymouth HS."
+ },
+ {
+  "school": "Neshaminy-Langhorne",
+  "identified_as": "Neshaminy-Langhorne High School, Langhorne (Neshaminy SD)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Redskins",
+  "confidence": "medium",
+  "wikipedia": "Neshaminy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Neshaminy_High_School"
+  ],
+  "era": "Neshaminy-Langhorne High School is the former name of Neshaminy High School (per infobox former_name).",
+  "notes": "Colours are the current Neshaminy HS infobox; same school, so likely the same in 1976-83."
+ },
+ {
+  "school": "Northeastern",
+  "identified_as": "Northeastern High School, Manchester (York County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "Northeastern High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeastern_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Latrobe",
+  "identified_as": "Latrobe High School, Latrobe",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "low",
+  "wikipedia": "Greater Latrobe Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Latrobe_Senior_High_School"
+  ],
+  "era": "Bracket years 1953-1966 predate Greater Latrobe Senior HS (opened 1966); colours shown are Greater Latrobe's.",
+  "notes": "Inferred continuity from Greater Latrobe; Latrobe HS colours not independently confirmed."
+ },
+ {
+  "school": "York Tech",
+  "identified_as": "York County School of Technology, York",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "York County School of Technology",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_County_School_of_Technology"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "McKeesport",
+  "identified_as": "McKeesport Area High School, McKeesport",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "McKeesport Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/McKeesport_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Bishop Canevin",
+  "identified_as": "Bishop Canevin High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Columbia Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "medium",
+  "wikipedia": "Bishop Canevin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Canevin_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Lower Moreland",
+  "identified_as": "Lower Moreland High School, Huntingdon Valley",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Lower Moreland Township School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lower_Moreland_Township_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Mountain View",
+  "identified_as": "Mountain View Junior/Senior High School, Kingsley (Susquehanna County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Mountain View School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mountain_View_School_District_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Scranton Prep",
+  "identified_as": "Scranton Preparatory School, Scranton",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "medium",
+  "wikipedia": "Scranton Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_Preparatory_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Radnor",
+  "identified_as": "Radnor High School, Radnor",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "medium",
+  "wikipedia": "Radnor High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Radnor_High_School"
+  ],
+  "era": "Nickname changed from Red Raiders to Raptors in 2021.",
+  "notes": null
+ },
+ {
+  "school": "Brashear",
+  "identified_as": "Brashear High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#A98F52",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Bulls",
+  "confidence": "medium",
+  "wikipedia": "Brashear High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brashear_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Northeast High",
+  "identified_as": "Northeast High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Red",
+    "hex": "#8B0000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Northeast High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_High_School_(Philadelphia)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Church Farm School",
+  "identified_as": "The Church Farm School, Exton",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Griffins",
+  "confidence": "medium",
+  "wikipedia": "Church Farm School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Church_Farm_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Bellwood Antis",
+  "identified_as": "Bellwood-Antis High School, Bellwood",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "medium",
+  "wikipedia": "Bellwood-Antis School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bellwood-Antis_School_District"
+  ],
+  "era": null,
+  "notes": null
+ }
+]

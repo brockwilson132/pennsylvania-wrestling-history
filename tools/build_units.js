@@ -19,7 +19,7 @@ const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school
 const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
 const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
 const MEMB = (W.WR_MEMB || { r: {} }).r;
-const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' } };
+const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' }, 'Bishop McDevitt': { 12: 'Bishop McDevitt (12)' } };
 const splitName = (sch, d) => (SPLIT[sch] && SPLIT[sch][d]) || sch;
 const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
 const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
@@ -212,6 +212,7 @@ const bySS = new Map();
 APP.forEach((a) => { const c = clsOf(a); const k = a.sch + '|' + a.year + '|' + c; (bySS.get(k) || bySS.set(k, []).get(k)).push(a); });
 const SHOW = ['Nazareth', 'Easton', 'Northampton', 'Bethlehem Catholic', 'Bethlehem Liberty', 'Parkland', 'Notre Dame-Green Pond'];
 const lineups = {};
+const RATED = new Map(); // year|class|school|name key -> that school season's wrestler (state-duals fill below)
 const SEAS = []; // per school-season: {row, lineup: [real rating or null per contested weight], covered}
 bySS.forEach((rows, k) => {
   const [sch, ys, c] = k.split('|'); const year = +ys;
@@ -223,6 +224,7 @@ bySS.forEach((rows, k) => {
   rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, nb: 0, shown: 0, X: -1, D: -1, R: -1, S: -1 }; if (p.g == null || p.g < 0) p.g = a.g; p.nb = Math.max(p.nb, NBO.get(a.year + '|' + a.w + '|' + nkey(a.name)) || 0);
     if (a.real != null && (p.real == null || a.real > p.real)) p.real = a.real; p.shown = Math.max(p.shown, a.rating);
     const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
+  per.forEach((p) => RATED.set(year + '|' + c + '|' + sch + '|' + nkey(p.name), p));
   const best = new Map(), unrated = new Set(); per.forEach((p) => { if (p.real == null) { unrated.add(p.std); return; } const b = best.get(p.std); if (!b || p.real > b.real) best.set(p.std, p); });
   const weights = Array.from(nW.get(year + '|' + c) || new Set(best.keys())).sort((a, b) => a - b);
   const lineup = weights.map((i) => (best.get(i) ? best.get(i).real : null));
@@ -350,7 +352,7 @@ byS.forEach((rows, i) => {
   /* a season rating resting on few bouts is uncertain: its spread is UNC / sqrt(1 + bouts); the win chance is averaged
      over both wrestlers' spreads, which shrinks the gap the bout is scored at (UNC tuned on the real state duals below) */
   let UNC = +(process.env.SEASON_UNC || 0); const K2 = Math.PI * Math.pow(Math.LN10 / 400, 2) / 8;
-  const varOf = (n) => (n == null ? 0 : UNC * UNC / (1 + n));
+  const varOf = (n) => (n == null ? 0 : n < 0 ? -n : UNC * UNC / (1 + n));   // n < 0: minus the rating's own variance (state-duals starters, whose rating is already a posterior)
   const bout = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0] : [-6, 36]; if (rb == null) return [6, 36]; let g = ra - rb; if (UNC) g /= Math.sqrt(1 + K2 * (varOf(na) + varOf(nb)));
     const i = Math.round((Math.max(-GMAX, Math.min(GMAX, g)) + GMAX) / 5); return [BM[i], BV[i] + BM[i] * BM[i]]; };
   /* the fill for a weight we can't see */
@@ -372,6 +374,67 @@ byS.forEach((rows, i) => {
   const FORFEIT = process.env.SEASON_EMPTY === 'forfeit';
   const empty = (y, wt) => (FORFEIT ? [[null, wt]] : BK[eraOf(y)].map(([r, w]) => [r, w * wt]));
   console.log('empty weight scored as a district non-placer, era quantiles:', BK.map((b) => b.map((x) => Math.round(x[0])).join('/')).join(' | '), FORFEIT ? '(off: forfeit)' : '');
+  /* state-duals starters (Brock, 2026-11-08): a weight nobody entered in the postseason, in a season whose team wrestled
+     the PIAA team duals, takes the wrestler the team actually sent out at that weight in those duals
+     (data/sources/state_dual_bouts.csv, tools/fetch_state_duals.py). Not anyone already in the postseason lineup (nobody
+     twice), and only that season (never another year's wrestler). His rating comes from his on-mat dual bouts (dec, major,
+     tech fall, fall) at any weight, on the rating scale, starting from the same district
+     non-placer the empty weight would have been (normal prior, the era's non-placer mean and spread): one win moves him a
+     little, four wins against state qualifiers a lot. With no rated bout he stays the non-placer. The duals the starters
+     come from are also the duals Strength is tuned on, so the tuning re-rates each starter without that dual's bouts. */
+  const DUALFILL = process.env.SEASON_DUALFILL !== 'off';
+  const NPS = [0, 1].map((e) => { const v = []; SEAS.forEach((s) => { if (s.year < SEASON_FROM || eraOf(s.year) !== e || !s.covered) return;
+    s.lw.forEach((l) => { const p = l[3]; if (p && p.D === 0 && p.R < 0 && p.S < 0) v.push(p.real); }); });
+    const mu = v.reduce((t, x) => t + x, 0) / v.length; return [mu, Math.sqrt(v.reduce((t, x) => t + (x - mu) * (x - mu), 0) / v.length)]; });
+  const rateMV = (era, B) => { const [mu, sd] = NPS[era]; let z = 0, t = 0, t2 = 0;
+    for (let r = mu - 4 * sd; r <= mu + 4 * sd; r += 5) { let l = -0.5 * Math.pow((r - mu) / sd, 2); B.forEach(([ro, won]) => { const p = 1 / (1 + Math.pow(10, (ro - r) / 400)); l += Math.log(won ? p : 1 - p); }); const w = Math.exp(l); z += w; t += w * r; t2 += w * r * r; }
+    return [t / z, Math.max(1, t2 / z - (t / z) * (t / z))]; };
+  const rateDual = (era, B) => rateMV(era, B)[0];
+  const hw = (w) => (w >= 275 ? 999 : w);   // heavyweight 275/285/HWT as one
+  const DUB = {};   // year -> on-mat state-duals bouts [weight, winner, his school, loser, his school, result] (Compare's real results)
+  let oppR = () => null;
+  const PP = new Map();   // year|class|school|name -> {name, era, n: Map(weight -> bouts there), B: [[opp rating or null, won, opp school, opp key]], r}
+  const DF = new Map();   // school|year|class -> Map(weight -> Set of PP keys)
+  if (DUALFILL) {
+    const csv = (line) => { const o = []; let cur = '', q = false; for (let i = 0; i < line.length; i++) { const ch = line[i]; if (q) { if (ch === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; } else if (ch === '"') q = true; else if (ch === ',') { o.push(cur); cur = ''; } else cur += ch; } o.push(cur); return o; };
+    const fp = path.join(__dirname, '..', 'data', 'sources', 'state_dual_bouts.csv');
+    const L = fs.existsSync(fp) ? fs.readFileSync(fp, 'utf8').split(/\r?\n/).filter(Boolean).map(csv) : [[]]; const H = L[0], ix = (c) => H.indexOf(c);
+    const R = L.slice(1).map((f) => Object.fromEntries(H.map((h, i) => [h, f[i]])));
+    /* team names: each dual page matched to its PIAA team-duals result (year, class, both scores), whose names are the
+       app's; a name never matched falls back to the school index */
+    global.window = global.window || {}; require(path.join(OV, 'duals.js')); const WD = global.window.WR_DUALS || [];
+    const tn = new Map(), seenD = new Set(), sim2 = (x, y) => { const a = nkey(x), b = nkey(canon(y)); return a.slice(0, 4) === b.slice(0, 4) || nkey(canon(x)) === b; };
+    R.forEach((r) => { if (seenD.has(r.dual_id)) return; seenD.add(r.dual_id);
+      const m = WD.filter((d) => d[0] === +r.year && d[1] === r.cls && ((d[5] === +r.score_a && d[8] === +r.score_b && (sim2(r.team_a, d[3]) || sim2(r.team_b, d[6]))) || (d[5] === +r.score_b && d[8] === +r.score_a && (sim2(r.team_b, d[3]) || sim2(r.team_a, d[6])))));
+      if (m.length !== 1) return; const d = m[0], aw = d[5] === +r.score_a && sim2(r.team_a, d[3]) || !(d[5] === +r.score_b && sim2(r.team_b, d[3]));
+      const vote = (pa, c) => { const k = r.year + '|' + r.cls + '|' + pa; const x = tn.get(k) || tn.set(k, new Map()).get(k); x.set(c, (x.get(c) || 0) + 1); };
+      vote(r.team_a, aw ? d[3] : d[6]); vote(r.team_b, aw ? d[6] : d[3]); });
+    const team = (y, c, pa) => { const x = tn.get(y + '|' + c + '|' + pa); return x ? Array.from(x).sort((p, q) => q[1] - p[1])[0][0] : canon(pa); };
+    const ON = { dec: 1, md: 1, tf: 1, fall: 1 }; let nb = 0, nOn = 0, nOpp = 0;
+    R.forEach((r) => { if (!r.winner || !r.loser) return; nb++; const y = +r.year, c = r.cls, w = hw(wNum(r.weight));
+      const side = [[r.winner, team(y, c, r.winner_team), 1], [r.loser, team(y, c, r.loser_team), 0]];
+      if (ON[r.result]) (DUB[y] = DUB[y] || []).push([w, r.winner, side[0][1], r.loser, side[1][1], r.result]);
+      side.forEach(([nm, sch, won], k) => { const [onm, osch] = side[1 - k]; const pk = y + '|' + c + '|' + sch + '|' + nkey(nm);
+        const e = PP.get(pk) || PP.set(pk, { name: nm, era: eraOf(y), n: new Map(), B: [] }).get(pk); e.n.set(w, (e.n.get(w) || 0) + 1);
+        const kk = sch + '|' + y + '|' + c; const M = DF.get(kk) || DF.set(kk, new Map()).get(kk); const x = M.get(w) || M.set(w, new Set()).get(w); x.add(pk);
+        if (!ON[r.result]) return; if (k === 0) nOn++; const ok = y + '|' + c + '|' + osch + '|' + nkey(onm), o = RATED.get(ok);
+        if (o && o.real != null) { if (k === 0) nOpp++; e.B.push([o.real, won, osch, null]); } else e.B.push([null, won, osch, ok]); }); });
+    /* opponents without a season rating (dual-only, or a postseason bracket not on file) are rated the same way, all at
+       once: each starts as the non-placer and the ratings are solved together until they settle */
+    const unk = Array.from(PP.keys()).filter((k) => { const o = RATED.get(k); return !o || o.real == null; });
+    unk.forEach((k) => { const e = PP.get(k); e.r = NPS[e.era][0]; });
+  oppR = (b) => (b[0] != null ? b[0] : PP.has(b[3]) && PP.get(b[3]).r != null ? PP.get(b[3]).r : null);
+    for (let it = 0; it < 30; it++) { let mv = 0; unk.forEach((k) => { const e = PP.get(k); const B = e.B.map((b) => [oppR(b), b[1]]).filter((b) => b[0] != null); const r = rateDual(e.era, B); mv = Math.max(mv, Math.abs(r - e.r)); e.r = r; }); if (mv < 0.5) break; }
+    unk.forEach((k) => { const e = PP.get(k); e.v = rateMV(e.era, e.B.map((b) => [oppR(b), b[1]]).filter((b) => b[0] != null))[1]; });
+    if (process.env.DF_DEBUG) PP.forEach((e, k) => { if (k.startsWith(process.env.DF_DEBUG)) console.log('  DFP', k, Math.round(e.r || 0), JSON.stringify(Array.from(e.n)), e.B.map((b) => (b[1] ? 'W ' : 'L ') + Math.round(oppR(b) || 0)).join(', ')); });
+    console.log(`state-duals bouts: ${nb} read, ${nOn} decided on the mat, ${nOpp} of those against an opponent with a season rating; team names matched ${tn.size}; ${unk.length} wrestlers rated from their dual bouts`);
+  }
+  /* the starters for season s's empty weights: each empty weight takes the dual-only wrestler who wrestled there most,
+     nobody twice (pairs taken most bouts-at-that-weight first), never anyone in the postseason lineup */
+  const startersOf = (s, ws) => { const M = DF.get(s.sch + '|' + s.year + '|' + s.c), out = new Map(); if (!M) return out; const C = [];
+    ws.forEach((w, j) => { if (w == null) return; const x = M.get(hw(w)); if (x) x.forEach((k) => { const e = PP.get(k); if (!RATED.has(k) && e.B.length) C.push([e.n.get(hw(w)), e.B.length, j, k]); }); });
+    C.sort((p, q) => q[0] - p[0] || q[1] - p[1]); const used = new Set();
+    C.forEach(([, , j, k]) => { if (out.has(j) || used.has(k)) return; out.set(j, PP.get(k)); used.add(k); }); return out; };
   FILL.forEach((f, k) => { const e = +k.split('|')[0]; FILL.set(k, f.flatMap(([r, w]) => (r == null ? empty(e ? 2000 : 1990, w) : [[r, w]]))); });
   /* the pool: every school season from 1974 with a lineup we can see */
   const pool = [];
@@ -380,16 +443,38 @@ byS.forEach((rows, i) => {
     const fill = exact ? null : FILL.get(eraOf(s.year) + '|' + binOf(s, R));
     /* one slot per weight the season actually had, lightest first (a weight bracket of STDK can hold two of a season's
        weights, 130 and 135 in 2002-11 or 182 and 195 in 2012-23, so slots are by position, not by bracket) */
-    const lw = s.lw; const slot = lw.map((x) => (exact ? (x[1] != null ? [[x[1], 1, x[3].nb]] : empty(s.year, 1)) : x[2] != null ? [[x[2], 1, x[4].nb]] : fill));
+    const lw = s.lw; const ST = exact && DUALFILL ? startersOf(s, lw.map((x) => (x[1] == null ? x[0] : null)).map((w) => w)) : new Map(); s.dfs = new Map();
+    const slot = lw.map((x, j) => { if (!exact) return x[2] != null ? [[x[2], 1, x[4].nb]] : fill; if (x[1] != null) return [[x[1], 1, x[3].nb]];
+      const e = ST.get(j); if (!e) return empty(s.year, 1); s.dfs.set(j, e); return [[e.r, 1, -e.v]]; });
     if (process.env.SEASON_ALIGN === 'bucket') { const o = new Array(STDK.length); s.weights.forEach((i, j) => { o[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; }); pool.push({ s, slot: o, est: !exact }); return; }
+    slot.wts = lw.map((x) => x[0]); slot.wk = slot.wts.join(',');
+    slot.avg = slot.flatMap((o) => o.map(([r, q, nb]) => [r, q / slot.length, nb]));   // the team's average wrestler: any of its weights, equally likely (empty weights as district non-placers)
     pool.push({ s, slot, est: !exact }); });
-  /* two lineups meet weight by weight; when one season had more weights, each of its weights meets the other's weight at the
-     same relative position (lightest to lightest, heaviest to heaviest) */
-  const pairs = (n, m) => { const N = Math.max(n, m), out = []; for (let k = 0; k < N; k++) out.push([N === 1 ? 0 : Math.round(k * (n - 1) / (N - 1)), N === 1 ? 0 : Math.round(k * (m - 1) / (N - 1))]); return out; };
-  const PAIRS = new Map(); const pairsOf = (n, m) => { const k = n * 100 + m; return PAIRS.get(k) || PAIRS.set(k, pairs(n, m)).get(k); };
+  /* the slot with each state-duals starter re-rated without his bouts against one opponent (tuning on that dual) */
+  const mkSlot = (o, wts) => { o.wts = wts; o.wk = wts.join(','); o.avg = o.flatMap((x) => x.map(([r, q, nb]) => [r, q / o.length, nb])); return o; };
+  const LOO = new Map(); const slotVs = (p, opp) => { if (!p.s.dfs || !p.s.dfs.size) return p.slot; const k = p.s.sch + '|' + p.s.year + '|' + p.s.c + '|' + opp; if (LOO.has(k)) return LOO.get(k);
+    let hit = false; const o = p.slot.map((x, j) => { const e = p.s.dfs.get(j); if (!e || !e.B.some((b) => b[2] === opp)) return x; hit = true; const B = e.B.filter((b) => b[2] !== opp).map((b) => [oppR(b), b[1]]).filter((b) => b[0] != null);
+      if (!B.length) return empty(p.s.year, 1); const [m, v] = rateMV(eraOf(p.s.year), B); return [[m, 1, -v]]; });
+    const r = hit ? mkSlot(o, p.slot.wts) : p.slot; LOO.set(k, r); return r; };
+  console.log('state-duals starters at empty weights:', pool.reduce((t, p) => t + (p.s.dfs ? p.s.dfs.size : 0), 0), 'in', pool.filter((p) => p.s.dfs && p.s.dfs.size).length, 'seasons', DUALFILL ? '' : '(off)');
+  /* two lineups meet weight by weight, each weight against the nearest weight of the other season and nobody twice
+     (Brock, 2026-11-08). The pairing keeps weight order and takes the fewest total pounds apart, where an unpaired weight
+     costs SIT pounds (heavyweight counted as 280), so two weights more than 2 x SIT apart never meet. Nobody sits out
+     (Brock): a weight left without a partner wrestles the other team's average wrestler, which is the whole lineup with
+     every weight equally likely (an empty weight counts as a district non-placer), not one averaged rating: a team of five
+     stars and eight empty weights is a 5-in-13 chance of a star, not a star.
+     2000 (13 weights) vs 2017 (14): 2000's 140 meets 2017's 138; 2000's 135 and 2017's 182 and 220 meet the other
+     team's average. The score is scaled to 13 bouts. overtime/app/seasons.js pairs the same way. */
+  const SIT = 8, wLb = (w) => (w >= 999 ? 280 : w);
+  const pairs = (A, B) => { const n = A.length, m = B.length, d = (i, j) => Math.abs(wLb(A[i]) - wLb(B[j]));
+    const f = Array.from({ length: n + 1 }, (_, i) => Array.from({ length: m + 1 }, (_, j) => (i + j) * SIT));
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) f[i][j] = Math.min(f[i - 1][j - 1] + d(i - 1, j - 1), f[i - 1][j] + SIT, f[i][j - 1] + SIT);
+    const out = []; let i = n, j = m; while (i > 0 || j > 0) { if (i > 0 && j > 0 && f[i][j] === f[i - 1][j - 1] + d(i - 1, j - 1)) { out.push([i - 1, j - 1]); i--; j--; } else if (i > 0 && (j === 0 || f[i][j] === f[i - 1][j] + SIT)) { out.push([i - 1, -1]); i--; } else { out.push([-1, j - 1]); j--; } }
+    return out.reverse(); };
+  const PAIRS = new Map(); const pairsOf = (A, B) => { const k = A.wk + '|' + B.wk; return PAIRS.get(k) || PAIRS.set(k, pairs(A.wts, B.wts)).get(k); };
   const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0; const bucket = process.env.SEASON_ALIGN === 'bucket';
-    const P = bucket ? null : pairsOf(A.length, B.length);
-    for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : A[P[b][0]], c = bucket ? B[b] : B[P[b][1]]; if (!a || !c) continue; n++;
+    const P = bucket ? null : pairsOf(A, B);
+    for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : P[b][0] < 0 ? A.avg : A[P[b][0]], c = bucket ? B[b] : P[b][1] < 0 ? B.avg : B[P[b][1]]; if (!a || !c) continue; n++;
       if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0], a[0][2], c[0][2]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
       let mm = 0, ee = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of c) { const r = bout(ra, rb, na, nb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
     return n ? [m * 13 / n, q * 13 / n, h * 13 / n] : [0, 1, 0]; };
@@ -401,12 +486,12 @@ byS.forEach((rows, i) => {
   let TAU = 0;
   { global.window = global.window || {}; require(path.join(OV, 'duals.js')); const DS = (global.window.WR_DUALS || []); const byK = new Map(pool.map((p) => [p.s.sch + '|' + p.s.year + '|' + p.s.c, p]));
     const G = DS.map((d) => [byK.get(d[3] + '|' + d[0] + '|' + d[1]), byK.get(d[6] + '|' + d[0] + '|' + d[1]), d[5] - d[8], d]).filter((g) => g[0] && g[1] && g[2] !== 0);
-    const evalU = (u, t) => { UNC = u; let ll = 0, ok = 0, se = 0; G.forEach(([a, b, real]) => { const [m, v] = dual(a.slot, b.slot); const p = Math.min(1 - 1e-6, Math.max(1e-6, Phi(m / Math.sqrt(v + t * t + 1e-9)))); ll -= Math.log(p); ok += p > 0.5; se += (m - real) * (m - real); }); return [ll / G.length, ok / G.length, Math.sqrt(se / G.length)]; };
+    const evalU = (u, t) => { UNC = u; let ll = 0, ok = 0, se = 0; G.forEach(([a, b, real]) => { const [m, v] = dual(slotVs(a, b.s.sch), slotVs(b, a.s.sch)); const p = Math.min(1 - 1e-6, Math.max(1e-6, Phi(m / Math.sqrt(v + t * t + 1e-9)))); ll -= Math.log(p); ok += p > 0.5; se += (m - real) * (m - real); }); return [ll / G.length, ok / G.length, Math.sqrt(se / G.length)]; };
     let best = null;
     (process.env.SEASON_UNC_GRID || '0,150,250,350,450,600').split(',').map(Number).forEach((u) => (process.env.SEASON_TAU_GRID || '0,4,8,12,16').split(',').map(Number).forEach((t) => {
       const r = evalU(u, t); console.log(`  spread ${u} swing ${t}: ${G.length} real duals, log loss ${r[0].toFixed(4)}, winner picked ${(100 * r[1]).toFixed(1)}%, margin rmse ${r[2].toFixed(1)}`); if (!best || r[0] < best[2]) best = [u, t, r[0]]; }));
     UNC = process.env.SEASON_UNC != null ? +process.env.SEASON_UNC : best[0]; TAU = process.env.SEASON_TAU != null ? +process.env.SEASON_TAU : best[1]; console.log('rating spread used:', UNC, 'dual swing used:', TAU);
-    if (process.env.SEASON_SHOW) G.filter((g) => [g[0], g[1]].some((p) => p.s.sch + '|' + p.s.year === process.env.SEASON_SHOW)).forEach(([a, b, real, d]) => { const [m, v] = dual(a.slot, b.slot); console.log('   ', d[0], d[2], d[3], d[5] + '-' + d[8], d[6], '| model margin', m.toFixed(1), 'winner chance', (100 * Phi(m / Math.sqrt(v + TAU * TAU))).toFixed(0) + '%'); });
+    if (process.env.SEASON_SHOW) G.filter((g) => [g[0], g[1]].some((p) => p.s.sch + '|' + p.s.year === process.env.SEASON_SHOW)).forEach(([a, b, real, d]) => { const [m, v] = dual(slotVs(a, b.s.sch), slotVs(b, a.s.sch)); console.log('   ', d[0], d[2], d[3], d[5] + '-' + d[8], d[6], '| model margin', m.toFixed(1), 'winner chance', (100 * Phi(m / Math.sqrt(v + TAU * TAU))).toFixed(0) + '%'); });
     /* do lineups with weak spots (a weight empty or below 700 in the postseason) beat the model's margin? */
     { const holes = (p) => p.slot.filter((o) => o.length === 1 ? o[0][0] == null || o[0][0] < 700 : false).length; const B = new Map();
       G.forEach(([a, b, real]) => { const [m] = dual(a.slot, b.slot); const k = Math.max(-4, Math.min(4, holes(a) - holes(b))); const x = B.get(k) || [0, 0, 0]; x[0]++; x[1] += real - m; x[2] += m; B.set(k, x);
@@ -426,8 +511,8 @@ byS.forEach((rows, i) => {
   field = pool.slice().sort((a, b) => b.win - a.win).slice(0, FIELD_N); rate(field);
   pool.sort((a, b) => b.win - a.win || b.mar - a.mar);
   if (process.env.SEASON_DEBUG) { const [x, y] = process.env.SEASON_DEBUG.split(',').map((k) => pool.find((p) => p.s.sch + '|' + p.s.year + '|' + p.s.c === k));
-    const P = pairsOf(x.slot.length, y.slot.length); let tot = 0;
-    P.forEach(([i, j]) => { const a = x.slot[i], b = y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', x.s.lw[i][0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', y.s.lw[j][0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
+    const P = pairsOf(x.slot, y.slot); let tot = 0;
+    P.forEach(([i, j]) => { const a = i < 0 ? x.slot.avg : x.slot[i], b = j < 0 ? y.slot.avg : y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', (x.s.lw[i] || ['avg'])[0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', (y.s.lw[j] || ['avg'])[0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
     console.log('  expected margin', tot.toFixed(1), 'ranks', pool.indexOf(x) + 1, pool.indexOf(y) + 1); }
   console.log(`school seasons as duals: ${pool.length} seasons (${pool.filter((p) => p.est).length} with weights filled), field ${FIELD_N}, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
   { const hr = pool.slice().sort((a, b) => b.hwin - a.hwin || b.hmar - a.hmar); const hk = new Map(hr.map((p, i) => [p, i + 1]));
@@ -439,22 +524,25 @@ byS.forEach((rows, i) => {
              two with hard cutoffs, weights
              filled (1) or field on file (0), Strength, state points, state titles, state medals, team title, state places ('1135')]
      seasons/<first letter of the school slug>.json (loaded when a row is opened): { slug: { year: lineup } }, lineup =
-       [[weight (999 = heavyweight), name, rating, district place, regional place, state place, grade 0-3 FR-SR or -1, bouts behind the rating], ...] (place -1 not there, 0 entered
-       without a place; a weight with nobody is [weight bracket]) */
+       [[weight (999 = heavyweight), name, rating, district place, regional place, state place, grade 0-3 FR-SR or -1, bouts behind the rating (negative: minus the rating's variance, for a state-duals starter)], ...] (place -1 not there, 0 entered
+       without a place; a weight with nobody is [weight bracket]; a state-duals starter at an empty weight has places -1, grade -1, his rated dual bouts and a 9th field 1)
+     seasons/duals-<year>.json: that season's state-duals bouts decided on the mat */
   const slugS = (x) => String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const LB = {};
   const rows = pool.map((p) => { const s = p.s, r = s.row;
     const sl = slugS(s.sch); if (sl) { const o = (LB[sl[0]] = LB[sl[0]] || {}); const x = o[sl] || (o[sl] = {});
-      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.lw.map((l) => { const w = p.est ? l[4] : l[3]; return w ? [l[0], w.name, Math.round(w.real), w.D, w.R, w.S, w.g == null ? -1 : w.g, w.nb || 0] : [l[0]]; }); }
+      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.lw.map((l, j) => { const w = p.est ? l[4] : l[3]; const e = !w && s.dfs && s.dfs.get(j); if (e) return [l[0], e.name, Math.round(e.r), -1, -1, -1, -1, -Math.round(e.v), 1]; return w ? [l[0], w.name, Math.round(w.real), w.D, w.R, w.S, w.g == null ? -1 : w.g, w.nb || 0] : [l[0]]; }); }
     return [r[0], s.year, s.c === 'AA' ? 1 : 0, r[3], r[4], Math.round(1000 * p.win), Math.round(10 * p.mar), Math.round(1000 * p.hwin), Math.round(10 * p.hmar), p.est ? 1 : 0, r[5], r[6], r[9], r[10] + r[11], r[15], s.med]; });
   /* sim: what the app needs to wrestle any two seasons against each other the same way (Compare): the bonus split by gap
      (gap bins, [dec, md, tf, fall] shares), the hard cut points, the rating spread and dual swing, the empty-weight
      quantiles by era, and the fill for weights we can't see, keyed era|bin */
   const r3 = (v) => Math.round(v * 1000) / 1000;
-  const sim = { gb, mix: gmix.map((x) => x.map(r3)), cut: CUT.map((v) => Math.round(v)), ref: REF, unc: UNC, tau: TAU, forfeit: FORFEIT ? 1 : 0,
+  const sim = { gb, mix: gmix.map((x) => x.map(r3)), cut: CUT.map((v) => Math.round(v)), ref: REF, unc: UNC, tau: TAU, sit: SIT, forfeit: FORFEIT ? 1 : 0,
     empty: BK.map((b) => b.map(([r, w]) => [Math.round(r), r3(w)])), fill: Object.fromEntries(Array.from(FILL).map(([k, v]) => [k, v.map(([r, w]) => [r == null ? null : Math.round(r), r3(w)])])) };
   fs.writeFileSync(path.join(OV, 'seasons.json'), JSON.stringify({ field: FIELD_N, from: SEASON_FROM, w: STDK.map((x) => x[0]), sim, rows }));
   const dir = path.join(OV, 'seasons'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
+  /* seasons/duals-<year>.json: that season's state-duals bouts decided on the mat, [weight, winner, school slug, loser, school slug, result] */
+  Object.entries(DUB).forEach(([y, B]) => fs.writeFileSync(path.join(dir, 'duals-' + y + '.json'), JSON.stringify(B.map((b) => [b[0], b[1], slugS(b[2]), b[3], slugS(b[4]), b[5]]))));
   let lb = 0; Object.entries(LB).forEach(([c, o]) => { const t = JSON.stringify(o); lb += t.length; fs.writeFileSync(path.join(dir, c + '.json'), t); });
   console.log('seasons.json bytes', fs.statSync(path.join(OV, 'seasons.json')).size, 'lineups', Object.keys(LB).length, 'files', lb, 'bytes');
 }

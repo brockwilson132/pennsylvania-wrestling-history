@@ -1,0 +1,491 @@
+[
+ {
+  "school": "Lake Consolidated",
+  "identified_as": "Lake Township Consolidated High School, Luzerne Co. (probable)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District",
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School"
+  ],
+  "era": "Probably predecessor of Lake-Lehman (black and gold, Knights).",
+  "notes": "Input lists District 12, which does not fit; identity uncertain. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "Nothing new found; the identity is still uncertain. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Reading Central Catholic",
+  "identified_as": "Reading Central Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "Reading Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Central_Catholic_High_School",
+   "search:https://berksnostalgia.com/tag/central-catholic-cardinals",
+   "https://berksnostalgia.com/wp-content/uploads/2020/05/central-catholic-1988-e1595615286757.png"
+  ],
+  "era": "Closed 2011; merged with Holy Name into Berks Catholic HS (do not use Berks Catholic colours).",
+  "notes": null,
+  "evidence": "Wikipedia infobox: 'Red and white', mascot Cardinal; closed in 2011. The old site cchscardinals.org is dead and could not be loaded through archive.org; the berksnostalgia image was only a building photo. No logo was seen, so no hex is given."
+ },
+ {
+  "school": "Lancaster",
+  "identified_as": "J. P. McCaskey High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BE001E",
+    "hex_from": "photo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Tornado",
+  "confidence": "medium",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School",
+   "https://en.wikipedia.org/wiki/File:MccaskeyLogo.JPG",
+   "https://www.sdlancaster.org/"
+  ],
+  "era": null,
+  "notes": "Assumed the 1978 'Lancaster' entry is McCaskey, the city's public high school.",
+  "evidence": "Wikipedia MccaskeyLogo.JPG (89x54 photo of a banner): black block 'M' in a white oval on a red #BE001E field. It agrees with the infobox red and black. The district site sdlancaster.org returned 403, so the hex comes from a small photo."
+ },
+ {
+  "school": "Muhlenburg",
+  "identified_as": "Muhlenberg High School, Laureldale (Berks Co.)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#00264B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F9CC15",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Muhls",
+  "confidence": "high",
+  "wikipedia": "Muhlenberg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Muhlenberg_High_School",
+   "https://www.muhlsdk12.org/",
+   "https://resources.finalsite.net/images/v1740589739/muhlsdk12org/djzgoqideufroj16mcri/MuhlenbergSchoolDistrictfavicon_1.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Muhlenberg SD site icon: navy #00264B block 'M' with gold #F9CC15 outline; matches Wikipedia 'blue and gold' (the blue is navy)."
+ },
+ {
+  "school": "Greencastle Antrim",
+  "identified_as": "Greencastle-Antrim High School, Greencastle",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#131D54",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCC300",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Greencastle-Antrim School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greencastle-Antrim_School_District",
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference",
+   "https://en.wikipedia.org/wiki/Blue_Devils",
+   "https://www.gcasd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/6184/logo/7306/GreencastleAntrim_Logo_color.png"
+  ],
+  "era": null,
+  "notes": "Inferred from Mid-Penn Conference Wikipedia table styling (#041e42 navy with #ffc72c gold); no infobox colours.",
+  "evidence": "district logo: gold #FCC300 'GA' outlined in navy #131D54; the same two hexes are the site's theme colours."
+ },
+ {
+  "school": "Annville Cleona",
+  "identified_as": "Annville-Cleona High School, Annville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D8202A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dutchmen",
+  "confidence": "medium",
+  "wikipedia": "Annville-Cleona School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Annville-Cleona_School_District",
+   "https://www.acschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/16902/logo/17986/Annville-Cleona_School_District_Logo.png"
+  ],
+  "era": null,
+  "notes": "District page gives mascot only. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "district logo: red #D8202A interlocked 'AC' with a thin dark outline on white; site theme red #D42128. Red is certain. White is inferred from the logo field; black appears only as an outline."
+ },
+ {
+  "school": "Center",
+  "identified_as": "Center High School, Center Township/Monaca (Beaver Co.)",
+  "colors": [],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Center Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Center_Area_School_District",
+   "https://en.wikipedia.org/wiki/Central_Valley_School_District_(Pennsylvania)",
+   "search:https://www.eliteprospects.com/team/21506/center-area-high/2006-2007"
+  ],
+  "era": "Center Area SD merged with Monaca in 2009 into Central Valley SD (Carolina blue and navy).",
+  "notes": "Center's own colours not given. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "Wikipedia Center Area SD infobox: mascot Trojans, colours field blank. An Elite Prospects 'Center Area High' listing gives Navy + Carolina Blue, but that matches successor Central Valley and is probably carried over, so it is not adopted. No Center-era image was found. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Bishop Shanahan",
+  "identified_as": "Bishop Shanahan High School, Downingtown",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#00673E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Bishop Shanahan High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Shanahan_High_School",
+   "https://en.wikipedia.org/wiki/File:Bishop_Shanahan_Seal.png",
+   "https://www.shanahan.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Wikipedia seal (Bishop_Shanahan_Seal.png): green #00673E seal on white, which matches the infobox #01673f. The school site theme is green #046A38 with a pale gold accent #F8E08E."
+ },
+ {
+  "school": "CW North Catholic",
+  "identified_as": "Cardinal Wuerl North Catholic High School, Cranberry Township",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C8102E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC425",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "North Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Catholic_High_School",
+   "https://www.northcatholic.org/",
+   "https://www.northcatholic.org/apple-touch-icon.png",
+   "search:https://www.maxpreps.com/pa/cranberry-township/north-catholic-trojans/football/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "Wikipedia article is titled North Catholic High School.",
+  "evidence": "northcatholic.org icon: red #C8102E interlocked 'NC' with a gold/yellow outline and dark edge. The site's top theme colours are #C8102E and gold #FFC425. The first pass's #FF2400/#FDD700 were generic values and are replaced."
+ },
+ {
+  "school": "West Mifflin South",
+  "identified_as": "West Mifflin South High School, West Mifflin",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_School_District",
+   "search:https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School"
+  ],
+  "era": "Merged into West Mifflin Area HS (blue and gold, Titans).",
+  "notes": "No colours for South itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "No source names South's own colours or nickname; only successor West Mifflin Area (blue and gold, Titans) is documented. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Sewickley Academy",
+  "identified_as": "Sewickley Academy, Sewickley",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D01344",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Sewickley Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sewickley_Academy",
+   "https://www.sewickley.org/",
+   "https://bbk12e1-cdn.myschoolcdn.com/ftpimages/636/logo/SAShield.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Sewickley Academy shield (SAShield.png): crimson-red #D01344 and black #231F20 quarters with white; agrees with the first pass's red and black."
+ },
+ {
+  "school": "Oliver",
+  "identified_as": "Oliver High School, Pittsburgh (North Side)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Seal Brown",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "medium",
+  "wikipedia": "Oliver High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oliver_High_School",
+   "search:https://thenorthsidechronicle.com/2012/02/16/perry-and-oliver-work-towards-becoming-one-school",
+   "search:https://heinzhistorycenter.emuseum.com/objects/6942/patch-insignia"
+  ],
+  "era": "School closed (later Oliver Citywide Academy).",
+  "notes": null,
+  "evidence": "Wikipedia and its mirrors say the colours are orange and seal brown (after David Brown Oliver), mascot Bears; a Northside Chronicle piece mentions 'the orange of the Oliver Bears'. No clean logo image was reachable (the Heinz History Center patch page is behind a bot check), so no hex is given."
+ },
+ {
+  "school": "Pitcairn",
+  "identified_as": "Pitcairn High School, Pitcairn (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Gateway High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Gateway_High_School_(Pennsylvania)",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1953/Page_9.html",
+   "https://www.e-yearbook.com/yearbooks/Pitcairn_High_School_Retrospect_Yearbook/1950/Page_20.html"
+  ],
+  "era": "Pitcairn now served by Gateway HS (black and gold).",
+  "notes": "No colour source for Pitcairn HS. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "e-yearbook.com has Pitcairn HS 'Retrospect' yearbooks (1947-1955). The OCR text of the pages checked does not mention colours, and the cover images would not download. No colours were found. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Lititz",
+  "identified_as": "Lititz High School, Lititz",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Warwick High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warwick_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Warwick_School_District",
+   "search:https://en.wikipedia.org/wiki/Warwick_High_School_(Pennsylvania)"
+  ],
+  "era": "Succeeded by Warwick HS (red and black, Warriors).",
+  "notes": "No colour source for Lititz HS itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "A search found only Warwick HS (red and black, Warriors, opened 1956); nothing on Lititz HS's own colours. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "California",
+  "identified_as": "California Area High School, Coal Center/California (Washington Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#59090A",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EFBF04",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "California Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/California_Area_School_District",
+   "https://www.calsd.org/",
+   "https://files.smartsites.parentsquare.com/11480/header_logo_img_lnvcof8af8ue9agjdlc.png"
+  ],
+  "era": null,
+  "notes": "District page gives no colours. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "California Area SD header and footer logo: gold #EFBF04 Trojan head on white; the site's main non-stock theme colour is dark maroon #59090A, with #33000D as a second tone."
+ },
+ {
+  "school": "North-Mont",
+  "identified_as": "Unidentified 'North-Mont' joint high school, District 4",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed (brackets 1954-1956).",
+  "notes": "Could not identify. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "Not researched further: the identity is unknown and search was not usable. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Williamsburg",
+  "identified_as": "Williamsburg Junior/Senior High School, Williamsburg (Blair Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0C1B7A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Pirates",
+  "confidence": "high",
+  "wikipedia": "Williamsburg Community School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Williamsburg_Community_School_District_(Pennsylvania)",
+   "https://www.williamsburg.k12.pa.us/",
+   "https://www.williamsburg.k12.pa.us/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site school_logo.png: pirate with royal/navy blue #0C1B7A hat and white skull-and-crossbones; matches the first pass's 'Blue Pirates' and blue and white."
+ },
+ {
+  "school": "Ambler Joint",
+  "identified_as": "Ambler Joint High School, Ambler",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Wissahickon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wissahickon_School_District",
+   "https://en.wikipedia.org/wiki/Wissahickon_High_School",
+   "https://en.wikipedia.org/wiki/Ambler,_Pennsylvania"
+  ],
+  "era": "Predecessor of Wissahickon HS (blue and gold, Trojans).",
+  "notes": "No colours found for Ambler itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "The Wikipedia Ambler article mentions only Ambler Junior High (closed by 1975) and Wissahickon SD; no colours for Ambler Joint HS. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Sandy Township",
+  "identified_as": "Sandy Township High School, Sandy Township (Clearfield Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "DuBois Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/DuBois_Area_School_District"
+  ],
+  "era": "Merged into DuBois Area SD (red, black and white).",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "Nothing found; the Wikipedia township article has no school details. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "West Chester",
+  "identified_as": "West Chester High School, West Chester",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#733635",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Henderson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Henderson_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/File:WCHendersonWarriors.GIF"
+  ],
+  "era": "Wikipedia says the original school was named West Chester High School; it is now Henderson HS (Warriors).",
+  "notes": "Colours are Henderson's current ones; not confirmed for 1959-1974.",
+  "evidence": "Henderson HS logo GIF on Wikipedia: a one-colour dark garnet/maroon (#340603, a dark low-quality rendering) Warrior head on white. This is consistent with garnet, so the infobox hex is kept. No West Chester HS-era image was found."
+ },
+ {
+  "school": "Kingston Central Catholic",
+  "identified_as": "Catholic high school in Kingston, Luzerne Co. (possibly predecessor of Bishop O'Reilly)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Redeemer_High_School"
+  ],
+  "era": "Kingston's Bishop O'Reilly HS merged into Holy Redeemer in 2007.",
+  "notes": "Identity not confirmed. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked.",
+  "evidence": "A search found nothing on this school's colours; the results were for Kingston, WA schools. Search engines (Bing, DDG) returned junk or blocked pages in this run; archive.org was rate-limited."
+ },
+ {
+  "school": "Susquehanna Twp.",
+  "identified_as": "Susquehanna Township High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ED1C24",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "Susquehanna Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Susquehanna_Township_High_School",
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference",
+   "https://www.hannasd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1685549845/hannasdorg/lyeoot7scvl9wq86htlu/Logo_SusquehannaTownship_NoMission.png"
+  ],
+  "era": "Mascot was Indians in the 1970s; now undefined.",
+  "notes": null,
+  "evidence": "district roundel logo: red #ED1C24 'ST' and ring with black lettering on white; site theme red #BB1D2E. Black is only used for the lettering."
+ }
+]

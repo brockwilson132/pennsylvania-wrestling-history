@@ -1,4 +1,4 @@
-weights reordered: 0, wrestlers moved: 0, rows added: 0
+weights reordered: 0, wrestlers moved: 0, schools corrected: 0, rows added: 0
 
 
 1947 single 145 place 2: list "Tom Hoeschele", bracket "Tom Hosechele" (spelling only, list kept)

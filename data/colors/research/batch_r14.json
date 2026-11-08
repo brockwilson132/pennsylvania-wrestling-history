@@ -1,0 +1,771 @@
+[
+ {
+  "school": "Ramsey",
+  "identified_as": "Ramsey High School, probably Mount Pleasant (Westmoreland Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Pleasant_Area_School_District"
+  ],
+  "era": "Closed school (brackets 1937-1939); successor likely Mount Pleasant Area HS (red, white and blue today).",
+  "notes": "Identity not confirmed; no colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Cecil Township",
+  "identified_as": "Cecil Township High School, Cecil Township (Washington Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Canon-McMillan School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canon-McMillan_School_District"
+  ],
+  "era": "Merged into Canon-McMillan (district founded 1954 from Canonsburg, Cecil Twp and North Strabane; Canon-McMillan colours blue and gold).",
+  "notes": "No source for Cecil HS's own colours. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Wattsburg",
+  "identified_as": "Wattsburg High School, Wattsburg (Erie Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Seneca High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wattsburg_Area_School_District",
+   "https://en.wikipedia.org/wiki/Seneca_High_School_(Pennsylvania)"
+  ],
+  "era": "Wattsburg Area SD's high school is now Seneca High School.",
+  "notes": "Neither Wikipedia page gives colours. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Westmoreland",
+  "identified_as": "Westmoreland High School, Luzerne County (Back Mountain area) - uncertain",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dallas_School_District"
+  ],
+  "era": "Closed (brackets 1959-1961); probably absorbed into the Dallas School District.",
+  "notes": "Identity uncertain; no colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Northern Potter",
+  "identified_as": "Northern Potter Junior Senior High School, Ulysses",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northern Potter Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Potter_Junior_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "York Technology",
+  "identified_as": "York County School of Technology, York",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "York County School of Technology",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_County_School_of_Technology"
+  ],
+  "era": null,
+  "notes": "Wikipedia: colours and mascot identical to York College of Pennsylvania."
+ },
+ {
+  "school": "German",
+  "identified_as": "German Township High School, McClellandtown (Fayette Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Albert Gallatin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_Area_School_District"
+  ],
+  "era": "Part of Albert Gallatin Area SD from 1966; German Twp senior high consolidated in 1987 (Tri-Valley HS, renamed Albert Gallatin 1993).",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Brownsville",
+  "identified_as": "Brownsville Area High School, Brownsville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Brownsville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brownsville_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Sugar Valley Rural Charter",
+  "identified_as": "Sugar Valley Rural Charter School, Loganton (Clinton Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "No Wikipedia page found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Boys' Latin",
+  "identified_as": "Boys' Latin of Philadelphia Charter School, Philadelphia",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Boys' Latin of Philadelphia Charter School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Boys'_Latin_of_Philadelphia_Charter_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Lawrence Park",
+  "identified_as": "Lawrence Park High School, Lawrence Park Township (Erie Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Iroquois School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Iroquois_School_District"
+  ],
+  "era": "Merged in 1966 with Wesleyville into the Iroquois School District (Iroquois Braves).",
+  "notes": "No colour source for Lawrence Park HS. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Scotland School",
+  "identified_as": "Scotland School for Veterans' Children, Scotland (Franklin Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference"
+  ],
+  "era": "School closed 2009 (Mid-Penn member 1992-2009).",
+  "notes": "Only evidence is the Mid-Penn Conference Wikipedia table cell styling (background #ba0c2f with black/#002d6c borders), not a stated colour; second colour may be black or navy."
+ },
+ {
+  "school": "Apollo Ridge",
+  "identified_as": "Apollo-Ridge High School, Spring Church (Armstrong Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Apollo-Ridge School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Apollo-Ridge_School_District"
+  ],
+  "era": null,
+  "notes": "From the district page infobox."
+ },
+ {
+  "school": "Turtle Creek Union",
+  "identified_as": "Turtle Creek Union High School, Turtle Creek (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Woodland Hills School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Turtle_Creek,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Woodland_Hills_School_District"
+  ],
+  "era": "Turtle Creek SD merged into Woodland Hills SD in 1981.",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Lancaster Boys",
+  "identified_as": "Lancaster Boys' High School, Lancaster",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School"
+  ],
+  "era": "Predecessor of J. P. McCaskey High School (opened 1938; red and black, Red Tornado).",
+  "notes": "Did not find whether the boys' high school used the same colours. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Franklin Township",
+  "identified_as": "Franklin Township High School, District 7 (WPIAL) - which Franklin Township is unclear",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed (brackets 1937-1939).",
+  "notes": "Several Franklin Townships in western PA (e.g. Westmoreland Co., later Franklin Regional); identity not resolved. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Edinboro",
+  "identified_as": "Edinboro High School, Edinboro (Erie Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "General McLane School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/General_McLane_School_District"
+  ],
+  "era": "Area now served by General McLane HS.",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Monessen",
+  "identified_as": "Monessen High School, Monessen",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Greyhounds",
+  "confidence": "medium",
+  "wikipedia": "Monessen High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Monessen_High_School",
+   "https://en.wikipedia.org/wiki/Monessen_City_School_District"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree."
+ },
+ {
+  "school": "Millvale",
+  "identified_as": "Millvale High School, Millvale (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shaler Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Millvale,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Shaler_Area_School_District"
+  ],
+  "era": "Millvale now part of Shaler Area SD (Titans).",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Mill Hall",
+  "identified_as": "Mill Hall High School, Mill Hall (Clinton Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Keystone Central School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District"
+  ],
+  "era": "Area now in Keystone Central SD (Central Mountain HS).",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Watsontown",
+  "identified_as": "Watsontown High School, Watsontown (Northumberland Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Warrior Run High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warrior_Run_High_School"
+  ],
+  "era": "Area now served by Warrior Run HS (blue and gray, Defenders).",
+  "notes": "No colour source for Watsontown HS. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Townville",
+  "identified_as": "Townville High School, Townville (Crawford Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed (brackets 1961-1973); area later part of PENNCREST SD.",
+  "notes": "No source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Lake Consolidated",
+  "identified_as": "Lake Township Consolidated High School, Luzerne Co. (probable)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District",
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School"
+  ],
+  "era": "Probably predecessor of Lake-Lehman (black and gold, Knights).",
+  "notes": "Input lists District 12, which does not fit; identity uncertain. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Reading Central Catholic",
+  "identified_as": "Reading Central Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "Reading Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Central_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Lancaster",
+  "identified_as": "J. P. McCaskey High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Tornado",
+  "confidence": "medium",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School"
+  ],
+  "era": null,
+  "notes": "Assumed the 1978 'Lancaster' entry is McCaskey, the city's public high school."
+ },
+ {
+  "school": "Muhlenburg",
+  "identified_as": "Muhlenberg High School, Laureldale (Berks Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Muhls",
+  "confidence": "medium",
+  "wikipedia": "Muhlenberg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Muhlenberg_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Greencastle Antrim",
+  "identified_as": "Greencastle-Antrim High School, Greencastle",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "medium",
+  "wikipedia": "Greencastle-Antrim School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greencastle-Antrim_School_District",
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference",
+   "https://en.wikipedia.org/wiki/Blue_Devils"
+  ],
+  "era": null,
+  "notes": "Inferred from Mid-Penn Conference Wikipedia table styling (#041e42 navy with #ffc72c gold); no infobox colours."
+ },
+ {
+  "school": "Annville Cleona",
+  "identified_as": "Annville-Cleona High School, Annville",
+  "colors": [],
+  "mascot": "Dutchmen",
+  "confidence": "low",
+  "wikipedia": "Annville-Cleona School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Annville-Cleona_School_District"
+  ],
+  "era": null,
+  "notes": "District page gives mascot only. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Center",
+  "identified_as": "Center High School, Center Township/Monaca (Beaver Co.)",
+  "colors": [],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Center Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Center_Area_School_District",
+   "https://en.wikipedia.org/wiki/Central_Valley_School_District_(Pennsylvania)"
+  ],
+  "era": "Center Area SD merged with Monaca in 2009 into Central Valley SD (Carolina blue and navy).",
+  "notes": "Center's own colours not given. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Bishop Shanahan",
+  "identified_as": "Bishop Shanahan High School, Downingtown",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#01673f",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Bishop Shanahan High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Shanahan_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "CW North Catholic",
+  "identified_as": "Cardinal Wuerl North Catholic High School, Cranberry Township",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": "#FF2400",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDD700",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "North Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia article is titled North Catholic High School."
+ },
+ {
+  "school": "West Mifflin South",
+  "identified_as": "West Mifflin South High School, West Mifflin",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_School_District"
+  ],
+  "era": "Merged into West Mifflin Area HS (blue and gold, Titans).",
+  "notes": "No colours for South itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Sewickley Academy",
+  "identified_as": "Sewickley Academy, Sewickley",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Sewickley Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sewickley_Academy"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Oliver",
+  "identified_as": "Oliver High School, Pittsburgh (North Side)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Seal Brown",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "medium",
+  "wikipedia": "Oliver High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oliver_High_School"
+  ],
+  "era": "School closed (later Oliver Citywide Academy).",
+  "notes": null
+ },
+ {
+  "school": "Pitcairn",
+  "identified_as": "Pitcairn High School, Pitcairn (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Gateway High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Gateway_High_School_(Pennsylvania)"
+  ],
+  "era": "Pitcairn now served by Gateway HS (black and gold).",
+  "notes": "No colour source for Pitcairn HS. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Lititz",
+  "identified_as": "Lititz High School, Lititz",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Warwick High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warwick_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Warwick_School_District"
+  ],
+  "era": "Succeeded by Warwick HS (red and black, Warriors).",
+  "notes": "No colour source for Lititz HS itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "California",
+  "identified_as": "California Area High School, Coal Center/California (Washington Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "California Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/California_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District page gives no colours. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "North-Mont",
+  "identified_as": "Unidentified 'North-Mont' joint high school, District 4",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed (brackets 1954-1956).",
+  "notes": "Could not identify. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Williamsburg",
+  "identified_as": "Williamsburg Junior/Senior High School, Williamsburg (Blair Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Pirates",
+  "confidence": "medium",
+  "wikipedia": "Williamsburg Community School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Williamsburg_Community_School_District_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Ambler Joint",
+  "identified_as": "Ambler Joint High School, Ambler",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Wissahickon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wissahickon_School_District",
+   "https://en.wikipedia.org/wiki/Wissahickon_High_School"
+  ],
+  "era": "Predecessor of Wissahickon HS (blue and gold, Trojans).",
+  "notes": "No colours found for Ambler itself. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Sandy Township",
+  "identified_as": "Sandy Township High School, Sandy Township (Clearfield Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "DuBois Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/DuBois_Area_School_District"
+  ],
+  "era": "Merged into DuBois Area SD (red, black and white).",
+  "notes": "No colour source found. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "West Chester",
+  "identified_as": "West Chester High School, West Chester",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#733635",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Henderson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Henderson_High_School_(Pennsylvania)"
+  ],
+  "era": "Wikipedia says the original school was named West Chester High School; it is now Henderson HS (Warriors).",
+  "notes": "Colours are Henderson's current ones; not confirmed for 1959-1974."
+ },
+ {
+  "school": "Kingston Central Catholic",
+  "identified_as": "Catholic high school in Kingston, Luzerne Co. (possibly predecessor of Bishop O'Reilly)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Redeemer_High_School"
+  ],
+  "era": "Kingston's Bishop O'Reilly HS merged into Holy Redeemer in 2007.",
+  "notes": "Identity not confirmed. Web search was unavailable (shared search budget exhausted); only Wikipedia was checked."
+ },
+ {
+  "school": "Susquehanna Twp.",
+  "identified_as": "Susquehanna Township High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Susquehanna Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Susquehanna_Township_High_School",
+   "https://en.wikipedia.org/wiki/Mid-Penn_Conference"
+  ],
+  "era": "Mascot was Indians in the 1970s; now undefined.",
+  "notes": null
+ }
+]
