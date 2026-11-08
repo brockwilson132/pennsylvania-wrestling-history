@@ -27,7 +27,7 @@ const SUCCESSOR = { Canonsburg: 'Canon-McMillan', 'Forty Fort': 'Wyoming Valley 
 // successors that are not in our data as schools: match them against NCES directly
 const GEO_ONLY = ['Armstrong', 'Holy Redeemer', 'Central Valley'];
 // our-name → NCES-name aliases where the names share no distinctive token
-const ALIAS = { 'Bethlehem Catholic': 'Bethlehem Catholic High School', 'Erie Cathedral Prep': 'Cathedral Preparatory School', "St. Joseph's Prep": "St Joseph's Preparatory School", 'Notre Dame-Green Pond': 'Notre Dame Easton', 'Bishop McDevitt (3)': 'Bishop McDevitt High School', 'Taylor Allderdice': 'Pittsburgh Allderdice', 'Allentown Dieruff': 'Louis E Dieruff', 'J.P. McCaskey': 'McCaskey Campus', 'Steelton': 'Steelton-Highspire', 'Springfield Delco': 'Springfield', 'West Chester Rustin': 'West Chester Bayard Rustin' };
+const ALIAS = { 'Bethlehem Catholic': 'Bethlehem Catholic High School', 'Erie Cathedral Prep': 'Cathedral Preparatory School', "St. Joseph's Prep": "St Joseph's Preparatory School", 'Notre Dame-Green Pond': 'Notre Dame Easton', 'Bishop McDevitt': 'Bishop McDevitt High School', 'Taylor Allderdice': 'Pittsburgh Allderdice', 'Allentown Dieruff': 'Louis E Dieruff', 'J.P. McCaskey': 'McCaskey Campus', 'Steelton': 'Steelton-Highspire', 'Springfield Delco': 'Springfield', 'West Chester Rustin': 'West Chester Bayard Rustin' };
 
 // each school's district: the one it wrestled in most often
 const dc = new Map(); U.ss.forEach((r) => { if (!(r[3] >= 1 && r[3] <= 12)) return; const k = r[0]; const m = dc.get(k) || {}; m[r[3]] = (m[r[3]] || 0) + 1; dc.set(k, m); });

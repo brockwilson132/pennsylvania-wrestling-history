@@ -18,7 +18,7 @@ const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a
 const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
 /* same corrections as the app (model.js): where a state entrant actually wrestled districts, and two schools sharing a name */
 const MEMB = (window.WR_MEMB || { r: {} }).r;
-const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' } };
+const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' }, 'Bishop McDevitt': { 12: 'Bishop McDevitt (12)' } };
 const splitName = (sch, d) => (SPLIT[sch] && SPLIT[sch][d]) || sch;
 const unitDist = (lvl, unit, d) => { if (lvl !== 'district') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
 

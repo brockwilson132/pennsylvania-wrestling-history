@@ -976,7 +976,7 @@ year,cls,weight,place,name,grade,school
 1975,AA,167,1,Jay Hockenbrock,SR,East Juniata
 1975,AA,167,2,Brian Hills,SR,Reynolds
 1975,AA,185,1,Bill Bertrand,SR,Burgettstown
-1975,AA,185,2,Dave Casale,SR,Greensburg CC
+1975,AA,185,2,Dave Casale,SR,Greensburg Central Catholic
 1975,AA,UNL,1,Steve Riley,SR,Greenville
 1975,AA,UNL,2,Jack Campbell,JR,Big Spring
 1976,AA,98,1,Don Reese,SO,Hughesville
@@ -1118,7 +1118,7 @@ year,cls,weight,place,name,grade,school
 1977,AA,185,1,Dan Blose,SR,Northwestern Lehigh
 1977,AA,185,2,Rich Brown,SR,Huntingdon
 1977,AA,185,3,Tom Leister,SR,Hanover
-1977,AA,185,4,Jess Caravaggio,SR,Greensburg CC
+1977,AA,185,4,Jess Caravaggio,SR,Greensburg Central Catholic
 1977,AA,UNL,1,Bill Neill,SR,Perkiomen Valley
 1977,AA,UNL,2,Ken Streich,SR,Ridgway
 1977,AA,UNL,3,Jim Covert,JR,Freedom Area
@@ -1204,7 +1204,7 @@ year,cls,weight,place,name,grade,school
 1978,AA,145,3,Bill Arbanas,SR,Reynolds
 1978,AA,145,4,Frank Holby,SR,Hanover Area
 1978,AA,155,1,Terry Williams,SO,Bald Eagle Nittany
-1978,AA,155,2,Chad Menzie,JR,Greensburg CC
+1978,AA,155,2,Chad Menzie,JR,Greensburg Central Catholic
 1978,AA,155,3,Randy McKinney,JR,Fairview
 1978,AA,155,4,Rick Gaetano,SR,Crestwood
 1978,AA,167,1,John Chandy,SR,Ligonier Valley
@@ -1288,7 +1288,7 @@ year,cls,weight,place,name,grade,school
 1979,AA,126,3,Alan Reto,SR,Pius X (Roseto)
 1979,AA,126,4,Gary Keene,SR,Seneca
 1979,AA,132,1,Scott Fenstermacher,SR,Northwestern Lehigh
-1979,AA,132,2,Dave Krivus,SR,Greensburg CC
+1979,AA,132,2,Dave Krivus,SR,Greensburg Central Catholic
 1979,AA,132,3,Dave Yerger,SR,Hamburg
 1979,AA,132,4,Lew Copenhaver,JR,Chief Logan
 1979,AA,138,1,Eric Childs,SR,Sayre
@@ -2799,7 +2799,7 @@ year,cls,weight,place,name,grade,school
 1990,AA,130,6,Ryan Heimbach,SR,Palmerton
 1990,AA,135,1,Russ Hughes,JR,Benton
 1990,AA,135,2,Matt Masters,SR,Northwestern Lehigh
-1990,AA,135,3,Chris Guarlotti,JR,Greensburg CC
+1990,AA,135,3,Chris Guarlotti,JR,Greensburg Central Catholic
 1990,AA,135,4,Brian Kocher,JR,Pen Argyl
 1990,AA,135,5,Chad Dellatre,SR,Moshannon Valley
 1990,AA,135,6,Troy Gump,SR,Chartiers-Houston
@@ -2961,7 +2961,7 @@ year,cls,weight,place,name,grade,school
 1991,AA,135,6,Brett Werkheiser,SO,Wilson Area
 1991,AA,140,1,Russ Hughes,SR,Benton
 1991,AA,140,2,Darin Keim,JR,Line Mountain
-1991,AA,140,3,Chris Guarlotti,SR,Greensburg CC
+1991,AA,140,3,Chris Guarlotti,SR,Greensburg Central Catholic
 1991,AA,140,4,Mike Reichard,SR,Northern Lehigh
 1991,AA,140,5,Josh Stanley,SO,Oxford Area
 1991,AA,140,6,Mike Menold,SR,Greenville
@@ -3541,7 +3541,7 @@ year,cls,weight,place,name,grade,school
 1994,AAA,189,4,Scott Siegrist,JR,Manheim Central
 1994,AAA,189,5,Jason Barr,SR,McGuffey
 1994,AAA,189,6,Chris Rickards,SR,Upper Darby
-1994,AAA,275,1,Brendan Bibro,SR,Pittsburgh CC
+1994,AAA,275,1,Brendan Bibro,SR,Pittsburgh Central Catholic
 1994,AAA,275,2,Vince Pellis,JR,Greensburg Salem
 1994,AAA,275,3,George Summerson,SR,Lock Haven
 1994,AAA,275,4,Bill Bell,SR,Bald Eagle Area
@@ -4840,13 +4840,13 @@ year,cls,weight,place,name,grade,school
 2002,AA,135,3,Adam Farabaugh,SR,Penn Cambria
 2002,AA,135,4,Jason Mounts,SR,Washington
 2002,AA,135,5,Ross Muench,SR,Wyalusing
-2002,AA,135,6,John Cortese,SR,Greensburg CC
+2002,AA,135,6,John Cortese,SR,Greensburg Central Catholic
 2002,AA,135,7,Joe Rovelli,SO,Elmer L. Meyers
 2002,AA,135,8,Keith Shumac,SO,Seneca
 2002,AA,140,1,Chad Sichak,SR,Richland
 2002,AA,140,2,Scott Rendos,SO,Brockway
 2002,AA,140,3,Ryan Hluschak,JR,Northern Lehigh
-2002,AA,140,4,Deacon Smolleck,SR,Greensburg CC
+2002,AA,140,4,Deacon Smolleck,SR,Greensburg Central Catholic
 2002,AA,140,5,Matt Edwards,SR,North Schuylkill
 2002,AA,140,6,Steve Lucchesi,JR,York Suburban
 2002,AA,140,7,Keith Gavin,JR,Lackawanna Trail
@@ -5170,7 +5170,7 @@ year,cls,weight,place,name,grade,school
 2003,AAA,140,5,Matt Barnett,SR,Hempfield
 2003,AAA,140,6,Dan Geib,JR,Souderton
 2003,AAA,140,7,Jared Mowl,JR,Moon
-2003,AAA,140,8,Andrew Sherry,JR,Pittsburgh CC
+2003,AAA,140,8,Andrew Sherry,JR,Pittsburgh Central Catholic
 2003,AAA,145,1,Jeff Ecklof,SR,Northampton
 2003,AAA,145,2,Kirk Main,SR,McGuffey
 2003,AAA,145,3,Mike Ferrara,SR,Pleasant Valley
@@ -5396,7 +5396,7 @@ year,cls,weight,place,name,grade,school
 2004,AAA,140,7,Mark Powell,SR,Trinity
 2004,AAA,140,8,Mike Parisi,SR,Northampton
 2004,AAA,145,1,Joey Ecklof,JR,Northampton
-2004,AAA,145,2,Andrew Sherry,SR,Pittsburgh CC
+2004,AAA,145,2,Andrew Sherry,SR,Pittsburgh Central Catholic
 2004,AAA,145,3,Chris Ramos,SR,Governor Mifflin
 2004,AAA,145,4,Corey Schwerin,SR,Hempfield
 2004,AAA,145,5,Bryan Kuhn,SR,Erie McDowell
@@ -5567,7 +5567,7 @@ year,cls,weight,place,name,grade,school
 2005,AAA,103,2,Jordan Oliver,FR,Easton
 2005,AAA,103,3,Walter Peppelman,FR,Central Dauphin
 2005,AAA,103,4,Nic Bedelyon,SO,Indian Valley
-2005,AAA,103,5,Nico Cortese,FR,Greensburg CC
+2005,AAA,103,5,Nico Cortese,FR,Greensburg Central Catholic
 2005,AAA,103,6,Dex Lederer,SO,Neshaminy
 2005,AAA,103,7,Matt Bonson,SO,Lewistown
 2005,AAA,103,8,Fred Rodgers,JR,Boyertown
@@ -5577,7 +5577,7 @@ year,cls,weight,place,name,grade,school
 2005,AAA,112,4,Ray Ward,JR,Stroudsburg
 2005,AAA,112,5,Jay Ivanco,JR,Gateway
 2005,AAA,112,6,Andrew Flegler,JR,Nazareth
-2005,AAA,112,7,Rudy Chelednik,SO,Greensburg CC
+2005,AAA,112,7,Rudy Chelednik,SO,Greensburg Central Catholic
 2005,AAA,112,8,Chuck Mulloy,FR,Penncrest
 2005,AAA,119,1,Mike Rappo,JR,Council Rock South
 2005,AAA,119,2,Brad Pataky,SR,Clearfield
@@ -5630,7 +5630,7 @@ year,cls,weight,place,name,grade,school
 2005,AAA,152,1,Joey Ecklof,SR,Northampton
 2005,AAA,152,2,Donnie Jones,SR,Greensburg Salem
 2005,AAA,152,3,Brent Fiorito,JR,Upper Perkiomen
-2005,AAA,152,4,Travis Uncapher,SO,Greensburg CC
+2005,AAA,152,4,Travis Uncapher,SO,Greensburg Central Catholic
 2005,AAA,152,5,Brad Steinbach,JR,St. Marys
 2005,AAA,152,6,Ryan Uber,SR,Warren
 2005,AAA,152,7,Bill Trimble,SR,Pennsbury
@@ -5666,7 +5666,7 @@ year,cls,weight,place,name,grade,school
 2005,AAA,215,5,Eric Tribbitt,SR,Central Dauphin
 2005,AAA,215,6,Nick Hursky,SR,Chartiers Valley
 2005,AAA,215,7,Seth Hillstrom,SR,Plymouth Whitemarsh
-2005,AAA,215,8,Nino San Doval,SR,Pittsburgh CC
+2005,AAA,215,8,Nino San Doval,SR,Pittsburgh Central Catholic
 2005,AAA,275,1,Bryan Reiss,SR,Emmaus
 2005,AAA,275,2,Stefan Tighe,SR,Erie Cathedral Prep
 2005,AAA,275,3,Nate Weaver,SR,York Tech
@@ -5788,7 +5788,7 @@ year,cls,weight,place,name,grade,school
 2006,AA,275,7,Paul Snyder,SO,Mount Pleasant
 2006,AA,275,8,Brock Nichols,SR,Towanda
 2006,AAA,103,1,Jordan Oliver,SO,Easton
-2006,AAA,103,2,Nico Cortese,SO,Greensburg CC
+2006,AAA,103,2,Nico Cortese,SO,Greensburg Central Catholic
 2006,AAA,103,3,Matt Snyder,SO,Lewistown
 2006,AAA,103,4,Joe Waltko,FR,North Allegheny
 2006,AAA,103,5,Nic Bedelyon,JR,Indian Valley
@@ -6110,7 +6110,7 @@ year,cls,weight,place,name,grade,school
 2007,AAA,215,1,Justin Wieller,SR,Northampton
 2007,AAA,215,2,Jordan Enck,JR,Manheim Central
 2007,AAA,215,3,Kevin Struble,SR,Bald Eagle Area
-2007,AAA,215,4,Danny Vaughan,JR,Pittsburgh CC
+2007,AAA,215,4,Danny Vaughan,JR,Pittsburgh Central Catholic
 2007,AAA,215,5,Brandon Miller,SR,Middletown
 2007,AAA,215,6,Dan Utchel,JR,Chartiers Valley
 2007,AAA,215,7,Ray Bennett,SR,Abington Heights
@@ -6732,7 +6732,7 @@ year,cls,weight,place,name,grade,school
 2010,AAA,135,7,Joe Mazzi,JR,La Salle College
 2010,AAA,135,8,Seth Ehlo,SO,Central Bucks West
 2010,AAA,140,1,Josh Kindig,SR,Blue Mountain
-2010,AAA,140,2,Lorenzo Thomas,JR,Pittsburgh CC
+2010,AAA,140,2,Lorenzo Thomas,JR,Pittsburgh Central Catholic
 2010,AAA,140,3,Mark Hartenstine,SR,Easton
 2010,AAA,140,4,Joe Marino,SR,Garnet Valley
 2010,AAA,140,5,Brian Brill,SO,Central Mountain
@@ -6960,27 +6960,27 @@ year,cls,weight,place,name,grade,school
 2011,AAA,140,3,Matt Cimato,JR,La Salle College
 2011,AAA,140,4,Shane Miller,SR,Middletown
 2011,AAA,140,5,Scott Bosak,SR,State College
-2011,AAA,140,6,Tyler Manion,JR,Pittsburgh CC
+2011,AAA,140,6,Tyler Manion,JR,Pittsburgh Central Catholic
 2011,AAA,140,7,Cody Zechman,SR,Selinsgrove
 2011,AAA,140,8,Matt Tadich,SR,Norwin
 2011,AAA,145,1,Brian Brill,JR,Central Mountain
 2011,AAA,145,2,Nick Catalano,SR,Canon-McMillan
 2011,AAA,145,3,Jayshon Wilson,SR,Carlisle
-2011,AAA,145,4,Eric Nutter,SR,Pittsburgh CC
+2011,AAA,145,4,Eric Nutter,SR,Pittsburgh Central Catholic
 2011,AAA,145,5,Garrett Peppelman,FR,Central Dauphin
 2011,AAA,145,6,Trey Duncan,SR,Spring Grove
 2011,AAA,145,7,Tyler Parsons,SR,Erie Cathedral Prep
 2011,AAA,145,8,Justin Heller,SR,Parkland
 2011,AAA,152,1,Chance Marsteller,FR,Kennard-Dale
 2011,AAA,152,2,Mark Havers,SR,Bradford
-2011,AAA,152,3,Lorenzo Thomas,SR,Pittsburgh CC
+2011,AAA,152,3,Lorenzo Thomas,SR,Pittsburgh Central Catholic
 2011,AAA,152,4,Brett Harner,SO,Norristown
 2011,AAA,152,5,Geno Morelli,JR,DuBois
 2011,AAA,152,6,T.J. Demetrio,SR,Pottsgrove
 2011,AAA,152,7,Tyler Buckwalter,SR,Central Mountain
 2011,AAA,152,8,John Lambert,SR,Northampton
 2011,AAA,160,1,Mike Ottinger,SR,Parkland
-2011,AAA,160,2,Jason Luster,JR,Pittsburgh CC
+2011,AAA,160,2,Jason Luster,JR,Pittsburgh Central Catholic
 2011,AAA,160,3,Zach Thomson,SR,Mechanicsburg
 2011,AAA,160,4,Brad Grieb,SR,Bellefonte
 2011,AAA,160,5,Shane Springer,JR,La Salle College
@@ -6992,13 +6992,13 @@ year,cls,weight,place,name,grade,school
 2011,AAA,171,3,Nick Bonaccorsi,SR,Bethel Park
 2011,AAA,171,4,Cole Baxter,SR,Butler
 2011,AAA,171,5,Connor Moran,JR,Solanco
-2011,AAA,171,6,Austin Coniker,JR,Pittsburgh CC
+2011,AAA,171,6,Austin Coniker,JR,Pittsburgh Central Catholic
 2011,AAA,171,7,Shane Gilmore,SR,Council Rock South
 2011,AAA,171,8,Chad Hoffman,JR,Hazleton Area
 2011,AAA,189,1,Kenny Courts,SR,Central Dauphin
 2011,AAA,189,2,Josh Popple,SR,James M. Coughlin
 2011,AAA,189,3,John Bolich,SR,Upper Moreland
-2011,AAA,189,4,Perry Hills,JR,Pittsburgh CC
+2011,AAA,189,4,Perry Hills,JR,Pittsburgh Central Catholic
 2011,AAA,189,5,Matt McCutcheon,SO,Kiski Area
 2011,AAA,189,6,Ryan Burnheimer,JR,Westmont Hilltop
 2011,AAA,189,7,Phil Sprenkle,SR,Dallastown
@@ -7137,7 +7137,7 @@ year,cls,weight,place,name,grade,school
 2012,AAA,106,4,Scott Parker,SO,Pennridge
 2012,AAA,106,5,Zach Fuentes,JR,Norristown
 2012,AAA,106,6,Jake Gromacki,SO,Erie Cathedral Prep
-2012,AAA,106,7,Vincenzo Joseph,FR,Pittsburgh CC
+2012,AAA,106,7,Vincenzo Joseph,FR,Pittsburgh Central Catholic
 2012,AAA,106,8,Dan Martoccio,SO,Council Rock South
 2012,AAA,113,1,Billy Rappo,SR,Council Rock South
 2012,AAA,113,2,Matt Grossmann,SO,Manheim Township
@@ -7191,7 +7191,7 @@ year,cls,weight,place,name,grade,school
 2012,AAA,152,2,Rustin Barrick,SR,Mechanicsburg
 2012,AAA,152,3,Casey Kent,SR,La Salle College
 2012,AAA,152,4,Cole Sheptock,SR,Northampton
-2012,AAA,152,5,Tyler Manion,SR,Pittsburgh CC
+2012,AAA,152,5,Tyler Manion,SR,Pittsburgh Central Catholic
 2012,AAA,152,6,Dillon Gavlock,SR,Central Mountain
 2012,AAA,152,7,Zach Voytek,JR,Greensburg Salem
 2012,AAA,152,8,Garrett Chase,SR,Erie Cathedral Prep
@@ -7219,7 +7219,7 @@ year,cls,weight,place,name,grade,school
 2012,AAA,182,6,Ryan Burnheimer,SR,Westmont Hilltop
 2012,AAA,182,7,Tyler Greene,JR,Easton
 2012,AAA,182,8,Danny Hockensmith,JR,Big Spring
-2012,AAA,195,1,Perry Hills,SR,Pittsburgh CC
+2012,AAA,195,1,Perry Hills,SR,Pittsburgh Central Catholic
 2012,AAA,195,2,Jake Hart,JR,Hampton
 2012,AAA,195,3,P.J. Steinmetz,JR,Council Rock South
 2012,AAA,195,4,Nick Shawley,JR,Bellefonte
@@ -7249,7 +7249,7 @@ year,cls,weight,place,name,grade,school
 2013,AA,106,4,Jacob Wasser,FR,Palisades
 2013,AA,106,5,Austin Griffiths,SO,Southmoreland
 2013,AA,106,6,Triston Law,SO,Forest Hills
-2013,AA,106,7,Tyshawn White,FR,Bishop McDevitt (3)
+2013,AA,106,7,Tyshawn White,FR,Bishop McDevitt
 2013,AA,106,8,Cameron Newman,SO,Line Mountain
 2013,AA,113,1,George Phillippi,FR,Derry Area
 2013,AA,113,2,Seth Carr,SR,South Fayette
@@ -7373,7 +7373,7 @@ year,cls,weight,place,name,grade,school
 2013,AAA,113,8,Derek Gulotta,SO,Owen J. Roberts
 2013,AAA,120,1,Sam Krivus,SO,Hempfield Area
 2013,AAA,120,2,Dalton Macri,JR,Canon-McMillan
-2013,AAA,120,3,Vincenzo Joseph,SO,Pittsburgh CC
+2013,AAA,120,3,Vincenzo Joseph,SO,Pittsburgh Central Catholic
 2013,AAA,120,4,Zach Valley,JR,Northampton
 2013,AAA,120,5,Ben Ross,JR,Pennridge
 2013,AAA,120,6,Mike Marino,JR,Garnet Valley
@@ -7456,7 +7456,7 @@ year,cls,weight,place,name,grade,school
 2013,AAA,220,3,Mike Boykin,JR,Coatesville
 2013,AAA,220,4,Tyler Callender,JR,Council Rock North
 2013,AAA,220,5,Evan Kauffman,SR,Bethlehem Freedom
-2013,AAA,220,6,Zach DeLuca,JR,Pittsburgh CC
+2013,AAA,220,6,Zach DeLuca,JR,Pittsburgh Central Catholic
 2013,AAA,220,7,Nathan Sharkey,SR,Bald Eagle Area
 2013,AAA,220,8,Alex Campbell,SR,Canon-McMillan
 2013,AAA,285,1,Aaron Bradley,SR,Nazareth
@@ -7468,7 +7468,7 @@ year,cls,weight,place,name,grade,school
 2013,AAA,285,7,Cary Hess,SR,Shippensburg
 2013,AAA,285,8,Austin Rosenberry,SR,Altoona
 2014,AA,106,1,Jake Riegel,FR,Bethlehem Catholic
-2014,AA,106,2,John Pipa,FR,Bishop McDevitt (3)
+2014,AA,106,2,John Pipa,FR,Bishop McDevitt
 2014,AA,106,3,Brian Courtney,FR,Athens
 2014,AA,106,4,Joe Lobeck,SO,Lancaster Catholic
 2014,AA,106,5,Max Murin,FR,Central Cambria
@@ -7619,7 +7619,7 @@ year,cls,weight,place,name,grade,school
 2014,AAA,132,6,Tyler Buckiso,SR,Peters Township
 2014,AAA,132,7,Jalen Palmer,SR,Delaware Valley
 2014,AAA,132,8,Tommy Stokes,SR,Bensalem
-2014,AAA,138,1,Vincenzo Joseph,JR,Pittsburgh CC
+2014,AAA,138,1,Vincenzo Joseph,JR,Pittsburgh Central Catholic
 2014,AAA,138,2,Mike Kemerer,JR,Franklin Regional
 2014,AAA,138,3,Patrick Duggan,JR,Cumberland Valley
 2014,AAA,138,4,Colby Ems,SR,East Stroudsburg South
@@ -7652,7 +7652,7 @@ year,cls,weight,place,name,grade,school
 2014,AAA,160,7,Bobby Fehr,SR,Northampton
 2014,AAA,160,8,Chad Reese,SR,Central Mountain
 2014,AAA,170,1,Chance Marsteller,SR,Kennard-Dale
-2014,AAA,170,2,Kyle Coniker,SR,Pittsburgh CC
+2014,AAA,170,2,Kyle Coniker,SR,Pittsburgh Central Catholic
 2014,AAA,170,3,Cody Seibert,SR,Big Spring
 2014,AAA,170,4,Noah Wilps,SR,Chartiers Valley
 2014,AAA,170,5,Ben Swarr,SR,Garden Spot
@@ -7710,14 +7710,14 @@ year,cls,weight,place,name,grade,school
 2015,AA,120,1,Cole Matthews,FR,Reynolds
 2015,AA,120,2,Brian Courtney,SO,Athens
 2015,AA,120,3,Taylor Ortz,JR,Brookville
-2015,AA,120,4,John Pipa,SO,Bishop McDevitt (3)
+2015,AA,120,4,John Pipa,SO,Bishop McDevitt
 2015,AA,120,5,Andrew Wert,FR,Trinity
 2015,AA,120,6,Justin McCoy,FR,Chestnut Ridge
 2015,AA,120,7,Brendan Howard,SR,Jefferson-Morgan
 2015,AA,120,8,Caleb Bordner,SR,Tri-Valley
 2015,AA,126,1,Johnathan Gabriel,JR,Bedford
 2015,AA,126,2,Seth Hogue,JR,Reynolds
-2015,AA,126,3,David Pipa,SR,Bishop McDevitt (3)
+2015,AA,126,3,David Pipa,SR,Bishop McDevitt
 2015,AA,126,4,Triston Law,SR,Forest Hills
 2015,AA,126,5,Charles Johnson,JR,Wyoming Area
 2015,AA,126,6,Grant Bond,SR,Boiling Springs
@@ -7859,7 +7859,7 @@ year,cls,weight,place,name,grade,school
 2015,AAA,145,6,Chase Gallik,SR,Wallenpaupack
 2015,AAA,145,7,James Saylor,JR,Easton
 2015,AAA,145,8,Alex Klucker,SR,East Pennsboro
-2015,AAA,152,1,Vincenzo Joseph,SR,Pittsburgh CC
+2015,AAA,152,1,Vincenzo Joseph,SR,Pittsburgh Central Catholic
 2015,AAA,152,2,Josh Maruca,SR,Franklin Regional
 2015,AAA,152,3,Mike Labriola,SO,Bethlehem Catholic
 2015,AAA,152,4,Kaleb Young,JR,Punxsutawney
@@ -7871,7 +7871,7 @@ year,cls,weight,place,name,grade,school
 2015,AAA,160,2,Cody Cordes,SR,Wyoming Valley West
 2015,AAA,160,3,Paul Dunn,SR,Bethel Park
 2015,AAA,160,4,Noah Stewart,JR,Mifflin County
-2015,AAA,160,5,Tony Palumbo,SR,Pittsburgh CC
+2015,AAA,160,5,Tony Palumbo,SR,Pittsburgh Central Catholic
 2015,AAA,160,6,Bailey Shutt,JR,Lower Dauphin
 2015,AAA,160,7,Frankie Krauss,SR,Spring-Ford
 2015,AAA,160,8,Alex Elliott,SR,Sun Valley
@@ -8143,12 +8143,12 @@ year,cls,weight,place,name,grade,school
 2017,AA,106,2,Josh Boozel,JR,Mount Union
 2017,AA,106,3,Kaden Cassidy,FR,Bishop McCort
 2017,AA,106,4,Elijah Bundro,FR,Wilson Area
-2017,AA,106,5,Nate Smith,FR,Bishop McDevitt (3)
+2017,AA,106,5,Nate Smith,FR,Bishop McDevitt
 2017,AA,106,6,Anthony Glasl,FR,Brockway
 2017,AA,106,7,Baylor Shunk,SO,Penns Valley
 2017,AA,106,8,Jacob Blair,FR,Muncy
 2017,AA,113,1,Jaret Lane,JR,Southern Columbia
-2017,AA,113,2,Chase Shields,SO,Bishop McDevitt (3)
+2017,AA,113,2,Chase Shields,SO,Bishop McDevitt
 2017,AA,113,3,Wyatt Lutz,JR,Montoursville
 2017,AA,113,4,Tyger Evans,SO,Susquehanna Township
 2017,AA,113,5,Richie Markulics,SO,Notre Dame-Green Pond
@@ -8178,7 +8178,7 @@ year,cls,weight,place,name,grade,school
 2017,AA,132,5,Carnell Andrews,JR,Bishop McCort
 2017,AA,132,6,Tanner McHugh,SR,Tamaqua
 2017,AA,132,7,Tyler Alberts,SR,Ellwood City
-2017,AA,132,8,Bodee Tolbert,JR,Bishop McDevitt (3)
+2017,AA,132,8,Bodee Tolbert,JR,Bishop McDevitt
 2017,AA,138,1,Max Murin,SR,Central Cambria
 2017,AA,138,2,Cole Matthews,JR,Reynolds
 2017,AA,138,3,Thayne Lawrence,FR,Frazier
@@ -8188,7 +8188,7 @@ year,cls,weight,place,name,grade,school
 2017,AA,138,7,Logan McClain,JR,Ridgway
 2017,AA,138,8,Brett Uhrin,SR,Valley View
 2017,AA,145,1,Justin McCoy,JR,Chestnut Ridge
-2017,AA,145,2,John Pipa,SR,Bishop McDevitt (3)
+2017,AA,145,2,John Pipa,SR,Bishop McDevitt
 2017,AA,145,3,Kody Komara,SR,Freedom Area
 2017,AA,145,4,Nathan Haubert,SO,Palisades
 2017,AA,145,5,Todd Lane,SR,Southern Columbia
@@ -8235,7 +8235,7 @@ year,cls,weight,place,name,grade,school
 2017,AA,195,6,Xavier Molnar,JR,Brookville
 2017,AA,195,7,Ivan Balavage,JR,Scranton Prep
 2017,AA,195,8,Jacob McMaster,SO,Greenville
-2017,AA,220,1,Harrison Cole Nye,SR,Bishop McDevitt (3)
+2017,AA,220,1,Harrison Cole Nye,SR,Bishop McDevitt
 2017,AA,220,2,Josiah Jones,JR,Bishop McCort
 2017,AA,220,3,Devin Fontanez,SR,Saucon Valley
 2017,AA,220,4,Max Mason,SR,Jersey Shore
@@ -10059,7 +10059,7 @@ year,cls,weight,place,name,grade,school
 2025,AAA,189,8,Michael Spielman,JR,Strath Haven
 2025,AAA,215,1,Elijah Brown,JR,Belle Vernon
 2025,AAA,215,2,Cooper Roscosky,JR,Kiski Area
-2025,AAA,215,3,Roman Thompson,SO,Pittsburgh CC
+2025,AAA,215,3,Roman Thompson,SO,Pittsburgh Central Catholic
 2025,AAA,215,4,Jake Conroy,SR,Ringgold
 2025,AAA,215,5,Brodie Daugherty,SR,Manheim Central
 2025,AAA,215,6,Decker Bechtold,FR,Owen J. Roberts
