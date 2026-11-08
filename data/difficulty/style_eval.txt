@@ -1,16 +1,16 @@
-win type (dec/major/tech/fall) on hidden 10% of 2018-26 regional + state bouts, n=3220: log loss base shares 1.1752, rating gap only 1.0317, gap + style 0.8987
-  fall: Brier gap only 0.2036, gap + style 0.1632 (actual share 0.313)
-  tech fall: Brier gap only 0.0652, gap + style 0.0584 (actual share 0.076)
-  major: Brier gap only 0.0965, gap + style 0.0942 (actual share 0.110)
-  fall chance by fifth of predicted chance (predicted / actual): 0.05/0.07, 0.15/0.15, 0.28/0.24, 0.45/0.41, 0.70/0.69
+win type (dec/major/tech/fall) on hidden 10% of 2018-26 regional + state bouts, n=3217: log loss base shares 1.1758, rating gap only 1.0299, gap + style 0.9011
+  fall: Brier gap only 0.2035, gap + style 0.1637 (actual share 0.313)
+  tech fall: Brier gap only 0.0652, gap + style 0.0585 (actual share 0.076)
+  major: Brier gap only 0.0965, gap + style 0.0944 (actual share 0.110)
+  fall chance by fifth of predicted chance (predicted / actual): 0.05/0.08, 0.15/0.15, 0.28/0.24, 0.45/0.41, 0.70/0.69
 coefficients (rows: 1, gap, gap^2, gap^3, winner major/tech/fall share, loser major/tech/fall share; cols dec/major/tech/fall):
-  +0.000 -2.224 -4.134 -0.792
-  +0.000 +1.629 +3.287 +1.124
-  +0.000 +0.181 -0.254 +0.384
-  +0.000 -0.120 +0.006 -0.007
-  +0.000 +0.369 +0.512 +0.262
-  +0.000 +0.378 +1.128 +0.370
-  +0.000 +0.807 +1.509 +2.593
-  +0.000 +0.342 +0.543 +0.260
-  +0.000 +0.395 +0.883 +0.424
-  +0.000 +0.779 +2.073 +3.260
+  +0.000 -2.233 -4.178 -0.794
+  +0.000 +1.627 +3.347 +1.117
+  +0.000 +0.169 -0.324 +0.360
+  +0.000 -0.115 +0.027 +0.003
+  +0.000 +0.359 +0.513 +0.259
+  +0.000 +0.376 +1.122 +0.366
+  +0.000 +0.798 +1.510 +2.590
+  +0.000 +0.325 +0.541 +0.259
+  +0.000 +0.396 +0.872 +0.422
+  +0.000 +0.773 +2.071 +3.262

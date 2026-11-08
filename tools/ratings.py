@@ -324,6 +324,8 @@ if MARGIN == 'ordered' and MCTX_F and os.path.exists(MCTX_F):
 # x0.8 .4751/.4216/80.8%; x1.0 .4736/.4253/77.5%. Larger scales trade agreement with how the tournament played out
 # for small prediction gains (a pinner who lost twice at states rated over medalists); x0.3 keeps champions on top as
 # often as the win-only model and has the best rating/placing agreement of all (Spearman .797 vs .794).
+# With margins in, the prior-width tuner picks 2.0 (1.5 .4896, 2.0 .4900: flat, widest within .001); the numbers above
+# are at 2.0, so data/sources/rating_settings.json pins 2.0 (at the old pin 1.5, champion #1 reads 86.6%).
 BETA_X = float(os.environ.get('RATINGS_BETA_X', 0.3))
 _BTH = {}
 def bout_th(b):
