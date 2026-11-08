@@ -1,116 +1,14 @@
-weights reordered: 96, wrestlers moved: 439, rows added: 22
+weights reordered: 0, wrestlers moved: 0, rows added: 0
 
-2015 AAA 285: Tommy Killoran 5->6; Bruce Graeber 6->5
-2016 AAA 106: Geo Barzona 4->6; Jobe Chishko 6->7; Brandon Meredith 7->4
-2016 AAA 113: Chris Wright 3->4; Devin Schnupp 4->6; Jakob Campbell 6->7; Gage Curry 7->3
-2016 AAA 120: Hunter Baxter 3->4; Dan Moran 4->5; Noah Levett 5->6; Noah Myers 6->7; K.J. Fenstermacher 7->3
-2016 AAA 126: Chandler Olson 3->4; Wade Cummings 4->5; Chris Eddins 5->6; Ethan McCoy 6->7; Cole Manley 7->3
-2016 AAA 132: Brett Kulp 3->4; Zachary Hartman 4->5; Zack Trampe 5->6; Seth Koleno 6->7; Luke Kemerer 7->3
-2016 AAA 138: Colin Cronin 3->4; Shaun Wilson 4->5; Jake Hinkson 5->6; Garrett Kyner 6->7; Sammy Sasso 7->3
-2016 AAA 145: Kevin Edwards 4->6; Brock Port 6->7; Lucas Martoccio 7->4
-2016 AAA 152: Travis Stefanik 2->3; James Saylor 3->2; Cole Karam 4->6; Chase Stephens 6->7; Derek Verkleeren 7->4
-2016 AAA 160: Bailey Shutt 4->5; Jonah Barley 5->6; Haydn Swartwood 6->7; Joshua Stillings 7->4
-2016 AAA 170: Noah Stewart 3->4; Jake Shaffer 4->5; Jared Siegrist 5->6; Steve Rice 6->7; Austin Bell 7->3
-2016 AAA 182: Drew Peck 3->4; Gregg Harvey 4->5; Colin McCracken 5->7; Kyle Gentile 7->3
-2016 AAA 195: Joe Doyle 3->4; Dylan Harr 4->6; Francis Duggan 6->7; Anthony Piscopo 7->3
-2016 AAA 220: Evan Callahan 4->6; Jesse Enck 6->7; Andrew Boob 7->4
-2016 AAA 285: Josh Fye 4->5; Isaac Reid 5->6; Kawaun Deboe 6->7; Niko Camacho 7->4
-2017 AA 106: Nate Smith 4->5; Anthony Glasl 5->6; Baylor Shunk 6->7; Elijah Bundro 7->4
-2017 AA 113: Tyger Evans 3->4; Derrick Christie 4->8; Isaac Crowell 5->6; Richie Markulics 6->5; Wyatt Lutz 7->3; Keelan Kunselman 8->7
-2017 AA 120: Bronson Garber 3->4; Joshua Jones 4->5; Colin Pasone 5->6; Andrew Ischo 6->7; Cole Hauck 7->3
-2017 AA 126: John Rocco Kazalas 2->6; Brian Earlston 3->4; Jeremy Hanford 4->8; Tanner Ball 6->7; Gage Bayless 7->3; Austin Clabaugh 8->2
-2017 AA 132: Caleb Dowling 3->4; Bodee Tolbert 4->8; Tyler Alberts 6->7; Gabe Miller 7->3; Tanner McHugh 8->6
-2017 AA 138: Alex Caldwell 4->5; Mike Doerflinger 5->6; Logan McClain 6->7; Sammy Hepler 7->4
-2017 AA 145: Todd Lane 2->5; Nathan Haubert 3->4; John Pipa 4->2; Dallas Bulsak 5->6; John Mott 6->7; Kody Komara 7->3
-2017 AA 152: Caleb Clymer 2->3; Chase Anklam 3->6; Robert Patrick 4->2; Caleb Hetrick 6->7; Brock Biddle 7->4
-2017 AA 160: Brian Shermeyer 4->8; Jake Carpenter 6->7; Gavin Wilkerson 7->4; Kyle Bennett 8->6
-2017 AA 170: Jared McGill 3->4; Carl Harris 4->8; Nick McClimans 6->7; Joel Leise 7->3; Matt Lewandowski 8->6
-2017 AA 182: Devin Evans 3->5; Zach Zimmerman 5->6; Anthony Marra 6->7; Dominic DeLuca 7->3
-2017 AA 195: Jerry Moore 4->5; Xavier Molnar 5->6; Ivan Balavage 6->7; Clay Verbanac 7->4
-2017 AA 220: Blake Reynolds 4->6; Tyler Cook 6->7; Maxwell Mason 7->4
-2017 AA 285: Nick Winfield 4->7; Evan Sweesey 7->4
-2019 AA 132: John Wheeler 4->6; Kaeden Berger 6->7; Zack Witmer 7->4
-2019 AA 138: A.J. Corrado 3->5; Tyler Martin 5->6; Malachi Duvall 6->7; Erik Gibson 7->3
-2019 AA 145: Tristan Pugh 4->6; Nathan Haubert 6->7; Gavin Garcia 7->4
-2019 AA 160: Tyler Stoltzfus 3->4; Cole Sossong 4->6; Cade Linn 6->7; Matthew Arciuolo 7->3
-2019 AA 170: David Galasso 3->4; Tyler Fisher 4->6; Isaiah DeJesus 6->7; Derek Brown 7->3
-2019 AA 182: Austin Walley 3->4; Derek Yingling 4->5; Garrett McClintick 5->6; Kaleb Kamerer 6->7; Gavin Henry 7->3
-2019 AA 195: Hunter Tremain 3->4; Geoff Magin 4->6; Gable Crebs 6->7; Colin Fegley 7->3
-2019 AA 220: Cameron Wood 2->4; Dominic DeLuca 3->2; Cory Johnston 4->6; Connor Forrest 6->7; Preston Zachman 7->3
-2019 AA 285: Derrick Skeehan 2->6; Jake Ryan 3->2; Jalen Stephens 4->3; Kole Winfield 5->7; Matt Long 6->5; Lear Quinton 7->4
-2019 AAA 106: Kyle Waterman 4->6; Braxton Appello-Fries 6->7; Aiden Lewis 7->4
-2019 AAA 113: Andrew Smith 4->7; Ben Monn 5->6; Kyle Burkholder 6->5; Matt Mayer 7->4
-2019 AAA 120: Shane Hanson-Ashworth 2->3; Cameron Enriquez 3->6; Cole Homet 4->7; Killian Delaney 6->8; Luke Lucerne 7->4; Kurtis Phipps 8->2
-2019 AAA 126: Ken Hayman 2->4; Trenton Donahue 3->6; Colton Camacho 4->2; Braden Ricchini 6->7; Patrick Gould 7->3
-2019 AAA 132: Sam Hillegas 2->3; Kenny Herrmann 3->2; Cade Balestrini 4->7; Drew Clearie 5->6; Tyler Dilley 6->5; Gabe Willochell 7->4
-2019 AAA 138: Devon Britton 4->6; Nick Coy 6->7; Ty Linsenbigler 7->4
-2019 AAA 145: Paniro Johnson 3->5; Brandon Connor 5->7; A.J. Tamburrino 7->3
-2019 AAA 152: Tanner Updegraff 2->3; Michael Kistler 3->7; Coltin Jezioro 4->8; Ethan Richner 5->6; Colton Zimmerman 6->5; Cole Handlovic 7->4; Cam Connor 8->2
-2019 AAA 160: Connor Herceg 4->8; John Crawford 5->6; Jake Richardson 6->5; Luke Frinzi 7->4; Dylan Reinert 8->7
-2019 AAA 170: Lenny Pinto 2->3; Dillon Keane 3->7; Nick Delp 4->8; Angel Garcia 5->6; Maximus Hale 6->5; Luke Nichter 7->4; Edmond Ruth 8->2
-2019 AAA 182: Joey Milano 2->4; Luke Stout 3->2; Tyler Mousaw 4->6; Jeremy Seymour 6->7; Scott Joll 7->3
-2019 AAA 195: Damen Moyer 4->6; Luke Montgomery 6->7; Cole Urbas 7->4
-2019 AAA 220: Dorian Crosby 3->4; Jamal Brandon 4->7; Nick Nittoli 5->6; Shane Noonan 6->5; Hunter Catka 7->3
-2019 AAA 285: Isaiah Vance 2->4; Jake Slinger 3->2; Kyler Wuestner 4->7; Nathan Hoaglund 5->6; Raymond Christas 6->5; Michael Wolfgram 7->3
-2020 AA 106: Ethan Kolb 3->7; Jaden Pepe 7->3
-2020 AA 113: Kai Burkett 4->5; Hunter Walk 5->6; Gavin Bradley 6->7; Owen Reinsel 7->4
-2020 AA 120: Logan Jaquay 3->4; Nate Smith 4->5; Cole Bayless 5->6; Nathan Holderbaum 6->7; Brandan Chletsos 7->3
-2020 AA 126: Dave Evans 2->4; Tyler Cymmerman 3->6; Levi Haines 4->2; Gabe Gramly 6->8; Jackson Arrington 7->3; Connor Pierce 8->7
-2020 AA 132: Kaeden Berger 2->5; Ian Oswalt 3->2; Noah Hunt 5->8; Noah Teeter 6->7; Anthony Glasl 7->3; Carter Gill 8->6
-2020 AA 138: Zack Witmer 4->5; Zach Holland 5->6; Blake Showers 6->7; Patrick DeMark 7->4
-2020 AA 145: Nathan Higley 3->4; Jackson Spires 4->7; Avery Bassett 7->3
-2020 AA 152: Wesley Barnes 2->4; A.J. Corrado 3->2; Ryan Weyandt 4->5; Shane Kemper 5->6; Tyler Martin 6->8; Malachi Duvall 7->3; Owen Jefferson 8->7
-2020 AA 160: Gage Musser 2->4; Nolan Lear 3->5; Thayne Lawrence 4->2; Keegan Rothrock 5->6; Isaac Cory 6->7; Gavin Garcia 7->3
-2020 AA 170: Trent Schultheis 2->4; Matthew Arciuolo 3->2; Cade Linn 4->5; Timothy Ward 5->6; Cole Toy 6->7; Cael Crebs 7->3
-2020 AA 182: Andrew Sharer 3->4; Ethan Finch 4->6; Patrick Cutchember 6->7; Dane Csencsits 7->3
-2020 AA 195: Danny Lawrence 2->3; Braydon Herbster 3->2; Parker Moore 4->6; Eric Johnson 6->7; Ethan Rode 7->4
-2020 AA 220: Nathan Taylor 3->4; Jake Ryan 4->5; Cael Black 5->6; Joey King 6->8; Duane Knisely 7->3; Cory Johnston 8->7
-2020 AA 285: Nickolas Warnke 4->7; Bronson Strouse 5->6; Riley Kemper 6->5; Jalen Stephens 7->4
-2022 AA 106: Cole Hubert 2->4; Louie Gill 3->2; Major Lewis 4->7; Carter Beck 5->6; Parker Sentipal 6->5; Ayden Smith 7->3
-2022 AA 113: Gauge Botero 2->3; Branden Wentzel 3->2; Hunter Robison 4->7; Landon Bainey 5->6; Lucas Fye 6->5; Deven Jackson 7->4
-2022 AA 120: Chris Vargo 4->5; Hunter Gould 5->6; Cole Householder 6->7; Cooper Hornack 7->4
-2022 AA 126: Charlie Robson 3->6; Eli Bounds 6->7; Kaden Milheim 7->3
-2022 AA 132: Mason Barvitskie 2->4; Calan Bollman 3->5; Owen Reinsel 4->2; Max Stein 5->6; Jack Martinec 6->7; Conner Heckman 7->3
-2022 AA 138: Anthony Evanitsky 2->3; Connor Saylor 3->5; Connor Pierce 4->2; Ambrose Boni 5->6; Cameron Milheim 6->7; Cade Wirnsberger 7->4
-2022 AA 145: Ty Watson 3->6; Trevor Weyandt 4->7; Carter Gill 6->4; Kaiden Wagner 7->3
-2022 AA 152: Devon Deem 2->5; Andrew Christie 3->2; Hunter Hohman 4->7; Justin Richey 5->6; Cooper Price 6->4; Michael Duggan 7->3
-2022 AA 160: Ganon Smith 2->3; Grant MacKay 3->2; Robbie Schneider 4->5; Aiden Zimmerman 5->6; Bryant Green 6->7; Zeke Dubler 7->4
-2022 AA 172: Suds Dubler 3->4; Garrett Tettemer 4->7; Riley Parker 5->6; Caleb Close 6->8; Nolan Lear 7->3; Garrett Garcia 8->5
-2022 AA 189: Patrick Cutchember 3->4; Ty Csencsits 4->8; Jacob Scheib 6->7; Hadyn Packer 7->3; Seth Stewart 8->6
-2022 AA 215: Abraham Keep 3->4; Dante Mahaffey 4->8; Bryce Rafferty 5->6; Hayden Linkerhof 6->5; Nicholas Woodruff 7->3; Cael Black 8->7
-2022 AA 285: Joshua Perrine 3->6; Xavier Reyda 6->7; Emmanuel Ulrich 7->3
-2024 AA 172: Hunter Hohman 3->4; Keegan Ramsay 4->3
-2024 AAA 215: Juliano Marion 4->5; Aidan Buggey 5->6; Brandon Stiehler 6->7; Ryan McMillan 7->8; Jake Conroy 8->4
-2025 AA 139: Noah Doi 3->4; Gideon Bracken 4->5; Gunnar Maciejewski 5->6; Colin Walther 6->7; Logan Powell 7->8; Sam Herring 8->3
-2025 AA 215: Juuso Young 5->6; Jason Singer 6->5
-2026 AAA 107: Quinn Bagnell 4->6; Bryce Thomas 6->7; Maximus Quarry 7->4
-2026 AAA 114: John Segata 2->3; Cael Muller 3->5; Gabe Benyo 4->2; Braden Todora 5->6; Zach Rehak 6->7; Dylan Barrett 7->4
-2026 AAA 121: Jacob Benyo 3->6; Teagan Caciolo 6->8; Dominick Morrison 7->3; Nico Emili 8->7
-2026 AAA 127: Max Tancini 4->7; Frank Leanza 7->4
-2026 AAA 133: Caleb Kosko 2->4; Willmont Kai 3->2; Sean Murray 4->8; Drew Scherer 5->6; Braiden Weaver 6->5; Mason Whitney 7->3; Brayden Sigle 8->7
-2026 AAA 139: Collier Hartman 3->4; Blake Boyer 4->6; Trey Wagner 6->7; Patrick Woloshyn 7->3
-2026 AAA 145: Daniel Dennis 2->5; Aiden Kunes 4->2; Nathan Klingensmith 5->6; Jackson Lininger 6->7; Myles Grossman 7->4
-2026 AAA 152: James Whitbred 4->5; Zack Jaffe 5->6; Cade Campbell 6->7; Luke Knox 7->4
-2026 AAA 160: Cole Gibbons 4->6; Jack White 6->8; Jonny O'Brien 7->4; Klint Miller 8->7
-2026 AAA 172: Elijah Simak 4->5; Christian Burd 5->6; A.J. Corp 6->7; Brock Frable 7->4
-2026 AAA 189: Hunter Snyder 4->6; David Clayton 6->8; Michael Spielman 7->4; Noah Templin 8->7
-2026 AAA 215: Decker Bechtold 2->3; Paxton Hunt 3->2; Cole Staker 4->8; Connor Smalley 6->7; Kendahl Hoare 7->4; Sawyer Ermigiotti 8->6
-2026 AAA 285: Nolan Reinert 3->4; Daniel Schiffert 4->5; Kurtis Crossman 5->6; Robert Rose 6->8; Brody Rebuck 7->3; Cam Danna 8->7
 
+1947 single 145 place 2: list "Tom Hoeschele", bracket "Tom Hosechele" (spelling only, list kept)
 1948 single 185 place 1: list "Lynn Illingsworth", bracket "Lynn Illingworth" (spelling only, list kept)
-1954 single 95: added from the bracket (2 places)
-1954 single 103: added from the bracket (2 places)
-1954 single 112: added from the bracket (2 places)
-1954 single 120: added from the bracket (2 places)
-1954 single 127: added from the bracket (2 places)
-1954 single 133: added from the bracket (2 places)
-1954 single 138: added from the bracket (2 places)
-1954 single 145: added from the bracket (2 places)
-1954 single 154: added from the bracket (2 places)
-1954 single 165: added from the bracket (2 places)
-1954 single 185: added from the bracket (2 places)
 1977 AA 145 place 2: list "Jim Whistler", bracket "Jim Whister" (spelling only, list kept)
+1990 AA 135 place 5: list "Chad DeLattre", bracket "Chad Dellatre" (spelling only, list kept)
 1993 AAA 140 place 5: list "James Reimert", bracket "Jim Reinert" (spelling only, list kept)
+1995 AAA 275 place 4: list "Frank Stovall", bracket "Frank Stoval" (spelling only, list kept)
 1997 AAA 125 place 5: list "Mike Maney", bracket "Mike Manley" (spelling only, list kept)
 1998 AA 275 place 6: list "Beau Truitt", bracket "Beau Trutt" (spelling only, list kept)
 1999 AAA 152 place 8: list "Mahmoud Elbattah", bracket "Mahmoud Elbattan" (spelling only, list kept)
+2004 AA 171 place 8: list "Justin Trostle", bracket "Justin Trostel" (spelling only, list kept)
+2009 AA 171 place 8: list "Corey Matilla", bracket "Corey Mattila" (spelling only, list kept)

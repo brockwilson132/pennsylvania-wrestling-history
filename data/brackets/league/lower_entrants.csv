@@ -72,7 +72,7 @@ league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,2,,Terr
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,,,Howard McDuffie,Delhaas,JR,6-2
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,,,Fran Giagnacova,Bristol,SO,4-3-1
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,,,Otto Harazim,William Tennent,SO,2-6
-league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,,,Hugh (Bud) Lawrence,Central Bucks,SO,6-1-1
+league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,154,1,,Hugh (Bud) Lawrence,Central Bucks,SO,6-1-1
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,165,1,,Ray Naylor,Bristol,SR,8-0
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,165,,,Tell Schreiber,Central Bucks,SO,
 league,1957_Lower_Bucks_County_single,1957,single,Lower_Bucks_County,165,,,Furman Simmers,Neshaminy,JR,3-5
@@ -342,7 +342,7 @@ league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Charles (Mi
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Stan (Larry) McIntosh,Lansdowne-Aldan,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Rich Glabfelter,Cheltenham,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Jim Toth,Octorara,JR,5-0
-league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Harold (Skip) Lentz,Abington,SR,
+league,1958_Suburban_League_single,1958,single,Suburban_League,127,2,,Harold (Skip) Lentz,Abington,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Rich Santillo,Norristown,JR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Rich Purnell,Conestoga,JR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,127,,,Mike Gabriel,Lower Merion,SR,
@@ -371,7 +371,7 @@ league,1958_Suburban_League_single,1958,single,Suburban_League,138,,,Tom Griffit
 league,1958_Suburban_League_single,1958,single,Suburban_League,138,,,Taylor (Skip) Spangler,West Chester,JR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,138,,,Larry Alden,Lansdowne-Aldan,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,138,1,,Dick Dean,Norristown,JR,
-league,1958_Suburban_League_single,1958,single,Suburban_League,145,,,Edgar (Spike) Hickman,Lower Merion,SO,
+league,1958_Suburban_League_single,1958,single,Suburban_League,145,1,,Edgar (Spike) Hickman,Lower Merion,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,145,,,Jim Aikens,Lansdowne-Aldan,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,145,,,Horace Webb,West Chester,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,145,,,Bill Hutchinson,Cheltenham,SR,
@@ -398,11 +398,11 @@ league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Dennis McGr
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Steve Speers,Lansdowne-Aldan,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Steve Schrader,Haverford High,JR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Frank Meyers,Abington,JR,
-league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Robert (Pete) Donovan,Upper Darby,JR,
+league,1958_Suburban_League_single,1958,single,Suburban_League,165,2,,Robert (Pete) Donovan,Upper Darby,JR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Irvin Lindley,Springfield Delco,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Bill Kohler,Norristown,SO,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Steve Kimmel,West Chester,JR,
-league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Jeff Wood,,,
+league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Jeff Wood,Conestoga,,
 league,1958_Suburban_League_single,1958,single,Suburban_League,165,,,Jerry Stremic,Cheltenham,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,185,,,Bob Yost,Upper Darby,SR,
 league,1958_Suburban_League_single,1958,single,Suburban_League,185,,,Bob Bunnell,West Chester,JR,
@@ -533,7 +533,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Dave Thomas,
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Bob Burtenshaw,Lower Merion,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Lewis Parker,Octorara,SO,6-2-1
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Mike Monastero,Norristown,SO,
-league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,? ?,,,
+league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,? ?,Penncrest,,
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Marvin Betesh,Cheltenham,FR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Phil Corey,Upper Darby,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,95,,,Maurice Wesley,West Chester,SO,
@@ -607,7 +607,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Doug Hertz,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Rich Glabfelter,Cheltenham,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Tom Braun,Lansdowne-Aldan,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Paul Brownback,Lower Merion,SR,
-league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,? ?,,,
+league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,? ?,Penncrest,,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Joe Pizzi,Conestoga,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,John Jackson,Harriton,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,138,,,Ernie Lindquist,Octorara,JR,5-3
@@ -627,7 +627,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,145,,,Craig Bate,
 league,1959_Suburban_League_single,1959,single,Suburban_League,145,,,Ken Kistler,Upper Darby,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,145,,,Taylor (Skip) Spangler,West Chester,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,145,,,? ?,,,
-league,1959_Suburban_League_single,1959,single,Suburban_League,145,,,Edgar (Spike) Hickman,Harriton,JR,
+league,1959_Suburban_League_single,1959,single,Suburban_League,145,2,,Edgar (Spike) Hickman,Harriton,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,,,Elmer Romeis,Norristown,JR,8-0-4
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,,,Bob Keim,Abington,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,2,,Steve Kimmel,West Chester,SR,
@@ -641,7 +641,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,154,,,Bob MacDoug
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,,,Art Rosenglick,Lower Merion,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,,,Bob Dennenberg,Harriton,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,154,1,,Ted Schmitt,Conestoga,SR,
-league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Robert (Pete) Donovan,Upper Darby,SR,
+league,1959_Suburban_League_single,1959,single,Suburban_League,165,1,,Robert (Pete) Donovan,Upper Darby,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Richard Bull,Harriton,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Mitchell Migatz,Haverford High,SO,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Steve MacAleer,Lansdowne-Aldan,SR,
@@ -649,7 +649,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Ben Brooks,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Robert Taylor,Octorara,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Ron Welpott,Conestoga,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Bill Chendorian,Norristown,SO,
-league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,? ?,,,
+league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,? ?,Penncrest,,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Bernard Newman,Cheltenham,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Ollie Burt,Springfield Delco,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,165,,,Bob Darlington,West Chester,JR,
@@ -659,7 +659,7 @@ league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Dave White,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Walt Pierce,Conestoga,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Robert Keller,Springfield Delco,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,George Kitchell,Harriton,SR,
-league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,? ?,,,
+league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,? ?,Penncrest,,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Mike Branca,Norristown,SR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Steve Speers,Lansdowne-Aldan,JR,
 league,1959_Suburban_League_single,1959,single,Suburban_League,185,,,Roger Staley,Lower Merion,JR,
@@ -839,7 +839,7 @@ league,1960_Suburban_League_single,1960,single,Suburban_League,133,2,,John Balis
 league,1960_Suburban_League_single,1960,single,Suburban_League,138,1,,Pete Saia,Haverford High,SR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,138,2,,Jay Smith,Norristown,SR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,138,,,Donald Day,Upper Darby,JR,
-league,1960_Suburban_League_single,1960,single,Suburban_League,145,,,Edgar (Spike) Hickman,Harriton,SR,
+league,1960_Suburban_League_single,1960,single,Suburban_League,145,1,,Edgar (Spike) Hickman,Harriton,SR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,145,2,,Mark Lichtenfeld,Upper Darby,JR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,154,1,,Randy Werrin,Lower Merion,SR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,154,,,Fred Blank,Upper Darby,JR,
@@ -849,7 +849,7 @@ league,1960_Suburban_League_single,1960,single,Suburban_League,154,2,,John Jacks
 league,1960_Suburban_League_single,1960,single,Suburban_League,165,2,,Elmer Romeis,Norristown,SR,9-0-2
 league,1960_Suburban_League_single,1960,single,Suburban_League,165,,,Ollie Burt,Springfield Delco,SR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,165,1,,Bob Cassidy,Haverford High,SR,
-league,1960_Suburban_League_single,1960,single,Suburban_League,180,,,Sverre (Olaf) Christensen,Upper Darby,SR,8-1
+league,1960_Suburban_League_single,1960,single,Suburban_League,180,2,,Sverre (Olaf) Christensen,Upper Darby,SR,8-1
 league,1960_Suburban_League_single,1960,single,Suburban_League,180,,,Bruce Sunstein,Harriton,SO,
 league,1960_Suburban_League_single,1960,single,Suburban_League,180,,,Dick Natoli,Norristown,JR,
 league,1960_Suburban_League_single,1960,single,Suburban_League,180,,,Bob Estill,Conestoga,JR,8-4
@@ -1105,7 +1105,7 @@ league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,,,P
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,,,Phil Weida,Emmaus,JR,
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,,,Bill Horn,Palmerton,JR,
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,,,Daniel Papay,Slatington,SO,
-league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,,,Generoso (Jerry) York,Lehighton,JR,
+league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,133,2,,Generoso (Jerry) York,Lehighton,JR,
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,138,1,,Gary Van Buskirk,Stroudsburg,SR,
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,138,,,Glenn Serfass,Lehighton,SO,
 league,1968_Lehigh_Valley_League_single,1968,single,Lehigh_Valley_League,138,,,Bob Mason,Catasauqua,SR,
@@ -1317,7 +1317,7 @@ league,1969_East_Penn_League_single,1969,single,East_Penn_League,180,,,John Bart
 league,1969_East_Penn_League_single,1969,single,East_Penn_League,180,,,Lance Gottwald,Bethlehem Liberty,JR,
 league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Gary Ward,Allentown Dieruff,SR,
 league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Chris Nagel,Allentown Allen,SR,
-league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Rich Rosenberg,,,
+league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Rich Rosenberg,Easton,,
 league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Bob McKoskey,Bethlehem Liberty,JR,
 league,1969_East_Penn_League_single,1969,single,East_Penn_League,250,,,Mark Andrejco,Bethlehem Freedom,SR,
 league,1969_Lehigh_Northampton_League_single,1969,single,Lehigh_Northampton_League,88,,,Lee Keck,Nazareth,FR,
@@ -1641,7 +1641,7 @@ league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Don Seier
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Tom Cronin,West Hazleton,JR,7-5
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Taylor Wallace,Hazleton Area,SO,0-0
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Randy Wehry,Tri-Valley,JR,12-3
-league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Craig (Moon) Mullin,Pottsville,SR,12-2
+league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,2,,Craig (Moon) Mullin,Pottsville,SR,12-2
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,George Brown,Schuylkill Haven,SR,3-5
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,Bill Drasher,Blue Mountain,SR,5-9
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,145,,,John Klitsch,Mahanoy,JR,
@@ -1678,7 +1678,7 @@ league,1969_TriCounty_League_single,1969,single,TriCounty_League,180,,,Tony Petr
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,180,,,Jim Hollenbush,Pottsville,SO,1-9-1
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,180,,,Dave Reager,Schuylkill Haven,FR,0-8
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,180,2,,Joe Narkiewicz,Minersville,SR,13-1
-league,1969_TriCounty_League_single,1969,single,TriCounty_League,250,2,,Dave Marcavage,Schuylkill Haven,JR,7-1
+league,1969_TriCounty_League_single,1969,single,TriCounty_League,250,2,,Dave Margavage,Schuylkill Haven,JR,7-1
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,250,,,Ed Hawk,Jim Thorpe,JR,3-6
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,250,,,Al Moses,Hazleton Area,SR,5-7
 league,1969_TriCounty_League_single,1969,single,TriCounty_League,250,,,Jim MacNeal,West Hazleton,JR,
@@ -2174,7 +2174,7 @@ league,1971_East_Penn_League_single,1971,single,East_Penn_League,112,,,Jay Meron
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,112,,,Lance Leonhardt,Bethlehem Freedom,JR,
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Dave Benson,Allentown Dieruff,JR,
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Robin Blum,Allentown Allen,SR,
-league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Sam Delserro,,,
+league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Sam Delserro,Easton,,
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Ernie Gonzalez,Bethlehem Liberty,JR,
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,120,,,Blaise Derrico,Bethlehem Freedom,JR,
 league,1971_East_Penn_League_single,1971,single,East_Penn_League,127,,,John Fritz,Bethlehem Liberty,SR,12-0
@@ -2644,7 +2644,7 @@ league,1972_East_Penn_League_single,1972,single,East_Penn_League,103,,,Jeff Shoe
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,103,,,Frank Beauchner,Allentown Allen,SR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Mike Stevens,Easton,SR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Rick Daubert,Pine Grove,SR,
-league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Dave Ramsey,,,
+league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Dave Ramsey,Bethlehem Liberty,,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Neil Harrington,Bethlehem Freedom,JR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Bill Wehry,Tri-Valley,SR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,112,,,Phil Martinez,Allentown Allen,FR,
@@ -2700,7 +2700,7 @@ league,1972_East_Penn_League_single,1972,single,East_Penn_League,180,,,Kyle Brue
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,180,,,Marco Cabassa,Bethlehem Liberty,JR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,180,,,John Koshulsky,Pine Grove,SO,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,180,,,Tom Heilman,Easton,SR,
-league,1972_East_Penn_League_single,1972,single,East_Penn_League,250,,,Milt Schuler,Bethlehem Liberty,JR,8-3-2
+league,1972_East_Penn_League_single,1972,single,East_Penn_League,250,,,Milton Schuler,Bethlehem Liberty,JR,8-3-2
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,250,,,Pete Heim,Tri-Valley,JR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,250,,,John Kilpatrick,Bethlehem Freedom,JR,
 league,1972_East_Penn_League_single,1972,single,East_Penn_League,250,,,Al Ciambrone,Easton,SR,
@@ -2755,7 +2755,7 @@ league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_Leag
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,112,,,Dave Bzik,East Stroudsburg,JR,
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,112,,,Bob Achterman,Bangor,JR,
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,112,,,Bill Coover,Pocono Mountain,SR,
-league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,120,,,Bill (Rocky) Chunko,Saucon Valley,SR,
+league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,120,1,,Bill (Rocky) Chunko,Saucon Valley,SR,
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,120,,,Bernie Bott,Jim Thorpe,JR,
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,120,,,Dan Ballard,Palisades,SO,
 league,1972_Lehigh_Northampton_League_single,1972,single,Lehigh_Northampton_League,120,,,Dave Billig,Parkland,SO,
@@ -3651,7 +3651,7 @@ league,2013_Central_League_single,2013,single,Central_League,132,3,,Kelley Barti
 league,2013_Central_League_single,2013,single,Central_League,132,,,Victor Fink,Harriton,SO,16-10
 league,2013_Central_League_single,2013,single,Central_League,132,4,,Ronnie Frank,Penncrest,JR,16-11
 league,2013_Central_League_single,2013,single,Central_League,132,6,,Kyle Wadell,Radnor,SO,19-11
-league,2013_Central_League_single,2013,single,Central_League,132,,,Kyle Ziegler,"Marple Newtown, 7th",,0-7
+league,2013_Central_League_single,2013,single,Central_League,132,,,Kyle Ziegler,Marple Newtown,7th,0-7
 league,2013_Central_League_single,2013,single,Central_League,132,5,,Brody Brush,Lower Merion,FR,11-11
 league,2013_Central_League_single,2013,single,Central_League,132,,,Anthony Tavani,Haverford High,SR,13-16
 league,2013_Central_League_single,2013,single,Central_League,132,,,Christian Dunn,Ridley,FR,3-2
@@ -3873,10 +3873,9 @@ league,2013_ChesMont_single,2013,single,ChesMont,220,1,,Mike Boykin,Coatesville,
 league,2013_ChesMont_single,2013,single,ChesMont,220,6,,Joe Trama,West Chester East,JR,9-9
 league,2013_ChesMont_single,2013,single,ChesMont,220,3,,Mike McClelland,Downingtown West,SR,21-13
 league,2013_ChesMont_single,2013,single,ChesMont,220,2,,Cory Tomasetti,Kennett,JR,22-5
-league,2013_ChesMont_single,2013,single,ChesMont,220,,,Lorenzo Mejias-Santana,West Chester Henderson,JR,5-16
+league,2013_ChesMont_single,2013,single,ChesMont,220,5,,Lorenzo Mejias-Santana,West Chester Henderson,JR,5-16
 league,2013_ChesMont_single,2013,single,ChesMont,220,7,,Evan James,Unionville,JR,4-10
 league,2013_ChesMont_single,2013,single,ChesMont,220,4,,Matt Bartolotta,Downingtown East,SR,31-7
-league,2013_ChesMont_single,2013,single,ChesMont,220,5,,Lorenzo Mejias-SantanaJR,West Chester Henderson,,
 league,2013_ChesMont_single,2013,single,ChesMont,285,2,,Dean Lang,Great Valley,JR,26-5
 league,2013_ChesMont_single,2013,single,ChesMont,285,5,,Jim Warburton,Octorara,SR,14-9
 league,2013_ChesMont_single,2013,single,ChesMont,285,4,,Will Hart,Unionville,JR,23-8
@@ -4354,13 +4353,12 @@ league,2013_SOL_National_single,2013,single,SOL_National,285,,,Keith Stewart,Abi
 league,2013_SOL_National_single,2013,single,SOL_National,285,4,,Bruce Graeber,Neshaminy,FR,18-11
 league,2014_Central_League_single,2014,single,Central_League,106,2,,Anthony Petril,Upper Darby,SR,26-3
 league,2014_Central_League_single,2014,single,Central_League,106,,,Owen Braithwaite,Radnor,FR,10-19
-league,2014_Central_League_single,2014,single,Central_League,106,,,Eric Appenzeller,"Ridley, 8th",,14-13
+league,2014_Central_League_single,2014,single,Central_League,106,6,,Eric Appenzeller,Ridley,8th,14-13
 league,2014_Central_League_single,2014,single,Central_League,106,4,,Vince Tavani,Haverford High,SO,20-8
 league,2014_Central_League_single,2014,single,Central_League,106,1,,Nick Puliti,Garnet Valley,FR,23-11
 league,2014_Central_League_single,2014,single,Central_League,106,5,,Ty D'Ortone,Penncrest,FR,15-15
 league,2014_Central_League_single,2014,single,Central_League,106,,,Joshua Van Deusen,Marple Newtown,FR,11-11
 league,2014_Central_League_single,2014,single,Central_League,106,3,,Nate Frantz,Strath Haven,SR,27-2
-league,2014_Central_League_single,2014,single,Central_League,106,6,,Eric Appenzeller 8th,Ridley,,
 league,2014_Central_League_single,2014,single,Central_League,113,1,,Austin Petril,Upper Darby,SR,28-1
 league,2014_Central_League_single,2014,single,Central_League,113,,,Trevor Beresford,Penncrest,FR,7-11
 league,2014_Central_League_single,2014,single,Central_League,113,,,Vince DiMichele,Springfield Delco,FR,9-20
@@ -4634,7 +4632,7 @@ league,2014_ChesMont_single,2014,single,ChesMont,195,2,,Wesley McGuire,Coatesvil
 league,2014_ChesMont_single,2014,single,ChesMont,220,1,,Mike Boykin,Coatesville,SR,27-0
 league,2014_ChesMont_single,2014,single,ChesMont,220,8,,Matt Duplicki,Downingtown West,FR,7-21
 league,2014_ChesMont_single,2014,single,ChesMont,220,,,Caleb Hopper,Kennett,FR,6-16
-league,2014_ChesMont_single,2014,single,ChesMont,220,,,Lorenzo Mejias-Santana,West Chester Henderson,SR,8-11
+league,2014_ChesMont_single,2014,single,ChesMont,220,6,,Lorenzo Mejias-Santana,West Chester Henderson,SR,8-11
 league,2014_ChesMont_single,2014,single,ChesMont,220,3,,Isaiah Spriggs,West Chester Rustin,SO,20-11
 league,2014_ChesMont_single,2014,single,ChesMont,220,4,,Joe Trama,West Chester East,SR,16-9
 league,2014_ChesMont_single,2014,single,ChesMont,220,,,Steve Annan,Unionville,SR,0-1
@@ -4642,7 +4640,6 @@ league,2014_ChesMont_single,2014,single,ChesMont,220,7,,Zach Davis,Oxford Area,F
 league,2014_ChesMont_single,2014,single,ChesMont,220,,,Adam Drill,Great Valley,JR,8-16
 league,2014_ChesMont_single,2014,single,ChesMont,220,5,,Ryan Wilson,Avon Grove,SO,0-1
 league,2014_ChesMont_single,2014,single,ChesMont,220,2,,Billy McGinley,Downingtown East,JR,30-6
-league,2014_ChesMont_single,2014,single,ChesMont,220,6,,Lorenzo Mejias-SantanaSR,West Chester Henderson,,
 league,2014_ChesMont_single,2014,single,ChesMont,285,1,,Sean Snodgrass,Downingtown East,SR,31-3
 league,2014_ChesMont_single,2014,single,ChesMont,285,,,Nick Garvey,Sun Valley,SO,6-11
 league,2014_ChesMont_single,2014,single,ChesMont,285,8,,Chad Giles,Downingtown West,SO,6-12
@@ -4969,7 +4966,6 @@ league,2014_SOL_Continental_single,2014,single,SOL_Continental,138,4,,Noah Wood,
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,138,2,,Colin Shannon,North Penn,FR,10-12
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,138,,,Max Tuerke,Hatboro-Horsham,SO,11-14
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,138,,,Jake Phaup,Souderton,FR,16-15
-league,2014_SOL_Continental_single,2014,single,SOL_Continental,138,,,Forfeit,,,
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,145,2,,Francesco Fabozzi,Central Bucks East,SR,29-0
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,145,,,Max Myers,North Penn,SR,1-11
 league,2014_SOL_Continental_single,2014,single,SOL_Continental,145,,,Jon Kirkner,Central Bucks South,SR,17-10
@@ -5472,7 +5468,7 @@ league,2015_Delaware_Valley_League_single,2015,single,Delaware_Valley_League,285
 league,2015_Delaware_Valley_League_single,2015,single,Delaware_Valley_League,285,2,,John Barlow,Chichester,SR,26-3
 league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,1,,Jakob Campbell,Boyertown,SO,29-9
 league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,,,Michael Kilgore,Pottsgrove,SO,3-8
-league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,,,Corey Morabito,"Methacton, 7th",,6-11
+league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,,,Corey Morabito,Methacton,7th,6-11
 league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,4,,Luke Resnick,Owen J. Roberts,SO,15-11
 league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,5,,Jared Kuhns,Upper Perkiomen,FR,18-12
 league,2015_Pioneer_Athletic_Conference_single,2015,single,Pioneer_Athletic_Conference,106,2,,Brandon Meredith,Spring-Ford,FR,30-7
@@ -6224,13 +6220,12 @@ league,2016_Delaware_Valley_League_single,2016,single,Delaware_Valley_League,285
 league,2016_Delaware_Valley_League_single,2016,single,Delaware_Valley_League,285,4,,Bryant Edwards,Glen Mills,SR,5-6
 league,2016_Delaware_Valley_League_single,2016,single,Delaware_Valley_League,285,2,,Giberilla Dukuray,Penn Wood,SO,7-11
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,1,,Brandon Meredith,Spring-Ford,SO,25-6
-league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,,,Corey Morabito,"Methacton, 8th",,16-10
+league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,5,,Corey Morabito,Methacton,8th,16-10
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,3,,Matt Wilde,Boyertown,JR,29-9
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,4,,Jared Kuhns,Upper Perkiomen,SO,23-5
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,6,,Kyle Fehnel,Pottsgrove,FR,7-12
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,,,Carsten Schlag,Phoenixville,SO,8-11
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,2,,Luke Resnick,Owen J. Roberts,JR,26-5
-league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,106,5,,Corey Morabito 8th,Methacton,,
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,113,1,,Jakob Campbell,Boyertown,JR,25-3
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,113,3,,Chase Banyai,Pottsgrove,SO,11-10
 league,2016_Pioneer_Athletic_Conference_single,2016,single,Pioneer_Athletic_Conference,113,5,,Austin Rowley,Perkiomen Valley,FR,15-6
@@ -7864,11 +7859,10 @@ league,2018_SOL_American_single,2018,single,SOL_American,106,3,,Brett Rama,Upper
 league,2018_SOL_American_single,2018,single,SOL_American,113,1,,Corey Cope,Quakertown,JR,25-7
 league,2018_SOL_American_single,2018,single,SOL_American,113,3,,Sam Negron,Hatboro-Horsham,SR,9-9
 league,2018_SOL_American_single,2018,single,SOL_American,113,5,,Jake Bainbridge,Plymouth Whitemarsh,FR,12-12
-league,2018_SOL_American_single,2018,single,SOL_American,113,,,Christopher Diaz-Jackson,Upper Moreland,FR,15-11
+league,2018_SOL_American_single,2018,single,SOL_American,113,4,,Christopher Diaz-Jackson,Upper Moreland,FR,15-11
 league,2018_SOL_American_single,2018,single,SOL_American,113,,,Aidan Reed,Upper Dublin,JR,9-15
 league,2018_SOL_American_single,2018,single,SOL_American,113,6,,Joseph Marino,Springfield Township,SO,7-12
 league,2018_SOL_American_single,2018,single,SOL_American,113,2,,Matt Fritz,Wissahickon,FR,19-9
-league,2018_SOL_American_single,2018,single,SOL_American,113,4,,Christopher Diaz-JacksoFnR,Upper Moreland,,
 league,2018_SOL_American_single,2018,single,SOL_American,120,2,,Charlie Brammer,Wissahickon,JR,17-10
 league,2018_SOL_American_single,2018,single,SOL_American,120,5,,Aiden Supsic,Upper Moreland,FR,4-9
 league,2018_SOL_American_single,2018,single,SOL_American,120,4,,John Zhang,Plymouth Whitemarsh,JR,7-18
@@ -7915,12 +7909,11 @@ league,2018_SOL_American_single,2018,single,SOL_American,160,4,,Mitchell McCann,
 league,2018_SOL_American_single,2018,single,SOL_American,160,6,,Zachary Gaffin,Cheltenham,FR,2-10
 league,2018_SOL_American_single,2018,single,SOL_American,160,1,,Zach Fisher,Plymouth Whitemarsh,SR,21-7
 league,2018_SOL_American_single,2018,single,SOL_American,170,2,,Mason Novak,Upper Dublin,JR,21-5
-league,2018_SOL_American_single,2018,single,SOL_American,170,,,Brandon Cordon-Acevedo,Springfield Township,FR,5-7
+league,2018_SOL_American_single,2018,single,SOL_American,170,6,,Brandon Cordon-Acevedo,Springfield Township,FR,5-7
 league,2018_SOL_American_single,2018,single,SOL_American,170,4,,Austin Jaffe,Hatboro-Horsham,SR,7-7
 league,2018_SOL_American_single,2018,single,SOL_American,170,3,,Warren Young,Plymouth Whitemarsh,SR,17-9
 league,2018_SOL_American_single,2018,single,SOL_American,170,5,,Kyle Oeldjen-Bruns,Quakertown,FR,1-3
 league,2018_SOL_American_single,2018,single,SOL_American,170,1,,Austin Zubyk,Upper Moreland,JR,22-5
-league,2018_SOL_American_single,2018,single,SOL_American,170,6,,Brandon Cordon-AcevedFoR,Springfield Township,,
 league,2018_SOL_American_single,2018,single,SOL_American,182,1,,Harry Green,Upper Moreland,SR,26-0
 league,2018_SOL_American_single,2018,single,SOL_American,182,5,,Micah Kunkle,Quakertown,FR,8-15
 league,2018_SOL_American_single,2018,single,SOL_American,182,3,,C.J. Grier,Hatboro-Horsham,SO,10-9
@@ -7963,8 +7956,7 @@ league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,2,,Anthony Co
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,,,Eric Reizas,Central Bucks South,FR,8-15
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,4,,J.W. Scollins,Central Bucks East,JR,10-12
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,3,,Alec Schrum,North Penn,SO,11-14
-league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,,,Sam Beckett,"Souderton, 8th",,23-9
-league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,1,,Sam Beckett 8th,Souderton,,
+league,2018_SOL_Continental_single,2018,single,SOL_Continental,126,1,,Sam Beckett,Souderton,8th,23-9
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,132,2,,Tyler Williams,Souderton,JR,24-5
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,132,,,Nophir Harrell,North Penn,FR,6-18
 league,2018_SOL_Continental_single,2018,single,SOL_Continental,132,4,,Dylan Rafferty,Central Bucks East,JR,15-11
@@ -8032,14 +8024,13 @@ league,2018_SOL_National_single,2018,single,SOL_National,113,2,,Zac Martin,Nesha
 league,2018_SOL_National_single,2018,single,SOL_National,113,,,Ryan Murphy,Pennsbury,SO,12-10
 league,2018_SOL_National_single,2018,single,SOL_National,113,,,Nick Bargas,Bensalem,FR,5-13
 league,2018_SOL_National_single,2018,single,SOL_National,113,3,,Maximino Mendez,Council Rock South,JR,24-6
-league,2018_SOL_National_single,2018,single,SOL_National,120,,,Shane Hanson-Ashworth,Council Rock South,JR,26-9
+league,2018_SOL_National_single,2018,single,SOL_National,120,1,,Shane Hanson-Ashworth,Council Rock South,JR,26-9
 league,2018_SOL_National_single,2018,single,SOL_National,120,,,Colin Miller,Pennsbury,SO,9-17
 league,2018_SOL_National_single,2018,single,SOL_National,120,4,,John Shalinsky,Council Rock North,JR,12-12
 league,2018_SOL_National_single,2018,single,SOL_National,120,2,,Connor Eck,Bensalem,FR,21-7
 league,2018_SOL_National_single,2018,single,SOL_National,120,,,Ethan Ohler,Neshaminy,SO,1-10
 league,2018_SOL_National_single,2018,single,SOL_National,120,,,Josue Carrera,Harry S. Truman,SR,0-3
 league,2018_SOL_National_single,2018,single,SOL_National,120,3,,Jake Rose,Abington,FR,22-3
-league,2018_SOL_National_single,2018,single,SOL_National,120,1,,Shane Hanson-AshworthJR,Council Rock South,,
 league,2018_SOL_National_single,2018,single,SOL_National,126,1,,Gunnar Fuss,Harry S. Truman,JR,25-2
 league,2018_SOL_National_single,2018,single,SOL_National,126,4,,Sammy Hayes,Council Rock North,SO,9-6
 league,2018_SOL_National_single,2018,single,SOL_National,126,3,,Braden Ricchini,Council Rock South,JR,19-14
@@ -8106,7 +8097,6 @@ league,2018_SOL_National_single,2018,single,SOL_National,285,,,Shane Judge,Abing
 league,2018_SOL_National_single,2018,single,SOL_National,285,4,,Chantz Kouveras,Council Rock North,SR,7-18
 league,2018_SOL_National_single,2018,single,SOL_National,285,3,,Matthew Soska,Neshaminy,JR,14-14
 league,2018_SOL_National_single,2018,single,SOL_National,285,2,,Elijah Slaughter,Pennsbury,SO,14-10
-league,2018_SOL_National_single,2018,single,SOL_National,285,,,Double Forfeit,,,
 league,2019_Central_League_single,2019,single,Central_League,106,3,,Alex Treloar,Ridley,SO,24-6
 league,2019_Central_League_single,2019,single,Central_League,106,,,Alan Ghosh,Lower Merion,FR,2-7
 league,2019_Central_League_single,2019,single,Central_League,106,,,Jimmy Cawley,Penncrest,FR,3-17
@@ -8226,13 +8216,12 @@ league,2019_Central_League_single,2019,single,Central_League,195,6,,Connor Boneb
 league,2019_Central_League_single,2019,single,Central_League,220,1,,Paul Pelham,Conestoga,SR,25-2
 league,2019_Central_League_single,2019,single,Central_League,220,4,,Victor Ninson,Ridley,SO,3-5
 league,2019_Central_League_single,2019,single,Central_League,220,,,James McManus,Springfield Delco,SO,7-17
-league,2019_Central_League_single,2019,single,Central_League,220,,,Bill Brosko,"Marple Newtown, 8th",,9-3
+league,2019_Central_League_single,2019,single,Central_League,220,3,,Bill Brosko,Marple Newtown,8th,9-3
 league,2019_Central_League_single,2019,single,Central_League,220,,,Jed Ojeda,Strath Haven,JR,8-4
 league,2019_Central_League_single,2019,single,Central_League,220,6,,Jon Harwood,Haverford High,FR,12-6
 league,2019_Central_League_single,2019,single,Central_League,220,5,,Patrick Kerwood,Upper Darby,SO,12-14
 league,2019_Central_League_single,2019,single,Central_League,220,,,Tom Subak,Radnor,SR,9-16
 league,2019_Central_League_single,2019,single,Central_League,220,2,,Joe Morrone,Garnet Valley,SR,14-5
-league,2019_Central_League_single,2019,single,Central_League,220,3,,Bill Brosko 8th,Marple Newtown,,
 league,2019_Central_League_single,2019,single,Central_League,285,2,,Tom Bramwell,Ridley,SR,23-4
 league,2019_Central_League_single,2019,single,Central_League,285,,,Tyler Fields,Marple Newtown,FR,
 league,2019_Central_League_single,2019,single,Central_League,285,,,Sean Knapp,Haverford High,SO,5-18
@@ -8574,8 +8563,7 @@ league,2019_SOL_National_single,2019,single,SOL_National,126,,,Mason Bost,Harry 
 league,2019_SOL_National_single,2019,single,SOL_National,126,3,,Luke Lucerne,Council Rock North,JR,19-5
 league,2019_SOL_National_single,2019,single,SOL_National,126,,,Aaron Joseph,Bensalem,JR,5-9
 league,2019_SOL_National_single,2019,single,SOL_National,126,,,Bryan Hadlich,William Tennent,SO,3-10
-league,2019_SOL_National_single,2019,single,SOL_National,126,,,Shane Hanson-Ashworth,Council Rock South,SR,21-8
-league,2019_SOL_National_single,2019,single,SOL_National,126,1,,Shane Hanson-AshworthSR,Council Rock South,,
+league,2019_SOL_National_single,2019,single,SOL_National,126,1,,Shane Hanson-Ashworth,Council Rock South,SR,21-8
 league,2019_SOL_National_single,2019,single,SOL_National,132,1,,Gunnar Fuss,Harry S. Truman,SR,24-3
 league,2019_SOL_National_single,2019,single,SOL_National,132,,,Massimo DiNardo,Bensalem,SR,15-7
 league,2019_SOL_National_single,2019,single,SOL_National,132,4,,Braden Ricchini,Council Rock South,SR,20-9
@@ -9119,7 +9107,6 @@ league,2020_SOL_National_single,2020,single,SOL_National,132,4,,Dan Hansbury,Nes
 league,2020_SOL_National_single,2020,single,SOL_National,132,,,Shermuhammad Sadriddinov,Council Rock South,SO,14-12
 league,2020_SOL_National_single,2020,single,SOL_National,132,,,Kayden Rossi,Harry S. Truman,SO,5-12
 league,2020_SOL_National_single,2020,single,SOL_National,132,3,,Rocky Moretti,Pennsbury,SO,18-8
-league,2020_SOL_National_single,2020,single,SOL_National,132,2,,"Pennsbury, SO, 18-8 2",Shermuhammad SadriddSiOnovCouncil Rock South,,
 league,2020_SOL_National_single,2020,single,SOL_National,138,1,,Zac Martin,Neshaminy,JR,21-2
 league,2020_SOL_National_single,2020,single,SOL_National,138,,,Ryan Gladwin,William Tennent,JR,2-4
 league,2020_SOL_National_single,2020,single,SOL_National,138,4,,Ryan McGurrin,Pennsbury,SR,9-15
@@ -9306,10 +9293,9 @@ league,2022_Pioneer_Athletic_Conference_single,2022,single,Pioneer_Athletic_Conf
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,1,,Max Tancini,Perkiomen Valley,SO,18-2
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,4,,Boden Waite,Boyertown,FR,13-10
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,3,,Brandon Quinton,Upper Perkiomen,SO,8-6
-league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,,,Mason Pacitto,"Phoenixville, 8th",,9-6
+league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,5,,Mason Pacitto,Phoenixville,8th,9-6
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,6,,Tyler Maack,Owen J. Roberts,FR,3-8
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,2,,Brady Seislove,Spring-Ford,SR,8-6
-league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,107,5,,Mason Pacitto 8th,Phoenixville,,
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,114,1,,Gus Smith,Spring-Ford,JR,19-8
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,114,,,Kevin Shuler,Upper Merion,JR,12-13
 league,2024_Pioneer_Athletic_Conference_single,2024,single,Pioneer_Athletic_Conference,114,4,,Quinn Carr,Owen J. Roberts,JR,14-9

@@ -810,7 +810,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1947,single,145,1,11,George Billets,Bethlehem Liberty,SO,
 1947,single,145,1,10,Bob Steinmetz,Erie Strong Vincent,JR,
 1947,single,145,1,5,Alan Hershberger,Bedford,SO,
-1947,single,145,1,2,Tom Hosechele,Kingston,JR,
+1947,single,145,1,2,Tom Hoeschele,Kingston,JR,
 1947,single,145,1,3,Russell Schelling,J.P. McCaskey,JR,
 1947,single,145,1,7,Bill Santel,Chartiers Township,SR,
 1947,single,145,1,1,Frank Vaughn,Abington,SR,
@@ -835,7 +835,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1947,single,165,1,3,Bob King,West York,SR,
 1947,single,185,1,7,Bill George,Waynesburg Central,SR,
 1947,single,185,1,4,Johnny (Admiral) Nemetz,Shamokin,SO,
-1947,single,185,1,6,Merle Bickel,Tyrone,SR,
+1947,single,185,1,6,Merle Bickle,Tyrone,SR,
 1947,single,185,1,1,Charles Anderson,Haverford High,SR,
 1947,single,185,1,10,Bob Arndt,Erie Academy,JR,
 1947,single,185,1,3,Mervin Kreider,J.P. McCaskey,JR,
@@ -2092,7 +2092,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1971,single,154,1,SE,Terry DeStito,East Pennsboro,SR,23-0
 1971,single,154,1,CNW,Tim Howe,West Branch,SR,16-3
 1971,single,154,1,SW,Jack Platts,North Allegheny,JR,20-2-1
-1971,single,154,1,NE,Welsey Schrader,Shamokin,SR,22-2
+1971,single,154,1,NE,Wes Schrader,Shamokin,SR,22-2
 1971,single,165,1,NE,Tony Karpovich,Hanover Area,SR,21-1-1
 1971,single,165,1,CNW,Dan Brenneman,Hollidaysburg,SR,20-0-1
 1971,single,165,1,SW,Jeff Lutz,North Allegheny,SR,22-1-1
@@ -2109,7 +2109,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1972,single,95,1,SE,Jay Yothers,North Penn,SR,24-1
 1972,single,95,1,SW,Denny Zuk,Carlynton,JR,22-1
 1972,single,95,1,NE,Rocco (Rocky) Creazzo,Easton,JR,18-0
-1972,single,103,1,SE,Mike Peters,Newport,SR,22-2
+1972,single,103,1,SE,Mark Peters,Newport,SR,22-2
 1972,single,103,1,CNW,Gib Fink,Tyrone,SR,20-0
 1972,single,103,1,NE,Greg Filipos,Bethlehem Liberty,SR,20-1
 1972,single,103,1,SW,Jim Seabright,McGuffey,JR,19-1
@@ -2212,7 +2212,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1973,single,145,1,CNW,Allen Fisher,Bald Eagle Area,SR,19-0
 1973,single,145,2,NE,Joe Manta,Wyoming Valley West,SR,16-4-1
 1973,single,145,1,SW,Fran Presley,Sharon,SR,21-2
-1973,single,145,2,SE,John Law,Reading,SR,22-3
+1973,single,145,2,SE,Jeff Law,Reading,SR,22-3
 1973,single,145,1,SE,Mark Stauffer,Lower Dauphin,SR,20-2-2
 1973,single,145,2,CNW,Curt Clark,Union City,SR,21-1
 1973,single,145,1,NE,Steve Eiswerth,Williamsport,SR,23-2
@@ -3142,7 +3142,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1976,AA,145,2,NE,Frank Hazeltine,Dallas,SR,15-5-2
 1976,AA,145,2,SE,Keith Campbell,Catasauqua,SR,17-4-1
 1976,AA,145,3,NE,Jim Vargo,Danville,SR,20-5-1
-1976,AA,145,2,SW,Harry Miller,Beth-Center,JR,11-4
+1976,AA,145,2,SW,Barry Miller,Beth-Center,JR,11-4
 1976,AA,145,1,NW,Mark Huffman,Redbank Valley,SR,21-3-1
 1976,AA,145,3,SC,Bryan Rice,Northern Lebanon,SR,16-7
 1976,AA,155,1,NW,Ron Matse,North Star,SR,22-1
@@ -3481,7 +3481,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1977,AA,126,1,SE,Dwight Billig,Northwestern Lehigh,SR,24-2
 1977,AA,126,4,NE,Ted Yost,Line Mountain,SR,22-6-2
 1977,AA,132,4,NE,Dennis Manotti,Mifflinburg,SR,22-6-1
-1977,AA,132,1,NW,Dave Shurgartis,Mount Union,SR,26-0
+1977,AA,132,1,NW,Dave Shugarts,Mount Union,SR,26-0
 1977,AA,132,3,SC,Mike Sterner,Littlestown,SR,21-2
 1977,AA,132,1,SE,Mike Rae,Jenkintown,SR,23-0
 1977,AA,132,2,SW,Ron Krautz,Jeannette,SR,14-1
@@ -5056,7 +5056,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1981,AA,145,3,NE,Mike Cammer,Sullivan County,SR,30-3
 1981,AA,145,2,SW,Jim Brezinski,Fort Cherry,SR,26-7
 1981,AA,145,2,NW,Bob Yahner,Cambria Heights,SR,26-1
-1981,AA,145,1,SW,Jim Frazier,Washington,JR,23-4-2
+1981,AA,145,1,SW,Jim Fraizer,Washington,JR,23-4-2
 1981,AA,145,4,NW,Don Parana,Johnsonburg,JR,24-4
 1981,AA,145,2,SC,Frank Baltimore,Susquehanna Township,SR,24-4
 1981,AA,145,2,NE,Brian Stamm,Danville,JR,25-4
@@ -5101,7 +5101,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1981,AA,185,1,NW,Jim Waliga,Kennedy Christian,SR,29-0
 1981,AA,185,3,SC,Dave Heagy,Manheim Central,SR,25-4-1
 1981,AA,185,1,SC,Wayne Beaver,New Oxford,JR,24-1
-1981,AA,185,3,NW,Rob Smith,Southern Huntingdon,SR,28-3
+1981,AA,185,3,NW,Rodney Smith,Southern Huntingdon,SR,28-3
 1981,AA,185,2,NE,Pete Giombetti,Valley View,SR,34-5
 1981,AA,185,2,SW,Al Starostanko,Jefferson-Morgan,JR,22-3
 1981,AA,185,1,NE,Jim Dorner,Loyalsock,SR,24-3
@@ -5425,7 +5425,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1982,AA,138,2,SW,Pete Picardi,Kittanning,JR,23-4-1
 1982,AA,138,2,NW,Rich Esposito,Brockway,SR,22-5-1
 1982,AA,138,1,SW,Lonnie Barnes,Washington,SR,30-1
-1982,AA,138,4,NW,Gary Weaver,Conemaugh Township,SR,23-6-1
+1982,AA,138,4,NW,Grant Weaver,Conemaugh Township,SR,23-6-1
 1982,AA,138,2,SC,Scott Hoover,Halifax,SR,22-3-1
 1982,AA,138,2,NE,Mark Powlus,Columbia-Montour Vo-Tech,SR,26-2
 1982,AA,138,1,NW,Mike Rossi,Grove City,SO,33-5-2
@@ -5681,7 +5681,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1982,AAA,185,2,NE,Mike Capuano,Bethlehem Liberty,SR,29-3-1
 1982,AAA,185,2,SE,Bob Branch,Central Bucks East,SR,26-2
 1982,AAA,185,1,NE,Jeff Sweda,Hazleton Area,SR,18-4
-1982,AAA,185,3,NW,Lester Norton,Bald Eagle Area,SR,21-6
+1982,AAA,185,3,NW,Lester Horton,Bald Eagle Area,SR,21-6
 1982,AAA,185,2,SW,Charlie Swink,Connellsville,JR,36-7
 1982,AAA,185,2,SC,Chris Hangen,Reading,SR,24-5-1
 1982,AAA,185,1,SE,Drew Bycoskie,Great Valley,SR,28-1
@@ -7734,7 +7734,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1988,AA,138,2,SC,Hoyt Craver,Garden Spot,JR,24-8
 1988,AA,138,1,SW,Don Lemley,Waynesburg Central,JR,20-10-2
 1988,AA,138,3,SC,Steve Dresch,Northern Lebanon,JR,26-6
-1988,AA,138,2,NE,Chris Keim,Line Mountain,JR,25-8
+1988,AA,138,2,NE,Chad Keim,Line Mountain,JR,25-8
 1988,AA,138,3,NW,Bob Armagost,Saegertown,SR,30-2
 1988,AA,145,1,NE,Bryan Wenner,Benton,JR,26-2
 1988,AA,145,3,SE,John Kane,Perkiomen Valley,SR,30-6
@@ -8266,7 +8266,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1989,AAA,125,1,SW,Mark Hutchin,Keystone Oaks,SR,28-2
 1989,AAA,125,3,SE,Randy Zarrolli,Council Rock,SR,30-2
 1989,AAA,125,1,NW,Rob Ruby,Indian Valley,SO,24-0-1
-1989,AAA,125,3,SC,Jule Daum,Susquenita,JR,29-6
+1989,AAA,125,3,SC,Juile Daum,Susquenita,JR,29-6
 1989,AAA,125,1,SC,Joey Wildasin,South Western,JR,27-0
 1989,AAA,125,4,SW,Brian Vargo,Seneca Valley,JR,23-11
 1989,AAA,125,2,NE,Don Suranofsky,Northampton,SR,26-4
@@ -8507,7 +8507,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1990,AA,135,3,SE,Tony Verenna,Wilson Area,SO,27-7
 1990,AA,135,1,SW,Chris Guarlotti,Greensburg CC,JR,27-2
 1990,AA,135,3,NW,T.J. Robie,Erie Strong Vincent,SR,28-4
-1990,AA,135,1,NW,Chad Dellatre,Moshannon Valley,SR,29-1
+1990,AA,135,1,NW,Chad DeLattre,Moshannon Valley,SR,29-1
 1990,AA,135,3,SW,Todd Christ,Chestnut Ridge,SR,27-2-1
 1990,AA,135,2,SC,Jamie Hildebrandt,Newport,SR,23-2
 1990,AA,135,2,SE,Brian Kocher,Pen Argyl,JR,25-7
@@ -8666,7 +8666,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1990,AAA,119,1,SW,Ty Moore,North Allegheny,SR,34-0
 1990,AAA,119,3,SE,Joe Ierubino,Council Rock,SR,30-7
 1990,AAA,119,1,NW,Rob Prebish,State College,SR,27-1-2
-1990,AAA,119,3,SC,Jacob Simmons,Harrisburg,SR,24-5-1
+1990,AAA,119,3,SC,Jacobi Simmons,Harrisburg,SR,24-5-1
 1990,AAA,119,1,SC,Sam Metzger,Spring Grove,SR,23-2
 1990,AAA,119,4,SW,Dave Marko,Connellsville,SR,30-8
 1990,AAA,119,2,NE,Ryan Nunamaker,Nazareth,SO,22-6-1
@@ -8704,7 +8704,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1990,AAA,130,2,SE,Carlos Granda,Conestoga,SR,32-2
 1990,AAA,130,2,NW,P.T. Yoder,Philipsburg-Osceola,SR,30-3
 1990,AAA,130,1,SE,Tim Alderfer,Souderton,SR,32-2
-1990,AAA,130,3,SC,Jule Daum,Susquenita,SR,26-3
+1990,AAA,130,3,SC,Juile Daum,Susquenita,SR,26-3
 1990,AAA,130,2,SW,Chuck Steadman,Trinity,JR,22-8-1
 1990,AAA,130,2,NE,Paul Avillion,Hazleton Area,SR,29-3
 1990,AAA,130,1,NW,Rob Ruby,Indian Valley,JR,25-0
@@ -8788,7 +8788,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1990,AAA,160,2,NW,Mike Colligan,Bradford,SR,23-2-1
 1990,AAA,160,2,SC,Doug Seidenstricker,South Western,JR,26-3
 1990,AAA,160,1,SW,Ray Brinzer,North Allegheny,SR,32-0
-1990,AAA,160,3,SC,Rob Hartman,Dallastown,SR,21-4
+1990,AAA,160,3,SC,Robbie Hartman,Dallastown,SR,21-4
 1990,AAA,160,2,NE,Aaron Poster,East Stroudsburg,JR,30-2
 1990,AAA,160,3,SE,Eric DeLong,Radnor,SR,24-6
 1990,AAA,171,1,NW,Kevin Frushone,Corry Area,SR,29-4
@@ -8844,7 +8844,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1991,AA,103,1,NW,Jason Parks,Tyrone,JR,25-3-1
 1991,AA,103,3,SC,John Halulko,Brandywine Heights,SO,29-1
 1991,AA,103,1,SC,Robbie Corbin,Hanover,SR,33-2-1
-1991,AA,103,3,NW,Colby Lucas,Penns Valley,SO,25-5-1
+1991,AA,103,3,NW,Corby Lucas,Penns Valley,SO,25-5-1
 1991,AA,103,2,NE,Jason Sluyter,Towanda,FR,26-7
 1991,AA,103,2,SW,Matt Scripps,Burrell,SR,28-2
 1991,AA,103,1,NE,Brian Rose,Crestwood,JR,27-0
@@ -9234,7 +9234,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1991,AAA,189,1,SW,Tiny Anderson,Greensburg Salem,SR,28-2-1
 1991,AAA,189,3,NW,Matt Fisher,Bald Eagle Area,SR,25-5-2
 1991,AAA,189,2,NE,Scott Kulenguskey,Shamokin,SR,29-4
-1991,AAA,189,2,SC,Brady Wagner,Manheim Central,SR,28-5
+1991,AAA,189,2,SC,Brad Wagner,Manheim Central,SR,28-5
 1991,AAA,189,1,SE,Jason Brechbill,Methacton,SR,34-3
 1991,AAA,189,3,SW,Mike Beres,Seneca Valley,SR,31-2
 1991,AAA,189,2,NW,Vince Knapp,Meadville,SR,29-6
@@ -9245,7 +9245,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1991,AAA,275,3,NW,Bryan Vitron,Erie Cathedral Prep,JR,32-7
 1991,AAA,275,1,NW,Mike Burns,Titusville,JR,30-1
 1991,AAA,275,4,SW,Rob Zelmore,Southmoreland,SR,
-1991,AAA,275,2,SC,John Givens,Elizabethtown,JR,26-3
+1991,AAA,275,2,SC,Jon Givens,Elizabethtown,JR,26-3
 1991,AAA,275,2,SE,Mike Delvecchio,Downingtown,SR,31-4-1
 1991,AAA,275,1,SC,Heath Fleisher,Susquenita,JR,27-2
 1991,AAA,275,3,NE,Ben Mayer,Williamsport,JR,28-3
@@ -9359,7 +9359,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AA,140,2,NE,Bob Renn,Line Mountain,SR,30-3
 1992,AA,140,2,SW,Dave Bowser,Chestnut Ridge,SR,25-5-1
 1992,AA,140,1,NE,Charlie Jacoby,Lake Lehman,JR,31-0-1
-1992,AA,140,4,NW,Gary Brookwalter,Mount Union,SR,25-4-1
+1992,AA,140,4,NW,Gary Bookwalter,Mount Union,SR,25-4-1
 1992,AA,140,2,SE,Joe Stofko,Catasauqua,SR,29-1-2
 1992,AA,140,2,SC,Justin Shaffer,Daniel Boone,SR,32-2
 1992,AA,140,1,SW,Eric Yanek,West Allegheny,SR,36-0
@@ -9464,7 +9464,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AA,275,3,SE,Scott Paul,Mount Carmel,SR,19-8-2
 1992,AAA,103,1,SW,Mark Angle,Canon-McMillan,FR,35-0
 1992,AAA,103,3,SE,Chris Mansueto,West Chester East,SO,32-5
-1992,AAA,103,1,NW,Jerry Burris,State College,SR,32-2
+1992,AAA,103,1,NW,Jeremy Burris,State College,SR,32-2
 1992,AAA,103,3,SC,John Garcia,J.P. McCaskey,SR,32-1
 1992,AAA,103,1,SC,Jeff Gibble,Wilson (West Lawn),SO,27-0-1
 1992,AAA,103,4,SW,Rodney Schmucker,Greater Latrobe,SO,24-9
@@ -9515,7 +9515,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AAA,125,1,SE,Jon Mittman,Wissahickon,SR,25-0
 1992,AAA,125,3,SW,Tim King,Greensburg Salem,JR,34-5
 1992,AAA,125,1,SW,Chad Jesko,Connellsville,SO,35-3
-1992,AAA,125,3,SE,Joe Zlicosky,Pennsbury,SR,28-6-1
+1992,AAA,125,3,SE,Joe Zilcosky,Pennsbury,SR,28-6-1
 1992,AAA,125,2,NW,Jason Yoder,Philipsburg-Osceola,SR,17-3-1
 1992,AAA,125,2,NE,Joe Reuben,Northampton,SR,29-3-2
 1992,AAA,125,1,NW,Jon Sack,Erie Cathedral Prep,JR,22-11
@@ -9555,7 +9555,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AAA,135,2,SE,Kirk Holt,William Tennent,SR,31-2
 1992,AAA,135,2,NW,Dean Mattivi,St. Marys,SR,25-4-2
 1992,AAA,135,1,NE,Steve Herceg,Nazareth,SR,30-2-3
-1992,AAA,135,3,SE,John Buck,Radnor,SR,29-3-1
+1992,AAA,135,3,SE,Jeff Buck,Radnor,SR,29-3-1
 1992,AAA,135,2,SW,John Withrow,Elizabeth Forward,JR,29-3
 1992,AAA,135,3,SC,Andy Titus,Conestoga Valley,SR,26-2
 1992,AAA,140,1,SW,Trent Boyd,Waynesburg Central,SR,25-4
@@ -9602,9 +9602,9 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AAA,152,3,SE,Gary Barnhart,Central Bucks West,SR,30-4
 1992,AAA,152,2,SW,Chris Yock,North Allegheny,SR,29-6-1
 1992,AAA,152,2,NW,Joe Farr,Warren,JR,30-4-1
-1992,AAA,152,1,SE,Cory Brechbill,Methacton,SR,21-2
+1992,AAA,152,1,SE,Corey Brechbill,Methacton,SR,21-2
 1992,AAA,152,3,NW,Todd Harrington,Corry Area,SR,23-3
-1992,AAA,152,2,SC,Adam Hockenbury,Susquenita,SR,30-5
+1992,AAA,152,2,SC,Adam Hockenberry,Susquenita,SR,30-5
 1992,AAA,152,3,SW,Bruce Hainan,Greensburg Salem,SO,30-8
 1992,AAA,160,1,NW,Tony Robie,Erie Strong Vincent,SR,25-1
 1992,AAA,160,3,SC,Gene Hecker,Solanco,JR,22-7
@@ -9666,7 +9666,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AAA,275,4,SW,Pat Birchmeirer,North Allegheny,SR,29-7-1
 1992,AAA,275,2,NE,Nate Bressler,Columbia-Montour Vo-Tech,SR,26-4
 1992,AAA,275,2,SE,Matt Kim,North Penn,JR,28-6
-1992,AAA,275,1,SC,John Givens,Elizabethtown,SR,25-3
+1992,AAA,275,1,SC,Jon Givens,Elizabethtown,SR,25-3
 1992,AAA,275,3,SE,Tim Glass,William Tennent,SR,30-4
 1992,AAA,275,2,SW,Jeff Craig,Connellsville,SR,28-3
 1992,AAA,275,3,NW,Greg Grimes,Central Cambria,JR,28-3
@@ -9687,7 +9687,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1993,AA,103,2,NW,Scott Bair,Bald Eagle Nittany,FR,31-1
 1993,AA,103,2,SW,Hunter Altman,Southmoreland,SR,26-8
 1993,AA,112,1,NW,Shad Benton,Central,FR,28-4
-1993,AA,112,3,SE,Ethan Edison,Oxford Area,FR,26-2
+1993,AA,112,3,SE,Ethan Eidson,Oxford Area,FR,26-2
 1993,AA,112,1,SC,John Halulko,Brandywine Heights,SR,31-1
 1993,AA,112,3,SW,Brad Kime,Beth-Center,SO,30-4
 1993,AA,112,1,NE,Jason Betz,Warrior Run,SO,32-0
@@ -9908,7 +9908,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1993,AAA,112,2,NE,Matt Roth,Parkland,JR,32-4
 1993,AAA,112,1,NW,Jeremy Heeman,Philipsburg-Osceola,JR,26-7
 1993,AAA,112,4,SW,Jamie Block,Greensburg Salem,JR,25-3
-1993,AAA,112,2,SC,Brent Ryer,Dover,SR,30-3
+1993,AAA,112,2,SC,Brett Ryer,Dover,SR,30-3
 1993,AAA,112,3,SE,Mark Hall,Pennsbury,SR,22-1
 1993,AAA,119,1,SC,Dana Weber,Waynesboro,JR,24-4
 1993,AAA,119,3,NE,Brian Derr,Shikellamy,JR,21-2
@@ -9987,9 +9987,9 @@ year,cls,weight,seed,region,name,school,grade,record
 1993,AAA,140,2,NW,Thad Diehl,Clearfield,JR,21-3
 1993,AAA,140,2,SC,Garth Warfel,York Tech,SR,23-3
 1993,AAA,140,1,SW,Brian Martin,Connellsville,JR,36-5
-1993,AAA,140,3,SC,Aaron Shoap,Shippensburg,JR,28-4
+1993,AAA,140,3,SC,Aron Shoap,Shippensburg,JR,28-4
 1993,AAA,140,2,NE,James Reimert,Allentown Allen,SR,25-2
-1993,AAA,140,3,SE,Bill Forber,Lower Merion,SR,31-4
+1993,AAA,140,3,SE,Bill Furber,Lower Merion,SR,31-4
 1993,AAA,145,1,NW,Mark Brothers,Central Cambria,SR,32-2
 1993,AAA,145,3,NE,Bob Farber,Tunkhannock,JR,31-3
 1993,AAA,145,1,SW,Mike Kail,Peters Township,SR,31-2
@@ -10417,7 +10417,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1994,AAA,145,3,SE,Matt Mattero,North Penn,SR,23-10
 1994,AAA,145,2,NW,Matt Pierce,Erie McDowell,JR,23-8
 1994,AAA,145,2,NE,Josh Mangle,Shikellamy,SR,26-9
-1994,AAA,145,1,SC,Jason Dell,South Western,SR,28-3
+1994,AAA,145,1,SC,Jake Dell,South Western,SR,28-3
 1994,AAA,145,3,NE,Scott Kurtz,Shamokin,SR,22-4
 1994,AAA,145,2,SE,Rob Kershner,Spring-Ford,SO,22-1
 1994,AAA,145,3,SW,Brian Pardini,Upper St. Clair,SR,35-9
@@ -10456,7 +10456,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1994,AAA,171,1,NE,Mark Miller,Stroudsburg,SR,27-3
 1994,AAA,171,3,SW,Scott Tomajko,Mount Pleasant,SO,30-8
 1994,AAA,171,1,SE,Tom Ingram,Spring-Ford,SO,30-4
-1994,AAA,171,3,SC,Rob Greenleaf,Solanco,JR,31-1
+1994,AAA,171,3,SC,Bob Greenleaf,Solanco,JR,31-1
 1994,AAA,171,1,SW,Jim Patterson,Greensburg Salem,SR,36-1
 1994,AAA,171,3,NE,Stan Morley,Athens,JR,23-2
 1994,AAA,171,2,NW,Justin Bierly,State College,SR,26-4
@@ -10485,7 +10485,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1994,AAA,189,3,SW,Tom Darrell,Connellsville,SR,37-5
 1994,AAA,189,2,NW,Eric Witherite,DuBois,SR,21-7
 1994,AAA,189,3,NE,Rick Umstead,Northampton,SO,28-10
-1994,AAA,275,1,SC,Jerry Hiller,Lower Dauphin,SR,27-1
+1994,AAA,275,1,SC,Jerry Hill,Lower Dauphin,SR,27-1
 1994,AAA,275,3,NW,Brandon Wrye,State College,SR,28-6
 1994,AAA,275,1,NE,Randy Homa,Pottsville,JR,26-2
 1994,AAA,275,4,SW,Curt Serverin,Peters Township,SR,27-7
@@ -10495,7 +10495,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1994,AAA,275,2,NW,George Summerson,Lock Haven,SR,27-2
 1994,AAA,275,1,SW,Vince Pellis,Greensburg Salem,JR,37-1
 1994,AAA,275,3,SE,Pat Mark,Phoenixville,SR,33-2
-1994,AAA,275,2,SC,Frank Stoval,Cedar Cliff,JR,25-7
+1994,AAA,275,2,SC,Frank Stovall,Cedar Cliff,JR,25-7
 1994,AAA,275,2,NE,Shawn Lattimer,Athens,JR,21-1
 1994,AAA,275,1,NW,Bill Bell,Bald Eagle Area,SR,29-3
 1994,AAA,275,3,SW,Mike Occhuizzo,Indiana,JR,27-7
@@ -10813,7 +10813,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1995,AAA,140,3,SW,Joe Lucas,Connellsville,SR,33-2
 1995,AAA,140,2,SC,Dennis Applebury,Cedar Cliff,SR,26-2
 1995,AAA,140,1,SW,Chamie Hooks,Kittanning,SO,29-1
-1995,AAA,140,3,SE,Pete Schwartz,Norristown,JR,31-7
+1995,AAA,140,3,SE,Pete Swartz,Norristown,JR,31-7
 1995,AAA,140,2,NW,Tyler McIntosh,Titusville,SR,26-6
 1995,AAA,140,2,NE,Christian Luciano,Northampton,FR,28-5
 1995,AAA,140,1,SC,Scott Krushinski,Warwick,SR,33-0
@@ -10831,13 +10831,13 @@ year,cls,weight,seed,region,name,school,grade,record
 1995,AAA,145,1,SW,Vince DeAugustine,Hempfield Area,SO,33-2
 1995,AAA,145,3,NW,Tony Rinella,Lock Haven,SR,26-5
 1995,AAA,145,2,NE,Travis Doto,Nazareth,SR,32-2
-1995,AAA,145,2,SC,Matt Shrink,James Buchanan,SR,23-8
+1995,AAA,145,2,SC,Matt Shirk,James Buchanan,SR,23-8
 1995,AAA,145,1,SE,Rick Springman,Norristown,SO,33-1
 1995,AAA,145,3,SW,Dana Jackson,Kiski Area,SR,23-2
 1995,AAA,145,2,NW,George Lyons,Bellefonte,SR,28-5
 1995,AAA,145,3,NE,Mack Rohaly,Williamsport,SR,32-3
 1995,AAA,152,1,NE,Tony Barbrie,Pittston Area,SR,33-1
-1995,AAA,152,3,SE,Adrain Tyson,Haverford High,SR,28-5
+1995,AAA,152,3,SE,Adam Tyson,Haverford High,SR,28-5
 1995,AAA,152,1,SW,Greg Uschock,Greater Latrobe,SR,31-2
 1995,AAA,152,3,NW,Dave Geyer,Lock Haven,SR,29-5
 1995,AAA,152,1,NW,Richard Taylor,Bald Eagle Area,SR,31-3
@@ -10902,7 +10902,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1995,AAA,189,3,SC,Dave Heckard,Cumberland Valley,JR,27-3
 1995,AAA,275,1,SW,Vince Pellis,Greensburg Salem,SR,30-0
 1995,AAA,275,3,NW,Brian McGuinness,Erie Cathedral Prep,SR,32-4
-1995,AAA,275,1,SC,Frank Stoval,Cedar Cliff,SR,29-2
+1995,AAA,275,1,SC,Frank Stovall,Cedar Cliff,SR,29-2
 1995,AAA,275,3,NE,Bill Langin,Crestwood,SR,31-4
 1995,AAA,275,1,NE,Rich Koehler,Bethlehem Freedom,JR,26-7
 1995,AAA,275,3,SW,Mike Enick,Penn-Trafford,JR,26-10
@@ -11221,7 +11221,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1996,AAA,135,2,SE,Eric Stabene,Downingtown,SR,29-6
 1996,AAA,135,3,SW,Josh Koscheck,Waynesburg Central,JR,31-3
 1996,AAA,140,1,NE,Jim Pope,Shikellamy,SR,31-6
-1996,AAA,140,3,SE,Ryan Bonfigillo,Methacton,SR,27-9
+1996,AAA,140,3,SE,Ryan Bonfiglio,Methacton,SR,27-9
 1996,AAA,140,1,SC,Zach Yohn,Manheim Central,JR,29-4
 1996,AAA,140,4,SW,Josh Shaner,McGuffey,SR,38-4
 1996,AAA,140,1,NW,Robbie Weikel,Bellefonte,SR,31-2
@@ -11279,7 +11279,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1996,AAA,160,1,NE,Rob Rohn,Nazareth,JR,29-2
 1996,AAA,160,3,NW,Tim Nageli,Erie McDowell,SR,32-1
 1996,AAA,160,2,SW,Kris Smith,Greensburg Salem,SR,26-4
-1996,AAA,160,2,SC,Joe Daugherty,Manheim Central,JR,27-3
+1996,AAA,160,2,SC,Joel Dougherty,Manheim Central,JR,27-3
 1996,AAA,160,1,SE,Kevin Boccella,Upper Merion,JR,30-1
 1996,AAA,160,3,SW,Mike Dean,North Allegheny,SR,30-5
 1996,AAA,160,2,NW,Ray Lowe,Lock Haven,SR,20-6
@@ -11293,7 +11293,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1996,AAA,171,2,SW,Mike Monsilovich,Indiana,SR,29-4
 1996,AAA,171,2,NW,Aaron Mitchell,DuBois,SR,25-4
 1996,AAA,171,1,SW,Steve Bucciero,Franklin Regional,SR,31-0
-1996,AAA,171,3,SE,Zak Pierce,Upper Darby,SR,27-6
+1996,AAA,171,3,SE,Zac Pierce,Upper Darby,SR,27-6
 1996,AAA,171,2,SC,Jeff Davis,Spring Grove,JR,17-9
 1996,AAA,171,2,NE,Jarret Hoff,Nazareth,JR,27-6
 1996,AAA,171,1,NW,Ryan Butterbaugh,Hollidaysburg,SR,22-3
@@ -11569,7 +11569,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1997,AAA,112,1,SE,Jeff Albano,Methacton,JR,31-0
 1997,AAA,112,3,SW,Brandon Newill,Mount Pleasant,JR,33-11
 1997,AAA,112,1,SC,Jared Sullivan,South Western,JR,31-0
-1997,AAA,112,3,SE,Paul Sujdak,Pennsbury,JR,34-4
+1997,AAA,112,3,SE,Paul Sudjak,Pennsbury,JR,34-4
 1997,AAA,112,2,SW,Rick Warren,Greater Latrobe,SR,24-8
 1997,AAA,112,2,NE,Kevin Rake,Pocono Mountain,SO,25-3
 1997,AAA,119,1,NW,Corey Guenot,Bald Eagle Area,SO,30-2
@@ -11601,7 +11601,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1997,AAA,125,2,SW,Josh Husok,Elizabeth Forward,SR,29-7
 1997,AAA,125,2,NW,Brandon Frantz,Bellefonte,SR,32-4
 1997,AAA,125,1,SE,Mark Mansueto,West Chester East,SR,33-0
-1997,AAA,125,3,NW,Geoff Royes,State College,SR,26-11
+1997,AAA,125,3,NW,Geoff Reyes,State College,SR,26-11
 1997,AAA,125,2,SC,Scott Perdue,Solanco,JR,26-10
 1997,AAA,125,2,SW,Shawn Amistade,Trinity,SR,38-4
 1997,AAA,130,1,NW,Hunter Guenot,Bald Eagle Area,JR,34-3
@@ -11639,7 +11639,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1997,AAA,140,2,NE,Mike Sommer,Northampton,SR,27-10
 1997,AAA,140,3,SC,Tim Sullivan,Northern York,SR,32-5
 1997,AAA,140,1,SW,Chamie Hooks,Kittanning,SR,32-10
-1997,AAA,140,3,NW,Jared Reed,Bald Eagle Area,SO,32-10
+1997,AAA,140,3,NW,Jesse Reed,Bald Eagle Area,SO,32-10
 1997,AAA,140,1,NW,Jason Bainey,Philipsburg-Osceola,SR,32-3
 1997,AAA,140,4,SW,Tony Prosdocimo,Woodland Hills,SO,25-6
 1997,AAA,140,2,SC,Dan Wilson,Solanco,JR,28-10
@@ -11672,7 +11672,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1997,AAA,152,3,SE,Jesse Oberto,Neshaminy,JR,26-9
 1997,AAA,152,1,NW,John Cogan,Penn Cambria,SR,32-4
 1997,AAA,152,3,SC,Dave Dietrich,Spring Grove,SR,33-1
-1997,AAA,152,1,SC,John Darras,Warwick,SR,29-7
+1997,AAA,152,1,SC,Joel Darras,Warwick,SR,29-7
 1997,AAA,152,4,SW,Joe Matrisch,Penn-Trafford,SR,27-12
 1997,AAA,152,2,NE,Mike Rosado,Easton,SO,24-12
 1997,AAA,152,2,SE,Dan Kennett,West Chester Henderson,SR,30-2
@@ -11702,7 +11702,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1997,AAA,160,3,SC,Denis Alampiyev,Waynesboro,SR,25-2
 1997,AAA,171,1,SW,Ryan McQuade,Kiski Area,SR,32-3
 1997,AAA,171,3,NW,Brandon Coleman,Lock Haven,JR,27-12
-1997,AAA,171,1,SC,Joe Dougherty,Manheim Central,SR,34-0
+1997,AAA,171,1,SC,Joel Dougherty,Manheim Central,SR,34-0
 1997,AAA,171,3,NE,Josh Wetzel,Shamokin,SR,29-7
 1997,AAA,171,1,NE,Jon Trenge,Parkland,SO,31-4
 1997,AAA,171,3,SW,Mike Droppelheuer,Connellsville,SR,32-5
@@ -11755,7 +11755,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1998,AA,103,1,SC,Evan Sola,Conrad Weiser,FR,33-2
 1998,AA,103,4,SW,Thad Walstrom,Moshannon Valley,FR,25-6
 1998,AA,103,2,NE,Nick Raczkowski,Lake Lehman,JR,30-2
-1998,AA,103,2,NW,Aaron Renner,Seneca,SR,30-2
+1998,AA,103,2,NW,Adam Renner,Seneca,SR,30-2
 1998,AA,103,1,NE,Chris Fleeger,Loyalsock,SO,29-0
 1998,AA,103,3,SW,Brock Link,Cambria Heights,SO,29-7
 1998,AA,103,2,SE,Justin Daubert,Pine Grove,SR,26-8
@@ -11978,7 +11978,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1998,AAA,112,3,NE,Frank Vega,Parkland,JR,26-12
 1998,AAA,112,1,NE,Gino Fortebuono,Easton,FR,29-7
 1998,AAA,112,3,NW,Mike Diaz,DuBois,JR,31-3
-1998,AAA,112,2,SE,Paul Sujdak,Pennsbury,SR,33-3
+1998,AAA,112,2,SE,Paul Sudjak,Pennsbury,SR,33-3
 1998,AAA,112,2,SW,Mike May,Derry Area,SO,29-3
 1998,AAA,112,1,SE,Jeff Albano,Methacton,SR,37-3
 1998,AAA,112,4,SW,Brandon Newill,Mount Pleasant,SR,34-5
@@ -12059,7 +12059,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1998,AAA,140,1,SW,George Carter,Greensburg Salem,SR,36-1
 1998,AAA,140,3,NE,Andy Faust,Nazareth,SR,15-11
 1998,AAA,140,2,NW,Anthony Andrews,Greater Johnstown,JR,29-1
-1998,AAA,140,2,SC,Brett Narkiewicz,Warwick,SR,31-2
+1998,AAA,140,2,SC,Brent Narkiewicz,Warwick,SR,31-2
 1998,AAA,140,1,NW,Hunter Guenot,Bald Eagle Area,SR,23-4
 1998,AAA,140,4,SW,Nick Picarsic,Penn-Trafford,JR,30-7
 1998,AAA,140,2,NE,Matt Dudeck,Bethlehem Liberty,JR,28-8
@@ -12129,7 +12129,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1998,AAA,171,2,SC,Steve Foote,Dallastown,SR,27-3
 1998,AAA,171,2,SE,Erik Warg,Council Rock,SR,32-3
 1998,AAA,171,1,NE,Christian Luciano,Northampton,SR,36-0
-1998,AAA,171,3,SC,Jacob Lininger,Lower Dauphin,JR,30-4
+1998,AAA,171,3,SC,Jake Lininger,Lower Dauphin,JR,30-4
 1998,AAA,171,2,SW,Mike Minella,Chartiers Valley,SR,28-3
 1998,AAA,171,2,NW,Justin Millard,Bald Eagle Area,SO,33-8
 1998,AAA,189,1,SE,Chris Papst,Downingtown,SR,33-4
@@ -12554,7 +12554,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1999,AAA,189,3,NW,Matt Doak,Blairsville,JR,27-3
 1999,AAA,189,1,NW,Matt Hogue,Meadville,SR,20-1
 1999,AAA,189,3,SW,Dan Meyers,Elizabeth Forward,SR,25-3
-1999,AAA,189,2,SC,Jacob Lininger,Lower Dauphin,SR,30-4
+1999,AAA,189,2,SC,Jake Lininger,Lower Dauphin,SR,30-4
 1999,AAA,189,2,NE,Marty Limpar,Northampton,JR,31-10
 1999,AAA,189,1,SC,Jon Sauve,Cumberland Valley,JR,28-1
 1999,AAA,189,4,SW,Shawn Kelley,McGuffey,SO,9-6
@@ -12851,7 +12851,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2000,AAA,125,1,SE,Aaron Brown,Owen J. Roberts,SR,32-1
 2000,AAA,125,3,SW,Ron Tarquino,West Allegheny,JR,32-6
 2000,AAA,125,2,NE,Brian Burns,Pottsville,JR,30-3
-2000,AAA,125,3,SC,Shaun Westhafer,Cumberland Valley,JR,15-8
+2000,AAA,125,3,SC,Shawn Westhafer,Cumberland Valley,JR,15-8
 2000,AAA,130,1,NE,Christian Franco,Whitehall,SO,34-1
 2000,AAA,130,3,SW,Drew Joseph,Connellsville,SR,38-2
 2000,AAA,130,1,SE,Jim Hartey,Norristown,JR,36-4
@@ -12946,7 +12946,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2000,AAA,160,2,NW,Justin Blose,Harbor Creek,SR,31-8
 2000,AAA,160,1,SW,Greg Jones,Greensburg Salem,SR,31-1
 2000,AAA,160,3,NE,Brad Youwakim,Northampton,JR,33-14
-2000,AAA,160,2,SC,Brandon Furhman,Dover,SR,27-8
+2000,AAA,160,2,SC,Brandon Fuhrman,Dover,SR,27-8
 2000,AAA,160,3,SE,Dave Camburn,Central Bucks West,JR,16-5
 2000,AAA,171,1,SE,Tim Smith,Perkiomen Valley,SR,30-1
 2000,AAA,171,3,NE,Marty Limpar,Northampton,SR,35-7
@@ -12963,7 +12963,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2000,AAA,171,1,NE,Brandon Mihalko,Bethlehem Liberty,SR,32-2
 2000,AAA,171,3,SE,Jim Swiggard,Norristown,SR,34-8
 2000,AAA,171,2,SW,Brandon Lehmeier,Shaler,JR,31-4
-2000,AAA,171,3,SC,Mike Dubbs,Dallastown,SR,31-6
+2000,AAA,171,3,SC,Matt Dubbs,Dallastown,SR,31-6
 2000,AAA,189,1,SW,Mike Croyle,Norwin,SR,33-0
 2000,AAA,189,3,NW,Josh Schmidt,St. Marys,SR,28-6
 2000,AAA,189,2,SC,Mike Scaff,Susquehannock,SR,29-3
@@ -13453,7 +13453,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2002,AA,119,3,SE,Matt Guerrieri,Brandywine Heights,JR,23-5
 2002,AA,119,1,NW,Keith Miller,Johnsonburg,SO,32-0
 2002,AA,119,1,NE,Trevor Bennett,Sayre,SO,29-8
-2002,AA,119,5,SE,Mike Fifthian,Springfield Township,SR,24-8
+2002,AA,119,5,SE,Mike Fithian,Springfield Township,SR,24-8
 2002,AA,119,2,NW,Jeff Becker,Slippery Rock,FR,24-1
 2002,AA,119,4,SE,Tyler Gilson,Juniata,JR,35-7
 2002,AA,119,2,SW,Sal Lascari,North Star,SO,31-4
@@ -13679,7 +13679,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2002,AAA,125,1,NE,Matt Ciasulli,Easton,SR,39-1
 2002,AAA,125,3,NW,Aaron Kitchel,Warren,SR,30-7
 2002,AAA,125,2,SW,Mark Throckmorton,Waynesburg Central,SO,17-3
-2002,AAA,125,2,SC,Cory Packer,Lampeter-Strasburg,SR,29-8
+2002,AAA,125,2,SC,Corey Packer,Lampeter-Strasburg,SR,29-8
 2002,AAA,125,1,SE,Nick Nauroth,Quakertown,JR,35-2
 2002,AAA,125,3,SW,Jeff Ruffini,Kiski Area,SR,31-6
 2002,AAA,125,2,NW,Mark Fisher,Bald Eagle Area,JR,27-7
@@ -13729,8 +13729,8 @@ year,cls,weight,seed,region,name,school,grade,record
 2002,AAA,140,2,SC,Brandon Foose,Boyertown,SR,35-7
 2002,AAA,140,2,SE,Ben Young,Downingtown,JR,31-8
 2002,AAA,140,1,NE,Christian Franco,Whitehall,SR,36-1
-2002,AAA,140,3,SC,David Bentz,Mechanicsburg,SR,31-4
-2002,AAA,140,2,SW,Zack Mauer,Canon-McMillan,SR,27-8
+2002,AAA,140,3,SC,Dave Bretz,Mechanicsburg,SR,31-4
+2002,AAA,140,2,SW,Zack Maier,Canon-McMillan,SR,27-8
 2002,AAA,140,3,NW,Bryan Kuhn,Erie McDowell,SO,30-5
 2002,AAA,145,1,SE,Mike Dimotsis,North Penn,JR,32-6
 2002,AAA,145,3,SW,Brendon Steele,Canon-McMillan,SO,25-10
@@ -13769,7 +13769,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2002,AAA,160,2,SC,Brandon Kauffman,Penn Manor,SR,31-8
 2002,AAA,160,2,SE,Joe Ammendola,Wissahickon,JR,32-7
 2002,AAA,160,1,NW,Jeremy Hart,State College,SR,29-2
-2002,AAA,160,3,SC,Zach Keller,Governor Mifflin,SR,35-5
+2002,AAA,160,3,SC,Zack Keller,Governor Mifflin,SR,35-5
 2002,AAA,160,4,SW,Stephen Breese,McGuffey,JR,25-14
 2002,AAA,160,1,NE,Jeremiah Mensinger,Berwick,SR,31-3
 2002,AAA,160,2,NW,Matt Waterman,Carrick,JR,29-4
@@ -14034,7 +14034,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2003,AA,215,2,SE,Jacob Showers,Biglerville,SO,30-8
 2003,AA,215,2,NE,Kyle Davis,Valley View,SO,34-1
 2003,AA,215,3,SE,Joe Tartar,Lehighton,JR,29-3
-2003,AA,215,5,SE,Danny Drewes,Juniata,SR,39-8
+2003,AA,215,5,SE,Dan Drewes,Juniata,SR,39-8
 2003,AA,215,1,NW,Matt Wilcox,Maplewood,SR,33-3
 2003,AA,275,1,NE,Chris Snyder,Milton,SR,31-1
 2003,AA,275,5,SE,Larray James,Milton Hershey,JR,31-8
@@ -14439,7 +14439,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2004,AA,171,1,SW,Kurt Brenner,Freedom Area,SR,40-1
 2004,AA,171,5,SE,Jason Marshall,Bermudian Springs,SR,35-8
 2004,AA,171,3,NW,Mark Collins,Eisenhower,SR,18-4
-2004,AA,171,2,SE,Justin Trostel,Biglerville,SR,37-6
+2004,AA,171,2,SE,Justin Trostle,Biglerville,SR,37-6
 2004,AA,171,2,NW,Trevor Gallo,Slippery Rock,JR,35-4
 2004,AA,171,3,SE,David Mendoza,Wyomissing,JR,34-8
 2004,AA,171,4,SW,Joe Vigliotti,Burgettstown,SR,35-8
@@ -14647,7 +14647,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2004,AAA,160,1,NW,Jake Lauffenburger,Warren,SR,31-2
 2004,AAA,160,3,NE,Dave Woodall,Pittston Area,SO,31-6
 2004,AAA,160,1,SE,Dave Schreiner,William Tennent,SR,35-1
-2004,AAA,160,3,SC,Tom Kocher,Manheim Township,JR,34-6
+2004,AAA,160,3,SC,Tommy Kocher,Manheim Township,JR,34-6
 2004,AAA,160,1,SC,Matt Moyer,Lower Dauphin,SR,24-0
 2004,AAA,160,4,SE,Kyle Karpinski,Neshaminy,SR,30-8
 2004,AAA,160,2,NE,Billy Haydt,Northampton,SR,32-7
@@ -14697,7 +14697,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2004,AAA,215,1,SC,Steve Busch,Exeter,SR,34-2
 2004,AAA,215,4,SE,Steve Funk,Pennridge,SR,33-6
 2004,AAA,215,1,NW,Josh Cherish,Oil City,JR,35-4
-2004,AAA,215,3,SC,Tyler Glatfelter,Dallastown,SR,33-8
+2004,AAA,215,3,SC,Tyler Gladfelter,Dallastown,SR,33-8
 2004,AAA,215,2,SE,Steve Van Alstine,Perkiomen Valley,SR,37-3
 2004,AAA,215,2,SW,Nick Hursky,Chartiers Valley,JR,33-3
 2004,AAA,215,1,SE,Joe Bergen,Pennsbury,SR,35-4
@@ -15104,7 +15104,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2005,AAA,160,3,SW,Patrick Hutchinson,Greensburg Salem,SR,36-6
 2005,AAA,160,2,NW,Landis Wright,Bald Eagle Area,JR,35-5
 2005,AAA,160,2,NE,Dave Woodall,Pittston Area,JR,34-4
-2005,AAA,160,1,SC,Raymond Schreffler,Cumberland Valley,SR,19-8
+2005,AAA,160,1,SC,Ray Schreffler,Cumberland Valley,SR,19-8
 2005,AAA,160,3,NE,Sam Eck,Jersey Shore,JR,28-6
 2005,AAA,160,2,SW,Rick Haarbauer,Baldwin,SR,31-2
 2005,AAA,160,3,SE,Andy Knerr,Norristown,SR,35-7
@@ -15119,7 +15119,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2005,AAA,171,1,NW,Brian Shaw,Hollidaysburg,JR,33-4
 2005,AAA,171,3,SW,Josh Serene,Kittanning,JR,32-3
 2005,AAA,171,2,SE,Alex Maza,Upper Perkiomen,SR,42-10
-2005,AAA,171,2,SC,Tom Kocher,Manheim Township,SR,34-2
+2005,AAA,171,2,SC,Tommy Kocher,Manheim Township,SR,34-2
 2005,AAA,171,2,SW,Daniel Thompson,Greater Latrobe,SR,34-4
 2005,AAA,171,3,NW,Mario Morelli,DuBois,JR,37-5
 2005,AAA,171,3,SE,J.J. Hansen,Conestoga,SR,30-4
@@ -15129,7 +15129,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2005,AAA,189,1,SC,Keith McDonald,Red Lion,SR,35-4
 2005,AAA,189,4,SE,Josh White,Boyertown,JR,38-12
 2005,AAA,189,1,NW,Seth Nyman,Bald Eagle Area,SR,33-7
-2005,AAA,189,3,SC,Darren Longenecker,Manheim Central,JR,31-6
+2005,AAA,189,3,SC,Darin Longenecker,Manheim Central,JR,31-6
 2005,AAA,189,2,SE,Drew Smith,Great Valley,JR,30-6
 2005,AAA,189,2,SW,Andrew Haile,Greensburg Salem,SR,35-3
 2005,AAA,189,1,SE,Pat Flynn,Quakertown,JR,36-4
@@ -15447,7 +15447,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2006,AAA,125,1,SW,Grant Lowther,Trinity,JR,39-4
 2006,AAA,125,3,SE,Ryan Kemmerer,Upper Perkiomen,FR,42-11
 2006,AAA,125,1,NW,Mike Robinson,Lewistown,JR,38-1
-2006,AAA,125,3,SC,Jonathan Crawford,Lower Dauphin,JR,29-7
+2006,AAA,125,3,SC,Jon Crawford,Lower Dauphin,JR,29-7
 2006,AAA,125,1,SC,Brian Polashuk,Spring Grove,SR,38-1
 2006,AAA,125,3,NW,Adam Will,Indian Valley,SO,30-13
 2006,AAA,125,2,NE,JuJu Drummond,Easton,JR,31-11
@@ -15841,7 +15841,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2007,AA,285,3,NW,Phillip Catrucco,Sharpsville,JR,27-5
 2007,AA,285,2,SE,Gabe Murtorff,Boiling Springs,SR,41-2
 2007,AA,285,2,NW,Robert Ryhal,West Middlesex,SR,28-1
-2007,AA,285,3,SE,Shane Coley,Eastern York,SR,33-2
+2007,AA,285,3,SE,Shane Cooley,Eastern York,SR,33-2
 2007,AA,285,4,SW,Alan Averi,Central Cambria,SR,33-2
 2007,AA,285,1,NE,Josh Marks,Southern Columbia,SR,26-1
 2007,AAA,103,1,SE,Mark Rappo,Council Rock South,JR,49-0
@@ -15858,7 +15858,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2007,AAA,103,2,NE,Brendon Kennelly,Pocono Mountain West,SO,31-4
 2007,AAA,103,1,NW,Mitchell Port,Bellefonte,FR,37-4
 2007,AAA,103,4,SE,Chris McGinley,Central Bucks West,FR,32-8
-2007,AAA,103,2,SC,Zack Barrick,Lower Dauphin,SO,24-9
+2007,AAA,103,2,SC,Zach Barrick,Lower Dauphin,SO,24-9
 2007,AAA,103,3,SW,Chris Mongelluzzo,Hempfield Area,SO,37-9
 2007,AAA,112,1,SC,Chris Albright,Red Lion,JR,37-2
 2007,AAA,112,3,NE,Kyle Cramer,Pleasant Valley,SR,25-8
@@ -15900,7 +15900,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2007,AAA,125,3,SE,D.J. Evans,Downingtown West,SR,36-6
 2007,AAA,125,2,SC,Zach Oberlander,Dallastown,JR,36-9
 2007,AAA,125,2,NE,Shane Fenningham,Northampton,SO,30-9
-2007,AAA,125,1,SC,Jonathan Crawford,Lower Dauphin,SR,36-2
+2007,AAA,125,1,SC,Jon Crawford,Lower Dauphin,SR,36-2
 2007,AAA,125,4,SE,Rob Vollrath,Council Rock South,SR,31-17
 2007,AAA,125,2,SW,Matt Scherich,McGuffey,SR,33-4
 2007,AAA,125,2,NW,Chad Frankhouser,Indian Valley,JR,33-6
@@ -16010,7 +16010,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2007,AAA,171,3,NW,Eric Lundgren,DuBois,JR,29-11
 2007,AAA,171,1,NW,Will Harris,Greater Johnstown,JR,29-3
 2007,AAA,171,4,SE,Vinnie D'Ortone,Penncrest,JR,18-9
-2007,AAA,171,2,SC,Corey Baker,Spring Grove,JR,31-10
+2007,AAA,171,2,SC,Cory Baker,Spring Grove,JR,31-10
 2007,AAA,171,2,SW,Lance Bryson,Albert Gallatin,JR,32-4
 2007,AAA,171,1,SC,Cory Getz,Warwick,SR,36-1
 2007,AAA,171,3,NE,Marcus Wilson,Northampton,SR,34-5
@@ -16148,7 +16148,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2008,AA,130,3,SW,Mitch Spencer,Avella,JR,34-3
 2008,AA,130,4,SW,Robert Henderson,United,FR,34-5
 2008,AA,130,1,SE,Colin Shober,Schuylkill Valley,SO,47-0
-2008,AA,135,1,SE,Phillip Macy,Littlestown,JR,42-4
+2008,AA,135,1,SE,Philip Macy,Littlestown,JR,42-4
 2008,AA,135,5,SW,Shawn Perich,Portage,SO,33-3
 2008,AA,135,3,NW,Mike Vernille,Hickory,JR,34-12
 2008,AA,135,2,NE,Devon Leiby,Troy,JR,34-9
@@ -16287,7 +16287,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2008,AA,285,1,SW,Sam Miller,Washington,SR,33-5
 2008,AA,285,4,SE,Tyler Zittle,Littlestown,SR,35-8
 2008,AA,285,3,NE,Tyler Coombe,Bloomsburg,SR,27-1
-2008,AA,285,2,SE,Jacob Walmer,ELCO,SR,45-4
+2008,AA,285,2,SE,Jake Walmer,ELCO,SR,45-4
 2008,AA,285,2,NE,Zeke Pyle,East Juniata,SR,34-4
 2008,AA,285,3,SE,Will Fletcher,Palisades,JR,33-5
 2008,AA,285,5,SW,Ethan Covalt,Penns Valley,SR,24-9
@@ -16339,7 +16339,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2008,AAA,119,1,NE,Kegan Handlovic,Easton,SR,35-1
 2008,AAA,119,3,SW,Nathan Pennesi,Greater Latrobe,JR,34-5
 2008,AAA,119,2,SE,Pat May,Downingtown West,SR,39-4
-2008,AAA,119,3,SC,Dave Calambas,Reading,SR,41-6
+2008,AAA,119,3,SC,David Calambas,Reading,SR,41-6
 2008,AAA,125,1,NE,Cort Choate,Blue Mountain,JR,35-6
 2008,AAA,125,4,SE,Briar Malischewski,Quakertown,FR,27-9
 2008,AAA,125,1,NW,Chad Frankhouser,Indian Valley,SR,30-4
@@ -16415,7 +16415,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2008,AAA,145,1,NW,Shane Alterio,Bellefonte,JR,37-4
 2008,AAA,145,3,SW,Matt Hundenski,Hopewell,SO,34-3
 2008,AAA,145,2,SE,Colin McConnell,Pennridge,JR,37-4
-2008,AAA,145,2,SC,Joseph Napoli,Cumberland Valley,JR,43-3
+2008,AAA,145,2,SC,Joey Napoli,Cumberland Valley,JR,43-3
 2008,AAA,145,2,SW,Mike Ganley,Bethel Park,JR,34-5
 2008,AAA,145,3,NW,Colton Spade,Lewistown,SO,33-9
 2008,AAA,145,3,SE,Jim Vollrath,Council Rock South,JR,41-10
@@ -16509,7 +16509,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2008,AAA,285,2,SW,Sam Brownlee,Canon-McMillan,JR,36-4
 2008,AAA,285,2,NW,Tim Watson,Bald Eagle Area,SR,31-5
 2008,AAA,285,1,SW,Justin Haines,Connellsville,SR,36-6
-2008,AAA,285,3,SC,Danny Estricher,Mechanicsburg,SR,33-4
+2008,AAA,285,3,SC,Dan Estricher,Mechanicsburg,SR,33-4
 2008,AAA,285,2,SE,David Osei,Abington,JR,33-1
 2008,AAA,285,2,NE,Robert Knopf,Pocono Mountain East,SR,32-3
 2008,AAA,285,1,NW,Sean Owen,Clearfield,JR,37-1
@@ -16618,7 +16618,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AA,140,2,NW,Cody Copeland,Greenville,FR,42-6
 2009,AA,140,2,SW,Daniel Knott,Claysburg-Kimmel,SR,31-4
 2009,AA,140,3,NW,Jaron Licatavich,Brockway,SR,23-6
-2009,AA,140,5,SE,Phillip Macy,Littlestown,SR,35-6
+2009,AA,140,5,SE,Philip Macy,Littlestown,SR,35-6
 2009,AA,140,1,NE,Matt Marcheski,Shamokin,SR,34-2
 2009,AA,140,1,SW,Dane Johnson,Shady Side Academy,SR,49-2
 2009,AA,140,4,SE,Dillon Smith,Jim Thorpe,JR,39-6
@@ -16631,9 +16631,9 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AA,145,1,NE,Eric Hess,Benton,JR,33-2
 2009,AA,145,5,SE,Austin Warman,Wilson Area,SR,36-5
 2009,AA,145,3,SW,Patrick Dumire,Westmont Hilltop,SR,32-9
-2009,AA,145,2,SE,Phil Califati,Brandywine Heights,JR,30-9
+2009,AA,145,2,SE,Phillip Calafati,Brandywine Heights,JR,30-9
 2009,AA,145,2,SW,Brian Gibbons,Bedford,SO,31-9
-2009,AA,145,3,SE,Jacob Stimer,Bermudian Springs,SR,35-13
+2009,AA,145,3,SE,Jake Stimer,Bermudian Springs,SR,35-13
 2009,AA,145,4,SW,Nick Carr,South Fayette,SO,34-6
 2009,AA,145,1,NW,Fabio Boccuzzi,Hickory,SR,39-7
 2009,AA,145,1,SE,Dakota Kuhn,Boiling Springs,SR,33-4
@@ -16686,11 +16686,11 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AA,171,1,SE,Josh Smith,Octorara,SR,33-3
 2009,AA,171,1,NW,Caleb Kolb,Grove City,SR,35-0
 2009,AA,171,4,SW,Cody Catalina,Beth-Center,SR,33-9
-2009,AA,171,3,SE,Michael Blaszczyk,Lancaster Catholic,SR,38-2
+2009,AA,171,3,SE,Mike Blaszczyk,Lancaster Catholic,SR,38-2
 2009,AA,171,2,SW,Dave Kephart,Portage,SO,25-7
 2009,AA,171,2,SE,Glenn Miller,Hamburg,JR,40-2
 2009,AA,171,3,SW,Sam Guidi,Fort Cherry,SO,36-5
-2009,AA,171,5,SE,Corey Mattila,Boiling Springs,SR,33-6
+2009,AA,171,5,SE,Corey Matilla,Boiling Springs,SR,33-6
 2009,AA,171,1,NE,Nathaniel Brown,Lewisburg,SO,30-2
 2009,AA,189,1,NW,R.J. Maison,Greenville,JR,38-4
 2009,AA,189,4,SE,Danny Boyle,Northern Lehigh,SR,32-4
@@ -16721,7 +16721,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AA,215,3,NE,Todd Hall,Athens,JR,34-9
 2009,AA,215,2,SE,Dylan Ferguson,Fairfield,JR,29-6
 2009,AA,215,2,NE,Nick Dawson,Montoursville,JR,36-5
-2009,AA,215,3,SE,Dan Thomas,Biglerville,JR,36-7
+2009,AA,215,3,SE,Danny Thomas,Biglerville,JR,36-7
 2009,AA,215,5,SW,Brian Beattie,Burrell,SO,31-12
 2009,AA,215,1,NW,Justin Buchanan,Sharpsville,SR,42-0
 2009,AA,285,1,SE,Dan Fultz,Juniata,JR,33-5
@@ -16818,7 +16818,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AAA,130,2,NW,Holden Lowe,Clearfield,SR,36-6
 2009,AAA,130,1,SW,Joe Waltko,North Allegheny,SR,37-1
 2009,AAA,130,3,NW,Scott Bosak,State College,SO,28-7
-2009,AAA,130,2,SC,Drew Rebling,South Western,JR,33-6
+2009,AAA,130,2,SC,Drew Reibling,South Western,JR,33-6
 2009,AAA,130,3,SE,Matt Martoccio,Council Rock South,SO,22-3
 2009,AAA,135,1,NW,Tyler Parsons,Erie Cathedral Prep,SO,31-11
 2009,AAA,135,3,SC,Kyle Fuller,Conrad Weiser,SR,34-2
@@ -16860,7 +16860,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AAA,145,4,SE,Brandon Loro,Springfield Delco,SR,36-8
 2009,AAA,145,2,SC,Bo Candelaria,Middletown,JR,31-5
 2009,AAA,145,2,SW,Devan Jones,Penn-Trafford,SR,35-6
-2009,AAA,145,1,SC,Joseph Napoli,Cumberland Valley,SR,42-0
+2009,AAA,145,1,SC,Joey Napoli,Cumberland Valley,SR,42-0
 2009,AAA,145,3,NE,Ian Heist,Parkland,SR,26-5
 2009,AAA,145,2,NW,Jamal Lyons,Erie Cathedral Prep,JR,30-5
 2009,AAA,145,2,SE,Marc Helfrich,Council Rock South,SR,33-8
@@ -16902,7 +16902,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2009,AAA,171,1,SE,Jim Resnick,Penncrest,SR,34-2
 2009,AAA,171,3,SW,P.J. Tasser,Belle Vernon,SR,31-4
 2009,AAA,171,1,NW,Nick Milano,Erie Cathedral Prep,SR,36-3
-2009,AAA,171,3,SC,Neil Sweigert,Donegal,SR,25-8
+2009,AAA,171,3,SC,Neal Sweigart,Donegal,SR,25-8
 2009,AAA,171,1,SC,Clay Gable,Dallastown,SR,35-4
 2009,AAA,171,4,SE,Scott Schretzenmaier,Great Valley,SR,36-5
 2009,AAA,171,2,NE,Seth Csazar,Northampton,SR,30-8

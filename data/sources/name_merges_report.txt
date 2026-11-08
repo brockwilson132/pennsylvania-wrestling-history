@@ -1,4 +1,4 @@
-530 candidate pairs from identity.py; 1 kept, 529 skipped; 1 wrestlers, 344 spellings rewritten
+534 candidate pairs from identity.py; 0 kept, 534 skipped; 0 wrestlers, 517 spellings rewritten
 
 skipped:
   both entered in one tournament Allen Wagner / Curtis (Allen) Wagner @ lansdowne
@@ -6,12 +6,12 @@ skipped:
   both entered in one tournament John F. McLaughlin / John W. McLaughlin @ southsidebeaver
   career over four seasons     Anthony Attilio / Anthony Attillio @ springford
   career over four seasons     Charles Smith / Charlie Smith @ eaststroudsburg
+  career over four seasons     Dan Bower / Dan Boyer @ loyalsock
   career over four seasons     David (Paul) Miller / Paul Miller @ cochranton
   career over four seasons     Donald Reynolds / Don Reynolds @ hanovertownship
   career over four seasons     Dylan R. Smith / Dylan Smith @ mountunion
-  career over four seasons     Eric Chambers / Eric Champbers @ centraldauphineast
-  career over four seasons     Gerrit (Gary) Strathmeyer / Gerritt Strathmeyer @ centralyork
   career over four seasons     Jack Brady / John Brady @ uniontown
+  career over four seasons     Jake Walker / Jared Walker @ southfayette
   career over four seasons     Jay K. (Ken) Heisey / Ken Heisey @ manheimcentral
   career over four seasons     Joel Vanderpool / Joe Vanderpool @ towanda
   career over four seasons     Mark Hutchinson / Mark Hutchin @ keystoneoaks
@@ -29,13 +29,11 @@ skipped:
   different school             A. Hollman / Amanda Hollman @ 
   different school             A. Kelly / Allison Kelly @ 
   different school             A. Kime / Andy Kime @ 
-  different school             A. Labe / Alex (Sandy) Labe @ 
   different school             Alex Henderson / ?. Henderson @ pennmanor
   different school             Alex Walker / A. Walker @ cheltenham
   different school             Al May / A. May @ 
   different school             A. Marcantonio / Andy Marcantonio @ 
   different school             Arment Waltenbaugh / A. Waltenbaugh @ faithchristianacademy
-  different school             Artemio Rodriguez / Artemio Rodriguez @ 
   different school             A. Serafini / Serafini @ 
   different school             ? Bair / Robie Bair @ 
   different school             B. Bauer / Brian Bauer @ 
@@ -169,7 +167,6 @@ skipped:
   different school             Ed Young / E. Young @ 
   different school             E. Favtaske / Eric Favtaske @ 
   different school             E. Flick / Ernie Flick @ 
-  different school             Elwood (Woody) Marcks / E. Marcks @ allentowndieruff
   different school             E. Martinelli / Eugene Martinelli @ 
   different school             E. Michael / Eric Michael @ 
   different school             Ernie Rounds / E. Rounds @ 
@@ -180,6 +177,7 @@ skipped:
   different school             F. Kerschner / Frank Kerschner @ 
   different school             F. Mafrice / Frank Mafrice @ 
   different school             F. O'Korn / Frank O'Korn @ 
+  different school             Franklin McCorkel / ? McCorkle @ hershey
   different school             G. Abbott / George Abbott @ 
   different school             Garey Mathers / G. Mathers @ 
   different school             Garrett Van Beek / G. Van Beek @ 
@@ -227,7 +225,6 @@ skipped:
   different school             Jarrad St. Cyr / J. St. Cyr @ ringgold
   different school             Jarrod Pritts / J. Pritts @ 
   different school             Jason Burr / J. Burr @ 
-  different school             jason Fogel / j. Fogel @ northampton
   different school             J. Bennett / Joe Bennett @ 
   different school             J. Bertagna / John Bertagna @ 
   different school             J. Boudreau / Jim (Mickey) Boudreau @ 
@@ -255,7 +252,6 @@ skipped:
   different school             J. Hessom / John Hessom @ 
   different school             J. Hrivnak / Josh Hrivnak @ 
   different school             Jim Salter / J. Salter @ 
-  different school             Jim Starnes / J. Starnes @ 
   different school             Jim Stewart / J. Stewart @ 
   different school             Jim Stiner / J. Stiner @ 
   different school             Jim Stonge / J. Stonge @ 
@@ -277,8 +273,8 @@ skipped:
   different school             John Rossi / J. Rossi @ 
   different school             John Waid / J. Waid @ 
   different school             John Weaver / J. Weaver @ 
+  different school             John Wolf / J. Wolf @ 
   different school             Jonathan Vizcarrondo / J. Vizcarrondo @ faithchristianacademy
-  different school             Joseph Reilly / J. Reilly @ 
   different school             J.R. (Joseph Rocco) Terenzio / J. Terenzio @ westernwayne
   different school             Julius Santos / Julius Santos @ marianabracettiacad
   different school             K. Barrett / Kent Barrett @ 
@@ -308,10 +304,13 @@ skipped:
   different school             ? Martinez / Miles Martin @ 
   different school             Martin Mann / M. Mann @ 
   different school             Marvin Butler / M. Butler @ 
+  different school             Matthew Ramos / M. Ramos @ executiveeducationacademy
   different school             Matt Loper / M. Loper @ 
   different school             Matt Steinmeyer / M. Steinmeyer @ 
+  different school             Maximillian Gyarmati / M. Gyarmati @ eaststroudsburgnorth
   different school             M. Crain / Mike Crain @ 
   different school             M. Glimp / Mike Glimp @ 
+  different school             Michael (Shane) Lorson / M. Lorson @ columbiamontourvotech
   different school             Mike Klingerman / M. Klingerman @ 
   different school             Mike Miller / M. Miller @ 
   different school             Mike Shields / M. Shields @ 
@@ -324,7 +323,6 @@ skipped:
   different school             N. Culp / Nelson Culp @ 
   different school             N. Dalton / Nick Dalton @ 
   different school             N. Davis / Nickson Davis @ 
-  different school             Ned O'Rourke / N. O'Rourke @ 
   different school             Neil Prample / N. Prample @ 
   different school             Nick Rossmann / N. Rossmann @ 
   different school             Noel Ferrari / Noel Ferrari @ stjohnneumannregional
@@ -361,7 +359,6 @@ skipped:
   different school             R. McVey / Ryan McVey @ 
   different school             R. Murin / Ron Murin @ 
   different school             Robbie Peterson / R. Peterson @ 
-  different school             Robert (Pop) Petrini / R. Petrini @ 
   different school             Robert Tenkewich / R. Tenkewich @ greenville
   different school             Rodney Williams / ? Williams @ greenville
   different school             Rod Thomas / R. Thomas @ 
@@ -373,15 +370,12 @@ skipped:
   different school             Sam Stafford / S. Stafford @ 
   different school             Sam Weaver / S. Weaver @ 
   different school             S. Baker / Scott Baker @ 
-  different school             Scott Lamplugh Jr. / S. Lamplugh Jr. (GAV) @ garnetvalley
   different school             Sean Sherlock / S. Sherlock @ 
   different school             Seth Worley / S. Worley @ 
-  different school             S. Fulmer / Steve Fulmer @ 
   different school             S. Gallagher / Shawn Gallagher @ 
   different school             S. Gaster / Shawn Gaster @ 
   different school             Shane Hanson-Ashworth / S. Hanson-Ashworth @ councilrocksouth
   different school             Shane Scanlon / S. Scanlon @ 
-  different school             S. Hannibal-Nixon / Sheldon Hannibal-Nixon @ 
   different school             Shawn Reagle / S. Reagle @ 
   different school             Shawn Wadding / S. Wadding @ 
   different school             Shermuhammad Sadriddinov / S. Sadriddinov @ councilrocksouth
@@ -397,6 +391,7 @@ skipped:
   different school             Ted Shearer / T. Shearer @ 
   different school             T. Ellsworth / Tracy Ellsworth @ 
   different school             Terry Powell / T. Powell @ 
+  different school             T. Hart / Tom Hart @ 
   different school             T. Harvey / Todd Harvey @ 
   different school             T. Hess / Tom Hess @ 
   different school             Thomas Lepkosky / T. Lepkosky @ 
@@ -432,6 +427,7 @@ skipped:
   grades disagree              Bob Woods / Robert Woods @ germantownship
   grades disagree              Bradford Weller / Brad Weller @ emmaus
   grades disagree              Chris D. Renninger / Chris Renninger @ bluemountain
+  grades disagree              Darin Whitesel / Darren Whitsel @ juniata
   grades disagree              Dave Dewald / Dave DeWalt @ schuylkillvalley
   grades disagree              Dave Martinez / Dave Martin @ southpark
   grades disagree              Dave Place / Dave Plance @ westallegheny
@@ -442,30 +438,42 @@ skipped:
   grades disagree              Eric Coates / Eric Coats @ boyslatin
   grades disagree              Greg A. Neff / Greg Neff @ lehighton
   grades disagree              Harold (Butch) Lowe / Harry (Packy) Lowe @ avella
+  grades disagree              Jeff Cowher / Josh Cowfer @ bucktail
   grades disagree              Jeff Hocher / Jeff Hocker @ redland
   grades disagree              Jim (Jack) Thomas / John Thomas @ columbia
   grades disagree              John Weaver / Jon Weaver @ conemaughtownship
   grades disagree              Justin Heillmann / Justin Heilmann @ peterstownship
   grades disagree              Ken Etzweiler / Ken Etzweller @ millersburg
   grades disagree              Kevin Schultz / Kevin Schutz @ brockway
+  grades disagree              Kirk Matoushek / Kirk Matuoshek @ westernwayne
   grades disagree              Lee Hall / Van (Lee) Hall @ hughesville
   grades disagree              Lon Ashenfelder / Lon Ashenfelter @ susquenita
   grades disagree              Mark A. Rosini / Mark Rosini @ ourladyoflourdesregional
+  grades disagree              Matt Hiller / Matt Miller @ montgomery
+  grades disagree              Mike Filthaan / Mike Fithian @ springfieldtownship
   grades disagree              Nate Smith / Nathan Smith @ bellefonte
+  grades disagree              Ray Fogelman / Ray Fogleman @ lowerdauphin
   grades disagree              Rich Teller / Rick Teller @ northernpotter
   grades disagree              Robert Yost / Rob Yost @ seneca
   grades disagree              Ryan Deitile / Ryan Deitle @ centralcambria
   grades disagree              Shane Manley / Shane Manney @ shamokin
   grades disagree              Stewart Preston / Stew Preston @ brockway
   grades disagree              Thomas Maby / Tom Maby @ susquehannacommunity
-  initial                      A.J. Cummings / A.J. Cummins @ warwick
+  initial                      A.J. Cummings / Andrew (AJ) Cummins @ warwick
+  initial                      B.J. Seymour / Brad (BJ) Seymour @ delonecatholic
   initial                      Desmond Johnson / D.J. Johnson @ grovecity
+  initial                      D.J. Simmons / Donald (DJ) Simmons @ halifax
+  initial                      D.J. Traylor / Douglas (DJ) Traylor @ kutztown
+  initial                      James (JC) Laughlin / J.C. Laughlin @ southwestern
   initial                      J.D. McFadden / Jesse McFadden @ maplewood
+  initial                      Richard (RJ) Conrad / R.J. Conrad @ eastpennsboro
   initial                      Timothy (TJ) Morrison / T.J. Morrison @ cedarcliff
   initial                      T.J. Fairlie / Todd Fairlie @ marplenewtown
   initial                      T.J. Robie / Tony Robie @ eriestrongvincent
   seasons not adjacent         Andrew Park / Andy Park @ blueridge
+  seasons not adjacent         Andy Schenck / Andy Schneck @ westchesterhenderson
   seasons not adjacent         Anthony Arroyo / Tony Arroyo @ reading
+  seasons not adjacent         Art Pellulo / Art Pelullo @ cheltenham
   seasons not adjacent         Art Pursell / Art Pursel @ centralbuckswest
   seasons not adjacent         Bobby Martini / Bob Martini @ brockway
   seasons not adjacent         Bob Miklas / Rob Miklas @ nazareth
@@ -489,7 +497,6 @@ skipped:
   seasons not adjacent         George Balabanian / George Balabanion @ marplenewtown
   seasons not adjacent         Gregg Hall / Greg Hall @ jeannette
   seasons not adjacent         Greg Melloy / Greg Meloy @ williamtennent
-  seasons not adjacent         Greg Oberling / Greg Oberlin @ kennarddale
   seasons not adjacent         Jack Bleecker / John Bleecker @ dover
   seasons not adjacent         Jack Burkett / Jonathan Burkett @ claysburgkimmel
   seasons not adjacent         Jack Cuvo / John Cuvo @ easton
@@ -506,7 +513,6 @@ skipped:
   seasons not adjacent         Joe Dorko / Joseph Dorko @ munhall
   seasons not adjacent         Joe Kelley / Joe Kelly @ saltsburg
   seasons not adjacent         Joe Villeneuve / Joe Villeueuve @ berlinbrothersvalley
-  seasons not adjacent         John Cappriotti / John Capriotti @ mechanicsburg
   seasons not adjacent         John Kline / Jonathan Kline @ selinsgrove
   seasons not adjacent         John Notte / Jon Notte @ stpiusx
   seasons not adjacent         Lee Cavanagh / Lee Cavanaugh @ strathhaven
@@ -528,5 +534,4 @@ skipped:
   seasons not adjacent         Tim Uliana / Tim Uliania @ penargyl
   seasons not adjacent         Travis Grosser / Travis Gross @ poconomountain
   seasons not adjacent         Travis McKiney / Travis McKinley @ somerset
-  seasons not adjacent         William Simpson / Will Simpson @ carlisle
   seasons not adjacent         Zachary Dice / Zach Dice @ easternyork

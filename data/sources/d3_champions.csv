@@ -809,7 +809,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 1990,AAA,119,1,Sam Metzger,Spring Grove,0,,d3records
 1990,AAA,125,1,Scott Mitchell,Warwick,0,,d3records
 1990,AAA,130,1,Joey Wildasin,South Western,0,1,d3records
-1990,AAA,135,1,Scott Weismantel,South Western,0,6,d3records
+1990,AAA,135,1,Scott Weismantle,South Western,0,6,d3records
 1990,AAA,140,1,Chris Ream,Dallastown,0,5,d3records
 1990,AAA,145,1,Brady Myers,Conestoga Valley,0,,d3records
 1990,AAA,152,1,Chad Pines,Cedar Cliff,0,2,d3records
@@ -868,7 +868,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 1992,AAA,160,1,Greg Byler,Ephrata,0,5,d3records
 1992,AAA,171,1,Dave Habowski,Northern,0,,d3records
 1992,AAA,180,1,Junior Granison,Harrisburg,0,1,d3records
-1992,AAA,HWT,1,John Givens,Elizabethtown,0,2,d3records
+1992,AAA,HWT,1,Jon Givens,Elizabethtown,0,2,d3records
 1993,AA,103,1,Jeremy Reck,Hanover,0,,d3records
 1993,AA,112,1,John Halulko,Brandywine Heights,0,4,d3records
 1993,AA,119,1,Matt Sprenkle,West York,0,,d3records
@@ -915,12 +915,12 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 1994,AAA,130,1,Dana Weber,Waynesboro,0,2,d3records
 1994,AAA,135,1,Duke Power,Solanco,0,6,d3records
 1994,AAA,140,1,Troy Barbush,Manheim Central,0,1,d3records
-1994,AAA,145,1,Jason Dell,South Western,0,,d3records
+1994,AAA,145,1,Jake Dell,South Western,0,,d3records
 1994,AAA,152,1,Brad Bush,Red Land,0,1,d3records
 1994,AAA,160,1,Coy Wire,Cedar Cliff,0,,d3records
 1994,AAA,171,1,Dave Heckard,Cumberland Valley,0,,d3records
 1994,AAA,189,1,Tony Carricato,Northern,0,,d3records
-1994,AAA,HWT,1,Jerry Hiller,Lower Dauphin,0,,d3records
+1994,AAA,HWT,1,Jerry Hill,Lower Dauphin,0,,d3records
 1995,AA,103,1,Chong Moua,Cocalico,0,,d3records
 1995,AA,112,1,Chad Luckenbaugh,West York,0,6,d3records
 1995,AA,119,1,Jeff Reese,Oley Valley,0,,d3records
@@ -996,7 +996,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 1997,AAA,145,1,Zach Miller,Boyertown,0,2,d3records
 1997,AAA,152,1,Joel Darras,Warwick,0,,d3records
 1997,AAA,160,1,Dan Bechtold,Hempfield,0,5,d3records
-1997,AAA,171,1,Joe Dougherty,Manheim Central,0,1,d3records
+1997,AAA,171,1,Joel Dougherty,Manheim Central,0,1,d3records
 1997,AAA,189,1,Coy Wire,Cedar Cliff,0,2,d3records
 1997,AAA,275,1,Pete Mielnik,Ephrata,0,1,d3records
 1998,AA,103,1,Evan Sola,Conrad Weiser,0,3,d3records
@@ -1085,7 +1085,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 2001,AA,135,1,John Ambs,Donegal,0,,d3records
 2001,AA,140,1,Joey Lovello,Brandywine Heights,0,3,d3records
 2001,AA,145,1,Eli Boldosser,Biglerville,0,,d3records
-2001,AA,152,1,Pat Tierney,Wyomissing,0,4,d3records
+2001,AA,152,1,Patrick Tierney,Wyomissing,0,4,d3records
 2001,AA,160,1,Anthony Corpora,Brandywine Heights,0,2,d3records
 2001,AA,171,1,Kevin Bordner,Tulpehocken,0,,d3records
 2001,AA,189,1,Nate Shierdan,West York,1,,d3records
@@ -1197,7 +1197,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 2005,AA,160,1,Jon Hade,Bermudian Springs,0,2,d3records
 2005,AA,171,1,Patrick Walsh,Schuylkill Valley,0,4,d3records
 2005,AA,189,1,David Mendoza,Wyomissing,0,3,d3records
-2005,AA,215,1,Jake Showers,Biglerville,0,5,d3records
+2005,AA,215,1,Jacob Showers,Biglerville,0,5,d3records
 2005,AA,275,1,Mike Daub,Susquenita,0,,d3records
 2005,AAA,103,1,Walter Peppelman,Central Dauphin,0,3,d3records
 2005,AAA,112,1,Tyler Nauman,Middletown,0,3,d3records
@@ -1208,14 +1208,14 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 2005,AAA,140,1,Chris Dahlheimer,Red Lion,0,,d3records
 2005,AAA,145,1,Chris Barrick,Big Spring,0,6,d3records
 2005,AAA,152,1,Erik Goodling,Cumberland Valley,0,,d3records
-2005,AAA,160,1,Raymond Schreffler,Cumberland Valley,0,,d3records
+2005,AAA,160,1,Ray Schreffler,Cumberland Valley,0,,d3records
 2005,AAA,171,1,Thomas Shovlin,Central Dauphin,0,3,d3records
 2005,AAA,189,1,Keith McDonald,Red Lion,0,6,d3records
 2005,AAA,215,1,Justin Terhune,Dallastown,0,2,d3records
 2005,AAA,275,1,Nate Weaver,York Technology,0,3,d3records
 2006,AA,103,1,Matt Yocco,Brandywine Heights,0,3,d3records
 2006,AA,112,1,Bryce Marshall,Bermudian Springs,0,4,d3records
-2006,AA,119,1,Zach Wolford,Hanover,0,,d3records
+2006,AA,119,1,Zack Wolford,Hanover,0,,d3records
 2006,AA,125,1,Brad Kummerer,Hamburg,0,4,d3records
 2006,AA,130,1,Nick Sanko,Hamburg,0,,d3records
 2006,AA,135,1,Nick Stabile,Hamburg,1,2,d3records
@@ -1307,7 +1307,7 @@ year,cls,weight,place,name,school,region_champ,piaa_place,source
 2009,AA,145,1,Dakota Kuhn,Boiling Springs,0,3,d3records
 2009,AA,152,1,Devin O’Brien,Bermudian Springs,0,7,d3records
 2009,AA,160,1,Derec Sauve,Susquenita,0,7,d3records
-2009,AA,171,1,Corey Mattila,Boiling Springs,0,8,d3records
+2009,AA,171,1,Corey Matilla,Boiling Springs,0,8,d3records
 2009,AA,189,1,Dallas Brown,Delone Catholic,0,2,d3records
 2009,AA,215,1,Dylan Ferguson,Fairfield,0,8,d3records
 2009,AA,285,1,Dan Fultz,Juniata,0,,d3records

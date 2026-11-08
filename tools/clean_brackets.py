@@ -320,6 +320,19 @@ def clean_entrants(E, B, rep):
     return keep
 
 
+def interleaved(g, name, school):
+    """g reads as all of name with the first 3+ characters of school woven in ("Charles (Chick) FessendCelanrks Summit/"
+    is Charles (Chick) Fessenden + "Clarks Summit/" of Clarks Summit/Abington)"""
+    if len(g) - len(name) < 3 or len(g) - len(name) > len(school) or not g.startswith(name[:min(4, len(name))]): return False
+    from functools import lru_cache
+    @lru_cache(None)
+    def go(i, j):   # i chars of g used, j chars of name used; the rest of g's used chars came from school, in order
+        k = i - j
+        if i == len(g): return j == len(name)
+        return (j < len(name) and g[i] == name[j] and go(i + 1, j + 1)) or (k < len(school) and g[i] == school[k] and go(i + 1, j))
+    return go(0, 0)
+
+
 def clean_bouts(B, E, S, rep):
     ents = defaultdict(list)   # bracket -> [(name, school)]
     for r in E: ents[(r['level'], r['tournament'], r['weight'])].append((r['name'], r['school']))
@@ -350,6 +363,17 @@ def clean_bouts(B, E, S, rep):
             if len(t) > k and t.endswith(sch[1:]) and t[-k] == sch[0] and t[-k - 1] != ' ':
                 nm = t[:-k] + t[-k + 1]
                 if len(nm.split()) >= 2 and not re.search(r'\d', nm): return (nm, sch)
+        for sch in SCHOOLS:   # "Hayden Yacoviello-AndrBuesrmudian Springs": the name's last 1-4 letters woven into the school
+            if not t.endswith(sch[-1]) or len(t) <= len(sch) + 2: continue
+            i, j, extra = len(sch) - 1, len(t) - 1, []
+            while i >= 0 and j >= 0:
+                if t[j] == sch[i]: i -= 1
+                else: extra.append(t[j])
+                j -= 1
+                if len(extra) > 4: break
+            if i >= 0 or not extra or len(extra) > 4 or t[j] == ' ' or not all(x.isalpha() for x in extra): continue
+            nm = t[:j + 1] + ''.join(reversed(extra))
+            if len(nm.split()) >= 2 and not re.search(r'\d', nm): return (nm, sch)
         return None
 
     sn = Counter(r['school'] for r in E) + Counter(r['school'] for r in S)
@@ -367,6 +391,10 @@ def clean_bouts(B, E, S, rep):
             n = b[s].strip(); m = SEED.match(n)
             if m: n = n[m.end():].strip(); rep['bouts: seed prefix stripped'] += 1
             b[s] = n
+            if len(n) > 12 and not any(key(c[0]) == key(n) for c in ents.get(bk, [])):
+                t = re.sub(r',\s*(?:FR|SO|JR|SR|\d{1,2}(?:th)?)\b.*$', '', n, flags=re.I).strip()   # "..., FR, 39-5"
+                hit = [c for c in ents.get(bk, []) if c[1] and interleaved(t, c[0], c[1])]
+                if len(hit) == 1: b[s], b[s + '_school'] = hit[0]; rep['bouts: name woven with its school taken back out'] += 1; continue
             if not b[s + '_school'].strip():
                 hit = resolve(n, bk)
                 if hit: b[s], b[s + '_school'] = hit; rep['bouts: name resolved to its entrant'] += 1
