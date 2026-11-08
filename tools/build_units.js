@@ -19,7 +19,7 @@ const canon = (s) => { const id = SB && SB.identity(s); const n = id ? id.school
 const nkey = (s) => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z]/g, '');
 const wNum = (w) => (w === 'UNL' || w === 'HWT' || w === 'Hwt' ? 999 : +w);
 const MEMB = (W.WR_MEMB || { r: {} }).r;
-const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' } };
+const SPLIT = { Trinity: { 7: 'Trinity (Washington)' }, 'Hempfield Area': { 3: 'Hempfield' }, Hempfield: { 7: 'Hempfield Area' }, 'Bethlehem Liberty': { 4: 'Liberty' }, 'Pius X (Roseto)': { 1: 'St. Pius X' }, 'Bishop McDevitt': { 12: 'Bishop McDevitt (12)' } };
 const splitName = (sch, d) => (SPLIT[sch] && SPLIT[sch][d]) || sch;
 const unitDist = (lvl, unit, d) => { if (lvl !== 'district' && lvl !== 'section') return d; const m = /^D(\d+)(?:_|$)/.exec(unit || ''); return m ? +m[1] : d; };
 const STDK = [['98', 0, 101], ['107', 102, 110], ['114', 111, 117], ['121', 118, 124], ['127', 125, 129], ['133', 130, 136], ['139', 137, 142], ['145', 143, 148], ['152', 149, 156], ['160', 157, 166], ['172', 167, 180], ['189', 181, 200], ['215', 201, 240], ['HWT', 241, 9999]];
@@ -491,7 +491,7 @@ byS.forEach((rows, i) => {
     (process.env.SEASON_UNC_GRID || '0,150,250,350,450,600').split(',').map(Number).forEach((u) => (process.env.SEASON_TAU_GRID || '0,4,8,12,16').split(',').map(Number).forEach((t) => {
       const r = evalU(u, t); console.log(`  spread ${u} swing ${t}: ${G.length} real duals, log loss ${r[0].toFixed(4)}, winner picked ${(100 * r[1]).toFixed(1)}%, margin rmse ${r[2].toFixed(1)}`); if (!best || r[0] < best[2]) best = [u, t, r[0]]; }));
     UNC = process.env.SEASON_UNC != null ? +process.env.SEASON_UNC : best[0]; TAU = process.env.SEASON_TAU != null ? +process.env.SEASON_TAU : best[1]; console.log('rating spread used:', UNC, 'dual swing used:', TAU);
-    if (process.env.SEASON_SHOW) G.filter((g) => [g[0], g[1]].some((p) => p.s.sch + '|' + p.s.year === process.env.SEASON_SHOW)).forEach(([a, b, real, d]) => { const [m, v] = dual(a.slot, b.slot); console.log('   ', d[0], d[2], d[3], d[5] + '-' + d[8], d[6], '| model margin', m.toFixed(1), 'winner chance', (100 * Phi(m / Math.sqrt(v + TAU * TAU))).toFixed(0) + '%'); });
+    if (process.env.SEASON_SHOW) G.filter((g) => [g[0], g[1]].some((p) => p.s.sch + '|' + p.s.year === process.env.SEASON_SHOW)).forEach(([a, b, real, d]) => { const [m, v] = dual(slotVs(a, b.s.sch), slotVs(b, a.s.sch)); console.log('   ', d[0], d[2], d[3], d[5] + '-' + d[8], d[6], '| model margin', m.toFixed(1), 'winner chance', (100 * Phi(m / Math.sqrt(v + TAU * TAU))).toFixed(0) + '%'); });
     /* do lineups with weak spots (a weight empty or below 700 in the postseason) beat the model's margin? */
     { const holes = (p) => p.slot.filter((o) => o.length === 1 ? o[0][0] == null || o[0][0] < 700 : false).length; const B = new Map();
       G.forEach(([a, b, real]) => { const [m] = dual(a.slot, b.slot); const k = Math.max(-4, Math.min(4, holes(a) - holes(b))); const x = B.get(k) || [0, 0, 0]; x[0]++; x[1] += real - m; x[2] += m; B.set(k, x);

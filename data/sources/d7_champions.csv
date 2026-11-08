@@ -248,7 +248,7 @@ year,cls,weight,place,name,school,source
 2015,AAA,132,1,A.C. Headlee,Waynesburg Central,wpial
 2015,AAA,138,1,Sam Krivus,Hempfield Area,wpial
 2015,AAA,145,1,Michael Kemerer,Franklin Regional,wpial
-2015,AAA,152,1,Vincenzo Joseph,Central Catholic,wpial
+2015,AAA,152,1,Vincenzo Joseph,Pittsburgh Central Catholic,wpial
 2015,AAA,160,1,Josh Shields,Franklin Regional,wpial
 2015,AAA,170,1,Te’Shan Campbell,Penn Hills,wpial
 2015,AAA,182,1,Kellan Stout,Mt. Lebanon,wpial
@@ -274,11 +274,11 @@ year,cls,weight,place,name,school,source
 2014,AAA,120,1,Luke Pletcher,Greater Latrobe,wpial
 2014,AAA,126,1,Dalton Macri,Canon-McMillan,wpial
 2014,AAA,132,1,Cameron Coy,Penn-Trafford,wpial
-2014,AAA,138,1,Vincenzo Joseph,Central Catholic,wpial
+2014,AAA,138,1,Vincenzo Joseph,Pittsburgh Central Catholic,wpial
 2014,AAA,145,1,Solomon Chishko,Canon-McMillan,wpial
 2014,AAA,152,1,Josh Shields,Franklin Regional,wpial
 2014,AAA,160,1,Austin Bell,Belle Vernon,wpial
-2014,AAA,170,1,Kyle Coniker,Central Catholic,wpial
+2014,AAA,170,1,Kyle Coniker,Pittsburgh Central Catholic,wpial
 2014,AAA,182,1,Zack Zavatsky,Greater Latrobe,wpial
 2014,AAA,195,1,Cole Macek,Montour,wpial
 2014,AAA,220,1,Tyler Worthing,Kiski Area,wpial
@@ -309,7 +309,7 @@ year,cls,weight,place,name,school,source
 2013,AAA,170,1,Cody Wiercioch,Canon-McMillan,wpial
 2013,AAA,182,1,Alex DeCiantis,North Allegheny,wpial
 2013,AAA,195,1,Jake Hart,Hampton,wpial
-2013,AAA,220,1,Zach DeLuca,Central Catholic,wpial
+2013,AAA,220,1,Zach DeLuca,Pittsburgh Central Catholic,wpial
 2013,AAA,285,1,Shane Kuhn,Kiski Area,wpial
 2013,AA,106,1,Austin McDermitt,Burgettstown,wpial
 2013,AA,113,1,George Phillippi,Derry,wpial
@@ -332,11 +332,11 @@ year,cls,weight,place,name,school,source
 2012,AAA,132,1,Mackenzie McGuire,Upper St. Clair,wpial
 2012,AAA,138,1,Solomon Chishko,Canon-McMillan,wpial
 2012,AAA,145,1,Heath Coles,Norwin,wpial
-2012,AAA,152,1,Tyler Manion,Central Catholic,wpial
+2012,AAA,152,1,Tyler Manion,Pittsburgh Central Catholic,wpial
 2012,AAA,160,1,Zack Zavatsky,Greater Latrobe,wpial
 2012,AAA,170,1,Cody Wiercioch,Canon-McMillan,wpial
 2012,AAA,182,1,Matt McCutcheon,Kiski Area,wpial
-2012,AAA,195,1,Perry Hills,Central Catholic,wpial
+2012,AAA,195,1,Perry Hills,Pittsburgh Central Catholic,wpial
 2012,AAA,220,1,Ben Balish,Pine-Richland,wpial
 2012,AAA,285,1,Cody Klempay,Canon-McMillan,wpial
 2012,AA,106,1,Pat Dewitt,Valley,wpial
@@ -359,12 +359,12 @@ year,cls,weight,place,name,school,source
 2011,AAA,125,1,Nico Megaludis,Franklin Regional,wpial
 2011,AAA,130,1,Solomon Chishko,Canon-McMillan,wpial
 2011,AAA,135,1,Ty Lydic,Greater Latrobe,wpial
-2011,AAA,140,1,Tyler Manion,Central Catholic,wpial
+2011,AAA,140,1,Tyler Manion,Pittsburgh Central Catholic,wpial
 2011,AAA,145,1,Nick Catalano,Canon-McMillan,wpial
-2011,AAA,152,1,Lorenzo Thomas,Central Catholic,wpial
-2011,AAA,160,1,Jason Luster,Central Catholic,wpial
+2011,AAA,152,1,Lorenzo Thomas,Pittsburgh Central Catholic,wpial
+2011,AAA,160,1,Jason Luster,Pittsburgh Central Catholic,wpial
 2011,AAA,171,1,Nick Bonaccorsi,Bethel Park,wpial
-2011,AAA,189,1,Perry Hills,Central Catholic,wpial
+2011,AAA,189,1,Perry Hills,Pittsburgh Central Catholic,wpial
 2011,AAA,215,1,Kyle McWreath,Trinity,wpial
 2011,AAA,285,1,Cody Klempay,Canon-McMillan,wpial
 2011,AA,103,1,Jason Nolf,Kittanning,wpial
@@ -385,9 +385,9 @@ year,cls,weight,place,name,school,source
 2010,AAA,112,1,James Gulibon,Derry,wpial
 2010,AAA,119,1,Nico Megaludis,Franklin Regional,wpial
 2010,AAA,125,1,Zach McGinnis,Waynesburg Central,wpial
-2010,AAA,130,1,Tyler Zymroz,Central Catholic,wpial
+2010,AAA,130,1,Tyler Zymroz,Pittsburgh Central Catholic,wpial
 2010,AAA,135,1,Travis Shaffer,Derry,wpial
-2010,AAA,140,1,Lorenzo Thomas,Central Catholic,wpial
+2010,AAA,140,1,Lorenzo Thomas,Pittsburgh Central Catholic,wpial
 2010,AAA,145,1,Aaron McKinney,West Allegheny,wpial
 2010,AAA,152,1,Zack Shannon,Kiski Area,wpial
 2010,AAA,160,1,Troy Reaghard,West Allegheny,wpial
@@ -499,7 +499,7 @@ year,cls,weight,place,name,school,source
 2006,AAA,160,1,Eric Williams,Trinity,wpial
 2006,AAA,171,1,Josh Serene,Kittanning,wpial
 2006,AAA,189,1,Scott Joseph,Kiski Area,wpial
-2006,AAA,215,1,T.J. Valore,Greensburg C.C.,wpial
+2006,AAA,215,1,T.J. Valore,Greensburg Central Catholic,wpial
 2006,AAA,275,1,Myles Caragein,Keystone Oaks,wpial
 2006,AA,103,1,Dane Johnson,Shady Side Academy,wpial
 2006,AA,112,1,Jordan Shields,Burrell,wpial
@@ -550,7 +550,7 @@ year,cls,weight,place,name,school,source
 2004,AAA,130,1,Mark Throckmorton,Waynesburg Central,wpial
 2004,AAA,135,1,Dan Burkholder,Trinity,wpial
 2004,AAA,140,1,Donnie Jones,Greensburg Salem,wpial
-2004,AAA,145,1,Andrew Sherry,Central Catholic,wpial
+2004,AAA,145,1,Andrew Sherry,Pittsburgh Central Catholic,wpial
 2004,AAA,152,1,Jared Mowl,Moon,wpial
 2004,AAA,160,1,Jarrod King,Connellsville,wpial
 2004,AAA,171,1,Kyle Deliere,Canon-McMillan,wpial
@@ -618,7 +618,7 @@ year,cls,weight,place,name,school,source
 2002,AA,125,1,Dan Kosharsky,Chartiers-Houston,wpial
 2002,AA,130,1,Louie Vigliotti,Burgettstown,wpial
 2002,AA,135,1,Dave Saadeh,Elderton,wpial
-2002,AA,140,1,Deacon Smolleck,Greensburg C.C.,wpial
+2002,AA,140,1,Deacon Smolleck,Greensburg Central Catholic,wpial
 2002,AA,145,1,Josh Peterson,Southmoreland,wpial
 2002,AA,152,1,Matt Hill,Freedom Area,wpial
 2002,AA,160,1,Tory Moore,Shady Side Academy,wpial
@@ -818,7 +818,7 @@ year,cls,weight,place,name,school,source
 1994,AAA,160,1,Keilan O’Daniel,Canon-McMillan,wpial
 1994,AAA,171,1,Jim Patterson,Greensburg Salem,wpial
 1994,AAA,189,1,Jarratt Gooch,Seneca Valley,wpial
-1994,AAA,HWT,1,Brendan Bibro,Central Catholic,wpial
+1994,AAA,HWT,1,Brendan Bibro,Pittsburgh Central Catholic,wpial
 1994,AA,103,1,Todd Porter,Chartiers-Houston,wpial
 1994,AA,112,1,Justin Watson,West Greene,wpial
 1994,AA,119,1,Chris Tarr,Washington,wpial
@@ -968,7 +968,7 @@ year,cls,weight,place,name,school,source
 1988,AAA,155,1,Ray Brinzer,North Allegheny,wpial
 1988,AAA,167,1,Mike Kraft,Penn Hills,wpial
 1988,AAA,185,1,Nate McKnight,New Castle,wpial
-1988,AAA,HWT,1,George Mehalic,Central Catholic,wpial
+1988,AAA,HWT,1,George Mehalic,Pittsburgh Central Catholic,wpial
 1988,AAA,98,1,Ryan Sella,Avella,wpial
 1988,AAA,138,1,Don Lemley,Waynesburg Central,wpial
 1988,AAA,145,1,Eric Mosier,Jefferson-Morgan,wpial
@@ -1202,7 +1202,7 @@ year,cls,weight,place,name,school,source
 1978,AA,132,1,Jeff Gordon,Avella,wpial
 1978,AA,138,1,Gary Havelka,Burgettstown,wpial
 1978,AA,145,1,Mike McWilliams,Carmichaels,wpial
-1978,AA,155,1,Chad Menzie,Greensburg C.C.,wpial
+1978,AA,155,1,Chad Menzie,Greensburg Central Catholic,wpial
 1978,AA,167,1,John Chendy,Ligonier Valley,wpial
 1978,AA,185,1,Tom Morrell,Immaculate Conception,wpial
 1978,AA,HWT,1,Jim Covert,Freedom Area,wpial
@@ -1223,11 +1223,11 @@ year,cls,weight,place,name,school,source
 1977,AA,119,1,Jeff Gordon,Avella,wpial
 1977,AA,126,1,Rob Bogo,Avella,wpial
 1977,AA,132,1,Gary Havelka,Burgettstown,wpial
-1977,AA,138,1,Ted Cawoski,Greensburg C.C.,wpial
-1977,AA,145,1,Chad Menzie,Greensburg C.C.,wpial
+1977,AA,138,1,Ted Cawoski,Greensburg Central Catholic,wpial
+1977,AA,145,1,Chad Menzie,Greensburg Central Catholic,wpial
 1977,AA,155,1,John Chendy,Ligonier Valley,wpial
 1977,AA,167,1,Charles Colburn,Bethlehem-Center,wpial
-1977,AA,185,1,Jess Caravaggio,Greensburg C.C.,wpial
+1977,AA,185,1,Jess Caravaggio,Greensburg Central Catholic,wpial
 1977,AA,HWT,1,Jim Covert,Freedom Area,wpial
 1976,AAA,98,1,Curt Ellis,Washington,wpial
 1976,AAA,105,1,William Hawley,Norwin,wpial
@@ -1252,7 +1252,7 @@ year,cls,weight,place,name,school,source
 1976,AA,155,1,Jim Hargrove,Immaculate Conception,wpial
 1976,AA,167,1,Joe Zombeck,Fort Cherry,wpial
 1976,AA,185,1,Tom Bertrand,Burgettstown,wpial
-1976,AA,HWT,1,Mark Cuneo,Greensburg C.C.,wpial
+1976,AA,HWT,1,Mark Cuneo,Greensburg Central Catholic,wpial
 1975,AAA,91,1,Larry Moorhead,Kiski Area,wpial
 1975,AAA,98,1,Vance Mulligan,Washington,wpial
 1975,AAA,105,1,Angelo Marino,Canon-McMillan,wpial
@@ -1297,13 +1297,13 @@ year,cls,weight,place,name,school,source
 1974,AA,105,1,Tom Baker,Waynesburg Central,wpial
 1974,AA,112,1,Darwin Stalnaker,German Township,wpial
 1974,AA,119,1,Jim Walters,Burgettstown,wpial
-1974,AA,126,1,Dave Detore,Greensburg C.C.,wpial
+1974,AA,126,1,Dave Detore,Greensburg Central Catholic,wpial
 1974,AA,132,1,Jim Bauer,Avella,wpial
 1974,AA,145,1,Kevin Martin,Jefferson-Morgan,wpial
 1974,AA,155,1,Bob Hospodar,Fort Cherry,wpial
 1974,AA,167,1,Bill Bertrand,Burgettstown,wpial
 1974,AA,185,1,Kevin Bussey,Waynesburg Central,wpial
-1974,AA,HWT,1,Ted Cuneo,Greensburg C.C.,wpial
+1974,AA,HWT,1,Ted Cuneo,Greensburg Central Catholic,wpial
 1973,single,88,1,Angelo Marino,Canon-McMillan,wpial
 1973,single,95,1,Kevin Nellis,Shaler,wpial
 1973,single,105,1,Dennis Zuk,Carlynton,wpial
