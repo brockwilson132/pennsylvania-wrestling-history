@@ -36,7 +36,7 @@
   if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc); }
   const nnorm = (o) => (o && typeof o === 'object' ? o : {});
   let nBase = nnorm(draft && draft.nBase), notes = nnorm(clone((draft && draft.notes) || nBase));
-  const ui = { sort: 'az', note: '', sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
+  const ui = { sort: 'az', note: '', pick: '', sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
   const undo = [];
   const keep = () => ls.set(K_DRAFT, changes() ? J({ base, doc, nBase, notes }) : null);
   const edit = (fn) => { undo.push(J({ doc, sel: ui.sel })); if (undo.length > 100) undo.shift(); fn(); ui.save = ''; ui.err = ''; keep(); draw(); };
@@ -64,6 +64,7 @@
   function dedupe(m) { const seen = new Map(), alias = {};
     Object.keys(m.sets).forEach((id) => { const k = m.sets[id].map((h) => h.toUpperCase()).join(); if (seen.has(k)) { alias[id] = seen.get(k); delete m.sets[id]; } else seen.set(k, id); });
     Object.keys(m.schools).forEach((s) => { if (alias[m.schools[s]]) m.schools[s] = alias[m.schools[s]]; });
+    const used = new Set(Object.values(m.schools)); Object.keys(m.sets).forEach((id) => { if (!used.has(id)) delete m.sets[id]; });
     Object.defineProperty(m, 'alias', { value: alias, enumerable: false, configurable: true, writable: true }); return m; }
   /* ---- GitHub ---- */
   const token = () => ls.get(K_TOKEN) || '';
@@ -168,106 +169,102 @@
     const all = [...new Set([...UD.schools, ...Object.keys(doc.schools)])];
     const t = ui.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
     return all.filter((s) => { const k = s.toLowerCase(); if (t.length && !t.every((x) => k.includes(x))) return false;
-      if (ui.f === 'set') return doc.schools[s] === ui.sel;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
       if (ui.f === 'notes') return !!notes[s];
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; })
       .sort((a, b) => (ui.sort in SORTS ? medOf(b, SORTS[ui.sort]) - medOf(a, SORTS[ui.sort]) : 0) || a.localeCompare(b));
   }
-  function brush() {
-    const p = setPaint(ui.sel), name = ui.focus && doc.schools[ui.focus] === ui.sel ? ui.focus : (Object.keys(doc.schools).find((s) => doc.schools[s] === ui.sel) || 'School');
-    const s = doc.sets[ui.sel] || ['#2A3038', '#4A5360', '#EEEAE1'], cur = s[ui.part];
-    const low = ui.sel && T.contrast(s[0], s[2]) < T.READS;
+  /* the colour sheet for one school: its tag at every size, the saved sets to pick from (or none), and its own fill,
+     dot and text. Editing colours never changes another school: a set shared with others is copied for this one first. */
+  const colOf = (s) => { const id = doc.schools[s]; if (id && doc.sets[id]) return doc.sets[id]; const p = T.paint(s, doc); return [p.fill, p.acc, p.ink]; };
+  function sheet(s) {
+    const id = doc.schools[s], p = T.paint(s, doc), c = colOf(s), cur = c[ui.part], none = !id && p.none;
+    const low = !none && T.contrast(c[0], c[2]) < T.READS;
+    const pv = `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(s.length, 1))))}px"><span class="ce-pvb">${pill(s, p)}</span><span class="ce-pvs">${pill(s, p)}${pill(abbr(s), p, 'ab')}${pill(abbr(s), p, 'ab xs')}</span></div>`;
+    const sets = `<div class="ce-ss" role="group" aria-label="Sets"><button class="ce-sb ce-none" data-auto aria-pressed="${!id}" aria-label="No set" style="--fill:${T.NONE.fill};--acc:${T.NONE.acc};--ink:${T.NONE.ink}"><i></i></button>${Object.keys(doc.sets).sort(byColour).map((k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; }).join('')}</div>`;
     const parts = `<div class="ce-pt" role="group" aria-label="Part">
-      <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${s[0]}"></span></button>
-      <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${s[1]}"></span></button>
-      <button class="ce-pb" data-part="2" aria-pressed="${ui.part === 2}" aria-label="Text"><span class="ce-sw2" style="--fill:${s[0]};color:${s[2]}">Aa</span></button>
+      <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${c[0]}"></span></button>
+      <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${c[1]}"></span></button>
+      <button class="ce-pb" data-part="2" aria-pressed="${ui.part === 2}" aria-label="Text"><span class="ce-sw2" style="--fill:${c[0]};color:${c[2]}">Aa</span></button>
       ${low ? `<button class="ce-warn" data-fix aria-label="Make the text readable">${svg('warn')}</button>` : ''}</div>`;
-    const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && ui.sel && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
+    const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && !none && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
       <button class="ce-sw ce-tool" data-swadd aria-pressed="${ui.add}" aria-label="Add a colour">${svg('plus')}</button></div>`;
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
-    const sets = `<div class="ce-ss" role="group" aria-label="Sets">
-      <button class="ce-sb ce-tool" data-snew aria-label="New set">${svg('plus')}</button>
-      ${ui.sel ? `<button class="ce-sb ce-tool" data-scopy aria-label="Copy set">${svg('copy')}</button><button class="ce-sb ce-tool${ui.armDel ? ' ce-arm' : ''}" data-sdel aria-label="Delete set">${svg('trash')}</button>` : ''}
-      ${Object.keys(doc.sets).sort(byColour).map((id) => { const q = setPaint(id); return `<button class="ce-sb" data-set="${id}" aria-pressed="${id === ui.sel}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>${uses(id)}</button>`; }).join('')}</div>`;
-    const big = ui.sel ? name : 'School';
-    const pp = ui.sel ? p : T.NONE;
-    return `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(big.length, 1))))}px"><span class="ce-pvb">${pill(big, pp)}</span><span class="ce-pvs">${pill(big, pp)}${pill(abbr(big), pp, 'ab')}${pill(abbr(big), pp, 'ab xs')}</span></div>${ui.min ? '' : parts + sw + cx}${sets}`;
+    const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${pv}${was}${sets}${parts}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
-    const ss = schoolsShown(), sp = setPaint(ui.sel);
-    const chips = [['all', 'All'], ['set', `<span class="ce-mini" style="--f:${sp.fill};--a:${sp.acc}"><b><i></i></b>${ui.sel ? uses(ui.sel) : 0}</span>`], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
+    const ss = schoolsShown();
+    const chips = [['all', 'All'], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
       .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     const sorts = [['az', '<b class="ce-az">A–Z</b>'], ['D', geo('district')], ['R', geo('region')], ['S', geo('state')]];
     return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label><div class="ce-so" role="group" aria-label="Sort">${sorts.map(([k, l]) => `<button data-sort="${k}" aria-pressed="${ui.sort === k}" aria-label="${{ az: 'Name', D: 'District medals', R: 'Regional medals', S: 'State medals' }[k]}">${l}</button>`).join('')}</div></div>
       <div class="ce-ch" role="group" aria-label="Show">${chips.map(([k, l]) => `<button data-f="${k}" aria-pressed="${ui.f === k}">${l}</button>`).join('')}</div>
-      <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), use = ui.sel && doc.schools[s] === ui.sel, d = DIST.get(s);
-        return `<li class="ce-sr${use ? ' ce-use' : ''}${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-ck">${svg('ok')}</span><span class="ce-nm">${pill(s, p)}<small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button><button class="ce-pk${p.none && !doc.schools[s] ? ' ce-no' : ''}" data-pick aria-label="Use this school's colours">${svg('pick')}</button></li>`; }).join('')}</ul>`;
+      <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), d = DIST.get(s);
+        return `<li class="ce-sr${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-nm"><span class="ce-nmr">${pill(s, p)}${changed(s) ? `<button class="ce-rv" data-rv aria-label="Back to saved colours">${svg('undo')}${pill(abbr(s), T.paint(s, base), 'ab xs')}</button>` : ''}</span><small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button></li>`; }).join('')}</ul>`;
   }
   function draw() {
     const n = changes(), focusQ = document.activeElement && document.activeElement.id === 'q', caret = focusQ ? document.activeElement.selectionStart : 0;
     const sv = ui.save === 'busy' ? 'spin' : ui.save === 'ok' ? 'ok' : ui.save === 'err' ? 'err' : 'save';
-    const y = window.scrollY, lsy = root.querySelector('.ce-ss') ? root.querySelector('.ce-ss').scrollLeft : 0;
+    const y = window.scrollY, sc = root.querySelector('.ce-cs'), csy = sc ? sc.scrollTop : 0;
     root.innerHTML = `<div class="ce-eb"><div class="ce-eh">
         <a class="ce-ib" href="./" aria-label="Back to Overtime">${svg('back')}</a><span class="ce-sp"></span>
-        <button class="ce-ib" data-min aria-label="${ui.min ? 'Show colours' : 'Hide colours'}">${svg(ui.min ? 'down' : 'up')}</button>
         <button class="ce-ib" data-undo aria-label="Undo"${undo.length ? '' : ' disabled'}>${svg('undo')}</button>
         <button class="ce-ib${token() ? ' ce-on' : ''}" data-tok aria-label="GitHub token">${svg('key')}${token() ? '' : '<span class="ce-dt"></span>'}</button>
         <button class="ce-ib${ui.save ? " ce-" + ui.save : ""}" data-save aria-label="Save"${n || ui.save ? '' : ' disabled'}>${svg(sv)}${n && ui.save !== 'busy' ? `<span class="ce-bd">${n}</span>` : ''}</button>
-      </div>${brush()}</div>
+      </div></div>
       ${ui.err ? `<div class="ce-msg" role="alert">${esc(ui.err)}</div>` : ''}<div class="ce-lw">${list()}</div>
+      ${ui.pick ? sheet(ui.pick) : ''}
       ${ui.note ? `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-nt"><div class="ce-nth">${pill(ui.note, T.paint(ui.note, doc))}</div><textarea id="nt" rows="4" spellcheck="true">${esc(notes[ui.note] ? notes[ui.note].note : '')}</textarea><div class="ce-ntb">${notes[ui.note] ? `<button class="ce-ib" data-ntdel aria-label="Delete note">${svg('trash')}</button>` : ''}<span class="ce-sp"></span><button class="ce-ib" data-ntok aria-label="Keep note">${svg('ok')}</button></div></div></div>` : ''}
       ${ui.tok ? `<div class="ce-tk" data-tkbg><div class="ce-tkc"><input id="tok" type="password" placeholder="github_pat_…" value="${esc(token())}" autocomplete="off" spellcheck="false"><button class="ce-ib" data-tkok aria-label="Keep token">${svg('ok')}</button>${token() ? `<button class="ce-ib" data-tkdel aria-label="Forget token">${svg('trash')}</button>` : ''}</div></div>` : ''}`;
-    window.scrollTo(0, y); const s2 = root.querySelector('.ce-ss'); if (s2) s2.scrollLeft = lsy;
+    window.scrollTo(0, y); const s2 = root.querySelector('.ce-cs'); if (s2) s2.scrollTop = csy;
     if (focusQ) { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(caret, caret); }
     if (ui.tok) document.getElementById('tok').focus();
     if (ui.note) { const t = document.getElementById('nt'); t.focus(); t.setSelectionRange(t.value.length, t.value.length); }
   }
 
   /* ---- actions ---- */
-  function paintSwatch(h) { if (!ui.sel) return; if (doc.sets[ui.sel][ui.part].toUpperCase() === h.toUpperCase()) return; edit(() => { doc.sets[ui.sel] = doc.sets[ui.sel].slice(); doc.sets[ui.sel][ui.part] = h; }); }
+  /* the set this school's colour edits go to: its own set, or a fresh copy when it shares one (or has none) */
+  const pkey = (s, d) => { const q = T.paint(s, d); return q.fill + q.acc + q.ink; };
+  const changed = (s) => pkey(s, doc) !== pkey(s, base);
+  /* put one school back to its saved colours (its saved set, restored or re-made if it was edited since) */
+  function revert(s) { edit(() => { const id = base.schools[s];
+    if (!id) { delete doc.schools[s]; return; }
+    const was = base.sets[id]; if (J(doc.sets[id]) === J(was)) { doc.schools[s] = id; return; }
+    const others = Object.keys(doc.schools).some((k) => k !== s && doc.schools[k] === id);
+    if (!doc.sets[id] || !others) { doc.sets[id] = was.slice(); doc.schools[s] = id; } else { const n = newId(); doc.sets[n] = was.slice(); doc.schools[s] = n; } }); }
+  function own(s) { const id = doc.schools[s]; if (id && uses(id) === 1) return id; const n = newId(); doc.sets[n] = colOf(s).slice(); doc.schools[s] = n; return n; }
+  function setPart(h) { const s = ui.pick; if (colOf(s)[ui.part].toUpperCase() === h.toUpperCase() && doc.schools[s]) return; edit(() => { const id = own(s); doc.sets[id] = doc.sets[id].slice(); doc.sets[id][ui.part] = h; }); }
   function addSwatch() { const h = document.getElementById('cxh').value; if (!hexOk(h)) return; const v = hexN(h);
-    edit(() => { if (!doc.swatches.includes(v)) doc.swatches.push(v); ui.add = false; if (ui.sel) { doc.sets[ui.sel] = doc.sets[ui.sel].slice(); doc.sets[ui.sel][ui.part] = v; } }); }
-  function tapSchool(s) {
-    ui.focus = s; if (!ui.sel) { draw(); return; }
-    edit(() => { if (doc.schools[s] === ui.sel) delete doc.schools[s]; else doc.schools[s] = ui.sel; });
-  }
-  function pickSchool(s) {
-    ui.focus = s; const id = doc.schools[s];
-    if (id) { ui.sel = id; ui.armDel = false; draw(); return; }
-    const p = T.auto(s); if (p.none) return;
-    edit(() => { const n = newId(); doc.sets[n] = [p.fill, p.acc, p.ink]; doc.schools[s] = n; ui.sel = n; });
-  }
+    if (!doc.swatches.includes(v)) edit(() => { doc.swatches.push(v); }); ui.add = false; setPart(v); draw(); }
   root.addEventListener('click', (e) => {
     const t = e.target.closest('button,[data-s],[data-tkbg]'); if (!t) return; const d = t.dataset;
     if (d.part != null) { ui.part = +d.part; draw(); }
-    else if (d.sw) { if (ui.del) edit(() => { doc.swatches = doc.swatches.filter((h) => h !== d.sw); }); else paintSwatch(d.sw); }
+    else if (d.sw) { if (ui.del) edit(() => { doc.swatches = doc.swatches.filter((h) => h !== d.sw); }); else setPart(d.sw); }
     else if (d.swadd != null) { ui.add = !ui.add; ui.del = false; draw(); }
     else if (d.swdel != null) { ui.del = !ui.del; draw(); }
     else if (d.cxok != null) addSwatch();
-    else if (d.set) { ui.sel = d.set; ui.armDel = false; if (ui.f === 'set') window.scrollTo(0, 0); draw(); }
-    else if (d.snew != null) edit(() => { const n = newId(); doc.sets[n] = ['#111111', '#8A8D8F', '#FFFFFF']; ui.sel = n; ui.part = 0; ui.armDel = false; ui.min = false; });
-    else if (d.scopy != null) edit(() => { const n = newId(); doc.sets[n] = doc.sets[ui.sel].slice(); ui.sel = n; ui.armDel = false; ui.min = false; });
-    else if (d.sdel != null) { if (!ui.armDel) { ui.armDel = true; draw(); return; }
-      edit(() => { const id = ui.sel; delete doc.sets[id]; Object.keys(doc.schools).forEach((k) => { if (doc.schools[k] === id) delete doc.schools[k]; }); ui.sel = Object.keys(doc.sets)[0] || null; ui.armDel = false; }); }
+    else if (d.set) { const k = ui.pick; if (doc.schools[k] !== d.set) edit(() => { doc.schools[k] = d.set; }); }
+    else if (d.auto != null) { const k = ui.pick; if (doc.schools[k]) edit(() => { delete doc.schools[k]; }); }
+    else if (d.csok != null) { ui.pick = ''; ui.add = false; ui.del = false; draw(); }
     else if (d.f) { ui.f = d.f; draw(); }
     else if (d.sort) { ui.sort = d.sort; draw(); }
     else if (d.note != null) { e.stopPropagation(); ui.note = t.closest('[data-s]').dataset.s; draw(); }
     else if (d.ntok != null) { const v = document.getElementById('nt').value.trim(), k = ui.note; ui.note = '';
       if (v) { if (!notes[k] || notes[k].note !== v) notes[k] = { note: v, at: new Date().toISOString().slice(0, 10) }; } else delete notes[k]; ui.save = ''; keep(); draw(); }
     else if (d.ntdel != null) { delete notes[ui.note]; ui.note = ''; ui.save = ''; keep(); draw(); }
-    else if (d.pick != null) { e.stopPropagation(); pickSchool(t.closest('[data-s]').dataset.s); }
-    else if (d.s) tapSchool(d.s);
-    else if (d.fix != null) { const c = doc.sets[ui.sel], ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
-      edit(() => { doc.sets[ui.sel] = [c[0], c[1], ink]; }); }
-    else if (d.min != null) { ui.min = !ui.min; draw(); }
+    else if (d.rvs != null) revert(ui.pick);
+    else if (d.rv != null) { e.stopPropagation(); revert(t.closest('[data-s]').dataset.s); }
+    else if (d.s) { ui.focus = d.s; ui.pick = d.s; draw(); }
+    else if (d.fix != null) { const c = colOf(ui.pick), ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
+      const keepPart = ui.part; ui.part = 2; setPart(ink); ui.part = keepPart; draw(); }
     else if (d.undo != null) { const u = undo.pop(); if (u) { const o = JSON.parse(u); doc = o.doc; ui.sel = o.sel; ui.save = ''; keep(); draw(); } }
     else if (d.save != null) { if (ui.save === 'err' && !changes()) { ui.save = ''; ui.err = ''; draw(); } else save(); }
     else if (d.tok != null) { ui.tok = true; draw(); }
     else if (d.tkok != null) { ls.set(K_TOKEN, document.getElementById('tok').value.trim() || null); ui.tok = false; ui.err = ''; draw(); refresh(); }
     else if (d.tkdel != null) { ls.set(K_TOKEN, null); ui.tok = false; draw(); }
-    else if (d.tkbg != null && e.target === t) { ui.tok = false; ui.note = ''; draw(); }
+    else if (d.tkbg != null && e.target === t) { ui.tok = false; ui.note = ''; ui.pick = ''; ui.add = false; ui.del = false; draw(); }
   });
   root.addEventListener('input', (e) => {
     if (e.target.id === 'q') { ui.q = e.target.value; const lw = root.querySelector('.ce-lw'); const pos = e.target.selectionStart; lw.innerHTML = list(); const q = document.getElementById('q'); q.focus(); q.setSelectionRange(pos, pos); }
