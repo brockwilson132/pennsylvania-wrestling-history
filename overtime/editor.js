@@ -42,7 +42,9 @@
   /* ---- state ---- */
   let base = norm(clone(window.OT_COLORS)), doc = clone(base);
   const draft = (() => { try { return JSON.parse(ls.get(K_DRAFT) || 'null'); } catch (e) { return null; } })();
-  if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc); }
+  if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc);
+    /* the published file moved on since the draft was kept (a merged PR, another device): keep the draft's own edits on top of it */
+    const shipped = norm(clone(window.OT_COLORS)); if (J(shipped) !== J(base)) { doc = norm(merge(shipped)); base = shipped; } }
   const nnorm = (o) => (o && typeof o === 'object' ? o : {});
   let nBase = nnorm(draft && draft.nBase), notes = nnorm(clone((draft && draft.notes) || nBase));
   const ui = { sort: 'az', note: '', pick: '', seq: [], recent: (() => { try { return JSON.parse(ls.get('ot-colors-recent') || '[]'); } catch (e) { return []; } })(), sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', cl: '', th: '', thOpen: false, focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
