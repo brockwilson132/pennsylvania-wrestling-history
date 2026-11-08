@@ -8,10 +8,13 @@
  *   top     the 200 biggest upsets at any level      finals  the 100 biggest in state finals
  *   states  the 100 biggest at states                killers the 100 wrestlers with the most upset wins
  *   all     every upset, biggest first (the Records list in Rankings scopes it to a district, region or school)
+ * overtime/upsets/<year>.json: the bolt on bracket bouts, { bkey: [[side, round, winner], ...] }. Same rule without the
+ *   1500 floor on the loser, so a district bracket shows its own upsets; every Records upset is also a bracket upset.
  * Row: [year, cls, level, unit, weight, side, round, winner, winnerSchool, loser, loserSchool, result, score, flags, preW, preL]
  */
 'use strict';
 const fs = require('fs'), path = require('path');
+const { bkeyOf } = require('./bkey');
 const OV = path.join(__dirname, '..', 'overtime'), DB = path.join(__dirname, '..', 'data', 'brackets'), DD = path.join(__dirname, '..', 'data', 'difficulty');
 global.window = {}; (0, eval)(fs.readFileSync(path.join(OV, 'badges.js'), 'utf8'));
 const SB = window.SchoolBadge, SAME = { Allentown: 'William Allen', Allen: 'William Allen' };
@@ -24,7 +27,7 @@ const MIN_LOSER = 1500, MAX_ODDS = 0.25, MIN_PRIOR = 3;
 
 const R = new Map();
 read(path.join(DD, 'bout_rtg.csv')).forEach((r) => { if (r.pre_w === '' || r.pre_l === '') return; R.set([r.level, r.tournament, r.weight, r.side, r.round, nkey(r.winner), nkey(r.loser)].join('|'), [+r.pre_w, +r.pre_l]); });
-const ups = [];
+const ups = [], BR = {};
 /* bouts in the order they were wrestled: season, then section < district < regional < state, then the round (a higher
    round number is earlier), championship side before consolations */
 const LV = { section: 0, district: 1, regional: 2, state: 3 }, SIDE = (s) => (s === 'champ' ? 0 : 1);
@@ -35,7 +38,9 @@ B.forEach((b) => {
   const kw = nkey(b.winner) + '|' + canon(b.winner_school), kl = nkey(b.loser) + '|' + canon(b.loser_school);
   const priorW = bump(kw); bump(kl); if (priorW < MIN_PRIOR) return;
   const pre = R.get([b.level, b.tournament, b.weight, b.side, b.round, nkey(b.winner), nkey(b.loser)].join('|')); if (!pre) return;
-  const [pw, pl] = pre; if (pl < MIN_LOSER) return; const p = odds(pw, pl); if (p >= MAX_ODDS) return;
+  const [pw, pl] = pre; const p = odds(pw, pl); if (p >= MAX_ODDS) return;
+  const Y = BR[b.year] || (BR[b.year] = {}), k = bkeyOf(b.level, b.tournament, b.weight); (Y[k] || (Y[k] = [])).push([b.side, +b.round, b.winner]);
+  if (pl < MIN_LOSER) return;
   ups.push({ p, row: [+b.year, b.cls, b.level, b.level === 'state' ? '' : b.unit, b.weight, b.side, +b.round, b.winner, canon(b.winner_school), b.loser, canon(b.loser_school), b.result, b.score, b.flags, pw, pl] });
 });
 ups.sort((a, b) => a.p - b.p);
@@ -47,5 +52,8 @@ ups.forEach((u) => { const [year, , , , , , , w, ws] = u.row; const k = nkey(w) 
 const killers = Array.from(K.values()).sort((a, b) => b.n - a.n || a.best - b.best).slice(0, 100).map((x) => [x.name, x.sch, x.n, Math.round(1000 * x.best) / 1000, x.y0, x.y1, x.big]);
 const out = { minLoser: MIN_LOSER, maxOdds: MAX_ODDS, minPrior: MIN_PRIOR, n: ups.length, top, states, finals, killers, all: rows(ups, ups.length) };
 fs.writeFileSync(path.join(OV, 'upsets.json'), JSON.stringify(out));
+fs.mkdirSync(path.join(OV, 'upsets'), { recursive: true }); let nb = 0, bb = 0;
+Object.entries(BR).forEach(([y, o]) => { const t = JSON.stringify(o); bb += t.length; nb += Object.values(o).reduce((a, v) => a + v.length, 0); fs.writeFileSync(path.join(OV, 'upsets', y + '.json'), t); });
+console.log('bracket upsets', nb, 'in', Object.keys(BR).length, 'season files', (bb / 1e6).toFixed(2), 'MB');
 console.log('upsets', ups.length, 'of', R.size, 'rated bouts; top odds', ups[0] && ups[0].p.toFixed(3), 'bytes', fs.statSync(path.join(OV, 'upsets.json')).size);
 console.log('giant killers', killers.slice(0, 5).map((k) => `${k[0]} (${k[1]}) ${k[2]}`).join('; '));
