@@ -5,7 +5,7 @@
 const fs = require('fs');
 global.window = {}; require('../site/badges.js');
 const SB = window.SchoolBadge;
-const SAME = { Allentown: 'William Allen', Allen: 'William Allen', 'Notre Dame-GP': 'Notre Dame-Green Pond', 'Fath Christian Academy': 'Faith Christian Academy', 'Canon McMillan': 'Canon-McMillan', 'West Lawn Wilson': 'Wilson (West Lawn)' };
+const SAME = { ...JSON.parse(fs.readFileSync('data/sources/school_aliases.json', 'utf8')), Allentown: 'William Allen', Allen: 'William Allen', 'Notre Dame-GP': 'Notre Dame-Green Pond', 'Fath Christian Academy': 'Faith Christian Academy', 'Canon McMillan': 'Canon-McMillan', 'West Lawn Wilson': 'Wilson (West Lawn)' };
 const canon = (s) => { s = SAME[s] || s; const id = SB.identity(s); const n = id ? id.school : s; return SAME[n] || n; };
 const t = fs.readFileSync('data/sources/piaa_duals.csv', 'utf8').split(/\r?\n/).filter(Boolean); const H = t[0].split(',');
 const rows = t.slice(1).map((line) => { const out = []; let cur = '', q = false; for (const ch of line) { if (ch === '"') q = !q; else if (ch === ',' && !q) { out.push(cur); cur = ''; } else cur += ch; } out.push(cur); const o = {}; H.forEach((h, i) => { o[h] = out[i] || ''; }); return o; });
