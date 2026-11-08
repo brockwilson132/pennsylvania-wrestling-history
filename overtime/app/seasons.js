@@ -81,8 +81,8 @@
   /* ---- Compare: two school seasons wrestle one dual, weight by weight (#dual/<slug>/<year>~<slug>/<year>) ----
      The same model as the ranking (tools/build_units.js, seasons.json `sim`): each bout at the two wrestlers' season
      ratings (the gap shrunk for ratings resting on few bouts), Expected = the chance of each result, Cutoffs = the
-     higher-rated wrestler wins and the gap says how. Weights meet lightest to lightest, heaviest to heaviest (eras had
-     different weights); a weight with nobody entered is a district entrant who didn't place, and a weight we can't see is
+     higher-rated wrestler wins and the gap says how. Each weight meets the nearest weight of the other season, nobody
+     twice, and a weight with no close partner sits out (eras had different weights); a weight with nobody entered is a district entrant who didn't place, and a weight we can't see is
      the era's fill, both marked ≈.
      Where the two wrestlers met in a bracket THAT season, the real result replaces the model: the last meeting of the
      season (the postseason only moves up, so it is also the biggest stage), decided on the mat (dec, major, tech fall,
@@ -113,8 +113,14 @@
     const fill = sim.fill[era + '|' + bin] || empty;
     return L.map((e) => ({ e, mix: e[1] ? [[e[2], 1, e[7]]] : fill, gap: !e[1], fill: !e[1] }));
   }
-  /* weights meet by position, lightest to lightest and heaviest to heaviest */
-  const pairs = (n, m) => { const N = Math.max(n, m), out = []; for (let k = 0; k < N; k++) out.push([N === 1 ? 0 : Math.round(k * (n - 1) / (N - 1)), N === 1 ? 0 : Math.round(k * (m - 1) / (N - 1))]); return out; };
+  /* each weight meets the nearest weight of the other season, nobody twice (tools/build_units.js pairs): weight order kept,
+     fewest total pounds apart, leaving a weight out costs sim.sit pounds; returns the matched [i, j] in weight order */
+  const wLb = (w) => (w >= 999 ? 280 : w);
+  const pairs = (A, B) => { const G = SD.sim.sit || 8, n = A.length, m = B.length, d = (i, j) => Math.abs(wLb(A[i]) - wLb(B[j]));
+    const f = Array.from({ length: n + 1 }, (_, i) => Array.from({ length: m + 1 }, (_, j) => (i + j) * G));
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) f[i][j] = Math.min(f[i - 1][j - 1] + d(i - 1, j - 1), f[i - 1][j] + G, f[i][j - 1] + G);
+    const out = []; let i = n, j = m; while (i > 0 && j > 0) { if (f[i][j] === f[i - 1][j - 1] + d(i - 1, j - 1)) { out.push([i - 1, j - 1]); i--; j--; } else if (f[i][j] === f[i - 1][j] + G) i--; else j--; }
+    return out.reverse(); };
   /* the last meeting that season between two wrestlers, decided on the mat: { pts, aWon, key } or null */
   function realBout(year, na, nb) {
     const Y = OT.sosYear(year); if (!Y || !na || !nb) return null; const ka = OT.nkey(na), kb = OT.nkey(nb); let best = null;
@@ -128,15 +134,19 @@
   function dualOf(ra, La, rb, Lb) {
     const A = slotsOf(ra, La), B = slotsOf(rb, Lb), same = ra[C.y] === rb[C.y];
     let m = 0, v = 0, ta = 0, tb = 0, ha = 0, hb = 0;
-    const bouts = pairs(A.length, B.length).map(([i, j]) => { const a = A[i], b = B[j];
+    const P = pairs(A.map((x) => x.e[0]), B.map((x) => x.e[0]));
+    const bouts = P.map(([i, j]) => { const a = A[i], b = B[j];
       const real = same && !a.gap && !b.gap ? realBout(ra[C.y], a.e[1], b.e[1]) : null;
       let ea = 0, eb = 0, s2 = 0, h = 0, pa = 0;
       if (real) { ea = real.aWon ? real.pts : 0; eb = real.aWon ? 0 : real.pts; s2 = real.pts * real.pts; h = real.aWon ? real.pts : -real.pts; pa = real.aWon ? 1 : 0; }
       else a.mix.forEach(([x, wa, na]) => b.mix.forEach(([y, wb, nb]) => { const o = bout1(x, y, na, nb), k = wa * wb; ea += k * o[0]; eb += k * o[1]; s2 += k * o[2]; h += k * o[3]; pa += k * o[4]; }));
       const mm = ea - eb; m += mm; v += real ? 0 : s2 - mm * mm; ta += Math.max(0, mm); tb += Math.max(0, -mm); ha += Math.max(0, h); hb += Math.max(0, -h);
-      return { wa: a.e[0], wb: b.e[0], a, b, real, ea, eb, h, pa, est: !real && (a.gap || b.gap) }; });
+      return { i, j, wa: a.e[0], wb: b.e[0], a, b, real, ea, eb, h, pa, est: !real && (a.gap || b.gap) }; });
+    /* the weights that sit out, in weight order between the bouts */
+    const rows = []; let ia = 0, jb = 0;
+    bouts.concat([{ i: A.length, j: B.length, end: 1 }]).forEach((o) => { while (ia < o.i) rows.push({ sit: 'a', a: A[ia], wa: A[ia++].e[0] }); while (jb < o.j) rows.push({ sit: 'b', b: B[jb], wb: B[jb++].e[0] }); if (!o.end) { rows.push(o); ia++; jb++; } });
     const t2 = Math.pow(SD.sim.tau || 0, 2);
-    return { bouts, ta, tb, ha, hb, p: v + t2 > 1e-9 ? Phi(m / Math.sqrt(v + t2)) : m > 0 ? 1 : m < 0 ? 0 : 0.5 };
+    return { bouts, rows, ta, tb, ha, hb, p: v + t2 > 1e-9 ? Phi(m / Math.sqrt(v + t2)) : m > 0 ? 1 : m < 0 ? 0 : 0.5 };
   }
   const keyOf = (r) => slug(S[r[C.sch]]) + '/' + r[C.y] + (r[C.cls] ? 'b' : '');
   const parseSide = (t) => { const m = /^(.+)\/(\d{4}b?)$/.exec(t || ''); return m ? { sl: m[1], yk: m[2] } : null; };
@@ -170,7 +180,8 @@
       if (!e[1]) return `<span class="dqw dqx"><b>—</b></span>`;
       const g = e[6] >= 0 ? `<em class="dqg">${OT.GRADE_L[e[6]]}</em>` : '';
       return `<span class="dqw"><b>${esc(e[1])}</b><span class="dqr">${OT.rtgBars(e[2])}<i>${e[2]}</i>${g}</span></span>`; };
-    const rows = D.bouts.map((o) => {
+    const rows = D.rows.map((o) => {
+      if (o.sit) return `<div class="dqr0 dqso">${o.sit === 'a' ? side(o.a) : '<span></span>'}<span></span><span class="dqwt">${wLab(o.sit === 'a' ? o.wa : o.wb)}</span><span></span>${o.sit === 'b' ? side(o.b) : '<span></span>'}</div>`;
       const aw = o.real ? o.real.aWon : cut ? o.h > 0 : o.ea > o.eb, bw = o.real ? !o.real.aWon : cut ? o.h < 0 : o.ea < o.eb;
       const num = o.real ? String(o.real.pts) : cut ? f1(Math.abs(o.h)) : f1(Math.abs(o.ea - o.eb)), wp = Math.min(99, Math.round(100 * Math.max(o.pa, 1 - o.pa))) + '%';
       const forfeit = !o.real && SD.sim.forfeit && (o.a.gap && !o.a.fill || o.b.gap && !o.b.fill);
