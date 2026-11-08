@@ -1,0 +1,233 @@
+[
+ {
+  "school": "Shamokin",
+  "identified_as": "Shamokin Area High School, Coal Township",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#581768",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "Shamokin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shamokin_Area_High_School",
+   "https://en.wikipedia.org/wiki/Shamokin_Area_School_District",
+   "search:https://www.shamokin.k12.pa.us",
+   "search:https://www.indians.k12.pa.us/Page/144",
+   "https://indians.k12.pa.us/",
+   "https://files.smartsites.parentsquare.com/9249/header_logo_img_46joumg49d3t4ekjiao.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree; district logo confirms purple. Black/grey in logo is outline/shading.",
+  "evidence": "District site indians.k12.pa.us header logo (Indian head in headdress): purple #581768 feathers/S on white, black outline; site theme purple #512D6E (plus stock Bootstrap colours)."
+ },
+ {
+  "school": "Bald Eagle Nittany",
+  "identified_as": "Bald Eagle-Nittany High School, Mill Hall (Keystone Central SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Bald Eagle-Nittany High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bald_Eagle-Nittany_High_School",
+   "https://en.wikipedia.org/w/index.php?title=Bald_Eagle-Nittany_High_School&action=raw"
+  ],
+  "era": "Closed 1999/2000; merged with Lock Haven HS into Central Mountain HS (royal blue/white).",
+  "notes": "Wikipedia only.",
+  "evidence": "Retry: Wikipedia raw infobox 'colours = Black and White', mascot Panther (confirmed). No yearbook on e-yearbook.com found; web and Bing image searches returned nothing from the school's era. No image looked at, so no hex. Did not use Central Mountain's colours."
+ },
+ {
+  "school": "Lower Paxton",
+  "identified_as": "Lower Paxton Township High School (Dauphin County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rangers",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/yearbooks/Lower_Paxton_High_School_Ranger_Yearbook/1955/Page_14.html",
+   "https://www.e-yearbook.com/yearbooks/Lower_Paxton_High_School_Ranger_Yearbook/1955/Page_16.html",
+   "search:https://www.e-yearbook.com/yearbooks/Lower_Paxton_High_School_Ranger_Yearbook/1946/Page_11.html",
+   "search:https://www.e-yearbook.com/yearbooks/Lower_Paxton_High_School_Ranger_Yearbook/1951/Page_11.html"
+  ],
+  "era": "Replaced by Central Dauphin HS (green and white, Rams) when it opened in 1955.",
+  "notes": "Colours from alma mater text only (printed in 1946, 1951 and 1955 Ranger yearbooks); no hex. Mascot from yearbook title and 'Lower Paxton Rangers' newspaper mentions. Not Lower Dauphin (also blue/white, different school).",
+  "evidence": "1955 Ranger yearbook OCR: alma mater \"We hail thee, Alma Mater, Our gallant white and blue\"; same book notes the new school band would wear green and white (Central Dauphin). No colour image could be viewed (e-yearbook images blocked). Retry: search snippets show the same white-and-blue alma mater on 1946 and 1951 yearbook pages; no colour image reachable."
+ },
+ {
+  "school": "Donora",
+  "identified_as": "Donora High School, Donora",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://messengerpaper.com/index.php/news-2/localnews/12473-d-tee",
+   "search:https://www.observer-reporter.com/living/2018/oct/17/event-to-spotlight-donora-dragons-football-prowess/",
+   "https://www.e-yearbook.com/Donora_High_School_Dragon_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Donora_High_School_Dragon_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Donora_High_School_Dragon_Yearbook/1954/Page_1.html",
+   "https://messengerpaper.com/index.php/news-2/sports/13335-donora-football-dragons-1904-to-1968-part-one",
+   "search:https://www.monvalleyindependent.com/2023/10/05/its-etched-in-stone-remembering-the-dynamic-donora-dragons-of-1945/",
+   "search:https://messengerpaper.com/index.php/news-2/localnews/14652-december-2019-news-from-the-donora-historical-society-and-smog-museum",
+   "search:https://messengerpaper.com/index.php/news-2/localnews/12922-may-2018-news-from-the-donora-historical-society-and-smog-museum",
+   "search:https://www.e-yearbook.com/yearbooks/Donora_High_School_Dragon_Yearbook/1951/Page_24.html"
+  ],
+  "era": "Merged into Ringgold SD (blue and gold) c. 1969.",
+  "notes": "Two independent text sources agree; hex not given (no clean image).",
+  "evidence": "Donora Dragon yearbooks OCR: 1953 track report \"to balance the Orange and Black offensive punch\"; 1954 \"orange and black band uniform\". Messenger article: team historically known as \"the Orange and Black\". No clean colour image found. Retry: Donora Historical Society notes (search snippets) describe surviving orange football pants with black and white stripes and Dragon shirts in black with orange ink. No logo image found, so still no hex."
+ },
+ {
+  "school": "East Pike Run",
+  "identified_as": "East Pike Run Township High School (Washington County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/w/index.php?title=California_Area_School_District&action=raw"
+  ],
+  "era": "East Pike Run Township SD joined California Community SD in 1948 to form California Area SD (successor); colours of East Pike Run itself not found.",
+  "notes": "No colours found.",
+  "evidence": "Retry: California Area SD Wikipedia confirms the 1948 jointure with East Pike Run Township SD (identity plausible). Two more web searches found no yearbook, team name or colours; no image to look at."
+ },
+ {
+  "school": "Lemoyne",
+  "identified_as": "Lemoyne High School, Lemoyne (Cumberland County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Lemoyne_High_School_Pioneer_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Lemoyne_High_School_Pioneer_Yearbook/1942/Page_14.html",
+   "search:https://en.wikipedia.org/wiki/West_Shore_School_District",
+   "https://www.e-yearbook.com/yearbooks/Lemoyne_High_School_Pioneer_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lemoyne_High_School_Pioneer_Yearbook/1952/Page_1.html",
+   "https://en.wikipedia.org/w/index.php?title=Cedar_Cliff_High_School&action=raw",
+   "https://en.wikipedia.org/w/index.php?title=West_Shore_School_District&action=raw"
+  ],
+  "era": "Lemoyne yearbooks end 1952; then West Shore HS (Trojans, navy blue and silver per Cedar Cliff Wikipedia), merged 1959 with New Cumberland into Cedar Cliff (navy, gold, silver).",
+  "notes": "Blue and gold from one OCR line in Lemoyne's own yearbook football report; opponent New Cumberland was also blue/gold, so a small chance of mix-up. Not West Shore's later navy/silver.",
+  "evidence": "Retry: 1951 Lemoyne Pioneer yearbook OCR football report, last game vs New Cumberland: \"the boys in blue and gold fought a hard but losing battle\" (yearbook describing its own team, which lost). Class colours (blue and silver 1951, green and silver 1952) are class-only. No colour image viewable."
+ },
+ {
+  "school": "Derry Township",
+  "identified_as": "Derry Township High School, Yeagertown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Devils",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Derry_Township_High_School_L_Histoire_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Derry_Township_High_School_L_Histoire_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Derry_Township_High_School_L_Histoire_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/Derry_Township_High_School_L_Histoire_Yearbook",
+   "search:https://www.e-yearbook.com/yearbooks/Derry_Township_High_School_L_Histoire_Yearbook/1951/Page_24.html"
+  ],
+  "era": null,
+  "notes": "Identity now confirmed as Mifflin County (Yeagertown). Crimson inferred from mascot, cheer and paper name.",
+  "evidence": "Derry Township HS L'Histoire yearbooks (Lewistown/Yeagertown ads confirm Mifflin County) OCR: teams called \"the Red Devils\"; cheer \"We are loyal to you, Crimson Tide. Three cheers for Yeagertown\"; school paper \"Crimson Star\". Second colour not found. Retry: re-grepped 1950 and 1952 yearbook OCR pages for crimson/red/white/school colours: only class colours (royal blue and gray; green and white) and the 'Crimson Star' paper; one web search found nothing. No image viewable."
+ },
+ {
+  "school": "Claysville",
+  "identified_as": "Claysville High School, Claysville (Washington County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Claysville_High_School_Panther_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Claysville_High_School_Panther_Yearbook/1947/Page_1.html"
+  ],
+  "era": "Later part of McGuffey SD (navy and gold).",
+  "notes": "Single uniform mention; not a direct statement of school colours.",
+  "evidence": "Claysville Panther yearbook 1947 OCR (only year online): cheerleaders \"New black and white uniforms\". Retry: re-grepped all 1947 yearbook OCR pages for colour words/alma mater: nothing more (track team 'New uniforms', no colours). One web search returned only McGuffey (navy and gold, Highlanders, later). No image viewable."
+ },
+ {
+  "school": "Center Township",
+  "identified_as": "Center Township High School (probably Beaver County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.bcshof.org/halloffamers/alberts2012.htm",
+   "search:https://en.wikipedia.org/wiki/Center_Area_School_District",
+   "search:https://www.eliteprospects.com/team/21506/center-area-high/2006-2007",
+   "https://en.wikipedia.org/w/index.php?title=Center_Area_School_District&action=raw",
+   "search:https://en.wikipedia.org/wiki/Central_Valley_High_School_(Pennsylvania)"
+  ],
+  "era": "If Beaver County: Center (Area) HS, Trojans, merged with Monaca 2009/10 into Central Valley HS (Warriors, Carolina and navy blue). Colours of the old Center Township HS not found.",
+  "notes": "Identity still unconfirmed (several Center Townships in District 7). No colours found.",
+  "evidence": "No yearbook online. Search: Beaver County Center HS were the Trojans (nickname from coach Sarge Alberts); a modern hockey listing gives navy and Carolina blue for Center Area, not usable for the 1950s. Retry: Center Area SD Wikipedia infobox gives mascot Trojans, colours blank. Search found only the 2006-07 hockey listing (navy and Carolina blue) and Central Valley (same colours), both too late to apply. Identity still not confirmed; no image looked at."
+ }
+]

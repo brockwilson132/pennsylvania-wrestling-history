@@ -1,0 +1,258 @@
+[
+ {
+  "school": "Big Spring",
+  "identified_as": "Big Spring High School, Newville",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#980000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC21B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Big Spring School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Big_Spring_School_District",
+   "search:https://www.maxpreps.com/pa/newville/big-spring-bulldogs/",
+   "https://www.bigspringsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1698432052/bigspringsdorg/muk6n7sj2dpnbvhkpopy/district-logo.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1721317310/bigspringsdorg/z9y947zpvfshewbsiemy/BSHS-GymWall-July2024.jpg",
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Big_Spring_School_District.html",
+   "search:https://www.bigspringsd.org/cms/lib/PA02207410/Centricity/domain/69/minutes/10-01-2012 Board Final.pdf",
+   "https://sites.google.com/bigspringsd.org/bigspringathletics",
+   "search:https://www.maxpreps.com/pa/newville/big-spring-bulldogs"
+  ],
+  "era": null,
+  "notes": "District infobox lists no colours; MaxPreps colour field was cut off in search snippets. Do not confuse with Big Spring HS, Texas (black/gold Steers).",
+  "evidence": "Big Spring Athletics site (sites.google.com/bigspringsd.org/bigspringathletics): header bulldog logo is gold #FFC21B with black outline and a red collar; site heading text in maroon #980000 with gold #F1C232 accent. Earlier: BSHS gym wall 'Bulldog Country' mural gold with dark maroon; Wikipedia mirror and board minutes say maroon and gold."
+ },
+ {
+  "school": "West View",
+  "identified_as": "West View High School, West View (Allegheny County)",
+  "colors": [
+   {
+    "name": "Rose",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "North Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Hills_High_School",
+   "https://www.e-yearbook.com/yearbooks/West_View_High_School_Westvian_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/West_View_High_School_Westvian_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/West_View_High_School_Westvian_Yearbook/1955/Page_1.html",
+   "search:https://www.wvboro.com/node/1996"
+  ],
+  "era": "West View HS (brackets 1939-1958) was absorbed into North Hills High School; Wikipedia's 'West View High School' redirects there.",
+  "notes": "Own colours from the 1949 Westvian yearbook (West View HS, 1938-1958). Mascot not found. Successor North Hills (red and white, Indians) not applied.",
+  "evidence": "1949 Westvian yearbook OCR text (e-yearbook.com): senior write-ups say a student from 'enemy territory, Bellevue ... remained forever true to the rose and gold' and another drove with 'rose and gold streamers flapping from the aerial'. Text only, no image with a clean colour, so no hex."
+ },
+ {
+  "school": "Saltsburg",
+  "identified_as": "Saltsburg Middle-High School, Saltsburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EF0102",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Saltsburg Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saltsburg_Middle-High_School",
+   "https://www.rvschools.org",
+   "https://files.smartsites.parentsquare.com/9690/header_logo_img_0365oias674lajpolgb.png",
+   "https://www.maxpreps.com/pa/saltsburg/saltsburg-trojans/",
+   "https://image.maxpreps.io/school-mascot/2/b/f/2bf3e439-120a-465e-a180-d40fce0e06c2.gif",
+   "https://www.e-yearbook.com/yearbooks/Saltsburg_High_School_La_Saltianna_Yearbook/1959/Page_1.html",
+   "search:https://www.casdonline.org/fs/pages/12907"
+  ],
+  "era": "Saltsburg schools are now part of River Valley School District (formed from Blairsville-Saltsburg SD); colours here are Saltsburg's own.",
+  "notes": null,
+  "evidence": "MaxPreps Saltsburg Trojans mascot image: red #EF0102 Trojan helmet head drawn on white (no other colours); MaxPreps colour fields CC0022 / FFFFFF. 1959 La Saltianna yearbook alma mater: 'Hail, Alma Mater -- Red and White ... With Trojan brave'. Wikipedia: Red and White, Trojans."
+ },
+ {
+  "school": "Penn Highlands",
+  "identified_as": "Penn Highlands High School, Mifflin County (Lewistown area)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "low",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "search:https://issuu.com/lewistownsentinel/docs/i_remember_when-2023/s/26965001"
+  ],
+  "era": "Penn Highlands was the merged Mifflin County high school (early 1970s); a Lewistown Sentinel retrospective says that at the end of the 1973 school year 'the Cougars were put to rest' and the county split its high schools (Lewistown Area, Chief Logan, etc.).",
+  "notes": "Lewistown Area HS article says Lewistown inherited the 'blue and white' uniforms of the defunct Penn Highlands school; only source, so low.",
+  "evidence": "No image found. Mascot Cougars from a Lewistown Sentinel 'I Remember When' 2023 snippet (page itself unreachable from this sandbox). Blue and white still only inferred from the Lewistown Area HS Wikipedia line that Lewistown inherited Penn Highlands' blue and white uniforms; no yearbook online."
+ },
+ {
+  "school": "Coal Township",
+  "identified_as": "Coal Township High School, Coal Township (Northumberland County)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Shamokin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shamokin_Area_High_School",
+   "https://www.e-yearbook.com/Coal_Township_High_School_Le_Souvenir_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Coal_Township_High_School_Le_Souvenir_Yearbook/1947/Page_1.html",
+   "search:https://www.lykensvalley.org/?p=35817"
+  ],
+  "era": "Merged into Shamokin Area High School (now located in Coal Township); successor is also purple and white (Indians). Colours here are Coal Township HS's own, from its 1947 yearbook.",
+  "notes": "Own colours from the 1947 Le Souvenir alma mater. Mascot not found. Not to be confused with Our Lady of Lourdes Regional (Coal Township).",
+  "evidence": "1947 Le Souvenir yearbook OCR text (e-yearbook.com), 'CTHS ALMA MATER': 'Hail to the [p]urple, Hail to the white, Hail Alma Mater'. Lykens Valley history post 'Coal Township High School - Alma Mater, 1947' seen in search results (site blocked here). Text only, no hex."
+ },
+ {
+  "school": "Lewistown-Granville",
+  "identified_as": "Lewistown-Granville High School, Lewistown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver (steel grey)",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://www.e-yearbook.com/Lewistown_High_School_Lore_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Lewistown_High_School_Lore_Yearbook/1940/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lewistown_High_School_Lore_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lewistown_High_School_Lore_Yearbook/1957/Page_1.html"
+  ],
+  "era": "Lewistown-Granville merged into Penn Highlands in 1971; when Lewistown re-formed (~1976) it switched to blue and white.",
+  "notes": "Lewistown Area HS Wikipedia: 'original colors were maroon and silver'. Lewistown High's school newspaper through the 1940s-50s was titled 'Maroon and Steel'. Panthers nickname still unconfirmed (may be the later school's).",
+  "evidence": "Lewistown High 'Lore' yearbook OCR text 1940-1957 (e-yearbook.com): senior activity lists repeatedly name the school paper 'Maroon and Steel'; Granville students attended (1950s). Agrees with Wikipedia's maroon and silver. Text only, no image, so no hex."
+ },
+ {
+  "school": "John Harris",
+  "identified_as": "John Harris High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver (gray)",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "medium",
+  "wikipedia": "Harrisburg High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harrisburg_High_School_%28Pennsylvania%29",
+   "https://www.e-yearbook.com/Harris_High_School_Pioneer_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Harris_High_School_Pioneer_Yearbook/1929/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Harris_High_School_Pioneer_Yearbook/1931/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Harris_High_School_Pioneer_Yearbook/1932/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Harris_High_School_Pioneer_Yearbook/1939/Page_1.html",
+   "https://afrolumens.com/century%20of%20change/hhsfootball.html",
+   "search:https://pafootballnews.com/district3/great-pa-teams-harrisburg-john-harris-1931-hbgcougar_fball/"
+  ],
+  "era": "Opened 1926; merged with William Penn HS in 1971 to form Harrisburg High School (black and gray, Cougars).",
+  "notes": "Own colours from the school's 'Pioneer' yearbooks (listed on e-yearbook.com as 'Harris High School'). William Penn (rival) was the Orange and Black Tigers; successor Harrisburg HS (black and gray, Cougars) not applied. Class colours in the books (maroon/gray 1929, turquoise/silver 1935, blue and gold 1928) are per-class, not school colours.",
+  "evidence": "John Harris 'Pioneer' yearbook OCR text: football 'under the banner of the Crimson and Silver' (1931), 'a Crimson and Silver man recovered' (1932), 'laughed and played ... under the Crimson and Silver' (1929); 1937-39 books call the team 'the Crimson eleven' and say the team got 'new uniforms of crimson and gray' (1939). Afrolumens confirms 'John Harris Pioneers' vs 'William Penn Tigers'. Text only, no hex."
+ },
+ {
+  "school": "Immaculate Conception",
+  "identified_as": "Immaculate Conception High School, Washington, PA",
+  "colors": [],
+  "mascot": "Comets",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://cs.observer-reporter.com/columns/2019/dec/29/the-ic-boys-basketball-team-finally-realized-a-goal/",
+   "search:https://wash-greenesportshall.org/directory/donald-p-hazlett/",
+   "search:https://wash-greenesportshall.org/directory/angelo-morascyzk/",
+   "search:https://cs.observer-reporter.com/?p=319328",
+   "search:https://wash-greenesportshall.org/?p=2349"
+  ],
+  "era": "Catholic high school in Washington, PA (wrestling program started 1964 under Donald Hazlett; produced a WPIAL/PIAA champion under Angelo Morascyzk); girls' teams 'Comettes' won 1986 WPIAL Class A title; later closed.",
+  "notes": "Identity now well supported (Washington-Greene sports hall of fame bios name I.C. wrestling; Observer-Reporter calls the team the Comets). Colours still not found.",
+  "evidence": "Search snippets only: Observer-Reporter 1979 column calls IC the Comets; hall of fame bios describe IC wrestling (Hazlett, Morascyzk). Pages themselves returned nothing from this sandbox; no yearbook on e-yearbook.com; no image or colour statement found."
+ },
+ {
+  "school": "Calvary Christian",
+  "identified_as": "Calvary Christian Academy, Philadelphia (13500 Philmont Ave, Northeast Philadelphia)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#003357",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://northeasttimes.com/2012/03/22/grappling-with-the-success-of-his-wrestling-career/",
+   "search:https://www.pa-wrestling.com/hs/news_story.htm?id=4347",
+   "https://www.maxpreps.com/pa/philadelphia/calvary-christian-academy-cougars/",
+   "https://image.maxpreps.io/school-mascot/7/f/6/7f6332ba-d7e4-494f-b775-e3c5605ef2e6.gif",
+   "https://cca.ccphilly.org",
+   "search:https://cca.ccphilly.org/wp-content/uploads/24-25-CCA-Athletic-Handbook.pdf"
+  ],
+  "era": null,
+  "notes": "Corrected identity: the only appearance is Richie Cerebe (2014, AA 152, 6th in state), who wrestled in the District 1/12 (Southeast) bracket. Calvary Christian Academy (Philadelphia, a ministry of Calvary Chapel of Philadelphia) had no team; he wrestled in a co-op with Phil-Mont Christian Academy (Northeast Times, Bucks County Courier Times). Not an Erie/District 10 school.",
+  "evidence": "MaxPreps Calvary Christian Academy Cougars (Philadelphia) mascot image: navy #003357 cougar head with periwinkle/grey shading inside a dark 'C', on white; MaxPreps colour fields 022C66 / FFFFFF. School site cca.ccphilly.org returned a Cloudflare block, so not cross-checked."
+ }
+]

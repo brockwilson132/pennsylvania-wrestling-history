@@ -1,0 +1,225 @@
+[
+ {
+  "school": "Meadowbrook Christian",
+  "identified_as": "Meadowbrook Christian School, Milton (Northumberland County) - founded 1982 by Christ Wesleyan Church",
+  "colors": [
+   {
+    "name": "Dark green",
+    "hex": "#134523",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.meadowbrookchristian.com/",
+   "search:https://privateschoolreview.com/meadowbrook-christian-school-profile",
+   "search:https://www.maxpreps.com/pa/milton/meadowbrook-christian/events",
+   "https://www.mcslions.org/",
+   "https://www.mcslions.org/wp-content/uploads/2021/07/cropped-cropped-MCS-Logo-Horizontal-WEB-3-1.png",
+   "https://www.mcslions.org/wp-content/uploads/2020/08/cropped-mcs_favicon-192x192.png",
+   "search:https://brandfetch.com/mcslions.org"
+  ],
+  "era": null,
+  "notes": "Official site is mcslions.org (old meadowbrookchristian.com is a placeholder); domain gives Lions nickname. No written colour statement found.",
+  "evidence": "School logo (mcslions.org header): dark green #134523 block 'M' outlined in black with white inner line, black wordmark; favicon M green #004518; site CSS top brand colour #003A12 green. Green certain; black is logo outline/wordmark only, so medium."
+ },
+ {
+  "school": "Churchill",
+  "identified_as": "Churchill Area High School, Pittsburgh (closed 1987)",
+  "colors": [],
+  "mascot": "Chargers",
+  "confidence": "low",
+  "wikipedia": "Churchill Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Churchill_Area_High_School",
+   "search:https://en.wikipedia.org/wiki/Churchill_Area_High_School",
+   "search:https://historicpittsburgh.org/islandora/object/pitt:MSP285.B004.F10.I05"
+  ],
+  "era": "Merged 1987 into Woodland Hills High School.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Wikipedia infobox colours field is empty; nickname Chargers from article text.",
+  "evidence": "Retry: WebSearch (3 queries), archive.org search and e-yearbook lookup found no Churchill Area HS colours or yearbook; only other states' Churchill schools. Nothing looked at with colour; successor Woodland Hills colours deliberately not used."
+ },
+ {
+  "school": "Jenner-Boswell",
+  "identified_as": "Jenner-Boswell Joint High School (later Jenner-Boswell-Jennerstown), Boswell (Somerset County)",
+  "colors": [],
+  "mascot": "Bears",
+  "confidence": "low",
+  "wikipedia": "North Star High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_High_School",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1957/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1959/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1960/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1956/Page_1.html"
+  ],
+  "era": "Merged 1969 with Forbes SD into North Star (green and white, Cougars); those are the successor's colours.",
+  "notes": "Rex Collium yearbooks (1953-1960, e-yearbook OCR) call the teams the 'J.B.J. Bears' / 'Jenner-Boswell-Jennerstown Bears' (football, basketball, wrestling). No school colours stated; only class colours (1957 blue and black, 1959/1960 red and white), which are not used.",
+  "evidence": "Read OCR text of 6 Rex Collium yearbooks: mascot Bears confirmed, no school colours, alma mater lyric without colours. No colour image looked at. North Star colours deliberately not used."
+ },
+ {
+  "school": "New Cumberland",
+  "identified_as": "New Cumberland High School, New Cumberland, Cumberland Co.",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Cedar Cliff High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Shore_School_District",
+   "https://en.wikipedia.org/wiki/Cedar_Cliff_High_School",
+   "https://en.wikipedia.org/w/index.php?title=Cedar_Cliff_High_School&action=raw",
+   "https://www.e-yearbook.com/New_Cumberland_High_School_Shawnee_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/New_Cumberland_High_School_Shawnee_Yearbook/1951/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Cumberland_High_School_Shawnee_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Cumberland_High_School_Shawnee_Yearbook/1954/Page_1.html"
+  ],
+  "era": "Merged 1959 with West Shore HS into Cedar Cliff (navy, gold and silver, Colts); New Cumberland's navy and gold carried into Cedar Cliff's colours.",
+  "notes": "Cedar Cliff Wikipedia History section: 'West Shore's colors, navy blue and silver, would merge with New Cumberland's navy blue and gold'. Shawnee yearbooks (1951, 1953) call the teams the Tigers. 1954 yearbook says new caps and gowns 'represent the school colors, white for the girls, and blue for the boys' (blue confirmed; white only as gown colour).",
+  "evidence": "No colour image looked at; names from Wikipedia history text, blue corroborated by 1954 Shawnee yearbook OCR. No hex."
+ },
+ {
+  "school": "Northumberland",
+  "identified_as": "Northumberland High School, Northumberland, Northumberland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School",
+   "https://en.wikipedia.org/w/index.php?title=Shikellamy_High_School&action=raw",
+   "https://www.e-yearbook.com/yearbooks/Sunbury_High_School_La_Vie_Yearbook/1955/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Sunbury_High_School_La_Vie_Yearbook/1965/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Shikellamy_High_School_Profile_Yearbook/1985/Page_9.html",
+   "search:https://digital-release.2822news.com/?p=104243"
+  ],
+  "era": "Merged with Sunbury HS in 1965 to form Shikellamy (Braves; maroon, white, blue)",
+  "notes": "No source for Northumberland HS colours or nickname found. 'Pineknotters Day' (started 1972 by Northumberland HS graduates) suggests 'Pineknotters' as the town/school nickname, unconfirmed as a team name; Sunbury yearbooks call the team 'Norry'.",
+  "evidence": "Retry: 2 WebSearches, Sunbury La Vie 1955/1965 and Shikellamy 1985 yearbook OCR (merger history) read; none names Northumberland's colours. Nothing looked at with colour. Successor Shikellamy colours not used."
+ },
+ {
+  "school": "Ashland",
+  "identified_as": "Ashland High School, Ashland, Schuylkill Co.",
+  "colors": [],
+  "mascot": "Black Diamonds",
+  "confidence": "low",
+  "wikipedia": "North Schuylkill School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Schuylkill_School_District",
+   "https://en.wikipedia.org/w/index.php?title=Ashland,_Pennsylvania&action=raw",
+   "https://www.e-yearbook.com/Ashland_High_School_Ardante_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Ashland_High_School_Ardante_Yearbook/1943/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Ashland_High_School_Ardante_Yearbook/1944/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Ashland_High_School_Ardante_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Ashland_High_School_Ardante_Yearbook/1953/Page_1.html"
+  ],
+  "era": "Merged into North Schuylkill (Spartans; crimson red and royal blue) in the late 1960s/1970s",
+  "notes": "Ardante yearbooks (e-yearbook OCR, 1941-1953) call the football team 'The Black Diamonds of 1951' / 'the Diamonds', and the school paper was The Black Diamond, so Black Diamonds is the school's nickname. No school colours stated; only class colours (blue and gold, blue and white, blue and silver, green and gold, red and gray), which vary by class and are not used.",
+  "evidence": "Read OCR text of 8 Ardante yearbooks; nickname confirmed, no school colours. No colour image looked at. Successor North Schuylkill colours not used."
+ },
+ {
+  "school": "Northern Chester County Tech",
+  "identified_as": "Northern Chester County Technical School (now Technical College High School Pickering Campus), Phoenixville area",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.ncsasports.org/wrestling-recruiting/pennsylvania/west-grove/chester-county-technical-college-high-sc"
+  ],
+  "era": "Now part of Chester County IU Technical College High School",
+  "notes": "No Wikipedia page; two WebSearches (colours/mascot, 1970s wrestling) found nothing on NCCT's own athletics identity.",
+  "evidence": "Retry: 2 WebSearches returned only other schools; no NCCT-era image or colour statement found. Successor TCHS branding not used."
+ },
+ {
+  "school": "Saegertown",
+  "identified_as": "Saegertown Junior/Senior High School, Saegertown (PENNCREST SD)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#08084E",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#CEAA44",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Penncrest School District",
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Penncrest_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Saegertown_High_School_Blue_Gold_Yearbook/1960/Page_25.html",
+   "https://www.maxpreps.com/pa/saegertown/saegertown-panthers/",
+   "https://image.maxpreps.io/school-mascot/3/e/c/3ecfe3d6-91e8-4cad-ad67-a649bf3e3d1a.gif",
+   "https://www.penncrest.org",
+   "https://www.penncrest.org/pics/header_logo.png",
+   "https://www.saegertownhs.net/",
+   "https://www.saegertownhs.net/pics/header_logo.png",
+   "https://www.saegertownhs.net/pics/footer_logo.png"
+  ],
+  "era": null,
+  "notes": "Penncrest SD Wikipedia (via search snippet) gives blue & gold for Saegertown; 1960 yearbook titled 'Blue Gold' agrees; the school's own site and Panthers logo show navy and gold.",
+  "evidence": "Saegertown Jr/Sr High site (saegertownhs.net) Panthers shield logo: gold field #CEAA44 with navy outline (#000157), black panther head, silver 'PANTHERS' wordmark; site CSS top colours navy #08084E and gold #F2B80C (maroon #731111 is Penncrest district accent). Blue is navy."
+ },
+ {
+  "school": "Hughesville",
+  "identified_as": "Hughesville Junior/Senior High School, Hughesville (East Lycoming SD)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2C5418",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold (modern site accent)",
+    "hex": "#AC8400",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Hughesville Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hughesville_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/East_Lycoming_School_District",
+   "https://www.elsd.org",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/images/logos/logo.png",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/images/logos/district-logo.png",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/style.css",
+   "https://www.e-yearbook.com/yearbooks/Hughesville_Junior_Senior_High_School_Monarch_Yearbook/1948/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Hughesville_Junior_Senior_High_School_Monarch_Yearbook/1953/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Hughesville_Junior_Senior_High_School_Monarch_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Hughesville_Junior_Senior_High_School_Monarch_Yearbook/1968/Page_1.html",
+   "search:https://www.muncyluminary.com/tri-town/in-our-schools/2013/02/05/new-banner-unveiled-at-spartan-wrestling-match/"
+  ],
+  "era": null,
+  "notes": "Monarch yearbooks: 1953 and 1954 alma mater ends 'For our dear old Alma Mater And the Green and White', 1953 cheer 'Up with the colors ... Green and White!' and 'Green and White junior high squad'. The 1948 alma mater instead ended 'The Orange and the Blue', so the colours changed around 1950. Gold appears only as a modern district site accent; grey only as the logo helmet.",
+  "evidence": "Yearbook OCR names Green and White (1953-54). East Lycoming SD Spartan helmet logo: dark green plume #324828 and grey helmet; site theme green #2C5418 dominant, gold #AC8400 accent. Green confirmed by both; white from yearbooks only, no hex."
+ }
+]

@@ -1,0 +1,269 @@
+[
+ {
+  "school": "Karns City",
+  "identified_as": "Karns City Area Junior/Senior High School, Karns City",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#391379",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#976D11",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Gremlins",
+  "confidence": "high",
+  "wikipedia": "Karns City Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Karns_City_Area_Junior/Senior_High_School",
+   "https://www.e-yearbook.com/Fairview_Township_Karns_City_High_School_Afterthought_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Fairview_Township_Karns_City_High_School_Afterthought_Yearbook/1953/Page_1.html",
+   "https://www.kcasdk12.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1618408916/karnscityk12paus/dwuxg5afkqdis9p9rd6o/KarnsCityAreaSchoolDistrict.png",
+   "search:https://en.wikipedia.org/wiki/Karns_City_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Purple and gold attested in 1953 and today; district site found at kcasdk12.org.",
+  "evidence": "District site kcasdk12.org theme CSS: purple #391379 (most used), gold #976D11. District KC oval logo (looked at): beveled purple letters #32275C with pale metallic gold #DACFAE outline on white; flat site theme hexes used since logo is shaded. 1953 Afterthought yearbook OCR: cheerleaders in purple skirts, gold sweaters."
+ },
+ {
+  "school": "West Springfield",
+  "identified_as": "West Springfield High School (Erie County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/West_Springfield_High_School_Laurel_Yearbook",
+   "search:https://www.e-yearbook.com/yearbooks/West_Springfield_High_School_Laurel_Yearbook/1958/Page_99.html"
+  ],
+  "era": "Area later part of Northwestern SD (red and black).",
+  "notes": "No school colours found.",
+  "evidence": "West Springfield Laurel yearbooks 1951, 1954, 1955, 1957, 1958 (all years on e-yearbook) full OCR re-grepped for colour words, uniforms, sweaters: only class colours (blue/white 1957, mint green/white 1958) and store ads; no school colours. WebSearch found nothing for the Erie County school."
+ },
+ {
+  "school": "Albion",
+  "identified_as": "Albion High School, Albion (Erie County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Albion_High_School_Alhi_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Albion_High_School_Alhi_Yearbook/1958/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Albion_High_School_Alhi_Yearbook/1945/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Albion_High_School_Alhi_Yearbook/1948/Page_1.html"
+  ],
+  "era": "Later part of Northwestern SD (also red and black).",
+  "notes": "Red and black from Albion's own 1945 yearbook; same pair as successor Northwestern, but attested before the merger.",
+  "evidence": "Albion Alhi 1945 yearbook OCR, football report: \"The Red and Black gridders opened on Labor Day ... playing Union City\" (Red and Black named twice). 1948 and 1951-58 books state no school colours; 1958 notes contest to choose colours for new Northwestern HS. No image with clean colour, so no hex."
+ },
+ {
+  "school": "Washington Township",
+  "identified_as": "Washington Township High School, Apollo (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.e-yearbook.com/Washington_Township_High_School_Washtonian_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Washington_Township_High_School_Washtonian_Yearbook/1952/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Washington_Township_High_School_Washtonian_Yearbook/1954/Page_1.html",
+   "https://www.e-yearbook.com/Washington_Township_High_School_Wahtonian_Yearbook"
+  ],
+  "era": "Township later part of Kiski Area SD (Cavaliers); Kiski colours not used here.",
+  "notes": "Identity now fairly firm: the project's 1959-60 data put Washington Township in District 7 Section 2 with Kittanning, Greensburg, Latrobe, Hempfield, Norwin, Jeannette (Westmoreland/Armstrong), which fits the Apollo-area school, not Waynesboro (maroon/gray). Crimson and white from its own yearbooks; 1951/1954 band uniforms maroon, so the red may be a dark crimson.",
+  "evidence": "Washington Twp HS (Apollo) Washtonian yearbook OCR: 1952 \"The Crimson and White Eleven\", \"1951 Crimson and White Football Squad\", majorettes in \"Crimson and White uniforms\"; 1954 cheerleaders \"flashes of crimson and white\" but band in \"maroon and grey uniforms\"; 1951 majorettes \"maroon and white\". School paper also called Crimson and White. Identity cross-checked against repo files overtime/lower/1959-section.json and 1960-section.json (D7_S2 opponents). No clean image, so no hex."
+ },
+ {
+  "school": "New Kensington",
+  "identified_as": "New Kensington High School, New Kensington",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://hartj.pages.iu.edu/kenhi.htm",
+   "https://www.e-yearbook.com/New_Kensington_High_School_Taleoken_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1956/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1957/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1958/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1945/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1946/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1947/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1948/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/New_Kensington_High_School_Taleoken_Yearbook/1951/Page_1.html"
+  ],
+  "era": "Merged with Arnold in 1965; became Valley HS (Vikings, black and gold) c. 1967.",
+  "notes": "Corrected: school colours read as red and black (teams called \"the Red and Black\" 1945-49); white appears in band/cheer uniforms (1947-48, 1956-57), so kept as a third colour.",
+  "evidence": "Taleoken yearbook OCR, 15 years scanned (1944-59): football reports call the team \"the Red and Black\" (1945, 1946 \"Red and Black grid machine\", 1949 \"the Red and Black's record\"); 1945 band and teams in \"red and black uniforms\"; 1958 \"Red and black day\"; band \"red and white uniforms\" 1947, cheerleaders \"red and white outfits\" 1948, red sweaters/white skirts 1956-57. No clean image, so no hex."
+ },
+ {
+  "school": "Emporium",
+  "identified_as": "Emporium High School, Emporium (Cameron County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cameron_County_High_School",
+   "https://www.e-yearbook.com/Emporium_High_School_Raider_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Emporium_High_School_Raider_Yearbook/1947/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Emporium_High_School_Raider_Yearbook/1943/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Emporium_High_School_Raider_Yearbook/1945/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Emporium_High_School_Raider_Yearbook/1946/Page_1.html"
+  ],
+  "era": "Predecessor of Cameron County HS (Red Raiders, also red and white).",
+  "notes": "Red and white confirmed from Emporium's own alma mater and cheer uniforms (1940s), not inferred from the successor.",
+  "evidence": "Emporium Raider yearbook OCR: alma mater printed 1943, 1945, 1946 begins \"Red and White, we sing our praise to you\" and ends \"Our Alma Mater hail all hail / The Red and White\"; 1945 cheerleaders \"in their flashy red and white uniforms\"; football team \"the Red Raiders\". No clean image, so no hex."
+ },
+ {
+  "school": "Lock Haven",
+  "identified_as": "Lock Haven Senior High School, Lock Haven (Clinton County)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.lockhaven.com/sports/local-sports/2026/06/memorable-campaign-a-look-back-at-lhhs-footballs-storied-unbeaten-1953-season/",
+   "https://www.e-yearbook.com/Lock_Haven_High_School_Gazette_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Lock_Haven_High_School_Gazette_Yearbook/1934/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lock_Haven_High_School_Gazette_Yearbook/1936/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lock_Haven_High_School_Gazette_Yearbook/1937/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lock_Haven_High_School_Gazette_Yearbook/1947/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Lock_Haven_High_School_Gazette_Yearbook/1955/Page_1.html"
+  ],
+  "era": "Closed 1999/2000; merged with Bald Eagle-Nittany into Central Mountain HS (royal blue/white).",
+  "notes": "Purple and white, Bobcats, from the school's own Gazette yearbooks 1934-55. Not Lock Haven University's crimson.",
+  "evidence": "Lock Haven HS Gazette yearbook OCR (15 years, 1934-55): 1934 alma mater ends \"We'll hail thee ever, dear Purple and White\"; football/basketball reports call teams \"the Purple and White eleven\", \"Purple and White Bobcats\" (1936), \"Purple and White Band\" (1937); \"purple and white\" in 1934-41, 1947-48; \"purple\" heavily used through 1955. No clean image, so no hex."
+ },
+ {
+  "school": "Chartiers-Houston",
+  "identified_as": "Chartiers-Houston Junior/Senior High School, Houston",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "high",
+  "wikipedia": "Chartiers-Houston School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District",
+   "https://www.maxpreps.com/pa/houston/chartiers-houston-buccaneers/",
+   "search:https://www.chbucs.org",
+   "search:https://pafootballnews.com/district7/close-battle-in-the-first-half-leads-to-blowout-victory-in-the-second-half-athletics_sd-chsdschools/",
+   "https://www.chsdschools.org"
+  ],
+  "era": null,
+  "notes": "District Wikipedia only.",
+  "evidence": "MaxPreps team page (earlier pass) lists color1 #8F0018 (maroon), color2 #C8880A (gold), color3 #FFFFFF; agrees with district Wikipedia infobox \"Maroon and Gold\" (re-checked). Hex left null: district sites chbucs.org (403), chsdschools.org (403), chartiers-houston.org and k12.pa.us guesses unreachable; MaxPreps 403 this pass and Wikipedia has no logo image, so no logo or school-site pixels were seen."
+ },
+ {
+  "school": "Canonsburg",
+  "identified_as": "Canonsburg High School, Canonsburg (Washington County)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Gunners",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canon-McMillan_School_District",
+   "search:https://cmalumniwrestling.squarespace.com/blog/2017/10/4/a-brief-history-of-the-canon-mcmillan-wrestling-program",
+   "https://www.e-yearbook.com/Canonsburg_High_School_Canon_Log_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Canonsburg_High_School_Canon_Log_Yearbook/1940/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Canonsburg_High_School_Canon_Log_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Canonsburg_High_School_Canon_Log_Yearbook/1950/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Canonsburg_High_School_Canon_Log_Yearbook/1955/Page_1.html"
+  ],
+  "era": "Merged c. 1959 into Canon-McMillan (blue and gold, Big Macs); Canon-McMillan colours not used here.",
+  "notes": "Brown and gold from Canonsburg's own Canon Log yearbooks (1940-55).",
+  "evidence": "Canonsburg HS Canon Log yearbook OCR (15 years, 1923-55): 1940 basketball \"a determined Brown and Gold squad ... enabled the Gunners\"; 1949 \"the 1949 Brown and Gold Band\", flag twirlers in \"brown and gold outfits\", majorettes white and gold, cheerleaders all-white or brown-and-white; 1950 alma mater text \"Colors of Brown and Gold stand as a symbol\"; 1955 ushers in brown skirts and \"gold colored school sweaters\" (majorettes red and white that year). No clean image, so no hex."
+ }
+]

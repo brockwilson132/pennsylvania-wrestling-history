@@ -1,0 +1,271 @@
+[
+ {
+  "school": "Northwest",
+  "identified_as": "Northwest Area High School, Shickshinny (presumed)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#1A3174",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#A69567",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rangers",
+  "confidence": "medium",
+  "wikipedia": "Northwest Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northwest_Area_School_District",
+   "search:https://www.maxpreps.com/pa/shickshinny/northwest-area-rangers/softball/schedule/all-time",
+   "https://www.maxpreps.com/pa/shickshinny/northwest-area-rangers/",
+   "https://www.nasdedu.com/",
+   "https://www.nasdedu.com/pics/school_logo.png"
+  ],
+  "era": "Bracket years 1957-1961 predate/early in Northwest Area's history; colours are current.",
+  "notes": "Identity uncertain (District 2 'Northwest', 1957-61). Colours from a MaxPreps search snippet only; may not match the 1950s school.",
+  "evidence": "Northwest Area SD site nasdedu.com logo (school_logo.png): Ranger figure and NORTHWEST RANGERS script in navy #1A3174 with Vegas gold #A69567 trim and white; matches MaxPreps navy/Vegas gold/white. Current branding; whether the 1957-61 'Northwest' is this school is still unresolved."
+ },
+ {
+  "school": "Quigley Catholic",
+  "identified_as": "Quigley Catholic High School, Baden",
+  "colors": [
+   {
+    "name": "Burgundy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Quigley Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Quigley_Catholic_High_School",
+   "https://www.qchs.org",
+   "https://www.timesonline.com/story/lifestyle/features/2020/05/29/quigley-catholic-high-closing-at/1129036007/",
+   "search:https://www.maxpreps.com/pa/baden/quigley-catholic-spartans/golf/14-15/schedule/",
+   "search:https://www.privateschoolreview.com/quigley-catholic-high-school-profile",
+   "https://upload.wikimedia.org/wikipedia/en/7/73/Quigleycatholichs.png"
+  ],
+  "era": "Quigley Catholic closed in 2020 (Beaver County Times).",
+  "notes": "Burgundy and white per Wikipedia infobox; a 2014 MaxPreps schedule (search snippet) lists 'Maroon, White' (same colour family). No image of the logo could be retrieved.",
+  "evidence": "Retry: Wikipedia infobox image file (Quigleycatholichs.png) blocked by Wikimedia robot policy; MaxPreps 403; HSSN 'Quigley Catholic Logo' page DNS error / 403; qchs.org hijacked. Names only: burgundy (Wikipedia) / maroon (MaxPreps 2014) and white. No hex."
+ },
+ {
+  "school": "Swissvale",
+  "identified_as": "Swissvale High School, Swissvale",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Woodland Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Woodland_Hills_High_School",
+   "https://www.e-yearbook.com/yearbooks/Swissvale_High_School_Swissvalian_Yearbook/1931/Page_16.html",
+   "https://www.e-yearbook.com/yearbooks/Swissvale_High_School_Swissvalian_Yearbook/1927/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Swissvale_High_School_Swissvalian_Yearbook/1949/Page_27.html"
+  ],
+  "era": "Merged into Woodland Hills High School (1981 consolidation; Swissvale campus used into the mid-1980s).",
+  "notes": "Blue and gold from Swissvale's own yearbooks (1927, 1931, 1949); shade and mascot not established. Not Woodland Hills' colours.",
+  "evidence": "e-yearbook OCR of Swissvalian: 1931 alma mater 'Sing the praise of the Swissvale High School / With her gold and blue'; 1927 football recap 'carry the blue and gold'; 1949 choir 'blue and gold robes'. Text only, no image, so no hex."
+ },
+ {
+  "school": "Bristol",
+  "identified_as": "Bristol Junior/Senior High School, Bristol (Bucks County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D40308",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Bristol Borough School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bristol_Borough_School_District",
+   "https://bbsd.org/",
+   "https://bbsd.org/images/logo.jpg",
+   "https://bbsd.org/images/logoimage.jpg",
+   "search:https://www.maxpreps.com/pa/bristol/bristol-warriors"
+  ],
+  "era": null,
+  "notes": "Red confirmed by the district's own header/seal; second colour (grey/silver lettering, black or white) not established by any text source. Not to be confused with Bristol Township (Truman, black and gold).",
+  "evidence": "bbsd.org (Bristol Borough SD) header and seal banner flat red #D40308 with silver/grey #C0C0C0 lettering; second school colour not established (grey may be decoration only)."
+ },
+ {
+  "school": "Athens",
+  "identified_as": "Athens Area High School, Athens (Bradford County)",
+  "colors": [
+   {
+    "name": "Silver",
+    "hex": "#9B9B9B",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#0B0B0B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.com/wiki/PIAA_Football_Teams,_Conferences_and_Leagues",
+   "https://en.wikipedia.org/wiki/Athens_Area_School_District",
+   "https://www.athensasd.k12.pa.us/",
+   "https://www.athensasd.k12.pa.us/sysimages/Wildcat2.png",
+   "https://www.athensasd.k12.pa.us/Athletics.aspx",
+   "https://www.athensasd.k12.pa.us/GalleryImages/2022816161214265_image.jpg",
+   "https://www.athensasd.k12.pa.us/GalleryImages/202686121952534_image.jpg"
+  ],
+  "era": null,
+  "notes": "Only a Wikipedia list table (PIAA football teams) gives 'silver & black'; district page showed no colours. Verify. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session).",
+  "evidence": "District site: Wildcat2.png logo is greyscale (black #0B0B0B with grey/silver shading); home-page mission-statement banner is flat silver-grey #9B9B9B with black wildcat seals; 'Wildcats Move Together' flyer also black/silver/white. All branding greyscale, consistent with Wikipedia list 'silver & black'. Site CSS stock Bootstrap."
+ },
+ {
+  "school": "Faith Christian Academy",
+  "identified_as": "Faith Christian Academy, Upper Bucks (Sellersville mailing address; secondary campus now 2255 Allentown Rd, Quakertown)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#920122",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#777577",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "sources": [
+   "https://www.maxpreps.com/pa/sellersville/faith-christian-academy-lions/basketball",
+   "https://fcalions.org/",
+   "https://www.privateschoolreview.com/faith-christian-academy-profile/18951",
+   "https://www.my-fca.com/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1719244341/myfcacom/lea9tk6v0bvf0udfvygi/FaithChristianAcademyLIONf.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1625665765/myfcacom/hcmmyfhaimer8mkv3s0o/faithtransparent1.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1772030928/myfcacom/onzcufpznmeptavztod9/Wrestlingstates2026.jpg"
+  ],
+  "era": null,
+  "notes": "School site my-fca.com (linked from the PrivateSchoolReview profile for the Sellersville-listed FCA Lions) shows FCA Lions wrestling as 4-time PIAA champions, matching the PIAA wrestling school. Address on the site is Quakertown 18951; same school as MaxPreps 'Sellersville' FCA Lions.",
+  "evidence": "my-fca.com 'F' logo flat maroon #920122 and grey #777577 with black outline; lion athletics logo black, grey and maroon; 2026 PIAA wrestling champions photo shows maroon and black team gear. Site CSS mostly template colours (not used)."
+ },
+ {
+  "school": "Kittanning",
+  "identified_as": "Kittanning Senior High School, Kittanning (Armstrong County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/w/index.php?oldid=1047500191",
+   "search:https://www.eliteprospects.com/team/17971/kittanning-high/2011-2012",
+   "https://www.e-yearbook.com/yearbooks/Kittanning_High_School_Kit_Han_Ne_Yearbook/1953/Page_100.html",
+   "https://www.e-yearbook.com/yearbooks/Kittanning_High_School_Kit_Han_Ne_Yearbook/1953/Page_79.html",
+   "https://www.e-yearbook.com/yearbooks/Kittanning_High_School_Kit_Han_Ne_Yearbook/1958/Page_112.html"
+  ],
+  "era": "Closed June 2015; merged with Ford City into Armstrong Junior-Senior High (River Hawks, blue and orange). Colours here are Kittanning's.",
+  "notes": "Wikipedia page now redirects to the district; colours read from the 2021 revision of 'Kittanning High School'. One old PIAA listing (search) gave red, white & black.",
+  "evidence": "Kittanning's own Kit-Han-Ne yearbooks (e-yearbook OCR): 1953 football 'the Red and White downed Oakmont', band 'snappy red and white outfit'; 1958 football 'The Red and White dominated'; 1972 mentions Wildcats. Agrees with old Wikipedia infobox (red and white). Text only, no image, so no hex."
+ },
+ {
+  "school": "Penn Joint",
+  "identified_as": "Penn Joint High School, Harrison City/Claridge (Penn Township, Westmoreland Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Penn-Trafford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn-Trafford_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Penn_Joint_High_School_Penn_Point_Yearbook/1949/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Penn_Joint_High_School_Penn_Point_Yearbook/1949/Page_43.html",
+   "https://www.e-yearbook.com/yearbooks/Penn_Joint_High_School_Penn_Point_Yearbook/1949/Page_49.html",
+   "https://www.e-yearbook.com/yearbooks/Penn_Joint_High_School_Penn_Point_Yearbook/1949/Page_16.html"
+  ],
+  "era": "Penn Joint merged with Trafford to form Penn-Trafford (Warriors, green and gold); bracket years 1965-1972",
+  "notes": "Blue and white inferred from Penn Joint's 1949 band and majorette uniforms; no explicit 'school colors' statement found. Not Penn-Trafford's green/gold.",
+  "evidence": "1949 Penn Point yearbook OCR (Claridge, PA): band bought 'tailored, blue and white uniforms'; school paper clipping 'majorettes will have blue skirts and white jackets trimmed in blue'. Alma mater names no colours; paper was 'Pensindian'. Text only, no hex."
+ },
+ {
+  "school": "Rostraver",
+  "identified_as": "Rostraver High School, Rostraver Township (Pricedale area), Westmoreland Co.",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Leopards",
+  "confidence": "high",
+  "wikipedia": "Belle Vernon Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Belle_Vernon_Area_School_District",
+   "search:https://pa-roots.com/westmoreland/townships/rostraver/school.html",
+   "https://www.e-yearbook.com/yearbooks/Rostraver_High_School_Rostravette_Yearbook/1953/Page_55.html",
+   "https://www.e-yearbook.com/yearbooks/Rostraver_High_School_Rostravette_Yearbook/1952/Page_61.html",
+   "https://www.e-yearbook.com/yearbooks/Rostraver_High_School_Rostravette_Yearbook/1952/Page_64.html",
+   "https://www.e-yearbook.com/yearbooks/Rostraver_High_School_Rostravette_Yearbook/1944/Page_1.html"
+  ],
+  "era": "Rostraver SD merged with Belmar in 1965 to form Belle Vernon Area (Leopards, green/gold/white); Rostraver HS operated to ~1967",
+  "notes": "Rostraver's own yearbooks give Leopards, green and white (1944-1953); Belle Vernon Area later kept the Leopards name and added gold.",
+  "evidence": "Rostravette yearbook OCR: 1953 cheer 'The Leopards are a mighty foe, With colors Green and White'; 1952 football 'the Green and White eleven'; 1944 sports 'the Green and White' and 'the Leopards'. Text only, no image, so no hex."
+ }
+]
