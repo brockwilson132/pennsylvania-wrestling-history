@@ -1,0 +1,622 @@
+[
+ {
+  "school": "Wilson (West Lawn)",
+  "identified_as": "Wilson High School, West Lawn (Spring Township, Berks County)",
+  "colors": [
+   {
+    "name": "Red (cardinal)",
+    "hex": "#9A1413",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Wilson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilson_High_School_(Pennsylvania)",
+   "https://www.wilsonsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/28460/logo/31273/Wilson_School_District_PA_Logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: white block W on dark red #9A1413; site theme #9A1411 matches"
+ },
+ {
+  "school": "Delaware Valley",
+  "identified_as": "Delaware Valley High School, Milford (Pike County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#DC362D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#332928",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Delaware Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Delaware_Valley_High_School",
+   "https://dvhs.dvsd.org/",
+   "https://resources.finalsite.net/images/v1748171547/dvsdorg/r6qwvysjinv1igussgf0/footer-logo.png",
+   "https://upload.wikimedia.org/wikipedia/commons/f/f0/Delaware_Valley_High_School_logo.png"
+  ],
+  "era": null,
+  "notes": "Infobox gives colour boxes only (red, black, white); no text names.",
+  "evidence": "Wikipedia DV logo: black D interlocked with red #DC362D V on white; current site footer DV logo is black/white only; site CSS is stock Finalsite"
+ },
+ {
+  "school": "Oxford Area",
+  "identified_as": "Oxford Area High School, Oxford (Chester County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#830125",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "medium",
+  "wikipedia": "Oxford Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oxford_Area_High_School",
+   "https://www.oxfordasd.org",
+   "https://oahs.oxfordasd.org/",
+   "https://resources.finalsite.net/images/v1709825519/oxfordasdorg/bkwdfkmdbttzieyn4fzr/favicon.ico"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district bell-tower favicon (48px) flat maroon #830125 on white; site CSS non-stock accent #BE3A52 (lighter crimson); no Hornets athletic logo found"
+ },
+ {
+  "school": "Pennsbury",
+  "identified_as": "Pennsbury High School, Fairless Hills (Bucks County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F68328",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#2F2623",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Pennsbury High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pennsbury_High_School",
+   "https://www.pennsburysd.org",
+   "https://cdnsm5-ss5.sharpschool.com/UserFiles/Servers/Server_74529931/Image/logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district seal: orange #F68328 ring with black text/art on white; site CSS also uses orange #F37600"
+ },
+ {
+  "school": "Berwick",
+  "identified_as": "Berwick Area Senior High School, Berwick (Columbia County)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#000045",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Berwick Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berwick_Area_School_District",
+   "search:https://www.maxpreps.com/pa/berwick/berwick-bulldogs/tennis/21-22/schedule/",
+   "https://www.berwicksd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/20822/logo/23636/Berwick_Area_School_District_PA_Logo.png"
+  ],
+  "era": null,
+  "notes": "High school infobox only shows a colour-kit image; district page and MaxPreps (search snippet) say blue and white.",
+  "evidence": "district bulldog logo drawn in very dark navy #000045 with white; site theme navy #1A245C. Blue is navy, not royal"
+ },
+ {
+  "school": "Hanover Area",
+  "identified_as": "Hanover Area Junior/Senior High School, Hanover Township (Luzerne County)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#2B3492",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hawkeyes",
+  "confidence": "high",
+  "wikipedia": "Hanover Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hanover_Area_School_District",
+   "https://www.hanoverarea.org",
+   "https://cmsv2-assets.apptegy.net/uploads/22522/logo/25335/Hawk_22_coin.png"
+  ],
+  "era": null,
+  "notes": "Colours from district infobox; mascot (Hawkeyes) from general knowledge, not a read source.",
+  "evidence": "district hawk 'HA' coin logo: royal blue #2B3492 on white; site theme blue #005188"
+ },
+ {
+  "school": "Everett",
+  "identified_as": "Everett Area High School, Everett (Bedford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D22027",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Everett Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Everett_Area_School_District",
+   "https://www.everettasd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/1457/logo/1314/everett.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district Warrior head logo: red #D22027 line art on white; site theme #D80000"
+ },
+ {
+  "school": "Port Allegany",
+  "identified_as": "Port Allegany Junior/Senior High School, Port Allegany (McKean County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#E95320",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#030504",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Gators",
+  "confidence": "high",
+  "wikipedia": "Port Allegany School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Port_Allegany_School_District",
+   "search:https://www.bradfordera.com/2007/09/28/rts-for-friday-sept-28-2007",
+   "https://www.pasdedu.org/",
+   "https://ecs-cluster-bucket-wsos-prod-two.s3.us-west-2.amazonaws.com/uploads/sites/158/Port-Allegany-LOGO-sm.png",
+   "https://www.pasd.us",
+   "https://www.pasd.us/images/favicon.png"
+  ],
+  "era": null,
+  "notes": "Only source is a 2007 Bradford Era reader column (search snippet) saying black and orange, dating to 1913 yearbook; order uncertain. Wikipedia gives mascot only.",
+  "evidence": "district Gators logo: green gator over orange #E95320 'GATORS' outlined black; old pasd.us favicon is a black cat-head silhouette. Gator green is art, not a school colour"
+ },
+ {
+  "school": "Tussey Mountain",
+  "identified_as": "Tussey Mountain Junior/Senior High School, Saxton (Bedford County)",
+  "colors": [
+   {
+    "name": "Red (dark/cardinal)",
+    "hex": "#9B171B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "medium",
+  "wikipedia": "Tussey Mountain School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tussey_Mountain_School_District",
+   "https://www.tmsd.net",
+   "https://cmsv2-assets.apptegy.net/uploads/1549/logo/5622/logo_tmsd.png"
+  ],
+  "era": null,
+  "notes": "District infobox only; high school infobox colours field is blank.",
+  "evidence": "district seal: Titan with shield in dark red #9B171B on white; site theme #9A0F0A. Black not seen on site/logo, kept from district infobox; red looks primary"
+ },
+ {
+  "school": "Central Cambria",
+  "identified_as": "Central Cambria High School, Ebensburg (Cambria County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E54335",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Red Devils",
+  "confidence": "high",
+  "wikipedia": "Central Cambria School District",
+  "sources": [
+   "search:https://www.eliteprospects.com/team/21728/central-cambria-high/2016-2017",
+   "search:https://cencam.org",
+   "https://www.cencam.org",
+   "https://www.cencam.org/pics/school_logo.png",
+   "https://www.cencam.org/pics/footer_logo.png"
+  ],
+  "era": null,
+  "notes": "Only hockey database (EliteProspects, 'Black + Red') states colours; Wikipedia district page gives none. Order guessed from Red Devils name.",
+  "evidence": "site athletic 'CC' logo: black CC with red #E54335 devil trident; district seal footer logo black/red (#BB2017) on white. Red primary"
+ },
+ {
+  "school": "West York",
+  "identified_as": "West York Area High School, York",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#0A2360",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "West York Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_York_Area_High_School",
+   "https://www.wyasd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1698082061/wyasdorg/dhgwaoqshvvqajnv1nh6/WestYorkAreaSchoolDistrict.png"
+  ],
+  "era": null,
+  "notes": "Mascot from general knowledge, not a read source.",
+  "evidence": "district seal with bulldog: navy #0A2360 and white; site theme navy #102464"
+ },
+ {
+  "school": "Sharon",
+  "identified_as": "Sharon High School (Sharon Middle/High School), Sharon (Mercer County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FF6600",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#010001",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Sharon City School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sharon,_Pennsylvania",
+   "search:https://www.maxpreps.com/pa/sharon/sharon-tigers/football/",
+   "https://www.sharonsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/1858/logo/2510/logo_sharonsd.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district tiger shield logo: orange #FF6600 and black with white; site theme #FF621A / #CD4800"
+ },
+ {
+  "school": "Glendale",
+  "identified_as": "Glendale Junior/Senior High School, Flinton (Cambria County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#2A4492",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C9A226",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Glendale Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Glendale_Junior/Senior_High_School",
+   "https://www.gsd1.org",
+   "https://cmsv2-assets.apptegy.net/uploads/25994/logo/28807/Glendale_SD_Logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: royal-ish blue #2A4492 block V with yellow/gold Viking head; site theme blue #394B85 and gold #C9A226 (logo yellow is pale shading, so site gold used)"
+ },
+ {
+  "school": "Reading",
+  "identified_as": "Reading Senior High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C12324",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#2D0A0A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Red Knights",
+  "confidence": "high",
+  "wikipedia": "Reading Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Senior_High_School",
+   "https://www.readingsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/26034/logo/28847/reading-logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district Red Knight logo: red #C12324 R outlined black, knight in grey/red; site theme #A10B1A"
+ },
+ {
+  "school": "Governor Mifflin",
+  "identified_as": "Governor Mifflin Senior High School, Shillington (Berks County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#7A2430",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#A4976B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Governor Mifflin Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Governor_Mifflin_Senior_High_School",
+   "https://www.gmsd.org",
+   "https://www.gmsd.org/uploaded/gmfavicon.ico"
+  ],
+  "era": null,
+  "notes": "Gold hex #C5B358 is a Wikipedia editor value (generic 'Vegas gold'), maroon given by name only.",
+  "evidence": "site GM favicon: maroon #7A2430 M with muted (Vegas) gold #A4976B G; site theme maroon #76232F and gold #84754E agree"
+ },
+ {
+  "school": "South Park",
+  "identified_as": "South Park High School, South Park Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0057A8",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "South Park High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Park_High_School_(Pennsylvania)",
+   "https://www.sparksd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1759320415/sparksdorg/kca1wpuhssptbd0dbck1/SP_LogoforSite_2.png",
+   "https://en.wikipedia.org/wiki/South_Park_School_District"
+  ],
+  "era": null,
+  "notes": "Infobox: royal blue, white, black accent.",
+  "evidence": "district 'SP' logo: royal blue #0057A8 only; district infobox says royal blue and white. Black accent (first pass) not seen"
+ },
+ {
+  "school": "Red Land",
+  "identified_as": "Red Land High School, Lewisberry (York County)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#071D36",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#C51A1A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "high",
+  "wikipedia": "Red Land High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Red_Land_High_School",
+   "https://www.wssd.k12.pa.us/RedLand.aspx",
+   "https://www.wssd.k12.pa.us/PatriotAthletics.aspx",
+   "https://www.wssd.k12.pa.us/WindowImages/20211610309235_image.png",
+   "https://filecabinet9.eschoolview.com/541F6A0F-E904-4F4A-B95D-56A4668AF1C6/a7387f2f-35af-4ebf-bd66-6a0778d3c9db.png",
+   "https://www.wssd.k12.pa.us/WindowImages/RL15.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Red Land athletics 'RL' logo: navy #071D36 outline/stars with red #C51A1A and white stripes; school banner graphic red; WSSD site theme is district blue (not used)"
+ },
+ {
+  "school": "Kittanning",
+  "identified_as": "Kittanning Senior High School, Kittanning (Armstrong County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/w/index.php?oldid=1047500191",
+   "search:https://www.eliteprospects.com/team/17971/kittanning-high/2011-2012"
+  ],
+  "era": "Closed June 2015; merged with Ford City into Armstrong Junior-Senior High (River Hawks, blue and orange). Colours here are Kittanning's.",
+  "notes": "Wikipedia page now redirects to the district; colours read from the 2021 revision of 'Kittanning High School'. One old PIAA listing (search) gave red, white & black.",
+  "evidence": "closed school; old Wikipedia revision infobox: red and white, no image; image searches returned nothing usable, so no hex"
+ },
+ {
+  "school": "Berlin Brothersvalley",
+  "identified_as": "Berlin Brothersvalley High School, Berlin (Somerset County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#354C87",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mountaineers",
+  "confidence": "high",
+  "wikipedia": "Berlin Brothersvalley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berlin_Brothersvalley_High_School",
+   "https://www.bbsd.com",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1721910077/bbsdcom/daudpzstqlvn5vxzbtau/BerlinBrothersvalleySchoolDistrictPrimaryLogoImage.png",
+   "https://resources.finalsite.net/images/v1721910243/bbsdcom/bhwmudloghke0eaig22i/BerlinBrothersvalleySchoolDistrictfavicon.png"
+  ],
+  "era": null,
+  "notes": "Infobox gives colour boxes only (blue, white).",
+  "evidence": "district primary logo: blue #354C87 'BB' with rifleman Mountaineer on white; favicon BB blue #013A89"
+ },
+ {
+  "school": "La Salle College",
+  "identified_as": "La Salle College High School, Wyndmoor (Montgomery County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#004B8C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#B4A46C",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Explorers",
+  "confidence": "high",
+  "wikipedia": "La Salle College High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/La_Salle_College_High_School",
+   "https://www.lschs.org",
+   "https://resources.finalsite.net/images/v1664988479/lasalle/np1url3xkyjmym9tc2td/logo.svg",
+   "https://resources.finalsite.net/images/v1665526687/lasalle/ehtkh2ubwocswdc3rda3/LaSalleSignatureLogo.svg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site theme: blue #004B8C (most used) and muted gold #B4A46C (brighter #EDD601 accent also used); site logos are white-only SVG over the blue"
+ },
+ {
+  "school": "Cranberry",
+  "identified_as": "Cranberry High School, Seneca (Venango County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#6D2111",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Berries",
+  "confidence": "medium",
+  "wikipedia": "Cranberry Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cranberry_Area_School_District",
+   "https://www.cranberrysd.org",
+   "https://www.cranberrysd.org/wp-content/uploads/Cranberry-School-Distrct-Crest-Logo-1.svg",
+   "https://www.cranberrysd.org/wp-content/uploads/Cranberry-Favicon.webp",
+   "https://www.cranberrysd.org/wp-content/uploads/Cranberry-Jr-SR-High-Hero-Banner-High-School-Front-600.webp"
+  ],
+  "era": null,
+  "notes": "District infobox: maroon, gold; mascot 'Super Berry'.",
+  "evidence": "district crest SVG fill maroon #6D2111; Super Berry mascot favicon red #A21E22; school front sign is cranberry-red with white letters. Gold not seen anywhere (kept from district infobox, no hex)"
+ },
+ {
+  "school": "J.P. McCaskey",
+  "identified_as": "J. P. McCaskey High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AF1F27",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Red Tornado",
+  "confidence": "high",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School",
+   "https://www.lancasterschools.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1675081328/lancasterschoolsorg/reufr4pumympt2tfivl9/DistrictLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School District of Lancaster logo (not McCaskey-specific): red #AF1F27 and black #231F20 on white; site theme red #AF0D26. Matches Red Tornado red and black"
+ }
+]

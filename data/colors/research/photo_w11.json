@@ -1,0 +1,253 @@
+[
+ {
+  "school": "Munhall",
+  "identified_as": "Munhall High School, Munhall (Allegheny County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Steel Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Munhall,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Steel_Valley_School_District",
+   "https://www.e-yearbook.com/yearbooks/Munhall_High_School_Munhisko_Yearbook/1935/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Munhall_High_School_Munhisko_Yearbook/1939/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Munhall_High_School_Munhisko_Yearbook/1964/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Munhall_High_School_Munhisko_Yearbook/1967/Page_1.html"
+  ],
+  "era": "Merged with Homestead into Steel Valley (Ironmen; maroon and gold) around 1970.",
+  "notes": "Colours and mascot from Munhall HS's own Munhisko yearbooks (1935, 1939, 1964). Not Steel Valley's maroon and gold.",
+  "evidence": "e-yearbook.com OCR of Munhisko yearbooks: 1939 'sale of maroon and white novelties for the football games' and basketball 'victory for the Maroon and White'; 1935 also 'the Maroon and White'; 1964 'The Munhall Indians' (football, basketball). Text only, no clean graphic for a hex."
+ },
+ {
+  "school": "Summit Academy",
+  "identified_as": "Summit Academy, Herman (Butler Co.)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Scarlet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.summitacademy.org",
+   "https://www.summitacademyschools.org",
+   "https://www.maxpreps.com/pa/herman/summit-academy-knights/",
+   "search:https://tribhssn.triblive.com/summit-academy-looks-to-benefit-from-more-experienced-roster",
+   "search:https://www.butlereagle.com/20131028/a-new-summit"
+  ],
+  "era": null,
+  "notes": "Names from MaxPreps team profile (navy, scarlet, white); first pass (PIAA football table) said blue, red and gray. Gray dropped as unconfirmed. MaxPreps swatch hexes (#022C66, #CC0022) are a preset palette, not the school's artwork, so not used.",
+  "evidence": "MaxPreps page for Summit Academy Knights, Herman PA: colorName1 Navy, colorName2 Scarlet, colorName3 White. Agrees with first-pass blue and red. No school site or logo found."
+ },
+ {
+  "school": "Scranton Central",
+  "identified_as": "Scranton Central High School, Scranton",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "low",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)",
+   "https://archive.org/details/classmates-yearbook-27663-1986-scranton-central-high-school",
+   "https://archive.org/details/Lot-c-1930-SCRANTON-CENTRAL-HIGH-SCHOOL-FOOTBALL-BASKETBALL-SCHEDULES-TICKETS-mmco",
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1986-08-27/ed-1/seq-34/"
+  ],
+  "era": "Closed 1991; students went to Scranton HS (Knights, cardinal and Vegas gold, combining Central's gold with Tech's red).",
+  "notes": "Only gold is attested (Scranton HS article); Central's second colour not found.",
+  "evidence": "1986 'Aquila' yearbook: navy/black cover with gold eagle, no stated colours. Retry: c.1929-33 Central HS football/basketball schedule cards (archive.org lot photo) are printed on orange-gold card with dark ink, consistent with gold but no second colour shown. WebSearch found no colour statement. Second colour still unverified."
+ },
+ {
+  "school": "Central Bucks",
+  "identified_as": "Central Bucks High School, Doylestown (became CB West in 1969)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "low",
+  "wikipedia": "Central Bucks High School West",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_West",
+   "search:https://archive.org/details/classmates-yearbook-33609-1979-central-bucks-west-high-school",
+   "https://www.e-yearbook.com/yearbooks/Central_Bucks_High_School_West_Antler_Yearbook/1960/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Central_Bucks_High_School_West_Antler_Yearbook/1966/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Central_Bucks_High_School_West_Antler_Yearbook/1967/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Central_Bucks_High_School_West_Antler_Yearbook/1968/Page_1.html"
+  ],
+  "era": "Single Central Bucks HS until CB East opened c. 1969; colours shown are CB West's.",
+  "notes": "Not verified that pre-1969 Central Bucks wore black and gold.",
+  "evidence": "No pre-1969 image found earlier. Retry: e-yearbook.com OCR of the pre-split Central Bucks 'Antler' 1960, 1966-68 confirms teams called 'the Bucks' but never names school colours (only 'gold braid' worn by band seniors, 1966); page images return HTTP 410. Black and gold is CB West's (infobox); pre-split colours still unverified."
+ },
+ {
+  "school": "Sharon Hill",
+  "identified_as": "Sharon Hill High School, Sharon Hill (Delaware Co.)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Owls",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School",
+   "https://archive.org/details/classmates-yearbook-26242-1960-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26494-1961-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26340-1963-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26307-1964-sharon-hill-high-school",
+   "https://www.e-yearbook.com/yearbooks/Sharon_Hill_High_School_Owl_Yearbook/1942/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Sharon_Hill_High_School_Owl_Yearbook/1943/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Sharon_Hill_High_School_Owl_Yearbook/1944/Page_1.html",
+   "https://www.e-yearbook.com/yearbooks/Sharon_Hill_High_School_Owl_Yearbook/1946/Page_1.html"
+  ],
+  "era": "Merged with Collingdale HS into Academy Park HS in 1982 (Knights, blue and silver).",
+  "notes": "Mascot Owls from the 1960s yearbooks; 1946 text also calls the team 'the Hillers'. Purple and gold from the school's own 1942 and 1946 yearbooks (not class colours).",
+  "evidence": "e-yearbook.com OCR of Sharon Hill 'Owl' yearbooks: 1942 band 'resplendently attired in fine, new purple and gold uniforms'; 1946 band again in 'purple and gold uniforms', and football: opponents 'scoring upon the Purple and Gold' (the 'Hiller' team). Class colours (blue/white, maroon/silver, maroon/gold, royal blue/gold, green/white) vary by year and were ignored. Text only, no hex."
+ },
+ {
+  "school": "Jefferson",
+  "identified_as": "Unidentified Jefferson (District 7, 1943-54)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Probably a pre-merger school (e.g. Jefferson Township HS, Allegheny Co., or a Greene Co. Jefferson HS).",
+  "notes": "Identity not confirmed; no colours given.",
+  "evidence": "Identity still unresolved; no 1943-54 District 7 'Jefferson' yearbook found on archive.org (only Thomas Jefferson HS, Jefferson Hills, 1960+). Retry WebSearch returned only modern Thomas Jefferson HS results. Nothing looked at."
+ },
+ {
+  "school": "Valley Forge Military",
+  "identified_as": "Valley Forge Military Academy, Wayne",
+  "colors": [
+   {
+    "name": "Buff",
+    "hex": "#E0AB76",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Valley Forge Military Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Forge_Military_Academy",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.vfmac.edu",
+   "https://www.vfmac.edu/academy/",
+   "https://www.vfmac.edu/wp-content/uploads/2026/06/VFMC_Capshield-e1780664083910.png",
+   "https://archive.org/details/classmates-yearbook-23803-1950-valley-forge-military-academy",
+   "https://archive.org/details/classmates-yearbook-22907-1960-valley-forge-military-academy",
+   "https://archive.org/details/classmates-yearbook-36141-1957-valley-forge-military-academy"
+  ],
+  "era": null,
+  "notes": "Buff and blue are the academy's own colours (1950 and 1960 yearbooks agree with the Wikipedia infobox). Scarlet and white on today's vfmac.edu is the college's branding, not used.",
+  "evidence": "archive.org yearbook text: 1950 VFMA football reports call the Trojans 'the Buff and Blue' repeatedly; 1960 alma mater 'Buff and blue for thee'. Agrees with infobox buff and blue; vfmac.edu scarlet #A91327 theme is the current college's. Buff hex kept from infobox; no image looked at for blue."
+ },
+ {
+  "school": "Lehman-Jackson-Ross",
+  "identified_as": "Lehman-Jackson-Ross High School, Lehman (Luzerne Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School",
+   "https://archive.org/details/classmates-yearbook-25074-1948-lake-lehman-high-school",
+   "https://archive.org/details/classmates-yearbook-26642-1967-lake-lehman-high-school",
+   "https://archive.org/details/classmates-yearbook-19443-1969-lake-lehman-high-school"
+  ],
+  "era": "Predecessor of Lake-Lehman (Knights, black and gold).",
+  "notes": "Colours inferred from the 1948 Lehman HS yearbook (predecessor school); nickname then 'Scotties' (girls' team). Not Lake-Lehman's black and gold.",
+  "evidence": "1948 Lehman HS yearbook: girls' team 'Lehman Scotties ... new red jackets and blue suits' (cover greyscale). Retry: 1967 and 1969 Lake-Lehman yearbooks give only Lake-Lehman's 'Black and Gold' alma mater, nothing on the Lehman-Jackson-Ross years; WebSearch found nothing. Red and blue remain unconfirmed for the L-J-R name."
+ },
+ {
+  "school": "North Penn-Blossburg",
+  "identified_as": "North Penn Junior/Senior High School, Blossburg",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "North Penn Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Penn_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Southern_Tioga_School_District",
+   "https://archive.org/details/KeithLindieArchiveNorthPennHighSchoolFootballBlossburgPaCirca1970s",
+   "https://archive.org/details/KeithLindieArchiveTape271"
+  ],
+  "era": "Closed 2014; merged into North Penn-Mansfield (also Panthers, blue and white).",
+  "notes": null,
+  "evidence": "Keith Lindie archive video stills (Blossburg): 1997 royal-blue 'Panthers' sweatshirt in a school display case, blue-and-white pep rally and blue court striping in the North Penn gym; 1970s football in white jerseys. Blue and white confirmed; no clean graphic for a hex."
+ }
+]

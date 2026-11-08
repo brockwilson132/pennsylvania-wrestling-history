@@ -1,0 +1,581 @@
+[
+ {
+  "school": "Rocky Grove",
+  "identified_as": "Rocky Grove Junior/Senior High School, Franklin (Valley Grove SD; the district's only high school)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FF6D00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Orioles",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Grove_School_District",
+   "search:https://www.maxpreps.com/pa/franklin/rocky-grove-orioles/baseball/",
+   "https://www.vgsd.org",
+   "https://resources.finalsite.net/images/v1712944758/vgsdorg/rhlyr96ak8d7fl2tmimz/favicon.png"
+  ],
+  "era": null,
+  "notes": "Colours from the Valley Grove SD logo (Rocky Grove is its only high school); no school-specific athletic logo found.",
+  "evidence": "Valley Grove SD site logo: 'VG' monogram in black #231F20 with orange #FF6D00 G; orange and black also fit the Orioles nickname. District-level mark, no Rocky Grove athletics logo seen."
+ },
+ {
+  "school": "Fleetwood",
+  "identified_as": "Fleetwood Area High School, Fleetwood",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BF1F2D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Fleetwood Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fleetwood_Area_High_School",
+   "https://en.wikipedia.org/wiki/Fleetwood_Area_School_District",
+   "https://hs.fleetwoodasd.org",
+   "https://www.fleetwoodasd.org",
+   "https://resources.finalsite.net/images/v1693395128/fleetwoodasdk12paus/mxmt9dli0gm6elrovnca/RW-TIGERHeaderLogo.jpg"
+  ],
+  "era": null,
+  "notes": "High school and district Wikipedia pages agree (not independent of each other).",
+  "evidence": "HS site header tiger-head logo drawn in red #BF1F2D on white; district site theme colour #A10901 (darker red, most-used CSS colour)."
+ },
+ {
+  "school": "Shade",
+  "identified_as": "Shade Junior/Senior High School, Cairnbrook",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Shade Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shade_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Shade-Central_City_School_District",
+   "search:https://www.maxpreps.com/pa/cairnbrook/shade-panthers/",
+   "https://www.shade.k12.pa.us",
+   "https://1.cdn.edl.io/jUvobokegVP1W76O0NBwf0jJQ1n5RQ1mXlcozNDC95xEcngB.jpg"
+  ],
+  "era": null,
+  "notes": "District page says \"Blue and gold\"; HS page says Navy Blue and Gold.",
+  "evidence": "School site has no colour logo (panther mural photo only); site text announces 'PBIS Spirit Day - Wear Blue and Gold', confirming the names. No clean image to take a hex from."
+ },
+ {
+  "school": "Nether Providence",
+  "identified_as": "Nether Providence High School, Wallingford",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Nether Providence High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Nether_Providence_High_School"
+  ],
+  "era": "Merged with Swarthmore High School in 1983 to form Strath Haven High School (Panthers, black/silver/white).",
+  "notes": null,
+  "evidence": "Closed 1983; no image of its own era could be found (image search returned unrelated results). Names kept from Wikipedia infobox (Blue & Gold); no hex."
+ },
+ {
+  "school": "Exeter Township",
+  "identified_as": "Exeter Township Senior High School, Reading (Exeter Twp.)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0056B8",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Exeter Township Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Exeter_Township_Senior_High_School",
+   "https://www.exeter.k12.pa.us",
+   "https://files.smartsites.parentsquare.com/6461/header_logo_img_0cem7ca1opg3bafbgcc.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District header logo: eagle head and 'EXETER' wordmark in royal blue #0056B8 on white; site theme #0057B7 agrees."
+ },
+ {
+  "school": "Girard College",
+  "identified_as": "Girard College, Philadelphia",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#90193D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#BCB5BD",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "high",
+  "wikipedia": "Girard College",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Girard_College",
+   "search:https://issuu.com/girardcollege/docs/spring_2025_steel_garnet_magazine",
+   "https://www.girardcollege.edu",
+   "https://upload.wikimedia.org/wikipedia/en/6/64/Girard-College-ColumnLogo-Garnet.png"
+  ],
+  "era": null,
+  "notes": "Inferred only: infobox logo file is \"ColumnLogo-Garnet\" and the school magazine is titled \"Steel & Garnet\". No source states the colours outright.",
+  "evidence": "Official column logo (Wikipedia file): garnet #90193D field with light steel-grey #BCB5BD column and wordmark; current site SVG logos are white-only."
+ },
+ {
+  "school": "Wilkinsburg",
+  "identified_as": "Wilkinsburg High School, Wilkinsburg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1E295D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#D4232A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "low",
+  "wikipedia": "Wilkinsburg School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilkinsburg_School_District",
+   "https://www.wilkinsburgschools.org",
+   "https://resources.finalsite.net/images/v1783528646/wilkinsburgschoolsorg/i1rbp0kdufzeeeno8fji/tiger_logo.png"
+  ],
+  "era": "High school closed in 2016; students now attend Westinghouse (Pittsburgh).",
+  "notes": "District (not successor) branding; era check for the closed high school not possible.",
+  "evidence": "Current Wilkinsburg SD logo: tiger head in red #D4232A and navy #1E295D inside a navy ring ('Established 1840'). This is the district's present branding (K-8 since the HS closed in 2016); no image from the high school's own years was found to confirm."
+ },
+ {
+  "school": "Millville",
+  "identified_as": "Millville Area Junior Senior High School, Millville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#171E52",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Quakers",
+  "confidence": "high",
+  "wikipedia": "Millville Area Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Millville_Area_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Millville_Area_School_District",
+   "search:https://www.maxpreps.com/news/nHrwrPGT40-zU3n5l9an4g/soccer-recap-millville-gets-the-win.htm",
+   "https://www.millsd.us",
+   "https://resources.finalsite.net/images/v1691945602/millvillek12paus/fo1dzgkmetrwducz1se2/MillvilleLogo3.png"
+  ],
+  "era": null,
+  "notes": "Logo blue is a gradient slate-navy; site theme navy used for hex.",
+  "evidence": "District 'M Quakers' logo: dark blue (gradient, flat #26455A) M with white/black outline; site theme's dominant colour navy #171E52."
+ },
+ {
+  "school": "Phil-Mont Christian",
+  "identified_as": "Philadelphia-Montgomery Christian Academy, Erdenheim",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "low",
+  "wikipedia": "Philadelphia-Montgomery Christian Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Philadelphia-Montgomery_Christian_Academy",
+   "search:https://www.phil-mont.com/",
+   "https://www.phil-mont.com (HTTP 406, not readable)"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School site refused requests (406) and image search gave unrelated results; nothing looked at. Names kept from first pass."
+ },
+ {
+  "school": "Scranton Tech",
+  "identified_as": "Scranton Technical High School, Scranton",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "low",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)"
+  ],
+  "era": "Became Scranton High School in 1990 (Knights, cardinal red and Vegas gold; red inherited from Tech).",
+  "notes": "Only red is attested (via successor page); Tech's secondary colour not found.",
+  "evidence": "Closed 1990; no era image found (image search unusable). Name 'Red' kept from first pass."
+ },
+ {
+  "school": "Bishop Carroll",
+  "identified_as": "Bishop Carroll High School, Ebensburg",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#054D9B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "high",
+  "wikipedia": "Bishop Carroll High School (Ebensburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Carroll_High_School_(Ebensburg,_Pennsylvania)",
+   "https://www.bishopcarroll.com",
+   "https://www.bishopcarroll.com/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": "Infobox mascot field is blank; region listed as NW but District 6 matches Ebensburg.",
+  "evidence": "School seal icon: royal blue #054D9B ring and field with white lettering; site theme dominant colour navy #002E5F. Site text 'Husky Headlines' confirms Huskies."
+ },
+ {
+  "school": "Olney",
+  "identified_as": "Olney High School, Philadelphia",
+  "colors": [],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Olney High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Olney_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Olney_High_School_Trojan_Yearbook/1967/Page_16.html",
+   "https://olney.philasd.org"
+  ],
+  "era": "Was Olney East/West; Aspira charter 2011-2022 (see \"Olney Charter\"); returned to the School District of Philadelphia 2022.",
+  "notes": "No colours found.",
+  "evidence": "School page uses the generic SDP theme; no Olney logo or colour graphic found (only stock clip-art). Colours still unknown."
+ },
+ {
+  "school": "Cresson",
+  "identified_as": "Cresson High School, Cresson",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Penn Cambria School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Cambria_School_District"
+  ],
+  "era": "Penn Cambria School District formed 1966 (Panthers; blue, black, white); Cresson HS colours before that unknown.",
+  "notes": "No colours found for Cresson HS itself.",
+  "evidence": "Closed (Penn Cambria formed 1966); no era image found. Colours unknown."
+ },
+ {
+  "school": "Greensburg C.C.",
+  "identified_as": "Greensburg Central Catholic High School, Greensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Centurions",
+  "confidence": "medium",
+  "wikipedia": "Greensburg Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School",
+   "https://www.gcchs.org (HTTP 403)"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School site returned 403 and image search was unusable; Wikipedia infobox still says Maroon & Gray. No image looked at, no hex."
+ },
+ {
+  "school": "Bellwood-Antis",
+  "identified_as": "Bellwood-Antis High School, Bellwood",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0050E3",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEE45B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Bellwood-Antis School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bellwood-Antis_School_District",
+   "https://www.blwd.k12.pa.us",
+   "https://www.blwd.k12.pa.us/pics/school_logo.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District school_logo.jpg: script 'BA' in gold #FEE45B with dark outline on bright royal blue #0050E3 field, gold border; matches Wikipedia 'Blue and Gold'."
+ },
+ {
+  "school": "Chester",
+  "identified_as": "Chester High School, Chester",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FF781C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Clippers",
+  "confidence": "high",
+  "wikipedia": "Chester High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chester_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Chester-Upland_School_District",
+   "https://chs.chesteruplandsd.org",
+   "https://resources.finalsite.net/images/v1764173052/chesteruplandsdorg/bsdcrigwgvpv7ouxzsk3/LogoCHS108x150.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Chester HS crest logo: orange #FF781C background and crest fill with black linework and 'CHESTER' banner lettering; agrees with Wikipedia Orange and Black."
+ },
+ {
+  "school": "Lampeter Strasburg",
+  "identified_as": "Lampeter-Strasburg High School, Lampeter",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#00539B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "high",
+  "wikipedia": "Lampeter-Strasburg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lampeter-Strasburg_High_School",
+   "https://www.l-spioneers.org",
+   "https://files.smartsites.parentsquare.com/12876/header_logo_img_odpn63f5qqcc6phdlcf.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District header logo: interlocking 'LS' in blue #00539B; site link colour #00539C identical."
+ },
+ {
+  "school": "Allegheny-Clarion Valley",
+  "identified_as": "Allegheny-Clarion Valley High School, Foxburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#253D86",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Allegheny-Clarion Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Allegheny-Clarion_Valley_School_District",
+   "https://www.acvsd.org",
+   "https://resources.finalsite.net/images/v1786581986/acvsdorg/s34m43hifvwpe2sahqrl/falconword.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District falcon seal: falcon and ring lettering in blue #253D86 on white."
+ },
+ {
+  "school": "Thomas A. Edison",
+  "identified_as": "Thomas A. Edison/Fareira High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#364945",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F2BF46",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Owls",
+  "confidence": "high",
+  "wikipedia": "Thomas A. Edison High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Thomas_A._Edison_High_School_(Pennsylvania)",
+   "https://edison.philasd.org",
+   "https://edison.philasd.org/wp-content/uploads/sites/286/2026/06/Screenshot-2026-06-25-at-8.56.07-AM.png",
+   "https://edison.philasd.org/wp-content/uploads/sites/286/2023/02/OWL-FOR-PATCH-1.png"
+  ],
+  "era": null,
+  "notes": "Black appears heavily in current spirit wear.",
+  "evidence": "School-site uniform flyer: school name in dark green #364945 with gold edge, green polo, gold #F2BF46 'E' on black sweatshirts; owl patch logo is black and white. Agrees with first-pass Green and Gold."
+ },
+ {
+  "school": "Mastery Charter School",
+  "identified_as": "Mastery Charter School (campus uncertain), Philadelphia",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#005DAA",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Orange",
+    "hex": "#F78F1E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Mastery Charter Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mastery_Charter_Schools",
+   "https://masterycharter.org",
+   "https://masterycharter.org/app/themes/mastery/dist/images/favicon/favicon.png"
+  ],
+  "era": null,
+  "notes": "Campus uncertain; colours are the Mastery Charter network brand, not a specific campus.",
+  "evidence": "Mastery network site: theme blue #005DAA (dominant) and orange #F78F1E; 'M' logo in blue #015DAA with grey swoosh. Network branding only; the campus is unknown, and campuses (e.g. Gratz: red) use their own colours."
+ },
+ {
+  "school": "North Catholic",
+  "identified_as": "Cardinal Wuerl North Catholic High School, Cranberry Twp. (formerly North Catholic HS, Pittsburgh)",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": "#C8102E",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC425",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Cardinal Wuerl North Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cardinal_Wuerl_North_Catholic_High_School",
+   "https://www.northcatholic.org",
+   "https://www.northcatholic.org/apple-touch-icon.png"
+  ],
+  "era": "Moved from Troy Hill, Pittsburgh to Cranberry Township in 2014 and renamed Cardinal Wuerl North Catholic.",
+  "notes": null,
+  "evidence": "School site theme: scarlet #C8102E (x30) and gold #FFC425 (x24) are its two brand colours; site icon is an interlocking 'NC' in scarlet #C8102E with yellow-gold outline. Agrees with Wikipedia Scarlet and Gold."
+ },
+ {
+  "school": "Simon Gratz Mastery Charter",
+  "identified_as": "Simon Gratz High School Mastery Charter, Philadelphia",
+  "colors": [
+   {
+    "name": "Cherry Red",
+    "hex": "#E92324",
+    "hex_from": "photo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Simon Gratz High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Simon_Gratz_High_School",
+   "search:https://www.chalkbeat.org/philadelphia/2011/8/29/22185699/mastery-simon-gratz-opens-its-doors/",
+   "search:https://masterycharter.org/news/simon-gratz-head-basketball-coach-lynard-stewart-has-the-bulldogs-playing-at-a-high-level/",
+   "https://masterycharter.org/schools/simon-gratz-high-school",
+   "https://masterycharter.org/app/uploads/2017/02/Gratz.16.17.hallway-1024x682.jpg",
+   "https://masterycharter.org/app/uploads/2018/07/Gratz-Grad-2018-1024x681.jpg",
+   "https://masterycharter.org/app/uploads/2017/02/Gratz.16.17.happyhallway-1024x681.jpg"
+  ],
+  "era": null,
+  "notes": "Chalkbeat (2011, search summary) says traditional cherry and white were kept under Mastery; uniform shirts are red with black.",
+  "evidence": "Mastery Gratz page photos: hallway lockers painted bright red (#E92324), red student polos, graduates in red and white gowns; 'Bulldog Ready days' in page text. Hex from painted lockers (some lighting variation)."
+ }
+]

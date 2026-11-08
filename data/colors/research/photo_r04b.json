@@ -1,0 +1,659 @@
+[
+ {
+  "school": "Upper Dauphin",
+  "identified_as": "Upper Dauphin Area High School, Elizabethville (Dauphin County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#E96A24",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#0E1012",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Upper Dauphin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Dauphin_Area_High_School",
+   "https://udasd.org",
+   "https://udasd.org/wp-content/uploads/2022/03/cropped-UDASD-Trojan-Head-LOGO-80x92.png"
+  ],
+  "era": null,
+  "notes": "First-pass infobox orange #ff8200 replaced by logo orange.",
+  "evidence": "District site header Trojan-head logo: orange #E96A24 crest with black #0E1012 linework on white; site CSS is stock theme colours only. White in logo is fill, kept out."
+ },
+ {
+  "school": "Valley",
+  "identified_as": "Valley Junior/Senior High School, New Kensington (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C5B358",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Junior/Senior_High_School",
+   "https://www.nkasd.com",
+   "https://3.files.edl.io/342d/26/09/29/144025-53a5cb49-366d-4d10-bddc-63d1b88365de.png"
+  ],
+  "era": null,
+  "notes": "Gold is a muted Vegas/metallic gold, close to infobox #c4b454.",
+  "evidence": "New Kensington-Arnold SD site: only brand colour in CSS is metallic gold #C5B358 (x21) beside black; homepage flyer for 'VHS Black & Gold Party' homecoming confirms black and gold. No Viking logo found on site."
+ },
+ {
+  "school": "Mechanicsburg",
+  "identified_as": "Mechanicsburg Area Senior High School, Mechanicsburg (Cumberland County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#6B0117",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Steel Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Mechanicsburg Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mechanicsburg_Area_Senior_High_School",
+   "https://www.mbgsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/27854/logo/30667/Mechanicsburg_Area_School_District__PA_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": "Maroon confirmed and specific; steel unverified visually.",
+  "evidence": "District 'M / Tradition Pride Excellence' logo is deep maroon #6B0117 with white; site theme main colour #76232F maroon (x194). No grey/steel visible in the logo, so steel kept only by name from first pass."
+ },
+ {
+  "school": "Penn Manor",
+  "identified_as": "Penn Manor High School, Millersville (Lancaster County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#002554",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#D0A92C",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "high",
+  "wikipedia": "Penn Manor High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Manor_High_School",
+   "https://www.pennmanor.net",
+   "https://www.pennmanor.net/wp-content/uploads/2023/05/comet.svg",
+   "https://www.pennmanor.net/wp-content/uploads/2023/05/yellow-bar.jpg"
+  ],
+  "era": null,
+  "notes": "Navy and gold, darker than infobox blue; infobox #998F4D gold looks too dull.",
+  "evidence": "Site theme presets: primary #002554 navy, tertiary #D0A92C gold (plus light golds #ECDCAA/#FAF6E9); comet.svg logo fill navy #1E3463 on white; yellow-bar banner graphic in gold tones."
+ },
+ {
+  "school": "Dover",
+  "identified_as": "Dover Area High School, Dover (York County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BE1A27",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Charcoal Gray",
+    "hex": "#31363B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Dover Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dover_Area_High_School",
+   "https://www.doversd.org",
+   "https://doversd-cdn.fxbrt.com/downloads/logos_assets/dasd-webheader.png",
+   "https://doversd-cdn.fxbrt.com/downloads/logos_assets/footer_logo.png"
+  ],
+  "era": null,
+  "notes": "Silver of the infobox shows up as charcoal/dark grey plus light silver in the current eagle logo.",
+  "evidence": "Header logo: red #BE1A27 'D' with dark grey #3E3A3F text; footer Eagles logo: charcoal #31363B eagle and banner, red #B81B27 accents, white lettering, light silver #ACA4A6 highlights."
+ },
+ {
+  "school": "Carlisle",
+  "identified_as": "Carlisle High School, Carlisle (Cumberland County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#256041",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Thundering Herd",
+  "confidence": "high",
+  "wikipedia": "Carlisle High School (Carlisle, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlisle_High_School_(Carlisle,_Pennsylvania)",
+   "https://www.carlisleschools.org",
+   "https://cdnsm5-ss13.sharpschool.com/UserFiles/Servers/Server_95479/Image/District%20Branding_Logos/Primary%20District%20Logo.png"
+  ],
+  "era": null,
+  "notes": "Green is a forest green; black is prominent in the current logo.",
+  "evidence": "Primary district logo: black bison on forest green #256041 field inside a black ring with white lettering. Site CSS reds are template colours."
+ },
+ {
+  "school": "Red Lion",
+  "identified_as": "Red Lion Area Senior High School, Red Lion (York County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#130F06",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FECD30",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Red Lion Area School District",
+  "sources": [
+   "search:https://gptkb.org/entity/Red_Lion_Area_Senior_High_School",
+   "search:https://www.maxpreps.com/pa/red-lion/red-lion-lions/",
+   "https://www.rlasd.net",
+   "https://www.rlasd.net/apple-touch-icon.png",
+   "https://3.files.edl.io/73cf/21/04/22/123251-aa63a9c4-671c-4fd4-9fb0-2adc7cec3b3f.png",
+   "https://3.files.edl.io/6181/26/01/05/131423-7c4bfbc8-7af2-4fe4-978a-16e906b5b4e1.png"
+  ],
+  "era": null,
+  "notes": "CORRECTION: first pass said red and white; the school's own site shows black and gold.",
+  "evidence": "District site icon: black #130F06 lion head with gold outline; site CSS top brand colour gold #FECD30 (x26); homepage graphics are black-and-gold (board vacancy banner, info banner)."
+ },
+ {
+  "school": "Lackawanna Trail",
+  "identified_as": "Lackawanna Trail Junior/Senior High School, Factoryville (Wyoming County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#8D0215",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#010202",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Lackawanna Trail High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lackawanna_Trail_High_School",
+   "https://ltsd.org",
+   "https://ltsd.org/wp-content/uploads/2020/11/logo.png"
+  ],
+  "era": null,
+  "notes": "Red is a deep crimson/cardinal.",
+  "evidence": "District logo: dark red #8D0215 'Lions' script and circle with black outline/back; site CSS includes #880016. White only as outline."
+ },
+ {
+  "school": "West Chester Henderson",
+  "identified_as": "Henderson High School, West Chester (Chester County)",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#6D0009",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver Gray",
+    "hex": "#C2BFC1",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Henderson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Henderson_High_School_(Pennsylvania)",
+   "https://hhs.wcasd.net",
+   "https://resources.finalsite.net/images/v1727193927/wcasdnet/f8mjej4tirxn7dqvlzl9/HHS-Warriors-Logo.png"
+  ],
+  "era": null,
+  "notes": "Garnet very dark, close to infobox #733635.",
+  "evidence": "HHS Warriors shield logo: garnet #6D0009 'WARRIORS' and WC monogram with black outline/banner on light silver #DCDDDE/#C2BFC1 shield. Site CSS is stock Finalsite."
+ },
+ {
+  "school": "Blairsville",
+  "identified_as": "Blairsville Middle-High School, Blairsville (Indiana County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "River Valley Middle\u2013High School",
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Blairsville_Middle-High_School",
+   "search:https://www.maxpreps.com/pa/blairsville/blairsville-bobcats/",
+   "search:https://wiki.riteme.site/wiki/Blairsville_Middle-High_School",
+   "https://en.wikipedia.org/wiki/River_Valley_Middle%E2%80%93High_School"
+  ],
+  "era": "Blairsville and Saltsburg combined into River Valley Middle-High School (Panthers, black and teal / aero blue) around 2022. Colours here are Blairsville's.",
+  "notes": "Orange and black names only; no hex verified.",
+  "evidence": "No image looked at: MaxPreps blocked (403), Wayback unreachable, Bing image search returned unrelated results. A web search result list repeats Orange and Black / Bobcats for the PA school; River Valley infobox (successor) is Black and Teal, Panthers."
+ },
+ {
+  "school": "Erie Strong Vincent",
+  "identified_as": "Strong Vincent High School, Erie",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Colonels",
+  "confidence": "medium",
+  "wikipedia": "Erie City School District",
+  "sources": [
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Strong_Vincent_High_School.html",
+   "search:https://www.maxpreps.com/pa/erie/strong-vincent-colonels/football/schedule/all-time",
+   "https://commons.wikimedia.org/wiki/File:1946_-_Football_Program_Allentown_vs_Erie_Strong-Vincent_High_School.jpg",
+   "https://strongvincentms.bigteams.com/"
+  ],
+  "era": "Closed as a high school in 2017 when Erie's high schools merged into Erie High School (gold and royal purple); building became Strong Vincent Middle School.",
+  "notes": "Red and black names only (two snippet sources); no hex verified.",
+  "evidence": "Looked at 1946 Strong Vincent vs Allentown program cover (Commons): stock illustration, no school colours shown. Strong Vincent Middle School athletics site exists but is a different (successor) school and its theme is stock, so not used. Wayback and MaxPreps unreachable."
+ },
+ {
+  "school": "Indian Valley",
+  "identified_as": "Indian Valley High School, Lewistown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "low",
+  "wikipedia": "Indian Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Indian_Valley_High_School_(Pennsylvania)",
+   "search:https://wikipedia2006.classicistranieri.com/en/i/n/d/Indian_Valley_High_School_%28Pennsylvania%29_51a4.html"
+  ],
+  "era": "Closed 2011 when Mifflin County SD merged Indian Valley and Lewistown into Mifflin County High School.",
+  "notes": "Red and black from 2006 Wikipedia mirror snippet only; no hex verified.",
+  "evidence": "No image looked at: old site indianvalleywarriors.com only via Wayback, which was unreachable; MaxPreps 403; image search unusable. Current Wikipedia infobox has no colours (mascot Warrior, closed 2011)."
+ },
+ {
+  "school": "Cochranton",
+  "identified_as": "Cochranton Junior/Senior High School, Cochranton (Crawford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#F20002",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/cochranton/cochranton-cardinals/football/schedule/all-time",
+   "https://www.craw.org",
+   "https://www.craw.org/pics/Cochranton-Junior-Senior%20High-School-logo.png"
+  ],
+  "era": null,
+  "notes": "Logo shows black as a strong secondary; white from first pass not visible except eye detail.",
+  "evidence": "Crawford Central SD school logo for Cochranton Jr/Sr: bright red #F20002 cardinal head, black outline/face, orange-gold beak #F2A52C (bird detail, not a school colour). District site theme red #B00011."
+ },
+ {
+  "school": "Littlestown",
+  "identified_as": "Littlestown Senior High School, Littlestown (Adams County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#10284B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F5D516",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Thunderbolts",
+  "confidence": "high",
+  "wikipedia": "Littlestown Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Littlestown_Senior_High_School",
+   "https://www.lasd.k12.pa.us",
+   "https://cmsv2-assets.apptegy.net/uploads/6170/logo/7303/Littlestown-L-Proportioned-RGB__8_.png"
+  ],
+  "era": null,
+  "notes": "Gold is a bright yellow-gold.",
+  "evidence": "District 'L' with lightning bolt logo: navy #10284B L, gold #F5D516 bolt; site theme #00274C navy (x145) and #F5D617 gold (x74)."
+ },
+ {
+  "school": "St. Pius X",
+  "identified_as": "Saint Pius X High School, Lower Pottsgrove Township (Montgomery County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCC00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Winged Lions",
+  "confidence": "medium",
+  "wikipedia": "Saint Pius X High School (Lower Pottsgrove Township, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saint_Pius_X_High_School_(Lower_Pottsgrove_Township,_Pennsylvania)",
+   "http://www.stpiusxhs.org"
+  ],
+  "era": "Closed 2010; replaced by Pope John Paul II High School (Royersford).",
+  "notes": "Gold hex is the editor's infobox swatch, not from a logo.",
+  "evidence": "No image looked at: school closed 2010 and old site stpiusxhs.org only via Wayback, which was unreachable; image search unusable. Wikipedia infobox reads Navy Blue and Gold with a #FFCC00 swatch (kept)."
+ },
+ {
+  "school": "Trinity",
+  "identified_as": "Trinity High School, Camp Hill (Lower Allen Township, Cumberland County)",
+  "colors": [
+   {
+    "name": "Kelly Green",
+    "hex": "#277A1E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Shamrocks",
+  "confidence": "high",
+  "wikipedia": "Trinity High School (Lower Allen Township, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Trinity_High_School_(Lower_Allen_Township,_Pennsylvania)",
+   "https://www.thsrocks.us",
+   "https://thsrocks.us/wp-content/uploads/2024/09/triquetra_logo.webp",
+   "https://thsrocks.us/wp-content/uploads/2024/10/trinity-logo-outlined.webp"
+  ],
+  "era": null,
+  "notes": "Green and white confirmed.",
+  "evidence": "Official site thsrocks.us seal logo: green #277A1E lettering, ring and shamrock on white (red cross and black are heraldic details). Site CSS leads with navy #121961 (theme, not seen in logos). trinityhs.org is a different Trinity."
+ },
+ {
+  "school": "St. Joseph's Academy",
+  "identified_as": "Saint Joseph's Catholic Academy, Boalsburg (Centre County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1A3668",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#E04403",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Wolfpack",
+  "confidence": "high",
+  "wikipedia": "Saint Joseph's Catholic Academy (Boalsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saint_Joseph's_Catholic_Academy_(Boalsburg,_Pennsylvania)",
+   "https://stjoeacad.org",
+   "https://stjoeacad.org/wp-content/uploads/2021/02/logo_new2.png",
+   "https://stjoeacad.org/wp-content/uploads/2022/09/Wolf-Statue-768x509.jpg"
+  ],
+  "era": null,
+  "notes": "Blue is a navy.",
+  "evidence": "Site header crest and wordmark in navy #1A3668 (site CSS #16335F); site uses orange #E04403 as accent border. Infobox also says blue and orange. No Wolfpack athletics logo found."
+ },
+ {
+  "school": "Moon",
+  "identified_as": "Moon Area High School, Moon Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#B22A2E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#252521",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Moon Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Moon_Area_High_School",
+   "https://www.moonarea.net",
+   "https://resources.finalsite.net/images/v1651666114/moonareanet/uewwdatk48qzbsersxgi/moonareaschooldistrict.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Moon Area SD 'MA' logo: red #B22A2E letters and ring, near-black #252521 text; site theme red #AD2F36 (x93)."
+ },
+ {
+  "school": "Pine-Richland",
+  "identified_as": "Pine-Richland High School, Gibsonia (Allegheny County)",
+  "colors": [
+   {
+    "name": "Dark Green",
+    "hex": "#003428",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Sage/Silver",
+    "hex": "#B4C7C0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Pine-Richland High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pine-Richland_High_School",
+   "https://www.pinerichland.org",
+   "https://resources.finalsite.net/images/v1709305682/pinerichlandorg/xnmky5uyvulbraknjzpe/Pine-RichlandSchoolDistrictHeaderLogo.png"
+  ],
+  "era": null,
+  "notes": "Green is far darker than infobox #008000; the pale sage may be a design accent rather than an official colour.",
+  "evidence": "District header 'PR' logo: very dark green #003428 front letters with pale sage-grey #B4C7C0 shadow letters on white. Site CSS is stock Finalsite."
+ },
+ {
+  "school": "Peters Township",
+  "identified_as": "Peters Township High School, McMurray (Washington County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C8252B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Peters Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Peters_Township_High_School",
+   "https://www.ptsd.k12.pa.us",
+   "https://files.smartsites.parentsquare.com/13360/header_logo_img_fb4l63nmpq6t0cgpjim.png"
+  ],
+  "era": null,
+  "notes": "Red and white confirmed with black as logo field; mascot not checked on this pass.",
+  "evidence": "District header 'PT' logo: white PT on black oval with red #C8252B rim; site CSS mostly Bootstrap stock plus #9C072A. ptsd.org is an unrelated PTSD site."
+ },
+ {
+  "school": "Lower Merion",
+  "identified_as": "Lower Merion High School, Ardmore (Montgomery County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#541B25",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Aces",
+  "confidence": "high",
+  "wikipedia": "Lower Merion High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lower_Merion_High_School",
+   "https://www.lmsd.org",
+   "https://www.lmsd.org/uploaded/themes/default/images/districtlogo.png"
+  ],
+  "era": null,
+  "notes": "District-level branding; no Aces athletics logo checked.",
+  "evidence": "District logo wordmark and seal in maroon #541A24-#5F2A33; site theme top colour #541B25 (x57)."
+ },
+ {
+  "school": "Cameron County",
+  "identified_as": "Cameron County Junior/Senior High School, Emporium",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A90707",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "high",
+  "wikipedia": "Cameron County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cameron_County_High_School",
+   "https://www.camcosd.org",
+   "https://files.smartsites.parentsquare.com/10359/header_logo_img_0vas5lbgoq9i2lllagd.png",
+   "https://files.smartsites.parentsquare.com/10359/Clean%20Logo%20Small_1787152696.png"
+  ],
+  "era": null,
+  "notes": "Red is a dark red; black appears in logo artwork.",
+  "evidence": "District header logo: Native American head in headdress with red #A90707 and white feathers, black tips/outline; site theme red #A90707 (x17)."
+ }
+]

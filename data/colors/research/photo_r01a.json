@@ -1,0 +1,680 @@
+[
+ {
+  "school": "Greensburg Salem",
+  "identified_as": "Greensburg Salem High School, Greensburg",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#FFAF3C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Brown",
+    "hex": "#4F2817",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Lions",
+  "confidence": "high",
+  "wikipedia": "Greensburg Salem High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Salem_High_School",
+   "https://gshs.greensburgsalem.org",
+   "https://resources.finalsite.net/images/v1676418558/greensburgsalemorg/tyzovxgbdpsskceircgs/GS_FullColor.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia cites the district's 2020-21 Parent/Student Handbook for Gold, Brown and White.",
+  "evidence": "district 'GS' block logo: gold/orange #FFAF3C fill with dark brown #4F2817 outline; site theme brown #89563B and gold #FFAF3C. Gold is a warm orange-gold."
+ },
+ {
+  "school": "Saegertown",
+  "identified_as": "Saegertown Junior/Senior High School, Saegertown (PENNCREST SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Penncrest School District",
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Penncrest_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Saegertown_High_School_Blue_Gold_Yearbook/1960/Page_25.html",
+   "https://www.maxpreps.com/pa/saegertown/saegertown-panthers/",
+   "https://image.maxpreps.io/school-mascot/3/e/c/3ecfe3d6-91e8-4cad-ad67-a649bf3e3d1a.gif",
+   "https://www.penncrest.org",
+   "https://www.penncrest.org/pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": "Penncrest SD Wikipedia (via search snippet) gives blue & gold for Saegertown; 1960 yearbook titled 'Blue Gold' agrees.",
+  "evidence": "MaxPreps school record lists Blue/Gold (database hex #034CB2/#C8880A, not used); MaxPreps mascot is clip-art panther with yellow 'S.H.S.' outlined in blue, not clean. Penncrest district site/logo is maroon #6D1214 (district brand, not Saegertown)."
+ },
+ {
+  "school": "McGuffey",
+  "identified_as": "McGuffey High School, Claysville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#081E49",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C9B75D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "high",
+  "wikipedia": "McGuffey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/McGuffey_High_School",
+   "https://en.wikipedia.org/wiki/McGuffey_School_District",
+   "https://www.mcguffey.k12.pa.us",
+   "https://www.mcguffey.k12.pa.us/sysimages/HeaderLogo5.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree.",
+  "evidence": "district header Highlander logo: navy #081E49 and Vegas gold #C9B75D on white; site theme #071D49 navy and #C5B358 gold. Gold is a muted Vegas gold."
+ },
+ {
+  "school": "Bermudian Springs",
+  "identified_as": "Bermudian Springs High School, York Springs",
+  "colors": [
+   {
+    "name": "Cherry Red",
+    "hex": "#800000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Bermudian Springs High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bermudian_Springs_High_School",
+   "https://en.wikipedia.org/wiki/Bermudian_Springs_School_District",
+   "https://www.bermudian.org",
+   "https://resources.finalsite.net/images/v1679910195/bermudianorg/zbkwby2sfwzwdbo4gvre/Header1.png"
+  ],
+  "era": null,
+  "notes": "HS page: Red, Black, Silver, White (silver box #C0C0C0 is a generic silver). District page says 'Steel and Cherry' - same palette named differently.",
+  "evidence": "district seal (header): dark cherry/maroon #800000 on white with grey lettering; site theme #800404. The red is a deep cherry, matching the district's 'Cherry and Steel' naming. Black/silver not seen in the seal."
+ },
+ {
+  "school": "Shaler",
+  "identified_as": "Shaler Area High School, Glenshaw",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0B233F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#DB1E36",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "high",
+  "wikipedia": "Shaler Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shaler_Area_High_School",
+   "https://en.wikipedia.org/wiki/Shaler_Area_School_District",
+   "https://shalerarea.org",
+   "https://shalerarea.org/wp-content/uploads/2023/11/SA-Titan-logo-White-Fill.png"
+  ],
+  "era": null,
+  "notes": "HS page: blue and white with red secondary; district page: Navy Blue, White, Red.",
+  "evidence": "district Titan helmet logo: navy #0B233F helmet and outer ring, red #DB1E36 inner ring, white fill; site theme #A30001 red and navy #2C335F/#08154A."
+ },
+ {
+  "school": "Bishop McDevitt",
+  "identified_as": "Bishop McDevitt High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#0C2340",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#A39261",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Bishop McDevitt High School (Harrisburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McDevitt_High_School_(Harrisburg,_Pennsylvania)",
+   "https://www.bishopmcdevitt.org/mcd",
+   "https://www.bishopmcdevitt.org/mcd/images/BMcD_Logo.png"
+  ],
+  "era": null,
+  "notes": "Not Bishop McDevitt of Wyncote (District 12); District 3 = Harrisburg.",
+  "evidence": "school wordmark logo: dark navy text (#031F34) and muted gold/bronze 'HIGH SCHOOL' and cross (#94866D); site CSS footer navy #0c2340 with #A39261 gold border, #012B5D blue. Agrees with Wikipedia navy/Vegas gold."
+ },
+ {
+  "school": "Bedford",
+  "identified_as": "Bedford High School, Bedford (Bedford Area SD)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#01328C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Bedford High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bedford_High_School_(Pennsylvania)",
+   "https://www.bedfordasd.org/o/bhs",
+   "https://cmsv2-assets.apptegy.net/uploads/1027/logo/3379/dirstrict_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; infobox has no mascot.",
+  "evidence": "Bedford HS page theme colour #01328C (royal blue) dominates; district 'EXCEL!' stamp logo is blue #4462B0 with red #CC0405 lettering (district motto mark, not a school logo). No athletic mascot logo found. Red appears only in the district stamp."
+ },
+ {
+  "school": "Hughesville",
+  "identified_as": "Hughesville Junior/Senior High School, Hughesville (East Lycoming SD)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2C5418",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#AC8400",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "low",
+  "wikipedia": "Hughesville Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hughesville_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/East_Lycoming_School_District",
+   "https://www.elsd.org",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/images/logos/logo.png",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/images/logos/district-logo.png",
+   "https://www.elsd.org/wp-content/themes/elsd-custom/style.css"
+  ],
+  "era": null,
+  "notes": "Both Wikipedia infobox colour fields are blank; searches found no stated colours. Search budget ran out before more sources could be checked.",
+  "evidence": "East Lycoming SD (sole HS = Hughesville) Spartan helmet logo: dark green plume #324828 and grey helmet; site theme green #2C5418 dominant, gold #AC8400/#BFA447 used as accents. No written colour statement found; green is clear, gold and grey are inferred from site/logo."
+ },
+ {
+  "school": "Mount Pleasant",
+  "identified_as": "Mount Pleasant Area Junior/Senior High School, Mount Pleasant",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0F02FF",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Red",
+    "hex": "#E40800",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Mount Pleasant Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Pleasant_Area_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Mount_Pleasant_Area_School_District",
+   "https://www.mpasd.net",
+   "https://cmsv2-assets.apptegy.net/uploads/15731/logo/16752/logo_template_300V.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree.",
+  "evidence": "district logo: bright blue outlined 'V' (#0000FF) with Viking head in red, yellow and blue; site theme blue #0F02FF and red #E40800. Blue is a vivid royal blue."
+ },
+ {
+  "school": "Brandywine Heights",
+  "identified_as": "Brandywine Heights Area High School, Topton",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#781A1A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#1B365E",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": "#B3B2B6",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bullets",
+  "confidence": "high",
+  "wikipedia": "Brandywine Heights Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brandywine_Heights_Area_School_District",
+   "https://www.bhasd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/6854/logo/8087/BH_logo_template_300%282%29.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia only; colour boxes are named colours, not hex.",
+  "evidence": "district 'BH' shield: maroon #781A1A border and stars, navy #50556F-ish 'BH' panel, grey #B3B2B6 bars; site theme navy #1B365E and maroon #76191A. The 'Blue' is navy."
+ },
+ {
+  "school": "Mt. Lebanon",
+  "identified_as": "Mt. Lebanon High School, Mt. Lebanon",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1D2453",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E3BA12",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "medium",
+  "wikipedia": "Mt. Lebanon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mt._Lebanon_High_School",
+   "https://en.wikipedia.org/wiki/Mt._Lebanon_School_District",
+   "https://www.mtlsd.org",
+   "https://resources.finalsite.net/images/v1768143467/mtlebanon/xooyqhyygbaqexs514qp/Layer1.svg",
+   "https://resources.finalsite.net/images/v1767478862/mtlebanon/risggocyoyxd40r0qmkv/MLSD1.svg"
+  ],
+  "era": null,
+  "notes": "HS page colour box uses navy for the blue; district page uses plain blue.",
+  "evidence": "district SVG logos (fill values read from the SVG source; could not render): navy #1D2453 and gold #E3BA12; second mark all navy #223064. Blue is navy, matching the HS Wikipedia colour box."
+ },
+ {
+  "school": "Philipsburg-Osceola",
+  "identified_as": "Philipsburg-Osceola Area High School, Philipsburg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0F426D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": "#BABCBE",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "high",
+  "wikipedia": "Philipsburg-Osceola Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_High_School",
+   "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_School_District",
+   "https://www.pomounties.org",
+   "https://files.smartsites.parentsquare.com/11483/header_logo_img_1hi6glqks25a0fofaca.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "district header Mountie logo: navy/denim blue #0F426D coonskin cap and hair with silver-grey #BABCBE face/fur; site theme #2A3F7A. Silver/grey is a logo colour, not in the name list."
+ },
+ {
+  "school": "Shamokin",
+  "identified_as": "Shamokin Area High School, Coal Township",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Shamokin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shamokin_Area_High_School",
+   "https://en.wikipedia.org/wiki/Shamokin_Area_School_District",
+   "search:https://www.shamokin.k12.pa.us"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "No image looked at: district site (shamokin.k12.pa.us) unreachable from here (proxy 502), web/image search engines returned junk, Wikipedia has no logo image. Names kept from first pass (Wikipedia)."
+ },
+ {
+  "school": "Central Mountain",
+  "identified_as": "Central Mountain High School, Mill Hall (Keystone Central SD)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#18007F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Central Mountain High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Mountain_High_School",
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District",
+   "https://cmhs.kcsd.us",
+   "https://resources.finalsite.net/images/v1750872236/kcsdk12paus/r3qxpporgoatcw2tswks/Central-Mountain-Logo.png"
+  ],
+  "era": "Formed 2000 from Lock Haven HS and Bald Eagle-Nittany HS.",
+  "notes": "Wikipedia color box #002366 (that hex is 'royal blue (traditional)', quite dark).",
+  "evidence": "school Wildcat 'CM' logo: deep violet-leaning royal blue #18007F on white; site theme #000F84. Darker and more violet than a standard royal blue."
+ },
+ {
+  "school": "Westmont Hilltop",
+  "identified_as": "Westmont Hilltop High School, Johnstown",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EC3126",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#48484A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hilltoppers",
+  "confidence": "high",
+  "wikipedia": "Westmont Hilltop High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Westmont_Hilltop_High_School",
+   "https://en.wikipedia.org/wiki/Westmont_Hilltop_School_District",
+   "https://www.whsd.org",
+   "https://www.whsd.org/pics/footer_logo.png",
+   "https://www.whsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "district footer wordmark 'WH Westmont Hilltop Hilltoppers': bright red #EC3126 letters with charcoal grey #48484A outline and grey mountains; site theme red #D11915. Header logo is a seasonal 250th flag version."
+ },
+ {
+  "school": "Danville",
+  "identified_as": "Danville Area High School, Danville",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#391B57",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#F57120",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Ironmen",
+  "confidence": "high",
+  "wikipedia": "Danville High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Danville_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Danville_Area_School_District",
+   "https://www.danvillesd.org",
+   "https://resources.finalsite.net/images/v1687258153/danvillek12paus/mgoaf4soylwxtmsqntc3/Danville_Logo_Webpage.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "district Ironmen logo: white arm and hammer on dark purple #391B57 disc with orange flame accents; site theme purple #3A0A57 and orange #F57120. Purple is primary."
+ },
+ {
+  "school": "Manheim Central",
+  "identified_as": "Manheim Central High School, Manheim",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#500000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Barons",
+  "confidence": "medium",
+  "wikipedia": "Manheim Central High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Manheim_Central_High_School",
+   "https://en.wikipedia.org/wiki/Manheim_Central_School_District",
+   "https://www.manheimcentral.org",
+   "https://resources.finalsite.net/images/v1793807822/manheimcentralorg/qvsyuxr9fhwfalx42vqm/Web-Logo-Crest-cropped.png",
+   "https://resources.finalsite.net/images/v1692214993/manheimcentralorg/fcayq52sq4p2tuxtetmz/Homepage-Athletics.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree (HS colour box renders gray as silver).",
+  "evidence": "district crest: dark maroon/brown #411512 'MC' panel with green laurel and gold torch; site theme #500000 maroon; athletics photo shows maroon 'MC' painted on the turf. Gray not seen in the crest."
+ },
+ {
+  "school": "Derry Area",
+  "identified_as": "Derry Area High School, Derry",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#125B8A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F9D20F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Derry Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Derry_Area_High_School",
+   "https://en.wikipedia.org/wiki/Derry_Area_School_District",
+   "https://www.dasd.us",
+   "https://derasdm.edlioschool.com/common_files/main.css",
+   "https://derasdm.edlioschool.com/common_pics/logo.png",
+   "https://derasdm.edlioschool.com/common_pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "district Trojan helmet logo: medium/steel blue #125B8A with bright yellow-gold #F9D20F plume and outline; 'DA' header monogram blue #0D5891; site theme CSS #003594 blue and #FFB900 gold."
+ },
+ {
+  "school": "Boyertown",
+  "identified_as": "Boyertown Area Senior High School, Boyertown",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AE0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "high",
+  "wikipedia": "Boyertown Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Boyertown_Area_School_District",
+   "search:https://www.wikiwand.com/en/Boyertown_Area_School_District",
+   "https://www.boyertownasd.org",
+   "https://resources.finalsite.net/images/v1682782218/boyertownasdorg/kw8fvnlqqt9i6yrvxwfp/PNGwithCopyrightandRed19204202023.png",
+   "https://resources.finalsite.net/images/v1762282395/boyertownasdorg/lllxa0eo0eav2lxahzcx/OfficialDistrictLogoPhoto11042025.png"
+  ],
+  "era": null,
+  "notes": "Current Wikipedia raw infobox has no colours field; only a Wikipedia mirror (seen via search) says 'Black & red'. Unverified.",
+  "evidence": "district Bear head logo: black #000000 bear with deep red #AE0000 fur/mouth on white; district seal red #C10405; site theme #C00000. Confirms black and red."
+ },
+ {
+  "school": "Grove City",
+  "identified_as": "Grove City Area High School, Grove City",
+  "colors": [
+   {
+    "name": "Vegas Gold",
+    "hex": "#B4A36B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Grove City Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Grove_City_Area_School_District",
+   "search:https://www.maxpreps.com/pa/grove-city/grove-city-eagles/golf/16-17/schedule/",
+   "https://www.gcasdk12.org",
+   "https://resources.finalsite.net/images/v1716382345/grovecityk12paus/dat7wdf2bvcsfutt59lv/DistrictLogoTransparent.png"
+  ],
+  "era": null,
+  "notes": "Conflict: district Wikipedia says Gold and black; MaxPreps (per search summary) says gold and white. Not Grove City HS in Ohio (crimson/blue).",
+  "evidence": "district seal: Vegas gold #B4A36B ring and shield quarters with black lettering and eagle head; resolves the gold/black vs gold/white conflict in favour of gold and black."
+ },
+ {
+  "school": "Muncy",
+  "identified_as": "Muncy Junior/Senior High School, Muncy",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#001E44",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "Muncy Junior-Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Muncy_Junior-Senior_High_School",
+   "https://en.wikipedia.org/wiki/Muncy_School_District",
+   "https://www.muncysd.org",
+   "https://www.muncysd.org/wp-content/themes/base-theme/images/logo.png"
+  ],
+  "era": null,
+  "notes": "HS Wikipedia (citing Sun-Gazette) blue and white with navy box; district page 'White and Navy Blue' (citing proximityone).",
+  "evidence": "district logo: navy #001E44 Indian head drawing on white; site theme #001E44."
+ },
+ {
+  "school": "Bald Eagle Nittany",
+  "identified_as": "Bald Eagle-Nittany High School, Mill Hall (Keystone Central SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Bald Eagle-Nittany High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bald_Eagle-Nittany_High_School"
+  ],
+  "era": "Closed 1999/2000; merged with Lock Haven HS into Central Mountain HS (royal blue/white).",
+  "notes": "Wikipedia only.",
+  "evidence": "No era image found: closed school (pre-2000); Wikipedia page has no image and image search engines were unusable from here. Names kept from first pass; did not use Central Mountain's colours."
+ }
+]

@@ -1,0 +1,493 @@
+[
+ {
+  "school": "Fort LeBoeuf",
+  "identified_as": "Fort LeBoeuf High School, Waterford",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bison",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fort_LeBoeuf_School_District",
+   "https://www.maxpreps.com/pa/waterford/fort-leboeuf-bison"
+  ],
+  "era": null,
+  "notes": "Wikipedia: blue and white; MaxPreps: Royal Blue, White, Red (red possibly an athletic accent). Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Kiski Area",
+  "identified_as": "Kiski Area High School, Vandergrift",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cavaliers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kiski_Area_High_School",
+   "https://www.westmorelandsports.com/schools/kiski-area",
+   "https://www.maxpreps.com/pa/vandergrift/kiski-area-cavaliers/"
+  ],
+  "era": null,
+  "notes": "Wikipedia and WestmorelandSports agree navy and gold; hockey site says Old Gold. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Hempfield Area",
+  "identified_as": "Hempfield Area High School, Greensburg",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hempfield_Area_High_School",
+   "https://www.westmorelandsports.com/schools/hempfield"
+  ],
+  "era": null,
+  "notes": "Two independent sources agree. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Council Rock South",
+  "identified_as": "Council Rock High School South, Holland",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Hawks",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Council_Rock_High_School_South",
+   "https://eliteprospects.com/team/21805/council-rock-high-south",
+   "https://en.wikipedia.org/wiki/Council_Rock_High_School_North"
+  ],
+  "era": "Opened 2002-03 when Council Rock split; South took gold, North silver, both keep blue.",
+  "notes": "Wikipedia infobox order Navy, White, Gold; gold is the distinguishing colour. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Greenville",
+  "identified_as": "Greenville Junior-Senior High School, Greenville (Mercer County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "sources": [
+   "https://cheerleadingcoaching.com/coaching-interviews-and-tips/cheerleading-coaching-interviews/greenville-high-school-coach-ruppert-cheerleading-coaching-interview-tips/"
+  ],
+  "era": null,
+  "notes": "Only an informal cheer-coaching interview names colours, and it is not certain it is the PA school. Wikipedia/district results did not show colours. Verify. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Greater Latrobe",
+  "identified_as": "Greater Latrobe Senior High School, Latrobe",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Latrobe_School_District",
+   "https://www.westmorelandsports.com/schools/latrobe",
+   "https://www.maxpreps.com/pa/latrobe/greater-latrobe-wildcats/"
+  ],
+  "era": null,
+  "notes": "High-school Wikipedia infobox adds white. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Bellefonte",
+  "identified_as": "Bellefonte Area High School, Bellefonte",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bellefonte_Area_High_School",
+   "https://www.basd.net/page/history-of-the-red-raiders",
+   "https://www.maxpreps.com/pa/bellefonte/bellefonte-red-raiders"
+  ],
+  "era": null,
+  "notes": "District history page: red and white since mid-1920s. Nickname briefly dropped 2021, restored 2022. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Wyalusing",
+  "identified_as": "Wyalusing Valley Junior-Senior High School, Wyalusing",
+  "colors": [
+   {
+    "name": "Kelly Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Bright Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "sources": [
+   "https://wyalusingrams.com/high-school-athletics",
+   "https://en.wikipedia.org/wiki/Wyalusing_Valley_Junior-Senior_High_School"
+  ],
+  "era": null,
+  "notes": "School athletics site: 'Kelly Green & Bright Gold'. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Mifflinburg",
+  "identified_as": "Mifflinburg Area High School, Mifflinburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mifflinburg_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflinburg_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Wikipedia only (school + district pages). Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Warrior Run",
+  "identified_as": "Warrior Run High School, Turbotville",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Defenders",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warrior_Run_High_School",
+   "https://en.wikipedia.org/wiki/Warrior_Run_School_District"
+  ],
+  "era": null,
+  "notes": "Wikipedia only. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Chestnut Ridge",
+  "identified_as": "Chestnut Ridge Senior High School, New Paris",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chestnut_Ridge_Senior_High_School",
+   "https://www.on3.com/high-school/chestnut-ridge-new-paris-pa-5352",
+   "https://www.maxpreps.com/pa/new-paris/chestnut-ridge-lions/football/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "MaxPreps says Blue, Yellow. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Athens",
+  "identified_as": "Athens Area High School, Athens (Bradford County)",
+  "colors": [
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "low",
+  "sources": [
+   "https://en.wikipedia.com/wiki/PIAA_Football_Teams,_Conferences_and_Leagues",
+   "https://en.wikipedia.org/wiki/Athens_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Only a Wikipedia list table (PIAA football teams) gives 'silver & black'; district page showed no colours. Verify. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Dallastown",
+  "identified_as": "Dallastown Area High School, Dallastown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dallastown_Area_School_District",
+   "https://en.wikipedia.org/wiki/Dallastown_Area_High_School",
+   "https://www.maxpreps.com/pa/dallastown/dallastown-wildcats/football",
+   "https://www.eliteprospects.com/team/19841/dallastown-hs/2025-2026"
+  ],
+  "era": null,
+  "notes": "Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "DuBois",
+  "identified_as": "DuBois Area Senior High School, DuBois",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Beavers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/DuBois_Area_Senior_High_School",
+   "https://www.on3.com/high-school/du-bois-du-bois-pa-5357",
+   "https://www.connectradio.fm/?p=832095"
+  ],
+  "era": null,
+  "notes": "Not DuBois Central Catholic. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Franklin Regional",
+  "identified_as": "Franklin Regional High School, Murrysville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Franklin_Regional_High_School",
+   "https://www.westmorelandsports.com/schools/franklin-regional",
+   "https://www.eliteprospects.com/team/21530/franklin-regional-high/2024-2025"
+  ],
+  "era": null,
+  "notes": "Wikipedia: blue and gold; WestmorelandSports: Navy Blue/Vegas Gold; hockey: Navy + Old Gold. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Ridgway",
+  "identified_as": "Ridgway Area High School, Ridgway",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Elkers",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ridgway_Area_School_District",
+   "https://mshs.rasd.us/"
+  ],
+  "era": null,
+  "notes": "Colours from district Wikipedia infobox only. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Tyrone",
+  "identified_as": "Tyrone Area High School, Tyrone",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tyrone_Area_School_District",
+   "https://tyroneeagleeyenews.com/eagle-eye-explainer-how-tyrone-became-the-golden-eagles"
+  ],
+  "era": null,
+  "notes": "Colours from district Wikipedia only. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Boiling Springs",
+  "identified_as": "Boiling Springs High School, Boiling Springs (Cumberland County)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bubblers",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Boiling_Springs_High_School_(Pennsylvania)",
+   "https://wackyhighschoolmascots.blogspot.com/2024/03/bubblers-boiling-springs-pa-high-school.html"
+  ],
+  "era": "A Medium essay claims the school was once the Mustangs in red, white and blue (unverified).",
+  "notes": "Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Washington",
+  "identified_as": "Washington High School, Washington (Washington County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Prexies",
+  "confidence": "low",
+  "sources": [
+   "https://www.maxpreps.com/pa/washington/washington-prexies/volleyball/schedule/all-time",
+   "https://en.wikipedia.org/wiki/Washington_School_District_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Only one MaxPreps page states Blue, Gold; district Wikipedia infobox shows no colours. Do not confuse with W&J (red/black). Verify. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ },
+ {
+  "school": "Faith Christian Academy",
+  "identified_as": "Faith Christian Academy, Sellersville",
+  "colors": [],
+  "mascot": "Lions",
+  "confidence": "low",
+  "sources": [
+   "https://www.maxpreps.com/pa/sellersville/faith-christian-academy-lions/basketball"
+  ],
+  "era": null,
+  "notes": "No source for Sellersville colours found; other Faith Christian Academies (FL, WV) have different colours. Search-result summaries only (WebFetch blocked for wikipedia/maxpreps in this session)."
+ }
+]

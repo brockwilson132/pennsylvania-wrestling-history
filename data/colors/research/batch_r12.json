@@ -1,0 +1,983 @@
+[
+ {
+  "school": "Keystone",
+  "identified_as": "Keystone Junior/Senior High School, Knox",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Keystone Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_School_District",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "search:https://www.maxpreps.com/pa/knox/keystone-panthers/football/"
+  ],
+  "era": null,
+  "notes": "District infobox lists White, Black and Gold; PIAA football table and MaxPreps give black and gold."
+ },
+ {
+  "school": "Bishop McDevitt (12)",
+  "identified_as": "Bishop McDevitt High School, Wyncote",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Royal Lancers",
+  "confidence": "low",
+  "wikipedia": "Bishop McDevitt High School (Wyncote, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McDevitt_High_School_(Wyncote,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "search:https://www.maxpreps.com/pa/wyncote/bishop-mcdevitt-royal-lancers/soccer/schedule/all-time"
+  ],
+  "era": "Closed 2021.",
+  "notes": "Conflict: school infobox says Gold and White; PIAA football table and MaxPreps say black and gold."
+ },
+ {
+  "school": "Windber",
+  "identified_as": "Windber Area High School, Windber",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Ramblers",
+  "confidence": "medium",
+  "wikipedia": "Windber Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Windber_Area_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; not checked against the 1949-59 era. Web search budget ran out mid-batch; only Wikipedia was checked."
+ },
+ {
+  "school": "Woodrow Wilson",
+  "identified_as": "Woodrow Wilson High School, Levittown (Bristol Township SD)",
+  "colors": [
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Rams",
+  "confidence": "medium",
+  "wikipedia": "Harry S Truman High School (Levittown, Pennsylvania)",
+  "sources": [
+   "search:https://easternpafootball.com/?p=18532",
+   "https://en.wikipedia.org/wiki/Harry_S_Truman_High_School_(Levittown,_Pennsylvania)"
+  ],
+  "era": "Woodrow Wilson HS 1959-1980; renamed Harry S Truman HS in 1980 (Tigers, black and gold).",
+  "notes": "Gray and gold came from a search snippet of an Eastern PA Football retrospective ('Golden Rams 1959-1980'); page itself not read."
+ },
+ {
+  "school": "Belmont Charter",
+  "identified_as": "Belmont Charter High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Belmont Charter School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://en.wikipedia.org/wiki/Belmont_Charter_School"
+  ],
+  "era": null,
+  "notes": "Only the Wikipedia PIAA football table gives colours/mascot; school infobox has none."
+ },
+ {
+  "school": "Waynesburg",
+  "identified_as": "Waynesburg High School, Waynesburg (predecessor of Waynesburg Central)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "low",
+  "wikipedia": "Waynesburg Central High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Waynesburg_Central_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": "Bracket years 1951-68 predate Central Greene's Waynesburg Central; colours shown are Waynesburg Central's.",
+  "notes": "Not verified that the older Waynesburg HS wore red and black. Web search budget ran out mid-batch; only Wikipedia was checked."
+ },
+ {
+  "school": "Academy at Palumbo",
+  "identified_as": "Academy at Palumbo, Philadelphia",
+  "colors": [
+   {
+    "name": "Teal",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Griffins",
+  "confidence": "high",
+  "wikipedia": "Academy at Palumbo",
+  "sources": [
+   "search:https://palumbo.philasd.org/about-us/",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "search:https://www.maxpreps.com/pa/philadelphia/academy-at-palumbo-griffin/soccer/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "School site (via search snippet): 'Our school colors are teal, silver, and black.'"
+ },
+ {
+  "school": "Delaware Co. Christian",
+  "identified_as": "Delaware County Christian School, Newtown Square",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": "Delaware County Christian School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Delaware_County_Christian_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Infobox: Green and White. PIAA football table: dark green, white & black."
+ },
+ {
+  "school": "Delhaas",
+  "identified_as": "Delhaas High School, Bristol Township (Bucks Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://neshaminyfootball.com/wp-content/uploads/Writing-2018-DHS-VS.-NESHAMINY-1959.pdf"
+  ],
+  "era": "Bristol Township school; Woodrow Wilson HS was split off from it in 1959. Later fate not confirmed.",
+  "notes": "No source found for colours or mascot."
+ },
+ {
+  "school": "Bishop O'Reilly",
+  "identified_as": "Bishop O'Reilly High School, Kingston",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Queensmen",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://bishoporeilly.org/alma-mater/",
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1985-08-28/ed-1/seq-36/"
+  ],
+  "era": "Later closed as a high school (per search; reportedly became an elementary school).",
+  "notes": "Colours inferred only from alma mater lyrics ('Queen Mary's blue', gold); no explicit colour statement found."
+ },
+ {
+  "school": "Overbrook",
+  "identified_as": "Overbrook High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Overbrook High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "search:https://www.maxpreps.com/pa/philadelphia/overbrook-panthers/wrestling/22-23/schedule/"
+  ],
+  "era": null,
+  "notes": "MaxPreps lists Orange, Black, White; PIAA football table orange & black."
+ },
+ {
+  "school": "North Pocono",
+  "identified_as": "North Pocono High School, Covington Township",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "North Pocono High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Pocono_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Frankford",
+  "identified_as": "Frankford High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "medium",
+  "wikipedia": "Frankford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Frankford_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Infobox text says royal blue but its colour box is navy; PIAA table lists crimson, gold & navy."
+ },
+ {
+  "school": "Collingdale",
+  "identified_as": "Collingdale High School, Collingdale (Delaware Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://aphspage.sedelco.org/our_school/general_information",
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School"
+  ],
+  "era": "Merged with Sharon Hill HS into Academy Park HS in 1982 (Knights, blue and silver).",
+  "notes": "Collingdale's own colours not found."
+ },
+ {
+  "school": "Greensburg CC",
+  "identified_as": "Greensburg Central Catholic High School, Greensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Centurions",
+  "confidence": "medium",
+  "wikipedia": "Greensburg Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Bethlehem-Center",
+  "identified_as": "Bethlehem-Center High School, Fredericktown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Bethlehem-Center School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bethlehem-Center_School_District",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Mansfield",
+  "identified_as": "Mansfield High School, Mansfield (Tioga Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Tioga_School_District",
+   "https://en.wikipedia.org/wiki/North_Penn_Junior/Senior_High_School"
+  ],
+  "era": "Merged with North Penn (Blossburg) in 2014 as North Penn-Mansfield (Panthers, blue and white).",
+  "notes": "Pre-merger Mansfield colours not found. Web search budget ran out mid-batch; only Wikipedia was checked."
+ },
+ {
+  "school": "Plains",
+  "identified_as": "Plains (probably Plains Township High School, Luzerne Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Bracket years 1936-39 only; likely closed/merged long ago.",
+  "notes": "Identity unconfirmed and no colour source found. Wikipedia 'Plains High School' is a Texas school, not this one."
+ },
+ {
+  "school": "Northern",
+  "identified_as": "Northern High School (Northern York County), Dillsburg",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Polar Bears",
+  "confidence": "medium",
+  "wikipedia": "Northern High School (Dillsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_High_School_(Dillsburg,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Morrisville",
+  "identified_as": "Morrisville Middle/Senior High School, Morrisville (Bucks Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Morrisville Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Morrisville_Middle/Senior_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Infobox colour box shows navy."
+ },
+ {
+  "school": "Abraham Lincoln",
+  "identified_as": "Abraham Lincoln High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCD31",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Rail Splitters",
+  "confidence": "medium",
+  "wikipedia": "Abraham Lincoln High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Abraham_Lincoln_High_School_(Philadelphia)",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "PIAA table orders them gold & black."
+ },
+ {
+  "school": "River Valley",
+  "identified_as": "River Valley Middle-High School, Blairsville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Aero Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "low",
+  "wikipedia": "River Valley Middle–High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/River_Valley_Middle–High_School",
+   "https://en.wikipedia.org/wiki/River_Valley_School_District_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": "Formed from the Blairsville-Saltsburg merger (c. 2022).",
+  "notes": "Conflict: school infobox says Black and Teal; district infobox and PIAA table say aero blue and black."
+ },
+ {
+  "school": "Summit Academy",
+  "identified_as": "Summit Academy, Herman (Butler Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Only source is the Wikipedia PIAA football table (WPIAL listing)."
+ },
+ {
+  "school": "Bucktail",
+  "identified_as": "Bucktail Area High School, Renovo",
+  "colors": [
+   {
+    "name": "Cherry Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "medium",
+  "wikipedia": "Bucktail High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bucktail_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Allegheny Clarion Valley",
+  "identified_as": "Allegheny-Clarion Valley Junior/Senior High School, Foxburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Allegheny-Clarion Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Allegheny-Clarion_Valley_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Scranton Central",
+  "identified_as": "Scranton Central High School, Scranton",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "low",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)"
+  ],
+  "era": "Closed 1991; students went to Scranton HS (Knights, cardinal and Vegas gold, combining Central's gold with Tech's red).",
+  "notes": "Only gold is attested (Scranton HS article); Central's second colour not found."
+ },
+ {
+  "school": "Elk County Christian",
+  "identified_as": "Elk County Catholic High School, St. Marys",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "medium",
+  "wikipedia": "Elk County Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elk_County_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Bracket name says 'Christian'; assumed to be Elk County Catholic (District 9, St. Marys)."
+ },
+ {
+  "school": "Plumstead Christian",
+  "identified_as": "Plumstead Christian School, Plumsteadville (Bucks Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "No source found. Web search budget ran out mid-batch; only Wikipedia was checked."
+ },
+ {
+  "school": "Central Bucks",
+  "identified_as": "Central Bucks High School, Doylestown (became CB West in 1969)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "low",
+  "wikipedia": "Central Bucks High School West",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_West"
+  ],
+  "era": "Single Central Bucks HS until CB East opened c. 1969; colours shown are CB West's.",
+  "notes": "Not verified that pre-1969 Central Bucks wore black and gold."
+ },
+ {
+  "school": "Sharon Hill",
+  "identified_as": "Sharon Hill High School, Sharon Hill (Delaware Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School"
+  ],
+  "era": "Merged with Collingdale HS into Academy Park HS in 1982 (Knights, blue and silver).",
+  "notes": "Sharon Hill's own colours not found."
+ },
+ {
+  "school": "Beaver",
+  "identified_as": "Beaver Area High School, Beaver",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "Beaver Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Beaver_Area_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Devon Prep",
+  "identified_as": "Devon Preparatory School, Devon",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tide",
+  "confidence": "medium",
+  "wikipedia": "Devon Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Devon_Preparatory_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Perry Traditional Academy",
+  "identified_as": "Perry Traditional Academy, Pittsburgh",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Commodores",
+  "confidence": "medium",
+  "wikipedia": "Perry Traditional Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Perry_Traditional_Academy",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Infobox colours empty; alma mater 'the White and Blue' plus PIAA table blue & white."
+ },
+ {
+  "school": "Jefferson",
+  "identified_as": "Unidentified Jefferson (District 7, 1943-54)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Probably a pre-merger school (e.g. Jefferson Township HS, Allegheny Co., or a Greene Co. Jefferson HS).",
+  "notes": "Identity not confirmed; no colours given."
+ },
+ {
+  "school": "Valley Forge Military",
+  "identified_as": "Valley Forge Military Academy, Wayne",
+  "colors": [
+   {
+    "name": "Buff",
+    "hex": "#E0AB76",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Valley Forge Military Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Forge_Military_Academy",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "PIAA football table text says 'scarlet & white' but its boxes are gold/navy; infobox buff and blue used."
+ },
+ {
+  "school": "Lehman-Jackson-Ross",
+  "identified_as": "Lehman-Jackson-Ross High School, Lehman (Luzerne Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School"
+  ],
+  "era": "Predecessor of Lake-Lehman (Knights, black and gold).",
+  "notes": "Own colours not found."
+ },
+ {
+  "school": "North Penn-Blossburg",
+  "identified_as": "North Penn Junior/Senior High School, Blossburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "North Penn Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Penn_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Southern_Tioga_School_District"
+  ],
+  "era": "Closed 2014; merged into North Penn-Mansfield (also Panthers, blue and white).",
+  "notes": null
+ },
+ {
+  "school": "Mariana Bracetti Acad.",
+  "identified_as": "Mariana Bracetti Academy Charter School, Philadelphia",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "No source found. Web search budget ran out mid-batch; only Wikipedia was checked."
+ },
+ {
+  "school": "Central Catholic",
+  "identified_as": "Central Catholic High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Central Catholic High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Catholic_High_School_(Pittsburgh)",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": "Infobox box is navy."
+ },
+ {
+  "school": "Derry",
+  "identified_as": "Derry Area High School, Derry",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Derry Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Derry_Area_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Cumberland Township",
+  "identified_as": "Cumberland Township High School, Carmichaels (Greene Co.) - inferred",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Carmichaels Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_Junior/Senior_High_School"
+  ],
+  "era": "Likely predecessor of Carmichaels Area (Mikes; blue, gold and white).",
+  "notes": "Identity inferred; own colours not found."
+ },
+ {
+  "school": "Wilson",
+  "identified_as": "Wilson High School, West Lawn",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Wilson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilson_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Lansdale Catholic",
+  "identified_as": "Lansdale Catholic High School, Lansdale",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "medium",
+  "wikipedia": "Lansdale Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lansdale_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Nanticoke",
+  "identified_as": "Nanticoke High School, Nanticoke",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Greater Nanticoke Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": "Predecessor of Greater Nanticoke Area (Trojans, blue and red per PIAA table).",
+  "notes": "1947-56 colours not verified."
+ }
+]

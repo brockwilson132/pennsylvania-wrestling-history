@@ -1,0 +1,231 @@
+[
+ {
+  "school": "Oakmont",
+  "identified_as": "Oakmont High School, Oakmont, Allegheny Co.",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Oaks",
+  "confidence": "high",
+  "wikipedia": "Riverview High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Riverview_High_School_(Pennsylvania)",
+   "search:https://tribhssndev.triblive.com/?p=241029",
+   "https://www.e-yearbook.com/yearbooks/Oakmont_High_School_Yearbook/1940/Page_27.html",
+   "https://www.e-yearbook.com/yearbooks/Oakmont_High_School_Yearbook/1940/Page_29.html",
+   "https://www.e-yearbook.com/yearbooks/Oakmont_High_School_Yearbook/1952/Page_45.html",
+   "https://www.e-yearbook.com/yearbooks/Oakmont_High_School_Yearbook/1952/Page_22.html",
+   "https://archive.org/details/periscope1967oakm"
+  ],
+  "era": "Oakmont HS merged with Verona into Riverview (Raiders, black and gold/yellow) in the early 1970s",
+  "notes": "Red and Black from the school's own Periscope yearbooks: 1940 ('played their last game for the Red and Black', 'Red and black banners' at football banquet) and 1952 (varsity football and basketball 'the Red and Black'). 1952 junior-high team called 'the Green and White' (junior high only). 1967 Periscope confirms 'Mighty Oaks' nickname. No colour image seen, so no hex. Do not use Riverview colours.",
+  "evidence": "Retry pass: e-yearbook.com OCR text of Oakmont Periscope 1940 and 1952 names varsity colours Red and Black; archive.org 1967 Periscope text confirms Oaks nickname; no clean colour graphic available, hex null"
+ },
+ {
+  "school": "Duquesne",
+  "identified_as": "Duquesne High School, Duquesne, Allegheny Co.",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dukes",
+  "confidence": "medium",
+  "wikipedia": "Duquesne City School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Duquesne_City_School_District",
+   "search:https://duquesnehunky.com/2011/03/28/733/",
+   "https://duquesnehunky.com/2011/03/28/733/",
+   "https://duquesnehunky.com/2013/01/10/duquesne-high-school-football/",
+   "https://www.e-yearbook.com/yearbooks/Duquesne_High_School_Echo_Yearbook/1942/Page_55.html",
+   "https://www.e-yearbook.com/yearbooks/Duquesne_High_School_Echo_Yearbook/1942/Page_61.html",
+   "https://www.e-yearbook.com/yearbooks/Duquesne_High_School_Echo_Yearbook/1942/Page_64.html",
+   "https://www.e-yearbook.com/yearbooks/Duquesne_High_School_Echo_Yearbook/1943/Page_65.html"
+  ],
+  "era": "High school closed in 2007; students go to West Mifflin Area / East Allegheny",
+  "notes": "'Dukes' confirmed by the 1942 Echo yearbook (football and basketball 'the Dukes'). Colours: a closing-of-the-school newspaper article reposted on duquesnehunky.com opens 'Farewell faithful followers of the red and white!'; 1942 Echo: tennis team in 'red shorts with white shirts', safety-squad pin red and white. An alumni comment likens the football uniforms to the San Francisco 49ers (red and gold), so gold trim is possible but unconfirmed. Echo class colours (1942 Ivory and Scarlet, 1943 Marine Blue and Silver) are class colours, not school colours. Not Duquesne University (red and blue).",
+  "evidence": "Retry pass: duquesnehunky.com farewell article text 'followers of the red and white'; e-yearbook OCR of 1942 Echo (Dukes, red-and-white tennis uniforms); no colour image seen, hex null"
+ },
+ {
+  "school": "Bishop Klonowski",
+  "identified_as": "Bishop Klonowski High School, South Scranton",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "search:https://en.wikipedia.org/wiki/Roger_Williams_Public_School_No._10",
+   "search:https://bishoporeilly.org/history/",
+   "https://en.wikipedia.org/wiki/Henry_Klonowski"
+  ],
+  "era": "Formerly South Scranton Catholic HS; renamed Bishop Klonowski 1973; closed 1982, students to Bishop Hannan",
+  "notes": "No colour source found. Not listed among e-yearbook.com Pennsylvania yearbooks. Namesake Henry Klonowski, Scranton auxiliary bishop 1947-73.",
+  "evidence": "Retry pass: web searches and the e-yearbook.com Pennsylvania index found no Klonowski or South Scranton Catholic yearbook, site or colour statement; no colours"
+ },
+ {
+  "school": "Bishop Hannan",
+  "identified_as": "Bishop Hannan High School, Scranton",
+  "colors": [],
+  "mascot": "Golden Lancers",
+  "confidence": "low",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "search:https://www.privateschoolreview.com/bishop-hannan-high-school-profile",
+   "search:https://www.maxpreps.com/pa/scranton/bishop-hannan/basketball/"
+  ],
+  "era": "Closed 2007, merged with Bishop O'Hara into Holy Cross HS (Crusaders; silver, forest green, black)",
+  "notes": "'Golden Lancers' suggests gold but no source names the colours; do not use Holy Cross colours.",
+  "evidence": "Retry pass: web searches (colour-word combinations with Golden Lancers) and the e-yearbook.com Pennsylvania index found no Hannan colour statement or yearbook; only successor Holy Cross colours surface, not used; no colours"
+ },
+ {
+  "school": "Norco Tech",
+  "identified_as": "Unclear; probably North Montco Technical Career Center, Lansdale",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.schooldigger.com/go/PA/district/80590/search.aspx",
+   "https://neris.fsri.org/departments/FD42029585",
+   "search:https://skillplum.com/apprenticeship/north-montco-tech-lansdale-pa"
+  ],
+  "era": "Vocational school in brackets 1974-1980",
+  "notes": "Identity still uncertain. The repo's 1978 District 1 AA brackets list Norco Tech with Pottsgrove, Jenkintown, Octorara, Avon Grove, Kennett and others. 'Norco' is the local short name for North Coventry Township, Chester Co. (Norco Fire Company, Pottstown 19465), which would point to a Chester County vo-tech near Pottstown rather than North Montco Tech in Lansdale; no source ties a 'Norco Tech' wrestling team to either. No colours found.",
+  "evidence": "Retry pass: web searches for 'Norco Tech' found no school; NERIS listing shows Norco = North Coventry (Pottstown) fire company; no school logo, site or yearbook found, so no colours"
+ },
+ {
+  "school": "Elkland Area",
+  "identified_as": "Elkland Area High School, Elkland, Tioga Co.",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Northern Tioga School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Tioga_School_District",
+   "search:https://joycetice.com/schools/elkalumni.htm",
+   "https://www.joycetice.com/schools/spelkl.htm",
+   "https://www.joycetice.com/schools/elkalumni.htm",
+   "https://www.e-yearbook.com/Elkland_High_School_Loudspeaker_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Elkland_High_School_Loudspeaker_Yearbook/1958/Page_67.html",
+   "https://www.e-yearbook.com/yearbooks/Elkland_High_School_Loudspeaker_Yearbook/1958/Page_82.html",
+   "https://www.e-yearbook.com/yearbooks/Elkland_High_School_Loudspeaker_Yearbook/1959/Page_87.html",
+   "https://www.e-yearbook.com/yearbooks/Elkland_High_School_Loudspeaker_Yearbook/1959/Page_68.html"
+  ],
+  "era": "Closed 2011 (Northern Tioga SD); students to Cowanesque Valley",
+  "notes": "Elkland High School Loudspeaker yearbooks 1957-59: teams are 'the Elkland Rams' (soccer, basketball, baseball). 1958 diary page: 'The Jayvees looked sharp in their new orange and black uniforms' - the only colour statement found, so orange and black are likely the school colours but rest on one line about the JV basketball uniforms. 1959 class colours (turquoise and white) are class colours only. Do not use Cowanesque Valley colours.",
+  "evidence": "Retry pass: e-yearbook.com OCR text of Elkland Loudspeaker 1957, 1958, 1959 (Rams nickname; JV 'new orange and black uniforms'); no colour image seen, hex null"
+ },
+ {
+  "school": "Conneaut Valley",
+  "identified_as": "Conneaut Valley High School, Conneautville, Crawford Co.",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Conneaut School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_School_District",
+   "https://en.wikipedia.org/wiki/Conneaut_Area_Senior_High_School",
+   "https://www.e-yearbook.com/Conneaut_Valley_High_School_Valley_Echo_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Conneaut_Valley_High_School_Valley_Echo_Yearbook/1959/Page_7.html"
+  ],
+  "era": "Merged with Conneaut Lake and Linesville into Conneaut Area Senior HS (Eagles; black, royal blue, silver)",
+  "notes": "A search snippet (unverified mirror) attributed red and black with an Indian mascot to Conneaut Valley Middle School (former HS building); not confirmed, so not listed.",
+  "evidence": "Retry pass: e-yearbook.com OCR text of all pages of the 1959 Valley Echo (only year online) has no colour or nickname statement; web searches return only the merged district's Eagles colours (black, royal blue, silver), not used; no colours"
+ },
+ {
+  "school": "Langley",
+  "identified_as": "Langley High School, Sheraden, Pittsburgh",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Langley High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Langley_High_School_(Pittsburgh)",
+   "search:https://www.maxpreps.com/pa/pittsburgh/langley-mustangs/football",
+   "https://www.pghschools.org/schools/k-8/langley",
+   "search:https://www.e-yearbook.com/yearbooks/Langley_High_School_Aeronaut_Yearbook/1966/Page_47.html",
+   "https://www.e-yearbook.com/Langley_High_School_Aeronaut_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Langley_High_School_Aeronaut_Yearbook/1956/Page_79.html",
+   "https://www.e-yearbook.com/yearbooks/Langley_High_School_Aeronaut_Yearbook/1956/Page_82.html"
+  ],
+  "era": "Closed as a high school after 2011-12 (now Langley K-8)",
+  "notes": "Maroon per Wikipedia; 1956 Aeronaut yearbook: 'The bright maroon and white of the Langley High A Band is a familiar sight at Langley's football games', matching the alumni page heading 'SCHOOL COLORS - MAROON AND WHITE' (search only). Mustangs confirmed in 1956 and 1966 Aeronaut. District listed as None in input; Pittsburgh City League (District 8).",
+  "evidence": "Retry pass: e-yearbook.com OCR text of Langley Aeronaut 1956 (band in 'bright maroon and white'; Mustangs) and 1966 (Mustangs); no colour image seen, hex null"
+ },
+ {
+  "school": "Schenley",
+  "identified_as": "Schenley High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Schenley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Schenley_High_School",
+   "search:https://www.pressreader.com/usa/pittsburgh-post-gazette/20210819/282591676022266",
+   "https://commons.wikimedia.org/wiki/File:SchenleyHigh2007.jpg",
+   "https://www.e-yearbook.com/Schenley_High_School_Schenley_Journal_Yearbook",
+   "https://www.e-yearbook.com/yearbooks/Schenley_High_School_Schenley_Journal_Yearbook/1952/Page_74.html",
+   "https://www.e-yearbook.com/yearbooks/Schenley_High_School_Schenley_Journal_Yearbook/1952/Page_76.html",
+   "https://www.e-yearbook.com/yearbooks/Schenley_High_School_Schenley_Journal_Yearbook/1957/Page_70.html"
+  ],
+  "era": "Closed 2011",
+  "notes": "Red and black: Wikipedia, Post-Gazette 2021 reunion ('signature red-and-black', search snippet) and the school's own 1952 Schenley Journal yearbook (football team called 'the Red and Black') agree. White is from Wikipedia only. Spartans confirmed in the 1957 yearbook.",
+  "evidence": "Retry pass: e-yearbook.com OCR text of Schenley Journal 1952 ('the Red and Black' football) and 1957 (Schenley Spartans); no colour image seen, hex null"
+ }
+]

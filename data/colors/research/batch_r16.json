@@ -1,0 +1,739 @@
+[
+ {
+  "school": "Penn Joint",
+  "identified_as": "Penn Joint High School, Harrison City/Claridge (Penn Township, Westmoreland Co.)",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Penn-Trafford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn-Trafford_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Penn_Joint_High_School_Penn_Point_Yearbook/1949/Page_1.html"
+  ],
+  "era": "Penn Joint merged with Trafford to form Penn-Trafford (Warriors, green and gold); bracket years 1965-1972",
+  "notes": "No source found for Penn Joint's own colours; do not use Penn-Trafford's green/gold."
+ },
+ {
+  "school": "Rostraver",
+  "identified_as": "Rostraver High School, Rostraver Township (Pricedale area), Westmoreland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Belle Vernon Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Belle_Vernon_Area_School_District",
+   "search:https://pa-roots.com/westmoreland/townships/rostraver/school.html"
+  ],
+  "era": "Rostraver SD merged with Belmar in 1965 to form Belle Vernon Area (Leopards, green/gold/white); Rostraver HS operated to ~1967",
+  "notes": "No source found for Rostraver's own colours or mascot."
+ },
+ {
+  "school": "East Allegheny",
+  "identified_as": "East Allegheny High School, North Versailles",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "East Allegheny School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Allegheny_School_District"
+  ],
+  "era": null,
+  "notes": "Colours from district Wikipedia infobox only."
+ },
+ {
+  "school": "Oakmont",
+  "identified_as": "Oakmont High School, Oakmont, Allegheny Co.",
+  "colors": [],
+  "mascot": "Oaks",
+  "confidence": "low",
+  "wikipedia": "Riverview High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Riverview_High_School_(Pennsylvania)",
+   "search:https://tribhssndev.triblive.com/?p=241029"
+  ],
+  "era": "Oakmont HS merged with Verona into Riverview (Raiders, black and gold/yellow) in the early 1970s",
+  "notes": "Oaks nickname from a TribLive article (search only); colours not found. Wikipedia 'Oakmont High School' is the California school."
+ },
+ {
+  "school": "Duquesne",
+  "identified_as": "Duquesne High School, Duquesne, Allegheny Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Duquesne City School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Duquesne_City_School_District",
+   "search:https://duquesnehunky.com/2011/03/28/733/"
+  ],
+  "era": "High school closed in 2007; students go to West Mifflin Area / East Allegheny",
+  "notes": "Search results only show Duquesne University colours (red and blue), which are a different institution; high school colours not found. 'Dukes' nickname inferred from community sources, not confirmed."
+ },
+ {
+  "school": "Dunmore",
+  "identified_as": "Dunmore High School, Dunmore",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#800000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Blue",
+    "hex": "#0000ff",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "medium",
+  "wikipedia": "Dunmore High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dunmore_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox hex #800000 is really maroon although labelled Crimson."
+ },
+ {
+  "school": "Lakeland",
+  "identified_as": "Lakeland Junior-Senior High School, Jermyn (Scott Township)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Chiefs",
+  "confidence": "medium",
+  "wikipedia": "Lakeland School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lakeland_School_District_(Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/jermyn/lakeland-chiefs/"
+  ],
+  "era": null,
+  "notes": "Infobox says 'Blue and red' with royalblue/red color boxes, cited to MaxPreps."
+ },
+ {
+  "school": "Bishop Klonowski",
+  "identified_as": "Bishop Klonowski High School, South Scranton",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "search:https://en.wikipedia.org/wiki/Roger_Williams_Public_School_No._10",
+   "search:https://bishoporeilly.org/history/"
+  ],
+  "era": "Formerly South Scranton Catholic HS; renamed Bishop Klonowski 1973; closed 1982, students to Bishop Hannan",
+  "notes": "No colour source found."
+ },
+ {
+  "school": "Bishop Hannan",
+  "identified_as": "Bishop Hannan High School, Scranton",
+  "colors": [],
+  "mascot": "Golden Lancers",
+  "confidence": "low",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)"
+  ],
+  "era": "Closed 2007, merged with Bishop O'Hara into Holy Cross HS (Crusaders; silver, forest green, black)",
+  "notes": "'Golden Lancers' suggests gold but no source names the colours; do not use Holy Cross colours."
+ },
+ {
+  "school": "St. John Neumann Regional",
+  "identified_as": "St. John Neumann Regional Academy (formerly Bishop Neumann HS), Williamsport",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "high",
+  "wikipedia": "St. John Neumann Regional Academy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._John_Neumann_Regional_Academy_High_School",
+   "search:https://www.privateschoolreview.com/st-john-neumann-high-school-profile"
+  ],
+  "era": null,
+  "notes": "Wikipedia and PrivateSchoolReview (search snippet) agree on maroon and gold; colours for the 1975-84 Bishop Neumann era not separately verified."
+ },
+ {
+  "school": "Cowanesque Valley",
+  "identified_as": "Cowanesque Valley Junior Senior High School, Westfield",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Cowanesque Valley Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cowanesque_Valley_Junior_Senior_High_School",
+   "search:https://www.maxpreps.com/pa/westfield/cowanesque-valley-indians/football/history"
+  ],
+  "era": null,
+  "notes": "Colours from Wikipedia only; Indians nickname from MaxPreps URL."
+ },
+ {
+  "school": "Norco Tech",
+  "identified_as": "Unclear; probably North Montco Technical Career Center, Lansdale",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.schooldigger.com/go/PA/district/80590/search.aspx"
+  ],
+  "era": "Vocational school in brackets 1974-1980",
+  "notes": "Identity uncertain: 'Norco' not confirmed by any source; could be another District 1 vo-tech. No colours found."
+ },
+ {
+  "school": "Christopher Dock",
+  "identified_as": "Christopher Dock Mennonite High School (now Dock Mennonite Academy), Lansdale",
+  "colors": [],
+  "mascot": "Pioneers",
+  "confidence": "low",
+  "wikipedia": "Dock Mennonite Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dock_Mennonite_Academy",
+   "search:https://issuu.com/jaygordon1/docs/lamplighter_final/s/27325",
+   "search:https://www.privateschoolreview.com/dock-mennonite-academy-profile/18964"
+  ],
+  "era": "Renamed Dock Mennonite Academy",
+  "notes": "Pioneers nickname confirmed by school newsletter (search); colours not found (Wikipedia infobox has none)."
+ },
+ {
+  "school": "Elkland Area",
+  "identified_as": "Elkland Area High School, Elkland, Tioga Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Northern Tioga School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Tioga_School_District",
+   "search:https://joycetice.com/schools/elkalumni.htm"
+  ],
+  "era": "Closed 2011 (Northern Tioga SD); students to Cowanesque Valley",
+  "notes": "No colour or mascot source found."
+ },
+ {
+  "school": "Clarion-Limestone",
+  "identified_as": "Clarion-Limestone Area Jr/Sr High School, Strattanville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Clarion-Limestone Jr/Sr High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Clarion-Limestone_Jr/Sr_High_School",
+   "https://en.wikipedia.org/wiki/Clarion-Limestone_Area_School_District",
+   "search:https://www.maxpreps.com/pa/strattanville/clarion-limestone-lions"
+  ],
+  "era": null,
+  "notes": "Wikipedia gives navy blue and Vegas gold; MaxPreps (search snippet) says blue and gold. 1979-era shade not verified."
+ },
+ {
+  "school": "Conneaut Valley",
+  "identified_as": "Conneaut Valley High School, Conneautville, Crawford Co.",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Conneaut School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_School_District",
+   "https://en.wikipedia.org/wiki/Conneaut_Area_Senior_High_School"
+  ],
+  "era": "Merged with Conneaut Lake and Linesville into Conneaut Area Senior HS (Eagles; black, royal blue, silver)",
+  "notes": "A search snippet (unverified mirror) attributed red and black with an Indian mascot to Conneaut Valley Middle School (former HS building); not confirmed, so not listed."
+ },
+ {
+  "school": "Langley",
+  "identified_as": "Langley High School, Sheraden, Pittsburgh",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "Langley High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Langley_High_School_(Pittsburgh)",
+   "search:https://www.maxpreps.com/pa/pittsburgh/langley-mustangs/football"
+  ],
+  "era": "Closed as a high school after 2011-12 (now Langley K-8)",
+  "notes": "Wikipedia lists only Maroon; a secondary colour was not found. District listed as None in input; Pittsburgh City League (District 8)."
+ },
+ {
+  "school": "Schenley",
+  "identified_as": "Schenley High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Schenley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Schenley_High_School"
+  ],
+  "era": "Closed 2011",
+  "notes": "Wikipedia infobox only."
+ },
+ {
+  "school": "St. Gregory's Academy",
+  "identified_as": "St. Gregory's Academy, Elmhurst Township, Lackawanna Co.",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "medium",
+  "wikipedia": "St. Gregory's Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._Gregory%27s_Academy"
+  ],
+  "era": "Boys' boarding school, closed 2012",
+  "notes": null
+ },
+ {
+  "school": "Union Area",
+  "identified_as": "Union Area High School, New Castle (Lawrence Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Scotties",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/new-castle/union-area-scotties/basketball/girls"
+  ],
+  "era": null,
+  "notes": "Only MaxPreps (search snippet) names colours; Wikipedia district infobox is blank. Not confirmed by school."
+ },
+ {
+  "school": "Kensington",
+  "identified_as": "Kensington High School, Philadelphia",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Kensington High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kensington_High_School_(Philadelphia)"
+  ],
+  "era": "Kensington was split into several small schools (e.g. Kensington CAPA, Kensington Health Sciences) around 2006-2010",
+  "notes": "Wikipedia has no colours; web search budget exhausted before further lookup."
+ },
+ {
+  "school": "Friends Select",
+  "identified_as": "Friends Select School, Philadelphia",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Friends Select School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Friends_Select_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Kennedy-Kenrick",
+  "identified_as": "Kennedy-Kenrick Catholic High School, Norristown",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Athletic Gold",
+    "hex": "#FFCC00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "medium",
+  "wikipedia": "Kennedy\u2013Kenrick Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennedy%E2%80%93Kenrick_Catholic_High_School"
+  ],
+  "era": "Closed 2010; replaced by Pope John Paul II HS",
+  "notes": "Royal blue given only as a named color box."
+ },
+ {
+  "school": "Cardinal Wuerl North Catholic",
+  "identified_as": "North Catholic High School (formerly Cardinal Wuerl North Catholic), Cranberry Township",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": "#FF2400",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDD700",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "North Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Catholic_High_School"
+  ],
+  "era": "Named Cardinal Wuerl North Catholic 2014-2018ish; now North Catholic",
+  "notes": null
+ },
+ {
+  "school": "Naeinghborhood Academy",
+  "identified_as": "The Neighborhood Academy, Pittsburgh (input name is a typo)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "No Wikipedia page found and web search budget exhausted; identity assumed from the misspelled name."
+ },
+ {
+  "school": "Lincoln Park",
+  "identified_as": "Lincoln Park Performing Arts Charter School, Midland",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Leopards",
+  "confidence": "medium",
+  "wikipedia": "Lincoln Park Performing Arts Charter School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lincoln_Park_Performing_Arts_Charter_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Brownsville Area",
+  "identified_as": "Brownsville Area High School, Brownsville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Brownsville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brownsville_Area_High_School",
+   "https://en.wikipedia.org/wiki/Brownsville_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District page says black, white and gold; high school page says black and gold."
+ },
+ {
+  "school": "Mohawk Area",
+  "identified_as": "Mohawk Area Junior/Senior High School, Bessemer",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Mohawk Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mohawk_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Mascot field blank on Wikipedia; not verified."
+ },
+ {
+  "school": "New Cumberland",
+  "identified_as": "New Cumberland High School, New Cumberland, Cumberland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Shore School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Shore_School_District",
+   "https://en.wikipedia.org/wiki/Cedar_Cliff_High_School"
+  ],
+  "era": "Absorbed into West Shore SD (Cedar Cliff, navy/gold/silver, Colts) in the 1960s",
+  "notes": "No source for New Cumberland HS colours found; web search budget exhausted."
+ },
+ {
+  "school": "Northumberland",
+  "identified_as": "Northumberland High School, Northumberland, Northumberland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School"
+  ],
+  "era": "Merged with Sunbury HS in 1965 to form Shikellamy (Braves; maroon, white, blue)",
+  "notes": "No source for Northumberland HS colours found."
+ },
+ {
+  "school": "Ashland",
+  "identified_as": "Ashland High School, Ashland, Schuylkill Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Schuylkill School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Schuylkill_School_District"
+  ],
+  "era": "Merged into North Schuylkill (Spartans; crimson red and royal blue) in the late 1960s/1970s",
+  "notes": "No source for Ashland HS colours found. 'Black Diamonds' is the town's nickname, not confirmed as the school's."
+ },
+ {
+  "school": "Homer-Center",
+  "identified_as": "Homer-Center Junior/Senior High School, Homer City",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Homer-Center School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Homer-Center_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Northern Chester County Tech",
+  "identified_as": "Northern Chester County Technical School (now Technical College High School Pickering Campus), Phoenixville area",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Now part of Chester County IU Technical College High School",
+  "notes": "No Wikipedia page found and web search budget exhausted."
+ },
+ {
+  "school": "St. John Neumann Regional Acad",
+  "identified_as": "St. John Neumann Regional Academy (formerly Bishop Neumann HS), Williamsport",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "high",
+  "wikipedia": "St. John Neumann Regional Academy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._John_Neumann_Regional_Academy_High_School",
+   "search:https://www.privateschoolreview.com/st-john-neumann-high-school-profile"
+  ],
+  "era": null,
+  "notes": "Wikipedia and PrivateSchoolReview (search snippet) agree on maroon and gold; colours for the 1975-84 Bishop Neumann era not separately verified."
+ },
+ {
+  "school": "Villa Maria Academy",
+  "identified_as": "Villa Maria Academy, Erie",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Victors",
+  "confidence": "medium",
+  "wikipedia": "Villa Maria Academy (Erie, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Villa_Maria_Academy_(Erie,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Girls' school; check this is not a merged-program entry with Cathedral Prep."
+ },
+ {
+  "school": "Brentwood",
+  "identified_as": "Brentwood High School, Brentwood, Allegheny Co.",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#A98F52",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Brentwood High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brentwood_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Blue given as named 'navy' color box."
+ },
+ {
+  "school": "Coventry Christian",
+  "identified_as": "Coventry Christian Schools, Pottstown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Coventry Christian Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coventry_Christian_Schools"
+  ],
+  "era": null,
+  "notes": null
+ }
+]

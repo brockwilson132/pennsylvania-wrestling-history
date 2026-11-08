@@ -1,0 +1,562 @@
+[
+ {
+  "school": "Summit Academy",
+  "identified_as": "Summit Academy, Herman (Butler Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.summitacademy.org",
+   "https://www.summitacademyschools.org"
+  ],
+  "era": null,
+  "notes": "Only source is the Wikipedia PIAA football table (WPIAL listing).",
+  "evidence": "No site for the Herman (Butler Co.) Summit Academy found; summitacademy.org (Florida) and summitacademyschools.org (navy #00004F and red #D14A3B, 'since 2004', Ohio) are different schools and were not used. Search engines returned junk this batch. First-pass names kept unverified."
+ },
+ {
+  "school": "Bucktail",
+  "identified_as": "Bucktail Area High School, Renovo",
+  "colors": [
+   {
+    "name": "Cherry Red",
+    "hex": "#CD1835",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "high",
+  "wikipedia": "Bucktail High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bucktail_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.kcsd.k12.pa.us/schools",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1750958082/kcsdk12paus/iivrra9mfmimbhwcoolp/Bucktail-Logo.png",
+   "https://www.bucktailathletics.com/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "KCSD Bucktail logo (buck head with B): cherry red #CD1835 with heavy black antlers/outline and white B; bucktailathletics.com theme red #D51836 on white. Black is a logo outline/accent, not listed as an official colour."
+ },
+ {
+  "school": "Allegheny Clarion Valley",
+  "identified_as": "Allegheny-Clarion Valley Junior/Senior High School, Foxburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#286FB8",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Allegheny-Clarion Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Allegheny-Clarion_Valley_Junior/Senior_High_School",
+   "https://www.acvsd.org",
+   "https://resources.finalsite.net/images/v1707153326/acvsdorg/gbmyezd4yhiwv7bqxwfk/favicon.ico"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "acvsd.org header ('Home of the Falcons'): medium blue nav bar #286FB8, falcon seal printed in light blue on white; no athletics logo found. Blue and white confirmed, shade from site theme only."
+ },
+ {
+  "school": "Scranton Central",
+  "identified_as": "Scranton Central High School, Scranton",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "low",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)",
+   "https://archive.org/details/classmates-yearbook-27663-1986-scranton-central-high-school"
+  ],
+  "era": "Closed 1991; students went to Scranton HS (Knights, cardinal and Vegas gold, combining Central's gold with Tech's red).",
+  "notes": "Only gold is attested (Scranton HS article); Central's second colour not found.",
+  "evidence": "1986 Scranton Central yearbook 'Aquila': dark navy/black cover with gold eagle; text mentions 'Miss Golden Eagle' and the Golden Eagles but never states school colours. Gold confirmed; second colour (possibly navy/blue) unverified."
+ },
+ {
+  "school": "Elk County Christian",
+  "identified_as": "Elk County Catholic High School, St. Marys",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#822433",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FED100",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Elk County Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elk_County_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.eccss.org",
+   "https://irp.cdn-website.com/d894e3f6/dms3rep/multi/Cross+Logo+Maroon+No+Lettering.png"
+  ],
+  "era": null,
+  "notes": "Bracket name says 'Christian'; assumed to be Elk County Catholic (District 9, St. Marys).",
+  "evidence": "eccss.org: maroon cross logo #822635, site maroon #822433 and gold #FED100 (gold cross, 'Apply Today' button), crusader knight with maroon plume; 'Crusader Athletics' link. Maroon and gold confirmed."
+ },
+ {
+  "school": "Plumstead Christian",
+  "identified_as": "Plumstead Christian School, Plumsteadville (Bucks Co.)",
+  "colors": [
+   {
+    "name": "Crimson Red",
+    "hex": "#A7153C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://plumsteadchristian.org/wp-content/uploads/2026/04/PCS-Logo-Medium-1-300x300.png",
+   "https://plumsteadchristian.org/athletics/",
+   "https://plumsteadchristian.org/wp-content/uploads/2018/06/athletics-1.jpg"
+  ],
+  "era": null,
+  "notes": "Mascot Panthers from the school's athletics page.",
+  "evidence": "PCS seal: black ring and quarters with crimson #A7153C quarters and outline on white; site accent #BD2041; athletics page names 'PCS Panthers', baseball photo shows red jerseys, white pants, black caps."
+ },
+ {
+  "school": "Central Bucks",
+  "identified_as": "Central Bucks High School, Doylestown (became CB West in 1969)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "low",
+  "wikipedia": "Central Bucks High School West",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_West",
+   "search:https://archive.org/details/classmates-yearbook-33609-1979-central-bucks-west-high-school"
+  ],
+  "era": "Single Central Bucks HS until CB East opened c. 1969; colours shown are CB West's.",
+  "notes": "Not verified that pre-1969 Central Bucks wore black and gold.",
+  "evidence": "No pre-1969 Central Bucks HS image found (archive.org has CB West 1979/1986 only). Black and gold is CB West's (infobox); pre-split colours unverified."
+ },
+ {
+  "school": "Sharon Hill",
+  "identified_as": "Sharon Hill High School, Sharon Hill (Delaware Co.)",
+  "colors": [],
+  "mascot": "Owls",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School",
+   "https://archive.org/details/classmates-yearbook-26242-1960-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26494-1961-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26340-1963-sharon-hill-high-school",
+   "https://archive.org/details/classmates-yearbook-26307-1964-sharon-hill-high-school"
+  ],
+  "era": "Merged with Collingdale HS into Academy Park HS in 1982 (Knights, blue and silver).",
+  "notes": "Mascot Owls from the school's own yearbooks. Class colours varied by year and are not school colours.",
+  "evidence": "Sharon Hill HS yearbooks 1960-64 ('The Owl'): teams called the Owls (football reports); covers are dark leatherette with a gold school seal (1964); text gives only yearly class colours (green/white, red/white, navy/gold), not school colours. School colours still not found."
+ },
+ {
+  "school": "Beaver",
+  "identified_as": "Beaver Area High School, Beaver",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#6A0201",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "high",
+  "wikipedia": "Beaver Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Beaver_Area_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.basd.k12.pa.us",
+   "https://www.basd.k12.pa.us/BASDAthletics.aspx",
+   "https://www.basd.k12.pa.us/sysimages/BeaverLogoWhite2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "basd.k12.pa.us athletics page: maroon icons #6A0201 (CSS #6C0000), Athletic Hall of Fame shield in darker maroon #46131F, 'Bobcats Nation' shirt heather maroon; bobcat logo is white-only. Gray not seen in a clean graphic."
+ },
+ {
+  "school": "Devon Prep",
+  "identified_as": "Devon Preparatory School, Devon",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1E376D",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCB05",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Tide",
+  "confidence": "high",
+  "wikipedia": "Devon Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Devon_Preparatory_School",
+   "https://www.devonprep.com",
+   "https://www.devonprep.com/wp-content/uploads/2026/05/cropped-Untitled-May-27-2026-at-13.55.35-270x270.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "devonprep.com theme CSS: navy #1E376D (200 uses) and gold #FFCB05 (114 uses, 'Inquire' button); crest favicon solid blue #002D74. Blue is a navy shade."
+ },
+ {
+  "school": "Perry Traditional Academy",
+  "identified_as": "Perry Traditional Academy, Pittsburgh",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#03118D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Commodores",
+  "confidence": "high",
+  "wikipedia": "Perry Traditional Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Perry_Traditional_Academy",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.pghschools.org/perry",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1724431567/pghschoolsorg/joo7f7jt05ksfwny4fgj/perryhs-logo-updated-8-9-22.png"
+  ],
+  "era": null,
+  "notes": "Infobox colours empty; alma mater 'the White and Blue' plus PIAA table blue & white.",
+  "evidence": "Pittsburgh Perry page logo (Commodore with anchor): deep royal blue coat #03118D, white epaulettes/trim with blue star, gray anchor and dark navy outlines; matches alma mater 'the White and Blue'. Page names the teams Commodores."
+ },
+ {
+  "school": "Jefferson",
+  "identified_as": "Unidentified Jefferson (District 7, 1943-54)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Probably a pre-merger school (e.g. Jefferson Township HS, Allegheny Co., or a Greene Co. Jefferson HS).",
+  "notes": "Identity not confirmed; no colours given.",
+  "evidence": "Identity still unresolved; no 1943-54 District 7 'Jefferson' yearbook found on archive.org (only Thomas Jefferson HS, Jefferson Hills, 1960+). Nothing looked at."
+ },
+ {
+  "school": "Valley Forge Military",
+  "identified_as": "Valley Forge Military Academy, Wayne",
+  "colors": [
+   {
+    "name": "Buff",
+    "hex": "#E0AB76",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Valley Forge Military Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Forge_Military_Academy",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.vfmac.edu",
+   "https://www.vfmac.edu/academy/",
+   "https://www.vfmac.edu/wp-content/uploads/2026/06/VFMC_Capshield-e1780664083910.png"
+  ],
+  "era": null,
+  "notes": "Possible alternative: scarlet and white (current VFMC site, PIAA football table text). Buff and blue kept from Wikipedia infobox.",
+  "evidence": "vfmac.edu (now Valley Forge Military College) academy page: scarlet #A91327 and white theme, capshield in red/white/blue with gold eagle. Conflicts with infobox buff and blue; PIAA table text also says scarlet & white. Academy-era athletic colours unresolved."
+ },
+ {
+  "school": "Lehman-Jackson-Ross",
+  "identified_as": "Lehman-Jackson-Ross High School, Lehman (Luzerne Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_Junior/Senior_High_School",
+   "https://archive.org/details/classmates-yearbook-25074-1948-lake-lehman-high-school"
+  ],
+  "era": "Predecessor of Lake-Lehman (Knights, black and gold).",
+  "notes": "Colours inferred from the 1948 Lehman HS yearbook (predecessor school); nickname then 'Scotties' (girls' team). Not Lake-Lehman's black and gold.",
+  "evidence": "1948 Lehman (PA) HS yearbook (filed as 'Lake Lehman'; Jackson Twp students already attending): girls' basketball 'Lehman Scotties came on the floor this year with their new red jackets and blue suits'; cover scan is greyscale. Suggests red and blue for the Lehman school; not confirmed for the later Lehman-Jackson-Ross name."
+ },
+ {
+  "school": "North Penn-Blossburg",
+  "identified_as": "North Penn Junior/Senior High School, Blossburg",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "North Penn Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Penn_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Southern_Tioga_School_District",
+   "https://archive.org/details/KeithLindieArchiveNorthPennHighSchoolFootballBlossburgPaCirca1970s",
+   "https://archive.org/details/KeithLindieArchiveTape271"
+  ],
+  "era": "Closed 2014; merged into North Penn-Mansfield (also Panthers, blue and white).",
+  "notes": null,
+  "evidence": "Keith Lindie archive video stills (Blossburg): 1997 royal-blue 'Panthers' sweatshirt in a school display case, blue-and-white pep rally and blue court striping in the North Penn gym; 1970s football in white jerseys. Blue and white confirmed; no clean graphic for a hex."
+ },
+ {
+  "school": "Mariana Bracetti Acad.",
+  "identified_as": "Mariana Bracetti Academy Charter School, Philadelphia",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#153F91",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.mbacs.org",
+   "https://www.mbacs.org/pics/header_logo.png",
+   "https://www.mbacs.org/BracettiAthletics"
+  ],
+  "era": null,
+  "notes": "No source found. Web search budget ran out mid-batch; only Wikipedia was checked.",
+  "evidence": "mbacs.org header logo: white 'MBA' on royal blue #153F91; site CSS #153F92 and navy #0D285E. Athletics page lists wrestling but names no mascot; colour names inferred from logo/site only."
+ },
+ {
+  "school": "Central Catholic",
+  "identified_as": "Central Catholic High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0F2D52",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC629",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Central Catholic High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Catholic_High_School_(Pittsburgh)",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.centralcatholichs.com",
+   "https://resources.finalsite.net/images/v1764620394/centralcatholichscom/kemq7n7mxviusgw9lvfw/header-logo.svg"
+  ],
+  "era": null,
+  "notes": "Infobox box is navy.",
+  "evidence": "centralcatholichs.com header-logo SVG: navy #0F2D52 shield with gold #FFC629 rim (white chapel); site theme #005EB8/#002855. Navy and gold."
+ },
+ {
+  "school": "Derry",
+  "identified_as": "Derry Area High School, Derry",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#003594",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFB900",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Derry Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Derry_Area_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.dasd.us/",
+   "https://www.dasd.us/apple-touch-icon.png",
+   "https://www.derryathletics.com/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "dasd.us header: royal blue nav/sections #003594 and gold #FFB900 buttons and triangles, gold Trojan helmet graphic; 'DA' monogram #0D5891. derryathletics.com showed 'School Not Found'."
+ },
+ {
+  "school": "Cumberland Township",
+  "identified_as": "Cumberland Township High School, Carmichaels (Greene Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Carmichaels Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carmichaels_Area_Junior/Senior_High_School",
+   "https://archive.org/details/classmates-yearbook-56214-1944-cumberland-township-high-school"
+  ],
+  "era": "Likely predecessor of Carmichaels Area (Mikes; blue, gold and white).",
+  "notes": "Identity confirmed by the 1944 yearbook (Carmichaels). Own colours not found; do not assume Carmichaels Area's.",
+  "evidence": "1944 Cumberland Township HS (Carmichaels, PA) yearbook 'Cumberlander': confirms the school is in Carmichaels; staff of 'The Mike' paper (Mikes name already in use); cover greyscale, text gives class colours only (red/white, green/white, lavender/white). School colours not found."
+ },
+ {
+  "school": "Wilson",
+  "identified_as": "Wilson High School, West Lawn",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#9A1413",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Wilson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilson_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.wilsonsd.org/o/whs",
+   "https://cmsv2-assets.apptegy.net/uploads/28716/logo/31529/Wilson_School_District_PA_Logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Wilson SD logo: white block W outlined on dark red #9A1413; site theme #9A1411 most used colour. Red is a deep cardinal shade."
+ },
+ {
+  "school": "Lansdale Catholic",
+  "identified_as": "Lansdale Catholic High School, Lansdale",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#003015",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFD100",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Lansdale Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lansdale_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.lansdalecatholic.com"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "lansdalecatholic.com: very dark green header/nav #003015 with gold #FFD100 accents; crest in gold and green; students in dark green blazers. Green is a deep forest green."
+ },
+ {
+  "school": "Nanticoke",
+  "identified_as": "Nanticoke High School, Nanticoke",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Greater Nanticoke Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/PIAA_football"
+  ],
+  "era": "Predecessor of Greater Nanticoke Area (Trojans, blue and red per PIAA table).",
+  "notes": "1947-56 colours not verified.",
+  "evidence": "No Nanticoke HS yearbook or image found on archive.org/Commons; search engines unusable this batch. Colours not found."
+ }
+]

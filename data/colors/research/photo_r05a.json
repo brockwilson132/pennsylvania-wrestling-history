@@ -1,0 +1,625 @@
+[
+ {
+  "school": "United",
+  "identified_as": "United Junior/Senior High School, Armagh",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#012E62",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#515D6B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "United Junior/Senior High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/United_Junior/Senior_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/United_School_District_(Pennsylvania)",
+   "https://www.unitedsd.net/",
+   "https://cmsv2-assets.apptegy.net/uploads/21459/logo/24273/unitedlogo.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree (not fully independent).",
+  "evidence": "unitedsd.net header logo (Apptegy): navy #012E62 lion and UNITED lettering with grey #515D6B/#9FA8B0 mane accents on white; site theme #022E5F. Blue is navy, not royal; grey is an accent."
+ },
+ {
+  "school": "Hatboro-Horsham",
+  "identified_as": "Hatboro-Horsham Senior High School, Horsham",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EF3138",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#060709",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hatters",
+  "confidence": "high",
+  "wikipedia": "Hatboro-Horsham Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hatboro-Horsham_Senior_High_School",
+   "https://www.hhsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/22589/logo/25402/logo_hatboro-web.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "hhsd.org logo: red #EF3138 'H' and black #060709 'H' with top hat, white outline; site theme red #D9251C."
+ },
+ {
+  "school": "Lakeview",
+  "identified_as": "Lakeview High School, Stoneboro (Lakeview School District, Mercer County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#DC2612",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Sailors",
+  "confidence": "high",
+  "wikipedia": "Lakeview School District (Mercer County, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lakeview_School_District_(Mercer_County,_Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/stoneboro/lakeview-sailors/track-field/schedule/",
+   "search:https://www.maxpreps.com/pa/stoneboro/lakeview-sailors/football/staff/all-time/",
+   "https://www.lakeview.k12.pa.us/",
+   "https://resources.finalsite.net/images/v1700592797/lakeviewk12paus/tcs8rrtyacwu10fzpy8x/TRANSPARENTLOGO.png",
+   "https://www.maxpreps.com/pa/stoneboro/lakeview-sailors/"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox has no colours; only a search summary of MaxPreps pages gave Red and Black (one search showed the field blank). Verify.",
+  "evidence": "lakeview.k12.pa.us (Lakeview SD) logo: red #DC2612 ship's wheel with 'Sailors', black banner; MaxPreps Lakeview Sailors (Stoneboro) lists Red/Black."
+ },
+ {
+  "school": "Central Tech",
+  "identified_as": "Central Career & Technical School (Central Tech), Erie",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://www.maxpreps.com/pa/erie/central-tech-falcons"
+  ],
+  "era": "Erie School District consolidated high schools in 2017; successor Erie High School (Royals, purple and gold).",
+  "notes": "Wikipedia gives 'Black and Gold (Yellow)'.",
+  "evidence": "No image found: MaxPreps page refused (403), web/image search and Wayback rate-limited. Names kept from first pass (Wikipedia)."
+ },
+ {
+  "school": "North Hills",
+  "identified_as": "North Hills High School, Ross Township (Pittsburgh)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BD2036",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "North Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Hills_High_School",
+   "https://www.nhsd.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1650290612/nhsdnet/nu1amocugaf5qt50wqyt/NHLogoWhiteOutlinecopy1.png",
+   "https://www.maxpreps.com/pa/pittsburgh/north-hills-indians/",
+   "https://image.maxpreps.io/school-mascot/8/3/9/8393a1fc-169b-4c9d-8da7-ef6a83c964e1.gif"
+  ],
+  "era": null,
+  "notes": "Infobox has colour boxes only (red, white), no names/hex.",
+  "evidence": "nhsd.net theme red #BD2036 (header logo is a white-outline version); MaxPreps North Hills Indians block 'NH' logo red #CC0000 on white, colours Red/White."
+ },
+ {
+  "school": "Penn Hills",
+  "identified_as": "Penn Hills High School, Penn Hills (Pittsburgh)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D60B00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CFBD7B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Penn Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Hills_High_School",
+   "https://www.phsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1673988838/phsdk12paus/kiutijey3cwcjv4qgphq/PHVECTOR.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1674959651/phsdk12paus/jaokxzlncotilihijgfl/PennHills1nored.png"
+  ],
+  "era": null,
+  "notes": "Red has no hex in infobox (named 'red' only). Mascot not confirmed from infobox.",
+  "evidence": "phsd.org PH roundel logo: red #D60B00 disc, Vegas-gold #CFBD7B 'PH' and ring; site CSS red #B20000 and gold #C5B358. Mascot not checked (MaxPreps refused)."
+ },
+ {
+  "school": "James M. Coughlin",
+  "identified_as": "James M. Coughlin High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "low",
+  "wikipedia": "James M. Coughlin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/James_M._Coughlin_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/james-m-coughlin-crusaders/lacrosse/girls/schedule/all-time"
+  ],
+  "era": "Closed 2021; merged with Meyers and G.A.R. into Wilkes-Barre Area High School (Wolfpack, black and Carolina blue).",
+  "notes": "Wikipedia infobox colours field is empty; only a MaxPreps girls lacrosse listing (via search) gives Blue, Red. Verify.",
+  "evidence": "No image found: closed school, MaxPreps refused (403), search and Wayback rate-limited. Names kept from first pass."
+ },
+ {
+  "school": "Northern Bedford",
+  "identified_as": "Northern Bedford County Middle/High School, Loysburg",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northern Bedford County Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Bedford_County_Middle/High_School",
+   "https://www.nbcsd.org/",
+   "https://files.smartsites.parentsquare.com/9376/header_logo_img_mfpq53kgrutmfpclfdm.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "nbcsd.org header logo: 'NBC' with panther paw drawn in white with dark outline only (no other colour), consistent with black and white; no clean black hex in site CSS (stock Bootstrap only)."
+ },
+ {
+  "school": "Conestoga",
+  "identified_as": "Conestoga High School, Berwyn",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#990033",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#9C9C9C",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "high",
+  "wikipedia": "Conestoga High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conestoga_High_School",
+   "https://www.tesd.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1739545631/tesdnet/ph1ltklqwplswv9qr8jr/WebsiteHeader_newlogo4.png",
+   "https://www.maxpreps.com/pa/berwyn/conestoga-pioneers/",
+   "https://image.maxpreps.io/school-mascot/0/c/6/0c6a12b7-3f9e-40f8-aa5e-8481b5635370.gif"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "MaxPreps Conestoga Pioneers block 'C' logo: garnet #990033 and grey #9C9C9C with black outline; T/E district seal on tesd.net is maroon #762224. Agrees with Wikipedia garnet and gray."
+ },
+ {
+  "school": "Pottstown",
+  "identified_as": "Pottstown Senior High School, Pottstown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#222260",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Pottstown Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pottstown_Senior_High_School",
+   "https://www.pottstownschools.org/",
+   "https://www.pottstownschools.org/sysimages/PottstownHighSchool2.png",
+   "https://www.maxpreps.com/pa/pottstown/pottstown-trojans/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "pottstownschools.org theme navy #222260 (most-used site colour, also frames the HS tile image); no Trojan logo seen. MaxPreps lists Blue/White."
+ },
+ {
+  "school": "Wyoming Area",
+  "identified_as": "Wyoming Area Secondary Center, Exeter (Wyoming Area School District)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2A6940",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Wyoming Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyoming_Area_School_District",
+   "https://www.wyomingarea.org/",
+   "https://www.maxpreps.com/pa/exeter/wyoming-area-warriors/",
+   "https://image.maxpreps.io/school-mascot/0/9/0/090f959a-b71d-4a88-9bca-ec28e18d19ed.gif"
+  ],
+  "era": null,
+  "notes": "Hex from district page infobox.",
+  "evidence": "MaxPreps Wyoming Area Warriors logo: green #2A6940 'WARRIORS', monument and stars on white (no gold in it); MaxPreps lists Green/Gold. District site shows only a seal. Gold hex kept from the Wikipedia infobox."
+ },
+ {
+  "school": "Kingston",
+  "identified_as": "Kingston High School, Kingston (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District"
+  ],
+  "era": "Bracket years 1936-1967; Kingston merged into Wyoming Valley West School District (successor Wyoming Valley West HS, Spartans).",
+  "notes": "No source found for pre-merger Kingston HS colours or mascot. A 2006 item mentions youth 'Kingston Huskies' only.",
+  "evidence": "Nothing found; search and archive sources were rate-limited. No colours given."
+ },
+ {
+  "school": "Meyersdale",
+  "identified_as": "Meyersdale Area High School, Meyersdale",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E61A23",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "high",
+  "wikipedia": "Meyersdale Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Meyersdale_Area_High_School",
+   "https://www.masd.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1715611148/masdnet/ya0alf1a895cdkg7wpkp/MeyersdaleAreaSchoolDistrict.png",
+   "https://www.maxpreps.com/pa/meyersdale/meyersdale-red-raiders/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "masd.net logo: red #E61A23 'M' with white/black outline and spear on black field; MaxPreps Meyersdale Red Raiders lists Black/Red."
+ },
+ {
+  "school": "Kennett",
+  "identified_as": "Kennett High School, Kennett Square",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#00359B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Demons",
+  "confidence": "high",
+  "wikipedia": "Kennett High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennett_High_School_(Pennsylvania)",
+   "https://khs.kcsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1727981588/kcsdorg/d760ytyibxriaajwq5vn/2024KennettHighSchoolPrimaryLogoImage.png",
+   "https://www.kcsd.org/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "khs.kcsd.org Kennett High School logo: royal blue #00359B block 'K' and wordmark on white (same blue as district logo)."
+ },
+ {
+  "school": "West Chester East",
+  "identified_as": "West Chester East High School, West Chester",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CE1F39",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F0B463",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "West Chester East High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Chester_East_High_School",
+   "https://ehs.wcasd.net/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1727193884/wcasdnet/m1rxswnokklvrrtnlsrh/EHS-Vikings-logo.png",
+   "https://upload.wikimedia.org/wikipedia/en/2/2f/WCEastVikings.gif"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "ehs.wcasd.net EHS Vikings logo: red #CE1F39 helmet and outline, gold #F0B463 horns/beard; older Wikipedia logo (WCEastVikings.gif) has a gold/black Viking head with red band. Yellow reads as gold."
+ },
+ {
+  "school": "Souderton",
+  "identified_as": "Souderton Area High School, Souderton",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BA122B",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Big Red (formerly Indians)",
+  "confidence": "high",
+  "wikipedia": "Souderton Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Souderton_Area_High_School",
+   "https://www.soudertonsd.org/",
+   "https://sahs.soudertonsd.org/",
+   "https://resources.finalsite.net/images/v1656685564/soudertonsdorg/h3l8ad1kivmj3lguwuul/red1.svg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "soudertonsd.org theme red #BA122B (153 uses; district logo SVG is white-only); sahs.soudertonsd.org red graphic red1.svg #CF001C."
+ },
+ {
+  "school": "Coudersport",
+  "identified_as": "Coudersport Area Junior/Senior High School, Coudersport",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#5A169D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": "#D2DBD8",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Coudersport Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coudersport_Area_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/coudersport/coudersport-falcons/",
+   "https://www.coudyschools.net/",
+   "https://cmsv2-assets.apptegy.net/uploads/17746/logo/18702/logo_template_300-web.png",
+   "https://www.maxpreps.com/pa/coudersport/coudersport-falcons/",
+   "https://image.maxpreps.io/school-mascot/6/a/0/6a08c57f-3bae-4e4d-9962-d75126307ca9.gif"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox has no colours; MaxPreps colours field truncated in search results.",
+  "evidence": "coudyschools.net falcon logo: purple #5A169D with white and silver-grey #D2DBD8 outline; site theme #59179D; MaxPreps Coudersport Falcons logo purple #660099/grey, colours Purple/White."
+ },
+ {
+  "school": "Northern Lebanon",
+  "identified_as": "Northern Lebanon High School, Fredericksburg (Lebanon County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#1B4388",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FAB429",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Northern Lebanon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Lebanon_High_School",
+   "https://en.wikipedia.org/wiki/Northern_Lebanon_School_District",
+   "https://www.norleb.k12.pa.us/",
+   "https://www.norleb.k12.pa.us/uploaded/photos/District/Logos/NorlebSD_District_Banner.png",
+   "https://www.maxpreps.com/pa/fredericksburg/northern-lebanon-vikings/"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree.",
+  "evidence": "norleb.k12.pa.us district banner: blue #1B4388 wordmark and seal, gold #FAB429 bar; site CSS #003594 and #FFB81C; MaxPreps Vikings logo blue/gold. Note nlsd.org is Northern Lehigh, not this school."
+ },
+ {
+  "school": "Central",
+  "identified_as": "Central High School, Martinsburg (Spring Cove School District)",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": "#AD0116",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "medium",
+  "wikipedia": "Central High School (Martinsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_High_School_(Martinsburg,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Spring_Cove_School_District",
+   "https://chs.springcovesd.org/",
+   "https://www.springcovesd.org/",
+   "https://3.files.edl.io/b4f3/26/10/08/023056-57ae2154-1ab0-4319-9a6f-2e68c6fe3769.png"
+  ],
+  "era": null,
+  "notes": "HS page says red and gray (citing MaxPreps); district page says Scarlet and Grey. Identity: assumed Martinsburg Central (D6, AA), not Central Cambria/Central Dauphin.",
+  "evidence": "chs.springcovesd.org page graphics: scarlet #AD0116/#BA0716 block lettering with black outline; site CSS #990000. No logo with grey seen (MaxPreps refused)."
+ },
+ {
+  "school": "Troy",
+  "identified_as": "Troy Area Junior/Senior High School, Troy (Bradford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BD0001",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Troy Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Troy_Area_School_District",
+   "search:https://www.maxpreps.com/pa/troy/troy-trojans/soccer/schedule/all-time",
+   "https://www.troyareasd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/19974/logo/22587/Troy_Area_School_District_PA_Logo.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page and MaxPreps (search snippet) agree.",
+  "evidence": "troyareasd.org Trojan head logo: red #BD0001 line art on white; site theme #BE0002."
+ },
+ {
+  "school": "Conrad Weiser",
+  "identified_as": "Conrad Weiser High School, Robesonia",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#041E42",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Scouts",
+  "confidence": "high",
+  "wikipedia": "Conrad Weiser High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conrad_Weiser_High_School",
+   "https://www.conradweiser.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/10602/logo/11986/cw-web-color-updated.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "conradweiser.org 'CW' logo: navy #041E42 on white; site theme #041E42 (294 uses)."
+ },
+ {
+  "school": "Elizabethtown",
+  "identified_as": "Elizabethtown Area High School, Elizabethtown",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0E4CA1",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "high",
+  "wikipedia": "Elizabethtown Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elizabethtown_Area_School_District",
+   "search:https://www.eliteprospects.com/team/19870/elizabethtown-area-high/2024-2025",
+   "https://www.etownschools.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1690408723/etownschoolsorg/uzwx4m6bffbdzchrgbom/Letter_E_Logo_Straight_S.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia and hockey team listing agree.",
+  "evidence": "etownschools.org letter-'E' logo: royal blue #0E4CA1 with black/white outline; site theme #0033A0."
+ }
+]

@@ -1,0 +1,237 @@
+[
+ {
+  "school": "Stowe Township",
+  "identified_as": "Stowe Township High School, Stowe Township (Allegheny Co.)",
+  "colors": [],
+  "mascot": "Stallions",
+  "confidence": "low",
+  "wikipedia": "Sto-Rox High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sto-Rox_High_School",
+   "https://en.wikipedia.org/wiki/Sto-Rox_School_District",
+   "https://steelcityblitz.com/?p=35050",
+   "https://archive.triblive.com/news/high-school-notebook-sto-rox-celebrates-50-years-of-football",
+   "https://en.wikipedia.org/w/index.php?title=Sto-Rox_High_School&action=raw"
+  ],
+  "era": "Merged with McKees Rocks in 1966-67 to form Sto-Rox (Vikings; green and white).",
+  "notes": "No colours found for the 1930s school.",
+  "evidence": "Retry: archive.org title searches (stowe yearbook, Stowe Township High School) found no PA yearbook; Wikipedia raw pages for Stowe Township and Sto-Rox give only Sto-Rox's Kelly green and white (successor). Own colours still unknown."
+ },
+ {
+  "school": "Penn Cambria",
+  "identified_as": "Penn Cambria High School, Cresson",
+  "colors": [
+   {
+    "name": "Light (Columbia) Blue",
+    "hex": "#9CCAE3",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#0D0D0D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Penn Cambria School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Cambria_School_District",
+   "https://www.pcam.org/",
+   "https://www.pcam.org/wp-content/uploads/2018/07/cropped-logo-1-192x192.png",
+   "https://www.pcam.org/wp-content/uploads/2018/08/penn-cambria-logo_header2.png",
+   "https://www.pcam.org/schools/high-school/athletics/",
+   "https://penn-cambria.bigteams.com/",
+   "https://assets-rst7.rschooltoday.com/rst7files/uploads/sites/1971/2026/06/1742829600_PCLogo.png",
+   "search:https://www.maxpreps.com/pa/cresson/penn-cambria-panthers/"
+  ],
+  "era": null,
+  "notes": "Blue is a light/Columbia blue, not navy (site navy is district web theme). White only as logo outline; Wikipedia lists Blue, Black, White.",
+  "evidence": "Athletics site (penn-cambria.bigteams.com) panther logo: light blue #9CCAE3 panther on black #0D0D0D with thin white outline; matches district seal light blue #97AAD3 and Wikipedia 'Blue, Black, White'."
+ },
+ {
+  "school": "Fairchance-Georges",
+  "identified_as": "Fairchance-Georges High School, Fairchance (Fayette County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Albert Gallatin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_Area_School_District",
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_High_School",
+   "https://en.wikipedia.org/w/index.php?title=Fairchance,_Pennsylvania&action=raw"
+  ],
+  "era": "Merged into Albert Gallatin High School (Colonials; black and silver).",
+  "notes": "No source for Fairchance-Georges' own colours.",
+  "evidence": "Retry: archive.org searches (fairchance, georges township) found no yearbook; Wikipedia raw for Fairchance has nothing on the school; WebSearch budget spent. Own colours still unknown."
+ },
+ {
+  "school": "Hanover Township",
+  "identified_as": "Hanover Township High School, Hanover Township (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Hanover Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hanover_Area_School_District",
+   "https://en.wikipedia.org/w/index.php?title=Hanover_Township,_Luzerne_County,_Pennsylvania&action=raw"
+  ],
+  "era": "Merged into Hanover Area (blue and white) around 1966-71.",
+  "notes": "No source for Hanover Township's own colours.",
+  "evidence": "Retry: archive.org 'Hanover High School' yearbooks found are Hanover (York Co.) 'Revonah', not this school; Wikipedia raw for Hanover Township (Luzerne) gives no school colours. Own colours still unknown."
+ },
+ {
+  "school": "Bishop Hoban",
+  "identified_as": "Bishop Hoban High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Argents",
+  "confidence": "medium",
+  "wikipedia": "Bishop Hoban High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Hoban_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/bishop-hoban-argent/basketball",
+   "search:https://holyredeemerhs.org/history",
+   "https://archive.org/details/classmates-yearbook-26730-1977-bishop-hoban-high-school",
+   "https://archive.org/details/classmates-yearbook-38260-1984-bishop-hoban-high-school",
+   "https://archive.org/details/classmates-yearbook-38069-1982-bishop-hoban-high-school",
+   "https://archive.org/details/classmates-yearbook-26665-1979-bishop-hoban-high-school",
+   "https://archive.org/details/classmates-yearbook-20402-1978-bishop-hoban-high-school",
+   "https://archive.org/details/classmates-yearbook-37586-1983-bishop-hoban-high-school"
+  ],
+  "era": "Closed 2007; consolidated into Holy Redeemer High School (Royals; red, white, gold).",
+  "notes": "Wikipedia infobox and search results agree on green and gold, Argents. No logo or period photo could be found (image search unavailable; maxpreps blocked), so no hex.",
+  "evidence": "Retry: read archive.org OCR of 1977, 1978, 1979, 1982, 1983, 1984 Bishop Hoban yearbooks (Arc): Argents confirmed, but no colour statement; 1984 football page photos are black-and-white and cover is maroon/silver art, so no hex. Green and gold kept from Wikipedia infobox."
+ },
+ {
+  "school": "Sunbury",
+  "identified_as": "Sunbury High School, Sunbury (Northumberland County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School",
+   "https://en.wikipedia.org/wiki/Shikellamy_School_District",
+   "https://archive.org/details/classmates-yearbook-59085-1927-sunbury-high-school",
+   "https://archive.org/download/classmates-yearbook-59085-1927-sunbury-high-school/59085_djvu.txt"
+  ],
+  "era": "Merged into Shikellamy High School (Braves; maroon, white, blue) in the mid-1960s.",
+  "notes": "1927 yearbook (La Vie) repeatedly calls the football and basketball teams 'the Blue and White'. Class colours vary by class and are not school colours. Nickname not found. Only one yearbook era checked.",
+  "evidence": "archive.org OCR of 1927 Sunbury High (PA) yearbook: 'the Blue and White eleven of Sunbury High', 'the Blue and White Cage Team', many game reports; no clean colour image, so no hex."
+ },
+ {
+  "school": "Smithfield-Ridgebury-Ulster",
+  "identified_as": "Smithfield-Ridgebury-Ulster High School, East Smithfield (Bradford County)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Smithfield_Township,_Bradford_County,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Athens_Area_School_District",
+   "https://archive.org/details/classmates-yearbook-49792-1964-smithfield-ridgebury-ulster-high-school",
+   "https://archive.org/download/classmates-yearbook-49792-1964-smithfield-ridgebury-ulster-high-school/49792_djvu.txt"
+  ],
+  "era": "Closed; area now served by Athens Area School District (Wildcats). Exact merger date not confirmed.",
+  "notes": "1964 yearbook (Smithsonian) alma mater: 'With her colors ever flying, True to the Gold and Blue'. School had a wrestling team (coach James Priester). Nickname not found.",
+  "evidence": "archive.org OCR of 1964 S.R.U. yearbook, East Smithfield PA: alma mater names 'the Gold and Blue'; no image looked at, so no hex."
+ },
+ {
+  "school": "St. John Kanty Prep",
+  "identified_as": "St. John Kanty Preparatory School, Erie (closed 1980)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://cmnewengland.org/2010/06/st-john-kanty-prep-end-of-the-legend/",
+   "search:https://www.e-yearbook.com/yearbooks/St_John_Kanty_Preparatory_School_Kantian_Yearbook/1951/Page_24.html",
+   "https://cmnewengland.org/2010/06/st-john-kanty-prep-end-of-the-legend/",
+   "https://cmnewengland.org/2010/09/for-god-for-country-for-kanty/",
+   "https://www.e-yearbook.com/yearbooks/St_John_Kanty_Preparatory_School_Kantian_Yearbook/1951/Page_24.html",
+   "https://www.e-yearbook.com/yearbooks/St_John_Kanty_Preparatory_School_Kantian_Yearbook/1951/Page_47.html"
+  ],
+  "era": "Closed after the 1980 graduation.",
+  "notes": "1951 Kantian yearbook: basketball write-up calls the team 'the maroon and white'; class colours also Maroon and White. No image with clean colour, so no hex.",
+  "evidence": "e-yearbook OCR, 1951 Kantian: p.46-47 basketball 'the maroon and white were defeated by St. Mary's Central'; p.24 'Class Colors Maroon and White'. Mascot not found."
+ },
+ {
+  "school": "Executive Education Acad.",
+  "identified_as": "Executive Education Academy Charter School, Allentown",
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/allentown/executive-education-academy-charter-school-raptors/basketball"
+  ],
+  "era": null,
+  "notes": "MaxPreps listing only (search snippet).",
+  "evidence": "School site eeacs.org, www.eeacs.org, eeacs.bigteams.com and MaxPreps all returned 403 to this environment (retry pass too); WebSearch budget spent. First-pass names kept, no hex."
+ }
+]

@@ -24,9 +24,12 @@ import pdfplumber
 SEEDP = re.compile(r'^(?:([A-Z]{1,3}|\d{1,2}(?:/\d{1,2})?)-(\d{1,2})|([A-Z]))\s+(.+)$')
 SCHOOL = re.compile(r'^(.+?)(?:,\s*(FR|SO|JR|SR|Fr|So|Jr|Sr|9|10|11|12))?(?:,\s*([\d]+-[\d]+(?:-[\d]+)?))?\s*,?\s*$')
 ABBR_TAIL = re.compile(r'\([A-Z0-9&\-]{1,6}\)\s*$')
+# a bout tag like "T. Donnelly (CUV)" sits at the end of the text; "(TD)" in "Tom (TD) Donnelly" is a nickname
+# and "(West Lawn)" / "(Roseto)" are part of a school's name, so neither should hide the word
+TAG_IN = re.compile(r'\([A-Z0-9&\-]{1,6}\)\s*(?:$|[A-Z][a-z]*\.|Fall|Dec|Maj|TF|Bye|DQ|Inj|Def|Forf|Med|FF|\d)')
 WEIGHT = re.compile(r'^(\d{2,3}|UNL|Unl|Unlimited|HWT|Hwt|Heavyweight)$')
 TEAM = re.compile(r'^(\d+)\.\s+([\d.]+)\s+(.+?)(?:\s+((?=[A-Z0-9&\-]*[A-Z])[A-Z0-9&\-]{1,6}))?(?:\s+(?:[\d\-]+\s*)+)?$')
-RESULT = re.compile(r'^(Fall|Dec\.|Maj\.|TF|Bye|DQ|Inj\.|Def\.|Forf\.|Med\.|FF|OT|SV|TB|UTB|\d+(st|nd|rd|th) Place|CHAMPION|Champion)')
+RESULT = re.compile(r'^(Fall|Dec\.|Sup\. Dec\.|Maj\.|TF|Bye|DQ|Inj\.|Def\.|Forf\.|Med\.|FF|OT|SV|TB|UTB|\d+(st|nd|rd|th) Place|CHAMPION|Champion)')
 GRADES = {'FR', 'SO', 'JR', 'SR', '9', '10', '11', '12', 'Fr', 'So', 'Jr', 'Sr'}
 GR = {'Fr': 'FR', 'So': 'SO', 'Jr': 'JR', 'Sr': 'SR', '9': 'FR', '10': 'SO', '11': 'JR', '12': 'SR'}
 REGION = {'North_East': 'NE', 'North_West': 'NW', 'South_Central': 'SC', 'South_East': 'SE', 'South_West': 'SW', 'West': 'W', 'East': 'E', 'Central_North_West': 'CNW'}
@@ -59,7 +62,7 @@ def meta(path):
 def parse_place_block(ws, y0):
     """rows under the 'Place Winners' header -> [(place, name, grade, school)]"""
     cand = [w for w in ws if w['top'] > y0 + 2 and w['top'] < y0 + 170 and w['x0'] > 180
-            and '(' not in w['text'] and not RESULT.match(w['text'].strip()) and 'corrections' not in w['text']
+            and not TAG_IN.search(w['text']) and not RESULT.match(w['text'].strip()) and 'corrections' not in w['text']
             and not w['text'].startswith('Latest results') and not w['text'].startswith('http')]
     out, n = [], 0
     for row in rows_of(cand):
@@ -67,7 +70,9 @@ def parse_place_block(ws, y0):
         if len(toks) < 2: continue
         place = None
         if toks[0].isdigit() and 1 <= int(toks[0]) <= 8: place = int(toks[0]); toks = toks[1:]
-        if len(toks) < 2: continue
+        if not toks or (len(toks) < 2 and place is None): continue
+        if len(toks) == 1:  # name, grade and school glued into one word ("Michael (Misha) StrangaSrRityGarden Spot")
+            out.append((place, toks[0], '', '')); continue
         grade = ''
         gi = [i for i, t in enumerate(toks) if t in GRADES]
         if gi: grade = GR.get(toks[gi[-1]], toks[gi[-1]]); school = ' '.join(toks[gi[-1] + 1:]); name = ' '.join(toks[:gi[-1]])
@@ -106,7 +111,7 @@ def parse_file(path):
                 names = [w for w in ws if w['x0'] < 135 and w['top'] > 55 and not ABBR_TAIL.search(w['text']) and w['text'].strip() not in ('Bye', '')
                          and not RESULT.match(w['text'].strip()) and not w['text'].startswith('Latest') and not w['text'].startswith('http')
                          and not (is_school_word(w['text']) and not SEEDP.match(w['text'].strip()))]
-                schools = [w for w in ws if 100 < w['x0'] < 345 and ',' in w['text'] and '(' not in w['text']]
+                schools = [w for w in ws if 100 < w['x0'] < 345 and ',' in w['text'] and not TAG_IN.search(w['text'])]
                 used, seen = set(), []
                 for nw in names:
                     best, bd = None, 1e9
@@ -145,6 +150,13 @@ def parse_file(path):
                     if hit is None:
                         for e in seen:  # last-name + school fallback
                             if key(e[3].split()[-1]) == key(name.split()[-1]) and key(e[4])[:6] == key(school)[:6]: hit = e; break
+                    if hit is None:  # same school, same first name, last name garbled ("Charles (Chuck) SamselSl R")
+                        def fl(n):
+                            t = re.sub(r'\([^)]*\)', '', n).split()
+                            return (key(t[0]), key(''.join(t[1:]))[:4]) if len(t) > 1 else None
+                        m = [e for e in seen if not e[1] and (not school or (e[4] and key(e[4])[:6] == key(school)[:6])) and fl(name) and fl(e[3]) == fl(name)]
+                        if len(m) == 1: hit = m[0]
+                    if hit is None and not school: continue
                     if hit is None:
                         seen.append([wt, pl, '', name, school, grade, ''])
                     else:
@@ -152,6 +164,7 @@ def parse_file(path):
                         if not hit[4]: hit[4] = school
                         if not hit[5]: hit[5] = grade
                 for e in seen:
+                    if e[3].count('(') > e[3].count(')'): e[3] = re.sub(r'\((\S+)', r'(\1)', e[3], count=1)  # "Thomas (Mike Conrow"
                     ents.append([level, base, year, cls, unit, e[0], e[1], e[2], e[3], e[4], e[5], e[6]])
     except Exception as ex:
         log.append(f'{base}: ERROR {ex}')

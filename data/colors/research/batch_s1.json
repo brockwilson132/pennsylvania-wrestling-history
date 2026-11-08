@@ -1,0 +1,481 @@
+[
+ {
+  "school": "Reynolds",
+  "identified_as": "Reynolds Junior/Senior High School, Greenville (Mercer County)",
+  "colors": [],
+  "mascot": "Raiders",
+  "confidence": "low",
+  "sources": [],
+  "era": null,
+  "notes": "Searches did not surface stated colours; Wikipedia/MaxPreps/school site could not be fetched (network blocked). Do not confuse with Reynolds HS (Oregon), forest green/silver."
+ },
+ {
+  "school": "Canon-McMillan",
+  "identified_as": "Canon-McMillan Senior High School, Canonsburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Big Macs (Highlander)",
+  "confidence": "high",
+  "sources": [
+   "https://www.cmsd.k12.pa.us/resources/staff/branding-guidelines",
+   "https://en.wikipedia.org/wiki/Canon-McMillan_School_District"
+  ],
+  "era": null,
+  "notes": "District branding page refers to the blue-and-gold CM logo; no hex given. Sources seen via search snippets only."
+ },
+ {
+  "school": "Waynesburg Central",
+  "identified_as": "Waynesburg Central High School, Waynesburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Waynesburg_Central_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia (and mirrors) only, seen via search snippets."
+ },
+ {
+  "school": "Clearfield",
+  "identified_as": "Clearfield Area Junior/Senior High School, Clearfield",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bison",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Clearfield_Area_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Mountain_Athletic_Conference_(PIAA)"
+  ],
+  "era": null,
+  "notes": "School and conference Wikipedia pages agree; seen via search snippets."
+ },
+ {
+  "school": "Bald Eagle Area",
+  "identified_as": "Bald Eagle Area Junior/Senior High School, Wingate",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bald_Eagle_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District-level Wikipedia colours only, via search snippet."
+ },
+ {
+  "school": "State College",
+  "identified_as": "State College Area High School, State College",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Little Lions",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/State_College_Area_High_School",
+   "https://www.maxpreps.com/pa/state-college/state-college-little-lions/football/schedule/all-time",
+   "https://lionsdigest1.com/24785/opinion/time-for-change-scasd-debates-new-school-colors/"
+  ],
+  "era": null,
+  "notes": "Wikipedia, MaxPreps and student paper agree (maroon and gray since 1920s)."
+ },
+ {
+  "school": "North Allegheny",
+  "identified_as": "North Allegheny Senior High School, Wexford",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "sources": [
+   "https://pa01001119.schoolwires.net/Page/7399",
+   "https://triblive.com/local/north-hills/north-allegheny-hopes-new-tiger-logo-will-be-purrfect-addition-to-district",
+   "https://www.maxpreps.com/pa/wexford/north-allegheny-tigers/volleyball/boys/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "District principal page states Black and Gold; 2020 logo uses gold, black, white, gray. Order on MaxPreps is gold/black."
+ },
+ {
+  "school": "Central Dauphin",
+  "identified_as": "Central Dauphin High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Dauphin_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox via search snippet; school site caption mentions green gowns. Hockey listing adds black."
+ },
+ {
+  "school": "Burrell",
+  "identified_as": "Burrell High School, Lower Burrell",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Burrell_School_District",
+   "https://www.westmorelandsports.com/schools/burrell"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Trinity (Washington)",
+  "identified_as": "Trinity High School, Washington (Trinity Area SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hillers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Trinity_High_School_(Washington,_Pennsylvania)",
+   "https://www.maxpreps.com/pa/washington/trinity-hillers/soccer/schedule/all-time"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Benton",
+  "identified_as": "Benton Middle-Senior High School, Benton (Columbia County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "low",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Benton_Middle-Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia lists only orange; a second colour (possibly black) is not confirmed by any source found."
+ },
+ {
+  "school": "Erie Cathedral Prep",
+  "identified_as": "Cathedral Preparatory School, Erie",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Ramblers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cathedral_Preparatory_School",
+   "https://d9and10sports.com/cathedral-prep-villa-maria-maria-to-merge-in-2022/",
+   "https://www.yahoo.com/now/whats-orange-black-blue-white-101716824.html"
+  ],
+  "era": "2022: merged with Villa Maria Academy (Prep-Villa); Ramblers name and orange/black kept",
+  "notes": "MaxPreps and the new athletic logos add royal blue as an accent."
+ },
+ {
+  "school": "Connellsville",
+  "identified_as": "Connellsville Area Senior High School, Connellsville",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Connellsville_Area_Senior_High_School",
+   "https://www.maxpreps.com/pa/connellsville/connellsville-falcons/soccer/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "One auto-generated knowledge-graph site says black and gold; disregarded."
+ },
+ {
+  "school": "Cumberland Valley",
+  "identified_as": "Cumberland Valley High School, Mechanicsburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cumberland_Valley_High_School",
+   "https://en.wikipedia.org/wiki/Cumberland_Valley_School_District"
+  ],
+  "era": null,
+  "notes": "High school page: red, black, white; district page: red and white. Black may be an accent."
+ },
+ {
+  "school": "Line Mountain",
+  "identified_as": "Line Mountain Jr./Sr. High School, Herndon",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Line_Mountain_School_District",
+   "https://wikipedia.com/wiki/Line_Mountain_Jr./Sr._High_School"
+  ],
+  "era": "Formed from Mahanoy Joint (blue/gold) and Trevorton (red) merger",
+  "notes": "Red is listed as a trim colour only."
+ },
+ {
+  "school": "Shikellamy",
+  "identified_as": "Shikellamy High School, Sunbury",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Braves",
+  "confidence": "low",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School",
+   "https://en.wikipedia.org/wiki/Shikellamy_School_District"
+  ],
+  "era": null,
+  "notes": "Conflict: high school Wikipedia page says maroon, white and blue; district page says blue and red."
+ },
+ {
+  "school": "Montoursville",
+  "identified_as": "Montoursville Area High School, Montoursville",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Montoursville_Area_High_School",
+   "https://www.montoursville.k12.pa.us/thearrowhead/?p=8225"
+  ],
+  "era": null,
+  "notes": "Wikipedia plus district student newspaper."
+ },
+ {
+  "school": "Brookville",
+  "identified_as": "Brookville Area Jr./Sr. High School, Brookville",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders (Blue Raiders)",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brookville_Area_Jr./Sr._High_School",
+   "https://en.wikipedia.org/wiki/Brookville_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Not Brookville, Ohio (royal blue/white Blue Devils)."
+ },
+ {
+  "school": "Southern Columbia",
+  "identified_as": "Southern Columbia Area High School, Catawissa",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Columbia_Area_High_School",
+   "https://easternpafootball.com/?p=26278"
+  ],
+  "era": null,
+  "notes": "Wikipedia says black and gold; football previews specify Vegas Gold."
+ },
+ {
+  "school": "Cedar Cliff",
+  "identified_as": "Cedar Cliff High School, Camp Hill (West Shore SD)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Colts",
+  "confidence": "medium",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cedar_Cliff_High_School"
+  ],
+  "era": null,
+  "notes": null
+ }
+]

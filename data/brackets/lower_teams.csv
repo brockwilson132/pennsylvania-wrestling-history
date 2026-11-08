@@ -1296,7 +1296,7 @@ district,1961_D11_single,1961,single,D11,6,11.0,Whitehall,WHL
 district,1961_D11_single,1961,single,D11,8,10.0,Nazareth,NAZ
 district,1961_D11_single,1961,single,D11,9,8.0,Emmaus,EMM
 district,1961_D11_single,1961,single,D11,10,7.0,Allentown Dieruff,DRF
-district,1961_D11_single,1961,single,D11,11,6.0,Hellertown Lower Saucon,HTLS
+district,1961_D11_single,1961,single,D11,11,6.0,Saucon Valley,HTLS
 district,1961_D11_single,1961,single,D11,12,1.0,Parkland,PRK
 district,1961_D11_single,1961,single,D11,13,0.0,Slatington,SLAT
 district,1961_D1_single,1961,single,D1,1,15.0,Central Bucks,CNBK
@@ -1478,7 +1478,7 @@ district,1963_D11_single,1963,single,D11,8,14.0,Emmaus,EMM
 district,1963_D11_single,1963,single,D11,9,13.0,Parkland,PRK
 district,1963_D11_single,1963,single,D11,10,11.0,Palisades,PLS
 district,1963_D11_single,1963,single,D11,11,6.0,Southern Lehigh,SOLE
-district,1963_D11_single,1963,single,D11,12,4.0,Hellertown Lower Saucon,HTLS
+district,1963_D11_single,1963,single,D11,12,4.0,Saucon Valley,HTLS
 district,1963_D11_single,1963,single,D11,13,3.0,Whitehall,WHL
 district,1963_D12_single,1963,single,D12,1,29.0,Tunkhannock,TNK
 district,1963_D12_single,1963,single,D12,2,16.0,Clarks Summit/Abington,CSB
@@ -1559,7 +1559,7 @@ district,1964_D11_single,1964,single,D11,2,58.0,Easton,EAS
 district,1964_D11_single,1964,single,D11,3,0.0,Allentown Allen,ALL
 district,1964_D11_single,1964,single,D11,3,0.0,Bethlehem Liberty,BLIB
 district,1964_D11_single,1964,single,D11,3,0.0,Emmaus,EMM
-district,1964_D11_single,1964,single,D11,3,0.0,Hellertown Lower Saucon,HTLS
+district,1964_D11_single,1964,single,D11,3,0.0,Saucon Valley,HTLS
 district,1964_D11_single,1964,single,D11,3,0.0,Nazareth,NAZ
 district,1964_D11_single,1964,single,D11,3,0.0,Northampton,NHA
 district,1964_D11_single,1964,single,D11,3,0.0,Palisades,PLS
@@ -1733,7 +1733,7 @@ district,1966_D10_single,1966,single,D10,14,0.0,North East,NE
 district,1966_D10_single,1966,single,D10,14,0.0,West Middlesex,WMS
 district,1966_D11_single,1966,single,D11,1,95.0,Allentown Allen,ALL
 district,1966_D11_single,1966,single,D11,2,39.0,Bethlehem Liberty,BLIB
-district,1966_D11_single,1966,single,D11,3,34.0,Hellertown Lower Saucon,HTLS
+district,1966_D11_single,1966,single,D11,3,34.0,Saucon Valley,HTLS
 district,1966_D11_single,1966,single,D11,4,27.0,Wilson Area,WLA
 district,1966_D11_single,1966,single,D11,5,25.0,Allentown Dieruff,DRF
 district,1966_D11_single,1966,single,D11,6,17.0,Easton,EAS
@@ -1853,7 +1853,7 @@ district,1967_D10_single,1967,single,D10,15,0.0,Union City,UC
 district,1967_D10_single,1967,single,D10,15,0.0,Warren,WRN
 district,1967_D11_single,1967,single,D11,1,63.0,Allentown Allen,ALL
 district,1967_D11_single,1967,single,D11,2,46.0,Bethlehem Liberty,BLIB
-district,1967_D11_single,1967,single,D11,3,34.0,Hellertown Lower Saucon,HTLS
+district,1967_D11_single,1967,single,D11,3,34.0,Saucon Valley,HTLS
 district,1967_D11_single,1967,single,D11,4,30.0,Wilson Area,WLA
 district,1967_D11_single,1967,single,D11,5,29.0,Easton,EAS
 district,1967_D11_single,1967,single,D11,6,27.0,Nazareth,NAZ
@@ -1975,7 +1975,7 @@ district,1968_D11_single,1968,single,D11,4,34.0,Allentown Allen,ALL
 district,1968_D11_single,1968,single,D11,5,33.0,Allentown Dieruff,DRF
 district,1968_D11_single,1968,single,D11,6,26.0,Tri-Valley,TV
 district,1968_D11_single,1968,single,D11,7,23.0,Bethlehem Freedom,BFR
-district,1968_D11_single,1968,single,D11,8,20.0,Hellertown Lower Saucon,HTLS
+district,1968_D11_single,1968,single,D11,8,20.0,Saucon Valley,HTLS
 district,1968_D11_single,1968,single,D11,9,18.0,North Schuylkill,NSC
 district,1968_D11_single,1968,single,D11,10,16.0,Northampton,NHA
 district,1968_D11_single,1968,single,D11,11,14.0,Bethlehem Liberty,BLIB
@@ -2117,7 +2117,7 @@ district,1969_D11_single,1969,single,D11,7,30.0,Emmaus,EMM
 district,1969_D11_single,1969,single,D11,8,28.0,North Schuylkill,NSC
 district,1969_D11_single,1969,single,D11,9,24.0,Parkland,PRK
 district,1969_D11_single,1969,single,D11,10,23.0,Stroudsburg,SDB
-district,1969_D11_single,1969,single,D11,11,22.0,Hellertown Lower Saucon,HTLS
+district,1969_D11_single,1969,single,D11,11,22.0,Saucon Valley,HTLS
 district,1969_D11_single,1969,single,D11,12,17.0,Tri-Valley,TV
 district,1969_D11_single,1969,single,D11,13,11.0,Bethlehem Liberty,BLIB
 district,1969_D11_single,1969,single,D11,14,10.0,Pottsville,PTV
@@ -2242,7 +2242,7 @@ district,1970_D10_single,1970,single,D10,15,0.0,Northwestern,NW
 district,1970_D10_single,1970,single,D10,15,0.0,Reynolds,REY
 district,1970_D10_single,1970,single,D10,15,0.0,Titusville,TTV
 district,1970_D10_single,1970,single,D10,15,0.0,Warren,WRN
-district,1970_D11_single,1970,single,D11,1,72.0,Hellertown Lower Saucon,HTLS
+district,1970_D11_single,1970,single,D11,1,72.0,Saucon Valley,HTLS
 district,1970_D11_single,1970,single,D11,2,59.0,North Schuylkill,NSC
 district,1970_D11_single,1970,single,D11,3,58.0,Easton,EAS
 district,1970_D11_single,1970,single,D11,4,40.0,Bethlehem Liberty,BLIB
@@ -10686,7 +10686,7 @@ district,2001_D9_AAA,2001,AAA,D9,2,156.0,Clearfield,CLF
 district,2001_D9_AAA,2001,AAA,D9,3,155.5,St. Marys,STM
 district,2001_D9_AAA,2001,AAA,D9,4,69.5,Bradford,BRF
 district,2001_D9_AAA,2001,AAA,D9,5,62.0,Punxsutawney,PNX
-district,2001_D9_AAA,2001,AAA,D9,6,37.0,Allegheny Clarion Valley,ACV
+district,2001_D9_AAA,2001,AAA,D9,6,37.0,Allegheny-Clarion Valley,ACV
 district,2002_D10_AA,2002,AA,D10,1,159.0,Reynolds,REY
 district,2002_D10_AA,2002,AA,D10,2,84.0,Cochranton,CRT
 district,2002_D10_AA,2002,AA,D10,3,72.5,Sharpsville,SHRP
@@ -11003,7 +11003,7 @@ district,2002_D9_AAA,2002,AAA,D9,2,169.0,Clearfield,CLF
 district,2002_D9_AAA,2002,AAA,D9,3,140.0,DuBois,DUB
 district,2002_D9_AAA,2002,AAA,D9,4,98.5,Punxsutawney,PNX
 district,2002_D9_AAA,2002,AAA,D9,5,61.5,Bradford,BRF
-district,2002_D9_AAA,2002,AAA,D9,6,33.5,Allegheny Clarion Valley,ACV
+district,2002_D9_AAA,2002,AAA,D9,6,33.5,Allegheny-Clarion Valley,ACV
 district,2003_D10_AA,2003,AA,D10,1,219.5,Reynolds,REY
 district,2003_D10_AA,2003,AA,D10,2,121.0,Commodore Perry,CP
 district,2003_D10_AA,2003,AA,D10,3,93.0,Lakeview,LKV
@@ -11321,7 +11321,7 @@ district,2003_D9_AAA,2003,AAA,D9,2,163.0,DuBois,DUB
 district,2003_D9_AAA,2003,AAA,D9,3,157.0,St. Marys,STM
 district,2003_D9_AAA,2003,AAA,D9,4,97.0,Punxsutawney,PNX
 district,2003_D9_AAA,2003,AAA,D9,5,80.5,Bradford,BRF
-district,2003_D9_AAA,2003,AAA,D9,6,18.0,Allegheny Clarion Valley,ACV
+district,2003_D9_AAA,2003,AAA,D9,6,18.0,Allegheny-Clarion Valley,ACV
 district,2004_D10_AA,2004,AA,D10,1,205.0,Reynolds,REY
 district,2004_D10_AA,2004,AA,D10,2,135.0,Fort LeBoeuf,FLB
 district,2004_D10_AA,2004,AA,D10,3,78.0,Mercer,MER
@@ -11670,7 +11670,7 @@ district,2004_D9_AAA,2004,AAA,D9,2,172.0,DuBois,DUB
 district,2004_D9_AAA,2004,AAA,D9,3,139.5,St. Marys,STM
 district,2004_D9_AAA,2004,AAA,D9,4,105.5,Punxsutawney,PNX
 district,2004_D9_AAA,2004,AAA,D9,5,93.0,Bradford,BRF
-district,2004_D9_AAA,2004,AAA,D9,6,8.0,Allegheny Clarion Valley,ACV
+district,2004_D9_AAA,2004,AAA,D9,6,8.0,Allegheny-Clarion Valley,ACV
 district,2005_D10_AA,2005,AA,D10,1,213.0,Reynolds,REY
 district,2005_D10_AA,2005,AA,D10,2,122.5,Fort LeBoeuf,FLB
 district,2005_D10_AA,2005,AA,D10,3,104.5,Grove City,GRC
@@ -12018,7 +12018,7 @@ district,2005_D9_AAA,2005,AAA,D9,2,193.5,Clearfield,CLF
 district,2005_D9_AAA,2005,AAA,D9,3,133.0,St. Marys,STM
 district,2005_D9_AAA,2005,AAA,D9,4,96.0,Punxsutawney,PNX
 district,2005_D9_AAA,2005,AAA,D9,5,86.5,Bradford,BRF
-district,2005_D9_AAA,2005,AAA,D9,6,36.0,Allegheny Clarion Valley,ACV
+district,2005_D9_AAA,2005,AAA,D9,6,36.0,Allegheny-Clarion Valley,ACV
 district,2006_D10_AA,2006,AA,D10,1,261.5,Reynolds,REY
 district,2006_D10_AA,2006,AA,D10,2,137.5,Greenville,GRNV
 district,2006_D10_AA,2006,AA,D10,3,114.0,Fort LeBoeuf,FLB
@@ -16381,7 +16381,7 @@ district,2019_D11_AA,2019,AA,D11,18,36.5,Allentown CC,ACC
 district,2019_D11_AA,2019,AA,D11,19,28.0,Salisbury Township,SBT
 district,2019_D11_AA,2019,AA,D11,20,14.0,Schuylkill Haven,SCHV
 district,2019_D11_AA,2019,AA,D11,21,11.0,Panther Valley,PAV
-district,2019_D11_AA,2019,AA,D11,22,5.0,Executive Education Acad.,EEA
+district,2019_D11_AA,2019,AA,D11,22,5.0,Executive Education Academy,EEA
 district,2019_D11_AAA,2019,AAA,D11,1,256.5,Northampton,NHA
 district,2019_D11_AAA,2019,AAA,D11,2,232.5,Nazareth,NAZ
 district,2019_D11_AAA,2019,AAA,D11,3,214.5,Bethlehem Liberty,BLIB
@@ -16711,7 +16711,7 @@ district,2020_D11_AA,2020,AA,D11,17,37.0,Williams Valley,WV
 district,2020_D11_AA,2020,AA,D11,18,29.0,Salisbury Township,SBT
 district,2020_D11_AA,2020,AA,D11,19,28.0,Palmerton,PLMT
 district,2020_D11_AA,2020,AA,D11,20,23.0,Schuylkill Haven,SCHV
-district,2020_D11_AA,2020,AA,D11,21,8.0,Executive Education Acad.,EEA
+district,2020_D11_AA,2020,AA,D11,21,8.0,Executive Education Academy,EEA
 district,2020_D11_AA,2020,AA,D11,22,0.0,Panther Valley,PAV
 district,2020_D11_AAA,2020,AAA,D11,1,291.5,Nazareth,NAZ
 district,2020_D11_AAA,2020,AAA,D11,2,243.5,Bethlehem Catholic,BECA
@@ -17315,7 +17315,7 @@ district,2022_D11_AA,2022,AA,D11,17,30.0,Northern Lehigh,NLH
 district,2022_D11_AA,2022,AA,D11,18,27.0,Williams Valley,WV
 district,2022_D11_AA,2022,AA,D11,19,20.0,Mahanoy,MAH
 district,2022_D11_AA,2022,AA,D11,19,20.0,Pine Grove,PNG
-district,2022_D11_AA,2022,AA,D11,21,3.0,Executive Education Acad.,EEA
+district,2022_D11_AA,2022,AA,D11,21,3.0,Executive Education Academy,EEA
 district,2022_D11_AAA,2022,AAA,D11,1,305.5,Nazareth,NAZ
 district,2022_D11_AAA,2022,AAA,D11,2,288.5,Bethlehem Catholic,BECA
 district,2022_D11_AAA,2022,AAA,D11,3,154.0,Northampton,NHA
@@ -17635,7 +17635,7 @@ district,2023_D11_AA,2023,AA,D11,18,42.0,Mahanoy,MAH
 district,2023_D11_AA,2023,AA,D11,19,22.0,Williams Valley,WV
 district,2023_D11_AA,2023,AA,D11,20,21.0,Northern Lehigh,NLH
 district,2023_D11_AA,2023,AA,D11,21,5.0,Panther Valley,PAV
-district,2023_D11_AA,2023,AA,D11,22,4.0,Executive Education Acad.,EEA
+district,2023_D11_AA,2023,AA,D11,22,4.0,Executive Education Academy,EEA
 district,2023_D11_AAA,2023,AAA,D11,1,315.5,Bethlehem Catholic,BECA
 district,2023_D11_AAA,2023,AAA,D11,2,273.0,Nazareth,NAZ
 district,2023_D11_AAA,2023,AAA,D11,3,196.5,Easton,EAS
@@ -17958,7 +17958,7 @@ district,2024_D11_AA,2024,AA,D11,18,43.0,Williams Valley,WV
 district,2024_D11_AA,2024,AA,D11,19,36.0,Salisbury Township,SBT
 district,2024_D11_AA,2024,AA,D11,20,24.5,Panther Valley,PAV
 district,2024_D11_AA,2024,AA,D11,21,20.0,Pine Grove,PNG
-district,2024_D11_AA,2024,AA,D11,22,9.0,Executive Education Acad.,EEA
+district,2024_D11_AA,2024,AA,D11,22,9.0,Executive Education Academy,EEA
 district,2024_D11_AAA,2024,AAA,D11,1,241.5,Bethlehem Catholic,BECA
 district,2024_D11_AAA,2024,AAA,D11,2,224.5,Easton,EAS
 district,2024_D11_AAA,2024,AAA,D11,3,222.5,Nazareth,NAZ
@@ -18264,7 +18264,7 @@ district,2025_D11_AA,2025,AA,D11,13,55.5,Northern Lehigh,NLH
 district,2025_D11_AA,2025,AA,D11,14,51.5,Catasauqua,CAT
 district,2025_D11_AA,2025,AA,D11,15,47.5,Salisbury Township,SBT
 district,2025_D11_AA,2025,AA,D11,16,37.0,Wilson Area,WLA
-district,2025_D11_AA,2025,AA,D11,17,21.5,Executive Education Acad.,EEA
+district,2025_D11_AA,2025,AA,D11,17,21.5,Executive Education Academy,EEA
 district,2025_D11_AA,2025,AA,D11,18,9.5,Allentown Central Catholic,ACC
 district,2025_D11_AA,2025,AA,D11,19,6.0,Schuylkill Haven,SCHV
 district,2025_D11_AA,2025,AA,D11,20,3.0,Panther Valley,PAV
@@ -24550,7 +24550,7 @@ regional,1999_North_West_AAA,1999,AAA,NW,24,8.0,Lock Haven,LKHV
 regional,1999_North_West_AAA,1999,AAA,NW,26,7.0,Altoona,ALT
 regional,1999_North_West_AAA,1999,AAA,NW,27,5.0,Warren,WRN
 regional,1999_North_West_AAA,1999,AAA,NW,28,4.0,Harbor Creek,HCR
-regional,1999_North_West_AAA,1999,AAA,NW,29,3.0,Allegheny Clarion Valley,ACV
+regional,1999_North_West_AAA,1999,AAA,NW,29,3.0,Allegheny-Clarion Valley,ACV
 regional,1999_North_West_AAA,1999,AAA,NW,30,2.0,Carrick,CAR
 regional,1999_North_West_AAA,1999,AAA,NW,30,2.0,Punxsutawney,PNX
 regional,1999_North_West_AAA,1999,AAA,NW,30,2.0,Taylor Allderdice,TA
@@ -25319,7 +25319,7 @@ regional,2001_North_West_AAA,2001,AAA,NW,26,4.0,Carrick,CAR
 regional,2001_North_West_AAA,2001,AAA,NW,26,4.0,Taylor Allderdice,TA
 regional,2001_North_West_AAA,2001,AAA,NW,29,3.0,Punxsutawney,PNX
 regional,2001_North_West_AAA,2001,AAA,NW,30,2.0,Harbor Creek,HCR
-regional,2001_North_West_AAA,2001,AAA,NW,31,0.0,Allegheny Clarion Valley,ACV
+regional,2001_North_West_AAA,2001,AAA,NW,31,0.0,Allegheny-Clarion Valley,ACV
 regional,2001_North_West_AAA,2001,AAA,NW,31,0.0,Brashear,BRS
 regional,2001_North_West_AAA,2001,AAA,NW,31,0.0,Greater Johnstown,GJ
 regional,2001_North_West_AAA,2001,AAA,NW,31,0.0,Peabody,PB
@@ -25703,7 +25703,7 @@ regional,2002_North_West_AAA,2002,AAA,NW,21,18.0,Conneaut Lake,CLK
 regional,2002_North_West_AAA,2002,AAA,NW,22,17.0,Huntingdon,HTD
 regional,2002_North_West_AAA,2002,AAA,NW,23,16.0,Oil City,OC
 regional,2002_North_West_AAA,2002,AAA,NW,24,13.0,Perry Traditional Acad.,PTA
-regional,2002_North_West_AAA,2002,AAA,NW,25,6.0,Allegheny Clarion Valley,ACV
+regional,2002_North_West_AAA,2002,AAA,NW,25,6.0,Allegheny-Clarion Valley,ACV
 regional,2002_North_West_AAA,2002,AAA,NW,26,4.0,Schenley,SCH
 regional,2002_North_West_AAA,2002,AAA,NW,27,3.0,Langley,LNG
 regional,2002_North_West_AAA,2002,AAA,NW,28,2.0,Lewistown,LWST
@@ -26094,7 +26094,7 @@ regional,2003_North_West_AAA,2003,AAA,NW,25,4.0,Brashear,BRS
 regional,2003_North_West_AAA,2003,AAA,NW,25,4.0,Meadville,MDV
 regional,2003_North_West_AAA,2003,AAA,NW,27,3.0,Carrick,CAR
 regional,2003_North_West_AAA,2003,AAA,NW,27,3.0,Schenley,SCH
-regional,2003_North_West_AAA,2003,AAA,NW,29,2.0,Allegheny Clarion Valley,ACV
+regional,2003_North_West_AAA,2003,AAA,NW,29,2.0,Allegheny-Clarion Valley,ACV
 regional,2003_North_West_AAA,2003,AAA,NW,29,2.0,Perry Traditional Acad.,PTA
 regional,2003_North_West_AAA,2003,AAA,NW,31,1.0,Oliver,OL
 regional,2003_North_West_AAA,2003,AAA,NW,31,1.0,Westinghouse,WH
@@ -26892,7 +26892,7 @@ regional,2005_North_West_AAA,2005,AAA,NW,26,4.0,Perry Traditional Acad.,PTA
 regional,2005_North_West_AAA,2005,AAA,NW,28,3.0,Langley,LNG
 regional,2005_North_West_AAA,2005,AAA,NW,29,1.0,Peabody,PB
 regional,2005_North_West_AAA,2005,AAA,NW,29,1.0,Taylor Allderdice,TA
-regional,2005_North_West_AAA,2005,AAA,NW,31,0.0,Allegheny Clarion Valley,ACV
+regional,2005_North_West_AAA,2005,AAA,NW,31,0.0,Allegheny-Clarion Valley,ACV
 regional,2005_North_West_AAA,2005,AAA,NW,31,0.0,Carrick,CAR
 regional,2005_North_West_AAA,2005,AAA,NW,31,0.0,Westinghouse,WH
 regional,2005_South_Central_AAA,2005,AAA,SC,1,121.5,Central Dauphin,CD
@@ -41348,155 +41348,6 @@ section,2021_D3_S4_AAA,2021,AAA,D3_S4,11,14.0,West York,WY
 section,2021_D3_S4_AAA,2021,AAA,D3_S4,12,12.0,Susquehannock,SQH
 section,2021_D3_S4_AAA,2021,AAA,D3_S4,13,3.0,York Tech,YT
 section,2021_D3_S4_AAA,2021,AAA,D3_S4,14,0.0,Northeastern,NEN
-section,2021_SRE_AA,2021,AA,SRE,1,108.5,Notre Dame-Green Pond,NDGP
-section,2021_SRE_AA,2021,AA,SRE,2,88.0,Southern Columbia,SCL
-section,2021_SRE_AA,2021,AA,SRE,3,68.0,Benton,BNT
-section,2021_SRE_AA,2021,AA,SRE,4,65.0,Montoursville,MNTV
-section,2021_SRE_AA,2021,AA,SRE,5,51.0,Hamburg,HMB
-section,2021_SRE_AA,2021,AA,SRE,6,35.0,Bermudian Springs,BES
-section,2021_SRE_AA,2021,AA,SRE,6,35.0,Saucon Valley,SAV
-section,2021_SRE_AA,2021,AA,SRE,8,34.5,Faith Christian Academy,FCA
-section,2021_SRE_AA,2021,AA,SRE,9,34.0,Midd-West,MW
-section,2021_SRE_AA,2021,AA,SRE,9,34.0,Mifflinburg,MFB
-section,2021_SRE_AA,2021,AA,SRE,11,33.0,Bishop McDevitt,BMD
-section,2021_SRE_AA,2021,AA,SRE,12,32.5,Montgomery,MTG
-section,2021_SRE_AA,2021,AA,SRE,13,32.0,Muncy,MCY
-section,2021_SRE_AA,2021,AA,SRE,14,25.0,Biglerville,BGV
-section,2021_SRE_AA,2021,AA,SRE,15,23.5,Lewisburg,LWB
-section,2021_SRE_AA,2021,AA,SRE,16,22.5,Wyoming Area,WYMA
-section,2021_SRE_AA,2021,AA,SRE,17,22.0,Boiling Springs,BOS
-section,2021_SRE_AA,2021,AA,SRE,18,20.0,Tamaqua,TMQ
-section,2021_SRE_AA,2021,AA,SRE,19,19.5,Brandywine Heights,BH
-section,2021_SRE_AA,2021,AA,SRE,20,19.0,Athens,ATH
-section,2021_SRE_AA,2021,AA,SRE,21,17.0,Allentown CC,ACC
-section,2021_SRE_AA,2021,AA,SRE,21,17.0,Palisades,PLS
-section,2021_SRE_AA,2021,AA,SRE,21,17.0,Sullivan County,SCTY
-section,2021_SRE_AA,2021,AA,SRE,24,14.0,Halifax,HLF
-section,2021_SRE_AA,2021,AA,SRE,24,14.0,South Williamsport,SWLP
-section,2021_SRE_AA,2021,AA,SRE,26,11.5,Meadowbrook Christian,MBC
-section,2021_SRE_AA,2021,AA,SRE,27,11.0,Hughesville,HSV
-section,2021_SRE_AA,2021,AA,SRE,28,10.0,Conwell-Egan,CEC
-section,2021_SRE_AA,2021,AA,SRE,29,9.0,Fairfield,FF
-section,2021_SRE_AA,2021,AA,SRE,29,9.0,Pope John Paul II,PJP
-section,2021_SRE_AA,2021,AA,SRE,29,9.0,West Perry,WPRY
-section,2021_SRE_AA,2021,AA,SRE,32,8.0,Susquenita,SQ
-section,2021_SRE_AA,2021,AA,SRE,33,7.0,Camp Hill,CPH
-section,2021_SRE_AA,2021,AA,SRE,34,6.0,Danville,DV
-section,2021_SRE_AA,2021,AA,SRE,34,6.0,Line Mountain,LM
-section,2021_SRE_AA,2021,AA,SRE,34,6.0,Milton,MLT
-section,2021_SRE_AA,2021,AA,SRE,37,5.5,Jersey Shore,JS
-section,2021_SRE_AA,2021,AA,SRE,38,5.0,Pen Argyl,PAR
-section,2021_SRE_AA,2021,AA,SRE,38,5.0,Tri-Valley,TV
-section,2021_SRE_AA,2021,AA,SRE,40,4.0,Lancaster Catholic,LCC
-section,2021_SRE_AA,2021,AA,SRE,40,4.0,Newport,NWPT
-section,2021_SRE_AA,2021,AA,SRE,40,4.0,North Penn-Liberty,NPL
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Berks Catholic,BRKC
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Littlestown,LTT
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Mount Carmel,MTC
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Pequea Valley,PQV
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Salisbury Township,SBT
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Scranton Prep,SCP
-section,2021_SRE_AA,2021,AA,SRE,43,0.0,Trinity,TRN
-section,2021_SRE_AAA,2021,AAA,SRE,1,131.0,Bethlehem Catholic,BECA
-section,2021_SRE_AAA,2021,AAA,SRE,2,88.0,Nazareth,NAZ
-section,2021_SRE_AAA,2021,AAA,SRE,3,82.0,Northampton,NHA
-section,2021_SRE_AAA,2021,AAA,SRE,4,53.0,Easton,EAS
-section,2021_SRE_AAA,2021,AAA,SRE,5,46.5,Spring-Ford,SF
-section,2021_SRE_AAA,2021,AAA,SRE,6,46.0,West Scranton,WSCR
-section,2021_SRE_AAA,2021,AAA,SRE,7,42.0,Delaware Valley,DEV
-section,2021_SRE_AAA,2021,AAA,SRE,8,35.0,Council Rock North,CRN
-section,2021_SRE_AAA,2021,AAA,SRE,9,23.0,Downingtown East,DE
-section,2021_SRE_AAA,2021,AAA,SRE,10,22.5,Hazleton Area,HAZ
-section,2021_SRE_AAA,2021,AAA,SRE,11,22.0,Abington Heights,ABH
-section,2021_SRE_AAA,2021,AAA,SRE,11,22.0,Council Rock South,CRS
-section,2021_SRE_AAA,2021,AAA,SRE,13,21.5,West Chester Henderson,WCH
-section,2021_SRE_AAA,2021,AAA,SRE,14,21.0,Coatesville,CTV
-section,2021_SRE_AAA,2021,AAA,SRE,14,21.0,Interboro,INT
-section,2021_SRE_AAA,2021,AAA,SRE,14,21.0,Sun Valley,SUV
-section,2021_SRE_AAA,2021,AAA,SRE,17,20.0,Boyertown,BT
-section,2021_SRE_AAA,2021,AAA,SRE,17,20.0,Quakertown,QT
-section,2021_SRE_AAA,2021,AAA,SRE,19,19.0,Central Bucks East,CBE
-section,2021_SRE_AAA,2021,AAA,SRE,20,18.5,Downingtown West,DW
-section,2021_SRE_AAA,2021,AAA,SRE,21,17.0,Neshaminy,NESH
-section,2021_SRE_AAA,2021,AAA,SRE,22,16.0,Bensalem,BNS
-section,2021_SRE_AAA,2021,AAA,SRE,22,16.0,La Salle College,LAS
-section,2021_SRE_AAA,2021,AAA,SRE,22,16.0,Perkiomen Valley,PKV
-section,2021_SRE_AAA,2021,AAA,SRE,25,14.0,Wallenpaupack,WAL
-section,2021_SRE_AAA,2021,AAA,SRE,26,13.0,Emmaus,EMM
-section,2021_SRE_AAA,2021,AAA,SRE,27,12.0,Kennett,KNT
-section,2021_SRE_AAA,2021,AAA,SRE,27,12.0,North Penn,NP
-section,2021_SRE_AAA,2021,AAA,SRE,27,12.0,Strath Haven,SH
-section,2021_SRE_AAA,2021,AAA,SRE,27,12.0,Stroudsburg,SDB
-section,2021_SRE_AAA,2021,AAA,SRE,27,12.0,Upper Darby,UDA
-section,2021_SRE_AAA,2021,AAA,SRE,32,11.0,Bethlehem Liberty,BLIB
-section,2021_SRE_AAA,2021,AAA,SRE,33,10.0,Central Bucks West,CBW
-section,2021_SRE_AAA,2021,AAA,SRE,34,9.0,East Stroudsburg North,ESN
-section,2021_SRE_AAA,2021,AAA,SRE,35,7.0,Pottsville,PTV
-section,2021_SRE_AAA,2021,AAA,SRE,35,7.0,Whitehall,WHL
-section,2021_SRE_AAA,2021,AAA,SRE,37,6.0,Pennridge,PRG
-section,2021_SRE_AAA,2021,AAA,SRE,37,6.0,Radnor,RAD
-section,2021_SRE_AAA,2021,AAA,SRE,39,4.0,Bethlehem Freedom,BFR
-section,2021_SRE_AAA,2021,AAA,SRE,39,4.0,Garnet Valley,GAV
-section,2021_SRE_AAA,2021,AAA,SRE,39,4.0,West Chester East,WCE
-section,2021_SRE_AAA,2021,AAA,SRE,39,4.0,West Chester Rustin,WCR
-section,2021_SRE_AAA,2021,AAA,SRE,43,0.0,Crestwood,CRW
-section,2021_SRE_AAA,2021,AAA,SRE,43,0.0,Lower Merion,LME
-section,2021_SRE_AAA,2021,AAA,SRE,43,0.0,Oxford Area,OX
-section,2021_SRE_AAA,2021,AAA,SRE,43,0.0,Pittston Area,PTSA
-section,2021_SRW_AA,2021,AA,SRW,1,56.0,Burrell,BUR
-section,2021_SRW_AA,2021,AA,SRW,2,52.0,Reynolds,REY
-section,2021_SRW_AA,2021,AA,SRW,3,48.5,Hickory,HCK
-section,2021_SRW_AA,2021,AA,SRW,4,41.0,Brookville,BRV
-section,2021_SRW_AA,2021,AA,SRW,5,36.5,Forest Hills,FH
-section,2021_SRW_AA,2021,AA,SRW,6,33.0,Laurel,LRL
-section,2021_SRW_AA,2021,AA,SRW,7,31.0,Saegertown,SGT
-section,2021_SRW_AA,2021,AA,SRW,8,30.0,Chestnut Ridge,CNRG
-section,2021_SRW_AA,2021,AA,SRW,8,30.0,Fort LeBoeuf,FLB
-section,2021_SRW_AA,2021,AA,SRW,8,30.0,Mount Pleasant,MTPL
-section,2021_SRW_AA,2021,AA,SRW,8,30.0,St. Joseph's Academy,SJA
-section,2021_SRW_AA,2021,AA,SRW,12,28.0,Greenville,GRNV
-section,2021_SRW_AA,2021,AA,SRW,13,25.0,Bald Eagle Area,BEA
-section,2021_SRW_AA,2021,AA,SRW,13,25.0,Philipsburg-Osceola,PO
-section,2021_SRW_AA,2021,AA,SRW,15,24.0,Marion Center,MAC
-section,2021_SRW_AA,2021,AA,SRW,16,23.5,Frazier,FRZ
-section,2021_SRW_AA,2021,AA,SRW,17,23.0,Bishop McCort,BMCT
-section,2021_SRW_AA,2021,AA,SRW,17,23.0,Glendale,GD
-section,2021_SRW_AA,2021,AA,SRW,19,21.0,Johnsonburg,JNBG
-section,2021_SRW_AA,2021,AA,SRW,19,21.0,Sheffield,SHF
-section,2021_SRW_AA,2021,AA,SRW,19,21.0,South Park,SPK
-section,2021_SRW_AA,2021,AA,SRW,22,20.0,Carlynton,CRLT
-section,2021_SRW_AA,2021,AA,SRW,22,20.0,Mount Union,MU
-section,2021_SRW_AA,2021,AA,SRW,24,18.0,Freedom Area,FRE
-section,2021_SRW_AA,2021,AA,SRW,25,17.5,Penns Valley,PNV
-section,2021_SRW_AA,2021,AA,SRW,26,16.0,Blackhawk,BLH
-section,2021_SRW_AA,2021,AA,SRW,26,16.0,Harbor Creek,HCR
-section,2021_SRW_AA,2021,AA,SRW,26,16.0,North Star,NST
-section,2021_SRW_AA,2021,AA,SRW,29,15.0,Commodore Perry,CP
-section,2021_SRW_AA,2021,AA,SRW,29,15.0,McGuffey,MCG
-section,2021_SRW_AA,2021,AA,SRW,31,14.0,Bentworth,BNW
-section,2021_SRW_AA,2021,AA,SRW,31,14.0,Burgettstown,BGT
-section,2021_SRW_AA,2021,AA,SRW,31,14.0,Tussey Mountain,TM
-section,2021_SRW_AA,2021,AA,SRW,34,13.0,Girard,GIR
-section,2021_SRW_AA,2021,AA,SRW,35,12.0,Corry Area,COR
-section,2021_SRW_AA,2021,AA,SRW,35,12.0,Richland,RCHL
-section,2021_SRW_AA,2021,AA,SRW,35,12.0,West Branch,WB
-section,2021_SRW_AA,2021,AA,SRW,38,11.0,Cambria Heights,CAH
-section,2021_SRW_AA,2021,AA,SRW,38,11.0,Mercer,MER
-section,2021_SRW_AA,2021,AA,SRW,38,11.0,Quaker Valley,QKV
-section,2021_SRW_AA,2021,AA,SRW,41,10.0,Beth-Center,BCTR
-section,2021_SRW_AA,2021,AA,SRW,41,10.0,Knoch,KN
-section,2021_SRW_AA,2021,AA,SRW,43,9.0,Meyersdale,MYD
-section,2021_SRW_AA,2021,AA,SRW,44,8.5,Westmont Hilltop,WMH
-section,2021_SRW_AA,2021,AA,SRW,45,7.0,Derry Area,DER
-section,2021_SRW_AA,2021,AA,SRW,45,7.0,Eisenhower,EH
-section,2021_SRW_AA,2021,AA,SRW,47,6.0,Conneaut Area,CA
-section,2021_SRW_AA,2021,AA,SRW,47,6.0,Elizabeth Forward,EF
-section,2021_SRW_AA,2021,AA,SRW,49,4.0,Tyrone,TYR
-section,2021_SRW_AA,2021,AA,SRW,50,0.0,Central,CEN
-section,2021_SRW_AA,2021,AA,SRW,50,0.0,Huntingdon,HTD
-section,2021_SRW_AA,2021,AA,SRW,50,0.0,Kane,KANE
-section,2021_SRW_AA,2021,AA,SRW,50,0.0,Ligonier Valley,LGV
-section,2021_SRW_AA,2021,AA,SRW,50,0.0,Port Allegany,PAL
 section,2022_D3_S1_AA,2022,AA,D3_S1,1,244.0,Boiling Springs,BOS
 section,2022_D3_S1_AA,2022,AA,D3_S1,2,219.0,West Perry,WPRY
 section,2022_D3_S1_AA,2022,AA,D3_S1,3,144.0,Biglerville,BGV
@@ -42344,7 +42195,7 @@ section,1962_D11_SE_single,1962,single,D11_SE,4,7.0,Nazareth,NAZ
 section,1962_D11_SE_single,1962,single,D11_SE,5,6.0,Southern Lehigh,SOLE
 section,1962_D11_SE_single,1962,single,D11_SE,6,3.0,Palisades,PLS
 section,1962_D11_SE_single,1962,single,D11_SE,7,2.0,East Stroudsburg,ESDB
-section,1962_D11_SE_single,1962,single,D11_SE,8,1.0,Hellertown Lower Saucon,HTLS
+section,1962_D11_SE_single,1962,single,D11_SE,8,1.0,Saucon Valley,HTLS
 section,1962_D11_SE_single,1962,single,D11_SE,9,0.0,Stroudsburg,SDB
 section,1962_D11_SW_single,1962,single,D11_SW,1,14.0,Emmaus,EMM
 section,1962_D11_SW_single,1962,single,D11_SW,1,14.0,Northampton,NHA
@@ -42448,7 +42299,7 @@ section,1963_D11_SE_single,1963,single,D11_SE,2,9.0,Wilson Area,WLA
 section,1963_D11_SE_single,1963,single,D11_SE,3,8.0,Easton,EAS
 section,1963_D11_SE_single,1963,single,D11_SE,4,7.0,Nazareth,NAZ
 section,1963_D11_SE_single,1963,single,D11_SE,5,6.0,Southern Lehigh,SOLE
-section,1963_D11_SE_single,1963,single,D11_SE,6,4.0,Hellertown Lower Saucon,HTLS
+section,1963_D11_SE_single,1963,single,D11_SE,6,4.0,Saucon Valley,HTLS
 section,1963_D11_SE_single,1963,single,D11_SE,6,4.0,Palisades,PLS
 section,1963_D11_SE_single,1963,single,D11_SE,8,0.0,Stroudsburg,SDB
 section,1963_D11_SW_single,1963,single,D11_SW,1,15.0,Allentown Dieruff,DRF
@@ -42646,7 +42497,7 @@ section,1965_D10_S4_single,1965,single,D10_S4,10,1.0,Cochranton,CRT
 section,1965_D10_S4_single,1965,single,D10_S4,11,0.0,Eisenhower,EH
 section,1965_D11_SE_single,1965,single,D11_SE,1,18.0,Easton,EAS
 section,1965_D11_SE_single,1965,single,D11_SE,2,17.0,Allentown Allen,ALL
-section,1965_D11_SE_single,1965,single,D11_SE,3,12.0,Hellertown Lower Saucon,HTLS
+section,1965_D11_SE_single,1965,single,D11_SE,3,12.0,Saucon Valley,HTLS
 section,1965_D11_SE_single,1965,single,D11_SE,4,6.0,Stroudsburg,SDB
 section,1965_D11_SE_single,1965,single,D11_SE,4,6.0,Wilson Area,WLA
 section,1965_D11_SE_single,1965,single,D11_SE,6,4.0,Slatington,SLAT
@@ -42785,7 +42636,7 @@ section,1966_D11_SE_single,1966,single,D11_SE,9,1.0,Palisades,PLS
 section,1966_D11_SE_single,1966,single,D11_SE,9,1.0,Pen Argyl,PAR
 section,1966_D11_SE_single,1966,single,D11_SE,9,1.0,Whitehall,WHL
 section,1966_D11_SW_single,1966,single,D11_SW,1,13.0,Allentown Allen,ALL
-section,1966_D11_SW_single,1966,single,D11_SW,2,4.0,Hellertown Lower Saucon,HTLS
+section,1966_D11_SW_single,1966,single,D11_SW,2,4.0,Saucon Valley,HTLS
 section,1966_D11_SW_single,1966,single,D11_SW,2,4.0,Parkland,PRK
 section,1966_D11_SW_single,1966,single,D11_SW,4,3.0,Blue Mountain,BM
 section,1966_D11_SW_single,1966,single,D11_SW,4,3.0,Easton,EAS
@@ -42903,7 +42754,7 @@ section,1967_D10_S4_single,1967,single,D10_S4,8,27.0,Rocky Grove,RKGR
 section,1967_D10_S4_single,1967,single,D10_S4,9,15.0,Eisenhower,EH
 section,1967_D10_S4_single,1967,single,D10_S4,10,0.0,Cochranton,CRT
 section,1967_D11_SE_single,1967,single,D11_SE,1,11.0,Allentown Allen,ALL
-section,1967_D11_SE_single,1967,single,D11_SE,2,8.0,Hellertown Lower Saucon,HTLS
+section,1967_D11_SE_single,1967,single,D11_SE,2,8.0,Saucon Valley,HTLS
 section,1967_D11_SE_single,1967,single,D11_SE,3,5.0,Palisades,PLS
 section,1967_D11_SE_single,1967,single,D11_SE,4,2.0,Lehighton,LHT
 section,1967_D11_SE_single,1967,single,D11_SE,4,2.0,Williams Valley,WV

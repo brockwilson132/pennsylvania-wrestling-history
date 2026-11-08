@@ -22,10 +22,14 @@ The PDF parsers leave text in the name column that is not a wrestler. Every rule
     8. a side that is not a wrestler ("Forfeit", "Double Forfeit", "Bye"): bout dropped (no contest)
     9. result text glued to a name ("T. Rosengrant (PNMT)Fall 2:36") cut off; seed prefixes stripped; a side with no school ("J. Boudreau", " SE-1 Gerald (Jerry) WilliamsManheim Central,
        SR, 19-0-1", " ? Hibbard Haverford High") resolved to the bracket's entrant when exactly one entrant fits
+  both
+   10. a tournament loaded twice under two names (the 2021 super-regionals were once linked in as sections, 2021_SRE_AAA,
+       and again as regionals, 2021_East_AAA_Super): when every bout of one tournament is also a bout of another, the
+       copy is dropped from bouts and entrants. The section copy goes; otherwise the later name. Each bout counted once.
 Names whose first name is unknown in the source ("? Miller") are real wrestlers and are kept.
 Writes data/brackets/clean_report.txt.
 """
-import csv, io, os, re, sys
+import csv, io, json, os, re, sys
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -133,6 +137,8 @@ SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bet
                # district-only wrestlers on two school seasons). Bishop McDevitt (12), Wyncote, is another school.
                'Bishop McDevitt (3)': 'Bishop McDevitt', 'Pittsburgh CC': 'Pittsburgh Central Catholic', 'Greensburg CC': 'Greensburg Central Catholic',
                'Greensburg C.C.': 'Greensburg Central Catholic', 'Reading CC': 'Reading Central Catholic'}
+# Brock's merges from the colour editor's school notes (data/school_notes.json): one school under two names
+SCHOOL_SAME.update(json.load(open(os.path.join(ROOT, 'data', 'sources', 'school_aliases.json'))))
 # a name that means one school only in one file: the WPIAL list's "Central Catholic" is Pittsburgh's
 SCHOOL_SAME_IN = {'d7_champions.csv': {'Central Catholic': 'Pittsburgh Central Catholic'}}
 
@@ -345,6 +351,19 @@ def clean_entrants(E, B, rep):
     return keep
 
 
+def interleaved(g, name, school):
+    """g reads as all of name with the first 3+ characters of school woven in ("Charles (Chick) FessendCelanrks Summit/"
+    is Charles (Chick) Fessenden + "Clarks Summit/" of Clarks Summit/Abington)"""
+    if len(g) - len(name) < 3 or len(g) - len(name) > len(school) or not g.startswith(name[:min(4, len(name))]): return False
+    from functools import lru_cache
+    @lru_cache(None)
+    def go(i, j):   # i chars of g used, j chars of name used; the rest of g's used chars came from school, in order
+        k = i - j
+        if i == len(g): return j == len(name)
+        return (j < len(name) and g[i] == name[j] and go(i + 1, j + 1)) or (k < len(school) and g[i] == school[k] and go(i + 1, j))
+    return go(0, 0)
+
+
 def clean_bouts(B, E, S, rep):
     ents = defaultdict(list)   # bracket -> [(name, school)]
     for r in E: ents[(r['level'], r['tournament'], r['weight'])].append((r['name'], r['school']))
@@ -375,6 +394,17 @@ def clean_bouts(B, E, S, rep):
             if len(t) > k and t.endswith(sch[1:]) and t[-k] == sch[0] and t[-k - 1] != ' ':
                 nm = t[:-k] + t[-k + 1]
                 if len(nm.split()) >= 2 and not re.search(r'\d', nm): return (nm, sch)
+        for sch in SCHOOLS:   # "Hayden Yacoviello-AndrBuesrmudian Springs": the name's last 1-4 letters woven into the school
+            if not t.endswith(sch[-1]) or len(t) <= len(sch) + 2: continue
+            i, j, extra = len(sch) - 1, len(t) - 1, []
+            while i >= 0 and j >= 0:
+                if t[j] == sch[i]: i -= 1
+                else: extra.append(t[j])
+                j -= 1
+                if len(extra) > 4: break
+            if i >= 0 or not extra or len(extra) > 4 or t[j] == ' ' or not all(x.isalpha() for x in extra): continue
+            nm = t[:j + 1] + ''.join(reversed(extra))
+            if len(nm.split()) >= 2 and not re.search(r'\d', nm): return (nm, sch)
         return None
 
     sn = Counter(r['school'] for r in E) + Counter(r['school'] for r in S)
@@ -392,6 +422,10 @@ def clean_bouts(B, E, S, rep):
             n = b[s].strip(); m = SEED.match(n)
             if m: n = n[m.end():].strip(); rep['bouts: seed prefix stripped'] += 1
             b[s] = n
+            if len(n) > 12 and not any(key(c[0]) == key(n) for c in ents.get(bk, [])):
+                t = re.sub(r',\s*(?:FR|SO|JR|SR|\d{1,2}(?:th)?)\b.*$', '', n, flags=re.I).strip()   # "..., FR, 39-5"
+                hit = [c for c in ents.get(bk, []) if c[1] and interleaved(t, c[0], c[1])]
+                if len(hit) == 1: b[s], b[s + '_school'] = hit[0]; rep['bouts: name woven with its school taken back out'] += 1; continue
             if not b[s + '_school'].strip():
                 hit = resolve(n, bk)
                 if hit: b[s], b[s + '_school'] = hit; rep['bouts: name resolved to its entrant'] += 1
@@ -403,6 +437,29 @@ def clean_bouts(B, E, S, rep):
 JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – ')   # "est Chester", "BattiPstlyamouth", "Maplewood, JR, -1-17", a glued second entry
 
 
+def bout_sig(b):
+    return (b['year'], b['cls'], b['weight'], key(b['winner']), key(b['loser']), b['result'], b['score'])
+
+
+def copies(B):
+    """rule 10: tournaments whose bouts are all bouts of another tournament -> {copy: original}"""
+    T, lv = defaultdict(set), {}
+    for b in B: T[b['tournament']].add(bout_sig(b)); lv[b['tournament']] = b['level']
+    out = {}
+    for a in sorted(T):
+        for c in sorted(T):
+            if a == c or a in out or c in out or len(T[a]) < 5 or T[a] != T[c]: continue
+            drop = a if (lv[a] == 'section') > (lv[c] == 'section') or ((lv[a] == 'section') == (lv[c] == 'section') and a > c) else c
+            out[drop] = c if drop == a else a
+    return out
+
+
+def drop_copies(E, B, rep):
+    cp = copies(B)
+    for t, o in sorted(cp.items()): rep[f'tournament loaded twice, copy dropped: {t} (kept {o})'] += 1
+    return [r for r in E if r['tournament'] not in cp], [b for b in B if b['tournament'] not in cp]
+
+
 def junk_left(E, B, S=()):
     bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])
            or SCHOOL_LINE_PREFIX.match(r['name']) or grade_out(r['name'])]
@@ -412,6 +469,7 @@ def junk_left(E, B, S=()):
     bad += same_name_files(M, Counter(), check=True)
     bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + woven_schools(E) + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
+    bad += [f'copy of {o}: {t}' for t, o in copies(B).items()]
     return bad
 
 
@@ -428,6 +486,7 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
+    cp = copies(B); E, B = drop_copies(E, B, rep)
     same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep); same_school_files(rep)
     S = read('state_entrants.csv')[1] if os.path.exists(os.path.join(BR, 'state_entrants.csv')) else []
     M = name_merges()
@@ -439,6 +498,8 @@ def run(folder=None, check=False):
         same_name_files(M, rep)   # then: node tools/build_medals.js && node tools/build_brackets.js, copy site/medals.js brackets.js to overtime/
     if os.path.exists(os.path.join(BR, 'lower_teams.csv')):
         tf, T = read('lower_teams.csv'); r0 = Counter(); same_school(T, ['school'], r0)
+        n = len(T); T = [r for r in T if r.get('tournament') not in cp]
+        if len(T) < n: r0['team rows of a copied tournament dropped'] += n - len(T)
         if r0: write('lower_teams.csv', tf, T); rep.update(r0)
     for _ in range(6):   # entrant schools filled from bouts let more bout names resolve, and back: repeat to a fixed point
         r = Counter(); E = clean_entrants(E, B, r); B = clean_bouts(B, E, S, r)

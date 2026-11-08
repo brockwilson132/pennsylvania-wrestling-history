@@ -1,0 +1,600 @@
+[
+ {
+  "school": "Upper Merion",
+  "identified_as": "Upper Merion Area High School, King of Prussia",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#041E41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EDB933",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Upper Merion Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Merion_Area_High_School",
+   "https://www.umasd.org/",
+   "https://resources.finalsite.net/images/v1734621782/umasdorg/s72k7ofhmzolxh2wbp8k/UM-LOGO.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District site umasd.org header logo UM-LOGO.png: navy #041E41 'UM' block letters with gold #EDB933 outline and Viking head; navy and gold match the first-pass names."
+ },
+ {
+  "school": "Coatesville",
+  "identified_as": "Coatesville Area Senior High School, Coatesville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CC0516",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Coatesville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coatesville_Area_High_School",
+   "https://www.casdschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/24825/logo/27638/Coatesville_ASD_Logo.png",
+   "https://www.casdathletics.org/ (turned out to be Connellsville, not used)"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "casdschools.org theme CSS dominated by red #CC0516 (285 uses); district seal logo has a red #B20606 'FORWARD' shield but is a green/blue landscape seal, not an athletics mark. No Red Raiders athletics logo could be fetched (athletics pages behind a bot check), so black is kept by name only."
+ },
+ {
+  "school": "Conneaut Lake",
+  "identified_as": "Conneaut Lake High School, Conneaut Lake (Conneaut SD)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Conneaut Lake High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_Lake_High_School",
+   "https://en.wikipedia.org/wiki/Conneaut_School_District",
+   "https://www.conneautsd.org/"
+  ],
+  "era": "Merged 2012 into Conneaut Area Senior High School (Eagles: black, royal blue, silver) - successor colours, not Conneaut Lake's.",
+  "notes": "Conneaut Lake HS's own colours not found; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Closed school (merged 2012). conneautsd.org is the successor Conneaut SD site (blue #00609C theme) and is not used. Image search engines returned unrelated results; no Conneaut Lake-era logo or photo was found."
+ },
+ {
+  "school": "Camp Hill",
+  "identified_as": "Camp Hill High School, Camp Hill",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#003356",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Camp Hill High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Camp_Hill_High_School",
+   "https://www.camphillsd.k12.pa.us/",
+   "https://resources.finalsite.net/images/v1689603932/camphillsdk12paus/nrg0qgdvncyxjlrwiftn/CHSD_logo_MASTER.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District logo CHSD_logo_MASTER.png: navy #003356 ring and lion with grey #929FAB shading on white; site theme colour #003366 (166 uses) agrees. Replaces the infobox #001A57."
+ },
+ {
+  "school": "Ligonier Valley",
+  "identified_as": "Ligonier Valley High School, Ligonier",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#F10000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Ligonier Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ligonier_Valley_High_School",
+   "https://www.lvsd.k12.pa.us/",
+   "https://www.lvsd.k12.pa.us/pics/header_logo.png",
+   "https://ligvsdm.edlioschool.com/common_files/main.css"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "lvsd.k12.pa.us header_logo.png: red #F10000 'LV' letters in a black oval with red rim; site CSS accent #D10000 agrees."
+ },
+ {
+  "school": "Northeast Bradford",
+  "identified_as": "Northeast Bradford Junior/Senior High School, Rome",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northeast Bradford School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_Bradford_School_District",
+   "https://www.nebpanthers.org/ (parked)"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "No official site found (nebpanthers.org is a parked domain); MaxPreps and image search were not reachable. Colour names unchanged from first pass, no hex."
+ },
+ {
+  "school": "Indiana",
+  "identified_as": "Indiana Area Senior High School, Indiana",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": "#CC0A00",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Indians (Little Indians)",
+  "confidence": "high",
+  "wikipedia": "Indiana Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Indiana_Area_School_District",
+   "https://www.iasd.cc/",
+   "https://cmsv2-assets.apptegy.net/uploads/32347/logo/35332/Logo_Indiana_area_web.png",
+   "https://www.maxpreps.com/pa/indiana/indiana-little-indians/"
+  ],
+  "era": null,
+  "notes": "District infobox only; order as given there ('Black and Red'). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "iasd.cc theme CSS red #CC0A00 (192 uses); district logo is a red ring and red 'I' (#D20A0C-#F11923) on white with dark outlines. MaxPreps lists Black and Red, mascot Indians. Black not drawn as a flat colour in the logo, so no hex."
+ },
+ {
+  "school": "Cambridge Springs",
+  "identified_as": "Cambridge Springs Junior/Senior High School, Cambridge Springs (PENNCREST SD)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#2953B4",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Penncrest School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penncrest_School_District",
+   "https://www.penncrest.org/",
+   "https://www.cambridgespringshs.net/",
+   "https://www.cambridgespringshs.net/pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": "From PENNCREST district infobox per-school list. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "cambridgespringshs.net header_logo.png: Blue Devils mascot, blue devil head and stripes royal #2953B4 (lighter #4C67B8 face), black and white 'BLUE DEVILS' wordmark; HS site CSS top colour blue #002A8C. Black is an outline/accent in the logo. (PENNCREST district maroon #731111 is the district brand, not this school's.)"
+ },
+ {
+  "school": "Berks Catholic",
+  "identified_as": "Berks Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#272629",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C39C00",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Saints",
+  "confidence": "high",
+  "wikipedia": "Berks Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berks_Catholic_High_School",
+   "https://www.berkscatholic.org/",
+   "https://resources.finalsite.net/images/v1652965321/berkscatholicorg/mykikl281sn0wtlbt7t8/BerksCatholic_Seal_4C-eps-file.png"
+  ],
+  "era": null,
+  "notes": "Mascot is a Saint Bernard. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "berkscatholic.org seal BerksCatholic_Seal_4C: black #272629 ring with metallic gold #796E4A / cream #E1D8BD crest; site theme gold #C39C00 used as the clean gold."
+ },
+ {
+  "school": "Quaker Valley",
+  "identified_as": "Quaker Valley High School, Leetsdale",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#B59452",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Quakers",
+  "confidence": "high",
+  "wikipedia": "Quaker Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Quaker_Valley_High_School",
+   "https://www.qvsd.org/",
+   "https://www.qvsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Infobox gives only colour boxes; the name 'Gold' for #edcb34 is my label. Mascot from general knowledge. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "qvsd.org school_logo.png: black disc with white 'QV' monogram and metallic gold #B59452 (highlight #F3D392) ring."
+ },
+ {
+  "school": "Keystone Oaks",
+  "identified_as": "Keystone Oaks High School, Dormont",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#CFB63A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#010101",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "high",
+  "wikipedia": "Keystone Oaks High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Oaks_High_School",
+   "https://www.kosd.org/",
+   "https://files.smartsites.parentsquare.com/8758/header_logo_img_nfpr6l9vpmusejadeip.png"
+  ],
+  "era": null,
+  "notes": "Infobox gives only colour boxes; the name 'Gold' is my label. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "kosd.org header logo: gold #CFB63A 'KO' monogram with black #010101 outline on white. White is background only."
+ },
+ {
+  "school": "Fairview",
+  "identified_as": "Fairview High School, Fairview (Erie County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D00107",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Fairview High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fairview_High_School_%28Pennsylvania%29",
+   "https://www.fairviewschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/11433/logo/13085/Fairview_School_District_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "fairviewschools.org logo: block 'F' in red #D00107 and black with white outline; site theme #8A0400 (dark red) is the main CSS colour."
+ },
+ {
+  "school": "Garden Spot",
+  "identified_as": "Garden Spot High School, New Holland",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0033A0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Garden Spot High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Garden_Spot_High_School",
+   "https://www.elanco.org/",
+   "https://files.smartsites.parentsquare.com/11236/header_logo_img_0pi3213kafel6fpekda.png",
+   "https://www.maxpreps.com/pa/new-holland/garden-spot-spartans/"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "elanco.org header logo: Spartan helmet in royal blue #0033A0; site theme #0033A0 matches. MaxPreps lists Blue and Gray. Gray not seen in a clean graphic."
+ },
+ {
+  "school": "Garnet Valley",
+  "identified_as": "Garnet Valley High School, Glen Mills",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#1A479A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFE34F",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Jaguars",
+  "confidence": "low",
+  "wikipedia": "Garnet Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Garnet_Valley_High_School",
+   "https://www.gvsd.org/",
+   "https://resources.finalsite.net/images/v1677656488/gvsdorg/ce1ej2slzwbw4vt6bevs/GV_Logo-blue.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "gvsd.org district logo GV_Logo-blue.png is a blue #1A479A serif 'GV'; site theme CSS is blue #0033AB plus gold #FFE34F. Nothing garnet seen. Conflicts with first-pass Garnet/White (Wikipedia); no Jaguars athletics logo could be fetched to settle it."
+ },
+ {
+  "school": "Perkiomen Valley",
+  "identified_as": "Perkiomen Valley High School, Collegeville",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F78F1E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Brown",
+    "hex": "#6B3B23",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Perkiomen Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Perkiomen_Valley_School_District",
+   "https://www.pvsd.org/",
+   "https://www.pvsd.org/wp-content/uploads/2021/06/cropped-Perkiomen-Valley-Logo-_Crest-1-192x192.png",
+   "https://www.pvsd.org/wp-content/uploads/2021/06/PVSD-Site-Logo.png"
+  ],
+  "era": "Colours chosen 1969 at merger of Collegeville-Trappe (red/gold) and Schwenksville (blue/white).",
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "pvsd.org crest logo in orange #F78F1E; site wordmark PVSD-Site-Logo.png brown #703E25 rule with orange #F99528 crest; site CSS brown #6B3B23 (50 uses)."
+ },
+ {
+  "school": "Mercer",
+  "identified_as": "Mercer Area Middle-High School, Mercer",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#00004F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Royal blue",
+    "hex": "#000FFF",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Mercer Area Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mercer_Area_Middle-High_School",
+   "https://www.mercer.k12.pa.us/",
+   "https://resources.finalsite.net/images/v1688394363/mercerk12paus/ywjfahfb3kvqcqcxkjdg/MercerLogo.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "mercer.k12.pa.us MercerLogo.png: navy #00004F block 'M' with white mustang on a royal #000FFF / navy split field; site theme navy #001B64 and royal #0040EB agree."
+ },
+ {
+  "school": "Eisenhower",
+  "identified_as": "Eisenhower Middle/High School, Russell (Warren County SD)",
+  "colors": [],
+  "mascot": "Knights",
+  "confidence": "low",
+  "wikipedia": "Eisenhower Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eisenhower_Middle/High_School",
+   "https://www.wcsdpa.org/",
+   "https://www.wcsdpa.org/o/emhs (bot check)"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "wcsdpa.org district logo is a green/grey compass seal (district brand, not Eisenhower's); Eisenhower's own page (/o/emhs) and image search were blocked. No colours found."
+ },
+ {
+  "school": "South Williamsport",
+  "identified_as": "South Williamsport Area Junior/Senior High School, South Williamsport",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#263D97",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "high",
+  "wikipedia": "South Williamsport Area Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Williamsport_Area_Junior_Senior_High_School",
+   "https://www.swasd.org/",
+   "https://files.smartsites.parentsquare.com/12200/header_logo_img_na67jieqajomdlbpcgh.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "swasd.org header logo: royal blue #263D97 block 'S' with Mountie mascot; site theme #244196 agrees. White is fill/outline."
+ },
+ {
+  "school": "Pequea Valley",
+  "identified_as": "Pequea Valley High School, Kinzers",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C5172D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Braves",
+  "confidence": "high",
+  "wikipedia": "Pequea Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pequea_Valley_High_School",
+   "https://www.pequeavalley.org/",
+   "https://resources.finalsite.net/images/v1696883084/pvsdk12paus/fpl8ozdljbfeunxxup5c/PVSchoolDistrictLogo-PMS185200.png",
+   "https://www.maxpreps.com/pa/kinzers/pequea-valley-braves/"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "pequeavalley.org district logo (file named PMS 185/200): red #C5172D 'PV' and ring on white, grey ring decorative; site theme #E10D2D. MaxPreps Braves mascot art: red block 'PV' with white/black outline; MaxPreps colours Red and White."
+ },
+ {
+  "school": "Williamson",
+  "identified_as": "Williamson Junior/Senior High School, Tioga (Northern Tioga SD)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#1B334D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#C8B688",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Williamson Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Williamson_Senior_High_School",
+   "https://www.ntiogasd.org/williamson-high-schoolhome-of-the-warriors/",
+   "https://www.ntiogasd.org/wp-content/themes/base-theme/images/Williamson%20logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia article's infobox is titled 'Williamson-Elkland Senior High School' - possible merger/rename; verify. Infobox colours read 'blue gold'. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "ntiogasd.org Williamson High School page ('Home of the Warriors') logo: navy #1B334D shield with Vegas gold #C8B688 'W' and border. So 'Blue and Gold' is navy and Vegas gold."
+ },
+ {
+  "school": "Eastern York",
+  "identified_as": "Eastern York High School, Wrightsville",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#1B417F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCBA2D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "high",
+  "wikipedia": "Eastern York School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eastern_York_School_District",
+   "https://www.easternyork.org/",
+   "https://files.smartsites.parentsquare.com/13732/header_logo_img_v511ghjqu7kbdobofha.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "easternyork.org header logo: Golden Knights crest in blue #1B417F and gold #FCBA2D; site theme #1B417F matches; 'Knight's Path' graphic also navy and gold."
+ },
+ {
+  "school": "East Juniata",
+  "identified_as": "East Juniata Junior/Senior High School, McAlisterville",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#4C060C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "East Juniata Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Juniata_Junior/Senior_High_School",
+   "https://www.maxpreps.com/pa/mcalisterville/east-juniata-tigers/",
+   "https://www.jcsdk12.org/"
+  ],
+  "era": null,
+  "notes": "Not Juniata HS (Mifflintown), which is a different school. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "MaxPreps East Juniata Tigers mascot art: maroon 'TIGERS' and 'EAST JUNIATA' lettering (shaded; dominant #4C060C) with grey/white tiger; MaxPreps lists Maroon and Gray. Juniata County SD logo is navy/grey (district brand, not used)."
+ }
+]

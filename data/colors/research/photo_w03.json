@@ -1,0 +1,244 @@
+[
+ {
+  "school": "Bishop O'Reilly",
+  "identified_as": "Bishop O'Reilly High School, Kingston (Luzerne Co.; opened 1954 as West Side Central Catholic)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#00187B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E1D815",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Queensmen",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://bishoporeilly.org/alma-mater/",
+   "search:https://panewsarchive.psu.edu/lccn/sn87080317/1985-08-28/ed-1/seq-36/",
+   "https://bishoporeilly.org/alma-mater/",
+   "https://bishoporeilly.org/history/",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/image005.png",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/image014.png",
+   "https://bishoporeilly.org/wp-content/uploads/2023/08/cropped-west-side-central-catholic-high-school.png",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/patch21.gif",
+   "https://bishoporeilly.org/wp-content/uploads/2007/07/image015.gif"
+  ],
+  "era": "Opened 1954 as West Side Central Catholic HS, renamed Bishop O'Reilly; last class graduated May 2007, building became a regional elementary school; most students went to Holy Redeemer HS, Wilkes-Barre.",
+  "notes": "Alumni site states the colours outright: alma mater 'Forever Gold and Blue' and the crest description 'a wreath of the colors, gold and blue'. Blue is 'Queen Mary's blue' (a Marian blue); on the school patch it is a deep royal blue, and the gold is a bright yellow-gold.",
+  "evidence": "Alumni site school patch (patch21.gif): round 'BISHOP O'REILLY HIGH SCHOOL / KINGSTON, PA' patch with crest, gold #E1D815 lettering and line art on deep blue #00187B field. Matches the alma mater text (gold and blue). Other site images greyscale."
+ },
+ {
+  "school": "Collingdale",
+  "identified_as": "Collingdale High School, Collingdale (Delaware Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://aphspage.sedelco.org/our_school/general_information",
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School",
+   "https://www.easternpafootball.com/?s=Collingdale",
+   "https://archive.org/details/boroughofcolling00coll",
+   "search:https://forums.pa-wrestling.com/printer_friendly_posts.asp?TID=5508"
+  ],
+  "era": "Merged with Sharon Hill HS into Academy Park HS in 1982 (Knights, blue and silver); old Collingdale HS served as Academy Park's west campus until 1984 and part of it is now Collingdale borough hall.",
+  "notes": "Collingdale's own colours not found.",
+  "evidence": "Retry: Borough of Collingdale 75th anniversary book (1966, archive.org OCR) describes the 1927 senior high and its athletics but names no colours or nickname; web searches found only Academy Park and a wrestling forum thread naming 1980-81 Collingdale wrestlers. No image or colour source found."
+ },
+ {
+  "school": "Greensburg CC",
+  "identified_as": "Greensburg Central Catholic High School, Greensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#5C332F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#5D5150",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#191A15",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Centurions",
+  "confidence": "high",
+  "wikipedia": "Greensburg Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School",
+   "https://en.wikipedia.org/wiki/PIAA_football",
+   "https://www.gcchs.org",
+   "https://www.maxpreps.com/pa/greensburg/greensburg-central-catholic-centurions/",
+   "https://www.westmorelandsports.com/schools/greensburg-central-catholic",
+   "https://res.cloudinary.com/westmorelandsports/image/upload/v1626838556/gcc_1c58935c37.svg",
+   "search:https://www.wpxi.com/sports/high-school/greensburg-central-catholic-football/289200992",
+   "search:https://tribhssn.triblive.com/?p=75725"
+  ],
+  "era": null,
+  "notes": "Maroon is a dark, brownish maroon in the Centurions artwork; gray is a dark warm gray. Black is used for the helmet plume and lettering outline; Westmoreland Sports lists Maroon/Black, Wikipedia and WPXI list Maroon & Gray.",
+  "evidence": "Westmoreland Sports Centurions logo (embedded PNG in gcc.svg): Roman helmet head in a maroon #5C332F ring with 'CENTURIONS' text, helmet in dark gray #5D5150, black #191A15 plume/outlines on white. gcchs.org still 403 (Cloudflare)."
+ },
+ {
+  "school": "Mansfield",
+  "identified_as": "Mansfield High School, Mansfield (Tioga Co.)",
+  "colors": [],
+  "mascot": "Tigers (probable)",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Tioga_School_District",
+   "https://en.wikipedia.org/wiki/North_Penn_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/mansfield/north-penn-mansfield-tigers/wrestling/12-13/schedule/",
+   "https://joycetice.com/schools/mhs/mhs33.htm",
+   "https://en.wikipedia.org/wiki/Mansfield,_Pennsylvania"
+  ],
+  "era": "Merged with North Penn (Blossburg) in 2014 as North Penn-Mansfield (Panthers, blue and white).",
+  "notes": "Pre-merger Mansfield colours still not found. MaxPreps keeps Mansfield's pre-merger (2012-13) wrestling page under the slug 'north-penn-mansfield-tigers' listing Royal Blue, White, Silver, which suggests Mansfield were the Tigers, but that page shows the merged school's current profile, so its colours are not given to Mansfield here. Yearbook was 'Manscript' (Joyce Tice genealogy site).",
+  "evidence": "Joyce Tice Mansfield HS yearbook transcriptions (1933 etc.) have no colour mentions; MaxPreps returned 403; archive.org has no Manscript scans. No image seen."
+ },
+ {
+  "school": "Plains",
+  "identified_as": "Plains (probably Plains Township High School, Luzerne Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Plains_Township,_Pennsylvania",
+   "search:https://en.wikipedia.org/wiki/Wilkes-Barre_Area_High_School"
+  ],
+  "era": "Bracket years 1936-39 only; likely closed/merged long ago.",
+  "notes": "Identity unconfirmed and no colour source found. Wikipedia 'Plains High School' is a Texas school, not this one.",
+  "evidence": "Retry: two searches and Wikipedia raw pages (Plains Township, Wilkes-Barre Area SD) found no Plains (PA) high school, colours or mascot; all hits were Plains TX/MT/OH. Identity still unconfirmed."
+ },
+ {
+  "school": "Conneaut Lake",
+  "identified_as": "Conneaut Lake High School, Conneaut Lake (Conneaut SD)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lakers / Indians",
+  "confidence": "low",
+  "wikipedia": "Conneaut Lake High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_Lake_High_School",
+   "https://en.wikipedia.org/wiki/Conneaut_School_District",
+   "https://www.conneautsd.org/",
+   "https://www.conneautlakehistory.com/sports",
+   "https://static.wixstatic.com/media/74e976_c606365f10a642229e32d00284a2c225~mv2.jpg",
+   "https://static.wixstatic.com/media/74e976_73e2da41a0d345bb93ad65a3fc5a6fa7~mv2.jpg",
+   "search:https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Conneaut_School_District.html"
+  ],
+  "era": "Merged 2012 into Conneaut Area Senior High School (Eagles: black, royal blue, silver) - successor colours, not Conneaut Lake's.",
+  "notes": "Mascot from a framed Meadville Tribune page in the historical society museum (1960s state Class C basketball title): headlines 'Lakers Top Lykens' and 'Indians Fight with Determination'. Colours Maroon & Gray come only from a search-result summary of an old (c.2017) Wikipedia mirror listing 'Conneaut Lake Middle School - Indian - Maroon & Gray' (the middle school sits in the old HS building and kept its identity before the district rebrand); the mirror page itself could not be opened, so unconfirmed.",
+  "evidence": "Conneaut Lake Area Historical Society sports page and its exhibit photos (black-and-white newspaper clippings, no colour visible). Current Wikipedia district table now shows Eagles black/royal/silver for all schools. No hex."
+ },
+ {
+  "school": "Northeast Bradford",
+  "identified_as": "Northeast Bradford Junior/Senior High School, Rome",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northeast Bradford School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_Bradford_School_District",
+   "https://www.nebpanthers.com/ (bot check)",
+   "search:https://greatpaschools.com/?p=851",
+   "search:https://www.maxpreps.com/pa/rome/northeast-bradford-panthers/"
+  ],
+  "era": null,
+  "notes": "Official district site is nebpanthers.com (per Wikipedia infobox); it now serves a bot-check page, so no logo or theme could be read. Colour names maroon and gray from Wikipedia only.",
+  "evidence": "Retry: nebpanthers.com returned a 'Client Challenge' bot page (not bypassed); MaxPreps 403; Bing image search returned only an unrelated image. No artwork seen, no hex."
+ },
+ {
+  "school": "Garnet Valley",
+  "identified_as": "Garnet Valley High School, Glen Mills",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#981C1E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Jaguars",
+  "confidence": "high",
+  "wikipedia": "Garnet Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Garnet_Valley_High_School",
+   "https://www.gvsd.org/",
+   "https://resources.finalsite.net/images/v1677656488/gvsdorg/ce1ej2slzwbw4vt6bevs/GV_Logo-blue.png",
+   "https://sites.google.com/garnetvalley.org/homeofthejaguars",
+   "https://sites.google.com/sitesv-images-rt/APXyLQeVvvt88WPW-Jizj_-ykUHjNL22XyerU1ziKm4FdQYO6iVlrFnZzpRfisdwA9W_fgDgrGS-gEbRklKUTLFuHQpb3iRM0yQdgyEbkcga8BwF0c-wIzFKK8vpt8Ceiq7lddwXW46Xi0b56-TUkP5FNlC3OAkZ6QCKii3EDiU=w400",
+   "https://sites.google.com/sitesv-images-rt/APXyLQd5Dnx5x-CwiiNSl7x0yRW8TUHBVVZb5WPvWJRocYeQGbMGfDxrv6XilckdHI2ZU3Tv_-nzlfcnWDxT3jxdvteWw1TdKa86Z6g4v3sZjBa_9-8BQ5ptlULcj4WnrYHWbTPalS60PxAV-sC5RViXL0aZr4XWgjatLckAY1G4xnJsNqxxkpM74p3-aLVnxRUqn8-jppXYYqbD=w800"
+  ],
+  "era": null,
+  "notes": "Garnet and white confirmed by the athletics site. The blue/gold seen on gvsd.org is the district's corporate brand, not the athletic colours. The old crest graphic on the athletics site is a darker maroon-garnet (scan), not used for hex.",
+  "evidence": "District athletics site 'Home of the Jaguars' (sites.google.com/garnetvalley.org): site home logo is a white-and-black spotted jaguar head with garnet #981C1E outline/mouth; site theme accent rgba(150,27,29) = #961B1D matches. Banner crest shows dark garnet shield with 'GARNET VALLEY' ribbon."
+ },
+ {
+  "school": "Eisenhower",
+  "identified_as": "Eisenhower Middle/High School, Russell (Warren County SD)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": "Eisenhower Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eisenhower_Middle/High_School",
+   "https://www.wcsdpa.org/",
+   "https://www.wcsdpa.org/o/emhs (bot check)",
+   "https://www.timesobserver.com/sports/local-sports/2024/02/knights-roll-on-senior-day",
+   "https://ogden_images.s3.amazonaws.com/www.timesobserver.com/images/2024/02/04213532/Eisenhower-senior-wrestlers.jpg",
+   "https://www.timesobserver.com/sports/local-sports/2018/02/knights-take-down-dragons-in-fierce-battle/",
+   "https://ogden_images.s3.amazonaws.com/www.timesobserver.com/images/2018/02/08235039/IkeNHolt-1100x729.jpg",
+   "search:https://d9and10sports.com/jan-21-2026-wrestling-late-wins-flury-lifts-eisenhower-past-warren-north-east-nips-seneca-powered-by-lutons-plumbing-heating-a-c/"
+  ],
+  "era": null,
+  "notes": "Colours read from photos of Eisenhower's own gym, not from a stated source. The wcsdpa.org district site (green/grey compass seal) is the district brand, not the school's.",
+  "evidence": "Times Observer photos in Eisenhower's gym (2018 home dual vs Warren, 2024 senior day): gym wall painted with navy-gold-navy stripes, navy pennant banners with a gold/white knight-helmet logo, navy mat with gold circles, Eisenhower wrestlers in navy-and-gold singlets and gold 'Eisenhower Knights Wrestling' shirts. Wall is overexposed in the photos (stripes read #475880 / #FCDA8F), so no hex given. wcsdpa.org pages now bot-checked."
+ }
+]

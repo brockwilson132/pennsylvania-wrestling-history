@@ -1,0 +1,235 @@
+[
+ {
+  "school": "St. Gregory's Academy",
+  "identified_as": "St. Gregory's Academy, Elmhurst Township, Lackawanna Co.",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "medium",
+  "wikipedia": "St. Gregory's Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._Gregory%27s_Academy",
+   "search:https://gregorythegreatacademy.org/?p=215"
+  ],
+  "era": "Boys' boarding school, closed 2012",
+  "notes": null,
+  "evidence": "Retry: Wikipedia raw infobox 'Red and Black' (generic color boxes only, no crest image); search summary describes the original Hicks-designed crest with a red diagonal band, consistent with red/black, but no crest image could be reached for a hex."
+ },
+ {
+  "school": "Hyndman",
+  "identified_as": "Hyndman Middle-Senior High School, Hyndman (Bedford Co.)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "low",
+  "wikipedia": "Hyndman Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hyndman_Middle-High_School",
+   "search:https://www.maxpreps.com/pa/hyndman/hyndman-charter-school-hornets",
+   "https://www.e-yearbook.com/yearbooks/Hyndman_Londonderry_High_School_Hornet_Yearbook/1965/Page_55.html",
+   "https://www.e-yearbook.com/yearbooks/Hyndman_Londonderry_High_School_Hornet_Yearbook/1955/Page_37.html"
+  ],
+  "era": "Public Hyndman Middle-High School closed 2011 (Bedford Area SD); Hyndman Charter School (Hornets) continued in the town.",
+  "notes": "Inferred from one line on the closing page of the 1965 Hornet yearbook (Hyndman-Londonderry HS), 'With Ties of Orange and Black And Memories to Sing'; not stated outright as school colours. Class colours that year were royal blue and white. Yearbook page images could not be downloaded (hotlink-blocked).",
+  "evidence": "e-yearbook.com OCR, Hyndman-Londonderry Hornet: 1965 p55 'With Ties of Orange and Black And Memories to Sing'; 1955/1956 books confirm Hornets but give no colours; no image seen."
+ },
+ {
+  "school": "Chartiers Township",
+  "identified_as": "Chartiers Township High School, Chartiers Township (Washington Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "medium",
+  "wikipedia": "Chartiers-Houston School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District",
+   "search:https://chbucs.k12.pa.us/page/about-us",
+   "https://www.e-yearbook.com/yearbooks/Chartiers_Houston_High_School_Charconge_Yearbook/1952/Page_5.html",
+   "https://www.e-yearbook.com/yearbooks/Chartiers_Houston_High_School_Charconge_Yearbook/1952/Page_10.html",
+   "https://www.e-yearbook.com/yearbooks/Chartiers_Houston_High_School_Charconge_Yearbook/1952/Page_6.html"
+  ],
+  "era": "Merged with Houston into Chartiers-Houston (first class 1956), which uses Maroon and Gold, Buccaneers.",
+  "notes": "Own pre-merger colours: the 1952 Charconge (title page 'Chartiers Township High School, R.D. 1, Washington, Pennsylvania') prints the alma mater adopted 1951 with 'Maroon and gold thy colors bold'. Mascot 'Bucky' the Buccaneer appears in the same book. The successor Chartiers-Houston kept these colours, but this record rests on Chartiers Township's own yearbook. e-yearbook files the book under 'Chartiers Houston High School'.",
+  "evidence": "e-yearbook.com OCR of 1952 Charconge: p5 title 'Chartiers Township High School'; p10 alma mater 'Maroon and gold thy colors bold, Ring out proud Chartiers name'; p6 'Bucky of Chartiers High'. No clean image for a hex."
+ },
+ {
+  "school": "Glen Mills",
+  "identified_as": "Glen Mills Schools, Glen Mills (Delaware County)",
+  "colors": [],
+  "mascot": "Battlin' Bulls",
+  "confidence": "low",
+  "wikipedia": "Glen Mills Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Glen_Mills_Schools",
+   "search:https://papreplive.com/football/glen-mills-has-a-clear-agenda-after-latest-victory",
+   "search:https://npaaa.org/NPKnightsFootball/2003_glenmills.htm",
+   "search:https://www.pressreader.com/usa/daily-times-primos-pa/20170930/281943133082159"
+  ],
+  "era": "Residential reform school; closed 2019 after state licence revoked.",
+  "notes": "No source found stating colours; Wikipedia article has no infobox colours.",
+  "evidence": "Retry: WebSearch for Battling Bulls colours returned only game reports and lawsuit news; MaxPreps 403. No colours confirmed. (Garnet Valley HS in the same town is a different school; its garnet and white not applied.)"
+ },
+ {
+  "school": "Lansdowne-Aldan",
+  "identified_as": "Lansdowne-Aldan High School, Lansdowne (Delaware County)",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School",
+   "https://www.e-yearbook.com/yearbooks/Lansdowne_High_School_Lahian_Yearbook/1954/Page_78.html",
+   "https://www.e-yearbook.com/yearbooks/Lansdowne_High_School_Lahian_Yearbook/1959/Page_87.html",
+   "https://www.e-yearbook.com/yearbooks/Lansdowne_High_School_Lahian_Yearbook/1962/Page_39.html",
+   "https://www.e-yearbook.com/yearbooks/Lansdowne_High_School_Lahian_Yearbook/1958/Page_50.html"
+  ],
+  "era": "Merged 1982 with Yeadon and Darby-Colwyn into Penn Wood High School (Patriots; maroon, white, navy).",
+  "notes": "Own colours from Lahian yearbooks 1954-1962 (teams called 'the Garnet and Gray'; school paper also named Garnet and Gray). A 1962 baseball line calls the team 'the Lords'; mascot not confirmed so left null. Not Penn Wood's colours.",
+  "evidence": "e-yearbook.com OCR of Lansdowne-Aldan Lahian: 1954 p78 'end-fullback for the Garnet and Gray'; 1958 p50 majorettes in 'garnet and white uniforms'; 1959 p48/p87 garnet and gray; 1962 p39 band 'in natty new garnet and gray uniforms'. No clean image for a hex."
+ },
+ {
+  "school": "Steelton",
+  "identified_as": "Steelton High School, Steelton (Dauphin County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steamrollers",
+  "confidence": "high",
+  "wikipedia": "Steelton-Highspire School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steelton-Highspire_School_District",
+   "https://en.wikipedia.org/wiki/Steelton_High_School",
+   "search:https://www.maxpreps.com/pa/steelton/steelton-highspire-steamrollers",
+   "https://www.shsd.k12.pa.us",
+   "https://www.e-yearbook.com/yearbooks/Steelton_High_School_Ingot_Yearbook/1942/Page_75.html",
+   "https://www.e-yearbook.com/yearbooks/Steelton_High_School_Ingot_Yearbook/1942/Page_70.html",
+   "https://www.e-yearbook.com/yearbooks/Steelton_High_School_Ingot_Yearbook/1954/Page_22.html"
+  ],
+  "era": "Steelton High School later absorbed Highspire to form Steelton-Highspire High School (Steamrollers; blue, white and grey per Wikipedia). Those successor colours are not assigned here.",
+  "notes": "Own colours from Steelton HS Ingot yearbooks (alma mater 'that dear old Blue and White that Steelton wore'); class colours (navy/gold, navy/silver) are per-class, not school colours. Steamroller symbol confirmed 1942.",
+  "evidence": "e-yearbook.com OCR of Steelton Ingot: 1942 p75 and 1954 p22 alma mater 'dear old Blue and White That Steelton wore'; 1942 p70 football 'the Blue and White gridders', symbolic Steamroller. No clean image for a hex."
+ },
+ {
+  "school": "Kishacoquillas",
+  "identified_as": "Kishacoquillas High School, Reedsville/Belleville area (Mifflin County)",
+  "colors": [],
+  "mascot": "Indians",
+  "confidence": "low",
+  "wikipedia": "Mifflin County School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mifflin_County_School_District",
+   "search:https://topoquest.com/place-detail.php?id=1178552",
+   "https://www.e-yearbook.com/yearbooks/Menno_Union_Township_High_School_Kishaco_Quill_Yearbook/1955/Page_6.html",
+   "search:https://en.wikipedia.org/wiki/Mifflin_County_School_District"
+  ],
+  "era": "Kishacoquillas Jr/Sr High School (Indians) closed June 1988; combined with Chief Logan in 1989 to form Indian Valley High School, later part of Mifflin County High School (Huskies; purple, black, silver).",
+  "notes": "No source found for Kish's own colours. Predecessor Menno-Union Township HS (Belleville) alma mater names no colours. Belleville Mennonite (red and white) is a different school. First pass had the closing date wrong (2011).",
+  "evidence": "Searched e-yearbook.com: Menno-Union 'Kishaco Quill' 1951/1955 OCR (alma mater with no colours named; class colours maroon and steel only); a Kishacoquillas HS 'Kishacoquill' book URL resolves but has no page text. Search snippet of Mifflin County SD Wikipedia gives 1988 closure. No colours confirmed."
+ },
+ {
+  "school": "Trafford",
+  "identified_as": "Trafford High School, Trafford (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tomahawks",
+  "confidence": "high",
+  "wikipedia": "Penn-Trafford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn-Trafford_High_School",
+   "search:https://en.wikipedia.org/wiki/Penn-Trafford_School_District",
+   "https://www.e-yearbook.com/yearbooks/Trafford_High_School_Reflector_Yearbook/1950/Page_51.html",
+   "https://www.e-yearbook.com/yearbooks/Trafford_High_School_Reflector_Yearbook/1947/Page_54.html"
+  ],
+  "era": "Merged with Penn Joint to form Penn-Trafford (Warriors; green and gold) around 1971-72.",
+  "notes": "Own colours from Trafford HS Reflector yearbooks; not Penn-Trafford's green and gold.",
+  "evidence": "e-yearbook.com OCR of Trafford Reflector: 1950 p51 football 'the brown and white' / 'Brown and White' beat Snowden (Tomahawks); 1947 p54 band 'Our colors are BROWN and white'; 1947 p51 majorettes 'brown and white twins'. No clean image for a hex."
+ },
+ {
+  "school": "Dormont",
+  "identified_as": "Dormont High School, Dormont (Allegheny County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Keystone Oaks High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dormont,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Keystone_Oaks_High_School",
+   "https://www.e-yearbook.com/yearbooks/Dormont_High_School_Yearbook/1959/Page_68.html",
+   "https://www.e-yearbook.com/yearbooks/Dormont_High_School_Yearbook/1957/Page_32.html"
+  ],
+  "era": "Merged into Keystone Oaks High School (Golden Eagles; gold, white, black) in the late 1960s.",
+  "notes": "Colours from Dormont's own yearbook (The Torch); no clean image for a hex. Not Keystone Oaks' colours.",
+  "evidence": "e-yearbook.com OCR of Dormont HS Torch: 1959 p68 'Proudly wearing the school colors, maroon and grey the sixty piece band'; 1957 p32 majorettes in 'maroon and gray uniforms'."
+ }
+]
