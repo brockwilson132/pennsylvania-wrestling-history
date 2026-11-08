@@ -10,56 +10,11 @@
 
 
   /* ---- school name tags ----
-     A school is a small tag in its own colours: filled with its main colour, its second colour as the dot (F, pill) or the
-     edge (D, jersey), and the name written in the first of its colours that reads on the fill (second, then third, then
-     white or black). Colours are named presets, not each school's exact hex, so schools in "the same red" match.
-     District 11 is set by hand from Brock's list (TAG_ASSIGN); other schools snap the badge file's colours to the presets;
-     a school with no colours on file gets the plain grey tag. The tag is a pill with a dot in the accent colour. */
-  const TAG_PRESETS = {
-    red: '#C8102E', maroon: '#7A1E2C', orange: '#E87722', gold: '#C9A227', yellow: '#FFD200', green: '#15803D', dkgreen: '#0B4D2C',
-    royal: '#1F4E9C', navy: '#1B2A4A', ltblue: '#7EC8F2', purple: '#4B2E83', brown: '#4E2A1E', grey: '#8A8D8F', white: '#FFFFFF', black: '#111111',
-  };
-  /* District 11, from Brock (2026-11-05): colours in order, main first. Old names follow the school that replaced them. */
-  const TAG_ASSIGN = {
-    'Allentown Central Catholic': ['green', 'gold'], 'Allentown Dieruff': ['royal', 'grey'], 'Bangor': ['maroon', 'white'],
-    'Bethlehem Catholic': ['brown', 'gold'], 'Bethlehem Freedom': ['black', 'gold'], 'Bethlehem Liberty': ['maroon', 'navy', 'white'],
-    'Liberty': ['maroon', 'navy', 'white'], 'Bishop Hafey': ['gold', 'white'], 'Blue Mountain': ['navy', 'white'], 'Catasauqua': ['brown', 'white'],
-    'East Stroudsburg': ['purple', 'white'], 'East Stroudsburg North': ['ltblue', 'black', 'white'], 'East Stroudsburg South': ['purple', 'white'],
-    'Easton': ['red', 'white', 'black'], 'Emmaus': ['green', 'gold'], 'Hellertown Lower Saucon': ['red', 'black'], 'Jim Thorpe': ['navy', 'red', 'white'],
-    'Lehighton': ['maroon', 'white'], 'Mahanoy': ['black', 'gold'], 'Minersville': ['royal', 'white', 'black'], 'Nazareth': ['royal', 'white', 'black'],
-    'North Schuylkill': ['red', 'royal'], 'Northampton': ['orange', 'black'], 'Northern Lehigh': ['navy', 'white'], 'Northwestern Lehigh': ['black', 'gold'],
-    'Notre Dame-Green Pond': ['navy', 'gold'], 'Palisades': ['purple', 'gold', 'white'], 'Palmerton': ['royal', 'white'], 'Panther Valley': ['black', 'gold', 'white'],
-    'Parkland': ['red', 'grey', 'black'], 'Pen Argyl': ['green', 'white'], 'Pine Grove': ['red', 'grey'], 'Pius X (Roseto)': ['royal', 'white'],
-    'Pleasant Valley': ['royal', 'white'], 'Pocono Mountain': ['red', 'white'], 'Pocono Mountain East': ['red', 'white'], 'Pocono Mountain West': ['navy', 'grey'],
-    'Pottsville': ['red', 'white'], 'Salisbury Township': ['navy', 'white'], 'Saucon Valley': ['red', 'black'], 'Schuylkill Haven': ['royal', 'gold'],
-    'Shenandoah Valley': ['ltblue', 'white'], 'Slatington': ['navy', 'white'], 'Southern Lehigh': ['royal', 'white'], 'Stroudsburg': ['maroon', 'white'],
-    'Tamaqua': ['royal', 'white', 'black'], 'Tri-Valley': ['red', 'black', 'white'], 'West Hazleton': ['ltblue', 'black'], 'Whitehall': ['maroon', 'gold'],
-    'William Allen': ['yellow', 'royal'], 'Williams Valley': ['royal', 'red', 'white'], 'Wilson Area': ['royal', 'gold'],
-  };
-  const hexRgb = (h) => { const n = parseInt(String(h).replace('#', ''), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
-  const relLum = (h) => { const c = hexRgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
-  const contrast = (a, b) => { const x = relLum(a), y = relLum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-  const READS = 3.8;   // tags are bold condensed caps: 3.8:1 keeps Emmaus gold-on-green (3.9) and drops grey-on-red (1.8)
-  const PK = Object.entries(TAG_PRESETS);
-  const nearestKey = (h) => { const [r, g, b] = hexRgb(h); let best = 'grey', bd = Infinity;
-    PK.forEach(([k, m]) => { const [R, G, B] = hexRgb(m); const d = 2 * (r - R) ** 2 + 4 * (g - G) ** 2 + 3 * (b - B) ** 2; if (d < bd) { bd = d; best = k; } }); return best; };
-  const TAGC = new Map();
-  /* a school's colours as preset keys, main first; null when nothing is on file */
-  function schoolColours(sch) {
-    if (TAGC.has(sch)) return TAGC.get(sch);
-    let ks = TAG_ASSIGN[sch] || null;
-    if (!ks) { const id = window.SchoolBadge && window.SchoolBadge.identity(sch);
-      if (id && id.primary) ks = [id.primary, id.secondary, id.accent].filter(Boolean).map(nearestKey).filter((k, i, a) => a.indexOf(k) === i); }
-    TAGC.set(sch, ks); return ks;
-  }
-  /* fill, accent (dot or edge) and text colour for one school */
-  function tagPaint(sch) {
-    const ks = schoolColours(sch);
-    if (!ks || !ks.length) return { fill: '#2A3038', acc: '#4A5360', ink: '#EEEAE1', none: true };
-    const fill = TAG_PRESETS[ks[0]], acc = TAG_PRESETS[ks[1] || ks[0]];
-    const ink = ks.slice(1).map((k) => TAG_PRESETS[k]).find((c) => contrast(fill, c) >= READS) || (contrast(fill, '#FFFFFF') >= contrast(fill, '#000000') ? '#FFFFFF' : '#000000');
-    return { fill, acc, ink };
-  }
+     A school is a small pill in its own colours: filled with its main colour, a dot in its second, the name in a third.
+     The colours are Brock's sets in schoolcolors.js (edited on colors.html); a school without a set snaps its badge
+     colours to presets, and one with neither gets the plain grey tag. The logic lives in tags.js (shared with the editor). */
+  const TAGS = window.OTTags;
+  const tagPaint = (sch) => TAGS.paint(sch);
   const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
   const stag = (sch, o = {}) => { const p = tagPaint(sch);
@@ -512,5 +467,5 @@
       + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament. ' : '') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
   }
 
-  Object.assign(OT, { stag, schoolColours, tagPaint, TAG_PRESETS, TAG_ASSIGN, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
+  Object.assign(OT, { stag, tagPaint, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });
 })();
