@@ -386,6 +386,16 @@ if MARGIN == 'ordered':
               2: {'beta': 0.309, 't': [-3.06, -1.59, -0.48, 0.57, 0.87, 1.37, 2.05, 2.45, 3.43, 4.54]}, 3: {'beta': 0.344, 't': [-2.94, -1.52, -0.47, 0.5, 0.78, 1.23, 1.95, 2.13, 2.94, 3.88]},
               4: {'beta': 0.381, 't': [-3.12, -1.64, -0.62, 0.25, 0.53, 0.91, 1.64, 1.77, 2.58, 3.6]}}
     say('margin model: win + how he won (cumulative logit); slope per era ' + ', '.join(f'{e}: {v["beta"] * BETA_X:.3f}' for e, v in sorted(TH.items())))
+bouts_in = Counter(b['bk'] for b in bouts)
+PLACE_W = 0.3
+npseudo = 0
+for bk, es in entrants.items():
+    y = int(bk[1][:4]); pl = sorted([(e[3], ID(e[0], y)) for e in es if e[3]], key=lambda x: x[0])
+    if len(pl) < 2 or bouts_in.get(bk, 0) >= len(pl) or (NO_SEC_BOUTS and bk[0] == 'section') or (FIRST == 'drop' and bk[0] in ('district', 'section')): continue
+    for i in range(len(pl)):
+        for j in range(i + 1, len(pl)):
+            season_b[y].append((pl[i][1], pl[j][1], PLACE_W / (len(pl) - 1), ('P', bk[0]))); npseudo += 1
+say(f'\nseason-batch fit: {sum(len(v) for v in season_b.values()) - npseudo} bouts + {npseudo} placement-implied pairs (weight {PLACE_W}/(placers-1)) for brackets with fewer bouts than placers')
 def fit_season(rows, ids, mu, sd, mask=None):
     """MAP Bradley-Terry: maximize sum m*log sigma(c*(t_w - t_l)) - sum (t-mu)^2/(2 sd^2)"""
     idx = {k: i for i, k in enumerate(ids)}
