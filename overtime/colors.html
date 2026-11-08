@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0D10">
+<title>Colours · Overtime</title>
+<link rel="stylesheet" href="app/styles.css">
+<style>
+/* school colour editor (editor.js). Phone first: the brush (preview, parts, swatches, sets) stays on top, schools scroll under it. */
+body{padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ed{max-width:1080px;margin:0 auto}
+.ce-eb{position:sticky;top:0;z-index:20;background:rgba(11,13,16,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:0 16px 10px}
+.ce-eh{display:flex;align-items:center;gap:4px;height:52px}
+.ce-ib{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;color:var(--ash);position:relative}
+.ce-ib svg{width:22px;height:22px}.ce-ib:hover{background:var(--slate);color:var(--chalk)}.ce-ib:disabled{opacity:.3;pointer-events:none}
+.ce-ib.ce-on{color:var(--chalk)}.ce-ib .ce-bd{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--gold);color:var(--mat);font:900 11px/17px var(--cond)}
+.ce-ib .ce-dt{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.ce-ib.ce-ok{color:var(--green)}.ce-ib.ce-err{color:var(--red)}.ce-ib.ce-busy svg{animation:edsp 1s linear infinite}@keyframes edsp{to{transform:rotate(360deg)}}
+.ce-eh .ce-sp{flex:1}
+.ce-pv{display:grid;place-items:center;gap:8px;min-height:62px;padding:10px 8px;margin:2px 0 10px;border-radius:var(--r);background:var(--slate);border:1px solid var(--line)}
+.ce-pvb{display:flex;justify-content:center;max-width:100%}.ce-pvb .stag{font-size:var(--pz,23px);line-height:1.4;gap:8px;max-width:100%}.ce-pvb .stag.tF{padding:2px 18px 2px 8px}.ce-pvb .stag.tF>i{width:20px;height:20px;box-shadow:0 0 0 2.5px rgba(0,0,0,.45)}
+.ce-pvs{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;max-width:100%}
+.ce-pt{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.ce-pb{flex:1;height:44px;display:grid;place-items:center;border-radius:12px;background:var(--slate);border:1px solid var(--line2)}
+.ce-pb[aria-pressed=true]{border-color:var(--chalk);box-shadow:0 0 0 1px var(--chalk)}
+.ce-pb .ce-sw0{width:42px;height:22px;border-radius:11px;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.ce-pb .ce-sw1{width:22px;height:22px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.ce-pb .ce-sw2{font:900 22px/1 var(--cond);letter-spacing:.02em;padding:0 9px;border-radius:7px;background:var(--fill)}
+.ce-pt .ce-warn{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:var(--gold);background:var(--slate);border:1px solid var(--gold)}.ce-warn svg{width:22px;height:22px}
+.ce-sg{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:10px}
+.ce-sw{aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);position:relative;max-width:44px;justify-self:center;width:100%}
+.ce-sw[aria-pressed=true]{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 0 0 2px var(--mat),0 0 0 4px var(--chalk)}
+.ce-sw.ce-tool{display:grid;place-items:center;color:var(--ash);background:var(--slate);box-shadow:inset 0 0 0 1px var(--line2)}.ce-sw.ce-tool svg{width:20px;height:20px}
+.ce-sw.ce-tool[aria-pressed=true]{color:var(--chalk);box-shadow:inset 0 0 0 1px var(--chalk)}
+.ce-sg.ce-del .ce-sw:not(.ce-tool)::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px dashed var(--red)}
+.ce-cx{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.ce-cx input[type=color]{width:44px;height:44px;padding:0;border:1px solid var(--line2);border-radius:12px;background:var(--slate)}
+.ce-cx input[type=text]{flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line2);background:var(--slate);color:var(--chalk);font:700 18px var(--cond);letter-spacing:.08em;text-transform:uppercase;padding:0 12px}
+.ce-ss{display:flex;gap:8px;overflow-x:auto;padding:3px 2px 4px;scrollbar-width:none}.ce-ss::-webkit-scrollbar{display:none}
+.ce-sb{flex:none;height:34px;display:inline-flex;align-items:center;gap:6px;padding:0 12px 0 7px;border-radius:17px;background:var(--fill);color:var(--ink);font:900 14px/1 var(--cond);box-shadow:0 0 0 1px rgba(255,255,255,.16)}
+.ce-sb>i{width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 1.5px rgba(0,0,0,.45)}
+.ce-sb[aria-pressed=true]{box-shadow:0 0 0 2px var(--mat),0 0 0 4px var(--chalk)}
+.ce-sb.ce-tool{background:var(--slate);color:var(--ash);padding:0 9px;box-shadow:inset 0 0 0 1px var(--line2)}.ce-sb.ce-tool svg{width:18px;height:18px}
+.ce-sb.ce-tool.ce-arm{color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+.ce-fl{display:flex;gap:8px;align-items:center;padding:12px 16px 8px}
+.ce-fs{flex:1;min-width:0;position:relative}.ce-fs svg{position:absolute;left:11px;top:11px;width:20px;height:20px;color:var(--ash)}
+.ce-fs input{width:100%;height:42px;border-radius:12px;border:1px solid var(--line2);background:var(--slate);color:var(--chalk);font:16px var(--body);padding:0 12px 0 38px}
+.ce-ch{display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;scrollbar-width:none}.ce-ch::-webkit-scrollbar{display:none}
+.ce-ch button{flex:none;min-width:38px;height:34px;padding:0 10px;border-radius:17px;background:var(--slate);border:1px solid var(--line2);color:var(--ash);font:700 14px/1 var(--cond);letter-spacing:.04em;display:inline-grid;place-items:center}
+.ce-ch button[aria-pressed=true]{color:var(--mat);background:var(--chalk);border-color:var(--chalk)}
+.ce-ch .ce-mini{display:inline-flex;align-items:center;gap:6px}.ce-ch .ce-mini>b{width:22px;height:12px;border-radius:6px;background:var(--f);box-shadow:0 0 0 1px rgba(255,255,255,.2)}.ce-ch .ce-mini>b>i{display:block;width:8px;height:8px;margin:2px 0 0 2px;border-radius:50%;background:var(--a)}
+.ce-sl{list-style:none;margin:0;padding:0 8px 24px}.ce-sl>li{border:0;margin:0}
+.ce-sr{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 4px 0 8px;border-radius:12px;cursor:pointer}
+.ce-sr:hover{background:var(--slate)}.ce-sr.ce-foc{background:var(--slate2)}
+.ce-sr .ce-ck{flex:none;width:20px;height:20px;color:var(--chalk);opacity:0}.ce-sr.ce-use .ce-ck{opacity:1}
+.ce-sr .ce-nm{flex:1;min-width:0;display:flex}.ce-sr .stag{font-size:13.5px;line-height:20px}
+.ce-sr .ce-dn{flex:none;width:28px;text-align:right;font:700 13px var(--cond);color:var(--ash2)}
+.ce-sr .ce-pk{flex:none;width:40px;height:40px;display:grid;place-items:center;color:var(--ash2);border-radius:10px}.ce-sr .ce-pk:hover{color:var(--chalk);background:var(--line)}.ce-sr .ce-pk svg{width:19px;height:19px}
+.ce-sr .ce-pk.ce-no{visibility:hidden}
+.ce-tk{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);display:grid;align-items:end}
+.ce-tkc{background:var(--slate);border-top:1px solid var(--line2);border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center}
+.ce-tkc input{flex:1;min-width:0;height:46px;border-radius:12px;border:1px solid var(--line2);background:var(--mat);color:var(--chalk);font:15px var(--body);padding:0 12px}
+.ce-tkc .ce-ib{background:var(--mat);border:1px solid var(--line2)}
+.ce-msg{margin:0 16px 8px;padding:8px 12px;border-radius:10px;background:rgba(255,59,47,.12);color:#FF8A80;font:700 13px var(--cond);letter-spacing:.04em}
+.ce-ld{padding:40px 16px;text-align:center;color:var(--ash)}
+@media (min-width:860px){
+  .ed{display:grid;grid-template-columns:400px 1fr;gap:0 24px;align-items:start;padding:0 16px}
+  .ce-eb{grid-row:1 / span 3;top:0;height:100vh;overflow:auto;border:0;border-right:1px solid var(--line);padding:0 20px 20px 0;background:none;backdrop-filter:none}
+  .ce-ss{flex-wrap:wrap;overflow:visible}
+  .ce-fl,.ce-ch{padding-left:0;padding-right:0}.ce-fl{position:sticky;top:0;z-index:5;background:var(--mat);padding-top:14px}
+  .ce-tk{align-items:center;justify-items:center}.ce-tkc{width:480px;border-radius:18px;border:1px solid var(--line2)}
+}
+</style>
+</head>
+<body>
+<div class="ed" id="ed"><div class="ld">…</div></div>
+<script src="badges.js"></script>
+<script src="units.js"></script>
+<script src="schoolcolors.js"></script>
+<script src="tags.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>
