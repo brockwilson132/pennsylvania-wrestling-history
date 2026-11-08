@@ -1,4 +1,4 @@
-/* School name tag colours, written by the colour editor (colors.html). sets: id -> [fill, dot, text]; schools: name -> set id. */
+/* School name tag colours, written by the colour editor (colors.html). sets: id -> [fill, dot, text]; schools: name -> set id; abbr: name -> short name. */
 window.OT_COLORS = {
 "swatches": ["#C8102E", "#7A1E2C", "#E87722", "#C9A227", "#FFD200", "#15803D", "#0B4D2C", "#1F4E9C", "#1B2A4A", "#7EC8F2", "#4B2E83", "#4E2A1E", "#8A8D8F", "#FFFFFF", "#111111"],
 "sets": {
@@ -83,5 +83,8 @@ window.OT_COLORS = {
 "William Allen": "s26",
 "Williams Valley": "s27",
 "Wilson Area": "s23"
+},
+"abbr": {
+
 }
 };
