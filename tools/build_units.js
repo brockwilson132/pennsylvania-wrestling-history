@@ -117,6 +117,10 @@ const REAL = new Map();
   }
 }
 const realOf = (a) => { const L = REAL.get(a.year + '|' + a.w + '|' + nkey(a.name)); if (!L) return null; if (L.length === 1) return L[0][1]; const m = L.find((x) => x[0] === nkey(a.raw)); return m ? m[1] : null; };
+/* postseason bouts per wrestler-season (year | weight | name): how much a season rating rests on */
+const NBO = new Map();
+{ const L = fs.readFileSync(path.join(__dirname, '..', 'data', 'brackets', 'bouts.csv'), 'utf8').split(/\r?\n/); const h = L[0].split(','); const [iY, iW, iA, iB] = ['year', 'weight', 'winner', 'loser'].map((c) => h.indexOf(c));
+  for (let i = 1; i < L.length; i++) { const f = L[i].split(','); if (f.length !== h.length) continue; [iA, iB].forEach((j) => { if (!f[j]) return; const k = f[iY] + '|' + wNum(f[iW]) + '|' + nkey(f[j]); NBO.set(k, (NBO.get(k) || 0) + 1); }); } }
 let nReal = 0; APP.forEach((a) => { const v = realOf(a); a.real = v == null ? (a.rating || null) : v; if (v != null) nReal++; });
 console.log('real season ratings', WSF.split('/').pop(), 'matched', nReal, 'of', APP.length);
 
@@ -210,7 +214,7 @@ bySS.forEach((rows, k) => {
   let reg = regionOf(year, c, d) || (rows.find((a) => a.lvl === 'regional' && a.unit) || {}).unit || ''; if (reg === 'W') reg = 'SW'; if (!['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(reg)) reg = '';
   const covered = cov.has(year + '|' + c + '|' + d);
   const per = new Map(); // wrestler → {std, real, shown, D,R,S}
-  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, shown: 0, X: -1, D: -1, R: -1, S: -1 };
+  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, nb: 0, shown: 0, X: -1, D: -1, R: -1, S: -1 }; p.nb = Math.max(p.nb, NBO.get(a.year + '|' + a.w + '|' + nkey(a.name)) || 0);
     if (a.real != null && (p.real == null || a.real > p.real)) p.real = a.real; p.shown = Math.max(p.shown, a.rating);
     const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
   const best = new Map(), unrated = new Set(); per.forEach((p) => { if (p.real == null) { unrated.add(p.std); return; } const b = best.get(p.std); if (!b || p.real > b.real) best.set(p.std, p); });
@@ -336,7 +340,12 @@ byS.forEach((rows, i) => {
   const hardPts = (g) => (g < CUT[0] ? 3 : g < CUT[1] ? 4 : g < CUT[2] ? 5 : 6);
   const hard = (ra, rb) => (ra == null ? (rb == null ? 0 : -6) : rb == null ? 6 : ra === rb ? 0 : ra > rb ? hardPts(ra - rb) : -hardPts(rb - ra));
   /* one bout: [mean, mean of square] of (A points - B points); null = nobody entered */
-  const bout = (ra, rb) => { if (ra == null) return rb == null ? [0, 0] : [-6, 36]; if (rb == null) return [6, 36]; const i = Math.round((Math.max(-GMAX, Math.min(GMAX, ra - rb)) + GMAX) / 5); return [BM[i], BV[i] + BM[i] * BM[i]]; };
+  /* a season rating resting on few bouts is uncertain: its spread is UNC / sqrt(1 + bouts); the win chance is averaged
+     over both wrestlers' spreads, which shrinks the gap the bout is scored at (UNC tuned on the real state duals below) */
+  let UNC = +(process.env.SEASON_UNC || 0); const K2 = Math.PI * Math.pow(Math.LN10 / 400, 2) / 8;
+  const varOf = (n) => (n == null ? 0 : UNC * UNC / (1 + n));
+  const bout = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0] : [-6, 36]; if (rb == null) return [6, 36]; let g = ra - rb; if (UNC) g /= Math.sqrt(1 + K2 * (varOf(na) + varOf(nb)));
+    const i = Math.round((Math.max(-GMAX, Math.min(GMAX, g)) + GMAX) / 5); return [BM[i], BV[i] + BM[i] * BM[i]]; };
   /* the fill for a weight we can't see */
   const pv = (r) => 1 / (1 + Math.pow(10, (REF - r) / 400));
   const eraOf = (y) => (y < 1999 ? 0 : 1);
@@ -364,7 +373,7 @@ byS.forEach((rows, i) => {
     const fill = exact ? null : FILL.get(eraOf(s.year) + '|' + binOf(s, R));
     /* one slot per weight the season actually had, lightest first (a weight bracket of STDK can hold two of a season's
        weights, 130 and 135 in 2002-11 or 182 and 195 in 2012-23, so slots are by position, not by bracket) */
-    const lw = s.lw; const slot = lw.map((x) => (exact ? (x[1] != null ? [[x[1], 1]] : empty(s.year, 1)) : x[2] != null ? [[x[2], 1]] : fill));
+    const lw = s.lw; const slot = lw.map((x) => (exact ? (x[1] != null ? [[x[1], 1, x[3].nb]] : empty(s.year, 1)) : x[2] != null ? [[x[2], 1, x[4].nb]] : fill));
     if (process.env.SEASON_ALIGN === 'bucket') { const o = new Array(STDK.length); s.weights.forEach((i, j) => { o[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; }); pool.push({ s, slot: o, est: !exact }); return; }
     pool.push({ s, slot, est: !exact }); });
   /* two lineups meet weight by weight; when one season had more weights, each of its weights meets the other's weight at the
@@ -374,26 +383,44 @@ byS.forEach((rows, i) => {
   const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0; const bucket = process.env.SEASON_ALIGN === 'bucket';
     const P = bucket ? null : pairsOf(A.length, B.length);
     for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : A[P[b][0]], c = bucket ? B[b] : B[P[b][1]]; if (!a || !c) continue; n++;
-      if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
-      let mm = 0, ee = 0; for (const [ra, wa] of a) for (const [rb, wb] of c) { const r = bout(ra, rb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
+      if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0], a[0][2], c[0][2]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
+      let mm = 0, ee = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of c) { const r = bout(ra, rb, na, nb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
     return n ? [m * 13 / n, q * 13 / n, h * 13 / n] : [0, 1, 0]; };
   const Phi = (z) => 0.5 * (1 + Math.tanh(0.7978845608 * (z + 0.044715 * z * z * z)));
   /* the 500: best by expected margin against every season (opponents at each weight pooled, rounded to 10 points) */
+  /* tune on every real PIAA team-duals result on file (1230 since 1999), the same constants then used for every era:
+     UNC, the spread of a season rating resting on few bouts, and TAU, the dual-to-dual swing a lineup can't show
+     (lineup changes, weight bumps, a bad night), added to the spread of the team score */
+  let TAU = 0;
+  { global.window = global.window || {}; require(path.join(OV, 'duals.js')); const DS = (global.window.WR_DUALS || []); const byK = new Map(pool.map((p) => [p.s.sch + '|' + p.s.year + '|' + p.s.c, p]));
+    const G = DS.map((d) => [byK.get(d[3] + '|' + d[0] + '|' + d[1]), byK.get(d[6] + '|' + d[0] + '|' + d[1]), d[5] - d[8], d]).filter((g) => g[0] && g[1] && g[2] !== 0);
+    const evalU = (u, t) => { UNC = u; let ll = 0, ok = 0, se = 0; G.forEach(([a, b, real]) => { const [m, v] = dual(a.slot, b.slot); const p = Math.min(1 - 1e-6, Math.max(1e-6, Phi(m / Math.sqrt(v + t * t + 1e-9)))); ll -= Math.log(p); ok += p > 0.5; se += (m - real) * (m - real); }); return [ll / G.length, ok / G.length, Math.sqrt(se / G.length)]; };
+    let best = null;
+    (process.env.SEASON_UNC_GRID || '0,150,250,350,450,600').split(',').map(Number).forEach((u) => (process.env.SEASON_TAU_GRID || '0,4,8,12,16').split(',').map(Number).forEach((t) => {
+      const r = evalU(u, t); console.log(`  spread ${u} swing ${t}: ${G.length} real duals, log loss ${r[0].toFixed(4)}, winner picked ${(100 * r[1]).toFixed(1)}%, margin rmse ${r[2].toFixed(1)}`); if (!best || r[0] < best[2]) best = [u, t, r[0]]; }));
+    UNC = process.env.SEASON_UNC != null ? +process.env.SEASON_UNC : best[0]; TAU = process.env.SEASON_TAU != null ? +process.env.SEASON_TAU : best[1]; console.log('rating spread used:', UNC, 'dual swing used:', TAU);
+    if (process.env.SEASON_SHOW) G.filter((g) => [g[0], g[1]].some((p) => p.s.sch + '|' + p.s.year === process.env.SEASON_SHOW)).forEach(([a, b, real, d]) => { const [m, v] = dual(a.slot, b.slot); console.log('   ', d[0], d[2], d[3], d[5] + '-' + d[8], d[6], '| model margin', m.toFixed(1), 'winner chance', (100 * Phi(m / Math.sqrt(v + TAU * TAU))).toFixed(0) + '%'); });
+    /* do lineups with weak spots (a weight empty or below 700 in the postseason) beat the model's margin? */
+    { const holes = (p) => p.slot.filter((o) => o.length === 1 ? o[0][0] == null || o[0][0] < 700 : false).length; const B = new Map();
+      G.forEach(([a, b, real]) => { const [m] = dual(a.slot, b.slot); const k = Math.max(-4, Math.min(4, holes(a) - holes(b))); const x = B.get(k) || [0, 0, 0]; x[0]++; x[1] += real - m; x[2] += m; B.set(k, x);
+        const k2 = 'r' + Math.max(-4, Math.min(4, holes(b) - holes(a))); const y = B.get(k2) || [0, 0, 0]; y[0]++; y[1] += m - real; y[2] -= m; B.set(k2, y); });
+      [-4, -3, -2, -1, 0, 1, 2, 3, 4].forEach((k) => { const x = B.get(k) || [0, 0, 0], y = B.get('r' + k) || [0, 0, 0]; const n = x[0] + y[0]; if (n) console.log(`   weak spots, team minus opponent ${k}: ${n} duals, real minus model margin ${((x[1] + y[1]) / n).toFixed(1)}`); }); }
+    if (process.env.SEASON_TUNE_ONLY) process.exit(0); }
   const NB = 14, posB = (j, n) => (n <= 1 ? 0 : Math.round(j * (NB - 1) / (n - 1)));
   const H = Array.from({ length: NB }, () => new Map()), HN = new Array(NB).fill(0);
   pool.forEach((p) => p.slot.forEach((o, j) => { if (!o) return; const b = posB(j, p.slot.length); HN[b]++; o.forEach(([r, w]) => { const k = r == null ? 'x' : Math.round(r / 10) * 10; H[b].set(k, (H[b].get(k) || 0) + w); }); }));
   const HA = H.map((m, b) => Array.from(m).map(([k, w]) => [k === 'x' ? null : k, w / Math.max(1, HN[b])]));
-  pool.forEach((p) => { let m = 0, n = 0; p.slot.forEach((o, j) => { if (!o) return; n++; for (const [ra, wa] of o) for (const [rb, wb] of HA[posB(j, p.slot.length)]) m += wa * wb * bout(ra, rb)[0]; }); p.m1 = n ? m * 13 / n : -99; });
+  pool.forEach((p) => { let m = 0, n = 0; p.slot.forEach((o, j) => { if (!o) return; n++; for (const [ra, wa, na] of o) for (const [rb, wb] of HA[posB(j, p.slot.length)]) m += wa * wb * bout(ra, rb, na, 2)[0]; }); p.m1 = n ? m * 13 / n : -99; });
   let field = pool.slice().sort((a, b) => b.m1 - a.m1).slice(0, FIELD_N);
   /* expected: chance of winning each dual; hard: the dual scored with cutoffs, a win 1, a tie a half */
-  const rate = (F) => pool.forEach((p) => { let w = 0, m = 0, n = 0, hw = 0, hm = 0; for (const o of F) { if (o === p) continue; const [mm, v, hh] = dual(p.slot, o.slot); w += Phi(mm / Math.sqrt(v + 1e-9)); m += mm; hw += hh > 0.05 ? 1 : hh < -0.05 ? 0 : 0.5; hm += hh; n++; } p.win = w / n; p.mar = m / n; p.hwin = hw / n; p.hmar = hm / n; });
+  const rate = (F) => pool.forEach((p) => { let w = 0, m = 0, n = 0, hw = 0, hm = 0; for (const o of F) { if (o === p) continue; const [mm, v, hh] = dual(p.slot, o.slot); w += Phi(mm / Math.sqrt(v + TAU * TAU + 1e-9)); m += mm; hw += hh > 0.05 ? 1 : hh < -0.05 ? 0 : 0.5; hm += hh; n++; } p.win = w / n; p.mar = m / n; p.hwin = hw / n; p.hmar = hm / n; });
   rate(field);
   /* once more against the 500 best by the duals themselves */
   field = pool.slice().sort((a, b) => b.win - a.win).slice(0, FIELD_N); rate(field);
   pool.sort((a, b) => b.win - a.win || b.mar - a.mar);
   if (process.env.SEASON_DEBUG) { const [x, y] = process.env.SEASON_DEBUG.split(',').map((k) => pool.find((p) => p.s.sch + '|' + p.s.year + '|' + p.s.c === k));
     const P = pairsOf(x.slot.length, y.slot.length); let tot = 0;
-    P.forEach(([i, j]) => { const a = x.slot[i], b = y.slot[j]; let r = 0, h = 0; for (const [ra, wa] of a) for (const [rb, wb] of b) { r += wa * wb * bout(ra, rb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', x.s.lw[i][0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', y.s.lw[j][0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
+    P.forEach(([i, j]) => { const a = x.slot[i], b = y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', x.s.lw[i][0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', y.s.lw[j][0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
     console.log('  expected margin', tot.toFixed(1), 'ranks', pool.indexOf(x) + 1, pool.indexOf(y) + 1); }
   console.log(`school seasons as duals: ${pool.length} seasons (${pool.filter((p) => p.est).length} with weights filled), field ${FIELD_N}, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
   { const hr = pool.slice().sort((a, b) => b.hwin - a.hwin || b.hmar - a.hmar); const hk = new Map(hr.map((p, i) => [p, i + 1]));
