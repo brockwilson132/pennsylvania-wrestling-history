@@ -1,6 +1,6 @@
-exact 8009
-last-name 44
-missing 1417
+exact 8017
+last-name 45
+missing 1408
 of 9470
 
 sample missing:

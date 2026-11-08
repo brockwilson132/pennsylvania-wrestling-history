@@ -1,6 +1,6 @@
 year,cls,weight,seed,region,name,school,grade,record
 1938,single,85,1,10,Jerry Spence,Grove City,FR,
-1938,single,85,1,7,Sandy DeMarino,Greensburg,FR,
+1938,single,85,1,7,Sandy DeMarino,Greensburg Salem,FR,
 1938,single,85,1,4,Lake Byerly,Muncy,FR,
 1938,single,85,1,9,Sam Harry,Clearfield,SO,
 1938,single,85,1,1,George Beck,Upper Merion,FR,
@@ -36,7 +36,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1938,single,125,1,1,Vic Jamison,Upper Merion,JR,
 1938,single,125,1,11,William Owens,Pottsville,SR,
 1938,single,125,1,3,Roy Bowser,West York,SR,
-1938,single,135,1,7,John Metzler,Greensburg,SR,
+1938,single,135,1,7,John Metzler,Greensburg Salem,SR,
 1938,single,135,1,1,Ben Bell,Cheltenham,SR,
 1938,single,135,1,2,Levio Grilli,Plains,SR,
 1938,single,135,1,3,Miles (Ike) Belic,Steelton,JR,
@@ -62,7 +62,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1938,single,155,1,9,Bob Bader,DuBois,JR,
 1938,single,165,1,2,Leo Roan,Forty Fort,SR,
 1938,single,165,1,10,Paul Plummer,Greenville,SO,
-1938,single,165,1,7,Robert (Don) Bitler,Greensburg,SR,
+1938,single,165,1,7,Robert (Don) Bitler,Greensburg Salem,SR,
 1938,single,165,1,9,Henry Blake,DuBois,SR,
 1938,single,165,1,4,Glenn Smith,Mount Carmel,SR,
 1938,single,165,1,11,Dick Brenneman,Pottsville,SR,
@@ -99,7 +99,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1939,single,105,1,3,Ben Klugh,Steelton,SO,
 1939,single,105,1,2,Bob Kolezar,Kingston,SO,
 1939,single,105,1,11,Tom Marshall,Bethlehem Liberty,SO,
-1939,single,115,1,7,Vincent Detore,Greensburg,JR,
+1939,single,115,1,7,Vincent Detore,Greensburg Salem,JR,
 1939,single,115,1,2,Donald Stevick,Kingston,SR,
 1939,single,115,1,6,Charles Ridenour,State College,SR,
 1939,single,115,1,11,Clyde Wood,Pottsville,SR,
@@ -118,7 +118,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1939,single,135,1,10,Ralph Davis,Grove City,JR,
 1939,single,135,1,1,Vic Jamison,Upper Merion,SR,
 1939,single,135,1,4,Joe Homiak,Shamokin,SR,
-1939,single,135,1,7,Thomas (Kid) Abraham,Greensburg,SR,
+1939,single,135,1,7,Thomas (Kid) Abraham,Greensburg Salem,SR,
 1939,single,135,1,11,Peter Cicchine,Bethlehem Liberty,JR,
 1939,single,135,1,2,Tom Jennings,Kingston,SR,
 1939,single,135,1,6,Bill Piper,Blairsville,SR,
@@ -197,7 +197,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1940,single,135,1,1,Jack Goeller,Lansdowne,SR,
 1940,single,135,1,11,Peter Cicchine,Bethlehem Liberty,SR,
 1940,single,135,1,10,Tom Braine,Grove City,SR,
-1940,single,135,1,7,Vincent Detore,Greensburg,SR,
+1940,single,135,1,7,Vincent Detore,Greensburg Salem,SR,
 1940,single,135,1,3,Anthony Verroca,Steelton,JR,
 1940,single,135,1,4,Leonard Gudleski,Mount Carmel,SR,
 1940,single,135,1,2,John Dillon,Kingston,SR,
@@ -277,7 +277,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1941,single,125,1,5,Charles Wilson,Bedford,SR,
 1941,single,125,1,9,Jack Sullivan,DuBois,SR,
 1941,single,125,1,11,James Heil,Bethlehem Liberty,SR,
-1941,single,125,1,7,Ralph Abraham,Greensburg,SR,
+1941,single,125,1,7,Ralph Abraham,Greensburg Salem,SR,
 1941,single,125,1,10,Jack Huff,Grove City,SR,
 1941,single,125,1,1,Tom Haley,Lower Merion,SR,
 1941,single,125,1,2,Richard Stevick,Kingston,JR,
@@ -359,7 +359,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1942,single,120,1,1,Arthur Bennett,Cheltenham,JR,
 1942,single,127,1,1,Lloyd McAllister,Lower Merion,SR,
 1942,single,127,1,11,Howard Unangst,Bethlehem Liberty,JR,
-1942,single,127,1,7,Francis Pastor,Greensburg,SR,
+1942,single,127,1,7,Francis Pastor,Greensburg Salem,SR,
 1942,single,127,1,5,Robert Horner,Boswell,JR,
 1942,single,127,1,2,Vincent Finan,Kingston,SO,
 1942,single,127,1,4,Byron Dugan,Muncy,SR,10-0
@@ -419,7 +419,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1942,single,185,1,10,Gabriel Pruent,Farrell,SR,
 1943,single,95,1,5,Eugene Naugle,Conemaugh Township,JR,
 1943,single,95,1,9,Bill Thomson,Clearfield,SO,12-2
-1943,single,95,1,7,Charles Barno,Jefferson,FR,
+1943,single,95,1,7,Charles Barno,Jefferson-Morgan,FR,
 1943,single,95,1,4,George Mowery,Mount Carmel,JR,
 1943,single,95,1,2,Leonard Bhaerman,Forty Fort,SO,
 1943,single,95,1,10,Darrell Atwell,Grove City,SO,
@@ -627,7 +627,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1945,single,145,1,2,George Mooney,Kingston,JR,
 1945,single,145,1,10,Ted Savchuk,Greenville,JR,
 1945,single,145,1,5,Don Jones,Boswell,JR,
-1945,single,145,1,7,Joe Yourchick,Jefferson,SO,
+1945,single,145,1,7,Joe Yourchick,Jefferson-Morgan,SO,
 1945,single,145,1,3,Henry Shaub,J.P. McCaskey,SR,
 1945,single,145,1,1,Laird Robertson,Haverford High,SR,
 1945,single,145,1,11,Charles Szvetecz,Bethlehem Liberty,SR,
@@ -847,7 +847,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1948,single,95,1,3,Harold Gillespie,J.P. McCaskey,SR,
 1948,single,95,1,5,Donald (Peewee) Jones,Bedford,SO,
 1948,single,95,1,6,Tom Riglin,Bellefonte,SO,
-1948,single,95,1,7,Enrico Nobile,Greensburg,JR,
+1948,single,95,1,7,Enrico Nobile,Greensburg Salem,JR,
 1948,single,95,1,2,Donald Stubblebine,Plymouth,FR,
 1948,single,95,1,4,Charles Cawthorn,Shamokin,FR,
 1948,single,95,1,10,Art Grazier,Erie Strong Vincent,SO,
@@ -1090,7 +1090,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1950,single,133,1,11,Donald Palmer,Bethlehem Liberty,SR,
 1950,single,133,1,10,Norman Lenkner,Greenville,SR,
 1950,single,133,1,6,Larry Fornicola,Bellefonte,JR,
-1950,single,133,1,7,Vernon Cottle,Jefferson,SR,
+1950,single,133,1,7,Vernon Cottle,Jefferson-Morgan,SR,
 1950,single,133,1,3,Bill Foreman,Hanover,JR,
 1950,single,138,1,9,Jerry Maurey,Clearfield,SR,13-0
 1950,single,138,1,3,Don Fasnacht,Hershey,SR,
@@ -1130,7 +1130,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1950,single,165,1,2,Bob Masonis,Kingston,JR,
 1950,single,185,1,4,Jim Kopenhaver,Shamokin,JR,
 1950,single,185,1,3,Earl Hartlaub,Hanover,SR,
-1950,single,185,1,10,Dick (Moose) Passerotti,East,JR,
+1950,single,185,1,10,Dick (Moose) Passerotti,Erie East,JR,
 1950,single,185,1,6,Elwood Reese,Tyrone,SR,
 1950,single,185,1,11,William Houser,Allentown,SR,
 1950,single,185,1,2,Mike Ternowski,Kingston,SR,
@@ -1178,7 +1178,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1951,single,165,1,NE,Dean Rissmiller,Nazareth,SO,
 1951,single,185,1,CNW,Rudolph (Rudy) Gaston,Blairsville,SR,
 1951,single,185,1,SE,Ken Ober,Manheim Borough,SR,
-1951,single,185,1,SW,Bill Hoffman,Greensburg,SR,
+1951,single,185,1,SW,Bill Hoffman,Greensburg Salem,SR,
 1951,single,185,1,NE,Jim Eshbach,Williamsport,SR,
 1952,single,95,1,CNW,Tom Seiple,Greenville,JR,
 1952,single,95,1,SW,Charles Pryor,Washington,FR,
@@ -1266,7 +1266,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1953,single,165,1,SW,Joe Thomas,Chartiers Township,SR,
 1953,single,185,1,NE,Ormond Long,Elmer L. Meyers,SR,
 1953,single,185,1,SE,Galen Kemble,Hershey,JR,
-1953,single,185,1,CNW,Dan Wisniewski,East,SR,
+1953,single,185,1,CNW,Dan Wisniewski,Erie East,SR,
 1953,single,185,1,SW,Harold McElhaney,Burgettstown,SR,
 1954,single,95,1,SE,Charles Pistorio,Upper Darby,JR,
 1954,single,95,1,CNW,Ed Cunningham,Indiana,SO,
@@ -1899,13 +1899,13 @@ year,cls,weight,seed,region,name,school,grade,record
 1967,single,145,1,CNW,Jim Gollner,Reynolds,SR,20-0-1
 1967,single,154,1,SE,Larry Nolen,Cumberland Valley,SR,17-0
 1967,single,154,1,SW,Bill Brunofsky,Waynesburg Central,SR,22-0
-1967,single,154,1,CNW,Eddie Carr,East,SR,23-0
+1967,single,154,1,CNW,Eddie Carr,Erie East,SR,23-0
 1967,single,154,1,NE,Richard Ceccoli,Forty Fort,SR,15-0
 1967,single,165,1,SW,Ted Swisher,Mount Lebanon,SR,17-1
 1967,single,165,1,CNW,Jim Torsell,Bellefonte,SR,22-0
 1967,single,165,1,NE,John Pontius,Mifflinburg,SR,21-2-1
 1967,single,165,1,SE,Bill Landis,Hershey,SR,18-0
-1967,single,180,1,CNW,Fletcher Carr,East,JR,21-1
+1967,single,180,1,CNW,Fletcher Carr,Erie East,JR,21-1
 1967,single,180,1,SW,Terry Claypool,Kittanning,JR,19-3
 1967,single,180,1,NE,Geoff Baum,Allentown Allen,SR,19-0
 1967,single,180,1,SE,Ed Wilson,Lansdowne-Aldan,SR,22-0
@@ -1953,7 +1953,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1968,single,165,1,NE,Joe McAndrew,North Schuylkill,JR,24-0
 1968,single,165,1,SE,Bruce Jones,Newport,JR,21-0
 1968,single,165,1,SW,Jim Fleming,Mount Lebanon,SR,21-0
-1968,single,180,1,CNW,Fletcher Carr,East,SR,23-1
+1968,single,180,1,CNW,Fletcher Carr,Erie East,SR,23-1
 1968,single,180,1,SE,Mike Loercher,Manheim Central,SR,24-0
 1968,single,180,1,NE,Danny Newhard,Allentown Dieruff,JR,22-1
 1968,single,180,1,SW,Terry Claypool,Kittanning,SR,21-1
@@ -2003,7 +2003,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1969,single,165,1,SE,Bruce Jones,Newport,SR,22-0-1
 1969,single,180,1,NE,Scott Moyer,Mifflinburg,SR,25-0
 1969,single,180,1,SE,Ken Kauffman,Manheim Township,SR,21-2-1
-1969,single,180,1,CNW,Woodrow (Woody) Thompson,East,SO,20-1
+1969,single,180,1,CNW,Woodrow (Woody) Thompson,Erie East,SO,20-1
 1969,single,180,1,SW,Rodney Smith,Mount Lebanon,SR,23-0
 1969,single,250,1,NE,Joel Kislin,GAR Memorial,SR,16-3
 1969,single,250,1,SW,Jim Caramanna,Mount Lebanon,SR,21-2
@@ -2101,7 +2101,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1971,single,180,1,SE,Rich Acierno,Springfield Township,SR,23-0
 1971,single,180,1,CNW,Larry Suhey,State College,JR,20-1
 1971,single,180,1,NE,Scott Barker,Allentown Allen,SR,19-0
-1971,single,250,1,CNW,Woodrow (Woody) Thompson,East,SR,21-0
+1971,single,250,1,CNW,Woodrow (Woody) Thompson,Erie East,SR,21-0
 1971,single,250,1,SE,Bill Snyder,Susquenita,SR,20-1
 1971,single,250,1,SW,George Reihner,Washington,SO,19-5
 1971,single,250,1,NE,George Barkanic,Lehighton,JR,24-0
@@ -2177,7 +2177,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1973,single,112,2,SE,Brad Warner,Dallastown,JR,22-2-1
 1973,single,112,1,SW,Keith Nellis,Shaler,SR,23-1
 1973,single,112,2,NE,Don Adams,Line Mountain,JR,21-2
-1973,single,119,1,CNW,Jim Carr,East,JR,23-0
+1973,single,119,1,CNW,Jim Carr,Erie East,JR,23-0
 1973,single,119,2,SW,Mike Kerr,Wilkinsburg,SR,21-1
 1973,single,119,1,NE,Dennis Ryder,Hughesville,JR,23-1
 1973,single,119,2,SE,Dan Bedesem,Council Rock,JR,22-2-1
@@ -2428,7 +2428,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1974,AAA,250,3,SE,Tino DiMarco,Conestoga,JR,19-4
 1974,AAA,250,1,NE,Lynn Morris,Nazareth,SR,23-0-1
 1974,AAA,250,4,SW,Bill Calcek,Charleroi,SR,21-3
-1974,AAA,250,2,NW,Bob Dixon,East,JR,22-1
+1974,AAA,250,2,NW,Bob Dixon,Erie East,JR,22-1
 1974,AAA,250,2,SW,Jeff Cully,North Allegheny,SR,19-4
 1974,AAA,250,1,SE,Karl Frederick,Upper Moreland,SR,23-1
 1974,AAA,250,2,SC,Bob Bickelman,Lebanon,JR,20-1
@@ -3169,7 +3169,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1976,AA,167,2,NW,Tim Yale,Ridgway,SR,23-5-1
 1976,AA,167,3,SE,Randy Brown,Southern Lehigh,SR,20-4
 1976,AA,167,1,SC,Warren Robertson,Littlestown,JR,24-0-1
-1976,AA,167,1,NW,Rodney Harner,Bellwood Antis,SR,20-2-2
+1976,AA,167,1,NW,Rodney Harner,Bellwood-Antis,SR,20-2-2
 1976,AA,167,4,NE,Reed Moyer,Mifflinburg,SR,17-5
 1976,AA,167,1,SW,Joe Zombeck,Fort Cherry,JR,17-0
 1976,AA,167,4,NW,Norm Sollenberger,Northern Bedford,SR,19-5
@@ -3749,7 +3749,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1977,AAA,167,2,NE,Butch Snyder,Shikellamy,SR,20-3
 1977,AAA,167,3,SC,Dave Lehman,Palmyra,SR,23-5
 1977,AAA,167,2,SW,Jay Best,Mount Lebanon,SR,11-2-1
-1977,AAA,167,2,NW,Oliver (Boomer) Bryant,East,SR,12-5
+1977,AAA,167,2,NW,Oliver (Boomer) Bryant,Erie East,SR,12-5
 1977,AAA,167,3,SE,Dave Armstrong,Central Bucks West,JR,25-3
 1977,AAA,167,1,SC,Bruce Landis,Penn Manor,SR,24-0
 1977,AAA,185,3,SE,John Dannaker,Conestoga,JR,20-6-2
@@ -4201,7 +4201,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1979,AA,105,2,NW,John Baker,North Star,JR,19-1
 1979,AA,105,3,SC,Vinnie Desiderio,Brandywine Heights,JR,25-2-1
 1979,AA,112,1,SE,Dennis Andrews,Notre Dame-GP,SR,17-0
-1979,AA,112,3,NW,Ron Wilson,Bellwood Antis,SO,28-3
+1979,AA,112,3,NW,Ron Wilson,Bellwood-Antis,SO,28-3
 1979,AA,112,1,SW,Rich Bongiorini,Burgettstown,SR,26-0
 1979,AA,112,4,NE,Trace Nevil,Central Columbia,SO,24-11
 1979,AA,112,1,NW,Dave Pick,Bald Eagle Nittany,JR,27-1
@@ -4604,7 +4604,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1980,AA,119,3,SE,Dan Boyer,Bangor,JR,25-4-1
 1980,AA,119,1,SW,Joe Throckmorton,Waynesburg Central,SR,26-0
 1980,AA,119,3,NW,Jeff Musser,Commodore Perry,SR,29-6
-1980,AA,119,1,NW,Ron Wilson,Bellwood Antis,JR,29-1
+1980,AA,119,1,NW,Ron Wilson,Bellwood-Antis,JR,29-1
 1980,AA,119,4,NE,Tony Agnoni,Liberty,SR,26-4-1
 1980,AA,119,2,SC,Zeb Brown,Juniata,JR,22-2
 1980,AA,119,2,SE,Tom McHugh,Jenkintown,SR,20-1
@@ -5002,7 +5002,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1981,AA,119,3,NE,Bob Johnson,Athens,SR,33-5
 1981,AA,126,1,SC,Neal Barrick,Susquenita,SR,25-2
 1981,AA,126,3,SE,Kevin Coleman,Salisbury Township,SR,21-3
-1981,AA,126,1,NW,Ron Wilson,Bellwood Antis,SR,28-0
+1981,AA,126,1,NW,Ron Wilson,Bellwood-Antis,SR,28-0
 1981,AA,126,4,NE,Don Fausnaught,Danville,SR,15-5-1
 1981,AA,126,1,SE,Dan Stout,East Stroudsburg,SR,26-1
 1981,AA,126,4,NW,Jeff Payne,Fort LeBoeuf,SR,32-3
@@ -5751,7 +5751,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1983,AA,112,1,NE,Dave Kennedy,Athens,SO,39-1
 1983,AA,112,3,SC,Chris Bilbie,Susquehannock,JR,30-1
 1983,AA,112,2,SE,Pat Papay,Palmerton,JR,23-3-2
-1983,AA,112,3,NW,Tracey Karlie,Bellwood Antis,JR,30-3
+1983,AA,112,3,NW,Tracey Karlie,Bellwood-Antis,JR,30-3
 1983,AA,119,1,NE,Rob Meloy,Danville,JR,36-3
 1983,AA,119,4,NW,Steve Valenti,Smethport,SO,24-6
 1983,AA,119,1,SE,Kent Lane,North Schuylkill,SR,32-3
@@ -5791,7 +5791,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1983,AA,132,1,SE,Greg Roscioli,Wilson Area,SR,22-10
 1983,AA,132,3,NE,Wayne Rosencrans,Lake Lehman,JR,38-6
 1983,AA,132,2,SW,Adrian Turner,Burgettstown,SR,22-4-1
-1983,AA,132,2,NW,Dan Himes,Bellwood Antis,SR,29-4
+1983,AA,132,2,NW,Dan Himes,Bellwood-Antis,SR,29-4
 1983,AA,132,1,SW,Jeff Fraizer,Washington,SR,29-4
 1983,AA,132,4,NW,Chris Link,Reynolds,JR,24-7
 1983,AA,132,2,SC,Todd Wilkerson,Susquehanna Township,SR,26-5
@@ -6133,7 +6133,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1984,AA,112,2,SW,Mike D'Alessandro,Washington,SR,22-6
 1984,AA,112,2,SE,Troy Handlovic,Wilson Area,SR,23-5-1
 1984,AA,112,1,SC,Rich Williams,Susquenita,JR,28-1
-1984,AA,112,3,NW,Tracey Karlie,Bellwood Antis,SR,30-1-1
+1984,AA,112,3,NW,Tracey Karlie,Bellwood-Antis,SR,30-1-1
 1984,AA,112,2,NE,Rich Merlo,Mount Carmel,JR,26-5
 1984,AA,112,3,SE,Gentry Brownie,Pottstown,SO,19-6-2
 1984,AA,119,1,SW,Marc Bartolomucci,Beth-Center,SR,36-0
@@ -6989,7 +6989,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1986,AA,155,1,SC,Brian Fisher,Susquenita,SR,26-2
 1986,AA,155,4,NE,Mike Curtis,Western Wayne,SR,21-4
 1986,AA,155,1,NE,Paul Keysaw,Athens,SR,25-0
-1986,AA,155,4,NW,Adam Claar,Bellwood Antis,SR,29-4
+1986,AA,155,4,NW,Adam Claar,Bellwood-Antis,SR,29-4
 1986,AA,155,2,SE,Rob Miller,Palisades,SR,26-5-1
 1986,AA,155,2,SW,Ed Bergman,German Township,SR,14-4
 1986,AA,155,1,SE,Frank Zelinsky,Palmerton,JR,28-1
@@ -9407,7 +9407,7 @@ year,cls,weight,seed,region,name,school,grade,record
 1992,AA,160,2,SW,Paul Donovan,Sewickley Academy,SR,30-1
 1992,AA,160,2,NW,Tim Hollobaugh,Brookville,SR,25-2
 1992,AA,160,1,SW,Rick Vettorell,Avella,SR,23-8
-1992,AA,160,4,NW,Karl Montanaro,Bellwood Antis,SR,23-7
+1992,AA,160,4,NW,Karl Montanaro,Bellwood-Antis,SR,23-7
 1992,AA,160,2,SC,Kyle Follweiler,Kutztown,SR,28-1-1
 1992,AA,160,2,NE,Kirby Ellis,Towanda,SR,29-4-1
 1992,AA,160,1,NW,Mike Scott,Hickory,SR,33-1
@@ -17893,7 +17893,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2012,AA,120,4,SE,Sam Oberlander,Palmerton,SR,37-5
 2012,AA,120,3,SW,Nathan Reckner,South Side Beaver,JR,38-5
 2012,AA,120,2,NE,Logan Everett,Williamson,JR,33-3
-2012,AA,120,2,SW,Jared Woomer,Bellwood Antis,SR,30-2
+2012,AA,120,2,SW,Jared Woomer,Bellwood-Antis,SR,30-2
 2012,AA,120,3,NE,Kent Lane,Southern Columbia,FR,32-4
 2012,AA,120,5,SW,Jason Miller,Jefferson-Morgan,SO,41-9
 2012,AA,120,1,SE,Zeke Moisey,Bethlehem Catholic,SO,26-3
@@ -21668,7 +21668,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2019,AA,195,5,SW,Jonathan Vargo,Bentworth,SR,26-6
 2019,AA,195,1,SW,Kolby Franklin,St. Joseph's Academy,FR,41-5
 2019,AA,195,4,SE,Ben Weidenhammer,Hamburg,SR,33-11
-2019,AA,195,6,SW,Trentin Whaley,Bellwood Antis,SR,23-11
+2019,AA,195,6,SW,Trentin Whaley,Bellwood-Antis,SR,23-11
 2019,AA,195,3,NW,Eric Johnson,Brockway,JR,32-7
 2019,AA,195,2,NE,Gable Crebs,Montoursville,SR,31-6
 2019,AA,195,2,NW,Austin Kelly,Conneaut Area,SR,27-16
@@ -22162,7 +22162,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2020,AA,160,2,SE,Max Delaye,Camp Hill,JR,31-4
 2020,AA,160,3,NE,Isaac Cory,Montoursville,SO,39-10
 2020,AA,160,1,NW,Gage Musser,Commodore Perry,JR,33-2
-2020,AA,160,4,SW,Alex Taylor,Bellwood Antis,JR,31-8
+2020,AA,160,4,SW,Alex Taylor,Bellwood-Antis,JR,31-8
 2020,AA,160,6,SE,Tate Neiderer,Delone Catholic,JR,30-11
 2020,AA,160,1,NE,Nolan Lear,Benton,SO,32-1
 2020,AA,160,4,SE,Tyler Wonders,West Perry,JR,32-5
@@ -22254,7 +22254,7 @@ year,cls,weight,seed,region,name,school,grade,record
 2020,AA,220,4,SW,David Close,Bald Eagle Area,SR,31-11
 2020,AA,220,6,SE,Joe Tinari,North Schuylkill,SR,28-14
 2020,AA,285,1,NW,Colby Whitehill,Brookville,SR,36-0
-2020,AA,285,5,SW,Evan Pellegrine,Bellwood Antis,SR,30-7
+2020,AA,285,5,SW,Evan Pellegrine,Bellwood-Antis,SR,30-7
 2020,AA,285,4,SE,Joshua Schaffer,Northern Lehigh,JR,28-11
 2020,AA,285,3,SW,Riley Kemper,Burgettstown,SR,41-3
 2020,AA,285,2,NE,Emmanuel Ulrich,Mifflinburg,FR,32-9

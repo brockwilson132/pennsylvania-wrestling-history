@@ -9,14 +9,14 @@ year,cls,weight,place,name,grade,school
 1938,single,115,2,Andy (Pooch) Puchany,JR,Canonsburg
 1938,single,125,1,Joe Quethera,SR,Clearfield
 1938,single,125,2,Don Atwell,SR,Grove City
-1938,single,135,1,John Metzler,SR,Greensburg
+1938,single,135,1,John Metzler,SR,Greensburg Salem
 1938,single,135,2,William Unangst,SO,Bethlehem Liberty
 1938,single,145,1,Harold Welker,SR,Shamokin
 1938,single,145,2,Angelo Carmella,JR,DuBois
 1938,single,155,1,Dick DiBatista,SR,Lower Merion
 1938,single,155,2,Cletus (Junior) Gentzler,SR,West York
 1938,single,165,1,Dick Brenneman,SR,Pottsville
-1938,single,165,2,Robert (Don) Bitler,SR,Greensburg
+1938,single,165,2,Robert (Don) Bitler,SR,Greensburg Salem
 1938,single,185,1,Phil (Hubby) Ahwesh,SR,Canonsburg
 1938,single,185,2,Charles Horvath,JR,Bethlehem Liberty
 1939,single,85,1,Ray (Bucky) Murdock,JR,Waynesburg Central
@@ -297,7 +297,7 @@ year,cls,weight,place,name,grade,school
 1951,single,154,2,Joe Solomon,SR,Canonsburg
 1951,single,165,1,Bob Good,SR,Philipsburg
 1951,single,165,2,Alex (Bosko) Skirpan,JR,Carnegie
-1951,single,185,1,Bill Hoffman,SR,Greensburg
+1951,single,185,1,Bill Hoffman,SR,Greensburg Salem
 1951,single,185,2,Rudolph (Rudy) Gaston,SR,Blairsville
 1952,single,95,1,Tom Seiple,JR,Greenville
 1952,single,95,2,Dan Zikowski,SO,Kingston
@@ -342,7 +342,7 @@ year,cls,weight,place,name,grade,school
 1953,single,165,1,Bill Thomas,SR,Tyrone
 1953,single,165,2,Bill Evelhair,SR,Hughesville
 1953,single,185,1,Ormond Long,SR,Elmer L. Meyers
-1953,single,185,2,Dan Wisniewski,SR,East
+1953,single,185,2,Dan Wisniewski,SR,Erie East
 1954,single,95,1,Bill Bane,JR,Trinity
 1954,single,95,2,Charles Pistorio,JR,Upper Darby
 1954,single,103,1,Francis Adams,SR,Chartiers Township
@@ -660,11 +660,11 @@ year,cls,weight,place,name,grade,school
 1967,single,145,1,Jim Gollner,SR,Reynolds
 1967,single,145,2,Dave Cook,SR,Chartiers-Houston
 1967,single,154,1,Bill Brunofsky,SR,Waynesburg Central
-1967,single,154,2,Eddie Carr,SR,East
+1967,single,154,2,Eddie Carr,SR,Erie East
 1967,single,165,1,Ted Swisher,SR,Mount Lebanon
 1967,single,165,2,John Pontius,SR,Mifflinburg
 1967,single,180,1,Geoff Baum,SR,Allentown Allen
-1967,single,180,2,Fletcher Carr,JR,East
+1967,single,180,2,Fletcher Carr,JR,Erie East
 1967,single,250,1,Dave Joyner,SR,State College
 1967,single,250,2,Ralph Cindrich,SR,Avella
 1968,single,95,1,Joey Bordell,SR,Shamokin
@@ -688,7 +688,7 @@ year,cls,weight,place,name,grade,school
 1968,single,165,1,Lewis Craig,SR,Bald Eagle Area
 1968,single,165,2,Jim Fleming,SR,Mount Lebanon
 1968,single,180,1,Danny Newhard,JR,Allentown Dieruff
-1968,single,180,2,Fletcher Carr,SR,East
+1968,single,180,2,Fletcher Carr,SR,Erie East
 1968,single,250,1,Karl Ginder,JR,Manheim Central
 1968,single,250,2,Charles Chulada,JR,James M. Coughlin
 1969,single,95,1,Tom Teagarden,SO,McGuffey
@@ -761,7 +761,7 @@ year,cls,weight,place,name,grade,school
 1971,single,165,2,Tim Barrett,SR,Conestoga
 1971,single,180,1,Larry Suhey,JR,State College
 1971,single,180,2,Don Dallatore,SR,Trinity
-1971,single,250,1,Woodrow (Woody) Thompson,,East
+1971,single,250,1,Woodrow (Woody) Thompson,,Erie East
 1971,single,250,2,George Barkanic,JR,Lehighton
 1972,single,95,1,Paul Packer,JR,Bald Eagle Area
 1972,single,95,2,Denny Zuk,JR,Carlynton
@@ -799,7 +799,7 @@ year,cls,weight,place,name,grade,school
 1973,single,112,2,Mike Zito,SO,Bethlehem Freedom
 1973,single,112,3,Tom Turnbull,SR,Iroquois
 1973,single,112,4,Eric Mast,SR,Mechanicsburg
-1973,single,119,1,Jim Carr,JR,East
+1973,single,119,1,Jim Carr,JR,Erie East
 1973,single,119,2,Larry Kepp,JR,Central Dauphin East
 1973,single,119,3,David Longmore,SR,Dallas
 1973,single,119,4,Dennis Ryder,JR,Hughesville
@@ -1484,7 +1484,7 @@ year,cls,weight,place,name,grade,school
 1981,AA,119,5,Ray Barrick,SR,Susquenita
 1981,AA,119,6,John Lis,SR,Burgettstown
 1981,AA,126,1,Tom Wilt,JR,Washington
-1981,AA,126,2,Ron Wilson,SR,Bellwood Antis
+1981,AA,126,2,Ron Wilson,SR,Bellwood-Antis
 1981,AA,126,3,Larry Blankenship,SR,Kane
 1981,AA,126,4,Dan Stout,SR,East Stroudsburg
 1981,AA,126,5,Trace Nevil,SR,Central Columbia
@@ -1905,7 +1905,7 @@ year,cls,weight,place,name,grade,school
 1984,AA,105,6,Larry Knopsnyder,SR,Berlin Brothersvalley
 1984,AA,112,1,Troy Handlovic,SR,Wilson Area
 1984,AA,112,2,Jeff Husick,SR,Tussey Mountain
-1984,AA,112,3,Tracey Karlie,SR,Bellwood Antis
+1984,AA,112,3,Tracey Karlie,SR,Bellwood-Antis
 1984,AA,112,4,Larry Rehrig,SO,Northern Lehigh
 1984,AA,112,5,Dave Kennedy,JR,Athens
 1984,AA,112,6,Rich Merlo,JR,Mount Carmel

@@ -131,7 +131,7 @@ def removals(s, p):
 
 
 # one school printed under two names (not a parse garble: a spelling the archive uses): the name the app files it under
-SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Bethlehem-Center', 'Canon-McMillion': 'Canon-McMillan',
+SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bethelhem-Center': 'Beth-Center', 'Canon-McMillion': 'Canon-McMillan',
                # short forms and the district tag some seasons print: one school each, so the state entry and the district
                # entry of the same season land on one lineup (Bishop McDevitt 2024 had its state qualifiers and its
                # district-only wrestlers on two school seasons). Bishop McDevitt (12), Wyncote, is another school.

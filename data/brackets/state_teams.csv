@@ -64,7 +64,7 @@ year,cls,place,pts,school,abbr
 1976,AA,51,2.0,Smithfield-Ridgebury-Ulster,SRU
 1976,AA,51,2.0,Tri-Valley,TV
 1976,AA,51,2.0,York Catholic,YRKC
-1976,AA,66,0.0,Bellwood Antis,BA
+1976,AA,66,0.0,Bellwood-Antis,BA
 1976,AA,66,0.0,Bermudian Springs,BES
 1976,AA,66,0.0,Biglerville,BGV
 1976,AA,66,0.0,Clarion,CLR
@@ -369,7 +369,7 @@ year,cls,place,pts,school,abbr
 1977,AAA,48,2.0,Chartiers Valley,CHV
 1977,AAA,48,2.0,Cumberland Valley,CUV
 1977,AAA,48,2.0,DuBois,DUB
-1977,AAA,48,2.0,East,EAST
+1977,AAA,48,2.0,Erie East,EAST
 1977,AAA,48,2.0,Elmer L. Meyers,ELM
 1977,AAA,48,2.0,Great Valley,GRTV
 1977,AAA,48,2.0,Hempfield Area,HMPA
@@ -696,7 +696,7 @@ year,cls,place,pts,school,abbr
 1979,AA,47,3.0,Saegertown,SGT
 1979,AA,47,3.0,United,UNTD
 1979,AA,47,3.0,Western Wayne,WW
-1979,AA,50,2.0,Bellwood Antis,BA
+1979,AA,50,2.0,Bellwood-Antis,BA
 1979,AA,50,2.0,Brockway,BRWY
 1979,AA,50,2.0,Catasauqua,CAT
 1979,AA,50,2.0,Cocalico,COC
@@ -927,7 +927,7 @@ year,cls,place,pts,school,abbr
 1980,AA,52,3.0,Athens,ATH
 1980,AA,52,3.0,Delaware Valley,DEV
 1980,AA,52,3.0,Williamson,WLMS
-1980,AA,55,2.0,Bellwood Antis,BA
+1980,AA,55,2.0,Bellwood-Antis,BA
 1980,AA,55,2.0,Bucktail,BUCK
 1980,AA,55,2.0,Burgettstown,BGT
 1980,AA,55,2.0,East Stroudsburg,ESDB
@@ -1116,7 +1116,7 @@ year,cls,place,pts,school,abbr
 1981,AA,17,20.0,Blairsville,BLV
 1981,AA,19,18.5,Hamburg,HMB
 1981,AA,19,18.5,Ridgway,RGW
-1981,AA,21,18.0,Bellwood Antis,BA
+1981,AA,21,18.0,Bellwood-Antis,BA
 1981,AA,21,18.0,Conemaugh Valley,CMVY
 1981,AA,21,18.0,New Oxford,NO
 1981,AA,21,18.0,Northern York,NY
@@ -1585,7 +1585,7 @@ year,cls,place,pts,school,abbr
 1983,AA,66,0.0,Aliquippa,ALQP
 1983,AA,66,0.0,Avella,AVL
 1983,AA,66,0.0,Avonworth,AVW
-1983,AA,66,0.0,Bellwood Antis,BA
+1983,AA,66,0.0,Bellwood-Antis,BA
 1983,AA,66,0.0,Benton,BNT
 1983,AA,66,0.0,Bermudian Springs,BES
 1983,AA,66,0.0,Bishop Hoban,BHB
@@ -1784,7 +1784,7 @@ year,cls,place,pts,school,abbr
 1984,AA,35,14.0,Mapletown,MPT
 1984,AA,35,14.0,Milton Hershey,MH
 1984,AA,35,14.0,Moshannon Valley,MSV
-1984,AA,39,13.0,Bellwood Antis,BA
+1984,AA,39,13.0,Bellwood-Antis,BA
 1984,AA,39,13.0,Jeannette,JNT
 1984,AA,41,12.5,Chief Logan,CFLG
 1984,AA,42,12.0,Kane,KANE
@@ -2267,7 +2267,7 @@ year,cls,place,pts,school,abbr
 1986,AA,61,2.0,Reynolds,REY
 1986,AA,61,2.0,South Williamsport,SWLP
 1986,AA,61,2.0,Tussey Mountain,TM
-1986,AA,68,0.0,Bellwood Antis,BA
+1986,AA,68,0.0,Bellwood-Antis,BA
 1986,AA,68,0.0,Biglerville,BGV
 1986,AA,68,0.0,Bishop Hoban,BHB
 1986,AA,68,0.0,Bloomsburg,BLM
@@ -3613,7 +3613,7 @@ year,cls,place,pts,school,abbr
 1992,AA,93,1.0,Salisbury Township,SBT
 1992,AA,93,1.0,Twin Valley,TWV
 1992,AA,93,1.0,West Greene,WG
-1992,AA,97,0.0,Bellwood Antis,BA
+1992,AA,97,0.0,Bellwood-Antis,BA
 1992,AA,97,0.0,Bishop O'Hara,BOH
 1992,AA,97,0.0,Burrell,BUR
 1992,AA,97,0.0,Carmichaels,CRML
@@ -8094,7 +8094,7 @@ year,cls,place,pts,school,abbr
 2012,AA,85,2.0,Wyoming Area,WYMA
 2012,AA,85,2.0,Wyomissing,WYO
 2012,AA,96,1.0,Avella,AVL
-2012,AA,96,1.0,Bellwood Antis,BA
+2012,AA,96,1.0,Bellwood-Antis,BA
 2012,AA,96,1.0,Halifax,HLF
 2012,AA,96,1.0,Lancaster Catholic,LCC
 2012,AA,96,1.0,Montgomery,MTG
@@ -9818,7 +9818,7 @@ year,cls,place,pts,school,abbr
 2019,AA,85,4.0,Allentown CC,ACC
 2019,AA,85,4.0,Annville-Cleona,AC
 2019,AA,85,4.0,Bald Eagle Area,BEA
-2019,AA,85,4.0,Bellwood Antis,BA
+2019,AA,85,4.0,Bellwood-Antis,BA
 2019,AA,85,4.0,Coudersport,CDP
 2019,AA,85,4.0,Faith Christian Academy,FCA
 2019,AA,85,4.0,Montrose,MTR
@@ -10047,7 +10047,7 @@ year,cls,place,pts,school,abbr
 2020,AA,47,14.0,Commodore Perry,CP
 2020,AA,47,14.0,East Pennsboro,EP
 2020,AA,47,14.0,Trinity,TRN
-2020,AA,50,13.5,Bellwood Antis,BA
+2020,AA,50,13.5,Bellwood-Antis,BA
 2020,AA,51,13.0,Seneca,SEN
 2020,AA,52,12.5,Hickory,HCK
 2020,AA,53,12.0,Brandywine Heights,BH
