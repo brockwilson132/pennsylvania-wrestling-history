@@ -155,6 +155,8 @@
     note: '<path d="M5 4 H15 L19 8 V20 H5 Z M15 4 V8 H19 M8 12 H16 M8 16 H13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
     noted: '<path d="M5 4 H15 L19 8 V20 H5 Z" fill="currentColor"/><path d="M8 12 H16 M8 16 H13" stroke="#0B0D10" stroke-width="1.9" stroke-linecap="round"/>',
     clock: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 7.5 V12 L15 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
+    shield: '<path d="M12 3 L19.5 6 V11.5 C19.5 16 16.3 19.4 12 21 C7.7 19.4 4.5 16 4.5 11.5 V6 Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>',
+    link: '<path d="M10 14 L14 10 M8.5 11.5 L6.5 13.5 A3.5 3.5 0 0 0 11.5 18.5 L13.5 16.5 M15.5 12.5 L17.5 10.5 A3.5 3.5 0 0 0 12.5 5.5 L10.5 7.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
     search: '<circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16 L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     warn: '<path d="M12 3 L22 20 H2 Z" fill="currentColor" opacity=".18"/><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9 V14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/>',
   };
@@ -178,12 +180,25 @@
   /* the colour sheet for one school: its tag at every size, the saved sets to pick from (or none), and its own fill,
      dot and text. Editing colours never changes another school: a set shared with others is copied for this one first. */
   const colOf = (s) => { const id = doc.schools[s]; if (id && doc.sets[id]) return doc.sets[id]; const p = T.paint(s, doc); return [p.fill, p.acc, p.ink]; };
+  /* schools whose names look like this one (one name inside the other, or a shared uncommon word, or a badge alias):
+     the candidates for "same school, different name" notes */
+  const STOP = new Set('high school area regional senior junior jr sr township twp catholic central north south east west valley mount mountain mt saint st county academy joint memorial christian prep the of and hs upper lower new city borough'.split(' '));
+  const ALL = [...new Set([...UD.schools, ...Object.keys(window.OT_COLORS ? window.OT_COLORS.schools : {})])];
+  const words = (n) => n.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w.length >= 4 && !STOP.has(w));
+  const WIX = new Map(); ALL.forEach((n) => words(n).forEach((w) => (WIX.get(w) || WIX.set(w, []).get(w)).push(n)));
+  const aliases = (n) => { const id = window.SchoolBadge && window.SchoolBadge.identity(n); return id ? [id.school].concat(id.aliases || []).map((a) => a.toLowerCase()) : []; };
+  function similar(n) {
+    const lo = n.toLowerCase(), al = aliases(n), out = new Map();
+    ALL.forEach((m) => { if (m === n) return; const ml = m.toLowerCase(); if (ml.includes(lo) || lo.includes(ml) || al.includes(ml)) out.set(m, 0); });
+    words(n).forEach((w) => { const L = WIX.get(w) || []; if (L.length <= 6) L.forEach((m) => { if (m !== n && !out.has(m)) out.set(m, 1); }); });
+    return [...out].sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])).slice(0, 6).map((x) => x[0]);
+  }
   const used = (id) => { ui.recent = [id].concat(ui.recent.filter((x) => x !== id)).slice(0, 6); ls.set('ot-colors-recent', J(ui.recent)); };
   /* the next or previous school in the list as it was when the picker opened */
   const step = (dir) => { const i = ui.seq.indexOf(ui.pick), n = ui.seq[i + dir]; if (n) { ui.pick = n; ui.focus = n; ui.add = false; ui.del = false; draw(); } };
   function sheet(s) {
     const at = ui.seq.indexOf(s), prev = at > 0, next = at >= 0 && at < ui.seq.length - 1, dd = DIST.get(s);
-    const nav = `<div class="ce-nav"><button class="ce-ib" data-prev aria-label="Previous school"${prev ? '' : ' disabled'}>${svg('back')}</button><span class="ce-meta">${dd ? `<b>${dd[1]}</b>` : ''}${rangeOf(s)}</span><button class="ce-ib ce-fw" data-next aria-label="Next school"${next ? '' : ' disabled'}>${svg('back')}</button></div>`;
+    const nav = `<div class="ce-nav"><button class="ce-ib" data-prev aria-label="Previous school"${prev ? '' : ' disabled'}>${svg('back')}</button><span class="ce-meta">${dd ? `<b>${dd[1]}</b>` : ''}${rangeOf(s)}</span><button class="ce-ib${notes[s] ? ' ce-on' : ''}" data-pnote aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button><button class="ce-ib ce-fw" data-next aria-label="Next school"${next ? '' : ' disabled'}>${svg('back')}</button></div>`;
     const id = doc.schools[s], p = T.paint(s, doc), c = colOf(s), cur = c[ui.part], none = !id && p.none;
     const low = !none && T.contrast(c[0], c[2]) < T.READS;
     const pv = `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(s.length, 1))))}px"><span class="ce-pvb">${pill(s, p)}</span><span class="ce-pvs">${pill(s, p)}${pill(abbr(s), p, 'ab')}${pill(abbr(s), p, 'ab xs')}</span></div>`;
@@ -199,8 +214,12 @@
     const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && !none && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
       <button class="ce-sw ce-tool" data-swadd aria-pressed="${ui.add}" aria-label="Add a colour">${svg('plus')}</button></div>`;
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
+    const bid = window.SchoolBadge && window.SchoolBadge.identity(s), bh = bid ? [bid.primary, bid.secondary, bid.accent].filter(Boolean).map((h) => h.toUpperCase()) : [];
+    const badge = bh.length ? `<div class="ce-bdg">${svg('shield')}${bh.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!none && h === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}</div>` : '';
+    const sim = similar(s);
+    const kin = sim.length ? `<div class="ce-kin">${svg('link')}${sim.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
     const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
-    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${sets}${parts}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${kin}${sets}${parts}${badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
     const ss = schoolsShown();
@@ -256,6 +275,8 @@
     else if (d.cxok != null) addSwatch();
     else if (d.set) { const k = ui.pick; used(d.set); if (doc.schools[k] !== d.set) edit(() => { doc.schools[k] = d.set; }); else draw(); }
     else if (d.prev != null) step(-1);
+    else if (d.pnote != null) { ui.note = ui.pick; draw(); }
+    else if (d.jump) { ui.pick = d.jump; ui.focus = d.jump; ui.add = false; ui.del = false; draw(); }
     else if (d.next != null) step(1);
     else if (d.auto != null) { const k = ui.pick; if (doc.schools[k]) edit(() => { delete doc.schools[k]; }); }
     else if (d.csok != null) { ui.pick = ''; ui.add = false; ui.del = false; draw(); }
@@ -275,7 +296,7 @@
     else if (d.tok != null) { ui.tok = true; draw(); }
     else if (d.tkok != null) { ls.set(K_TOKEN, document.getElementById('tok').value.trim() || null); ui.tok = false; ui.err = ''; draw(); refresh(); }
     else if (d.tkdel != null) { ls.set(K_TOKEN, null); ui.tok = false; draw(); }
-    else if (d.tkbg != null && e.target === t) { ui.tok = false; ui.note = ''; ui.pick = ''; ui.add = false; ui.del = false; draw(); }
+    else if (d.tkbg != null && e.target === t) { if (ui.note || ui.tok) { ui.tok = false; ui.note = ''; } else { ui.pick = ''; ui.add = false; ui.del = false; } draw(); }
   });
   root.addEventListener('input', (e) => {
     if (e.target.id === 'q') { ui.q = e.target.value; const lw = root.querySelector('.ce-lw'); const pos = e.target.selectionStart; lw.innerHTML = list(); const q = document.getElementById('q'); q.focus(); q.setSelectionRange(pos, pos); }
