@@ -383,22 +383,26 @@ byS.forEach((rows, i) => {
     const lw = s.lw; const slot = lw.map((x) => (exact ? (x[1] != null ? [[x[1], 1, x[3].nb]] : empty(s.year, 1)) : x[2] != null ? [[x[2], 1, x[4].nb]] : fill));
     if (process.env.SEASON_ALIGN === 'bucket') { const o = new Array(STDK.length); s.weights.forEach((i, j) => { o[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; }); pool.push({ s, slot: o, est: !exact }); return; }
     slot.wts = lw.map((x) => x[0]); slot.wk = slot.wts.join(',');
+    slot.avg = slot.flatMap((o) => o.map(([r, q, nb]) => [r, q / slot.length, nb]));   // the team's average wrestler: any of its weights, equally likely (empty weights as district non-placers)
     pool.push({ s, slot, est: !exact }); });
   /* two lineups meet weight by weight, each weight against the nearest weight of the other season and nobody twice
-     (Brock, 2026-11-08). The pairing keeps weight order and takes the fewest total pounds apart, where leaving a weight
-     out costs SIT pounds (heavyweight counted as 280): two weights more than 2 x SIT apart never meet, and a weight with no
-     close partner sits out (2000 has 13 weights to 2017's 14: 2000's 140 meets 2017's 138, and 2000's 135 sits out).
-     The score is scaled to 13 bouts, so a weight sitting out costs neither side. overtime/app/seasons.js pairs the same way. */
+     (Brock, 2026-11-08). The pairing keeps weight order and takes the fewest total pounds apart, where an unpaired weight
+     costs SIT pounds (heavyweight counted as 280), so two weights more than 2 x SIT apart never meet. Nobody sits out
+     (Brock): a weight left without a partner wrestles the other team's average wrestler, which is the whole lineup with
+     every weight equally likely (an empty weight counts as a district non-placer), not one averaged rating: a team of five
+     stars and eight empty weights is a 5-in-13 chance of a star, not a star.
+     2000 (13 weights) vs 2017 (14): 2000's 140 meets 2017's 138; 2000's 135 and 2017's 182 and 220 meet the other
+     team's average. The score is scaled to 13 bouts. overtime/app/seasons.js pairs the same way. */
   const SIT = 8, wLb = (w) => (w >= 999 ? 280 : w);
   const pairs = (A, B) => { const n = A.length, m = B.length, d = (i, j) => Math.abs(wLb(A[i]) - wLb(B[j]));
     const f = Array.from({ length: n + 1 }, (_, i) => Array.from({ length: m + 1 }, (_, j) => (i + j) * SIT));
     for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) f[i][j] = Math.min(f[i - 1][j - 1] + d(i - 1, j - 1), f[i - 1][j] + SIT, f[i][j - 1] + SIT);
-    const out = []; let i = n, j = m; while (i > 0 && j > 0) { if (f[i][j] === f[i - 1][j - 1] + d(i - 1, j - 1)) { out.push([i - 1, j - 1]); i--; j--; } else if (f[i][j] === f[i - 1][j] + SIT) i--; else j--; }
+    const out = []; let i = n, j = m; while (i > 0 || j > 0) { if (i > 0 && j > 0 && f[i][j] === f[i - 1][j - 1] + d(i - 1, j - 1)) { out.push([i - 1, j - 1]); i--; j--; } else if (i > 0 && (j === 0 || f[i][j] === f[i - 1][j] + SIT)) { out.push([i - 1, -1]); i--; } else { out.push([-1, j - 1]); j--; } }
     return out.reverse(); };
   const PAIRS = new Map(); const pairsOf = (A, B) => { const k = A.wk + '|' + B.wk; return PAIRS.get(k) || PAIRS.set(k, pairs(A.wts, B.wts)).get(k); };
   const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0; const bucket = process.env.SEASON_ALIGN === 'bucket';
     const P = bucket ? null : pairsOf(A, B);
-    for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : A[P[b][0]], c = bucket ? B[b] : B[P[b][1]]; if (!a || !c) continue; n++;
+    for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : P[b][0] < 0 ? A.avg : A[P[b][0]], c = bucket ? B[b] : P[b][1] < 0 ? B.avg : B[P[b][1]]; if (!a || !c) continue; n++;
       if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0], a[0][2], c[0][2]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
       let mm = 0, ee = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of c) { const r = bout(ra, rb, na, nb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
     return n ? [m * 13 / n, q * 13 / n, h * 13 / n] : [0, 1, 0]; };
@@ -436,7 +440,7 @@ byS.forEach((rows, i) => {
   pool.sort((a, b) => b.win - a.win || b.mar - a.mar);
   if (process.env.SEASON_DEBUG) { const [x, y] = process.env.SEASON_DEBUG.split(',').map((k) => pool.find((p) => p.s.sch + '|' + p.s.year + '|' + p.s.c === k));
     const P = pairsOf(x.slot, y.slot); let tot = 0;
-    P.forEach(([i, j]) => { const a = x.slot[i], b = y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', x.s.lw[i][0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', y.s.lw[j][0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
+    P.forEach(([i, j]) => { const a = i < 0 ? x.slot.avg : x.slot[i], b = j < 0 ? y.slot.avg : y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', (x.s.lw[i] || ['avg'])[0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', (y.s.lw[j] || ['avg'])[0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
     console.log('  expected margin', tot.toFixed(1), 'ranks', pool.indexOf(x) + 1, pool.indexOf(y) + 1); }
   console.log(`school seasons as duals: ${pool.length} seasons (${pool.filter((p) => p.est).length} with weights filled), field ${FIELD_N}, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
   { const hr = pool.slice().sort((a, b) => b.hwin - a.hwin || b.hmar - a.hmar); const hk = new Map(hr.map((p, i) => [p, i + 1]));
