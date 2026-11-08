@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """School colour research -> overtime/schoolresearch.js (suggestions shown in the colour editor, colors.html).
 
-Input: data/colors/research/batch_*.json, one object per school written by the research agents:
-  {school, identified_as, colors: [{name, hex, hex_from}], mascot, confidence, wikipedia, sources, era, notes}
+Input, one object per school written by the research agents:
+  data/colors/research/batch_*.json  pass 1, names from Wikipedia and search results
+  data/colors/research/photo_*.json  pass 2, the agents looked at each school's logo, site and photos (wins over pass 1)
+  {school, identified_as, colors: [{name, hex, hex_from}], mascot, confidence, wikipedia, sources, era, notes, evidence}
 
 Each colour gets one hex, and the file records where it came from:
-  s  the agent read a hex on the school's own site or brand guide
+  l  sampled from the school's logo (pixels), p  from a clean graphic in a photo
+  s  the school's own site theme or brand guide
   w  the school's Wikipedia infobox gives an explicit hex ({{color box|#c4b454}}); CSS colour words there
-     ({{color box|navy}}) are an editor's generic pick, so they count as a name, not a shade
+     ({{color box|navy}}) and their web hex twins (#000080, #0000FF ...) are an editor's generic pick, so they count
+     as a name, not a shade
   n  only a colour name was found: the standard shade for that name below (the editor's own swatches where
      one fits), so the same name always gives the same colour
 Wikipedia pages are cached in data/colors/research/wiki_cache.json (delete it to refetch).
@@ -36,9 +40,13 @@ STD = {
     'purple': '#4B2E83', 'violet': '#4B2E83',
     'brown': '#4E2A1E',
     'gray': '#8A8D8F', 'grey': '#8A8D8F', 'silver': '#A7A9AC', 'steel gray': '#708090', 'steel grey': '#708090',
-    'white': '#FFFFFF', 'black': '#111111',
+    'white': '#FFFFFF', 'black': '#111111', 'cerise': '#DE3163', 'steel': '#708090',
 }
 CONF = {'high': 3, 'medium': 2, 'low': 1}
+FROM = {'logo': 'l', 'photo': 'p', 'school-site': 's', 'wikipedia-infobox': 'w'}
+# the hex of CSS colour words: an infobox hex equal to one of these is a generic web colour, not the school's shade
+WEB = {'#000080', '#0000FF', '#4169E1', '#800000', '#FF0000', '#008000', '#00FF00', '#FFD700', '#FFFF00', '#C0C0C0', '#808080',
+       '#ADD8E6', '#87CEEB', '#FFA500', '#800080', '#A52A2A', '#DC143C', '#B22222', '#228B22', '#006400', '#00008B', '#191970'}
 
 
 def std(name):
@@ -99,9 +107,13 @@ def wiki_title(x):
 
 def main():
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
-    out, missing = {}, set()
-    for f in sorted(glob.glob(os.path.join(RDIR, 'batch_*.json'))):
-        for x in json.load(open(f)):
+    out, missing, recs = {}, set(), {}
+    for pat in ('batch_*.json', 'photo_*.json'):   # pass 2 replaces pass 1 school by school
+        for f in sorted(glob.glob(os.path.join(RDIR, pat))):
+            for x in json.load(open(f)):
+                recs[x['school']] = x
+    if True:
+        for x in recs.values():
             title = wiki_title(x)
             boxes = infobox_hex(wiki_colours(title, cache)) if title else []
             cols = x.get('colors') or []
@@ -109,7 +121,9 @@ def main():
             wh = [b if re.fullmatch(r'#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?', b) else None for b in boxes] if len(boxes) == len(cols) else [None] * len(cols)
             c = []
             for col, w in zip(cols, wh):
-                h, src = col.get('hex'), 's' if col.get('hex_from') == 'school-site' else 'w' if col.get('hex') else None
+                h, src = col.get('hex'), FROM.get(col.get('hex_from'), 'w') if col.get('hex') else None
+                if h and src == 'w' and h.upper() in WEB:
+                    h = None
                 if not h and w:
                     h, src = w, 'w'
                 if not h:
@@ -122,18 +136,19 @@ def main():
                 c.append([col['name'], h.upper(), src])
             out[x['school']] = {k: v for k, v in {
                 'c': c, 'q': CONF.get(x.get('confidence'), 1), 'm': x.get('mascot'), 'w': title,
-                's': [s for s in (x.get('sources') or []) if s], 'e': x.get('era'), 'x': x.get('notes'),
+                's': [s for s in (x.get('sources') or []) if s], 'e': x.get('era'),
+                'x': ' · '.join(t for t in (x.get('evidence'), x.get('notes')) if t),
             }.items() if v}
     json.dump(cache, open(CACHE, 'w'), indent=0, sort_keys=True, ensure_ascii=False)
     J = lambda v: json.dumps(v, ensure_ascii=False)
     body = ',\n'.join(J(k) + ': ' + J(out[k]) for k in sorted(out))
     open(OUT, 'w').write('/* School colour research (tools/build_colour_research.py): suggestions for the colour editor only. '
-                         'c: [name, hex, s=school site | w=Wikipedia hex | n=standard shade for the name]; q: 3 high, 2 medium, 1 low. */\n'
+                         'c: [name, hex, l=logo | p=photo | s=school site | w=Wikipedia hex | n=standard shade for the name]; q: 3 high, 2 medium, 1 low. */\n'
                          'window.OT_RESEARCH = {\n' + body + '\n};\n')
     n = len(out)
     print(f'{n} schools, {sum(1 for v in out.values() if v.get("c"))} with colours;',
           'by confidence', {q: sum(1 for v in out.values() if v.get('q') == q) for q in (3, 2, 1)},
-          '; hex from', {s: sum(1 for v in out.values() for c in v.get('c', []) if c[2] == s) for s in 'swn'})
+          '; hex from', {s: sum(1 for v in out.values() for c in v.get('c', []) if c[2] == s) for s in 'lpswn'})
     if missing:
         print('colour names with no standard shade (add to STD):', sorted(missing))
 

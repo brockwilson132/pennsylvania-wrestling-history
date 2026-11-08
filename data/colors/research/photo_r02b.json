@@ -1,0 +1,653 @@
+[
+ {
+  "school": "Susquehanna Township",
+  "identified_as": "Susquehanna Township High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ED1C24",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "high",
+  "wikipedia": "Susquehanna Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Susquehanna_Township_High_School",
+   "https://www.hannasd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1685549845/hannasdorg/lyeoot7scvl9wq86htlu/Logo_SusquehannaTownship_NoMission.png"
+  ],
+  "era": "Formerly the Indians; Wikipedia says mascot currently undefined.",
+  "notes": null,
+  "evidence": "District logo (ST monogram roundel): flat red #ED1C24 with black ST outline on white; site theme red #BB1D2E. Mascot not shown."
+ },
+ {
+  "school": "Chartiers Valley",
+  "identified_as": "Chartiers Valley High School, Bridgeville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E72C2E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#004E94",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Colts",
+  "confidence": "high",
+  "wikipedia": "Chartiers Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chartiers_Valley_High_School",
+   "https://www.cvsd.net/",
+   "https://www.cvsd.net/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District crest on cvsd.net: red #E72C2E and blue #004E94 fields with grey/silver ring. No athletic Colts logo found on homepage."
+ },
+ {
+  "school": "Erie McDowell",
+  "identified_as": "McDowell High School, Millcreek Township (Erie)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#213A72",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "McDowell High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/McDowell_High_School_(Pennsylvania)",
+   "https://mcdowellathletics.com/",
+   "https://assets-rst7.rschooltoday.com/rst7files/uploads/sites/695/2026/05/19100925/McDowell-High-School-Logo-300x300.png",
+   "https://www.mtsd.org/",
+   "https://files.smartsites.parentsquare.com/11818/header_logo_img_mltovn988dkp5bhbgoh.png"
+  ],
+  "era": null,
+  "notes": "Trojans confirmed by mcdowellathletics.com logo.",
+  "evidence": "McDowell athletics site logo: Trojan helmet with navy-blue plume #213A72, silver/grey helmet; Millcreek district site theme navy #071D49 (district seal #14207E). Trojans mascot confirmed."
+ },
+ {
+  "school": "Hickory",
+  "identified_as": "Hickory High School, Hermitage",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EF111B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#1D1D1D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "high",
+  "wikipedia": "Hermitage School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hermitage_School_District_(Pennsylvania)",
+   "https://hermitagesd.net/",
+   "https://files.smartsites.parentsquare.com/13224/hornet_logo_1784208991.png",
+   "https://files.smartsites.parentsquare.com/13224/header_logo_img_t6el8jh0c3orcgonkjp.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia cites MaxPreps; no independent check.",
+  "evidence": "Hermitage SD 'Home of the Hornets' logo: red hornet #EF111B on black/charcoal #1D1D1D hexagon; header H logo red #FF163E; site theme red #EB0000."
+ },
+ {
+  "school": "Mount Carmel",
+  "identified_as": "Mount Carmel Area Junior/Senior High School, Mount Carmel",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A80D10",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Tornadoes",
+  "confidence": "high",
+  "wikipedia": "Mount Carmel Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Carmel_Area_School_District",
+   "search:https://mccaravan.org/uncategorized/2015/03/31/mount-carmel-to-change-school-colors/",
+   "https://www.mca.k12.pa.us/wp/",
+   "https://www.mca.k12.pa.us/wp/wp-content/uploads/2016/06/seal_dr2.png",
+   "https://www.mca.k12.pa.us/wp/wp-content/uploads/2025/08/field_logo_2025-scaled-2880x720.jpg"
+  ],
+  "era": null,
+  "notes": "A student-paper item dated 31 Mar 2015 says colours change from brown and white to red and white 'as of April 1'; may be an April Fools piece. Treat brown/white history as unverified.",
+  "evidence": "District seal on mca.k12.pa.us: flat dark red #A80D10 on white; homepage field banner shows a red tornado mascot. Brown no longer used (2015 change per first pass)."
+ },
+ {
+  "school": "Bloomsburg",
+  "identified_as": "Bloomsburg Area High School, Bloomsburg",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#B32025",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Bloomsburg Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bloomsburg_Area_High_School",
+   "https://www.bloomsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1730910911/bloomsdk12paus/ecmmt0dsdidqvnuvlvgn/ApprovedBLogo-Large.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District 'B' logo on bloomsd.org: red #B32025 block B with white inline and black panther. Site theme is stock Finalsite only."
+ },
+ {
+  "school": "Lower Dauphin",
+  "identified_as": "Lower Dauphin High School, Hummelstown",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0033A0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Lower Dauphin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lower_Dauphin_High_School",
+   "https://www.ldsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1721392605/ldsdorg/rukjxtcshwobtrnjupcj/LowerDauphinSchoolDistrict512pixels.tiff"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District logo on ldsd.org: LD monogram with falcon head and wordmark in royal blue #0033A0 on white."
+ },
+ {
+  "school": "Delone Catholic",
+  "identified_as": "Delone Catholic High School, McSherrystown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#B1A17A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#CE2B31",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#3B4DA1",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Squires",
+  "confidence": "medium",
+  "wikipedia": "Delone Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Delone_Catholic_High_School",
+   "https://www.delonecatholic.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1688412294/delonecatholicorg/k7rjl5w3nnxihlm014yk/DeloneCatholicLogo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia: school colours red and blue; ATHLETIC colours black and gold. Listed athletic colours first for wrestling use.",
+  "evidence": "School crest on delonecatholic.org: old-gold #B1A17A panel with red #CE2B31 cross, blue #3B4DA1 panel with gold eagle, black chief. Site theme blue #3044B5, red #CC2D30. Black-and-gold athletic colours (Wikipedia) not seen in an athletic logo."
+ },
+ {
+  "school": "Freedom Area",
+  "identified_as": "Freedom Area High School, Freedom (Beaver County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#B00E0E",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Freedom Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Freedom_Area_School_District",
+   "https://www.freedomareaschools.org/",
+   "https://www.freedomareaschools.org/sysimages/LogoHeader2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District header logo on freedomareaschools.org: grey bulldog with black outline and red collar (#FF0000) with red 'F' tag; site header theme red #B00E0E. Black also prominent in logo."
+ },
+ {
+  "school": "North Star",
+  "identified_as": "North Star High School, Boswell",
+  "colors": [
+   {
+    "name": "Forest Green",
+    "hex": "#094D24",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "North Star School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_School_District",
+   "search:https://www.maxpreps.com/pa/boswell/north-star-cougars/football",
+   "https://www.nscougars.com/"
+  ],
+  "era": null,
+  "notes": "District page says forest green; HS page and MaxPreps say green.",
+  "evidence": "nscougars.com theme CSS: dark forest green #094D24 used for background/border/text. No logo image could be retrieved (logo URLs 404)."
+ },
+ {
+  "school": "Milton",
+  "identified_as": "Milton Area High School, Milton",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#C9693F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#0E1720",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Black Panthers",
+  "confidence": "high",
+  "wikipedia": "Milton Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Milton_Area_High_School",
+   "search:https://www.maxpreps.com/pa/milton/milton-black-panthers/football/media/preview/",
+   "https://www.miltonsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/25176/logo/27989/Milton-M-with-Panther-2.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia gives no colours; MaxPreps only (lists both Orange/Black and Black/Orange).",
+  "evidence": "District logo on miltonsd.org: burnt-orange block M #C9693F outlined in black with black panther #0E1720; site theme orange #DE552C."
+ },
+ {
+  "school": "Juniata",
+  "identified_as": "Juniata High School, Mifflintown",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Navy",
+    "hex": "#053563",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Juniata High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Juniata_High_School",
+   "https://www.jcsdk12.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/4565/logo/6638/JC.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Juniata County SD 'JC' logo: navy #053563 letters in grey ring; site theme button colour #053563. No red seen on district site; red from first pass (Wikipedia) unconfirmed by image. Logo is district-wide, not the HS athletic mark."
+ },
+ {
+  "school": "Claysburg-Kimmel",
+  "identified_as": "Claysburg-Kimmel Junior/Senior High School, Claysburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0454B4",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFB514",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Claysburg-Kimmel School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Claysburg-Kimmel_School_District",
+   "https://www.cksdbulldogs.com/",
+   "https://www.cksdbulldogs.com/pics/school_logo.png",
+   "https://www.cksdbulldogs.com/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "cksdbulldogs.com theme CSS --color-1 blue #0454B4, --color-2 gold #FCB404; site logo is gold bulldog #FFB514 with black outline. (ckbulldogs.org is an unrelated North Dakota school.)"
+ },
+ {
+  "school": "Huntingdon",
+  "identified_as": "Huntingdon Area Senior High School, Huntingdon",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BC1212",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#232C59",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bearcats",
+  "confidence": "high",
+  "wikipedia": "Huntingdon Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Huntingdon_Area_Senior_High_School",
+   "search:https://huntsd.org/wp-content/uploads/2025/08/2025-2026-Student-Handbook.pdf",
+   "https://huntsd.org/",
+   "https://huntsd.org/wp-content/uploads/2023/02/Huntingdon_Logo-2-300x300.png"
+  ],
+  "era": null,
+  "notes": "Official student handbook: 'School colors - red and blue'. HS Wikipedia infobox adds white (navy box).",
+  "evidence": "District roundel on huntsd.org: split H in red #BC1212 and navy #232C59 with 'Bearcats' script; matches handbook 'red and blue'."
+ },
+ {
+  "school": "Shady Side Academy",
+  "identified_as": "Shady Side Academy, Pittsburgh (Fox Chapel)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#001D43",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFB808",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Shady Side Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shady_Side_Academy",
+   "https://www.shadysideacademy.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1731526862/shadyside/qcgzyonwssd7zizrpxhe/Footer_SSA_Dog-Shield.gif"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "SSA bulldog shield logo: gold bulldog #FFB808 over navy #001D43 'SSA' shield; site theme navy #041E42 and gold #FFB81C (both heavily used). Gold is a bright athletic gold, not dull old gold."
+ },
+ {
+  "school": "Chambersburg",
+  "identified_as": "Chambersburg Area Senior High School, Chambersburg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#14284B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver Grey",
+    "hex": "#838C97",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Chambersburg Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chambersburg_Area_Senior_High_School",
+   "https://www.casdonline.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1703097307/chambersburgk12paus/pr5r237iewysvexgnhzl/ChambersburgHS_Mascot-TM.png"
+  ],
+  "era": null,
+  "notes": "Infobox hexes cite the district's Brand Guidelines page (casdonline.org), which I did not read directly.",
+  "evidence": "Chambersburg HS Trojan mascot logo on casdonline.org: navy #14284B with grey #838C97 and light silver #C6CBCC; matches infobox brand-guide navy #13294B."
+ },
+ {
+  "school": "West Allegheny",
+  "identified_as": "West Allegheny High School, Imperial",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": "#C32033",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Grey",
+    "hex": "#545454",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "West Allegheny High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Allegheny_High_School",
+   "https://www.westasd.org/",
+   "https://www.westasd.org/sysimages/logoHeader3.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District roundel on westasd.org: scarlet 'WA' #C32033 with black shadow, dark grey #545454 ring; site theme reds #970204/#CD0A0A."
+ },
+ {
+  "school": "Upper Darby",
+  "identified_as": "Upper Darby High School, Drexel Hill",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#5D2D86",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#B29143",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Royals",
+  "confidence": "high",
+  "wikipedia": "Upper Darby High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Darby_High_School",
+   "https://www.upperdarbysd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1748541827/upperdarbysdorg/zwo9yltvgi65v4qxzfth/UDSDHeaderLogoSDV2.png"
+  ],
+  "era": null,
+  "notes": "Purple box uses named 'indigo', so no purple hex.",
+  "evidence": "District 'UD' header logo: metallic gold #B29143 U and purple #5D2D86 D; site theme purple #5B2B82 and gold #B09043."
+ },
+ {
+  "school": "Corry Area",
+  "identified_as": "Corry Area High School, Corry",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F2840D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#18130F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Beavers",
+  "confidence": "high",
+  "wikipedia": "Corry Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Corry_Area_School_District",
+   "search:https://www.maxpreps.com/pa/corry/corry-beavers/football",
+   "https://www.corrysd.net/",
+   "https://www.corrysd.net/sysimages/PNG/header_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia colours field empty; MaxPreps only.",
+  "evidence": "District keystone logo on corrysd.net: orange diamond #F2840D with black 'C' and outline (#18130F)."
+ },
+ {
+  "school": "Penn Cambria",
+  "identified_as": "Penn Cambria High School, Cresson",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#97AAD3",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "low",
+  "wikipedia": "Penn Cambria School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Cambria_School_District",
+   "https://www.pcam.org/",
+   "https://www.pcam.org/wp-content/uploads/2018/07/cropped-logo-1-192x192.png",
+   "https://www.pcam.org/wp-content/uploads/2018/08/penn-cambria-logo_header2.png",
+   "https://www.pcam.org/schools/high-school/athletics/"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District seal on pcam.org: light blue #97AAD3 outer ring with black/white shield; but site theme CSS uses navy #1B3058 (and a red #A41D31). Which blue the Panthers use is unclear; no athletic logo found."
+ },
+ {
+  "school": "South Western",
+  "identified_as": "South Western Senior High School, Hanover (York County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#080808",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "South Western School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Western_School_District",
+   "search:https://www.maxpreps.com/pa/hanover/south-western-mustangs/football",
+   "https://www.swsd.k12.pa.us/",
+   "https://cmsv2-assets.apptegy.net/uploads/20034/logo/22635/logo_southwestern-web.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia has no colours; MaxPreps football only. Not Southwestern HS, Hanover IN.",
+  "evidence": "District compass-star logo on swsd.k12.pa.us: black 'S W' letters and outlines, silver/grey #C6C7C9 star, on white; site theme menu/border accent is pure red #FF0000 (not seen in logo)."
+ },
+ {
+  "school": "Spring Grove",
+  "identified_as": "Spring Grove Area High School, Spring Grove",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#012E85",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "medium",
+  "wikipedia": "Spring Grove Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Spring_Grove_Area_High_School",
+   "https://www.sgasd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1684240567/sgasdcom/oscwp8l8t0ipkebfnyou/PrimaryLogo_BlueGrayandWhite.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "District primary logo 'SG' with rocket on sgasd.org: royal blue #012E85, grey and white only (file named BlueGrayandWhite); site theme blue #003087. Red from first pass not seen."
+ }
+]

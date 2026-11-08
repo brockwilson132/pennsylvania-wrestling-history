@@ -1,0 +1,632 @@
+[
+ {
+  "school": "Hershey",
+  "identified_as": "Hershey High School, Hershey",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0B1856",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Orange",
+    "hex": "#ED771D",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Hershey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hershey_High_School",
+   "https://www.hershey.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1683030558/hersheyk12paus/wn4z9vopugs9u2x6clin/Branding_Package_Public.png"
+  ],
+  "era": null,
+  "notes": "Not Milton Hershey School (brown and gold).",
+  "evidence": "Derry Township SD branding package image lists colours navy #0B1856, orange #ED771D, grey #E1E1E1, white, dark navy #14123D; site CSS #14123D x112, #ED771D x23. 'Blue' is navy."
+ },
+ {
+  "school": "Seneca",
+  "identified_as": "Seneca High School, Erie County (Wattsburg Area SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#232D65",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "Seneca High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Seneca_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Wattsburg_Area_School_District",
+   "https://www.wattsburg.org/",
+   "https://files.smartsites.parentsquare.com/12586/_variants/contain-350w/gcpl8g52uv6panjddhg.png",
+   "https://www.instagram.com/wasd_bobcats/"
+  ],
+  "era": null,
+  "notes": "Wikipedia stub and district page list no colours or mascot. Not Seneca Valley (District 7).",
+  "evidence": "Wattsburg Area SD site (Seneca HS) theme colour #232D65 (navy); site photo of Seneca football: blue jerseys/'S' helmets with white. Uniform blue looks brighter (royal) than site navy. Mascot Bobcats from district Instagram handle wasd_bobcats."
+ },
+ {
+  "school": "South Fayette",
+  "identified_as": "South Fayette High School, McDonald (South Fayette Township)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#0D5B40",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "South Fayette Township School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Fayette_Township_School_District",
+   "https://www.southfayette.org",
+   "https://www.southfayette.org/sysimages/HeaderLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district header logo: dark green #0D5B40 ring with lighter green #00946E SF monogram on white; site CSS #008060/#059662/#00946E. Shade is a deep forest green rather than kelly."
+ },
+ {
+  "school": "Hempfield",
+  "identified_as": "Hempfield High School, Landisville (Lancaster County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EE3442",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Black Knights",
+  "confidence": "high",
+  "wikipedia": "Hempfield High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hempfield_High_School",
+   "https://www.hempfieldsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1740666798/hempfieldsdorg/ic7fqxwnievr0uzlfkqm/HempfieldSchoolDistrict.png"
+  ],
+  "era": null,
+  "notes": "District 3 school; not Hempfield Area (Greensburg, royal blue/silver).",
+  "evidence": "district logo: black knight helmet with red 'H' and red #EE3442 'Hempfield' wordmark on white."
+ },
+ {
+  "school": "Middletown",
+  "identified_as": "Middletown Area High School, Middletown (Dauphin County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0032AB",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F4CE20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Raiders",
+  "confidence": "high",
+  "wikipedia": "Middletown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Middletown_Area_High_School",
+   "https://www.raiderweb.org",
+   "https://cdnsm5-ss19.sharpschool.com/UserFiles/Servers/Server_344046/Image/Logo/Master%20Middletown%20M.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district 'Master Middletown M' logo: royal blue #0032AB block M with gold #F4CE20 bar and outline. Site CSS is SharpSchool stock (ignored)."
+ },
+ {
+  "school": "Plum",
+  "identified_as": "Plum Senior High School, Plum",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#6C52A2",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCB426",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Plum High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Plum_High_School",
+   "https://www.pbsd.k12.pa.us",
+   "https://www.pbsd.k12.pa.us/sysimages/LogoAthletics2.png",
+   "https://www.pbsd.k12.pa.us/sysimages/PBSDLogo3.png"
+  ],
+  "era": null,
+  "notes": "Infobox shows only colour boxes in order gold, purple, white; no names or order stated.",
+  "evidence": "athletics 'Plum' wordmark: gold #FCB426 letters outlined purple #6C52A2; district seal purple #6951A3 ring, gold rim, white centre; site CSS #6E4ABC, #FFC846."
+ },
+ {
+  "school": "Abington Heights",
+  "identified_as": "Abington Heights High School, Clarks Summit",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1A284D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "high",
+  "wikipedia": "Abington Heights High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Abington_Heights_High_School",
+   "https://en.wikipedia.org/wiki/Abington_Heights_School_District",
+   "https://www.ahsd.org",
+   "https://cdnsm5-ss20.sharpschool.com/UserFiles/Servers/Server_449269/Image/Abington%20Heights%20-%20Vector.png"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps; blue hex from color box.",
+  "evidence": "district crest vector: flat navy #1A284D on white (comet, 'AH', banner). Site CSS #000055 navy. Replaces infobox #000080."
+ },
+ {
+  "school": "Wyoming Valley West",
+  "identified_as": "Wyoming Valley West High School, Plymouth",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#7A0020",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E0BE79",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Wyoming Valley West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyoming_Valley_West_High_School",
+   "https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District",
+   "https://www.wvwsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1734013590/wvwspartansorg/sxbl8ebna2l4igkohmoy/TrabsparentSpartanCrest.png"
+  ],
+  "era": null,
+  "notes": "HS and district pages agree.",
+  "evidence": "district Spartan crest: maroon #7A0020 shield with light (Vegas-type) gold #E0BE79 helmet, spears and banners. Small image (87x120)."
+ },
+ {
+  "school": "Crestwood",
+  "identified_as": "Crestwood High School, Mountain Top",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#DC0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "high",
+  "wikipedia": "Crestwood High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Crestwood_High_School_(Pennsylvania)",
+   "https://www.csdcomets.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1738696293/csdcometsorg/dyipq3dkox34cecnceal/CrestwoodSchoolDistrictPrimaryLogoImage.png",
+   "https://www.maxpreps.com/pa/mountain-top/crestwood-comets/"
+  ],
+  "era": null,
+  "notes": "Infobox cites a 1963 Times Leader article.",
+  "evidence": "district crest: red #DC0000 ring with white lettering, gold #CDA503 laurel/star trim; MaxPreps lists red/white. Gold appears only as crest trim."
+ },
+ {
+  "school": "Octorara",
+  "identified_as": "Octorara Area Junior-Senior High School, Atglen",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#112F54",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#BD3B3F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Braves",
+  "confidence": "high",
+  "wikipedia": "Octorara Junior-Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Octorara_Junior-Senior_High_School",
+   "https://www.octorara.k12.pa.us",
+   "https://cmsv2-assets.apptegy.net/uploads/19857/logo/22386/octorara_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: navy #112F54 'Octorara' wordmark, red #BD3B3F 'Area School District' and rule; site theme #002856 navy, #AF2B30 red. Blue is navy."
+ },
+ {
+  "school": "Mount Union",
+  "identified_as": "Mount Union Area Senior High School, Mount Union",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0B3672",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C9B04A",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Mount Union Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Union_Area_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District",
+   "https://www.muasd.org",
+   "https://www.muasd.org/wp-content/uploads/2023/02/School-Logo.jpg"
+  ],
+  "era": null,
+  "notes": "Colours from the district page; HS page has none.",
+  "evidence": "district Trojan head logo (low-quality JPEG): blue #0B3672 with pale Vegas gold; site CSS navy #002D61/#003366 and golds #C9B04A, #D4AD6A, #C4B454. Blue reads navy rather than royal."
+ },
+ {
+  "school": "Richland",
+  "identified_as": "Richland High School, Johnstown (Richland Township)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#282A92",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Red",
+    "hex": "#A6261B",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Richland High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Richland_High_School_(Pennsylvania)",
+   "https://www.richlandsd.com"
+  ],
+  "era": null,
+  "notes": "Infobox: red, white, and blue; article body says red and blue. Not Pine-Richland.",
+  "evidence": "district site theme: blue #282A92 x32 and red #A6261B x23 (non-stock). No logo image checked (apple-touch-icon not available)."
+ },
+ {
+  "school": "Fort Cherry",
+  "identified_as": "Fort Cherry Junior/Senior High School, McDonald",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EE1B23",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rangers",
+  "confidence": "high",
+  "wikipedia": "Fort Cherry School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fort_Cherry_School_District",
+   "https://www.fortcherry.org",
+   "https://www.fortcherry.org/sysimages/HeaderLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district header logo: red #EE1B23 disc with white 'FC', grey ring and 'Fort Cherry Rangers' in red; site CSS #ED1C24."
+ },
+ {
+  "school": "Kennedy Christian",
+  "identified_as": "Kennedy Christian High School (now Kennedy Catholic), Hermitage",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "low",
+  "wikipedia": "Kennedy Catholic High School (Hermitage, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennedy_Catholic_High_School_(Hermitage,_Pennsylvania)",
+   "https://kennedycatholic.org",
+   "https://kennedycatholic.org/wp-content/uploads/2021/12/Kennedy-Blue-Header-Logo-1600x200-1.png"
+  ],
+  "era": "Named Kennedy Christian HS during its bracket years; now Kennedy Catholic, whose current branding is navy and red 'Gaels'. Maroon/gold (Golden Eagles) per Wikipedia is unverified for the Kennedy Christian era.",
+  "notes": "Not confirmed that colours were the same under the Kennedy Christian name.",
+  "evidence": "current Kennedy Catholic header logo: navy #131331 wordmark with red #A22E39 'Home of the Gaels' bar (site CSS also red/blue). Wikipedia infobox: Golden Eagles, maroon and gold. No era image found for Kennedy Christian, so names are Wikipedia's; current branding conflicts."
+ },
+ {
+  "school": "Thomas Jefferson",
+  "identified_as": "Thomas Jefferson High School, Jefferson Hills",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#FED035",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Jaguars",
+  "confidence": "medium",
+  "wikipedia": "Thomas Jefferson High School (Jefferson Hills, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Thomas_Jefferson_High_School_(Jefferson_Hills,_Pennsylvania)",
+   "https://www.wjhsd.net",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1742991304/wjhsdnet/vxzgwieiuhgltygnrz71/WestJeffersonHillsSchoolDistrictPrimaryThumbnailImage.png"
+  ],
+  "era": null,
+  "notes": "Infobox gives colour boxes only (no names).",
+  "evidence": "West Jefferson Hills SD logo: white 'WJHSD' with gold #FED035 rules; site CSS #FED035 (gold). No Jaguars athletic logo found to confirm black."
+ },
+ {
+  "school": "St. Marys",
+  "identified_as": "St. Marys Area High School, St. Marys",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#113A72",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#7D1D21",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Flying Dutchmen",
+  "confidence": "high",
+  "wikipedia": "Saint Marys Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saint_Marys_Area_School_District",
+   "https://www.smasd.org",
+   "https://www.smasd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Colours from district page infobox. Mascot not stated on Wikipedia; 'Flying Dutch' from general knowledge, verify. Not Elk County Catholic (maroon/gold).",
+  "evidence": "district logo: 'St. Marys' ship in blue #113A72 with 'Flying Dutchmen' in dark red #7D1D21; site CSS #0055AB and #812428. Red is a deep brick/maroon red. Mascot confirmed Flying Dutchmen."
+ },
+ {
+  "school": "Harbor Creek",
+  "identified_as": "Harbor Creek Junior/Senior High School, Harborcreek",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FC7323",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Huskies",
+  "confidence": "medium",
+  "wikipedia": "Harbor Creek School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harbor_Creek_School_District",
+   "https://www.hcsd.iu5.org",
+   "https://www.hcsd.iu5.org/_MASTER/common_pics/header-district_logo_hc.png",
+   "https://www.maxpreps.com/pa/harborcreek/harbor-creek-huskies/"
+  ],
+  "era": null,
+  "notes": "District page names the Huskies but no colours.",
+  "evidence": "district header logo: orange #FC7323 'HC' with grey drop shadow; MaxPreps team page lists black (#222222) and orange. Black not seen in the logo."
+ },
+ {
+  "school": "Sayre",
+  "identified_as": "Sayre Area High School, Sayre",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AF0F2B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#0C1D40",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Redskins",
+  "confidence": "high",
+  "wikipedia": "Sayre Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sayre_Area_High_School",
+   "https://www.sayresd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/16352/logo/17442/Sayre_LogoN.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: red #AF0F2B 'SAYRE' outlined navy #0C1D40, crossed arrows in navy/red on white; site CSS #233C4F, #DD3333. Blue is navy."
+ },
+ {
+  "school": "West Greene",
+  "identified_as": "West Greene High School, Rogersville",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#071A73",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F7B919",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "high",
+  "wikipedia": "West Greene High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Greene_High_School_(Pennsylvania)",
+   "https://www.wgsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/890/logo/845/West_Greene_School_District_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district 'West Greene Pioneers' logo: blue #071A73 and gold #F7B919 with black outlines; site theme #0A31BC royal blue, #FFD300 gold. Mascot Pioneers."
+ },
+ {
+  "school": "Gettysburg",
+  "identified_as": "Gettysburg Area High School, Gettysburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#800000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Gettysburg Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Gettysburg_Area_High_School",
+   "https://www.gettysburg.k12.pa.us"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site CSS dominated by #800000 maroon (x159); only logo on page is a white version. Agrees with Wikipedia infobox."
+ },
+ {
+  "school": "Jeannette",
+  "identified_as": "Jeannette Senior High School, Jeannette",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#BB1B33",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Blue",
+    "hex": "#004799",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Jayhawks",
+  "confidence": "high",
+  "wikipedia": "Jeannette City School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Jeannette_City_School_District",
+   "https://www.jeannetteschooldistrict.org/",
+   "https://www.jeannetteschooldistrict.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district Jayhawk logo: royal blue #004799 body, red #BB1B33 head, yellow beak/feet (Kansas-style bird); site CSS small #00008B/#8B0000."
+ },
+ {
+  "school": "Bethel Park",
+  "identified_as": "Bethel Park High School, Bethel Park",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#231F1F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#EF4C23",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Black Hawks",
+  "confidence": "high",
+  "wikipedia": "Bethel Park High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bethel_Park_High_School",
+   "https://www.bpsd.org",
+   "https://www.bpsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district seal: black #231F1F ring with orange #EF4C23 'BP' block letters and trim on white."
+ }
+]

@@ -1,0 +1,641 @@
+[
+ {
+  "school": "Interboro",
+  "identified_as": "Interboro High School, Prospect Park",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FAC926",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "high",
+  "wikipedia": "Interboro High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Interboro_High_School",
+   "https://www.interborosd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1738083270/interborosdorg/wbjgazz4qriq4c9ofgwt/IBucs-LOGO.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "District site 'I Bucs' athletic logo: gold #FAC926 letters with black #231F20 outline/fill; matches Wikipedia black and gold. Site CSS is stock Finalsite."
+ },
+ {
+  "school": "Upper Dublin",
+  "identified_as": "Upper Dublin High School, Fort Washington",
+  "colors": [
+   {
+    "name": "Cardinal red",
+    "hex": "#931114",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#A7A9AC",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "high",
+  "wikipedia": "Upper Dublin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Dublin_High_School",
+   "https://www.udsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/10047/logo/11524/logo-web.png",
+   "https://www.maxpreps.com/pa/fort-washington/upper-dublin-cardinals/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; gray given by name.",
+  "evidence": "District 'UD' cardinal logo: cardinal red #931114 bird, gray #A7A9AC letters, black outlines; site theme red #A31202. MaxPreps lists Scarlet and Gray (mascot 'Flying Cardinals'). Black is outline only, listed last as minor."
+ },
+ {
+  "school": "Southern Huntingdon",
+  "identified_as": "Southern Huntingdon County Middle/High School, Three Springs",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#002147",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCC00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "high",
+  "wikipedia": "Southern Huntingdon County Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Huntingdon_County_Middle/High_School",
+   "https://en.wikipedia.org/wiki/Southern_Huntingdon_County_School_District",
+   "https://shcsd.org/",
+   "https://shcsd.org/wp-content/uploads/2022/02/logo-dark-SHCSD-300-1.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only (HS and district agree).",
+  "evidence": "District logo: navy #002147 'SHCSD' and ring, gold #FFCC00 disc with rocket; site theme navy #002147 and gold #E7BA39. Wikipedia's 'blue' is navy."
+ },
+ {
+  "school": "Penncrest",
+  "identified_as": "Penncrest High School, Media",
+  "colors": [
+   {
+    "name": "Red (crimson)",
+    "hex": "#9A2233",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEDA15",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Penncrest High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penncrest_High_School",
+   "https://phs.rtmsd.org/",
+   "https://www.rtmsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1709103065/rtmsdorg/cfqdjj4vdexvumfehwtj/Cheer_Lions_Cropped.jpg",
+   "https://www.maxpreps.com/pa/media/penncrest-lions/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "Penncrest HS site theme vars primary #9A2233 (deep red) and secondary #FEDA15 (gold); cheer photo shows red flags with gold 'LIONS' letters; MaxPreps Red/Gold. (The rose favicon #9A2234 is Rose Tree Media district.)"
+ },
+ {
+  "school": "Donegal",
+  "identified_as": "Donegal High School, Mount Joy",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#0E7B3E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "high",
+  "wikipedia": "Donegal High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Donegal_High_School",
+   "https://www.donegalsd.org/",
+   "https://files.smartsites.parentsquare.com/13074/header_logo_img_0anfkkticks8dcpppgc.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "District header logo: green #0E7B3E 'D' seal with white, gray wordmark; site theme green #0E8142."
+ },
+ {
+  "school": "Iroquois",
+  "identified_as": "Iroquois Junior/Senior High School, Erie (Iroquois SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFB81C",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Braves",
+  "confidence": "high",
+  "wikipedia": "Iroquois School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Iroquois_School_District",
+   "https://www.iroquoissd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/2827/logo/2932/Iroquois_Header_District-03-01.png"
+  ],
+  "era": null,
+  "notes": "Mascot Braves confirmed by district logo.",
+  "evidence": "District header 'Iroquois School District / Home of the Braves': black wordmark and black/gold 'I Braves' emblem (logo gold ~#C0901D, shaded); site theme gold #FFB81C is the dominant CSS colour. Mascot Braves confirmed by the logo."
+ },
+ {
+  "school": "York Suburban",
+  "identified_as": "York Suburban Senior High School, York",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F26322",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "York Suburban Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_Suburban_Senior_High_School",
+   "https://www.yssd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1746194387/yssdorg/ehiqzgyqcefoceortjlv/YorkSuburbanSchoolDistrictPrimaryLogoImage.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1773175048/yssdorg/zmvvvjevdv9cmbcjtc4n/Athletics.png",
+   "https://www.maxpreps.com/pa/york/york-suburban-trojans/"
+  ],
+  "era": null,
+  "notes": "Wikipedia colour boxes only (no names); mascot not in infobox (Trojans from general knowledge).",
+  "evidence": "District 'YS' shield: orange #F26322 top, black #231F20 bottom, white letters; athletics photo shows orange/black 'Trojans' banner; MaxPreps Orange/Black, Trojans."
+ },
+ {
+  "school": "Highlands",
+  "identified_as": "Highlands High School, Harrison Township (Natrona Heights)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#311C0E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#B99214",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Rams",
+  "confidence": "high",
+  "wikipedia": "Highlands High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Highlands_High_School_(Pennsylvania)",
+   "https://www.goldenrams.com/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1738082449/goldenramscom/hztlwaabmxwsfoiicjjq/H-Brown-Lg-1.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "District 'h' logo: dark brown #311C0E and gold #B99214 blocks with white text."
+ },
+ {
+  "school": "Fairfield",
+  "identified_as": "Fairfield Area High School, Fairfield (Adams County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2F7B3A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": "Fairfield Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fairfield_Area_High_School",
+   "https://www.fairfieldpaschools.org/",
+   "https://files.smartsites.parentsquare.com/9401/header_logo_img_rs8s9n25bp1r2olllek.png",
+   "https://www.maxpreps.com/pa/fairfield/fairfield-knights/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; mascot listed as 'Green Knight'.",
+  "evidence": "District header 'Knights' logo: green #2F7B3A lettering and plume with black and silver (no gold); site theme dark green #305426. Gold rests on Wikipedia and MaxPreps names only."
+ },
+ {
+  "school": "Central Valley",
+  "identified_as": "Central Valley High School, Monaca",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": "#96B7E0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#121F49",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Central Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Valley_High_School_(Pennsylvania)",
+   "https://www.centralvalleysd.org/",
+   "https://files.smartsites.parentsquare.com/11786/header_logo_img_cqkgh67lksi3dpbbicd.png",
+   "https://posts.parentsquare.com/inline_images_1c47ebfb8119fe83_1793298697440-CVLogo4Web_NoBrd-Sq.png",
+   "https://www.maxpreps.com/pa/monaca/central-valley-warriors/"
+  ],
+  "era": "Formed 2010 from the merger of Center Area and Monaca.",
+  "notes": "Wikipedia hex values look like generic web colours (LightSkyBlue/Navy), not a brand spec. Mascot not in infobox (Warriors from general knowledge).",
+  "evidence": "District interlocking 'CV' logo: Carolina blue #96B7E0 fill with navy #121F49 outline; site theme navy #121F49; MaxPreps Navy/Carolina Blue."
+ },
+ {
+  "school": "Carnegie",
+  "identified_as": "Carnegie High School, Carnegie (Allegheny County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Carlynton School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlynton_School_District",
+   "https://en.wikipedia.org/wiki/Carlynton_Junior/Senior_High_School"
+  ],
+  "era": "Bracket years end 1971; Carnegie merged into Carlynton (green and gold, Golden Cougars).",
+  "notes": "Carnegie HS's own colours not found; do not use Carlynton's.",
+  "evidence": "No school site (closed 1971); web/image search engines returned nothing usable and no Carnegie HS images were found. No colours given."
+ },
+ {
+  "school": "Ringgold",
+  "identified_as": "Ringgold High School, Carroll Township (Monongahela)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#042E59",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#BE9D29",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Ringgold High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ringgold_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Ringgold_School_District",
+   "https://www.ringgold.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1709925923/ringgoldorg/v9jboiki8cx2fj74nu6e/logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia: 'Blue and gold' with a navy box and gold #c4b454.",
+  "evidence": "District 'R' ram logo: gold #BE9D29 ram, white R with very dark indigo-navy #2F1F50 outline; site theme vars primary #042E59 navy, secondary #C4B454 gold."
+ },
+ {
+  "school": "Uniontown",
+  "identified_as": "Uniontown Area High School, Uniontown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#660000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "high",
+  "wikipedia": "Uniontown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Uniontown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Uniontown_Area_School_District",
+   "https://www.uasdraiders.org/",
+   "https://cdnsm5-ss20.sharpschool.com/UserFiles/Servers/Server_2376116/Image/UASH-logo.png"
+  ],
+  "era": null,
+  "notes": "HS colour boxes and district infobox agree (both Wikipedia).",
+  "evidence": "District 'U' logo: maroon #660000 block letter with white and gray outline; site theme dark maroon #4D0F10."
+ },
+ {
+  "school": "Steelton-Highspire",
+  "identified_as": "Steelton-Highspire Junior/Senior High School, Steelton",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#4E6AB3",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steamrollers",
+  "confidence": "medium",
+  "wikipedia": "Steelton-Highspire School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steelton-Highspire_School_District",
+   "https://www.shsd.k12.pa.us/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1703007879/shsdk12paus/gx0o0jr8xfxebshkpx1f/SHSDCrestLogo.jpg"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot not in infobox (Steamrollers from general knowledge).",
+  "evidence": "District 'SH' crest: single medium blue #4E6AB3 on white; site theme vars primary #003E7E, secondary #4169E1. No athletics/Steamroller logo found; gray only from Wikipedia."
+ },
+ {
+  "school": "German Township",
+  "identified_as": "German Township High School, McClellandtown (Fayette County) (closed)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1919/Page_12.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1915/Page_14.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1921/Page_22.html",
+   "https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1919/Page_12.html"
+  ],
+  "era": "Later merged into Albert Gallatin Area SD (Colonials).",
+  "notes": "Colours from 1915-1921 'Laureola' yearbook pages (search snippets); not confirmed for the 1939-1987 wrestling years.",
+  "evidence": "1919 Laureola yearbook OCR text: 'COLORS\u2014Red and Black' and alma mater 'the Black and Red'. No image of the later (1939-1987) era found, so no hex."
+ },
+ {
+  "school": "Lebanon",
+  "identified_as": "Lebanon High School, Lebanon",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#142B53",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cedars",
+  "confidence": "high",
+  "wikipedia": "Lebanon High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lebanon_High_School_(Pennsylvania)",
+   "https://www.lebanonsd.org/",
+   "https://cdnsm5-ss5.sharpschool.com/UserFiles/Servers/Server_70151114/Image/Lebanon%20Logo%20High%20Res.png",
+   "https://www.maxpreps.com/pa/lebanon/lebanon-cedars/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "District 'L' logo: navy #142B53 letter with white cedar and bright red #FF0000 outline; MaxPreps Blue/Red. The blue is navy."
+ },
+ {
+  "school": "Tunkhannock",
+  "identified_as": "Tunkhannock Area High School, Tunkhannock",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#F6851F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#030303",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Tunkhannock Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tunkhannock_Area_High_School",
+   "https://www.tasd.net/",
+   "https://irp.cdn-website.com/8118a1f1/dms3rep/multi/opt/TASD_Seal_Logo_5_2018-126w.png",
+   "https://www.maxpreps.com/pa/tunkhannock/tunkhannock-tigers/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "District seal: orange #F6851F 'T' outlined in black on white; site CSS orange #FF8C00; MaxPreps Orange/Black/White."
+ },
+ {
+  "school": "Western Wayne",
+  "identified_as": "Western Wayne High School, Lake Ariel",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#BDAB79",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Western Wayne School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Western_Wayne_School_District",
+   "https://www.maxpreps.com/pa/lake-ariel/western-wayne-wildcats/",
+   "https://image.maxpreps.io/school-mascot/1/f/e/1fed953a-97ea-41b3-8414-291ebb60c939.gif?version=634159852800000000"
+  ],
+  "era": null,
+  "notes": "Colours from MaxPreps (school-supplied) only; district site unreachable.",
+  "evidence": "MaxPreps school-mascot image: black 'WW' letters with Vegas gold #BDAB79 outline; MaxPreps lists Black/Vegas Gold/White, mascot Wildcats. District site did not load."
+ },
+ {
+  "school": "Wallenpaupack",
+  "identified_as": "Wallenpaupack Area High School, Hawley",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#452662",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buckhorns",
+  "confidence": "high",
+  "wikipedia": "Wallenpaupack Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wallenpaupack_Area_School_District",
+   "https://www.wallenpaupack.org/",
+   "https://resources.finalsite.net/images/v1746652934/wallenpaupackorg/ecweekjpynsilawofg6y/WallenpaupackAreaSchoolDistrictPrimaryLogoImage.gif",
+   "https://www.maxpreps.com/pa/hawley/wallenpaupack-area-buckhorns/"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot from general knowledge.",
+  "evidence": "District crest: deep purple #452662 panels and banner on white (blue lake is a map detail); MaxPreps Purple/White, mascot Buckhorns confirmed."
+ },
+ {
+  "school": "Harriton",
+  "identified_as": "Harriton High School, Rosemont",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E91F34",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Harriton High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harriton_High_School",
+   "https://www.lmsd.org/harritonhs",
+   "https://www.lmsd.org/uploaded/photos/headers/hhs_logo.png",
+   "https://www.maxpreps.com/pa/rosemont/harriton-rams/"
+  ],
+  "era": null,
+  "notes": "Wikipedia hex are pure primaries, likely not brand values.",
+  "evidence": "Harriton header logo: red #E91F34 'H' badge with black wordmark; MaxPreps Red/White/Black, Rams. (Site maroon #541B25 is Lower Merion district.)"
+ },
+ {
+  "school": "Bishop McDevitt (3)",
+  "identified_as": "Bishop McDevitt High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#082539",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#8E744B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Bishop McDevitt High School (Harrisburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McDevitt_High_School_(Harrisburg,_Pennsylvania)",
+   "https://www.bishopmcdevitt.org/mcd/",
+   "https://www.bishopmcdevitt.org/mcd/images/BMcD_Logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; navy hex written as '1B2452' without '#'.",
+  "evidence": "School logo: navy #082539 wordmark and old/Vegas gold #8E744B 'HIGH SCHOOL' and cross; site CSS navy #012B5D and gold #A39261."
+ },
+ {
+  "school": "West Chester Rustin",
+  "identified_as": "West Chester Rustin High School, Westtown Township",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#003E7E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#E2D677",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "high",
+  "wikipedia": "West Chester Rustin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Chester_Rustin_High_School",
+   "https://rhs.wcasd.net/",
+   "https://resources.finalsite.net/images/v1727193950/wcasdnet/n9dbsx3leet1fkomrxsf/RHS-Golden-Knights-logo.png",
+   "https://www.wcasd.net/"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "Rustin 'Golden Knights' logo: pale gold #E2D677 knight with navy #003E7E outline; Rustin site theme navy #001B64. Gold is a light Vegas/pale gold. (District 'WC' blue #025480 is not Rustin's.)"
+ }
+]

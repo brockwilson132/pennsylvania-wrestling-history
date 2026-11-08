@@ -1,0 +1,615 @@
+[
+ {
+  "school": "New Hope-Solebury",
+  "identified_as": "New Hope-Solebury High School, New Hope",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#22324D",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E0A412",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "New Hope-Solebury High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/New_Hope-Solebury_High_School",
+   "https://www.nhsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/20487/logo/23301/NHSDLogo.png"
+  ],
+  "era": null,
+  "notes": "First pass said royal blue; district logo and site are navy and gold.",
+  "evidence": "nhsd.org header logo (NHSDLogo.png): navy ~#20324C lion and lettering, gold ~#E1A00A mane; site theme CSS top colours #22324D and #E0A412 match."
+ },
+ {
+  "school": "Carrick",
+  "identified_as": "Carrick High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#062539",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold (orange-gold)",
+    "hex": "#F1A053",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Royal blue",
+    "hex": "#115091",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "high",
+  "wikipedia": "Carrick High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carrick_High_School",
+   "https://www.pghschools.org/carrick",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1724440824/pghschoolsorg/sle6mytoomxwswawxljn/carrickhs-logo.png"
+  ],
+  "era": null,
+  "notes": "Blue and gold confirmed; the current PPS logo uses a dark navy plus a lighter royal blue, and its gold leans orange.",
+  "evidence": "PPS school page logo carrickhs-logo.png: 'CHS' monogram with spear, dark navy #062539 letters, orange-gold #F1A053 ring/outline, royal blue #115091 spear."
+ },
+ {
+  "school": "Susquehanna Community",
+  "identified_as": "Susquehanna Community Junior/Senior High School, Susquehanna (Susquehanna Community School District)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#002366",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Sabers",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/susquehanna/susquehanna-sabers/softball/schedule/all-time",
+   "https://www.scschools.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1742895880/scschoolsorg/ov4zjzqoyrx2ixg8uif0/SusquehannaCommunitySchoolDistrictPrimaryLogoImage.png",
+   "search:https://en.wikipedia.org/wiki/Susquehanna_Community_School_District"
+  ],
+  "era": null,
+  "notes": "District logo is navy on white (crossed sabers shield). White is the field colour of the shield, so it is kept as the second colour.",
+  "evidence": "scschools.org primary logo: crossed sabers and Old English 'S' in navy #002366 on a white shield; second logo (school_logo_2) same navy."
+ },
+ {
+  "school": "Obama Academy",
+  "identified_as": "Barack Obama Academy of International Studies 6-12, Pittsburgh",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#535488",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#A7A8A9",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Barack Obama Academy of International Studies 6\u201312",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Barack_Obama_Academy_of_International_Studies_6%E2%80%9312",
+   "https://www.pghschools.org/obama",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1724441040/pghschoolsorg/vhwqcubw7pedlfnq5zle/obama6-12-logo.png"
+  ],
+  "era": null,
+  "notes": "The logo's purple is a muted blue-violet.",
+  "evidence": "PPS school page logo obama6-12-logo.png: eagle head in purple #535488 with black #231F20 outline and grey/silver #A7A8A9 detail."
+ },
+ {
+  "school": "Archbishop Wood",
+  "identified_as": "Archbishop Wood Catholic High School, Warminster",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#167001",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#D9B000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Archbishop Wood Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Archbishop_Wood_Catholic_High_School",
+   "https://www.archwood.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1774287133/archwoodorg/jop2ufgy2gwev9cidh2p/header_logo_1.png"
+  ],
+  "era": null,
+  "notes": "Logo shows green and gold; black (from Wikipedia) not visible in the crest, kept third without a hex.",
+  "evidence": "archwood.org header crest: green #167001 field, gold #D9B000 ring and lettering."
+ },
+ {
+  "school": "Central High",
+  "identified_as": "Central High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#9E1C35",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEE375",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lancers",
+  "confidence": "high",
+  "wikipedia": "Central High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_High_School_%28Philadelphia%29",
+   "https://centralhs.philasd.org/",
+   "https://centralhs.philasd.org/wp-content/uploads/sites/235/2017/09/cropped-CHS-LOGO-keefe-192x192.png",
+   "https://www.philasd.org/centralhs/wp-content/uploads/sites/235/2017/08/Central-Logo.gif"
+  ],
+  "era": null,
+  "notes": "School seal: crimson (dark, maroon-leaning) and a light gold.",
+  "evidence": "centralhs.philasd.org site icon CHS-LOGO-keefe: seal with crimson #9E1C35 ring and gold #FEE375; Central-Logo.gif on the same site agrees (#8A2538 / #FDE374)."
+ },
+ {
+  "school": "Archbishop Ryan",
+  "identified_as": "Archbishop Ryan High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EAD42E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "high",
+  "wikipedia": "Archbishop Ryan High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Archbishop_Ryan_High_School",
+   "https://www.archbishopryan.com/",
+   "https://www.archbishopryan.com/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Interlocking 'AR' logo: red A, black R, gold outlines. Black is a real colour here (the R) but the hex was not taken from flat black.",
+  "evidence": "archbishopryan.com/pics/school_logo.png: red #FF0000 'A', gold #EAD42E outline, black 'R'; site theme red #C82623."
+ },
+ {
+  "school": "Academy Park",
+  "identified_as": "Academy Park High School, Sharon Hill",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": "#C0C0C0",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": "Academy Park High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Academy_Park_High_School"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": null
+ },
+ {
+  "school": "George Washington",
+  "identified_as": "George Washington High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#1B212F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Old gold",
+    "hex": "#8A6C36",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "George Washington High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/George_Washington_High_School_%28Philadelphia%29",
+   "https://gwhs.philasd.org/",
+   "https://www.philasd.org/gwhs/wp-content/uploads/sites/368/2019/03/GWHS_Logo_4C_FINAL_OUTLINES.jpg"
+  ],
+  "era": null,
+  "notes": "School logo is navy and old (Vegas-type) gold, not the generic blue/gold infobox hexes.",
+  "evidence": "gwhs.philasd.org logo GWHS_Logo_4C_FINAL: eagle head over 'GWHS' in navy #1B212F with old gold #8A6C36 outline."
+ },
+ {
+  "school": "Westinghouse",
+  "identified_as": "Westinghouse Academy 6-12, Pittsburgh",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0032A0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDDC02",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Westinghouse High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Westinghouse_High_School_%28Pittsburgh%29",
+   "https://www.pghschools.org/westinghouse",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1725544233/pghschoolsorg/bmvwhkbbnwwjbzjih1vk/westinghouse6-23-logo-updated-8-9-22.png"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps.",
+  "evidence": "PPS school page logo westinghouse6-23-logo: 'BULLDOGS WESTINGHOUSE' banner in royal blue #0032A0 with gold #FDDC02 stripe; bulldog grey."
+ },
+ {
+  "school": "Archbishop Carroll",
+  "identified_as": "Archbishop John Carroll High School, Radnor",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C10230",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "high",
+  "wikipedia": "Archbishop John Carroll High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Archbishop_John_Carroll_High_School",
+   "https://www.jcarroll.org/",
+   "https://www.jcarroll.org/pics/logo_news.png",
+   "https://www.jcarroll.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Athletic block 'C' is red with white; crest also adds gold detail. archbishopcarroll.org is a different school (Washington DC, Lions, green/gold) - not used.",
+  "evidence": "jcarroll.org logo_news.png: red #C10230 octagon block 'C' with white; school_logo crest red #CD163F; site theme red #BA0C2F."
+ },
+ {
+  "school": "Clarks Summit/Abington",
+  "identified_as": "Clarks Summit-Abington High School, Clarks Summit (predecessor of Abington Heights)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "low",
+  "wikipedia": "Abington Heights School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Abington_Heights_School_District",
+   "https://en.wikipedia.org/wiki/Abington_Heights_High_School"
+  ],
+  "era": "Clarks Summit-Abington (brackets 1959-1964) became Abington Heights; Abington Heights HS opened 1967.",
+  "notes": "Wikipedia says the Comets nickname came from Clarks Summit HS; colours (blue/white) are Abington Heights' and only inferred for the predecessor. Batch lists District 12 but Clarks Summit is District 2.",
+  "evidence": null
+ },
+ {
+  "school": "Erie",
+  "identified_as": "Erie High School, Erie",
+  "colors": [
+   {
+    "name": "Royal purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Royals",
+  "confidence": "medium",
+  "wikipedia": "Erie High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Erie_High_School_%28Pennsylvania%29"
+  ],
+  "era": "Opened 2017 from the merger of Central Tech and Strong Vincent; new colours/brand chosen then.",
+  "notes": "Infobox lists 'Gold and Royal Purple'; order unclear.",
+  "evidence": null
+ },
+ {
+  "school": "Perry Traditional Acad.",
+  "identified_as": "Perry Traditional Academy, Pittsburgh",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#001192",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Commodores",
+  "confidence": "medium",
+  "wikipedia": "Perry Traditional Academy",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Perry_Traditional_Academy",
+   "search:https://www.maxpreps.com/pa/pittsburgh/perry-traditional-academy-commodores/softball/schedule/all-time",
+   "https://www.pghschools.org/perry",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1724431567/pghschoolsorg/joo7f7jt05ksfwny4fgj/perryhs-logo-updated-8-9-22.png"
+  ],
+  "era": null,
+  "notes": "Small clip-art mascot (Commodore) drawn in royal blue with white/silver trim; supports blue and white.",
+  "evidence": "PPS school page logo perryhs-logo (150px): commodore figure in royal blue #001192 coat, navy shadows, white/silver epaulettes."
+ },
+ {
+  "school": "Martin Luther King",
+  "identified_as": "Martin Luther King High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Martin Luther King High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Martin_Luther_King_High_School_%28Philadelphia%29"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": null
+ },
+ {
+  "school": "Penn Wood",
+  "identified_as": "Penn Wood High School, Lansdowne",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Navy blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Penn Wood High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": null
+ },
+ {
+  "school": "Franklin Towne Charter",
+  "identified_as": "Franklin Towne Charter High School, Philadelphia (Bridesburg)",
+  "colors": [],
+  "mascot": "Coyotes",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://northeasttimes.com/?p=5113",
+   "search:https://www.maxpreps.com/pa/philadelphia/franklin-towne-warriors/volleyball/history"
+  ],
+  "era": null,
+  "notes": "No colours found. Nickname conflict: Northeast Times uses Coyotes, MaxPreps URLs use Warriors.",
+  "evidence": null
+ },
+ {
+  "school": "Jenkintown",
+  "identified_as": "Jenkintown Middle/High School, Jenkintown",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AB1D21",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#1C1E4D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Drakes",
+  "confidence": "high",
+  "wikipedia": "Jenkintown School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Jenkintown_School_District",
+   "https://www.jenkintowndrakes.org/",
+   "https://i0.wp.com/jenkintowndrakes.org/wp-content/uploads/2024/08/3.png",
+   "https://jenkintowndrakes.org/wp-content/uploads/2024/07/reddrake.png"
+  ],
+  "era": null,
+  "notes": "Blue is navy.",
+  "evidence": "jenkintowndrakes.org round 'J Drakes' badge: navy #1C1E4D ring, red #AB1D21 centre; red drake mascot #AD1F24 with navy #2A2D5C detail; site CSS #AF170A/#003388."
+ },
+ {
+  "school": "Tulpehocken",
+  "identified_as": "Tulpehocken Junior/Senior High School, Bethel Township (Bernville address)",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0206A7",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FED102",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Tulpehocken Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tulpehocken_Area_School_District",
+   "search:https://berksnostalgia.com/Bethel-High-School/",
+   "search:https://www.tulpehocken.org/o/tas",
+   "https://www.tulpehocken.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/19571/logo/21839/lightbox__1_.png"
+  ],
+  "era": null,
+  "notes": "District logo and site theme are blue and gold (site uses a darker blue #203D77).",
+  "evidence": "tulpehocken.org header logo: royal blue #0206A7 shield and wordmark with gold #FED102 'T' and subtitle; site theme #203D77 / #FECD18."
+ },
+ {
+  "school": "Wilkes-Barre Area",
+  "identified_as": "Wilkes-Barre Area High School, Plains Township",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": "#68ABE4",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolfpack",
+  "confidence": "high",
+  "wikipedia": "Wilkes-Barre Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilkes-Barre_Area_High_School",
+   "search:https://wnep.com/article/news/local/luzerne-county/wilkes-barre-area-welcomes-the-wolfpack/523-037a646c-448c-46b1-8f3a-70f204c72a3e",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/wilkes-barre-wolfpack/basketball/schedule/all-time",
+   "https://www.wbasd.k12.pa.us/",
+   "https://www.wbasd.k12.pa.us/sysimages/HeaderLogo.png"
+  ],
+  "era": "Formed 2021 (sports consolidated from ~2019) from Coughlin, GAR and Meyers.",
+  "notes": "Logo shows Carolina blue ring, grey/white wolf, black outlines. Board-approved colours (WNEP) black and Carolina blue.",
+  "evidence": "wbasd.k12.pa.us HeaderLogo.png: Carolina blue #68ABE4 ring with white lettering, grey wolf, black outline; site CSS top colour #6CACE4 (PMS 284)."
+ },
+ {
+  "school": "Pittsburgh CC",
+  "identified_as": "Central Catholic High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#0F2D52",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC629",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Central Catholic High School (Pittsburgh)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Catholic_High_School_%28Pittsburgh%29",
+   "https://www.centralcatholichs.com/",
+   "https://resources.finalsite.net/images/v1764620394/centralcatholichscom/kemq7n7mxviusgw9lvfw/header-logo.svg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "centralcatholichs.com header-logo.svg fills: navy #0F2D52 and gold #FFC629; site theme navy #002855 / blue #005EB8."
+ },
+ {
+  "school": "West Side Vo-Tech",
+  "identified_as": "West Side Career and Technology Center, Kingston",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#001D50",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#C59D65",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "medium",
+  "wikipedia": "West Side Career and Technology Center",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Side_Career_and_Technology_Center",
+   "https://www.wsctc.net/",
+   "https://www.wsctc.net/images/logo-titan.png",
+   "https://www.wsctc.net/images/logo.png"
+  ],
+  "era": null,
+  "notes": "Current Titans logo is navy and Vegas gold; the CTC gear logo is navy #17286B and darker gold #B99311. Era: these are the current brand; 1969-1998 wrestling-era colours not confirmed.",
+  "evidence": "wsctc.net logo-titan.png: navy #001D50 'TITANS' and helmet, Vegas gold #C59D65 trim; logo.png gear: navy #17286B, gold #B99311; site CSS gold #EDCA05."
+ }
+]

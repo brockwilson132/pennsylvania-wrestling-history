@@ -1,0 +1,447 @@
+[
+ {
+  "school": "Rothrock",
+  "identified_as": "Rothrock High School, McVeytown (Mifflin County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Closed; later part of Mifflin County School District.",
+  "notes": "No Wikipedia page found; identity assumed from District 6 and name. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Ridley Township",
+  "identified_as": "Ridley Township High School, Folsom (Ridley Twp.)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Green Raiders",
+  "confidence": "low",
+  "wikipedia": "Ridley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ridley_High_School",
+   "https://en.wikipedia.org/wiki/Ridley_School_District"
+  ],
+  "era": "Predecessor of Ridley High School (Ridley School District); colours given are the successor's.",
+  "notes": "Inferred from successor Ridley HS (green and white, infobox hex #0B3B0B not used because unverified for the 1960s school).",
+  "evidence": null
+ },
+ {
+  "school": "West Philadelphia",
+  "identified_as": "West Philadelphia High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0B1E3E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#AF5534",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Speedboys",
+  "confidence": "high",
+  "wikipedia": "West Philadelphia High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Philadelphia_High_School",
+   "https://www.maxpreps.com/pa/philadelphia/west-philadelphia-speedboys/",
+   "https://image.maxpreps.io/school-mascot/6/1/6/616abd7a-0e54-4529-b3cd-c75d50c5c88c.gif"
+  ],
+  "era": null,
+  "notes": "Logo blue is navy; orange is a burnt orange (felt-textured artwork, so shade approximate).",
+  "evidence": "MaxPreps WP chenille-letter mascot logo: navy #0B1E3E letters with burnt-orange #AF5534 trim; MaxPreps colour fields Orange (#CC4E10) / Blue (#034CB2); Wikipedia orange and blue."
+ },
+ {
+  "school": "Mastery Charter School Lenfest",
+  "identified_as": "Mastery Charter School Lenfest Campus, Philadelphia",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Mastery Charter Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mastery_Charter_Schools",
+   "search:https://masterycharter.org/secondary-schools/lenfest-campus"
+  ],
+  "era": null,
+  "notes": "No mascot or colours found.",
+  "evidence": null
+ },
+ {
+  "school": "Reading CC",
+  "identified_as": "Reading Central Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D22730",
+    "hex_from": "photo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "high",
+  "wikipedia": "Reading Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Central_Catholic_High_School",
+   "https://berksnostalgia.com/central-catholic-high-school/",
+   "https://berksnostalgia.com/tag/central-catholic-cardinals",
+   "https://berksnostalgia.com/wp-content/uploads/2020/05/central-catholic-sweater.jpeg",
+   "https://berksnostalgia.com/wp-content/uploads/2020/05/central-tee.jpeg"
+  ],
+  "era": "Closed 2011; merged with Holy Name into Berks Catholic.",
+  "notes": null,
+  "evidence": "Berksiana history page: 'mascot was the Cardinal and its colors red and white', school song 'For the red and the white'; retro Central Catholic cardinal sweatshirt graphic flat red #D22730 on white, CC tee in red."
+ },
+ {
+  "school": "Sewickley Township",
+  "identified_as": "Sewickley Township High School, Herminie (Westmoreland Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Yough School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Yough_School_District"
+  ],
+  "era": "Likely a predecessor of Yough (Cougars; green and orange) \u2014 not verified.",
+  "notes": "Identity uncertain (could also be Sewickley Twp. in Allegheny Co.). Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "North Clarion",
+  "identified_as": "North Clarion County Junior/Senior High School, Tionesta Twp./Leeper",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#592C91",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolves",
+  "confidence": "medium",
+  "wikipedia": "North Clarion County Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Clarion_County_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/North_Clarion_County_School_District",
+   "https://www.northclarion.org",
+   "https://cdn.schoolblocks.com/organizations/dc99d3d5-47f8-4d03-ad0e-72c14ddbc92c/dc99d3d5-47f8-4d03-ad0e-72c14ddbc92c_logo_17309186954733899.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia says purple and gold (district page purple and yellow); current logo shows purple and silver/grey only, so gold not seen.",
+  "evidence": "northclarion.org district logo: purple #592C91 wolf outline and wordmark with silver-grey #A1A6B2 wolf face; no gold in logo. Site CSS #330066 purple."
+ },
+ {
+  "school": "West Shamokin",
+  "identified_as": "West Shamokin High School, Rural Valley",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolves",
+  "confidence": "medium",
+  "wikipedia": "West Shamokin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Shamokin_High_School"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": null
+ },
+ {
+  "school": "Bonner & Prendie",
+  "identified_as": "Monsignor Bonner & Archbishop Prendergast Catholic High School, Drexel Hill",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#0C4B34",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FBDB41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Garnet",
+    "hex": "#73193E",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Friars (boys) / Pandas (girls)",
+  "confidence": "high",
+  "wikipedia": "Monsignor Bonner & Archbishop Prendergast Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Monsignor_Bonner_%26_Archbishop_Prendergast_Catholic_High_School",
+   "https://www.bonnerprendie.com",
+   "https://www.bonnerprendie.com/pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": "Merged Bonner & Prendie crest combines both schools' colours; Bonner-only set was green/gold/white/black (infobox).",
+  "evidence": "bonnerprendie.com header crest (B&P shield): green #0C4B34, garnet #73193E, gold #FBDB41 on white; site CSS top colours #F9D741, #7F183F, #173A25 agree. Merged school uses Bonner green/gold plus Prendergast garnet."
+ },
+ {
+  "school": "William Penn",
+  "identified_as": "William Penn Senior High School, York",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FF5000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#002369",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bearcats",
+  "confidence": "high",
+  "wikipedia": "William Penn Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/William_Penn_Senior_High_School",
+   "search:https://www.maxpreps.com/pa/york/william-penn-bearcats/",
+   "https://www.ycs.k12.pa.us/o/wpshs",
+   "https://cmsv2-assets.apptegy.net/uploads/21041/logo/23855/William_Penn_logo.png",
+   "https://www.easternpafootball.com/db/schedules/viewteam.php5?id=202",
+   "https://www.easternpafootball.com/teamlogo/York William Penn 2025.png"
+  ],
+  "era": null,
+  "notes": "Infobox orange #E86100 replaced by school logo orange.",
+  "evidence": "William Penn SHS site (ycs.k12.pa.us/o/wpshs) header logo: bearcat in a block Y, flat orange #FF5000 with navy #002369 outline on white; site theme #192B53 navy and #EF792D orange; EasternPAFootball 2025 helmet orange with royal-blue facemask."
+ },
+ {
+  "school": "Elizabeth",
+  "identified_as": "Elizabeth High School, Elizabeth (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Elizabeth Forward High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elizabeth_Forward_High_School",
+   "https://en.wikipedia.org/wiki/Elizabeth_Forward_School_District"
+  ],
+  "era": "Predecessor of Elizabeth Forward (Warriors; red and black); 1936-40 colours unknown.",
+  "notes": "No source for the 1930s school colours. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Wyoming Seminary",
+  "identified_as": "Wyoming Seminary, Kingston",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#013A80",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Knights",
+  "confidence": "high",
+  "wikipedia": "Wyoming Seminary",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyoming_Seminary",
+   "https://www.wyomingseminary.org",
+   "https://resources.finalsite.net/images/v1788207919/wyoming/yohjymxyhjrs5znyhvmc/favicon_new.svg",
+   "https://resources.finalsite.net/images/v1787835653/wyoming/stq9boaca4lxquayvenb/header_logo.svg",
+   "search:https://issuu.com/wyomingseminary3/docs/19_summer_journal"
+  ],
+  "era": null,
+  "notes": "Infobox colours field empty. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": "wyomingseminary.org: favicon SVG drawn entirely in #013A80, and #013A80 is the site's dominant theme colour (white header logo on it); school journal states official colours navy blue and white."
+ },
+ {
+  "school": "Lake-Noxen",
+  "identified_as": "Lake-Noxen High School, Luzerne County",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lake-Lehman School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lake-Lehman_School_District"
+  ],
+  "era": "Predecessor of Lake-Lehman (formed by later merger).",
+  "notes": "No colours found. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Captain Jack",
+  "identified_as": "Captain Jack High School, Mount Union area (Huntingdon Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Mount Union Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mount_Union_Area_School_District"
+  ],
+  "era": "Probably a predecessor of Mount Union Area (Trojans; royal blue and Vegas gold) \u2014 not verified.",
+  "notes": "Identity unverified. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Ralpho Township",
+  "identified_as": "Ralpho Township High School, Elysburg",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Southern Columbia Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Columbia_Area_School_District"
+  ],
+  "era": "Ralpho Township is now served by Southern Columbia Area (Tigers; black and gold).",
+  "notes": "No colours found for the 1950s school. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Mahanoy Joint",
+  "identified_as": "Mahanoy Joint High School, Mahanoy City area",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Mahanoy Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mahanoy_Area_School_District"
+  ],
+  "era": "Probably a predecessor of Mahanoy Area (Golden Bears; black and gold) \u2014 not verified.",
+  "notes": "No colours found for the 1959-66 school. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Steelton Highspire",
+  "identified_as": "Steelton-Highspire High School, Steelton",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#4E6AB2",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steamrollers",
+  "confidence": "high",
+  "wikipedia": "Steelton-Highspire High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steelton-Highspire_High_School",
+   "https://www.shsd.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1703007879/shsdk12paus/gx0o0jr8xfxebshkpx1f/SHSDCrestLogo.jpg"
+  ],
+  "era": null,
+  "notes": "Grey from the district infobox not seen in the crest. Mascot inferred from the steamroller in the crest (Steamrollers/Rollers).",
+  "evidence": "shsd.k12.pa.us SHSD crest logo: single flat blue #4E6AB2 on white, with a steamroller in the crest; matches infobox blue and white. No grey seen."
+ },
+ {
+  "school": "Cardinal Dougherty",
+  "identified_as": "Cardinal Dougherty High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#8C2633",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "Cardinal Dougherty High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cardinal_Dougherty_High_School"
+  ],
+  "era": "Closed in 2010.",
+  "notes": null,
+  "evidence": null
+ },
+ {
+  "school": "Olney Charter",
+  "identified_as": "Aspira Olney Charter High School (Olney High School), Philadelphia",
+  "colors": [],
+  "mascot": "Trojans",
+  "confidence": "low",
+  "wikipedia": "Olney High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Olney_High_School"
+  ],
+  "era": "Aspira-run charter 2011-2022, same school as \"Olney\".",
+  "notes": "No colours found. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Beaver County Christian",
+  "identified_as": "Beaver County Christian School, Beaver Falls",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "No Wikipedia page. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "West Mifflin North",
+  "identified_as": "West Mifflin North High School, West Mifflin",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School"
+  ],
+  "era": "Opened 1960; North and South later consolidated into West Mifflin Area High School (Titans; blue and gold).",
+  "notes": "No colours found for North specifically. Web search budget was exhausted before this school could be searched; only Wikipedia was checked.",
+  "evidence": null
+ },
+ {
+  "school": "Stowe Township",
+  "identified_as": "Stowe Township High School, Stowe Township (Allegheny Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Sto-Rox High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sto-Rox_High_School",
+   "https://en.wikipedia.org/wiki/Sto-Rox_School_District"
+  ],
+  "era": "Merged with McKees Rocks in 1966-67 to form Sto-Rox (Vikings; green and white).",
+  "notes": "No colours found for the 1930s school.",
+  "evidence": null
+ }
+]

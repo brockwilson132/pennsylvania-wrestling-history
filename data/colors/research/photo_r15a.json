@@ -1,0 +1,472 @@
+[
+ {
+  "school": "Elco",
+  "identified_as": "Eastern Lebanon County (ELCO) High School, Myerstown",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#0E2D52",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EBAA22",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "high",
+  "wikipedia": "Eastern Lebanon County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eastern_Lebanon_County_High_School",
+   "https://www.elcosd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1736793337/elcosdorg/mv7bwcn6u1hzpaeni2rf/elco.png"
+  ],
+  "era": null,
+  "notes": "Infobox text 'Blue and gold' with color boxes navy/gold (named colours, no hex).",
+  "evidence": "district 'ELCO' wordmark logo: navy #0E2D52 block letters with gold #EBAA22 spear/arrowhead on white; matches Wikipedia infobox blue and gold. Site CSS is stock Finalsite (no school colours)."
+ },
+ {
+  "school": "St. John Kanty Prep",
+  "identified_as": "St. John Kanty Preparatory School, Erie (closed 1980)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://cmnewengland.org/2010/06/st-john-kanty-prep-end-of-the-legend/",
+   "search:https://www.e-yearbook.com/yearbooks/St_John_Kanty_Preparatory_School_Kantian_Yearbook/1951/Page_24.html",
+   "https://cmnewengland.org/2010/06/st-john-kanty-prep-end-of-the-legend/",
+   "https://cmnewengland.org/2010/09/for-god-for-country-for-kanty/"
+  ],
+  "era": "Closed after the 1980 graduation.",
+  "notes": "No source found stating colours; history pages and searches give none. Left empty.",
+  "evidence": "Read two Vincentian history posts (photos of building, yearbook covers in grey/sepia); no colour mention. Web searches found no colours; image search engines unreachable from this environment."
+ },
+ {
+  "school": "Canevin Catholic",
+  "identified_as": "Bishop Canevin High School, Pittsburgh (Scott Twp area; known as Canevin Catholic High School from 1987)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#030C35",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Columbia Blue",
+    "hex": "#86B9E8",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Bishop Canevin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Canevin_High_School",
+   "search:https://bishopcanevin.org/wp-content/uploads/2026/08/BC-Student-Parent-Handbook-2026-2027.pdf",
+   "https://bishopcanevin.org",
+   "https://bishopcanevin.org/wp-content/uploads/2022/07/BCHS_Crest.png"
+  ],
+  "era": "Named Canevin Catholic HS from 1987 per Wikipedia history; now Bishop Canevin again.",
+  "notes": "Handbook (search snippet) lists 'White, Navy and Columbia Blue'; Wikipedia infobox lists Columbia blue, navy, white. Order here follows Wikipedia/athletic use; handbook lists white first. Bracket year 1980 predates the 1987 rename, so the name in our data may be anachronistic but the school is the same.",
+  "evidence": "Bishop Canevin 'Crusaders' crest on school site: navy #030C35 shield with Columbia blue #86B9E8 cross/border and white lettering/sword; site CSS has #8DB9E5 light blue."
+ },
+ {
+  "school": "Venango Catholic",
+  "identified_as": "Venango Catholic High School, Oil City",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDC30E",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Venango Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Venango_Catholic_High_School",
+   "https://www.venangocatholic.org",
+   "https://www.venangocatholic.org/history/",
+   "https://www.venangocatholic.org/wp-content/uploads/2023/10/VenangoCatholicHighSchool-SM.png"
+  ],
+  "era": "Opened 1962 as Venango Christian HS (renamed Venango Catholic 2001); predecessor St. Joseph HS, Oil City, was green and gold.",
+  "notes": null,
+  "evidence": "School crest (Viking ship, 'Reddite Deo', 1962): black #000000 ship and lettering on gold #FDC30E shield/crown. History page: named Venango Christian HS until 2001; predecessor St. Joseph HS (to 1962) was green and gold."
+ },
+ {
+  "school": "Our Lady of the Sacred Heart",
+  "identified_as": "Our Lady of the Sacred Heart High School, Coraopolis",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#3A1F74",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CDB887",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Chargers",
+  "confidence": "high",
+  "wikipedia": "Our Lady of the Sacred Heart High School (Coraopolis)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Our_Lady_of_the_Sacred_Heart_High_School_(Coraopolis)",
+   "https://www.olsh.org",
+   "https://www.olsh.org/pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "School header logo: purple #3A1F74 wordmark and heart with tan/Vegas gold #CDB887 outline and sword; site CSS has #330066 and #CCB887. Gold is a muted Vegas gold, not yellow gold."
+ },
+ {
+  "school": "Benjamin Franklin",
+  "identified_as": "Benjamin Franklin High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#000098",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Yellow Gold",
+    "hex": "#FFFF01",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Electrons",
+  "confidence": "medium",
+  "wikipedia": "Benjamin Franklin High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Benjamin_Franklin_High_School_(Philadelphia)",
+   "https://bfhs.philasd.org",
+   "https://bfhs.philasd.org/wp-content/uploads/sites/211/2021/12/BFHS-%E2%80%A2-Graffiti-with-Electron_Page_1-scaled.jpg"
+  ],
+  "era": null,
+  "notes": "Identity doubt remains: listed as District 1 though Philadelphia schools are normally District 12; no other Benjamin Franklin HS known in District 1. Logo yellow is a pure graphic yellow; real 'gold' shade may differ.",
+  "evidence": "BFHS school-site header logo ('Electrons' graffiti letters): dark royal blue #000098 outlines/lettering with bright yellow #FFFF01 shadows and light-blue fill; site CSS is the stock School District of Philadelphia theme (navy #0B315B) so not used. Agrees with infobox blue/gold."
+ },
+ {
+  "school": "Holy Cross",
+  "identified_as": "Holy Cross High School, Dunmore (est. 2007)",
+  "colors": [
+   {
+    "name": "Forest Green",
+    "hex": "#124834",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCB426",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#96999B",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Knights (currently; formerly Crusaders)",
+  "confidence": "medium",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "https://holycrosshs.org",
+   "https://holycrosshs.org/images/template/hchs-header-logo.svg?v=0.01",
+   "https://holycrosshs.org/athletics/overview",
+   "https://holycrosshs.org/uploads/images/athletics-transparent.webp?v=1757614864283"
+  ],
+  "era": null,
+  "notes": "Conflict: current school branding is green and gold (Knights), Wikipedia lists silver/forest green/black (Crusaders era). Silver kept third from the header wordmark grey; black not seen on current logos. For early years (2007 on) silver/green/black may be more accurate.",
+  "evidence": "School site header SVG: green #044A38 'HOLY CROSS', gold #FCAF34/green crest, grey #96999B 'HIGH SCHOOL'. Athletics page logo: 'Holy Cross High School Knights Athletics' in forest green #124834 and gold #FCB426 with white. Wikipedia infobox says silver, forest green, black."
+ },
+ {
+  "school": "Executive Education Acad.",
+  "identified_as": "Executive Education Academy Charter School, Allentown",
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/allentown/executive-education-academy-charter-school-raptors/basketball"
+  ],
+  "era": null,
+  "notes": "MaxPreps listing only (search snippet).",
+  "evidence": "School site eeacs.org and MaxPreps both refused this environment (403 / not allowed); no image looked at. First-pass names kept, no hex."
+ },
+ {
+  "school": "Beaver Falls",
+  "identified_as": "Beaver Falls High School, Beaver Falls",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Beaver Falls High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Beaver_Falls_High_School"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": ""
+ },
+ {
+  "school": "Neighborhood Academy",
+  "identified_as": "The Neighborhood Academy, Pittsburgh (Stanton Heights)",
+  "colors": [],
+  "mascot": "Bulldogs",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/pittsburgh/neighborhood-academy-bulldogs/"
+  ],
+  "era": null,
+  "notes": "MaxPreps colours field blank in search snippet. Do not confuse with Westinghouse HS Bulldogs (blue and gold).",
+  "evidence": ""
+ },
+ {
+  "school": "Executive Education Academy",
+  "identified_as": "Executive Education Academy Charter School, Allentown",
+  "colors": [
+   {
+    "name": "Dark Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Raptors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/allentown/executive-education-academy-charter-school-raptors/basketball"
+  ],
+  "era": null,
+  "notes": "Same school as 'Executive Education Acad.'; MaxPreps listing only (search snippet).",
+  "evidence": "Same school as 'Executive Education Acad.'; eeacs.org and MaxPreps refused this environment (403); no image looked at. First-pass names kept, no hex."
+ },
+ {
+  "school": "Tyrone Christian Academy",
+  "identified_as": "Tyrone Christian Academy, Tyrone (Blair County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.altoonamirror.com/sports/scholastic/miscellaneous/2025/12/rifle-tyrone-christian-academy-drops-opener/"
+  ],
+  "era": null,
+  "notes": "No colours found. Do not use Tyrone Area HS colours (orange and black, Golden Eagles); that is a different school.",
+  "evidence": ""
+ },
+ {
+  "school": "Peabody",
+  "identified_as": "Peabody High School, Pittsburgh (East Liberty)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Highlanders",
+  "confidence": "medium",
+  "wikipedia": "Peabody High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Peabody_High_School_(Pennsylvania)"
+  ],
+  "era": "Closed 2011; students moved to Pittsburgh Obama Academy (former Peabody building).",
+  "notes": null,
+  "evidence": ""
+ },
+ {
+  "school": "Ford City",
+  "identified_as": "Ford City High School, Ford City (Armstrong County)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Sabers",
+  "confidence": "medium",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Ford_City_High_School.html",
+   "search:https://www.alumniclass.com/fordcity/military-alumni-view"
+  ],
+  "era": "Closed 2015, merged with Kittanning into Armstrong Jr/Sr HS (Riverhawks, blue and orange).",
+  "notes": "Purple and gold from search-result listings (old Wikipedia mirror and a school profile); not confirmed for the 1970s specifically.",
+  "evidence": ""
+ },
+ {
+  "school": "Aliquippa",
+  "identified_as": "Aliquippa Junior/Senior High School, Aliquippa",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Quips",
+  "confidence": "medium",
+  "wikipedia": "Aliquippa Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Aliquippa_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": ""
+ },
+ {
+  "school": "Armstrong Central",
+  "identified_as": "Unconfirmed: likely an Armstrong County school (Armstrong School District area), 1991-92",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "Identity doubt: could not identify 'Armstrong Central' with certainty; Wikipedia has no page. Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": ""
+ },
+ {
+  "school": "Bellevue",
+  "identified_as": "Bellevue High School, Bellevue (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Bellevue School District later merged with Avalon to form Northgate (Flames, red and gold); do not use Northgate colours.",
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours. Search found nothing for pre-Northgate Bellevue HS.",
+  "evidence": ""
+ },
+ {
+  "school": "Sewickley",
+  "identified_as": "Sewickley (public) High School, Sewickley",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sewickley_High_School"
+  ],
+  "era": "Public Sewickley HS later absorbed into Quaker Valley.",
+  "notes": "Wikipedia page 'Sewickley High School' has no colours field. Not Sewickley Academy (red and black).",
+  "evidence": ""
+ },
+ {
+  "school": "Rankin Township",
+  "identified_as": "Rankin High School, Rankin (Allegheny County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Rankin later folded into Woodland Hills SD.",
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": ""
+ },
+ {
+  "school": "Wilkes-Barre Township",
+  "identified_as": "Wilkes-Barre Township High School",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Later part of Wilkes-Barre Area SD.",
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": ""
+ },
+ {
+  "school": "Yeadon",
+  "identified_as": "Yeadon High School, Yeadon (Delaware County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Wood_High_School"
+  ],
+  "era": "Later merged into Penn Wood HS (maroon, white, navy); do not use Penn Wood colours without confirmation.",
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": ""
+ },
+ {
+  "school": "Reynoldsville",
+  "identified_as": "Reynoldsville High School, Reynoldsville (Jefferson County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": null,
+  "notes": "Search budget ran out before this school was searched; Wikipedia had nothing on this school's own colours.",
+  "evidence": ""
+ }
+]

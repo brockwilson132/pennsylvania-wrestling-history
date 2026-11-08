@@ -1,0 +1,423 @@
+[
+ {
+  "school": "Union Area",
+  "identified_as": "Union Area High School, New Castle (Lawrence Co.)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#015DA6",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Scotties",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/new-castle/union-area-scotties/basketball/girls",
+   "https://www.unionareasd.org/",
+   "https://www.unionareasd.org/wp-content/uploads/2019/11/uasd-w-tag-500x158.png"
+  ],
+  "era": null,
+  "notes": "District logo is a single royal blue with white; site CSS also uses #003388 (darker blue) and #015DA6. Silver (MaxPreps) not seen in district artwork; Scotties mascot art not found.",
+  "evidence": "district header logo uasd-w-tag.png: royal blue #015DA6 'U' + text on white; site CSS #003388 x12, #015DA6"
+ },
+ {
+  "school": "Kensington",
+  "identified_as": "Kensington High School, Philadelphia",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Kensington High School (Philadelphia)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kensington_High_School_(Philadelphia)"
+  ],
+  "era": "Kensington was split into several small schools (e.g. Kensington CAPA, Kensington Health Sciences) around 2006-2010",
+  "notes": "Wikipedia has no colours; web search budget exhausted before further lookup.",
+  "evidence": null
+ },
+ {
+  "school": "Friends Select",
+  "identified_as": "Friends Select School, Philadelphia",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#3A2416",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEBD17",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Friends Select School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Friends_Select_School",
+   "https://www.friends-select.org/",
+   "https://upload.wikimedia.org/wikipedia/en/0/00/Friends_Select_School_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Wikipedia logo: dark brown #392416 wordmark on gold #FEBD17; school site theme brown #3A2416 x190 with light gold #FFE670"
+ },
+ {
+  "school": "Kennedy-Kenrick",
+  "identified_as": "Kennedy-Kenrick Catholic High School, Norristown",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Athletic Gold",
+    "hex": "#FFCC00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "medium",
+  "wikipedia": "Kennedy\u2013Kenrick Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennedy%E2%80%93Kenrick_Catholic_High_School"
+  ],
+  "era": "Closed 2010; replaced by Pope John Paul II HS",
+  "notes": "Royal blue given only as a named color box.",
+  "evidence": null
+ },
+ {
+  "school": "Cardinal Wuerl North Catholic",
+  "identified_as": "North Catholic High School (formerly Cardinal Wuerl North Catholic), Cranberry Township",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C8102E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC425",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "North Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Catholic_High_School",
+   "https://www.northcatholic.org/",
+   "https://www.northcatholic.org/apple-touch-icon.png"
+  ],
+  "era": "Named Cardinal Wuerl North Catholic 2014-2018ish; now North Catholic",
+  "notes": "Wikipedia's 'scarlet' #FF2400 is a generic swatch; school's interlocking NC logo is a deeper red with gold/yellow outline.",
+  "evidence": "school site icon: interlocking NC in red #C8102E outlined gold/yellow (#FAEC5C); site CSS #C8102E x30, #FFC425 x24"
+ },
+ {
+  "school": "Naeinghborhood Academy",
+  "identified_as": "The Neighborhood Academy, Pittsburgh (input name is a typo)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#003C6C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Orange",
+    "hex": "#E76F1F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://www.theneighborhoodacademy.org/",
+   "https://resources.finalsite.net/images/v1747206509/theneighborhoodacademyorg/b5mraqoesovf8dh29jgm/Logo2.svg"
+  ],
+  "era": null,
+  "notes": "Colours from the school's institutional logo SVG (navy with a single orange accent); no athletics logo or mascot found. Orange may be a branding accent rather than a team colour.",
+  "evidence": "school site Logo2.svg fills: navy #003C6C (24 shapes) + one orange #E76F1F shape; site CSS also uses #003C6C"
+ },
+ {
+  "school": "Lincoln Park",
+  "identified_as": "Lincoln Park Performing Arts Charter School, Midland",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#15477C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#DAA62A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Leopards",
+  "confidence": "high",
+  "wikipedia": "Lincoln Park Performing Arts Charter School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lincoln_Park_Performing_Arts_Charter_School",
+   "https://www.lppacs.org/",
+   "https://static.wixstatic.com/media/bea83b_76ac39d827504d0ab22014dd611dfbe2~mv2.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site 'LP' logo: white LP on gold #DAA62A disc; site CSS #15477C/#17477C navy-blue and #D9A529 gold"
+ },
+ {
+  "school": "Brownsville Area",
+  "identified_as": "Brownsville Area High School, Brownsville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Brownsville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brownsville_Area_High_School",
+   "https://en.wikipedia.org/wiki/Brownsville_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District page says black, white and gold; high school page says black and gold.",
+  "evidence": null
+ },
+ {
+  "school": "Mohawk Area",
+  "identified_as": "Mohawk Area Junior/Senior High School, Bessemer",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#991D33",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Mohawk Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mohawk_Area_School_District",
+   "https://www.mohawk.k12.pa.us/"
+  ],
+  "era": null,
+  "notes": "Mascot confirmed as Warriors from district logo.",
+  "evidence": "district site icon/image: 'M Warriors' logo, red #991D33 M with black and white WARRIORS banner"
+ },
+ {
+  "school": "New Cumberland",
+  "identified_as": "New Cumberland High School, New Cumberland, Cumberland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "West Shore School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Shore_School_District",
+   "https://en.wikipedia.org/wiki/Cedar_Cliff_High_School"
+  ],
+  "era": "Absorbed into West Shore SD (Cedar Cliff, navy/gold/silver, Colts) in the 1960s",
+  "notes": "No source for New Cumberland HS colours found; web search budget exhausted.",
+  "evidence": null
+ },
+ {
+  "school": "Northumberland",
+  "identified_as": "Northumberland High School, Northumberland, Northumberland Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School"
+  ],
+  "era": "Merged with Sunbury HS in 1965 to form Shikellamy (Braves; maroon, white, blue)",
+  "notes": "No source for Northumberland HS colours found.",
+  "evidence": null
+ },
+ {
+  "school": "Ashland",
+  "identified_as": "Ashland High School, Ashland, Schuylkill Co.",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Schuylkill School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Schuylkill_School_District"
+  ],
+  "era": "Merged into North Schuylkill (Spartans; crimson red and royal blue) in the late 1960s/1970s",
+  "notes": "No source for Ashland HS colours found. 'Black Diamonds' is the town's nickname, not confirmed as the school's.",
+  "evidence": null
+ },
+ {
+  "school": "Homer-Center",
+  "identified_as": "Homer-Center Junior/Senior High School, Homer City",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Homer-Center School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Homer-Center_School_District",
+   "https://www.homercenter.org/",
+   "https://www.homercenter.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Site template uses a dark red accent (#6D0703) but the school's HC logo is strictly black and white, matching Wikipedia.",
+  "evidence": "district site school_logo.png: interlocking HC in white with black outline; site CSS accent #6D0703"
+ },
+ {
+  "school": "Northern Chester County Tech",
+  "identified_as": "Northern Chester County Technical School (now Technical College High School Pickering Campus), Phoenixville area",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Now part of Chester County IU Technical College High School",
+  "notes": "No Wikipedia page found and web search budget exhausted.",
+  "evidence": null
+ },
+ {
+  "school": "St. John Neumann Regional Acad",
+  "identified_as": "St. John Neumann Regional Academy (formerly Bishop Neumann HS), Williamsport",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#932F2F",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "high",
+  "wikipedia": "St. John Neumann Regional Academy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._John_Neumann_Regional_Academy_High_School",
+   "search:https://www.privateschoolreview.com/st-john-neumann-high-school-profile",
+   "https://www.sjnra.org/"
+  ],
+  "era": null,
+  "notes": "School seal is black line art; maroon is the site's main theme colour. Gold not seen in artwork.",
+  "evidence": "school site seal (black-and-white knight/cross); site CSS main colour maroon #932F2F x13"
+ },
+ {
+  "school": "Villa Maria Academy",
+  "identified_as": "Villa Maria Academy, Erie",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#3152A1",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Victors",
+  "confidence": "high",
+  "wikipedia": "Villa Maria Academy (Erie, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Villa_Maria_Academy_(Erie,_Pennsylvania)",
+   "https://upload.wikimedia.org/wikipedia/en/c/c2/Villa_maria_academy_seal.png"
+  ],
+  "era": null,
+  "notes": "Girls' school; Erie (not Villa Maria Academy, Malvern) assumed from first pass.",
+  "evidence": "Wikipedia seal: royal blue #3152A1 disc with navy #223476 trim, white VMA cipher"
+ },
+ {
+  "school": "Brentwood",
+  "identified_as": "Brentwood High School, Brentwood, Allegheny Co.",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#A98F52",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Brentwood High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Brentwood_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Blue given as named 'navy' color box.",
+  "evidence": null
+ },
+ {
+  "school": "Coventry Christian",
+  "identified_as": "Coventry Christian Schools, Pottstown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#000067",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Red",
+    "hex": "#93011E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Coventry Christian Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coventry_Christian_Schools",
+   "https://upload.wikimedia.org/wikipedia/en/4/45/Coventry_Christian_Schools_logo.gif"
+  ],
+  "era": null,
+  "notes": "First pass said blue and white; the school logo is navy ring with a red shield. School site blocked (Cloudflare), so athletic colours not confirmed.",
+  "evidence": "Wikipedia school logo GIF: navy #000067 ring and lettering, red #93011E shield, gold torch"
+ }
+]

@@ -1,0 +1,608 @@
+[
+ {
+  "school": "Harrisburg",
+  "identified_as": "Harrisburg High School (John Harris Campus), Harrisburg",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": "#848587",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver/Light Gray",
+    "hex": "#BCBDC0",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Harrisburg High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harrisburg_High_School_(Pennsylvania)",
+   "search:https://cheerleadingcoaching.com/coaching-interviews-and-tips/cheerleading-coaching-interviews/harrisburg-high-school-brianna-ramen-cheerleading-coaching-interview-tips/",
+   "https://www.hbgsd.us",
+   "https://cmsv2-assets.apptegy.net/uploads/31749/logo/34829/harrisburg_city_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox: black and gray (color box named colours, no hex). A cheer-coach interview agrees and adds white. A maroon/gold athletics page in search results belongs to Harrisburg SD 41-2 (South Dakota), not this school. Merged John Harris + William Penn in 1971; earlier-era colours not checked.",
+  "evidence": "district 'Mighty Cougars' logo: black #000000 cougar and H, mid gray #848587 and light gray #BCBDC0 ring on white; site CSS only Apptegy stock colours. Agrees with Wikipedia black and gray."
+ },
+ {
+  "school": "Gateway",
+  "identified_as": "Gateway Senior High School, Monroeville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Gators",
+  "confidence": "medium",
+  "wikipedia": "Gateway High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Gateway_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Gateway_School_District",
+   "search:https://www.gatewayk12.org/ghs/index"
+  ],
+  "era": null,
+  "notes": "School and district Wikipedia pages agree (district: 'Black & Vegas Gold'); gold hex #C5B358 is from the high-school infobox. Both are Wikipedia, not independent of each other.",
+  "evidence": "gatewayk12.org could not be loaded (TLS certificate chain error), archive.org rate-limited, image search returned junk; nothing looked at. Kept first-pass Wikipedia infobox gold."
+ },
+ {
+  "school": "Abington",
+  "identified_as": "Abington Senior High School, Abington Township (Montgomery Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#861E41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Galloping Ghosts",
+  "confidence": "high",
+  "wikipedia": "Abington Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Abington_Senior_High_School",
+   "https://www.abington.k12.pa.us",
+   "https://cmsv2-assets.apptegy.net/uploads/13737/logo/15415/abingtonpa_logo_web.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only; color box uses named colours, no hex.",
+  "evidence": "district seal logo: maroon #861E41 with white lettering; site theme #862041 (also uses #F6BE00 gold as an accent, not a stated school colour)."
+ },
+ {
+  "school": "North East",
+  "identified_as": "North East High School, North East (Erie Co.)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#531928",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#8B7752",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Grape Pickers",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_East_School_District",
+   "search:https://www.maxpreps.com/pa/north-east/north-east-grape-pickers/football",
+   "https://www.nesd1.org",
+   "https://files.smartsites.parentsquare.com/10215/header_logo_img_kcgilml09sd84iepild.png",
+   "search:https://www.maxpreps.com/pa/north-east/north-east-grape-pickers/"
+  ],
+  "era": null,
+  "notes": "No colours found; district Wikipedia page has no colours field and search results did not state them.",
+  "evidence": "district 'NE' header logo: maroon #531928 disc with white NE and a muted Vegas-gold #8B7752 ring; site CSS uses the same #531928 and #8B7752. MaxPreps page (before it blocked access) listed Maroon and Gold."
+ },
+ {
+  "school": "Sun Valley",
+  "identified_as": "Sun Valley High School, Aston (Penn-Delco SD)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#00263E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CABB6D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Vanguards",
+  "confidence": "high",
+  "wikipedia": "Sun Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sun_Valley_High_School_(Pennsylvania)",
+   "https://svhs.pdsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1714580365/pdsdorg/pqrcbc9a07wqgx4lk455/SVHSprimarylogo.png",
+   "https://www.pdsd.org"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox with hex values.",
+  "evidence": "Sun Valley HS primary logo: navy #00263E ring (same as the Wikipedia infobox) and Vegas gold #CABB6D SV monogram. The Penn-Delco district logo is a different blue/yellow (#2B69A7/#F9E374)."
+ },
+ {
+  "school": "Bensalem",
+  "identified_as": "Bensalem High School, Bensalem",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#1F5AA9",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#C8C8C8",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Owls",
+  "confidence": "high",
+  "wikipedia": "Bensalem High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bensalem_High_School",
+   "https://www.bensalemsd.org",
+   "https://3.files.edl.io/ac99/20/03/26/234337-b9a3c1cd-6665-4a56-b043-2437552cc155.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox; colour box shows 'royalblue' (CSS name), no hex.",
+  "evidence": "block 'B' logo on district site: split royal blue #1F5AA9 and silver/gray #C8C8C8 with black outline, white counters; site theme blue #0038A8."
+ },
+ {
+  "school": "William Tennent",
+  "identified_as": "William Tennent High School, Warminster (Centennial SD)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D90029",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "William Tennent High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/William_Tennent_High_School",
+   "https://www.centennialsd.org/o/wths",
+   "https://cmsv2-assets.apptegy.net/uploads/15198/logo/17138/William.png",
+   "https://www.centennialsd.org"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "WTHS header logo: black and white panther with red #D90029 'WT'; school page theme #D80029 matches. Red appears primary on the site; Wikipedia lists Black, White and Red."
+ },
+ {
+  "school": "Maplewood",
+  "identified_as": "Maplewood Junior/Senior High School, Guys Mills (Penncrest SD)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#E3AB27",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Penncrest School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penncrest_School_District",
+   "search:https://www.maxpreps.com/pa/guys-mills/maplewood-tigers/football",
+   "https://www.maplewoodhs.net/",
+   "https://www.maplewoodhs.net/pics/header_logo.png",
+   "https://www.penncrest.org"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page lists 'gold & black (Maplewood)'; no high-school page; search did not confirm.",
+  "evidence": "Maplewood HS 'Tigers' header logo: gold #E3AB27 shield and tiger with black lettering; site CSS #DAA525. (Penncrest district logo is maroon #6D1214, not Maplewood's.)"
+ },
+ {
+  "school": "Hyndman",
+  "identified_as": "Hyndman Middle-Senior High School, Hyndman (Bedford Co.)",
+  "colors": [],
+  "mascot": "Hornets",
+  "confidence": "low",
+  "wikipedia": "Hyndman Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hyndman_Middle-High_School",
+   "search:https://www.maxpreps.com/pa/hyndman/hyndman-charter-school-hornets"
+  ],
+  "era": "Public Hyndman Middle-High School closed 2011 (Bedford Area SD); Hyndman Charter School (Hornets) continued in the town.",
+  "notes": "No colours found; Wikipedia colours field is empty, MaxPreps colour field blank in search results.",
+  "evidence": "No usable site or photo reached (archive.org rate-limited, image search returned unrelated images). No colours confirmed."
+ },
+ {
+  "school": "Union City",
+  "identified_as": "Union City High School, Union City (Erie Co.)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#264C41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/union-city/union-city-bears/basketball/girls/schedule/all-time",
+   "https://en.wikipedia.org/wiki/Union_City_Area_School_District",
+   "https://www.ucasd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/18814/logo/20308/UC-logo-web.png"
+  ],
+  "era": null,
+  "notes": "Only a MaxPreps listing (search snippet) gives Green, White; district Wikipedia page has no colours.",
+  "evidence": "district 'UC' bear logo: dark green #264C41 letters, white outline, brown bear (mascot art, not a school colour); site theme #0D4B37 dark green."
+ },
+ {
+  "school": "Lancaster Catholic",
+  "identified_as": "Lancaster Catholic High School, Lancaster",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#452C86",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDB827",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Lancaster Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lancaster_Catholic_High_School",
+   "search:https://issuu.com/lchscrusaders/docs/ar_2022_website",
+   "search:https://www.easternpafootball.com/?p=1501",
+   "https://www.lchsyes.org",
+   "https://www.lchsyes.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia plus school annual report (Purple & Gold Gala) and EasternPAFootball ('purple and gold') agree; no hex.",
+  "evidence": "site theme purple #452C86 and gold #FDB827; seal logo is purple (#59288B ring, #411E69 shield) with small bronze-gold accents."
+ },
+ {
+  "school": "Girard",
+  "identified_as": "Girard High School, Girard (Erie Co.)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#EC0F19",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FAD316",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Yellowjackets",
+  "confidence": "high",
+  "wikipedia": "Girard School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Girard_School_District",
+   "https://www.girardsd.org",
+   "https://www.girardsd.org/pics/Big_G_with-a-bee-2.png",
+   "search:https://www.maxpreps.com/pa/girard/girard-yellowjackets/"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page only.",
+  "evidence": "district 'Big G with a bee' logo: red #EC0F19 G with a gold #FAD316 and black yellowjacket; MaxPreps lists Scarlet and Gold."
+ },
+ {
+  "school": "Slippery Rock",
+  "identified_as": "Slippery Rock Area High School, Slippery Rock",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E01F2C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231F20",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "high",
+  "wikipedia": "Slippery Rock Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Slippery_Rock_Area_School_District",
+   "search:https://www.maxpreps.com/pa/slippery-rock/slippery-rock-rockets/",
+   "https://www.slipperyrock.k12.pa.us",
+   "https://www.slipperyrock.k12.pa.us/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "No colours found. Do not use Slippery Rock University's green and white.",
+  "evidence": "district 'SR' rocket logo: red #E01F2C letters outlined in black #231F20, black and white rocket trail. First pass had no colours."
+ },
+ {
+  "school": "Elizabeth Forward",
+  "identified_as": "Elizabeth Forward High School, Elizabeth",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#DB1F26",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#040707",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Elizabeth Forward High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elizabeth_Forward_High_School",
+   "https://www.efsd.net",
+   "https://efhs.efsd.net/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1770318182/efsdnet/cetjecj6kujz9x2jbqm3/EF-SchoolDist-Logo_300dpi.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "district logo: red #DB1F26 'EF' on white inside a black #040707 ring; site CSS is Finalsite stock."
+ },
+ {
+  "school": "Cocalico",
+  "identified_as": "Cocalico Senior High School, Denver (Lancaster Co.)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0068B3",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Cocalico Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cocalico_Senior_High_School",
+   "https://www.cocalico.org",
+   "https://cdnsm5-ss18.sharpschool.com/UserFiles/Servers/Server_91712/Templates/logo/Logo_bird_lrg.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox; royal blue hex #002366 from color box.",
+  "evidence": "district eagle-head logo: single flat blue #0068B3 on white; site CSS mostly SharpSchool stock."
+ },
+ {
+  "school": "Chartiers Township",
+  "identified_as": "Chartiers Township High School, Chartiers Township (Washington Co.)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Chartiers-Houston School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District",
+   "search:https://chbucs.k12.pa.us/page/about-us"
+  ],
+  "era": "Merged with Houston into Chartiers-Houston (first class 1956), which uses Maroon and Gold, Buccaneers.",
+  "notes": "Pre-merger Chartiers Township colours not found; successor's maroon and gold not assumed.",
+  "evidence": "Closed school (pre-1956); no period images found. Successor Chartiers-Houston colours (maroon and gold) not applied."
+ },
+ {
+  "school": "Albert Gallatin",
+  "identified_as": "Albert Gallatin Area Senior High School, Uniontown (Point Marion area)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#C3C0C0",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Colonials",
+  "confidence": "high",
+  "wikipedia": "Albert Gallatin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_High_School",
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_Area_School_District",
+   "https://www.agasd.org",
+   "https://www.agasd.org/sysimages/LogoHeader2.png"
+  ],
+  "era": null,
+  "notes": "High-school Wikipedia infobox only; district page has no colours.",
+  "evidence": "district Colonial header logo: black #000000 with silver/gray #C3C0C0 and white; site CSS maroon #95192A/#6E1D1D also appears (theme accent) but logo is black/silver, matching first pass."
+ },
+ {
+  "school": "Somerset",
+  "identified_as": "Somerset Area High School, Somerset",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#FE7E00",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "high",
+  "wikipedia": "Somerset Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Somerset_Area_High_School",
+   "search:https://www.eliteprospects.com/team/21733/somerset-area-high/2007-2008",
+   "https://www.sasd.us",
+   "https://cmsv2-assets.apptegy.net/uploads/7840/logo/9136/Somerset_Stroke.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia and EliteProspects (hockey) agree orange and black.",
+  "evidence": "district golden eagle logo: black #000000 eagle with orange #FE7E00 feathers and gold talons/beak; site theme #FE7E00."
+ },
+ {
+  "school": "Cheltenham",
+  "identified_as": "Cheltenham High School, Wyncote",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#104B7D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCB040",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Cheltenham High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cheltenham_High_School",
+   "https://www.cheltenham.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1708603754/cheltenhamorg/bcigrwzt208yic2njjaj/district-footer-logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox: 'Blue and Gold'; blue box is CSS 'navy' (no hex), gold hex #CFB53B.",
+  "evidence": "district 'C' logo: blue #104B7D with gold #FCB040 crest border and lettering; site theme #003882 blue and #EBAD14 gold. District logo, not a Panthers athletic mark."
+ },
+ {
+  "school": "Valley View",
+  "identified_as": "Valley View High School, Archbald",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#004682",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F9C817",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Valley View High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_View_High_School_(Pennsylvania)",
+   "https://www.valleyviewsd.org/en-US",
+   "https://cdn.schoolblocks.com/organizations/eaa8fa6d-7354-43ea-b4ac-dc9c93bca971/rrg872-valleyview-topleft-logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only; named colour boxes.",
+  "evidence": "Valley View SD (Archbald) top-left logo: blue #004682 paw print with gold #F9C817 outline. (vvsd.net is an unrelated San Diego site.)"
+ },
+ {
+  "school": "Phoenixville",
+  "identified_as": "Phoenixville Area High School, Phoenixville",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#573594",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Phantoms",
+  "confidence": "high",
+  "wikipedia": "Phoenixville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Phoenixville_Area_High_School",
+   "https://www.pasd.com",
+   "https://cdnsm5-ss8.sharpschool.com/UserFiles/Servers/Server_435174/Image/Seal%20Top%20Banner.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox; fight song line 'Defenders of the purple and the white' (also Wikipedia).",
+  "evidence": "district seal: purple #573594 ring, white and black block P with purple phoenix; site CSS SharpSchool stock."
+ },
+ {
+  "school": "Marion Center",
+  "identified_as": "Marion Center Area Junior/Senior High School, Marion Center",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#2E681B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F0D56F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Stingers",
+  "confidence": "high",
+  "wikipedia": "Marion Center Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Marion_Center_Area_School_District",
+   "search:https://www.maxpreps.com/pa/marion-center/marion-center-stingers/football/",
+   "https://www.mcasd.net",
+   "https://3.files.edl.io/867f/24/11/22/161512-1b7debd6-64cd-47e1-b4f9-ea19444ae3cd.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page and MaxPreps football page (search snippet) agree.",
+  "evidence": "district banner 'Home of the Stingers' hornet: green #2E681B and gold #F0D56F (a little shaded); site theme #003300 dark green and #FFCC00 gold."
+ }
+]

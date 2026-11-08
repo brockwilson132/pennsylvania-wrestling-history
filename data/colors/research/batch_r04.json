@@ -1,0 +1,1102 @@
+[
+ {
+  "school": "Wilson (West Lawn)",
+  "identified_as": "Wilson High School, West Lawn (Spring Township, Berks County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "Wilson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wilson_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Delaware Valley",
+  "identified_as": "Delaware Valley High School, Milford (Pike County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Delaware Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Delaware_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox gives colour boxes only (red, black, white); no text names."
+ },
+ {
+  "school": "Oxford Area",
+  "identified_as": "Oxford Area High School, Oxford (Chester County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "medium",
+  "wikipedia": "Oxford Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oxford_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Pennsbury",
+  "identified_as": "Pennsbury High School, Fairless Hills (Bucks County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Pennsbury High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pennsbury_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Berwick",
+  "identified_as": "Berwick Area Senior High School, Berwick (Columbia County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Berwick Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berwick_Area_School_District",
+   "search:https://www.maxpreps.com/pa/berwick/berwick-bulldogs/tennis/21-22/schedule/"
+  ],
+  "era": null,
+  "notes": "High school infobox only shows a colour-kit image; district page and MaxPreps (search snippet) say blue and white."
+ },
+ {
+  "school": "Hanover Area",
+  "identified_as": "Hanover Area Junior/Senior High School, Hanover Township (Luzerne County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hawkeyes",
+  "confidence": "medium",
+  "wikipedia": "Hanover Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hanover_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Colours from district infobox; mascot (Hawkeyes) from general knowledge, not a read source."
+ },
+ {
+  "school": "Everett",
+  "identified_as": "Everett Area High School, Everett (Bedford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Everett Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Everett_Area_School_District"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Port Allegany",
+  "identified_as": "Port Allegany Junior/Senior High School, Port Allegany (McKean County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Gators",
+  "confidence": "low",
+  "wikipedia": "Port Allegany School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Port_Allegany_School_District",
+   "search:https://www.bradfordera.com/2007/09/28/rts-for-friday-sept-28-2007"
+  ],
+  "era": null,
+  "notes": "Only source is a 2007 Bradford Era reader column (search snippet) saying black and orange, dating to 1913 yearbook; order uncertain. Wikipedia gives mascot only."
+ },
+ {
+  "school": "Tussey Mountain",
+  "identified_as": "Tussey Mountain Junior/Senior High School, Saxton (Bedford County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "medium",
+  "wikipedia": "Tussey Mountain School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tussey_Mountain_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox only; high school infobox colours field is blank."
+ },
+ {
+  "school": "Central Cambria",
+  "identified_as": "Central Cambria High School, Ebensburg (Cambria County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Devils",
+  "confidence": "low",
+  "wikipedia": "Central Cambria School District",
+  "sources": [
+   "search:https://www.eliteprospects.com/team/21728/central-cambria-high/2016-2017",
+   "search:https://cencam.org"
+  ],
+  "era": null,
+  "notes": "Only hockey database (EliteProspects, 'Black + Red') states colours; Wikipedia district page gives none. Order guessed from Red Devils name."
+ },
+ {
+  "school": "West York",
+  "identified_as": "West York Area High School, York",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#000080",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "medium",
+  "wikipedia": "West York Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_York_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Mascot from general knowledge, not a read source."
+ },
+ {
+  "school": "Sharon",
+  "identified_as": "Sharon High School (Sharon Middle/High School), Sharon (Mercer County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Sharon City School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sharon,_Pennsylvania",
+   "search:https://www.maxpreps.com/pa/sharon/sharon-tigers/football/"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Glendale",
+  "identified_as": "Glendale Junior/Senior High School, Flinton (Cambria County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Glendale Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Glendale_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Reading",
+  "identified_as": "Reading Senior High School, Reading",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Knights",
+  "confidence": "medium",
+  "wikipedia": "Reading Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Reading_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Governor Mifflin",
+  "identified_as": "Governor Mifflin Senior High School, Shillington (Berks County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "Governor Mifflin Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Governor_Mifflin_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Gold hex #C5B358 is a Wikipedia editor value (generic 'Vegas gold'), maroon given by name only."
+ },
+ {
+  "school": "South Park",
+  "identified_as": "South Park High School, South Park Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "South Park High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Park_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Infobox: royal blue, white, black accent."
+ },
+ {
+  "school": "Red Land",
+  "identified_as": "Red Land High School, Lewisberry (York County)",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Red Land High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Red_Land_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Kittanning",
+  "identified_as": "Kittanning Senior High School, Kittanning (Armstrong County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/w/index.php?oldid=1047500191",
+   "search:https://www.eliteprospects.com/team/17971/kittanning-high/2011-2012"
+  ],
+  "era": "Closed June 2015; merged with Ford City into Armstrong Junior-Senior High (River Hawks, blue and orange). Colours here are Kittanning's.",
+  "notes": "Wikipedia page now redirects to the district; colours read from the 2021 revision of 'Kittanning High School'. One old PIAA listing (search) gave red, white & black."
+ },
+ {
+  "school": "Berlin Brothersvalley",
+  "identified_as": "Berlin Brothersvalley High School, Berlin (Somerset County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mountaineers",
+  "confidence": "medium",
+  "wikipedia": "Berlin Brothersvalley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berlin_Brothersvalley_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox gives colour boxes only (blue, white)."
+ },
+ {
+  "school": "La Salle College",
+  "identified_as": "La Salle College High School, Wyndmoor (Montgomery County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#003366",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Explorers",
+  "confidence": "medium",
+  "wikipedia": "La Salle College High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/La_Salle_College_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Cranberry",
+  "identified_as": "Cranberry High School, Seneca (Venango County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Berries",
+  "confidence": "medium",
+  "wikipedia": "Cranberry Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cranberry_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox: maroon, gold; mascot 'Super Berry'."
+ },
+ {
+  "school": "J.P. McCaskey",
+  "identified_as": "J. P. McCaskey High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Tornado",
+  "confidence": "medium",
+  "wikipedia": "J. P. McCaskey High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/J._P._McCaskey_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Upper Dauphin",
+  "identified_as": "Upper Dauphin Area High School, Elizabethville (Dauphin County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#ff8200",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Upper Dauphin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Dauphin_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Valley",
+  "identified_as": "Valley Junior/Senior High School, New Kensington (Westmoreland County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#c4b454",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Valley_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Mechanicsburg",
+  "identified_as": "Mechanicsburg Area Senior High School, Mechanicsburg (Cumberland County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#800000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Steel",
+    "hex": "#666666",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Mechanicsburg Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mechanicsburg_Area_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Hexes from infobox colour samples; #800000 is just generic maroon."
+ },
+ {
+  "school": "Penn Manor",
+  "identified_as": "Penn Manor High School, Millersville (Lancaster County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#00277A",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#998F4D",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Comets",
+  "confidence": "medium",
+  "wikipedia": "Penn Manor High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Manor_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Dover",
+  "identified_as": "Dover Area High School, Dover (York County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Dover Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dover_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox reads 'Red, Silver/White and Black' (silver and white given as alternatives)."
+ },
+ {
+  "school": "Carlisle",
+  "identified_as": "Carlisle High School, Carlisle (Cumberland County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Thundering Herd",
+  "confidence": "medium",
+  "wikipedia": "Carlisle High School (Carlisle, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlisle_High_School_(Carlisle,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Infobox mascot Bison; team name Thundering Herd."
+ },
+ {
+  "school": "Red Lion",
+  "identified_as": "Red Lion Area Senior High School, Red Lion (York County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "low",
+  "wikipedia": "Red Lion Area School District",
+  "sources": [
+   "search:https://gptkb.org/entity/Red_Lion_Area_Senior_High_School",
+   "search:https://www.maxpreps.com/pa/red-lion/red-lion-lions/"
+  ],
+  "era": null,
+  "notes": "Only an auto-generated knowledge-graph site states red and white; Wikipedia and MaxPreps snippets gave no colours. Needs owner check."
+ },
+ {
+  "school": "Lackawanna Trail",
+  "identified_as": "Lackawanna Trail Junior/Senior High School, Factoryville (Wyoming County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Lackawanna Trail High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lackawanna_Trail_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "West Chester Henderson",
+  "identified_as": "Henderson High School, West Chester (Chester County)",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#733635",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Henderson High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Henderson_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Blairsville",
+  "identified_as": "Blairsville Middle-High School, Blairsville (Indiana County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "River Valley Middle\u2013High School",
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Blairsville_Middle-High_School",
+   "search:https://www.maxpreps.com/pa/blairsville/blairsville-bobcats/"
+  ],
+  "era": "Blairsville and Saltsburg combined into River Valley Middle-High School (Panthers, black and teal / aero blue) around 2022. Colours here are Blairsville's.",
+  "notes": "Orange and black seen in a search snippet of the former Blairsville Wikipedia page (now a redirect); not read directly."
+ },
+ {
+  "school": "Erie Strong Vincent",
+  "identified_as": "Strong Vincent High School, Erie",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Colonels",
+  "confidence": "medium",
+  "wikipedia": "Erie City School District",
+  "sources": [
+   "search:https://bafybeiemxf5abjwjbikoz4mc3a3dla6ual3jsgpdr4cjr3oz3evfyavhwq.ipfs.4everland.io/wiki/Strong_Vincent_High_School.html",
+   "search:https://www.maxpreps.com/pa/erie/strong-vincent-colonels/football/schedule/all-time"
+  ],
+  "era": "Closed as a high school in 2017 when Erie's high schools merged into Erie High School (gold and royal purple); building became Strong Vincent Middle School.",
+  "notes": "Wikipedia mirror and MaxPreps (both search snippets only) agree on red and black."
+ },
+ {
+  "school": "Indian Valley",
+  "identified_as": "Indian Valley High School, Lewistown (Mifflin County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Indian Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Indian_Valley_High_School_(Pennsylvania)",
+   "search:https://wikipedia2006.classicistranieri.com/en/i/n/d/Indian_Valley_High_School_%28Pennsylvania%29_51a4.html"
+  ],
+  "era": "Closed 2011 when Mifflin County SD merged Indian Valley and Lewistown into Mifflin County High School.",
+  "notes": "Current Wikipedia infobox colours blank; 2006 Wikipedia mirror (search snippet) says red and black."
+ },
+ {
+  "school": "Cochranton",
+  "identified_as": "Cochranton Junior/Senior High School, Cochranton (Crawford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/cochranton/cochranton-cardinals/football/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "MaxPreps (search snippet) only; no Wikipedia article."
+ },
+ {
+  "school": "Littlestown",
+  "identified_as": "Littlestown Senior High School, Littlestown (Adams County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#000066",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#ffff22",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Thunderbolts",
+  "confidence": "medium",
+  "wikipedia": "Littlestown Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Littlestown_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Hexes are background colours in an infobox div; the #ffff22 gold looks like an editor approximation."
+ },
+ {
+  "school": "St. Pius X",
+  "identified_as": "Saint Pius X High School, Lower Pottsgrove Township (Montgomery County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCC00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Winged Lions",
+  "confidence": "medium",
+  "wikipedia": "Saint Pius X High School (Lower Pottsgrove Township, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saint_Pius_X_High_School_(Lower_Pottsgrove_Township,_Pennsylvania)"
+  ],
+  "era": "Closed 2010; replaced by Pope John Paul II High School (Royersford).",
+  "notes": null
+ },
+ {
+  "school": "Trinity",
+  "identified_as": "Trinity High School, Camp Hill (Lower Allen Township, Cumberland County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Shamrocks",
+  "confidence": "medium",
+  "wikipedia": "Trinity High School (Lower Allen Township, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Trinity_High_School_(Lower_Allen_Township,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "St. Joseph's Academy",
+  "identified_as": "Saint Joseph's Catholic Academy, Boalsburg (Centre County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolfpack",
+  "confidence": "medium",
+  "wikipedia": "Saint Joseph's Catholic Academy (Boalsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Saint_Joseph's_Catholic_Academy_(Boalsburg,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Identified by District 6 location; bracket region listed as SW."
+ },
+ {
+  "school": "Moon",
+  "identified_as": "Moon Area High School, Moon Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Moon Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Moon_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Pine-Richland",
+  "identified_as": "Pine-Richland High School, Gibsonia (Allegheny County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#008000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Pine-Richland High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pine-Richland_High_School"
+  ],
+  "era": null,
+  "notes": "#008000 is generic green; infobox white box has invalid hex #zzzzzz."
+ },
+ {
+  "school": "Peters Township",
+  "identified_as": "Peters Township High School, McMurray (Washington County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Peters Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Peters_Township_High_School"
+  ],
+  "era": null,
+  "notes": "Mascot (Indians) from general knowledge, not a read source."
+ },
+ {
+  "school": "Lower Merion",
+  "identified_as": "Lower Merion High School, Ardmore (Montgomery County)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Aces",
+  "confidence": "medium",
+  "wikipedia": "Lower Merion High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lower_Merion_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox mascot bulldog; team names Aces, Bulldogs."
+ },
+ {
+  "school": "Cameron County",
+  "identified_as": "Cameron County Junior/Senior High School, Emporium",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Cameron County High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cameron_County_High_School"
+  ],
+  "era": null,
+  "notes": null
+ }
+]
