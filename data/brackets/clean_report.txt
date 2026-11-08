@@ -1,3 +1,8 @@
-entrants 401059 -> 401059, bouts 587568 -> 587568
+entrants 401059 -> 400643, bouts 587568 -> 586892
    1235  bouts: side still has no school (kept)
     715  entrants: still no school (kept)
+    149  team rows of a copied tournament dropped
+      1  tournament loaded twice, copy dropped: 2021_SRE_AA (kept 2021_East_AA_Super)
+      1  tournament loaded twice, copy dropped: 2021_SRE_AAA (kept 2021_East_AAA_Super)
+      1  tournament loaded twice, copy dropped: 2021_SRW_AA (kept 2021_West_AA_Super)
+      1  tournament loaded twice, copy dropped: 2021_SRW_AAA (kept 2021_West_AAA_Super)
