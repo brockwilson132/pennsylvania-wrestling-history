@@ -95,9 +95,9 @@ for r in csv.DictReader(open('data/brackets/state_entrants.csv')):
 # ---- identity linking (v2): merge name variants of one wrestler so his bouts pool into one season rating
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from identity import canon_map
-_idrec = [(b['winner'], b['winner_school'], b['year'], b['weight']) for b in bouts] + [(b['loser'], b['loser_school'], b['year'], b['weight']) for b in bouts]
+_idrec = [(b['winner'], b['winner_school'], b['year'], b['weight'], b['tournament']) for b in bouts] + [(b['loser'], b['loser_school'], b['year'], b['weight'], b['tournament']) for b in bouts]
 for (lvl, t, w), es in entrants.items():
-    for e in es: _idrec.append((e[1], e[2], int(t[:4]), w))
+    for e in es: _idrec.append((e[1], e[2], int(t[:4]), w, t))
 CANON, _merges = canon_map(_idrec, nk, nk); del _idrec
 CK = lambda k: CANON.get(k, k)
 for b in bouts: b['wk'] = CK(b['wk']); b['lk'] = CK(b['lk'])
@@ -680,6 +680,14 @@ for sc in (0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.5):
 # the widest prior, so the season's own bouts decide and the prior only fills gaps
 SDS = max(k for k, v in scores.items() if v <= min(scores.values()) + 0.001)
 say('prior sd scale (hidden 5% of 1990-2017 bouts): ' + ', '.join(f'{k}: {v:.4f}' for k, v in scores.items()) + f' -> {SDS}')
+# Pinned settings: the grid scores above are nearly flat, so a data update (a re-issued bracket sheet, a spelling fix)
+# can tip the pick from one grid point to the next and move every rating by 20-100 points for no reason of its own.
+# The values in data/sources/rating_settings.json are the ones in use; the tuner still runs and reports its pick, and
+# RATINGS_RETUNE=1 uses the fresh picks instead (then copy them into the file on purpose).
+PIN = {} if os.environ.get('RATINGS_RETUNE') else json.load(open('data/sources/rating_settings.json'))
+if 'prior_sd_scale' in PIN:
+    if PIN['prior_sd_scale'] != SDS: say(f"prior sd scale pinned at {PIN['prior_sd_scale']} (tuner pick {SDS})")
+    SDS = PIN['prior_sd_scale']
 # the district offsets move the prior mean, and how far a rating follows its prior depends on the prior width: offsets
 # fitted at one width and applied at another over- or under-shoot (most where a season has few bouts). Refit them at
 # the width the ratings actually use.
@@ -706,6 +714,8 @@ if SDS != 2.0 and not os.environ.get('RATINGS_NO_SHIFT'):
             ll = np.mean([-math.log(max(1e-9, 1 / (1 + 10 ** ((Tt[b['year']][b['li']] - Tt[b['year']][b['wi']]) / 400)))) for b in tb_])
             say(f'  first-round prior offset {off:+d} at prior sd scale {SDS}: log loss {ll:.4f}')
             if best2 is None or ll < best2[1]: best2 = (off, ll)
+        if 'first_round_offset' in PIN and PIN['first_round_offset'] != best2[0]:
+            say(f"first-round prior offset pinned at {PIN['first_round_offset']:+d} (tuner pick {best2[0]:+d})"); best2 = (PIN['first_round_offset'], None)
         STG.update({k: float(best2[0]) for k in STG}); say(f'first-round prior offset at the final width: {best2[0]:+d}')
         if best2[0] != best[0]:
             for it in range(NIT):

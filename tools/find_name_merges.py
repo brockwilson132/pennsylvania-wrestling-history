@@ -49,18 +49,18 @@ def main():
     opp = defaultdict(set)
     K = lambda n, s: nk(n) + '|' + nk(s)
     for r in LE:
-        k = K(r['name'], r['school']); y = int(r['year']); recs.append((r['name'], r['school'], y, r['weight']))
+        k = K(r['name'], r['school']); y = int(r['year']); recs.append((r['name'], r['school'], y, r['weight'], r['tournament']))
         spell[k][r['name']] += 1; years[k].add(y); entered[(r['level'], r['tournament'], r['weight'])].add(k); tourn[(r['level'], r['tournament'])].add(k)
         if r['grade'] in GR: grads[k].add(y + 4 - GR[r['grade']])
     for r in SE:
-        k = K(r['name'], r['school']); y = int(r['year']); recs.append((r['name'], r['school'], y, r['weight']))
+        k = K(r['name'], r['school']); y = int(r['year']); recs.append((r['name'], r['school'], y, r['weight'], f"{r['year']}_{r['cls']}"))
         spell[k][r['name']] += 1; at_states[k][r['name']] += 1; years[k].add(y); entered[('state', r['year'] + r['cls'], r['weight'])].add(k); tourn[('state', r['year'] + r['cls'])].add(k)
         if r['grade'] in GR: grads[k].add(y + 4 - GR[r['grade']])
     for b in B:
         bk = (b['level'], b['tournament'], b['weight']); y = int(b['year'])
         kw, kl = K(b['winner'], b['winner_school']), K(b['loser'], b['loser_school'])
         for k, n, s in ((kw, b['winner'], b['winner_school']), (kl, b['loser'], b['loser_school'])):
-            recs.append((n, s, y, b['weight'])); spell[k][n] += 1; years[k].add(y); rounds[bk][k].add((b['side'], b['round']))
+            recs.append((n, s, y, b['weight'], b['tournament'])); spell[k][n] += 1; years[k].add(y); rounds[bk][k].add((b['side'], b['round']))
         opp[kw].add(kl); opp[kl].add(kw)
     canon, merges = canon_map(recs, nk, nk)
     pairs = {tuple(sorted((a, b))) for a, b, _ in merges}

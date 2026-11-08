@@ -1,32 +1,3 @@
-entrants 401048 -> 401048, bouts 587020 -> 587020
-   1287  bouts: side still has no school (kept)
-      1  data/medals/1975_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1977_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1978_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1979_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1990_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1991_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/1994_AAA.csv: school spelled another way, filed under its one name
-      2  data/medals/2002_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/2003_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2004_AAA.csv: school spelled another way, filed under its one name
-      4  data/medals/2005_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2006_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2007_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2010_AAA.csv: school spelled another way, filed under its one name
-      6  data/medals/2011_AAA.csv: school spelled another way, filed under its one name
-      3  data/medals/2012_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2013_AA.csv: school spelled another way, filed under its one name
-      2  data/medals/2013_AAA.csv: school spelled another way, filed under its one name
-      1  data/medals/2014_AA.csv: school spelled another way, filed under its one name
-      2  data/medals/2014_AAA.csv: school spelled another way, filed under its one name
-      2  data/medals/2015_AA.csv: school spelled another way, filed under its one name
-      2  data/medals/2015_AAA.csv: school spelled another way, filed under its one name
-      5  data/medals/2017_AA.csv: school spelled another way, filed under its one name
-      1  data/medals/2025_AAA.csv: school spelled another way, filed under its one name
-     24  data/sources/d7_champions.csv: school spelled another way, filed under its one name
-    735  entrants: still no school (kept)
-   2947  school spelled another way, filed under its one name
-     73  state_entrants.csv: school spelled another way, filed under its one name
-     43  state_places.csv: school spelled another way, filed under its one name
-     38  state_teams.csv: school spelled another way, filed under its one name
+entrants 401059 -> 401059, bouts 587568 -> 587568
+   1235  bouts: side still has no school (kept)
+    715  entrants: still no school (kept)

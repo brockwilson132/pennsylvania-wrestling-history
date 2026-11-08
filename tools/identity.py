@@ -7,8 +7,9 @@ bouts do not pool into one season rating.
 
 canon_map(records) takes (key, name, school, year, weight) and returns {key: canonical key}. Two keys merge when,
 in the same season, they share a school (or one school is empty / a prefix of the other) and a last name (exact,
-or one letter apart for names of 5+ letters), their first names are compatible (equal, one a prefix of the other,
-an initial, or a known nickname pair), and their weights are within one class of each other. Merges are then
+or one letter apart / two letters swapped for names of 5+ letters), their first names are compatible (equal, one a prefix
+of the other, an initial, or a known nickname pair; any first names when the school, season and weight agree and
+the two never meet in one tournament), and their weights are within one class of each other. Merges are then
 carried across seasons through the same school and an exact first+last name match is not required.
 Brothers at the same school are protected by the first-name rule (Sonny / Sammy are not compatible) and the
 weight rule.
@@ -26,7 +27,7 @@ NICK = [('william', 'bill', 'billy', 'will', 'willie', 'liam'), ('robert', 'bob'
         ('jeffrey', 'jeff', 'geoffrey'), ('joshua', 'josh'), ('kenneth', 'ken', 'kenny'), ('lawrence', 'larry'), ('leonard', 'len', 'lenny', 'leo'),
         ('nathaniel', 'nathan', 'nate'), ('patrick', 'pat', 'paddy'), ('peter', 'pete'), ('phillip', 'philip', 'phil'), ('raymond', 'ray'),
         ('ronald', 'ron', 'ronnie'), ('donald', 'don', 'donnie'), ('douglas', 'doug'), ('stephen', 'steven', 'steve', 'stevie'),
-        ('timothy', 'tim', 'timmy'), ('vincent', 'vince', 'vinny'), ('walter', 'walt'), ('theodore', 'ted', 'teddy', 'theo'),
+        ('timothy', 'tim', 'timmy'), ('vincent', 'vince', 'vinny', 'vinnie'), ('walter', 'walt'), ('theodore', 'ted', 'teddy', 'theo'),
         ('eugene', 'gene'), ('harold', 'harry', 'hal'), ('henry', 'hank', 'harry'), ('jacob', 'jake'), ('maxwell', 'max'),
         ('mitchell', 'mitch'), ('cameron', 'cam'), ('dominic', 'dom', 'dominick'), ('gabriel', 'gabe'), ('isaac', 'ike'),
         ('jason', 'jay'), ('jerome', 'jerry'), ('kevin', 'kev'), ('louis', 'lou', 'louie'), ('martin', 'marty'), ('salvatore', 'sal'),
@@ -68,9 +69,18 @@ def lev1(a, b):
     for i in range(len(b)):
         if b[:i] + b[i + 1:] == a: return True
     return False
+def dist(a, b):
+    """edit distance, a swap of two neighbouring letters counting as one"""
+    d = [[i + j if not i * j else 0 for j in range(len(b) + 1)] for i in range(len(a) + 1)]
+    for i in range(1, len(a) + 1):
+        for j in range(1, len(b) + 1):
+            d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] != b[j - 1]))
+            if i > 1 and j > 1 and a[i - 1] == b[j - 2] and a[i - 2] == b[j - 1]: d[i][j] = min(d[i][j], d[i - 2][j - 2] + 1)
+    return d[-1][-1]
 def last_ok(a, b):
     if a == b: return True
     if min(len(a), len(b)) >= 5 and lev1(a, b): return True
+    if len(a) == len(b) >= 5 and [i for i in range(len(a)) if a[i] != b[i]] in ([i, i + 1] for i in range(len(a) - 1)) and sorted(a) == sorted(b): return True   # Weismantle / Weismantel
     if min(len(a), len(b)) >= 4 and (a.startswith(b) or b.startswith(a)): return True   # hyphenated / truncated
     return False
 def school_ok(a, b):
@@ -80,16 +90,20 @@ def wnum(w):
     m = re.match(r'\d+', str(w)); return int(m.group()) if m else 300
 
 def canon_map(records, nk_name, nk_school):
-    """records: iterable of (name, school, year, weight). Returns {key: canonical key} with key = nk(name)|nk(school)."""
+    """records: iterable of (name, school, year, weight[, tournament]). Returns {key: canonical key} with key = nk(name)|nk(school)."""
     info = {}
     by_year = defaultdict(lambda: defaultdict(set))   # year -> last-name bucket -> keys
     w_of = defaultdict(set); yrs = defaultdict(set)
-    for name, school, year, weight in records:
+    tn = defaultdict(set)   # key -> tournaments it is entered in, when the records name them (5th field)
+    for rec in records:
+        name, school, year, weight = rec[:4]
         k = nk_name(name) + '|' + nk_school(school)
+        if len(rec) > 4: tn[k].add(rec[4])
         if k not in info:
             f, l = first_last(name); info[k] = (f, l, nick(name), nk_school(school), name)
         w_of[(k, year)].add(wnum(weight)); yrs[k].add(year)
         by_year[year][info[k][1][:3]].add(k)
+        if info[k][3]: by_year[year]['@' + info[k][3]].add(k)   # and by school: a misprint early in the last name (Coley / Cooley)
     parent = {}
     def find(x):
         while parent.get(x, x) != x: parent[x] = parent.get(parent[x], parent[x]); x = parent[x]
@@ -107,15 +121,31 @@ def canon_map(records, nk_name, nk_school):
     weak = lambda k: (len(info[k][0]) <= 1) or not info[k][3]          # initial-only first name, or no school
     cand = defaultdict(set)
     for y, buckets in by_year.items():
+        done = set()
         for _, keys in buckets.items():
             keys = sorted(keys)
             if len(keys) < 2: continue
             for i in range(len(keys)):
                 for j in range(i + 1, len(keys)):
-                    a, b = keys[i], keys[j]; fa, la, na, sa, _ = info[a]; fb, lb, nb, sb, _ = info[b]
-                    if not school_ok(sa, sb) or not last_ok(la, lb) or not first_ok(fa, fb, na, nb): continue
-                    if not weights_close(a, b, y): continue
-                    if fa and fb and fa != fb and la != lb: continue          # two differences at once: too loose
+                    a, b = keys[i], keys[j]
+                    if (a, b) in done: continue
+                    done.add((a, b)); fa, la, na, sa, _ = info[a]; fb, lb, nb, sb, _ = info[b]
+                    if not school_ok(sa, sb): continue
+                    # one school enters one wrestler per weight: the same school, season and weight (and only that
+                    # weight for both) with the same last name is one wrestler even when two sheets disagree on his
+                    # first name (Jason / Jake Dell, South Western 145, 1994) or on two letters at once (Phil Califati /
+                    # Phillip Calafati)
+                    # (never two keys entered in one tournament: those are two wrestlers; first names must start alike)
+                    # In that slot the last name may also be two letters off (Shiffert / Shifflet, Mattila / Matilla) when
+                    # the first names agree.
+                    slot = (sa and sa == sb and fa and fb and fa[0] == fb[0] and len(w_of[(a, y)]) == 1
+                            and w_of[(a, y)] == w_of[(b, y)] and tn[a] and tn[b] and not (tn[a] & tn[b])
+                            and (last_ok(la, lb) or (first_ok(fa, fb, na, nb) and la[:1] == lb[:1] and min(len(la), len(lb)) >= 5 and dist(la, lb) <= 2)))
+                    if not slot and not last_ok(la, lb): continue
+                    if not slot:
+                        if not first_ok(fa, fb, na, nb): continue
+                        if not weights_close(a, b, y): continue
+                        if fa and fb and fa != fb and la != lb: continue          # two differences at once: too loose
                     if JUNK.search(info[a][4].lower()) or JUNK.search(info[b][4].lower()): continue
                     cand[(a, y)].add(b); cand[(b, y)].add(a)
     # a weak key (initial or no school) merges only when it has exactly one candidate that season; strong pairs

@@ -1,9 +1,14 @@
 weights reordered: 0, wrestlers moved: 0, schools corrected: 0, rows added: 0
 
 
+1947 single 145 place 2: list "Tom Hoeschele", bracket "Tom Hosechele" (spelling only, list kept)
 1948 single 185 place 1: list "Lynn Illingsworth", bracket "Lynn Illingworth" (spelling only, list kept)
 1977 AA 145 place 2: list "Jim Whistler", bracket "Jim Whister" (spelling only, list kept)
+1990 AA 135 place 5: list "Chad DeLattre", bracket "Chad Dellatre" (spelling only, list kept)
 1993 AAA 140 place 5: list "James Reimert", bracket "Jim Reinert" (spelling only, list kept)
+1995 AAA 275 place 4: list "Frank Stovall", bracket "Frank Stoval" (spelling only, list kept)
 1997 AAA 125 place 5: list "Mike Maney", bracket "Mike Manley" (spelling only, list kept)
 1998 AA 275 place 6: list "Beau Truitt", bracket "Beau Trutt" (spelling only, list kept)
 1999 AAA 152 place 8: list "Mahmoud Elbattah", bracket "Mahmoud Elbattan" (spelling only, list kept)
+2004 AA 171 place 8: list "Justin Trostle", bracket "Justin Trostel" (spelling only, list kept)
+2009 AA 171 place 8: list "Corey Matilla", bracket "Corey Mattila" (spelling only, list kept)
