@@ -308,26 +308,36 @@ def mcat(b):
     return None
 def mera(y): return 0 if y < 1956 else 1 if y < 1974 else 2 if y < 1990 else 3 if y < 2005 else 4
 TH = None   # era -> {'beta': slope, 't': 10 thresholds in z units}, set below in ordered mode
-if MARGIN == 'ordered' and os.environ.get('RATINGS_THRESH'):
-    TH = {int(k): v for k, v in json.load(open(os.environ['RATINGS_THRESH'])).items()}
-# How much a margin counts: the slopes below were fitted on pre-bout ratings, which are noisy, so the scale on them is
-# chosen by prediction (2026-11-08, hidden 1990-2017 regional + state bouts at the best prior width, log loss):
-# x0.35 .4618, x0.5 .4554, x0.7 .4507, x1.0 .4529, x1.5 .4665 (old weights .4821). Untouched 2018-26 test: x0.7 .4192
-# (old weights .4472), picked 80.0% (78.5%). Refitting the slopes on the final ratings is no guide (they already hold
-# the margins, so the slope ratchets up: x0.7 -> ~0.59 raw, x1.0 -> ~0.78).
-BETA_X = float(os.environ.get('RATINGS_BETA_X', 0.7))
+# Margin in context (2026-11-08, after Brock's own 2017 state run of close wins read as weakness): what a margin says
+# depends on where and between whom. At the same rating gap, state bouts end in bonus points less often than district
+# bouts, and a wrestler who wins (or loses) by bonus points in his other bouts does so again whatever the gap. So each
+# bout's thresholds move by a level offset (regional, state vs district) and by the winner's shrunk bonus share among
+# his other wins and the loser's among his other losses (career window, this bout left out). A margin then moves a
+# rating only when it is unusual for that setting and those two wrestlers. Fitted by tools/fit_margin.py on the
+# season ratings of the win-only model (RATINGS_MARGIN=weights), so the margins never fit themselves.
+MCTX_F = os.environ.get('RATINGS_THRESH') or ('data/difficulty/margin_ctx.json' if os.environ.get('RATINGS_MCTX', '1') == '1' else '')
+if MARGIN == 'ordered' and MCTX_F and os.path.exists(MCTX_F):
+    TH = {int(k): v for k, v in json.load(open(MCTX_F)).items()}
+# How much a margin counts (slope scale on the fitted slopes; with the context offsets, 2026-11-08). Hidden 1990-2017
+# regional + state bouts at the best prior width / untouched 2018-26 test / state champion rated #1 in his bracket:
+# win-only .5046/.4469/89.3%; x0.3 .4896/.4292/88.6%; x0.4 .4848/.4249/86.9%; x0.55 .4812/.4245/83.4%;
+# x0.8 .4751/.4216/80.8%; x1.0 .4736/.4253/77.5%. Larger scales trade agreement with how the tournament played out
+# for small prediction gains (a pinner who lost twice at states rated over medalists); x0.3 keeps champions on top as
+# often as the win-only model and has the best rating/placing agreement of all (Spearman .797 vs .794).
+BETA_X = float(os.environ.get('RATINGS_BETA_X', 0.3))
 _BTH = {}
 def bout_th(b):
     """(beta, lo, hi) of the margin term for a bout's known category range; beta 0 = no margin term"""
     v = _BTH.get(b['i'])
     if v is None: v = _BTH[b['i']] = _bout_th(b)
     return v
-def _bout_th(b):
+def _bout_th(b, moff=None):
     c = MCAT.get(b['i'])
     if c is None or TH is None: return 0.0, -1e6, 1e6
     e = TH[mera(b['year'])]; t = e['t']; lo = -1e6 if c[0] == 0 else t[c[0] - 1]; hi = 1e6 if c[1] == 10 else t[c[1]]
     if lo == -1e6 and hi == 1e6: return 0.0, -1e6, 1e6
-    return e['beta'] * BETA_X, lo, hi
+    o = (MOFF if moff is None else moff).get(b['i'], 0.0)   # on the margin logit: P(at least k | won) = sigma(beta * z + o - theta_k)
+    return e['beta'] * BETA_X, lo - o, hi - o
 def fit_thresh(rows_by_era):
     """per era, slope and thresholds of P(category | won) given the rating gaps (MLE; thresholds monotone by construction)"""
     out = {}
@@ -380,6 +390,38 @@ for b in bouts:
     m = mweight(b)
     if m > 0: season_b[b['year']].append((b['wi'], b['li'], 1.0 if MARGIN == 'ordered' else m, b['i']))
 MCAT = {b['i']: mcat(b) for b in bouts if b['result'] not in SKIP} if MARGIN == 'ordered' else {}
+MOFF = {}   # bout -> offset on the margin logit from level and the two wrestlers' styles (see MCTX_F above)
+def bonus_of(c): return None if c is None else 1 if c[0] >= 4 else 0 if c[1] <= 3 else None
+def style_counts(bs, key):
+    D = defaultdict(lambda: [0, 0])
+    for b in bs:
+        bb = bonus_of(MCAT.get(b['i']) if MCAT else mcat(b))
+        if bb is not None: D[(b[key], b['year'])][0] += bb; D[(b[key], b['year'])][1] += 1
+    return D
+def style_feat(D, k, y, bb, p, A=8.0):
+    a = n = 0
+    for d in range(-3, 4):
+        v = D.get((k, y + d))
+        if v: a += v[0]; n += v[1]
+    if bb is not None: a -= bb; n -= 1
+    q = (a + A * p) / (n + A); return math.log(q / (1 - q)) - math.log(p / (1 - p))
+_MOFFC = {}
+def moff_for(mask):
+    """offsets with the style counts built WITHOUT the masked (hidden) bouts, so a hidden result never reaches a rating"""
+    key = None if mask is None else id(mask)
+    if key in _MOFFC: return _MOFFC[key][1]
+    out = {}
+    if MARGIN == 'ordered' and TH is not None and 'fw' in TH[4]:
+        bs = bouts if mask is None else [b for b in bouts if b['i'] not in mask]
+        SW, SL = style_counts(bs, 'wi'), style_counts(bs, 'li')
+        for b in bs:
+            c = MCAT.get(b['i'])
+            if c is None: continue
+            e = TH[mera(b['year'])]; bb = bonus_of(c)
+            out[b['i']] = (e['reg'] * (b['level'] == 'regional') + e['state'] * (b['level'] == 'state')
+                           + e['fw'] * style_feat(SW, b['wi'], b['year'], bb, e['p0']) + e['fl'] * style_feat(SL, b['li'], b['year'], bb, e['p0']))
+    _MOFFC[key] = (mask, out); return out
+MOFF = moff_for(None)
 if MARGIN == 'ordered':
     if TH is None:   # first pass: fitted on the pre-bout ratings of the last run (data/difficulty/bout_rtg.csv); refined from this run's output
         TH = {0: {'beta': 0.255, 't': [-2.96, -1.84, -0.64, 0.65, 1.02, 1.32, 1.86, 1.88, 3.29, 20.48]}, 1: {'beta': 0.191, 't': [-3.22, -1.93, -0.71, 0.46, 0.73, 1.19, 1.69, 1.9, 3.2, 19.83]},
@@ -404,7 +446,9 @@ def fit_season(rows, ids, mu, sd, mask=None):
     M = np.array([r[2] for r in rows if mask is None or r[3] not in mask], float)
     mu = np.asarray(mu, float); iv = 1 / np.asarray(sd, float) ** 2
     if MARGIN == 'ordered':
-        LH = np.array([bout_th(BI[r[3]]) if isinstance(r[3], int) else (0.0, -1e6, 1e6) for r in rows if mask is None or r[3] not in mask], float).reshape(-1, 3)
+        mo = None if mask is None or not MOFF else moff_for(mask)
+        if mo is not None: cm = _MOFFC.setdefault(('th', id(mask)), {})
+        LH = np.array([(bout_th(BI[r[3]]) if mo is None else (cm.get(r[3]) or cm.setdefault(r[3], _bout_th(BI[r[3]], mo)))) if isinstance(r[3], int) else (0.0, -1e6, 1e6) for r in rows if mask is None or r[3] not in mask], float).reshape(-1, 3)
         BE, LO, HI = LH[:, 0], LH[:, 1], LH[:, 2]; K0 = np.log1p(-np.exp(np.minimum(LO - HI, -1e-12)))
         def f(t):
             z = C_ * (t[W] - t[L]); a = BE * z - LO; b_ = BE * z - HI
@@ -838,6 +882,13 @@ if os.environ.get('RATINGS_SHIFT_TEST'):
     Tm, *_ = smoother(mask=HM, sd_scale=SDS, shift=SHIFT); hm = [b for b in bouts if b['i'] in HM]
     sc_, n_ = score(Tm, hm); acc_ = np.mean([Tm[b['year']][b['wi']] > Tm[b['year']][b['li']] for b in hm])
     say(f'common test, hidden 10% of 2018-26 regional + state bouts (n={n_}): log loss {sc_:.4f}, accuracy {acc_:.3f}')
+    if os.environ.get('RATINGS_HIDDEN_DUMP'):
+        with open(os.environ['RATINGS_HIDDEN_DUMP'], 'w', newline='') as f_:
+            cw_ = csv.writer(f_); cw_.writerow(['year', 'tournament', 'winner', 'winner_school', 'loser', 'loser_school', 'result', 'score', 'p'])
+            for b in hm:
+                tw, tl = Tm.get(b['year'], {}).get(b['wi']), Tm.get(b['year'], {}).get(b['li'])
+                if tw is None or tl is None: continue
+                cw_.writerow([b['year'], b['tournament'], b['winner'], b['winner_school'], b['loser'], b['loser_school'], b['result'], b.get('score', ''), 1 / (1 + 10 ** ((tl - tw) / 400))])
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
 held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and pick(b, 'held', 10)}
 Th, *_ = smoother(mask=held, sd_scale=SDS, shift=SHIFT)
@@ -1089,7 +1140,10 @@ for (b2, k) in recs: rec_keys[b2].append(k)
 for bk, (y, c, unit, lr) in bracket_meta.items():
     keys = list(dict.fromkeys([e[0] for e in entrants.get(bk, [])] + rec_keys.get(bk, [])))
     vals = [norm(theta(k, y), y, c) for k in keys if theta(k, y) is not None]
-    top = sorted(vals, reverse=True)[:8]
+    # field strength = mean of the 4 best-rated entrants, placed or not (Brock 2026-11-08). Not the top 8: 1950-70 state and
+    # regional fields often had only 4 wrestlers, with no weak 5th-8th entrant to pull a top-8 mean down, so the 1960s
+    # (6% of state brackets) filled 30% of the toughest sixth; with the top 4 every decade sits near its share.
+    top = sorted(vals, reverse=True)[:4]
     brackets[bk] = {'year': y, 'c': c, 'unit': unit, 'lr': lr, 'n': len(keys), 'rated': len(vals), 'field': float(np.mean(top)) if top else None, 'bouts': bouts_in.get(bk, 0)}
 for lvl in ('district', 'regional', 'state'):
     fs = [B['field'] for bk, B in brackets.items() if bk[0] == lvl and B['year'] >= 1980 and B['field'] is not None]

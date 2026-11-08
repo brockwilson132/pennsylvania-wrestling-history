@@ -41,11 +41,19 @@ So each season is fit **as one batch**:
   replacing the old fall 1.5 / tech 1.4 / major 1.2 / dec 1.0 / OT 0.8 weights). Each bout has two parts: who won,
   P = σ(z) as before, and the margin given the win, a cumulative logit over one ladder of 11 categories ordered by the
   edge each means: OT, decision by 1, by 2–3, by 4–7, fall after 4:00, major 8–11, fall 2:00–4:00, major 12+, fall
-  1:00–2:00, fall under 1:00, tech fall. P(at least category k | won) = σ(β·z − θₖ), with β and θ per era (scoring rules
-  and period lengths changed). β comes out far below 1: a margin is much noisier evidence than the win itself (a
-  shared latent, β = 1, made held-out log loss far worse). The β scale was chosen on hidden 1990–2017 regional + state
-  bouts (×0.7: .4507 vs .4821 with the old weights); on the untouched 2018–26 test log loss fell .4472 → .4192 and the
-  winner picked rose 78.5% → 80.0%, with district fairness unchanged. A missing score or pin time counts only for what
+  1:00–2:00, fall under 1:00, tech fall. P(at least category k | won) = σ(β·z + o − θₖ), with β and θ per era (scoring
+  rules and period lengths changed). The offset o puts each margin **in context**: a level term (at the same rating gap,
+  state bouts end in bonus points less often than district bouts) and the winner's shrunk bonus share among his other
+  wins and the loser's among his other losses (a grinder who wins everything 3–1 is not marked down for it). So a margin
+  moves a rating only when it is unusual for that setting and those two wrestlers. β, θ and o are fitted by
+  `tools/fit_margin.py` on the win-only model's ratings (data/difficulty/margin_ctx.json), with the 2018–26 test bouts
+  left out; the style counts in `ratings.py` also leave out whatever bouts a test hides. Without the context terms, close
+  state wins read as weakness and low-bonus wrestlers were underrated (hidden state bouts: +7% wins above expectation; with
+  them about +1%). How much margins count (a scale on β) was chosen 2026-11-08 with Brock: hidden 1990–2017 / 2018–26
+  test / state champion rated #1 in his bracket: win-only .5046/.4469/89.3%, ×0.3 .4896/.4292/88.6%, ×0.8
+  .4751/.4216/80.8%. ×0.3 is used: most of the clearly real prediction gain (vs win-only 8 standard errors; ×0.8 adds
+  .0075, 2.5 s.e.) without rating non-placers over medalists, and the best agreement with state placings. A missing
+  score or pin time counts only for what
   is known (some decision; at least a late fall; or the win alone). Losing to a star costs little, and now losing
   close to one shows; getting pinned in 0:30 costs more than losing a decision. Forfeits, injury defaults and DQs carry
   no information and are dropped. A win counts by the opponent's full-season strength, regardless of round or level.
@@ -125,7 +133,7 @@ happened years later.
 
 ## 4. Two measures, and which one wins at what
 
-- **Field strength** (a bracket): mean season strength of the bracket's top eight entrants.
+- **Field strength** (a bracket): mean season strength of the bracket's four best-rated entrants, placed or not (a top-eight mean let 1950-70 four-man fields crowd the toughest tier). Toughness tiers in the app are sextiles of this within each level.
 - **Path SOS** (one wrestler's run): mean season strength of the opponents he actually wrestled in that
   tournament, wins counted twice (a loss still tells you who you had to see). Both include same-season later results.
 
