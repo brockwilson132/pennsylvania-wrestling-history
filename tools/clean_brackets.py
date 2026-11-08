@@ -22,6 +22,10 @@ The PDF parsers leave text in the name column that is not a wrestler. Every rule
     8. a side that is not a wrestler ("Forfeit", "Double Forfeit", "Bye"): bout dropped (no contest)
     9. result text glued to a name ("T. Rosengrant (PNMT)Fall 2:36") cut off; seed prefixes stripped; a side with no school ("J. Boudreau", " SE-1 Gerald (Jerry) WilliamsManheim Central,
        SR, 19-0-1", " ? Hibbard Haverford High") resolved to the bracket's entrant when exactly one entrant fits
+  both
+   10. a tournament loaded twice under two names (the 2021 super-regionals were once linked in as sections, 2021_SRE_AAA,
+       and again as regionals, 2021_East_AAA_Super): when every bout of one tournament is also a bout of another, the
+       copy is dropped from bouts and entrants. The section copy goes; otherwise the later name. Each bout counted once.
 Names whose first name is unknown in the source ("? Miller") are real wrestlers and are kept.
 Writes data/brackets/clean_report.txt.
 """
@@ -431,6 +435,29 @@ def clean_bouts(B, E, S, rep):
 JUNK_SCHOOL = re.compile(r'^[a-z]|[a-z]{3}[A-Z]|,\s*(?:FR|SO|JR|SR)\b|\) .* – ')   # "est Chester", "BattiPstlyamouth", "Maplewood, JR, -1-17", a glued second entry
 
 
+def bout_sig(b):
+    return (b['year'], b['cls'], b['weight'], key(b['winner']), key(b['loser']), b['result'], b['score'])
+
+
+def copies(B):
+    """rule 10: tournaments whose bouts are all bouts of another tournament -> {copy: original}"""
+    T, lv = defaultdict(set), {}
+    for b in B: T[b['tournament']].add(bout_sig(b)); lv[b['tournament']] = b['level']
+    out = {}
+    for a in sorted(T):
+        for c in sorted(T):
+            if a == c or a in out or c in out or len(T[a]) < 5 or T[a] != T[c]: continue
+            drop = a if (lv[a] == 'section') > (lv[c] == 'section') or ((lv[a] == 'section') == (lv[c] == 'section') and a > c) else c
+            out[drop] = c if drop == a else a
+    return out
+
+
+def drop_copies(E, B, rep):
+    cp = copies(B)
+    for t, o in sorted(cp.items()): rep[f'tournament loaded twice, copy dropped: {t} (kept {o})'] += 1
+    return [r for r in E if r['tournament'] not in cp], [b for b in B if b['tournament'] not in cp]
+
+
 def junk_left(E, B, S=()):
     bad = [r['name'] for r in E if not weight_ok(r['weight']) or NOT_WRESTLER(r['name']) or SEED.match(r['name']) or SCHOOL_LINE.match(r['name'])
            or SCHOOL_LINE_PREFIX.match(r['name']) or grade_out(r['name'])]
@@ -440,6 +467,7 @@ def junk_left(E, B, S=()):
     bad += same_name_files(M, Counter(), check=True)
     bad += [r['school'] for r in E if JUNK_SCHOOL.search(r['school']) or r['school'] in SCHOOL_SAME] + woven_schools(E) + [b[s + '_school'] for b in B for s in ('winner', 'loser') if JUNK_SCHOOL.search(b[s + '_school'])]
     bad += [b[s] for b in B for s in ('winner', 'loser') if NOT_WRESTLER(b[s].strip()) or SEED.match(b[s]) or GLUE.search(b[s]) or b[s] != b[s].strip()]
+    bad += [f'copy of {o}: {t}' for t, o in copies(B).items()]
     return bad
 
 
@@ -456,6 +484,7 @@ def run(folder=None, check=False):
         print(f'{len(bad)} names left to clean' + (f': {Counter(bad).most_common(8)}' if bad else ''))
         return len(bad)
     rep = Counter(); n0e, n0b = len(E), len(B)
+    cp = copies(B); E, B = drop_copies(E, B, rep)
     same_school(E, ['school'], rep); same_school(B, ['winner_school', 'loser_school'], rep); same_school_files(rep)
     S = read('state_entrants.csv')[1] if os.path.exists(os.path.join(BR, 'state_entrants.csv')) else []
     M = name_merges()
@@ -467,6 +496,8 @@ def run(folder=None, check=False):
         same_name_files(M, rep)   # then: node tools/build_medals.js && node tools/build_brackets.js, copy site/medals.js brackets.js to overtime/
     if os.path.exists(os.path.join(BR, 'lower_teams.csv')):
         tf, T = read('lower_teams.csv'); r0 = Counter(); same_school(T, ['school'], r0)
+        n = len(T); T = [r for r in T if r.get('tournament') not in cp]
+        if len(T) < n: r0['team rows of a copied tournament dropped'] += n - len(T)
         if r0: write('lower_teams.csv', tf, T); rep.update(r0)
     for _ in range(6):   # entrant schools filled from bouts let more bout names resolve, and back: repeat to a fixed point
         r = Counter(); E = clean_entrants(E, B, r); B = clean_bouts(B, E, S, r)
