@@ -1,0 +1,60 @@
+[
+ {
+  "school": "Greensburg C.C.",
+  "identified_as": "Greensburg Central Catholic High School, Greensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#5D292B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray (slate)",
+    "hex": "#586471",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Centurions",
+  "confidence": "high",
+  "wikipedia": "Greensburg Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School",
+   "https://www.gcchs.org (HTTP 403)",
+   "https://www.maxpreps.com/pa/greensburg/greensburg-central-catholic-centurions/",
+   "https://image.maxpreps.io/school-mascot/c/3/2/c32f9ffd-719c-42a1-bab0-a7c2f8864101.gif",
+   "https://en.wikipedia.org/w/index.php?title=Greensburg_Central_Catholic_High_School&action=raw"
+  ],
+  "era": null,
+  "notes": "Black in the logo is outline/plume only.",
+  "evidence": "MaxPreps Centurions mascot logo (school-supplied): maroon ring/helmet #5D292B and slate gray helmet #586471 with black outline; matches Wikipedia 'Maroon & Gray'. gcchs.org still 403."
+ },
+ {
+  "school": "Mastery Charter School",
+  "identified_as": "Mastery Charter School (campus uncertain), Philadelphia",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#005DAA",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Orange",
+    "hex": "#F78F1E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Mastery Charter Schools",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mastery_Charter_Schools",
+   "https://masterycharter.org",
+   "https://masterycharter.org/app/themes/mastery/dist/images/favicon/favicon.png",
+   "https://masterycharter.org/secondary-schools/lenfest-campus",
+   "https://masterycharter.org/app/themes/mastery/dist/images/logo-type-horiz.svg"
+  ],
+  "era": null,
+  "notes": "Campus uncertain; colours are the Mastery Charter network brand. Repo data lists 'Mastery Charter School' (D12 AAA) in 2012-2014 only, separate from 'Mastery Charter School Lenfest' (2024-26) and 'Simon Gratz Mastery Charter'; the 2012-14 entry was probably Lenfest or Thomas campus.",
+  "evidence": "Mastery network site: theme blue #005DAA (dominant) and orange #F78F1E; 'M' logo in blue #015DAA with grey swoosh. Network branding only; the campus is unknown, and campuses (e.g. Gratz: red) use their own colours. Retry: Lenfest campus page uses only network theme (#005DAA); no campus colours or mascot found. WebSearch budget spent, so the 2012-14 wrestlers' campus was not resolved."
+ }
+]

@@ -1,0 +1,261 @@
+[
+ {
+  "school": "Carnegie",
+  "identified_as": "Carnegie High School, Carnegie (Allegheny County) (closed)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Little Tartans",
+  "confidence": "high",
+  "wikipedia": "Carlynton School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlynton_School_District",
+   "https://en.wikipedia.org/wiki/Carlynton_Junior/Senior_High_School",
+   "https://www.e-yearbook.com/yearbooks/Carnegie_High_School_Voyager_Yearbook/1956/Page_14.html",
+   "https://www.e-yearbook.com/yearbooks/Carnegie_High_School_Voyager_Yearbook/1926/Page_15.html",
+   "search:https://carnegiecarnegie.org/yearbooks/"
+  ],
+  "era": "Bracket years end 1971; Carnegie merged into Carlynton (green and gold, Golden Cougars).",
+  "notes": "Own colours from its Voyager yearbooks (1926, 1956); nickname Little Tartans chosen by student vote in 1939. Not Carlynton's green and gold.",
+  "evidence": "1956 Voyager yearbook OCR (p.14): 'nickname ... 1939 ... Little Tartans. Orange and black have been the colors for as far back as anyone can remember'; 1926 Voyager: 'the faithful Orange and Black'. Text only, no clean image, so no hex."
+ },
+ {
+  "school": "German Township",
+  "identified_as": "German Township High School, McClellandtown (Fayette County) (closed)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Uhlans",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1919/Page_12.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1915/Page_14.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1921/Page_22.html",
+   "https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1919/Page_12.html",
+   "search:https://www.heraldstandard.com/news/2005/sep/16/uhlans-missed-especially-at-football-seasonwe-are-the-uhlans-the-mighty-mighty-uhlans/",
+   "https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1945/Page_13.html"
+  ],
+  "era": "Later merged into Albert Gallatin Area SD (Colonials).",
+  "notes": "Red and black in the 1915-1921 Laureola yearbooks and in a 2005 Herald-Standard retrospective column on the 'red-and-black-clad Uhlans' football teams of the later years, so colours held into the wrestling era.",
+  "evidence": "1919 Laureola yearbook OCR: 'COLORS\u2014Red and Black', alma mater 'the Black and Red'; 2005 Herald-Standard column (search snippet; article body not readable) recalls the red-and-black-clad Uhlans. No image, so no hex."
+ },
+ {
+  "school": "Canton",
+  "identified_as": "Canton Junior/Senior High School, Canton (Bradford County)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#AE1515",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Canton Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canton_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Canton_Area_School_District",
+   "https://www.canton.k12.pa.us/",
+   "https://www.canton.k12.pa.us/wp-content/uploads/2018/06/Warrior-head-black-transparent.svg",
+   "https://www.maxpreps.com/pa/canton/canton-warriors/"
+  ],
+  "era": null,
+  "notes": "Crimson and white per both Wikipedia pages; district site's custom theme accent is a crimson #AE1515 (menu highlight, buttons). Logo itself is one-colour black.",
+  "evidence": "canton.k12.pa.us inline custom CSS: ubermenu active/highlight colour and events button background #AE1515 (crimson; also #9B1515 nearby), distinct from the stock theme red #FF2A13; logo is a black warrior head. Names crimson and white from district and HS Wikipedia pages."
+ },
+ {
+  "school": "Central Bucks West",
+  "identified_as": "Central Bucks High School West, Doylestown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bucks",
+  "confidence": "high",
+  "wikipedia": "Central Bucks High School West",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_West",
+   "https://cbwest.cbsd.org/",
+   "https://www.maxpreps.com/pa/doylestown/central-bucks-west-bucks/",
+   "https://image.maxpreps.io/school-mascot/a/a/b/aab4cc54-1522-4fe2-ae4f-3924683263fb.gif",
+   "search:https://patch.com/pennsylvania/doylestown/cb-west-baseball-turn-doylestown-green-red-0"
+  ],
+  "era": null,
+  "notes": "Infobox mascot field reads 'Buckshot'; teams are the Bucks. Black and gold agreed by Wikipedia, MaxPreps (primary colour black, black/yellow buck-head mascot) and a Patch report of the baseball team's black and gold.",
+  "evidence": "school site carries only the navy district seal; MaxPreps page data gives CB West schoolColor #222222 (black) and its buck-head mascot was black with bright yellow (crude upload, no hex used); infobox black and gold; Patch baseball article mentions black and gold. No clean gold seen, so no hex."
+ },
+ {
+  "school": "Lewistown",
+  "identified_as": "Lewistown Area High School, Lewistown",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflin_County_High_School",
+   "https://www.lewistownsentinel.com/sports/local-sports/2024/10/mitchell-field-90-years-of-memories/"
+  ],
+  "era": "Lewistown High (Panthers, maroon and steel/silver; 'Maroons' before 1934) to 1970; Penn Highlands HS (Cougars, royal blue and white) 1970-73; Lewistown Area HS (Panthers, kept royal blue and white) 1973-2011; then Mifflin County HS (Huskies, purple/black/silver). For bracket years before 1970 the colours were maroon and steel.",
+  "notes": "Royal blue and white apply to Lewistown Area HS (1973-2011), inherited from Penn Highlands; earlier Lewistown/Lewistown-Granville Panthers wore maroon and steel. Wikipedia and the 2024 Lewistown Sentinel history agree.",
+  "evidence": "Lewistown Sentinel 2024 'Mitchell Field 90 years' article: 'Lewistown-Granville Maroon and Steel Panthers' (late 1960s), 'Royal Blue and White-clad Penn Highlands Cougars' from 1970, Panthers since 1934 (formerly Maroons); Wikipedia says Lewistown Area inherited Penn Highlands' blue and white. No image, so no hex."
+ },
+ {
+  "school": "Kennedy Christian",
+  "identified_as": "Kennedy Christian High School (now Kennedy Catholic), Hermitage",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "medium",
+  "wikipedia": "Kennedy Catholic High School (Hermitage, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennedy_Catholic_High_School_(Hermitage,_Pennsylvania)",
+   "https://kennedycatholic.org",
+   "https://kennedycatholic.org/wp-content/uploads/2021/12/Kennedy-Blue-Header-Logo-1600x200-1.png",
+   "https://vindyarchives.com/news/2001/mar/27/championships-keep-getting-sweeter",
+   "https://vindyarchives.com/news/2001/mar/27/eagles-soar-over-pennsylvania",
+   "search:https://kennedycatholicschools.org/history/",
+   "search:https://www.kennedycatholicschools.org/?p=18959"
+  ],
+  "era": "Kennedy Christian HS 1964-2001, renamed Kennedy Catholic in 2001. Golden Eagles name confirmed for the Kennedy Christian era (2001 Vindicator); the current kennedycatholic.org site shows navy/red 'Gaels' branding, which is later and not used here.",
+  "notes": "Maroon and gold per Wikipedia and a Kennedy Catholic Schools history page (search snippet only; page behind Cloudflare check, not opened). Colours not seen in an era image.",
+  "evidence": "2001 Vindicator articles call the Kennedy Christian teams the Golden Eagles; kennedycatholicschools.org history page (search snippet) lists 'School Colors: Maroon and Gold, School Mascot: Golden Eagles'; Wikipedia agrees. No era image, so no hex."
+ },
+ {
+  "school": "Central Tech",
+  "identified_as": "Central Career & Technical School (Central Tech), Erie",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://www.maxpreps.com/pa/erie/central-tech-falcons",
+   "search:https://www.maxpreps.com/pa/erie/central-tech-falcons/football/",
+   "search:https://www.eriereader.com/article/er-sports-19"
+  ],
+  "era": "Erie School District consolidated high schools in 2017; successor Erie High School (Royals, purple and gold).",
+  "notes": "Wikipedia gives 'Black and Gold (Yellow)'.",
+  "evidence": "No image found: MaxPreps football page refused (403) on retry; web search only repeats Wikipedia's 'Black and Gold (Yellow)' and Falcon mascot. Names kept from first pass (Wikipedia)."
+ },
+ {
+  "school": "James M. Coughlin",
+  "identified_as": "James M. Coughlin High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "James M. Coughlin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/James_M._Coughlin_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/james-m-coughlin-crusaders/lacrosse/girls/schedule/all-time",
+   "https://www.e-yearbook.com/yearbooks/Coughlin_High_School_Breidlin_Yearbook/1954/Page_18.html",
+   "https://cheerfollower.blogspot.com/2019/04/cheerleaders-donate-uniforms-to-school.html"
+  ],
+  "era": "Closed 2021; merged with Meyers and G.A.R. into Wilkes-Barre Area High School (Wolfpack, black and Carolina blue).",
+  "notes": "Own 1954 Breidlin yearbook calls the baseball team 'the Red and Blue'; MaxPreps (2025 girls lacrosse) lists Blue, Red. Order follows the yearbook. Not the Wolfpack's black and Carolina blue.",
+  "evidence": "1954 Coughlin Breidlin yearbook OCR p.17-18: 'the Red and Blue suffer a loss at the hands of Newport'; MaxPreps listing (search snippet) Colors Blue, Red. No clean image, so no hex."
+ },
+ {
+  "school": "Northern Bedford",
+  "identified_as": "Northern Bedford County Middle/High School, Loysburg",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Northern Bedford County Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Bedford_County_Middle/High_School",
+   "https://www.nbcsd.org/",
+   "https://files.smartsites.parentsquare.com/9376/header_logo_img_mfpq53kgrutmfpclfdm.png",
+   "https://files.smartsites.parentsquare.com/9376/css13235.css"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "nbcsd.org header logo: 'NBC' block letters with panther paw drawn entirely in white (#FFFFFF, logocolors 100% near-white) and set on the site's header background --ss-header-background-color #000000 (site theme). Matches Wikipedia's black and white."
+ }
+]
