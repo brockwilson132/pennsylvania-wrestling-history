@@ -10575,7 +10575,7 @@ district,2001_D3_AA,2001,AA,D3,25,24.0,Shippensburg,SHIP
 district,2001_D3_AA,2001,AA,D3,27,18.0,Annville-Cleona,AC
 district,2001_D3_AA,2001,AA,D3,27,18.0,ELCO,ELCO
 district,2001_D3_AA,2001,AA,D3,29,14.0,Eastern York,EY
-district,2001_D3_AA,2001,AA,D3,29,14.0,Reading CC,RCC
+district,2001_D3_AA,2001,AA,D3,29,14.0,Reading Central Catholic,RCC
 district,2001_D3_AA,2001,AA,D3,31,11.0,York Suburban,YS
 district,2001_D3_AA,2001,AA,D3,32,9.0,Daniel Boone,DB
 district,2001_D3_AA,2001,AA,D3,33,6.0,Greencastle-Antrim,GCA
@@ -10899,7 +10899,7 @@ district,2002_D3_AA,2002,AA,D3,36,2.0,James Buchanan,JB
 district,2002_D3_AA,2002,AA,D3,37,0.0,Camp Hill,CPH
 district,2002_D3_AA,2002,AA,D3,37,0.0,East Pennsboro,EP
 district,2002_D3_AA,2002,AA,D3,37,0.0,Lancaster Catholic,LCC
-district,2002_D3_AA,2002,AA,D3,37,0.0,Reading CC,RCC
+district,2002_D3_AA,2002,AA,D3,37,0.0,Reading Central Catholic,RCC
 district,2002_D3_AA,2002,AA,D3,37,0.0,Susquehanna Township,ST
 district,2002_D4_AA,2002,AA,D4,1,126.0,Wyalusing,WYA
 district,2002_D4_AA,2002,AA,D4,2,112.5,Bloomsburg,BLM
@@ -11868,7 +11868,7 @@ district,2005_D3_AA,2005,AA,D3,18,36.0,Hanover,HAN
 district,2005_D3_AA,2005,AA,D3,20,34.0,East Pennsboro,EP
 district,2005_D3_AA,2005,AA,D3,21,32.0,Newport,NWPT
 district,2005_D3_AA,2005,AA,D3,22,29.0,Northern Lebanon,NLB
-district,2005_D3_AA,2005,AA,D3,23,28.0,Reading CC,RCC
+district,2005_D3_AA,2005,AA,D3,23,28.0,Reading Central Catholic,RCC
 district,2005_D3_AA,2005,AA,D3,24,24.0,James Buchanan,JB
 district,2005_D3_AA,2005,AA,D3,24,24.0,Palmyra,PALM
 district,2005_D3_AA,2005,AA,D3,26,20.0,Oley Valley,OV
@@ -12225,7 +12225,7 @@ district,2006_D3_AA,2006,AA,D3,24,20.0,Kutztown,KTZ
 district,2006_D3_AA,2006,AA,D3,25,18.0,Halifax,HLF
 district,2006_D3_AA,2006,AA,D3,26,17.0,Fleetwood,FW
 district,2006_D3_AA,2006,AA,D3,26,17.0,Pequea Valley,PQV
-district,2006_D3_AA,2006,AA,D3,26,17.0,Reading CC,RCC
+district,2006_D3_AA,2006,AA,D3,26,17.0,Reading Central Catholic,RCC
 district,2006_D3_AA,2006,AA,D3,29,15.0,East Pennsboro,EP
 district,2006_D3_AA,2006,AA,D3,30,14.0,Lancaster Catholic,LCC
 district,2006_D3_AA,2006,AA,D3,31,9.0,Camp Hill,CPH
@@ -12585,7 +12585,7 @@ district,2007_D3_AA,2007,AA,D3,19,35.5,Palmyra,PALM
 district,2007_D3_AA,2007,AA,D3,20,32.0,Camp Hill,CPH
 district,2007_D3_AA,2007,AA,D3,21,31.0,Lancaster Catholic,LCC
 district,2007_D3_AA,2007,AA,D3,22,28.0,Northern Lebanon,NLB
-district,2007_D3_AA,2007,AA,D3,23,24.0,Reading CC,RCC
+district,2007_D3_AA,2007,AA,D3,23,24.0,Reading Central Catholic,RCC
 district,2007_D3_AA,2007,AA,D3,24,21.0,Eastern York,EY
 district,2007_D3_AA,2007,AA,D3,24,21.0,Pequea Valley,PQV
 district,2007_D3_AA,2007,AA,D3,26,18.5,Halifax,HLF
@@ -12961,7 +12961,7 @@ district,2008_D3_AA,2008,AA,D3,29,7.0,Annville-Cleona,AC
 district,2008_D3_AA,2008,AA,D3,29,7.0,Eastern York,EY
 district,2008_D3_AA,2008,AA,D3,29,7.0,Halifax,HLF
 district,2008_D3_AA,2008,AA,D3,29,7.0,Kutztown,KTZ
-district,2008_D3_AA,2008,AA,D3,33,3.0,Reading CC,RCC
+district,2008_D3_AA,2008,AA,D3,33,3.0,Reading Central Catholic,RCC
 district,2008_D3_AA,2008,AA,D3,34,0.0,Northern Lebanon,NLB
 district,2008_D4_AA,2008,AA,D4,1,126.5,Canton,CNT
 district,2008_D4_AA,2008,AA,D4,2,109.0,Benton,BNT
@@ -13590,7 +13590,7 @@ district,2010_D3_AA,2010,AA,D3,17,34.0,Pequea Valley,PQV
 district,2010_D3_AA,2010,AA,D3,18,29.0,Fleetwood,FW
 district,2010_D3_AA,2010,AA,D3,19,22.0,Newport,NWPT
 district,2010_D3_AA,2010,AA,D3,19,22.0,Oley Valley,OV
-district,2010_D3_AA,2010,AA,D3,21,16.0,Bishop McDevitt (3),BMD3
+district,2010_D3_AA,2010,AA,D3,21,16.0,Bishop McDevitt,BMD3
 district,2010_D3_AA,2010,AA,D3,21,16.0,Lancaster Catholic,LCC
 district,2010_D3_AA,2010,AA,D3,23,11.0,Littlestown,LTT
 district,2010_D3_AA,2010,AA,D3,24,9.0,Upper Dauphin,UD
@@ -14522,7 +14522,7 @@ district,2013_D3_AA,2013,AA,D3,8,70.5,Lancaster Catholic,LCC
 district,2013_D3_AA,2013,AA,D3,9,68.5,Brandywine Heights,BH
 district,2013_D3_AA,2013,AA,D3,10,66.0,Hanover,HAN
 district,2013_D3_AA,2013,AA,D3,11,61.0,Annville-Cleona,AC
-district,2013_D3_AA,2013,AA,D3,12,57.5,Bishop McDevitt (3),BMD3
+district,2013_D3_AA,2013,AA,D3,12,57.5,Bishop McDevitt,BMD3
 district,2013_D3_AA,2013,AA,D3,13,56.0,Upper Dauphin,UD
 district,2013_D3_AA,2013,AA,D3,14,51.0,Hamburg,HMB
 district,2013_D3_AA,2013,AA,D3,15,49.5,Halifax,HLF
@@ -14855,7 +14855,7 @@ district,2014_D3_AA,2014,AA,D3,2,170.5,Bermudian Springs,BES
 district,2014_D3_AA,2014,AA,D3,3,103.5,Hamburg,HMB
 district,2014_D3_AA,2014,AA,D3,4,90.5,Schuylkill Valley,SCV
 district,2014_D3_AA,2014,AA,D3,5,89.5,Biglerville,BGV
-district,2014_D3_AA,2014,AA,D3,6,83.0,Bishop McDevitt (3),BMD3
+district,2014_D3_AA,2014,AA,D3,6,83.0,Bishop McDevitt,BMD3
 district,2014_D3_AA,2014,AA,D3,7,71.0,Hanover,HAN
 district,2014_D3_AA,2014,AA,D3,8,68.0,Lancaster Catholic,LCC
 district,2014_D3_AA,2014,AA,D3,9,67.0,Annville-Cleona,AC
@@ -15192,7 +15192,7 @@ district,2015_D3_AA,2015,AA,D3,2,117.0,Bermudian Springs,BES
 district,2015_D3_AA,2015,AA,D3,3,98.0,Northern Lebanon,NLB
 district,2015_D3_AA,2015,AA,D3,4,82.5,Biglerville,BGV
 district,2015_D3_AA,2015,AA,D3,5,65.5,Littlestown,LTT
-district,2015_D3_AA,2015,AA,D3,6,62.5,Bishop McDevitt (3),BMD3
+district,2015_D3_AA,2015,AA,D3,6,62.5,Bishop McDevitt,BMD3
 district,2015_D3_AA,2015,AA,D3,7,60.5,Annville-Cleona,AC
 district,2015_D3_AA,2015,AA,D3,7,60.5,Schuylkill Valley,SCV
 district,2015_D3_AA,2015,AA,D3,9,56.5,Delone Catholic,DC
@@ -24094,7 +24094,7 @@ regional,1997_South_West_AA,1997,AA,SW,33,1.0,Carlynton,CRLT
 regional,1997_South_West_AA,1997,AA,SW,33,1.0,Valley,VLY
 regional,1997_South_West_AA,1997,AA,SW,35,0.0,Bentworth,BNW
 regional,1997_South_West_AA,1997,AA,SW,35,0.0,Everett,EV
-regional,1997_South_West_AA,1997,AA,SW,35,0.0,Greensburg CC,GCC
+regional,1997_South_West_AA,1997,AA,SW,35,0.0,Greensburg Central Catholic,GCC
 regional,1997_South_West_AA,1997,AA,SW,35,0.0,Jeannette,JNT
 regional,1997_South_West_AA,1997,AA,SW,35,0.0,Pine-Richland,PRL
 regional,1997_South_West_AA,1997,AA,SW,35,0.0,Tyrone,TYR
@@ -24736,7 +24736,7 @@ regional,1999_South_West_AA,1999,AA,SW,47,4.0,Ligonier Valley,LGV
 regional,1999_South_West_AA,1999,AA,SW,47,4.0,Steel Valley,STV
 regional,1999_South_West_AA,1999,AA,SW,50,3.5,South Side Beaver,SSB
 regional,1999_South_West_AA,1999,AA,SW,51,3.0,Bucktail,BUCK
-regional,1999_South_West_AA,1999,AA,SW,52,2.0,Greensburg CC,GCC
+regional,1999_South_West_AA,1999,AA,SW,52,2.0,Greensburg Central Catholic,GCC
 regional,1999_South_West_AA,1999,AA,SW,52,2.0,Juniata Valley,JV
 regional,1999_South_West_AA,1999,AA,SW,52,2.0,Southern Huntingdon,SHD
 regional,1999_South_West_AA,1999,AA,SW,55,1.0,Mount Union,MU
@@ -24779,7 +24779,7 @@ regional,1999_South_West_AAA,1999,AAA,SW,31,12.0,Belle Vernon,BEV
 regional,1999_South_West_AAA,1999,AAA,SW,31,12.0,Butler,BTL
 regional,1999_South_West_AAA,1999,AAA,SW,33,10.0,Highlands,HL
 regional,1999_South_West_AAA,1999,AAA,SW,33,10.0,McKeesport,MCK
-regional,1999_South_West_AAA,1999,AAA,SW,35,9.0,Pittsburgh CC,PCC
+regional,1999_South_West_AAA,1999,AAA,SW,35,9.0,Pittsburgh Central Catholic,PCC
 regional,1999_South_West_AAA,1999,AAA,SW,35,9.0,West Mifflin,WMF
 regional,1999_South_West_AAA,1999,AAA,SW,37,7.0,Mount Lebanon,ML
 regional,1999_South_West_AAA,1999,AAA,SW,37,7.0,Plum,PLM
@@ -25116,7 +25116,7 @@ regional,2000_South_West_AA,2000,AA,SW,32,11.0,Laurel,LRL
 regional,2000_South_West_AA,2000,AA,SW,32,11.0,Richland,RCHL
 regional,2000_South_West_AA,2000,AA,SW,35,10.0,Glendale,GD
 regional,2000_South_West_AA,2000,AA,SW,35,10.0,Tyrone,TYR
-regional,2000_South_West_AA,2000,AA,SW,37,9.0,Greensburg CC,GCC
+regional,2000_South_West_AA,2000,AA,SW,37,9.0,Greensburg Central Catholic,GCC
 regional,2000_South_West_AA,2000,AA,SW,38,8.0,Conemaugh Township,CMTW
 regional,2000_South_West_AA,2000,AA,SW,39,5.0,Burgettstown,BGT
 regional,2000_South_West_AA,2000,AA,SW,39,5.0,Everett,EV
@@ -25180,7 +25180,7 @@ regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,Hempfield Area,HMPA
 regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,Hopewell,HPW
 regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,McKeesport,MCK
 regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,North Hills,NHL
-regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,Pittsburgh CC,PCC
+regional,2000_South_West_AAA,2000,AAA,SW,45,0.0,Pittsburgh Central Catholic,PCC
 regional,2001_North_East_AA,2001,AA,NE,1,63.0,Bloomsburg,BLM
 regional,2001_North_East_AA,2001,AA,NE,2,54.0,Benton,BNT
 regional,2001_North_East_AA,2001,AA,NE,3,52.0,Elmer L. Meyers,ELM
@@ -25418,7 +25418,7 @@ regional,2001_South_East_AA,2001,AA,SE,48,0.0,Bristol,BRI
 regional,2001_South_East_AA,2001,AA,SE,48,0.0,Jim Thorpe,JTR
 regional,2001_South_East_AA,2001,AA,SE,48,0.0,Lehighton,LHT
 regional,2001_South_East_AA,2001,AA,SE,48,0.0,Mahanoy,MAH
-regional,2001_South_East_AA,2001,AA,SE,48,0.0,Reading CC,RCC
+regional,2001_South_East_AA,2001,AA,SE,48,0.0,Reading Central Catholic,RCC
 regional,2001_South_East_AA,2001,AA,SE,48,0.0,Shippensburg,SHIP
 regional,2001_South_East_AAA,2001,AAA,SE,1,77.0,Norristown,NT
 regional,2001_South_East_AAA,2001,AAA,SE,2,74.5,Upper Perkiomen,UPE
@@ -25509,7 +25509,7 @@ regional,2001_South_West_AA,2001,AA,SW,44,4.0,Bellwood Antis,BA
 regional,2001_South_West_AA,2001,AA,SW,44,4.0,Meyersdale,MYD
 regional,2001_South_West_AA,2001,AA,SW,44,4.0,South Side Beaver,SSB
 regional,2001_South_West_AA,2001,AA,SW,47,3.0,Chartiers-Houston,CHH
-regional,2001_South_West_AA,2001,AA,SW,47,3.0,Greensburg CC,GCC
+regional,2001_South_West_AA,2001,AA,SW,47,3.0,Greensburg Central Catholic,GCC
 regional,2001_South_West_AA,2001,AA,SW,47,3.0,Summit Academy,SMA
 regional,2001_South_West_AA,2001,AA,SW,50,2.0,Tussey Mountain,TM
 regional,2001_South_West_AA,2001,AA,SW,51,1.0,Charleroi,CHL
@@ -25557,7 +25557,7 @@ regional,2001_South_West_AAA,2001,AAA,SW,37,6.0,Highlands,HL
 regional,2001_South_West_AAA,2001,AAA,SW,37,6.0,Kittanning,KIT
 regional,2001_South_West_AAA,2001,AAA,SW,37,6.0,Mount Pleasant,MTPL
 regional,2001_South_West_AAA,2001,AAA,SW,41,5.5,Thomas Jefferson,TJ
-regional,2001_South_West_AAA,2001,AAA,SW,42,5.0,Pittsburgh CC,PCC
+regional,2001_South_West_AAA,2001,AAA,SW,42,5.0,Pittsburgh Central Catholic,PCC
 regional,2001_South_West_AAA,2001,AAA,SW,43,4.0,Franklin Regional,FR
 regional,2001_South_West_AAA,2001,AAA,SW,43,4.0,Quigley Catholic,QC
 regional,2001_South_West_AAA,2001,AAA,SW,45,3.0,Montour,MNT
@@ -25870,7 +25870,7 @@ regional,2002_South_West_AA,2002,AA,SW,10,35.5,Fort Cherry,FC
 regional,2002_South_West_AA,2002,AA,SW,11,34.0,North Star,NST
 regional,2002_South_West_AA,2002,AA,SW,11,34.0,Richland,RCHL
 regional,2002_South_West_AA,2002,AA,SW,13,32.0,Cambria Heights,CAH
-regional,2002_South_West_AA,2002,AA,SW,13,32.0,Greensburg CC,GCC
+regional,2002_South_West_AA,2002,AA,SW,13,32.0,Greensburg Central Catholic,GCC
 regional,2002_South_West_AA,2002,AA,SW,13,32.0,Penns Valley,PNV
 regional,2002_South_West_AA,2002,AA,SW,16,30.0,Chartiers-Houston,CHH
 regional,2002_South_West_AA,2002,AA,SW,16,30.0,Northern Bedford,NOB
@@ -25938,7 +25938,7 @@ regional,2002_South_West_AAA,2002,AAA,SW,22,18.0,Seneca Valley,SEV
 regional,2002_South_West_AAA,2002,AAA,SW,22,18.0,Upper St. Clair,USC
 regional,2002_South_West_AAA,2002,AAA,SW,27,15.0,Highlands,HL
 regional,2002_South_West_AAA,2002,AAA,SW,28,14.0,Hempfield Area,HMPA
-regional,2002_South_West_AAA,2002,AAA,SW,29,11.0,Pittsburgh CC,PCC
+regional,2002_South_West_AAA,2002,AAA,SW,29,11.0,Pittsburgh Central Catholic,PCC
 regional,2002_South_West_AAA,2002,AAA,SW,30,10.0,Belle Vernon,BEV
 regional,2002_South_West_AAA,2002,AAA,SW,30,10.0,Butler,BTL
 regional,2002_South_West_AAA,2002,AAA,SW,32,8.0,Baldwin,BALD
@@ -26143,7 +26143,7 @@ regional,2003_South_Central_AAA,2003,AAA,SC,38,7.5,Garden Spot,GSP
 regional,2003_South_Central_AAA,2003,AAA,SC,39,7.0,Dover,DOV
 regional,2003_South_Central_AAA,2003,AAA,SC,40,6.0,Elizabethtown,ELBT
 regional,2003_South_Central_AAA,2003,AAA,SC,40,6.0,Shippensburg,SHIP
-regional,2003_South_Central_AAA,2003,AAA,SC,42,4.0,Reading CC,RCC
+regional,2003_South_Central_AAA,2003,AAA,SC,42,4.0,Reading Central Catholic,RCC
 regional,2003_South_Central_AAA,2003,AAA,SC,43,3.0,Central York,CYK
 regional,2003_South_Central_AAA,2003,AAA,SC,43,3.0,Chambersburg,CMB
 regional,2003_South_Central_AAA,2003,AAA,SC,43,3.0,Daniel Boone,DB
@@ -26321,11 +26321,11 @@ regional,2003_South_West_AAA,2003,AAA,SW,11,52.0,Greater Latrobe,GLT
 regional,2003_South_West_AAA,2003,AAA,SW,12,50.5,Canon-McMillan,CMM
 regional,2003_South_West_AAA,2003,AAA,SW,13,50.0,Penn-Trafford,PTF
 regional,2003_South_West_AAA,2003,AAA,SW,14,45.0,Valley,VLY
-regional,2003_South_West_AAA,2003,AAA,SW,15,43.0,Pittsburgh CC,PCC
+regional,2003_South_West_AAA,2003,AAA,SW,15,43.0,Pittsburgh Central Catholic,PCC
 regional,2003_South_West_AAA,2003,AAA,SW,16,42.0,Plum,PLM
 regional,2003_South_West_AAA,2003,AAA,SW,17,35.0,Fox Chapel,FXCH
 regional,2003_South_West_AAA,2003,AAA,SW,18,33.0,Keystone Oaks,KO
-regional,2003_South_West_AAA,2003,AAA,SW,19,26.0,Greensburg CC,GCC
+regional,2003_South_West_AAA,2003,AAA,SW,19,26.0,Greensburg Central Catholic,GCC
 regional,2003_South_West_AAA,2003,AAA,SW,19,26.0,Moon,MOON
 regional,2003_South_West_AAA,2003,AAA,SW,21,25.0,Highlands,HL
 regional,2003_South_West_AAA,2003,AAA,SW,21,25.0,West Allegheny,WAG
@@ -26716,7 +26716,7 @@ regional,2004_South_West_AAA,2004,AAA,SW,7,78.0,Chartiers Valley,CHV
 regional,2004_South_West_AAA,2004,AAA,SW,8,74.5,Penn-Trafford,PTF
 regional,2004_South_West_AAA,2004,AAA,SW,9,73.5,Shaler,SHA
 regional,2004_South_West_AAA,2004,AAA,SW,10,50.5,Greater Latrobe,GLT
-regional,2004_South_West_AAA,2004,AAA,SW,11,40.5,Pittsburgh CC,PCC
+regional,2004_South_West_AAA,2004,AAA,SW,11,40.5,Pittsburgh Central Catholic,PCC
 regional,2004_South_West_AAA,2004,AAA,SW,12,40.0,Fox Chapel,FXCH
 regional,2004_South_West_AAA,2004,AAA,SW,12,40.0,Hampton,HMT
 regional,2004_South_West_AAA,2004,AAA,SW,14,38.0,North Allegheny,NA
@@ -26725,7 +26725,7 @@ regional,2004_South_West_AAA,2004,AAA,SW,16,32.5,Plum,PLM
 regional,2004_South_West_AAA,2004,AAA,SW,17,31.0,Belle Vernon,BEV
 regional,2004_South_West_AAA,2004,AAA,SW,18,30.0,Gateway,GTWY
 regional,2004_South_West_AAA,2004,AAA,SW,18,30.0,Norwin,NRW
-regional,2004_South_West_AAA,2004,AAA,SW,20,29.0,Greensburg CC,GCC
+regional,2004_South_West_AAA,2004,AAA,SW,20,29.0,Greensburg Central Catholic,GCC
 regional,2004_South_West_AAA,2004,AAA,SW,21,26.0,Albert Gallatin,AGL
 regional,2004_South_West_AAA,2004,AAA,SW,21,26.0,McGuffey,MCG
 regional,2004_South_West_AAA,2004,AAA,SW,23,25.0,Upper St. Clair,USC
@@ -26991,7 +26991,7 @@ regional,2005_South_East_AA,2005,AA,SE,43,2.0,Harriton,HAR
 regional,2005_South_East_AA,2005,AA,SE,43,2.0,Juniata,JUN
 regional,2005_South_East_AA,2005,AA,SE,43,2.0,Schuylkill Haven,SCHV
 regional,2005_South_East_AA,2005,AA,SE,46,1.0,Lancaster Catholic,LCC
-regional,2005_South_East_AA,2005,AA,SE,46,1.0,Reading CC,RCC
+regional,2005_South_East_AA,2005,AA,SE,46,1.0,Reading Central Catholic,RCC
 regional,2005_South_East_AA,2005,AA,SE,48,0.0,Delaware Co. Christian,DCC
 regional,2005_South_East_AA,2005,AA,SE,48,0.0,ELCO,ELCO
 regional,2005_South_East_AA,2005,AA,SE,48,0.0,Hanover,HAN
@@ -27120,7 +27120,7 @@ regional,2005_South_West_AAA,2005,AAA,SW,4,97.0,Greensburg Salem,GSL
 regional,2005_South_West_AAA,2005,AAA,SW,5,89.5,Canon-McMillan,CMM
 regional,2005_South_West_AAA,2005,AAA,SW,6,83.5,Waynesburg Central,WYC
 regional,2005_South_West_AAA,2005,AAA,SW,7,67.0,North Allegheny,NA
-regional,2005_South_West_AAA,2005,AAA,SW,8,59.5,Greensburg CC,GCC
+regional,2005_South_West_AAA,2005,AAA,SW,8,59.5,Greensburg Central Catholic,GCC
 regional,2005_South_West_AAA,2005,AAA,SW,9,56.0,McGuffey,MCG
 regional,2005_South_West_AAA,2005,AAA,SW,10,54.5,Albert Gallatin,AGL
 regional,2005_South_West_AAA,2005,AAA,SW,11,53.0,Fox Chapel,FXCH
@@ -27131,7 +27131,7 @@ regional,2005_South_West_AAA,2005,AAA,SW,15,44.0,Plum,PLM
 regional,2005_South_West_AAA,2005,AAA,SW,16,43.0,Greater Latrobe,GLT
 regional,2005_South_West_AAA,2005,AAA,SW,17,31.0,Chartiers Valley,CHV
 regional,2005_South_West_AAA,2005,AAA,SW,18,29.5,Gateway,GTWY
-regional,2005_South_West_AAA,2005,AAA,SW,18,29.5,Pittsburgh CC,PCC
+regional,2005_South_West_AAA,2005,AAA,SW,18,29.5,Pittsburgh Central Catholic,PCC
 regional,2005_South_West_AAA,2005,AAA,SW,20,26.0,Avonworth,AVW
 regional,2005_South_West_AAA,2005,AAA,SW,20,26.0,Bethel Park,BP
 regional,2005_South_West_AAA,2005,AAA,SW,22,24.0,Keystone Oaks,KO
@@ -27396,7 +27396,7 @@ regional,2006_South_East_AA,2006,AA,SE,43,3.0,Lancaster Catholic,LCC
 regional,2006_South_East_AA,2006,AA,SE,44,2.0,Camp Hill,CPH
 regional,2006_South_East_AA,2006,AA,SE,44,2.0,East Pennsboro,EP
 regional,2006_South_East_AA,2006,AA,SE,44,2.0,Pequea Valley,PQV
-regional,2006_South_East_AA,2006,AA,SE,44,2.0,Reading CC,RCC
+regional,2006_South_East_AA,2006,AA,SE,44,2.0,Reading Central Catholic,RCC
 regional,2006_South_East_AA,2006,AA,SE,44,2.0,Tri-Valley,TV
 regional,2006_South_East_AA,2006,AA,SE,49,1.0,Notre Dame-GP,NDGP
 regional,2006_South_East_AA,2006,AA,SE,49,1.0,Palmyra,PALM
@@ -27520,7 +27520,7 @@ regional,2006_South_West_AAA,2006,AAA,SW,1,116.0,Kiski Area,KSK
 regional,2006_South_West_AAA,2006,AAA,SW,2,81.5,Waynesburg Central,WYC
 regional,2006_South_West_AAA,2006,AAA,SW,3,79.0,Canon-McMillan,CMM
 regional,2006_South_West_AAA,2006,AAA,SW,3,79.0,McGuffey,MCG
-regional,2006_South_West_AAA,2006,AAA,SW,5,75.0,Greensburg CC,GCC
+regional,2006_South_West_AAA,2006,AAA,SW,5,75.0,Greensburg Central Catholic,GCC
 regional,2006_South_West_AAA,2006,AAA,SW,5,75.0,Trinity,TRIN
 regional,2006_South_West_AAA,2006,AAA,SW,7,69.5,Keystone Oaks,KO
 regional,2006_South_West_AAA,2006,AAA,SW,8,66.5,Greater Latrobe,GLT
@@ -27537,7 +27537,7 @@ regional,2006_South_West_AAA,2006,AAA,SW,18,34.0,Fox Chapel,FXCH
 regional,2006_South_West_AAA,2006,AAA,SW,18,34.0,Kittanning,KIT
 regional,2006_South_West_AAA,2006,AAA,SW,20,32.0,Ambridge,AMB
 regional,2006_South_West_AAA,2006,AAA,SW,20,32.0,Gateway,GTWY
-regional,2006_South_West_AAA,2006,AAA,SW,22,29.0,Pittsburgh CC,PCC
+regional,2006_South_West_AAA,2006,AAA,SW,22,29.0,Pittsburgh Central Catholic,PCC
 regional,2006_South_West_AAA,2006,AAA,SW,23,27.0,Butler,BTL
 regional,2006_South_West_AAA,2006,AAA,SW,23,27.0,Plum,PLM
 regional,2006_South_West_AAA,2006,AAA,SW,23,27.0,West Mifflin,WMF
@@ -27781,7 +27781,7 @@ regional,2007_South_East_AA,2007,AA,SE,21,24.0,Pius X (Roseto),PX
 regional,2007_South_East_AA,2007,AA,SE,24,23.0,Susquenita,SQ
 regional,2007_South_East_AA,2007,AA,SE,25,22.0,Donegal,DNG
 regional,2007_South_East_AA,2007,AA,SE,26,18.0,Wyomissing,WYO
-regional,2007_South_East_AA,2007,AA,SE,27,17.0,Reading CC,RCC
+regional,2007_South_East_AA,2007,AA,SE,27,17.0,Reading Central Catholic,RCC
 regional,2007_South_East_AA,2007,AA,SE,28,16.0,Eastern York,EY
 regional,2007_South_East_AA,2007,AA,SE,28,16.0,Lehighton,LHT
 regional,2007_South_East_AA,2007,AA,SE,28,16.0,Oley Valley,OV
@@ -27945,7 +27945,7 @@ regional,2007_South_West_AAA,2007,AAA,SW,17,41.0,Belle Vernon,BEV
 regional,2007_South_West_AAA,2007,AAA,SW,18,40.0,Norwin,NRW
 regional,2007_South_West_AAA,2007,AAA,SW,19,37.5,Indiana,IND
 regional,2007_South_West_AAA,2007,AAA,SW,20,33.0,Franklin Regional,FR
-regional,2007_South_West_AAA,2007,AAA,SW,21,30.0,Pittsburgh CC,PCC
+regional,2007_South_West_AAA,2007,AAA,SW,21,30.0,Pittsburgh Central Catholic,PCC
 regional,2007_South_West_AAA,2007,AAA,SW,22,29.0,Plum,PLM
 regional,2007_South_West_AAA,2007,AAA,SW,23,23.5,Fox Chapel,FXCH
 regional,2007_South_West_AAA,2007,AAA,SW,24,23.0,Bethel Park,BP
@@ -28343,7 +28343,7 @@ regional,2008_South_West_AAA,2008,AAA,SW,14,58.5,Norwin,NRW
 regional,2008_South_West_AAA,2008,AAA,SW,15,55.0,West Mifflin,WMF
 regional,2008_South_West_AAA,2008,AAA,SW,16,53.0,McGuffey,MCG
 regional,2008_South_West_AAA,2008,AAA,SW,17,47.0,Butler,BTL
-regional,2008_South_West_AAA,2008,AAA,SW,18,46.0,Pittsburgh CC,PCC
+regional,2008_South_West_AAA,2008,AAA,SW,18,46.0,Pittsburgh Central Catholic,PCC
 regional,2008_South_West_AAA,2008,AAA,SW,19,42.0,Plum,PLM
 regional,2008_South_West_AAA,2008,AAA,SW,20,38.0,Franklin Regional,FR
 regional,2008_South_West_AAA,2008,AAA,SW,21,37.0,Waynesburg Central,WYC
@@ -28600,7 +28600,7 @@ regional,2009_South_East_AA,2009,AA,SE,29,16.0,Annville-Cleona,AC
 regional,2009_South_East_AA,2009,AA,SE,29,16.0,Littlestown,LTT
 regional,2009_South_East_AA,2009,AA,SE,31,15.0,Jim Thorpe,JTR
 regional,2009_South_East_AA,2009,AA,SE,32,12.0,Williams Valley,WV
-regional,2009_South_East_AA,2009,AA,SE,33,9.0,Bishop McDevitt (3),BMD3
+regional,2009_South_East_AA,2009,AA,SE,33,9.0,Bishop McDevitt,BMD3
 regional,2009_South_East_AA,2009,AA,SE,34,0.0,Bristol,BRI
 regional,2009_South_East_AA,2009,AA,SE,34,0.0,Camp Hill,CPH
 regional,2009_South_East_AA,2009,AA,SE,34,0.0,Cardinal Dougherty,CRDD
@@ -28747,7 +28747,7 @@ regional,2009_South_West_AAA,2009,AAA,SW,6,85.0,Connellsville,CNV
 regional,2009_South_West_AAA,2009,AAA,SW,6,85.0,North Allegheny,NA
 regional,2009_South_West_AAA,2009,AAA,SW,8,78.0,Canon-McMillan,CMM
 regional,2009_South_West_AAA,2009,AAA,SW,9,63.0,West Allegheny,WAG
-regional,2009_South_West_AAA,2009,AAA,SW,10,53.0,Pittsburgh CC,PCC
+regional,2009_South_West_AAA,2009,AAA,SW,10,53.0,Pittsburgh Central Catholic,PCC
 regional,2009_South_West_AAA,2009,AAA,SW,10,53.0,West Mifflin,WMF
 regional,2009_South_West_AAA,2009,AAA,SW,12,52.0,Fox Chapel,FXCH
 regional,2009_South_West_AAA,2009,AAA,SW,13,50.0,Elizabeth Forward,EF
@@ -29025,7 +29025,7 @@ regional,2010_South_East_AA,2010,AA,SE,35,7.0,Eastern York,EY
 regional,2010_South_East_AA,2010,AA,SE,37,4.0,North Schuylkill,NSC
 regional,2010_South_East_AA,2010,AA,SE,37,4.0,Schuylkill Haven,SCHV
 regional,2010_South_East_AA,2010,AA,SE,37,4.0,Springfield Township,SFT
-regional,2010_South_East_AA,2010,AA,SE,40,3.0,Bishop McDevitt (3),BMD3
+regional,2010_South_East_AA,2010,AA,SE,40,3.0,Bishop McDevitt,BMD3
 regional,2010_South_East_AA,2010,AA,SE,40,3.0,Harriton,HAR
 regional,2010_South_East_AA,2010,AA,SE,40,3.0,Littlestown,LTT
 regional,2010_South_East_AA,2010,AA,SE,43,2.5,Lower Moreland,LMO
@@ -29158,7 +29158,7 @@ regional,2010_South_West_AA,2010,AA,SW,53,0.0,Glendale,GD
 regional,2010_South_West_AA,2010,AA,SW,53,0.0,West Branch,WB
 regional,2010_South_West_AAA,2010,AAA,SW,1,102.5,Canon-McMillan,CMM
 regional,2010_South_West_AAA,2010,AAA,SW,2,101.5,Connellsville,CNV
-regional,2010_South_West_AAA,2010,AAA,SW,3,101.0,Pittsburgh CC,PCC
+regional,2010_South_West_AAA,2010,AAA,SW,3,101.0,Pittsburgh Central Catholic,PCC
 regional,2010_South_West_AAA,2010,AAA,SW,4,90.0,Kiski Area,KSK
 regional,2010_South_West_AAA,2010,AAA,SW,5,85.0,Greater Latrobe,GLT
 regional,2010_South_West_AAA,2010,AAA,SW,6,78.0,Derry Area,DER
@@ -29585,7 +29585,7 @@ regional,2011_South_West_AA,2011,AA,SW,56,0.0,Marion Center,MAC
 regional,2011_South_West_AA,2011,AA,SW,56,0.0,Shade,SHDE
 regional,2011_South_West_AA,2011,AA,SW,56,0.0,Washington,WSH
 regional,2011_South_West_AAA,2011,AAA,SW,1,167.5,Canon-McMillan,CMM
-regional,2011_South_West_AAA,2011,AAA,SW,2,141.0,Pittsburgh CC,PCC
+regional,2011_South_West_AAA,2011,AAA,SW,2,141.0,Pittsburgh Central Catholic,PCC
 regional,2011_South_West_AAA,2011,AAA,SW,3,112.5,Greater Latrobe,GLT
 regional,2011_South_West_AAA,2011,AAA,SW,4,105.5,Franklin Regional,FR
 regional,2011_South_West_AAA,2011,AAA,SW,5,82.5,North Allegheny,NA
@@ -29864,7 +29864,7 @@ regional,2012_South_East_AA,2012,AA,SE,26,19.5,Tamaqua,TMQ
 regional,2012_South_East_AA,2012,AA,SE,27,18.0,Lehighton,LHT
 regional,2012_South_East_AA,2012,AA,SE,28,17.0,Pine Grove,PNG
 regional,2012_South_East_AA,2012,AA,SE,29,13.0,Upper Dauphin,UD
-regional,2012_South_East_AA,2012,AA,SE,30,12.0,Bishop McDevitt (3),BMD3
+regional,2012_South_East_AA,2012,AA,SE,30,12.0,Bishop McDevitt,BMD3
 regional,2012_South_East_AA,2012,AA,SE,30,12.0,Camp Hill,CPH
 regional,2012_South_East_AA,2012,AA,SE,32,11.5,Phil-Mont Christian,PMC
 regional,2012_South_East_AA,2012,AA,SE,33,11.0,North Schuylkill,NSC
@@ -30013,7 +30013,7 @@ regional,2012_South_West_AA,2012,AA,SW,57,0.0,Glendale,GD
 regional,2012_South_West_AA,2012,AA,SW,57,0.0,South Allegheny,SALG
 regional,2012_South_West_AA,2012,AA,SW,57,0.0,Yough,YGH
 regional,2012_South_West_AAA,2012,AAA,SW,1,216.5,Canon-McMillan,CMM
-regional,2012_South_West_AAA,2012,AAA,SW,2,112.0,Pittsburgh CC,PCC
+regional,2012_South_West_AAA,2012,AAA,SW,2,112.0,Pittsburgh Central Catholic,PCC
 regional,2012_South_West_AAA,2012,AAA,SW,3,111.0,Franklin Regional,FR
 regional,2012_South_West_AAA,2012,AAA,SW,4,107.5,Hampton,HMT
 regional,2012_South_West_AAA,2012,AAA,SW,5,99.0,Greensburg Salem,GSL
@@ -30289,7 +30289,7 @@ regional,2013_South_East_AA,2013,AA,SE,8,55.0,Brandywine Heights,BH
 regional,2013_South_East_AA,2013,AA,SE,9,51.5,Wyomissing,WYO
 regional,2013_South_East_AA,2013,AA,SE,10,50.5,Schuylkill Valley,SCV
 regional,2013_South_East_AA,2013,AA,SE,11,49.5,Bermudian Springs,BES
-regional,2013_South_East_AA,2013,AA,SE,12,40.5,Bishop McDevitt (3),BMD3
+regional,2013_South_East_AA,2013,AA,SE,12,40.5,Bishop McDevitt,BMD3
 regional,2013_South_East_AA,2013,AA,SE,13,38.0,Halifax,HLF
 regional,2013_South_East_AA,2013,AA,SE,14,37.5,Hanover,HAN
 regional,2013_South_East_AA,2013,AA,SE,15,34.0,North Schuylkill,NSC
@@ -30441,7 +30441,7 @@ regional,2013_South_West_AAA,2013,AAA,SW,3,111.0,North Allegheny,NA
 regional,2013_South_West_AAA,2013,AAA,SW,4,86.0,Kiski Area,KSK
 regional,2013_South_West_AAA,2013,AAA,SW,5,81.0,Norwin,NRW
 regional,2013_South_West_AAA,2013,AAA,SW,6,80.5,Hampton,HMT
-regional,2013_South_West_AAA,2013,AAA,SW,6,80.5,Pittsburgh CC,PCC
+regional,2013_South_West_AAA,2013,AAA,SW,6,80.5,Pittsburgh Central Catholic,PCC
 regional,2013_South_West_AAA,2013,AAA,SW,8,79.5,Greater Latrobe,GLT
 regional,2013_South_West_AAA,2013,AAA,SW,9,74.0,North Hills,NHL
 regional,2013_South_West_AAA,2013,AAA,SW,10,68.0,Greensburg Salem,GSL
@@ -30701,7 +30701,7 @@ regional,2014_South_East_AA,2014,AA,SE,5,63.5,Hanover,HAN
 regional,2014_South_East_AA,2014,AA,SE,6,62.0,North Schuylkill,NSC
 regional,2014_South_East_AA,2014,AA,SE,7,60.0,Pius X (Roseto),PX
 regional,2014_South_East_AA,2014,AA,SE,8,47.0,Panther Valley,PAV
-regional,2014_South_East_AA,2014,AA,SE,9,46.5,Bishop McDevitt (3),BMD3
+regional,2014_South_East_AA,2014,AA,SE,9,46.5,Bishop McDevitt,BMD3
 regional,2014_South_East_AA,2014,AA,SE,10,45.5,Hamburg,HMB
 regional,2014_South_East_AA,2014,AA,SE,11,44.0,Pen Argyl,PAR
 regional,2014_South_East_AA,2014,AA,SE,12,43.5,Lancaster Catholic,LCC
@@ -30859,7 +30859,7 @@ regional,2014_South_West_AAA,2014,AAA,SW,3,104.5,Belle Vernon,BEV
 regional,2014_South_West_AAA,2014,AAA,SW,4,104.0,North Allegheny,NA
 regional,2014_South_West_AAA,2014,AAA,SW,5,101.0,Kiski Area,KSK
 regional,2014_South_West_AAA,2014,AAA,SW,6,98.5,Canon-McMillan,CMM
-regional,2014_South_West_AAA,2014,AAA,SW,7,79.0,Pittsburgh CC,PCC
+regional,2014_South_West_AAA,2014,AAA,SW,7,79.0,Pittsburgh Central Catholic,PCC
 regional,2014_South_West_AAA,2014,AAA,SW,8,71.0,Hempfield Area,HMPA
 regional,2014_South_West_AAA,2014,AAA,SW,9,67.5,North Hills,NHL
 regional,2014_South_West_AAA,2014,AAA,SW,10,64.0,Mount Lebanon,ML
@@ -31116,7 +31116,7 @@ regional,2015_South_East_AA,2015,AA,SE,1,121.5,Boiling Springs,BOS
 regional,2015_South_East_AA,2015,AA,SE,2,90.0,Bermudian Springs,BES
 regional,2015_South_East_AA,2015,AA,SE,2,90.0,Tri-Valley,TV
 regional,2015_South_East_AA,2015,AA,SE,4,70.5,Saucon Valley,SAV
-regional,2015_South_East_AA,2015,AA,SE,5,56.0,Bishop McDevitt (3),BMD3
+regional,2015_South_East_AA,2015,AA,SE,5,56.0,Bishop McDevitt,BMD3
 regional,2015_South_East_AA,2015,AA,SE,6,51.5,Northern Lehigh,NLH
 regional,2015_South_East_AA,2015,AA,SE,7,49.5,Northern Lebanon,NLB
 regional,2015_South_East_AA,2015,AA,SE,8,44.5,Northwestern Lehigh,NWL
@@ -31299,7 +31299,7 @@ regional,2015_South_West_AAA,2015,AAA,SW,8,65.0,Norwin,NRW
 regional,2015_South_West_AAA,2015,AAA,SW,9,61.0,North Allegheny,NA
 regional,2015_South_West_AAA,2015,AAA,SW,10,59.5,Canon-McMillan,CMM
 regional,2015_South_West_AAA,2015,AAA,SW,11,55.0,Pine-Richland,PRL
-regional,2015_South_West_AAA,2015,AAA,SW,12,54.0,Pittsburgh CC,PCC
+regional,2015_South_West_AAA,2015,AAA,SW,12,54.0,Pittsburgh Central Catholic,PCC
 regional,2015_South_West_AAA,2015,AAA,SW,13,51.5,Connellsville,CNV
 regional,2015_South_West_AAA,2015,AAA,SW,14,42.5,Bethel Park,BP
 regional,2015_South_West_AAA,2015,AAA,SW,15,40.0,Mount Lebanon,ML
@@ -31701,7 +31701,7 @@ regional,2016_South_West_AA,2016,AA,SW,48,2.0,West Greene,WG
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Bellwood Antis,BA
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Carlynton,CRLT
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Conemaugh Township,CMTW
-regional,2016_South_West_AA,2016,AA,SW,53,1.0,Greensburg CC,GCC
+regional,2016_South_West_AA,2016,AA,SW,53,1.0,Greensburg Central Catholic,GCC
 regional,2016_South_West_AA,2016,AA,SW,53,1.0,Tyrone,TYR
 regional,2016_South_West_AA,2016,AA,SW,58,0.0,Avonworth,AVW
 regional,2016_South_West_AA,2016,AA,SW,58,0.0,Central Valley,CEV
@@ -31740,7 +31740,7 @@ regional,2016_South_West_AAA,2016,AAA,SW,24,25.0,Upper St. Clair,USC
 regional,2016_South_West_AAA,2016,AAA,SW,25,24.0,West Mifflin,WMF
 regional,2016_South_West_AAA,2016,AAA,SW,26,18.5,Butler,BTL
 regional,2016_South_West_AAA,2016,AAA,SW,26,18.5,Ringgold,RG
-regional,2016_South_West_AAA,2016,AAA,SW,28,16.0,Pittsburgh CC,PCC
+regional,2016_South_West_AAA,2016,AAA,SW,28,16.0,Pittsburgh Central Catholic,PCC
 regional,2016_South_West_AAA,2016,AAA,SW,29,15.0,Ambridge,AMB
 regional,2016_South_West_AAA,2016,AAA,SW,29,15.0,Plum,PLM
 regional,2016_South_West_AAA,2016,AAA,SW,29,15.0,Thomas Jefferson,TJ
@@ -32102,7 +32102,7 @@ regional,2017_South_West_AA,2017,AA,SW,35,17.0,Meyersdale,MYD
 regional,2017_South_West_AA,2017,AA,SW,35,17.0,Mount Pleasant,MTPL
 regional,2017_South_West_AA,2017,AA,SW,37,16.0,Blairsville,BLV
 regional,2017_South_West_AA,2017,AA,SW,37,16.0,Cambria Heights,CAH
-regional,2017_South_West_AA,2017,AA,SW,39,14.0,Greensburg CC,GCC
+regional,2017_South_West_AA,2017,AA,SW,39,14.0,Greensburg Central Catholic,GCC
 regional,2017_South_West_AA,2017,AA,SW,39,14.0,Laurel,LRL
 regional,2017_South_West_AA,2017,AA,SW,41,13.0,United,UNTD
 regional,2017_South_West_AA,2017,AA,SW,42,12.0,Forest Hills,FH
@@ -32152,7 +32152,7 @@ regional,2017_South_West_AAA,2017,AAA,SW,18,40.0,Norwin,NRW
 regional,2017_South_West_AAA,2017,AAA,SW,19,38.0,West Allegheny,WAG
 regional,2017_South_West_AAA,2017,AAA,SW,20,37.0,North Hills,NHL
 regional,2017_South_West_AAA,2017,AAA,SW,21,34.0,Montour,MNT
-regional,2017_South_West_AAA,2017,AAA,SW,22,29.0,Pittsburgh CC,PCC
+regional,2017_South_West_AAA,2017,AAA,SW,22,29.0,Pittsburgh Central Catholic,PCC
 regional,2017_South_West_AAA,2017,AAA,SW,23,28.0,Moon,MOON
 regional,2017_South_West_AAA,2017,AAA,SW,24,26.0,Greater Latrobe,GLT
 regional,2017_South_West_AAA,2017,AAA,SW,25,25.0,Laurel Highlands,LHL
@@ -32590,7 +32590,7 @@ regional,2018_South_West_AAA,2018,AAA,SW,37,8.0,Penn Hills,PH
 regional,2018_South_West_AAA,2018,AAA,SW,40,6.0,Blackhawk,BLH
 regional,2018_South_West_AAA,2018,AAA,SW,40,6.0,Ringgold,RG
 regional,2018_South_West_AAA,2018,AAA,SW,42,4.0,Fox Chapel,FXCH
-regional,2018_South_West_AAA,2018,AAA,SW,42,4.0,Pittsburgh CC,PCC
+regional,2018_South_West_AAA,2018,AAA,SW,42,4.0,Pittsburgh Central Catholic,PCC
 regional,2018_South_West_AAA,2018,AAA,SW,42,4.0,Woodland Hills,WLH
 regional,2018_South_West_AAA,2018,AAA,SW,45,2.0,Gateway,GTWY
 regional,2018_South_West_AAA,2018,AAA,SW,46,1.0,McKeesport,MCK
@@ -33021,7 +33021,7 @@ regional,2019_South_West_AAA,2019,AAA,SW,39,4.0,Shaler,SHA
 regional,2019_South_West_AAA,2019,AAA,SW,41,3.0,McKeesport,MCK
 regional,2019_South_West_AAA,2019,AAA,SW,41,3.0,New Castle,NCSL
 regional,2019_South_West_AAA,2019,AAA,SW,43,0.0,Albert Gallatin,AGL
-regional,2019_South_West_AAA,2019,AAA,SW,43,0.0,Pittsburgh CC,PCC
+regional,2019_South_West_AAA,2019,AAA,SW,43,0.0,Pittsburgh Central Catholic,PCC
 regional,2019_South_West_AAA,2019,AAA,SW,43,0.0,Ringgold,RG
 regional,2020_North_East_AA,2020,AA,NE,1,154.0,Southern Columbia,SCL
 regional,2020_North_East_AA,2020,AA,NE,2,111.0,Montoursville,MNTV
@@ -33446,7 +33446,7 @@ regional,2020_South_West_AAA,2020,AAA,SW,39,5.0,Gateway,GTWY
 regional,2020_South_West_AAA,2020,AAA,SW,40,3.0,Ringgold,RG
 regional,2020_South_West_AAA,2020,AAA,SW,41,1.0,Albert Gallatin,AGL
 regional,2020_South_West_AAA,2020,AAA,SW,42,0.0,Baldwin,BALD
-regional,2020_South_West_AAA,2020,AAA,SW,42,0.0,Pittsburgh CC,PCC
+regional,2020_South_West_AAA,2020,AAA,SW,42,0.0,Pittsburgh Central Catholic,PCC
 regional,2020_South_West_AAA,2020,AAA,SW,42,0.0,Upper St. Clair,USC
 regional,2021_North_East_AA,2021,AA,NE,1,111.5,Southern Columbia,SCL
 regional,2021_North_East_AA,2021,AA,NE,2,84.0,Montoursville,MNTV
@@ -34147,7 +34147,7 @@ regional,2022_South_West_AAA,2022,AAA,SW,29,18.0,Mars,MARS
 regional,2022_South_West_AAA,2022,AAA,SW,31,17.0,Hampton,HMT
 regional,2022_South_West_AAA,2022,AAA,SW,32,14.0,Albert Gallatin,AGL
 regional,2022_South_West_AAA,2022,AAA,SW,32,14.0,Moon,MOON
-regional,2022_South_West_AAA,2022,AAA,SW,34,12.0,Pittsburgh CC,PCC
+regional,2022_South_West_AAA,2022,AAA,SW,34,12.0,Pittsburgh Central Catholic,PCC
 regional,2022_South_West_AAA,2022,AAA,SW,35,11.0,Ringgold,RG
 regional,2022_South_West_AAA,2022,AAA,SW,36,9.5,McKeesport,MCK
 regional,2022_South_West_AAA,2022,AAA,SW,37,7.0,Penn Hills,PH
@@ -34556,7 +34556,7 @@ regional,2023_South_West_AAA,2023,AAA,SW,28,11.0,Norwin,NRW
 regional,2023_South_West_AAA,2023,AAA,SW,29,10.0,West Mifflin,WMF
 regional,2023_South_West_AAA,2023,AAA,SW,30,9.0,Moon,MOON
 regional,2023_South_West_AAA,2023,AAA,SW,31,8.0,Upper St. Clair,USC
-regional,2023_South_West_AAA,2023,AAA,SW,32,7.0,Pittsburgh CC,PCC
+regional,2023_South_West_AAA,2023,AAA,SW,32,7.0,Pittsburgh Central Catholic,PCC
 regional,2023_South_West_AAA,2023,AAA,SW,33,2.0,McKeesport,MCK
 regional,2023_South_West_AAA,2023,AAA,SW,34,1.0,Shaler,SHA
 regional,2023_South_West_AAA,2023,AAA,SW,35,0.0,Mars,MARS
@@ -34943,7 +34943,7 @@ regional,2024_South_West_AAA,2024,AAA,SW,16,59.0,Plum,PLM
 regional,2024_South_West_AAA,2024,AAA,SW,17,57.5,Hempfield Area,HMPA
 regional,2024_South_West_AAA,2024,AAA,SW,18,55.0,Baldwin,BALD
 regional,2024_South_West_AAA,2024,AAA,SW,19,46.5,Peters Township,PTW
-regional,2024_South_West_AAA,2024,AAA,SW,20,46.0,Pittsburgh CC,PCC
+regional,2024_South_West_AAA,2024,AAA,SW,20,46.0,Pittsburgh Central Catholic,PCC
 regional,2024_South_West_AAA,2024,AAA,SW,21,45.5,Butler,BTL
 regional,2024_South_West_AAA,2024,AAA,SW,22,43.0,Ringgold,RG
 regional,2024_South_West_AAA,2024,AAA,SW,23,32.0,Fox Chapel,FXCH
@@ -39247,7 +39247,7 @@ section,2002_D3_S3_AA,2002,AA,D3_S3,7,65.0,Kutztown,KTZ
 section,2002_D3_S3_AA,2002,AA,D3_S3,8,50.0,Tulpehocken,TLP
 section,2002_D3_S3_AA,2002,AA,D3_S3,9,39.0,Daniel Boone,DB
 section,2002_D3_S3_AA,2002,AA,D3_S3,10,32.0,Fleetwood,FW
-section,2002_D3_S3_AA,2002,AA,D3_S3,11,18.0,Reading CC,RCC
+section,2002_D3_S3_AA,2002,AA,D3_S3,11,18.0,Reading Central Catholic,RCC
 section,2002_D3_S3_AAA,2002,AAA,D3_S3,1,158.0,Boyertown,BT
 section,2002_D3_S3_AAA,2002,AAA,D3_S3,2,145.5,Governor Mifflin,GVM
 section,2002_D3_S3_AAA,2002,AAA,D3_S3,3,143.0,Ephrata,EPH
@@ -39661,7 +39661,7 @@ section,2008_D3_S3_AA,2008,AA,D3_S3,3,144.0,Hamburg,HMB
 section,2008_D3_S3_AA,2008,AA,D3_S3,4,119.5,Wyomissing,WYO
 section,2008_D3_S3_AA,2008,AA,D3_S3,5,45.5,Oley Valley,OV
 section,2008_D3_S3_AA,2008,AA,D3_S3,6,35.0,Fleetwood,FW
-section,2008_D3_S3_AA,2008,AA,D3_S3,7,17.5,Reading CC,RCC
+section,2008_D3_S3_AA,2008,AA,D3_S3,7,17.5,Reading Central Catholic,RCC
 section,2008_D3_S3_AA,2008,AA,D3_S3,8,16.0,Kutztown,KTZ
 section,2008_D3_S3_AA,2008,AA,D3_S3,9,3.0,Tulpehocken,TLP
 section,2008_D3_S3_AAA,2008,AAA,D3_S3,1,152.5,Warwick,WAR
@@ -39839,7 +39839,7 @@ section,2009_D3_S3_AA,2009,AA,D3_S3,5,100.0,Camp Hill,CPH
 section,2009_D3_S3_AA,2009,AA,D3_S3,6,85.5,Newport,NWPT
 section,2009_D3_S3_AA,2009,AA,D3_S3,7,71.0,Annville-Cleona,AC
 section,2009_D3_S3_AA,2009,AA,D3_S3,8,57.5,Upper Dauphin,UD
-section,2009_D3_S3_AA,2009,AA,D3_S3,9,14.0,Bishop McDevitt (3),BMD3
+section,2009_D3_S3_AA,2009,AA,D3_S3,9,14.0,Bishop McDevitt,BMD3
 section,2009_D3_S3_AA,2009,AA,D3_S3,10,7.0,Halifax,HLF
 section,2009_D3_S3_AAA,2009,AAA,D3_S3,1,148.5,Hempfield,HMP
 section,2009_D3_S3_AAA,2009,AAA,D3_S3,2,112.0,Solanco,SOL
@@ -39998,7 +39998,7 @@ section,2010_D3_S3_AA,2010,AA,D3_S3,3,194.0,Annville-Cleona,AC
 section,2010_D3_S3_AA,2010,AA,D3_S3,4,176.0,Susquenita,SQ
 section,2010_D3_S3_AA,2010,AA,D3_S3,5,150.0,Milton Hershey,MH
 section,2010_D3_S3_AA,2010,AA,D3_S3,6,122.0,Newport,NWPT
-section,2010_D3_S3_AA,2010,AA,D3_S3,7,99.0,Bishop McDevitt (3),BMD3
+section,2010_D3_S3_AA,2010,AA,D3_S3,7,99.0,Bishop McDevitt,BMD3
 section,2010_D3_S3_AA,2010,AA,D3_S3,8,74.0,Upper Dauphin,UD
 section,2010_D3_S3_AA,2010,AA,D3_S3,9,62.0,Halifax,HLF
 section,2010_D3_S3_AA,2010,AA,D3_S3,10,47.0,Camp Hill,CPH
@@ -40398,7 +40398,7 @@ section,2013_D3_S2_AA,2013,AA,D3_S2,4,125.0,Annville-Cleona,AC
 section,2013_D3_S2_AA,2013,AA,D3_S2,5,116.5,Northern Lebanon,NLB
 section,2013_D3_S2_AA,2013,AA,D3_S2,6,112.5,Brandywine Heights,BH
 section,2013_D3_S2_AA,2013,AA,D3_S2,7,99.0,Lancaster Catholic,LCC
-section,2013_D3_S2_AA,2013,AA,D3_S2,8,73.5,Bishop McDevitt (3),BMD3
+section,2013_D3_S2_AA,2013,AA,D3_S2,8,73.5,Bishop McDevitt,BMD3
 section,2013_D3_S2_AA,2013,AA,D3_S2,9,57.0,Columbia,COL
 section,2013_D3_S2_AA,2013,AA,D3_S2,10,47.0,Pequea Valley,PQV
 section,2013_D3_S2_AA,2013,AA,D3_S2,11,41.5,ELCO,ELCO
@@ -40511,7 +40511,7 @@ section,2014_D3_S2_AA,2014,AA,D3_S2,3,112.5,Northern Lebanon,NLB
 section,2014_D3_S2_AA,2014,AA,D3_S2,4,111.0,Annville-Cleona,AC
 section,2014_D3_S2_AA,2014,AA,D3_S2,5,105.5,Wyomissing,WYO
 section,2014_D3_S2_AA,2014,AA,D3_S2,6,93.0,ELCO,ELCO
-section,2014_D3_S2_AA,2014,AA,D3_S2,7,92.0,Bishop McDevitt (3),BMD3
+section,2014_D3_S2_AA,2014,AA,D3_S2,7,92.0,Bishop McDevitt,BMD3
 section,2014_D3_S2_AA,2014,AA,D3_S2,7,92.0,Brandywine Heights,BH
 section,2014_D3_S2_AA,2014,AA,D3_S2,9,85.0,Lancaster Catholic,LCC
 section,2014_D3_S2_AA,2014,AA,D3_S2,10,57.0,Pequea Valley,PQV
@@ -40625,7 +40625,7 @@ section,2015_D3_S2_AA,2015,AA,D3_S2,4,132.0,Wyomissing,WYO
 section,2015_D3_S2_AA,2015,AA,D3_S2,5,122.0,Schuylkill Valley,SCV
 section,2015_D3_S2_AA,2015,AA,D3_S2,6,115.5,Trinity,TRN
 section,2015_D3_S2_AA,2015,AA,D3_S2,7,112.0,Pequea Valley,PQV
-section,2015_D3_S2_AA,2015,AA,D3_S2,8,92.0,Bishop McDevitt (3),BMD3
+section,2015_D3_S2_AA,2015,AA,D3_S2,8,92.0,Bishop McDevitt,BMD3
 section,2015_D3_S2_AA,2015,AA,D3_S2,9,78.0,Brandywine Heights,BH
 section,2015_D3_S2_AA,2015,AA,D3_S2,10,53.0,Lancaster Catholic,LCC
 section,2015_D3_S2_AA,2015,AA,D3_S2,11,27.0,Kutztown,KTZ

@@ -73,7 +73,7 @@ year,cls,place,pts,school,abbr
 1976,AA,66,0.0,Curwensville,CWV
 1976,AA,66,0.0,Dallas,DAL
 1976,AA,66,0.0,Donegal,DNG
-1976,AA,66,0.0,Greensburg CC,GCC
+1976,AA,66,0.0,Greensburg Central Catholic,GCC
 1976,AA,66,0.0,Hyndman,HYN
 1976,AA,66,0.0,Immaculate Conception,IMCP
 1976,AA,66,0.0,Jenkintown,JNK
@@ -189,7 +189,7 @@ year,cls,place,pts,school,abbr
 1976,AAA,63,0.0,Methacton,MTH
 1976,AAA,63,0.0,Muhlenberg,MHL
 1976,AAA,63,0.0,Neshaminy-Maple Point,NMP
-1976,AAA,63,0.0,Pittsburgh CC,PCC
+1976,AAA,63,0.0,Pittsburgh Central Catholic,PCC
 1976,AAA,63,0.0,Pottstown,PTN
 1976,AAA,63,0.0,Punxsutawney,PNX
 1976,AAA,63,0.0,Seneca Valley,SEV
@@ -236,7 +236,7 @@ year,cls,place,pts,school,abbr
 1977,AA,30,7.0,Conemaugh Township,CMTW
 1977,AA,30,7.0,Crestwood,CRW
 1977,AA,30,7.0,McGuffey,MCG
-1977,AA,33,6.0,Greensburg CC,GCC
+1977,AA,33,6.0,Greensburg Central Catholic,GCC
 1977,AA,34,4.0,Burgettstown,BGT
 1977,AA,34,4.0,Cocalico,COC
 1977,AA,34,4.0,Dover,DOV
@@ -446,7 +446,7 @@ year,cls,place,pts,school,abbr
 1978,AA,18,20.0,Ridgway,RGW
 1978,AA,19,19.0,Fort Cherry,FC
 1978,AA,20,18.0,Conneaut Lake,CLK
-1978,AA,21,17.0,Greensburg CC,GCC
+1978,AA,21,17.0,Greensburg Central Catholic,GCC
 1978,AA,22,16.0,Hanover,HAN
 1978,AA,22,16.0,Lehighton,LHT
 1978,AA,24,13.0,Saegertown,SGT
@@ -667,7 +667,7 @@ year,cls,place,pts,school,abbr
 1979,AA,18,17.0,Crestwood,CRW
 1979,AA,18,17.0,Grove City,GRC
 1979,AA,18,17.0,Montgomery,MTG
-1979,AA,21,16.0,Greensburg CC,GCC
+1979,AA,21,16.0,Greensburg Central Catholic,GCC
 1979,AA,22,13.0,Hamburg,HMB
 1979,AA,22,13.0,Hughesville,HSV
 1979,AA,24,11.0,Athens,ATH
@@ -1709,7 +1709,7 @@ year,cls,place,pts,school,abbr
 1983,AAA,68,0.0,Elmer L. Meyers,ELM
 1983,AAA,68,0.0,Exeter,EX
 1983,AAA,68,0.0,Franklin,FRA
-1983,AAA,68,0.0,Greensburg CC,GCC
+1983,AAA,68,0.0,Greensburg Central Catholic,GCC
 1983,AAA,68,0.0,Harriton,HAR
 1983,AAA,68,0.0,Hershey,HER
 1983,AAA,68,0.0,Hickory,HCK
@@ -2803,7 +2803,7 @@ year,cls,place,pts,school,abbr
 1988,AAA,75,1.0,Chartiers-Houston,CHH
 1988,AAA,75,1.0,Hollidaysburg,HLB
 1988,AAA,75,1.0,Mount Pleasant,MTPL
-1988,AAA,75,1.0,Pittsburgh CC,PCC
+1988,AAA,75,1.0,Pittsburgh Central Catholic,PCC
 1988,AAA,75,1.0,Pottstown,PTN
 1988,AAA,75,1.0,Solanco,SOL
 1988,AAA,75,1.0,Thomas Jefferson,TJ
@@ -2906,7 +2906,7 @@ year,cls,place,pts,school,abbr
 1989,AA,73,3.0,Bishop O'Hara,BOH
 1989,AA,73,3.0,Brockway,BRWY
 1989,AA,73,3.0,Columbia,COL
-1989,AA,73,3.0,Greensburg CC,GCC
+1989,AA,73,3.0,Greensburg Central Catholic,GCC
 1989,AA,73,3.0,Mercer,MER
 1989,AA,73,3.0,Wyomissing,WYO
 1989,AA,79,2.0,Boiling Springs,BOS
@@ -3092,7 +3092,7 @@ year,cls,place,pts,school,abbr
 1990,AA,39,15.0,Eisenhower,EH
 1990,AA,39,15.0,Forest Hills,FH
 1990,AA,39,15.0,Mount Carmel,MTC
-1990,AA,43,14.0,Greensburg CC,GCC
+1990,AA,43,14.0,Greensburg Central Catholic,GCC
 1990,AA,43,14.0,Pottstown,PTN
 1990,AA,45,13.0,Mifflinburg,MFB
 1990,AA,46,12.0,Cranberry,CRB
@@ -3309,7 +3309,7 @@ year,cls,place,pts,school,abbr
 1991,AA,24,20.0,Burrell,BUR
 1991,AA,24,20.0,Springfield Township,SFT
 1991,AA,24,20.0,Warrior Run,WR
-1991,AA,27,19.0,Greensburg CC,GCC
+1991,AA,27,19.0,Greensburg Central Catholic,GCC
 1991,AA,27,19.0,Pottstown,PTN
 1991,AA,29,18.5,Catasauqua,CAT
 1991,AA,30,18.0,Burgettstown,BGT
@@ -4051,7 +4051,7 @@ year,cls,place,pts,school,abbr
 1994,AA,80,2.0,North Star,NST
 1994,AA,80,2.0,Palmyra,PALM
 1994,AA,80,2.0,Pottstown,PTN
-1994,AA,80,2.0,Reading CC,RCC
+1994,AA,80,2.0,Reading Central Catholic,RCC
 1994,AA,80,2.0,Sharon,SHR
 1994,AA,80,2.0,Steelton-Highspire,STHS
 1994,AA,94,1.0,Aliquippa,ALQP
@@ -4100,7 +4100,7 @@ year,cls,place,pts,school,abbr
 1994,AAA,19,23.0,Parkland,PRK
 1994,AAA,19,23.0,Stroudsburg,SDB
 1994,AAA,21,22.0,Conestoga,CNST
-1994,AAA,21,22.0,Pittsburgh CC,PCC
+1994,AAA,21,22.0,Pittsburgh Central Catholic,PCC
 1994,AAA,23,21.0,Philipsburg-Osceola,PO
 1994,AAA,23,21.0,Warwick,WAR
 1994,AAA,25,20.0,Kiski Area,KSK
@@ -5764,7 +5764,7 @@ year,cls,place,pts,school,abbr
 2002,AA,23,21.0,Fort Cherry,FC
 2002,AA,23,21.0,Penn Cambria,PEC
 2002,AA,25,20.0,Erie Strong Vincent,ESV
-2002,AA,25,20.0,Greensburg CC,GCC
+2002,AA,25,20.0,Greensburg Central Catholic,GCC
 2002,AA,25,20.0,Kennedy Christian,KCHR
 2002,AA,25,20.0,Palisades,PLS
 2002,AA,25,20.0,Pine Grove,PNG
@@ -6141,7 +6141,7 @@ year,cls,place,pts,school,abbr
 2003,AAA,54,9.0,Trinity,TRIN
 2003,AAA,58,8.0,Bethlehem Freedom,BFR
 2003,AAA,58,8.0,Parkland,PRK
-2003,AAA,58,8.0,Pittsburgh CC,PCC
+2003,AAA,58,8.0,Pittsburgh Central Catholic,PCC
 2003,AAA,61,7.0,Erie Cathedral Prep,ECP
 2003,AAA,61,7.0,Franklin Regional,FR
 2003,AAA,61,7.0,General McLane,GML
@@ -6345,7 +6345,7 @@ year,cls,place,pts,school,abbr
 2004,AAA,26,22.0,Norristown,NT
 2004,AAA,27,19.0,Honesdale,HND
 2004,AAA,27,19.0,Valley,VLY
-2004,AAA,29,18.0,Pittsburgh CC,PCC
+2004,AAA,29,18.0,Pittsburgh Central Catholic,PCC
 2004,AAA,29,18.0,Trinity,TRIN
 2004,AAA,29,18.0,Whitehall,WHL
 2004,AAA,32,17.5,Moon,MOON
@@ -6414,7 +6414,7 @@ year,cls,place,pts,school,abbr
 2004,AAA,91,0.0,Dover,DOV
 2004,AAA,91,0.0,Franklin,FRA
 2004,AAA,91,0.0,Great Valley,GRTV
-2004,AAA,91,0.0,Greensburg CC,GCC
+2004,AAA,91,0.0,Greensburg Central Catholic,GCC
 2004,AAA,91,0.0,Haverford High,HAV
 2004,AAA,91,0.0,Hollidaysburg,HLB
 2004,AAA,91,0.0,Lower Dauphin,LD
@@ -6554,7 +6554,7 @@ year,cls,place,pts,school,abbr
 2005,AAA,17,26.0,Waynesburg Central,WYC
 2005,AAA,18,25.0,Bald Eagle Area,BEA
 2005,AAA,18,25.0,Big Spring,BS
-2005,AAA,18,25.0,Greensburg CC,GCC
+2005,AAA,18,25.0,Greensburg Central Catholic,GCC
 2005,AAA,21,23.0,Honesdale,HND
 2005,AAA,22,22.0,Red Lion,RLI
 2005,AAA,22,22.0,York Tech,YT
@@ -6606,7 +6606,7 @@ year,cls,place,pts,school,abbr
 2005,AAA,68,4.0,Northern York,NY
 2005,AAA,68,4.0,Owen J. Roberts,OJR
 2005,AAA,68,4.0,Penncrest,PC
-2005,AAA,68,4.0,Pittsburgh CC,PCC
+2005,AAA,68,4.0,Pittsburgh Central Catholic,PCC
 2005,AAA,68,4.0,Pittston Area,PTSA
 2005,AAA,68,4.0,Plymouth Whitemarsh,PWM
 2005,AAA,68,4.0,Spring Grove,SPG
@@ -6783,7 +6783,7 @@ year,cls,place,pts,school,abbr
 2006,AAA,18,25.0,Council Rock North,CRN
 2006,AAA,18,25.0,Spring-Ford,SF
 2006,AAA,20,24.0,Greater Latrobe,GLT
-2006,AAA,20,24.0,Greensburg CC,GCC
+2006,AAA,20,24.0,Greensburg Central Catholic,GCC
 2006,AAA,20,24.0,Indian Valley,IV
 2006,AAA,23,23.0,State College,SC
 2006,AAA,24,22.0,Ambridge,AMB
@@ -6960,7 +6960,7 @@ year,cls,place,pts,school,abbr
 2007,AA,83,1.0,Northern Bedford,NOB
 2007,AA,83,1.0,Oley Valley,OV
 2007,AA,83,1.0,Palmyra,PALM
-2007,AA,83,1.0,Reading CC,RCC
+2007,AA,83,1.0,Reading Central Catholic,RCC
 2007,AA,83,1.0,Sharpsville,SHRP
 2007,AA,83,1.0,Wellsboro,WSB
 2007,AA,98,0.0,Bedford,BDF
@@ -7014,7 +7014,7 @@ year,cls,place,pts,school,abbr
 2007,AAA,31,15.0,Chartiers Valley,CHV
 2007,AAA,33,14.0,Cedar Cliff,CCL
 2007,AAA,33,14.0,Norwin,NRW
-2007,AAA,33,14.0,Pittsburgh CC,PCC
+2007,AAA,33,14.0,Pittsburgh Central Catholic,PCC
 2007,AAA,33,14.0,Waynesburg Central,WYC
 2007,AAA,37,13.0,Big Spring,BS
 2007,AAA,37,13.0,Fox Chapel,FXCH
@@ -7296,7 +7296,7 @@ year,cls,place,pts,school,abbr
 2008,AAA,77,2.0,DuBois,DUB
 2008,AAA,77,2.0,Hopewell,HPW
 2008,AAA,77,2.0,Pine-Richland,PRL
-2008,AAA,77,2.0,Pittsburgh CC,PCC
+2008,AAA,77,2.0,Pittsburgh Central Catholic,PCC
 2008,AAA,77,2.0,Plymouth Whitemarsh,PWM
 2008,AAA,77,2.0,Unionville,UNV
 2008,AAA,77,2.0,Upper Perkiomen,UPE
@@ -7504,7 +7504,7 @@ year,cls,place,pts,school,abbr
 2009,AAA,74,3.0,Conrad Weiser,CW
 2009,AAA,74,3.0,Kennard-Dale,KD
 2009,AAA,74,3.0,Oxford Area,OX
-2009,AAA,74,3.0,Pittsburgh CC,PCC
+2009,AAA,74,3.0,Pittsburgh Central Catholic,PCC
 2009,AAA,74,3.0,Stroudsburg,SDB
 2009,AAA,74,3.0,Waynesburg Central,WYC
 2009,AAA,74,3.0,West Allegheny,WAG
@@ -7670,7 +7670,7 @@ year,cls,place,pts,school,abbr
 2010,AAA,20,24.0,Franklin Regional,FR
 2010,AAA,21,22.0,Norristown,NT
 2010,AAA,22,21.0,Erie McDowell,EMD
-2010,AAA,22,21.0,Pittsburgh CC,PCC
+2010,AAA,22,21.0,Pittsburgh Central Catholic,PCC
 2010,AAA,24,20.0,East Pennsboro,EP
 2010,AAA,25,19.0,Hempfield,HMP
 2010,AAA,26,18.5,Warwick,WAR
@@ -7882,7 +7882,7 @@ year,cls,place,pts,school,abbr
 2011,AA,94,0.0,Wellsboro,WSB
 2011,AA,94,0.0,West Greene,WG
 2011,AAA,1,92.0,Canon-McMillan,CMM
-2011,AAA,2,79.0,Pittsburgh CC,PCC
+2011,AAA,2,79.0,Pittsburgh Central Catholic,PCC
 2011,AAA,3,78.0,Central Dauphin,CD
 2011,AAA,4,63.0,Solanco,SOL
 2011,AAA,5,56.0,Parkland,PRK
@@ -8100,7 +8100,7 @@ year,cls,place,pts,school,abbr
 2012,AA,96,1.0,Montgomery,MTG
 2012,AA,96,1.0,Northern Lebanon,NLB
 2012,AA,96,1.0,Pine Grove,PNG
-2012,AA,103,0.0,Bishop McDevitt (3),BMD3
+2012,AA,103,0.0,Bishop McDevitt,BMD3
 2012,AA,103,0.0,Camp Hill,CPH
 2012,AA,103,0.0,Carlynton,CRLT
 2012,AA,103,0.0,Catasauqua,CAT
@@ -8129,7 +8129,7 @@ year,cls,place,pts,school,abbr
 2012,AAA,6,47.0,Franklin Regional,FR
 2012,AAA,7,46.5,Council Rock South,CRS
 2012,AAA,8,44.0,Erie McDowell,EMD
-2012,AAA,9,42.0,Pittsburgh CC,PCC
+2012,AAA,9,42.0,Pittsburgh Central Catholic,PCC
 2012,AAA,9,42.0,Solanco,SOL
 2012,AAA,11,40.0,Kiski Area,KSK
 2012,AAA,12,37.0,Bethlehem Liberty,BLIB
@@ -8289,7 +8289,7 @@ year,cls,place,pts,school,abbr
 2013,AA,51,9.0,Pius X (Roseto),PX
 2013,AA,51,9.0,Redbank Valley,RBV
 2013,AA,51,9.0,Southmoreland,SML
-2013,AA,55,8.5,Bishop McDevitt (3),BMD3
+2013,AA,55,8.5,Bishop McDevitt,BMD3
 2013,AA,56,8.0,Valley,VLY
 2013,AA,56,8.0,Williamson,WLMS
 2013,AA,58,7.0,Freedom Area,FRE
@@ -8366,7 +8366,7 @@ year,cls,place,pts,school,abbr
 2013,AAA,20,26.0,Pennridge,PRG
 2013,AAA,22,24.5,Hempfield Area,HMPA
 2013,AAA,23,24.0,Easton,EAS
-2013,AAA,23,24.0,Pittsburgh CC,PCC
+2013,AAA,23,24.0,Pittsburgh Central Catholic,PCC
 2013,AAA,25,23.0,Father Judge,FJ
 2013,AAA,26,22.0,Big Spring,BS
 2013,AAA,27,21.0,Bethlehem Freedom,BFR
@@ -8475,7 +8475,7 @@ year,cls,place,pts,school,abbr
 2014,AA,20,23.5,Avella,AVL
 2014,AA,21,23.0,Fort LeBoeuf,FLB
 2014,AA,22,22.5,Reynolds,REY
-2014,AA,23,22.0,Bishop McDevitt (3),BMD3
+2014,AA,23,22.0,Bishop McDevitt,BMD3
 2014,AA,24,21.0,Canton,CNT
 2014,AA,25,20.0,Fairfield,FF
 2014,AA,26,19.0,Schuylkill Valley,SCV
@@ -8573,7 +8573,7 @@ year,cls,place,pts,school,abbr
 2014,AAA,6,53.0,Nazareth,NAZ
 2014,AAA,7,50.5,Canon-McMillan,CMM
 2014,AAA,8,48.0,Northampton,NHA
-2014,AAA,9,44.0,Pittsburgh CC,PCC
+2014,AAA,9,44.0,Pittsburgh Central Catholic,PCC
 2014,AAA,10,43.0,Cumberland Valley,CUV
 2014,AAA,11,37.5,Pennridge,PRG
 2014,AAA,12,31.0,Kennard-Dale,KD
@@ -8694,7 +8694,7 @@ year,cls,place,pts,school,abbr
 2015,AA,13,39.0,Huntingdon,HTD
 2015,AA,14,35.0,Wyalusing,WYA
 2015,AA,15,33.0,Berlin Brothersvalley,BBV
-2015,AA,15,33.0,Bishop McDevitt (3),BMD3
+2015,AA,15,33.0,Bishop McDevitt,BMD3
 2015,AA,15,33.0,Brookville,BRV
 2015,AA,18,32.0,Bedford,BDF
 2015,AA,19,31.0,Derry Area,DER
@@ -8814,7 +8814,7 @@ year,cls,place,pts,school,abbr
 2015,AAA,7,44.5,Mifflin County,MFC
 2015,AAA,8,44.0,Belle Vernon,BEV
 2015,AAA,9,42.0,Altoona,ALT
-2015,AAA,10,40.5,Pittsburgh CC,PCC
+2015,AAA,10,40.5,Pittsburgh Central Catholic,PCC
 2015,AAA,11,40.0,Pennridge,PRG
 2015,AAA,12,37.0,Cumberland Valley,CUV
 2015,AAA,13,36.0,South Western,SW
@@ -9195,7 +9195,7 @@ year,cls,place,pts,school,abbr
 2016,AAA,114,0.0,Upper Moreland,UMO
 2016,AAA,114,0.0,Upper Perkiomen,UPE
 2017,AA,1,136.5,Reynolds,REY
-2017,AA,2,88.5,Bishop McDevitt (3),BMD3
+2017,AA,2,88.5,Bishop McDevitt,BMD3
 2017,AA,3,73.5,Bishop McCort,BMCT
 2017,AA,4,61.0,Brookville,BRV
 2017,AA,5,55.5,Line Mountain,LM
@@ -9314,7 +9314,7 @@ year,cls,place,pts,school,abbr
 2017,AA,114,0.0,Church Farm School,CFS
 2017,AA,114,0.0,Curwensville,CWV
 2017,AA,114,0.0,Eastern York,EY
-2017,AA,114,0.0,Greensburg CC,GCC
+2017,AA,114,0.0,Greensburg Central Catholic,GCC
 2017,AA,114,0.0,Hyndman,HYN
 2017,AA,114,0.0,Juniata,JUN
 2017,AA,114,0.0,Kennard-Dale,KD
@@ -9416,7 +9416,7 @@ year,cls,place,pts,school,abbr
 2017,AAA,84,4.0,Governor Mifflin,GVM
 2017,AAA,84,4.0,Northeastern,NEN
 2017,AAA,84,4.0,Oxford Area,OX
-2017,AAA,84,4.0,Pittsburgh CC,PCC
+2017,AAA,84,4.0,Pittsburgh Central Catholic,PCC
 2017,AAA,84,4.0,Pottsgrove,PG
 2017,AAA,84,4.0,Roman Catholic,RC
 2017,AAA,84,4.0,Shikellamy,SHK
@@ -11015,7 +11015,7 @@ year,cls,place,pts,school,abbr
 2024,AAA,56,9.0,Waynesburg Central,WYC
 2024,AAA,63,8.0,Lower Dauphin,LD
 2024,AAA,63,8.0,Manheim Central,MHC
-2024,AAA,63,8.0,Pittsburgh CC,PCC
+2024,AAA,63,8.0,Pittsburgh Central Catholic,PCC
 2024,AAA,63,8.0,Strath Haven,SH
 2024,AAA,63,8.0,Whitehall,WHL
 2024,AAA,68,7.0,La Salle College,LAS
@@ -11222,7 +11222,7 @@ year,cls,place,pts,school,abbr
 2025,AAA,42,17.5,Conestoga Valley,COV
 2025,AAA,43,17.0,Manheim Central,MHC
 2025,AAA,44,16.0,Northeastern,NEN
-2025,AAA,44,16.0,Pittsburgh CC,PCC
+2025,AAA,44,16.0,Pittsburgh Central Catholic,PCC
 2025,AAA,46,15.5,Pennridge,PRG
 2025,AAA,47,15.0,Armstrong,ARMS
 2025,AAA,47,15.0,Ringgold,RG
