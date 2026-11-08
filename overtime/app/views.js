@@ -103,7 +103,7 @@
     if (!W || !(W.apps.length || (W.lower && W.lower.length))) {   // index entry with no matching rows: state results only, no bars
       if (!s.sres.length) return ''; const y1 = Math.max(...s.sres.map((r) => r.year)), ys = [y1 - 3, y1 - 2, y1 - 1, y1];
       return ys.map((y, i) => { const r = s.sres.find((x) => x.year === y);
-        return `<span class="sx"><span class="sg">'${String(y).slice(2)}<i>${OT.GRADE_L[i]}</i></span><span class="smtr sm0"><i></i></span>${r ? (r.place ? `<span class="yp ${OT.pc(r.place)}">${ordinal(r.place)}</span>` : '<span class="yp q">Q</span>') : '<span class="sr0">–</span>'}</span>`; }).join(''); }
+        return `<span class="sx"><span class="sg">'${String(y).slice(2)}<i>${OT.GRADE_L[i]}</i></span><span class="sgn sg0"></span>${r ? (r.place ? `<span class="yp ${OT.pc(r.place)}">${ordinal(r.place)}</span>` : '<span class="yp q">Q</span>') : '<span class="sr0">–</span>'}</span>`; }).join(''); }
     const M = OT.careerCells(W.apps, W.lower && W.lower.length ? W.lower : null);
     const at = (k) => M.rows.find((r) => r.k === k).cells;
     return M.cols.map((col, i) => {
