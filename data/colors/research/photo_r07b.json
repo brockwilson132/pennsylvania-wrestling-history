@@ -1,0 +1,609 @@
+[
+ {
+  "school": "Father Judge",
+  "identified_as": "Father Judge High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ED174F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Columbia Blue",
+    "hex": "#79BDE9",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "high",
+  "wikipedia": "Father Judge High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Father_Judge_High_School",
+   "search:https://www.beachballclassic.com/father-judge-pa/",
+   "search:https://northeasttimes.com/2023/06/19/crusaders-took-everyone-on-fun-ride/",
+   "https://www.fatherjudge.com/",
+   "https://www.fatherjudge.com/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Beach Ball Classic profile says Blue and Red; Northeast Times notes baby-blue uniforms dominate. Wikipedia infobox: 'Sheridan Red and Columbia Blue'; red box is CSS 'red' (no hex), Columbia blue hex #75B2DD.",
+  "evidence": "fatherjudge.com header crest (pics/school_logo.png): flat red stripe #ED174F and Columbia blue #79BDE9, with a royal-blue field #5161AC and white cross; agrees with Wikipedia 'Sheridan Red and Columbia Blue'. Royal blue appears in the crest but is not listed as a school colour."
+ },
+ {
+  "school": "Erie Academy",
+  "identified_as": "Academy High School, Erie",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1932/Page_29.html",
+   "https://www.e-yearbook.com/yearbooks/Academy_High_School_Academe_Yearbook/1932/Page_29.html"
+  ],
+  "era": "Closed 1992-93; merged with Technical Memorial into Central High School (later Central Tech, then Erie High School in 2017). The building's later occupant, Northwest PA Collegiate Academy, also uses blue and gold, which may continue Academy's colours.",
+  "notes": "Colour names from Academy's own 1932 yearbook text; no hex found.",
+  "evidence": "Academy's own 1932 'Academe' yearbook (e-yearbook page 29, text): football squads split into 'Blue team' and 'Gold team' and the team is called 'the Blue and Gold Standard Bearers'. Scans are black-and-white, so no hex. Image searches could not be run (search engines and Commons unavailable)."
+ },
+ {
+  "school": "Sharpsville",
+  "identified_as": "Sharpsville Area Senior High School, Sharpsville",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#2173C6",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.maxpreps.com/pa/sharpsville/sharpsville-blue-devils/football/schedule/all-time",
+   "search:https://pafootballnews.com/district10/a-great-tribute-to-the-sharpsville-west-middlesex-teams-merger-in-pictures-shscoverage-wmasd_athletics/",
+   "https://en.wikipedia.org/wiki/Sharpsville_Area_School_District",
+   "https://www.sharpsville.k12.pa.us/",
+   "https://files.smartsites.parentsquare.com/9205/header_logo_img_olo5qpc3focb5galpgi.png"
+  ],
+  "era": null,
+  "notes": "MaxPreps (search snippet) only; district Wikipedia page has no colours.",
+  "evidence": "District site header Blue Devil logo: flat blue #2173C6 on white; the same #2173C6 is the site's theme colour."
+ },
+ {
+  "school": "Columbia",
+  "identified_as": "Columbia Junior-Senior High School, Columbia (Lancaster Co.)",
+  "colors": [
+   {
+    "name": "Crimson (maroon)",
+    "hex": "#660E16",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#A78F58",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Crimson Tide",
+  "confidence": "high",
+  "wikipedia": "Columbia Borough School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Columbia_Borough_School_District",
+   "search:https://www.maxpreps.com/high-schools/columbia-crimson-tide-(columbia,pa)/football/home.htm",
+   "https://www.columbiabsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/2692/logo/5953/New_Tide_Logo_web_.png"
+  ],
+  "era": null,
+  "notes": "Only a MaxPreps listing via search summary; district Wikipedia colours field empty. 'Red' may be crimson.",
+  "evidence": "columbiabsd.org header 'Tide C' logo: dark crimson/maroon #660E16 block C with Vegas-gold #A78F58 outline and 'TIDE'; site theme #611B1B maroon and #F3D903 bright gold. So 'Red and Gold' is really crimson/maroon and gold."
+ },
+ {
+  "school": "East",
+  "identified_as": "East High School, Erie",
+  "colors": [
+   {
+    "name": "Scarlet",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/East_High_School_(Erie%2C_Pennsylvania).html",
+   "https://en.wikipedia.org/wiki/Erie_High_School_(Pennsylvania)"
+  ],
+  "era": "Converted to a middle school in 2017; high school students consolidated into Erie High School (Royals, gold and royal purple).",
+  "notes": "Colours from an archived Wikipedia mirror (page no longer on en.wikipedia) seen in search only.",
+  "evidence": "No photo evidence: closed school, no official site; Bing image search returned unrelated results and Wikimedia Commons was rate-limited, so no images could be checked. First-pass colour names kept, no hex."
+ },
+ {
+  "school": "Middleburg",
+  "identified_as": "Middleburg High School, Middleburg (Snyder Co.)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Middies",
+  "confidence": "medium",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School"
+  ],
+  "era": "Merged with West Snyder (red/white Mounties) into Midd-West High School in 2004-05 (Mustangs, Carolina blue and silver).",
+  "notes": "Colours from Midd-West High School Wikipedia article text.",
+  "evidence": "No photo evidence: closed school, no official site; Bing image search returned unrelated results and Wikimedia Commons was rate-limited, so no images could be checked. First-pass colour names kept, no hex."
+ },
+ {
+  "school": "Juniata Valley",
+  "identified_as": "Juniata Valley Junior/Senior High School, Alexandria",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#046939",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "medium",
+  "wikipedia": "Juniata Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Juniata_Valley_School_District",
+   "https://www.jvsd.org/",
+   "https://www.jvsd.org/wp-content/uploads/2025/09/Hornet-300x287.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page only.",
+  "evidence": "jvsd.org hornet mascot image (Hornet.png): green #046939 jersey with black outlines on white. The site theme CSS is purple/grey (#5B4E96), not school colours. Black appears only as outline."
+ },
+ {
+  "school": "Conestoga Valley",
+  "identified_as": "Conestoga Valley High School, Lancaster",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A0102C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy",
+    "hex": "#002A5C",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Buckskins",
+  "confidence": "medium",
+  "wikipedia": "Conestoga Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conestoga_Valley_High_School",
+   "https://www.conestogavalley.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1716992091/conestogavalleyorg/aopoj8lxspxldvlx7f4a/seal.jpg"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "District seal (seal.jpg) and favicon: navy #002A5C ring/text with crimson-red #A0102C laurel and stars on white. District seal, not an athletics (Buckskins) logo; site CSS is Finalsite stock."
+ },
+ {
+  "school": "Conneaut Area",
+  "identified_as": "Conneaut Area Senior High School, Linesville",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#221E1F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Royal Blue",
+    "hex": "#00609C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Conneaut Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_Area_Senior_High_School",
+   "https://cash.conneautsd.org/",
+   "https://www.conneautsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1653045527/conneautsdorg/dvifvozl9hk5gpeo27dx/CSDEagle_CMYK_nooval.png"
+  ],
+  "era": "Consolidated Conneaut SD high school (appears in brackets from 2013; predecessor schools not checked).",
+  "notes": "Wikipedia infobox only.",
+  "evidence": "cash.conneautsd.org eagle logo (CSDEagle_CMYK_nooval.png): black #221E1F eagle with tan beak, no blue; site theme colour #00609C blue. Silver not seen."
+ },
+ {
+  "school": "New Oxford",
+  "identified_as": "New Oxford Senior High School, New Oxford",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#7C2629",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": "#B2B7BB",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy",
+    "hex": "#041E42",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Colonials",
+  "confidence": "medium",
+  "wikipedia": "New Oxford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/New_Oxford_High_School",
+   "https://nohs.conewago.k12.pa.us/",
+   "https://www.conewago.k12.pa.us/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1683121943/conewagok12paus/vqj8al7j7re2tmfingby/CVSDShieldColor2.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia: 'Maroon and gray (Sports teams use red and blue)'; listed school colours here, athletic red/blue as alternative. Athletic colours may differ from school colours; verify.",
+  "evidence": "Conewago Valley SD shield (CVSDShieldColor2.png, used on the NOHS page): navy #00265C, dark red #8A1B04, silver-grey #B2B7BB; site theme navy #041E42 and maroon #7C2629. Wikipedia: maroon and gray, sports teams use red and blue. District-level art, no NOHS athletic logo seen."
+ },
+ {
+  "school": "Lampeter-Strasburg",
+  "identified_as": "Lampeter-Strasburg High School, Lampeter",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#00539B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "high",
+  "wikipedia": "Lampeter-Strasburg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lampeter-Strasburg_High_School",
+   "https://www.l-spioneers.org/",
+   "https://files.smartsites.parentsquare.com/12876/header_logo_img_odpn63f5qqcc6phdlcf.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "District site header 'LS' logo: flat blue #00539B; site theme #00539C."
+ },
+ {
+  "school": "Neshaminy-Maple Point",
+  "identified_as": "Neshaminy Maple Point High School, Langhorne",
+  "colors": [],
+  "mascot": "Cougars",
+  "confidence": "low",
+  "wikipedia": "Neshaminy High School",
+  "sources": [
+   "search:https://neshaminyfootball.com/1975-1982-maple-point-cougars/",
+   "https://en.wikipedia.org/wiki/Neshaminy_High_School"
+  ],
+  "era": "Operated 1975-1982 as a second Neshaminy SD high school, then re-merged into Neshaminy High School (red and blue).",
+  "notes": "Colours not found; Neshaminy's red and blue not assumed.",
+  "evidence": "No photo evidence: closed school, no official site; Bing image search returned unrelated results and Wikimedia Commons was rate-limited, so no images could be checked. First-pass colour names kept, no hex."
+ },
+ {
+  "school": "Butler",
+  "identified_as": "Butler Area Senior High School, Butler",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#EACF6C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#1B3B7C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Tornado",
+  "confidence": "high",
+  "wikipedia": "Butler Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Butler_Area_Senior_High_School",
+   "search:https://www.butlereagle.com/?p=398366",
+   "https://www.basdk12.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1650544460/basdk12org/corxa0yefgslzfyo0g0u/logo_transparent.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia: 'Metallic Gold and White with Blue trims'; Butler Eagle (search summary) says gold and white with some navy.",
+  "evidence": "basdk12.org Golden Tornado logo: gold gradient tornado (#EACF6C) on navy #1B3B7C square with gold border; site theme navy #252E69 and gold #B69007. Wikipedia: white and gold with blue trim. (basd.net is Bellefonte, not Butler.)"
+ },
+ {
+  "school": "Central Dauphin East",
+  "identified_as": "Central Dauphin East High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Central Dauphin East High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Dauphin_East_High_School",
+   "https://cdeasthigh.cdschools.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1717084839/cdsdk12paus/hgckgphiqkxlukgxtvxp/CDEHS_SingleFeature_NewsGraphic_800x683px.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1756235938/cdsdk12paus/zeivazbxqy2fyoxxygbp/CDSD2025Logo_Solid_72.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox (color box #000/#fff).",
+  "evidence": "CD East high school page 'E' panther graphic (CDEHS news graphic) and the district CDSD logo panther: black and white (the district logo's green belongs to the CD Rams)."
+ },
+ {
+  "school": "Honesdale",
+  "identified_as": "Honesdale High School, Honesdale",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hornets",
+  "confidence": "medium",
+  "wikipedia": "Honesdale High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Honesdale_High_School",
+   "https://upload.wikimedia.org/wikipedia/en/e/ef/Whsdlogo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "Wayne Highlands SD logo (Wikipedia file Whsdlogo.png): black lettering with red #FF0000 mountains; district-level logo, not a Hornets logo. Agrees with Wikipedia 'Red and Black'. whsdk12.com could not be fetched."
+ },
+ {
+  "school": "Dallas",
+  "identified_as": "Dallas High School, Dallas (Luzerne Co.)",
+  "colors": [
+   {
+    "name": "Light Blue",
+    "hex": "#5AA3D2",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mountaineers",
+  "confidence": "medium",
+  "wikipedia": "Dallas High School (Dallas, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Dallas_High_School_(Dallas,_Pennsylvania)",
+   "https://dallassd.com/",
+   "https://dallassd.com/wp-content/uploads/2022/07/DallasSchoolDistrictLogo_FullColor_Web_Favicon-OLD.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "dallassd.com district logo (favicon PNG): light/Carolina blue #5AA3D2 'D' with a Mountaineer coonskin cap and musket. Suggests the blue is a light blue, not royal. Site CSS #003388 is a WordPress stock colour seen on other sites."
+ },
+ {
+  "school": "GAR Memorial",
+  "identified_as": "G.A.R. Memorial Junior/Senior High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Grenadiers",
+  "confidence": "low",
+  "wikipedia": "G. A. R. Memorial Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/G._A._R._Memorial_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/gar-memorial-grenadiers/football/schedule/all-time",
+   "search:https://www.timesleader.com/news/1718542/it-still-feels-like-home-community-celebrates-100th-anniversary-of-gar",
+   "https://www.wbasd.k12.pa.us/garjrsrhighschool_home.aspx",
+   "https://www.wbasd.k12.pa.us/PageImages/Gar%20Crop%20Photoshop3.png"
+  ],
+  "era": "High school closed 2022; merged with Coughlin and Meyers into Wilkes-Barre Area High School (Wolfpack).",
+  "notes": "Wikipedia and MaxPreps agree; Times Leader explains Union/Confederate blue and gray.",
+  "evidence": "WBASD GAR page (garjrsrhighschool_home.aspx) shows only a building photo and the district Wolfpack header; no GAR Grenadiers logo or uniform found, so no hex. Colour names left from first pass."
+ },
+ {
+  "school": "Titusville",
+  "identified_as": "Titusville Area High School, Titusville",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#574025",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F1CC69",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "high",
+  "wikipedia": "Titusville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Titusville_Area_High_School",
+   "https://www.gorockets.org/",
+   "https://wsos-cdn.s3.us-west-2.amazonaws.com/uploads/sites/207/graphic-SportsLogo.jpg",
+   "https://wsos-cdn.s3.us-west-2.amazonaws.com/uploads/sites/207/graphic-logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox only.",
+  "evidence": "gorockets.org sports logo (graphic-SportsLogo.jpg): gold #F1CC69 'T' outlined in brown #574025 with rockets; site theme brown #512D1D and gold #E9B61E."
+ },
+ {
+  "school": "Blue Ridge",
+  "identified_as": "Blue Ridge High School, New Milford",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D10412",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Raiders",
+  "confidence": "high",
+  "wikipedia": "Blue Ridge School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Blue_Ridge_School_District",
+   "search:https://www.maxpreps.com/pa/new-milford/blue-ridge-raiders/events",
+   "https://www.brsd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1755539054/brsdorg/qqyh0ypw4ewq2tbtj72z/BRLogo-VarsityLetteringWhiteTransparentBackground.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page; MaxPreps calls them 'Red Raiders' (consistent but not a colour statement).",
+  "evidence": "brsd.org varsity 'BR' logo: red #D10412 letters (favicon same) with black outline on white; site theme dark red #9B0900. Black is outline only."
+ },
+ {
+  "school": "Ridley",
+  "identified_as": "Ridley High School, Folsom",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#155400",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Green Raiders",
+  "confidence": "high",
+  "wikipedia": "Ridley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ridley_High_School",
+   "https://www.ridleysd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/16808/logo/18062/logo_template_300h.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox with hex values (white box was typoed '##FFFFFF').",
+  "evidence": "ridleysd.org header oval 'R' logo: dark green #155400 on white; site theme #013B00 dark green."
+ },
+ {
+  "school": "Wissahickon",
+  "identified_as": "Wissahickon High School, Ambler",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#13294B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFB81C",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Wissahickon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wissahickon_High_School",
+   "https://www.wsdweb.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1683557135/wissahickon/klndsn28oqrruw7vox4s/District_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox with hex values.",
+  "evidence": "wsdweb.org district shield logo: navy #13294B and gold #FFB81C; same two values are the site theme colours."
+ },
+ {
+  "school": "Scranton",
+  "identified_as": "Scranton High School, Scranton",
+  "colors": [
+   {
+    "name": "Cardinal Red",
+    "hex": "#8C2332",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C2B181",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "high",
+  "wikipedia": "Scranton High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Scranton_High_School_(Pennsylvania)",
+   "https://www.scrsd.org/",
+   "https://www.scrsd.org/departments/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1669542940/scrsdorg/pcvybtvftdpaaqquprun/unnamed.png"
+  ],
+  "era": "Scranton Technical became Scranton High School in 1990; Central closed 1991 and merged in. Colours combine Central (Golden Eagles, gold) and Tech (Red Raiders, red).",
+  "notes": "Wikipedia infobox with hex values.",
+  "evidence": "scrsd.org athletics page Scranton High 'S' Knight logo (unnamed.png): flat cardinal #8C2332 with Vegas gold #C2B181 outline and knight helmet; matches Wikipedia 'Cardinal red and Vegas gold'. District seal/theme is orange (#FFA82E) and not the school's."
+ }
+]

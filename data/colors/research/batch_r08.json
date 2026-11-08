@@ -1,0 +1,981 @@
+[
+ {
+  "school": "Unionville",
+  "identified_as": "Unionville High School, Kennett Square",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Longhorns",
+  "confidence": "high",
+  "wikipedia": "Unionville High School (Kennett Square, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Unionville_High_School_(Kennett_Square,_Pennsylvania)",
+   "search:https://papreplive.com/football/hook-em-unionville-picks-longhorns-as-new-nickname-after-thorough-process",
+   "search:https://www.maxpreps.com/pa/kennett-square/unionville-longhorns/football/schedule/all-time",
+   "search:https://www.publicschoolreview.com/unionville-high-school-profile"
+  ],
+  "era": "Nickname was Indians for 60+ years before switching to Longhorns (recent); colours blue and gold unchanged as far as found.",
+  "notes": "Wikipedia infobox has no colours. Search snippets: PAPrepLive 'blue and gold', MaxPreps 'Midnight Blue, Gold', EliteProspects 'Navy + Gold' -- blue is a dark/navy shade."
+ },
+ {
+  "school": "Technical Memorial",
+  "identified_as": "Technical Memorial High School, Erie (closed 1993)",
+  "colors": [],
+  "mascot": "Centaurs (unconfirmed)",
+  "confidence": "low",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://digital-release.yourerie.com/news/local-news/students-to-choose-new-name-mascot-and-colors-for-central-tech"
+  ],
+  "era": "Merged with Academy HS after 1992-93 to form Central HS (later Central Tech, black and gold, Falcons; now Erie High, purple and gold, Royals). Tech Memorial's own colours not found.",
+  "notes": "Do not use successor colours. One search snippet called the Centaur the old Tech Memorial mascot; unverified."
+ },
+ {
+  "school": "Halifax",
+  "identified_as": "Halifax Area High School, Halifax",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "medium",
+  "wikipedia": "Halifax Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Halifax_Area_High_School",
+   "https://en.wikipedia.org/wiki/Halifax_Area_School_District"
+  ],
+  "era": null,
+  "notes": "HS page says 'Black and Gold', district page 'Black and Vegas gold'. Both Wikipedia."
+ },
+ {
+  "school": "Youngsville",
+  "identified_as": "Youngsville Middle/High School, Youngsville (Warren County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Youngsville High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Youngsville_High_School",
+   "search:https://timesobserver.com/sports/local-sports/2025/02/eagles-focused"
+  ],
+  "era": "District voted Jan 2025 to close Youngsville; students moved to Eisenhower after 2024-25.",
+  "notes": "Wikipedia infobox only."
+ },
+ {
+  "school": "Strath Haven",
+  "identified_as": "Strath Haven High School, Wallingford",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Strath Haven High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Strath_Haven_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only (named colour boxes, no hex)."
+ },
+ {
+  "school": "Portage",
+  "identified_as": "Portage Area Junior/Senior High School, Portage",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "Portage Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Portage_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot not in infobox (Mustangs from general knowledge, unverified)."
+ },
+ {
+  "school": "Pope John Paul II",
+  "identified_as": "Pope John Paul II High School, Royersford",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#0000FF",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Athletic Gold",
+    "hex": "#FFCC00",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Golden Panthers",
+  "confidence": "medium",
+  "wikipedia": "Pope John Paul II High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pope_John_Paul_II_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Hex values from Wikipedia color boxes; #0000FF looks like a generic pure blue, may not be the school's actual shade."
+ },
+ {
+  "school": "Sullivan County",
+  "identified_as": "Sullivan County Junior/Senior High School, Laporte",
+  "colors": [],
+  "mascot": "Griffins",
+  "confidence": "low",
+  "wikipedia": "Sullivan County School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sullivan_County_School_District",
+   "search:https://www.maxpreps.com/pa/laporte/sullivan-county-griffins/baseball/"
+  ],
+  "era": null,
+  "notes": "No colours found in Wikipedia or search results."
+ },
+ {
+  "school": "Laurel",
+  "identified_as": "Laurel Junior/Senior High School, New Castle (Lawrence County)",
+  "colors": [],
+  "mascot": "Spartans",
+  "confidence": "low",
+  "wikipedia": "Laurel School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Laurel_School_District_(Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/new-castle/laurel-spartans/football"
+  ],
+  "era": null,
+  "notes": "No colours found. Do not confuse with Laurel HS (Maryland), blue/gold."
+ },
+ {
+  "school": "Boswell",
+  "identified_as": "Boswell High School, Boswell (Somerset County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Star School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_13.html"
+  ],
+  "era": "1940s school; later Jenner-Boswell Joint HS, merged into North Star SD in 1969 (North Star: forest green and white, Cougars).",
+  "notes": "No source for Boswell's own colours. Search hits for 'Boswell High School' are a Texas school (gold/white Pioneers) -- not this one."
+ },
+ {
+  "school": "Charleroi",
+  "identified_as": "Charleroi Area Junior/Senior High School, Charleroi",
+  "colors": [],
+  "mascot": "Cougars",
+  "confidence": "low",
+  "wikipedia": "Charleroi School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Charleroi_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox colour field is empty; web search budget ran out before another source could be checked."
+ },
+ {
+  "school": "Sugar Valley",
+  "identified_as": "Sugar Valley Area High School, Loganton (Clinton County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District",
+   "search:https://www.wikipedia.org/wiki/User:GMorris419/Sugar_Valley_Rural_Charter_School"
+  ],
+  "era": "Keystone Central SD high school that closed in the 1990s; Sugar Valley Rural Charter School (Phoenix, green and white per an unpublished Wikipedia user draft) now occupies the area.",
+  "notes": "Old high school's colours not found; charter colours should not be assumed."
+ },
+ {
+  "school": "Kennard-Dale",
+  "identified_as": "Kennard-Dale High School, Fawn Grove",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Kennard-Dale High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennard-Dale_High_School",
+   "search:https://www.eliteprospects.com/team/20036/kennard-dale-susquehannock/2011-2012"
+  ],
+  "era": null,
+  "notes": "Wikipedia article text (not infobox); joint hockey team listing also blue and gold."
+ },
+ {
+  "school": "Montour",
+  "identified_as": "Montour High School, Robinson Township (McKees Rocks)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Montour High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Montour_High_School",
+   "https://en.wikipedia.org/wiki/Montour_School_District"
+  ],
+  "era": null,
+  "notes": "Both HS and district Wikipedia pages agree (same source family)."
+ },
+ {
+  "school": "Armstrong",
+  "identified_as": "Armstrong Junior/Senior High School, Kittanning (Armstrong SD)",
+  "colors": [],
+  "mascot": "River Hawks",
+  "confidence": "low",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)"
+  ],
+  "era": "Opened 2016 from the merger of Kittanning and Ford City high schools.",
+  "notes": "No colours found on Wikipedia; mascot from general knowledge, unverified."
+ },
+ {
+  "school": "Punxsutawney",
+  "identified_as": "Punxsutawney Area High School, Punxsutawney",
+  "colors": [],
+  "mascot": "Chucks",
+  "confidence": "low",
+  "wikipedia": "Punxsutawney Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Punxsutawney_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox colour field empty; no other source checked (search budget exhausted)."
+ },
+ {
+  "school": "Conemaugh Township",
+  "identified_as": "Conemaugh Township Area Middle/Senior High School, Davidsville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Conemaugh Township Area Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conemaugh_Township_Area_Middle/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Conemaugh_Township_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Montrose",
+  "identified_as": "Montrose Area Junior/Senior High School, Montrose",
+  "colors": [],
+  "mascot": "Meteors",
+  "confidence": "low",
+  "wikipedia": "Montrose Area Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Montrose_Area_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Montrose_Area_School_District"
+  ],
+  "era": null,
+  "notes": "No colours on either Wikipedia page."
+ },
+ {
+  "school": "Bradford",
+  "identified_as": "Bradford Area High School, Bradford",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Owls",
+  "confidence": "medium",
+  "wikipedia": "Bradford Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bradford_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Springfield Township",
+  "identified_as": "Springfield Township High School, Erdenheim (Montgomery County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Steel Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Springfield Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Springfield_Township_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia gives 'Blue and Steel'. District 1 placement matches Montgomery County, not Springfield (Delaware County)."
+ },
+ {
+  "school": "Downingtown East",
+  "identified_as": "Downingtown High School East Campus, Exton",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#2b3594",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#faca2c",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Downingtown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Downingtown_High_School"
+  ],
+  "era": "Downingtown split into East and West campuses in 2003; East has been the Cougars since.",
+  "notes": "Wikipedia: both campuses use blue and gold; hex from the shared infobox."
+ },
+ {
+  "school": "Harry S. Truman",
+  "identified_as": "Harry S. Truman High School, Levittown (Bristol Township SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Bristol Township School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bristol_Township_School_District"
+  ],
+  "era": null,
+  "notes": "From district Wikipedia infobox (Truman is the district's only high school); no HS page found."
+ },
+ {
+  "school": "Interboro",
+  "identified_as": "Interboro High School, Prospect Park",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "medium",
+  "wikipedia": "Interboro High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Interboro_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Upper Dublin",
+  "identified_as": "Upper Dublin High School, Fort Washington",
+  "colors": [
+   {
+    "name": "Cardinal",
+    "hex": "#C41E3A",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cardinals",
+  "confidence": "medium",
+  "wikipedia": "Upper Dublin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Dublin_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; gray given by name."
+ },
+ {
+  "school": "Southern Huntingdon",
+  "identified_as": "Southern Huntingdon County Middle/High School, Three Springs",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "medium",
+  "wikipedia": "Southern Huntingdon County Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Southern_Huntingdon_County_Middle/High_School",
+   "https://en.wikipedia.org/wiki/Southern_Huntingdon_County_School_District"
+  ],
+  "era": null,
+  "notes": "Wikipedia only (HS and district agree)."
+ },
+ {
+  "school": "Penncrest",
+  "identified_as": "Penncrest High School, Media",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Penncrest High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penncrest_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Donegal",
+  "identified_as": "Donegal High School, Mount Joy",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Donegal High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Donegal_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Iroquois",
+  "identified_as": "Iroquois Junior/Senior High School, Erie (Iroquois SD)",
+  "colors": [],
+  "mascot": "Braves",
+  "confidence": "low",
+  "wikipedia": "Iroquois School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Iroquois_School_District"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; mascot from general knowledge, unverified."
+ },
+ {
+  "school": "York Suburban",
+  "identified_as": "York Suburban Senior High School, York",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "York Suburban Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/York_Suburban_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia colour boxes only (no names); mascot not in infobox (Trojans from general knowledge)."
+ },
+ {
+  "school": "Highlands",
+  "identified_as": "Highlands High School, Harrison Township (Natrona Heights)",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Rams",
+  "confidence": "medium",
+  "wikipedia": "Highlands High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Highlands_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Fairfield",
+  "identified_as": "Fairfield Area High School, Fairfield (Adams County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "medium",
+  "wikipedia": "Fairfield Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fairfield_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; mascot listed as 'Green Knight'."
+ },
+ {
+  "school": "Central Valley",
+  "identified_as": "Central Valley High School, Monaca",
+  "colors": [
+   {
+    "name": "Carolina Blue",
+    "hex": "#87CEFA",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#000080",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Central Valley High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Valley_High_School_(Pennsylvania)"
+  ],
+  "era": "Formed 2010 from the merger of Center Area and Monaca.",
+  "notes": "Wikipedia hex values look like generic web colours (LightSkyBlue/Navy), not a brand spec. Mascot not in infobox (Warriors from general knowledge)."
+ },
+ {
+  "school": "Carnegie",
+  "identified_as": "Carnegie High School, Carnegie (Allegheny County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Carlynton School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlynton_School_District",
+   "https://en.wikipedia.org/wiki/Carlynton_Junior/Senior_High_School"
+  ],
+  "era": "Bracket years end 1971; Carnegie merged into Carlynton (green and gold, Golden Cougars).",
+  "notes": "Carnegie HS's own colours not found; do not use Carlynton's."
+ },
+ {
+  "school": "Ringgold",
+  "identified_as": "Ringgold High School, Carroll Township (Monongahela)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#c4b454",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Ringgold High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ringgold_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Ringgold_School_District"
+  ],
+  "era": null,
+  "notes": "Wikipedia: 'Blue and gold' with a navy box and gold #c4b454."
+ },
+ {
+  "school": "Uniontown",
+  "identified_as": "Uniontown Area High School, Uniontown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Uniontown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Uniontown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Uniontown_Area_School_District"
+  ],
+  "era": null,
+  "notes": "HS colour boxes and district infobox agree (both Wikipedia)."
+ },
+ {
+  "school": "Steelton-Highspire",
+  "identified_as": "Steelton-Highspire Junior/Senior High School, Steelton",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steamrollers",
+  "confidence": "medium",
+  "wikipedia": "Steelton-Highspire School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Steelton-Highspire_School_District"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot not in infobox (Steamrollers from general knowledge)."
+ },
+ {
+  "school": "German Township",
+  "identified_as": "German Township High School, McClellandtown (Fayette County) (closed)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1919/Page_12.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1915/Page_14.html",
+   "search:https://www.e-yearbook.com/yearbooks/German_Township_High_School_Laureola_Yearbook/1921/Page_22.html"
+  ],
+  "era": "Later merged into Albert Gallatin Area SD (Colonials).",
+  "notes": "Colours from 1915-1921 'Laureola' yearbook pages (search snippets); not confirmed for the 1939-1987 wrestling years."
+ },
+ {
+  "school": "Lebanon",
+  "identified_as": "Lebanon High School, Lebanon",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cedars",
+  "confidence": "medium",
+  "wikipedia": "Lebanon High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lebanon_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Tunkhannock",
+  "identified_as": "Tunkhannock Area High School, Tunkhannock",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Tunkhannock Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Tunkhannock_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ },
+ {
+  "school": "Western Wayne",
+  "identified_as": "Western Wayne High School, Lake Ariel",
+  "colors": [],
+  "mascot": "Wildcats",
+  "confidence": "low",
+  "wikipedia": "Western Wayne School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Western_Wayne_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox colour field empty; mascot from general knowledge, unverified."
+ },
+ {
+  "school": "Wallenpaupack",
+  "identified_as": "Wallenpaupack Area High School, Hawley",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buckhorns",
+  "confidence": "medium",
+  "wikipedia": "Wallenpaupack Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wallenpaupack_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot from general knowledge."
+ },
+ {
+  "school": "Harriton",
+  "identified_as": "Harriton High School, Rosemont",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ff0000",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Harriton High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Harriton_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia hex are pure primaries, likely not brand values."
+ },
+ {
+  "school": "Bishop McDevitt (3)",
+  "identified_as": "Bishop McDevitt High School, Harrisburg",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": "#1B2452",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CFB53B",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "medium",
+  "wikipedia": "Bishop McDevitt High School (Harrisburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McDevitt_High_School_(Harrisburg,_Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "Wikipedia only; navy hex written as '1B2452' without '#'."
+ },
+ {
+  "school": "West Chester Rustin",
+  "identified_as": "West Chester Rustin High School, Westtown Township",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#c4b454",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "medium",
+  "wikipedia": "West Chester Rustin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Chester_Rustin_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia only."
+ }
+]

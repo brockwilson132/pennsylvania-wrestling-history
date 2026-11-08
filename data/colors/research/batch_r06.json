@@ -1,0 +1,1017 @@
+[
+ {
+  "school": "Downingtown West",
+  "identified_as": "Downingtown West High School, Exton (Downingtown Area SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#2b3594",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#faca2c",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Whippets",
+  "confidence": "medium",
+  "wikipedia": "Downingtown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Downingtown_High_School",
+   "https://en.wikipedia.org/wiki/Downingtown_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Shared Downingtown HS (East/West) article states both schools' colors are blue and gold; district page agrees. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Wyomissing",
+  "identified_as": "Wyomissing Area Junior/Senior High School, Wyomissing",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Wyomissing Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyomissing_Area_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox uses color box keyword 'navy' (no hex). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Conwell-Egan",
+  "identified_as": "Conwell-Egan Catholic High School, Fairless Hills",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Conwell–Egan Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conwell%E2%80%93Egan_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Midd-West",
+  "identified_as": "Midd-West High School, Middleburg",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "low",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School",
+   "https://en.wikipedia.org/wiki/Midd-West_School_District"
+  ],
+  "era": "Formed 2005 from West Snyder (red/white Mounties) and Middleburg (blue/gold Middies).",
+  "notes": "Conflict: district infobox says Carolina Blue, Black, Grey and White; high school article text says Carolina blue and dull silver. Carolina blue is primary in both."
+ },
+ {
+  "school": "West Perry",
+  "identified_as": "West Perry High School, Elliottsburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "West Perry High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Perry_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Carlynton",
+  "identified_as": "Carlynton Junior/Senior High School, Carnegie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Cougars",
+  "confidence": "medium",
+  "wikipedia": "Carlynton Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlynton_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Carlynton_School_District"
+  ],
+  "era": null,
+  "notes": "School and district Wikipedia pages agree (not independent). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "West Snyder",
+  "identified_as": "West Snyder High School, Beaver Springs (Snyder County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "medium",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School"
+  ],
+  "era": "Merged with Middleburg HS in 2005 to form Midd-West (Carolina blue).",
+  "notes": "Only from a sentence in the Midd-West HS article. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Chief Logan",
+  "identified_as": "Chief Logan High School, Highland Park/Lewistown area (Mifflin County SD)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflin_County_School_District"
+  ],
+  "era": "Part of Penn Highlands HS 1971-76; merged with Kishacoquillas in 1989 into Indian Valley HS; Indian Valley later merged into Mifflin County HS (2011).",
+  "notes": "No colours found on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Shippensburg",
+  "identified_as": "Shippensburg Area Senior High School, Shippensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Greyhounds",
+  "confidence": "medium",
+  "wikipedia": "Shippensburg Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shippensburg_Area_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Daniel Boone",
+  "identified_as": "Daniel Boone Area High School, Birdsboro",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": "#99BADD",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blazers",
+  "confidence": "medium",
+  "wikipedia": "Daniel Boone Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Daniel_Boone_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Susquehannock",
+  "identified_as": "Susquehannock High School, Glen Rock (Southern York County SD)",
+  "colors": [],
+  "mascot": "Warriors",
+  "confidence": "low",
+  "wikipedia": "Susquehannock High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Susquehannock_High_School",
+   "https://en.wikipedia.org/wiki/Southern_York_County_School_District"
+  ],
+  "era": null,
+  "notes": "No colours on school or district Wikipedia pages; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Frazier",
+  "identified_as": "Frazier High School, Perryopolis",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Commodores",
+  "confidence": "medium",
+  "wikipedia": "Frazier High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Frazier_High_School",
+   "https://en.wikipedia.org/wiki/Frazier_School_District"
+  ],
+  "era": null,
+  "notes": "Colours from district infobox; HS page has none. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Hopewell",
+  "identified_as": "Hopewell High School, Aliquippa (Hopewell Township, Beaver County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Hopewell High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hopewell_High_School_%28Pennsylvania%29"
+  ],
+  "era": null,
+  "notes": "Blue shown with color box keyword 'navy' (no hex). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "West Mifflin",
+  "identified_as": "West Mifflin Area High School, West Mifflin",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "medium",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School"
+  ],
+  "era": null,
+  "notes": "White listed as accent. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Warren",
+  "identified_as": "Warren Area High School, Warren",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "medium",
+  "wikipedia": "Warren Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warren_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Haverford High",
+  "identified_as": "Haverford High School, Havertown (Haverford Township SD)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Fords",
+  "confidence": "medium",
+  "wikipedia": "Haverford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Haverford_High_School"
+  ],
+  "era": null,
+  "notes": "Mascot 'Henry', a 1929 Model A Ford. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Great Valley",
+  "identified_as": "Great Valley High School, Malvern",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Great Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Great_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Oil City",
+  "identified_as": "Oil City Area Senior High School, Oil City",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Oil City Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oil_City_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox colours field is blank; no HS article; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Smethport",
+  "identified_as": "Smethport Area Junior/Senior High School, Smethport",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Smethport Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Smethport_Area_School_District"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Franklin",
+  "identified_as": "Franklin Area High School, Franklin (Venango County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Franklin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Franklin_Area_School_District"
+  ],
+  "era": null,
+  "notes": "No colours on district page; do not confuse with Franklin Regional (D7, blue/gold Panthers). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Central Bucks East",
+  "identified_as": "Central Bucks High School East, Doylestown (Buckingham Twp)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Central Bucks High School East",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_East"
+  ],
+  "era": null,
+  "notes": "Blue shown with color box keyword 'navy'. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Greater Johnstown",
+  "identified_as": "Greater Johnstown High School, Johnstown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Columbia blue",
+    "hex": "#9BDDFF",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Greater Johnstown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Johnstown_High_School"
+  ],
+  "era": null,
+  "notes": "Mascot not parsed from infobox (from general knowledge). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Upper Merion",
+  "identified_as": "Upper Merion Area High School, King of Prussia",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Navy blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Upper Merion Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Merion_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Coatesville",
+  "identified_as": "Coatesville Area Senior High School, Coatesville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Coatesville Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coatesville_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Conneaut Lake",
+  "identified_as": "Conneaut Lake High School, Conneaut Lake (Conneaut SD)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Conneaut Lake High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conneaut_Lake_High_School",
+   "https://en.wikipedia.org/wiki/Conneaut_School_District"
+  ],
+  "era": "Merged 2012 into Conneaut Area Senior High School (Eagles: black, royal blue, silver) - successor colours, not Conneaut Lake's.",
+  "notes": "Conneaut Lake HS's own colours not found; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Camp Hill",
+  "identified_as": "Camp Hill High School, Camp Hill",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#001A57",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": "#FFFFFF",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "Camp Hill High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Camp_Hill_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Ligonier Valley",
+  "identified_as": "Ligonier Valley High School, Ligonier",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Ligonier Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ligonier_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Northeast Bradford",
+  "identified_as": "Northeast Bradford Junior/Senior High School, Rome",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northeast Bradford School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_Bradford_School_District"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Indiana",
+  "identified_as": "Indiana Area Senior High School, Indiana",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Indiana Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Indiana_Area_School_District"
+  ],
+  "era": null,
+  "notes": "District infobox only; order as given there ('Black and Red'). Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Cambridge Springs",
+  "identified_as": "Cambridge Springs Junior/Senior High School, Cambridge Springs (PENNCREST SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Penncrest School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penncrest_School_District"
+  ],
+  "era": null,
+  "notes": "From PENNCREST district infobox per-school list. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Berks Catholic",
+  "identified_as": "Berks Catholic High School, Reading",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Saints",
+  "confidence": "medium",
+  "wikipedia": "Berks Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Berks_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": "Mascot is a Saint Bernard. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Quaker Valley",
+  "identified_as": "Quaker Valley High School, Leetsdale",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#edcb34",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Quakers",
+  "confidence": "medium",
+  "wikipedia": "Quaker Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Quaker_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox gives only colour boxes; the name 'Gold' for #edcb34 is my label. Mascot from general knowledge. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Keystone Oaks",
+  "identified_as": "Keystone Oaks High School, Dormont",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Eagles",
+  "confidence": "medium",
+  "wikipedia": "Keystone Oaks High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Oaks_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox gives only colour boxes; the name 'Gold' is my label. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Fairview",
+  "identified_as": "Fairview High School, Fairview (Erie County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "Fairview High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fairview_High_School_%28Pennsylvania%29"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Garden Spot",
+  "identified_as": "Garden Spot High School, New Holland",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Garden Spot High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Garden_Spot_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Garnet Valley",
+  "identified_as": "Garnet Valley High School, Glen Mills",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#733635",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Jaguars",
+  "confidence": "medium",
+  "wikipedia": "Garnet Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Garnet_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Perkiomen Valley",
+  "identified_as": "Perkiomen Valley High School, Collegeville",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Brown",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Perkiomen Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Perkiomen_Valley_School_District"
+  ],
+  "era": "Colours chosen 1969 at merger of Collegeville-Trappe (red/gold) and Schwenksville (blue/white).",
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Mercer",
+  "identified_as": "Mercer Area Middle-High School, Mercer",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Royal blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "Mercer Area Middle-High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mercer_Area_Middle-High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Eisenhower",
+  "identified_as": "Eisenhower Middle/High School, Russell (Warren County SD)",
+  "colors": [],
+  "mascot": "Knights",
+  "confidence": "low",
+  "wikipedia": "Eisenhower Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eisenhower_Middle/High_School"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "South Williamsport",
+  "identified_as": "South Williamsport Area Junior/Senior High School, South Williamsport",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "medium",
+  "wikipedia": "South Williamsport Area Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Williamsport_Area_Junior_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Pequea Valley",
+  "identified_as": "Pequea Valley High School, Kinzers",
+  "colors": [],
+  "mascot": "Braves",
+  "confidence": "low",
+  "wikipedia": "Pequea Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pequea_Valley_High_School"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Williamson",
+  "identified_as": "Williamson Junior/Senior High School, Tioga (Northern Tioga SD)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Williamson Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Williamson_Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia article's infobox is titled 'Williamson-Elkland Senior High School' - possible merger/rename; verify. Infobox colours read 'blue gold'. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "Eastern York",
+  "identified_as": "Eastern York High School, Wrightsville",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Knights",
+  "confidence": "medium",
+  "wikipedia": "Eastern York School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Eastern_York_School_District"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ },
+ {
+  "school": "East Juniata",
+  "identified_as": "East Juniata Junior/Senior High School, McAlisterville",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "medium",
+  "wikipedia": "East Juniata Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Juniata_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": "Not Juniata HS (Mifflintown), which is a different school. Search budget was exhausted; only Wikipedia could be read, no official school source checked."
+ }
+]

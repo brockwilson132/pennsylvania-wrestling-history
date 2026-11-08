@@ -1,0 +1,613 @@
+[
+ {
+  "school": "Penn-Trafford",
+  "identified_as": "Penn-Trafford High School, Harrison City",
+  "colors": [
+   {
+    "name": "Dartmouth Green (dark green)",
+    "hex": "#1B3E1D",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EBB21D",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Penn-Trafford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn-Trafford_High_School",
+   "https://en.wikipedia.org/wiki/Penn-Trafford_School_District",
+   "search:https://www.westmorelandsports.com/schools/penn-trafford",
+   "https://www.penntrafford.org",
+   "https://www.penntrafford.org/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia body text names Dartmouth Green and Green Bay Gold (Dartmouth Green replaced Kelly Green); MaxPreps/Westmoreland Sports (search) say Green/Gold.",
+  "evidence": "penntrafford.org theme CSS dominated by #1B3E1D (x47) and #EBB21D (x40); apple-touch-icon 'PT' spear logo drawn in dark green #193E1D with gold #F1C44D; matches Wikipedia Dartmouth Green/Green Bay Gold"
+ },
+ {
+  "school": "Altoona",
+  "identified_as": "Altoona Area High School, Altoona",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#780E2A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mountain Lions",
+  "confidence": "high",
+  "wikipedia": "Altoona Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Altoona_Area_High_School",
+   "https://www.aasdcat.com",
+   "https://www.aasdcat.com/apple-touch-icon.png"
+  ],
+  "era": null,
+  "notes": "Not 'Altoona High School' (Wisconsin, red/black).",
+  "evidence": "aasdcat.com AASD seal logo drawn in flat maroon #780E2A on white; site CSS top colour #881426 (maroon); agrees with Wikipedia maroon/white"
+ },
+ {
+  "school": "Owen J. Roberts",
+  "identified_as": "Owen J. Roberts High School, Pottstown (South Coventry Twp)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C20F2F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Owen J. Roberts High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Owen_J._Roberts_High_School",
+   "https://www.ojrsd.com",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1752081350/ojrsdcom/xiyjxtf8cy2xjr5dyrks/OJRPawOfficialLogo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "ojrsd.com 'OJR Paw Official Logo' is flat red #C20F2F; site theme --primary-color #C32033 (secondary grey #888A8D); matches Wikipedia red/white"
+ },
+ {
+  "school": "Beth-Center",
+  "identified_as": "Bethlehem-Center High School, Fredericktown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1F385A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#C3B682",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Bethlehem-Center School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bethlehem-Center_School_District",
+   "https://www.bcasd.net"
+  ],
+  "era": null,
+  "notes": "District Wikipedia only.",
+  "evidence": "bcasd.net (Bethlehem-Center SD) header bulldog roundel: navy #1F385A ring, Vegas/khaki gold #C3B682 field, grey bulldog; wordmark also in that gold. First pass 'Blue and Gold' refined to navy and Vegas gold"
+ },
+ {
+  "school": "Quakertown",
+  "identified_as": "Quakertown Community High School, Quakertown",
+  "colors": [
+   {
+    "name": "Blue (royal)",
+    "hex": "#07509A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#0D161F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Quakertown Community School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Quakertown_Community_School_District",
+   "https://www.qcsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/20058/logo/22740/Quakertown_Community_School_District_PA_Logo_scaled_down.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox colours blank; searches found no stated colours. Search budget ran out.",
+  "evidence": "qcsd.org district logo: royal blue #07509A 'Q' with black/charcoal panther (#0D161F, grey #4F5963) on white; site CSS most-used colour navy #013973. Names inferred from logo, no written colour statement found; black may be just the panther artwork"
+ },
+ {
+  "school": "Lock Haven",
+  "identified_as": "Lock Haven Senior High School, Lock Haven (Keystone Central SD)",
+  "colors": [],
+  "mascot": "Bobcats",
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://www.lockhaven.com/sports/local-sports/2026/06/memorable-campaign-a-look-back-at-lhhs-footballs-storied-unbeaten-1953-season/"
+  ],
+  "era": "Closed 1999/2000; merged with Bald Eagle-Nittany into Central Mountain HS (royal blue/white).",
+  "notes": "No source found for LHHS colours; do not use Lock Haven University's crimson/white. Search budget ran out.",
+  "evidence": "No image or site found in pass 2: search engines unusable this run (DuckDuckGo blocked, Bing returned unrelated results) and Keystone Central SD site (keystonecentral.org) unreachable. Nothing looked at; colours remain unknown"
+ },
+ {
+  "school": "Burgettstown",
+  "identified_as": "Burgettstown Area Junior/Senior High School, Burgettstown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#001355",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Devils",
+  "confidence": "high",
+  "wikipedia": "Burgettstown Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Burgettstown_Area_School_District",
+   "search:https://www.maxpreps.com/pa/burgettstown/burgettstown-blue-devils/football/schedule/all-time",
+   "https://www.burgettstown.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1713792172/burgettstownk12paus/dbpayw0ywhmcicotyrhh/Blue_Devil2.jpg"
+  ],
+  "era": null,
+  "notes": "Wikipedia colours field blank; MaxPreps per search summary: Navy, White.",
+  "evidence": "burgettstown.k12.pa.us theme --primary-color #001355 (secondary silver-grey #A5A7A8); site Blue Devil head image (a scan) is blue #2F4E76 on white; agrees with MaxPreps navy/white"
+ },
+ {
+  "school": "Chartiers-Houston",
+  "identified_as": "Chartiers-Houston Junior/Senior High School, Houston",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Buccaneers",
+  "confidence": "high",
+  "wikipedia": "Chartiers-Houston School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chartiers-Houston_School_District",
+   "https://www.maxpreps.com/pa/houston/chartiers-houston-buccaneers/",
+   "search:https://www.chbucs.org"
+  ],
+  "era": null,
+  "notes": "District Wikipedia only.",
+  "evidence": "MaxPreps team page lists color1 #8F0018 (maroon), color2 #C8880A (gold), color3 #FFFFFF; agrees with district Wikipedia maroon/gold. Hex left null: district site (chartiers-houston.org, chbucs.org) unreachable/403 and MaxPreps mascot image refused (403), so no logo or school-site pixels were seen"
+ },
+ {
+  "school": "Norwin",
+  "identified_as": "Norwin High School, North Huntingdon",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#002855",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F0AF13",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Knights",
+  "confidence": "high",
+  "wikipedia": "Norwin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Norwin_High_School",
+   "https://en.wikipedia.org/wiki/Norwin_School_District",
+   "https://www.norwinsd.org",
+   "https://www.norwinsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree; HS colour box shows navy.",
+  "evidence": "norwinsd.org header logo: shield and NORWIN wordmark in gold #F0AF13 with white (for a dark header); site CSS also carries #002855 navy and #EAAA00 gold; Wikipedia blue/gold with navy box"
+ },
+ {
+  "school": "Elmer L. Meyers",
+  "identified_as": "Elmer L. Meyers Junior/Senior High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#002366",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mohawks",
+  "confidence": "medium",
+  "wikipedia": "Elmer L. Meyers Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elmer_L._Meyers_Junior/Senior_High_School",
+   "https://www.wbasd.k12.pa.us/meyersjrsrhighschool_home.aspx",
+   "https://www.wbasd.k12.pa.us/sysimages/HeaderLogo.png"
+  ],
+  "era": "Closed after 2020-21; consolidated into Wilkes-Barre Area HS.",
+  "notes": "Wikipedia only.",
+  "evidence": "wbasd.k12.pa.us legacy Meyers page now shows only the successor Wilkes-Barre Area 'Wolfpack' logo (light blue/grey), which was NOT used; small campus photo too small for colours. No Mohawks logo found; Wikipedia infobox hex kept"
+ },
+ {
+  "school": "Forest Hills",
+  "identified_as": "Forest Hills High School, Sidman (Forest Hills SD, Cambria County)",
+  "colors": [
+   {
+    "name": "Green (dark)",
+    "hex": "#0A4437",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F8B51D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rangers",
+  "confidence": "high",
+  "wikipedia": "Forest Hills High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Forest_Hills_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Forest_Hills_School_District",
+   "https://www.fhrangers.org",
+   "https://www.fhrangers.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Minor conflict: HS page says Green and Yellow, district page Green and gold.",
+  "evidence": "fhrangers.org school logo: interlocking 'FH' block letters in gold #F8B51D outlined dark green #0A4437. Gold is a yellow-gold, which explains Wikipedia's 'Green and Yellow' vs 'Green and gold'"
+ },
+ {
+  "school": "Schuylkill Valley",
+  "identified_as": "Schuylkill Valley High School, Leesport",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C91123",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#1A191A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Schuylkill Valley School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Schuylkill_Valley_School_District",
+   "https://www.schuylkillvalley.org",
+   "https://resources.finalsite.net/images/v1694613136/schuylkillvalleyorg/djpttosqkve7mhzw0hll/schuylkill-valley-logo.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia only.",
+  "evidence": "schuylkillvalley.org logo: red 'SV' (#EC3237) with black panther in a black-ringed white circle; site theme --primary-color #C91123, secondary #EE2A2F. Confirms red and black"
+ },
+ {
+  "school": "Jefferson-Morgan",
+  "identified_as": "Jefferson-Morgan Middle/Senior High School, Jefferson",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#E45D21",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#010101",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Rockets",
+  "confidence": "high",
+  "wikipedia": "Jefferson-Morgan Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Jefferson-Morgan_Middle/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Jefferson-Morgan_School_District",
+   "https://www.jmsd.org",
+   "https://files.smartsites.parentsquare.com/13191/header_logo_img_22doddav833o8oflfka.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "jmsd.org header logo: black rocket in a black ring with orange #E45D21 outline/highlights; matches Wikipedia orange/black"
+ },
+ {
+  "school": "Canonsburg",
+  "identified_as": "Canonsburg High School, Canonsburg",
+  "colors": [],
+  "mascot": "Gunners",
+  "confidence": "low",
+  "wikipedia": "Canon-McMillan School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Canon-McMillan_School_District",
+   "search:https://cmalumniwrestling.squarespace.com/blog/2017/10/4/a-brief-history-of-the-canon-mcmillan-wrestling-program"
+  ],
+  "era": "Merged c. 1959 into Canon-McMillan (blue and gold, Big Macs).",
+  "notes": "No source found for Canonsburg HS's own pre-merger colours; do not assume Canon-McMillan blue/gold. Search budget ran out.",
+  "evidence": "No image found in pass 2: search engines unusable this run and no Wikipedia/Commons image for the pre-1959 school. Colours remain unknown; Canon-McMillan blue/gold deliberately not used"
+ },
+ {
+  "school": "Northern York",
+  "identified_as": "Northern High School, Dillsburg",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Polar Bears",
+  "confidence": "medium",
+  "wikipedia": "Northern High School (Dillsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_High_School_(Dillsburg,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Northern_York_County_School_District",
+   "search:https://www.nycsd.net"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "District site nycsd.net unreachable from this environment and MaxPreps refused (403); search engines unusable this run. No image looked at; names kept from Wikipedia"
+ },
+ {
+  "school": "Meadville",
+  "identified_as": "Meadville Area Senior High School, Meadville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#FF0000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Bulldogs",
+  "confidence": "high",
+  "wikipedia": "Meadville Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Meadville_Area_Senior_High_School",
+   "https://www.craw.org",
+   "https://www.craw.org/pics/Meadville-Area-Senior-High-School-logo.png",
+   "https://www.maxpreps.com/pa/meadville/meadville-bulldogs/",
+   "https://image.maxpreps.io/school-mascot/f/d/e/fde7b8e1-fe01-434f-a03a-8182b785f096.gif"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "craw.org 'Meadville Area Senior High School' logo and MaxPreps mascot image: grey/white bulldog with flat red #FF0000 spiked collar and black linework; MaxPreps lists color1 #222222 (black), color2 #CC0022 (red). Agrees with Wikipedia red/black. Logo red is clip-art pure red, so the exact shade is uncertain (MaxPreps #CC0022 is a darker alternative)"
+ },
+ {
+  "school": "General McLane",
+  "identified_as": "General McLane High School, Edinboro",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#ED1C24",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Grey",
+    "hex": "#606060",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lancers",
+  "confidence": "high",
+  "wikipedia": "General McLane High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/General_McLane_High_School",
+   "https://www.generalmclane.net",
+   "https://www.generalmclane.net/wp-content/themes/gm_underscores/images/logo_top_responsive_menu_logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "generalmclane.net 'GM' shield logo: left half red #ED1C24, right half grey #606060; site CSS top colour #C81920. Red/white per Wikipedia; grey is used as a logo colour (may be secondary/trim only)"
+ },
+ {
+  "school": "Pennridge",
+  "identified_as": "Pennridge High School, Perkasie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#025B35",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Pennridge School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pennridge_School_District",
+   "https://www.pennridge.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1724961994/pennridgeorg/cnvgbdd7jxfiimrci9hc/PennridgeSchoolDistrictPrimaryLogoImage.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia cites MaxPreps for green and white; #06402B is from the Wikipedia colour box.",
+  "evidence": "pennridge.org theme --primary-color and --secondary-color both #025B35; district primary logo has green #1F6835 'P' and ram head with grey/white and a thin gold ring (decorative). Wikipedia box #06402B was darker than the school's own green"
+ },
+ {
+  "school": "Commodore Perry",
+  "identified_as": "Commodore Perry Junior/Senior High School, Hadley",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#B42B35",
+    "hex_from": "photo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Commodore Perry School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Commodore_Perry_School_District",
+   "search:https://cppanthers.org/athletics/parent-information/",
+   "https://cppanthers.org",
+   "https://cppanthers.org/wp-content/themes/commodoreperry/images/bg_header.jpg",
+   "https://cppanthers.org/wp-content/uploads/2023/10/IMG_0374-1024x768.jpg",
+   "https://cppanthers.org/wp-content/uploads/2024/10/IMG_8355-cropped-1024x708.jpg"
+  ],
+  "era": null,
+  "notes": "Wikipedia has no colours field; searches found none. Search budget ran out.",
+  "evidence": "cppanthers.org theme: black header with black panther and red stripe, CSS accent #F00; gym photo (IMG_0374) shows painted red wall (#B42B35) with black panther paw/logo; girls' basketball in white/black/red 'Lady Panthers' uniforms, cross-country in black/white singlets"
+ },
+ {
+  "school": "Central Columbia",
+  "identified_as": "Central Columbia High School, Bloomsburg",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Jays",
+  "confidence": "medium",
+  "wikipedia": "Central Columbia High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Columbia_High_School",
+   "https://en.wikipedia.org/wiki/Central_Columbia_School_District",
+   "search:https://www.ccsd.cc"
+  ],
+  "era": null,
+  "notes": "HS page: Blue, White, Silver; district page: Blue and silver.",
+  "evidence": "District site ccsd.cc returns a bot 'Client Challenge' page and MaxPreps refused (403); ccsdk12.org is a different district (Canton Central, NY - bear logo, not used). No image looked at; names kept from Wikipedia"
+ },
+ {
+  "school": "Solanco",
+  "identified_as": "Solanco High School, Quarryville",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#FBC400",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#020202",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Mules",
+  "confidence": "high",
+  "wikipedia": "Solanco High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Solanco_High_School",
+   "https://en.wikipedia.org/wiki/Solanco_School_District",
+   "https://www.solancosd.org",
+   "https://www.solancosd.org/wp-content/uploads/2022/01/school-emblem.png"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia agree.",
+  "evidence": "solancosd.org school emblem: gold #FBC400 block 'S' outlined black with mule head; site CSS #FEC013/#E18C0A golds. Gold appears as the dominant colour, listed first; Wikipedia black/gold"
+ },
+ {
+  "school": "Bishop McCort",
+  "identified_as": "Bishop McCort Catholic High School, Johnstown",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#DA251C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CCC08E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Crushers",
+  "confidence": "high",
+  "wikipedia": "Bishop McCort High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_McCort_High_School",
+   "https://crusherathletics.org/",
+   "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/mccort.sidearmsports.com/images/responsive_2022/main_logo.png",
+   "https://highschool.mccort.org"
+  ],
+  "era": null,
+  "notes": "Wikipedia colour boxes give hex; infobox mascot text reads 'Nort Nort' (vandalism?); 'Crushers' is from general knowledge, not a source read here.",
+  "evidence": "crusherathletics.org (official athletics site) CSS #DA251C and #CCC08E; main logo red 'M McCORT' (#DB2727) with Vegas-gold #D4BE9C trim. Mascot Crushers confirmed by athletics site name"
+ }
+]

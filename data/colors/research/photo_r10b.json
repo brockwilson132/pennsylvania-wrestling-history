@@ -1,0 +1,577 @@
+[
+ {
+  "school": "Fairchance-Georges",
+  "identified_as": "Fairchance-Georges High School, Fairchance (Fayette County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Albert Gallatin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_Area_School_District",
+   "https://en.wikipedia.org/wiki/Albert_Gallatin_High_School"
+  ],
+  "era": "Merged into Albert Gallatin High School (Colonials; black and silver).",
+  "notes": "No source for Fairchance-Georges' own colours.",
+  "evidence": "Photo pass: Bing/DDG HTML search returned no usable results from this environment and one WebSearch found nothing about this school; no image of the school's own era was found, so colours remain unconfirmed."
+ },
+ {
+  "school": "Elk Lake",
+  "identified_as": "Elk Lake Junior/Senior High School, Dimock (Susquehanna County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#356E3C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#030403",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "high",
+  "wikipedia": "Elk Lake School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elk_Lake_School_District",
+   "https://www.elklakeschool.org/"
+  ],
+  "era": null,
+  "notes": "District site (Google Sites) shows a Warriors crest and a Warriors headdress logo in green, black and white; site theme green #356E3C matches the crest exactly. A minor gold accent (#B79951) appears in the site CSS only.",
+  "evidence": "elklakeschool.org crest logo: green #356E3C, black #030403 on white; headdress logo green #326B39/black/white; site theme #356E3C"
+ },
+ {
+  "school": "Greater Nanticoke",
+  "identified_as": "Greater Nanticoke Area High School, Nanticoke (Luzerne County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D12529",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#10243D",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Greater Nanticoke Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Nanticoke_Area_School_District",
+   "https://www.gnasd.com/",
+   "https://cdnsm5-ss14.sharpschool.com/UserFiles/Servers/Server_351319/Templates/MainLogoSmall.jpg"
+  ],
+  "era": null,
+  "notes": "District header banner 'Greater Nanticoke Area TROJANS': red wordmark with navy outline and a navy Trojan helmet head; site CSS also red-heavy (#FF0000, #860000).",
+  "evidence": "gnasd.com header logo MainLogoSmall.jpg: red #D12529 'TROJANS' wordmark, navy #10243D Trojan head and outline, on white"
+ },
+ {
+  "school": "Taylor Allderdice",
+  "identified_as": "Taylor Allderdice High School, Pittsburgh (Squirrel Hill)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#1E754E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "high",
+  "wikipedia": "Taylor Allderdice High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Taylor_Allderdice_High_School",
+   "https://allderdicedragons.com/",
+   "https://assets-rst7.rschooltoday.com/rst7files/uploads/sites/1875/2026/06/26486.png",
+   "https://www.pghschools.org/schools/9-12/allderdice"
+  ],
+  "era": null,
+  "notes": "Athletics site allderdicedragons.com: green dragon on a shield reading DRAGONS; Elementor primary colour #025D34 (darker green); team photos show green shirts and white/grey lettering. The pghschools.org page colours are district-wide, not Allderdice's.",
+  "evidence": "allderdicedragons.com dragon logo: green #1E754E, black outline, cream shield; site primary #025D34; tennis team photos in green"
+ },
+ {
+  "school": "Hanover Township",
+  "identified_as": "Hanover Township High School, Hanover Township (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Hanover Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hanover_Area_School_District"
+  ],
+  "era": "Merged into Hanover Area (blue and white) around 1966-71.",
+  "notes": "No source for Hanover Township's own colours.",
+  "evidence": "Photo pass: Bing/DDG HTML search returned no usable results from this environment and one WebSearch found nothing about this school; no image of the school's own era was found, so colours remain unconfirmed."
+ },
+ {
+  "school": "Roman Catholic",
+  "identified_as": "Roman Catholic High School, Philadelphia",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#482366",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EFC47B",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cahillites",
+  "confidence": "high",
+  "wikipedia": "Roman Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Roman_Catholic_High_School",
+   "https://www.romancatholichs.com/",
+   "https://images.squarespace-cdn.com/content/v1/68dbfbdbbc305049a39d57e4/8a4152a8-7219-4db5-9adc-f61253879327/the_rchs_seal_rgb_052124.png"
+  ],
+  "era": null,
+  "notes": "School seal in purple and gold; site theme also purple #470A58 and gold #FFBF3F.",
+  "evidence": "romancatholichs.com seal (the_rchs_seal_rgb): purple #482366, gold #EFC47B, white; site CSS #470A58 / #FFBF3F"
+ },
+ {
+  "school": "Annville-Cleona",
+  "identified_as": "Annville-Cleona High School, Annville (Lebanon County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D8202A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dutchmen",
+  "confidence": "medium",
+  "wikipedia": "Annville-Cleona School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Annville-Cleona_School_District",
+   "https://www.acschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/16902/logo/17986/Annville-Cleona_School_District_Logo.png"
+  ],
+  "era": null,
+  "notes": "District 'AC' logo is red with a white keyline and a near-black (#360A0C) outer outline; site theme red #D42128. Black appears as trim only, so not listed; whether black is an official colour is unconfirmed.",
+  "evidence": "acschools.org district logo: red #D8202A interlocking AC, white keyline, near-black outline; site theme #D42128"
+ },
+ {
+  "school": "Columbia-Montour Vo-Tech",
+  "identified_as": "Columbia-Montour Area Vocational-Technical School, Bloomsburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#006937",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FCB525",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Columbia-Montour Area Vocational-Technical School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Columbia-Montour_Area_Vocational-Technical_School",
+   "https://www.cmvt.us/",
+   "https://files.smartsites.parentsquare.com/11803/header_logo_img_lle5lpkaom910doibpc.png"
+  ],
+  "era": null,
+  "notes": "Site theme colours green and gold (non-framework); small header crest is green with gold.",
+  "evidence": "cmvt.us site CSS: green #006937, gold #FCB525 (besides stock Bootstrap); header crest green/gold"
+ },
+ {
+  "school": "Bishop Hoban",
+  "identified_as": "Bishop Hoban High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Argents",
+  "confidence": "medium",
+  "wikipedia": "Bishop Hoban High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bishop_Hoban_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/bishop-hoban-argent/basketball",
+   "search:https://holyredeemerhs.org/history"
+  ],
+  "era": "Closed 2007; consolidated into Holy Redeemer High School (Royals; red, white, gold).",
+  "notes": "Wikipedia infobox and search results agree on green and gold, Argents. No logo or period photo could be found (image search unavailable; maxpreps blocked), so no hex.",
+  "evidence": "No image found; names only from Wikipedia infobox and a WebSearch summary"
+ },
+ {
+  "school": "Sunbury",
+  "identified_as": "Sunbury High School, Sunbury (Northumberland County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Shikellamy High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shikellamy_High_School",
+   "https://en.wikipedia.org/wiki/Shikellamy_School_District"
+  ],
+  "era": "Merged into Shikellamy High School (Braves; maroon, white, blue) in the mid-1960s.",
+  "notes": "No source for Sunbury High's own colours. Wikipedia 'Sunbury High School' is a North Carolina building.",
+  "evidence": "Photo pass: Bing/DDG HTML search returned no usable results from this environment and one WebSearch found nothing about this school; no image of the school's own era was found, so colours remain unconfirmed."
+ },
+ {
+  "school": "York",
+  "identified_as": "York High School / William Penn Senior High School, York",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#192B53",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Orange",
+    "hex": "#EF792D",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Bearcats",
+  "confidence": "high",
+  "wikipedia": "William Penn Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/William_Penn_Senior_High_School",
+   "https://www.ycs.k12.pa.us/"
+  ],
+  "era": null,
+  "notes": "School District of the City of York site theme navy and orange, matching Wikipedia/MaxPreps blue and orange.",
+  "evidence": "ycs.k12.pa.us site theme: navy #192B53 (x158), orange #EF792D (x76)"
+ },
+ {
+  "school": "Avonworth",
+  "identified_as": "Avonworth High School, Ohio Township (Allegheny County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D1232C",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": "#BEBEBE",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Antelopes",
+  "confidence": "high",
+  "wikipedia": "Avonworth High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Avonworth_High_School",
+   "https://www.avonworth.k12.pa.us/",
+   "https://resources.finalsite.net/images/v1686606978/avonworthk12paus/rhxfxumahrabqp4xrxym/AvonworthLogoHiRes_AONLY.png"
+  ],
+  "era": null,
+  "notes": "District 'A' logo with antelope head cut-out is solid red; site theme red #D92C21. Gray not seen on the logo; kept from infobox.",
+  "evidence": "avonworth.k12.pa.us logo AvonworthLogoHiRes_AONLY: red #D1232C with white antelope; site theme #D92C21"
+ },
+ {
+  "school": "Monsignor Bonner",
+  "identified_as": "Monsignor Bonner High School, Drexel Hill (Delaware County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#173A25",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F9D741",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Friars",
+  "confidence": "high",
+  "wikipedia": "Monsignor Bonner and Archbishop Prendergast High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Monsignor_Bonner_and_Archbishop_Prendergast_High_School",
+   "https://www.bonnerprendie.com/"
+  ],
+  "era": "Merged with Archbishop Prendergast in 2012 (Prendergast side: garnet, grey, black, white); boys' teams kept Friars and Bonner colours.",
+  "notes": "Bonner & Prendie site theme: green #173A25 and gold #F9D741 (Bonner) plus garnet #7F183F (Prendergast). Graduation photos: boys in green gowns; 'Class of 2030' graphic dark green with gold crest.",
+  "evidence": "bonnerprendie.com CSS: gold #F9D741, garnet #7F183F, green #173A25; site photos green gowns, green/gold graphic"
+ },
+ {
+  "school": "Northeast Catholic",
+  "identified_as": "Northeast Catholic High School for Boys, Philadelphia",
+  "colors": [
+   {
+    "name": "Cardinal Red",
+    "hex": "#EE1C25",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Northeast Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northeast_Catholic_High_School",
+   "https://www.northcatholicalumni.org/",
+   "https://static.wixstatic.com/media/dd8681_3d3f08b4e3854476828540fd17d492d4~mv2.png",
+   "https://static.wixstatic.com/media/dd8681_1cc44bde538f4eaf9952f582284de15a~mv2.jpg",
+   "search:https://uni-watch.com/2023/06/05/a-picture-is-worth-a-thousand-uni-related-words/",
+   "search:https://www.northcatholicalumni.org/about"
+  ],
+  "era": "Closed June 2010.",
+  "notes": "North Catholic Alumni Association logo: falcon wearing a red sweater with a white interlocking NC monogram, black/silver trim; school history (search) says colours Cardinal Red and White. 100th-anniversary seal also red. Hex is from current alumni artwork, not a period uniform.",
+  "evidence": "northcatholicalumni.org alumni logo: red #EE1C25 sweater, white NC monogram, black/silver; centennial seal red ring"
+ },
+ {
+  "school": "Cardinal O'Hara",
+  "identified_as": "Cardinal O'Hara High School, Springfield (Delaware County)",
+  "colors": [
+   {
+    "name": "Cardinal Red",
+    "hex": "#A41229",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy Blue",
+    "hex": "#003866",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "high",
+  "wikipedia": "Cardinal O'Hara High School (Springfield, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Cardinal_O'Hara_High_School_(Springfield,_Pennsylvania)",
+   "https://www.cohs.com/",
+   "https://resources.finalsite.net/images/v1727817891/cohscom/snokjjrdg6qb4he0xukm/favicon-cardinal-o-hara.ico"
+  ],
+  "era": null,
+  "notes": "Lion mascot logo drawn in navy and cardinal red with white; site theme navy #041C34 and red #98012E.",
+  "evidence": "cohs.com favicon lion: navy #003866, red #A41229, white; site theme #041C34 / #98012E"
+ },
+ {
+  "school": "Northern Cambria",
+  "identified_as": "Northern Cambria High School, Barnesboro (Cambria County)",
+  "colors": [
+   {
+    "name": "Gold",
+    "hex": "#F9BB41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#2B292A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Colts",
+  "confidence": "high",
+  "wikipedia": "Northern Cambria High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Cambria_High_School",
+   "https://en.wikipedia.org/wiki/Northern_Cambria_School_District",
+   "https://www.ncsd.k12.pa.us/",
+   "https://www.ncsd.k12.pa.us/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "District 'Colts' script logo gold with black outline and a white/black colt; site theme gold #F8BC40.",
+  "evidence": "ncsd.k12.pa.us pics/school_logo.png: gold #F9BB41 script, black #2B292A outline/colt; site theme #F8BC40"
+ },
+ {
+  "school": "Mid Valley",
+  "identified_as": "Mid Valley Secondary Center, Throop (Lackawanna County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#0033A0",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Mid Valley Secondary Center",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mid_Valley_Secondary_Center",
+   "https://en.wikipedia.org/wiki/Mid_Valley_School_District",
+   "https://www.mvsd.us/",
+   "https://www.midvalleyathletics.com/"
+  ],
+  "era": null,
+  "notes": "Athletics site theme royal blue; cross-country and volleyball photos show royal blue uniforms with white lettering and grey trim. District logo is a white Spartan helmet.",
+  "evidence": "midvalleyathletics.com theme badge colour #0033A0; team photos royal blue/white; mvsd.us Spartan logo white"
+ },
+ {
+  "school": "Smithfield-Ridgebury-Ulster",
+  "identified_as": "Smithfield-Ridgebury-Ulster High School, Bradford County",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Smithfield_Township,_Bradford_County,_Pennsylvania",
+   "https://en.wikipedia.org/wiki/Athens_Area_School_District"
+  ],
+  "era": "Closed; area now served by Athens Area School District (Wildcats). Exact merger date not confirmed.",
+  "notes": "No source found for its colours.",
+  "evidence": "Photo pass: Bing/DDG HTML search returned no usable results from this environment and one WebSearch found nothing about this school; no image of the school's own era was found, so colours remain unconfirmed."
+ },
+ {
+  "school": "Our Lady of Lourdes Regional",
+  "identified_as": "Our Lady of Lourdes Regional High School, Coal Township (Shamokin area)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#CD3634",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Our Lady of Lourdes Regional School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Our_Lady_of_Lourdes_Regional_School",
+   "https://www.lourdesregional.com/",
+   "https://www.lourdesregional.com/student-life/athletics",
+   "https://www.lourdesregional.com/wp-content/themes/lourdes/img/logo.png",
+   "https://www.lourdesregional.com/wp-content/uploads/2024/03/Keer-Kerris-Krebs.webp"
+  ],
+  "era": "Now Our Lady of Lourdes Regional School (K-12).",
+  "notes": "Athletics photos show 'LOURDES' uniforms in black with red/white lettering and fans in red; site theme red #CD3634. The current school wordmark (OLOL) is blue (#0B3D81), apparently academic branding, not athletic. 'Cerise' could not be confirmed as a distinct shade.",
+  "evidence": "lourdesregional.com athletics page photo: red/white lettering on black volleyball uniforms; site menu red #CD3634; OLOL logo blue #0B3D81"
+ },
+ {
+  "school": "Greater Johnstown Vo-Tech",
+  "identified_as": "Greater Johnstown Area Vocational-Technical School (now Greater Johnstown Career and Technology Center), Johnstown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#004A8B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#E8BA4A",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Johnstown_High_School",
+   "https://www.gjctc.org/",
+   "https://ecs-cluster-bucket-wsos-prod-two.s3.us-west-2.amazonaws.com/uploads/sites/117/graphic_header_logo.png"
+  ],
+  "era": null,
+  "notes": "GJCTC shield logo: blue banner and stars, gold border, black gears and torch. No athletic mascot found; colours of the vo-tech's wrestling era not verified.",
+  "evidence": "gjctc.org header logo: blue #004A8B, gold #E8BA4A, black"
+ },
+ {
+  "school": "West Middlesex",
+  "identified_as": "West Middlesex Area Junior/Senior High School, West Middlesex (Mercer County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D90203",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#242626",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Big Reds",
+  "confidence": "high",
+  "wikipedia": "West Middlesex Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Middlesex_Area_School_District",
+   "https://westmiddlesex.org/",
+   "https://westmiddlesex.org/wp-content/uploads/2024/08/26591-300x300.png"
+  ],
+  "era": null,
+  "notes": "District 'WM' logo: white/silver letters with a red and black textured background and black outline.",
+  "evidence": "westmiddlesex.org logo (26591.png): red #D90203, black #242626, white/silver letters"
+ },
+ {
+  "school": "Mapletown",
+  "identified_as": "Mapletown Junior/Senior High School, Greensboro (Greene County; Southeastern Greene SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#DFB968",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Maples",
+  "confidence": "high",
+  "wikipedia": "Mapletown Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mapletown_Junior/Senior_High_School",
+   "https://www.segsd.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/642/logo/423/SoutheasternGreene_logo-01.png"
+  ],
+  "era": null,
+  "notes": "Southeastern Greene SD (Mapletown is its only high school) round logo: black field with gold; site theme gold #B5912E.",
+  "evidence": "segsd.org district logo: black #000000 with gold #DFB968 lettering/crest; site theme gold #B5912E"
+ }
+]

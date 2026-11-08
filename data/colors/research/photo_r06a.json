@@ -1,0 +1,611 @@
+[
+ {
+  "school": "Downingtown West",
+  "identified_as": "Downingtown West High School, Exton (Downingtown Area SD)",
+  "colors": [
+   {
+    "name": "Navy/royal blue",
+    "hex": "#000065",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFCB00",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Whippets",
+  "confidence": "medium",
+  "wikipedia": "Downingtown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Downingtown_High_School",
+   "https://en.wikipedia.org/wiki/Downingtown_Area_School_District",
+   "https://www.dasd.org",
+   "https://resources.finalsite.net/images/v1653050937/dasdorg/i9vr5s7imgoxmeqs3nru/logo.png"
+  ],
+  "era": null,
+  "notes": "Shared Downingtown HS (East/West) article states both schools' colors are blue and gold; district page agrees. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "DASD district logo (no DWHS-specific logo on site): royal blue #3265CB map + navy #000065 ring text + gold #FFCB00 ring; district site theme navy #010142 and gold #FFCC00. Matches Wikipedia blue and gold."
+ },
+ {
+  "school": "Wyomissing",
+  "identified_as": "Wyomissing Area Junior/Senior High School, Wyomissing",
+  "colors": [
+   {
+    "name": "Blue (deep royal)",
+    "hex": "#000099",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Wyomissing Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyomissing_Area_Junior/Senior_High_School",
+   "https://www.wyoarea.org",
+   "https://files.smartsites.parentsquare.com/8573/header_logo_img_rkidsn331ltbbaidfoh.png"
+  ],
+  "era": null,
+  "notes": "Infobox uses color box keyword 'navy' (no hex). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District header logo: athletic 'W/A' block letter in flat #000099 with white outline; site CSS top colour also #000099. Reads as deep pure blue rather than true navy (Wikipedia says navy)."
+ },
+ {
+  "school": "Conwell-Egan",
+  "identified_as": "Conwell-Egan Catholic High School, Fairless Hills",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#0063A8",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F1C516",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Conwell\u2013Egan Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conwell%E2%80%93Egan_Catholic_High_School",
+   "https://conwell-egan.org",
+   "https://conwell-egan.org/images/cec-logo-footer.png",
+   "https://conwell-egan.org/favicon.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "School site header crest: blue #0768AC and gold #F1C516 shield; site theme blue #0063A8 x113, gold #F0C415 x61, dark navy #001B32. Shows gold, not just white, as second colour; no athletics-specific Eagles logo found."
+ },
+ {
+  "school": "Midd-West",
+  "identified_as": "Midd-West High School, Middleburg",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": "#61ADE0",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School",
+   "https://en.wikipedia.org/wiki/Midd-West_School_District",
+   "https://www.mwsd.cc",
+   "https://cmsv2-assets.apptegy.net/uploads/3857/favicon/6397/midd-west_dragon.png",
+   "https://cmsv2-assets.apptegy.net/uploads/3857/logo/6397/logo_subheader_district.png"
+  ],
+  "era": "Formed 2005 from West Snyder (red/white Mounties) and Middleburg (blue/gold Middies).",
+  "notes": "Conflict: district infobox says Carolina Blue, Black, Grey and White; high school article text says Carolina blue and dull silver. Carolina blue is primary in both.",
+  "evidence": "District favicon/subheader mascot: black mustang head on Carolina blue disc (#61ADE0, lighter #8EC4E8); site theme Carolina blue #97C0E6 x82. Grey/silver not seen in the logo."
+ },
+ {
+  "school": "West Perry",
+  "identified_as": "West Perry High School, Elliottsburg",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#00572C",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "medium",
+  "wikipedia": "West Perry High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Perry_High_School",
+   "https://www.westperry.org",
+   "https://files.smartsites.parentsquare.com/9341/header_logo_img_3gdh31cd8rkt0kcpppf.png",
+   "https://files.smartsites.parentsquare.com/9341/footer_logo_img_5qqqumq32hgv9jbkkoa.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District site theme green #00572C (non-Bootstrap); header and footer mustang logos are white-only artwork, so no logo hex."
+ },
+ {
+  "school": "Carlynton",
+  "identified_as": "Carlynton Junior/Senior High School, Carnegie",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#144633",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FFC627",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Cougars",
+  "confidence": "high",
+  "wikipedia": "Carlynton Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Carlynton_Junior/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Carlynton_School_District",
+   "https://www.carlynton.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1760538751/carlyntonk12paus/k6dxritkifx1zagodw1t/CarlyntonSchoolDistrictPrimaryLogoImage.png"
+  ],
+  "era": null,
+  "notes": "School and district Wikipedia pages agree (not independent). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District primary logo: Cougar head on a dark green #144633 disc with gold #FFC627 ring and stripes."
+ },
+ {
+  "school": "West Snyder",
+  "identified_as": "West Snyder High School, Beaver Springs (Snyder County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mounties",
+  "confidence": "low",
+  "wikipedia": "Midd-West High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Midd-West_High_School"
+  ],
+  "era": "Merged with Middleburg HS in 2005 to form Midd-West (Carolina blue).",
+  "notes": "Only from a sentence in the Midd-West HS article. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Closed school (merged 2005); web image search engines (Bing, DuckDuckGo, Yahoo) returned no usable results in this session, so no period photo seen. Names kept from first pass, no hex."
+ },
+ {
+  "school": "Chief Logan",
+  "identified_as": "Chief Logan High School, Highland Park/Lewistown area (Mifflin County SD)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Lewistown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lewistown_Area_High_School",
+   "https://en.wikipedia.org/wiki/Mifflin_County_School_District"
+  ],
+  "era": "Part of Penn Highlands HS 1971-76; merged with Kishacoquillas in 1989 into Indian Valley HS; Indian Valley later merged into Mifflin County HS (2011).",
+  "notes": "No colours found on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Closed school (1989); no site and image search unavailable this session; Wikipedia has no Chief Logan HS article. No colours found."
+ },
+ {
+  "school": "Shippensburg",
+  "identified_as": "Shippensburg Area Senior High School, Shippensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#662B3B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Grey",
+    "hex": "#9DA1A6",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Greyhounds",
+  "confidence": "high",
+  "wikipedia": "Shippensburg Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Shippensburg_Area_Senior_High_School",
+   "https://www.shipk12.org",
+   "https://content.myconnectsuite.com/api/documents/a5d631605b4b4e428da02f835b762575.png",
+   "https://content.myconnectsuite.com/api/documents/c797831b58014add953c084bd07af0a2.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District header logo: maroon #662B3B 'S' with grey #9DA1A6 greyhound and grey wordmark; round athletic seal also maroon/grey/white. Site CSS is stock Bootstrap."
+ },
+ {
+  "school": "Daniel Boone",
+  "identified_as": "Daniel Boone Area High School, Birdsboro",
+  "colors": [
+   {
+    "name": "Carolina blue",
+    "hex": "#57A1DE",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#1B3351",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blazers",
+  "confidence": "high",
+  "wikipedia": "Daniel Boone Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Daniel_Boone_Area_High_School",
+   "https://www.dboone.org",
+   "https://cmsv2-assets.apptegy.net/uploads/14274/logo/15685/70th%282%29.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District 70th-anniversary 'DB' logo: Carolina blue #57A1DE fill with navy #1B3351 outline and white letters; site theme navy #1F3753 x819. Navy is a real second colour, not just white."
+ },
+ {
+  "school": "Susquehannock",
+  "identified_as": "Susquehannock High School, Glen Rock (Southern York County SD)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A2111A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#231E1F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Susquehannock High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Susquehannock_High_School",
+   "https://en.wikipedia.org/wiki/Southern_York_County_School_District",
+   "https://www.sycsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1709321983/syck12paus/hb0kxkq7rnu9anoub4gt/SYCSDLogoNameHeader.png"
+  ],
+  "era": null,
+  "notes": "No colours on school or district Wikipedia pages; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Southern York County SD header logo (Susquehannock is its only high school): Warrior-head emblem in a red #A2111A ring with black #231E1F outline on cream/white. Small image; one source."
+ },
+ {
+  "school": "Frazier",
+  "identified_as": "Frazier High School, Perryopolis",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#B01117",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Commodores",
+  "confidence": "medium",
+  "wikipedia": "Frazier High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Frazier_High_School",
+   "https://en.wikipedia.org/wiki/Frazier_School_District",
+   "https://www.frazierschooldistrict.org",
+   "https://content.myconnectsuite.com/api/documents/770222d5e8fa44d8a1395d21a44df4c1.png"
+  ],
+  "era": null,
+  "notes": "Colours from district infobox; HS page has none. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District site theme red #B01117 (only non-Bootstrap colour); red-and-white graphics on the page; no Commodores logo found. Wikipedia district infobox: red and white."
+ },
+ {
+  "school": "Hopewell",
+  "identified_as": "Hopewell High School, Aliquippa (Hopewell Township, Beaver County)",
+  "colors": [
+   {
+    "name": "Navy blue",
+    "hex": "#041E42",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Vegas gold",
+    "hex": "#C5B358",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "high",
+  "wikipedia": "Hopewell High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hopewell_High_School_%28Pennsylvania%29",
+   "https://www.hopewellarea.org",
+   "https://www.hopewellarea.org/pics/header_logo.png",
+   "https://www.hopewellarea.org/pics/footer_logo.png",
+   "https://en.wikipedia.org/wiki/Hopewell_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Special:FilePath/HopewellViking.png"
+  ],
+  "era": null,
+  "notes": "Blue shown with color box keyword 'navy' (no hex). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District site CSS: Vegas gold #C5B358 x31 and navy #041E42; header logo shows a gold Viking on gold #CBBA5D / slate blue quarters; Wikipedia infobox uses navy + #C5B358 too."
+ },
+ {
+  "school": "West Mifflin",
+  "identified_as": "West Mifflin Area High School, West Mifflin",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#076AA8",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEC424",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Titans",
+  "confidence": "high",
+  "wikipedia": "West Mifflin Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Mifflin_Area_High_School",
+   "https://www.wmasd.org",
+   "https://www.wmasd.org/sysimages/LogoHeader.png"
+  ],
+  "era": null,
+  "notes": "White listed as accent. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District header logo: 'WM' in medium blue #076AA8 outlined in gold #FEC424, with a Titan knight figure; site CSS #0066A4 and #FFC423 agree."
+ },
+ {
+  "school": "Warren",
+  "identified_as": "Warren Area High School, Warren",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#002892",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "medium",
+  "wikipedia": "Warren Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Warren_Area_High_School",
+   "https://www.wcsdpa.org/o/wahs",
+   "https://www.wcsdpa.org",
+   "https://cmsv2-assets.apptegy.net/uploads/10822/logo/12243/Warren_County_School_District_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Warren Area HS page on the county district site uses school theme #002892 (district pages use green); only the county-district compass logo is shown, no Dragons logo."
+ },
+ {
+  "school": "Haverford High",
+  "identified_as": "Haverford High School, Havertown (Haverford Township SD)",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#930000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EDCC00",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Fords",
+  "confidence": "high",
+  "wikipedia": "Haverford High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Haverford_High_School",
+   "https://www.haverford.k12.pa.us",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1746640618/haverfordk12paus/mbx9hgmxc1yfa5xcj01u/HaverfordLogo.webp"
+  ],
+  "era": null,
+  "notes": "Mascot 'Henry', a 1929 Model A Ford. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District logo: crimson #930000 'H' disc with gold #EDCC00 ring and crimson/gold swoosh; matches crimson and gold."
+ },
+ {
+  "school": "Great Valley",
+  "identified_as": "Great Valley High School, Malvern",
+  "colors": [
+   {
+    "name": "Royal blue",
+    "hex": "#1A479A",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Great Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Great_Valley_High_School",
+   "https://www.gvsd.org/gvhs",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1677656488/gvsdorg/ce1ej2slzwbw4vt6bevs/GV_Logo-blue.png",
+   "https://en.wikipedia.org/wiki/Special:FilePath/Greatvalleyhsschoollogo.JPG"
+  ],
+  "era": null,
+  "notes": "Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "GV monogram logo flat royal blue #1A479A; site theme #0033AB. Silver not visible in any logo seen; Wikipedia logo file is an embossed seal (no colour)."
+ },
+ {
+  "school": "Oil City",
+  "identified_as": "Oil City Area Senior High School, Oil City",
+  "colors": [
+   {
+    "name": "Columbia blue",
+    "hex": "#AABEDB",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#0E2666",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Oilers",
+  "confidence": "medium",
+  "wikipedia": "Oil City Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oil_City_Area_School_District",
+   "https://www.ocasd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1729614596/ocasdorg/y9rjiniv9g3q0r2zhxc6/ocwebsite.png",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1729615239/ocasdorg/ymoes0f19lrckdpdtxzk/Ocweb.png"
+  ],
+  "era": null,
+  "notes": "District infobox colours field is blank; no HS article; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District logo: Old-English 'OC' in light Columbia blue #AABEDB with white edging and a navy oil derrick, on a navy #0E2666 field. Wikipedia mascot field = oil derrick."
+ },
+ {
+  "school": "Smethport",
+  "identified_as": "Smethport Area Junior/Senior High School, Smethport",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#D95B2D",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Hubbers",
+  "confidence": "high",
+  "wikipedia": "Smethport Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Smethport_Area_School_District",
+   "https://www.smethportschools.com/",
+   "https://wsos-cdn.s3.us-west-2.amazonaws.com/uploads/sites/210/footer-logo.png",
+   "https://wsos-cdn.s3.us-west-2.amazonaws.com/uploads/sites/210/logo-smethport.png"
+  ],
+  "era": null,
+  "notes": "No colours on Wikipedia; web search unavailable. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District 'SA Hubbers' logo: orange #D95B2D wagon wheel and 'S', black 'A' and wordmark; site theme orange #F96917."
+ },
+ {
+  "school": "Franklin",
+  "identified_as": "Franklin Area High School, Franklin (Venango County)",
+  "colors": [],
+  "mascot": "Knights",
+  "confidence": "low",
+  "wikipedia": "Franklin Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Franklin_Area_School_District",
+   "https://sites.google.com/students.fasd.k12.pa.us/franklin-area-school-district/home"
+  ],
+  "era": null,
+  "notes": "No colours on district page; do not confuse with Franklin Regional (D7, blue/gold Panthers). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District domain fasd.k12.pa.us now redirects to a bare student Google Site with no logo or colours; franklinarea.org is a different district (Franklin Park); image search unavailable. Knights mascot inferred from district address '40 Knights Way'. No colours found."
+ },
+ {
+  "school": "Central Bucks East",
+  "identified_as": "Central Bucks High School East, Doylestown (Buckingham Twp)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#C83038",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Navy blue",
+    "hex": "#1A273E",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "high",
+  "wikipedia": "Central Bucks High School East",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Bucks_High_School_East",
+   "https://cbeast.cbsd.org",
+   "https://upload.wikimedia.org/wikipedia/en/2/23/CBEPats.jpg"
+  ],
+  "era": null,
+  "notes": "Blue shown with color box keyword 'navy'. Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "Wikipedia infobox logo CBEPats.jpg: 'Patriots' script in navy #1A273E with red #C83038 and white patriot head; infobox names red, white and navy. CBSD school pages only show the district seal (#1E7BB1)."
+ },
+ {
+  "school": "Greater Johnstown",
+  "identified_as": "Greater Johnstown High School, Johnstown",
+  "colors": [
+   {
+    "name": "Columbia blue",
+    "hex": "#72A7DC",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#060505",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Greater Johnstown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greater_Johnstown_High_School",
+   "https://www.gjsd.net",
+   "https://3.files.edl.io/e13b/26/08/25/144523-e904be2a-ce8a-47e6-98bd-eb7eac280673.png"
+  ],
+  "era": null,
+  "notes": "Mascot not parsed from infobox (from general knowledge). Search budget was exhausted; only Wikipedia could be read, no official school source checked.",
+  "evidence": "District site theme Columbia blue #72A7DC x25 with black; GJSD cyber-school graphic shows a black Trojan helmet logo. Wikipedia infobox: black and Columbia blue (#9BDDFF)."
+ }
+]

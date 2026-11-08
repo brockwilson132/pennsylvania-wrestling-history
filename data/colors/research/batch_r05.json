@@ -1,0 +1,1060 @@
+[
+ {
+  "school": "United",
+  "identified_as": "United Junior/Senior High School, Armagh",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lions",
+  "confidence": "medium",
+  "wikipedia": "United Junior/Senior High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/United_Junior/Senior_High_School_(Pennsylvania)",
+   "https://en.wikipedia.org/wiki/United_School_District_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree (not fully independent)."
+ },
+ {
+  "school": "Hatboro-Horsham",
+  "identified_as": "Hatboro-Horsham Senior High School, Horsham",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hatters",
+  "confidence": "medium",
+  "wikipedia": "Hatboro-Horsham Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hatboro-Horsham_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Lakeview",
+  "identified_as": "Lakeview High School, Stoneboro (Lakeview School District, Mercer County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Sailors",
+  "confidence": "low",
+  "wikipedia": "Lakeview School District (Mercer County, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Lakeview_School_District_(Mercer_County,_Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/stoneboro/lakeview-sailors/track-field/schedule/",
+   "search:https://www.maxpreps.com/pa/stoneboro/lakeview-sailors/football/staff/all-time/"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox has no colours; only a search summary of MaxPreps pages gave Red and Black (one search showed the field blank). Verify."
+ },
+ {
+  "school": "Central Tech",
+  "identified_as": "Central Career & Technical School (Central Tech), Erie",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "medium",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://www.maxpreps.com/pa/erie/central-tech-falcons"
+  ],
+  "era": "Erie School District consolidated high schools in 2017; successor Erie High School (Royals, purple and gold).",
+  "notes": "Wikipedia gives 'Black and Gold (Yellow)'."
+ },
+ {
+  "school": "North Hills",
+  "identified_as": "North Hills High School, Ross Township (Pittsburgh)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "North Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Hills_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox has colour boxes only (red, white), no names/hex."
+ },
+ {
+  "school": "Penn Hills",
+  "identified_as": "Penn Hills High School, Penn Hills (Pittsburgh)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": null,
+  "confidence": "medium",
+  "wikipedia": "Penn Hills High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Penn_Hills_High_School"
+  ],
+  "era": null,
+  "notes": "Red has no hex in infobox (named 'red' only). Mascot not confirmed from infobox."
+ },
+ {
+  "school": "James M. Coughlin",
+  "identified_as": "James M. Coughlin High School, Wilkes-Barre",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Crusaders",
+  "confidence": "low",
+  "wikipedia": "James M. Coughlin High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/James_M._Coughlin_High_School",
+   "search:https://www.maxpreps.com/pa/wilkes-barre/james-m-coughlin-crusaders/lacrosse/girls/schedule/all-time"
+  ],
+  "era": "Closed 2021; merged with Meyers and G.A.R. into Wilkes-Barre Area High School (Wolfpack, black and Carolina blue).",
+  "notes": "Wikipedia infobox colours field is empty; only a MaxPreps girls lacrosse listing (via search) gives Blue, Red. Verify."
+ },
+ {
+  "school": "Northern Bedford",
+  "identified_as": "Northern Bedford County Middle/High School, Loysburg",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Northern Bedford County Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Bedford_County_Middle/High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Conestoga",
+  "identified_as": "Conestoga High School, Berwyn",
+  "colors": [
+   {
+    "name": "Garnet",
+    "hex": "#9a2a2a",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gray",
+    "hex": "#888888",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Pioneers",
+  "confidence": "medium",
+  "wikipedia": "Conestoga High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conestoga_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Pottstown",
+  "identified_as": "Pottstown Senior High School, Pottstown",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "medium",
+  "wikipedia": "Pottstown Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pottstown_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Wyoming Area",
+  "identified_as": "Wyoming Area Secondary Center, Exeter (Wyoming Area School District)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#336600",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Warriors",
+  "confidence": "medium",
+  "wikipedia": "Wyoming Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Wyoming_Area_School_District"
+  ],
+  "era": null,
+  "notes": "Hex from district page infobox."
+ },
+ {
+  "school": "Kingston",
+  "identified_as": "Kingston High School, Kingston (Luzerne County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "search:https://en.wikipedia.org/wiki/Wyoming_Valley_West_School_District"
+  ],
+  "era": "Bracket years 1936-1967; Kingston merged into Wyoming Valley West School District (successor Wyoming Valley West HS, Spartans).",
+  "notes": "No source found for pre-merger Kingston HS colours or mascot. A 2006 item mentions youth 'Kingston Huskies' only."
+ },
+ {
+  "school": "Meyersdale",
+  "identified_as": "Meyersdale Area High School, Meyersdale",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Red Raiders",
+  "confidence": "medium",
+  "wikipedia": "Meyersdale Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Meyersdale_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Kennett",
+  "identified_as": "Kennett High School, Kennett Square",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Blue Demons",
+  "confidence": "medium",
+  "wikipedia": "Kennett High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennett_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "West Chester East",
+  "identified_as": "West Chester East High School, West Chester",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Yellow",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "West Chester East High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Chester_East_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Souderton",
+  "identified_as": "Souderton Area High School, Souderton",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Big Red (formerly Indians)",
+  "confidence": "medium",
+  "wikipedia": "Souderton Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Souderton_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Coudersport",
+  "identified_as": "Coudersport Area Junior/Senior High School, Coudersport",
+  "colors": [],
+  "mascot": "Falcons",
+  "confidence": "low",
+  "wikipedia": "Coudersport Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Coudersport_Area_Junior/Senior_High_School",
+   "search:https://www.maxpreps.com/pa/coudersport/coudersport-falcons/"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox has no colours; MaxPreps colours field truncated in search results."
+ },
+ {
+  "school": "Northern Lebanon",
+  "identified_as": "Northern Lebanon High School, Fredericksburg (Lebanon County)",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Vikings",
+  "confidence": "medium",
+  "wikipedia": "Northern Lebanon High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northern_Lebanon_High_School",
+   "https://en.wikipedia.org/wiki/Northern_Lebanon_School_District"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree."
+ },
+ {
+  "school": "Central",
+  "identified_as": "Central High School, Martinsburg (Spring Cove School District)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Dragons",
+  "confidence": "medium",
+  "wikipedia": "Central High School (Martinsburg, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_High_School_(Martinsburg,_Pennsylvania)",
+   "https://en.wikipedia.org/wiki/Spring_Cove_School_District"
+  ],
+  "era": null,
+  "notes": "HS page says red and gray (citing MaxPreps); district page says Scarlet and Grey. Identity: assumed Martinsburg Central (D6, AA), not Central Cambria/Central Dauphin."
+ },
+ {
+  "school": "Troy",
+  "identified_as": "Troy Area Junior/Senior High School, Troy (Bradford County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Trojans",
+  "confidence": "high",
+  "wikipedia": "Troy Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Troy_Area_School_District",
+   "search:https://www.maxpreps.com/pa/troy/troy-trojans/soccer/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "District Wikipedia page and MaxPreps (search snippet) agree."
+ },
+ {
+  "school": "Conrad Weiser",
+  "identified_as": "Conrad Weiser High School, Robesonia",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Scouts",
+  "confidence": "medium",
+  "wikipedia": "Conrad Weiser High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conrad_Weiser_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Elizabethtown",
+  "identified_as": "Elizabethtown Area High School, Elizabethtown",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bears",
+  "confidence": "high",
+  "wikipedia": "Elizabethtown Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Elizabethtown_Area_School_District",
+   "search:https://www.eliteprospects.com/team/19870/elizabethtown-area-high/2024-2025"
+  ],
+  "era": null,
+  "notes": "District Wikipedia and hockey team listing agree."
+ },
+ {
+  "school": "Central York",
+  "identified_as": "Central York High School, York",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Central York High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_York_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Philipsburg",
+  "identified_as": "Philipsburg High School, Philipsburg (Centre County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Philipsburg-Osceola Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Philipsburg-Osceola_Area_High_School"
+  ],
+  "era": "Bracket years 1940-1954, before the Philipsburg-Osceola merger; successor P-O Mounties wear navy and white.",
+  "notes": "No source for pre-merger Philipsburg HS colours; do not assume P-O navy/white."
+ },
+ {
+  "school": "Exeter",
+  "identified_as": "Exeter Township Senior High School, Reading (Berks County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Exeter Township Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Exeter_Township_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Upper St. Clair",
+  "identified_as": "Upper St. Clair High School, Upper St. Clair",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "Upper St. Clair High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_St._Clair_High_School"
+  ],
+  "era": null,
+  "notes": "Wikipedia cites MaxPreps."
+ },
+ {
+  "school": "Hollidaysburg",
+  "identified_as": "Hollidaysburg Area High School, Hollidaysburg",
+  "colors": [
+   {
+    "name": "Navy",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#d9c67c",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Golden Tigers",
+  "confidence": "medium",
+  "wikipedia": "Hollidaysburg Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Hollidaysburg_Area_High_School",
+   "https://en.wikipedia.org/wiki/Hollidaysburg_Area_School_District"
+  ],
+  "era": null,
+  "notes": "HS and district Wikipedia pages agree."
+ },
+ {
+  "school": "West Scranton",
+  "identified_as": "West Scranton High School, Scranton",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Invaders",
+  "confidence": "medium",
+  "wikipedia": "West Scranton High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/West_Scranton_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Pittston Area",
+  "identified_as": "Pittston Area High School, Pittston",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Patriots",
+  "confidence": "medium",
+  "wikipedia": "Pittston Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pittston_Area_High_School"
+  ],
+  "era": null,
+  "notes": "Infobox has colour boxes only. Infobox mascot field reads 'GETZIE'; team name Patriots from general knowledge, verify."
+ },
+ {
+  "school": "Springfield Delco",
+  "identified_as": "Springfield High School, Springfield Township (Delaware County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Springfield High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Springfield_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Moshannon Valley",
+  "identified_as": "Moshannon Valley Junior/Senior High School, Houtzdale",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Black Knights",
+  "confidence": "medium",
+  "wikipedia": "Moshannon Valley Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Moshannon_Valley_Junior/Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Jamestown",
+  "identified_as": "Jamestown Area Junior/Senior High School, Jamestown (Mercer County)",
+  "colors": [],
+  "mascot": "Mighty Muskies",
+  "confidence": "low",
+  "wikipedia": "Jamestown Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Jamestown_Area_School_District",
+   "search:https://www.maxpreps.com/pa/jamestown/jamestown-mighty-muskies/"
+  ],
+  "era": null,
+  "notes": "District Wikipedia colours field is empty; MaxPreps colours truncated in search."
+ },
+ {
+  "school": "South Side Beaver",
+  "identified_as": "South Side High School, Hookstown (Beaver County)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "South Side High School (Hookstown, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Side_High_School_(Hookstown,_Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/hookstown/south-side-rams/soccer/girls/schedule/all-time"
+  ],
+  "era": null,
+  "notes": "Wikipedia and MaxPreps (search snippet) agree."
+ },
+ {
+  "school": "Oley Valley",
+  "identified_as": "Oley Valley High School, Oley",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Lynx",
+  "confidence": "medium",
+  "wikipedia": "Oley Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oley_Valley_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Milton Hershey",
+  "identified_as": "Milton Hershey School, Hershey",
+  "colors": [
+   {
+    "name": "Brown",
+    "hex": "#654321",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Gold",
+    "hex": "#C5B358",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Milton Hershey School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Milton_Hershey_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "East Pennsboro",
+  "identified_as": "East Pennsboro High School, Enola",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "medium",
+  "wikipedia": "East Pennsboro High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/East_Pennsboro_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Ephrata",
+  "identified_as": "Ephrata High School, Ephrata",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mountaineers",
+  "confidence": "medium",
+  "wikipedia": "Ephrata High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ephrata_High_School_(Pennsylvania)"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Farrell",
+  "identified_as": "Farrell High School, Farrell (Mercer County)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Steelers",
+  "confidence": "medium",
+  "wikipedia": "Farrell Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Farrell_Area_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Farrell_High_School_Reflector_Yearbook/1940/Page_14.html"
+  ],
+  "era": "Bracket years 1938-1950 (District 7 then); now Farrell Area High School, District 10.",
+  "notes": "Current colours from Wikipedia (navy and gold, citing MaxPreps); 1940s alma mater reportedly references 'the blue and gold' (search snippet), supporting same colours in that era."
+ },
+ {
+  "school": "Waynesboro",
+  "identified_as": "Waynesboro Area Senior High School, Waynesboro",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Waynesboro Area Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Waynesboro_Area_Senior_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Hampton",
+  "identified_as": "Hampton High School, Allison Park (Hampton Township School District)",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Talbots",
+  "confidence": "medium",
+  "wikipedia": "Hampton High School (Allison Park, Pennsylvania)",
+  "sources": [
+   "search:https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Hampton_High_School_(Allison_Park%2C_Pennsylvania).html",
+   "search:https://www.eliteprospects.com/team/18877/hampton-high/2007-2008"
+  ],
+  "era": null,
+  "notes": "Wikipedia mirror and hockey listing agree (both via search only); live Wikipedia page not retrieved."
+ },
+ {
+  "school": "Greensburg Central Catholic",
+  "identified_as": "Greensburg Central Catholic High School, Greensburg",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Centurions",
+  "confidence": "medium",
+  "wikipedia": "Greensburg Central Catholic High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Greensburg_Central_Catholic_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Johnsonburg",
+  "identified_as": "Johnsonburg Area High School, Johnsonburg",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "medium",
+  "wikipedia": "Johnsonburg Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Johnsonburg_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ },
+ {
+  "school": "Plymouth Whitemarsh",
+  "identified_as": "Plymouth Whitemarsh High School, Plymouth Meeting (Colonial School District)",
+  "colors": [
+   {
+    "name": "Colonial Blue",
+    "hex": "#0c2361",
+    "hex_from": "wikipedia-infobox"
+   },
+   {
+    "name": "Scarlet",
+    "hex": "#c91e33",
+    "hex_from": "wikipedia-infobox"
+   }
+  ],
+  "mascot": "Colonials",
+  "confidence": "high",
+  "wikipedia": "Plymouth-Whitemarsh High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Plymouth-Whitemarsh_High_School",
+   "search:https://www.colonialsd.org/our-schools/plymouth-whitemarsh-high/about-pwhs/mission-and-values"
+  ],
+  "era": null,
+  "notes": "Wikipedia infobox hex values cite the school's Mission and Values page (not read directly)."
+ },
+ {
+  "school": "Clarion",
+  "identified_as": "Clarion Area High School, Clarion",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Bobcats",
+  "confidence": "medium",
+  "wikipedia": "Clarion Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Clarion_Area_High_School"
+  ],
+  "era": null,
+  "notes": null
+ }
+]

@@ -1,0 +1,580 @@
+[
+ {
+  "school": "Unionville",
+  "identified_as": "Unionville High School, Kennett Square",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#012147",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FEBD35",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Longhorns",
+  "confidence": "high",
+  "wikipedia": "Unionville High School (Kennett Square, Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Unionville_High_School_(Kennett_Square,_Pennsylvania)",
+   "search:https://papreplive.com/football/hook-em-unionville-picks-longhorns-as-new-nickname-after-thorough-process",
+   "search:https://www.maxpreps.com/pa/kennett-square/unionville-longhorns/football/schedule/all-time",
+   "search:https://www.publicschoolreview.com/unionville-high-school-profile",
+   "https://uhs.ucfsd.org/",
+   "https://www.ucfsd.org/",
+   "https://resources.finalsite.net/images/v1778060434/cqsewpqcg9fktwl24ee3/REDESIGNUnionvilleHighSchoolfavicon.png",
+   "https://resources.finalsite.net/images/v1777412284/ucfsdorg/mpwc2udhmtpswbonl6ms/FooterLogo_1.svg"
+  ],
+  "era": "Nickname was Indians for 60+ years before switching to Longhorns (recent); colours blue and gold unchanged as far as found.",
+  "notes": "Wikipedia infobox has no colours. Search snippets: PAPrepLive 'blue and gold', MaxPreps 'Midnight Blue, Gold', EliteProspects 'Navy + Gold' -- blue is a dark/navy shade.",
+  "evidence": "Unionville HS site (uhs.ucfsd.org) favicon: navy #012147 longhorn head with gold horn tips; district/HS site theme CSS navy #061D8E/#04081A and gold #FEBD35. District UCF footer logo is white-only. Blue is a dark navy, agrees with first-pass 'midnight blue/navy and gold'."
+ },
+ {
+  "school": "Technical Memorial",
+  "identified_as": "Technical Memorial High School, Erie (closed 1993)",
+  "colors": [],
+  "mascot": "Centaurs (unconfirmed)",
+  "confidence": "low",
+  "wikipedia": "Central Tech High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Central_Tech_High_School",
+   "search:https://digital-release.yourerie.com/news/local-news/students-to-choose-new-name-mascot-and-colors-for-central-tech"
+  ],
+  "era": "Merged with Academy HS after 1992-93 to form Central HS (later Central Tech, black and gold, Falcons; now Erie High, purple and gold, Royals). Tech Memorial's own colours not found.",
+  "notes": "Do not use successor colours. One search snippet called the Centaur the old Tech Memorial mascot; unverified.",
+  "evidence": "No image or page for the closed school found (search engines returned unrelated results); nothing looked at shows its colours."
+ },
+ {
+  "school": "Halifax",
+  "identified_as": "Halifax Area High School, Halifax",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CBB778",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Halifax Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Halifax_Area_High_School",
+   "https://en.wikipedia.org/wiki/Halifax_Area_School_District",
+   "https://www.hasd.us/",
+   "https://cmsv2-assets.apptegy.net/uploads/10871/logo/12383/Halifax_Area_SD_logo_template_300.png"
+  ],
+  "era": null,
+  "notes": "HS page says 'Black and Gold', district page 'Black and Vegas gold'. Both Wikipedia.",
+  "evidence": "Halifax Area SD site (hasd.us): wildcat head logo is black on white only; site theme CSS main brand colour #CBB778 (Vegas gold, 149 uses) plus black. Agrees with Wikipedia 'black and Vegas gold'."
+ },
+ {
+  "school": "Youngsville",
+  "identified_as": "Youngsville Middle/High School, Youngsville (Warren County)",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#9F2619",
+    "hex_from": "photo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "high",
+  "wikipedia": "Youngsville High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Youngsville_High_School",
+   "search:https://timesobserver.com/sports/local-sports/2025/02/eagles-focused",
+   "https://timesobserver.com/sports/local-sports/2025/02/eagles-focused/",
+   "https://ogden_images.s3.amazonaws.com/www.timesobserver.com/images/2025/02/25004804/Lindemuth-Benton-211-1-483x840.jpg",
+   "https://ogden_images.s3.amazonaws.com/www.timesobserver.com/images/2025/02/25004721/David-Manning-Friday-1100x733.jpg",
+   "https://www.wcsdpa.org/"
+  ],
+  "era": "District voted Jan 2025 to close Youngsville; students moved to Eisenhower after 2024-25.",
+  "notes": "Wikipedia infobox only.",
+  "evidence": "Times Observer Feb 2025 photos: Youngsville gym wall painted red with white 'YOUNGSVILLE EAGLES' lettering (wall red sampled #9F2619 in photo lighting, approximate); home uniforms white with red trim, away uniforms black with red. Agrees with Wikipedia red and white. Warren County SD site has no Youngsville logo (school page behind a bot check)."
+ },
+ {
+  "school": "Strath Haven",
+  "identified_as": "Strath Haven High School, Wallingford",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Silver",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Panthers",
+  "confidence": "high",
+  "wikipedia": "Strath Haven High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Strath_Haven_High_School",
+   "https://www.wssd.org/",
+   "https://www.wssd.org/departments/athletics",
+   "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1790085714/wssdorg/bbueafeuk1ctldvqdded/Football518SEPT26.jpg"
+  ],
+  "era": null,
+  "notes": "Wikipedia only (named colour boxes, no hex).",
+  "evidence": "WSSD site football photo (Sept 2026): Strath Haven in black jerseys/silver-grey trim and white; no clean logo found and site CSS is stock Finalsite, so no hex. Photo agrees with Wikipedia black, silver, white."
+ },
+ {
+  "school": "Portage",
+  "identified_as": "Portage Area Junior/Senior High School, Portage",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#03D033",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Mustangs",
+  "confidence": "high",
+  "wikipedia": "Portage Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Portage_Area_School_District",
+   "https://www.portageareasd.org/",
+   "https://files.smartsites.parentsquare.com/8132/header_logo_img_a8fqunaulqk2anknble.png"
+  ],
+  "era": null,
+  "notes": "District Wikipedia infobox only; mascot not in infobox (Mustangs from general knowledge, unverified).",
+  "evidence": "Portage Area SD site header logo: bright kelly green #03D033 'P' with black outline (black is outline only); site CSS also has #008000 green. Agrees with Wikipedia green and white."
+ },
+ {
+  "school": "Pope John Paul II",
+  "identified_as": "Pope John Paul II High School, Royersford",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#121E34",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDC42C",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Golden Panthers",
+  "confidence": "high",
+  "wikipedia": "Pope John Paul II High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pope_John_Paul_II_High_School_(Pennsylvania)",
+   "https://www.pjphs.org/",
+   "https://www.pjphs.org/athletics",
+   "https://static.wixstatic.com/media/4a0c34_957ec4cfaf204cb49152841d9ac11bd3~mv2.png",
+   "https://static.wixstatic.com/media/4a0c34_6bcb6904be33419d8276eac2fe81ddfa~mv2.png"
+  ],
+  "era": null,
+  "notes": "Hex values from Wikipedia color boxes; #0000FF looks like a generic pure blue, may not be the school's actual shade.",
+  "evidence": "pjphs.org athletics page: sport tiles gold #FDC42C icons on navy, championship banners navy #121E34 with gold; mascot photo wears navy shirt with gold; site CSS #FFC535 gold and #062539 navy. Blue is navy, not the Wikipedia #0000FF pure blue."
+ },
+ {
+  "school": "Sullivan County",
+  "identified_as": "Sullivan County Junior/Senior High School, Laporte",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D22921",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Griffins",
+  "confidence": "medium",
+  "wikipedia": "Sullivan County School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sullivan_County_School_District",
+   "search:https://www.maxpreps.com/pa/laporte/sullivan-county-griffins/baseball/",
+   "https://www.sulcosd.k12.pa.us/",
+   "https://cmsv2-assets.apptegy.net/uploads/23126/logo/25939/sullivan_crest_final.png"
+  ],
+  "era": null,
+  "notes": "No colours found in Wikipedia or search results.",
+  "evidence": "Sullivan County SD site: crest logo drawn in red #D22921 and black on white; site theme CSS #CD1D16 red (287 uses). Only the school's own site; colour names red and black are inferred from crest + theme, no text source."
+ },
+ {
+  "school": "Laurel",
+  "identified_as": "Laurel Junior/Senior High School, New Castle (Lawrence County)",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#004937",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Laurel School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Laurel_School_District_(Pennsylvania)",
+   "search:https://www.maxpreps.com/pa/new-castle/laurel-spartans/football",
+   "https://www.laurel.k12.pa.us/",
+   "https://images.squarespace-cdn.com/content/v1/5c77f59f840b1643b331678f/fc568fa3-0c68-4c0d-beba-d80e080e56d3/SPARTAN+HEAD++Green+JPEG.jpg"
+  ],
+  "era": null,
+  "notes": "No colours found. Do not confuse with Laurel HS (Maryland), blue/gold.",
+  "evidence": "Laurel SD site (laurel.k12.pa.us) header: dark green #004937 Spartan helmet on white ('SPARTAN HEAD Green' file). Second colour white inferred from logo background."
+ },
+ {
+  "school": "Boswell",
+  "identified_as": "Boswell High School, Boswell (Somerset County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Star School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_School_District",
+   "search:https://www.e-yearbook.com/yearbooks/Jenner_Boswell_Joint_High_School_Rex_Collium_Yearbook/1942/Page_13.html"
+  ],
+  "era": "1940s school; later Jenner-Boswell Joint HS, merged into North Star SD in 1969 (North Star: forest green and white, Cougars).",
+  "notes": "No source for Boswell's own colours. Search hits for 'Boswell High School' are a Texas school (gold/white Pioneers) -- not this one.",
+  "evidence": "No image of the closed Boswell HS found; nothing looked at shows its colours."
+ },
+ {
+  "school": "Charleroi",
+  "identified_as": "Charleroi Area Junior/Senior High School, Charleroi",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#A60E11",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Charleroi School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Charleroi_School_District",
+   "https://www.charleroisd.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1643962961/charleroisdorg/egvpeznp9nqsfddxxm4t/Charleroi-School-District-Logo1.png"
+  ],
+  "era": null,
+  "notes": "District infobox colour field is empty; web search budget ran out before another source could be checked.",
+  "evidence": "Charleroi SD site header logo: black cougar head in a red #A60E11 disc with black/white; site theme CSS #B70F0F red (91 uses, non-stock)."
+ },
+ {
+  "school": "Sugar Valley",
+  "identified_as": "Sugar Valley Area High School, Loganton (Clinton County) (closed)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://en.wikipedia.org/wiki/Keystone_Central_School_District",
+   "search:https://www.wikipedia.org/wiki/User:GMorris419/Sugar_Valley_Rural_Charter_School"
+  ],
+  "era": "Keystone Central SD high school that closed in the 1990s; Sugar Valley Rural Charter School (Phoenix, green and white per an unpublished Wikipedia user draft) now occupies the area.",
+  "notes": "Old high school's colours not found; charter colours should not be assumed.",
+  "evidence": "No image of the old Sugar Valley Area HS found; nothing looked at shows its colours."
+ },
+ {
+  "school": "Kennard-Dale",
+  "identified_as": "Kennard-Dale High School, Fawn Grove",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#1A3F7F",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F9D700",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Rams",
+  "confidence": "high",
+  "wikipedia": "Kennard-Dale High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kennard-Dale_High_School",
+   "search:https://www.eliteprospects.com/team/20036/kennard-dale-susquehannock/2011-2012",
+   "https://www.sesdweb.net/",
+   "https://cmsv2-assets.apptegy.net/uploads/33336/logo/36399/image002.png",
+   "https://cmsv2-assets.apptegy.net/uploads/33336/watermark/36399/Crest2_Logo-2.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia article text (not infobox); joint hockey team listing also blue and gold.",
+  "evidence": "South Eastern SD site (sesdweb.net): ram logo in dark blue-violet #3C345A and yellow-gold #FBEA0B; site theme CSS #1A3F7F navy (146) and #F9D700 gold (81). Agrees with Wikipedia blue and gold."
+ },
+ {
+  "school": "Montour",
+  "identified_as": "Montour High School, Robinson Township (McKees Rocks)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Gold",
+    "hex": "#F4CD0E",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "medium",
+  "wikipedia": "Montour High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Montour_High_School",
+   "https://en.wikipedia.org/wiki/Montour_School_District",
+   "https://www.montourschools.com/",
+   "https://montourathletics.org/"
+  ],
+  "era": null,
+  "notes": "Both HS and district Wikipedia pages agree (same source family).",
+  "evidence": "Montour SD site theme CSS top non-grey colour #F4CD0E gold with black; no Spartan logo found on district or montourathletics.org (template colours only)."
+ },
+ {
+  "school": "Armstrong",
+  "identified_as": "Armstrong Junior/Senior High School, Kittanning (Armstrong SD)",
+  "colors": [],
+  "mascot": "River Hawks",
+  "confidence": "low",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)",
+   "https://www.asd.k12.pa.us/",
+   "https://ajshs.asd.k12.pa.us/",
+   "https://ajshs.asd.k12.pa.us/pics/school_logo.png"
+  ],
+  "era": "Opened 2016 from the merger of Kittanning and Ford City high schools.",
+  "notes": "No colours found on Wikipedia; mascot from general knowledge, unverified.",
+  "evidence": "Armstrong SD and Armstrong Jr/Sr HS sites show only the district logo (blue #185AB1 and grey ring) and building photos; no River Hawks athletic logo found, so school colours still unknown."
+ },
+ {
+  "school": "Punxsutawney",
+  "identified_as": "Punxsutawney Area High School, Punxsutawney",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#D10010",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Chucks",
+  "confidence": "medium",
+  "wikipedia": "Punxsutawney Area School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Punxsutawney_Area_School_District",
+   "https://www.punxsy.k12.pa.us/",
+   "https://3.files.edl.io/76ab/24/08/14/191241-ac85f6c8-75af-46c4-adb8-5bb8ddcbdb44.png"
+  ],
+  "era": null,
+  "notes": "District infobox colour field empty; no other source checked (search budget exhausted).",
+  "evidence": "Punxsutawney Area SD site: header banner red (#D31413 in image) with white 'PUNXSUTAWNEY AREA SCHOOL DISTRICT' text and red/white Chucks badge; site theme CSS #D10010 red. White inferred from banner; no text source."
+ },
+ {
+  "school": "Conemaugh Township",
+  "identified_as": "Conemaugh Township Area Middle/Senior High School, Davidsville",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#790000",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Indians",
+  "confidence": "medium",
+  "wikipedia": "Conemaugh Township Area Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Conemaugh_Township_Area_Middle/Senior_High_School",
+   "https://en.wikipedia.org/wiki/Conemaugh_Township_Area_School_District",
+   "https://www.ctasd.org/",
+   "https://ecs-cluster-bucket-wsos-prod-two.s3.us-west-2.amazonaws.com/uploads/sites/87/header-Logo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "CTASD site: header Indian-head logo is chrome/black-grey only; site theme CSS top non-stock colour #790000 dark red (also #C02B0A). Red shade from CSS only; Wikipedia gives red, white, black."
+ },
+ {
+  "school": "Montrose",
+  "identified_as": "Montrose Area Junior/Senior High School, Montrose",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#450707",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Meteors",
+  "confidence": "high",
+  "wikipedia": "Montrose Area Junior Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Montrose_Area_Junior_Senior_High_School",
+   "https://en.wikipedia.org/wiki/Montrose_Area_School_District",
+   "https://www.masd.info/",
+   "https://files.smartsites.parentsquare.com/13479/header_logo_img_9qrtuak7uaqifplechc.png"
+  ],
+  "era": null,
+  "notes": "No colours on either Wikipedia page.",
+  "evidence": "Montrose Area SD site header logo: block 'M' and 'METEORS' in flat dark maroon #450707 on white; site theme CSS #390000 maroon agrees. White inferred from logo."
+ },
+ {
+  "school": "Bradford",
+  "identified_as": "Bradford Area High School, Bradford",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#E72024",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Owls",
+  "confidence": "high",
+  "wikipedia": "Bradford Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bradford_Area_High_School",
+   "https://www.bradfordareaschools.org/",
+   "https://cmsv2-assets.apptegy.net/uploads/20978/logo/23792/Bradfordogo.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia only.",
+  "evidence": "Bradford Area SD site logo: owl head in red #E72024 and black with yellow #FFF500 eye accents (yellow is art, not a school colour); site theme CSS #A20103 red (157 uses). Agrees with Wikipedia red and black."
+ },
+ {
+  "school": "Springfield Township",
+  "identified_as": "Springfield Township High School, Erdenheim (Montgomery County)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0B2240",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Steel Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Spartans",
+  "confidence": "high",
+  "wikipedia": "Springfield Township High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Springfield_Township_High_School",
+   "https://www.sdst.org/",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1775841979/sdstorg2/sotsu0zo4vjf0c7cajrx/SpringfieldTwpSD_CrestMark600px_1.png"
+  ],
+  "era": null,
+  "notes": "Wikipedia gives 'Blue and Steel'. District 1 placement matches Montgomery County, not Springfield (Delaware County).",
+  "evidence": "Springfield Township SD crest mark (district header): navy #0B2240 with white; steel grey not seen in a clean flat area, so no hex. Navy matches Wikipedia 'blue and steel'."
+ },
+ {
+  "school": "Downingtown East",
+  "identified_as": "Downingtown High School East Campus, Exton",
+  "colors": [
+   {
+    "name": "Royal Blue",
+    "hex": "#2B3695",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F6C936",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "high",
+  "wikipedia": "Downingtown High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Downingtown_High_School",
+   "https://www.dasd.org/departments/athletics",
+   "https://resources.finalsite.net/images/v1674488351/dasdorg/veadiqih38p6midqd7dy/DHSEastLogo.png",
+   "https://www.dasd.org/"
+  ],
+  "era": "Downingtown split into East and West campuses in 2003; East has been the Cougars since.",
+  "notes": "Wikipedia: both campuses use blue and gold; hex from the shared infobox.",
+  "evidence": "DASD athletics page 'Downingtown High School East' cougar logo: royal blue #2B3695 cougar and lettering in gold #F6C936 ring; DASD theme CSS #010142 navy and #FFCC00. Logo matches Wikipedia infobox #2b3594/#faca2c."
+ },
+ {
+  "school": "Harry S. Truman",
+  "identified_as": "Harry S. Truman High School, Levittown (Bristol Township SD)",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#CDBF8C",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Bristol Township School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Bristol_Township_School_District",
+   "https://www.bristoltwpsd.org/",
+   "https://www.bristoltwpsd.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "From district Wikipedia infobox (Truman is the district's only high school); no HS page found.",
+  "evidence": "Bristol Township SD site logo: black tiger head in black oval with Vegas gold #CDBF8C ring and stripes; gold is a pale Vegas gold, not yellow."
+ }
+]

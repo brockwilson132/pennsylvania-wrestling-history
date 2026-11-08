@@ -1,0 +1,545 @@
+[
+ {
+  "school": "Upper Moreland",
+  "identified_as": "Upper Moreland High School, Willow Grove",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#4B2A8F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Vegas Gold",
+    "hex": "#B49875",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Golden Bears",
+  "confidence": "high",
+  "wikipedia": "Upper Moreland High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Upper_Moreland_High_School",
+   "https://www.umtsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/20007/logo/22604/UpperMoreland.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district seal logo: purple #4B2A8F ring/crest and tan Vegas gold #B49875; site theme #523191 purple and #B59973 gold agree. Gold is a muted Vegas/old gold, not yellow."
+ },
+ {
+  "school": "Bishop O'Hara",
+  "identified_as": "Bishop O'Hara High School, Dunmore (closed 2007)",
+  "colors": [],
+  "mascot": "Bruins",
+  "confidence": "low",
+  "wikipedia": "Holy Cross High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Holy_Cross_High_School_(Pennsylvania)",
+   "search:https://www.wikipedia.org/wiki/Bishop_O%27Hara_High_School"
+  ],
+  "era": "Closed 2007; merged with Bishop Hannan into Holy Cross High School (Dunmore), whose colours (silver, forest green, black) are the successor's, not O'Hara's.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Holy Cross article mentions O'Hara's 'Lady Bruins' (2001) but gives no O'Hara colours.",
+  "evidence": "Web search found only the merger (2007, into Holy Cross: silver/forest green/black - successor's) and the 'Lady Bruins' 2001 softball title; no O'Hara-era image or colour found. Image search returned unrelated results."
+ },
+ {
+  "school": "Northwestern",
+  "identified_as": "Northwestern Senior High School, Albion",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#8A131F",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Wildcats",
+  "confidence": "high",
+  "wikipedia": "Northwestern Senior High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Northwestern_Senior_High_School_(Pennsylvania)",
+   "https://www.nwsd.org",
+   "https://cmsv2-assets.apptegy.net/uploads/26848/logo/29661/NorthwesternSD_Logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district logo: black varsity-letter N with dark red felt outline (shaded, ~#642628); site theme main colour #8A131F dark red. Red is a deep/cardinal red, not pure #FF0000."
+ },
+ {
+  "school": "Manheim Borough",
+  "identified_as": "Manheim Borough High School, Manheim (Lancaster County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [],
+  "era": "Pre-1950s borough school, presumably succeeded by Manheim Central (maroon and gray, Barons) - not verified.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Wikipedia page found for Manheim Borough HS.",
+  "evidence": "Not researched further in photo pass: no site exists for this pre-1950s school and image search returned unrelated results; nothing looked at."
+ },
+ {
+  "school": "Kutztown",
+  "identified_as": "Kutztown Area High School, Kutztown",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0E2C65",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Cougars",
+  "confidence": "medium",
+  "wikipedia": "Kutztown Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Kutztown_Area_High_School",
+   "https://www.kasd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1686315274/kasdorg/fohhietotns3z300khnn/Headerlogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district header seal is black-and-white cougar line art (no colour); site theme main colour #0E2C65 navy."
+ },
+ {
+  "school": "Sheffield",
+  "identified_as": "Sheffield Area Middle/High School, Sheffield (Warren County)",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Wolverines",
+  "confidence": "low",
+  "wikipedia": "Sheffield Area Middle/High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Sheffield_Area_Middle/High_School",
+   "search:https://www.wcsdpa.org/o/samhs/live_feeds/9632806",
+   "search:https://nfhsnetwork.com/schools/sheffield-area-high-school-sheffield-pa",
+   "search:https://www.maxpreps.com/pa/sheffield/sheffield-wolverines/"
+  ],
+  "era": "High school grades reportedly closed 2025 (building now Sheffield Area Elementary/Middle School; students rezoned to Warren Area HS) - per search summary of Wikipedia, not verified on district site.",
+  "notes": null,
+  "evidence": "No image examined: Warren County SD school page (wcsdpa.org/o/samhs) blocked automated access with a bot check; MaxPreps 403; NFHS page empty; image search returned unrelated results. Colour names unchanged from first pass, no hex."
+ },
+ {
+  "school": "Ferndale",
+  "identified_as": "Ferndale Area Junior/Senior High School, Johnstown",
+  "colors": [
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Yellow",
+    "hex": "#FFDE05",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Yellowjackets",
+  "confidence": "high",
+  "wikipedia": "Ferndale Area Junior/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Ferndale_Area_Junior/Senior_High_School",
+   "https://www.fasdk12.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1678374265/fasdk12org/kwk6aa9kuxgm2izniu4m/FASD_Yellow_Jacket.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district yellow-jacket logo: flat black #000000 and bright yellow #FFDE05; site theme accent #FFDE05 matches."
+ },
+ {
+  "school": "South Allegheny",
+  "identified_as": "South Allegheny Middle/Senior High School, Liberty (McKeesport)",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#0A1F41",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#EBAB1F",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Gladiators",
+  "confidence": "high",
+  "wikipedia": "South Allegheny Middle/Senior High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/South_Allegheny_Middle/Senior_High_School",
+   "https://www.southallegheny.org",
+   "https://www.southallegheny.org/pics/school_logo.png"
+  ],
+  "era": null,
+  "notes": "Infobox color box uses 'darkblue'.",
+  "evidence": "district SA gladiator-helmet logo: navy #0A1F41 and gold #EBAB1F; site theme #041E42 navy and #EAAA00 gold agree. 'Blue' is navy."
+ },
+ {
+  "school": "Elderton",
+  "identified_as": "Elderton Junior/Senior High School, Elderton (Armstrong SD; closed 2012)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "Armstrong School District (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Armstrong_School_District_(Pennsylvania)"
+  ],
+  "era": "Closed June 2012 (Armstrong SD).",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. 'Elderton High School' redirects to the Armstrong SD page, which gives no colours.",
+  "evidence": "Not researched further in photo pass: school closed 2012, no site; image search returned unrelated results; nothing looked at."
+ },
+ {
+  "school": "Mars",
+  "identified_as": "Mars Area High School, Mars",
+  "colors": [
+   {
+    "name": "Blue",
+    "hex": "#224F88",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gold",
+    "hex": "#F0C154",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Fightin' Planets",
+  "confidence": "high",
+  "wikipedia": "Mars Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Mars_Area_High_School",
+   "https://www.marsk12.org",
+   "https://3.files.edl.io/2058/20/09/14/161304-e6d9b297-0298-42e0-a4d0-129b22edce5a.jpg",
+   "https://3.files.edl.io/3352/23/10/11/152953-d93aa140-4624-4f4b-890e-86d0c00b8f54.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district 'M with ringed planet' logo: gold M outlined in navy; athletics banner 'Home of the Fightin' Planets' in royal blue (~#020DDC) and gold #F0C154; site theme #224F88 blue and #FEDF35 yellow. Blue shade varies navy-to-royal across materials."
+ },
+ {
+  "school": "Fox Chapel",
+  "identified_as": "Fox Chapel Area High School, Pittsburgh",
+  "colors": [
+   {
+    "name": "Red",
+    "hex": "#AF2224",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   },
+   {
+    "name": "Black",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Foxes",
+  "confidence": "medium",
+  "wikipedia": "Fox Chapel Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Fox_Chapel_Area_High_School",
+   "https://www.fcasd.edu",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1683295076/fcasdedu/tmzmgvl8tvuw22msgzpd/LightSpaceFox.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district fox-head mark: red #AF2224 with white/light-grey face; site theme main colour #83140E darker red. Black not seen in the mark (kept from first pass)."
+ },
+ {
+  "school": "Muhlenberg",
+  "identified_as": "Muhlenberg High School, Laureldale",
+  "colors": [
+   {
+    "name": "Navy Blue",
+    "hex": "#00264B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FDCB09",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Muhls",
+  "confidence": "high",
+  "wikipedia": "Muhlenberg High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Muhlenberg_High_School",
+   "https://www.muhlsdk12.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1740581707/muhlsdk12org/datdtqfwdzbg4yuy0kdr/MuhlenbergSchoolDistrictPrimaryLogoImage.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district primary logo: navy #00264B block M outlined gold #FDCB09. 'Blue' is navy."
+ },
+ {
+  "school": "Baldwin",
+  "identified_as": "Baldwin High School, Pittsburgh (Baldwin-Whitehall SD)",
+  "colors": [
+   {
+    "name": "Purple",
+    "hex": "#603089",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Fighting Highlanders",
+  "confidence": "medium",
+  "wikipedia": "Baldwin High School (Pennsylvania)",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Baldwin_High_School_(Pennsylvania)",
+   "https://www.bwschools.net",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1768961080/bwschoolsnet/ql25qrosiofs1aovzt5i/BW-Logo-Masters-01latest.jpg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "Baldwin-Whitehall district BW wordmark: purple #603089 on white (district logo, not a Highlanders athletics mark). Site CSS shows only Finalsite stock colours."
+ },
+ {
+  "school": "Meadowbrook Christian",
+  "identified_as": "Meadowbrook Christian School, Milton (Northumberland County) - founded 1982 by Christ Wesleyan Church",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": null,
+  "sources": [
+   "https://www.meadowbrookchristian.com/",
+   "search:https://privateschoolreview.com/meadowbrook-christian-school-profile",
+   "search:https://www.maxpreps.com/pa/milton/meadowbrook-christian/events"
+  ],
+  "era": null,
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Wikipedia page found.",
+  "evidence": "No colours found: meadowbrookchristian.com is a 'Coming Soon' placeholder; MaxPreps 403; image search unusable. Nothing to look at."
+ },
+ {
+  "school": "Churchill",
+  "identified_as": "Churchill Area High School, Pittsburgh (closed 1987)",
+  "colors": [],
+  "mascot": "Chargers",
+  "confidence": "low",
+  "wikipedia": "Churchill Area High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Churchill_Area_High_School",
+   "search:https://en.wikipedia.org/wiki/Churchill_Area_High_School"
+  ],
+  "era": "Merged 1987 into Woodland Hills High School.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. Wikipedia infobox colours field is empty; nickname Chargers from article text.",
+  "evidence": "Web search confirmed Chargers nickname (WPIHL hockey titles 1973-83) but no colours; no period image found (image search unusable). Successor Woodland Hills colours deliberately not used."
+ },
+ {
+  "school": "Avon Grove",
+  "identified_as": "Avon Grove High School, West Grove",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#79121B",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gold",
+    "hex": "#FED143",
+    "hex_from": "logo"
+   }
+  ],
+  "mascot": "Red Devils",
+  "confidence": "high",
+  "wikipedia": "Avon Grove High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Avon_Grove_High_School",
+   "https://www.avongrove.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1781705424/avongrove/qhgwixtbv1acfo50p17u/AvonGroveSchoolDistrictLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district AG roundel: maroon #79121B and gold #FED143 on cream; site theme #79121B and #FFCE32 agree."
+ },
+ {
+  "school": "Pottsgrove",
+  "identified_as": "Pottsgrove High School, Pottstown",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#4F1C1F",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Black",
+    "hex": "#020101",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Silver",
+    "hex": "#A7A9AC",
+    "hex_from": "logo"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Falcons",
+  "confidence": "high",
+  "wikipedia": "Pottsgrove High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Pottsgrove_High_School",
+   "https://www.pgsd.org",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1683285159/pgsdorg/siospfwrs1nqylgkvn2i/PottsgroveSchoolDistrictLogo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district falcon roundel: deep maroon #4F1C1F falcon/F, black ring, silver-grey #A7A9AC field, white lettering; site theme #571C20 maroon. First pass 'maroon and white' omits black and silver seen in current logo."
+ },
+ {
+  "school": "Marple Newtown",
+  "identified_as": "Marple Newtown High School, Newtown Square",
+  "colors": [
+   {
+    "name": "Orange",
+    "hex": "#EF7C00",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Black",
+    "hex": "#000000",
+    "hex_from": "school-site"
+   }
+  ],
+  "mascot": "Tigers",
+  "confidence": "high",
+  "wikipedia": "Marple Newtown School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Marple_Newtown_School_District",
+   "https://www.mnsd.net",
+   "https://resources.finalsite.net/images/f_auto,q_auto/v1792698381/mnsdnet/zy47qxph4q18r2z1ovsl/MarpleNewtownSchoolDistrict1.jpg"
+  ],
+  "era": null,
+  "notes": "Infobox cites MaxPreps for colours.",
+  "evidence": "site theme main colour #EF7C00 orange with black; district faculty banner image black header with all staff in orange shirts. Orange listed first as dominant."
+ },
+ {
+  "school": "St. Joseph's Prep",
+  "identified_as": "St. Joseph's Preparatory School, Philadelphia",
+  "colors": [
+   {
+    "name": "Crimson",
+    "hex": "#9D2235",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Hawks",
+  "confidence": "medium",
+  "wikipedia": "St. Joseph's Preparatory School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/St._Joseph's_Preparatory_School",
+   "https://www.sjprep.org",
+   "https://www.sjprep.org/Images/assets/custom-logo.svg"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "school site theme main colour #9D2235 crimson; header SJP wordmark SVG is plain white (no colour). Gray not verified."
+ },
+ {
+  "school": "Chichester",
+  "identified_as": "Chichester High School, Boothwyn/Aston (Chichester SD)",
+  "colors": [
+   {
+    "name": "Maroon",
+    "hex": "#840214",
+    "hex_from": "logo"
+   },
+   {
+    "name": "Gray",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Eagles",
+  "confidence": "medium",
+  "wikipedia": "Chichester School District",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Chichester_School_District",
+   "https://www.chichestersd.org",
+   "https://www.chichestersd.org/pics/header_logo.png"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district header logo: maroon #840214 eagle with black wordmark; site theme #83020D maroon, plus a gold accent #FDC238 used on headings (not confirmed as a school colour). Gray not seen."
+ },
+ {
+  "school": "Jenner-Boswell",
+  "identified_as": "Jenner-Boswell High School, Boswell (Somerset County)",
+  "colors": [],
+  "mascot": null,
+  "confidence": "low",
+  "wikipedia": "North Star High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/North_Star_High_School"
+  ],
+  "era": "Merged 1969 with Forbes SD into North Star (green and white, Cougars); those are the successor's colours.",
+  "notes": "Web search budget was exhausted for this run; only Wikipedia checked. No Jenner-Boswell colours found.",
+  "evidence": "Not researched further in photo pass: school merged 1969, no site; image search returned unrelated results; nothing looked at. North Star colours deliberately not used."
+ },
+ {
+  "school": "Oswayo Valley",
+  "identified_as": "Oswayo Valley High School, Shinglehouse",
+  "colors": [
+   {
+    "name": "Green",
+    "hex": "#165016",
+    "hex_from": "school-site"
+   },
+   {
+    "name": "White",
+    "hex": null,
+    "hex_from": null
+   }
+  ],
+  "mascot": "Green Wave",
+  "confidence": "high",
+  "wikipedia": "Oswayo Valley High School",
+  "sources": [
+   "https://en.wikipedia.org/wiki/Oswayo_Valley_High_School",
+   "https://oswayovalley.com/",
+   "https://oswayovalley.com/wp-content/uploads/2013/09/cropped-cropped-cropped-cropped-heading1-1-192x192.jpg",
+   "https://oswayovalley.com/wp-content/uploads/2026/10/VB.png",
+   "search:https://en.wikipedia.org/wiki/Oswayo_Valley_School_District",
+   "search:https://www.maxpreps.com/pa/shinglehouse/oswayo-valley-green-wave/basketball"
+  ],
+  "era": null,
+  "notes": null,
+  "evidence": "district site (oswayovalley.com) theme green #165016; header art dark forest green (~#063705) with white wave strokes; 2026 volleyball team photo shows forest-green/black/white uniforms and green-and-white banners on the gym wall. Green is a dark forest green; black appears as a uniform trim only."
+ }
+]

@@ -31,6 +31,13 @@
     const t = out.map(([a, b]) => (a === b ? String(a) : a + '–' + b)).join(' · '); RANGE.set(s, t); return t; };
   const medOf = (s, i) => (MED.get(s) || [0, 0, 0])[i];
   const SORTS = { D: 0, R: 1, S: 2 };
+  /* researched school colours (schoolresearch.js): suggestions only, nothing changes until Brock taps one in */
+  const RES = window.OT_RESEARCH || {};
+  const resOf = (s) => { const r = RES[s]; return r && r.c && r.c.length ? r : null; };
+  /* a suggestion as a tag: fill = the first colour, dot = the second, text = the first later colour that reads on the fill */
+  const resCols = (r) => { const hs = r.c.map((c) => c[1]); const p = T.fromColours(hs); return [p.fill, hs.length > 1 ? hs[1] : p.ink, p.ink]; };
+  /* a school with a suggestion that its tag doesn't wear yet (unset, or set to other colours) */
+  const resDiff = (s) => { const r = resOf(s); if (!r) return false; const id = doc.schools[s], cur = id && doc.sets[id]; return !cur || J(cur.map((h) => h.toUpperCase())) !== J(resCols(r).map((h) => h.toUpperCase())); };
 
   /* ---- state ---- */
   let base = norm(clone(window.OT_COLORS)), doc = clone(base);
@@ -144,6 +151,9 @@
   const hexOk = (h) => /^#?[0-9a-f]{6}$/i.test(h.trim());
   const hexN = (h) => '#' + h.trim().replace('#', '').toUpperCase();
   const I = {
+    flask: '<path d="M9.5 3.5 H14.5 M10.5 3.5 V9.5 L5 19 A1.2 1.2 0 0 0 6 20.5 H18 A1.2 1.2 0 0 0 19 19 L13.5 9.5 V3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M7.6 15 H16.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
+    info: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 11 V16.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.3" fill="currentColor"/>',
+    ext: '<path d="M14 4.5 H19.5 V10 M19.5 4.5 L11 13 M17 14 V19.5 H4.5 V7 H10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
     back: '<path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
     undo: '<path d="M9 7 L4 12 L9 17 M4.5 12 H14 A5.5 5.5 0 0 1 14 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -3)"/>',
     key: '<circle cx="8" cy="14" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.2 11.2 L20 3.5 M16.5 6.5 L19 9 M14.5 8.5 L16.5 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
@@ -182,6 +192,7 @@
       if (ui.cl && !(CLS.has(s) && CLS.get(s)[1] === ui.cl)) return false;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
       if (ui.f === 'notes') return !!notes[s];
+      if (ui.f === 'res') return resDiff(s);
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; });
   }
   /* pill themes in the list: every distinct fill + dot + text, in colour order, with how many schools wear it */
@@ -230,15 +241,20 @@
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
     const bid = window.SchoolBadge && window.SchoolBadge.identity(s), bh = bid ? [bid.primary, bid.secondary, bid.accent].filter(Boolean).map((h) => h.toUpperCase()) : [];
     const badge = bh.length ? `<div class="ce-bdg">${svg('shield')}${bh.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!none && h === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}</div>` : '';
+    const rr = resOf(s), rc = rr && resCols(rr), src = rr && (rr.s || []).find((u) => !u.startsWith('search:'));
+    const rlink = rr && (src || (rr.w ? 'https://en.wikipedia.org/wiki/' + encodeURIComponent(rr.w.replace(/ /g, '_')) : (rr.s || [''])[0].replace(/^search:/, '')));
+    const rinfo = rr && [rr.e, rr.x].filter(Boolean).join(' · ');
+    const research = rr ? `<div class="ce-res"><span class="ce-rq" role="img" aria-label="Confidence ${rr.q} of 3">${[1, 2, 3].map((i) => `<b class="${i <= rr.q ? 'on' : ''}"></b>`).join('')}</span>${rr.c.map((c) => `<button class="ce-sw${c[2] === 'n' ? '' : ' ce-hx'}" data-sw="${c[1]}" style="background:${c[1]}" aria-pressed="${!none && c[1] === cur.toUpperCase()}" aria-label="${esc(c[0])} ${c[1]}"></button>`).join('')}<span class="ce-sp"></span><button class="ce-sb ce-ra" data-resok aria-pressed="${!!id && J(colOf(s).map((h) => h.toUpperCase())) === J(rc.map((h) => h.toUpperCase()))}" style="--fill:${rc[0]};--acc:${rc[1]};--ink:${rc[2]}" aria-label="Use"><i></i>Aa</button>${rinfo ? `<button class="ce-ib${ui.rinfo ? ' ce-on' : ''}" data-rinfo aria-label="Notes">${svg('info')}</button>` : ''}${rlink ? `<a class="ce-ib" href="${esc(rlink)}" target="_blank" rel="noopener" aria-label="Source">${svg('ext')}</a>` : ''}</div>${ui.rinfo && rinfo ? `<div class="ce-rx">${esc(rinfo)}</div>` : ''}` : '';
     const sim = similar(s);
     const kin = sim.length ? `<div class="ce-kin">${svg('link')}${sim.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
     const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
-    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${kin}${sets}${parts}${badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${research}${kin}${sets}${parts}${rr ? '' : badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
     const ss = schoolsShown();
     const chips = [['all', 'All'], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
       .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
+      .concat([['res', `<span class="ce-mini">${svg('flask')}${Object.keys(RES).filter(resDiff).length}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     const tp = ui.th && themes(baseShown()).find((t) => t.k === ui.th), tq = tp ? tp.p : null;
     const thChip = `<button data-thopen aria-pressed="${ui.thOpen}" aria-label="Pill themes">${tq ? `<span class="ce-mini" style="--f:${tq.fill};--a:${tq.acc}"><b><i></i></b></span>` : svg('palette')}</button>`;
@@ -297,6 +313,10 @@
     else if (d.next != null) step(1);
     else if (d.auto != null) { const k = ui.pick; if (doc.schools[k]) edit(() => { delete doc.schools[k]; }); }
     else if (d.csok != null) { ui.pick = ''; ui.add = false; ui.del = false; draw(); }
+    else if (d.resok != null) { const s = ui.pick, rc = resCols(resOf(s)).map((h) => h.toUpperCase());
+      const same = Object.keys(doc.sets).find((k) => J(doc.sets[k].map((h) => h.toUpperCase())) === J(rc));
+      edit(() => { if (same) doc.schools[s] = same; else { const n = own(s); doc.sets[n] = rc; } }); }
+    else if (d.rinfo != null) { ui.rinfo = !ui.rinfo; draw(); }
     else if (d.f) { ui.f = d.f; draw(); }
     else if (d.cl) { ui.cl = ui.cl === d.cl ? '' : d.cl; draw(); }
     else if (d.thopen != null) { ui.thOpen = !ui.thOpen; if (!ui.thOpen) ui.th = ''; draw(); }
