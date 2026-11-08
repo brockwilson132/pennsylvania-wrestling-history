@@ -25,6 +25,10 @@
   const medalPts = (r) => String(r[C.pl] || '').split('').reduce((t, p) => t + OT.PTS[+p - 1], 0);
   const inPlace = (p) => !p || p.kind === 'state' ? () => true : p.kind === 'region' ? (r) => r[C.reg] === p.id : p.kind === 'district' ? (r) => r[C.d] === +p.id : (r) => r[C.sch] === SIDX.get(p.id);
   const clsOk = (r) => state.cls === 'ALL' || (r[C.cls] ? 'AA' : 'AAA') === state.cls;
+  /* PIAA team-duals champions (on file from 1999): a trophy beside the year, not part of the number */
+  let DCH = null; const dualChamp = (r) => { if (!DCH) { DCH = new Set(); (window.WR_DUALS || []).forEach((d) => { if (/championship match/i.test(d[2])) DCH.add((OT.canon ? OT.canon(d[3]) : d[3]) + '|' + d[0] + '|' + (d[1] === 'AA' ? 1 : 0)); }); }
+    return DCH.has(S[r[C.sch]] + '|' + r[C.y] + '|' + r[C.cls]); };
+  const TROPHY = '<svg class="zst" viewBox="0 0 24 24" aria-label="State duals champion"><path d="M7 3h10v5a5 5 0 0 1-10 0z M7 5H3.5v1.5A3.5 3.5 0 0 0 7 10 M17 5h3.5v1.5A3.5 3.5 0 0 1 17 10 M12 13v4 M8 21h8 M9.5 17h5v4h-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   const pct = (v) => (v / 10).toFixed(1) + '%';
   const counts = (r) => { const c = [0, 0, 0, 0, 0, 0, 0, 0]; String(r[C.pl] || '').split('').forEach((p) => { if (+p) c[+p - 1]++; }); return c; };
   /* state medals by place, 1st to 8th left to right: bar height = how many, top edge in the medal colour */
@@ -36,7 +40,7 @@
     const est = r[C.est] ? '≈' : '';
     const tip = `${mode === 'exp' ? 'Expected' : 'Cutoffs'} · wins ${pct(r[vi])} of duals vs the ${SD.field} best · margin ${(r[mi] / 10).toFixed(1)}${est ? ' · estimated lineup' : ''}`;
     return `<div class="sx zsx" style="--p1:${OT.colorOf(sch)}"><button class="sxr" data-sx data-ssl="${esc(key)}" aria-expanded="false"><i class="rk${rank === 1 ? ' g' : ''}">${rank}</i>`
-      + `<span class="nm zsn"><b class="zsy">${r[C.y]}</b>${own ? '' : OT.stag(sch)}</span>`
+      + `<span class="nm zsn"><b class="zsy">${r[C.y]}${dualChamp(r) ? TROPHY : ''}</b>${own ? '' : OT.stag(sch)}</span>`
       + `<span class="zsp${sort === 'medals' ? ' on' : ''}">${medalBars(counts(r))}</span>`
       + `<span class="vt vtr${sort === 'duals' ? ' on' : ''}" style="--tint:${OT.colorAt(Math.max(0.04, SD[pk](r[vi])))}" title="${esc(tip)}"><b>${est}${pct(r[vi])}</b></span>`
       + `</button><div class="sxd" hidden><div class="zsl" data-sslb="${esc(key)}"></div><a class="sxo" href="#school/${slug(sch)}">${esc(sch)} →</a></div></div>`;
