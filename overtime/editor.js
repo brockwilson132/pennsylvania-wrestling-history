@@ -36,7 +36,7 @@
   if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc); }
   const nnorm = (o) => (o && typeof o === 'object' ? o : {});
   let nBase = nnorm(draft && draft.nBase), notes = nnorm(clone((draft && draft.notes) || nBase));
-  const ui = { sort: 'az', note: '', pick: '', sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
+  const ui = { sort: 'az', note: '', pick: '', seq: [], recent: (() => { try { return JSON.parse(ls.get('ot-colors-recent') || '[]'); } catch (e) { return []; } })(), sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
   const undo = [];
   const keep = () => ls.set(K_DRAFT, changes() ? J({ base, doc, nBase, notes }) : null);
   const edit = (fn) => { undo.push(J({ doc, sel: ui.sel })); if (undo.length > 100) undo.shift(); fn(); ui.save = ''; ui.err = ''; keep(); draw(); };
@@ -154,6 +154,7 @@
     pick: '<path d="M14.5 5.5 L18.5 9.5 M16.5 3.5 A2.1 2.1 0 0 1 20.5 7.5 L17.5 10.5 L13.5 6.5 Z M14.8 9.2 L6.5 17.5 L5 21 L8.5 19.5 L16.8 11.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
     note: '<path d="M5 4 H15 L19 8 V20 H5 Z M15 4 V8 H19 M8 12 H16 M8 16 H13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
     noted: '<path d="M5 4 H15 L19 8 V20 H5 Z" fill="currentColor"/><path d="M8 12 H16 M8 16 H13" stroke="#0B0D10" stroke-width="1.9" stroke-linecap="round"/>',
+    clock: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 7.5 V12 L15 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
     search: '<circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16 L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     warn: '<path d="M12 3 L22 20 H2 Z" fill="currentColor" opacity=".18"/><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9 V14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/>',
   };
@@ -177,11 +178,19 @@
   /* the colour sheet for one school: its tag at every size, the saved sets to pick from (or none), and its own fill,
      dot and text. Editing colours never changes another school: a set shared with others is copied for this one first. */
   const colOf = (s) => { const id = doc.schools[s]; if (id && doc.sets[id]) return doc.sets[id]; const p = T.paint(s, doc); return [p.fill, p.acc, p.ink]; };
+  const used = (id) => { ui.recent = [id].concat(ui.recent.filter((x) => x !== id)).slice(0, 6); ls.set('ot-colors-recent', J(ui.recent)); };
+  /* the next or previous school in the list as it was when the picker opened */
+  const step = (dir) => { const i = ui.seq.indexOf(ui.pick), n = ui.seq[i + dir]; if (n) { ui.pick = n; ui.focus = n; ui.add = false; ui.del = false; draw(); } };
   function sheet(s) {
+    const at = ui.seq.indexOf(s), prev = at > 0, next = at >= 0 && at < ui.seq.length - 1, dd = DIST.get(s);
+    const nav = `<div class="ce-nav"><button class="ce-ib" data-prev aria-label="Previous school"${prev ? '' : ' disabled'}>${svg('back')}</button><span class="ce-meta">${dd ? `<b>${dd[1]}</b>` : ''}${rangeOf(s)}</span><button class="ce-ib ce-fw" data-next aria-label="Next school"${next ? '' : ' disabled'}>${svg('back')}</button></div>`;
     const id = doc.schools[s], p = T.paint(s, doc), c = colOf(s), cur = c[ui.part], none = !id && p.none;
     const low = !none && T.contrast(c[0], c[2]) < T.READS;
     const pv = `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(s.length, 1))))}px"><span class="ce-pvb">${pill(s, p)}</span><span class="ce-pvs">${pill(s, p)}${pill(abbr(s), p, 'ab')}${pill(abbr(s), p, 'ab xs')}</span></div>`;
-    const sets = `<div class="ce-ss" role="group" aria-label="Sets"><button class="ce-sb ce-none" data-auto aria-pressed="${!id}" aria-label="No set" style="--fill:${T.NONE.fill};--acc:${T.NONE.acc};--ink:${T.NONE.ink}"><i></i></button>${Object.keys(doc.sets).sort(byColour).map((k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; }).join('')}</div>`;
+    const rec = ui.recent.filter((k) => doc.sets[k]).slice(0, 6);
+    const chip = (k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; };
+    const recent = rec.length ? `<div class="ce-ss ce-rec" role="group" aria-label="Recent sets">${svg('clock')}${rec.map(chip).join('')}</div>` : '';
+    const sets = recent + `<div class="ce-ss" role="group" aria-label="Sets"><button class="ce-sb ce-none" data-auto aria-pressed="${!id}" aria-label="No set" style="--fill:${T.NONE.fill};--acc:${T.NONE.acc};--ink:${T.NONE.ink}"><i></i></button>${Object.keys(doc.sets).sort(byColour).map((k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; }).join('')}</div>`;
     const parts = `<div class="ce-pt" role="group" aria-label="Part">
       <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${c[0]}"></span></button>
       <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${c[1]}"></span></button>
@@ -191,7 +200,7 @@
       <button class="ce-sw ce-tool" data-swadd aria-pressed="${ui.add}" aria-label="Add a colour">${svg('plus')}</button></div>`;
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
     const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
-    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${pv}${was}${sets}${parts}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${sets}${parts}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
     const ss = schoolsShown();
@@ -235,7 +244,7 @@
     const others = Object.keys(doc.schools).some((k) => k !== s && doc.schools[k] === id);
     if (!doc.sets[id] || !others) { doc.sets[id] = was.slice(); doc.schools[s] = id; } else { const n = newId(); doc.sets[n] = was.slice(); doc.schools[s] = n; } }); }
   function own(s) { const id = doc.schools[s]; if (id && uses(id) === 1) return id; const n = newId(); doc.sets[n] = colOf(s).slice(); doc.schools[s] = n; return n; }
-  function setPart(h) { const s = ui.pick; if (colOf(s)[ui.part].toUpperCase() === h.toUpperCase() && doc.schools[s]) return; edit(() => { const id = own(s); doc.sets[id] = doc.sets[id].slice(); doc.sets[id][ui.part] = h; }); }
+  function setPart(h) { const s = ui.pick; if (colOf(s)[ui.part].toUpperCase() === h.toUpperCase() && doc.schools[s]) return; edit(() => { const id = own(s); doc.sets[id] = doc.sets[id].slice(); doc.sets[id][ui.part] = h; used(id); }); }
   function addSwatch() { const h = document.getElementById('cxh').value; if (!hexOk(h)) return; const v = hexN(h);
     if (!doc.swatches.includes(v)) edit(() => { doc.swatches.push(v); }); ui.add = false; setPart(v); draw(); }
   root.addEventListener('click', (e) => {
@@ -245,7 +254,9 @@
     else if (d.swadd != null) { ui.add = !ui.add; ui.del = false; draw(); }
     else if (d.swdel != null) { ui.del = !ui.del; draw(); }
     else if (d.cxok != null) addSwatch();
-    else if (d.set) { const k = ui.pick; if (doc.schools[k] !== d.set) edit(() => { doc.schools[k] = d.set; }); }
+    else if (d.set) { const k = ui.pick; used(d.set); if (doc.schools[k] !== d.set) edit(() => { doc.schools[k] = d.set; }); else draw(); }
+    else if (d.prev != null) step(-1);
+    else if (d.next != null) step(1);
     else if (d.auto != null) { const k = ui.pick; if (doc.schools[k]) edit(() => { delete doc.schools[k]; }); }
     else if (d.csok != null) { ui.pick = ''; ui.add = false; ui.del = false; draw(); }
     else if (d.f) { ui.f = d.f; draw(); }
@@ -256,7 +267,7 @@
     else if (d.ntdel != null) { delete notes[ui.note]; ui.note = ''; ui.save = ''; keep(); draw(); }
     else if (d.rvs != null) revert(ui.pick);
     else if (d.rv != null) { e.stopPropagation(); revert(t.closest('[data-s]').dataset.s); }
-    else if (d.s) { ui.focus = d.s; ui.pick = d.s; draw(); }
+    else if (d.s) { ui.focus = d.s; ui.pick = d.s; ui.seq = schoolsShown(); draw(); }
     else if (d.fix != null) { const c = colOf(ui.pick), ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
       const keepPart = ui.part; ui.part = 2; setPart(ink); ui.part = keepPart; draw(); }
     else if (d.undo != null) { const u = undo.pop(); if (u) { const o = JSON.parse(u); doc = o.doc; ui.sel = o.sel; ui.save = ''; keep(); draw(); } }
@@ -271,6 +282,7 @@
     else if (e.target.id === 'cxp') document.getElementById('cxh').value = e.target.value.toUpperCase();
     else if (e.target.id === 'cxh' && hexOk(e.target.value)) document.getElementById('cxp').value = hexN(e.target.value).toLowerCase();
   });
+  document.addEventListener('keydown', (e) => { if (!ui.pick || /INPUT|TEXTAREA/.test((e.target || {}).tagName || '')) return; if (e.key === 'ArrowRight') step(1); else if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'Escape') { ui.pick = ''; draw(); } });
   root.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.id === 'cxh') addSwatch(); if (e.key === 'Enter' && e.target.id === 'tok') root.querySelector('[data-tkok]').click(); });
   window.addEventListener('beforeunload', (e) => { if (changes()) { e.preventDefault(); e.returnValue = ''; } });
   draw(); refresh();
