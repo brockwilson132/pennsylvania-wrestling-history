@@ -15,7 +15,7 @@
      colours to presets, and one with neither gets the plain grey tag. The logic lives in tags.js (shared with the editor). */
   const TAGS = window.OTTags;
   const tagPaint = (sch) => TAGS.paint(sch);
-  const abbrOf = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
+  const abbrOf = (sch) => TAGS.abbr(sch);
   /* stag(school): the full-name tag; stag(school, {abbr:true}): the short tag for tight spots (bracket lines, badges) */
   const stag = (sch, o = {}) => { const p = tagPaint(sch);
     return `<span class="stag tF${o.abbr ? ' ab' : ''}${p.none ? ' nc' : ''}${o.cls ? ' ' + o.cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"${o.abbr ? ` title="${esc(sch)}"` : ''}><i></i>${o.abbr ? `<u>${esc(abbrOf(sch))}</u>` : esc(sch)}</span>`; };

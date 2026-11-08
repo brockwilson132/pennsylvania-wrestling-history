@@ -28,20 +28,24 @@
     if (id && id.primary) { const ks = [id.primary, id.secondary, id.accent].filter(Boolean).map(nearestKey).filter((k, i, a) => a.indexOf(k) === i); p = fromColours(ks.map((k) => PRESETS[k])); }
     AUTO.set(sch, p); return p;
   }
-  const data = () => (typeof window !== 'undefined' && window.OT_COLORS) || { swatches: [], sets: {}, schools: {} };
+  const data = () => (typeof window !== 'undefined' && window.OT_COLORS) || { swatches: [], sets: {}, schools: {}, abbr: {} };
   /* the paint for one school (doc: an editor working copy; default the published file) */
   function paint(sch, doc) { const d = doc || data(), id = d.schools[sch], s = id && d.sets[id];
     return s ? { fill: s[0], acc: s[1], ink: s[2], set: id } : auto(sch); }
+  /* the short name for tight spots (bracket lines): Brock's own, else the badge file's, else the first three letters */
+  function abbr(sch, doc) { const d = doc || data(), own = d.abbr && d.abbr[sch]; if (own) return own;
+    const r = typeof window !== 'undefined' && window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); }
   /* schoolcolors.js as text: one set or school per line, so every edit is a small readable diff */
   function serialize(d) {
-    const J = JSON.stringify, sets = Object.keys(d.sets), sch = Object.keys(d.schools).sort((a, b) => a.localeCompare(b));
-    return '/* School name tag colours, written by the colour editor (colors.html). sets: id -> [fill, dot, text]; schools: name -> set id. */\n'
+    const J = JSON.stringify, sets = Object.keys(d.sets), sch = Object.keys(d.schools).sort((a, b) => a.localeCompare(b)), ab = Object.keys(d.abbr || {}).sort((a, b) => a.localeCompare(b));
+    return '/* School name tag colours, written by the colour editor (colors.html). sets: id -> [fill, dot, text]; schools: name -> set id; abbr: name -> short name. */\n'
       + 'window.OT_COLORS = {\n"swatches": [' + d.swatches.map((h) => J(h)).join(', ') + '],\n'
       + '"sets": {\n' + sets.map((k) => J(k) + ': [' + d.sets[k].map((h) => J(h)).join(', ') + ']').join(',\n') + '\n},\n'
-      + '"schools": {\n' + sch.map((k) => J(k) + ': ' + J(d.schools[k])).join(',\n') + '\n}\n};\n';
+      + '"schools": {\n' + sch.map((k) => J(k) + ': ' + J(d.schools[k])).join(',\n') + '\n},\n'
+      + '"abbr": {\n' + ab.map((k) => J(k) + ': ' + J(d.abbr[k])).join(',\n') + '\n}\n};\n';
   }
   const parse = (txt) => JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}') + 1));
-  const api = { PRESETS, NONE, READS, contrast, fromColours, auto, paint, serialize, parse };
+  const api = { PRESETS, NONE, READS, contrast, fromColours, auto, paint, abbr, serialize, parse };
   if (typeof window !== 'undefined') window.OTTags = api;
   if (typeof module !== 'undefined') module.exports = api;
 })();

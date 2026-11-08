@@ -14,7 +14,7 @@
   const J = JSON.stringify;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* private mode */ } } };
-  const norm = (d) => ({ swatches: (d && d.swatches) || [], sets: (d && d.sets) || {}, schools: (d && d.schools) || {} });
+  const norm = (d) => ({ swatches: (d && d.swatches) || [], sets: (d && d.sets) || {}, schools: (d && d.schools) || {}, abbr: (d && d.abbr) || {} });
 
   /* every school in the archive, with the district it wrestled in most recently */
   const UD = window.WR_UNITS || { schools: [], ss: [] };
@@ -36,25 +36,26 @@
   if (draft && draft.doc && draft.base) { base = norm(draft.base); doc = norm(draft.doc); }
   const nnorm = (o) => (o && typeof o === 'object' ? o : {});
   let nBase = nnorm(draft && draft.nBase), notes = nnorm(clone((draft && draft.notes) || nBase));
-  const ui = { sort: 'az', note: '', sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
+  const ui = { sort: 'az', note: '', pick: '', seq: [], recent: (() => { try { return JSON.parse(ls.get('ot-colors-recent') || '[]'); } catch (e) { return []; } })(), sel: Object.keys(doc.sets)[0] || null, part: 0, q: '', f: 'all', focus: '', del: false, add: false, armDel: false, min: false, save: '', err: '', tok: false };
   const undo = [];
   const keep = () => ls.set(K_DRAFT, changes() ? J({ base, doc, nBase, notes }) : null);
   const edit = (fn) => { undo.push(J({ doc, sel: ui.sel })); if (undo.length > 100) undo.shift(); fn(); ui.save = ''; ui.err = ''; keep(); draw(); };
 
   /* what changed since the file was loaded: sets, schools and swatches, key by key */
   function diff(a, b) {
-    const out = { sets: [], schools: [], swAdd: b.swatches.filter((h) => !a.swatches.includes(h)), swDel: a.swatches.filter((h) => !b.swatches.includes(h)) };
-    ['sets', 'schools'].forEach((k) => { new Set([...Object.keys(a[k]), ...Object.keys(b[k])]).forEach((x) => { if (J(a[k][x]) !== J(b[k][x])) out[k].push(x); }); });
+    const out = { sets: [], schools: [], abbr: [], swAdd: b.swatches.filter((h) => !a.swatches.includes(h)), swDel: a.swatches.filter((h) => !b.swatches.includes(h)) };
+    ['sets', 'schools', 'abbr'].forEach((k) => { new Set([...Object.keys(a[k]), ...Object.keys(b[k])]).forEach((x) => { if (J(a[k][x]) !== J(b[k][x])) out[k].push(x); }); });
     return out;
   }
   const ndiff = (a, b) => [...new Set([...Object.keys(a), ...Object.keys(b)])].filter((k) => J(a[k]) !== J(b[k]));
-  const changes = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.swAdd.length + d.swDel.length + ndiff(nBase, notes).length; };
-  const colourChanges = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.swAdd.length + d.swDel.length; };
+  const changes = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.abbr.length + d.swAdd.length + d.swDel.length + ndiff(nBase, notes).length; };
+  const colourChanges = () => { const d = diff(base, doc); return d.sets.length + d.schools.length + d.abbr.length + d.swAdd.length + d.swDel.length; };
   /* lay this browser's changes over the latest file on GitHub (another save may have landed since this page loaded) */
   function merge(remote) {
     const m = norm(clone(remote)), d = diff(base, doc);
     d.sets.forEach((k) => { if (doc.sets[k]) m.sets[k] = doc.sets[k]; else delete m.sets[k]; });
     d.schools.forEach((k) => { if (doc.schools[k]) m.schools[k] = doc.schools[k]; else delete m.schools[k]; });
+    d.abbr.forEach((k) => { if (doc.abbr[k]) m.abbr[k] = doc.abbr[k]; else delete m.abbr[k]; });
     m.swatches = m.swatches.filter((h) => !d.swDel.includes(h)).concat(d.swAdd.filter((h) => !m.swatches.includes(h)));
     Object.keys(m.schools).forEach((k) => { if (!m.sets[m.schools[k]]) delete m.schools[k]; });
     return m;
@@ -64,6 +65,7 @@
   function dedupe(m) { const seen = new Map(), alias = {};
     Object.keys(m.sets).forEach((id) => { const k = m.sets[id].map((h) => h.toUpperCase()).join(); if (seen.has(k)) { alias[id] = seen.get(k); delete m.sets[id]; } else seen.set(k, id); });
     Object.keys(m.schools).forEach((s) => { if (alias[m.schools[s]]) m.schools[s] = alias[m.schools[s]]; });
+    const used = new Set(Object.values(m.schools)); Object.keys(m.sets).forEach((id) => { if (!used.has(id)) delete m.sets[id]; });
     Object.defineProperty(m, 'alias', { value: alias, enumerable: false, configurable: true, writable: true }); return m; }
   /* ---- GitHub ---- */
   const token = () => ls.get(K_TOKEN) || '';
@@ -93,8 +95,8 @@
   }
   const latest = async () => { const j = await gh('GET'); const txt = b64d(j.content); return { sha: j.sha, txt, doc: norm(T.parse(txt)) }; };
   function message(d) {
-    const sch = d.schools.slice(0, 3).join(', '), more = d.schools.length > 3 ? ` +${d.schools.length - 3}` : '';
-    const bits = [d.schools.length ? sch + more : '', d.sets.length ? `${d.sets.length} set${d.sets.length > 1 ? 's' : ''}` : '', d.swAdd.length + d.swDel.length ? 'swatches' : ''].filter(Boolean);
+    const who = [...new Set(d.schools.concat(d.abbr))], sch = who.slice(0, 3).join(', '), more = who.length > 3 ? ` +${who.length - 3}` : '';
+    const bits = [who.length ? sch + more : '', d.sets.length ? `${d.sets.length} set${d.sets.length > 1 ? 's' : ''}` : '', d.swAdd.length + d.swDel.length ? 'swatches' : ''].filter(Boolean);
     return 'School colours: ' + (bits.join('; ') || 'update');
   }
   async function save() {
@@ -134,7 +136,14 @@
   const uses = (id) => Object.values(doc.schools).filter((v) => v === id).length;
   const newId = () => { let id; do { id = Math.random().toString(36).slice(2, 6); } while (doc.sets[id] || /^\d/.test(id)); return id; };
   const pill = (name, p, cls = '') => `<span class="stag tF${p.none ? ' nc' : ''}${cls ? ' ' + cls : ''}" style="--tf:${p.fill};--ta:${p.acc};--ti:${p.ink}"><i></i>${esc(name)}</span>`;
-  const abbr = (sch) => { const r = window.SchoolBadge && window.SchoolBadge.resolve ? window.SchoolBadge.resolve(sch) : null; return r ? r.abbr : String(sch || '?').slice(0, 3).toUpperCase(); };
+  const abbr = (sch) => T.abbr(sch, doc);
+  /* look-alikes: schools in the same district whose tags are identical (same colours), so its brackets can't tell them apart */
+  let LA = null;
+  const lookAlikes = () => { if (LA) return LA; LA = new Map(); const by = new Map();
+    [...new Set([...UD.schools, ...Object.keys(doc.schools)])].forEach((s) => { const d = DIST.get(s), p = T.paint(s, doc); if (!d || p.none) return; const k = d[1] + '|' + p.fill + p.acc + p.ink; (by.get(k) || by.set(k, []).get(k)).push(s); });
+    by.forEach((L) => { if (L.length > 1) L.forEach((s) => LA.set(s, L.filter((x) => x !== s))); }); return LA; };
+  /* short names already used in the same district */
+  const abClash = (s) => { const d = DIST.get(s); if (!d) return []; const a = abbr(s); return UD.schools.filter((x) => x !== s && DIST.get(x) && DIST.get(x)[1] === d[1] && abbr(x) === a); };
   const hexOk = (h) => /^#?[0-9a-f]{6}$/i.test(h.trim());
   const hexN = (h) => '#' + h.trim().replace('#', '').toUpperCase();
   const I = {
@@ -153,6 +162,9 @@
     pick: '<path d="M14.5 5.5 L18.5 9.5 M16.5 3.5 A2.1 2.1 0 0 1 20.5 7.5 L17.5 10.5 L13.5 6.5 Z M14.8 9.2 L6.5 17.5 L5 21 L8.5 19.5 L16.8 11.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
     note: '<path d="M5 4 H15 L19 8 V20 H5 Z M15 4 V8 H19 M8 12 H16 M8 16 H13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>',
     noted: '<path d="M5 4 H15 L19 8 V20 H5 Z" fill="currentColor"/><path d="M8 12 H16 M8 16 H13" stroke="#0B0D10" stroke-width="1.9" stroke-linecap="round"/>',
+    clock: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 7.5 V12 L15 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
+    shield: '<path d="M12 3 L19.5 6 V11.5 C19.5 16 16.3 19.4 12 21 C7.7 19.4 4.5 16 4.5 11.5 V6 Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>',
+    link: '<path d="M10 14 L14 10 M8.5 11.5 L6.5 13.5 A3.5 3.5 0 0 0 11.5 18.5 L13.5 16.5 M15.5 12.5 L17.5 10.5 A3.5 3.5 0 0 0 12.5 5.5 L10.5 7.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>',
     search: '<circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16 L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
     warn: '<path d="M12 3 L22 20 H2 Z" fill="currentColor" opacity=".18"/><path d="M12 3 L22 20 H2 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9 V14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/>',
   };
@@ -168,113 +180,146 @@
     const all = [...new Set([...UD.schools, ...Object.keys(doc.schools)])];
     const t = ui.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
     return all.filter((s) => { const k = s.toLowerCase(); if (t.length && !t.every((x) => k.includes(x))) return false;
-      if (ui.f === 'set') return doc.schools[s] === ui.sel;
       if (ui.f === 'grey') return !doc.schools[s] && T.auto(s).none;
       if (ui.f === 'notes') return !!notes[s];
+      if (ui.f === 'same') return lookAlikes().has(s);
       if (ui.f !== 'all') return DIST.has(s) && DIST.get(s)[1] === +ui.f; return true; })
       .sort((a, b) => (ui.sort in SORTS ? medOf(b, SORTS[ui.sort]) - medOf(a, SORTS[ui.sort]) : 0) || a.localeCompare(b));
   }
-  function brush() {
-    const p = setPaint(ui.sel), name = ui.focus && doc.schools[ui.focus] === ui.sel ? ui.focus : (Object.keys(doc.schools).find((s) => doc.schools[s] === ui.sel) || 'School');
-    const s = doc.sets[ui.sel] || ['#2A3038', '#4A5360', '#EEEAE1'], cur = s[ui.part];
-    const low = ui.sel && T.contrast(s[0], s[2]) < T.READS;
+  /* the colour sheet for one school: its tag at every size, the saved sets to pick from (or none), and its own fill,
+     dot and text. Editing colours never changes another school: a set shared with others is copied for this one first. */
+  const colOf = (s) => { const id = doc.schools[s]; if (id && doc.sets[id]) return doc.sets[id]; const p = T.paint(s, doc); return [p.fill, p.acc, p.ink]; };
+  /* schools whose names look like this one (one name inside the other, or a shared uncommon word, or a badge alias):
+     the candidates for "same school, different name" notes */
+  const STOP = new Set('high school area regional senior junior jr sr township twp catholic central north south east west valley mount mountain mt saint st county academy joint memorial christian prep the of and hs upper lower new city borough'.split(' '));
+  const ALL = [...new Set([...UD.schools, ...Object.keys(window.OT_COLORS ? window.OT_COLORS.schools : {})])];
+  const words = (n) => n.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w.length >= 4 && !STOP.has(w));
+  const WIX = new Map(); ALL.forEach((n) => words(n).forEach((w) => (WIX.get(w) || WIX.set(w, []).get(w)).push(n)));
+  const aliases = (n) => { const id = window.SchoolBadge && window.SchoolBadge.identity(n); return id ? [id.school].concat(id.aliases || []).map((a) => a.toLowerCase()) : []; };
+  function similar(n) {
+    const lo = n.toLowerCase(), al = aliases(n), out = new Map();
+    ALL.forEach((m) => { if (m === n) return; const ml = m.toLowerCase(); if (ml.includes(lo) || lo.includes(ml) || al.includes(ml)) out.set(m, 0); });
+    words(n).forEach((w) => { const L = WIX.get(w) || []; if (L.length <= 6) L.forEach((m) => { if (m !== n && !out.has(m)) out.set(m, 1); }); });
+    return [...out].sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])).slice(0, 6).map((x) => x[0]);
+  }
+  const used = (id) => { ui.recent = [id].concat(ui.recent.filter((x) => x !== id)).slice(0, 6); ls.set('ot-colors-recent', J(ui.recent)); };
+  /* the next or previous school in the list as it was when the picker opened */
+  const step = (dir) => { const i = ui.seq.indexOf(ui.pick), n = ui.seq[i + dir]; if (n) { ui.pick = n; ui.focus = n; ui.add = false; ui.del = false; draw(); } };
+  function sheet(s) {
+    const at = ui.seq.indexOf(s), prev = at > 0, next = at >= 0 && at < ui.seq.length - 1, dd = DIST.get(s);
+    const nav = `<div class="ce-nav"><button class="ce-ib" data-prev aria-label="Previous school"${prev ? '' : ' disabled'}>${svg('back')}</button><span class="ce-meta">${dd ? `<b>${dd[1]}</b>` : ''}${rangeOf(s)}</span><button class="ce-ib${notes[s] ? ' ce-on' : ''}" data-pnote aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button><button class="ce-ib ce-fw" data-next aria-label="Next school"${next ? '' : ' disabled'}>${svg('back')}</button></div>`;
+    const id = doc.schools[s], p = T.paint(s, doc), c = colOf(s), cur = c[ui.part], none = !id && p.none;
+    const low = !none && T.contrast(c[0], c[2]) < T.READS;
+    const pv = `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(s.length, 1))))}px"><span class="ce-pvb">${pill(s, p)}</span><span class="ce-pvs">${pill(s, p)}${pill(abbr(s), p, 'ab')}${pill(abbr(s), p, 'ab xs')}<label class="ce-abl"><input id="ab" value="${esc(abbr(s))}" maxlength="5" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Short name">${abClash(s).length ? `<span class="ce-la" role="img" aria-label="Another school in the district uses this short name">${svg('warn')}</span>` : ''}</label></span></div>`;
+    const rec = ui.recent.filter((k) => doc.sets[k]).slice(0, 6);
+    const chip = (k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; };
+    const recent = rec.length ? `<div class="ce-ss ce-rec" role="group" aria-label="Recent sets">${svg('clock')}${rec.map(chip).join('')}</div>` : '';
+    const sets = recent + `<div class="ce-ss" role="group" aria-label="Sets"><button class="ce-sb ce-none" data-auto aria-pressed="${!id}" aria-label="No set" style="--fill:${T.NONE.fill};--acc:${T.NONE.acc};--ink:${T.NONE.ink}"><i></i></button>${Object.keys(doc.sets).sort(byColour).map((k) => { const q = setPaint(k); return `<button class="ce-sb" data-set="${k}" aria-pressed="${k === id}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>Aa</button>`; }).join('')}</div>`;
     const parts = `<div class="ce-pt" role="group" aria-label="Part">
-      <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${s[0]}"></span></button>
-      <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${s[1]}"></span></button>
-      <button class="ce-pb" data-part="2" aria-pressed="${ui.part === 2}" aria-label="Text"><span class="ce-sw2" style="--fill:${s[0]};color:${s[2]}">Aa</span></button>
+      <button class="ce-pb" data-part="0" aria-pressed="${ui.part === 0}" aria-label="Fill"><span class="ce-sw0" style="background:${c[0]}"></span></button>
+      <button class="ce-pb" data-part="1" aria-pressed="${ui.part === 1}" aria-label="Dot"><span class="ce-sw1" style="background:${c[1]}"></span></button>
+      <button class="ce-pb" data-part="2" aria-pressed="${ui.part === 2}" aria-label="Text"><span class="ce-sw2" style="--fill:${c[0]};color:${c[2]}">Aa</span></button>
       ${low ? `<button class="ce-warn" data-fix aria-label="Make the text readable">${svg('warn')}</button>` : ''}</div>`;
-    const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && ui.sel && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
+    const sw = `<div class="ce-sg${ui.del ? ' ce-del' : ''}">${doc.swatches.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!ui.del && !none && h.toUpperCase() === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}
       <button class="ce-sw ce-tool" data-swadd aria-pressed="${ui.add}" aria-label="Add a colour">${svg('plus')}</button></div>`;
     const cx = ui.add ? `<div class="ce-cx"><input type="color" id="cxp" value="${cur}"><input type="text" id="cxh" value="${cur}" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text"><button class="ce-ib" data-cxok aria-label="Add">${svg('ok')}</button><button class="ce-ib${ui.del ? ' ce-err' : ''}" data-swdel aria-pressed="${ui.del}" aria-label="Remove colours">${svg('trash')}</button></div>` : '';
-    const sets = `<div class="ce-ss" role="group" aria-label="Sets">
-      <button class="ce-sb ce-tool" data-snew aria-label="New set">${svg('plus')}</button>
-      ${ui.sel ? `<button class="ce-sb ce-tool" data-scopy aria-label="Copy set">${svg('copy')}</button><button class="ce-sb ce-tool${ui.armDel ? ' ce-arm' : ''}" data-sdel aria-label="Delete set">${svg('trash')}</button>` : ''}
-      ${Object.keys(doc.sets).sort(byColour).map((id) => { const q = setPaint(id); return `<button class="ce-sb" data-set="${id}" aria-pressed="${id === ui.sel}" style="--fill:${q.fill};--acc:${q.acc};--ink:${q.ink}"><i></i>${uses(id)}</button>`; }).join('')}</div>`;
-    const big = ui.sel ? name : 'School';
-    const pp = ui.sel ? p : T.NONE;
-    return `<div class="ce-pv" style="--pz:${Math.max(13, Math.min(23, Math.floor(560 / Math.max(big.length, 1))))}px"><span class="ce-pvb">${pill(big, pp)}</span><span class="ce-pvs">${pill(big, pp)}${pill(abbr(big), pp, 'ab')}${pill(abbr(big), pp, 'ab xs')}</span></div>${ui.min ? '' : parts + sw + cx}${sets}`;
+    const bid = window.SchoolBadge && window.SchoolBadge.identity(s), bh = bid ? [bid.primary, bid.secondary, bid.accent].filter(Boolean).map((h) => h.toUpperCase()) : [];
+    const badge = bh.length ? `<div class="ce-bdg">${svg('shield')}${bh.map((h) => `<button class="ce-sw" data-sw="${h}" style="background:${h}" aria-pressed="${!none && h === cur.toUpperCase()}" aria-label="${h}"></button>`).join('')}</div>` : '';
+    const la = lookAlikes().get(s) || [];
+    const twins = la.length ? `<div class="ce-kin ce-twin">${svg('warn')}${la.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
+    const sim = similar(s);
+    const kin = sim.length ? `<div class="ce-kin">${svg('link')}${sim.map((m) => `<button class="ce-kn" data-jump="${esc(m)}">${pill(m, T.paint(m, doc), 'xs')}<small>${rangeOf(m)}</small></button>`).join('')}</div>` : '';
+    const was = changed(s) ? `<button class="ce-rv ce-rvs" data-rvs aria-label="Back to saved colours">${svg('undo')}${pill(s, T.paint(s, base))}</button>` : '';
+    return `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-cs">${nav}${pv}${was}${twins}${kin}${sets}${parts}${badge}${sw}${cx}<div class="ce-ntb"><span class="ce-sp"></span><button class="ce-ib ce-done" data-csok aria-label="Done">${svg('ok')}</button></div></div></div>`;
   }
   function list() {
-    const ss = schoolsShown(), sp = setPaint(ui.sel);
-    const chips = [['all', 'All'], ['set', `<span class="ce-mini" style="--f:${sp.fill};--a:${sp.acc}"><b><i></i></b>${ui.sel ? uses(ui.sel) : 0}</span>`], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
-      .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`]])
+    const ss = schoolsShown();
+    const chips = [['all', 'All'], ['grey', `<span class="ce-mini" style="--f:${T.NONE.fill};--a:${T.NONE.acc}"><b><i></i></b>${greyN()}</span>`]]
+      .concat([['notes', `<span class="ce-mini">${svg('note')}${Object.keys(notes).length}</span>`], ['same', `<span class="ce-mini ce-lam">${svg('warn')}${lookAlikes().size}</span>`]])
       .concat(Array.from({ length: 12 }, (_, i) => [String(i + 1), String(i + 1)]));
     const sorts = [['az', '<b class="ce-az">A–Z</b>'], ['D', geo('district')], ['R', geo('region')], ['S', geo('state')]];
     return `<div class="ce-fl"><label class="ce-fs">${svg('search')}<input id="q" type="search" value="${esc(ui.q)}" autocomplete="off" aria-label="Search schools"></label><div class="ce-so" role="group" aria-label="Sort">${sorts.map(([k, l]) => `<button data-sort="${k}" aria-pressed="${ui.sort === k}" aria-label="${{ az: 'Name', D: 'District medals', R: 'Regional medals', S: 'State medals' }[k]}">${l}</button>`).join('')}</div></div>
       <div class="ce-ch" role="group" aria-label="Show">${chips.map(([k, l]) => `<button data-f="${k}" aria-pressed="${ui.f === k}">${l}</button>`).join('')}</div>
-      <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), use = ui.sel && doc.schools[s] === ui.sel, d = DIST.get(s);
-        return `<li class="ce-sr${use ? ' ce-use' : ''}${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-ck">${svg('ok')}</span><span class="ce-nm">${pill(s, p)}<small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button><button class="ce-pk${p.none && !doc.schools[s] ? ' ce-no' : ''}" data-pick aria-label="Use this school's colours">${svg('pick')}</button></li>`; }).join('')}</ul>`;
+      <ul class="ce-sl">${ss.map((s) => { const p = T.paint(s, doc), d = DIST.get(s);
+        return `<li class="ce-sr${ui.focus === s ? ' ce-foc' : ''}" data-s="${esc(s)}"><span class="ce-nm"><span class="ce-nmr">${pill(s, p)}${lookAlikes().has(s) ? `<span class="ce-la" role="img" aria-label="Same tag as another school in the district">${svg('warn')}</span>` : ''}${changed(s) ? `<button class="ce-rv" data-rv aria-label="Back to saved colours">${svg('undo')}${pill(abbr(s), T.paint(s, base), 'ab xs')}</button>` : ''}</span><small>${rangeOf(s)}</small></span><span class="ce-dn${ui.sort in SORTS ? ' ce-md' : ''}">${ui.sort in SORTS ? medOf(s, SORTS[ui.sort]) || '' : d ? d[1] : ''}</span><button class="ce-nb${notes[s] ? ' ce-has' : ''}" data-note aria-label="Note">${svg(notes[s] ? 'noted' : 'note')}</button></li>`; }).join('')}</ul>`;
   }
   function draw() {
+    LA = null;
     const n = changes(), focusQ = document.activeElement && document.activeElement.id === 'q', caret = focusQ ? document.activeElement.selectionStart : 0;
     const sv = ui.save === 'busy' ? 'spin' : ui.save === 'ok' ? 'ok' : ui.save === 'err' ? 'err' : 'save';
-    const y = window.scrollY, lsy = root.querySelector('.ce-ss') ? root.querySelector('.ce-ss').scrollLeft : 0;
+    const y = window.scrollY, sc = root.querySelector('.ce-cs'), csy = sc ? sc.scrollTop : 0;
     root.innerHTML = `<div class="ce-eb"><div class="ce-eh">
         <a class="ce-ib" href="./" aria-label="Back to Overtime">${svg('back')}</a><span class="ce-sp"></span>
-        <button class="ce-ib" data-min aria-label="${ui.min ? 'Show colours' : 'Hide colours'}">${svg(ui.min ? 'down' : 'up')}</button>
         <button class="ce-ib" data-undo aria-label="Undo"${undo.length ? '' : ' disabled'}>${svg('undo')}</button>
         <button class="ce-ib${token() ? ' ce-on' : ''}" data-tok aria-label="GitHub token">${svg('key')}${token() ? '' : '<span class="ce-dt"></span>'}</button>
         <button class="ce-ib${ui.save ? " ce-" + ui.save : ""}" data-save aria-label="Save"${n || ui.save ? '' : ' disabled'}>${svg(sv)}${n && ui.save !== 'busy' ? `<span class="ce-bd">${n}</span>` : ''}</button>
-      </div>${brush()}</div>
+      </div></div>
       ${ui.err ? `<div class="ce-msg" role="alert">${esc(ui.err)}</div>` : ''}<div class="ce-lw">${list()}</div>
+      ${ui.pick ? sheet(ui.pick) : ''}
       ${ui.note ? `<div class="ce-tk" data-tkbg><div class="ce-tkc ce-nt"><div class="ce-nth">${pill(ui.note, T.paint(ui.note, doc))}</div><textarea id="nt" rows="4" spellcheck="true">${esc(notes[ui.note] ? notes[ui.note].note : '')}</textarea><div class="ce-ntb">${notes[ui.note] ? `<button class="ce-ib" data-ntdel aria-label="Delete note">${svg('trash')}</button>` : ''}<span class="ce-sp"></span><button class="ce-ib" data-ntok aria-label="Keep note">${svg('ok')}</button></div></div></div>` : ''}
       ${ui.tok ? `<div class="ce-tk" data-tkbg><div class="ce-tkc"><input id="tok" type="password" placeholder="github_pat_…" value="${esc(token())}" autocomplete="off" spellcheck="false"><button class="ce-ib" data-tkok aria-label="Keep token">${svg('ok')}</button>${token() ? `<button class="ce-ib" data-tkdel aria-label="Forget token">${svg('trash')}</button>` : ''}</div></div>` : ''}`;
-    window.scrollTo(0, y); const s2 = root.querySelector('.ce-ss'); if (s2) s2.scrollLeft = lsy;
+    window.scrollTo(0, y); const s2 = root.querySelector('.ce-cs'); if (s2) s2.scrollTop = csy;
     if (focusQ) { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(caret, caret); }
     if (ui.tok) document.getElementById('tok').focus();
     if (ui.note) { const t = document.getElementById('nt'); t.focus(); t.setSelectionRange(t.value.length, t.value.length); }
   }
 
   /* ---- actions ---- */
-  function paintSwatch(h) { if (!ui.sel) return; if (doc.sets[ui.sel][ui.part].toUpperCase() === h.toUpperCase()) return; edit(() => { doc.sets[ui.sel] = doc.sets[ui.sel].slice(); doc.sets[ui.sel][ui.part] = h; }); }
+  /* the set this school's colour edits go to: its own set, or a fresh copy when it shares one (or has none) */
+  const pkey = (s, d) => { const q = T.paint(s, d); return q.fill + q.acc + q.ink; };
+  const changed = (s) => pkey(s, doc) !== pkey(s, base);
+  /* put one school back to its saved colours (its saved set, restored or re-made if it was edited since) */
+  function revert(s) { edit(() => { const id = base.schools[s];
+    if (!id) { delete doc.schools[s]; return; }
+    const was = base.sets[id]; if (J(doc.sets[id]) === J(was)) { doc.schools[s] = id; return; }
+    const others = Object.keys(doc.schools).some((k) => k !== s && doc.schools[k] === id);
+    if (!doc.sets[id] || !others) { doc.sets[id] = was.slice(); doc.schools[s] = id; } else { const n = newId(); doc.sets[n] = was.slice(); doc.schools[s] = n; } }); }
+  function own(s) { const id = doc.schools[s]; if (id && uses(id) === 1) return id; const n = newId(); doc.sets[n] = colOf(s).slice(); doc.schools[s] = n; return n; }
+  function setPart(h) { const s = ui.pick; if (colOf(s)[ui.part].toUpperCase() === h.toUpperCase() && doc.schools[s]) return; edit(() => { const id = own(s); doc.sets[id] = doc.sets[id].slice(); doc.sets[id][ui.part] = h; used(id); }); }
   function addSwatch() { const h = document.getElementById('cxh').value; if (!hexOk(h)) return; const v = hexN(h);
-    edit(() => { if (!doc.swatches.includes(v)) doc.swatches.push(v); ui.add = false; if (ui.sel) { doc.sets[ui.sel] = doc.sets[ui.sel].slice(); doc.sets[ui.sel][ui.part] = v; } }); }
-  function tapSchool(s) {
-    ui.focus = s; if (!ui.sel) { draw(); return; }
-    edit(() => { if (doc.schools[s] === ui.sel) delete doc.schools[s]; else doc.schools[s] = ui.sel; });
-  }
-  function pickSchool(s) {
-    ui.focus = s; const id = doc.schools[s];
-    if (id) { ui.sel = id; ui.armDel = false; draw(); return; }
-    const p = T.auto(s); if (p.none) return;
-    edit(() => { const n = newId(); doc.sets[n] = [p.fill, p.acc, p.ink]; doc.schools[s] = n; ui.sel = n; });
-  }
+    if (!doc.swatches.includes(v)) edit(() => { doc.swatches.push(v); }); ui.add = false; setPart(v); draw(); }
   root.addEventListener('click', (e) => {
     const t = e.target.closest('button,[data-s],[data-tkbg]'); if (!t) return; const d = t.dataset;
     if (d.part != null) { ui.part = +d.part; draw(); }
-    else if (d.sw) { if (ui.del) edit(() => { doc.swatches = doc.swatches.filter((h) => h !== d.sw); }); else paintSwatch(d.sw); }
+    else if (d.sw) { if (ui.del) edit(() => { doc.swatches = doc.swatches.filter((h) => h !== d.sw); }); else setPart(d.sw); }
     else if (d.swadd != null) { ui.add = !ui.add; ui.del = false; draw(); }
     else if (d.swdel != null) { ui.del = !ui.del; draw(); }
     else if (d.cxok != null) addSwatch();
-    else if (d.set) { ui.sel = d.set; ui.armDel = false; if (ui.f === 'set') window.scrollTo(0, 0); draw(); }
-    else if (d.snew != null) edit(() => { const n = newId(); doc.sets[n] = ['#111111', '#8A8D8F', '#FFFFFF']; ui.sel = n; ui.part = 0; ui.armDel = false; ui.min = false; });
-    else if (d.scopy != null) edit(() => { const n = newId(); doc.sets[n] = doc.sets[ui.sel].slice(); ui.sel = n; ui.armDel = false; ui.min = false; });
-    else if (d.sdel != null) { if (!ui.armDel) { ui.armDel = true; draw(); return; }
-      edit(() => { const id = ui.sel; delete doc.sets[id]; Object.keys(doc.schools).forEach((k) => { if (doc.schools[k] === id) delete doc.schools[k]; }); ui.sel = Object.keys(doc.sets)[0] || null; ui.armDel = false; }); }
+    else if (d.set) { const k = ui.pick; used(d.set); if (doc.schools[k] !== d.set) edit(() => { doc.schools[k] = d.set; }); else draw(); }
+    else if (d.prev != null) step(-1);
+    else if (d.pnote != null) { ui.note = ui.pick; draw(); }
+    else if (d.jump) { ui.pick = d.jump; ui.focus = d.jump; ui.add = false; ui.del = false; draw(); }
+    else if (d.next != null) step(1);
+    else if (d.auto != null) { const k = ui.pick; if (doc.schools[k]) edit(() => { delete doc.schools[k]; }); }
+    else if (d.csok != null) { ui.pick = ''; ui.add = false; ui.del = false; draw(); }
     else if (d.f) { ui.f = d.f; draw(); }
     else if (d.sort) { ui.sort = d.sort; draw(); }
     else if (d.note != null) { e.stopPropagation(); ui.note = t.closest('[data-s]').dataset.s; draw(); }
     else if (d.ntok != null) { const v = document.getElementById('nt').value.trim(), k = ui.note; ui.note = '';
       if (v) { if (!notes[k] || notes[k].note !== v) notes[k] = { note: v, at: new Date().toISOString().slice(0, 10) }; } else delete notes[k]; ui.save = ''; keep(); draw(); }
     else if (d.ntdel != null) { delete notes[ui.note]; ui.note = ''; ui.save = ''; keep(); draw(); }
-    else if (d.pick != null) { e.stopPropagation(); pickSchool(t.closest('[data-s]').dataset.s); }
-    else if (d.s) tapSchool(d.s);
-    else if (d.fix != null) { const c = doc.sets[ui.sel], ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
-      edit(() => { doc.sets[ui.sel] = [c[0], c[1], ink]; }); }
-    else if (d.min != null) { ui.min = !ui.min; draw(); }
+    else if (d.rvs != null) revert(ui.pick);
+    else if (d.rv != null) { e.stopPropagation(); revert(t.closest('[data-s]').dataset.s); }
+    else if (d.s) { ui.focus = d.s; ui.pick = d.s; ui.seq = schoolsShown(); draw(); }
+    else if (d.fix != null) { const c = colOf(ui.pick), ink = [c[1], '#FFFFFF', '#000000'].find((h) => T.contrast(c[0], h) >= T.READS) || (T.contrast(c[0], '#FFFFFF') >= T.contrast(c[0], '#000000') ? '#FFFFFF' : '#000000');
+      const keepPart = ui.part; ui.part = 2; setPart(ink); ui.part = keepPart; draw(); }
     else if (d.undo != null) { const u = undo.pop(); if (u) { const o = JSON.parse(u); doc = o.doc; ui.sel = o.sel; ui.save = ''; keep(); draw(); } }
     else if (d.save != null) { if (ui.save === 'err' && !changes()) { ui.save = ''; ui.err = ''; draw(); } else save(); }
     else if (d.tok != null) { ui.tok = true; draw(); }
     else if (d.tkok != null) { ls.set(K_TOKEN, document.getElementById('tok').value.trim() || null); ui.tok = false; ui.err = ''; draw(); refresh(); }
     else if (d.tkdel != null) { ls.set(K_TOKEN, null); ui.tok = false; draw(); }
-    else if (d.tkbg != null && e.target === t) { ui.tok = false; ui.note = ''; draw(); }
+    else if (d.tkbg != null && e.target === t) { if (ui.note || ui.tok) { ui.tok = false; ui.note = ''; } else { ui.pick = ''; ui.add = false; ui.del = false; } draw(); }
   });
+  root.addEventListener('change', (e) => { if (e.target.id !== 'ab' || !ui.pick) return; const s = ui.pick, v = e.target.value.trim().toUpperCase().replace(/[^A-Z0-9&.'-]/g, '').slice(0, 5);
+    const auto = T.abbr(s, { ...doc, abbr: {} }); if ((v || auto) === abbr(s)) { e.target.value = abbr(s); return; }
+    edit(() => { if (!v || v === auto) delete doc.abbr[s]; else doc.abbr[s] = v; }); });
   root.addEventListener('input', (e) => {
     if (e.target.id === 'q') { ui.q = e.target.value; const lw = root.querySelector('.ce-lw'); const pos = e.target.selectionStart; lw.innerHTML = list(); const q = document.getElementById('q'); q.focus(); q.setSelectionRange(pos, pos); }
     else if (e.target.id === 'cxp') document.getElementById('cxh').value = e.target.value.toUpperCase();
     else if (e.target.id === 'cxh' && hexOk(e.target.value)) document.getElementById('cxp').value = hexN(e.target.value).toLowerCase();
   });
-  root.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.id === 'cxh') addSwatch(); if (e.key === 'Enter' && e.target.id === 'tok') root.querySelector('[data-tkok]').click(); });
+  document.addEventListener('keydown', (e) => { if (!ui.pick || /INPUT|TEXTAREA/.test((e.target || {}).tagName || '')) return; if (e.key === 'ArrowRight') step(1); else if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'Escape') { ui.pick = ''; draw(); } });
+  root.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.id === 'ab') e.target.blur(); if (e.key === 'Enter' && e.target.id === 'cxh') addSwatch(); if (e.key === 'Enter' && e.target.id === 'tok') root.querySelector('[data-tkok]').click(); });
   window.addEventListener('beforeunload', (e) => { if (changes()) { e.preventDefault(); e.returnValue = ''; } });
   draw(); refresh();
 })();
