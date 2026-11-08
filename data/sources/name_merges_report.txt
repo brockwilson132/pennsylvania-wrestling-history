@@ -1,4 +1,4 @@
-534 candidate pairs from identity.py; 0 kept, 534 skipped; 0 wrestlers, 517 spellings rewritten
+530 candidate pairs from identity.py; 0 kept, 530 skipped; 0 wrestlers, 517 spellings rewritten
 
 skipped:
   both entered in one tournament Allen Wagner / Curtis (Allen) Wagner @ lansdowne
@@ -75,7 +75,6 @@ skipped:
   different school             ? Bower / Doug Bowersox @ 
   different school             Brian Shannon / B. Shannon @ 
   different school             ? Broome / John Brooke @ 
-  different school             Bruce Lawrence / Bruce Lawrence @ hellertown
   different school             ? Buck / Rick Buck @ 
   different school             Calvin Cramer / C. Cramer @ 
   different school             ? Campbell / Jack Campbell @ 
@@ -149,7 +148,6 @@ skipped:
   different school             Dominic Sumpolec / D. Sumpolec @ notredamegreenpond
   different school             Dom Russo / ? Russo @ farrell
   different school             Donald Harrison / Donald Harrison @ marianabracettiacad
-  different school             Don Rohn / Don Rohn @ hellertown
   different school             Duane Wilcox / D. Wilcox @ 
   different school             E. Anderson / Eddie Anderson @ 
   different school             Easton Cleveland-Pequignot / E. Cleveland-Pequignot @ northpennliberty
@@ -187,7 +185,6 @@ skipped:
   different school             Gary March / G. March @ 
   different school             Gary Osborn / G. Osborn @ 
   different school             Gary Smith / G. Smith @ 
-  different school             Gary Weaver / Gary Weaver @ hellertown
   different school             G. Cosgrove / Glenn Cosgrove @ 
   different school             G. Dombrosky / George Dombrosky @ 
   different school             G. Dombrow / George Dombrow @ 
@@ -402,7 +399,6 @@ skipped:
   different school             T. McCauley / Tom McCauley @ 
   different school             T. McKenna / Tom McKenna @ 
   different school             T. Moroz / Tom Moroz @ 
-  different school             Tom Huber / Tom Huber @ hellertown
   different school             Tom Thurber / T. Thurber @ 
   different school             Tom Wright / T. Wright @ 
   different school             V. Ceneviva / Vince Ceneviva @ 

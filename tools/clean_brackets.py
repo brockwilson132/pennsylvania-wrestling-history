@@ -29,7 +29,7 @@ The PDF parsers leave text in the name column that is not a wrestler. Every rule
 Names whose first name is unknown in the source ("? Miller") are real wrestlers and are kept.
 Writes data/brackets/clean_report.txt.
 """
-import csv, io, os, re, sys
+import csv, io, json, os, re, sys
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -137,6 +137,8 @@ SCHOOL_SAME = {'Mastery Charter Lenfest': 'Mastery Charter School Lenfest', 'Bet
                # district-only wrestlers on two school seasons). Bishop McDevitt (12), Wyncote, is another school.
                'Bishop McDevitt (3)': 'Bishop McDevitt', 'Pittsburgh CC': 'Pittsburgh Central Catholic', 'Greensburg CC': 'Greensburg Central Catholic',
                'Greensburg C.C.': 'Greensburg Central Catholic', 'Reading CC': 'Reading Central Catholic'}
+# Brock's merges from the colour editor's school notes (data/school_notes.json): one school under two names
+SCHOOL_SAME.update(json.load(open(os.path.join(ROOT, 'data', 'sources', 'school_aliases.json'))))
 # a name that means one school only in one file: the WPIAL list's "Central Catholic" is Pittsburgh's
 SCHOOL_SAME_IN = {'d7_champions.csv': {'Central Catholic': 'Pittsburgh Central Catholic'}}
 
