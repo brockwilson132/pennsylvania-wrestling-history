@@ -167,7 +167,7 @@
     const [ta, tb] = String(id || '').split('~'); const A = parseSide(ta), B = parseSide(tb);
     const mode = MODES[state.smode] ? state.smode : 'exp';
     const seg = `<div class="seg sm zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
-    const head = (inner) => `<header class="uh2 dqh"><h1>Compare</h1>${seg}</header>${inner}`;
+    const head = (inner) => `<header class="uh2 dqh"><h1>Compare</h1>${seg}</header>${OT.h2hTabs ? OT.h2hTabs('d') : ''}${inner}`;
     if (!SD) { loadSeasons(); return head('<div class="fpn" data-need-ss="1"></div>'); }
     const ra = A && rowOf(A.sl, A.yk), rb = B && rowOf(B.sl, B.yk);
     const team = (r, side, sc) => r ? `<button class="dqt${q.pick === side ? ' on' : ''}" data-dqpick="${side}"><b class="zsy">${r[C.y]}${r[C.cls] ? '<small>AA</small>' : ''}</b>${OT.stag(S[r[C.sch]])}${sc != null ? `<em>${sc}</em>` : ''}</button>`

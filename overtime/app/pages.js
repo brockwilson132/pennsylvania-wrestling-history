@@ -308,7 +308,9 @@
     return head + section('Meetings', `<div class="card" id="h2hmeet">${met}</div>`) + odds;
   };
   /* head to head, schools: bouts between their wrestlers, PIAA team duals, and dual-meet odds from each season's lineup */
-  const h2hTabs = (on) => `<div class="dpick h2tab"><a href="#h2h/" class="${on === 'w' ? 'on' : ''}">Wrestlers</a><a href="#h2hs/" class="${on === 's' ? 'on' : ''}">Schools</a></div>`;
+  /* Wrestlers / Schools / Seasons; from a school pair, Seasons opens that school's seasons to pick from */
+  const h2hTabs = (on, sl) => `<div class="dpick h2tab"><a href="#h2h/" class="${on === 'w' ? 'on' : ''}">Wrestlers</a><a href="#h2hs/" class="${on === 's' ? 'on' : ''}">Schools</a><a href="#dual/~${sl ? '?pick=a&s=' + sl : ''}" class="${on === 'd' ? 'on' : ''}">Seasons</a></div>`;
+  OT.h2hTabs = h2hTabs;
   function h2hsPick(side, name, other) {
     const ph = side === 'a' ? 'First school' : 'Second school';
     return `<div class="h2p" data-h2side="${side}"><input class="search h2i" data-h2kind="s" type="search" placeholder="${name ? esc(name) + ' · change' : 'Search ' + ph.toLowerCase()}" autocomplete="off" aria-label="${ph}" data-h2other="${esc(other || '')}"><div class="h2l"></div>
@@ -317,7 +319,7 @@
   PAGES.dual = (id, q) => OT.dualPage(id, q);
   PAGES.h2hs = (id) => {
     const [sa, sb] = h2hIds(id); const nA = sa ? OT.SLUG2S.get(sa) : null, nB = sb ? OT.SLUG2S.get(sb) : null;
-    const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Two schools: every postseason bout between their wrestlers, their PIAA team duals, and the odds of a dual meet between their lineups.</div></header>${h2hTabs('s')}
+    const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Two schools: every postseason bout between their wrestlers, their PIAA team duals, and the odds of a dual meet between their lineups.</div></header>${h2hTabs('s', sa)}
       <div class="card h2pick">${h2hsPick('a', nA, sb)}<span class="h2vs">vs</span>${h2hsPick('b', nB, sa)}</div>`;
     if ((sa && !nA) || (sb && !nB)) return head + empty('No school at this address.');
     if (!nA || !nB) return head;
