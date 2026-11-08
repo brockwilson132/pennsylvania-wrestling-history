@@ -25,7 +25,8 @@ def main(out, ver):
     html, b = re.subn(r'(<link rel="stylesheet" href=")' + local + '"', rf'\1\2?v={ver}"', html)
     def late(m): return re.sub(r"'([^'?]+\.js)'", rf"'\1?v={ver}'", m.group(0))
     html, c = re.subn(r'window\.OT_LATE = \[[^\]]*\]', late, html)
-    if not (a and b and c): sys.exit(f'stamp failed: scripts={a} styles={b} late={c}')
+    html, d = re.subn(r"sc\.src = 'intro-audio\.js'", f"sc.src = 'intro-audio.js?v={ver}'", html)  # loader music, loaded on demand
+    if not (a and b and c and d): sys.exit(f'stamp failed: scripts={a} styles={b} late={c} audio={d}')
     (out / 'index.html').write_text(html)
     print(f'built {out} v={ver}: {a} scripts, {b} stylesheet, OT_LATE stamped')
 
