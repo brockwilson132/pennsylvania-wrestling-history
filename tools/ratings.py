@@ -75,6 +75,7 @@ def pick(b, salt, pct):
     correction to some brackets does not reshuffle which bouts every tuning step hides"""
     k = '|'.join((salt, b['tournament'], b['weight'], b['side'], str(b['round']), b['winner'], b['loser']))
     return zlib.crc32(k.encode()) % 100 < pct
+BI = {b['i']: b for b in bouts}
 med = json.loads(open('overtime/medals.js').read().split('window.WR_MEDALS=', 1)[1].split(';')[0])
 state_place = {(y, c, wn(w), nk(n)): p for y, c, w, p, n, s, d in med}
 def state_tname(y, c):
@@ -255,6 +256,7 @@ tr = [r for r in pairs if r[3] <= 2017]; te = [r for r in pairs if r[3] > 2017]
 a = min((x / 100 for x in range(1, 200)), key=lambda a: sum(lgl(-a * d) for d, *_ in tr))
 X = np.array([[-d, (rw - rl) / 400] for d, rw, rl, y in tr]);
 from scipy.optimize import minimize
+from scipy.special import expit
 f = lambda w: np.mean(np.log1p(np.exp(-(X @ w))))
 wfit = minimize(f, [0.3, 1.0]).x
 Xt = np.array([[-d, (rw - rl) / 400] for d, rw, rl, y in te])
@@ -273,6 +275,84 @@ def mweight(b):
     if b['result'] in SKIP: return 0.0
     if b['result'] == 'dec' and re.search(r'\b(OT|SV|TB|UTB|2OT|UT)\b', b['flags'] or ''): return 0.8
     return MW.get(b['result'], 1.0)
+# ---- result margin and pin time (RATINGS_MARGIN=ordered). Two parts per bout: who won, P = sigma(z) as before (so the
+# scale and every win-probability test are unchanged), and HOW he won given that he won: one ladder of 11 categories
+# ordered by the edge each one means (mean pre-bout gap, 1990+ regional + state: OT 34, dec by 1 57, by 2-3 88, by 4-7
+# 146, fall after 4:00 187, major 8-11 222, fall 2:00-4:00 250, major 12+ 282, fall 1:00-2:00 338, fall under 1:00 382,
+# tech fall 389), modelled as a cumulative logit P(at least category k | won) = sigma(beta * z - theta_k). beta, the
+# slope, says how much a margin tells about strength; it is fitted per era with the thresholds (scoring rules and
+# period lengths changed), and comes out far below 1 (~0.2-0.4): a margin is much noisier evidence than the win itself.
+# (Tested 2026-11-08: one shared latent for win and margin, i.e. beta = 1, made held-out log loss far worse, .498 -> .542
+# at the first offset step, because it treats a 1-point decision as nearly exact.) A bout whose score or pin time is
+# missing counts only for what is known (a decision of unknown score: some decision, 1974+; a fall of unknown time: at
+# least a late fall; otherwise the win alone), so a missing score never costs or gains anything.
+MARGIN = os.environ.get('RATINGS_MARGIN', 'ordered')   # 'weights' = the old fall 1.5 / TF 1.4 / MD 1.2 / dec 1.0 / OT 0.8 weights
+MCATS = ['dec OT', 'dec 1', 'dec 2-3', 'dec 4-7', 'fall 4+', 'md 8-11', 'fall 2-4', 'md 12+', 'fall 1-2', 'fall <1', 'tf']
+def mcat(b):
+    """(lowest category, highest category) the result is known to lie in, or None for a plain win"""
+    res, sc, fl = b['result'], b['score'] or '', b['flags'] or ''
+    if res == 'fall':
+        m = re.fullmatch(r'(\d{1,2}):(\d\d)', sc.strip())
+        if not m: return (4, 10)
+        t = int(m[1]) * 60 + int(m[2]); k = 9 if t < 60 else 8 if t < 120 else 6 if t < 240 else 4
+        return (k, k)
+    if res == 'tf': return (10, 10)
+    if res in ('dec', 'md'):
+        if re.search(r'\b(OT|SV|TB|UTB|2OT|UT)\b', fl): return (0, 0)
+        m = re.match(r'\s*(\d+)-(\d+)', sc)
+        if not m: return (0, 3) if res == 'dec' and b['year'] >= 1974 else None
+        d = int(m[1]) - int(m[2])
+        if d <= 0: return None
+        k = 1 if d <= 1 else 2 if d <= 3 else 3 if d <= 7 else 5 if d <= 11 else 7
+        return (k, k)
+    return None
+def mera(y): return 0 if y < 1956 else 1 if y < 1974 else 2 if y < 1990 else 3 if y < 2005 else 4
+TH = None   # era -> {'beta': slope, 't': 10 thresholds in z units}, set below in ordered mode
+# Margin in context (2026-11-08, after Brock's own 2017 state run of close wins read as weakness): what a margin says
+# depends on where and between whom. At the same rating gap, state bouts end in bonus points less often than district
+# bouts, and a wrestler who wins (or loses) by bonus points in his other bouts does so again whatever the gap. So each
+# bout's thresholds move by a level offset (regional, state vs district) and by the winner's shrunk bonus share among
+# his other wins and the loser's among his other losses (career window, this bout left out). A margin then moves a
+# rating only when it is unusual for that setting and those two wrestlers. Fitted by tools/fit_margin.py on the
+# season ratings of the win-only model (RATINGS_MARGIN=weights), so the margins never fit themselves.
+MCTX_F = os.environ.get('RATINGS_THRESH') or ('data/difficulty/margin_ctx.json' if os.environ.get('RATINGS_MCTX', '1') == '1' else '')
+if MARGIN == 'ordered' and MCTX_F and os.path.exists(MCTX_F):
+    TH = {int(k): v for k, v in json.load(open(MCTX_F)).items()}
+# How much a margin counts (slope scale on the fitted slopes; with the context offsets, 2026-11-08). Hidden 1990-2017
+# regional + state bouts at the best prior width / untouched 2018-26 test / state champion rated #1 in his bracket:
+# win-only .5046/.4469/89.3%; x0.3 .4896/.4292/88.6%; x0.4 .4848/.4249/86.9%; x0.55 .4812/.4245/83.4%;
+# x0.8 .4751/.4216/80.8%; x1.0 .4736/.4253/77.5%. Larger scales trade agreement with how the tournament played out
+# for small prediction gains (a pinner who lost twice at states rated over medalists); x0.3 keeps champions on top as
+# often as the win-only model and has the best rating/placing agreement of all (Spearman .797 vs .794).
+# With margins in, the prior-width tuner picks 2.0 (1.5 .4896, 2.0 .4900: flat, widest within .001); the numbers above
+# are at 2.0, so data/sources/rating_settings.json pins 2.0 (at the old pin 1.5, champion #1 reads 86.6%).
+BETA_X = float(os.environ.get('RATINGS_BETA_X', 0.3))
+_BTH = {}
+def bout_th(b):
+    """(beta, lo, hi) of the margin term for a bout's known category range; beta 0 = no margin term"""
+    v = _BTH.get(b['i'])
+    if v is None: v = _BTH[b['i']] = _bout_th(b)
+    return v
+def _bout_th(b, moff=None):
+    c = MCAT.get(b['i'])
+    if c is None or TH is None: return 0.0, -1e6, 1e6
+    e = TH[mera(b['year'])]; t = e['t']; lo = -1e6 if c[0] == 0 else t[c[0] - 1]; hi = 1e6 if c[1] == 10 else t[c[1]]
+    if lo == -1e6 and hi == 1e6: return 0.0, -1e6, 1e6
+    o = (MOFF if moff is None else moff).get(b['i'], 0.0)   # on the margin logit: P(at least k | won) = sigma(beta * z + o - theta_k)
+    return e['beta'] * BETA_X, lo - o, hi - o
+def fit_thresh(rows_by_era):
+    """per era, slope and thresholds of P(category | won) given the rating gaps (MLE; thresholds monotone by construction)"""
+    out = {}
+    for e, rows in rows_by_era.items():
+        z = np.array([C_ * (a - b_) for a, b_, c in rows]); lo_k = np.array([r[2][0] for r in rows]); hi_k = np.array([r[2][1] for r in rows])
+        def f(p):
+            bt = math.exp(p[0]); th = np.concatenate([[-1e6], np.cumsum(np.concatenate([[p[1]], np.exp(p[2:])])), [1e6]])
+            a_ = bt * z - th[lo_k]; b_ = bt * z - th[hi_k + 1]
+            v = np.logaddexp(0, a_) + np.logaddexp(0, b_) - a_ - np.log1p(-np.exp(np.minimum(th[lo_k] - th[hi_k + 1], -1e-12)))
+            return float(v.sum())
+        p0 = np.concatenate([[math.log(0.3), -3.0], np.log(np.full(9, 0.6))]); r = minimize(f, p0, method='L-BFGS-B', options={'maxiter': 5000})
+        out[e] = {'beta': round(math.exp(r.x[0]), 4), 't': [round(float(x), 4) for x in np.cumsum(np.concatenate([[r.x[1]], np.exp(r.x[2:])]))]}
+    return out
 # identities: one name+school can be several people (father and son, or unrelated wrestlers years apart). Same rule as
 # tools/build_people.js splitCareers: a career spans at most 4 seasons (5 when grades show a repeated year), grades
 # never go backward, every grade implies the same graduating class (+-1 for a repeat), no season past graduation.
@@ -310,7 +390,46 @@ for b in bouts: b['wi'] = ID(b['wk'], b['year']); b['li'] = ID(b['lk'], b['year'
 season_b = defaultdict(list)          # year -> [(winner id, loser id, weight, bout index or -1)]
 for b in bouts:
     m = mweight(b)
-    if m > 0: season_b[b['year']].append((b['wi'], b['li'], m, b['i']))
+    if m > 0: season_b[b['year']].append((b['wi'], b['li'], 1.0 if MARGIN == 'ordered' else m, b['i']))
+MCAT = {b['i']: mcat(b) for b in bouts if b['result'] not in SKIP} if MARGIN == 'ordered' else {}
+MOFF = {}   # bout -> offset on the margin logit from level and the two wrestlers' styles (see MCTX_F above)
+def bonus_of(c): return None if c is None else 1 if c[0] >= 4 else 0 if c[1] <= 3 else None
+def style_counts(bs, key):
+    D = defaultdict(lambda: [0, 0])
+    for b in bs:
+        bb = bonus_of(MCAT.get(b['i']) if MCAT else mcat(b))
+        if bb is not None: D[(b[key], b['year'])][0] += bb; D[(b[key], b['year'])][1] += 1
+    return D
+def style_feat(D, k, y, bb, p, A=8.0):
+    a = n = 0
+    for d in range(-3, 4):
+        v = D.get((k, y + d))
+        if v: a += v[0]; n += v[1]
+    if bb is not None: a -= bb; n -= 1
+    q = (a + A * p) / (n + A); return math.log(q / (1 - q)) - math.log(p / (1 - p))
+_MOFFC = {}
+def moff_for(mask):
+    """offsets with the style counts built WITHOUT the masked (hidden) bouts, so a hidden result never reaches a rating"""
+    key = None if mask is None else id(mask)
+    if key in _MOFFC: return _MOFFC[key][1]
+    out = {}
+    if MARGIN == 'ordered' and TH is not None and 'fw' in TH[4]:
+        bs = bouts if mask is None else [b for b in bouts if b['i'] not in mask]
+        SW, SL = style_counts(bs, 'wi'), style_counts(bs, 'li')
+        for b in bs:
+            c = MCAT.get(b['i'])
+            if c is None: continue
+            e = TH[mera(b['year'])]; bb = bonus_of(c)
+            out[b['i']] = (e['reg'] * (b['level'] == 'regional') + e['state'] * (b['level'] == 'state')
+                           + e['fw'] * style_feat(SW, b['wi'], b['year'], bb, e['p0']) + e['fl'] * style_feat(SL, b['li'], b['year'], bb, e['p0']))
+    _MOFFC[key] = (mask, out); return out
+MOFF = moff_for(None)
+if MARGIN == 'ordered':
+    if TH is None:   # first pass: fitted on the pre-bout ratings of the last run (data/difficulty/bout_rtg.csv); refined from this run's output
+        TH = {0: {'beta': 0.255, 't': [-2.96, -1.84, -0.64, 0.65, 1.02, 1.32, 1.86, 1.88, 3.29, 20.48]}, 1: {'beta': 0.191, 't': [-3.22, -1.93, -0.71, 0.46, 0.73, 1.19, 1.69, 1.9, 3.2, 19.83]},
+              2: {'beta': 0.309, 't': [-3.06, -1.59, -0.48, 0.57, 0.87, 1.37, 2.05, 2.45, 3.43, 4.54]}, 3: {'beta': 0.344, 't': [-2.94, -1.52, -0.47, 0.5, 0.78, 1.23, 1.95, 2.13, 2.94, 3.88]},
+              4: {'beta': 0.381, 't': [-3.12, -1.64, -0.62, 0.25, 0.53, 0.91, 1.64, 1.77, 2.58, 3.6]}}
+    say('margin model: win + how he won (cumulative logit); slope per era ' + ', '.join(f'{e}: {v["beta"] * BETA_X:.3f}' for e, v in sorted(TH.items())))
 bouts_in = Counter(b['bk'] for b in bouts)
 PLACE_W = 0.3
 npseudo = 0
@@ -328,6 +447,19 @@ def fit_season(rows, ids, mu, sd, mask=None):
     L = np.array([idx[r[1]] for r in rows if mask is None or r[3] not in mask], int)
     M = np.array([r[2] for r in rows if mask is None or r[3] not in mask], float)
     mu = np.asarray(mu, float); iv = 1 / np.asarray(sd, float) ** 2
+    if MARGIN == 'ordered':
+        mo = None if mask is None or not MOFF else moff_for(mask)
+        if mo is not None: cm = _MOFFC.setdefault(('th', id(mask)), {})
+        LH = np.array([(bout_th(BI[r[3]]) if mo is None else (cm.get(r[3]) or cm.setdefault(r[3], _bout_th(BI[r[3]], mo)))) if isinstance(r[3], int) else (0.0, -1e6, 1e6) for r in rows if mask is None or r[3] not in mask], float).reshape(-1, 3)
+        BE, LO, HI = LH[:, 0], LH[:, 1], LH[:, 2]; K0 = np.log1p(-np.exp(np.minimum(LO - HI, -1e-12)))
+        def f(t):
+            z = C_ * (t[W] - t[L]); a = BE * z - LO; b_ = BE * z - HI
+            v = M * np.logaddexp(0, -z) + np.where(BE > 0, np.logaddexp(0, a) + np.logaddexp(0, b_) - a - K0, 0.0)
+            s = C_ * (-M * expit(-z) + BE * (expit(a) + expit(b_) - 1))
+            g = np.zeros_like(t); np.add.at(g, W, s); np.add.at(g, L, -s)
+            d = t - mu; return float(v.sum() + 0.5 * (iv * d * d).sum()), g + iv * d
+        r = minimize(f, mu.copy(), jac=True, method='L-BFGS-B', options={'maxiter': 500})
+        return dict(zip(ids, r.x))
     def f(t):
         z = C_ * (t[W] - t[L]); sp = np.logaddexp(0, -z)
         g = np.zeros_like(t); s = M * C_ * (1 / (1 + np.exp(z)))
@@ -762,6 +894,13 @@ if os.environ.get('RATINGS_SHIFT_TEST'):
     Tm, *_ = smoother(mask=HM, sd_scale=SDS, shift=SHIFT); hm = [b for b in bouts if b['i'] in HM]
     sc_, n_ = score(Tm, hm); acc_ = np.mean([Tm[b['year']][b['wi']] > Tm[b['year']][b['li']] for b in hm])
     say(f'common test, hidden 10% of 2018-26 regional + state bouts (n={n_}): log loss {sc_:.4f}, accuracy {acc_:.3f}')
+    if os.environ.get('RATINGS_HIDDEN_DUMP'):
+        with open(os.environ['RATINGS_HIDDEN_DUMP'], 'w', newline='') as f_:
+            cw_ = csv.writer(f_); cw_.writerow(['year', 'tournament', 'winner', 'winner_school', 'loser', 'loser_school', 'result', 'score', 'p'])
+            for b in hm:
+                tw, tl = Tm.get(b['year'], {}).get(b['wi']), Tm.get(b['year'], {}).get(b['li'])
+                if tw is None or tl is None: continue
+                cw_.writerow([b['year'], b['tournament'], b['winner'], b['winner_school'], b['loser'], b['loser_school'], b['result'], b.get('score', ''), 1 / (1 + 10 ** ((tl - tw) / 400))])
 # leak-free test of the batch rating: hide 10% of 2018-2026 bouts, fit without them, predict them
 held = {b['i'] for b in bouts if b['year'] >= 2018 and b['result'] not in SKIP and pick(b, 'held', 10)}
 Th, *_ = smoother(mask=held, sd_scale=SDS, shift=SHIFT)
@@ -772,6 +911,14 @@ acc_b = np.mean([Th[b['year']][b['wi']] > Th[b['year']][b['li']] for b in hb])
 say(f'held-out 10% of 2018-2026 bouts (n={len(hb)}), fit without them: season-batch strength log loss {ll_batch:.4f} accuracy {acc_b:.3f}; forward rating {ll_fwd:.4f}')
 say('  (the batch number uses the rest of that season, before and after the bout; the forward number uses only the past. Both are leak-free for the hidden bout.)')
 T, T0, Wt, RES_SD = smoother(report=True, sd_scale=SDS, shift=SHIFT)
+if MARGIN == 'ordered':   # refit slope and thresholds on the final ratings (next run: RATINGS_THRESH=<out>/thresh.json)
+    _re = defaultdict(list)
+    for b in bouts:
+        c = MCAT.get(b['i']); Ty = T.get(b['year'], {})
+        if c and b['wi'] in Ty and b['li'] in Ty: _re[mera(b['year'])].append((Ty[b['wi']], Ty[b['li']], c))
+    TH_FIT = fit_thresh(_re)
+    say('margin slope refit on the final ratings: ' + ', '.join(f'era {e}: {v["beta"]:.3f}' for e, v in sorted(TH_FIT.items())))
+    json.dump(TH_FIT, open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/thresh.json', 'w'))
 say(f'prior sd (most common pattern, scaled): {RES_SD:.0f}')
 def theta(k, y): return T.get(y, {}).get(ID(k, y))
 
@@ -902,7 +1049,11 @@ for y in YEARS:
     for r in season_b[y]:
         a, b_, wgt = r[0], r[1], r[2]
         if a not in Ty or b_ not in Ty: continue
-        p = 1 / (1 + math.exp(-C_ * (Ty[a] - Ty[b_]))); x = wgt * C_ * C_ * p * (1 - p)
+        if MARGIN == 'ordered' and isinstance(r[3], int):
+            be_, lo_, hi_ = bout_th(BI[r[3]]); z_ = C_ * (Ty[a] - Ty[b_]); p = 1 / (1 + math.exp(-z_)); x = wgt * C_ * C_ * p * (1 - p)
+            if be_ > 0: pa_ = expit(be_ * z_ - lo_); pb_ = expit(be_ * z_ - hi_); x += C_ * C_ * be_ * be_ * (pa_ * (1 - pa_) + pb_ * (1 - pb_))
+        else:
+            p = 1 / (1 + math.exp(-C_ * (Ty[a] - Ty[b_]))); x = wgt * C_ * C_ * p * (1 - p)
         info[a] = info.get(a, 0) + x; info[b_] = info.get(b_, 0) + x
     for i, v in info.items():
         if v > 0: SDV[(i, y)] = 1 / math.sqrt(v)
@@ -1001,7 +1152,10 @@ for (b2, k) in recs: rec_keys[b2].append(k)
 for bk, (y, c, unit, lr) in bracket_meta.items():
     keys = list(dict.fromkeys([e[0] for e in entrants.get(bk, [])] + rec_keys.get(bk, [])))
     vals = [norm(theta(k, y), y, c) for k in keys if theta(k, y) is not None]
-    top = sorted(vals, reverse=True)[:8]
+    # field strength = mean of the 4 best-rated entrants, placed or not (Brock 2026-11-08). Not the top 8: 1950-70 state and
+    # regional fields often had only 4 wrestlers, with no weak 5th-8th entrant to pull a top-8 mean down, so the 1960s
+    # (6% of state brackets) filled 30% of the toughest sixth; with the top 4 every decade sits near its share.
+    top = sorted(vals, reverse=True)[:4]
     brackets[bk] = {'year': y, 'c': c, 'unit': unit, 'lr': lr, 'n': len(keys), 'rated': len(vals), 'field': float(np.mean(top)) if top else None, 'bouts': bouts_in.get(bk, 0)}
 for lvl in ('district', 'regional', 'state'):
     fs = [B['field'] for bk, B in brackets.items() if bk[0] == lvl and B['year'] >= 1980 and B['field'] is not None]
@@ -1084,8 +1238,10 @@ def fit_one(mu_i, sd_i, obs, t0):
     t = t0; iv = 1 / sd_i ** 2
     for _ in range(30):
         g = iv * (t - mu_i); h = iv
-        for o, sg, m in obs:
-            z = C_ * sg * (t - o); p = 1 / (1 + np.exp(z)); g -= m * C_ * sg * p; h += m * C_ * C_ * p * (1 - p)
+        for o, sg, m, be, lo, hi in obs:   # be > 0: the margin term (RATINGS_MARGIN=ordered)
+            z = C_ * sg * (t - o); p = 1 / (1 + math.exp(max(-700.0, min(700.0, z)))); g -= m * C_ * sg * p; h += m * C_ * C_ * p * (1 - p)
+            if be > 0:
+                a = expit(be * z - lo); b_ = expit(be * z - hi); g -= C_ * sg * be * (1 - a - b_); h += C_ * C_ * be * be * (a * (1 - a) + b_ * (1 - b_))
         st = g / h; t -= st
         if abs(st) < 1e-4: break
     return t
@@ -1102,17 +1258,18 @@ with open(os.environ.get('RATINGS_OUT', 'data/difficulty') + '/bout_rtg.csv', 'w
                 b = BI[r[3]]; k = (_stage(b), WAVE[r[3]])
             else:
                 k = (LV[r[3][1]] + 0.9, 10 ** 6)   # placement-implied pairs count once that level is over
-            mine[r[0]].append((k, Ty[r[1]], 1, r[2], r[3])); mine[r[1]].append((k, Ty[r[0]], -1, r[2], r[3]))
+            be_, lo_, hi_ = bout_th(BI[r[3]]) if (MARGIN == 'ordered' and isinstance(r[3], int)) else (0.0, -1e6, 1e6)
+            mine[r[0]].append((k, Ty[r[1]], 1, r[2], be_, lo_, hi_, r[3])); mine[r[1]].append((k, Ty[r[0]], -1, r[2], be_, lo_, hi_, r[3]))
         AS = {}                           # (wrestler, bout index) -> (before, after)
         for i, ev in mine.items():
             ev.sort(key=lambda e: e[0]); m_i, s_i = P0[i]; t = m_i; done = []
             for n_, e in enumerate(ev):
-                if not isinstance(e[4], int): done.append(e[1:4]); continue
+                if not isinstance(e[7], int): done.append(e[1:7]); continue
                 pre = fit_one(m_i, s_i, done, t) if done else m_i
-                post = fit_one(m_i, s_i, done + [x[1:4] for x in ev[n_:] if x[0] == e[0]], pre); nfit += 1
-                AS[(i, e[4])] = (pre, post)
+                post = fit_one(m_i, s_i, done + [x[1:7] for x in ev[n_:] if x[0] == e[0]], pre); nfit += 1
+                AS[(i, e[7])] = (pre, post)
                 if all(x[0] <= e[0] for x in ev): maxgap = max(maxgap, abs(post - Ty[i]))
-                done.append(e[1:4]); t = pre
+                done.append(e[1:7]); t = pre
         for r in season_b[y]:
             if not isinstance(r[3], int): continue
             b = BI[r[3]]; (pw_, qw_), (pl_, ql_) = AS[(b['wi'], r[3])], AS[(b['li'], r[3])]; c = b['c']

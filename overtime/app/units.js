@@ -134,7 +134,7 @@
     return `<svg class="spk" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${d}" fill="none" stroke="#EEEAE1" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity=".85"/>${lone}<circle cx="${X(pk[0])}" cy="${Y(pk[1])}" r="2.6" fill="#D9A441"/></svg>`;
   }
   /* ---------- strength of competition ----------
-     A bracket's strength is the mean rating of its top eight. Everywhere a result appears it gets one slim bar beside it.
+     A bracket's strength is the mean rating of its four best-rated entrants. Everywhere a result appears it gets one slim bar beside it.
      Every level shares ONE scale anchored to the average state bracket: that bracket sits at 80% of the bar (orange), the
      weakest district brackets (5th percentile) at the empty end, and the scale runs on in straight rating points, so the
      toughest state brackets reach red. A loaded district therefore reads close to a state bracket, a thin one reads cold,
@@ -164,8 +164,9 @@
   const fieldTip = (v, lvl = 'state', ctx) => { const p = pctIn(v, lvl); return `Strength of competition ${r10(v)} · ${vsState(v)} (${r10(sAnchor().avg)})` + (p != null ? ` · tougher than ${p}% of ${lvl} brackets` : '') + (ctx ? ' · ' + ctx : ''); };
   const compColor = (v, lvl = 'state') => colorAt(sFrac(v, lvl));
   /* ---------- the toughness signal: six signal bars beside every result ----------
-     Each bracket is measured against brackets at its OWN level (section counts as district): six equal steps of rating
-     points between that level's 5th and 95th percentile, from Docile (one bar) to Violent (six). The column a result sits
+     Each bracket is measured against brackets at its OWN level (section counts as district): the level's brackets split
+     into sextiles of strength (mean of the 4 best-rated entrants), so each tier holds a sixth of them, from Docile (one
+     bar) to Violent (six) (Brock 2026-11-08). The column a result sits
      in already says the level, so the bars spend all six steps on "how tough for a district / regional / state bracket".
      The comparison across levels (exact number, how far from the average state bracket) lives in the tooltip and the
      bracket header. Cut points come from every bracket on file, so they follow each rebuild. */
@@ -174,8 +175,8 @@
   const sgLvl = (lvl) => (lvl === 'section' || !LK[lvl] ? (lvl === 'state' ? 'state' : 'district') : lvl);
   let SGC = null;
   const sgCuts = (lvl) => {
-    if (!SGC) { SGC = {}; SG_LV.forEach((l) => { const A = lvlArr(l); if (!A.length) return; const q = (p) => A[Math.floor(p * (A.length - 1))], lo = q(0.05), hi = q(0.95);
-      SGC[l] = [1, 2, 3, 4, 5].map((i) => Math.round((lo + (hi - lo) * i / 6) / 10) * 10); }); }
+    if (!SGC) { SGC = {}; SG_LV.forEach((l) => { const A = lvlArr(l); if (!A.length) return; const q = (p) => A[Math.floor(p * (A.length - 1))];
+      SGC[l] = [1, 2, 3, 4, 5].map((i) => Math.round(q(i / 6) / 10) * 10); }); }
     return SGC[sgLvl(lvl)] || [];
   };
   const sgTier = (v, lvl) => sgCuts(lvl).filter((c) => v >= c).length;
@@ -198,7 +199,7 @@
     const L = sAnchor().lvl;
     const lvls = SG_LV.map((l) => `<span class="sgl"><i>${l[0].toUpperCase() + l.slice(1)}</i><em>avg ${r10(L[l])}</em></span>`).join('');
     const rows = SG_N.map((n, t) => `<div class="sgr">${sgSvg(t, ' big')}<span class="sgm"><b style="color:${sgCol(t)}">${n}</b><small>${SG_D[t]}</small></span>${SG_LV.map((l) => `<span class="sgv2${sgTier(L[l], l) === t ? ' avg' : ''}">${sgRange(t, l)}</span>`).join('')}</div>`).join('');
-    return `${row}<div class="sgx"><p>Signal bars compare a bracket only with brackets at the same level. Its column (district, regional or state) tells you which. A Violent district bracket is still easier than most state brackets: tap a result or open a bracket for the exact strength and how it compares with the average state bracket (${r10(L.state)}).</p><div class="sgt"><span></span><span></span>${lvls}${rows}</div><p class="sgf">The gold dot marks the tier holding each level's average bracket. Strength is the average rating of a bracket's top eight. Each level is cut into six equal steps between its 5th and 95th percentile, using every bracket on file.</p></div>`;
+    return `${row}<div class="sgx"><p>Signal bars compare a bracket only with brackets at the same level. Its column (district, regional or state) tells you which. A Violent district bracket is still easier than most state brackets: tap a result or open a bracket for the exact strength and how it compares with the average state bracket (${r10(L.state)}).</p><div class="sgt"><span></span><span></span>${lvls}${rows}</div><p class="sgf">The gold dot marks the tier holding each level's average bracket. Strength is the average rating of a bracket's four best-rated wrestlers. Each level's brackets are split into six equal groups, using every bracket on file.</p></div>`;
   };
   const sbar = (v, lvl, ctx) => smeter(v, lvl, ctx, false);
   const compBar = (v, tip) => sbar(v, 'state', tip);
@@ -302,12 +303,11 @@
   const winTypesOf = (name, years) => { if (!BW) return null; const k = nkey(name); const t = [0, 0, 0, 0]; let any = false; years.forEach((y) => { const v = BW[k + '|' + y]; if (v && v.length > 9) { any = true; t[0] += v[7]; t[1] += v[8]; t[2] += v[9]; t[3] += v[5]; } }); return any ? t : null; };
 
   /* ---------- wrestler card (the one standard card: Wrestlers list, all-time team, school pages) ----------
-     Peak-rating bar down the left (1500 = an average state qualifier, to 2200). Four tiles first: postseason wins by
+     Peak rating with its ladder bars (rtgBars). Four tiles first: postseason wins by
      type (decisions, majors, tech falls, falls). Then seasons run down: year and grade on the left, District → Regional
      → State across (each result carries its bracket-toughness signal bars inside it, so results centre under their
      level), the weight on the right. The school tag always shows. `rank` is whatever sits left of the name: a list
      rank, a weight or a team. */
-  const PK_LO = 1500, PK_HI = 2200;
   const WC_LV = [['district', 'District'], ['regional', 'Regional'], ['state', 'State']];
   /* postseason wins by type as one bar, decisions → falls getting brighter, losses dark red at the end; only the count
      sits in each piece (the colours are explained once, in the key above the list) */
@@ -318,10 +318,15 @@
     const tip = `${v[0]} decisions · ${v[1]} majors · ${v[2]} tech falls · ${v[3]} falls · ${v[4]} losses`;
     return `<span class="wtb" title="${tip}" aria-label="${tip}">${WT_K.map(([k], j) => (v[j] ? `<span class="${k}" style="flex:${v[j]}">${v[j]}</span>` : '')).join('')}</span>`;
   }
-  /* peak rating as signal bars: six steps from 1500 (an average state qualifier) to 2200, coloured on the rating scale */
+  /* a rating as signal bars on one fixed ladder, the same at every level: each bar is the furthest a wrestler at that
+     rating gets more often than not (50/50 points of a logistic fit on 1999-2026 seasons, margin-in-context ratings x0.3,
+     2026-11-08): 700 reaches regionals, 1300 reaches states, 1550 medals, 1750 top four, 1950 state final. So one bar =
+     below regional level, three = plays like a state qualifier, six = plays like a state finalist. Bracket toughness keeps
+     its own six tiers (Docile ... Violent), sextiles within each level. */
+  const RB_CUT = [700, 1300, 1550, 1750, 1950];
   function rtgBars(v) {
-    const f = Math.max(0, Math.min(1, (v - PK_LO) / (PK_HI - PK_LO))), n = Math.max(1, Math.min(6, Math.ceil(f * 6))), c = colorAt(f);
-    return `<svg class="rtb" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
+    const n = 1 + RB_CUT.filter((x) => v >= x).length, c = colorAt(0.08 + 0.92 * (n - 1) / 5);
+    return `<svg class="rtb sgv" viewBox="0 0 23 14" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="${i * 4}" y="${12 - i * 2}" width="3" height="${2 + i * 2}" rx=".6" fill="${i < n ? c : '#2F3640'}"/>`).join('')}</svg>`;
   }
   /* a result is a disc, every one the same size: gold / silver / bronze with the place, 4th–8th plain with the place,
      a ring with Q for qualified or advanced without a place, an empty socket for no place or not entered; the
@@ -335,7 +340,7 @@
   const lvIcon = (lvl) => `<span class="lvi" title="${lvl[0].toUpperCase() + lvl.slice(1)}">${OT.navIcon(LV_ICON[lvl])}</span>`;
   /* the wins bar's key: one swatch per type, under the bar it explains */
   const WT_S = ['Dec', 'Major', 'Tech fall', 'Fall', 'Loss'];
-  const winKey = () => `<span class="wtk">${WT_K.map(([k], j) => `<span><i class="${k}"></i>${WT_S[j]}</span>`).join('')}</span>`;
+  const winKey = (noLoss) => `<span class="wtk">${WT_K.slice(0, noLoss ? 4 : 5).map(([k], j) => `<span><i class="${k}"></i>${WT_S[j]}</span>`).join('')}</span>`;
   const wlegend = () => `<div class="wlg">${winKey()}</div>`;
   /* one result cell: toughness bars, disc, spacer; a link to the bracket when there is one */
   function dcell(c, lvl, link) {

@@ -405,7 +405,7 @@
   /* the eight medalists: top three on a podium (name, school, his rating with its signal bars), 4th–8th as rows. The
      bars on a rating are the same six tiers as the bracket's own level, so a rating reads against that level's brackets. */
   function medalists(placers, info, lvl) {
-    const rtg = (i) => (i.rt == null ? '' : `<span class="mdsg">${OT.sgIcon(i.rt, lvl)}<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b></span>`);
+    const rtg = (i) => (i.rt == null ? '' : `<span class="mdsg">${OT.rtgBars(i.rt)}<b>${i.raw ? Math.round(i.rt) : OT.rtg10(i.rt)}</b></span>`);
     const by = (p) => placers.filter((r) => r.place === p);
     const chip = (r) => stag(r.sch, { abbr: true });
     const stats = (r) => { const i = info(r); return `<span class="mdv" title="${i.raw ? 'RTG after the tournament' : 'season rating'}">${rtg(i)}</span>`; };
@@ -455,7 +455,7 @@
       line: (n, won, b) => { const e = EN.get(nk(n)); const pr = PRE.get(b); const rt = pr ? (won ? pr[0] : pr[1]) : rOfName(n);
         const chip = e ? stag(e.r.sch, { abbr: true, cls: 'xs' }) : '<i class="bxnc"></i>';
         const tip = `${n}${e ? ' · ' + e.r.sch : ''}${e && e.seedLabel ? ' · seed ' + e.seedLabel : ''}${rt != null ? (pr ? ' · RTG going in ' + Math.round(rt) : ' · RTG ' + OT.rtg10(rt)) : ''}`;
-        const inner = `${chip}<i class="b2gr">${e && e.r.grade ? esc(e.r.grade) : ''}</i><span class="b2n">${esc(n)}</span><span class="b2v">${rt != null ? OT.sgIcon(rt, F.lvl) : '<i class="b2sg"></i>'}<b${rt == null ? ' class="nr"' : ''}>${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</b></span>`;
+        const inner = `${chip}<i class="b2gr">${e && e.r.grade ? esc(e.r.grade) : ''}</i><span class="b2n">${esc(n)}</span><span class="b2v">${rt != null ? OT.rtgBars(rt) : '<i class="b2sg"></i>'}<b${rt == null ? ' class="nr"' : ''}>${rt != null ? (pr ? Math.round(rt) : OT.rtg10(rt)) : '–'}</b></span>`;
         return e ? `<a class="b2l${won ? ' w' : ''}${ctx.isFocus(n) ? ' me' : ''}" href="#wrestler/${e.slug}" title="${esc(tip)}">${inner}</a>` : `<span class="b2l${won ? ' w' : ''}" title="${esc(tip)}">${inner}</span>`; } };
     const RNC = (d) => ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16', 'Round of 32', 'Pigtails'][d] || 'Prelims';
     const RNX = (d) => (d === 0 ? '3rd place' : d === 1 ? 'Consolation semis' : 'Consolation R' + d);
@@ -493,9 +493,9 @@
         /* how tough his path was: his opponents' average rating going into each bout, on this level's strength scale */
         const opp = bl.map((b) => { const won = nk(b[2]) === nk(r.name); const v = b.length > 8 ? (won ? b[8] : b[7]) : null; return v != null ? v : rOfName(won ? b[3] : b[2]); }).filter((v) => v != null);
         const path = opp.length ? opp.reduce((a, v) => a + v, 0) / opp.length : null;
-        const pbar = path != null ? OT.sgIcon(path, F.lvl) : '';
-        /* his rating with the same six signal bars the medalists use: the tiers of this bracket's own level */
-        const rv = rOf(r), rbar = rv ? OT.sgIcon(rv, F.lvl) : '';
+        const pbar = path != null ? OT.rtgBars(path) : '';
+        /* his rating with the rating ladder bars used for every wrestler rating (OT.rtgBars) */
+        const rv = rOf(r), rbar = rv ? OT.rtgBars(rv) : '';
         const pline = path != null ? `<span class="bvop"><span>Opponents averaged</span>${pbar}<b>${Math.round(path)}</b></span>` : '';
         return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary>${fin || '<span></span>'}<span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span><span class="dsp">${rbar}${rv ? `<b class="bvrt" title="RTG">${OT.rtg10(rv)}</b>` : ''}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }

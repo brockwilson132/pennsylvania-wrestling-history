@@ -1675,3 +1675,7 @@ button.dqn{width:100%;cursor:pointer}button.dqn.alt b{color:var(--ash)}
 /* state-duals starter at an empty weight: the duals mark in place of grade / places */
 .zsdu{justify-self:center;display:inline-flex;color:var(--ash2)}.zsdu svg{width:18px;height:18px}
 .dqg.dqdu{display:inline-flex;vertical-align:middle}.dqg.dqdu svg{width:13px;height:13px}
+
+/* head to head: how a bout between the two ends */
+.h2how{margin-top:12px;display:grid;gap:6px}.h2how .wtb{height:24px}.h2how .wtb>span{min-width:0}
+.h2mid{flex:0 0 8px;display:block}

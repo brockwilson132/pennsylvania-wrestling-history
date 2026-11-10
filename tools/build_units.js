@@ -127,6 +127,14 @@ const realOf = (a) => { const L = REAL.get(a.year + '|' + a.w + '|' + nkey(a.nam
 const NBO = new Map();
 { const L = fs.readFileSync(path.join(__dirname, '..', 'data', 'brackets', 'bouts.csv'), 'utf8').split(/\r?\n/); const h = L[0].split(','); const [iY, iW, iA, iB] = ['year', 'weight', 'winner', 'loser'].map((c) => h.indexOf(c));
   for (let i = 1; i < L.length; i++) { const f = L[i].split(','); if (f.length !== h.length) continue; [iA, iB].forEach((j) => { if (!f[j]) return; const k = f[iY] + '|' + wNum(f[iW]) + '|' + nkey(f[j]); NBO.set(k, (NBO.get(k) || 0) + 1); }); } }
+/* style (tools/build_style.py): each wrestler-season's record by type over this season and up to three before, and the
+   model that turns the two wrestlers' records plus the gap into the chance of decision / major / tech fall / fall */
+const STY_M = process.env.SEASON_STYLE === 'off' ? null : (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'difficulty', 'style_model.json'), 'utf8')); } catch (e) { return null; } })();
+const STYC = new Map();
+if (STY_M) { const txt = require('zlib').gunzipSync(fs.readFileSync(path.join(__dirname, '..', 'data', 'difficulty', 'style.csv.gz'))).toString('utf8').split('\n'); const h = txt[0].split(',');
+  for (let i = 1; i < txt.length; i++) { const f = txt[i].split(','); if (f.length !== h.length) continue; const k = f[0] + '|' + wNum(f[1]) + '|' + nkey(f[2]);
+    const L = STYC.get(k) || STYC.set(k, []).get(k); L.push([(f[3] || '').split('|')[1] || '', f.slice(4).map(Number)]); } }
+const styleCnt = (a) => { const L = STYC.get(a.year + '|' + a.w + '|' + nkey(a.name)); if (!L) return null; if (L.length === 1) return L[0][1]; const m = L.find((x) => x[0] === nkey(a.raw)); return m ? m[1] : null; };
 let nReal = 0; APP.forEach((a) => { const v = realOf(a); a.real = v == null ? (a.rating || null) : v; if (v != null) nReal++; });
 console.log('real season ratings', WSF.split('/').pop(), 'matched', nReal, 'of', APP.length);
 
@@ -221,7 +229,7 @@ bySS.forEach((rows, k) => {
   let reg = regionOf(year, c, d) || (rows.find((a) => a.lvl === 'regional' && a.unit) || {}).unit || ''; if (reg === 'W') reg = 'SW'; if (!['NE', 'NW', 'SC', 'SE', 'SW', 'CNW'].includes(reg)) reg = '';
   const covered = cov.has(year + '|' + c + '|' + d);
   const per = new Map(); // wrestler → {std, real, shown, D,R,S}
-  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, nb: 0, shown: 0, X: -1, D: -1, R: -1, S: -1 }; if (p.g == null || p.g < 0) p.g = a.g; p.nb = Math.max(p.nb, NBO.get(a.year + '|' + a.w + '|' + nkey(a.name)) || 0);
+  rows.forEach((a) => { const p = per.get(a.k) || { name: a.name, std: a.std, w: a.w, real: null, nb: 0, shown: 0, X: -1, D: -1, R: -1, S: -1 }; if (p.g == null || p.g < 0) p.g = a.g; p.nb = Math.max(p.nb, NBO.get(a.year + '|' + a.w + '|' + nkey(a.name)) || 0); if (!p.st) p.st = styleCnt(a);
     if (a.real != null && (p.real == null || a.real > p.real)) p.real = a.real; p.shown = Math.max(p.shown, a.rating);
     const L = { section: 'X', district: 'D', regional: 'R', state: 'S' }[a.lvl]; const pl = a.place || 0; if (p[L] < 0 || (pl && (!p[L] || pl < p[L]))) p[L] = pl; if (a.lvl === 'state') p.std = a.std; per.set(a.k, p); });
   per.forEach((p) => RATED.set(year + '|' + c + '|' + sch + '|' + nkey(p.name), p));
@@ -353,8 +361,22 @@ byS.forEach((rows, i) => {
      over both wrestlers' spreads, which shrinks the gap the bout is scored at (UNC tuned on the real state duals below) */
   let UNC = +(process.env.SEASON_UNC || 0); const K2 = Math.PI * Math.pow(Math.LN10 / 400, 2) / 8;
   const varOf = (n) => (n == null ? 0 : n < 0 ? -n : UNC * UNC / (1 + n));   // n < 0: minus the rating's own variance (state-duals starters, whose rating is already a posterior)
-  const bout = (ra, rb, na, nb) => { if (ra == null) return rb == null ? [0, 0] : [-6, 36]; if (rb == null) return [6, 36]; let g = ra - rb; if (UNC) g /= Math.sqrt(1 + K2 * (varOf(na) + varOf(nb)));
-    const i = Math.round((Math.max(-GMAX, Math.min(GMAX, g)) + GMAX) / 5); return [BM[i], BV[i] + BM[i] * BM[i]]; };
+  /* style: given a win, logits of dec / major / tech fall / fall = a gap curve (table ZB) + the winner's record by type
+     (shares among his wins) + the loser's (shares among his losses); see tools/build_style.py. A wrestler with no record,
+     or a weight nobody filled, has the usual shares (0). With style off (no model) the split is the gap table above. */
+  const ZB = new Float64Array(BM.length * 4);
+  if (STY_M) for (let i = 0; i < BM.length; i++) { const g = Math.max(STY_M.clip[0], Math.min(STY_M.clip[1], i * 5 - GMAX)) / 400, x = [1, g, g * g, g * g * g]; for (let k = 0; k < 4; k++) ZB[4 * i + k] = x.reduce((t, v, j) => t + v * STY_M.W[j][k], 0); }
+  const mixZ = (i, sw, sl, out) => { let m = -1e9; for (let k = 0; k < 4; k++) { let z = ZB[4 * i + k]; if (sw) z += sw[0] * STY_M.W[4][k] + sw[1] * STY_M.W[5][k] + sw[2] * STY_M.W[6][k]; if (sl) z += sl[3] * STY_M.W[7][k] + sl[4] * STY_M.W[8][k] + sl[5] * STY_M.W[9][k]; out[k] = z; if (z > m) m = z; }
+    let t = 0; for (let k = 0; k < 4; k++) { out[k] = Math.exp(out[k] - m); t += out[k]; } for (let k = 0; k < 4; k++) out[k] /= t; return out; };
+  const QA = new Float64Array(4), QB = new Float64Array(4);
+  const bout = (ra, rb, na, nb, sa, sb) => { if (ra == null) return rb == null ? [0, 0] : [-6, 36]; if (rb == null) return [6, 36]; let g = ra - rb; if (UNC) g /= Math.sqrt(1 + K2 * (varOf(na) + varOf(nb)));
+    const i = Math.round((Math.max(-GMAX, Math.min(GMAX, g)) + GMAX) / 5);
+    if (!STY_M) return [BM[i], BV[i] + BM[i] * BM[i]];
+    const p = 1 / (1 + Math.pow(10, -g / 400)), ma = mixZ(i, sa, sb, QA), mb = mixZ(BM.length - 1 - i, sb, sa, QB); let m = 0, s2 = 0;
+    for (let k = 0; k < 4; k++) { m += p * ma[k] * BP[k] - (1 - p) * mb[k] * BP[k]; s2 += (p * ma[k] + (1 - p) * mb[k]) * BP[k] * BP[k]; } return [m, s2]; };
+  /* a wrestler's record by type as model features: shrunk log share of major / tech fall / fall among his wins, then among his losses */
+  const stF = (c) => { if (!c || !STY_M) return null; const p0 = STY_M.p0, A = STY_M.A, nw = c[0] + c[1] + c[2] + c[3], nl = c[4] + c[5] + c[6] + c[7];
+    return [1, 2, 3].map((k) => Math.log((c[k] + A * p0[k]) / (nw + A)) - Math.log(p0[k])).concat([1, 2, 3].map((k) => Math.log((c[4 + k] + A * p0[k]) / (nl + A)) - Math.log(p0[k]))); };
   /* the fill for a weight we can't see */
   const pv = (r) => 1 / (1 + Math.pow(10, (REF - r) / 400));
   const eraOf = (y) => (y < 1999 ? 0 : 1);
@@ -444,14 +466,14 @@ byS.forEach((rows, i) => {
     /* one slot per weight the season actually had, lightest first (a weight bracket of STDK can hold two of a season's
        weights, 130 and 135 in 2002-11 or 182 and 195 in 2012-23, so slots are by position, not by bracket) */
     const lw = s.lw; const ST = exact && DUALFILL ? startersOf(s, lw.map((x) => (x[1] == null ? x[0] : null)).map((w) => w)) : new Map(); s.dfs = new Map();
-    const slot = lw.map((x, j) => { if (!exact) return x[2] != null ? [[x[2], 1, x[4].nb]] : fill; if (x[1] != null) return [[x[1], 1, x[3].nb]];
+    const slot = lw.map((x, j) => { if (!exact) return x[2] != null ? [[x[2], 1, x[4].nb, stF(x[4].st)]] : fill; if (x[1] != null) return [[x[1], 1, x[3].nb, stF(x[3].st)]];
       const e = ST.get(j); if (!e) return empty(s.year, 1); s.dfs.set(j, e); return [[e.r, 1, -e.v]]; });
     if (process.env.SEASON_ALIGN === 'bucket') { const o = new Array(STDK.length); s.weights.forEach((i, j) => { o[i] = exact ? [[s.lineup[j], 1]] : R[j] != null ? [[R[j], 1]] : fill; }); pool.push({ s, slot: o, est: !exact }); return; }
     slot.wts = lw.map((x) => x[0]); slot.wk = slot.wts.join(',');
-    slot.avg = slot.flatMap((o) => o.map(([r, q, nb]) => [r, q / slot.length, nb]));   // the team's average wrestler: any of its weights, equally likely (empty weights as district non-placers)
+    slot.avg = slot.flatMap((o) => o.map(([r, q, nb, st]) => [r, q / slot.length, nb, st]));   // the team's average wrestler: any of its weights, equally likely (empty weights as district non-placers)
     pool.push({ s, slot, est: !exact }); });
   /* the slot with each state-duals starter re-rated without his bouts against one opponent (tuning on that dual) */
-  const mkSlot = (o, wts) => { o.wts = wts; o.wk = wts.join(','); o.avg = o.flatMap((x) => x.map(([r, q, nb]) => [r, q / o.length, nb])); return o; };
+  const mkSlot = (o, wts) => { o.wts = wts; o.wk = wts.join(','); o.avg = o.flatMap((x) => x.map(([r, q, nb, st]) => [r, q / o.length, nb, st])); return o; };
   const LOO = new Map(); const slotVs = (p, opp) => { if (!p.s.dfs || !p.s.dfs.size) return p.slot; const k = p.s.sch + '|' + p.s.year + '|' + p.s.c + '|' + opp; if (LOO.has(k)) return LOO.get(k);
     let hit = false; const o = p.slot.map((x, j) => { const e = p.s.dfs.get(j); if (!e || !e.B.some((b) => b[2] === opp)) return x; hit = true; const B = e.B.filter((b) => b[2] !== opp).map((b) => [oppR(b), b[1]]).filter((b) => b[0] != null);
       if (!B.length) return empty(p.s.year, 1); const [m, v] = rateMV(eraOf(p.s.year), B); return [[m, 1, -v]]; });
@@ -475,8 +497,8 @@ byS.forEach((rows, i) => {
   const dual = (A, B) => { let m = 0, q = 0, n = 0, h = 0; const bucket = process.env.SEASON_ALIGN === 'bucket';
     const P = bucket ? null : pairsOf(A, B);
     for (let b = 0; b < (bucket ? A.length : P.length); b++) { const a = bucket ? A[b] : P[b][0] < 0 ? A.avg : A[P[b][0]], c = bucket ? B[b] : P[b][1] < 0 ? B.avg : B[P[b][1]]; if (!a || !c) continue; n++;
-      if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0], a[0][2], c[0][2]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
-      let mm = 0, ee = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of c) { const r = bout(ra, rb, na, nb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
+      if (a.length === 1 && c.length === 1) { const r = bout(a[0][0], c[0][0], a[0][2], c[0][2], a[0][3], c[0][3]); m += r[0]; q += r[1] - r[0] * r[0]; h += hard(a[0][0], c[0][0]); continue; }
+      let mm = 0, ee = 0; for (const [ra, wa, na, sa] of a) for (const [rb, wb, nb, sb] of c) { const r = bout(ra, rb, na, nb, sa, sb); mm += wa * wb * r[0]; ee += wa * wb * r[1]; h += wa * wb * hard(ra, rb); } m += mm; q += ee - mm * mm; }
     return n ? [m * 13 / n, q * 13 / n, h * 13 / n] : [0, 1, 0]; };
   const Phi = (z) => 0.5 * (1 + Math.tanh(0.7978845608 * (z + 0.044715 * z * z * z)));
   /* the 500: best by expected margin against every season (opponents at each weight pooled, rounded to 10 points) */
@@ -512,7 +534,7 @@ byS.forEach((rows, i) => {
   pool.sort((a, b) => b.win - a.win || b.mar - a.mar);
   if (process.env.SEASON_DEBUG) { const [x, y] = process.env.SEASON_DEBUG.split(',').map((k) => pool.find((p) => p.s.sch + '|' + p.s.year + '|' + p.s.c === k));
     const P = pairsOf(x.slot, y.slot); let tot = 0;
-    P.forEach(([i, j]) => { const a = i < 0 ? x.slot.avg : x.slot[i], b = j < 0 ? y.slot.avg : y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na] of a) for (const [rb, wb, nb] of b) { r += wa * wb * bout(ra, rb, na, nb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', (x.s.lw[i] || ['avg'])[0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', (y.s.lw[j] || ['avg'])[0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
+    P.forEach(([i, j]) => { const a = i < 0 ? x.slot.avg : x.slot[i], b = j < 0 ? y.slot.avg : y.slot[j]; let r = 0, h = 0; for (const [ra, wa, na, sa] of a) for (const [rb, wb, nb, sb] of b) { r += wa * wb * bout(ra, rb, na, nb, sa, sb)[0]; h += wa * wb * hard(ra, rb); } tot += r; console.log('  ', (x.s.lw[i] || ['avg'])[0], a.length > 1 ? 'empty' : Math.round(a[0][0] || 0), 'vs', (y.s.lw[j] || ['avg'])[0], b.length > 1 ? 'empty' : Math.round(b[0][0] || 0), r.toFixed(1), 'cut', h.toFixed(1)); });
     console.log('  expected margin', tot.toFixed(1), 'ranks', pool.indexOf(x) + 1, pool.indexOf(y) + 1); }
   console.log(`school seasons as duals: ${pool.length} seasons (${pool.filter((p) => p.est).length} with weights filled), field ${FIELD_N}, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
   { const hr = pool.slice().sort((a, b) => b.hwin - a.hwin || b.hmar - a.hmar); const hk = new Map(hr.map((p, i) => [p, i + 1]));
@@ -525,19 +547,19 @@ byS.forEach((rows, i) => {
              filled (1) or field on file (0), Strength, state points, state titles, state medals, team title, state places ('1135')]
      seasons/<first letter of the school slug>.json (loaded when a row is opened): { slug: { year: lineup } }, lineup =
        [[weight (999 = heavyweight), name, rating, district place, regional place, state place, grade 0-3 FR-SR or -1, bouts behind the rating (negative: minus the rating's variance, for a state-duals starter)], ...] (place -1 not there, 0 entered
-       without a place; a weight with nobody is [weight bracket]; a state-duals starter at an empty weight has places -1, grade -1, his rated dual bouts and a 9th field 1)
+       without a place; a weight with nobody is [weight bracket]; a state-duals starter at an empty weight has places -1, grade -1, his rated dual bouts and a 9th field 1); the 10th field is the wrestler's record by type (W dec md tf fall, L dec md tf fall) or 0, for the style model
      seasons/duals-<year>.json: that season's state-duals bouts decided on the mat */
   const slugS = (x) => String(x).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const LB = {};
   const rows = pool.map((p) => { const s = p.s, r = s.row;
     const sl = slugS(s.sch); if (sl) { const o = (LB[sl[0]] = LB[sl[0]] || {}); const x = o[sl] || (o[sl] = {});
-      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.lw.map((l, j) => { const w = p.est ? l[4] : l[3]; const e = !w && s.dfs && s.dfs.get(j); if (e) return [l[0], e.name, Math.round(e.r), -1, -1, -1, -1, -Math.round(e.v), 1]; return w ? [l[0], w.name, Math.round(w.real), w.D, w.R, w.S, w.g == null ? -1 : w.g, w.nb || 0] : [l[0]]; }); }
+      x[s.year + (s.c === 'AA' ? 'b' : '')] = s.lw.map((l, j) => { const w = p.est ? l[4] : l[3]; const e = !w && s.dfs && s.dfs.get(j); if (e) return [l[0], e.name, Math.round(e.r), -1, -1, -1, -1, -Math.round(e.v), 1]; return w ? [l[0], w.name, Math.round(w.real), w.D, w.R, w.S, w.g == null ? -1 : w.g, w.nb || 0, 0, w.st || 0] : [l[0]]; }); }
     return [r[0], s.year, s.c === 'AA' ? 1 : 0, r[3], r[4], Math.round(1000 * p.win), Math.round(10 * p.mar), Math.round(1000 * p.hwin), Math.round(10 * p.hmar), p.est ? 1 : 0, r[5], r[6], r[9], r[10] + r[11], r[15], s.med]; });
   /* sim: what the app needs to wrestle any two seasons against each other the same way (Compare): the bonus split by gap
      (gap bins, [dec, md, tf, fall] shares), the hard cut points, the rating spread and dual swing, the empty-weight
      quantiles by era, and the fill for weights we can't see, keyed era|bin */
   const r3 = (v) => Math.round(v * 1000) / 1000;
-  const sim = { gb, mix: gmix.map((x) => x.map(r3)), cut: CUT.map((v) => Math.round(v)), ref: REF, unc: UNC, tau: TAU, sit: SIT, forfeit: FORFEIT ? 1 : 0,
+  const sim = { style: STY_M ? { p0: STY_M.p0, A: STY_M.A, clip: STY_M.clip, W: STY_M.W } : null, gb, mix: gmix.map((x) => x.map(r3)), cut: CUT.map((v) => Math.round(v)), ref: REF, unc: UNC, tau: TAU, sit: SIT, forfeit: FORFEIT ? 1 : 0,
     empty: BK.map((b) => b.map(([r, w]) => [Math.round(r), r3(w)])), fill: Object.fromEntries(Array.from(FILL).map(([k, v]) => [k, v.map(([r, w]) => [r == null ? null : Math.round(r), r3(w)])])) };
   fs.writeFileSync(path.join(OV, 'seasons.json'), JSON.stringify({ field: FIELD_N, from: SEASON_FROM, w: STDK.map((x) => x[0]), sim, rows }));
   const dir = path.join(OV, 'seasons'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
