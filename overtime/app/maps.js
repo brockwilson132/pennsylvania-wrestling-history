@@ -252,7 +252,7 @@
   }
   /* the TIME scrubber (filter bar): the whole archive as a heat strip of the statewide rating per season, two handles
      for the window. Drawn with the window set to all-time so the strip always spans every season of the class. */
-  function timeScrubber() {
+  function timeScrubber(opts = {}) {
     const st = OT.state, keep = st.win; const [a, b] = OT.yearsWindow();
     st.win = { mode: 'all', from: null, to: null };
     let y0, y1, RS;
@@ -261,7 +261,7 @@
     const strip = `<span class="scrs">${ys.map((y) => { const v = RS.get(y); return `<i class="${y < a || y > b ? 'out' : ''}" style="${v ? 'background:' + OT.ratingColor('region', v) : ''}"></i>`; }).join('')}</span>`;
     const ticks = ys.map((y) => { const v = RS.get(y); return `<button class="sct${y >= a && y <= b ? ' in' : ''}" data-ty="${y}" style="left:${(pc(y) - 50 / n).toFixed(2)}%;width:${(100 / n).toFixed(3)}%" aria-label="${y}" title="${y}${v ? ' · statewide rating ' + r10(v) : ''}"></button>`; }).join('');
     const labs = ys.filter((y) => y % 10 === 0).map((y) => `<i style="left:${pc(y).toFixed(2)}%">${y}</i>`).join('');
-    return `<div class="scr tscr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${a === b ? a : a + '–' + b}</b><span class="muted">${a === b ? '1 season' : (b - a + 1) + ' seasons'}</span></div><div class="scrt hs">${strip}<span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%" role="slider" aria-label="First season" aria-valuenow="${a}" tabindex="0"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%" role="slider" aria-label="Last season" aria-valuenow="${b}" tabindex="0"></span></div><div class="scrx">${labs}</div></div>`;
+    return `<div class="scr tscr" data-y0="${y0}" data-y1="${y1}" data-a="${a}" data-b="${b}"><div class="scrh"><b class="scrl">${a === b ? a : a + '–' + b}</b>${opts.pre ? `<span class="tpre" role="group" aria-label="Seasons">${[['all', 'All'], ['25', 'Last 25'], ['10', 'Last 10'], ['5', 'Last 5']].map(([k, l]) => `<button type="button" data-tw="${k}" aria-pressed="${st.win.mode === k}">${l}</button>`).join('')}</span>` : `<span class="muted">${a === b ? '1 season' : (b - a + 1) + ' seasons'}</span>`}</div><div class="scrt hs">${strip}<span class="scrf" style="left:${(pc(a) - 50 / n).toFixed(2)}%;width:${((100 * (b - a + 1)) / n).toFixed(2)}%"></span>${ticks}<span class="sch" data-h="a" style="left:${pc(a).toFixed(2)}%" role="slider" aria-label="First season" aria-valuenow="${a}" tabindex="0"></span><span class="sch" data-h="b" style="left:${pc(b).toFixed(2)}%" role="slider" aria-label="Last season" aria-valuenow="${b}" tabindex="0"></span></div><div class="scrx">${labs}</div></div>`;
   }
   function mapCard(u) {
     /* the map follows TIME; a single season also gets that season's state placers */
