@@ -51,7 +51,7 @@
     const d = tlData(u); TL = { ...d, u };
     const opts = UNITS[u.kind] || UNITS.state; const sort = SORTS.some(([k]) => k === state.tlsort) ? state.tlsort : 'avg';
     const canGroup = d.kind === 'school' && (u.kind === 'state' || u.kind === 'region'); const grouped = canGroup && state.tlgroup;
-    const segs = opts.length > 1 ? `<div class="seg sm" role="group" aria-label="Rows">${opts.map(([k, l]) => `<button type="button" data-tlunit="${k}" aria-pressed="${k === d.kind}">${l}</button>`).join('')}</div>` : '';
+    const segs = opts.length > 1 ? `<div class="seg sm join" role="group" aria-label="Rows">${opts.map(([k, l]) => `<button type="button" data-tlunit="${k}" aria-pressed="${k === d.kind}">${l}</button>`).join('')}</div>` : '';
     const ctl = `<div class="tlctl">${segs}${canGroup ? `<button type="button" class="chipb${grouped ? ' on' : ''}" data-tlgroup aria-pressed="${!!grouped}">By district</button>` : ''}${OT.sortSelect('tlsort', d.kind === 'weight' ? [['weight', 'Weight']].concat(SORTS.slice(0, 3)) : SORTS, d.kind === 'weight' && !state.tlsort ? 'weight' : sort)}</div>`;
     if (!d.years.length) return `${ctl}${OT.empty(OT.yearsWindow()[1] < RATED_FROM ? 'Ratings start in 1974. Widen TIME to see the timeline.' : 'No rated seasons here in this window.')}`;
     const s = d.kind === 'weight' && (!state.tlsort || state.tlsort === 'weight') ? 'weight' : sort;
@@ -77,9 +77,8 @@
       return `${g}<div class="tlr"><span class="tlh">${lab}<span class="tla num" title="${esc(SORTS.find(([k]) => k === (s === 'weight' ? 'avg' : s))[1])}">${OT.r10(s === 'last' ? r.last : s === 'peak' ? r.peak : r.avg)}</span></span><div class="tls">${cells}</div></div>${alt}`; }).join('');
     const more = rows.length > lim ? `<div class="bmore"><button class="more" type="button" data-tlmore>Show ${Math.min(50, rows.length - lim)} more of ${rows.length}</button></div>` : '';
     const nn = NOUN[d.kind];
-    return `${ctl}<div class="tltip" id="tltip" aria-live="polite">${rows.length} ${nn[rows.length === 1 ? 0 : 1]}, ${d.years[0]}–${d.years[n - 1]}. Tap a season for its rating and rank.</div>
-      <div class="tlx pscr scroll" style="--n:${n}" data-y0="${d.years[0]}" data-y1="${d.years[n - 1]}"><div class="tlin">${ax}${body}</div></div>${more}${legendBar(d.kind)}
-      <div class="note">${d.kind === 'weight' ? 'Each weight: the rating of the school\'s best wrestler on record there that season (state entrants and district and regional placewinners).' : 'Each strip: the ' + nn[0] + '\'s season rating, cold to hot.'} Dotted cells are estimated. The number beside each name follows the sort.${d.kind === 'weight' ? '' : ' ' + nn[1][0].toUpperCase() + nn[1].slice(1) + ' rated in fewer than ' + minS + ' of these seasons come last.'}</div>`;
+    return `${ctl}<div class="tltip" id="tltip" aria-live="polite"></div>
+      <div class="tlx pscr scroll" style="--n:${n}" data-y0="${d.years[0]}" data-y1="${d.years[n - 1]}"><div class="tlin">${ax}${body}</div></div>${more}${legendBar(d.kind)}`;
   }
   /* the tip: value and rank among the rows that season */
   const tipFor = (key) => { if (!TL) return '';
@@ -145,7 +144,7 @@
     const key = (i) => (mode === 'team' ? i : T[i].c.k);
     const name = (i) => (mode === 'team' ? `${ordinal(i + 1)} team` : T[i].c.label === 'Hwt' ? 'Heavyweight' : T[i].c.label + ' lbs');
     const btn = (d, cls, txt) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="${cls}" data-attpick="${key(i)}" aria-label="${name(i)}">${txt}</button>` : `<button type="button" class="${cls}" disabled aria-hidden="true">${txt}</button>`; };
-    const ctl = `<div class="atctl"><div class="seg sm" role="group" aria-label="Show"><button type="button" data-attmode="team" aria-pressed="${mode === 'team'}">By team</button><button type="button" data-attmode="weight" aria-pressed="${mode === 'weight'}">By weight</button></div>`
+    const ctl = `<div class="atctl"><div class="seg sm mini" role="group" aria-label="Show"><button type="button" data-attmode="team" aria-pressed="${mode === 'team'}">By team</button><button type="button" data-attmode="weight" aria-pressed="${mode === 'weight'}">By weight</button></div>`
       + `<div class="atnav">${btn(-1, 'atar', '‹')}<label class="atsel"><select data-attsel aria-label="${mode === 'team' ? 'Team' : 'Weight'}">${d3.range(n).map((i) => `<option value="${key(i)}"${i === cur ? ' selected' : ''}>${name(i)}</option>`).join('')}</select></label>${btn(1, 'atar', '›')}</div></div>`;
     /* the picked column and the next one; CSS shows one on phones, two on wide screens (as the Wrestlers list does) */
     const cols = d3.range(cur, Math.min(n, cur + 2));
@@ -160,7 +159,7 @@
       + d3.range(nRows).map((r) => { const cells = cols.map((i) => cell(r, i)); if (mode === 'weight' && !cells[0] && cells.every((c) => !c)) return '';
         return cells.map((c, k) => (c ? card(c, lab(r)).replace(/^<a class="(wq|atc)"/, (m0, c0) => `<a class="${c0} k${k}"`) : `<div class="atc none k${k}${k ? '' : ' x0'}"></div>`)).join(''); }).join('') + '</div>';
     const step = (d, cls) => { const i = cur + d; return i >= 0 && i < n ? `<button type="button" class="chipb ${cls}" data-attpick="${key(i)}">${d < 0 ? '‹ ' : ''}${name(i)}${d > 0 ? ' ›' : ''}</button>` : '<span></span>'; };
-    return { body: `${ctl}${grid}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div><div class="note">Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties. Each wrestler counts once, at his highest-rated weight. Teams fill in order, 1st team first; a weight with nobody left takes the best remaining wrestler who also wrestled there. Teams go as deep as the records allow, up to ${ATT_DEPTH}.</div>` };
+    return { body: `${ctl}${grid}<div class="atstep">${step(-1, 'prev')}${step(1, 'next')}</div>` };
   }
   const teamGrid = (u) => attParts(u).body;
   Object.assign(OT, { timelineView, teamGrid });

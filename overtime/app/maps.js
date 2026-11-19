@@ -72,7 +72,7 @@
     if (holes) anyNo = true;
     const dl = Object.keys(M.d).filter((d) => M.d[d]).map((d) => `<path class="pad" d="${dPath(d)}"/>`).join('');
     const dn = Object.keys(M.dot).map((d) => `<text class="pdn" x="${M.dot[d][0]}" y="${M.dot[d][1] + (d == 8 ? -12 : 0)}">${d}</text>`).join('') + `<circle class="pd8" cx="${M.dot[8][0]}" cy="${M.dot[8][1]}" r="6"/>`;
-    const note = mixed.length ? `District${mixed.length > 1 ? 's' : ''} ${mixed.join(', ')} changed region in this window; shown with the region ${mixed.length > 1 ? 'each' : 'it'} fed most` : '';
+    const note = '';
     return wrap(svgOpen([0, 0, M.w, M.h], 'Regions of Pennsylvania coloured by rating') + fills + holes + dl + lines + outline() + dn + labels + '</svg>', legend(sc, note, anyNo ? noData() : ''));
   }
 
