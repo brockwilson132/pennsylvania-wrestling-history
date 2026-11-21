@@ -15,11 +15,11 @@ concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  deploy:
+  # Build and upload in one job, deploy in the next (GitHub's starter layout). With both steps in one job,
+  # deploy-pages sometimes asks for the artifact a second after the upload, before GitHub lists it, and fails with
+  # "No artifacts named github-pages" (it did on 2026-11-21). The per-attempt name keeps a re-run from finding two.
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/configure-pages@v5
@@ -28,5 +28,15 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+          name: github-pages-${{ github.run_attempt }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
