@@ -532,7 +532,7 @@
     const ctx = { span: [Math.max(wa, Math.min(...yrs)), Math.min(wb, Math.max(...yrs))], maxTi: Math.max(1, ...L.map((a) => a.ti)), maxTeam: Math.max(1, ...L.map((a) => a.tt + (dualTitles(kind).get(a.k) || 0))),
       scorePct: (v) => { let lo = 0, hi = sc.length; while (lo < hi) { const m = (lo + hi) >> 1; if (sc[m] < v) lo = m + 1; else hi = m; } return sc.length > 1 ? lo / (sc.length - 1) : 0.5; } };
     const more = L.length > (opts.limit || 20) ? `<button class="more" data-uall="${state.uall ? '0' : '1'}">${state.uall ? 'Show top ' + (opts.limit || 20) : 'Show all ' + L.length}</button>` : '';
-    return { sortSeg: '', html: `<div class="sxl">${head}${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind, ctx)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
+    return { sortSeg: '', html: `<div class="sxl${ctx.span[0] === ctx.span[1] ? ' one' : ''}">${head}${L.slice(0, lim).map((a, i) => unitCard(a, i + 1, sort, pageKind, ctx)).join('')}</div>${more ? `<div class="bmore">${more}</div>` : ''}` };
   }
 
   /* ---------- performance chart ----------
@@ -713,7 +713,7 @@
     let hits = ''; for (let y = y0; y <= y1; y++) hits += `<rect class="hitc" data-py="${y}" data-tip="${y}" x="${X(y).toFixed(1)}" y="0" width="${cw.toFixed(1)}" height="${bottom}"/>`;
     g = hits + g;
     const H = bottom + 18;
-    const pill = sel ? `<div class="psel"><span class="pselp"><b>${sa === sb ? sa : sa + '–' + sb}</b>${sa === sb ? '' : ' · ' + (sb - sa + 1) + ' seasons'}<button class="pselx" data-pclear aria-label="Clear selection">clear</button></span></div>` : `<div class="psel"><span class="pselh">${phone ? 'Tap a season · press and hold, then drag for a range' : 'Click a season · drag across for a range'}</span></div>`;
+    const pill = sel ? `<div class="psel"><span class="pselp"><b>${sa === sb ? sa : sa + '–' + sb}</b>${sa === sb ? '' : ' · ' + (sb - sa + 1) + ' seasons'}<button class="pselx" data-pclear aria-label="Clear selection">clear</button></span></div>` : '';
     const [dlo, dhi] = ratingDom('school');
     const legend = `<span class="hlg"><span class="mlgl">Strength</span><b>${r10(dlo)}</b><i class="mlgbar"></i><b>${r10(dhi)}</b></span><span><i class="lgc" style="background:#4A5360"></i>medalists</span><span><i class="lgc lgt"></i>individual title</span><span><i class="lgc" style="background:#D9A441"></i><i class="lgc" style="background:#B8BFC6"></i><i class="lgc" style="background:#B5733A"></i>team finish</span>`;
     let sheet = '';
@@ -778,5 +778,5 @@
     return out || '<div class="note1">No state placers this season.</div>';
   }
 
-  Object.assign(OT, { sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, winBar, rtgBars, sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
+  Object.assign(OT, { lvIcon, sfmt, winTypesOf, talWhat, unitRtgLabel: () => 'Strength', unitRtgTip: (kind) => (kind === 'school' ? 'Strength: the lineup as a dual-meet team. Its best wrestler at each weight, a weight with nobody entered a forfeit, scored by its chance of beating an average state qualifier (1500) and put back on the rating scale' : 'Strength: the average Strength of its top quarter of schools (at least one) each season'), talTxt, rw, careerGrid, otherClass, ratingDom, ratingColor, domFrac, mapMode, placeMatrix, aggregateCore, ssIn, colorAt, ratedYear, sortSelect, UD, SLUG2S, aggregate, unitAgg, unitRankings, unitCard, wrestlerCard, timeline, compBar, compColor, fieldGauge, fieldTip, wlegend, winKey, seasonRows, winBar, rtgBars, sgKey, sgTier, SG_N, sgIcon: (v, lvl) => (v == null ? '' : sgSvg(sgTier(v, sgLvl(lvl)))), spark, perfChart, loadBW, recordOf, winTypesOf, bwLoaded: () => !!BW, r10, colorOf, W3, sbar, resCell, podium, miniChart, placeDist, RCOL, lineColor, pctIn });
 })();

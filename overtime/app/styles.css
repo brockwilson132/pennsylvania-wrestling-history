@@ -1700,3 +1700,59 @@ button.dqn{width:100%;cursor:pointer}button.dqn.alt b{color:var(--ash)}
 .rkk .seg{flex-wrap:nowrap}
 @media(max-width:430px){.rkk .seg.sm button,.rkk .seg.sm a{padding:0 10px}}
 .smed .smr{display:inline-flex;align-items:center;gap:3px;vertical-align:middle;font:900 13px var(--cond);margin-left:4px;white-space:nowrap}.smed .smr > *{flex:none}
+/* column tables (Brock 2026-11-19): one aligned grid per list, no run-on rows. Season medals: weight, place, team,
+   wrestler, rating on the right; the weight shows once per weight */
+.ctab{padding:4px 10px 8px}
+.ctab .ctr{display:grid;grid-template-columns:32px 26px 46px minmax(0,1fr) auto;align-items:center;gap:0 7px;min-height:30px;font-size:14px}
+.ctab.nt .ctr{grid-template-columns:32px 26px minmax(0,1fr) auto}
+.ctab .ctg{border-top:1px solid var(--line);margin-top:4px;padding-top:4px}
+.ctab .cth{min-height:26px;font:700 10px var(--cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ash2)}
+.ctab .cw{font:900 16px var(--cond);color:var(--ash);text-decoration:none;line-height:1}.ctab .cw small{display:block;font-size:10px;color:var(--ash2)}
+.ctab .cp{font:700 13px var(--cond)}
+.ctab .ct{display:flex}.ctab .ct .stag{max-width:100%}
+.ctab .cn{text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ctab .cn:hover{color:var(--gold)}
+.ctab .cr{justify-self:end;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}.ctab .cr{min-width:58px;justify-content:flex-end}.ctab .cr b{font:900 15px var(--cond);min-width:31px;text-align:right}
+@media(min-width:700px){.ctab .ctr{grid-template-columns:52px 36px 64px minmax(0,1fr) 90px;min-height:34px;font-size:15px}.ctab.nt .ctr{grid-template-columns:52px 36px minmax(0,1fr) 90px}}
+/* ---------- three kinds of choice, three looks (Brock 2026-11-19: rows of identical pills were hard to read) ----------
+   .seg.tabs  what you are looking at: underlined tabs across the full width
+   .seg.join  a narrower choice inside it: one joined bar, equal segments
+   .seg.mini  how a list is shown (order, grouping, mode): small, quiet, right-aligned with the list */
+.rkk .seg.tabs,.seg.tabs{display:flex;flex-wrap:nowrap;gap:0;width:100%;border-bottom:1px solid var(--line2)}
+.seg.tabs button,.seg.tabs a,.seg.sm.tabs button,.seg.sm.tabs a{flex:1 1 auto;min-width:0;justify-content:center;height:40px;padding:0 4px;border:0;border-radius:0;background:none;box-shadow:none;color:var(--ash);font:900 15px var(--cond);letter-spacing:.04em;text-transform:uppercase;border-bottom:3px solid transparent;margin-bottom:-1px}
+.seg.tabs button:hover,.seg.tabs a:hover{color:var(--chalk);border-color:transparent;border-bottom-color:var(--line2)}
+.seg.tabs [aria-pressed=true]{color:var(--chalk);background:none;box-shadow:none;border-bottom-color:var(--gold)!important}
+.rkk:has(.seg.tabs){overflow:visible;margin:0 0 12px}
+.rkk .seg.join,.seg.join{display:flex;flex-wrap:nowrap;gap:0;width:100%;border:1px solid var(--line2);border-radius:10px;background:var(--slate);padding:2px}
+.seg.join button,.seg.join a,.seg.sm.join button,.seg.sm.join a{flex:1 1 auto;min-width:0;justify-content:center;height:30px;padding:0 8px;border:0;border-radius:8px;background:none;box-shadow:none;color:var(--ash);font:600 12.5px var(--body);white-space:nowrap}
+.seg.join button:hover,.seg.join a:hover{color:var(--chalk)}
+.seg.join [aria-pressed=true]{background:var(--slate2);color:var(--chalk);box-shadow:inset 0 0 0 1px var(--gold)}
+.rkk:has(.seg.join){overflow:visible}
+.seg.mini{display:inline-flex;flex-wrap:nowrap;gap:0;border:1px solid var(--line2);border-radius:8px;padding:1px;width:auto}
+.seg.mini button,.seg.mini a,.seg.sm.mini button{flex:none;height:26px;padding:0 9px;border:0;border-radius:6px;background:none;box-shadow:none;color:var(--ash2);font:700 11px var(--cond);letter-spacing:.1em;text-transform:uppercase}
+.seg.mini button:hover{color:var(--chalk)}
+.seg.mini [aria-pressed=true]{background:var(--slate2);color:var(--chalk);box-shadow:none}
+@media(max-width:380px){.seg.join button,.seg.join a{padding:0 5px;font-size:11.5px}.seg.tabs button,.seg.tabs a{font-size:14px;letter-spacing:.03em}}
+.tpre{display:inline-flex!important;gap:0!important;border:1px solid var(--line2);border-radius:8px;padding:1px}
+.tpre button{height:24px;padding:0 8px;border:0;border-radius:6px;background:none;color:var(--ash2);font:700 11px var(--cond);letter-spacing:.08em;text-transform:uppercase}
+.tpre button[aria-pressed=true]{background:var(--slate2);color:var(--chalk);box-shadow:none;border:0}
+/* upsets: two lines per bout (winner, then loser dimmed) under shared columns */
+.utab{padding:2px 10px}
+.utr{display:grid;grid-template-columns:40px 46px minmax(0,1fr) auto 40px;grid-template-rows:auto auto;align-items:center;gap:2px 7px;padding:8px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.utr:first-child{border-top:0}.utr:hover .cn{color:var(--gold)}
+.utr .uo{grid-row:1 / span 2;display:grid;line-height:1}.utr .uo b{font:900 19px var(--cond)}.utr .uo small{font:700 11px var(--cond);color:var(--ash2);margin-top:3px}
+.utr .cn{font-size:14px;font-weight:600}.utr .cn.ul{color:var(--ash);font-weight:400}
+.utr .uw{justify-self:end;font:900 15px var(--cond);color:var(--ash)}
+.utr .ur{justify-self:end;display:inline-flex;align-items:center;gap:3px;font:700 11px var(--cond);letter-spacing:.06em;color:var(--ash2)}.utr .ur .lvi svg{width:13px;height:13px}
+@media(min-width:700px){.utr{grid-template-columns:52px 52px minmax(0,1fr) 96px 56px}}
+
+.bwt{padding:4px 12px}
+.bwt .ctr{grid-template-columns:minmax(0,1fr) 30px 46px auto;min-height:40px;border-top:1px solid var(--line);text-decoration:none;color:inherit}.bwt .ctr:first-child{border-top:0}.bwt .ctr:hover .cn{color:var(--gold)}
+.bwt .cn{font-weight:600}.bwt .by{font:900 14px var(--cond);color:var(--ash)}
+.bwt .ur{display:inline-flex;align-items:center;gap:3px;font:700 11px var(--cond);letter-spacing:.06em;color:var(--ash2)}.bwt .ur .lvi svg{width:13px;height:13px}
+@media(min-width:700px){.bwt .ctr{grid-template-columns:minmax(0,1fr) 40px 60px 96px}}
+.sft{margin-bottom:14px}.sft .ctr{grid-template-columns:22px minmax(0,1fr) auto;min-height:40px}.sft .cn{font:900 16px var(--cond);text-transform:uppercase;letter-spacing:.04em}.sft .sfp{font:900 22px var(--cond)}
+.sft .ur .lvi svg,.sdt .ur .lvi svg{width:18px;height:18px}
+.sdt .ctr{grid-template-columns:32px 16px 52px 46px minmax(0,1fr);min-height:36px;border-top:1px solid var(--line)}.sdt .ctr:first-child{border-top:0}
+.sdt .ur{font:700 12px var(--cond);letter-spacing:.06em;color:var(--ash2)}.sdt .dwl{font:900 15px var(--cond);color:var(--ash2)}.sdt .dwl.w{color:var(--chalk)}.sdt .dsc{font:900 16px var(--cond)}
+/* one season: the per-season mini graphics under each number have nothing to show */
+.sxl.one .rcs{display:none}

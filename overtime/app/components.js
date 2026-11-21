@@ -155,8 +155,6 @@
   }
 
   /* all-time teams: one weight per wrestler, ranked by one value that is the same on every page (model.js attValue) */
-  const ATT_NOTE_ALL = 'Ranked the same way on every page: state finishes count 60% (each finish is worth what it rates in its class, so AA places count less), peak rating 40%, each measured against every state qualifier at that weight. Regional, then district results break ties.';
-  const ATT_NOTE = { state: ATT_NOTE_ALL, region: ATT_NOTE_ALL, district: ATT_NOTE_ALL, school: ATT_NOTE_ALL };
   function teamsBlock(u) {
     const T = allTimeTeams(u, 3);
     if (T === null) return '<div class="card empty" data-need-people="1">Loading every wrestler…</div>';
@@ -167,8 +165,7 @@
       const sp = s.sres.map((r) => r.place ? `<span class="yp ${pc(r.place)}" title="${ordinal(r.place)} at states, ${r.year}">${String(r.year).slice(2)}</span>` : `<span class="yp q" title="State qualifier, ${r.year}">${String(r.year).slice(2)}</span>`).join('');
       const lt = lowerToo ? mark('R', s.rB, s.rT) + (u.kind === 'region' ? '' : mark('D', s.dB, s.dT)) : '';
       return `<div class="slot t${i + 1}"><a href="${s.href}"><b>${esc(s.name)}</b><small>${u.kind === 'school' ? '' : esc(s.sch) + ' · '}${s.years}</small></a><span class="pl">${sp}${lt}</span>${s.rtg ? `<span class="srt">${rtgTag(s.rtg, { size: 'xs' })}</span>` : ''}</div>`; };
-    return `<div class="teams"><div class="thead"><span></span><span>1st team</span><span>2nd team</span><span>3rd team</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map(slot).join('')}</div>`).join('')}</div>
-      <div class="note">${ATT_NOTE[u.kind]} Each wrestler counts at one weight, his highest-rated. Pills are state results by year${lowerToo ? '; R and D marks are his best regional and district finishes (★ = champion)' : ''}.</div>`;
+    return `<div class="teams"><div class="thead"><span></span><span>1st team</span><span>2nd team</span><span>3rd team</span></div>${T.map(({ c, slots }) => `<div class="trow"><div class="w">${c.label}</div>${slots.map(slot).join('')}</div>`).join('')}</div>`;
   }
 
   /* season details render when a year is opened (a drawer can hold 80+ seasons) */
@@ -465,7 +462,7 @@
     const finish = (lab) => (n) => `<i>${lab}</i><b>${esc(n)}</b>`;
     const placeBox = (b) => `<div class="bxp"><div class="k">${b[0] === 'p5' ? '5th place' : '7th place'}</div><div class="bxm st"><span class="bxr">${b.u ? BOLT : ''}${esc(resTxt(b))}</span>${ctx.line(b[2], true, b)}${ctx.line(b[3], false, b)}</div></div>`;
     const bxside = state.bxside === 'cons' && consT.length + placeB.length ? 'cons' : 'champ';
-    const sideSeg = consT.length || placeB.length ? `<div class="seg sm b2side" role="group" aria-label="Side"><button data-bxside="champ" aria-pressed="${bxside === 'champ'}">Championship</button><button data-bxside="cons" aria-pressed="${bxside === 'cons'}">Consolation</button></div>` : '';
+    const sideSeg = consT.length || placeB.length ? `<div class="seg sm join b2side" role="group" aria-label="Side"><button data-bxside="champ" aria-pressed="${bxside === 'champ'}">Championship</button><button data-bxside="cons" aria-pressed="${bxside === 'cons'}">Consolation</button></div>` : '';
     const CHC = (d) => ['F', 'SF', 'QF', 'R16', 'R32', 'PIG'][d] || 'PRE';
     const CHX = (d, i) => (d === 0 ? '3RD' : d === 1 ? 'CSF' : 'C' + (i + 1));
     const pages = bxside === 'champ' ? pagesOf(champT, RNC, CHC)
@@ -476,7 +473,7 @@
       + (placeB.length ? `<section class="bxsec"><div class="bxk"><h3>Placement bouts</h3></div><div class="bxps">${placeB.map(placeBox).join('')}</div></section>` : '');
     // the field: every entrant with his bouts and career matrix
     const sortBy = state.bvsort === 'rtg' ? 'rtg' : 'seed';
-    const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
+    const sortSeg = F.entrants.length > 1 && !F.src ? `<div class="seg sm mini bvsort" role="group" aria-label="Order"><button data-bvsort="seed" aria-pressed="${sortBy === 'seed'}">Seed</button><button data-bvsort="rtg" aria-pressed="${sortBy === 'rtg'}">Rating</button></div>` : '';
     const boutsOf = (name) => { const n = nk(name); return bouts.filter((b) => nk(b[2]) === n || nk(b[3]) === n).sort((a, b) => (a[0] !== 'champ') - (b[0] !== 'champ') || b[1] - a[1]); };
     const boutTxt = (b, name) => { const won = nk(b[2]) === nk(name); let sc = b[5] || ''; if (!won && /^\d+-\d+$/.test(sc)) sc = sc.split('-').reverse().join('-'); const r = [{ fall: 'fall', tf: 'TF', md: 'MD', dec: '', ff: 'forfeit', inj: 'inj.', dq: 'DQ' }[b[4]] ?? b[4], sc, b[6]].filter(Boolean).join(' ');
       return `<span class="${won ? 'bo-w' : 'bo-l'}" title="${won ? 'beat' : 'lost to'} ${esc(won ? b[3] : b[2])}${b[0] === 'champ' ? '' : ' (consolation)'}">${won ? 'W' : 'L'} ${esc(r)}</span>`; };
@@ -500,12 +497,10 @@
         return `<details class="bvc${me ? ' me' : ''}"${me ? ' open' : ''}><summary>${fin || '<span></span>'}<span class="sdg"><span class="sd">${e.seedLabel || ''}</span>${r.grade ? `<i>${r.grade}</i>` : ''}</span><span class="cn"><b>${esc(r.name)}</b><small>${stag(r.sch, { cls: 'xs' })}</small></span><span class="dsp">${rbar}${rv ? `<b class="bvrt" title="RTG">${OT.rtg10(rv)}</b>` : ''}</span><span class="chev" aria-hidden="true"></span></summary><div class="bvcx">${bouts}${pline}${bwl}${entrantMatrix(e, F)}<a class="bvgo" href="#wrestler/${e.slug}">${esc(r.name)}'s page</a></div></details>`;
       }
     }).join('');
-    const advNote = F.adv ? ` The top ${F.adv} advanced${F.lvl === 'district' ? ' to regionals' : ' to Hershey'}.` : '';
     const placers = F.entrants.map((e) => e.r).filter((r) => r.place >= 1 && r.place <= 8);
     const info = (r) => ({ rt: hasElo && EOUT.has(nk(r.name)) ? EOUT.get(nk(r.name)) : rOf(r), raw: hasElo && EOUT.has(nk(r.name)) });
     return head + (placers.length ? medalists(placers, info, F.lvl) : '') + bracketHTML
-      + `<section class="bxsec"><div class="bxk"><h3>The field</h3>${sortSeg}</div><div class="bvlist"${F.loading ? ' data-loading="1"' : ''}>${lines}</div></section>`
-      + `<div class="note">${F.loading ? 'Loading the full field… ' : ''}${bouts.length ? (hasElo ? 'Bracket numbers are his RTG as the season went: the same season fit as his season rating, using only his bouts up to that point, with each opponent at his full-season strength. After his last bout of the season it is his season RTG. Medalists show the RTG after the tournament. ' : '') : ''}Each entrant: his bouts here, his season rating, and his career by level FR–SR with this tournament ringed.${advNote}</div>`;
+      + `<section class="bxsec"><div class="bxk"><h3>The field</h3>${sortSeg}</div><div class="bvlist"${F.loading ? ' data-loading="1"' : ''}>${lines}</div></section>`;
   }
 
   Object.assign(OT, { wirePager, stag, tagPaint, rtgTag, bracketView, stopwatch, careerCells, wrestlerCard, C, MED, pc, score, wordmark, navIcon, classToggle, windowToggle, unitHeader, section, empty, bracket, rankList, unitItems, wrestlerItems, teamsBlock, seasonsDrawer, lowerSeasons, levelSwitch, namedPodium, podiumC: podium, chips, road });

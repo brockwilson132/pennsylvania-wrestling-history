@@ -55,7 +55,7 @@
     const [wa, wb] = OT.yearsWindow(), f = inPlace(parent);
     const L = SD.rows.filter((r) => r[C.y] >= wa && r[C.y] <= wb && clsOk(r) && f(r))
       .sort(sort === 'medals' ? (a, b) => medalPts(b) - medalPts(a) || b[vi] - a[vi] : (a, b) => b[vi] - a[vi] || b[mi] - a[mi]);
-    const seg = `<div class="seg sm zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
+    const seg = `<div class="seg sm mini zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
     if (!L.length) return { sortSeg: seg, html: OT.empty(wb < SD.from ? `Ranked from ${SD.from}.` : 'No school seasons in this window.') };
     const lim = state.uall ? Math.min(L.length, 200) : 25;
     const hb = (k, l) => `<span class="vth"><button class="ht${sort === k ? ' on' : ''}" data-ssort="${k}" aria-pressed="${sort === k}">${l}</button></span>`;
@@ -166,7 +166,7 @@
   function dualPage(id, q = {}) {
     const [ta, tb] = String(id || '').split('~'); const A = parseSide(ta), B = parseSide(tb);
     const mode = MODES[state.smode] ? state.smode : 'exp';
-    const seg = `<div class="seg sm zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
+    const seg = `<div class="seg sm mini zsm0">${[['exp', 'Expected'], ['cut', 'Cutoffs']].map(([k, l]) => `<button data-smode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>`;
     const head = (inner) => `<header class="uh2 dqh"><h1>Compare</h1>${seg}</header>${OT.h2hTabs ? OT.h2hTabs('d') : ''}${inner}`;
     if (!SD) { loadSeasons(); return head('<div class="fpn" data-need-ss="1"></div>'); }
     const ra = A && rowOf(A.sl, A.yk), rb = B && rowOf(B.sl, B.yk);
