@@ -1,7 +1,7 @@
 /* Overtime — pages. One level page function; State, Region, District and School all call it. */
 'use strict';
 (() => {
-  const { esc, fmt, ordinal, state, clsName, U, REGIONS, DISTRICTS, SCHOOL_BY_SLUG, classHistory, section, empty, windowLabel, teamsBlock, seasonsDrawer, placeCounts } = OT;
+  const { esc, fmt, ordinal, state, U, SCHOOL_BY_SLUG, section, empty, seasonsDrawer, placeCounts } = OT;
 
 
   /* PIAA team duals (1999–2026, PA-Wrestling.com dual meet pages and District III Records): champions on the State page, a school's record on its page */
@@ -79,40 +79,80 @@
     });
     return `<div class="mtiles st">${out.join('')}</div>`;
   }
+  /* The place page has three tabs, and the line under the title always says which time it shows:
+     Overview (map and tiles, or a school's season grid) and All-time take a range of seasons (the scrubber);
+     Season takes one year (‹ year ›). */
+  const VIEWS = ['map', 'season', 'all'];
+  const lastYear = () => OT.YEARS[OT.YEARS.length - 1];
+  const seasonYear = () => { const y = +qv('y') || state.sy; return OT.YEARS.includes(y) ? y : lastYear(); };
+  /* run f with the window set to one season (caches are keyed by the window, so nothing leaks) */
+  const inYear = (y, f) => { const keep = state.win; state.win = { mode: 'custom', from: y, to: y }; try { return f(); } finally { state.win = keep; } };
+  const yearPick = (y) => { const ys = OT.YEARS, i = ys.indexOf(y), prev = ys[i - 1], next = ys[i + 1];
+    const arrow = (z, t) => (z ? `<button type="button" class="chipb tya" data-qset="y:${z}" aria-label="Season ${z}">${t}</button>` : `<span class="chipb tya off" aria-hidden="true">${t}</span>`);
+    return `<div class="tline typick">${arrow(prev, '‹')}<select data-qsel="y" aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${arrow(next, '›')}</div>`; };
+  const rangeLine = () => `<div class="tline">${OT.timeScrubber({ pre: true })}</div>`;
   function levelPage(u, opts = {}) {
     state.lvl = 'state';
-    const v = state.view || 'map';
-    /* header: the title, then the four metric tiles. Off the Map tab it is one line (the place, then the tab), so the
-       list, timeline or seasons start near the top; the tiles stay on the Map tab */
-    const slim = v !== 'map', VN = { rank: 'Rankings', hist: 'History', brk: 'Brackets' };
+    const v = VIEWS.includes(state.view) ? state.view : 'map';
+    const VN = { season: 'Season', all: 'All-time' };
     const act = opts.action || '';
-    const head = slim ? `<header class="uh2 uhc uhs"><div class="uht"><h1>${esc(u.name)}<span class="uhv">${VN[v] || ''}</span></h1>${act}</div></header>`
-      : `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1>${act}</div>${summary(u)}</header>`;
-    const rk = opts.rankings();
-    const rankSec = `<section class="sec"><div class="sech${slim ? ' sechs' : ''}">${slim ? '' : `<h2>${rk.title}</h2>`}<span class="ctl">${rk.sortSeg || ''}</span></div>${rk.toggle ? `<div class="rkk">${rk.toggle}</div>` : ''}${rk.html}</section>`;
+    const time = v === 'season' ? yearPick(seasonYear()) : rangeLine();
+    const head = v === 'map' ? `<header class="uh2 uhc"><div class="uht"><h1>${esc(u.name)}</h1>${act}</div>${time}${summary(u)}</header>`
+      : `<header class="uh2 uhc uhs"><div class="uht"><h1>${esc(u.name)}<span class="uhv">${VN[v]}</span></h1>${act}</div>${time}</header>`;
     const parts = [head];
-    if (v === 'map') { const map = u.kind === 'school' ? '' : OT.ratingMap(u); parts.push(map ? `<section class="sec secmap">${map}</section>` : '', u.kind === 'school' ? `<section class="sec">${OT.perfChart(u)}</section>` + rankSec : ''); }
-    else if (v === 'rank') parts.push(rankSec);
-    else if (v === 'brk') parts.push(`<section class="sec">${bracketsView(u)}</section>`);
-    else {
-      /* History: the place's seasons one by one, or every season side by side (the old Timeline) */
-      const h = qv('h') === 'time' ? 'time' : 'seasons';
-      parts.push(`<div class="rkk hsub">${qseg('h', [['seasons', 'Seasons'], ['time', 'Over time']], h)}</div>`);
-      if (h === 'time') parts.push(`<section class="sec tlsec">${OT.timelineView(u)}</section>`);
-      else { parts.push(`<section class="sec">${seasonsDrawer(u)}</section>`); if (u.kind === 'state' || u.kind === 'school') parts.push(dualsBlock(u)); if (u.kind === 'school') parts.push(section('Roster', rosterBlock(u))); if (opts.seasonsExtra) parts.push(opts.seasonsExtra); }
-    }
+    if (v === 'season') parts.push(seasonView(u));
+    else if (v === 'all') parts.push(allView(u, opts));
+    else if (u.kind === 'school') {
+      const rk = wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true });
+      parts.push(`<section class="sec">${OT.perfChart(u)}</section>`, `<section class="sec"><div class="sech"><h2>Best wrestlers</h2><span class="ctl">${rk.sortSeg || ''}</span></div>${rk.html}</section>`, section('Roster', rosterBlock(u)));
+    } else { const map = OT.ratingMap(u); if (map) parts.push(`<section class="sec secmap">${map}</section>`); }
     return parts.join('');
   }
-  /* the Rankings tab: what to rank for this place. Units below it, then its wrestlers, then its all-time team */
-  function rankChoice(u, units, parent, pageKind) {
-    const ks = (u.kind === 'school' ? [['seasons', 'Seasons'], ['wrestlers', 'Wrestlers'], ['team', 'All-time team']].concat(units) : units.concat([['seasons', 'School seasons'], ['wrestlers', 'Wrestlers'], ['team', 'All-time team']])).concat([['records', 'Records']]);
-    const kind = ks.some(([k]) => k === state.child) ? state.child : ks[0][0];
-    const toggle = childToggle(u.kind, ks, kind);
-    if (kind === 'wrestlers') return { ...wrestlerRank(OT.unitRows(u), { limit: 25, noSchool: u.kind === 'school' }), title: 'Rankings', toggle };
-    if (kind === 'seasons') return { title: 'Rankings', toggle, ...OT.seasonRankings(u.kind === 'state' ? null : { kind: u.kind, id: u.id }) };
-    if (kind === 'team') return { title: 'Rankings', toggle, html: `<div class="atsec">${OT.teamGrid(u)}</div>` };
-    if (kind === 'records') return { title: 'Rankings', toggle, html: recordsView(u) };
-    return unitRank(kind, parent, pageKind, toggle);
+  /* ---------- Season: one year at this place ---------- */
+  const SEASON_TABS = [['medals', 'Medals'], ['team', 'Team'], ['brk', 'Brackets'], ['up', 'Upsets']];
+  function seasonView(u) {
+    const y = seasonYear(); state.sy = y;
+    const s = SEASON_TABS.some(([k]) => k === qv('s')) ? qv('s') : 'medals';
+    const row = `<div class="rkk">${qseg('s', SEASON_TABS, s)}</div>`;
+    if (s === 'brk') return row + `<section class="sec">${bracketsView(u, y)}</section>`;
+    return row + `<section class="sec">${inYear(y, () => (s === 'team' ? seasonTeam(u, y) : s === 'up' ? recordsView(u, 'upsets') : seasonMedals(u, y)))}</section>`;
+  }
+  /* the place's state medals that season, weight by weight */
+  function seasonMedals(u, y) {
+    const mine = rowIn(u);
+    const pod = OT.APP.filter((r) => r.year === y && r.place && inClsP(r.cls) && mine(r) && (!state.f.weights.length || state.f.weights.includes(OT.stdOf(r).k)))
+      .sort((a, b) => a.wn - b.wn || a.place - b.place);
+    if (!pod.length) return empty('No state medals here this season.');
+    const byW = d3.groups(pod, (r) => (state.cls === 'ALL' ? r.cls + ' ' : '') + r.w);
+    return `<div class="card smed">${OT.podiumC(placeCounts(pod), { sm: true })}${byW.map(([, rs]) => `<div class="prow"><a class="w" href="${OT.bhref(OT.bkey(rs[0]))}">${state.cls === 'ALL' && rs[0].cls !== 'single' ? `<small>${rs[0].cls}</small> ` : ''}${OT.wShort(rs[0].w)}</a><div class="ps">${rs.map((r) => `<span><i style="color:${OT.MED[r.place - 1]}">${ordinal(r.place)}</i> <a href="${OT.wrestlerHref(r)}" style="text-decoration:none">${esc(r.name)}</a>${u.kind === 'school' ? '' : ` ${OT.stag(r.sch, { abbr: true })}`} ${(() => { const v = OT.ratingOf(r, 'state'); return v ? `<b class="smr">${OT.rtgBars(v)}${OT.rw(v)}</b>` : ''; })()}</span>`).join('')}</div></div>`).join('')}</div>`;
+  }
+  /* the team side of the season: the state tournament's team scores and the duals final (State), the place's schools that
+     season (Region, District), the school's own finish and duals (School) */
+  function seasonTeam(u, y) {
+    if (u.kind === 'state') return stateTeams(y);
+    if (u.kind === 'school') return seasonsDrawer(u) + dualsBlock(u);
+    const r = OT.unitRankings('school', { kind: u.kind, id: u.id }, u.kind);
+    return typeof r === 'string' ? r : `<div class="sech sechs"><span class="ctl">${r.sortSeg || ''}</span></div>${r.html}`;
+  }
+  /* ---------- All-time: a range of seasons at this place ---------- */
+  function allView(u, opts) {
+    const units = opts.units || [];
+    const groups = (units.length ? [['schools', 'Schools', units.map(([k]) => k)]] : [])
+      .concat([['wrestlers', 'Wrestlers', ['wrestlers']], ['teams', 'Teams', ['team', 'seasons']], ['records', 'Records', ['records']], ['trend', 'Trend', ['trend']]]);
+    const all = groups.flatMap((g) => g[2]);
+    const kind = all.includes(state.child) ? state.child : all[0];
+    const g = groups.find((x) => x[2].includes(kind));
+    const top = `<div class="seg sm rkseg">${groups.map(([, l, ks]) => `<button type="button" data-kind="${ks[0]}" aria-pressed="${ks.includes(kind)}">${l}</button>`).join('')}</div>`;
+    const subs = g[0] === 'schools' && units.length > 1 ? units : g[0] === 'teams' ? [['team', 'All-time team'], ['seasons', 'Best seasons']] : null;
+    const sub = subs ? `<div class="seg sm rkseg">${subs.map(([k, l]) => `<button type="button" data-kind="${k}" aria-pressed="${k === kind}">${l}</button>`).join('')}</div>` : '';
+    let rk;
+    if (kind === 'wrestlers') rk = wrestlerRank(OT.unitRows(u), { limit: 25, noSchool: u.kind === 'school' });
+    else if (kind === 'seasons') rk = OT.seasonRankings(u.kind === 'state' ? null : { kind: u.kind, id: u.id });
+    else if (kind === 'team') rk = { html: `<div class="atsec">${OT.teamGrid(u)}</div>` };
+    else if (kind === 'records') rk = { html: recordsView(u) };
+    else if (kind === 'trend') rk = { html: `<div class="tlsec">${OT.timelineView(u)}</div>` };
+    else rk = unitRank(kind, opts.parent || null, u.kind, '');
+    return `<div class="rkk">${top}</div>${sub ? `<div class="rkk">${sub}</div>` : ''}<section class="sec">${rk.sortSeg || rk.toggle ? `<div class="sech sechs"><span class="ctl">${rk.sortSeg || ''}</span></div>` : ''}${rk.toggle ? `<div class="rkk">${rk.toggle}</div>` : ''}${rk.html}</section>`;
   }
   /* the current address's query, and a choice row that rewrites one of its parameters in place */
   const qv = (k) => new URLSearchParams((location.hash.split('?')[1]) || '').get(k) || '';
@@ -123,8 +163,7 @@
     : u.kind === 'district' ? (r) => (r.d || OT.schoolDistrict(r.sch)) === u.id : (r) => (r.lvl ? r.region : OT.regionOf(r)) === u.id;
   /* Brackets: every bracket on record for one season at one level, scoped to the place; the latest season and the
      state tournament first. A weight with this place's placers in it is marked. */
-  function bracketsView(u) {
-    const ys = OT.YEARS, yq = +qv('y'), y = ys.includes(yq) ? yq : OT.yearsWindow()[1];
+  function bracketsView(u, y) {
     const lvs = [['state', 'State'], ['regional', 'Regional'], ['district', 'District']];
     const lv = lvs.some(([k]) => k === qv('bl')) ? qv('bl') : 'state';
     const mine = rowIn(u), cn = (c) => (c === 'single' ? 'One class' : c);
@@ -142,17 +181,16 @@
         return `<a class="twl${n ? ' has' : ''}" href="${OT.bhref(OT.bkey(g[0], lv))}">${g[0].wn}${n ? `<i>${n}</i>` : ''}</a>`; }).join('');
       return { nm, c, html: `<div class="tbrow"><span class="tbn"><b>${esc(nm)}</b><small>${cn(c)}</small></span><span class="tbws">${chips}</span></div>` }; })).flat()
       .sort((a, b) => (parseInt(a.nm.replace(/\D+/, ''), 10) || 0) - (parseInt(b.nm.replace(/\D+/, ''), 10) || 0) || a.nm.localeCompare(b.nm) || a.c.localeCompare(b.c));
-    const i = ys.indexOf(y), prev = ys[i - 1], next = ys[i + 1];
-    const pick = `<div class="typick">${prev ? `<button type="button" class="chipb" data-qset="y:${prev}" aria-label="Season ${prev}">‹ ${prev}</button>` : '<span></span>'}<select data-qsel="y" aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${next ? `<button type="button" class="chipb" data-qset="y:${next}" aria-label="Season ${next}">${next} ›</button>` : '<span></span>'}</div>`;
-    return `<div class="brkhd">${pick}<div class="rkk">${qseg('bl', lvs, lv)}</div></div>` + (groups.length ? `<div class="card tlist">${groups.map((g) => g.html).join('')}</div>` : empty('No brackets on record here this season.'));
+    return `<div class="rkk">${qseg('bl', lvs, lv)}</div>` + (groups.length ? `<div class="card tlist">${groups.map((g) => g.html).join('')}</div>` : empty('No brackets on record here this season.'));
   }
   /* Records (a Rankings choice): the biggest upsets, upsets at states, the giant killers and the most state titles,
      for this place (the winner's school), class and seasons */
-  function recordsView(u) {
-    const UP = OT.upsets(); if (!UP || !UP.all) return '<div class="card"><div class="muted bwl" data-need-upsets="1">Loading…</div></div>';
-    const kinds = [['upsets', 'Upsets'], ['states', 'At states'], ['killers', 'Giant killers'], ['titles', 'Most titles']];
-    const k = kinds.some(([x]) => x === qv('rc')) ? qv('rc') : 'upsets';
-    const seg = `<div class="rkk">${qseg('rc', kinds, k)}</div>`;
+  function recordsView(u, fixed) {
+    const kinds = [['upsets', 'Upsets'], ['states', 'At states'], ['killers', 'Giant killers'], ['titles', 'Most titles']].concat(u.kind === 'state' || u.kind === 'school' ? [['duals', 'Duals']] : []);
+    const k = fixed || (kinds.some(([x]) => x === qv('rc')) ? qv('rc') : 'upsets');
+    const seg = fixed ? '' : `<div class="rkk">${qseg('rc', kinds, k)}</div>`;
+    if (k === 'duals') return seg + (dualsBlock(u) || empty('No PIAA team duals here in this window.'));
+    const UP = OT.upsets(); if (!UP || !UP.all) return seg + '<div class="card"><div class="muted bwl" data-need-upsets="1">Loading…</div></div>';
     const sch = (r) => r[8], inPlace = u.kind === 'state' ? () => true : u.kind === 'school' ? (r) => OT.schIs(sch(r), u.id)
       : u.kind === 'district' ? (r) => OT.schoolDistrict(sch(r)) === u.id : (r) => OT.schoolRegion(sch(r)) === u.id;
     const A = UP.all.filter((r) => inClsP(r[1]) && OT.inWindow(r[0]) && inPlace(r));
@@ -172,7 +210,6 @@
     const key = (r) => (r[2] === 'state' ? `${r[0]}.${r[1]}.state.${OT.wNum(r[4])}` : `${r[0]}.${r[1]}.${r[2]}.${r[3]}.${OT.wNum(r[4])}`);
     return seg + (L.length ? `<div class="card"><ol class="bw h2m">${L.map((r) => `<li><a href="${OT.bhref(key(r))}"><span class="bwn"><b>${esc(r[7])} over ${esc(r[9])}</b><small>${r[0]} · ${esc(where(r))} · ${OT.wShort(r[4])} · ${RN(r[5], r[6])} · ${[RES[r[11]] || r[11], r[12]].filter(Boolean).join(' ')} · ${OT.rw(r[14])} vs ${OT.rw(r[15])}</small></span><span class="bwr"><b>${pct(oddsOf(r[14], r[15]))}</b><i>odds</i></span></a></li>`).join('')}</ol></div>` : empty('No upsets here in this window.'));
   }
-  const childToggle = (id, kinds, cur) => `<div class="seg sm rkseg" data-child="${id}">${kinds.map(([k, l]) => `<button data-kind="${k}" aria-pressed="${k === cur}">${l}</button>`).join('')}</div>`;
   const KN = { school: 'Rankings', district: 'Rankings', region: 'Rankings' };
   const unitRank = (kind, parent, pageKind, toggle) => { const r = OT.unitRankings(kind, parent, pageKind); return typeof r === 'string' ? { title: KN[kind], toggle, html: r } : { title: KN[kind], toggle, sortSeg: r.sortSeg, html: r.html }; };
   /* wrestlers ranked by peak rating (or weighted score); the window decides who is in, the whole career counts */
@@ -189,17 +226,8 @@
   }
 
   const PAGES = {};
-  PAGES.state = () => {
-    const u = U.state(); const kind = ['school', 'district', 'region'].includes(state.child) ? state.child : 'school';
-    void kind; return levelPage(u, { rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']], null, 'state') });
-  };
-  PAGES.region = (id) => {
-    if (!id) { const r = OT.unitRankings('region', null, 'state'); return `<header class="uh2"><h1>Regions</h1><div class="sub">The qualifying tournaments between districts and Hershey${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }
-    const u = U.region(id); const kind = state.child === 'district' ? 'district' : 'school';
-    const mem = OT.regionMembers(id), win = OT.windowLabel(); const full = mem.every((m) => m.span === win);
-    const memSub = mem.length ? mem.map((m) => `<a href="#district/${m.d}">District ${m.d}</a>${full ? '' : ' ' + m.span}`).join(', ') + (full ? '' : ' · <span class="note1">membership as of each season</span>') : '';
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }], sub: memSub, rankings: () => rankChoice(u, [['school', 'Schools'], ['district', 'Districts']], { kind: 'region', id }, 'region') }); void kind;
-  };
+  PAGES.state = () => levelPage(U.state(), { units: [['school', 'Schools'], ['district', 'Districts'], ['region', 'Regions']] });
+  PAGES.region = (id) => levelPage(U.region(id), { units: [['school', 'Schools'], ['district', 'Districts']], parent: { kind: 'region', id } });
   /* "Missing from the archive": seasons the bracket archive itself marks as incomplete (WR_MISSING, tools/build_missing.js) */
   const MISS = window.WR_MISSING || { t: [], m: [], r: [] };
   const yearRuns = (ys) => { const out = []; ys.forEach((y) => { const l = out[out.length - 1]; if (l && y === l[1] + 1) l[1] = y; else out.push([y, y]); }); return out.map(([a, b]) => a === b ? a : a + '–' + String(b).slice(2)).join(', '); };
@@ -212,31 +240,10 @@
     const seasons = new Set(rows.map((r) => r[1] + '|' + r[2])).size;
     return `<details class="drawer"><summary><span><b class="num" style="font-size:20px">${seasons}</b> <span class="muted">incomplete tournaments</span></span><span class="k">Open</span></summary><div class="body mlist">${body}</div></details>`;
   }
-  PAGES.district = (id) => {
-    if (!id) { const r = OT.unitRankings('district', null, 'state'); return `<header class="uh2"><h1>Districts</h1><div class="sub">The twelve PIAA districts${state.cls === 'ALL' ? '' : ', ' + clsName()}.</div></header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${r.sortSeg || ''}</span></div>${r.html || r}</section>`; }
-    const u = U.district(+id); const spans = OT.districtRegionSpans(+id), win = OT.windowLabel(); const dr = spans.map((x) => x.g);
-    const one = spans.length === 1 && spans[0].span === win;
-    const regs = spans.map((x) => `<a href="#region/${x.g}">${REGIONS[x.g]}</a>${one ? '' : ' ' + x.span}`).join(', ');
-    const movers = OT.districtMovers(+id).filter((m) => m.span !== win && m.n < 0.85 * m.total).slice(0, 4);
-    const moveNote = movers.length ? ` · part of the window: ${movers.map((m) => `<a href="#school/${OT.slug(m.sch)}">${esc(m.sch)}</a> ${m.span}`).join(', ')}` : '';
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(dr.length ? [{ name: REGIONS[dr[0]] + ' Region', href: '#region/' + dr[0] }] : [])], sub: `${esc(DISTRICTS[u.id])}${regs ? ' · wrestles in ' + regs : ''}${moveNote}${!one || movers.length ? ' · <span class="note1">membership as of each season</span>' : ''}`,
-      rankings: () => rankChoice(u, [['school', 'Schools']], { kind: 'district', id: +id }, 'district'), seasonsExtra: missingRows(+id).length ? section('Missing from the archive', missingBlock(+id)) : '' });
-  };
-  /* School tab root: the schools of the district you were looking at (or pick one) */
-  function schoolIndex() {
-    const d = state.ctxDistrict || 0;
-    const picker = `<div class="dpick">${d3.range(1, 13).map((k) => `<a href="#school?d=${k}" class="${k === d ? 'on' : ''}">D${k}</a>`).join('')}</div>`;
-    const r = d ? OT.unitRankings('school', { kind: 'district', id: d }, 'district') : OT.unitRankings('school', null, 'state');
-    const html = typeof r === 'string' ? r : r.html, sortSeg = typeof r === 'string' ? '' : r.sortSeg;
-    return `<header class="uh2"><h1>${d ? 'Schools · District ' + d : 'Schools'}</h1><div class="sub">${d ? esc(DISTRICTS[d]) + ' · ' : 'Statewide · '}pick a district or a school.</div>${picker}</header><section class="sec"><div class="sech"><h2>Rankings</h2><span class="ctl">${sortSeg}</span></div>${html}</section>`;
-  }
+  PAGES.district = (id) => levelPage(U.district(+id), { units: [['school', 'Schools']], parent: { kind: 'district', id: +id } });
   PAGES.school = (sl) => {
-    if (!sl) return schoolIndex();
     const name = SCHOOL_BY_SLUG.get(sl) || OT.SLUG2S.get(sl); if (!name) return `<header class="uh2"><h1>Not found</h1></header>` + empty('No school at this address.');
-    const u = U.school(name); const hist = classHistory(name).map((h) => `${h.cls === 'single' ? 'One class' : 'Class ' + h.cls} ${h.from === h.to ? h.from : h.from + '–' + h.to}`).join(' · ');
-    return levelPage(u, { crumbs: [{ name: 'Pennsylvania', href: '#state' }, ...(u.region ? [{ name: REGIONS[u.region] + ' Region', href: '#region/' + u.region }] : []), ...(u.d ? [{ name: 'District ' + u.d, href: '#district/' + u.d }] : [])], sub: hist,
-      action: `<a class="cmpb" href="#h2hs/${sl}~" aria-label="Compare ${esc(name)} head to head with another school" title="Head to head">Compare</a>`,
-      rankings: () => (state.view === 'rank' ? rankChoice(u, u.d ? [['school', 'District ' + u.d + ' schools']] : [], { kind: 'district', id: u.d }, 'district') : wrestlerRank(OT.unitRows(u), { limit: 15, noSchool: true, title: 'Best wrestlers' })) });
+    return levelPage(U.school(name), { action: `<a class="cmpb" href="#h2hs/${sl}~" aria-label="Compare ${esc(name)} with another school">Compare</a>` });
   };
   /* a school's roster: everyone who wrestled for it in any bracket (the people index, loaded on demand) */
   function rosterBlock(u) {
@@ -248,14 +255,6 @@
   const bestTxt = (p) => (p.lvl ? `${p.lvl[0].toUpperCase() + p.lvl.slice(1)} ${p.place ? ordinal(p.place) : p.lvl === 'state' ? 'qualifier' : 'entrant'}` : '');
   const personRow = (p) => `<a class="prr" href="#wrestler/${p.slug}"><span class="pn"><b>${esc(p.name)}</b><small>${esc(p.sch)} · ${p.y0 === p.y1 ? p.y0 : p.y0 + '–' + p.y1}</small></span><span class="pb ${p.place ? 'm' + Math.min(p.place, 5) : ''}">${bestTxt(p)}</span>${p.peak ? OT.rtgTag(p.peak, { size: 'sm' }) : '<span></span>'}</a>`;
   OT.personRow = personRow;
-  /* the statewide placewinner list with search (old links, and the Rankings tab's wrestlers with a search box) */
-  PAGES.wrestlers = () => {
-    const r = wrestlerRank(OT.ROWS().filter((x) => x.place), { limit: 40, title: 'Placewinners' }); const f = state.f;
-    const where = f.schools[0] || (f.districts[0] ? 'District ' + f.districts[0] : f.regions[0] ? REGIONS[f.regions[0]] + ' Region' : '');
-    return `<header class="uh2"><h1>Wrestlers</h1><div class="sub">State placewinners${where ? ' from ' + esc(where) : ''}, ${clsName()}, ${windowLabel()}, with their whole careers. Search finds anyone in any district, regional or state bracket${where ? ' from ' + esc(where) : ''}.</div></header>
-      <input class="search" id="wsearch" type="search" placeholder="Search ${where ? esc(where) + ' wrestlers' : 'any wrestler or school'}" autocomplete="off" aria-label="Search wrestlers">
-      <section class="sec"><div class="sech"><h2 id="whead">Placewinners</h2><span class="ctl" id="wctl">${r.sortSeg}</span></div><div id="wlist">${r.html}</div><div class="note" id="wmore"></div></section>`;
-  };
   PAGES.wrestler = (sl) => {
     const W = OT.getWrestler(sl);
     if (!W) return OT.peopleLoaded() ? `<header class="uh"><h1>Not found</h1></header>` + empty('No wrestler at this address.') : `<header class="uh"><h1>Loading…</h1></header><div class="card empty" data-need-people="1">Looking up this wrestler…</div>`;
@@ -268,7 +267,7 @@
     const tD = W.lower.filter((r) => r.lvl === 'district' && r.place === 1).length, tR = W.lower.filter((r) => r.lvl === 'regional' && r.place === 1).length, tS = places[0];
     const sumI = (cr ? [[`${OT.rtgBars(cr.peak)}${OT.rw(cr.peak)}`, 'Peak RTG'], [OT.rw(cr.avg), 'Career avg']] : []).concat([[`${tD + tR + tS}<small>${[['D', tD], ['R', tR], ['S', tS]].map(([l, n]) => `<span>${l}${n}</span>`).join('')}</small>`, 'Titles']]);
     const head = `<header class="uh2"><div class="crumb"><a href="#state">Pennsylvania</a><span>›</span><a href="#district/${W.d}">District ${W.d}</a><span>›</span><a href="${u.href}">${esc(W.sch)}</a></div>
-      <div class="whd"><h1>${esc(W.name)}</h1><a class="cmpb" href="#h2h/${W.slug}~" aria-label="Compare ${esc(W.name)} head to head with another wrestler" title="Head to head">Compare</a></div><div class="sub wsub">${OT.stag(W.sch)}<span>${first === last ? first : first + '–' + last}</span>${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
+      <div class="whd"><h1>${esc(W.name)}</h1><a class="cmpb" href="#h2h/${W.slug}~" aria-label="Compare ${esc(W.name)} with another wrestler">Compare</a></div><div class="sub wsub">${OT.stag(W.sch)}<span>${first === last ? first : first + '–' + last}</span>${W.lowerOnly && !W.apps.length ? ' · never reached states' : ''}</div>
       <div class="wqts wqhero"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${sumI.map(([v, l]) => `<span class="wqt"><i>${l}</i><b>${v}</b></span>`).join('')}</div></header>`;
     const wt4 = OT.winTypesOf(W.name, yrs), rc = OT.recordOf(W.name, yrs);
     const tl = section('Career', `<div class="card cgcard cdcard"${OT.bwLoaded() ? '' : ' data-need-bw="1"'}>${OT.seasonRows(W.apps, W.lower, { full: W.full, link: true, sr: cr ? cr.seasons : [] })}<div class="wtw">${OT.winBar(wt4, rc)}${OT.winKey()}</div>${W.full ? '' : '<div class="note">Loading his full career…</div>'}</div>`);
@@ -297,7 +296,7 @@
   PAGES.h2h = (id) => {
     const [sa, sb] = h2hIds(id); const A = sa ? OT.getWrestler(sa) : null, B = sb ? OT.getWrestler(sb) : null;
     const need = (sa && !A) || (sb && !B);
-    const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Any two wrestlers in any bracket: every bout between them, and the odds at their best.</div></header>${h2hTabs('w')}
+    const head = `<header class="uh2"><h1>Compare</h1></header>${h2hTabs('w')}
       <div class="card h2pick">${h2hPick('a', A, sb)}<span class="h2vs">vs</span>${h2hPick('b', B, sa)}</div>`;
     if (need) return head + (OT.peopleLoaded() ? empty('No wrestler at this address.') : '<div class="card empty" data-need-people="1">Looking up the wrestlers…</div>');
     if (!A || !B) return head;
@@ -319,7 +318,8 @@
   };
   /* head to head, schools: bouts between their wrestlers, PIAA team duals, and dual-meet odds from each season's lineup */
   /* Wrestlers / Schools / Seasons; from a school pair, Seasons opens that school's seasons to pick from */
-  const h2hTabs = (on, sl) => `<div class="dpick h2tab"><a href="#h2h/" class="${on === 'w' ? 'on' : ''}">Wrestlers</a><a href="#h2hs/" class="${on === 's' ? 'on' : ''}">Schools</a><a href="#dual/~${sl ? '?pick=a&s=' + sl : ''}" class="${on === 'd' ? 'on' : ''}">Seasons</a></div>`;
+  /* Compare: one tool, three things to compare; the same choice row on all three */
+  const h2hTabs = (on, sl) => `<div class="rkk"><div class="seg sm rkseg">${[['w', 'Wrestlers', '#h2h/'], ['s', 'Schools', '#h2hs/'], ['d', 'Seasons', '#dual/~' + (sl ? '?pick=a&s=' + sl : '')]].map(([k, l, h]) => `<a href="${h}" aria-pressed="${on === k}">${l}</a>`).join('')}</div></div>`;
   OT.h2hTabs = h2hTabs;
   function h2hsPick(side, name, other) {
     const ph = side === 'a' ? 'First school' : 'Second school';
@@ -329,7 +329,7 @@
   PAGES.dual = (id, q) => OT.dualPage(id, q);
   PAGES.h2hs = (id) => {
     const [sa, sb] = h2hIds(id); const nA = sa ? OT.SLUG2S.get(sa) : null, nB = sb ? OT.SLUG2S.get(sb) : null;
-    const head = `<header class="uh2"><h1>Head to head</h1><div class="sub">Two schools: every postseason bout between their wrestlers, their PIAA team duals, and the odds of a dual meet between their lineups.</div></header>${h2hTabs('s', sa)}
+    const head = `<header class="uh2"><h1>Compare</h1></header>${h2hTabs('s', sa)}
       <div class="card h2pick">${h2hsPick('a', nA, sb)}<span class="h2vs">vs</span>${h2hsPick('b', nB, sa)}</div>`;
     if ((sa && !nA) || (sb && !nB)) return head + empty('No school at this address.');
     if (!nA || !nB) return head;
@@ -360,77 +360,18 @@
   /* season recap: one season on one page — champions and their finals, team scores and duals, the strongest wrestlers,
      the biggest upsets, titles by district, and the season's numbers */
   const oddsOf = (a, b) => 1 / (1 + Math.pow(10, (b - a) / 400));
-  const yearPick = (y, page) => { const ys = OT.YEARS, i = ys.indexOf(y), prev = ys[i - 1], next = ys[i + 1];
-    return `<div class="typick">${prev ? `<a class="chipb" href="#${page}/${prev}" aria-label="Season ${prev}">‹ ${prev}</a>` : '<span></span>'}<select data-syear="${page}" aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${next ? `<a class="chipb" href="#${page}/${next}" aria-label="Season ${next}">${next} ›</a>` : '<span></span>'}</div>`; };
-  PAGES.season = (id) => {
-    const ys = OT.YEARS, y = ys.includes(+id) ? +id : OT.yearsWindow()[1];
-    const inCls = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
+  /* the state tournament's team scores (top five) and the PIAA team duals final, for each class that season */
+  function stateTeams(y) {
     const cn = (c) => (c === 'single' ? 'One class' : 'Class ' + c);
-    const head = `<header class="uh2"><h1>${y} season</h1><div class="sub">The season in one place${state.cls === 'ALL' ? '' : ', ' + clsName()}: champions and finals, team titles, the strongest wrestlers, the biggest upsets.</div>${yearPick(y, 'season')}</header>`;
-    if (!OT.sosLoaded(y)) return head + '<div class="card"><div class="muted bwl" data-need-season="1">Loading the season…</div></div>';
-    const SY = OT.sosYear(y) || {};
-    const rows = OT.APP.filter((r) => r.year === y && inCls(r.cls)); const champs = rows.filter((r) => r.place === 1);
-    if (!rows.length) return head + empty('No state results on record for this season.');
-    const classes = Array.from(new Set(rows.map((r) => r.cls))).sort((a, b) => (a === 'AAA' ? -1 : b === 'AAA' ? 1 : 0));
-    const who = (r) => `<a href="${OT.wrestlerHref(r)}"><b>${esc(r.name)}</b></a>`;
-    const rowByKey = new Map(rows.map((r) => [OT.bkey(r) + '|' + OT.nkey(r.name), r]));
-    /* champions, with the final */
-    const champBlock = classes.map((c) => { const cs = champs.filter((r) => r.cls === c).sort((a, b) => a.wn - b.wn);
-      const items = cs.map((r) => { const B = OT.sosBracket(OT.bkey(r)); const fin = B && B.b.find((b) => b[0] === 'champ' && b[1] === 0 && OT.nkey(b[2]) === OT.nkey(r.name)); const rt = B && B.s[OT.nkey(r.name)];
-        const prior = (() => { const W = OT.getWrestler(OT.rSlug(r)); const n = W ? W.rows.filter((x) => x.place === 1 && x.year < y).length : 0; return n ? `<span class="rpt">${ordinal(n + 1)} title</span>` : ''; })();
-        return `<li><span class="sw">${OT.wShort(r.w)}</span><span class="sn"><span class="snr">${who(r)}${prior}</span><small>${esc(r.sch)}${r.d ? ' · D' + r.d : ''}${fin ? ` · ${[RES[fin[4]] || fin[4], fin[5], fin[6]].filter(Boolean).join(' ')} over ${esc(fin[3])}` : ''}</small></span><span class="sr">${rt && rt[0] ? OT.rw(rt[0]) : ''}</span></li>`; }).join('');
-      return `<div class="card"><div class="k">${cn(c)}</div><ol class="slist">${items}</ol></div>`; }).join('');
-    /* team: state tournament scores, duals */
-    const teamBlock = classes.map((c) => { const T = (OT.TEAMSCORES.get(y + '|' + c) || []).slice().sort((a, b) => a.place - b.place).slice(0, 5);
+    const classes = Array.from(new Set(OT.APP.filter((r) => r.year === y && inClsP(r.cls)).map((r) => r.cls))).sort((a, b) => (a === 'AAA' ? -1 : b === 'AAA' ? 1 : 0));
+    if (!classes.length) return empty('No state results on record for this season.');
+    return classes.map((c) => { const T = (OT.TEAMSCORES.get(y + '|' + c) || []).slice().sort((a, b) => a.place - b.place).slice(0, 5);
       const S = OT.seasonOf(y, c === 'single' ? 'ALL' : c); const byPts = S ? S.teams.slice(0, 5) : [];
       const dual = DUALS.find((d) => d.year === y && (c === 'single' || d.cls === c) && /championship match/i.test(d.round));
       const list = T.length ? `<ol class="slist">${T.map((t) => `<li><span class="sw">${t.place}</span><span class="sn"><a href="#school/${OT.slug(t.sch)}"><b>${esc(t.sch)}</b></a></span><span class="sr">${t.pts}</span></li>`).join('')}</ol>`
-        : `<ol class="slist">${byPts.map((t, i) => `<li><span class="sw">${i + 1}</span><span class="sn"><a href="#school/${OT.slug(t.id)}"><b>${esc(t.id)}</b></a><small>${t.titles ? t.titles + ' title' + (t.titles > 1 ? 's' : '') + ' · ' : ''}${t.n} medal${t.n === 1 ? '' : 's'}</small></span><span class="sr">${t.pts} <i>pts</i></span></li>`).join('')}</ol><div class="note">${y < OT.TEAMSCORES_FROM ? 'Official team scores were not published before 1976; this is by placement points from the medals on record.' : 'No official team scores on record for this tournament; ranked by placement points.'}</div>`;
-      return `<div class="card"><div class="k">${cn(c)} · tournament</div>${list}${dual ? `<div class="k" style="margin-top:10px">${cn(c)} · duals</div><div class="sdual"><a href="#school/${OT.slug(dual.w)}"><b>${esc(dual.w)}</b></a> ${dual.ws}–${dual.ls} over ${esc(dual.l)}</div>` : ''}</div>`; }).join('');
-    /* strongest of the season: season ratings across the state brackets */
-    const names = new Map(); const top = [];
-    Object.entries(SY).forEach(([key, B]) => { const k = OT.parseBkey(key); if (!k || k.lvl !== 'state' || !inCls(k.cls)) return;
-      B.b.forEach((b) => { names.set(OT.nkey(b[2]), b[2]); names.set(OT.nkey(b[3]), b[3]); });
-      Object.entries(B.s).forEach(([nk, x]) => { if (x[0]) top.push({ key, k, nk, rating: x[0], r: rowByKey.get(key + '|' + nk) || null }); }); });
-    top.sort((a, b) => b.rating - a.rating);
-    const topBlock = `<div class="card"><ol class="slist">${top.slice(0, 10).map((t, i) => { const nm = t.r ? t.r.name : names.get(t.nk) || t.nk;
-      return `<li><span class="sw">${i + 1}</span><span class="sn">${t.r ? who(t.r) : `<b>${esc(nm)}</b>`}<small>${t.r ? esc(t.r.sch) + ' · ' : ''}${cn(t.k.cls)} ${OT.wShort(t.r ? t.r.w : t.k.wn)}${t.r && t.r.place ? ' · ' + ordinal(t.r.place) : ''}</small></span><span class="sr">${OT.rw(t.rating)}</span></li>`; }).join('')}</ol><div class="note">Season ratings, every bout of the postseason counted. 1500 = the average state qualifier.</div></div>`;
-    /* biggest upsets: the winner's odds before the bout, from the ratings up to that point, any level */
-    const ups = []; let nb = 0, falls = 0, ot = 0;
-    Object.entries(SY).forEach(([key, B]) => { const k = OT.parseBkey(key); if (!k || !inCls(k.cls)) return;
-      B.b.forEach((b) => { if (['ff', 'inj', 'dq', 'med'].includes(b[4])) return; nb++; if (b[4] === 'fall') falls++; if (/OT|SV|TB/.test(b[6] || '')) ot++;
-        if (b[7] == null || b[8] == null) return; const p = oddsOf(b[7], b[8]); if (p < 0.3 && b[8] >= 1500) ups.push({ key, k, b, p }); }); });
-    ups.sort((a, b) => a.p - b.p);
-    const LVL = { state: 'States', regional: 'Regional', district: 'District', section: 'Section' };
-    const where = (k) => k.lvl === 'state' ? 'States' : OT.unitLabel(k.lvl, k.unit);
-    const upBlock = ups.length ? `<div class="card"><ol class="bw h2m">${ups.slice(0, 10).map(({ key, k, b, p }) => `<li><a href="${OT.bhref(key)}"><span class="bwn"><b>${esc(b[2])} over ${esc(b[3])}</b><small>${esc(where(k))} · ${cn(k.cls)} ${OT.wShort(k.wn)} · ${RN(b[0], b[1])} · ${[RES[b[4]] || b[4], b[5], b[6]].filter(Boolean).join(' ')} · ${OT.rw(b[7])} vs ${OT.rw(b[8])}</small></span><span class="bwr"><b>${pct(p)}</b><i>odds</i></span></a></li>`).join('')}</ol><div class="note">The winner's odds going in, from both wrestlers' ratings up to that bout, at any level. Only wins over a wrestler rated 1500 or better.</div></div>` : empty('No upsets on record.');
-    /* titles by district */
-    const byD = d3.rollup(champs.filter((r) => r.d), (v) => v.length, (r) => r.d); const medD = d3.rollup(rows.filter((r) => r.d && r.place), (v) => v.length, (r) => r.d);
-    const dList = Array.from(byD).sort((a, b) => b[1] - a[1] || a[0] - b[0]);
-    const dBlock = dList.length ? `<div class="card"><ol class="slist">${dList.map(([d, n]) => `<li><span class="sw">D${d}</span><span class="sn"><a href="#district/${d}"><b>District ${d}</b></a><small>${medD.get(d) || 0} medal${medD.get(d) === 1 ? '' : 's'}</small></span><span class="sr">${n} <i>title${n === 1 ? '' : 's'}</i></span></li>`).join('')}</ol></div>` : '';
-    /* the numbers */
-    const brN = Object.keys(SY).filter((key) => { const k = OT.parseBkey(key); return k && inCls(k.cls); }).length;
-    const nums = [[champs.length, 'state titles'], [rows.filter((r) => r.place).length, 'state medals'], [rows.length, 'state entrants'], [brN, 'brackets on record'], [fmt(nb), 'bouts'], [nb ? Math.round(100 * falls / nb) + '%' : '–', 'ended by fall'], [ot, 'overtime bouts']];
-    const numBlock = `<div class="card"><div class="usum">${nums.map(([v, l]) => `<span><b>${v}</b><i>${l}</i></span>`).join('')}</div>${y === 2021 ? '<div class="note">2021 states were eight-man brackets (COVID year), so every qualifier medaled: no entrants without a place.</div>' : ''}</div>`;
-    return head + section('Champions', champBlock) + section('Team titles', teamBlock) + section('Strongest of the season', topBlock) + section('Biggest upsets', upBlock) + (dBlock ? section('Titles by district', dBlock) : '') + section('By the numbers', numBlock);
-  };
-  /* upsets: the biggest all-time, at states, in state finals, and the wrestlers with the most of them */
-  PAGES.upsets = (id, q = {}) => {
-    const t = ['top', 'states', 'finals', 'killers'].includes(q.t) ? q.t : 'top';
-    const tabs = `<div class="dpick h2tab">${[['top', 'All levels'], ['states', 'States'], ['finals', 'State finals'], ['killers', 'Giant killers']].map(([k, l]) => `<a href="#upsets?t=${k}" class="${k === t ? 'on' : ''}">${l}</a>`).join('')}</div>`;
-    const head = `<header class="uh2"><h1>Upsets</h1><div class="sub">Wins over a wrestler rated 1500 or better (an average state qualifier) at odds under 25%, from both wrestlers' ratings going into the bout. The winner has at least three rated bouts behind him, so his rating rests on something.${state.cls === 'ALL' ? '' : ' ' + clsName() + ' only.'}</div>${tabs}</header>`;
-    const U = OT.upsets(); if (!U) return head + '<div class="card"><div class="muted bwl" data-need-upsets="1">Loading…</div></div>';
-    const inCls = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
-    const cn = (c) => (c === 'single' ? 'One class' : 'Class ' + c);
-    const wl = (name, sch) => `<a href="#wrestler/${OT.slug(name)}--${OT.slug(sch)}">${esc(name)}</a>`;
-    if (t === 'killers') { const K = U.killers;
-      return head + `<div class="card"><ol class="slist">${K.map((k, i) => `<li><span class="sw">${i + 1}</span><span class="sn"><b>${wl(k[0], k[1])}</b><small>${esc(k[1])} · ${k[4] === k[5] ? k[4] : k[4] + '–' + k[5]}${k[6] ? ` · ${k[6]} at states` : ''} · best ${pct(k[3])}</small></span><span class="sr">${k[2]} <i>upset${k[2] === 1 ? '' : 's'}</i></span></li>`).join('')}</ol><div class="note">Upset wins in a career, by the rule above. Ties go to the longer odds.</div></div>`; }
-    const L = U[t].filter((r) => inCls(r[1])).slice(0, 100);
-    const where = (r) => r[2] === 'state' ? 'States' : OT.unitLabel(r[2], r[3]);
-    const key = (r) => r[2] === 'state' ? `${r[0]}.${r[1]}.state.${OT.wNum(r[4])}` : `${r[0]}.${r[1]}.${r[2]}.${r[3]}.${OT.wNum(r[4])}`;
-    return head + (L.length ? `<div class="card"><ol class="bw h2m">${L.map((r) => { const p = oddsOf(r[14], r[15]);
-      return `<li><a href="${OT.bhref(key(r))}"><span class="bwn"><b>${esc(r[7])} over ${esc(r[9])}</b><small>${r[0]} · ${esc(where(r))} · ${cn(r[1])} ${OT.wShort(r[4])} · ${RN(r[5], r[6])} · ${[RES[r[11]] || r[11], r[12], r[13]].filter(Boolean).join(' ')} · ${esc(r[8])} vs ${esc(r[10])} · ${OT.rw(r[14])} vs ${OT.rw(r[15])}</small></span><span class="bwr"><b>${pct(p)}</b><i>odds</i></span></a></li>`; }).join('')}</ol><div class="note">Tap a bout for its bracket. ${U.n ? fmt(U.n) + ' upsets by this rule in ' + fmt(574000) + '+ bouts on record.' : ''}</div></div>` : empty('No upsets in scope.'));
-  };
+        : `<ol class="slist">${byPts.map((t, i) => `<li><span class="sw">${i + 1}</span><span class="sn"><a href="#school/${OT.slug(t.id)}"><b>${esc(t.id)}</b></a></span><span class="sr">${t.pts} <i>pts</i></span></li>`).join('')}</ol>`;
+      return `<div class="card"><div class="k">${cn(c)}</div>${list}${dual ? `<div class="k" style="margin-top:10px">${cn(c)} · duals</div><div class="sdual"><a href="#school/${OT.slug(dual.w)}"><b>${esc(dual.w)}</b></a> ${dual.ws}–${dual.ls} ${esc(dual.l)}</div>` : ''}</div>`; }).join('');
+  }
   PAGES.about = () => `<header class="uh2"><h1>Overtime</h1><div class="sub">Pennsylvania high school wrestling history, from districts to Hershey.</div></header><div class="card about">
     <h3>Overtime Rating</h3><p>Every bout in the archive is read from the brackets (about 374,000, 1938–2026). Each season, every wrestler's rating is fit from all of his postseason bouts at once: sections, districts, regionals and states. So beating the eventual state champion at districts counts the same as beating him at Hershey. Falls and tech falls count a little more than decisions. A wrestler's neighbouring seasons give the starting point, and each district starts at its own level, measured from how its wrestlers do against other districts at regionals and states. A win over someone who went out in the first round counts for very little, because those wrestlers start well below the rest. That rule is the same in every district, so a district with bigger fields doesn't collect extra credit. A wrestler's RTG is his best season. Wrestlers whose season ended in the first round get no rating in the app: their numbers exist only to set that starting point, not to rank them. In brackets, the number beside each name is his rating from the bouts up to that point, with every opponent at his full-season strength; after his last bout it is his season rating. Every season is put on one scale: the 16 best at each weight in that season are lined up with the 16 best of today, top end included, so the 1940s, with only a few bouts per wrestler, don't crowd the all-time lists. 1500 is an average state qualifier of 1999–2026. Checked on bouts hidden from the fit, the rating picks the winner of 78% of 2018–26 regional and state bouts.</p>
     ${OT.aboutViz ? OT.aboutViz() : ''}
@@ -463,29 +404,7 @@
     return section('Rating', `<div class="card rcard"><div class="rhead"><div><span class="k">Career average</span><b class="num">${OT.rtg10(c.avg)}</b></div><div><span class="k">Peak</span><b class="num gold">${OT.rtg10(c.peak)}</b> <small class="muted">${c.peakYear}</small></div></div>${svg}<div class="k" style="margin-top:6px">Best wins</div><div id="bestwins" data-w="${esc(W.slug)}">${bestWinsHTML(W)}</div><div class="note">His strength each season from every bout at every level. 1500 = the average state qualifier.</div></div>`);
   }
   OT.bestWinsHTML = bestWinsHTML;
-  function indexPage(title, items, note) {
-    return `<header class="uh"><div><h1>${title}</h1>${note ? `<div class="sub">${note}</div>` : ''}</div></header><div class="idx">${items.map((it) => `<a href="${it.href}"><b>${esc(it.name)}</b><small>${it.sub}</small></a>`).join('')}</div>`;
-  }
-
-  /* Tournaments (menu): every bracket in the archive for one season, by level and unit */
-  PAGES.tournaments = (id, q = {}) => {
-    const ys = OT.YEARS, y = ys.includes(+q.y) ? +q.y : OT.yearsWindow()[1];
-    const inCls = (c) => state.cls === 'ALL' || c === state.cls || c === 'single';
-    const cn = (c) => (c === 'single' ? 'One class' : c);
-    const link = (r, lvl) => `<a class="twl" href="#tournaments?y=${y}&b=${encodeURIComponent(OT.bkey(r, lvl))}">${r.wn}</a>`;
-    const rowsOf = (rs, lvl, name) => d3.groups(rs.filter((r) => inCls(r.cls)), (r) => name(r), (r) => r.cls).map(([nm, byC]) => byC.map(([c, v]) => {
-      const one = Array.from(d3.group(v, (r) => r.wn).values()).map((g) => g[0]).sort((a, b) => a.wn - b.wn);
-      return { nm, c, html: `<div class="tbrow"><span class="tbn"><b>${esc(nm)}</b><small>${cn(c)}</small></span><span class="tbws">${one.map((r) => link(r, lvl)).join('')}</span></div>` }; })).flat();
-    const st = rowsOf(OT.APP.filter((r) => r.year === y), 'state', () => 'State championships');
-    const reg = rowsOf(OT.LOWER.filter((r) => r.year === y && r.lvl === 'regional'), 'regional', (r) => OT.unitLabel('regional', r.unit)).sort((a, b) => a.nm.localeCompare(b.nm) || a.c.localeCompare(b.c));
-    const dis = rowsOf(OT.LOWER.filter((r) => r.year === y && r.lvl === 'district'), 'district', (r) => OT.unitLabel('district', r.unit)).sort((a, b) => (parseInt(a.nm.replace(/\D+/, ''), 10) - parseInt(b.nm.replace(/\D+/, ''), 10)) || a.nm.localeCompare(b.nm) || a.c.localeCompare(b.c));
-    const i = ys.indexOf(y), prev = ys[i - 1], next = ys[i + 1];
-    const pick = `<div class="typick">${prev ? `<a class="chipb" href="#tournaments?y=${prev}" aria-label="Season ${prev}">‹ ${prev}</a>` : '<span></span>'}<select data-tyear aria-label="Season">${ys.slice().reverse().map((k) => `<option value="${k}"${k === y ? ' selected' : ''}>${k}</option>`).join('')}</select>${next ? `<a class="chipb" href="#tournaments?y=${next}" aria-label="Season ${next}">${next} ›</a>` : '<span></span>'}</div>`;
-    const blk = (t, rs) => rs.length ? section(t, `<div class="card tlist">${rs.map((r) => r.html).join('')}</div>`) : '';
-    return `<header class="uh2"><h1>Tournaments</h1><div class="sub">Every bracket on record for one season${state.cls === 'ALL' ? '' : ', ' + clsName()}. Tap a weight to open its bracket.</div>${pick}</header>`
-      + (y === 2021 ? '<div class="note">2021: eight-man state brackets (COVID year) after East and West super-regionals.</div>' : '') + (blk('State', st) + blk('Regionals', reg) + blk('Districts', dis) || empty('No brackets on record for this season.'));
-  };
   /* Missing from the archive (menu) */
-  PAGES.missing = () => `<header class="uh2"><h1>Missing</h1><div class="sub">Tournaments the bracket archive marks as incomplete: no official team scores, or consolation rounds not on record. Those seasons count only what was recorded.</div></header>${missingBlock(null).replace('<details class="drawer">', '<details class="drawer" open>') || empty('Nothing marked missing.')}`;
+  PAGES.missing = () => `<header class="uh2"><h1>Missing</h1></header>${missingBlock(null).replace('<details class="drawer">', '<details class="drawer" open>') || empty('Nothing marked missing.')}`;
   Object.assign(OT, { PAGES });
 })();
